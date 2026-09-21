@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "3.0",
+  "id": "set-up-an-event-source",
+  "name": "Set Up an Event Source",
+  "version": "1.0.0",
+  "description": "Set up or reuse advertiser conversion tracking for social platforms, direct event feeds, and measurement partners.",
+  "steward": {
+    "owner": "bokelley"
+  },
+  "entrypoint": "SKILL.md",
+  "assets": [
+    {
+      "route": "SKILL.md",
+      "file": "SKILL.md",
+      "contentType": "text/markdown; charset=utf-8"
+    },
+    {
+      "route": "manifest.json",
+      "file": "manifest.json",
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
+      "route": "references/scenarios.json",
+      "file": "references/scenarios.json",
+      "contentType": "application/json; charset=utf-8"
+    }
+  ],
+  "applicability": {
+    "audiences": [
+      {
+        "accountKind": "buyer",
+        "clientChannels": ["standard", "white_label_chatgpt"],
+        "requiredCapabilities": [],
+        "requiredFeatureEntitlements": []
+      }
+    ]
+  },
+  "distribution": {
+    "mcpAccountKinds": ["buyer"],
+    "submissionBundleAccountKinds": ["buyer"]
+  },
+  "tools": {
+    "required": ["get_status", "search", "get", "save_measurement_source"],
+    "optional": ["save_campaign"]
+  },
+  "documentation": [
+    "mintlify/v2/guides/log-events.mdx",
+    "mintlify/v2/setup/v3/buyer-workflows.mdx",
+    "mintlify/v2/skill.mdx"
+  ],
+  "evaluation": {
+    "acceptance": {
+      "scenarioAsset": "references/scenarios.json",
+      "scenarioIds": [
+        "reuse-native-social-source",
+        "register-partner-server-feed"
+      ]
+    },
+    "telemetry": {
+      "correlationSkillId": "set-up-an-event-source@1.0.0",
+      "outcomeSignals": [
+        "workflow_terminal_state",
+        "measurement_source_action_receipt",
+        "measurement_source_health_state"
+      ]
+    }
+  }
+}
