@@ -26,9 +26,10 @@ Discovery does not require creating an advertiser, campaign, seller connection,
 or media buy. Requesting live proposals is a later workflow that requires its
 own campaign context; do not smuggle it into this prototype.
 
-The public TypeScript and Python starters are pending mirror publication and
-fresh-install verification. Build the read-only example using the
-[direct MCP connection](connection.md) and current runtime schema.
+Use the published [TypeScript](https://github.com/apostra-public/apostra/tree/main/examples/typescript)
+or [Python](https://github.com/apostra-public/apostra/tree/main/examples/python)
+starter when it fits the repository. Otherwise build the read-only example
+using the [connection guide](connection.md) and current runtime schema.
 Adapt the example to the repository's package manager and test runner. Do not
 overwrite existing files to reproduce a blank-repository example.
 
