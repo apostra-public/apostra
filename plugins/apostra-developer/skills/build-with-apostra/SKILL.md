@@ -35,10 +35,13 @@ Choose how much of the operating loop the developer wants to own:
   an agent handles judgment within those boundaries. Prefer this for a durable
   buyer agent unless the developer has chosen another architecture.
 
-For agent-facing work, use a direct MCP connection to
-`https://api.interchange.io/mcp/v3` with the host's OAuth flow. Native
-`apostra-developer` plugin installation is pending mirror publication and
-fresh-install verification; use direct MCP until both are complete.
+For agent-facing work in Codex or Claude Code, prefer the published native
+`apostra-developer` plugin from `apostra-public/apostra`. It installs this skill
+and the MCP connection together. Use a direct MCP connection to
+`https://api.interchange.io/mcp/v3` when the host does not support the native
+plugin, or when instructions were installed separately with `npx skills`.
+In either case, let the host complete OAuth and store the interactive
+credential.
 For deterministic server or ETL work that needs a REST contract or an
 operation V3 does not expose, use the documented stable V2 REST API. Explain
 that choice in terms of the requested job, not a version-selection exercise.
@@ -54,6 +57,12 @@ authorized resource read. Report the observed account and any readiness blocker.
 A local skill installation is not an MCP connection. OAuth success is not
 permission to buy. A passing fixture test is not a successful live API call.
 Keep those outcomes separate throughout the work.
+
+Interactive OAuth represents the person using the coding agent. It does not
+create a runtime identity for finished software. Reuse an existing Apostra
+Agent when the software already has one, create one only when deployed software
+needs its own identity and credential, or use the available sandbox while
+prototyping safely.
 
 ## Build the requested workflow
 

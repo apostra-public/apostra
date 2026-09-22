@@ -2,7 +2,7 @@
   "schemaVersion": "3.0",
   "id": "set-up-a-campaign",
   "name": "Set Up a Campaign",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Create a grounded buyer campaign with conversion tracking, request proposals, compare supply, and stage a selected media buy.",
   "steward": {
     "owner": "bokelley"
@@ -65,10 +65,13 @@
   "evaluation": {
     "acceptance": {
       "scenarioAsset": "references/scenarios.json",
-      "scenarioIds": ["conversion-source-before-campaign"]
+      "scenarioIds": [
+        "conversion-source-before-campaign",
+        "meta-awareness-reach-frequency-cap-disclosure"
+      ]
     },
     "telemetry": {
-      "correlationSkillId": "set-up-a-campaign@1.3.0",
+      "correlationSkillId": "set-up-a-campaign@1.4.0",
       "outcomeSignals": [
         "workflow_terminal_state",
         "measurement_source_action_receipt",

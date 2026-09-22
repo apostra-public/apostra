@@ -14,7 +14,8 @@ codex plugin add apostra-developer@apostra
 
 The native plugin installs both the `build-with-apostra` skill and the Apostra
 MCP connection. Complete OAuth when prompted, then ask Codex: "Verify my
-Apostra account and help me build a seller discovery prototype."
+Apostra account with a read-only call and help me build a seller discovery
+prototype."
 
 ## Install in Claude Code
 
@@ -23,8 +24,14 @@ Apostra account and help me build a seller discovery prototype."
 /plugin install apostra-developer@apostra
 ```
 
-Complete OAuth when prompted. Never paste API keys or provider credentials
+Complete OAuth when prompted, then ask Claude Code to verify the account with a
+read-only call before building. Never paste API keys or provider credentials
 into a prompt.
+
+Interactive OAuth represents the person using the coding agent. It does not
+create a runtime identity for finished software. Reuse an existing Apostra
+Agent when one exists, create one when deployed software needs its own identity
+and credential, or prototype safely in the available sandbox.
 
 ## Install the skill in another compatible agent
 
@@ -42,17 +49,17 @@ This route installs the instructions only. Connect the agent's MCP client to
 
 | Package | Purpose | Current canonical skills |
 |---|---|---|
-| `apostra-developer` | Plan, run, automate, and report on advertising across sellers, or build those jobs into an application. | `build-with-apostra@1.0.0` |
+| `apostra-developer` | Plan, run, automate, and report on advertising across sellers, or build those jobs into an application. | `build-with-apostra@1.0.1` |
 | `amc-listing` | Build and maintain an Agentic Media Company listing in Interchange. | MCP access; workflow skill forthcoming |
 | `amc-merchandising` | Merchandise an Agentic Media Company's inventory and products in Interchange. | MCP access; workflow skill forthcoming |
 | `amc-distribution` | Prepare and distribute an Agentic Media Company through supported agent channels. | `publish-an-openai-app@1.0.0` |
 | `amc-campaign-management` | Operate seller-side campaigns and delivery in Interchange. | MCP access; workflow skill forthcoming |
 | `buyer-account-setup` | Prepare an Interchange buyer account for campaign execution. | `get-account-ready-to-buy@1.0.0` |
-| `buyer-campaign-management` | Discover sellers, create campaigns, request proposals, and manage delivery. | `buy-from-seller@1.3.0`, `set-up-a-campaign@1.3.0`, `set-up-an-event-source@1.0.0`, `manage-a-campaign@1.1.0` |
+| `buyer-campaign-management` | Discover sellers, create campaigns, request proposals, and manage delivery. | `buy-from-seller@1.3.0`, `set-up-a-campaign@1.4.0`, `set-up-an-event-source@1.0.0`, `manage-a-campaign@1.1.0` |
 | `buyer-creative-management` | Prepare and inspect buyer creative inputs for campaign execution. | `inspect-tag-sheet@1.0.0`, `generate-campaign-creatives@1.0.0` |
 | `buyer-reporting` | Inspect buyer campaign delivery and reporting in Interchange. | `set-up-an-event-source@1.0.0` |
 | `sales-agent-testing` | Test a first-party or third-party AdCP sales agent with governed buyer workflows. | `test-sales-agent@1.5.1` |
-| `amc-self-serve-buyer` | Bundle buyer workflows for an Agentic Media Company's own self-serve plugin. | `get-account-ready-to-buy@1.0.0`, `buy-from-seller@1.3.0`, `set-up-a-campaign@1.3.0`, `set-up-an-event-source@1.0.0`, `manage-a-campaign@1.1.0`, `inspect-tag-sheet@1.0.0`, `generate-campaign-creatives@1.0.0` |
+| `amc-self-serve-buyer` | Bundle buyer workflows for an Agentic Media Company's own self-serve plugin. | `get-account-ready-to-buy@1.0.0`, `buy-from-seller@1.3.0`, `set-up-a-campaign@1.4.0`, `set-up-an-event-source@1.0.0`, `manage-a-campaign@1.1.0`, `inspect-tag-sheet@1.0.0`, `generate-campaign-creatives@1.0.0` |
 
 `amc-self-serve-buyer` is the aggregate buyer package an Agentic Media
 Company can bundle into its own self-serve plugin. `sales-agent-testing`

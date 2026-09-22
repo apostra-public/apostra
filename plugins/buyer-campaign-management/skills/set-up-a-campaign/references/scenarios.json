@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.3.0",
+  "skillVersion": "1.4.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -11,6 +11,16 @@
         "The agent searches the advertiser's measurement sources before saving the conversion goal.",
         "The agent reuses or registers an exact event source and puts object.eventSourceId in the campaign goal.",
         "The agent reports source health separately and omits the goal if the buyer explicitly skips conversion tracking."
+      ]
+    },
+    {
+      "id": "meta-awareness-reach-frequency-cap-disclosure",
+      "title": "Disclose Meta REACH default frequency cap before staging",
+      "given": "The buyer selects the meta_awareness product and has not specified a frequency cap.",
+      "expect": [
+        "The agent discloses that Meta automatically applies a 2-impressions-per-7-days default frequency cap for the meta_awareness (REACH optimization) product.",
+        "The agent asks the buyer whether to use the default or specify a different cap before staging the media buy.",
+        "If the buyer requests an override, the agent includes targetingOverlay.frequency_cap with the correct max_impressions and window fields in the save_media_buy call."
       ]
     }
   ]

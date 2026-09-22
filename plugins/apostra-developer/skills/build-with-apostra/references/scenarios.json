@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "build-with-apostra",
-  "skillVersion": "1.0.0",
+  "skillVersion": "1.0.1",
   "scenarios": [
     {
       "id": "install-and-discover",
@@ -9,7 +9,7 @@
       "given": "A TypeScript repository has a package manager and test runner but no Apostra connection. The developer asks for a seller discovery prototype.",
       "expect": [
         "The agent inspects the repository and reuses its conventions before scaffolding.",
-        "It connects MCP directly, marks native plugin installation as pending mirror publication and fresh-install verification, completes host OAuth, and calls get_status before any account mutation.",
+        "It prefers the published native plugin in Codex or Claude Code, uses direct MCP when the host lacks native plugin support, completes host OAuth, and calls get_status before any account mutation.",
         "It discovers the current search schema and uses only read-only seller discovery for the first live example.",
         "The local fixture test proves successful discovery and an error or continuation case; the agent runs it and reports the observed result.",
         "The report separates installation, authentication, live account access, and local test evidence."

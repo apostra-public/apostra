@@ -2,7 +2,7 @@
   "schemaVersion": "3.0",
   "id": "build-with-apostra",
   "name": "Build with Apostra",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Use Apostra to plan or run ads, automate campaign work, read results, or build those jobs into tested software.",
   "steward": {
     "owner": "bokelley"
@@ -109,7 +109,7 @@
       ]
     },
     "telemetry": {
-      "correlationSkillId": "build-with-apostra@1.0.0",
+      "correlationSkillId": "build-with-apostra@1.0.1",
       "outcomeSignals": [
         "workflow_terminal_state",
         "scenario_assertion_results"
