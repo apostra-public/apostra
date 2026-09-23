@@ -59,6 +59,27 @@ export async function connectAndVerify(
   timeoutMs = IO_TIMEOUT_MS,
   endpoint = APOSTRA_MCP_URL,
 ): Promise<unknown> {
+  return withApostraSession(
+    token,
+    (client) => verifyApostraAccount(client, timeoutMs),
+    timeoutMs,
+    endpoint,
+  );
+}
+
+/**
+ * Open a session, run one unit of work, and close everything it opened.
+ *
+ * Connection lifetime is the fiddly part of this starter, so it lives in one
+ * place: verification and type generation both borrow a ready client rather
+ * than each rebuilding the transport, deadline and socket handling.
+ */
+export async function withApostraSession<T>(
+  token: string,
+  run: (client: Client) => Promise<T>,
+  timeoutMs = IO_TIMEOUT_MS,
+  endpoint = APOSTRA_MCP_URL,
+): Promise<T> {
   const url = new URL(endpoint);
   const lifetime = new AbortController();
   const timeoutError = new Error(
@@ -98,9 +119,9 @@ export async function connectAndVerify(
       signal: lifetime.signal,
       timeout: timeoutMs,
     });
-    const status = await verifyApostraAccount(client, timeoutMs);
+    const result = await run(client);
     await transport.terminateSession();
-    return status;
+    return result;
   } catch (error) {
     if (lifetime.signal.aborted) throw timeoutError;
     throw error;
