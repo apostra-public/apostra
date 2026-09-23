@@ -36,8 +36,9 @@ Choose how much of the operating loop the developer wants to own:
   buyer agent unless the developer has chosen another architecture.
 
 For agent-facing work in Codex or Claude Code, prefer the published native
-`apostra-developer` plugin from `apostra-public/apostra`. It installs this skill
-and the MCP connection together. Use a direct MCP connection to
+`apostra-developer` plugin from
+`https://github.com/apostra-public/apostra.git`. It installs this skill and the
+MCP connection together. Use a direct MCP connection to
 `https://api.interchange.io/mcp/v3` when the host does not support the native
 plugin, or when instructions were installed separately with `npx skills`.
 In either case, let the host complete OAuth and store the interactive
