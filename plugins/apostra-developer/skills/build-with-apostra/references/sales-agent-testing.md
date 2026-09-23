@@ -1,11 +1,11 @@
 # Test a sales agent
 
-Use the [seller workflow](https://docs.interchange.io/v2/setup/v3/seller-workflows#test-your-own-supply)
-and [sandbox guide](https://docs.interchange.io/v2/features/sandbox) to establish
-the current account's testing path. Retrieve
-`get({ kind: "skill", id: "test-sales-agent" })` before a remote test. Follow
-that returned version's declared scenarios, fixtures, bounds, and cleanup;
-do not copy a scenario from an older installed package.
+Retrieve `get({ kind: "skill", id: "test-sales-agent" })` before a remote test.
+Follow that returned version's declared scenarios, fixtures, bounds, and
+cleanup; do not copy a scenario from an older installed package. The
+canonical first-party [seller workflow](https://docs.interchange.io/v2/setup/v3/seller-workflows#test-your-own-supply)
+and [sandbox guide](https://docs.interchange.io/v2/features/sandbox) define the
+account's testing path.
 
 ## Select the evidence to collect
 

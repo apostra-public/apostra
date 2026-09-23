@@ -12,9 +12,9 @@ to know terms such as advertising agent, seller discovery, orchestration, or
 MCP.
 
 Apostra provides the account, campaign, seller connection, execution, and
-reporting state behind the work. Read the [developer docs](https://docs.interchange.io/v3/overview)
-for the product model; use live documentation and the connected account's
-`tools/list` schemas for capabilities and exact call shapes.
+reporting state behind the work. The first-party [developer docs](https://docs.interchange.io/v3/overview)
+are the canonical product reference. Use the connected account's `tools/list`
+schemas for its current capabilities and exact call shapes.
 
 ## Start in the repository
 
@@ -49,7 +49,7 @@ that choice in terms of the requested job, not a version-selection exercise.
 
 ## Connect and prove access
 
-Read [connection.md](references/connection.md) when installing, authenticating,
+Read the [connection guide](references/connection.md) when installing, authenticating,
 or changing account context. Complete read-only verification before any remote
 write. For MCP, call `get_status`, inspect the current tools, and read the
 intended account resource. For a REST-only integration, use the documented
@@ -65,15 +65,30 @@ Agent when the software already has one, create one only when deployed software
 needs its own identity and credential, or use the available sandbox while
 prototyping safely.
 
+## Prove the contract before writing calls
+
+Read a tool's schema before writing any call to it. The schema carries required
+fields, their types, their nesting, and the enum values the account accepts.
+Prose gives sequencing and intent; it does not define a request shape. Take
+field names, nesting, types, enum values, output optionality, nullability, and
+response variants from the live schemas rather than from a sample or a similar
+API.
+
+Proving access and proving the contract are separate checks. `get_status`
+proves authentication and reports readiness; authority still depends on the
+scoped resource and permission check. A passing fixture test proves only the
+shapes encoded in that fixture, so derive fixtures from schemas where the
+project can.
+
 ## Build the requested workflow
 
 Read only the reference needed for the task:
 
-- [agents.md](references/agents.md): seller discovery, connecting a seller,
+- [Agent workflows](references/agents.md): seller discovery, connecting a seller,
   durable buyer-agent loops, and independent agent identity.
-- [data-pipelines.md](references/data-pipelines.md): event ingestion handoff,
+- [Data pipelines](references/data-pipelines.md): event ingestion handoff,
   aggregate reporting, exports, and scheduled delivery to cloud storage.
-- [sales-agent-testing.md](references/sales-agent-testing.md): owned-supply
+- [Sales-agent testing](references/sales-agent-testing.md): owned-supply
   discovery and sandbox transaction tests with cleanup.
 
 Before following a workflow that changes account state, retrieve it through
@@ -95,9 +110,11 @@ out of the default test command. If authentication is blocked, continue the
 local example and state that live verification remains incomplete.
 
 Report the chosen architecture, files created, test command and observed
-result, read-only live result, and the next runnable step. Never report OAuth,
+result, read-only live result, and the next runnable step. Say which request and
+response shapes came from live schemas and which remain assumptions. Never report OAuth,
 account access, ingestion, delivery, or launch from an inferred outcome.
 When collecting activation evidence, record bounded outcomes and timestamps;
-exclude prompts, source code, credentials, payloads, and signed URLs. Follow
-the [skill correlation contract](https://docs.interchange.io/v2/skill#correlate-a-skill-run)
-when the host supports it; correlation metadata does not prove completion.
+exclude prompts, source code, credentials, payloads, and signed URLs. The
+first-party [skill correlation contract](https://docs.interchange.io/v2/skill#correlate-a-skill-run)
+defines supported correlation metadata; that metadata does not prove
+completion.
