@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "build-with-apostra",
-  "skillVersion": "1.0.2",
+  "skillVersion": "1.0.3",
   "scenarios": [
     {
       "id": "install-and-discover",
@@ -13,6 +13,18 @@
         "It discovers the current search schema and uses only read-only seller discovery for the first live example.",
         "The local fixture test proves successful discovery and an error or continuation case; the agent runs it and reports the observed result.",
         "The report separates installation, authentication, live account access, and local test evidence."
+      ]
+    },
+    {
+      "id": "contract-before-code",
+      "title": "Write calls from the schema, not from prose",
+      "given": "A developer asks for a campaign-creation step. Documentation describes the sequence, and live tool schemas define the request and response contracts.",
+      "expect": [
+        "The agent reads the tool schema before writing the call and does not infer fields from prose, a sample, or a similar API.",
+        "Generated fields, nesting, types, and enum values match the live schema.",
+        "Response parsing follows output optionality, nullability, and variants.",
+        "Authentication, readiness, authority, and contract conformance remain separate checks.",
+        "The handoff distinguishes schema-verified shapes from assumptions."
       ]
     },
     {
@@ -32,7 +44,7 @@
       "given": "The developer wants an independently operated buyer agent that compares proposals and waits for an authorized person to launch. The process may restart after a proposal request or launch preview.",
       "expect": [
         "The agent chooses a durable application boundary and distinguishes independent agent registration from a user's interactive connection.",
-        "It retrieves current agent-management documentation and the account catalog instead of inventing a hosted runtime or an unavailable API.",
+        "It uses the current installed workflow and account catalog instead of inventing a hosted runtime or an unavailable API.",
         "The implementation persists request handles, exact offer identities, revisions, and approvals and resumes by reading the saved operation.",
         "A deterministic restart test proves no duplicate request, and a changed-revision test proves launch cannot reuse stale approval.",
         "The workflow preserves the separate launch preview and confirmation calls."
