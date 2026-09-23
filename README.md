@@ -8,7 +8,7 @@ Apostra OAuth and server-side entitlements remain authoritative.
 ## Install in Codex
 
 ```sh
-codex plugin marketplace add apostra-public/apostra
+codex plugin marketplace add https://github.com/apostra-public/apostra.git
 codex plugin add apostra-developer@apostra
 ```
 
@@ -20,7 +20,7 @@ prototype."
 ## Install in Claude Code
 
 ```
-/plugin marketplace add apostra-public/apostra
+/plugin marketplace add https://github.com/apostra-public/apostra.git
 /plugin install apostra-developer@apostra
 ```
 
@@ -36,7 +36,7 @@ and credential, or prototype safely in the available sandbox.
 ## Install the skill in another compatible agent
 
 ```sh
-npx skills add apostra-public/apostra \
+npx skills add https://github.com/apostra-public/apostra.git \
   --skill build-with-apostra \
   --yes
 ```
@@ -49,7 +49,7 @@ This route installs the instructions only. Connect the agent's MCP client to
 
 | Package | Purpose | Current canonical skills |
 |---|---|---|
-| `apostra-developer` | Plan, run, automate, and report on advertising across sellers, or build those jobs into an application. | `build-with-apostra@1.0.1` |
+| `apostra-developer` | Plan, run, automate, and report on advertising across sellers, or build those jobs into an application. | `build-with-apostra@1.0.2` |
 | `amc-listing` | Build and maintain an Agentic Media Company listing in Interchange. | MCP access; workflow skill forthcoming |
 | `amc-merchandising` | Merchandise an Agentic Media Company's inventory and products in Interchange. | MCP access; workflow skill forthcoming |
 | `amc-distribution` | Prepare and distribute an Agentic Media Company through supported agent channels. | `publish-an-openai-app@1.0.0` |

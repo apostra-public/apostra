@@ -14,11 +14,11 @@ spelled as published even when they retain `interchange` in their names.
 
    ```text
    # Codex, in a terminal
-   codex plugin marketplace add apostra-public/apostra
+   codex plugin marketplace add https://github.com/apostra-public/apostra.git
    codex plugin add apostra-developer@apostra
 
    # Claude Code, inside a Claude Code session
-   /plugin marketplace add apostra-public/apostra
+   /plugin marketplace add https://github.com/apostra-public/apostra.git
    /plugin install apostra-developer@apostra
    ```
 

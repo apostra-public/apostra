@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "build-with-apostra",
-  "skillVersion": "1.0.1",
+  "skillVersion": "1.0.2",
   "scenarios": [
     {
       "id": "install-and-discover",
