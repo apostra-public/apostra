@@ -2,7 +2,7 @@
   "schemaVersion": "2.0",
   "contract": "deterministic-v3-tool-v1",
   "skillId": "manage-a-campaign",
-  "skillVersion": "1.1.0",
+  "skillVersion": "1.1.1",
   "endpoint": "/mcp/v3",
   "modelPolicy": "deterministic-no-model",
   "analytics": {
