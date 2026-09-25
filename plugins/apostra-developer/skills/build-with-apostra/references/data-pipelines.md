@@ -7,10 +7,9 @@ retry behavior without sending customer data.
 
 ## Event ingestion handoff
 
-Retrieve the applicable `set-up-an-event-source` skill through the active
-account's `get` tool before source mutations. The first-party [data-ingestion
-guide](https://docs.interchange.io/v3/bring-data-in) is the canonical product
-reference.
+Read [bring data in](https://docs.interchange.io/v3/bring-data-in) and retrieve
+the applicable `set-up-an-event-source` skill through the active account's
+`get` tool before source mutations.
 
 1. Read the advertiser's measurement sources and reuse a matching source
    when appropriate. Native provider source IDs must come from that provider's
@@ -37,24 +36,24 @@ observable receipt or health state still needed.
 
 ## Reporting pipeline
 
-Choose the output the developer actually needs. The first-party [reporting
-pipeline guide](https://docs.interchange.io/v3/reporting-pipeline) is the
-canonical product reference.
+Read [build a reporting pipeline](https://docs.interchange.io/v3/reporting-pipeline)
+and its linked contract guides. Choose the
+output the developer actually needs:
 
 | Need | Integration to build |
 | --- | --- |
-| An agent answers a campaign-performance question | V3 `get_delivery` with explicit metrics, dimensions, window, and scope |
+| An agent answers a question about one campaign | V3 `get_delivery` with the exact campaign ID and window; Apostra reads the connected provider live |
 | A backend pulls aggregate metrics on a schedule | The documented V2 reporting REST contract and the application's scheduler |
 | A one-off aggregate file | The documented CSV export; fetch its signed URL through the consuming backend |
 | Recurring log-level data in owned cloud storage | Data Delivery credential and Output configuration with an observed destination probe |
 
-For agent reports, use the current `get_delivery` schema. The first-party
-[delivery workflow](https://docs.interchange.io/v2/setup/v3/buyer-workflows#7-query-campaign-delivery)
-defines the reporting sequence.
-Follow pagination and preserve unavailable metrics, currency, and period
-information. Do not reinterpret missing data as zero or sum incompatible
-currencies. Seller-reported delivery and independently measured events answer
-different questions; name the source in the result.
+For agent reports, read the current `get_delivery` schema and
+[delivery workflow](https://docs.interchange.io/v2/setup/v3/buyer-workflows#7-query-campaign-delivery).
+Campaign delivery does not accept metric selection, dimensions, other filters,
+or pagination. Preserve the provider response, currency, reporting period, and
+unavailable metrics. Do not reinterpret missing data as zero. Seller-reported
+delivery and independently measured events answer different questions; name
+the source in the result.
 
 For a scheduled aggregate pull, implement this small pipeline:
 
@@ -80,5 +79,5 @@ output is observed. Do not invent an empty file when no source data exists.
 Keep signed export URLs and cloud credentials out of logs, chat, fixtures, and
 screenshots. A reporting export is sensitive data even after it is downloaded.
 Machine notifications can wake an application where supported; they do not
-replace the reporting records. Do not invent a generic V3 webhook tool when the
-active account does not expose a supported notification contract.
+replace the reporting records. Retrieve the relevant notification guide before
+implementing a callback rather than inventing a generic V3 webhook tool.

@@ -2,7 +2,7 @@
   "schemaVersion": "3.0",
   "id": "manage-a-campaign",
   "name": "Manage a Campaign",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Review delivery and safely update, launch, pause, or archive an existing buyer campaign.",
   "steward": {
     "owner": "bokelley"
@@ -64,7 +64,7 @@
       "scenarioContract": "deterministic-v3-tool-v1"
     },
     "telemetry": {
-      "correlationSkillId": "manage-a-campaign@1.1.0",
+      "correlationSkillId": "manage-a-campaign@1.1.1",
       "outcomeSignals": [
         "workflow_terminal_state",
         "scenario_assertion_results",
