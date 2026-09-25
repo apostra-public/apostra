@@ -2,7 +2,7 @@
   "schemaVersion": "3.0",
   "id": "build-with-apostra",
   "name": "Build with Apostra",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Use Apostra to plan or run ads, automate campaign work, read results, or build those jobs into tested software.",
   "steward": {
     "owner": "bokelley"
@@ -40,6 +40,11 @@
       "contentType": "text/markdown; charset=utf-8"
     },
     {
+      "route": "references/daily-campaign-review.md",
+      "file": "references/daily-campaign-review.md",
+      "contentType": "text/markdown; charset=utf-8"
+    },
+    {
       "route": "references/sales-agent-testing.md",
       "file": "references/sales-agent-testing.md",
       "contentType": "text/markdown; charset=utf-8"
@@ -74,8 +79,10 @@
     "required": ["get_status", "search", "get"],
     "optional": [
       "switch_account",
+      "open_connections_page",
       "save_buyer_agent",
       "save_connection",
+      "save_directed_campaign_subscription",
       "save_advertiser",
       "save_campaign",
       "save_media_buy",
@@ -91,6 +98,7 @@
     "mintlify/v3/build-an-agent.mdx",
     "mintlify/v3/bring-data-in.mdx",
     "mintlify/v3/reporting-pipeline.mdx",
+    "mintlify/v3/daily-campaign-review.mdx",
     "mintlify/v2/setup/v3/buyer-workflows.mdx",
     "mintlify/v2/setup/v3/seller-workflows.mdx",
     "mintlify/v2/setup/buyer-agent-credentials.mdx",
@@ -102,6 +110,8 @@
       "scenarioIds": [
         "install-and-discover",
         "contract-before-code",
+        "provider-authorization-handoff",
+        "daily-campaign-review",
         "instructions-without-connector",
         "durable-buyer-agent",
         "reporting-pipeline",
@@ -110,7 +120,7 @@
       ]
     },
     "telemetry": {
-      "correlationSkillId": "build-with-apostra@1.0.3",
+      "correlationSkillId": "build-with-apostra@1.0.4",
       "outcomeSignals": [
         "workflow_terminal_state",
         "scenario_assertion_results"
