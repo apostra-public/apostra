@@ -12,9 +12,10 @@ to know terms such as advertising agent, seller discovery, orchestration, or
 MCP.
 
 Apostra provides the account, campaign, seller connection, execution, and
-reporting state behind the work. The first-party [developer docs](https://docs.interchange.io/v3/overview)
-are the canonical product reference. Use the connected account's `tools/list`
-schemas for its current capabilities and exact call shapes.
+reporting state behind the work. Read the [developer docs](https://docs.interchange.io/v3/overview)
+for the product model and the order of operations. Take every call shape from
+the connected account's `tools/list` schemas: they are what the server
+enforces, and they are specific to the account you are connected to.
 
 ## Start in the repository
 
@@ -49,11 +50,19 @@ that choice in terms of the requested job, not a version-selection exercise.
 
 ## Connect and prove access
 
-Read the [connection guide](references/connection.md) when installing, authenticating,
+Read [connection.md](references/connection.md) when installing, authenticating,
 or changing account context. Complete read-only verification before any remote
 write. For MCP, call `get_status`, inspect the current tools, and read the
 intended account resource. For a REST-only integration, use the documented
 authorized resource read. Report the observed account and any readiness blocker.
+
+Treat missing authorization as an expected human handoff. If Apostra itself is
+not authorized, surface the coding-agent host's OAuth link or login prompt and
+wait for the person to complete it. If a requested provider such as Meta is not
+connected, follow the applicable workflow to obtain Apostra's one-time browser
+authorization URL, give that URL to the person, and wait. Never ask them to
+paste an Apostra token, provider token, password, or API key into chat. Verify
+the resulting connection with a fresh read before continuing.
 
 A local skill installation is not an MCP connection. OAuth success is not
 permission to buy. A passing fixture test is not a successful live API call.
@@ -69,26 +78,34 @@ prototyping safely.
 
 Read a tool's schema before writing any call to it. The schema carries required
 fields, their types, their nesting, and the enum values the account accepts.
-Prose gives sequencing and intent; it does not define a request shape. Take
-field names, nesting, types, enum values, output optionality, nullability, and
-response variants from the live schemas rather than from a sample or a similar
-API.
+Prose gives you sequencing and intent; it cannot give you a field name. Where
+the two appear to disagree, the schema is what the request is validated against.
 
-Proving access and proving the contract are separate checks. `get_status`
-proves authentication and reports readiness; authority still depends on the
-scoped resource and permission check. A passing fixture test proves only the
-shapes encoded in that fixture, so derive fixtures from schemas where the
-project can.
+Take field names, nesting, types, and enum values from the schema rather than
+from a sample, a similar API, or a field name that reads as obvious. Confirm
+response shapes from the tool's output schema, including optional fields,
+nullability, and response variants. Read a live object as additional evidence,
+not as the contract for code that parses every valid response.
+
+Proving access and proving the contract are different checks, and neither
+substitutes for the other. `get_status` proves authentication and reports
+account readiness; authority for an operation still requires its scoped
+resource and permission check. It says nothing about whether a call's payload
+will be accepted. A passing fixture test shows only that the code agrees with
+the shapes its author assumed - if those came from prose, the fixtures encode
+the same mistake and still pass.
 
 ## Build the requested workflow
 
 Read only the reference needed for the task:
 
-- [Agent workflows](references/agents.md): seller discovery, connecting a seller,
+- [daily-campaign-review.md](references/daily-campaign-review.md): read-only
+  campaign pacing and performance review across the current and prior period.
+- [agents.md](references/agents.md): seller discovery, connecting a seller,
   durable buyer-agent loops, and independent agent identity.
-- [Data pipelines](references/data-pipelines.md): event ingestion handoff,
+- [data-pipelines.md](references/data-pipelines.md): event ingestion handoff,
   aggregate reporting, exports, and scheduled delivery to cloud storage.
-- [Sales-agent testing](references/sales-agent-testing.md): owned-supply
+- [sales-agent-testing.md](references/sales-agent-testing.md): owned-supply
   discovery and sandbox transaction tests with cleanup.
 
 Before following a workflow that changes account state, retrieve it through
@@ -111,10 +128,10 @@ local example and state that live verification remains incomplete.
 
 Report the chosen architecture, files created, test command and observed
 result, read-only live result, and the next runnable step. Say which request and
-response shapes came from live schemas and which remain assumptions. Never report OAuth,
+response shapes were taken from the live schemas and which are still assumed;
+an assumed shape is an open risk even when every local test passes. Never report OAuth,
 account access, ingestion, delivery, or launch from an inferred outcome.
 When collecting activation evidence, record bounded outcomes and timestamps;
-exclude prompts, source code, credentials, payloads, and signed URLs. The
-first-party [skill correlation contract](https://docs.interchange.io/v2/skill#correlate-a-skill-run)
-defines supported correlation metadata; that metadata does not prove
-completion.
+exclude prompts, source code, credentials, payloads, and signed URLs. Follow
+the [skill correlation contract](https://docs.interchange.io/v2/skill#correlate-a-skill-run)
+when the host supports it; correlation metadata does not prove completion.
