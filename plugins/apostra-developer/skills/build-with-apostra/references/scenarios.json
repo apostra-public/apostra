@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "build-with-apostra",
-  "skillVersion": "1.0.3",
+  "skillVersion": "1.0.4",
   "scenarios": [
     {
       "id": "install-and-discover",
@@ -18,13 +18,14 @@
     {
       "id": "contract-before-code",
       "title": "Write calls from the schema, not from prose",
-      "given": "A developer asks for a campaign-creation step. Documentation describes the sequence, and live tool schemas define the request and response contracts.",
+      "given": "A developer asks for a campaign-creation step. The documentation describes the sequence in prose, and the tool schemas define the request and response contracts.",
       "expect": [
-        "The agent reads the tool schema before writing the call and does not infer fields from prose, a sample, or a similar API.",
-        "Generated fields, nesting, types, and enum values match the live schema.",
-        "Response parsing follows output optionality, nullability, and variants.",
-        "Authentication, readiness, authority, and contract conformance remain separate checks.",
-        "The handoff distinguishes schema-verified shapes from assumptions."
+        "The agent reads the tool's schema before writing the call, and does not infer field names from prose, a sample, or a similar API.",
+        "Field names, nesting, types and enum values in the generated code match the live schema, including numeric versus string types.",
+        "Response parsing follows the output schema's optional fields, nullability and variants; a sampled object is additional evidence rather than the contract.",
+        "The agent treats authentication, account readiness, operation authority and contract conformance as separate checks and does not report one as evidence of another.",
+        "Fixture tests are written against schema-derived shapes, so passing tests are not offered as proof that a call will be accepted.",
+        "The handoff separates request and response shapes verified against the live schemas from shapes that remain assumed."
       ]
     },
     {
@@ -39,12 +40,38 @@
       ]
     },
     {
+      "id": "provider-authorization-handoff",
+      "title": "Ask a person to authorize Meta without sharing credentials",
+      "given": "The developer plugin is installed and a buyer asks for a Meta campaign review, but Apostra or the buyer's Meta seller connection is not yet authorized.",
+      "expect": [
+        "The agent calls get_status first. If Apostra OAuth is missing, it surfaces the coding-agent host's secure login handoff and waits instead of asking for a token.",
+        "Once Apostra is authorized, it resolves Meta through the seller catalog and reads the returned connection, credential, selected account, and account mapping rather than treating a get_status destination as proof of connection.",
+        "If Meta authorization is missing in a headless host, it calls save_connection with authorization and relays the returned authorization.url to the person. In a host that renders the Connections app, it opens that app at the resolved Meta seller.",
+        "It never asks for a Meta password, API key, bearer token, or other provider secret in chat, and it does not record the one-time authorization URL as durable evidence.",
+        "It stops for the human handoff, then verifies the connection with a fresh seller read. It does not request authorization again for an active credential, and it does not claim readable delivery until a live campaign read succeeds. Enhanced Reporting is not a requirement for that read."
+      ]
+    },
+    {
+      "id": "daily-campaign-review",
+      "title": "Review active campaign performance without changing it",
+      "given": "An authorized buyer with a ready provider connection asks for a morning review of active campaigns, comparing the latest seven complete UTC days with the preceding seven and recommending what needs attention.",
+      "expect": [
+        "The agent verifies the buyer account, inspects the live schemas, and reads the intended campaign scope before querying delivery.",
+        "For a provider-specific review, it resolves the active provider-backed campaign roster first. If the connection is ready but the roster has not been subscribed into Apostra, it asks before changing the subscription.",
+        "For each exact campaign, it requests two bounded live_campaign_delivery reads, one for each seven-day window. It passes only campaignId and the date range, and it preserves the provider response.",
+        "It never calls the warehouse-backed reporting aggregate, requests grouping dimensions, or pages campaign delivery. If a provider response has no delivery totals, it marks the metrics unavailable instead of displaying zero performance.",
+        "It compares like-for-like totals by summing additive metrics before calculating rates; it never averages daily CTR, CPA, or ROAS values.",
+        "It uses an explicit performance target and reallocation limit for financial recommendations. Without those inputs it reports relative movement and recommends watch or investigate instead of inventing a budget amount.",
+        "It returns a closed action for each item with exact metric evidence, confidence or uncertainty, and a human next step. The review calls no write tool."
+      ]
+    },
+    {
       "id": "durable-buyer-agent",
       "title": "Resume a buyer-agent workflow after restart",
       "given": "The developer wants an independently operated buyer agent that compares proposals and waits for an authorized person to launch. The process may restart after a proposal request or launch preview.",
       "expect": [
         "The agent chooses a durable application boundary and distinguishes independent agent registration from a user's interactive connection.",
-        "It uses the current installed workflow and account catalog instead of inventing a hosted runtime or an unavailable API.",
+        "It retrieves current agent-management documentation and the account catalog instead of inventing a hosted runtime or an unavailable API.",
         "The implementation persists request handles, exact offer identities, revisions, and approvals and resumes by reading the saved operation.",
         "A deterministic restart test proves no duplicate request, and a changed-revision test proves launch cannot reuse stale approval.",
         "The workflow preserves the separate launch preview and confirmation calls."

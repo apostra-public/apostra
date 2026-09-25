@@ -1,7 +1,7 @@
 interface:
   display_name: "Build with Apostra"
   short_description: "Connect Apostra and build a tested integration"
-  default_prompt: "Use $build-with-apostra to connect this repository to Apostra and build a tested seller discovery prototype."
+  default_prompt: "Use $build-with-apostra to review my active Meta campaign performance. Verify the exact Meta connection, advertiser mapping, and active campaign roster before reading live delivery for each exact campaign. If authorization is missing, give me the secure browser URL and wait; never ask me to paste credentials. Treat a response with no delivery totals as unavailable, not zero, and do not change campaign state."
 
 dependencies:
   tools:
