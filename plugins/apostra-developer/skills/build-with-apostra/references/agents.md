@@ -1,12 +1,10 @@
 # Build an application or agent
 
-Use this installed workflow and the live tool schemas for the requested part
-of the loop. Apostra keeps the canonical campaign, transaction, and delivery
-state. The application may keep IDs, approvals, checkpoints, and its own data
-without rebuilding seller-specific adapters. The canonical first-party
-[agent guide](https://docs.interchange.io/v3/build-an-agent) and
-[buyer workflow](https://docs.interchange.io/v2/setup/v3/buyer-workflows)
-explain the product model.
+Read [build an agent](https://docs.interchange.io/v3/build-an-agent)
+and the [buyer workflow](https://docs.interchange.io/v2/setup/v3/buyer-workflows)
+for the requested part of the loop. Apostra keeps the canonical campaign,
+transaction, and delivery state. The application may keep IDs, approvals,
+checkpoints, and its own data without rebuilding seller-specific adapters.
 
 ## Seller discovery prototype
 
@@ -31,18 +29,16 @@ own campaign context; do not smuggle it into this prototype.
 Use the published [TypeScript](https://github.com/apostra-public/apostra/tree/main/examples/typescript)
 or [Python](https://github.com/apostra-public/apostra/tree/main/examples/python)
 starter when it fits the repository. Otherwise build the read-only example
-using the [connection guide](./connection.md) and current runtime schema.
+using the [connection guide](connection.md) and current runtime schema.
 Adapt the example to the repository's package manager and test runner. Do not
 overwrite existing files to reproduce a blank-repository example.
 
 ## Connect a seller
 
 First establish whether the developer means connecting a buyer to an existing
-seller or publishing their own inventory. Use the active account's tool schemas
-and installed workflow. The canonical first-party [buyer
-workflow](https://docs.interchange.io/v2/setup/v3/buyer-workflows) and [seller
-workflow](https://docs.interchange.io/v2/setup/v3/seller-workflows) explain
-each path.
+seller or publishing their own inventory. Read the applicable
+[buyer workflow](https://docs.interchange.io/v2/setup/v3/buyer-workflows) or
+[seller workflow](https://docs.interchange.io/v2/setup/v3/seller-workflows).
 
 Resolve an existing seller through the authenticated catalog and inspect the
 returned connection/readiness state. Follow the specific supported connection
@@ -61,9 +57,10 @@ must resume after a process restart:
    durable store. Store approval records alongside the exact object revision.
 2. Drive the workflow from fresh reads. Use the current catalog and buyer
    guide for typed saves and `request_proposals`; preserve returned qualified
-   identifiers without reconstructing them. Take each call's fields, types, and
-   enum values from its live schema, and generate types from those schemas when
-   the project can so a shape change fails the build instead of a live request.
+   identifiers without reconstructing them. Take each call's fields, types and
+   enum values from its schema before writing the call, and generate types from
+   those schemas where the project can, so a shape change fails the build
+   instead of a live request.
 3. Persist an asynchronous request's returned handle before scheduling a
    continuation. Poll that execution and follow result cursors within bounded
    retries. A restart resumes the saved operation; it does not create another
@@ -90,10 +87,10 @@ An interactive coding agent using a user's connection is not automatically an
 installed buyer agent. Register only when the software needs its own identity,
 credentials, advertiser grants, and lifecycle.
 
-Where advertised by the current catalog, `save_buyer_agent` supports
-external-agent management under its direct-administrator boundary. The
-canonical first-party [buyer-agent guide](https://docs.interchange.io/v2/setup/buyer-agent-credentials)
-defines registration and access. Use the documented console or REST path for
+Read [manage buyer agents](https://docs.interchange.io/v2/setup/buyer-agent-credentials)
+before implementing registration or access. Where advertised by the current
+catalog, `save_buyer_agent` supports external-agent management under its
+direct-administrator boundary. Use the documented console or REST path for
 controls absent from V3. Keep identity creation, credential provisioning,
 advertiser grants, and machine-notification setup as separate outcomes.
 Never put one-time credential secrets in chat, generated source, or test

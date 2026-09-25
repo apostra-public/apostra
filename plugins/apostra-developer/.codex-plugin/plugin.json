@@ -1,6 +1,6 @@
 {
   "name": "apostra-developer",
-  "version": "1.0.0+20d41eb94261",
+  "version": "1.0.0+0893ae41f2ae",
   "description": "Plan, run, automate, and report on advertising across sellers, or build those jobs into an application.",
   "author": {
     "name": "Scope3 PBC",
@@ -34,7 +34,7 @@
     ],
     "websiteURL": "https://docs.interchange.io/v3/overview",
     "defaultPrompt": [
-      "Connect this repository to Apostra and build a tested seller discovery prototype."
+      "Review my active Meta campaigns using Apostra. Verify the exact Meta connection, reporting state, and active campaign roster before reading delivery. Compare the latest seven complete days with the preceding seven. If authorization is missing, give me the secure browser URL and wait; never ask me to paste credentials. Treat missing delivery totals as unavailable, not zero. Show the evidence and do not change campaign state."
     ],
     "brandColor": "#7513D4",
     "composerIcon": "./assets/apostra-icon-purple.svg",
