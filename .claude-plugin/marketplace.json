@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "apostra",
-  "description": "Interchange workflow packages for Claude Code and Cowork.",
+  "description": "Apostra plugins for Claude Code. Regular Claude and Cowork connect through the hosted MCP connector.",
   "owner": {
     "name": "Scope3 PBC",
     "email": "engineering@scope3.com"
