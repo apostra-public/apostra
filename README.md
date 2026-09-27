@@ -5,6 +5,15 @@ workflow. Start with `apostra-developer`; install the narrower operating
 packages only when you need them. Packages do not grant account permissions.
 Apostra OAuth and server-side entitlements remain authoritative.
 
+Start with [Build software](https://docs.apostra.com/v3/overview) for a marketing
+assistant, advertising agent, data integration, or reporting service. To use
+Apostra in the application or with an assistant, follow
+[Manage ads](https://docs.apostra.com/v3/manage-ads).
+
+Regular Claude and Cowork use the
+[hosted MCP connector](https://docs.apostra.com/v3/client-setup#claude-and-cowork).
+The developer plugin below is for Codex and Claude Code.
+
 ## Install in Codex
 
 ```sh
@@ -77,7 +86,7 @@ registry. When a registry current-version pointer or referenced asset changes,
 the source workflow opens a reviewed sync PR for this repository.
 
 Every durable change remains confirmation-gated by the underlying Apostra
-tool contract. Build guides live at https://docs.interchange.io/v3/overview.
+tool contract. Build guides live at https://docs.apostra.com/v3/overview.
 
 ## License
 
