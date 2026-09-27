@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.4.0",
+  "skillVersion": "1.5.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -21,6 +21,56 @@
         "The agent discloses that Meta automatically applies a 2-impressions-per-7-days default frequency cap for the meta_awareness (REACH optimization) product.",
         "The agent asks the buyer whether to use the default or specify a different cap before staging the media buy.",
         "If the buyer requests an override, the agent includes targetingOverlay.frequency_cap with the correct max_impressions and window fields in the save_media_buy call."
+      ]
+    },
+    {
+      "id": "goal-statement-counted-by-seller",
+      "title": "Turn a site-traffic outcome into a seller-counted goal statement",
+      "given": "The buyer says \"find dog lovers in Slovenia, get them to my online store, €5,000\" and has no event source or analytics tracker.",
+      "expect": [
+        "The agent asks how the buyer will know it worked and who can count that result before saving any goal.",
+        "The agent proposes a one-line goal statement (clicks, a cost-per-click target the buyer names, counted by the seller's ad server, the commitment the buyer wants) and saves only the confirmed goal and target as a metric goal in optimizationGoals.",
+        "The agent offers campaign click-URL parameters through save_campaign tracking.macroAdditions so the buyer's own analytics can attribute the visits, and does not add them without confirmation."
+      ]
+    },
+    {
+      "id": "goal-statement-counted-by-event-source",
+      "title": "Ground a purchase goal counted by the buyer's own tracking",
+      "given": "The buyer wants online sales, says they use a website pixel, and has named the advertiser.",
+      "expect": [
+        "The agent searches the advertiser's measurement sources and reuses or registers an exact event source before saving the goal.",
+        "The agent proposes a goal statement counted by the buyer's event source and saves a confirmed event goal with object.eventSourceId and the target the buyer names.",
+        "The agent tells the buyer, from the goal-seeking campaigns page, that a seller can only aim for an event goal unless it can read the buyer's events."
+      ]
+    },
+    {
+      "id": "goal-statement-counted-by-vendor",
+      "title": "Handle a vendor-measured store-visit outcome without inventing a goal kind",
+      "given": "The buyer wants store visits and says a footfall measurement vendor counts them.",
+      "expect": [
+        "The agent retrieves the goal-seeking campaigns page and follows its current rule for vendor-measured goals instead of inventing a vendor goal kind.",
+        "The agent puts the store-visit outcome and the vendor in the campaign brief and does not write a structured vendor goal to optimizationGoals.",
+        "The agent tells the buyer what the platform does and does not do with a vendor-measured outcome today, as the page states."
+      ]
+    },
+    {
+      "id": "goal-statement-declined",
+      "title": "Proceed on the brief when the buyer declines to set a goal",
+      "given": "The buyer is asked how they will know the campaign worked and says they do not want to set a goal.",
+      "expect": [
+        "The agent saves the campaign without optimizationGoals and does not infer a goal from the campaign name or brief.",
+        "The agent explains, from the page's section on campaigns without a goal, that sellers price against the brief alone and proposals answer no goal of theirs.",
+        "The agent continues to request proposals only after the usual confirmation."
+      ]
+    },
+    {
+      "id": "proposals-compared-on-goal-terms",
+      "title": "Compare proposals on the goal's terms",
+      "given": "A campaign with a clicks goal at a €3 cost-per-click target and a stated wish for a guaranteed price has a terminal proposal round with a guaranteed, a best-effort and a report-only answer, and one seller that declined.",
+      "expect": [
+        "Before requesting proposals, the agent restates the goal statement and the commitment wanted and asks for confirmation.",
+        "The agent groups sellers by commitment.kind and commitment.meetsAskedTarget read from each proposal, names the answered target for each, and lists the seller that declined.",
+        "The agent never presents the best-effort answer as a guarantee or as cheaper than the guaranteed one on price alone, and ties its recommendation to the commitment the buyer wanted."
       ]
     }
   ]
