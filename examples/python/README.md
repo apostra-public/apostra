@@ -5,7 +5,7 @@ access token and makes one read-only `get_status` call. Connection,
 verification, and session teardown share a 15-second deadline. The starter
 cancels SDK tasks and closes HTTP connections before returning. On timeout,
 check network access and the MCP endpoint, then retry. For browser OAuth, use the
-[direct MCP quickstart](https://docs.interchange.io/v3/quickstart).
+[direct MCP quickstart](https://docs.apostra.com/v3/quickstart).
 
 ```sh
 python -m venv .venv
@@ -17,5 +17,5 @@ python -m unittest test_main.py
 
 Keep the token in an environment variable or secret manager. Do not commit it.
 After verification works, follow the
-[build-an-agent guide](https://docs.interchange.io/v3/build-an-agent) to add
+[build-an-agent guide](https://docs.apostra.com/v3/build-an-agent) to add
 tool discovery, durable checkpoints, confirmation gates, and retries.

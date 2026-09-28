@@ -5,7 +5,7 @@ access token and makes one read-only `get_status` call. The 15-second deadline
 covers connection, verification, and session teardown. The starter closes its
 HTTP connections before returning. On timeout, check network access and the MCP
 endpoint, then retry. For browser OAuth, use the
-[direct MCP quickstart](https://docs.interchange.io/v3/quickstart).
+[direct MCP quickstart](https://docs.apostra.com/v3/quickstart).
 
 ```sh
 npm install
@@ -63,5 +63,5 @@ flight is `startAt`/`endAt`, its budget is `total`, and its revision is a
 number. Read the schema — or generate from it — before writing the call.
 
 After verification works, follow the
-[build-an-agent guide](https://docs.interchange.io/v3/build-an-agent) to add
+[build-an-agent guide](https://docs.apostra.com/v3/build-an-agent) to add
 durable checkpoints, confirmation gates, and retries.
