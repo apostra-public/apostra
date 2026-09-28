@@ -1,0 +1,2 @@
+__version__ = '0.2.0'
+BASE_URL = "https://api.interchange.io/api/v3"
