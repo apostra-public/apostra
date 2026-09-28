@@ -50,7 +50,7 @@ that choice in terms of the requested job, not a version-selection exercise.
 
 ## Connect and prove access
 
-Read [connection.md](references/connection.md) when installing, authenticating,
+Read the [connection guide](./references/connection.md) when installing, authenticating,
 or changing account context. Complete read-only verification before any remote
 write. For MCP, call `get_status`, inspect the current tools, and read the
 intended account resource. For a REST-only integration, use the documented
@@ -99,13 +99,13 @@ the same mistake and still pass.
 
 Read only the reference needed for the task:
 
-- [daily-campaign-review.md](references/daily-campaign-review.md): read-only
+- [Daily campaign review](./references/daily-campaign-review.md): read-only
   campaign pacing and performance review across the current and prior period.
-- [agents.md](references/agents.md): seller discovery, connecting a seller,
+- [Agent workflows](./references/agents.md): seller discovery, connecting a seller,
   durable buyer-agent loops, and independent agent identity.
-- [data-pipelines.md](references/data-pipelines.md): event ingestion handoff,
+- [Data pipelines](./references/data-pipelines.md): event ingestion handoff,
   aggregate reporting, exports, and scheduled delivery to cloud storage.
-- [sales-agent-testing.md](references/sales-agent-testing.md): owned-supply
+- [Sales-agent testing](./references/sales-agent-testing.md): owned-supply
   discovery and sandbox transaction tests with cleanup.
 
 Before following a workflow that changes account state, retrieve it through
