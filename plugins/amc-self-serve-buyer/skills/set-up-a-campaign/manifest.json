@@ -2,8 +2,8 @@
   "schemaVersion": "3.0",
   "id": "set-up-a-campaign",
   "name": "Set Up a Campaign",
-  "version": "1.4.0",
-  "description": "Create a grounded buyer campaign with conversion tracking, request proposals, compare supply, and stage a selected media buy.",
+  "version": "1.5.0",
+  "description": "Create a grounded buyer campaign with a confirmed goal statement and conversion tracking, request proposals, compare supply on the goal's terms, and stage a selected media buy.",
   "steward": {
     "owner": "bokelley"
   },
@@ -60,18 +60,25 @@
     "mintlify/v2/setup/v3/buyer-workflows.mdx",
     "mintlify/v2/guides/log-events.mdx",
     "mintlify/v2/features/sandbox.mdx",
-    "mintlify/v2/skill.mdx"
+    "mintlify/v2/skill.mdx",
+    "mintlify/v2/concepts/goal-seeking-campaigns.mdx",
+    "mintlify/v2/object-guides/advertiser.mdx"
   ],
   "evaluation": {
     "acceptance": {
       "scenarioAsset": "references/scenarios.json",
       "scenarioIds": [
         "conversion-source-before-campaign",
-        "meta-awareness-reach-frequency-cap-disclosure"
+        "meta-awareness-reach-frequency-cap-disclosure",
+        "goal-statement-counted-by-seller",
+        "goal-statement-counted-by-event-source",
+        "goal-statement-counted-by-vendor",
+        "goal-statement-declined",
+        "proposals-compared-on-goal-terms"
       ]
     },
     "telemetry": {
-      "correlationSkillId": "set-up-a-campaign@1.4.0",
+      "correlationSkillId": "set-up-a-campaign@1.5.0",
       "outcomeSignals": [
         "workflow_terminal_state",
         "measurement_source_action_receipt",
