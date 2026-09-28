@@ -1,0 +1,53 @@
+name: Validate Apostra SDKs
+on:
+  pull_request:
+    paths: ['sdk/**', 'examples/sdk-*/**', '.github/workflows/*sdk*.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  packages:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - node: '22.18.0'
+            python: '3.11'
+          - node: '24'
+            python: '3.12'
+          - node: '26.9.0'
+            python: '3.14'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+        with:
+          version: '0.12.19'
+          python-version: ${{ matrix.python }}
+      - name: Check the immutable SDK compatibility base
+        env:
+          PULL_REQUEST_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          base="$PULL_REQUEST_BASE_SHA"
+          if [ -z "$base" ]; then
+            base="$(git tag --list 'sdk-v*' --sort=-version:refname | head -n1)"
+          fi
+          if [ -z "$base" ]; then
+            base="$(git rev-list --max-parents=0 HEAD)"
+          fi
+          node sdk/release/check-release.mjs --public --base "$(git rev-parse "$base^{commit}")"
+      - run: npm ci --ignore-scripts && npm run type-check && npm test
+        working-directory: sdk/typescript
+      - run: uv run --frozen mypy src tests/types_valid.py && uv run --frozen pyright && uv run --frozen python -m unittest discover -s tests -p 'test_*.py'
+        working-directory: sdk/python
+      - run: node sdk/testing/validate-types.mjs sdk/python
+      - run: uv run --frozen --group interop mypy --strict tests/adcp_interop_valid.py && uv run --frozen --group interop pyright tests/adcp_interop_valid.py && uv run --frozen --group interop python -m unittest discover -s tests -p adcp_interop_valid.py
+        working-directory: sdk/python
+      - run: node sdk/testing/validate-types.mjs sdk/python --adcp
+      - run: node sdk/testing/install-smoke.mjs . --public
+        env:
+          SDK_PYTHON: ${{ matrix.python }}
