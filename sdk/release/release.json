@@ -1,0 +1,5 @@
+{
+  "version": "0.3.0",
+  "notes": "Adds save_material archive and restore actions for seller Library documents, the archived Library-document search filter, and typed postal targeting refinements.",
+  "foundation": "090df7a691092f582e59da6a19083b6df7e1fbd5"
+}
