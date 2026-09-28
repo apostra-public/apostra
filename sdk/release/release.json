@@ -1,0 +1,5 @@
+{
+  "version": "0.4.0",
+  "notes": "Adds V3 HTTP write-receipt types and the latest generated Apostra SDK operations.",
+  "foundation": "090df7a691092f582e59da6a19083b6df7e1fbd5"
+}
