@@ -29,7 +29,7 @@ own campaign context; do not smuggle it into this prototype.
 Use the published [TypeScript](https://github.com/apostra-public/apostra/tree/main/examples/typescript)
 or [Python](https://github.com/apostra-public/apostra/tree/main/examples/python)
 starter when it fits the repository. Otherwise build the read-only example
-using the [connection guide](./connection.md) and current runtime schema.
+using the [connection guide](connection.md) and current runtime schema.
 Adapt the example to the repository's package manager and test runner. Do not
 overwrite existing files to reproduce a blank-repository example.
 
