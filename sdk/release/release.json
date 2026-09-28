@@ -1,0 +1,5 @@
+{
+  "version": "0.1.0",
+  "notes": "First paired Apostra HTTP SDK release: 53 public operations and two document routes, generated types, bearer credential injection, explicit account targeting, cancellation, and in-flight receipt boundaries.",
+  "foundation": "090df7a691092f582e59da6a19083b6df7e1fbd5"
+}
