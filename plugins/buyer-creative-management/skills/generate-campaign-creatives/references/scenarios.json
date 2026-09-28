@@ -2,7 +2,7 @@
   "schemaVersion": "2.0",
   "contract": "deterministic-v3-tool-v1",
   "skillId": "generate-campaign-creatives",
-  "skillVersion": "1.0.0",
+  "skillVersion": "1.1.0",
   "endpoint": "/mcp/v3",
   "modelPolicy": "deterministic-no-model",
   "analytics": {
@@ -38,7 +38,7 @@
     {
       "id": "creative-engine-discovery-no-spend",
       "title": "Discover enrolled Creative Engines without generation",
-      "description": "Read buyer readiness and the account-visible creative-engine catalogue without creating a connection, submitting a generation action, or selecting funding.",
+      "description": "Read buyer readiness and the account-visible Creative Engines catalogue without a generation action.",
       "mutationBoundary": "Read-only discovery only; performs no connection mutation, provider request, generation action, campaign launch, or spend.",
       "cleanupPolicy": "always-reverse-order",
       "runInputs": [
@@ -82,10 +82,7 @@
           "role": "ordinary",
           "mutates": false,
           "arguments": {
-            "kind": {
-              "source": "run_input",
-              "name": "creativeEngineKind"
-            }
+            "kind": { "source": "run_input", "name": "creativeEngineKind" }
           },
           "execution": {
             "timeoutMs": 30000,
@@ -102,6 +99,25 @@
           "cleanup": []
         }
       ]
+    },
+    {
+      "id": "scope3-preview-image-short-path",
+      "title": "Staging-verified enrolled buyer image short path",
+      "description": "This is staging evidence, not an executable acceptance scenario. The acceptance fixture has no deterministic creative provider, so its executable contract remains read-only discovery.",
+      "verification": {
+        "kind": "staging-verified",
+        "observedAt": "2026-09-28",
+        "evidence": [
+          {
+            "engine": "OpenAI",
+            "result": "returned a 1024x1024 JPEG asset URL"
+          },
+          {
+            "engine": "Gemini",
+            "result": "returned a 1024x1024 JPEG asset URL"
+          }
+        ]
+      }
     }
   ]
 }
