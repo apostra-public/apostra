@@ -13,9 +13,9 @@ MCP.
 
 Apostra provides the account, campaign, seller connection, execution, and
 reporting state behind the work. Read the [developer docs](https://docs.interchange.io/v3/overview)
-for the product model and the order of operations. Take every call shape from
-the connected account's `tools/list` schemas: they are what the server
-enforces, and they are specific to the account you are connected to.
+for the product model and the order of operations. For MCP, take every call
+shape from the connected account's `tools/list` schemas. For fixed V3 HTTP
+routes, take request and response shapes from the published OpenAPI contract.
 
 ## Start in the repository
 
@@ -44,13 +44,24 @@ MCP connection together. Use a direct MCP connection to
 plugin, or when instructions were installed separately with `npx skills`.
 In either case, let the host complete OAuth and store the interactive
 credential.
-For deterministic server or ETL work that needs a REST contract or an
-operation V3 does not expose, use the documented stable V2 REST API. Explain
-that choice in terms of the requested job, not a version-selection exercise.
+
+For deterministic server or ETL work, first read the [V3 HTTP guide](https://docs.interchange.io/v3/http-api).
+When an operation appears in its public catalogue, call its fixed
+`POST /api/v3/tools/<operation>` route and generate client types from
+`https://api.interchange.io/api/v3/openapi-3.1.yaml`. Follow the
+[authentication and account-binding guide](https://docs.interchange.io/v3/authentication):
+use a supported API key or M2M credential, keep the request on the resolved
+account, and never reuse an MCP-audience token for REST. If authorization or
+account access is missing, use the human handoff in
+[connection.md](references/connection.md) instead of requesting secrets.
+
+When the required operation is outside the public V3 HTTP catalogue, use the
+documented stable V2 REST API. Explain that choice in terms of the requested
+job, not a version-selection exercise.
 
 ## Connect and prove access
 
-Read the [connection guide](./references/connection.md) when installing, authenticating,
+Read [connection.md](references/connection.md) when installing, authenticating,
 or changing account context. Complete read-only verification before any remote
 write. For MCP, call `get_status`, inspect the current tools, and read the
 intended account resource. For a REST-only integration, use the documented
@@ -99,13 +110,13 @@ the same mistake and still pass.
 
 Read only the reference needed for the task:
 
-- [Daily campaign review](./references/daily-campaign-review.md): read-only
+- [daily-campaign-review.md](references/daily-campaign-review.md): read-only
   campaign pacing and performance review across the current and prior period.
-- [Agent workflows](./references/agents.md): seller discovery, connecting a seller,
+- [agents.md](references/agents.md): seller discovery, connecting a seller,
   durable buyer-agent loops, and independent agent identity.
-- [Data pipelines](./references/data-pipelines.md): event ingestion handoff,
+- [data-pipelines.md](references/data-pipelines.md): event ingestion handoff,
   aggregate reporting, exports, and scheduled delivery to cloud storage.
-- [Sales-agent testing](./references/sales-agent-testing.md): owned-supply
+- [sales-agent-testing.md](references/sales-agent-testing.md): owned-supply
   discovery and sandbox transaction tests with cleanup.
 
 Before following a workflow that changes account state, retrieve it through
