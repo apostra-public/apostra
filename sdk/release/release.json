@@ -1,0 +1,5 @@
+{
+  "version": "0.6.0",
+  "notes": "Adds the booked goal commitment (goalCommitment) to the media buy save_media_buy returns.",
+  "foundation": "090df7a691092f582e59da6a19083b6df7e1fbd5"
+}
