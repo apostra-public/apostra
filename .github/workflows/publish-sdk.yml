@@ -1,0 +1,141 @@
+# Composed into apostra-public/apostra; never run this from the private source.
+name: Publish Apostra SDKs
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Reviewed paired version
+        required: true
+      synthetic_evidence:
+        description: Successful synthetic-seller run URL for this candidate (both journeys/languages)
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: apostra-sdk-publication
+  cancel-in-progress: false
+jobs:
+  build:
+    if: github.repository == 'apostra-public/apostra' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: '26.9.0'
+          registry-url: https://registry.npmjs.org
+      - run: npm install --global npm@11.5.1
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+        with:
+          version: '0.12.19'
+          python-version: '3.12'
+      - id: version
+        env:
+          EXPECTED_VERSION: ${{ inputs.version }}
+          SYNTHETIC_EVIDENCE: ${{ inputs.synthetic_evidence }}
+        run: |
+          base="$(git tag --list 'sdk-v*' --sort=-version:refname | head -n1)"
+          if [ -z "$base" ]; then
+            base="$(git rev-list --max-parents=0 HEAD)"
+          fi
+          node sdk/release/check-release.mjs --public --base "$(git rev-parse "$base^{commit}")"
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const {version}=JSON.parse(fs.readFileSync('sdk/release/release.json','utf8'));
+          if(version!==process.env.EXPECTED_VERSION)throw new Error('Reviewed version mismatch');
+          if(!/^https:\/\/github\.com\/[^/]+\/[^/]+\/actions\/runs\/\d+$/.test(process.env.SYNTHETIC_EVIDENCE))throw new Error('Supply synthetic CI evidence for environment reviewers');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`version=${version}\n`);
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,`Release ${version}\n\nSynthetic evidence for approval: ${process.env.SYNTHETIC_EVIDENCE}\n`);
+          JS
+      - run: npm ci --ignore-scripts && npm run type-check && npm test
+        working-directory: sdk/typescript
+      - run: uv run --frozen mypy src tests/types_valid.py && uv run --frozen pyright && uv run --frozen python -m unittest discover -s tests -p 'test_*.py'
+        working-directory: sdk/python
+      - run: node sdk/testing/validate-types.mjs sdk/python
+      - run: node sdk/testing/install-smoke.mjs . --public
+      - name: Build the paired artifacts once
+        run: |
+          export SOURCE_DATE_EPOCH=$(git show -s --format=%ct HEAD)
+          mkdir -p artifacts
+          npm pack ./sdk/typescript --pack-destination artifacts
+          uv build --project sdk/python --out-dir artifacts
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: sdk-artifacts
+          path: artifacts/*
+  publish:
+    needs: build
+    environment: sdk-release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: '26.9.0'
+          registry-url: https://registry.npmjs.org
+      - run: npm install --global npm@11.5.1
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: sdk-artifacts
+          path: artifacts
+      - id: registry
+        run: node sdk/release/registry-state.mjs
+      # For the first npm package creation only, a scope owner supplies a
+      # short-lived environment secret. Remove it after configuring OIDC.
+      - if: steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists != 'true'
+        run: npm publish artifacts/*.tgz --access public --provenance --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_BOOTSTRAP_TOKEN }}
+      - if: steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists == 'true'
+        run: npm publish artifacts/*.tgz --access public --provenance --ignore-scripts
+      - run: mkdir -p python-dist && cp artifacts/*.whl artifacts/*.tar.gz python-dist/
+      - if: steps.registry.outputs.pypi_version_exists != 'true'
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33
+        with:
+          packages-dir: python-dist/
+          attestations: true
+  release:
+    needs: [build, publish]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: '26.9.0'
+      - run: npm install --global npm@11.5.1
+      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+        with:
+          version: '0.12.19'
+          python-version: '3.12'
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: sdk-artifacts
+          path: artifacts
+      - name: Install both public versions and create release notes
+        env:
+          SDK_VERSION: ${{ needs.build.outputs.version }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          install_dir=$(mktemp -d)
+          trap 'rm -rf "$install_dir"' EXIT
+          npm install --prefix "$install_dir" --ignore-scripts "@apostra/sdk@$SDK_VERSION"
+          node sdk/testing/verify-installed.mjs sdk/release/manifest.json "$install_dir"
+          uv venv --python 3.12 "$install_dir/venv"
+          uv pip install --python "$install_dir/venv/bin/python" "apostra==$SDK_VERSION"
+          node sdk/testing/verify-installed.mjs sdk/release/manifest.json "$install_dir" "$install_dir/venv/bin/python"
+          node --input-type=module -e "import fs from 'node:fs';fs.writeFileSync('release-notes.md',JSON.parse(fs.readFileSync('sdk/release/release.json','utf8')).notes)"
+          tag="sdk-v$SDK_VERSION"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            test "$(git ls-remote origin "refs/tags/$tag" | cut -f1)" = "$GITHUB_SHA"
+          else
+            gh release create "$tag" --target "$GITHUB_SHA" --title "Apostra SDKs $SDK_VERSION" --notes-file release-notes.md artifacts/*
+          fi

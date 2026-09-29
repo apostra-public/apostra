@@ -65,17 +65,17 @@ This route installs the instructions only. Connect the agent's MCP client to
 
 | Package | Purpose | Current canonical skills |
 |---|---|---|
-| `apostra-developer` | Plan, run, automate, and report on advertising across sellers, or build those jobs into an application. | `build-with-apostra@1.0.4` |
+| `apostra-developer` | Plan, run, automate, and report on advertising across sellers, or build those jobs into an application. | `build-with-apostra@1.0.5` |
 | `amc-listing` | Build and maintain an Agentic Media Company listing in Interchange. | MCP access; workflow skill forthcoming |
 | `amc-merchandising` | Merchandise an Agentic Media Company's inventory and products in Interchange. | MCP access; workflow skill forthcoming |
 | `amc-distribution` | Prepare and distribute an Agentic Media Company through supported agent channels. | `publish-an-openai-app@1.0.0` |
 | `amc-campaign-management` | Operate seller-side campaigns and delivery in Interchange. | MCP access; workflow skill forthcoming |
 | `buyer-account-setup` | Prepare an Interchange buyer account for campaign execution. | `get-account-ready-to-buy@1.0.0` |
 | `buyer-campaign-management` | Discover sellers, create campaigns, request proposals, and manage delivery. | `buy-from-seller@1.3.0`, `set-up-a-campaign@1.5.0`, `set-up-an-event-source@1.0.0`, `manage-a-campaign@1.1.1` |
-| `buyer-creative-management` | Prepare and inspect buyer creative inputs for campaign execution. | `inspect-tag-sheet@1.0.0`, `generate-campaign-creatives@1.0.0` |
+| `buyer-creative-management` | Prepare and inspect buyer creative inputs for campaign execution. | `inspect-tag-sheet@1.0.0`, `generate-campaign-creatives@1.1.0` |
 | `buyer-reporting` | Inspect buyer campaign delivery and reporting in Interchange. | `set-up-an-event-source@1.0.0` |
 | `sales-agent-testing` | Test a first-party or third-party AdCP sales agent with governed buyer workflows. | `test-sales-agent@1.5.1` |
-| `amc-self-serve-buyer` | Bundle buyer workflows for an Agentic Media Company's own self-serve plugin. | `get-account-ready-to-buy@1.0.0`, `buy-from-seller@1.3.0`, `set-up-a-campaign@1.5.0`, `set-up-an-event-source@1.0.0`, `manage-a-campaign@1.1.1`, `inspect-tag-sheet@1.0.0`, `generate-campaign-creatives@1.0.0` |
+| `amc-self-serve-buyer` | Bundle buyer workflows for an Agentic Media Company's own self-serve plugin. | `get-account-ready-to-buy@1.0.0`, `buy-from-seller@1.3.0`, `set-up-a-campaign@1.5.0`, `set-up-an-event-source@1.0.0`, `manage-a-campaign@1.1.1`, `inspect-tag-sheet@1.0.0`, `generate-campaign-creatives@1.1.0` |
 
 `amc-self-serve-buyer` is the aggregate buyer package an Agentic Media
 Company can bundle into its own self-serve plugin. `sales-agent-testing`
