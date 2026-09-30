@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "apostra"
+version = "0.21.0"
+description = "The official Apostra V3 HTTP SDK"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+authors = [{name = "Scope3 PBC"}]
+dependencies = ["httpx>=0.28.1,<0.29", "typing-extensions>=4.15,<5"]
+
+[project.urls]
+Source = "https://github.com/apostra-public/apostra/tree/main/sdk/python"
+Documentation = "https://docs.apostra.com/v2/sdk"
+Changelog = "https://docs.apostra.com/v2/changelog"
+
+[dependency-groups]
+dev = ["mypy==1.20.0", "pyright==1.1.408", "ruff==0.12.12", "build==1.3.0"]
+interop = ["adcp==8.0.0b15"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/apostra"]
+
+[tool.hatch.build.targets.sdist]
+only-include = ["src/apostra", "tests", "examples", "LICENSE", "README.md", "pyproject.toml", "uv.lock"]
+
+[tool.mypy]
+strict = true
+
+[tool.pyright]
+include = ["src", "tests/types_valid.py", "tests/test_transport.py", "examples/first_value.py"]
+typeCheckingMode = "strict"
+pythonVersion = "3.11"
+
+[tool.ruff]
+target-version = "py311"
