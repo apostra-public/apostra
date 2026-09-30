@@ -1,0 +1,54 @@
+{
+  "name": "@apostra/sdk",
+  "version": "0.12.0",
+  "description": "The official Apostra V3 HTTP SDK",
+  "type": "module",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apostra-public/apostra.git",
+    "directory": "sdk/typescript"
+  },
+  "homepage": "https://docs.interchange.io/v2/sdk",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./models": {
+      "types": "./dist/generated/types.gen.d.ts",
+      "import": "./dist/generated/types.gen.js"
+    },
+    "./metadata": {
+      "types": "./dist/generated/metadata.d.ts",
+      "import": "./dist/generated/metadata.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build": "tsc6 -p tsconfig.build.json",
+    "type-check": "tsc6 --noEmit",
+    "test": "vitest run",
+    "lint": "biome check src/transport.ts src/index.ts __tests__ --error-on-warnings",
+    "prepack": "npm run build"
+  },
+  "devDependencies": {
+    "@adcp/sdk": "14.0.0-rc.49",
+    "@types/node": "^22.15.17",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "vitest": "^4.1.9"
+  }
+}
