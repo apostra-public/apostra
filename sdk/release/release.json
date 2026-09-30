@@ -1,0 +1,5 @@
+{
+  "version": "0.17.0",
+  "notes": "Regenerates the paired SDKs from the changed V3 OpenAPI document.",
+  "foundation": "090df7a691092f582e59da6a19083b6df7e1fbd5"
+}
