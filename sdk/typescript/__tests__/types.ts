@@ -4,6 +4,7 @@ import {
   type GetDeliveryResult,
   type SaveCampaignInput,
   type SaveDimensionResult,
+  type SaveEventSourceResult,
   type SaveRfpInput,
 } from '../src/index.js'
 
@@ -21,6 +22,9 @@ const badCampaign: SaveCampaignInput = {
 }
 const api = new Apostra({ apiKey: 'test' })
 const delivery: Promise<GetDeliveryResult> = api.getDelivery({})
+function eventSourceFields(result: SaveEventSourceResult): [string, string] {
+  return [result.advertiserId, result.eventSources[0]?.eventSourceId ?? '']
+}
 function dimensionFields(result: SaveDimensionResult): [string, number] {
   return [result.object.id, result.object.usage.advertiser]
 }
@@ -44,6 +48,7 @@ void [
   campaign,
   badCampaign,
   delivery,
+  eventSourceFields,
   dimensionFields,
   writeWithoutKey,
   detailedWriteWithoutKey,
