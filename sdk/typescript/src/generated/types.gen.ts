@@ -4421,6 +4421,13 @@ export type ReviewBuyerChildAccountResponses = {
                 allowed: boolean;
                 denialReasons: Array<string>;
             };
+            planCoverage: {
+                covered: boolean;
+                /**
+                 * Why the Organization plan does not cover a Buyer Account, the plan it needs and the next step; null when covered.
+                 */
+                refusal: string | null;
+            };
             accessChanges: {
                 parentAdministratorsInheritChildAccess: true;
                 newMemberships: 0;
