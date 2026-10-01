@@ -1,6 +1,7 @@
 import type { OperationTypes } from './generated/client.js'
 import {
   baseUrl,
+  m2mTokenUrl,
   type OperationId,
   operations,
   version,
@@ -8,6 +9,15 @@ import {
 import type { AdcpError, InFlightReceipt } from './generated/types.gen.js'
 
 export type TokenProvider = () => string | Promise<string>
+export type M2mTokenProviderOptions = {
+  clientId: string
+  clientSecret: string
+  scope: string | string[]
+  /** Override fetch for testing or an application-owned HTTP implementation. */
+  fetch?: typeof globalThis.fetch
+  /** Deadline for an M2M token refresh. Defaults to 30 seconds. */
+  timeoutMs?: number
+}
 export type ClientOptions = {
   /** Supply exactly one credential source. Providers own acquisition/refresh. */
   apiKey?: string
@@ -17,6 +27,8 @@ export type ClientOptions = {
   baseUrl?: string
   fetch?: typeof globalThis.fetch
   timeoutMs?: number
+  /** Retry transient read failures and caller-keyed writes this many times. */
+  maxRetries?: number
 }
 export type RequestOptions = {
   accountId?: string
@@ -37,6 +49,10 @@ export type ResponseDetails<T> = {
   status: number
   headers: Headers
   requestId: string | null
+}
+type M2mTokenResponse = {
+  access_token: string
+  expires_in: number
 }
 export type ApostraErrorCode =
   | 'UNAUTHENTICATED'
@@ -141,6 +157,98 @@ const account = (value: string | undefined) => {
 function record(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
+function credentialPart(value: string, name: string): string {
+  if (!value || /[\r\n]/.test(value))
+    throw new TypeError(`${name} must be a non-empty single-line string`)
+  return value
+}
+function m2mScope(value: string | string[]): string {
+  const scope = Array.isArray(value) ? value.join(' ') : value
+  if (!scope.trim() || /[\r\n]/.test(scope))
+    throw new TypeError('scope must be a non-empty single-line string')
+  return scope
+}
+function m2mTimeoutMs(value: number | undefined): number {
+  const timeoutMs = value ?? 30_000
+  if (!Number.isFinite(timeoutMs) || timeoutMs <= 0)
+    throw new TypeError('timeoutMs must be a positive finite number')
+  return timeoutMs
+}
+/**
+ * Acquire and cache an OAuth client-credentials token for server-side use.
+ *
+ * The returned provider performs one refresh for concurrent callers and refreshes
+ * 60 seconds before expiry. It never persists or logs a client secret or token.
+ */
+export function m2mTokenProvider({
+  clientId: rawClientId,
+  clientSecret: rawClientSecret,
+  scope: rawScope,
+  fetch: suppliedFetch,
+  timeoutMs: rawTimeoutMs,
+}: M2mTokenProviderOptions): TokenProvider {
+  const clientId = credentialPart(rawClientId, 'clientId')
+  const clientSecret = credentialPart(rawClientSecret, 'clientSecret')
+  const scope = m2mScope(rawScope)
+  const fetcher = suppliedFetch ?? globalThis.fetch
+  const timeoutMs = m2mTimeoutMs(rawTimeoutMs)
+  let token: string | undefined
+  let expiresAt = 0
+  let refreshing: Promise<string> | undefined
+  const refresh = async (): Promise<string> => {
+    let response: Response
+    const signal = AbortSignal.timeout(timeoutMs)
+    try {
+      response = await fetcher(m2mTokenUrl, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          client_id: clientId,
+          client_secret: clientSecret,
+          grant_type: 'client_credentials',
+          scope,
+        }),
+        redirect: 'error',
+        signal,
+      })
+    } catch (cause) {
+      if (signal.aborted) throw new TimeoutError(cause)
+      throw new ConnectionError(cause)
+    }
+    if (!response.ok)
+      throw new Error(`M2M token request failed (${response.status})`)
+    let payload: unknown
+    try {
+      payload = await response.json()
+    } catch {
+      throw new Error('M2M token response is invalid')
+    }
+    if (
+      !record(payload) ||
+      typeof payload.access_token !== 'string' ||
+      !payload.access_token ||
+      /[\r\n]/.test(payload.access_token) ||
+      typeof payload.expires_in !== 'number' ||
+      !Number.isFinite(payload.expires_in) ||
+      payload.expires_in <= 0
+    )
+      throw new Error('M2M token response is invalid')
+    const result = payload as M2mTokenResponse
+    token = result.access_token
+    expiresAt = Date.now() + Math.max(0, result.expires_in * 1000 - 60_000)
+    return token
+  }
+  return () => {
+    if (token && Date.now() < expiresAt) return token
+    refreshing ??= refresh().finally(() => {
+      refreshing = undefined
+    })
+    return refreshing
+  }
+}
 function errorModel(value: unknown): value is AdcpError {
   return (
     record(value) &&
@@ -170,6 +278,39 @@ function retryAfterMs(value: string | null): number | null {
   if (Number.isFinite(seconds) && seconds >= 0) return seconds * 1000
   const at = Date.parse(value)
   return Number.isFinite(at) ? Math.max(0, at - Date.now()) : null
+}
+function retryDelayMs(error: unknown, attempt: number): number {
+  const jitter = Math.random() * Math.min(10_000, 250 * 2 ** attempt)
+  const retryAfter =
+    error instanceof ApostraError && error.retryAfter !== null
+      ? error.retryAfter * 1000
+      : 0
+  return Math.max(jitter, retryAfter)
+}
+function retryable(error: unknown): boolean {
+  if (error instanceof ConnectionError) return true
+  if (error instanceof ApostraError)
+    return error.status === 429 || error.status >= 500
+  return (
+    error instanceof ProtocolError &&
+    (error.status === 429 || error.status >= 500)
+  )
+}
+function wait(ms: number, signal: AbortSignal): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const cleanup = () => signal.removeEventListener('abort', abort)
+    const timer = setTimeout(() => {
+      cleanup()
+      resolve()
+    }, ms)
+    const abort = () => {
+      clearTimeout(timer)
+      cleanup()
+      reject(signal.reason)
+    }
+    signal.addEventListener('abort', abort, { once: true })
+    if (signal.aborted) abort()
+  })
 }
 function recoveryForStatus(status: number): Recovery {
   if (status === 408 || status === 429 || status >= 500) return 'transient'
@@ -203,17 +344,40 @@ export class Transport {
   readonly #options: ClientOptions
   readonly #url: string
   readonly #fetch: typeof globalThis.fetch
-  constructor(options: ClientOptions) {
+  constructor(options: ClientOptions = {}) {
+    const environment = (
+      globalThis as typeof globalThis & {
+        process?: { env?: Record<string, string | undefined> }
+      }
+    ).process?.env
+    const hasExplicitCredential = [
+      options.apiKey,
+      options.accessToken,
+      options.tokenProvider,
+    ].some((value) => value !== undefined)
+    const resolvedOptions: ClientOptions = {
+      ...options,
+      apiKey: hasExplicitCredential
+        ? options.apiKey
+        : environment?.APOSTRA_API_KEY,
+      accountId: options.accountId ?? environment?.APOSTRA_ACCOUNT_ID,
+      baseUrl: options.baseUrl ?? environment?.APOSTRA_BASE_URL,
+    }
     if (
-      [options.apiKey, options.accessToken, options.tokenProvider].filter(
-        (x) => x !== undefined,
-      ).length !== 1
+      [
+        resolvedOptions.apiKey,
+        resolvedOptions.accessToken,
+        resolvedOptions.tokenProvider,
+      ].filter((x) => x !== undefined).length !== 1
     )
       throw new TypeError(
         'Supply exactly one of apiKey, accessToken or tokenProvider',
       )
-    account(options.accountId)
-    const url = new URL(options.baseUrl ?? baseUrl)
+    const maxRetries = resolvedOptions.maxRetries ?? 2
+    if (!Number.isInteger(maxRetries) || maxRetries < 0)
+      throw new TypeError('maxRetries must be a non-negative integer')
+    account(resolvedOptions.accountId)
+    const url = new URL(resolvedOptions.baseUrl ?? baseUrl)
     if (
       url.username ||
       url.password ||
@@ -229,8 +393,8 @@ export class Transport {
         'Use an HTTPS base URL (HTTP is allowed only on loopback)',
       )
     this.#url = url.href.replace(/\/$/, '')
-    this.#options = { ...options }
-    this.#fetch = options.fetch ?? globalThis.fetch
+    this.#options = { ...resolvedOptions, maxRetries }
+    this.#fetch = resolvedOptions.fetch ?? globalThis.fetch
   }
   protected async request<T>(
     operation: OperationId,
@@ -341,73 +505,108 @@ export class Transport {
       else query.set(param.name, String(value))
     }
     if (meta.body) headers.set('Content-Type', 'application/json')
-    // Never replay mutations or follow redirects with bearer credentials.
-    let response: Response
-    try {
-      response = await deadline(
-        this.#fetch(`${this.#url}${path}${query.size ? `?${query}` : ''}`, {
-          method: meta.method,
-          headers,
-          body: meta.body ? JSON.stringify(requestInput) : undefined,
-          signal,
-          redirect: 'error',
-        }),
-      )
-    } catch (error) {
-      if (timeoutSignal.aborted) throw new TimeoutError(error)
-      if (options.signal?.aborted) throw error
-      throw new ConnectionError(error)
-    }
-    const requestId = response.headers.get('x-request-id')
-    // A 202 is an in-flight/uncertain write receipt, never a completed result.
-    if (response.status === 202) {
-      let receiptEnvelope: unknown
+    const url = `${this.#url}${path}${query.size ? `?${query}` : ''}`
+    const retries = this.#options.maxRetries ?? 2
+    for (let attempt = 0; ; attempt++) {
       try {
-        receiptEnvelope = await deadline(response.json())
+        let response: Response
+        try {
+          response = await deadline(
+            this.#fetch(url, {
+              method: meta.method,
+              headers,
+              body: meta.body ? JSON.stringify(requestInput) : undefined,
+              signal,
+              redirect: 'error',
+            }),
+          )
+        } catch (error) {
+          if (timeoutSignal.aborted) throw new TimeoutError(error)
+          if (options.signal?.aborted) throw error
+          throw new ConnectionError(error)
+        }
+        const requestId = response.headers.get('x-request-id')
+        // A 202 is an in-flight/uncertain write receipt, never a completed result.
+        if (response.status === 202) {
+          let receiptEnvelope: unknown
+          try {
+            receiptEnvelope = await deadline(response.json())
+          } catch (error) {
+            throwIfAborted()
+            if (!(error instanceof SyntaxError)) throw error
+            throw new ProtocolError(response.status, requestId)
+          }
+          if (!inFlightReceipt(receiptEnvelope))
+            throw new ProtocolError(response.status, requestId)
+          throw new InFlightReceiptError(
+            requestId,
+            retryAfterMs(response.headers.get('retry-after')),
+            receiptEnvelope.data.receipt,
+          )
+        }
+        if (meta.binary && response.ok)
+          return {
+            data: new Uint8Array(await deadline(response.arrayBuffer())) as T,
+            status: response.status,
+            headers: response.headers,
+            requestId,
+          }
+        let envelope: unknown
+        try {
+          envelope = await deadline(response.json())
+        } catch (error) {
+          throwIfAborted()
+          if (!(error instanceof SyntaxError)) throw error
+          throw new ProtocolError(response.status, requestId)
+        }
+        if (!response.ok) {
+          if (
+            record(envelope) &&
+            envelope.data === null &&
+            errorModel(envelope.error)
+          )
+            throw typedError(response.status, envelope.error, requestId)
+          throw new ProtocolError(response.status, requestId)
+        }
+        if (
+          !record(envelope) ||
+          envelope.error !== null ||
+          !('data' in envelope)
+        )
+          throw new ProtocolError(response.status, requestId)
+        return {
+          data: envelope.data as T,
+          status: response.status,
+          headers: response.headers,
+          requestId,
+        }
       } catch (error) {
-        throwIfAborted()
-        if (!(error instanceof SyntaxError)) throw error
-        throw new ProtocolError(response.status, requestId)
+        if (attempt >= retries || !retryable(error)) throw error
+        await deadline(wait(retryDelayMs(error, attempt), signal))
       }
-      if (!inFlightReceipt(receiptEnvelope))
-        throw new ProtocolError(response.status, requestId)
-      throw new InFlightReceiptError(
-        requestId,
-        retryAfterMs(response.headers.get('retry-after')),
-        receiptEnvelope.data.receipt,
-      )
     }
-    if (meta.binary && response.ok)
-      return {
-        data: new Uint8Array(await deadline(response.arrayBuffer())) as T,
-        status: response.status,
-        headers: response.headers,
-        requestId,
-      }
-    let envelope: unknown
+  }
+}
+
+/** Re-invoke a caller-owned keyed write until an in-flight receipt settles. */
+export async function settle<T>(
+  run: (signal: AbortSignal) => Promise<T>,
+  options: { signal?: AbortSignal; timeoutMs?: number } = {},
+): Promise<T> {
+  const timeout = options.timeoutMs ?? 30_000
+  if (!Number.isFinite(timeout) || timeout <= 0)
+    throw new TypeError('timeoutMs must be positive')
+  const timeoutSignal = AbortSignal.timeout(timeout)
+  const signal = options.signal
+    ? AbortSignal.any([options.signal, timeoutSignal])
+    : timeoutSignal
+  while (true) {
+    signal.throwIfAborted()
     try {
-      envelope = await deadline(response.json())
+      return await abortable(run(signal), signal)
     } catch (error) {
-      throwIfAborted()
-      if (!(error instanceof SyntaxError)) throw error
-      throw new ProtocolError(response.status, requestId)
-    }
-    if (!response.ok) {
-      if (
-        record(envelope) &&
-        envelope.data === null &&
-        errorModel(envelope.error)
-      )
-        throw typedError(response.status, envelope.error, requestId)
-      throw new ProtocolError(response.status, requestId)
-    }
-    if (!record(envelope) || envelope.error !== null || !('data' in envelope))
-      throw new ProtocolError(response.status, requestId)
-    return {
-      data: envelope.data as T,
-      status: response.status,
-      headers: response.headers,
-      requestId,
+      if (!(error instanceof InFlightReceiptError)) throw error
+      await wait(error.retryAfterMs ?? 1000, signal)
     }
   }
 }

@@ -19,6 +19,8 @@ behaviour.
 | Discover objects or read one object | `search`, `get` |
 | Create, update, preview, or confirm a campaign | `saveCampaign` |
 | Read delivery | `getDelivery` |
+| Inspect a successful call's request ID or headers | `getStatusWithResponse` (and the matching `WithResponse` method) |
+| Authenticate a deployed backend with M2M OAuth | `m2mTokenProvider` |
 | Handle a human-handoff URL | `openHandoff` |
 
 Use the generated types and the current documentation to construct requests. Do

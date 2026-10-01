@@ -1,6 +1,5 @@
 {
   "input": "mintlify/v2/v3-api-3.1.yaml",
-  "sha256": "26cec8ca19eef6943c519080dcd33d26a7214076f387435723d8977865eab7c1",
   "version": "0.33.0",
   "generators": {
     "typescript": "@hey-api/openapi-ts@0.99.0",
@@ -253,6 +252,7 @@
       "ProposedAccount": "object",
       "Operator": "object",
       "Capacity": "object",
+      "PlanCoverage": "object",
       "AccessChanges": "object",
       "OtherChanges": "object",
       "ReviewBuyerChildAccountResult": "object",

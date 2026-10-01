@@ -15,16 +15,38 @@ launch when `APOSTRA_CONFIRM_LAUNCH=true` is set deliberately.
 
 ```ts
 import { Apostra } from '@apostra/sdk'
-const api = new Apostra({ apiKey: process.env.APOSTRA_API_KEY!, accountId: '123' })
-const status = await api.getStatus({})
+const api = new Apostra()
+const status = await api.getStatus()
 ```
 
-Use `accessToken` for an existing REST/M2M bearer token, or `tokenProvider`
-for application-managed acquisition and refresh. Supply exactly one credential
-source. Never put API keys in browser bundles, URLs, examples or logs. The
-package does not acquire tokens, persist credentials or replay 401 responses.
+The client reads `APOSTRA_API_KEY`, `APOSTRA_ACCOUNT_ID` and
+`APOSTRA_BASE_URL` by default. Explicit constructor options override those
+values. Use `accessToken` for an existing REST/M2M bearer token, or
+`tokenProvider` for application-managed acquisition and refresh. Supply exactly
+one credential source. `m2mTokenProvider` acquires and caches a server-side
+client-credentials token with the published M2M endpoint; it refreshes 60
+seconds before expiry and shares a concurrent refresh. Never put API keys or
+client secrets in browser bundles, URLs, examples or logs. The package does not
+persist credentials or replay 401 responses. M2M token refreshes have a
+30-second deadline by default; pass `timeoutMs` to override it.
+
+```ts
+import { Apostra, m2mTokenProvider } from '@apostra/sdk'
+
+const api = new Apostra({
+  tokenProvider: m2mTokenProvider({
+    clientId: process.env.APOSTRA_CLIENT_ID!,
+    clientSecret: process.env.APOSTRA_CLIENT_SECRET!,
+    scope: 'interchange:read',
+  }),
+})
+```
 
 Methods accept the generated wire input and return the envelope's `data`.
+Every generated method also has a `WithResponse` variant, such as
+`getStatusWithResponse`. It returns `{ data, requestId, headers, status }` for
+successful calls, so support tools can retain `x-request-id` and response
+headers without dispatching by a wire operation name.
 `ApostraError` exposes `status`, `code`, `recovery`, `retryAfter`, `retryable`,
 the typed `error`, and `requestId`. Catch `RateLimitError`, `ValidationError`,
 or another typed subclass instead of parsing an exception string. The default
@@ -36,17 +58,34 @@ options to include a caller-owned `{ idempotencyKey }`. The SDK sends it as
 `Idempotency-Key`, and never creates or replaces it. Account selection uses
 `X-SCOPE3-CUSTOMER-ID`; it must match the account resolved by the credential.
 Cancellation stops waiting for HTTP; it does not undo server work. Requests
-have a 30-second timeout and no automatic retries or redirects. Transient
-errors expose the server's recovery hint and `retry_after`; the application
-decides whether replay is safe with the operation's original idempotency key.
+have a 30-second timeout, do not follow redirects, and retry transient network,
+429 and 5xx failures twice by default with full-jitter backoff. Set
+`maxRetries: 0` to opt out. Reads retry automatically. Writes retry only with
+the same caller-owned idempotency key, which generated write methods require.
+The SDK never creates or replaces that key. Server `retry_after` is a minimum
+retry delay.
+
+```ts
+const { data, requestId, headers } = await api.getStatusWithResponse()
+const correlationId = headers.get('x-request-id')
+```
+
 A `202` raises `InFlightReceiptError` rather than returning a completed value.
-It carries only the request ID and parsed `Retry-After` while the receipt schema
-and read-only receipt endpoint are pending. Keep the original key; the SDK does
-not replay the write or mint a replacement key.
+Use `settle` to replay the same keyed operation until it completes; it honours
+the receipt's `Retry-After`, deadline and cancellation signal:
+
+```ts
+const key = 'preview-123'
+const result = await settle(
+  (signal) => api.saveAsk(input, { idempotencyKey: key, signal }),
+  { timeoutMs: 30_000 },
+)
+```
 
 `paginate` and `poll` take typed callbacks. Preserve original query parameters,
 revisions and keys; provide the operation's cursor/status accessor. No helper
-assumes that a POST is safe to retry or that every list has the same cursor.
+assumes that a POST is safe to retry without its caller-owned key or that every
+list has the same cursor.
 Polling passes its signal to `read(signal)`; pagination passes it to
 `read(cursor, signal)`. Forward that signal into the SDK call to cancel the
 underlying HTTP request. Timeouts cover credentials, HTTP and response-body
