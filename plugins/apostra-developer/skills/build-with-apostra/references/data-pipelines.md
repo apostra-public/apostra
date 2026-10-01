@@ -11,7 +11,7 @@ Read [bring data in](https://docs.interchange.io/v3/bring-data-in) and retrieve
 the applicable `set-up-an-event-source` skill through the active account's
 `get` tool before source mutations.
 
-1. Read the advertiser's measurement sources and reuse a matching source
+1. Read the advertiser's event sources and reuse a matching source
    when appropriate. Native provider source IDs must come from that provider's
    authorized connection; a partner name alone does not establish a connector.
 2. Use the supported source-configuration workflow. Treat its returned
@@ -27,11 +27,10 @@ the applicable `set-up-an-event-source` skill through the active account's
    inspect its receipt, and read the source health. Preserve the difference
    between configuration saved, test accepted, and production events flowing.
 6. Attach conversion tracking to a campaign only when requested. Use the
-   source's raw `eventSourceId` for the campaign goal; the `event:`-prefixed
-   measurement-source noun ID addresses a different object.
+   source's `eventSourceId` for the campaign goal.
 
-Do not send production events to prove installation or claim that `not_seen`
-means a source is unusable. Return the sender's next command and the exact
+Do not send production events to prove installation or claim that a source
+with no events yet is unusable. Return the sender's next command and the exact
 observable receipt or health state still needed.
 
 ## Reporting pipeline
