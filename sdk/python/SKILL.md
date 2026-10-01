@@ -19,6 +19,7 @@ behaviour.
 | Discover objects or read one object | `search`, `get` |
 | Create, update, preview, or confirm a campaign | `save_campaign` |
 | Read delivery | `get_delivery` |
+| Inspect a successful call's request ID or headers | `get_status_with_response` (and the matching `_with_response` method) |
 | Handle a human-handoff URL | `open_handoff` |
 
 Use the generated types and the current documentation to construct requests. Do
