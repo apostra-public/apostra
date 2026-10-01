@@ -1,4 +1,4 @@
-// Generated from OpenAPI sha256:26cec8ca19eef6943c519080dcd33d26a7214076f387435723d8977865eab7c1
+// Generated. Do not edit.
 export const version = '0.33.0'
 export const baseUrl = "https://api.interchange.io/api/v3"
 export const operations = {
