@@ -33,6 +33,13 @@ jobs:
         with:
           version: '0.12.19'
           python-version: '3.12'
+      - name: Set the reviewed SDK version for this release
+        env:
+          EXPECTED_VERSION: ${{ inputs.version }}
+        run: |
+          node sdk/release/set-release-version.mjs "$EXPECTED_VERSION"
+          npm --prefix sdk/typescript install --package-lock-only --ignore-scripts --no-audit --no-fund
+          (cd sdk/python && UV_NO_CACHE=1 uv lock)
       - id: version
         env:
           EXPECTED_VERSION: ${{ inputs.version }}

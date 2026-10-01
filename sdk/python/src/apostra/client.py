@@ -12,7 +12,7 @@ class Apostra(SyncTransport):
         "Download a public immutable document revision"
         return cast("bytes", self._request("downloadV3PublicDocumentRevision", input, account_id=account_id, timeout=timeout))
 
-    def get_status(self, input: models.GetStatusInput, *, account_id: str | None = None, timeout: float | None = None) -> models.GetStatusResult:
+    def get_status(self, input: models.GetStatusInput = {}, *, account_id: str | None = None, timeout: float | None = None) -> models.GetStatusResult:
         "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand."
         return cast("models.GetStatusResult", self._request("get_status", input, account_id=account_id, timeout=timeout))
 
@@ -25,7 +25,7 @@ class Apostra(SyncTransport):
         return cast("models.SaveAccountResult", self._request("save_account", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def review_buyer_child_account(self, input: models.ReviewBuyerChildAccountInput, *, account_id: str | None = None, timeout: float | None = None) -> models.ReviewBuyerChildAccountResult:
-        "Review a Buyer child under the selected Organization: name, role, capacity, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account."
+        "Review a Buyer child under the selected Organization: name, role, capacity, plan coverage, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account."
         return cast("models.ReviewBuyerChildAccountResult", self._request("review_buyer_child_account", input, account_id=account_id, timeout=timeout))
 
     def request_buyer_child_account(self, input: models.RequestBuyerChildAccountInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestBuyerChildAccountResult:
@@ -241,7 +241,7 @@ class AsyncApostra(AsyncTransport):
         "Download a public immutable document revision"
         return cast("bytes", await self._request("downloadV3PublicDocumentRevision", input, account_id=account_id, timeout=timeout))
 
-    async def get_status(self, input: models.GetStatusInput, *, account_id: str | None = None, timeout: float | None = None) -> models.GetStatusResult:
+    async def get_status(self, input: models.GetStatusInput = {}, *, account_id: str | None = None, timeout: float | None = None) -> models.GetStatusResult:
         "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand."
         return cast("models.GetStatusResult", await self._request("get_status", input, account_id=account_id, timeout=timeout))
 
@@ -254,7 +254,7 @@ class AsyncApostra(AsyncTransport):
         return cast("models.SaveAccountResult", await self._request("save_account", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def review_buyer_child_account(self, input: models.ReviewBuyerChildAccountInput, *, account_id: str | None = None, timeout: float | None = None) -> models.ReviewBuyerChildAccountResult:
-        "Review a Buyer child under the selected Organization: name, role, capacity, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account."
+        "Review a Buyer child under the selected Organization: name, role, capacity, plan coverage, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account."
         return cast("models.ReviewBuyerChildAccountResult", await self._request("review_buyer_child_account", input, account_id=account_id, timeout=timeout))
 
     async def request_buyer_child_account(self, input: models.RequestBuyerChildAccountInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestBuyerChildAccountResult:

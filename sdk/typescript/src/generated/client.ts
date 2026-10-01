@@ -251,7 +251,7 @@ export class Apostra extends Transport {
    * @example
    * await client.getStatus(input)
    */
-  getStatus(input: GetStatusInput, options?: RequestOptions): Promise<GetStatusResult> { return this.request("get_status", input, options) }
+  getStatus(input: GetStatusInput = {}, options?: RequestOptions): Promise<GetStatusResult> { return this.request("get_status", input, options) }
   /**
    * Rechecks one external sales-agent source with no-spend get_products. Returns evidence IDs and seller readiness; no source configuration or media buy.
    *
@@ -267,7 +267,7 @@ export class Apostra extends Transport {
    */
   saveAccount(input: SaveAccountInput, options: WriteRequestOptions): Promise<SaveAccountResult> { return this.request("save_account", input, options) }
   /**
-   * Review a Buyer child under the selected Organization: name, role, capacity, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account.
+   * Review a Buyer child under the selected Organization: name, role, capacity, plan coverage, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account.
    *
    * @example
    * await client.reviewBuyerChildAccount(input)

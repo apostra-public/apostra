@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { operations, version } from '../src/generated/metadata.js'
 import {
@@ -21,7 +21,56 @@ const mockFetch = (
     Promise.resolve(fn(String(url), init ?? {})),
   )
 
+afterEach(() => {
+  vi.unstubAllEnvs()
+  vi.unstubAllGlobals()
+})
+
 describe('HTTP transport', () => {
+  it('uses environment defaults, lets explicit options win and keeps HTTPS validation', async () => {
+    vi.stubEnv('APOSTRA_API_KEY', 'environment-key')
+    vi.stubEnv('APOSTRA_ACCOUNT_ID', '12')
+    vi.stubEnv('APOSTRA_BASE_URL', 'https://environment.example')
+    const fetcher = mockFetch(() => response({}))
+    vi.stubGlobal('fetch', fetcher)
+
+    await new Apostra().getStatus()
+    const environmentRequest = fetcher.mock.calls[0] as [
+      RequestInfo | URL,
+      RequestInit,
+    ]
+    expect(environmentRequest[0]).toBe(
+      'https://environment.example/tools/get_status',
+    )
+    expect(
+      new Headers(environmentRequest[1].headers).get('authorization'),
+    ).toBe('Bearer environment-key')
+    expect(
+      new Headers(environmentRequest[1].headers).get('X-SCOPE3-CUSTOMER-ID'),
+    ).toBe('12')
+
+    await new Apostra({
+      accessToken: 'explicit-token',
+      accountId: '34',
+      baseUrl: 'https://explicit.example',
+      fetch: fetcher,
+    }).getStatus()
+    const explicitRequest = fetcher.mock.calls[1] as [
+      RequestInfo | URL,
+      RequestInit,
+    ]
+    expect(explicitRequest[0]).toBe('https://explicit.example/tools/get_status')
+    expect(new Headers(explicitRequest[1].headers).get('authorization')).toBe(
+      'Bearer explicit-token',
+    )
+    expect(
+      new Headers(explicitRequest[1].headers).get('X-SCOPE3-CUSTOMER-ID'),
+    ).toBe('34')
+
+    vi.stubEnv('APOSTRA_BASE_URL', 'http://not-loopback.example')
+    expect(() => new Apostra()).toThrow('Use an HTTPS base URL')
+  })
+
   it('serialises input, targets explicit accounts and obtains a fresh bearer each call', async () => {
     const seen: RequestInit[] = []
     const fetcher = mockFetch((_url, init) => {
