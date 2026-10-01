@@ -1,0 +1,11 @@
+# Apostra Python SDK
+
+Read `SKILL.md` in this package before implementing an Apostra task.
+
+- SDK guide: https://docs.apostra.com/v2/sdk
+- V3 HTTP contract: https://docs.apostra.com/v3/http-api
+- Authentication: https://docs.apostra.com/v3/authentication
+- Complete documentation corpus: https://docs.apostra.com/llms-full.txt
+
+The public documentation is the source of truth for operation inputs, results,
+permissions, and behaviour.
