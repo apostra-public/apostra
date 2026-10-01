@@ -28,8 +28,8 @@ missing:
   confirms and completes authorization in the browser flow.
 - In a command-line or other headless host, call `save_connection` with the
   resolved `sellerId` and `authorization: {}`. Relay the returned
-  `url` returned inside `authorization` to the person and stop. Never ask for the underlying
-  provider credential.
+  `url` from the returned `authorization` to the person and stop. Never ask for
+  the underlying provider credential.
 
 After the person says authorization is complete, re-read the connection rather
 than trusting the browser redirect. An active connection and credential mean
@@ -60,10 +60,10 @@ provider read succeeds. Enhanced Reporting is not required for this workflow.
    window. The comparison window is the seven days immediately before it.
    State both exact windows.
 4. For each campaign, call `get_delivery` twice with
-   `report: "live_campaign_delivery"` and a `campaignId` inside `filters`: once for the current
-   window and once for the comparison window. Do not pass metrics, dimensions,
-   other filters, a cursor, or a page size. This mode preserves the validated
-   provider response and never reads Apostra's reporting store.
+   `report: "live_campaign_delivery"` and the `campaignId` filter: once for the
+   current window and once for the comparison window. Do not pass metrics,
+   dimensions, other filters, a cursor, or a page size. This mode preserves the
+   validated provider response and never reads Apostra's reporting store.
 
 Do not persist an extract, create an export, or introduce another reporting
 store for an interactive review. A separately requested production routine
