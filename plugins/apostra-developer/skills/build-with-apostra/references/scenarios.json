@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "build-with-apostra",
-  "skillVersion": "1.0.4",
+  "skillVersion": "1.0.6",
   "scenarios": [
     {
       "id": "install-and-discover",
@@ -13,6 +13,18 @@
         "It discovers the current search schema and uses only read-only seller discovery for the first live example.",
         "The local fixture test proves successful discovery and an error or continuation case; the agent runs it and reports the observed result.",
         "The report separates installation, authentication, live account access, and local test evidence."
+      ]
+    },
+    {
+      "id": "v3-http-route-selection",
+      "title": "Choose a supported V3 HTTP route for deterministic automation",
+      "given": "A backend service needs a typed REST client for an Apostra operation and must remain bound to its authorized account.",
+      "expect": [
+        "The agent checks the public V3 HTTP catalogue before choosing a route.",
+        "For a catalogued operation, it uses POST /api/v3/tools/<operation> and generates types from `https://api.interchange.io/api/v3/openapi-3.1.yaml`.",
+        "It uses a supported API key or M2M client-credentials token, keeps explicit account selection equal to the account resolved by authentication, and does not reuse an MCP-audience token.",
+        "For an operation outside the public V3 HTTP catalogue, it uses the documented V2 REST contract instead of inventing a V3 route.",
+        "If authorization or account access is missing, it gives the documented human handoff and never asks for a secret in chat."
       ]
     },
     {
@@ -46,7 +58,7 @@
       "expect": [
         "The agent calls get_status first. If Apostra OAuth is missing, it surfaces the coding-agent host's secure login handoff and waits instead of asking for a token.",
         "Once Apostra is authorized, it resolves Meta through the seller catalog and reads the returned connection, credential, selected account, and account mapping rather than treating a get_status destination as proof of connection.",
-        "If Meta authorization is missing in a headless host, it calls save_connection with authorization and relays the returned url inside authorization to the person. In a host that renders the Connections app, it opens that app at the resolved Meta seller.",
+        "If Meta authorization is missing in a headless host, it calls save_connection with authorization and relays the returned authorization URL to the person. In a host that renders the Connections app, it opens that app at the resolved Meta seller.",
         "It never asks for a Meta password, API key, bearer token, or other provider secret in chat, and it does not record the one-time authorization URL as durable evidence.",
         "It stops for the human handoff, then verifies the connection with a fresh seller read. It does not request authorization again for an active credential, and it does not claim readable delivery until a live campaign read succeeds. Enhanced Reporting is not a requirement for that read."
       ]
