@@ -1,4 +1,4 @@
-// Generated from OpenAPI sha256:26cec8ca19eef6943c519080dcd33d26a7214076f387435723d8977865eab7c1
+// Generated. Do not edit.
 export const version = '0.33.0'
 export const baseUrl = "https://api.interchange.io/api/v3"
 export const operations = {
@@ -156,7 +156,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Review a Buyer child under the selected Organization: name, role, capacity, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account."
+    "summary": "Review a Buyer child under the selected Organization: name, role, capacity, plan coverage, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account."
   },
   "request_buyer_child_account": {
     "path": "/tools/request_buyer_child_account",
