@@ -1,0 +1,5 @@
+{
+  "version": "0.32.0",
+  "notes": "Removes the save_measurement_source operation and the measurement_source search/get kind; use save_event_source and kind event_source for event sources.",
+  "foundation": "090df7a691092f582e59da6a19083b6df7e1fbd5"
+}
