@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { operations, version } from '../src/generated/metadata.js'
 import {
@@ -10,6 +10,7 @@ import {
   paginate,
   poll,
   RateLimitError,
+  settle,
   TimeoutError,
 } from '../src/index.js'
 
@@ -21,7 +22,56 @@ const mockFetch = (
     Promise.resolve(fn(String(url), init ?? {})),
   )
 
+afterEach(() => {
+  vi.unstubAllEnvs()
+  vi.unstubAllGlobals()
+})
+
 describe('HTTP transport', () => {
+  it('uses environment defaults, lets explicit options win and keeps HTTPS validation', async () => {
+    vi.stubEnv('APOSTRA_API_KEY', 'environment-key')
+    vi.stubEnv('APOSTRA_ACCOUNT_ID', '12')
+    vi.stubEnv('APOSTRA_BASE_URL', 'https://environment.example')
+    const fetcher = mockFetch(() => response({}))
+    vi.stubGlobal('fetch', fetcher)
+
+    await new Apostra().getStatus()
+    const environmentRequest = fetcher.mock.calls[0] as [
+      RequestInfo | URL,
+      RequestInit,
+    ]
+    expect(environmentRequest[0]).toBe(
+      'https://environment.example/tools/get_status',
+    )
+    expect(
+      new Headers(environmentRequest[1].headers).get('authorization'),
+    ).toBe('Bearer environment-key')
+    expect(
+      new Headers(environmentRequest[1].headers).get('X-SCOPE3-CUSTOMER-ID'),
+    ).toBe('12')
+
+    await new Apostra({
+      accessToken: 'explicit-token',
+      accountId: '34',
+      baseUrl: 'https://explicit.example',
+      fetch: fetcher,
+    }).getStatus()
+    const explicitRequest = fetcher.mock.calls[1] as [
+      RequestInfo | URL,
+      RequestInit,
+    ]
+    expect(explicitRequest[0]).toBe('https://explicit.example/tools/get_status')
+    expect(new Headers(explicitRequest[1].headers).get('authorization')).toBe(
+      'Bearer explicit-token',
+    )
+    expect(
+      new Headers(explicitRequest[1].headers).get('X-SCOPE3-CUSTOMER-ID'),
+    ).toBe('34')
+
+    vi.stubEnv('APOSTRA_BASE_URL', 'http://not-loopback.example')
+    expect(() => new Apostra()).toThrow('Use an HTTPS base URL')
+  })
+
   it('serialises input, targets explicit accounts and obtains a fresh bearer each call', async () => {
     const seen: RequestInit[] = []
     const fetcher = mockFetch((_url, init) => {
@@ -66,7 +116,11 @@ describe('HTTP transport', () => {
         { status: 429, headers: { 'x-request-id': 'request-1' } },
       ),
     )
-    const client = new Apostra({ apiKey: 'private-key', fetch: fetcher })
+    const client = new Apostra({
+      apiKey: 'private-key',
+      fetch: fetcher,
+      maxRetries: 0,
+    })
     const error = await client
       .saveAsk(
         { id: 'ask-1', requesterState: 'accepted' },
@@ -122,9 +176,11 @@ describe('HTTP transport', () => {
       new Response('secret', { status: 502 }),
     ]) {
       await expect(
-        new Apostra({ apiKey: 'key', fetch: mockFetch(() => value) }).getStatus(
-          {},
-        ),
+        new Apostra({
+          apiKey: 'key',
+          fetch: mockFetch(() => value),
+          maxRetries: 0,
+        }).getStatus({}),
       ).rejects.toBeInstanceOf(ProtocolError)
     }
   })
@@ -287,6 +343,29 @@ async function collect<T>(items: AsyncIterable<T>): Promise<T[]> {
 }
 
 describe('credential and replay boundaries', () => {
+  it.each([400, 401, 403])(
+    'does not replay a transient-hinted %i response',
+    async (status) => {
+      const fetcher = mockFetch(() =>
+        Response.json(
+          {
+            data: null,
+            error: {
+              code: 'REQUEST_REJECTED',
+              message: 'do not replay',
+              recovery: 'transient',
+            },
+          },
+          { status },
+        ),
+      )
+      await expect(
+        new Apostra({ apiKey: 'key', fetch: fetcher }).getStatus({}),
+      ).rejects.toMatchObject({ status, retryable: true })
+      expect(fetcher).toHaveBeenCalledTimes(1)
+    },
+  )
+
   it('leaves refresh to the provider after a 401 without replaying the request', async () => {
     const provider = vi
       .fn()
@@ -315,7 +394,12 @@ describe('credential and replay boundaries', () => {
         { status: 503 },
       ),
     )
-    const api = new Apostra({ apiKey: 'key', accountId: '12', fetch: fetcher })
+    const api = new Apostra({
+      apiKey: 'key',
+      accountId: '12',
+      fetch: fetcher,
+      maxRetries: 0,
+    })
     const input = {
       catalogId: 'catalog-1',
       advertiserId: '123',
@@ -355,6 +439,103 @@ describe('credential and replay boundaries', () => {
       api.saveAsk({ id: 'ask-1', requesterState: 'accepted' }, {} as never),
     ).rejects.toThrow('idempotencyKey')
     expect(fetcher).not.toHaveBeenCalled()
+  })
+
+  it('retries transient reads and caller-keyed writes with the original payload', async () => {
+    const random = vi.spyOn(Math, 'random').mockReturnValue(0)
+    const fetcher = mockFetch(
+      vi
+        .fn()
+        .mockReturnValueOnce(
+          Response.json(
+            { data: null, error: { code: 'UNAVAILABLE', message: 'later' } },
+            { status: 503 },
+          ),
+        )
+        .mockReturnValueOnce(response({ read: true }))
+        .mockReturnValueOnce(
+          Response.json(
+            { data: null, error: { code: 'UNAVAILABLE', message: 'later' } },
+            { status: 503 },
+          ),
+        )
+        .mockReturnValueOnce(response({ write: true })),
+    )
+    const api = new Apostra({ apiKey: 'key', fetch: fetcher })
+    await expect(api.getStatus({})).resolves.toEqual({ read: true })
+    await expect(
+      api.saveAsk(
+        { id: 'ask-1', requesterState: 'accepted' },
+        { idempotencyKey: 'ask-1' },
+      ),
+    ).resolves.toEqual({ write: true })
+    expect(fetcher).toHaveBeenCalledTimes(4)
+    const firstWrite = fetcher.mock.calls[2][1]
+    const retryWrite = fetcher.mock.calls[3][1]
+    expect(retryWrite?.body).toBe(firstWrite?.body)
+    expect(new Headers(retryWrite?.headers).get('idempotency-key')).toBe(
+      'ask-1',
+    )
+    random.mockRestore()
+  })
+
+  it('honours retry_after before retrying and bounds jittered backoff', async () => {
+    vi.useFakeTimers()
+    const random = vi.spyOn(Math, 'random').mockReturnValue(0)
+    const fetcher = mockFetch(
+      vi
+        .fn()
+        .mockReturnValueOnce(
+          Response.json(
+            {
+              data: null,
+              error: {
+                code: 'RATE_LIMITED',
+                message: 'later',
+                retry_after: 1,
+                recovery: 'transient',
+              },
+            },
+            { status: 429 },
+          ),
+        )
+        .mockReturnValueOnce(response({})),
+    )
+    const pending = new Apostra({ apiKey: 'key', fetch: fetcher }).getStatus({})
+    await vi.advanceTimersByTimeAsync(999)
+    expect(fetcher).toHaveBeenCalledTimes(1)
+    await vi.advanceTimersByTimeAsync(1)
+    await expect(pending).resolves.toEqual({})
+    expect(fetcher).toHaveBeenCalledTimes(2)
+    random.mockRestore()
+    vi.useRealTimers()
+  })
+
+  it('settles in-flight keyed writes until a completed result and can cancel', async () => {
+    vi.useFakeTimers()
+    const receipt = {
+      id: '4e8d0bf9-419a-4eb4-a6ee-3438f7bc89a1',
+      state: 'running' as const,
+      stateVersion: 1,
+      stateChangedAt: '2026-09-28T10:00:00.000Z',
+    }
+    const run = vi
+      .fn()
+      .mockRejectedValueOnce(new InFlightReceiptError('r1', 10, receipt))
+      .mockResolvedValueOnce({ done: true })
+    const pending = settle(run, { timeoutMs: 100 })
+    await vi.advanceTimersByTimeAsync(9)
+    expect(run).toHaveBeenCalledTimes(1)
+    await vi.advanceTimersByTimeAsync(1)
+    await expect(pending).resolves.toEqual({ done: true })
+    const controller = new AbortController()
+    const cancelled = settle(
+      () => Promise.reject(new InFlightReceiptError('r1', 100, receipt)),
+      { signal: controller.signal },
+    )
+    controller.abort(new Error('cancelled'))
+    await expect(cancelled).rejects.toThrow('cancelled')
+    vi.useRealTimers()
   })
 
   it('rejects invalid local options before requesting credentials', async () => {

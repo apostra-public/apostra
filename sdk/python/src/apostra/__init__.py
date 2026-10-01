@@ -17,4 +17,6 @@ from .transport import (
     paginate as paginate,
     paginate_async as paginate_async,
     poll as poll,
+    settle as settle,
+    settle_async as settle_async,
 )

@@ -5,10 +5,12 @@ import asyncio
 import builtins
 import json
 import math
+import random
 import re
 from _thread import LockType
 from collections.abc import AsyncIterator, Awaitable, Callable, Iterator, Mapping
 from importlib.resources import files
+from os import environ
 from threading import Event, Lock, Thread
 from time import monotonic
 from typing import Literal, NotRequired, Self, TypeVar, TypedDict, cast
@@ -154,6 +156,38 @@ def _typed_error(status: int, error: AdcpError, request_id: str | None) -> Apost
     return error_type(status, error, request_id)
 
 
+def _max_retries(value: int) -> int:
+    if type(value) is not int or value < 0:
+        raise ValueError('max_retries must be a non-negative integer')
+    return value
+
+
+def _retryable(error: BaseException) -> bool:
+    if isinstance(error, ConnectionError):
+        return True
+    if isinstance(error, ApostraError):
+        return error.status == 429 or error.status >= 500
+    return isinstance(error, ProtocolError) and (error.status == 429 or error.status >= 500)
+
+
+def _retry_delay(error: BaseException, attempt: int) -> float:
+    jitter = random.uniform(0, min(10, 0.25 * 2 ** attempt))
+    retry_after = error.retry_after if isinstance(error, ApostraError) else None
+    return max(jitter, retry_after if isinstance(retry_after, (int, float)) else 0)
+
+
+def _wait(seconds: float, deadline: float, cancel: Event | None = None) -> None:
+    remaining = deadline - monotonic()
+    if remaining <= 0:
+        raise TimeoutError('Apostra request timed out')
+    if cancel and cancel.wait(min(seconds, remaining)):
+        raise asyncio.CancelledError()
+    if cancel is None:
+        Event().wait(min(seconds, remaining))
+    if seconds > remaining:
+        raise TimeoutError('Apostra request timed out')
+
+
 def _prepare(operation: str, input: Mapping[str, object], token: str, account_id: str | None, idempotency_key: str | None) -> tuple[Operation, str, dict[str, str]]:
     if not token or '\r' in token or '\n' in token:
         raise ValueError('Credential source returned an empty or invalid token')
@@ -273,7 +307,11 @@ def _run_sync_with_deadline(
 
 
 class SyncTransport:
-    def __init__(self, *, api_key: str | None = None, access_token: str | None = None, token_provider: TokenProvider | None = None, account_id: str | None = None, base_url: str = BASE_URL, timeout: float = 30, http_client: httpx.Client | None = None) -> None:
+    def __init__(self, *, api_key: str | None = None, access_token: str | None = None, token_provider: TokenProvider | None = None, account_id: str | None = None, base_url: str | None = None, timeout: float = 30, max_retries: int = 2, http_client: httpx.Client | None = None) -> None:
+        if not any(value is not None for value in (api_key, access_token, token_provider)):
+            api_key = environ.get('APOSTRA_API_KEY')
+        account_id = account_id if account_id is not None else environ.get('APOSTRA_ACCOUNT_ID')
+        base_url = base_url if base_url is not None else environ.get('APOSTRA_BASE_URL', BASE_URL)
         if sum(value is not None for value in (api_key, access_token, token_provider)) != 1:
             raise ValueError('Supply exactly one of api_key, access_token or token_provider')
         self.__token = api_key or access_token
@@ -282,6 +320,7 @@ class SyncTransport:
         self._account_id = _account(account_id)
         self._base_url = _base_url(base_url)
         self._timeout = timeout
+        self._max_retries = _max_retries(max_retries)
         self.__owns_client = http_client is None
         self._http = http_client or httpx.Client()
 
@@ -313,8 +352,15 @@ class SyncTransport:
                 raise ConnectionError('Apostra connection failed') from error
             return response, meta['binary']
 
-        response, binary = _run_sync_with_deadline(send, deadline, self.__provider_lock)
-        return _decode(response, binary)
+        for attempt in range(self._max_retries + 1):
+            try:
+                response, binary = _run_sync_with_deadline(send, deadline, self.__provider_lock)
+                return _decode(response, binary)
+            except (ApostraError, ConnectionError, ProtocolError) as error:
+                if attempt >= self._max_retries or not _retryable(error):
+                    raise
+                _wait(_retry_delay(error, attempt), deadline)
+        raise AssertionError('retry loop exhausted without a result')
 
     def close(self) -> None:
         if self.__owns_client:
@@ -328,7 +374,11 @@ class SyncTransport:
 
 
 class AsyncTransport:
-    def __init__(self, *, api_key: str | None = None, access_token: str | None = None, token_provider: AsyncTokenProvider | None = None, account_id: str | None = None, base_url: str = BASE_URL, timeout: float = 30, http_client: httpx.AsyncClient | None = None) -> None:
+    def __init__(self, *, api_key: str | None = None, access_token: str | None = None, token_provider: AsyncTokenProvider | None = None, account_id: str | None = None, base_url: str | None = None, timeout: float = 30, max_retries: int = 2, http_client: httpx.AsyncClient | None = None) -> None:
+        if not any(value is not None for value in (api_key, access_token, token_provider)):
+            api_key = environ.get('APOSTRA_API_KEY')
+        account_id = account_id if account_id is not None else environ.get('APOSTRA_ACCOUNT_ID')
+        base_url = base_url if base_url is not None else environ.get('APOSTRA_BASE_URL', BASE_URL)
         if sum(value is not None for value in (api_key, access_token, token_provider)) != 1:
             raise ValueError('Supply exactly one of api_key, access_token or token_provider')
         self.__token = api_key or access_token
@@ -336,6 +386,7 @@ class AsyncTransport:
         self._account_id = _account(account_id)
         self._base_url = _base_url(base_url)
         self._timeout = timeout
+        self._max_retries = _max_retries(max_retries)
         self.__owns_client = http_client is None
         self._http = http_client or httpx.AsyncClient()
 
@@ -346,22 +397,29 @@ class AsyncTransport:
         target = _account(account_id if account_id is not None else self._account_id)
         try:
             async with asyncio.timeout(seconds):
-                token = await self.__provider() if self.__provider else self.__token
-                meta, path, headers = _prepare(operation, input, token or '', target, idempotency_key)
-                payload = dict(input)
-                body_key_field = meta.get('bodyKeyField')
-                if body_key_field:
-                    supplied = payload.get(body_key_field)
-                    if supplied is not None and supplied != idempotency_key:
-                        raise ValueError(f'{body_key_field} must match idempotency_key for {operation}')
-                    payload[body_key_field] = cast(str, idempotency_key)
-                try:
-                    response = await self._http.request(meta['method'], self._base_url + path, headers=headers, json=payload if meta['body'] else None, timeout=seconds, follow_redirects=False)
-                except httpx.TimeoutException as error:
-                    raise TimeoutError('Apostra request timed out') from error
-                except httpx.HTTPError as error:
-                    raise ConnectionError('Apostra connection failed') from error
-                return _decode(response, meta['binary'])
+                for attempt in range(self._max_retries + 1):
+                    try:
+                        token = await self.__provider() if self.__provider else self.__token
+                        meta, path, headers = _prepare(operation, input, token or '', target, idempotency_key)
+                        payload = dict(input)
+                        body_key_field = meta.get('bodyKeyField')
+                        if body_key_field:
+                            supplied = payload.get(body_key_field)
+                            if supplied is not None and supplied != idempotency_key:
+                                raise ValueError(f'{body_key_field} must match idempotency_key for {operation}')
+                            payload[body_key_field] = cast(str, idempotency_key)
+                        try:
+                            response = await self._http.request(meta['method'], self._base_url + path, headers=headers, json=payload if meta['body'] else None, timeout=seconds, follow_redirects=False)
+                        except httpx.TimeoutException as error:
+                            raise TimeoutError('Apostra request timed out') from error
+                        except httpx.HTTPError as error:
+                            raise ConnectionError('Apostra connection failed') from error
+                        return _decode(response, meta['binary'])
+                    except (ApostraError, ConnectionError, ProtocolError) as error:
+                        if attempt >= self._max_retries or not _retryable(error):
+                            raise
+                        await asyncio.sleep(_retry_delay(error, attempt))
+                raise AssertionError('retry loop exhausted without a result')
         except builtins.TimeoutError as error:
             if isinstance(error, TimeoutError):
                 raise
@@ -419,6 +477,32 @@ async def poll(read: Callable[[], Awaitable[T]], complete: Callable[[T], bool], 
             if complete(result):
                 return result
             await asyncio.sleep(interval)
+
+
+def settle(run: Callable[[], T], *, timeout: float = 30, cancel: Event | None = None) -> T:
+    """Re-invoke a caller-owned keyed write until an in-flight receipt settles."""
+    if not math.isfinite(timeout) or timeout <= 0:
+        raise ValueError('timeout must be positive')
+    deadline = monotonic() + timeout
+    while True:
+        if cancel and cancel.is_set():
+            raise asyncio.CancelledError()
+        try:
+            return run()
+        except InFlightReceiptError as error:
+            _wait(error.retry_after if error.retry_after is not None else 1, deadline, cancel)
+
+
+async def settle_async(run: Callable[[], Awaitable[T]], *, timeout: float = 30) -> T:
+    """Async counterpart to settle; task cancellation stops its next retry."""
+    if not math.isfinite(timeout) or timeout <= 0:
+        raise ValueError('timeout must be positive')
+    async with asyncio.timeout(timeout):
+        while True:
+            try:
+                return await run()
+            except InFlightReceiptError as error:
+                await asyncio.sleep(error.retry_after if error.retry_after is not None else 1)
 
 
 def open_handoff(url: str, opener: Callable[[str], object] | None = None) -> str:
