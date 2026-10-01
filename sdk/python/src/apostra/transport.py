@@ -9,6 +9,7 @@ import re
 from _thread import LockType
 from collections.abc import AsyncIterator, Awaitable, Callable, Iterator, Mapping
 from importlib.resources import files
+from os import environ
 from threading import Event, Lock, Thread
 from time import monotonic
 from typing import Literal, NotRequired, Self, TypeVar, TypedDict, cast
@@ -273,7 +274,11 @@ def _run_sync_with_deadline(
 
 
 class SyncTransport:
-    def __init__(self, *, api_key: str | None = None, access_token: str | None = None, token_provider: TokenProvider | None = None, account_id: str | None = None, base_url: str = BASE_URL, timeout: float = 30, http_client: httpx.Client | None = None) -> None:
+    def __init__(self, *, api_key: str | None = None, access_token: str | None = None, token_provider: TokenProvider | None = None, account_id: str | None = None, base_url: str | None = None, timeout: float = 30, http_client: httpx.Client | None = None) -> None:
+        if not any(value is not None for value in (api_key, access_token, token_provider)):
+            api_key = environ.get('APOSTRA_API_KEY')
+        account_id = account_id if account_id is not None else environ.get('APOSTRA_ACCOUNT_ID')
+        base_url = base_url if base_url is not None else environ.get('APOSTRA_BASE_URL', BASE_URL)
         if sum(value is not None for value in (api_key, access_token, token_provider)) != 1:
             raise ValueError('Supply exactly one of api_key, access_token or token_provider')
         self.__token = api_key or access_token
@@ -328,7 +333,11 @@ class SyncTransport:
 
 
 class AsyncTransport:
-    def __init__(self, *, api_key: str | None = None, access_token: str | None = None, token_provider: AsyncTokenProvider | None = None, account_id: str | None = None, base_url: str = BASE_URL, timeout: float = 30, http_client: httpx.AsyncClient | None = None) -> None:
+    def __init__(self, *, api_key: str | None = None, access_token: str | None = None, token_provider: AsyncTokenProvider | None = None, account_id: str | None = None, base_url: str | None = None, timeout: float = 30, http_client: httpx.AsyncClient | None = None) -> None:
+        if not any(value is not None for value in (api_key, access_token, token_provider)):
+            api_key = environ.get('APOSTRA_API_KEY')
+        account_id = account_id if account_id is not None else environ.get('APOSTRA_ACCOUNT_ID')
+        base_url = base_url if base_url is not None else environ.get('APOSTRA_BASE_URL', BASE_URL)
         if sum(value is not None for value in (api_key, access_token, token_provider)) != 1:
             raise ValueError('Supply exactly one of api_key, access_token or token_provider')
         self.__token = api_key or access_token

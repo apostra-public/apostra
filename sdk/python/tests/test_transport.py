@@ -1,5 +1,6 @@
 import asyncio
 import json
+import os
 import unittest
 from pathlib import Path
 from threading import Event
@@ -22,6 +23,37 @@ def sdk_manifest_path() -> Path:
 
 
 class TransportTests(unittest.TestCase):
+    def test_environment_defaults_allow_zero_config_status_and_explicit_overrides(self) -> None:
+        requests: list[httpx.Request] = []
+
+        def handle(request: httpx.Request) -> httpx.Response:
+            requests.append(request)
+            return httpx.Response(200, json={'data': {}, 'error': None})
+
+        with patch.dict(os.environ, {
+            'APOSTRA_API_KEY': 'environment-key',
+            'APOSTRA_ACCOUNT_ID': '12',
+            'APOSTRA_BASE_URL': 'https://environment.example',
+        }):
+            with httpx.Client(transport=httpx.MockTransport(handle)) as http:
+                Apostra(http_client=http).get_status()
+                Apostra(
+                    access_token='explicit-token',
+                    account_id='34',
+                    base_url='https://explicit.example',
+                    http_client=http,
+                ).get_status()
+            with self.assertRaisesRegex(ValueError, 'Use HTTPS'):
+                with patch.dict(os.environ, {'APOSTRA_BASE_URL': 'http://not-loopback.example'}):
+                    Apostra()
+
+        self.assertEqual(str(requests[0].url), 'https://environment.example/tools/get_status')
+        self.assertEqual(requests[0].headers['authorization'], 'Bearer environment-key')
+        self.assertEqual(requests[0].headers['X-SCOPE3-CUSTOMER-ID'], '12')
+        self.assertEqual(str(requests[1].url), 'https://explicit.example/tools/get_status')
+        self.assertEqual(requests[1].headers['authorization'], 'Bearer explicit-token')
+        self.assertEqual(requests[1].headers['X-SCOPE3-CUSTOMER-ID'], '34')
+
     def test_unauthorized_does_not_replay_or_refresh_implicitly(self) -> None:
         tokens = iter(['expired', 'fresh'])
         requests: list[httpx.Request] = []
@@ -265,6 +297,25 @@ class TransportTests(unittest.TestCase):
 
 
 class AsyncTests(unittest.IsolatedAsyncioTestCase):
+    async def test_async_environment_defaults_allow_zero_config_status(self) -> None:
+        requests: list[httpx.Request] = []
+
+        async def handle(request: httpx.Request) -> httpx.Response:
+            requests.append(request)
+            return httpx.Response(200, json={'data': {}, 'error': None})
+
+        with patch.dict(os.environ, {
+            'APOSTRA_API_KEY': 'environment-key',
+            'APOSTRA_ACCOUNT_ID': '12',
+            'APOSTRA_BASE_URL': 'https://environment.example',
+        }):
+            async with httpx.AsyncClient(transport=httpx.MockTransport(handle)) as http:
+                await AsyncApostra(http_client=http).get_status()
+
+        self.assertEqual(str(requests[0].url), 'https://environment.example/tools/get_status')
+        self.assertEqual(requests[0].headers['authorization'], 'Bearer environment-key')
+        self.assertEqual(requests[0].headers['X-SCOPE3-CUSTOMER-ID'], '12')
+
     async def test_async_body_idempotency_key_matches_header(self) -> None:
         requests: list[httpx.Request] = []
         async def handle(request: httpx.Request) -> httpx.Response:
