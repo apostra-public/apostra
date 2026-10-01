@@ -10,6 +10,7 @@ from .transport import (
     PermissionError as PermissionError,
     ProtocolError as ProtocolError,
     RateLimitError as RateLimitError,
+    ResponseDetails as ResponseDetails,
     TimeoutError as TimeoutError,
     UnsupportedCapabilityError as UnsupportedCapabilityError,
     ValidationError as ValidationError,
@@ -17,4 +18,6 @@ from .transport import (
     paginate as paginate,
     paginate_async as paginate_async,
     poll as poll,
+    settle as settle,
+    settle_async as settle_async,
 )
