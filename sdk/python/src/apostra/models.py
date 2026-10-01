@@ -2065,6 +2065,11 @@ class Capacity(TypedDict):
     allowed: bool
     denialReasons: list[str]
 
+class PlanCoverage(TypedDict):
+    covered: bool
+    refusal: str | None
+    '\n    Why the Organization plan does not cover a Buyer Account, the plan it needs and the next step; null when covered.\n    '
+
 class AccessChanges(TypedDict):
     parentAdministratorsInheritChildAccess: Literal[True]
     newMemberships: Literal[0]
@@ -2079,6 +2084,7 @@ class ReviewBuyerChildAccountResult(TypedDict):
     proposedAccount: ProposedAccount
     operator: Operator
     capacity: Capacity
+    planCoverage: PlanCoverage
     accessChanges: AccessChanges
     otherChanges: OtherChanges
     transactionReadiness: Literal['not_verified']

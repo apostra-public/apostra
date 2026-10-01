@@ -14,11 +14,10 @@ is in the SDK source checkout. It previews by default and only confirms a
 launch when `APOSTRA_CONFIRM_LAUNCH=true` is set deliberately.
 
 ```python
-import os
 from apostra import Apostra
-api = Apostra(api_key=os.environ['APOSTRA_API_KEY'], account_id='123')
+api = Apostra()
 try:
-    status = api.get_status({})
+    status = api.get_status()
 finally:
     api.close()
 ```
@@ -28,10 +27,13 @@ field names, including camelCase keys. Methods use snake_case and return the
 envelope's `data`. Both mypy and pyright check inputs, results and recursive
 JSON types. Runtime schema constraints remain enforced by the server.
 
-Use `access_token` for an existing REST/M2M bearer token or `token_provider`
-for application-managed refresh. The async client requires an async provider.
-Supply exactly one source. Never expose keys in browser code, URLs or logs.
-Credentials are neither persisted nor included in exception strings.
+The client reads `APOSTRA_API_KEY`, `APOSTRA_ACCOUNT_ID` and
+`APOSTRA_BASE_URL` by default. Explicit constructor options override those
+values. Use `access_token` for an existing REST/M2M bearer token or
+`token_provider` for application-managed refresh. The async client requires an
+async provider. Supply exactly one source. Never expose keys in browser code,
+URLs or logs. Credentials are neither persisted nor included in exception
+strings.
 
 `ApostraError` exposes `status`, `code`, `recovery`, `retry_after`, `retryable`,
 `error` and `request_id`. Catch `RateLimitError`, `ValidationError`, or another

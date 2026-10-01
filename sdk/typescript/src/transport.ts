@@ -203,17 +203,37 @@ export class Transport {
   readonly #options: ClientOptions
   readonly #url: string
   readonly #fetch: typeof globalThis.fetch
-  constructor(options: ClientOptions) {
+  constructor(options: ClientOptions = {}) {
+    const environment = (
+      globalThis as typeof globalThis & {
+        process?: { env?: Record<string, string | undefined> }
+      }
+    ).process?.env
+    const hasExplicitCredential = [
+      options.apiKey,
+      options.accessToken,
+      options.tokenProvider,
+    ].some((value) => value !== undefined)
+    const resolvedOptions: ClientOptions = {
+      ...options,
+      apiKey: hasExplicitCredential
+        ? options.apiKey
+        : environment?.APOSTRA_API_KEY,
+      accountId: options.accountId ?? environment?.APOSTRA_ACCOUNT_ID,
+      baseUrl: options.baseUrl ?? environment?.APOSTRA_BASE_URL,
+    }
     if (
-      [options.apiKey, options.accessToken, options.tokenProvider].filter(
-        (x) => x !== undefined,
-      ).length !== 1
+      [
+        resolvedOptions.apiKey,
+        resolvedOptions.accessToken,
+        resolvedOptions.tokenProvider,
+      ].filter((x) => x !== undefined).length !== 1
     )
       throw new TypeError(
         'Supply exactly one of apiKey, accessToken or tokenProvider',
       )
-    account(options.accountId)
-    const url = new URL(options.baseUrl ?? baseUrl)
+    account(resolvedOptions.accountId)
+    const url = new URL(resolvedOptions.baseUrl ?? baseUrl)
     if (
       url.username ||
       url.password ||
@@ -229,8 +249,8 @@ export class Transport {
         'Use an HTTPS base URL (HTTP is allowed only on loopback)',
       )
     this.#url = url.href.replace(/\/$/, '')
-    this.#options = { ...options }
-    this.#fetch = options.fetch ?? globalThis.fetch
+    this.#options = resolvedOptions
+    this.#fetch = resolvedOptions.fetch ?? globalThis.fetch
   }
   protected async request<T>(
     operation: OperationId,

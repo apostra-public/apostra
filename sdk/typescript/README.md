@@ -15,14 +15,17 @@ launch when `APOSTRA_CONFIRM_LAUNCH=true` is set deliberately.
 
 ```ts
 import { Apostra } from '@apostra/sdk'
-const api = new Apostra({ apiKey: process.env.APOSTRA_API_KEY!, accountId: '123' })
-const status = await api.getStatus({})
+const api = new Apostra()
+const status = await api.getStatus()
 ```
 
-Use `accessToken` for an existing REST/M2M bearer token, or `tokenProvider`
-for application-managed acquisition and refresh. Supply exactly one credential
-source. Never put API keys in browser bundles, URLs, examples or logs. The
-package does not acquire tokens, persist credentials or replay 401 responses.
+The client reads `APOSTRA_API_KEY`, `APOSTRA_ACCOUNT_ID` and
+`APOSTRA_BASE_URL` by default. Explicit constructor options override those
+values. Use `accessToken` for an existing REST/M2M bearer token, or
+`tokenProvider` for application-managed acquisition and refresh. Supply exactly
+one credential source. Never put API keys in browser bundles, URLs, examples or
+logs. The package does not acquire tokens, persist credentials or replay 401
+responses.
 
 Methods accept the generated wire input and return the envelope's `data`.
 `ApostraError` exposes `status`, `code`, `recovery`, `retryAfter`, `retryable`,
