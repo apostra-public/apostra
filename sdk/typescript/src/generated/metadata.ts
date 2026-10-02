@@ -1,6 +1,7 @@
-// Generated from OpenAPI sha256:26cec8ca19eef6943c519080dcd33d26a7214076f387435723d8977865eab7c1
+// Generated. Do not edit.
 export const version = '0.33.0'
 export const baseUrl = "https://api.interchange.io/api/v3"
+export const m2mTokenUrl = "https://identity.scope3.com/oauth2/token"
 export const operations = {
   "getV3PublicDocumentRevisionSections": {
     "path": "/documents/{documentId}/revisions/{revisionId}/sections",
@@ -156,7 +157,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Review a Buyer child under the selected Organization: name, role, capacity, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account."
+    "summary": "Review a Buyer child under the selected Organization: name, role, capacity, plan coverage, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account."
   },
   "request_buyer_child_account": {
     "path": "/tools/request_buyer_child_account",
@@ -214,7 +215,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Accept current Terms or set up organization payment authority. Card setup uses a confirmed hosted link: request, confirm with its token, give the returned URL to the cardholder, then poll status. Card data never enters MCP."
+    "summary": "Accept current Terms, choose the payment terms sellers are asked for, or manage payment authority. Card setup uses a confirmed hosted link; card data never enters MCP."
   },
   "save_notification_config": {
     "path": "/tools/save_notification_config",

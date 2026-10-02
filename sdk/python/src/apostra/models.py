@@ -2065,6 +2065,11 @@ class Capacity(TypedDict):
     allowed: bool
     denialReasons: list[str]
 
+class PlanCoverage(TypedDict):
+    covered: bool
+    refusal: str | None
+    '\n    Why the Organization plan does not cover a Buyer Account, the plan it needs and the next step; null when covered.\n    '
+
 class AccessChanges(TypedDict):
     parentAdministratorsInheritChildAccess: Literal[True]
     newMemberships: Literal[0]
@@ -2079,6 +2084,7 @@ class ReviewBuyerChildAccountResult(TypedDict):
     proposedAccount: ProposedAccount
     operator: Operator
     capacity: Capacity
+    planCoverage: PlanCoverage
     accessChanges: AccessChanges
     otherChanges: OtherChanges
     transactionReadiness: Literal['not_verified']
@@ -2277,7 +2283,11 @@ class PaymentAuthority2(TypedDict):
 
 class SaveBillingInput2(TypedDict):
     paymentAuthority: PaymentAuthority | PaymentAuthority1 | PaymentAuthority2
-SaveBillingInput: TypeAlias = SaveBillingInput1 | SaveBillingInput2
+
+class SaveBillingInput3(TypedDict):
+    paymentTerms: Literal['net_15', 'net_30', 'net_45', 'net_60', 'net_90']
+    '\n    Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default.\n    '
+SaveBillingInput: TypeAlias = SaveBillingInput1 | SaveBillingInput2 | SaveBillingInput3
 
 class Terms1(TypedDict):
     accepted: Literal[True]
@@ -2297,9 +2307,14 @@ class SaveBillingResult2(TypedDict):
     terms: Terms2
 
 class SaveBillingResult3(TypedDict):
+    action: Literal['payment_terms_saved']
+    paymentTerms: Literal['net_15', 'net_30', 'net_45', 'net_60', 'net_90']
+    paymentTermsChosen: Literal[True]
+
+class SaveBillingResult4(TypedDict):
     action: Literal['confirmation_required', 'human_action_required', 'payment_authority_pending', 'payment_authority_opened', 'payment_authority_verified', 'payment_authority_expired']
     paymentAuthority: SaveBillingSuccessPendingConfirmationResult | SaveBillingSuccessCaptureLinkIssuedResult
-SaveBillingResult: TypeAlias = SaveBillingResult1 | SaveBillingResult2 | SaveBillingResult3
+SaveBillingResult: TypeAlias = SaveBillingResult1 | SaveBillingResult2 | SaveBillingResult3 | SaveBillingResult4
 SaveBillingError: TypeAlias = V3ToolErrorResponse
 
 class Scope(TypedDict):
