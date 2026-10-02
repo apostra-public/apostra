@@ -19,7 +19,9 @@ behaviour.
 | Discover objects or read one object | `search`, `get` |
 | Create, update, preview, or confirm a campaign | `saveCampaign` |
 | Read delivery | `getDelivery` |
-| Handle a human-handoff URL | `openHandoff` |
+| Inspect a successful call's request ID or headers | `getStatusWithResponse` (and the matching `WithResponse` method) |
+| Handle a human handoff and resume safely | `getHandoff`, then `openHandoff` |
+| Authenticate a deployed backend with M2M OAuth | `m2mTokenProvider` |
 
 Use the generated types and the current documentation to construct requests. Do
 not infer fields, permissions, lifecycle transitions, or URL formats from this
