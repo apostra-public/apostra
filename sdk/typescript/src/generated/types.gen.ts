@@ -4421,6 +4421,13 @@ export type ReviewBuyerChildAccountResponses = {
                 allowed: boolean;
                 denialReasons: Array<string>;
             };
+            planCoverage: {
+                covered: boolean;
+                /**
+                 * Why the Organization plan does not cover a Buyer Account, the plan it needs and the next step; null when covered.
+                 */
+                refusal: string | null;
+            };
             accessChanges: {
                 parentAdministratorsInheritChildAccess: true;
                 newMemberships: 0;
@@ -4928,6 +4935,7 @@ export type SaveBillingData = {
             version: string;
         };
         paymentAuthority?: never;
+        paymentTerms?: never;
     } | {
         paymentAuthority: {
             /**
@@ -4964,6 +4972,14 @@ export type SaveBillingData = {
             confirmationToken?: never;
         };
         terms?: never;
+        paymentTerms?: never;
+    } | {
+        /**
+         * Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default.
+         */
+        paymentTerms: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
+        terms?: never;
+        paymentAuthority?: never;
     };
     headers: {
         /**
@@ -5048,6 +5064,8 @@ export type SaveBillingResponses = {
                 accepted: true;
                 version: string;
             };
+            paymentTerms?: never;
+            paymentTermsChosen?: never;
             paymentAuthority?: never;
         } | {
             action: 'terms_not_required';
@@ -5056,11 +5074,21 @@ export type SaveBillingResponses = {
                 version: string;
                 governedByExistingContract: true;
             };
+            paymentTerms?: never;
+            paymentTermsChosen?: never;
+            paymentAuthority?: never;
+        } | {
+            action: 'payment_terms_saved';
+            paymentTerms: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
+            paymentTermsChosen: true;
+            terms?: never;
             paymentAuthority?: never;
         } | {
             action: 'confirmation_required' | 'human_action_required' | 'payment_authority_pending' | 'payment_authority_opened' | 'payment_authority_verified' | 'payment_authority_expired';
             paymentAuthority: SaveBillingSuccessPendingConfirmationResult | SaveBillingSuccessCaptureLinkIssuedResult;
             terms?: never;
+            paymentTerms?: never;
+            paymentTermsChosen?: never;
         };
         error: null;
     };

@@ -1890,11 +1890,13 @@ paths:
     post:
       operationId: review_buyer_child_account
       summary: >-
-        Review a Buyer child under the selected Organization: name, role, capacity, operator, inherited access and other
-        effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account.
+        Review a Buyer child under the selected Organization: name, role, capacity, plan coverage, operator, inherited
+        access and other effects. Read-only; nothing is created. Show the review to the person, then call
+        request_buyer_child_account.
       description: >-
-        Review a Buyer child under the selected Organization: name, role, capacity, operator, inherited access and other
-        effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account.
+        Review a Buyer child under the selected Organization: name, role, capacity, plan coverage, operator, inherited
+        access and other effects. Read-only; nothing is created. Show the review to the person, then call
+        request_buyer_child_account.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -2018,6 +2020,22 @@ paths:
                           - allowed
                           - denialReasons
                         additionalProperties: false
+                      planCoverage:
+                        type: object
+                        properties:
+                          covered:
+                            type: boolean
+                          refusal:
+                            anyOf:
+                              - type: string
+                              - type: 'null'
+                            description: >-
+                              Why the Organization plan does not cover a Buyer Account, the plan it needs and the next
+                              step; null when covered.
+                        required:
+                          - covered
+                          - refusal
+                        additionalProperties: false
                       accessChanges:
                         type: object
                         properties:
@@ -2062,6 +2080,7 @@ paths:
                       - proposedAccount
                       - operator
                       - capacity
+                      - planCoverage
                       - accessChanges
                       - otherChanges
                       - transactionReadiness
@@ -2825,11 +2844,11 @@ paths:
     post:
       operationId: save_billing
       summary: >-
-        Accept current Terms or set up organization payment authority. Card setup uses a confirmed hosted link: request,
-        confirm with its token, give the returned URL to the cardholder, then poll status. Card data never enters MCP.
+        Accept current Terms, choose the payment terms sellers are asked for, or manage payment authority. Card setup
+        uses a confirmed hosted link; card data never enters MCP.
       description: >-
-        Accept current Terms or set up organization payment authority. Card setup uses a confirmed hosted link: request,
-        confirm with its token, give the returned URL to the cardholder, then poll status. Card data never enters MCP.
+        Accept current Terms, choose the payment terms sellers are asked for, or manage payment authority. Card setup
+        uses a confirmed hosted link; card data never enters MCP.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -2933,6 +2952,20 @@ paths:
                   required:
                     - paymentAuthority
                   additionalProperties: false
+                - type: object
+                  properties:
+                    paymentTerms:
+                      type: string
+                      enum:
+                        - net_15
+                        - net_30
+                        - net_45
+                        - net_60
+                        - net_90
+                      description: 'Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default.'
+                  required:
+                    - paymentTerms
+                  additionalProperties: false
       responses:
         '200':
           description: Typed operation result
@@ -2989,6 +3022,27 @@ paths:
                         required:
                           - action
                           - terms
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: payment_terms_saved
+                          paymentTerms:
+                            type: string
+                            enum:
+                              - net_15
+                              - net_30
+                              - net_45
+                              - net_60
+                              - net_90
+                          paymentTermsChosen:
+                            type: boolean
+                            const: true
+                        required:
+                          - action
+                          - paymentTerms
+                          - paymentTermsChosen
                         additionalProperties: false
                       - type: object
                         properties:
