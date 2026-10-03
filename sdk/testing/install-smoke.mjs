@@ -9,6 +9,12 @@ import { resolve, join } from 'node:path'
 
 const root = resolve(process.argv[2] ?? '.')
 const publicTree = process.argv.includes('--public')
+const targetsIndex = process.argv.indexOf('--targets')
+const targets = targetsIndex < 0 ? 'both' : process.argv[targetsIndex + 1]
+if (!['typescript', 'python', 'both'].includes(targets))
+  throw new Error('Pass --targets typescript, python or both')
+const includesTypescript = targets === 'typescript' || targets === 'both'
+const includesPython = targets === 'python' || targets === 'both'
 const ts = join(root, publicTree ? 'sdk/typescript' : 'packages/apostra-sdk')
 const py = join(root, publicTree ? 'sdk/python' : 'packages/apostra-sdk-python')
 const manifest = join(root, publicTree ? 'sdk/release/manifest.json' : 'scripts/codegen/apostra-sdk/manifest.json')
@@ -72,25 +78,31 @@ async function exerciseJourneys(command, args, language) {
   assert.deepEqual(requests[3].body, { ...delivery, cursor: 'opaque cursor/+?' })
 }
 try {
-  const packed = JSON.parse(await run('npm',['pack','--json','--pack-destination',tmp],ts))
-  assert(packed[0].files.some(file => file.path === 'SKILL.md'), 'npm tarball is missing SKILL.md')
-  assert(packed[0].files.some(file => file.path === 'llms.txt'), 'npm tarball is missing llms.txt')
-  assert(packed[0].files.some(file => file.path === 'examples/first-value.ts'), 'npm tarball is missing the first-value example')
-  await run('uv',['build','--project',py,'--out-dir',tmp])
-  writeFileSync(join(tmp,'package.json'),'{}')
-  await run('npm',['install','--ignore-scripts','--no-audit','--no-fund',join(tmp,packed[0].filename)],tmp)
-  await run('node',[verifier,manifest,tmp])
-  writeFileSync(join(tmp,'smoke.mjs'), `import assert from 'node:assert/strict';import {createRequire} from 'node:module';import {Apostra} from '@apostra/sdk';const require=createRequire(import.meta.url);const metadata=require('@apostra/sdk/package.json');assert.equal(metadata.name,'@apostra/sdk');assert.throws(()=>require.resolve('@adcp/sdk'),{code:'MODULE_NOT_FOUND'});let count=0;const api=new Apostra({apiKey:'test',fetch:async()=>{count++;return Response.json({data:{ok:true},error:null})}});assert.equal((await api.getStatus({})).ok,true);assert.equal(count,1);`)
-  await run('node',['smoke.mjs'],tmp)
-  copyFileSync(join(root, publicTree ? 'examples/sdk-typescript/journeys.ts' : 'mintlify/examples/apostra-developer/sdk-typescript/journeys.ts'), join(tmp,'journeys.mts'))
-  writeFileSync(join(tmp,'subpaths.mts'), `import type {SaveRfpRequestJ} from '@apostra/sdk/models'; import {operations,version} from '@apostra/sdk/metadata'; const recursive: SaveRfpRequestJ={nested:[1,true,null]}; const release: string=version; void [recursive,release,operations];`)
-  await run(join(ts,'node_modules/.bin/tsc6'),['--noEmit','--strict','--target','ES2022','--module','NodeNext','--moduleResolution','NodeNext','--types','node','--typeRoots',join(ts,'node_modules/@types'),'journeys.mts','subpaths.mts'],tmp)
-  copyFileSync(join(root, publicTree ? 'examples/sdk-python/journeys.py' : 'mintlify/examples/apostra-developer/sdk-python/journeys.py'),join(tmp,'journeys.py'))
+  if (includesTypescript) {
+    const packed = JSON.parse(await run('npm',['pack','--json','--pack-destination',tmp],ts))
+    assert(packed[0].files.some(file => file.path === 'SKILL.md'), 'npm tarball is missing SKILL.md')
+    assert(packed[0].files.some(file => file.path === 'llms.txt'), 'npm tarball is missing llms.txt')
+    assert(packed[0].files.some(file => file.path === 'examples/first-value.ts'), 'npm tarball is missing the first-value example')
+    writeFileSync(join(tmp,'package.json'),'{}')
+    await run('npm',['install','--ignore-scripts','--no-audit','--no-fund',join(tmp,packed[0].filename)],tmp)
+    await run('node',[verifier,manifest,tmp])
+    writeFileSync(join(tmp,'smoke.mjs'), `import assert from 'node:assert/strict';import {createRequire} from 'node:module';import {Apostra} from '@apostra/sdk';const require=createRequire(import.meta.url);const metadata=require('@apostra/sdk/package.json');assert.equal(metadata.name,'@apostra/sdk');assert.throws(()=>require.resolve('@adcp/sdk'),{code:'MODULE_NOT_FOUND'});let count=0;const api=new Apostra({apiKey:'test',fetch:async()=>{count++;return Response.json({data:{ok:true},error:null})}});assert.equal((await api.getStatus({})).ok,true);assert.equal(count,1);`)
+    await run('node',['smoke.mjs'],tmp)
+    copyFileSync(join(root, publicTree ? 'examples/sdk-typescript/journeys.ts' : 'mintlify/examples/apostra-developer/sdk-typescript/journeys.ts'), join(tmp,'journeys.mts'))
+    writeFileSync(join(tmp,'subpaths.mts'), `import type {SaveRfpRequestJ} from '@apostra/sdk/models'; import {operations,version} from '@apostra/sdk/metadata'; const recursive: SaveRfpRequestJ={nested:[1,true,null]}; const release: string=version; void [recursive,release,operations];`)
+    await run(join(ts,'node_modules/.bin/tsc6'),['--noEmit','--strict','--target','ES2022','--module','NodeNext','--moduleResolution','NodeNext','--types','node','--typeRoots',join(ts,'node_modules/@types'),'journeys.mts','subpaths.mts'],tmp)
+  }
+  if (includesPython) {
+    await run('uv',['build','--project',py,'--out-dir',tmp])
+    copyFileSync(join(root, publicTree ? 'examples/sdk-python/journeys.py' : 'mintlify/examples/apostra-developer/sdk-python/journeys.py'),join(tmp,'journeys.py'))
+  }
   await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve)})
-  await exerciseJourneys('node',['journeys.mts'],'typescript')
-  const archives = readdirSync(tmp).filter(x=>x.endsWith('.whl') || x.endsWith('.tar.gz'))
-  if (archives.length !== 2) throw new Error('Expected wheel and source distribution')
-  for (const [index,archive] of archives.entries()) {
+  if (includesTypescript)
+    await exerciseJourneys('node',['journeys.mts'],'typescript')
+  if (includesPython) {
+    const archives = readdirSync(tmp).filter(x=>x.endsWith('.whl') || x.endsWith('.tar.gz'))
+    if (archives.length !== 2) throw new Error('Expected wheel and source distribution')
+    for (const [index,archive] of archives.entries()) {
     const venv=join(tmp,`venv-${index}`)
     await run('uv',['venv','--python',process.env.SDK_PYTHON ?? '3.12',venv])
     const python=join(venv,'bin/python')
@@ -120,9 +132,10 @@ assert names
     await run(python,['-m','mypy','--strict','journeys.py'],tmp)
     await run(python,['-m','pyright','--pythonpath',python,'journeys.py'],tmp)
     await run(python,['-c',`from apostra import Apostra; import importlib.resources; import importlib.util; assert importlib.util.find_spec('adcp') is None; guidance = importlib.resources.files('apostra'); assert guidance.joinpath('SKILL.md').is_file(); assert guidance.joinpath('llms.txt').is_file(); from apostra.models import SaveRfpRequestJ; import httpx; api=Apostra(api_key='test',http_client=httpx.Client(transport=httpx.MockTransport(lambda request: httpx.Response(200,json={'data': {'ok': True},'error': None})))); assert api.get_status({})['ok']; value: SaveRfpRequestJ={'nested': [1, True, None]}`],tmp)
-    await exerciseJourneys(python,['journeys.py'],'python')
+      await exerciseJourneys(python,['journeys.py'],'python')
+    }
   }
-  process.stdout.write('npm tarball, wheel and source distribution installed; both shipped journeys compiled and ran against local HTTP fixtures for each archive.\n')
+  process.stdout.write(`${targets} SDK archive(s) installed; selected shipped journeys compiled and ran against local HTTP fixtures.\n`)
 } finally {
   server.closeAllConnections()
   await new Promise(resolve=>server.close(resolve))
