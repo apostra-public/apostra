@@ -1,6 +1,6 @@
 {
   "name": "@apostra/sdk",
-  "version": "0.33.0",
+  "version": "0.35.0",
   "description": "The official Apostra V3 HTTP SDK",
   "type": "module",
   "license": "Apache-2.0",
