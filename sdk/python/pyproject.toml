@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "apostra"
-version = "0.33.0"
+version = "0.35.0"
 description = "The official Apostra V3 HTTP SDK"
 readme = "README.md"
 requires-python = ">=3.11"
