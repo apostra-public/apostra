@@ -153,7 +153,7 @@
         ]
       }
     ],
-    "summary": "Review a Buyer child under the selected Organization: name, role, capacity, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account."
+    "summary": "Review a Buyer child under the selected Organization: name, role, capacity, plan coverage, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account."
   },
   "request_buyer_child_account": {
     "path": "/tools/request_buyer_child_account",
@@ -211,7 +211,7 @@
         ]
       }
     ],
-    "summary": "Accept current Terms or set up organization payment authority. Card setup uses a confirmed hosted link: request, confirm with its token, give the returned URL to the cardholder, then poll status. Card data never enters MCP."
+    "summary": "Accept current Terms, choose the payment terms sellers are asked for, or manage payment authority. Card setup uses a confirmed hosted link; card data never enters MCP."
   },
   "save_notification_config": {
     "path": "/tools/save_notification_config",
@@ -268,7 +268,7 @@
         ]
       }
     ],
-    "summary": "query/kind; no{}. conversation=Murph; session=retained;Creative requires exactly one filter.advertiserId or filter.campaignId;Seller Library=material/requests;Docs: reread hits; cite;kind=skill before workflows;Agent=org software, not seller/counterparty; seller identity/listing=get/save_seller"
+    "summary": "query/kind; no{}. conversation=Murph; session=retained;Creative sessions require one filter.advertiserId or filter.campaignId;Seller Library=material/requests;Docs: reread hits; cite;kind=skill before workflows;Agent=org software, not seller/counterparty; seller identity/listing=get/save_seller"
   },
   "get": {
     "path": "/tools/get",
@@ -1131,6 +1131,6 @@
         ]
       }
     ],
-    "summary": "Request quotes and products from eligible sellers. With a campaign MediaBuy cap, only quotes confirming the exact cap are usable; compatible products may still be returned. Pass productQueryId as save_media_buy idempotencyKey. A new key starts a round; reuse replays it."
+    "summary": "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
   }
 }
