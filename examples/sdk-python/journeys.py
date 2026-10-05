@@ -27,12 +27,36 @@ async def main() -> None:
             return await api.get_delivery(page_input)
 
         pages = 0
-        observed_impressions = 0.0
         async for page in paginate_async(
             read_page,
             lambda page: page['page'].get('nextCursor') if page['report'] != 'live_campaign_delivery' else None,
         ):
             pages += 1
+            if page['report'] == 'live_campaign_delivery':
+                continue
+        assert pages > 0
+        # Keep the complete-window read above, but require the threshold on the
+        # one UTC day that provisioning simulated.
+        simulated_day_query: GetDeliveryInput = {
+            **query,
+            'range': {
+                'startDate': os.environ['DELIVERY_DATE'],
+                'endDate': os.environ['DELIVERY_DATE'],
+            },
+        }
+        async def read_simulated_day_page(cursor: str | None) -> GetDeliveryResult:
+            page_input = simulated_day_query.copy()
+            if cursor:
+                page_input['cursor'] = cursor
+            return await api.get_delivery(page_input)
+
+        simulated_day_pages = 0
+        observed_impressions = 0.0
+        async for page in paginate_async(
+            read_simulated_day_page,
+            lambda page: page['page'].get('nextCursor') if page['report'] != 'live_campaign_delivery' else None,
+        ):
+            simulated_day_pages += 1
             if page['report'] == 'live_campaign_delivery':
                 continue
             totals = page.get('totals')
@@ -44,7 +68,7 @@ async def main() -> None:
             impressions = impression_metric['value']
             if isinstance(impressions, (int, float)) and not isinstance(impressions, bool):
                 observed_impressions = max(observed_impressions, float(impressions))
-        assert pages > 0
+        assert simulated_day_pages > 0
         minimum_impressions = float(os.environ.get('APOSTRA_MIN_IMPRESSIONS', '0'))
         if minimum_impressions < 0:
             raise ValueError('APOSTRA_MIN_IMPRESSIONS must be a non-negative number')
