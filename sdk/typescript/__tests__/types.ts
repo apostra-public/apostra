@@ -2,8 +2,10 @@ import type { SaveRfpRequestJ } from '../src/generated/types.gen.js'
 import {
   Apostra,
   type GetDeliveryResult,
+  type ResponseDetails,
   type SaveCampaignInput,
   type SaveDimensionResult,
+  type SaveEventSourceResult,
   type SaveRfpInput,
 } from '../src/index.js'
 
@@ -21,6 +23,11 @@ const badCampaign: SaveCampaignInput = {
 }
 const api = new Apostra({ apiKey: 'test' })
 const delivery: Promise<GetDeliveryResult> = api.getDelivery({})
+const deliveryWithResponse: Promise<ResponseDetails<GetDeliveryResult>> =
+  api.getDeliveryWithResponse({})
+function eventSourceFields(result: SaveEventSourceResult): [string, string] {
+  return [result.advertiserId, result.eventSources[0]?.eventSourceId ?? '']
+}
 function dimensionFields(result: SaveDimensionResult): [string, number] {
   return [result.object.id, result.object.usage.advertiser]
 }
@@ -36,6 +43,11 @@ const detailedWrite = api.requestDetailed(
   { id: 'ask', requesterState: 'accepted' },
   { idempotencyKey: 'ask' },
 )
+// @ts-expect-error generated response variants preserve write-key requirements
+const writeWithResponseWithoutKey = api.saveAskWithResponse({
+  id: 'ask',
+  requesterState: 'accepted',
+})
 // @ts-expect-error missing action fields
 const bad: SaveRfpInput = { action: 'feedback' }
 void [
@@ -44,9 +56,12 @@ void [
   campaign,
   badCampaign,
   delivery,
+  deliveryWithResponse,
+  eventSourceFields,
   dimensionFields,
   writeWithoutKey,
   detailedWriteWithoutKey,
   detailedWrite,
+  writeWithResponseWithoutKey,
   bad,
 ]
