@@ -2,8 +2,8 @@
   "schemaVersion": "3.0",
   "id": "generate-campaign-creatives",
   "name": "Generate Campaign Creatives",
-  "version": "1.2.0",
-  "description": "Generate an enrolled buyer's campaign image and return its usable URL before optional library finalisation.",
+  "version": "1.4.0",
+  "description": "Generate an enrolled buyer's campaign or advertiser Library image and return its usable URL before optional Library finalisation.",
   "steward": { "owner": "bokelley" },
   "entrypoint": "SKILL.md",
   "assets": [
@@ -57,10 +57,9 @@
       "scenarioIds": ["creative-engine-discovery-no-spend"]
     },
     "telemetry": {
-      "correlationSkillId": "generate-campaign-creatives@1.2.0",
+      "correlationSkillId": "generate-campaign-creatives@1.4.0",
       "outcomeSignals": [
         "workflow_terminal_state",
-        "scenario_assertion_results",
         "creative_session_action_receipt"
       ]
     }
