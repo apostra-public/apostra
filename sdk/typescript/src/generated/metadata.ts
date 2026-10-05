@@ -1,6 +1,7 @@
-// Generated from OpenAPI sha256:26cec8ca19eef6943c519080dcd33d26a7214076f387435723d8977865eab7c1
-export const version = '0.33.0'
-export const baseUrl = "https://api.interchange.io/api/v3"
+// Generated. Do not edit.
+export const version = '0.36.0'
+export const baseUrl = "https://api.apostra.com/api/v3"
+export const m2mTokenUrl = "https://identity.scope3.com/oauth2/token"
 export const operations = {
   "getV3PublicDocumentRevisionSections": {
     "path": "/documents/{documentId}/revisions/{revisionId}/sections",
@@ -156,7 +157,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Review a Buyer child under the selected Organization: name, role, capacity, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account."
+    "summary": "Review a Buyer child under the selected Organization: name, role, capacity, plan coverage, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account."
   },
   "request_buyer_child_account": {
     "path": "/tools/request_buyer_child_account",
@@ -214,7 +215,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Accept current Terms or set up organization payment authority. Card setup uses a confirmed hosted link: request, confirm with its token, give the returned URL to the cardholder, then poll status. Card data never enters MCP."
+    "summary": "Accept current Terms, choose the payment terms sellers are asked for, or manage payment authority. Card setup uses a confirmed hosted link; card data never enters MCP."
   },
   "save_notification_config": {
     "path": "/tools/save_notification_config",
@@ -271,7 +272,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "query/kind; no{}. conversation=Murph; session=retained;Creative requires exactly one filter.advertiserId or filter.campaignId;Seller Library=material/requests;Docs: reread hits; cite;kind=skill before workflows;Agent=org software, not seller/counterparty; seller identity/listing=get/save_seller"
+    "summary": "query/kind; no{}. conversation=Murph; session=retained;Creative sessions require one filter.advertiserId or filter.campaignId;Seller Library=material/requests;Docs: reread hits; cite;kind=skill before workflows;Agent=org software, not seller/counterparty; seller identity/listing=get/save_seller"
   },
   "get": {
     "path": "/tools/get",
@@ -290,7 +291,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Read object/singleton. billing: omit id; Terms/readiness/payment status. skill: exact user-supplied or search ID; versioned instructions+digest. conversation: bounded. Buyer/seller: search IDs. Seller: include:[\"listing\"] or [\"identity\"]. Distribution: host/CNAME/readiness."
+    "summary": "Read object/singleton. billing: omit id; Terms/readiness/payment status. skill: exact user-supplied or search ID; versioned instructions+digest. conversation: bounded. Buyer/seller: search IDs. Seller: include listing, identity, commitmentRecord. Distribution: host/CNAME/readiness."
   },
   "save_connection": {
     "path": "/tools/save_connection",
@@ -386,6 +387,25 @@ export const operations = {
       }
     ],
     "summary": "Open the Seller Media Buys Page. Optionally focus one seller-owned account relationship and its buys or creatives; the Page self-fetches."
+  },
+  "open_seller_dashboard": {
+    "path": "/tools/open_seller_dashboard",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open the Seller Dashboard Page: seller analytics, or the synthetic evaluation view of practice runs while this is an active demo Seller Account. The Page self-fetches."
   },
   "open_connections_page": {
     "path": "/tools/open_connections_page",
@@ -1134,7 +1154,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Request quotes and products from eligible sellers. With a campaign MediaBuy cap, only quotes confirming the exact cap are usable; compatible products may still be returned. Pass productQueryId as save_media_buy idempotencyKey. A new key starts a round; reuse replays it."
+    "summary": "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
   }
 } as const
 export type OperationId = keyof typeof operations
