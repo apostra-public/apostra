@@ -28,18 +28,8 @@ jobs:
         with:
           version: '0.12.19'
           python-version: ${{ matrix.python }}
-      - name: Check the immutable SDK compatibility base
-        env:
-          PULL_REQUEST_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-        run: |
-          base="$PULL_REQUEST_BASE_SHA"
-          if [ -z "$base" ]; then
-            base="$(git tag --list 'sdk-v*' --sort=-version:refname | head -n1)"
-          fi
-          if [ -z "$base" ]; then
-            base="$(git rev-list --max-parents=0 HEAD)"
-          fi
-          node sdk/release/check-release.mjs --public --base "$(git rev-parse "$base^{commit}")"
+      - name: Check paired SDK release metadata
+        run: node sdk/release/check-release.mjs --public
       - run: npm ci --ignore-scripts && npm run type-check && npm test
         working-directory: sdk/typescript
       - run: uv run --frozen mypy src tests/types_valid.py && uv run --frozen pyright && uv run --frozen python -m unittest discover -s tests -p 'test_*.py'
