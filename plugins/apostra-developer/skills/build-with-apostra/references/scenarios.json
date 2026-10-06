@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "build-with-apostra",
-  "skillVersion": "1.0.6",
+  "skillVersion": "1.0.7",
   "scenarios": [
     {
       "id": "install-and-discover",
@@ -21,7 +21,7 @@
       "given": "A backend service needs a typed REST client for an Apostra operation and must remain bound to its authorized account.",
       "expect": [
         "The agent checks the public V3 HTTP catalogue before choosing a route.",
-        "For a catalogued operation, it uses POST /api/v3/tools/<operation> and generates types from `https://api.interchange.io/api/v3/openapi-3.1.yaml`.",
+        "For a catalogued operation, it uses POST /api/v3/tools/<operation> and generates types from `https://api.apostra.com/api/v3/openapi-3.1.yaml`.",
         "It uses a supported API key or M2M client-credentials token, keeps explicit account selection equal to the account resolved by authentication, and does not reuse an MCP-audience token.",
         "For an operation outside the public V3 HTTP catalogue, it uses the documented V2 REST contract instead of inventing a V3 route.",
         "If authorization or account access is missing, it gives the documented human handoff and never asks for a secret in chat."
