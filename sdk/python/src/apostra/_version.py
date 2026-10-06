@@ -1,2 +1,3 @@
-__version__ = '0.33.0'
-BASE_URL = "https://api.interchange.io/api/v3"
+__version__ = '0.36.0'
+BASE_URL = "https://api.apostra.com/api/v3"
+M2M_TOKEN_URL = "https://identity.scope3.com/oauth2/token"
