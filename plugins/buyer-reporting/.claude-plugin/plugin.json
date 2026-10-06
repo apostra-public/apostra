@@ -2,7 +2,7 @@
   "name": "buyer-reporting",
   "displayName": "Buyer Reporting",
   "description": "Inspect buyer campaign delivery and reporting in Interchange.",
-  "version": "1.0.0+23f76bd4b2fb",
+  "version": "1.0.0+f2b22ccdce4a",
   "author": {
     "name": "Scope3 PBC",
     "url": "https://interchange.io"
