@@ -1,7 +1,7 @@
 # Third-party notices
 
 The offline inspector bundles SheetJS Community Edition (`xlsx` 0.20.3) and
-Zod 4.1.12. Their complete license texts follow so this notice can travel with
+Zod 4.5.4. Their complete license texts follow so this notice can travel with
 the standalone inspector.
 
 ## SheetJS Community Edition — Apache License 2.0
