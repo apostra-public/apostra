@@ -15,7 +15,7 @@ from adcp.types import (
 )
 from apostra.models import (
     GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemQualifierAttributionWindow,
-    SaveCampaignRequestEventGoal,
+    SaveCampaignRequestCampaignEventGoal,
     SaveCatalogInput,
 )
 
@@ -39,10 +39,10 @@ def catalog(
     }
 
 
-def goal(event: EventType) -> SaveCampaignRequestEventGoal:
+def goal(event: EventType) -> SaveCampaignRequestCampaignEventGoal:
     return {
         "kind": "event",
-        "eventSources": [{"eventSourceId": "source", "eventType": event.value}],
+        "event_sources": [{"event_source_id": "source", "event_type": event.value}],
     }
 
 
@@ -68,7 +68,7 @@ class AdcpInteropTests(unittest.TestCase):
             )
             self.assertEqual(value.get("type"), kind.value)
         for event in EventType:
-            self.assertEqual(goal(event)["eventSources"][0]["eventType"], event.value)
+            self.assertEqual(goal(event)["event_sources"][0]["event_type"], event.value)
 
     def test_duration_round_trip(self) -> None:
         for unit in DurationUnit:
