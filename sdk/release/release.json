@@ -1,5 +1,5 @@
 {
-  "version": "0.33.0",
-  "notes": "Regenerates the paired SDKs for the V3 Meta campaign-budget allocation guidance and the current OpenAPI contract.",
+  "version": "0.37.0",
+  "notes": "Regenerates the paired SDKs from the changed V3 OpenAPI document.",
   "foundation": "090df7a691092f582e59da6a19083b6df7e1fbd5"
 }
