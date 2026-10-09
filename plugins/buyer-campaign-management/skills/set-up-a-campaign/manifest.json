@@ -2,7 +2,7 @@
   "schemaVersion": "3.0",
   "id": "set-up-a-campaign",
   "name": "Set Up a Campaign",
-  "version": "1.6.0",
+  "version": "1.8.0",
   "description": "Create a grounded buyer campaign with a confirmed goal statement and conversion tracking, request proposals, compare supply on the goal's terms, and stage a selected media buy.",
   "steward": {
     "owner": "bokelley"
@@ -22,6 +22,11 @@
     {
       "route": "references/scenarios.json",
       "file": "references/scenarios.json",
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
+      "route": "references/executable-scenarios.json",
+      "file": "references/executable-scenarios.json",
       "contentType": "application/json; charset=utf-8"
     }
   ],
@@ -77,8 +82,13 @@
         "proposals-compared-on-goal-terms"
       ]
     },
+    "executableAcceptance": {
+      "scenarioAsset": "references/executable-scenarios.json",
+      "scenarioIds": ["sandbox-advertiser-round-trip"],
+      "scenarioContract": "deterministic-v3-tool-v1"
+    },
     "telemetry": {
-      "correlationSkillId": "set-up-a-campaign@1.6.0",
+      "correlationSkillId": "set-up-a-campaign@1.8.0",
       "outcomeSignals": [
         "workflow_terminal_state",
         "event_source_action_receipt",
