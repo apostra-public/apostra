@@ -4,7 +4,7 @@ import { Agent } from "undici";
 
 export const IO_TIMEOUT_MS = 15_000;
 
-export const APOSTRA_MCP_URL = "https://api.interchange.io/mcp/v3";
+export const APOSTRA_MCP_URL = "https://api.apostra.com/mcp/v3";
 
 export interface ToolClient {
   callTool(
