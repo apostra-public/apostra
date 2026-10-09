@@ -21,7 +21,6 @@ const query: GetDeliveryInput = {
   limit:100,
 }
 let pages=0
-let observedImpressions = 0
 for await (const page of paginate(
   (cursor, signal)=>api.getDelivery({...query,...(cursor ? {cursor}: {})}, {signal}),
   page=>page.page?.nextCursor,
@@ -29,12 +28,29 @@ for await (const page of paginate(
 )) {
   pages++
   if (page.report === 'live_campaign_delivery') continue
+}
+if (pages===0) throw new Error('Missing delivery result')
+// The complete-window read proves historical reporting. Check the threshold
+// against only the simulated UTC day, so older delivery cannot satisfy it.
+const simulatedDayQuery: GetDeliveryInput = {
+  ...query,
+  range:{startDate:process.env.DELIVERY_DATE!,endDate:process.env.DELIVERY_DATE!},
+}
+let simulatedDayPages=0
+let observedImpressions = 0
+for await (const page of paginate(
+  (cursor, signal)=>api.getDelivery({...simulatedDayQuery,...(cursor ? {cursor}: {})}, {signal}),
+  page=>page.page?.nextCursor,
+  signal,
+)) {
+  simulatedDayPages++
+  if (page.report === 'live_campaign_delivery') continue
   const impressions = page.totals?.metrics.impressions?.value
   if (typeof impressions === 'number' && Number.isFinite(impressions)) {
     observedImpressions = Math.max(observedImpressions, impressions)
   }
 }
-if (pages===0) throw new Error('Missing delivery result')
+if (simulatedDayPages===0) throw new Error('Missing simulated-day delivery result')
 const minimumImpressions = Number(process.env.APOSTRA_MIN_IMPRESSIONS ?? '0')
 if (!Number.isFinite(minimumImpressions) || minimumImpressions < 0) {
   throw new Error('APOSTRA_MIN_IMPRESSIONS must be a non-negative number')
