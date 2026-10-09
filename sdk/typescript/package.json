@@ -1,6 +1,6 @@
 {
   "name": "@apostra/sdk",
-  "version": "0.33.0",
+  "version": "0.37.0",
   "description": "The official Apostra V3 HTTP SDK",
   "type": "module",
   "license": "Apache-2.0",
@@ -28,6 +28,10 @@
       "types": "./dist/generated/metadata.d.ts",
       "import": "./dist/generated/metadata.js"
     },
+    "./webhooks": {
+      "types": "./dist/webhooks.d.ts",
+      "import": "./dist/webhooks.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
@@ -46,11 +50,11 @@
     "build": "tsc6 -p tsconfig.build.json",
     "type-check": "tsc6 --noEmit",
     "test": "vitest run",
-    "lint": "biome check src/transport.ts src/index.ts __tests__ examples --error-on-warnings",
+    "lint": "biome check src/transport.ts src/webhooks.ts src/index.ts __tests__ examples --error-on-warnings",
     "prepack": "npm run build"
   },
   "devDependencies": {
-    "@adcp/sdk": "14.0.0",
+    "@adcp/sdk": "15.4.0",
     "@types/node": "^22.15.17",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "vitest": "^4.1.9"
