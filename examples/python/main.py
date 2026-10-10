@@ -9,7 +9,7 @@ import anyio
 
 IO_TIMEOUT_SECONDS = 15
 
-APOSTRA_MCP_URL = "https://api.interchange.io/mcp/v3"
+APOSTRA_MCP_URL = "https://api.apostra.com/mcp/v3"
 
 
 class ToolClient(Protocol):
