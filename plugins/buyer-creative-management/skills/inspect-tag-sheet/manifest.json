@@ -2,7 +2,7 @@
   "schemaVersion": "3.0",
   "id": "inspect-tag-sheet",
   "name": "Inspect a Tag Sheet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Preview CSV, XLS, and XLSX advertising tag sheets locally and report a content-free parser receipt when a mapping needs improvement.",
   "steward": {
     "owner": "bokelley"
@@ -73,7 +73,7 @@
       "scenarioIds": ["local-preview", "confirmed-corpus-report"]
     },
     "telemetry": {
-      "correlationSkillId": "inspect-tag-sheet@1.0.0",
+      "correlationSkillId": "inspect-tag-sheet@1.0.1",
       "outcomeSignals": [
         "local_parse_terminal_state",
         "expected_observed_match",

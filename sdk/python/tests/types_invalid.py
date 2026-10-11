@@ -1,5 +1,5 @@
-from apostra.models import SaveRfpRequestJ, SaveCampaignInput, SaveRfpInput, SaveLibraryRequestInput, SaveCreativeSessionInput, SaveDimensionInput, SearchInput, GetInput, SaveMaterialInput, RefreshInventorySourceHealthInput, GetDeliveryInput, GetStatusInput
-nested: SaveRfpRequestJ = {'deep': [lambda: 0]}
+from apostra.models import SaveRfpRequestJsonValue, SaveCampaignInput, SaveRfpInput, SaveLibraryRequestInput, SaveCreativeSessionInput, SaveDimensionInput, SearchInput, GetInput, SaveMaterialInput, RefreshInventorySourceHealthInput, GetDeliveryInput, GetStatusInput
+nested: SaveRfpRequestJsonValue = {'deep': [lambda: 0]}
 campaign: SaveCampaignInput = {'idempotencyKey': 'k', 'channelGroups': [{'channelGroupId': 'g', 'presetId': 'ctv', 'inventory': {}}]}
 rfp: SaveRfpInput = {'action': 'feedback'}
 library: SaveLibraryRequestInput = {'action': 'close'}
