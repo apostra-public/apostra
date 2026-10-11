@@ -4,10 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: Reviewed paired version
+        description: Reviewed version for the selected SDK target or targets
         required: true
+      targets:
+        description: SDK package or packages to publish
+        required: true
+        type: choice
+        options: [typescript, python, both]
       synthetic_evidence:
-        description: Successful synthetic-seller run URL for this candidate (both journeys/languages)
+        description: Successful synthetic-seller run URL for the selected target or targets
         required: true
 permissions:
   contents: read
@@ -20,6 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
+      targets: ${{ steps.version.outputs.targets }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
@@ -29,40 +35,77 @@ jobs:
           node-version: '26.9.0'
           registry-url: https://registry.npmjs.org
       - run: npm install --global npm@11.5.1
-      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      - if: inputs.targets == 'python' || inputs.targets == 'both'
+        uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
         with:
           version: '0.12.19'
           python-version: '3.12'
+      - name: Set the reviewed SDK version for this release
+        env:
+          EXPECTED_VERSION: ${{ inputs.version }}
+          TARGETS: ${{ inputs.targets }}
+        run: |
+          node sdk/release/set-release-version.mjs "$EXPECTED_VERSION" "$TARGETS"
+          if [[ "$TARGETS" == 'typescript' || "$TARGETS" == 'both' ]]; then
+            npm --prefix sdk/typescript install --package-lock-only --ignore-scripts --no-audit --no-fund
+          fi
+          if [[ "$TARGETS" == 'python' || "$TARGETS" == 'both' ]]; then
+            (cd sdk/python && UV_NO_CACHE=1 uv lock)
+          fi
       - id: version
         env:
           EXPECTED_VERSION: ${{ inputs.version }}
+          TARGETS: ${{ inputs.targets }}
           SYNTHETIC_EVIDENCE: ${{ inputs.synthetic_evidence }}
         run: |
-          base="$(git tag --list 'sdk-v*' --sort=-version:refname | head -n1)"
-          if [ -z "$base" ]; then
-            base="$(git rev-list --max-parents=0 HEAD)"
-          fi
-          node sdk/release/check-release.mjs --public --base "$(git rev-parse "$base^{commit}")"
+          selected=()
+          case "$TARGETS" in
+            typescript) selected=(typescript) ;;
+            python) selected=(python) ;;
+            both) selected=(typescript python) ;;
+            *) echo "::error::Unsupported SDK targets: $TARGETS"; exit 1 ;;
+          esac
+          for target in "${selected[@]}"; do
+            base="$(git tag --list "sdk-$target-v*" --sort=-version:refname | head -n1)"
+            if [ -z "$base" ]; then
+              base="$(git tag --list 'sdk-v*' --sort=-version:refname | head -n1)"
+            fi
+            if [ -z "$base" ]; then
+              base="$(git rev-list --max-parents=0 HEAD)"
+            fi
+            node sdk/release/check-release.mjs --public --targets "$target" --base "$(git rev-parse "$base^{commit}")"
+          done
           node --input-type=module <<'JS'
           import fs from 'node:fs';
           const {version}=JSON.parse(fs.readFileSync('sdk/release/release.json','utf8'));
           if(version!==process.env.EXPECTED_VERSION)throw new Error('Reviewed version mismatch');
+          if(!['typescript','python','both'].includes(process.env.TARGETS))throw new Error('Unsupported SDK targets');
           if(!/^https:\/\/github\.com\/[^/]+\/[^/]+\/actions\/runs\/\d+$/.test(process.env.SYNTHETIC_EVIDENCE))throw new Error('Supply synthetic CI evidence for environment reviewers');
           fs.appendFileSync(process.env.GITHUB_OUTPUT,`version=${version}\n`);
-          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,`Release ${version}\n\nSynthetic evidence for approval: ${process.env.SYNTHETIC_EVIDENCE}\n`);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,`targets=${process.env.TARGETS}\n`);
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,`Release ${version} (${process.env.TARGETS})\n\nSynthetic evidence for approval: ${process.env.SYNTHETIC_EVIDENCE}\n`);
           JS
-      - run: npm ci --ignore-scripts && npm run type-check && npm test
+      - if: inputs.targets == 'typescript' || inputs.targets == 'both'
+        run: npm ci --ignore-scripts && npm run type-check && npm test
         working-directory: sdk/typescript
-      - run: uv run --frozen mypy src tests/types_valid.py && uv run --frozen pyright && uv run --frozen python -m unittest discover -s tests -p 'test_*.py'
+      - if: inputs.targets == 'python' || inputs.targets == 'both'
+        run: uv run --frozen mypy src tests/types_valid.py && uv run --frozen pyright && uv run --frozen python -m unittest discover -s tests -p 'test_*.py'
         working-directory: sdk/python
-      - run: node sdk/testing/validate-types.mjs sdk/python
-      - run: node sdk/testing/install-smoke.mjs . --public
-      - name: Build the paired artifacts once
+      - if: inputs.targets == 'python' || inputs.targets == 'both'
+        run: node sdk/testing/validate-types.mjs sdk/python
+      - run: node sdk/testing/install-smoke.mjs . --public --targets "${{ inputs.targets }}"
+      - name: Build the selected artifacts
+        env:
+          TARGETS: ${{ inputs.targets }}
         run: |
           export SOURCE_DATE_EPOCH=$(git show -s --format=%ct HEAD)
           mkdir -p artifacts
-          npm pack ./sdk/typescript --pack-destination artifacts
-          uv build --project sdk/python --out-dir artifacts
+          if [[ "$TARGETS" == 'typescript' || "$TARGETS" == 'both' ]]; then
+            npm pack ./sdk/typescript --pack-destination artifacts
+          fi
+          if [[ "$TARGETS" == 'python' || "$TARGETS" == 'both' ]]; then
+            uv build --project sdk/python --out-dir artifacts
+          fi
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: sdk-artifacts
@@ -86,17 +129,18 @@ jobs:
           name: sdk-artifacts
           path: artifacts
       - id: registry
-        run: node sdk/release/registry-state.mjs
+        run: node sdk/release/registry-state.mjs --targets "${{ inputs.targets }}"
       # For the first npm package creation only, a scope owner supplies a
       # short-lived environment secret. Remove it after configuring OIDC.
-      - if: steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists != 'true'
+      - if: (inputs.targets == 'typescript' || inputs.targets == 'both') && steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists != 'true'
         run: npm publish artifacts/*.tgz --access public --provenance --ignore-scripts
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_BOOTSTRAP_TOKEN }}
-      - if: steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists == 'true'
+      - if: (inputs.targets == 'typescript' || inputs.targets == 'both') && steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists == 'true'
         run: npm publish artifacts/*.tgz --access public --provenance --ignore-scripts
-      - run: mkdir -p python-dist && cp artifacts/*.whl artifacts/*.tar.gz python-dist/
-      - if: steps.registry.outputs.pypi_version_exists != 'true'
+      - if: inputs.targets == 'python' || inputs.targets == 'both'
+        run: mkdir -p python-dist && cp artifacts/*.whl artifacts/*.tar.gz python-dist/
+      - if: (inputs.targets == 'python' || inputs.targets == 'both') && steps.registry.outputs.pypi_version_exists != 'true'
         uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33
         with:
           packages-dir: python-dist/
@@ -112,7 +156,8 @@ jobs:
         with:
           node-version: '26.9.0'
       - run: npm install --global npm@11.5.1
-      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      - if: needs.build.outputs.targets == 'python' || needs.build.outputs.targets == 'both'
+        uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
         with:
           version: '0.12.19'
           python-version: '3.12'
@@ -120,22 +165,35 @@ jobs:
         with:
           name: sdk-artifacts
           path: artifacts
-      - name: Install both public versions and create release notes
+      - name: Install selected public versions and create release notes
         env:
           SDK_VERSION: ${{ needs.build.outputs.version }}
+          TARGETS: ${{ needs.build.outputs.targets }}
           GH_TOKEN: ${{ github.token }}
         run: |
           install_dir=$(mktemp -d)
           trap 'rm -rf "$install_dir"' EXIT
-          npm install --prefix "$install_dir" --ignore-scripts "@apostra/sdk@$SDK_VERSION"
-          node sdk/testing/verify-installed.mjs sdk/release/manifest.json "$install_dir"
-          uv venv --python 3.12 "$install_dir/venv"
-          uv pip install --python "$install_dir/venv/bin/python" "apostra==$SDK_VERSION"
-          node sdk/testing/verify-installed.mjs sdk/release/manifest.json "$install_dir" "$install_dir/venv/bin/python"
+          assets=()
+          if [[ "$TARGETS" == 'typescript' || "$TARGETS" == 'both' ]]; then
+            npm install --prefix "$install_dir" --ignore-scripts "@apostra/sdk@$SDK_VERSION"
+            node sdk/testing/verify-installed.mjs sdk/release/manifest.json "$install_dir"
+            assets+=(artifacts/*.tgz)
+          fi
+          if [[ "$TARGETS" == 'python' || "$TARGETS" == 'both' ]]; then
+            uv venv --python 3.12 "$install_dir/venv"
+            uv pip install --python "$install_dir/venv/bin/python" "apostra==$SDK_VERSION"
+            node sdk/testing/verify-installed.mjs sdk/release/manifest.json "$install_dir" "$install_dir/venv/bin/python"
+            assets+=(artifacts/*.whl artifacts/*.tar.gz)
+          fi
           node --input-type=module -e "import fs from 'node:fs';fs.writeFileSync('release-notes.md',JSON.parse(fs.readFileSync('sdk/release/release.json','utf8')).notes)"
-          tag="sdk-v$SDK_VERSION"
+          case "$TARGETS" in
+            typescript) tag="sdk-typescript-v$SDK_VERSION"; title="Apostra TypeScript SDK $SDK_VERSION" ;;
+            python) tag="sdk-python-v$SDK_VERSION"; title="Apostra Python SDK $SDK_VERSION" ;;
+            both) tag="sdk-v$SDK_VERSION"; title="Apostra SDKs $SDK_VERSION" ;;
+            *) echo "::error::Unsupported SDK targets: $TARGETS"; exit 1 ;;
+          esac
           if gh release view "$tag" >/dev/null 2>&1; then
             test "$(git ls-remote origin "refs/tags/$tag" | cut -f1)" = "$GITHUB_SHA"
           else
-            gh release create "$tag" --target "$GITHUB_SHA" --title "Apostra SDKs $SDK_VERSION" --notes-file release-notes.md artifacts/*
+            gh release create "$tag" --target "$GITHUB_SHA" --title "$title" --notes-file release-notes.md "${assets[@]}"
           fi
