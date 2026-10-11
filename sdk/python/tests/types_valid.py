@@ -17,7 +17,7 @@ def typed_dimension_fields(result: SaveDimensionResult) -> tuple[str, float]:
 async def typed_async(client: AsyncApostra) -> GetDeliveryResult:
     return await client.get_delivery({})
 
-library: SaveLibraryRequestInput = {'action': 'close', 'id': 'r', 'closedBy': 'upload', 'materialId': 'm'}
+library: SaveLibraryRequestInput = {'action': 'close', 'id': 'r', 'closedBy': 'upload', 'closingMaterialId': 'm'}
 creative: SaveCreativeSessionInput = {'operation': 'select_output', 'campaignId': 'c', 'sessionId': 's', 'variantId': 'v', 'expectedRevision': 1}
 dimension: SaveDimensionInput = {'key': 'market', 'name': 'Market', 'valuesMode': 'open', 'appliesTo': ['campaign'], 'idempotencyKey': 'k'}
 search: SearchInput = {'kind': 'creative', 'filter': {'advertiserId': 'a'}}
