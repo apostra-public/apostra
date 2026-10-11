@@ -9,4 +9,4 @@ dependencies:
       value: "interchange"
       description: "Apostra account-resolved MCP server"
       transport: "streamable_http"
-      url: "https://api.interchange.io/mcp/v3"
+      url: "https://api.apostra.com/mcp/v3"
