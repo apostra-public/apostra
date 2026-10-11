@@ -40,7 +40,7 @@ For agent-facing work in Codex or Claude Code, prefer the published native
 `apostra-developer` plugin from
 `https://github.com/apostra-public/apostra.git`. It installs this skill and the
 MCP connection together. Use a direct MCP connection to
-`https://api.interchange.io/mcp/v3` when the host does not support the native
+`https://api.apostra.com/mcp/v3` when the host does not support the native
 plugin, or when instructions were installed separately with `npx skills`.
 In either case, let the host complete OAuth and store the interactive
 credential.
@@ -48,7 +48,7 @@ credential.
 For deterministic server or ETL work, first read the [V3 HTTP guide](https://docs.interchange.io/v3/http-api).
 When an operation appears in its public catalogue, call its fixed
 `POST /api/v3/tools/<operation>` route and generate client types from
-`https://api.interchange.io/api/v3/openapi-3.1.yaml`. Follow the
+`https://api.apostra.com/api/v3/openapi-3.1.yaml`. Follow the
 [authentication and account-binding guide](https://docs.interchange.io/v3/authentication):
 use a supported API key or M2M credential, keep the request on the resolved
 account, and never reuse an MCP-audience token for REST. If authorization or
