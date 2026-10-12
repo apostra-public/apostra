@@ -18,7 +18,7 @@ Read [references/parser-profile.json](references/parser-profile.json) to explain
 - Treat exit code `66` as a local file-access problem. Ask the user to verify the path and permissions; do not create or submit a parser report because no workbook was parsed.
 - A receipt is deliberately content-free. It is useful for clustering and reproduction routing, but it is not proof that a particular tag or URL is correct.
 - Do not call `save_ask` without explicit confirmation. When confirmed, send only the receipt, the skill version, and a short user-approved statement of expected versus observed behavior. Never send the workbook, raw headers, tags, URLs, filenames, or cell values.
-- Give each run `scope3/skill-id: inspect-tag-sheet@1.0.0` and the selected scenario ID when the host supports request metadata.
+- Give each run `scope3/skill-id: inspect-tag-sheet@1.0.1` and the selected scenario ID when the host supports request metadata.
 
 ## Run locally
 
@@ -28,7 +28,7 @@ Download and run the self-contained Node.js inspector:
 inspector_dir="$(mktemp -d "${TMPDIR:-/tmp}/inspect-tag-sheet.XXXXXX")" &&
 inspector_tmp="$inspector_dir/inspect-tag-sheet.mjs" &&
 trap 'rm -rf "$inspector_dir"' EXIT &&
-curl -fsSLo "$inspector_tmp" https://api.interchange.io/skills/inspect-tag-sheet/1.0.0/scripts/inspect-tag-sheet.mjs &&
+curl -fsSLo "$inspector_tmp" https://api.apostra.com/skills/inspect-tag-sheet/1.0.1/scripts/inspect-tag-sheet.mjs &&
 node "$inspector_tmp" /path/to/tag-sheet.xlsx
 ```
 
@@ -51,7 +51,7 @@ Interchange automatically records content-free evidence when its production uplo
 
 If local inspection finds a different problem—such as a plausible but wrong row count—show the sanitized receipt and ask whether the user wants to report it. After confirmation, use `save_ask` with `type: "support"` and include only:
 
-- `inspect-tag-sheet@1.0.0`;
+- `inspect-tag-sheet@1.0.1`;
 - the complete sanitized receipt;
 - the user-approved expected row count or mode; and
 - the observed row count or mode.
