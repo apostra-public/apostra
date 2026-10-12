@@ -9800,10 +9800,11 @@ class Ocr(TypedDict):
     '\n    Material confidence field.\n    '
 
 class OpenAdvertisersPageInput(TypedDict):
-    pass
+    intent: NotRequired[Literal['add']]
+    '\n    Use "add" to open the Add advertiser form.\n    '
 
 class OpenAdvertisersPageResult(TypedDict):
-    pass
+    intent: NotRequired[Literal['add']]
 
 class OpenAgentPageInput(TypedDict):
     agentId: str

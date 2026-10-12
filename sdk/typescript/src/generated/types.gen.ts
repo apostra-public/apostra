@@ -6419,7 +6419,10 @@ export type JsonValue = null | boolean | number | string | JsonValue[] | { [key:
 
 export type OpenAdvertisersPageData = {
     body: {
-        [key: string]: never;
+        /**
+         * Use "add" to open the Add advertiser form.
+         */
+        intent?: 'add';
     };
     headers?: {
         /**
@@ -6497,7 +6500,7 @@ export type OpenAdvertisersPageResponses = {
      */
     200: {
         data: {
-            [key: string]: never;
+            intent?: 'add';
         };
         error: null;
     };

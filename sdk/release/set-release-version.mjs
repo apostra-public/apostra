@@ -11,11 +11,13 @@ if (!['typescript', 'python', 'both'].includes(targets))
 const readJson = (path) => JSON.parse(readFileSync(path, 'utf8'))
 const writeJson = (path, value) =>
   writeFileSync(path, `${JSON.stringify(value, null, 2)}\n`)
+// A reviewed version equal to the generated one leaves the file unchanged,
+// so only a missing version line is an error.
 const replace = (path, expression, replacement) => {
   const source = readFileSync(path, 'utf8')
-  const next = source.replace(expression, replacement)
-  if (next === source) throw new Error(`Could not update SDK version in ${path}`)
-  writeFileSync(path, next)
+  if (!expression.test(source))
+    throw new Error(`Could not find the SDK version in ${path}`)
+  writeFileSync(path, source.replace(expression, replacement))
 }
 
 const release = readJson('sdk/release/release.json')
