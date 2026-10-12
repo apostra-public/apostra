@@ -32,6 +32,9 @@ class Access(TypedDict):
     advertisersTruncated: bool
 
 class Access1(TypedDict):
+    """
+    Complete replacement list of advertiser grants.
+    """
     expectedAccessRevision: int
     '\n    Access revision returned by the most recent read.\n    '
     advertisers: list[Advertiser3]
@@ -9117,6 +9120,9 @@ class LibraryRequirement(TypedDict):
     source: NotRequired[Source2]
 
 class Lifecycle(TypedDict):
+    """
+    One state-fenced suspend, resume, or retire action.
+    """
     action: Literal['suspend']
     '\n    Suspend an active buyer agent.\n    '
     expectedLifecycleState: Literal['active']
@@ -9124,6 +9130,9 @@ class Lifecycle(TypedDict):
     confirmationText: SaveBuyerAgentRequestLifecycleConfirmationText
 
 class Lifecycle1(TypedDict):
+    """
+    One state-fenced suspend, resume, or retire action.
+    """
     action: Literal['resume']
     '\n    Resume a suspended buyer agent.\n    '
     expectedLifecycleState: Literal['suspended']
@@ -9131,6 +9140,9 @@ class Lifecycle1(TypedDict):
     confirmationText: NotRequired[SaveBuyerAgentRequestLifecycleConfirmationText]
 
 class Lifecycle2(TypedDict):
+    """
+    One state-fenced suspend, resume, or retire action.
+    """
     action: Literal['retire']
     '\n    Permanently retire an active or suspended buyer agent.\n    '
     expectedLifecycleState: Literal['active', 'suspended']
@@ -10127,17 +10139,6 @@ class OpenVariantGallerySuccessGalleryVariant(TypedDict):
 OpenVariantGallerySuccessGalleryVariants: TypeAlias = list[OpenVariantGallerySuccessGalleryVariant]
 
 class Operator(TypedDict):
-    userId: ReviewBuyerChildAccountSuccessOperatorUserId
-    email: str | None
-    name: str | None
-
-class Operator1(TypedDict):
-    """
-    Buying operator in the exact pair.
-    """
-    domain: SaveAdvertiserInstructionsRequestOperatorDomain
-
-class Operator3(TypedDict):
     """
     Reuse an existing claimed provider operator.
     """
@@ -10146,7 +10147,7 @@ class Operator3(TypedDict):
     operatorUid: str
     '\n    Claimed provider operator ID to reuse.\n    '
 
-class Operator4(TypedDict):
+class Operator1(TypedDict):
     """
     Create a new provider operator.
     """
@@ -10154,6 +10155,17 @@ class Operator4(TypedDict):
     '\n    Create a provider operator.\n    '
     displayName: str
     '\n    Name for the new provider operator.\n    '
+
+class Operator2(TypedDict):
+    userId: ReviewBuyerChildAccountSuccessOperatorUserId
+    email: str | None
+    name: str | None
+
+class Operator3(TypedDict):
+    """
+    Buying operator in the exact pair.
+    """
+    domain: SaveAdvertiserInstructionsRequestOperatorDomain
 
 class OperatorIdentity(TypedDict):
     canManage: bool
@@ -11815,7 +11827,7 @@ class ReviewBuyerChildAccountInput(TypedDict):
 class ReviewBuyerChildAccountResult(TypedDict):
     parent: Parent
     proposedAccount: ProposedAccount
-    operator: Operator
+    operator: Operator2
     capacity: Capacity
     planCoverage: PlanCoverage
     accessChanges: AccessChanges
@@ -12028,7 +12040,7 @@ class SaveAdvertiserInstructionsInput1(TypedDict):
 class SaveAdvertiserInstructionsInput2(TypedDict):
     id: NotRequired[str]
     '\n    Existing instruction row id; omit when using the exact pair.\n    '
-    operator: NotRequired[Operator1]
+    operator: NotRequired[Operator3]
     '\n    Buying operator in the exact pair.\n    '
     brand: NotRequired[Brand1]
     '\n    Advertised brand in the exact pair.\n    '
@@ -12042,7 +12054,7 @@ class SaveAdvertiserInstructionsInput2(TypedDict):
 class SaveAdvertiserInstructionsInput3(TypedDict):
     instructions: NotRequired[Instructions1]
     id: NotRequired[str]
-    operator: NotRequired[Operator1]
+    operator: NotRequired[Operator3]
     brand: NotRequired[Brand1]
     discountPercent: NotRequired[float | None]
     expectedAccountId: NotRequired[int | str]
@@ -12132,38 +12144,63 @@ class SaveAdvertiserResult8(TypedDict):
 
 SaveAdvertiserResult: TypeAlias = SaveAdvertiserResult1 | SaveAdvertiserResult2 | SaveAdvertiserResult3 | SaveAdvertiserResult4 | SaveAdvertiserResult5 | SaveAdvertiserResult6 | SaveAdvertiserResult7 | SaveAdvertiserResult8
 
-class SaveAgentInput(TypedDict):
-    agentId: NotRequired[str]
-    '\n    Agent ID. Required for Seller mode confirmation or a Developer rename.\n    '
-    sourceId: NotRequired[str]
-    '\n    Optional seller-owned inventory Source ID for Seller mode confirmation.\n    '
-    productMode: NotRequired[Literal['WHOLESALE', 'COMPOSING', 'BOTH']]
-    '\n    Required Seller product mode: WHOLESALE, COMPOSING, or BOTH.\n    '
-    reason: NotRequired[str]
-    '\n    Required reason for a Seller product-mode confirmation or correction.\n    '
-    kind: NotRequired[Literal['SALES', 'CREATIVE']]
-    '\n    Required kind for a new Developer Agent: SALES or CREATIVE.\n    '
-    displayName: NotRequired[str]
-    '\n    Required name for a new Developer Agent or owned Agent rename.\n    '
-    operator: NotRequired[Operator3 | Operator4]
-    '\n    Optional operator for a new Developer Agent.\n    '
+class SaveAgentRequestSaveAgentDeveloperCreateInput(TypedDict):
+    operation: SaveAgentRequestSaveAgentDeveloperCreateOperation
+    kind: Literal['SALES', 'CREATIVE']
+    '\n    Kind for a new Agent: SALES or CREATIVE.\n    '
+    displayName: str
+    '\n    Name for a new Agent.\n    '
+    operator: NotRequired[Operator | Operator1]
+    '\n    Operator for a new Agent. Omit it to create an operator with the Agent name.\n    '
     endpoint: NotRequired[str]
-    '\n    Reserved for an immutable implementation revision on the Agent Page.\n    '
-    idempotencyKey: NotRequired[str]
-    '\n    Required unique key for a new Developer Agent registration.\n    '
+    '\n    Reserved for an immutable implementation revision; register endpoints through the Agent Page.\n    '
+    idempotencyKey: str
+    '\n    Unique key for a new Agent registration.\n    '
     expectedAccountId: NotRequired[int | str]
-    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+
+SaveAgentRequestSaveAgentDeveloperCreateOperation: TypeAlias = Literal['developer_create']
+'\nRegister a Developer-owned Agent.\n'
+
+class SaveAgentRequestSaveAgentDeveloperUpdateInput(TypedDict):
+    operation: SaveAgentRequestSaveAgentDeveloperUpdateOperation
+    agentId: str
+    '\n    Owned Agent ID to rename.\n    '
+    displayName: str
+    '\n    New name for the owned Agent.\n    '
+    endpoint: NotRequired[str]
+    '\n    Reserved for an immutable implementation revision; register endpoints through the Agent Page.\n    '
+    expectedAccountId: NotRequired[int | str]
+
+SaveAgentRequestSaveAgentDeveloperUpdateOperation: TypeAlias = Literal['developer_update']
+'\nRename a Developer-owned Agent.\n'
+
+class SaveAgentRequestSaveAgentSellerSaveInput(TypedDict):
+    operation: SaveAgentRequestSaveAgentSellerSaveOperation
+    agentId: str
+    '\n    Sales Agent ID returned by search or get.\n    '
+    sourceId: NotRequired[str]
+    '\n    Optional seller-owned inventory Source ID. Omit it when one binding matches; pass it to select one when several bindings match. Omit it for an Agent-owner confirmation, which rejects sourceId.\n    '
+    productMode: Literal['WHOLESALE', 'COMPOSING', 'BOTH']
+    '\n    Product mode to confirm or correct: WHOLESALE, COMPOSING, or BOTH.\n    '
+    reason: str
+    '\n    Why this product-mode confirmation or correction is needed.\n    '
+    expectedAccountId: NotRequired[int | str]
+
+SaveAgentInput: TypeAlias = SaveAgentRequestSaveAgentSellerSaveInput | SaveAgentRequestSaveAgentDeveloperCreateInput | SaveAgentRequestSaveAgentDeveloperUpdateInput
 
 class SaveAgentResult1(TypedDict):
     kind: Literal['agent']
+    outcome: Literal['seller_saved']
     object: Object4
 
 class SaveAgentResult2(TypedDict):
     kind: Literal['agent']
+    outcome: Literal['developer_created']
     object: Object5
 
 class SaveAgentResult3(TypedDict):
     kind: Literal['agent']
+    outcome: Literal['developer_updated']
     object: Object6
 
 SaveAgentResult: TypeAlias = SaveAgentResult1 | SaveAgentResult2 | SaveAgentResult3
@@ -12354,8 +12391,8 @@ class SaveAudienceRequestSaveAudienceMember(TypedDict):
     '\n    SHA-256 of lowercase, trimmed email (64-char lowercase hex).\n    '
     hashed_phone: NotRequired[str]
     '\n    SHA-256 of E.164 phone number (64-char lowercase hex).\n    '
-    email: NotRequired[str]
-    '\n    Raw email; normalized (lowercase, trimmed) and SHA-256 hashed before forwarding.\n    '
+    uids: NotRequired[list[Uid]]
+    '\n    Platform user IDs for this member.\n    '
 
 SaveAudienceRequestSaveAudienceMemberExternalId: TypeAlias = str
 
@@ -12512,6 +12549,7 @@ SaveBusinessRulesSuccessMaterialReceipt: TypeAlias = dict[str, JsonValue]
 class SaveBuyerAgentInput1(TypedDict):
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    operation: SaveBuyerAgentRequestSaveBuyerAgentCreateOperation
     displayName: SaveBuyerAgentRequestDisplayName
     kind: NotRequired[Literal['external', 'hosted']]
     '\n    external is available. hosted creation is not available yet.\n    '
@@ -12519,35 +12557,59 @@ class SaveBuyerAgentInput1(TypedDict):
 class SaveBuyerAgentInput2(TypedDict):
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation
     id: SaveBuyerAgentRequestId
     displayName: SaveBuyerAgentRequestDisplayName
 
 class SaveBuyerAgentInput3(TypedDict):
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation
     id: SaveBuyerAgentRequestId
     access: Access1
+    '\n    Complete replacement list of advertiser grants.\n    '
 
 class SaveBuyerAgentInput4(TypedDict):
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    operation: SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation
     id: SaveBuyerAgentRequestId
     lifecycle: Lifecycle | Lifecycle1 | Lifecycle2
+    '\n    One state-fenced suspend, resume, or retire action.\n    '
 
 class SaveBuyerAgentInput5(TypedDict):
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    operation: SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation
     id: SaveBuyerAgentRequestId
     credentialHandoff: Literal[True]
+    '\n    Prepare a safe reference for the administrator credential ceremony; never returns a secret.\n    '
 
 SaveBuyerAgentInput: TypeAlias = SaveBuyerAgentInput1 | SaveBuyerAgentInput2 | SaveBuyerAgentInput3 | SaveBuyerAgentInput4 | SaveBuyerAgentInput5
 
 SaveBuyerAgentRequestDisplayName: TypeAlias = str
+'\nName for the buyer agent.\n'
 
 SaveBuyerAgentRequestId: TypeAlias = str
+'\nBuyer-agent principal ID.\n'
 
 SaveBuyerAgentRequestLifecycleConfirmationText: TypeAlias = str
 '\nExact current display name; required to suspend or retire.\n'
+
+SaveBuyerAgentRequestSaveBuyerAgentCreateOperation: TypeAlias = Literal['create']
+'\nCreate an external buyer agent.\n'
+
+SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation: TypeAlias = Literal['credential_handoff']
+'\nPrepare the human credential handoff ceremony.\n'
+
+SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation: TypeAlias = Literal['lifecycle']
+'\nSuspend, resume, or retire the buyer agent.\n'
+
+SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation: TypeAlias = Literal['update_access']
+'\nReplace the exact advertiser access list.\n'
+
+SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation: TypeAlias = Literal['update_display_name']
+'\nChange the buyer-agent display name.\n'
 
 class SaveBuyerAgentResult(TypedDict):
     kind: Literal['buyer_agent']
@@ -16597,6 +16659,9 @@ class Seller(TypedDict):
     reason: Literal['channel_mismatch']
     sellerChannels: list[str]
 
+SaveAgentRequestSaveAgentSellerSaveOperation: TypeAlias = Literal['seller_save']
+'\nConfirm or correct a Seller product mode.\n'
+
 class SellerAccount(TypedDict):
     storefront: Storefront
     accountId: str
@@ -18138,6 +18203,12 @@ class Trigger1(TypedDict):
     '\n    Fires when predicate crosses, not on a schedule.\n    '
     predicate: Predicate
     '\n    The typed condition this trigger evaluates.\n    '
+
+class Uid(TypedDict):
+    type: Literal['rampid', 'rampid_derived', 'id5', 'uid2', 'euid', 'pairid', 'maid', 'hashed_email', 'publisher_first_party', 'world_id_nullifier', 'other']
+    '\n    Platform user ID type, e.g. uid2, rampid, or maid.\n    '
+    value: str
+    '\n    The user ID.\n    '
 
 class UnassignAccount(TypedDict):
     """
