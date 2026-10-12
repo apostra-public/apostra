@@ -209,7 +209,7 @@ export type SaveMaterialInput = Wire.SaveMaterialData['body']
 export type SaveMaterialResult = Wire.SaveMaterialResponses[200]['data']
 export type SaveMaterialError = Wire.SaveMaterialErrors[keyof Wire.SaveMaterialErrors]
 
-export type SaveMediaBuyInput = Omit<Wire.SaveMediaBuyData['body'], "idempotencyKey"> & Partial<Pick<Wire.SaveMediaBuyData['body'], "idempotencyKey">>
+export type SaveMediaBuyInput = Wire.SaveMediaBuyData['body']
 export type SaveMediaBuyResult = Wire.SaveMediaBuyResponses[200]['data']
 export type SaveMediaBuyError = Wire.SaveMediaBuyErrors[keyof Wire.SaveMediaBuyErrors]
 
@@ -584,14 +584,14 @@ export class Apostra extends Transport {
   /** Save seller notes and instructions for an exact brand-domain × operator-domain pair. Configuration does not verify the registry; discounts, source routing, sponsored access, and buyer-account trust are read-only. Returns the data together with response headers and request ID. */
   saveAdvertiserInstructionsWithResponse(input: SaveAdvertiserInstructionsInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAdvertiserInstructionsResult>> { return this.requestDetailed("save_advertiser_instructions", input, options) }
   /**
-   * In a Developer account, register a Sales or Creative Agent, or rename an owned Agent. A registration requires an account administrator and an idempotency key. In a Seller account, confirm or correct one Sales Agent product mode.
+   * Save a Sales Agent mode, register an Agent, or rename an owned Agent. Select seller_save, developer_create, or developer_update.
    *
    * @example
    * await client.saveAgent(input, { idempotencyKey: 'stable-key' })
    */
   saveAgent(input: SaveAgentInput, options: WriteRequestOptions): Promise<SaveAgentResult> { return this.request("save_agent", input, options) }
 
-  /** In a Developer account, register a Sales or Creative Agent, or rename an owned Agent. A registration requires an account administrator and an idempotency key. In a Seller account, confirm or correct one Sales Agent product mode. Returns the data together with response headers and request ID. */
+  /** Save a Sales Agent mode, register an Agent, or rename an owned Agent. Select seller_save, developer_create, or developer_update. Returns the data together with response headers and request ID. */
   saveAgentWithResponse(input: SaveAgentInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAgentResult>> { return this.requestDetailed("save_agent", input, options) }
   /**
    * File or update a typed ask in the Apostra Support workflow; returns askId. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first.
@@ -634,14 +634,14 @@ export class Apostra extends Transport {
   /** Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto needs acknowledgeNoHumanReview. Returns the data together with response headers and request ID. */
   saveBusinessRulesWithResponse(input: SaveBusinessRulesInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBusinessRulesResult>> { return this.requestDetailed("save_business_rules", input, options) }
   /**
-   * Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call.
+   * Create or manage one buyer agent.
    *
    * @example
    * await client.saveBuyerAgent(input, { idempotencyKey: 'stable-key' })
    */
   saveBuyerAgent(input: SaveBuyerAgentInput, options: WriteRequestOptions): Promise<SaveBuyerAgentResult> { return this.request("save_buyer_agent", input, options) }
 
-  /** Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call. Returns the data together with response headers and request ID. */
+  /** Create or manage one buyer agent. Returns the data together with response headers and request ID. */
   saveBuyerAgentWithResponse(input: SaveBuyerAgentInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBuyerAgentResult>> { return this.requestDetailed("save_buyer_agent", input, options) }
   /**
    * Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v2/setup/v3/identity-setup.

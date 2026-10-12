@@ -10204,63 +10204,7 @@ export type SaveAdvertiserResponses = {
 };
 
 export type SaveAgentData = {
-    body: {
-        /**
-         * Agent ID. Required for Seller mode confirmation or a Developer rename.
-         */
-        agentId?: string;
-        /**
-         * Optional seller-owned inventory Source ID for Seller mode confirmation.
-         */
-        sourceId?: string;
-        /**
-         * Required Seller product mode: WHOLESALE, COMPOSING, or BOTH.
-         */
-        productMode?: 'WHOLESALE' | 'COMPOSING' | 'BOTH';
-        /**
-         * Required reason for a Seller product-mode confirmation or correction.
-         */
-        reason?: string;
-        /**
-         * Required kind for a new Developer Agent: SALES or CREATIVE.
-         */
-        kind?: 'SALES' | 'CREATIVE';
-        /**
-         * Required name for a new Developer Agent or owned Agent rename.
-         */
-        displayName?: string;
-        /**
-         * Optional operator for a new Developer Agent.
-         */
-        operator?: {
-            /**
-             * Reuse a claimed provider operator.
-             */
-            kind: 'EXISTING';
-            /**
-             * Claimed provider operator ID to reuse.
-             */
-            operatorUid: string;
-            displayName?: never;
-        } | {
-            /**
-             * Create a provider operator.
-             */
-            kind: 'NEW';
-            /**
-             * Name for the new provider operator.
-             */
-            displayName: string;
-            operatorUid?: never;
-        };
-        /**
-         * Reserved for an immutable implementation revision on the Agent Page.
-         */
-        endpoint?: string;
-        /**
-         * Required unique key for a new Developer Agent registration.
-         */
-        idempotencyKey?: string;
+    body: (SaveAgentRequestSaveAgentSellerSaveInput | SaveAgentRequestSaveAgentDeveloperCreateInput | SaveAgentRequestSaveAgentDeveloperUpdateInput) & {
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -10338,6 +10282,104 @@ export type SaveAgentErrors = {
     503: V3ToolErrorResponse;
 };
 
+export type SaveAgentRequestSaveAgentDeveloperCreateInput = {
+    operation: SaveAgentRequestSaveAgentDeveloperCreateOperation;
+    /**
+     * Kind for a new Agent: SALES or CREATIVE.
+     */
+    kind: 'SALES' | 'CREATIVE';
+    /**
+     * Name for a new Agent.
+     */
+    displayName: string;
+    /**
+     * Operator for a new Agent. Omit it to create an operator with the Agent name.
+     */
+    operator?: {
+        /**
+         * Reuse a claimed provider operator.
+         */
+        kind: 'EXISTING';
+        /**
+         * Claimed provider operator ID to reuse.
+         */
+        operatorUid: string;
+        displayName?: never;
+    } | {
+        /**
+         * Create a provider operator.
+         */
+        kind: 'NEW';
+        /**
+         * Name for the new provider operator.
+         */
+        displayName: string;
+        operatorUid?: never;
+    };
+    /**
+     * Reserved for an immutable implementation revision; register endpoints through the Agent Page.
+     */
+    endpoint?: string;
+    /**
+     * Unique key for a new Agent registration.
+     */
+    idempotencyKey: string;
+    expectedAccountId?: number | string;
+};
+
+/**
+ * Register a Developer-owned Agent.
+ */
+export type SaveAgentRequestSaveAgentDeveloperCreateOperation = 'developer_create';
+
+export type SaveAgentRequestSaveAgentDeveloperUpdateInput = {
+    operation: SaveAgentRequestSaveAgentDeveloperUpdateOperation;
+    /**
+     * Owned Agent ID to rename.
+     */
+    agentId: string;
+    /**
+     * New name for the owned Agent.
+     */
+    displayName: string;
+    /**
+     * Reserved for an immutable implementation revision; register endpoints through the Agent Page.
+     */
+    endpoint?: string;
+    expectedAccountId?: number | string;
+};
+
+/**
+ * Rename a Developer-owned Agent.
+ */
+export type SaveAgentRequestSaveAgentDeveloperUpdateOperation = 'developer_update';
+
+export type SaveAgentRequestSaveAgentSellerSaveInput = {
+    operation: SaveAgentRequestSaveAgentSellerSaveOperation;
+    /**
+     * Sales Agent ID returned by search or get.
+     */
+    agentId: string;
+    /**
+     * Optional seller-owned inventory Source ID. Omit it when one binding matches; pass it to select one when several bindings match. Omit it for an Agent-owner confirmation, which rejects sourceId.
+     */
+    sourceId?: string;
+    /**
+     * Product mode to confirm or correct: WHOLESALE, COMPOSING, or BOTH.
+     */
+    productMode: 'WHOLESALE' | 'COMPOSING' | 'BOTH';
+    /**
+     * Why this product-mode confirmation or correction is needed.
+     */
+    reason: string;
+    expectedAccountId?: number | string;
+};
+
+/**
+ * Confirm or correct a Seller product mode.
+ */
+export type SaveAgentRequestSaveAgentSellerSaveOperation = 'seller_save';
+
 export type SaveAgentResponse = SaveAgentResponses[keyof SaveAgentResponses];
 
 export type SaveAgentResponses = {
@@ -10347,6 +10389,7 @@ export type SaveAgentResponses = {
     200: {
         data: {
             kind: 'agent';
+            outcome: 'seller_saved';
             object: {
                 agentId: string;
                 productMode: 'WHOLESALE' | 'COMPOSING' | 'BOTH';
@@ -10355,6 +10398,7 @@ export type SaveAgentResponses = {
             };
         } | {
             kind: 'agent';
+            outcome: 'developer_created';
             object: {
                 agentId: string;
                 displayName: string;
@@ -10364,6 +10408,7 @@ export type SaveAgentResponses = {
             };
         } | {
             kind: 'agent';
+            outcome: 'developer_updated';
             object: {
                 agentId: string;
                 displayName: string;
@@ -10910,9 +10955,18 @@ export type SaveAudienceRequestSaveAudienceMember = {
      */
     hashed_phone?: string;
     /**
-     * Raw email; normalized (lowercase, trimmed) and SHA-256 hashed before forwarding.
+     * Platform user IDs for this member.
      */
-    email?: string;
+    uids?: Array<{
+        /**
+         * Platform user ID type, e.g. uid2, rampid, or maid.
+         */
+        type: 'rampid' | 'rampid_derived' | 'id5' | 'uid2' | 'euid' | 'pairid' | 'maid' | 'hashed_email' | 'publisher_first_party' | 'world_id_nullifier' | 'other';
+        /**
+         * The user ID.
+         */
+        value: string;
+    }>;
 };
 
 export type SaveAudienceRequestSaveAudienceMemberExternalId = string;
@@ -10964,70 +11018,7 @@ export type SaveAudienceResponses = {
 };
 
 export type SaveBillingData = {
-    body: ({
-        operation: SaveBillingRequestSaveBillingTermsOperation;
-        terms: {
-            /**
-             * Explicitly accept the named Terms version.
-             */
-            accepted: true;
-            /**
-             * Terms version shown in Plan & Billing.
-             */
-            acceptedVersion: string;
-        };
-        expectedAccountId?: number | string;
-        paymentAuthority?: never;
-        paymentTerms?: never;
-    } | {
-        operation: SaveBillingRequestSaveBillingPaymentAuthorityOperation;
-        paymentAuthority: {
-            /**
-             * Hosted card capture.
-             */
-            method?: SaveBillingRequestPaymentAuthorityMethod;
-            /**
-             * Stage the payment-authority handoff.
-             */
-            action: 'request';
-            confirmationToken?: never;
-        } | {
-            /**
-             * Hosted card capture.
-             */
-            method?: SaveBillingRequestPaymentAuthorityMethod;
-            /**
-             * Confirm the payment-authority handoff.
-             */
-            action: 'confirm';
-            /**
-             * Token returned by the request stage.
-             */
-            confirmationToken: string;
-        } | {
-            /**
-             * Hosted card capture.
-             */
-            method?: SaveBillingRequestPaymentAuthorityMethod;
-            /**
-             * Poll the payment-authority handoff.
-             */
-            action: 'status';
-            confirmationToken?: never;
-        };
-        expectedAccountId?: number | string;
-        terms?: never;
-        paymentTerms?: never;
-    } | {
-        operation: SaveBillingRequestSaveBillingPaymentTermsOperation;
-        /**
-         * Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default.
-         */
-        paymentTerms: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
-        expectedAccountId?: number | string;
-        terms?: never;
-        paymentAuthority?: never;
-    }) & {
+    body: (SaveBillingRequestSaveBillingTermsInput | SaveBillingRequestSaveBillingPaymentAuthorityInput | SaveBillingRequestSaveBillingPaymentTermsInput) & {
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -11105,17 +11096,80 @@ export type SaveBillingErrors = {
     503: V3ToolErrorResponse;
 };
 
-export type SaveBillingRequestPaymentAuthorityMethod = 'capture_link';
+export type SaveBillingRequestSaveBillingPaymentAuthorityInput = {
+    operation: SaveBillingRequestSaveBillingPaymentAuthorityOperation;
+    paymentAuthority: {
+        /**
+         * Hosted card capture.
+         */
+        method?: SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityMethod;
+        /**
+         * Stage the payment-authority handoff.
+         */
+        action: 'request';
+        confirmationToken?: never;
+    } | {
+        /**
+         * Hosted card capture.
+         */
+        method?: SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityMethod;
+        /**
+         * Confirm the payment-authority handoff.
+         */
+        action: 'confirm';
+        /**
+         * Token returned by the request stage.
+         */
+        confirmationToken: string;
+    } | {
+        /**
+         * Hosted card capture.
+         */
+        method?: SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityMethod;
+        /**
+         * Poll the payment-authority handoff.
+         */
+        action: 'status';
+        confirmationToken?: never;
+    };
+    expectedAccountId?: number | string;
+};
+
+export type SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityMethod = 'capture_link';
 
 /**
  * Request, confirm, or poll payment authority.
  */
 export type SaveBillingRequestSaveBillingPaymentAuthorityOperation = 'payment_authority';
 
+export type SaveBillingRequestSaveBillingPaymentTermsInput = {
+    operation: SaveBillingRequestSaveBillingPaymentTermsOperation;
+    /**
+     * Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default.
+     */
+    paymentTerms: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
+    expectedAccountId?: number | string;
+};
+
 /**
  * Choose the payment terms sellers are asked for.
  */
 export type SaveBillingRequestSaveBillingPaymentTermsOperation = 'payment_terms';
+
+export type SaveBillingRequestSaveBillingTermsInput = {
+    operation: SaveBillingRequestSaveBillingTermsOperation;
+    terms: {
+        /**
+         * Explicitly accept the named Terms version.
+         */
+        accepted: true;
+        /**
+         * Terms version shown in Plan & Billing.
+         */
+        acceptedVersion: string;
+    };
+    expectedAccountId?: number | string;
+};
 
 /**
  * Accept the current Terms of Service.
@@ -11210,7 +11264,9 @@ export type SaveBillingSuccessPendingConfirmationResult = {
 };
 
 export type SaveBusinessRulesData = {
-    body: unknown & (unknown | unknown) & unknown & {
+    body: unknown & ({
+        policy: unknown;
+    } | unknown) & {
         /**
          * Exact get(material) provenance; include only to confirm that candidate.
          */
@@ -11233,21 +11289,9 @@ export type SaveBusinessRulesData = {
             advertiserRef?: string;
         };
         /**
-         * Compatibility input for already-sectioned Markdown. Prefer the two explicit policy fields.
+         * The policy version to write, as the read returns it.
          */
-        content?: string;
-        /**
-         * Brief rules for discovery and manual-buy screening. Always pair with creativePolicy; empty clears.
-         */
-        briefAcceptancePolicy?: string;
-        /**
-         * Submitted-creative rules. Always pair with briefAcceptancePolicy; empty clears.
-         */
-        creativePolicy?: string;
-        /**
-         * Why this version was written. Version history only.
-         */
-        notes?: string;
+        policy?: SaveBusinessRulesRequestSaveBusinessRulesPolicy;
         /**
          * auto approves creatives with no review; manual queues them.
          */
@@ -11341,6 +11385,25 @@ export type SaveBusinessRulesErrors = {
     503: V3ToolErrorResponse;
 };
 
+export type SaveBusinessRulesRequestSaveBusinessRulesPolicy = {
+    /**
+     * Compatibility input for already-sectioned Markdown. Prefer the two explicit policy fields.
+     */
+    content?: string;
+    /**
+     * Brief rules for discovery and manual-buy screening. Always pair with creativePolicy; empty clears.
+     */
+    briefAcceptancePolicy?: string;
+    /**
+     * Submitted-creative rules. Always pair with briefAcceptancePolicy; empty clears.
+     */
+    creativePolicy?: string;
+    /**
+     * Why this version was written. Version history only.
+     */
+    notes?: string;
+};
+
 export type SaveBusinessRulesResponse = SaveBusinessRulesResponses[keyof SaveBusinessRulesResponses];
 
 export type SaveBusinessRulesResponses = {
@@ -11394,6 +11457,7 @@ export type SaveBusinessRulesSuccessMaterialReceipt = {
 
 export type SaveBuyerAgentData = {
     body: ({
+        operation: SaveBuyerAgentRequestSaveBuyerAgentCreateOperation;
         displayName: SaveBuyerAgentRequestDisplayName;
         /**
          * external is available. hosted creation is not available yet.
@@ -11405,6 +11469,7 @@ export type SaveBuyerAgentData = {
         lifecycle?: never;
         credentialHandoff?: never;
     } | {
+        operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation;
         id: SaveBuyerAgentRequestId;
         displayName: SaveBuyerAgentRequestDisplayName;
         expectedAccountId?: number | string;
@@ -11413,7 +11478,11 @@ export type SaveBuyerAgentData = {
         lifecycle?: never;
         credentialHandoff?: never;
     } | {
+        operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation;
         id: SaveBuyerAgentRequestId;
+        /**
+         * Complete replacement list of advertiser grants.
+         */
         access: {
             /**
              * Access revision returned by the most recent read.
@@ -11439,7 +11508,11 @@ export type SaveBuyerAgentData = {
         lifecycle?: never;
         credentialHandoff?: never;
     } | {
+        operation: SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation;
         id: SaveBuyerAgentRequestId;
+        /**
+         * One state-fenced suspend, resume, or retire action.
+         */
         lifecycle: {
             /**
              * Suspend an active buyer agent.
@@ -11477,7 +11550,11 @@ export type SaveBuyerAgentData = {
         access?: never;
         credentialHandoff?: never;
     } | {
+        operation: SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation;
         id: SaveBuyerAgentRequestId;
+        /**
+         * Prepare a safe reference for the administrator credential ceremony; never returns a secret.
+         */
         credentialHandoff: true;
         expectedAccountId?: number | string;
         displayName?: never;
@@ -11562,14 +11639,45 @@ export type SaveBuyerAgentErrors = {
     503: V3ToolErrorResponse;
 };
 
+/**
+ * Name for the buyer agent.
+ */
 export type SaveBuyerAgentRequestDisplayName = string;
 
+/**
+ * Buyer-agent principal ID.
+ */
 export type SaveBuyerAgentRequestId = string;
 
 /**
  * Exact current display name; required to suspend or retire.
  */
 export type SaveBuyerAgentRequestLifecycleConfirmationText = string;
+
+/**
+ * Create an external buyer agent.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentCreateOperation = 'create';
+
+/**
+ * Prepare the human credential handoff ceremony.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation = 'credential_handoff';
+
+/**
+ * Suspend, resume, or retire the buyer agent.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation = 'lifecycle';
+
+/**
+ * Replace the exact advertiser access list.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation = 'update_access';
+
+/**
+ * Change the buyer-agent display name.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation = 'update_display_name';
 
 export type SaveBuyerAgentResponse = SaveBuyerAgentResponses[keyof SaveBuyerAgentResponses];
 
@@ -14784,202 +14892,7 @@ export type SaveCreativeResponses = {
 };
 
 export type SaveCreativeSessionData = {
-    body: ({
-        operation: SaveCreativeSessionRequestSaveCreativeSessionSaveDraftOperation;
-        /**
-         * Leave unset for eligible Scope3-funded image or voice drafts unless user names an engine. See Creative Engines guide.
-         */
-        engine?: SaveCreativeSessionRequestEngine;
-        draft: SaveCreativeSessionRequestDraft;
-        idempotencyKey: SaveCreativeSessionRequestSaveCreativeSessionDraftIdempotencyKey;
-        scope: SaveCreativeSessionRequestSaveCreativeSessionCampaignScope;
-        campaignId: SaveCreativeSessionRequestCampaignId;
-        expectedAccountId?: number | string;
-        sessionId?: never;
-        variantId?: never;
-        expectedRevision?: never;
-        approvedVariantId?: never;
-        approvedSessionRevision?: never;
-        name?: never;
-        message?: never;
-        advertiserId?: never;
-        sessionRevision?: never;
-        outputHash?: never;
-    } | {
-        operation: SaveCreativeSessionRequestSaveCreativeSessionSelectOutputOperation;
-        sessionId: SaveCreativeSessionRequestSessionId;
-        variantId: SaveCreativeSessionRequestSaveCreativeSessionSelectVariantId;
-        expectedRevision: SaveCreativeSessionRequestSaveCreativeSessionSelectExpectedRevision;
-        /**
-         * Optional idempotency key for this selection.
-         */
-        idempotencyKey?: SaveCreativeSessionRequestIdempotencyKey;
-        scope: SaveCreativeSessionRequestSaveCreativeSessionCampaignScope;
-        campaignId: SaveCreativeSessionRequestCampaignId;
-        expectedAccountId?: number | string;
-        engine?: never;
-        draft?: never;
-        approvedVariantId?: never;
-        approvedSessionRevision?: never;
-        name?: never;
-        message?: never;
-        advertiserId?: never;
-        sessionRevision?: never;
-        outputHash?: never;
-    } | {
-        operation: SaveCreativeSessionRequestSaveCreativeSessionApproveOutputOperation;
-        sessionId: SaveCreativeSessionRequestSessionId;
-        variantId: SaveCreativeSessionRequestSaveCreativeSessionApproveVariantId;
-        expectedRevision: SaveCreativeSessionRequestSaveCreativeSessionApproveExpectedRevision;
-        /**
-         * Optional idempotency key for this approval.
-         */
-        idempotencyKey?: SaveCreativeSessionRequestIdempotencyKey;
-        scope: SaveCreativeSessionRequestSaveCreativeSessionCampaignScope;
-        campaignId: SaveCreativeSessionRequestCampaignId;
-        expectedAccountId?: number | string;
-        engine?: never;
-        draft?: never;
-        approvedVariantId?: never;
-        approvedSessionRevision?: never;
-        name?: never;
-        message?: never;
-        advertiserId?: never;
-        sessionRevision?: never;
-        outputHash?: never;
-    } | {
-        operation: SaveCreativeSessionRequestSaveCreativeSessionFinalizeApprovedOutputOperation;
-        sessionId: SaveCreativeSessionRequestSessionId;
-        approvedVariantId: SaveCreativeSessionRequestApprovedVariantId;
-        approvedSessionRevision: SaveCreativeSessionRequestApprovedSessionRevision;
-        /**
-         * Optional final Creative name.
-         */
-        name?: SaveCreativeSessionRequestName;
-        /**
-         * Optional finalisation message.
-         */
-        message?: SaveCreativeSessionRequestMessage;
-        scope: SaveCreativeSessionRequestSaveCreativeSessionCampaignScope;
-        campaignId: SaveCreativeSessionRequestCampaignId;
-        expectedAccountId?: number | string;
-        engine?: never;
-        draft?: never;
-        idempotencyKey?: never;
-        variantId?: never;
-        expectedRevision?: never;
-        advertiserId?: never;
-        sessionRevision?: never;
-        outputHash?: never;
-    } | {
-        operation: SaveCreativeSessionRequestSaveCreativeSessionPromoteApprovedOutputOperation;
-        /**
-         * Campaign that owns the Creative Session.
-         */
-        campaignId: string;
-        /**
-         * Creative Session identifier.
-         */
-        sessionId: string;
-        /**
-         * Advertiser that will own the promoted Creative Asset.
-         */
-        advertiserId: SaveCreativeSessionRequestAdvertiserId;
-        variantId: SaveCreativeSessionRequestSaveCreativeSessionPromotionVariantId;
-        /**
-         * Session revision that recorded the approval.
-         */
-        sessionRevision: number;
-        /**
-         * SHA-256 digest recorded by the exact output approval.
-         */
-        outputHash: string;
-        idempotencyKey: SaveCreativeSessionRequestSaveCreativeSessionPromotionIdempotencyKey;
-        scope: SaveCreativeSessionRequestSaveCreativeSessionCampaignScope;
-        expectedAccountId?: number | string;
-        engine?: never;
-        draft?: never;
-        expectedRevision?: never;
-        approvedVariantId?: never;
-        approvedSessionRevision?: never;
-        name?: never;
-        message?: never;
-    } | {
-        operation: SaveCreativeSessionRequestSaveCreativeSessionSaveDraftOperation;
-        /**
-         * Leave unset for eligible Scope3-funded image or voice drafts unless user names an engine. See Creative Engines guide.
-         */
-        engine?: SaveCreativeSessionRequestEngine;
-        draft: SaveCreativeSessionRequestDraft;
-        idempotencyKey: SaveCreativeSessionRequestSaveCreativeSessionDraftIdempotencyKey;
-        scope: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserScope;
-        advertiserId: SaveCreativeSessionRequestAdvertiserId;
-        expectedAccountId?: number | string;
-        sessionId?: never;
-        variantId?: never;
-        expectedRevision?: never;
-        approvedVariantId?: never;
-        approvedSessionRevision?: never;
-        name?: never;
-        message?: never;
-    } | {
-        operation: SaveCreativeSessionRequestSaveCreativeSessionSelectOutputOperation;
-        sessionId: SaveCreativeSessionRequestSessionId;
-        variantId: SaveCreativeSessionRequestSaveCreativeSessionSelectVariantId;
-        expectedRevision: SaveCreativeSessionRequestSaveCreativeSessionSelectExpectedRevision;
-        /**
-         * Optional idempotency key for this selection.
-         */
-        idempotencyKey?: SaveCreativeSessionRequestIdempotencyKey;
-        scope: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserScope;
-        advertiserId: SaveCreativeSessionRequestAdvertiserId;
-        expectedAccountId?: number | string;
-        engine?: never;
-        draft?: never;
-        approvedVariantId?: never;
-        approvedSessionRevision?: never;
-        name?: never;
-        message?: never;
-    } | {
-        operation: SaveCreativeSessionRequestSaveCreativeSessionApproveOutputOperation;
-        sessionId: SaveCreativeSessionRequestSessionId;
-        variantId: SaveCreativeSessionRequestSaveCreativeSessionApproveVariantId;
-        expectedRevision: SaveCreativeSessionRequestSaveCreativeSessionApproveExpectedRevision;
-        /**
-         * Optional idempotency key for this approval.
-         */
-        idempotencyKey?: SaveCreativeSessionRequestIdempotencyKey;
-        scope: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserScope;
-        advertiserId: SaveCreativeSessionRequestAdvertiserId;
-        expectedAccountId?: number | string;
-        engine?: never;
-        draft?: never;
-        approvedVariantId?: never;
-        approvedSessionRevision?: never;
-        name?: never;
-        message?: never;
-    } | {
-        operation: SaveCreativeSessionRequestSaveCreativeSessionFinalizeApprovedOutputOperation;
-        sessionId: SaveCreativeSessionRequestSessionId;
-        approvedVariantId: SaveCreativeSessionRequestApprovedVariantId;
-        approvedSessionRevision: SaveCreativeSessionRequestApprovedSessionRevision;
-        /**
-         * Optional final Creative name.
-         */
-        name?: SaveCreativeSessionRequestName;
-        /**
-         * Optional finalisation message.
-         */
-        message?: SaveCreativeSessionRequestMessage;
-        scope: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserScope;
-        advertiserId: SaveCreativeSessionRequestAdvertiserId;
-        expectedAccountId?: number | string;
-        engine?: never;
-        draft?: never;
-        idempotencyKey?: never;
-        variantId?: never;
-        expectedRevision?: never;
-    }) & {
+    body: (SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInput | SaveCreativeSessionRequestSaveCreativeSessionCampaignSelectOutputInput | SaveCreativeSessionRequestSaveCreativeSessionCampaignApproveOutputInput | SaveCreativeSessionRequestSaveCreativeSessionCampaignFinalizeApprovedOutputInput | SaveCreativeSessionRequestSaveCreativeSessionCampaignPromoteApprovedOutputInput | SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInput | SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSelectOutputInput | SaveCreativeSessionRequestSaveCreativeSessionAdvertiserApproveOutputInput | SaveCreativeSessionRequestSaveCreativeSessionAdvertiserFinalizeApprovedOutputInput) & {
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -15057,30 +14970,96 @@ export type SaveCreativeSessionErrors = {
     503: V3ToolErrorResponse;
 };
 
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserApproveOutputInput = {
+    operation: SaveCreativeSessionRequestSaveCreativeSessionApproveOutputOperation;
+    sessionId: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserApproveOutputInputSessionId;
+    variantId: SaveCreativeSessionRequestSaveCreativeSessionApproveVariantId;
+    expectedRevision: SaveCreativeSessionRequestSaveCreativeSessionApproveExpectedRevision;
+    /**
+     * Optional idempotency key for this approval.
+     */
+    idempotencyKey?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserApproveOutputInputIdempotencyKey;
+    scope: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserScope;
+    advertiserId: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserApproveOutputInputAdvertiserId;
+    expectedAccountId?: number | string;
+};
+
 /**
  * Advertiser library scope.
  */
-export type SaveCreativeSessionRequestAdvertiserId = string;
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserApproveOutputInputAdvertiserId = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserApproveOutputInputIdempotencyKey = string;
+
+/**
+ * Creative Session identifier.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserApproveOutputInputSessionId = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserFinalizeApprovedOutputInput = {
+    operation: SaveCreativeSessionRequestSaveCreativeSessionFinalizeApprovedOutputOperation;
+    sessionId: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserFinalizeApprovedOutputInputSessionId;
+    approvedVariantId: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserFinalizeApprovedOutputInputApprovedVariantId;
+    approvedSessionRevision: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserFinalizeApprovedOutputInputApprovedSessionRevision;
+    /**
+     * Optional final Creative name.
+     */
+    name?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserFinalizeApprovedOutputInputName;
+    /**
+     * Optional finalisation message.
+     */
+    message?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserFinalizeApprovedOutputInputMessage;
+    scope: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserScope;
+    advertiserId: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserFinalizeApprovedOutputInputAdvertiserId;
+    expectedAccountId?: number | string;
+};
+
+/**
+ * Advertiser library scope.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserFinalizeApprovedOutputInputAdvertiserId = string;
 
 /**
  * Revision that recorded the approval.
  */
-export type SaveCreativeSessionRequestApprovedSessionRevision = number;
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserFinalizeApprovedOutputInputApprovedSessionRevision = number;
 
 /**
  * Exact approved output identifier.
  */
-export type SaveCreativeSessionRequestApprovedVariantId = string;
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserFinalizeApprovedOutputInputApprovedVariantId = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserFinalizeApprovedOutputInputMessage = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserFinalizeApprovedOutputInputName = string;
 
 /**
- * Campaign scope.
+ * Creative Session identifier.
  */
-export type SaveCreativeSessionRequestCampaignId = string;
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserFinalizeApprovedOutputInputSessionId = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInput = {
+    operation: SaveCreativeSessionRequestSaveCreativeSessionSaveDraftOperation;
+    /**
+     * Leave unset for eligible Scope3-funded image or voice drafts unless user names an engine. See Creative Engines guide.
+     */
+    engine?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputEngine;
+    draft: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraft;
+    idempotencyKey: SaveCreativeSessionRequestSaveCreativeSessionDraftIdempotencyKey;
+    scope: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserScope;
+    advertiserId: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputAdvertiserId;
+    expectedAccountId?: number | string;
+};
+
+/**
+ * Advertiser library scope.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputAdvertiserId = string;
 
 /**
  * Copy exact user brief to request.creative_brief.prompt; requested count to request.variant_count.
  */
-export type SaveCreativeSessionRequestDraft = {
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraft = {
     /**
      * Provider-neutral creative request.
      */
@@ -15110,11 +15089,11 @@ export type SaveCreativeSessionRequestDraft = {
     /**
      * Primary locked reference asset.
      */
-    source_asset?: SaveCreativeSessionRequestDraftSourceAsset;
+    source_asset?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftSourceAsset;
     /**
      * Reference assets for the session.
      */
-    assets?: Array<SaveCreativeSessionRequestDraftAssetsItem>;
+    assets?: Array<SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftAssetsItem>;
     /**
      * Derived reference-asset renditions.
      */
@@ -15142,11 +15121,11 @@ export type SaveCreativeSessionRequestDraft = {
         /**
          * Where the rendition originated.
          */
-        source?: SaveCreativeSessionRequestDraftRenditionsItemSource;
+        source?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftRenditionsItemSource;
         /**
          * How the rendition is used in the creative.
          */
-        role?: SaveCreativeSessionRequestDraftRenditionsItemRole;
+        role?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftRenditionsItemRole;
         /**
          * Rendition media type.
          */
@@ -15182,15 +15161,15 @@ export type SaveCreativeSessionRequestDraft = {
             /**
              * Permitted asset usage.
              */
-            usage?: SaveCreativeSessionRequestDraftRenditionsItemRightsUsage;
+            usage?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftRenditionsItemRightsUsage;
             /**
              * ISO timestamp when the asset rights expire.
              */
-            expires_at?: SaveCreativeSessionRequestDraftRenditionsItemRightsExpiresAt;
+            expires_at?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftRenditionsItemRightsExpiresAt;
             /**
              * Rights notes.
              */
-            notes?: SaveCreativeSessionRequestDraftRenditionsItemRightsNotes;
+            notes?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftRenditionsItemRightsNotes;
             /**
              * Asset from which rights are inherited.
              */
@@ -15250,7 +15229,7 @@ export type SaveCreativeSessionRequestDraft = {
     partial_success?: boolean;
 };
 
-export type SaveCreativeSessionRequestDraftAssetsItem = {
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftAssetsItem = {
     /**
      * Stable asset identifier, when known.
      */
@@ -15266,11 +15245,11 @@ export type SaveCreativeSessionRequestDraftAssetsItem = {
     /**
      * Where the asset originated.
      */
-    source?: SaveCreativeSessionRequestDraftAssetsItemSource;
+    source?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftAssetsItemSource;
     /**
      * How the asset is used in the creative.
      */
-    role?: SaveCreativeSessionRequestDraftAssetsItemRole;
+    role?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftAssetsItemRole;
     /**
      * Whether generation must preserve this asset.
      */
@@ -15294,15 +15273,15 @@ export type SaveCreativeSessionRequestDraftAssetsItem = {
         /**
          * Permitted asset usage.
          */
-        usage?: SaveCreativeSessionRequestDraftAssetsItemRightsUsage;
+        usage?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftAssetsItemRightsUsage;
         /**
          * ISO timestamp when the asset rights expire.
          */
-        expires_at?: SaveCreativeSessionRequestDraftAssetsItemRightsExpiresAt;
+        expires_at?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftAssetsItemRightsExpiresAt;
         /**
          * Rights notes.
          */
-        notes?: SaveCreativeSessionRequestDraftAssetsItemRightsNotes;
+        notes?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftAssetsItemRightsNotes;
     };
     /**
      * Known asset dimensions.
@@ -15364,27 +15343,27 @@ export type SaveCreativeSessionRequestDraftAssetsItem = {
     mime_type?: string;
 };
 
-export type SaveCreativeSessionRequestDraftAssetsItemRightsExpiresAt = string;
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftAssetsItemRightsExpiresAt = string;
 
-export type SaveCreativeSessionRequestDraftAssetsItemRightsNotes = string;
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftAssetsItemRightsNotes = string;
 
-export type SaveCreativeSessionRequestDraftAssetsItemRightsUsage = string;
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftAssetsItemRightsUsage = string;
 
-export type SaveCreativeSessionRequestDraftAssetsItemRole = 'product' | 'logo' | 'background' | 'reference' | 'copy' | 'audio' | 'video';
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftAssetsItemRole = 'product' | 'logo' | 'background' | 'reference' | 'copy' | 'audio' | 'video';
 
-export type SaveCreativeSessionRequestDraftAssetsItemSource = 'upload' | 'url' | 'dam' | 'product_catalog' | 'brand_library' | 'local' | 'generated';
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftAssetsItemSource = 'upload' | 'url' | 'dam' | 'product_catalog' | 'brand_library' | 'local' | 'generated';
 
-export type SaveCreativeSessionRequestDraftRenditionsItemRightsExpiresAt = string;
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftRenditionsItemRightsExpiresAt = string;
 
-export type SaveCreativeSessionRequestDraftRenditionsItemRightsNotes = string;
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftRenditionsItemRightsNotes = string;
 
-export type SaveCreativeSessionRequestDraftRenditionsItemRightsUsage = string;
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftRenditionsItemRightsUsage = string;
 
-export type SaveCreativeSessionRequestDraftRenditionsItemRole = 'product' | 'logo' | 'background' | 'reference' | 'copy' | 'audio' | 'video';
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftRenditionsItemRole = 'product' | 'logo' | 'background' | 'reference' | 'copy' | 'audio' | 'video';
 
-export type SaveCreativeSessionRequestDraftRenditionsItemSource = 'upload' | 'url' | 'dam' | 'product_catalog' | 'brand_library' | 'local' | 'generated';
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftRenditionsItemSource = 'upload' | 'url' | 'dam' | 'product_catalog' | 'brand_library' | 'local' | 'generated';
 
-export type SaveCreativeSessionRequestDraftSourceAsset = {
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftSourceAsset = {
     /**
      * Stable asset identifier, when known.
      */
@@ -15400,11 +15379,11 @@ export type SaveCreativeSessionRequestDraftSourceAsset = {
     /**
      * Where the asset originated.
      */
-    source?: SaveCreativeSessionRequestDraftSourceAssetSource;
+    source?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftSourceAssetSource;
     /**
      * How the asset is used in the creative.
      */
-    role?: SaveCreativeSessionRequestDraftSourceAssetRole;
+    role?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftSourceAssetRole;
     /**
      * Whether generation must preserve this asset.
      */
@@ -15428,15 +15407,15 @@ export type SaveCreativeSessionRequestDraftSourceAsset = {
         /**
          * Permitted asset usage.
          */
-        usage?: SaveCreativeSessionRequestDraftSourceAssetRightsUsage;
+        usage?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftSourceAssetRightsUsage;
         /**
          * ISO timestamp when the asset rights expire.
          */
-        expires_at?: SaveCreativeSessionRequestDraftSourceAssetRightsExpiresAt;
+        expires_at?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftSourceAssetRightsExpiresAt;
         /**
          * Rights notes.
          */
-        notes?: SaveCreativeSessionRequestDraftSourceAssetRightsNotes;
+        notes?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftSourceAssetRightsNotes;
     };
     /**
      * Known asset dimensions.
@@ -15498,17 +15477,17 @@ export type SaveCreativeSessionRequestDraftSourceAsset = {
     mime_type?: string;
 };
 
-export type SaveCreativeSessionRequestDraftSourceAssetRightsExpiresAt = string;
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftSourceAssetRightsExpiresAt = string;
 
-export type SaveCreativeSessionRequestDraftSourceAssetRightsNotes = string;
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftSourceAssetRightsNotes = string;
 
-export type SaveCreativeSessionRequestDraftSourceAssetRightsUsage = string;
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftSourceAssetRightsUsage = string;
 
-export type SaveCreativeSessionRequestDraftSourceAssetRole = 'product' | 'logo' | 'background' | 'reference' | 'copy' | 'audio' | 'video';
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftSourceAssetRole = 'product' | 'logo' | 'background' | 'reference' | 'copy' | 'audio' | 'video';
 
-export type SaveCreativeSessionRequestDraftSourceAssetSource = 'upload' | 'url' | 'dam' | 'product_catalog' | 'brand_library' | 'local' | 'generated';
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputDraftSourceAssetSource = 'upload' | 'url' | 'dam' | 'product_catalog' | 'brand_library' | 'local' | 'generated';
 
-export type SaveCreativeSessionRequestEngine = {
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSaveDraftInputEngine = {
     /**
      * Saved Creative Engine identifier.
      */
@@ -15519,13 +15498,33 @@ export type SaveCreativeSessionRequestEngine = {
     connectionId: string;
 };
 
-export type SaveCreativeSessionRequestIdempotencyKey = string;
-
-export type SaveCreativeSessionRequestMessage = string;
-
-export type SaveCreativeSessionRequestName = string;
-
 export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserScope = 'advertiser';
+
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSelectOutputInput = {
+    operation: SaveCreativeSessionRequestSaveCreativeSessionSelectOutputOperation;
+    sessionId: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSelectOutputInputSessionId;
+    variantId: SaveCreativeSessionRequestSaveCreativeSessionSelectVariantId;
+    expectedRevision: SaveCreativeSessionRequestSaveCreativeSessionSelectExpectedRevision;
+    /**
+     * Optional idempotency key for this selection.
+     */
+    idempotencyKey?: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSelectOutputInputIdempotencyKey;
+    scope: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserScope;
+    advertiserId: SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSelectOutputInputAdvertiserId;
+    expectedAccountId?: number | string;
+};
+
+/**
+ * Advertiser library scope.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSelectOutputInputAdvertiserId = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSelectOutputInputIdempotencyKey = string;
+
+/**
+ * Creative Session identifier.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionAdvertiserSelectOutputInputSessionId = string;
 
 /**
  * Session revision being approved.
@@ -15542,7 +15541,594 @@ export type SaveCreativeSessionRequestSaveCreativeSessionApproveOutputOperation 
  */
 export type SaveCreativeSessionRequestSaveCreativeSessionApproveVariantId = string;
 
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignApproveOutputInput = {
+    operation: SaveCreativeSessionRequestSaveCreativeSessionApproveOutputOperation;
+    sessionId: SaveCreativeSessionRequestSaveCreativeSessionCampaignApproveOutputInputSessionId;
+    variantId: SaveCreativeSessionRequestSaveCreativeSessionApproveVariantId;
+    expectedRevision: SaveCreativeSessionRequestSaveCreativeSessionApproveExpectedRevision;
+    /**
+     * Optional idempotency key for this approval.
+     */
+    idempotencyKey?: SaveCreativeSessionRequestSaveCreativeSessionCampaignApproveOutputInputIdempotencyKey;
+    scope: SaveCreativeSessionRequestSaveCreativeSessionCampaignScope;
+    campaignId: SaveCreativeSessionRequestSaveCreativeSessionCampaignApproveOutputInputCampaignId;
+    expectedAccountId?: number | string;
+};
+
+/**
+ * Campaign scope.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignApproveOutputInputCampaignId = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignApproveOutputInputIdempotencyKey = string;
+
+/**
+ * Creative Session identifier.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignApproveOutputInputSessionId = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignFinalizeApprovedOutputInput = {
+    operation: SaveCreativeSessionRequestSaveCreativeSessionFinalizeApprovedOutputOperation;
+    sessionId: SaveCreativeSessionRequestSaveCreativeSessionCampaignFinalizeApprovedOutputInputSessionId;
+    approvedVariantId: SaveCreativeSessionRequestSaveCreativeSessionCampaignFinalizeApprovedOutputInputApprovedVariantId;
+    approvedSessionRevision: SaveCreativeSessionRequestSaveCreativeSessionCampaignFinalizeApprovedOutputInputApprovedSessionRevision;
+    /**
+     * Optional final Creative name.
+     */
+    name?: SaveCreativeSessionRequestSaveCreativeSessionCampaignFinalizeApprovedOutputInputName;
+    /**
+     * Optional finalisation message.
+     */
+    message?: SaveCreativeSessionRequestSaveCreativeSessionCampaignFinalizeApprovedOutputInputMessage;
+    scope: SaveCreativeSessionRequestSaveCreativeSessionCampaignScope;
+    campaignId: SaveCreativeSessionRequestSaveCreativeSessionCampaignFinalizeApprovedOutputInputCampaignId;
+    expectedAccountId?: number | string;
+};
+
+/**
+ * Revision that recorded the approval.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignFinalizeApprovedOutputInputApprovedSessionRevision = number;
+
+/**
+ * Exact approved output identifier.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignFinalizeApprovedOutputInputApprovedVariantId = string;
+
+/**
+ * Campaign scope.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignFinalizeApprovedOutputInputCampaignId = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignFinalizeApprovedOutputInputMessage = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignFinalizeApprovedOutputInputName = string;
+
+/**
+ * Creative Session identifier.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignFinalizeApprovedOutputInputSessionId = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignPromoteApprovedOutputInput = {
+    operation: SaveCreativeSessionRequestSaveCreativeSessionPromoteApprovedOutputOperation;
+    /**
+     * Campaign that owns the Creative Session.
+     */
+    campaignId: string;
+    /**
+     * Creative Session identifier.
+     */
+    sessionId: string;
+    /**
+     * Advertiser that will own the promoted Creative Asset.
+     */
+    advertiserId: SaveCreativeSessionRequestSaveCreativeSessionCampaignPromoteApprovedOutputInputAdvertiserId;
+    variantId: SaveCreativeSessionRequestSaveCreativeSessionPromotionVariantId;
+    /**
+     * Session revision that recorded the approval.
+     */
+    sessionRevision: number;
+    /**
+     * SHA-256 digest recorded by the exact output approval.
+     */
+    outputHash: string;
+    idempotencyKey: SaveCreativeSessionRequestSaveCreativeSessionPromotionIdempotencyKey;
+    scope: SaveCreativeSessionRequestSaveCreativeSessionCampaignScope;
+    expectedAccountId?: number | string;
+};
+
+/**
+ * Advertiser library scope.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignPromoteApprovedOutputInputAdvertiserId = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInput = {
+    operation: SaveCreativeSessionRequestSaveCreativeSessionSaveDraftOperation;
+    /**
+     * Leave unset for eligible Scope3-funded image or voice drafts unless user names an engine. See Creative Engines guide.
+     */
+    engine?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputEngine;
+    draft: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraft;
+    idempotencyKey: SaveCreativeSessionRequestSaveCreativeSessionDraftIdempotencyKey;
+    scope: SaveCreativeSessionRequestSaveCreativeSessionCampaignScope;
+    campaignId: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputCampaignId;
+    expectedAccountId?: number | string;
+};
+
+/**
+ * Campaign scope.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputCampaignId = string;
+
+/**
+ * Copy exact user brief to request.creative_brief.prompt; requested count to request.variant_count.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraft = {
+    /**
+     * Provider-neutral creative request.
+     */
+    request: {
+        [key: string]: unknown;
+    };
+    /**
+     * Creative brief title.
+     */
+    title?: string;
+    /**
+     * Intended audience persona.
+     */
+    persona?: string;
+    /**
+     * Brand for the creative.
+     */
+    brand?: string;
+    /**
+     * Creative objective.
+     */
+    objective?: string;
+    /**
+     * Creative prompt.
+     */
+    prompt?: string;
+    /**
+     * Primary locked reference asset.
+     */
+    source_asset?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftSourceAsset;
+    /**
+     * Reference assets for the session.
+     */
+    assets?: Array<SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftAssetsItem>;
+    /**
+     * Derived reference-asset renditions.
+     */
+    renditions?: Array<{
+        /**
+         * Rendition asset identifier.
+         */
+        asset_id: string;
+        /**
+         * Identifier of the source asset.
+         */
+        parent_asset_id: string;
+        /**
+         * Kind of derived rendition.
+         */
+        rendition_type: 'transparent_cutout' | 'thumbnail' | 'render_crop';
+        /**
+         * Human-readable rendition label.
+         */
+        label: string;
+        /**
+         * Rendition URL.
+         */
+        url: string;
+        /**
+         * Where the rendition originated.
+         */
+        source?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftRenditionsItemSource;
+        /**
+         * How the rendition is used in the creative.
+         */
+        role?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftRenditionsItemRole;
+        /**
+         * Rendition media type.
+         */
+        mime_type?: string;
+        /**
+         * Rendition width in pixels.
+         */
+        width?: number;
+        /**
+         * Rendition height in pixels.
+         */
+        height?: number;
+        /**
+         * Whether the rendition includes transparency.
+         */
+        alpha?: boolean;
+        /**
+         * Whether the rendition must be preserved.
+         */
+        locked_asset?: boolean;
+        /**
+         * Whether the rendition may be transformed.
+         */
+        can_transform?: boolean;
+        /**
+         * Usage rights for the rendition.
+         */
+        rights?: {
+            /**
+             * Rendition rights status.
+             */
+            status?: 'unknown' | 'owned' | 'licensed' | 'restricted' | 'expired' | 'inherited';
+            /**
+             * Permitted asset usage.
+             */
+            usage?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftRenditionsItemRightsUsage;
+            /**
+             * ISO timestamp when the asset rights expire.
+             */
+            expires_at?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftRenditionsItemRightsExpiresAt;
+            /**
+             * Rights notes.
+             */
+            notes?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftRenditionsItemRightsNotes;
+            /**
+             * Asset from which rights are inherited.
+             */
+            source_asset_id?: string;
+        };
+        /**
+         * How the rendition was produced.
+         */
+        provenance?: {
+            /**
+             * Method used to create the rendition.
+             */
+            method?: 'background_removal' | 'thumbnail_generation' | 'original_has_alpha' | 'render_crop';
+            /**
+             * Provider that created the rendition.
+             */
+            provider?: string;
+            /**
+             * Checksum of the source asset.
+             */
+            source_checksum?: string;
+            /**
+             * ISO timestamp when the rendition was created.
+             */
+            created_at?: string;
+        };
+        /**
+         * Rendition quality assessment.
+         */
+        quality?: {
+            /**
+             * Overall rendition quality status.
+             */
+            status: 'approved' | 'needs_review' | 'failed';
+            /**
+             * Individual rendition quality checks.
+             */
+            checks?: Array<{
+                /**
+                 * Quality check code.
+                 */
+                code: string;
+                /**
+                 * Quality check status.
+                 */
+                status: 'pass' | 'warn' | 'fail';
+                /**
+                 * Quality check detail.
+                 */
+                detail?: string;
+            }>;
+        };
+    }>;
+    /**
+     * Whether partial generation success is acceptable.
+     */
+    partial_success?: boolean;
+};
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftAssetsItem = {
+    /**
+     * Stable asset identifier, when known.
+     */
+    asset_id?: string;
+    /**
+     * Human-readable asset label.
+     */
+    label: string;
+    /**
+     * Asset URL.
+     */
+    url: string;
+    /**
+     * Where the asset originated.
+     */
+    source?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftAssetsItemSource;
+    /**
+     * How the asset is used in the creative.
+     */
+    role?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftAssetsItemRole;
+    /**
+     * Whether generation must preserve this asset.
+     */
+    locked_asset?: boolean;
+    /**
+     * Whether the asset may be transformed.
+     */
+    can_transform?: boolean;
+    /**
+     * Instructions for preserving the asset.
+     */
+    preservation_notes?: string;
+    /**
+     * Usage rights for the asset.
+     */
+    rights?: {
+        /**
+         * Rights status for this asset.
+         */
+        status?: 'unknown' | 'owned' | 'licensed' | 'restricted' | 'expired';
+        /**
+         * Permitted asset usage.
+         */
+        usage?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftAssetsItemRightsUsage;
+        /**
+         * ISO timestamp when the asset rights expire.
+         */
+        expires_at?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftAssetsItemRightsExpiresAt;
+        /**
+         * Rights notes.
+         */
+        notes?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftAssetsItemRightsNotes;
+    };
+    /**
+     * Known asset dimensions.
+     */
+    dimensions?: {
+        /**
+         * Width in pixels.
+         */
+        width?: number;
+        /**
+         * Height in pixels.
+         */
+        height?: number;
+        /**
+         * Duration in seconds.
+         */
+        duration_seconds?: number;
+    };
+    /**
+     * Requested render crop.
+     */
+    render_crop?: {
+        /**
+         * Normalized horizontal crop origin.
+         */
+        x: number;
+        /**
+         * Normalized vertical crop origin.
+         */
+        y: number;
+        /**
+         * Normalized crop width.
+         */
+        width: number;
+        /**
+         * Normalized crop height.
+         */
+        height: number;
+        /**
+         * Crop coordinate units.
+         */
+        units?: 'normalized';
+        /**
+         * Source of the crop.
+         */
+        source?: 'user' | 'system' | 'dam' | 'product_catalog';
+        /**
+         * Crop notes.
+         */
+        notes?: string;
+    };
+    /**
+     * Asset content checksum, when available.
+     */
+    checksum?: string;
+    /**
+     * Asset media type.
+     */
+    mime_type?: string;
+};
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftAssetsItemRightsExpiresAt = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftAssetsItemRightsNotes = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftAssetsItemRightsUsage = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftAssetsItemRole = 'product' | 'logo' | 'background' | 'reference' | 'copy' | 'audio' | 'video';
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftAssetsItemSource = 'upload' | 'url' | 'dam' | 'product_catalog' | 'brand_library' | 'local' | 'generated';
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftRenditionsItemRightsExpiresAt = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftRenditionsItemRightsNotes = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftRenditionsItemRightsUsage = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftRenditionsItemRole = 'product' | 'logo' | 'background' | 'reference' | 'copy' | 'audio' | 'video';
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftRenditionsItemSource = 'upload' | 'url' | 'dam' | 'product_catalog' | 'brand_library' | 'local' | 'generated';
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftSourceAsset = {
+    /**
+     * Stable asset identifier, when known.
+     */
+    asset_id?: string;
+    /**
+     * Human-readable asset label.
+     */
+    label: string;
+    /**
+     * Asset URL.
+     */
+    url: string;
+    /**
+     * Where the asset originated.
+     */
+    source?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftSourceAssetSource;
+    /**
+     * How the asset is used in the creative.
+     */
+    role?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftSourceAssetRole;
+    /**
+     * Whether generation must preserve this asset.
+     */
+    locked_asset?: boolean;
+    /**
+     * Whether the asset may be transformed.
+     */
+    can_transform?: boolean;
+    /**
+     * Instructions for preserving the asset.
+     */
+    preservation_notes?: string;
+    /**
+     * Usage rights for the asset.
+     */
+    rights?: {
+        /**
+         * Rights status for this asset.
+         */
+        status?: 'unknown' | 'owned' | 'licensed' | 'restricted' | 'expired';
+        /**
+         * Permitted asset usage.
+         */
+        usage?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftSourceAssetRightsUsage;
+        /**
+         * ISO timestamp when the asset rights expire.
+         */
+        expires_at?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftSourceAssetRightsExpiresAt;
+        /**
+         * Rights notes.
+         */
+        notes?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftSourceAssetRightsNotes;
+    };
+    /**
+     * Known asset dimensions.
+     */
+    dimensions?: {
+        /**
+         * Width in pixels.
+         */
+        width?: number;
+        /**
+         * Height in pixels.
+         */
+        height?: number;
+        /**
+         * Duration in seconds.
+         */
+        duration_seconds?: number;
+    };
+    /**
+     * Requested render crop.
+     */
+    render_crop?: {
+        /**
+         * Normalized horizontal crop origin.
+         */
+        x: number;
+        /**
+         * Normalized vertical crop origin.
+         */
+        y: number;
+        /**
+         * Normalized crop width.
+         */
+        width: number;
+        /**
+         * Normalized crop height.
+         */
+        height: number;
+        /**
+         * Crop coordinate units.
+         */
+        units?: 'normalized';
+        /**
+         * Source of the crop.
+         */
+        source?: 'user' | 'system' | 'dam' | 'product_catalog';
+        /**
+         * Crop notes.
+         */
+        notes?: string;
+    };
+    /**
+     * Asset content checksum, when available.
+     */
+    checksum?: string;
+    /**
+     * Asset media type.
+     */
+    mime_type?: string;
+};
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftSourceAssetRightsExpiresAt = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftSourceAssetRightsNotes = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftSourceAssetRightsUsage = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftSourceAssetRole = 'product' | 'logo' | 'background' | 'reference' | 'copy' | 'audio' | 'video';
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputDraftSourceAssetSource = 'upload' | 'url' | 'dam' | 'product_catalog' | 'brand_library' | 'local' | 'generated';
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSaveDraftInputEngine = {
+    /**
+     * Saved Creative Engine identifier.
+     */
+    engineId: string;
+    /**
+     * Saved engine connection identifier.
+     */
+    connectionId: string;
+};
+
 export type SaveCreativeSessionRequestSaveCreativeSessionCampaignScope = 'campaign';
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSelectOutputInput = {
+    operation: SaveCreativeSessionRequestSaveCreativeSessionSelectOutputOperation;
+    sessionId: SaveCreativeSessionRequestSaveCreativeSessionCampaignSelectOutputInputSessionId;
+    variantId: SaveCreativeSessionRequestSaveCreativeSessionSelectVariantId;
+    expectedRevision: SaveCreativeSessionRequestSaveCreativeSessionSelectExpectedRevision;
+    /**
+     * Optional idempotency key for this selection.
+     */
+    idempotencyKey?: SaveCreativeSessionRequestSaveCreativeSessionCampaignSelectOutputInputIdempotencyKey;
+    scope: SaveCreativeSessionRequestSaveCreativeSessionCampaignScope;
+    campaignId: SaveCreativeSessionRequestSaveCreativeSessionCampaignSelectOutputInputCampaignId;
+    expectedAccountId?: number | string;
+};
+
+/**
+ * Campaign scope.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSelectOutputInputCampaignId = string;
+
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSelectOutputInputIdempotencyKey = string;
+
+/**
+ * Creative Session identifier.
+ */
+export type SaveCreativeSessionRequestSaveCreativeSessionCampaignSelectOutputInputSessionId = string;
 
 /**
  * Idempotency key for this draft save.
@@ -15588,11 +16174,6 @@ export type SaveCreativeSessionRequestSaveCreativeSessionSelectOutputOperation =
  * Exact generated output to select.
  */
 export type SaveCreativeSessionRequestSaveCreativeSessionSelectVariantId = string;
-
-/**
- * Creative Session identifier.
- */
-export type SaveCreativeSessionRequestSessionId = string;
 
 export type SaveCreativeSessionResponse = SaveCreativeSessionResponses[keyof SaveCreativeSessionResponses];
 
@@ -19760,15 +20341,7 @@ export type SaveMaterialSuccessSourceRevision = number;
 export type SaveMaterialSuccessTruncated = boolean;
 
 export type SaveMediaBuyData = {
-    body: ((unknown & unknown) | (unknown & unknown) | (unknown & unknown)) & {
-        /**
-         * ID of an existing media buy to update. Returns pending_approval when the change is staged but not live yet.
-         */
-        mediaBuyId?: string;
-        /**
-         * sfp1: qualified Proposal ID from request_proposals to accept into a new DRAFT media buy.
-         */
-        fromProposalId?: string;
+    body: ({
         /**
          * Campaign to place the media buy under. Required for explicit creation.
          */
@@ -19780,11 +20353,8 @@ export type SaveMediaBuyData = {
         /**
          * Storefront ID of the seller. Required for explicit creation.
          */
-        sellerId?: string;
-        /**
-         * Products. Omit with fromProposalId; retain allocation.
-         */
-        products?: Array<{
+        sellerId: string;
+        products: Array<{
             /**
              * Qualified ID returned by discovery. Pass it unchanged.
              */
@@ -19813,1142 +20383,6 @@ export type SaveMediaBuyData = {
              * Bid in campaign currency. Required for auction products; omit for fixed-price.
              */
             bidPrice?: number;
-            /**
-             * Deprecated. Numeric codes replace names; AI-10440 removal will have at least 14 days notice.
-             */
-            targetingOverlay?: {
-                /**
-                 * Nielsen DMA groups to include.
-                 */
-                geo_metros?: Array<{
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: 'nielsen_dma' | 'uk_itl1' | 'uk_itl2' | 'eurostat_nuts2' | 'custom';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                }>;
-                /**
-                 * Nielsen DMA groups to exclude.
-                 */
-                geo_metros_exclude?: Array<{
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: 'nielsen_dma' | 'uk_itl1' | 'uk_itl2' | 'eurostat_nuts2' | 'custom';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                }>;
-                /**
-                 * Postal areas to include.
-                 */
-                geo_postal_areas?: Array<{
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'US';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('zip' | 'zip_plus_four');
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'GB';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('outward' | 'full');
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'CA';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('fsa' | 'full');
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & ('DE' | 'CH' | 'AT');
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'plz';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'FR';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'code_postal';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'AU';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'postcode';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'BR';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'cep';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'IN';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'pin';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'ZA';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'postal_code';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & string;
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'custom');
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                }>;
-                /**
-                 * Postal areas to exclude.
-                 */
-                geo_postal_areas_exclude?: Array<{
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'US';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('zip' | 'zip_plus_four');
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'GB';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('outward' | 'full');
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'CA';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('fsa' | 'full');
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & ('DE' | 'CH' | 'AT');
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'plz';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'FR';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'code_postal';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'AU';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'postcode';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'BR';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'cep';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'IN';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'pin';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & 'ZA';
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'postal_code';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string & string;
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'custom');
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                } | {
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                }>;
-                /**
-                 * Named geographic places to include.
-                 */
-                geo_places?: Array<{
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string;
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: 'geonames' | 'google_ads' | 'microsoft_ads' | string;
-                    /**
-                     * Targeting-system version.
-                     */
-                    system_version?: string;
-                    /**
-                     * Geographic place category.
-                     */
-                    place_type: 'airport' | 'borough' | 'city' | 'city_region' | 'commune' | 'county' | 'district' | 'municipality' | 'neighborhood' | 'post_town' | 'prefecture' | 'province' | 'quarter' | 'state' | 'territory' | 'ward' | string;
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                    /**
-                     * Labels keyed by targeting value ID.
-                     */
-                    value_labels?: {
-                        [key: string]: string;
-                    };
-                    /**
-                     * AdCP extension values.
-                     */
-                    ext?: {
-                        [key: string]: unknown;
-                    };
-                } & (unknown | {
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: 'geonames' | 'google_ads' | 'microsoft_ads';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values?: unknown;
-                    /**
-                     * Country code for this area.
-                     */
-                    country?: unknown;
-                    /**
-                     * Targeting-system version.
-                     */
-                    system_version?: unknown;
-                    /**
-                     * Geographic place category.
-                     */
-                    place_type?: unknown;
-                    /**
-                     * Labels keyed by targeting value ID.
-                     */
-                    value_labels?: unknown;
-                    /**
-                     * AdCP extension values.
-                     */
-                    ext?: unknown;
-                })>;
-                /**
-                 * Named geographic places to exclude.
-                 */
-                geo_places_exclude?: Array<{
-                    /**
-                     * Country code for this area.
-                     */
-                    country: string;
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: 'geonames' | 'google_ads' | 'microsoft_ads' | string;
-                    /**
-                     * Targeting-system version.
-                     */
-                    system_version?: string;
-                    /**
-                     * Geographic place category.
-                     */
-                    place_type: 'airport' | 'borough' | 'city' | 'city_region' | 'commune' | 'county' | 'district' | 'municipality' | 'neighborhood' | 'post_town' | 'prefecture' | 'province' | 'quarter' | 'state' | 'territory' | 'ward' | string;
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values: Array<string>;
-                    /**
-                     * Labels keyed by targeting value ID.
-                     */
-                    value_labels?: {
-                        [key: string]: string;
-                    };
-                    /**
-                     * AdCP extension values.
-                     */
-                    ext?: {
-                        [key: string]: unknown;
-                    };
-                } & (unknown | {
-                    /**
-                     * Targeting system identifier.
-                     */
-                    system: 'geonames' | 'google_ads' | 'microsoft_ads';
-                    /**
-                     * Values in this targeting system.
-                     */
-                    values?: unknown;
-                    /**
-                     * Country code for this area.
-                     */
-                    country?: unknown;
-                    /**
-                     * Targeting-system version.
-                     */
-                    system_version?: unknown;
-                    /**
-                     * Geographic place category.
-                     */
-                    place_type?: unknown;
-                    /**
-                     * Labels keyed by targeting value ID.
-                     */
-                    value_labels?: unknown;
-                    /**
-                     * AdCP extension values.
-                     */
-                    ext?: unknown;
-                })>;
-                /**
-                 * Time windows when delivery is allowed.
-                 */
-                daypart_targets?: Array<{
-                    /**
-                     * Days covered by the window.
-                     */
-                    days: Array<'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'>;
-                    /**
-                     * Window start hour.
-                     */
-                    start_hour: number;
-                    /**
-                     * Window end hour.
-                     */
-                    end_hour: number;
-                    /**
-                     * IANA timezone for the window.
-                     */
-                    timezone?: 'inventory_local' | unknown;
-                    /**
-                     * Optional human-readable label.
-                     */
-                    label?: string;
-                }>;
-                /**
-                 * AXE segment IDs to include.
-                 */
-                axe_include_segment?: string;
-                /**
-                 * AXE segment IDs to exclude.
-                 */
-                axe_exclude_segment?: string;
-                /**
-                 * Audience segment IDs to include.
-                 */
-                audience_include?: Array<string>;
-                /**
-                 * Audience segment IDs to exclude.
-                 */
-                audience_exclude?: Array<string>;
-                /**
-                 * demographics reject before dispatch.
-                 */
-                demographics?: {
-                    /**
-                     * Audience age range.
-                     */
-                    age: {
-                        /**
-                         * Minimum permitted age.
-                         */
-                        min?: number;
-                        /**
-                         * Maximum permitted age.
-                         */
-                        max?: number;
-                        /**
-                         * Whether unknown ages are included.
-                         */
-                        include_unknown: boolean;
-                        /**
-                         * Accepted age-data bases.
-                         */
-                        accepted_bases?: unknown;
-                        /**
-                         * Accepted age verification methods.
-                         */
-                        accepted_verification_methods?: unknown;
-                    } & ({
-                        /**
-                         * Minimum permitted age.
-                         */
-                        min: unknown;
-                        /**
-                         * Maximum permitted age.
-                         */
-                        max?: unknown;
-                        /**
-                         * Whether unknown ages are included.
-                         */
-                        include_unknown?: unknown;
-                        /**
-                         * Accepted age-data bases.
-                         */
-                        accepted_bases?: unknown;
-                        /**
-                         * Accepted age verification methods.
-                         */
-                        accepted_verification_methods?: unknown;
-                    } | {
-                        /**
-                         * Maximum permitted age.
-                         */
-                        max: unknown;
-                        /**
-                         * Minimum permitted age.
-                         */
-                        min?: unknown;
-                        /**
-                         * Whether unknown ages are included.
-                         */
-                        include_unknown?: unknown;
-                        /**
-                         * Accepted age-data bases.
-                         */
-                        accepted_bases?: unknown;
-                        /**
-                         * Accepted age verification methods.
-                         */
-                        accepted_verification_methods?: unknown;
-                    }) & {
-                        /**
-                         * Accepted age-data bases.
-                         */
-                        accepted_bases?: Array<'verified' | 'declared' | 'inferred'>;
-                        /**
-                         * Accepted age verification methods.
-                         */
-                        accepted_verification_methods?: Array<'facial_age_estimation' | 'id_document' | 'digital_id' | 'credit_card' | 'world_id'>;
-                        /**
-                         * Minimum permitted age.
-                         */
-                        min?: unknown;
-                        /**
-                         * Maximum permitted age.
-                         */
-                        max?: unknown;
-                        /**
-                         * Whether unknown ages are included.
-                         */
-                        include_unknown?: unknown;
-                    } & (unknown | {
-                        /**
-                         * Accepted age verification methods.
-                         */
-                        accepted_verification_methods: unknown;
-                        /**
-                         * Accepted age-data bases.
-                         */
-                        accepted_bases: unknown;
-                        /**
-                         * Minimum permitted age.
-                         */
-                        min?: unknown;
-                        /**
-                         * Maximum permitted age.
-                         */
-                        max?: unknown;
-                        /**
-                         * Whether unknown ages are included.
-                         */
-                        include_unknown?: unknown;
-                    });
-                };
-                /**
-                 * Package impression frequency limit.
-                 */
-                frequency_cap?: {
-                    /**
-                     * Whether to suppress delivery after the cap.
-                     */
-                    suppress?: {
-                        /**
-                         * Number of time units.
-                         */
-                        interval: number;
-                        /**
-                         * Time unit.
-                         */
-                        unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
-                    };
-                    /**
-                     * Suppression duration in minutes.
-                     */
-                    suppress_minutes?: number;
-                    /**
-                     * Maximum impressions in the window.
-                     */
-                    max_impressions?: number;
-                    /**
-                     * Frequency-cap time unit.
-                     */
-                    per?: 'individuals' | 'households' | 'devices' | 'accounts' | 'cookies' | 'custom';
-                    /**
-                     * Frequency-cap window size.
-                     */
-                    window?: {
-                        /**
-                         * Number of time units.
-                         */
-                        interval: number;
-                        /**
-                         * Time unit.
-                         */
-                        unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
-                    };
-                } & ({
-                    /**
-                     * Whether to suppress delivery after the cap.
-                     */
-                    suppress: unknown;
-                    /**
-                     * Suppression duration in minutes.
-                     */
-                    suppress_minutes?: unknown;
-                    /**
-                     * Maximum impressions in the window.
-                     */
-                    max_impressions?: unknown;
-                    /**
-                     * Frequency-cap time unit.
-                     */
-                    per?: unknown;
-                    /**
-                     * Frequency-cap window size.
-                     */
-                    window?: unknown;
-                } | {
-                    /**
-                     * Suppression duration in minutes.
-                     */
-                    suppress_minutes: unknown;
-                    /**
-                     * Whether to suppress delivery after the cap.
-                     */
-                    suppress?: unknown;
-                    /**
-                     * Maximum impressions in the window.
-                     */
-                    max_impressions?: unknown;
-                    /**
-                     * Frequency-cap time unit.
-                     */
-                    per?: unknown;
-                    /**
-                     * Frequency-cap window size.
-                     */
-                    window?: unknown;
-                } | {
-                    /**
-                     * Maximum impressions in the window.
-                     */
-                    max_impressions: unknown;
-                    /**
-                     * Whether to suppress delivery after the cap.
-                     */
-                    suppress?: unknown;
-                    /**
-                     * Suppression duration in minutes.
-                     */
-                    suppress_minutes?: unknown;
-                    /**
-                     * Frequency-cap time unit.
-                     */
-                    per?: unknown;
-                    /**
-                     * Frequency-cap window size.
-                     */
-                    window?: unknown;
-                }) & (unknown | {
-                    /**
-                     * Maximum impressions in the window.
-                     */
-                    max_impressions: unknown;
-                    /**
-                     * Frequency-cap time unit.
-                     */
-                    per: unknown;
-                    /**
-                     * Frequency-cap window size.
-                     */
-                    window: unknown;
-                    /**
-                     * Whether to suppress delivery after the cap.
-                     */
-                    suppress?: unknown;
-                    /**
-                     * Suppression duration in minutes.
-                     */
-                    suppress_minutes?: unknown;
-                }) & (unknown | {
-                    /**
-                     * Frequency-cap time unit.
-                     */
-                    per: unknown;
-                    /**
-                     * Maximum impressions in the window.
-                     */
-                    max_impressions: unknown;
-                    /**
-                     * Whether to suppress delivery after the cap.
-                     */
-                    suppress?: unknown;
-                    /**
-                     * Suppression duration in minutes.
-                     */
-                    suppress_minutes?: unknown;
-                    /**
-                     * Frequency-cap window size.
-                     */
-                    window?: unknown;
-                }) & (unknown | {
-                    /**
-                     * Frequency-cap window size.
-                     */
-                    window: unknown;
-                    /**
-                     * Maximum impressions in the window.
-                     */
-                    max_impressions: unknown;
-                    /**
-                     * Whether to suppress delivery after the cap.
-                     */
-                    suppress?: unknown;
-                    /**
-                     * Suppression duration in minutes.
-                     */
-                    suppress_minutes?: unknown;
-                    /**
-                     * Frequency-cap time unit.
-                     */
-                    per?: unknown;
-                });
-                /**
-                 * Property-list reference to include.
-                 */
-                property_list?: {
-                    /**
-                     * Seller agent URL.
-                     */
-                    agent_url: string;
-                    /**
-                     * Seller list ID.
-                     */
-                    list_id: string;
-                    /**
-                     * Seller authorization token.
-                     */
-                    auth_token?: string;
-                };
-                /**
-                 * Property-list reference to exclude.
-                 */
-                property_list_exclude?: {
-                    /**
-                     * Seller agent URL.
-                     */
-                    agent_url: string;
-                    /**
-                     * Seller list ID.
-                     */
-                    list_id: string;
-                    /**
-                     * Seller authorization token.
-                     */
-                    auth_token?: string;
-                };
-                /**
-                 * Collection-list reference to include.
-                 */
-                collection_list?: {
-                    /**
-                     * Seller agent URL.
-                     */
-                    agent_url: string;
-                    /**
-                     * Seller list ID.
-                     */
-                    list_id: string;
-                    /**
-                     * Seller authorization token.
-                     */
-                    auth_token?: string;
-                };
-                /**
-                 * Collection-list reference to exclude.
-                 */
-                collection_list_exclude?: {
-                    /**
-                     * Seller agent URL.
-                     */
-                    agent_url: string;
-                    /**
-                     * Seller list ID.
-                     */
-                    list_id: string;
-                    /**
-                     * Seller authorization token.
-                     */
-                    auth_token?: string;
-                };
-                /**
-                 * Placement selection reference.
-                 */
-                placement_selection?: {
-                    [key: string]: unknown;
-                };
-                /**
-                 * Collection selection reference.
-                 */
-                collection_selection?: {
-                    [key: string]: unknown;
-                };
-                /**
-                 * Minimum audience age and verification.
-                 */
-                age_restriction?: {
-                    /**
-                     * Minimum permitted age.
-                     */
-                    min: number;
-                    /**
-                     * Whether age verification is required.
-                     */
-                    verification_required?: boolean;
-                    /**
-                     * Accepted age verification methods.
-                     */
-                    accepted_methods?: Array<'facial_age_estimation' | 'id_document' | 'digital_id' | 'credit_card' | 'world_id'>;
-                };
-                /**
-                 * Device platforms to include.
-                 */
-                device_platform?: Array<'ios' | 'android' | 'windows' | 'macos' | 'linux' | 'chromeos' | 'tvos' | 'tizen' | 'webos' | 'fire_os' | 'roku_os' | 'unknown'>;
-                /**
-                 * Device platforms to exclude.
-                 */
-                device_platform_exclude?: Array<'ios' | 'android' | 'windows' | 'macos' | 'linux' | 'chromeos' | 'tvos' | 'tizen' | 'webos' | 'fire_os' | 'roku_os' | 'unknown'>;
-                /**
-                 * Device types to include.
-                 */
-                device_type?: Array<'desktop' | 'mobile' | 'tablet' | 'ctv' | 'dooh' | 'unknown'>;
-                /**
-                 * Device types to exclude.
-                 */
-                device_type_exclude?: Array<'desktop' | 'mobile' | 'tablet' | 'ctv' | 'dooh' | 'unknown'>;
-                /**
-                 * Browsers to include.
-                 */
-                browser?: Array<'chrome' | 'safari' | 'firefox' | 'edge' | 'opera' | 'samsung_internet' | 'android_webview' | 'other' | 'unknown'>;
-                /**
-                 * Browsers to exclude.
-                 */
-                browser_exclude?: Array<'chrome' | 'safari' | 'firefox' | 'edge' | 'opera' | 'samsung_internet' | 'android_webview' | 'other' | 'unknown'>;
-                /**
-                 * Store or catchment identifiers.
-                 */
-                store_catchments?: Array<{
-                    /**
-                     * Store-catchment catalog ID.
-                     */
-                    catalog_id: string;
-                    /**
-                     * Store identifiers.
-                     */
-                    store_ids?: Array<string>;
-                    /**
-                     * Catchment identifiers.
-                     */
-                    catchment_ids?: Array<string>;
-                }>;
-                /**
-                 * Proximity areas to include.
-                 */
-                geo_proximity?: Array<{
-                    /**
-                     * Latitude in decimal degrees.
-                     */
-                    lat?: number;
-                    /**
-                     * Longitude in decimal degrees.
-                     */
-                    lng?: number;
-                    /**
-                     * Optional human-readable label.
-                     */
-                    label?: string;
-                    /**
-                     * Maximum travel time.
-                     */
-                    travel_time?: {
-                        /**
-                         * Numeric value.
-                         */
-                        value: number;
-                        /**
-                         * Time unit.
-                         */
-                        unit: 'min' | 'hr';
-                    };
-                    /**
-                     * Travel mode for this area.
-                     */
-                    transport_mode?: 'walking' | 'cycling' | 'driving' | 'public_transport';
-                    /**
-                     * Radius around this area.
-                     */
-                    radius?: {
-                        /**
-                         * Numeric value.
-                         */
-                        value: number;
-                        /**
-                         * Time unit.
-                         */
-                        unit: 'km' | 'mi' | 'm';
-                    };
-                    /**
-                     * Geographic boundary.
-                     */
-                    geometry?: {
-                        /**
-                         * Geometry type.
-                         */
-                        type: 'Polygon' | 'MultiPolygon';
-                        /**
-                         * Geometry coordinates.
-                         */
-                        coordinates: Array<unknown>;
-                    };
-                    /**
-                     * AdCP extension values.
-                     */
-                    ext?: {
-                        [key: string]: unknown;
-                    };
-                }>;
-                /**
-                 * Language codes to include.
-                 */
-                language?: Array<string>;
-                /**
-                 * Keyword targets and bid prices.
-                 */
-                keyword_targets?: Array<{
-                    /**
-                     * Keyword text.
-                     */
-                    keyword: string;
-                    /**
-                     * Keyword matching mode.
-                     */
-                    match_type: 'broad' | 'phrase' | 'exact';
-                    /**
-                     * Bid price for this keyword.
-                     */
-                    bid_price?: number;
-                }>;
-                /**
-                 * Keywords to exclude.
-                 */
-                negative_keywords?: Array<{
-                    /**
-                     * Keyword text.
-                     */
-                    keyword: string;
-                    /**
-                     * Keyword matching mode.
-                     */
-                    match_type: 'broad' | 'phrase' | 'exact';
-                }>;
-                /**
-                 * Signal groups and their selection mode.
-                 */
-                signal_targeting_groups?: {
-                    /**
-                     * How child selections combine.
-                     */
-                    operator: 'all';
-                    /**
-                     * Signal groups to combine.
-                     */
-                    groups: Array<{
-                        /**
-                         * How child selections combine.
-                         */
-                        operator: 'any' | 'none';
-                        /**
-                         * Signals in this group.
-                         */
-                        signals: Array<{
-                            /**
-                             * Targeting detail.
-                             */
-                            signal_ref: SaveMediaBuyRequestProductsItemTargetingOverlaySignalTargetingGroupsGroupsItemSignalsItemSignalRef;
-                            /**
-                             * Seller pricing-option reference.
-                             */
-                            pricing_option_id?: string;
-                            /**
-                             * Signal-agent segment reference.
-                             */
-                            signal_agent_segment_id?: string;
-                            /**
-                             * Seller activation reference.
-                             */
-                            activation_key?: unknown;
-                            /**
-                             * Targeting detail.
-                             */
-                            value_type: 'binary';
-                            /**
-                             * Numeric value.
-                             */
-                            value: true;
-                            values?: never;
-                            min_value?: never;
-                            max_value?: never;
-                        } | {
-                            /**
-                             * Targeting detail.
-                             */
-                            signal_ref: SaveMediaBuyRequestProductsItemTargetingOverlaySignalTargetingGroupsGroupsItemSignalsItemSignalRef;
-                            /**
-                             * Seller pricing-option reference.
-                             */
-                            pricing_option_id?: string;
-                            /**
-                             * Signal-agent segment reference.
-                             */
-                            signal_agent_segment_id?: string;
-                            /**
-                             * Seller activation reference.
-                             */
-                            activation_key?: unknown;
-                            /**
-                             * Targeting detail.
-                             */
-                            value_type: 'categorical';
-                            /**
-                             * Values in this targeting system.
-                             */
-                            values: Array<string>;
-                            value?: never;
-                            min_value?: never;
-                            max_value?: never;
-                        } | {
-                            /**
-                             * Targeting detail.
-                             */
-                            signal_ref: SaveMediaBuyRequestProductsItemTargetingOverlaySignalTargetingGroupsGroupsItemSignalsItemSignalRef;
-                            /**
-                             * Seller pricing-option reference.
-                             */
-                            pricing_option_id?: string;
-                            /**
-                             * Signal-agent segment reference.
-                             */
-                            signal_agent_segment_id?: string;
-                            /**
-                             * Seller activation reference.
-                             */
-                            activation_key?: unknown;
-                            /**
-                             * Targeting detail.
-                             */
-                            value_type: 'numeric';
-                            /**
-                             * Targeting detail.
-                             */
-                            min_value?: number;
-                            /**
-                             * Targeting detail.
-                             */
-                            max_value?: number;
-                            value?: never;
-                            values?: never;
-                        }>;
-                    }>;
-                };
-                /**
-                 * Country codes or names.
-                 */
-                geo_countries?: Array<string>;
-                /**
-                 * Country codes or names to exclude.
-                 */
-                geo_countries_exclude?: Array<string>;
-                /**
-                 * Subdivision codes or names.
-                 */
-                geo_regions?: Array<string>;
-                /**
-                 * Subdivision codes or names to exclude.
-                 */
-                geo_regions_exclude?: Array<string>;
-            };
             /**
              * Package standards. Viewability: MRC/GroupM. IVT ceiling; others floors. Update: null/[] clears.
              */
@@ -21011,6 +20445,556 @@ export type SaveMediaBuyData = {
              * Update only: line-item handle from the read; needed for a repeated product.
              */
             lineItemRef?: string;
+            targetingOverlay?: {
+                geo_metros?: Array<{
+                    /**
+                     * Metro area classification system (e.g., 'nielsen_dma', 'uk_itl2')
+                     */
+                    system: 'nielsen_dma' | 'uk_itl1' | 'uk_itl2' | 'eurostat_nuts2' | 'custom';
+                    values: Array<string>;
+                }>;
+                geo_metros_exclude?: Array<{
+                    /**
+                     * Metro area classification system (e.g., 'nielsen_dma', 'uk_itl2')
+                     */
+                    system: 'nielsen_dma' | 'uk_itl1' | 'uk_itl2' | 'eurostat_nuts2' | 'custom';
+                    values: Array<string>;
+                }>;
+                geo_postal_areas?: Array<{
+                    country: string & 'US';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('zip' | 'zip_plus_four');
+                    values: Array<string>;
+                } | {
+                    country: string & 'GB';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('outward' | 'full');
+                    values: Array<string>;
+                } | {
+                    country: string & 'CA';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('fsa' | 'full');
+                    values: Array<string>;
+                } | {
+                    country: string & ('DE' | 'CH' | 'AT');
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'plz';
+                    values: Array<string>;
+                } | {
+                    country: string & 'FR';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'code_postal';
+                    values: Array<string>;
+                } | {
+                    country: string & 'AU';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'postcode';
+                    values: Array<string>;
+                } | {
+                    country: string & 'BR';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'cep';
+                    values: Array<string>;
+                } | {
+                    country: string & 'IN';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'pin';
+                    values: Array<string>;
+                } | {
+                    country: string & 'ZA';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'postal_code';
+                    values: Array<string>;
+                } | {
+                    country: string & string;
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'custom');
+                    values: Array<string>;
+                } | {
+                    /**
+                     * Deprecated country-fused postal code system (e.g., 'us_zip', 'gb_outward'). Prefer country + postal-system.
+                     */
+                    system: 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz';
+                    values: Array<string>;
+                }>;
+                geo_postal_areas_exclude?: Array<{
+                    country: string & 'US';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('zip' | 'zip_plus_four');
+                    values: Array<string>;
+                } | {
+                    country: string & 'GB';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('outward' | 'full');
+                    values: Array<string>;
+                } | {
+                    country: string & 'CA';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('fsa' | 'full');
+                    values: Array<string>;
+                } | {
+                    country: string & ('DE' | 'CH' | 'AT');
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'plz';
+                    values: Array<string>;
+                } | {
+                    country: string & 'FR';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'code_postal';
+                    values: Array<string>;
+                } | {
+                    country: string & 'AU';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'postcode';
+                    values: Array<string>;
+                } | {
+                    country: string & 'BR';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'cep';
+                    values: Array<string>;
+                } | {
+                    country: string & 'IN';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'pin';
+                    values: Array<string>;
+                } | {
+                    country: string & 'ZA';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'postal_code';
+                    values: Array<string>;
+                } | {
+                    country: string & string;
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'custom');
+                    values: Array<string>;
+                } | {
+                    /**
+                     * Deprecated country-fused postal code system (e.g., 'us_zip', 'gb_outward'). Prefer country + postal-system.
+                     */
+                    system: 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz';
+                    values: Array<string>;
+                }>;
+                geo_places?: Array<{
+                    /**
+                     * ISO 3166-1 alpha-2 country code containing the place.
+                     */
+                    country: string;
+                    system: 'geonames' | 'google_ads' | 'microsoft_ads' | string;
+                    /**
+                     * Optional exact catalog version from the seller's declared supported_versions. When omitted, the seller applies catalog.current_version and MUST echo that version on persisted package state.
+                     */
+                    system_version?: string;
+                    place_type: 'airport' | 'borough' | 'city' | 'city_region' | 'commune' | 'county' | 'district' | 'municipality' | 'neighborhood' | 'post_town' | 'prefecture' | 'province' | 'quarter' | 'state' | 'territory' | 'ward' | string;
+                    values: Array<string>;
+                    value_labels?: {
+                        [key: string]: string;
+                    };
+                    ext?: {
+                        [key: string]: unknown;
+                    };
+                } & (unknown | {
+                    system: 'geonames' | 'google_ads' | 'microsoft_ads';
+                    values?: unknown;
+                })>;
+                geo_places_exclude?: Array<{
+                    /**
+                     * ISO 3166-1 alpha-2 country code containing the place.
+                     */
+                    country: string;
+                    system: 'geonames' | 'google_ads' | 'microsoft_ads' | string;
+                    /**
+                     * Optional exact catalog version from the seller's declared supported_versions. When omitted, the seller applies catalog.current_version and MUST echo that version on persisted package state.
+                     */
+                    system_version?: string;
+                    place_type: 'airport' | 'borough' | 'city' | 'city_region' | 'commune' | 'county' | 'district' | 'municipality' | 'neighborhood' | 'post_town' | 'prefecture' | 'province' | 'quarter' | 'state' | 'territory' | 'ward' | string;
+                    values: Array<string>;
+                    value_labels?: {
+                        [key: string]: string;
+                    };
+                    ext?: {
+                        [key: string]: unknown;
+                    };
+                } & (unknown | {
+                    system: 'geonames' | 'google_ads' | 'microsoft_ads';
+                    values?: unknown;
+                })>;
+                daypart_targets?: Array<{
+                    days: Array<'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'>;
+                    /**
+                     * Start hour (inclusive), 0-23 in 24-hour format. 0 = midnight, 6 = 6:00am, 18 = 6:00pm.
+                     */
+                    start_hour: number;
+                    /**
+                     * End hour (exclusive), 1-24 in 24-hour format. 10 = 10:00am, 24 = midnight. Must be greater than start_hour.
+                     */
+                    end_hour: number;
+                    timezone?: 'inventory_local' | string;
+                    /**
+                     * Optional human-readable name for this time window (e.g., 'Morning Drive', 'Prime Time')
+                     */
+                    label?: string;
+                }>;
+                /**
+                 * Deprecated: Use TMP provider fields instead. AXE segment ID to include for targeting.
+                 */
+                axe_include_segment?: string;
+                /**
+                 * Deprecated: Use TMP provider fields instead. AXE segment ID to exclude from targeting.
+                 */
+                axe_exclude_segment?: string;
+                audience_include?: Array<string>;
+                audience_exclude?: Array<string>;
+                demographics?: {
+                    age: {
+                        /**
+                         * Inclusive minimum age in completed years. Omit for an open lower bound.
+                         */
+                        min?: number;
+                        /**
+                         * Inclusive maximum age in completed years. Omit for an open upper bound.
+                         */
+                        max?: number;
+                        /**
+                         * Whether delivery to people whose age is unavailable is part of this predicate. This field has no default and MUST be supplied.
+                         */
+                        include_unknown: boolean;
+                    } & ({
+                        min: unknown;
+                        [key: string]: unknown;
+                    } | {
+                        max: unknown;
+                        [key: string]: unknown;
+                    }) & {
+                        accepted_bases?: Array<'verified' | 'declared' | 'inferred'>;
+                        accepted_verification_methods?: Array<'facial_age_estimation' | 'id_document' | 'digital_id' | 'credit_card' | 'world_id'>;
+                        [key: string]: unknown;
+                    } & (unknown | {
+                        accepted_verification_methods: unknown;
+                        accepted_bases: unknown;
+                    });
+                };
+                frequency_cap?: {
+                    suppress?: {
+                        /**
+                         * Number of time units. Must be 1 when unit is 'campaign'.
+                         */
+                        interval: number;
+                        /**
+                         * Time unit. 'seconds' for sub-minute precision. 'campaign' spans the full campaign flight.
+                         */
+                        unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+                    };
+                    /**
+                     * Deprecated — use suppress instead. Cooldown period in minutes between consecutive exposures to the same entity (e.g. 60 for a 1-hour cooldown).
+                     */
+                    suppress_minutes?: number;
+                    /**
+                     * Maximum number of impressions per entity per window. For duration windows, implementations typically use a rolling window. campaign applies across the owning field's full flight: the package flight for a targeting overlay, or the MediaBuy flight for a root cap.
+                     */
+                    max_impressions?: number;
+                    /**
+                     * Entity granularity for impression counting. Required when max_impressions is set.
+                     */
+                    per?: 'individuals' | 'households' | 'devices' | 'accounts' | 'cookies' | 'custom';
+                    window?: {
+                        /**
+                         * Number of time units. Must be 1 when unit is 'campaign'.
+                         */
+                        interval: number;
+                        /**
+                         * Time unit. 'seconds' for sub-minute precision. 'campaign' spans the full campaign flight.
+                         */
+                        unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+                    };
+                } & ({
+                    suppress: unknown;
+                    [key: string]: unknown;
+                } | {
+                    suppress_minutes: unknown;
+                    [key: string]: unknown;
+                } | {
+                    max_impressions: unknown;
+                    [key: string]: unknown;
+                }) & (unknown | {
+                    max_impressions: unknown;
+                    per: unknown;
+                    window: unknown;
+                    [key: string]: unknown;
+                }) & (unknown | {
+                    per: unknown;
+                    max_impressions: unknown;
+                    [key: string]: unknown;
+                }) & (unknown | {
+                    window: unknown;
+                    max_impressions: unknown;
+                    [key: string]: unknown;
+                });
+                property_list?: {
+                    /**
+                     * URL of the agent managing the property list
+                     */
+                    agent_url: string;
+                    /**
+                     * Identifier for the property list within the agent
+                     */
+                    list_id: string;
+                    /**
+                     * JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.
+                     */
+                    auth_token?: string;
+                };
+                property_list_exclude?: {
+                    /**
+                     * URL of the agent managing the property list
+                     */
+                    agent_url: string;
+                    /**
+                     * Identifier for the property list within the agent
+                     */
+                    list_id: string;
+                    /**
+                     * JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.
+                     */
+                    auth_token?: string;
+                };
+                collection_list?: {
+                    /**
+                     * URL of the agent managing the collection list
+                     */
+                    agent_url: string;
+                    /**
+                     * Identifier for the collection list within the agent
+                     */
+                    list_id: string;
+                    /**
+                     * JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.
+                     */
+                    auth_token?: string;
+                };
+                collection_list_exclude?: {
+                    /**
+                     * URL of the agent managing the collection list
+                     */
+                    agent_url: string;
+                    /**
+                     * Identifier for the collection list within the agent
+                     */
+                    list_id: string;
+                    /**
+                     * JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.
+                     */
+                    auth_token?: string;
+                };
+                placement_selection?: {
+                    [key: string]: unknown;
+                };
+                collection_selection?: {
+                    [key: string]: unknown;
+                };
+                age_restriction?: {
+                    /**
+                     * Minimum age required
+                     */
+                    min: number;
+                    /**
+                     * Whether verified age (not inferred) is required for compliance
+                     */
+                    verification_required?: boolean;
+                    accepted_methods?: Array<'facial_age_estimation' | 'id_document' | 'digital_id' | 'credit_card' | 'world_id'>;
+                };
+                device_platform?: Array<'ios' | 'android' | 'windows' | 'macos' | 'linux' | 'chromeos' | 'tvos' | 'tizen' | 'webos' | 'fire_os' | 'roku_os' | 'unknown'>;
+                device_platform_exclude?: Array<'ios' | 'android' | 'windows' | 'macos' | 'linux' | 'chromeos' | 'tvos' | 'tizen' | 'webos' | 'fire_os' | 'roku_os' | 'unknown'>;
+                device_type?: Array<'desktop' | 'mobile' | 'tablet' | 'ctv' | 'dooh' | 'unknown'>;
+                device_type_exclude?: Array<'desktop' | 'mobile' | 'tablet' | 'ctv' | 'dooh' | 'unknown'>;
+                browser?: Array<'chrome' | 'safari' | 'firefox' | 'edge' | 'opera' | 'samsung_internet' | 'android_webview' | 'other' | 'unknown'>;
+                browser_exclude?: Array<'chrome' | 'safari' | 'firefox' | 'edge' | 'opera' | 'samsung_internet' | 'android_webview' | 'other' | 'unknown'>;
+                store_catchments?: Array<{
+                    /**
+                     * Synced store-type catalog ID from sync_catalogs.
+                     */
+                    catalog_id: string;
+                    store_ids?: Array<string>;
+                    catchment_ids?: Array<string>;
+                }>;
+                geo_proximity?: Array<unknown & {
+                    /**
+                     * Latitude in decimal degrees (WGS 84). Required for travel_time and radius methods.
+                     */
+                    lat?: number;
+                    /**
+                     * Longitude in decimal degrees (WGS 84). Required for travel_time and radius methods.
+                     */
+                    lng?: number;
+                    /**
+                     * Human-readable label for this entry (e.g., 'Düsseldorf', 'Heathrow Airport', 'Primary trade area').
+                     */
+                    label?: string;
+                    travel_time?: {
+                        /**
+                         * Travel time limit.
+                         */
+                        value: number;
+                        /**
+                         * Time unit for isochrone (travel-time catchment) calculations.
+                         */
+                        unit: 'min' | 'hr';
+                    };
+                    /**
+                     * Transportation mode for isochrone calculation. Required when travel_time is provided.
+                     */
+                    transport_mode?: 'walking' | 'cycling' | 'driving' | 'public_transport';
+                    radius?: {
+                        /**
+                         * Radius distance.
+                         */
+                        value: number;
+                        /**
+                         * Distance unit.
+                         */
+                        unit: 'km' | 'mi' | 'm';
+                    };
+                    geometry?: {
+                        /**
+                         * GeoJSON geometry type.
+                         */
+                        type: 'Polygon' | 'MultiPolygon';
+                        coordinates: Array<unknown>;
+                    };
+                    ext?: {
+                        [key: string]: unknown;
+                    };
+                }>;
+                language?: Array<string>;
+                keyword_targets?: Array<{
+                    /**
+                     * The keyword to target
+                     */
+                    keyword: string;
+                    /**
+                     * Keyword targeting match type. broad: ads may serve on queries semantically related to the keyword. phrase: ads serve when the query contains the keyword phrase. exact: ads serve only when the query matches the keyword exactly.
+                     */
+                    match_type: 'broad' | 'phrase' | 'exact';
+                    /**
+                     * Per-keyword bid price, denominated in the same currency as the package's pricing option. Overrides the package-level bid_price for this keyword. Inherits the max_bid interpretation from the pricing option: when max_bid is true, this is the keyword's bid ceiling; when false, this is the exact bid. If omitted, the package bid_price applies.
+                     */
+                    bid_price?: number;
+                }>;
+                negative_keywords?: Array<{
+                    /**
+                     * The keyword to exclude
+                     */
+                    keyword: string;
+                    /**
+                     * Keyword targeting match type. broad: ads may serve on queries semantically related to the keyword. phrase: ads serve when the query contains the keyword phrase. exact: ads serve only when the query matches the keyword exactly.
+                     */
+                    match_type: 'broad' | 'phrase' | 'exact';
+                }>;
+                /**
+                 * Signal groups and their selection mode.
+                 */
+                signal_targeting_groups?: {
+                    /**
+                     * All groups must match.
+                     */
+                    operator: 'all';
+                    /**
+                     * ANDed Signal groups.
+                     */
+                    groups: Array<{
+                        /**
+                         * Include any, or exclude all.
+                         */
+                        operator: 'any' | 'none';
+                        /**
+                         * Signals in this group.
+                         */
+                        signals: Array<{
+                            /**
+                             * Returned Signal reference.
+                             */
+                            signal_ref: SaveMediaBuyRequestProductsItemTargetingOverlaySignalTargetingGroupsGroupsItemSignalsItemSignalRef;
+                            /**
+                             * Returned pricing option ID.
+                             */
+                            pricing_option_id?: string;
+                            /**
+                             * Returned execution handle.
+                             */
+                            signal_agent_segment_id?: string;
+                            /**
+                             * Returned activation key.
+                             */
+                            activation_key?: unknown;
+                            /**
+                             * Binary Signal.
+                             */
+                            value_type: 'binary';
+                            /**
+                             * True; use group operator to exclude.
+                             */
+                            value: true;
+                            values?: never;
+                            min_value?: never;
+                            max_value?: never;
+                        } | {
+                            /**
+                             * Returned Signal reference.
+                             */
+                            signal_ref: SaveMediaBuyRequestProductsItemTargetingOverlaySignalTargetingGroupsGroupsItemSignalsItemSignalRef;
+                            /**
+                             * Returned pricing option ID.
+                             */
+                            pricing_option_id?: string;
+                            /**
+                             * Returned execution handle.
+                             */
+                            signal_agent_segment_id?: string;
+                            /**
+                             * Returned activation key.
+                             */
+                            activation_key?: unknown;
+                            /**
+                             * Categorical Signal.
+                             */
+                            value_type: 'categorical';
+                            /**
+                             * Returned category values.
+                             */
+                            values: Array<string>;
+                            value?: never;
+                            min_value?: never;
+                            max_value?: never;
+                        } | {
+                            /**
+                             * Returned Signal reference.
+                             */
+                            signal_ref: SaveMediaBuyRequestProductsItemTargetingOverlaySignalTargetingGroupsGroupsItemSignalsItemSignalRef;
+                            /**
+                             * Returned pricing option ID.
+                             */
+                            pricing_option_id?: string;
+                            /**
+                             * Returned execution handle.
+                             */
+                            signal_agent_segment_id?: string;
+                            /**
+                             * Returned activation key.
+                             */
+                            activation_key?: unknown;
+                            /**
+                             * Numeric Signal.
+                             */
+                            value_type: 'numeric';
+                            /**
+                             * Returned lower bound.
+                             */
+                            min_value?: number;
+                            /**
+                             * Returned upper bound.
+                             */
+                            max_value?: number;
+                            value?: never;
+                            values?: never;
+                        }>;
+                    }>;
+                };
+                /**
+                 * Country codes or names.
+                 */
+                geo_countries?: Array<string>;
+                /**
+                 * Excluded country codes or names.
+                 */
+                geo_countries_exclude?: Array<string>;
+                /**
+                 * Subdivision codes or names.
+                 */
+                geo_regions?: Array<string>;
+                /**
+                 * Excluded subdivision codes or names.
+                 */
+                geo_regions_exclude?: Array<string>;
+            };
         }>;
         /**
          * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
@@ -21232,10 +21216,944 @@ export type SaveMediaBuyData = {
          * Creation: returned productQueryId. Update: deduplication key. Unused with fromProposalId.
          */
         idempotencyKey: string;
+        expectedAccountId?: number | string;
+        mediaBuyId?: never;
+        fromProposalId?: never;
+    } | {
+        /**
+         * ID of an existing media buy to update. Returns pending_approval when the change is staged but not live yet.
+         */
+        mediaBuyId: string;
+        /**
+         * Campaign to place the media buy under. Required for explicit creation.
+         */
+        campaignId?: string;
+        /**
+         * channelGroupId for a new buy. Required when campaign has channelGroups; invalid on updates.
+         */
+        channelGroupId?: string;
+        products?: Array<{
+            /**
+             * Qualified ID returned by discovery. Pass it unchanged.
+             */
+            productId: string;
+            /**
+             * Create only: give repeats of one productId distinct values to add separate line items.
+             */
+            selectionId?: string;
+            /**
+             * Returned inventory source ID. Pass unchanged when present to keep modular products unambiguous.
+             */
+            inventorySourceId?: string;
+            /**
+             * Returned sales agent ID. Pass unchanged when present to preserve the selected seller route.
+             */
+            salesAgentId?: string;
+            /**
+             * Returned Product pricing option ID. Pass unchanged when present.
+             */
+            pricingOptionId?: string;
+            /**
+             * Per-product budget. Required with fixed allocation; refused with seller_optimized.
+             */
+            budget?: number;
+            /**
+             * Bid in campaign currency. Required for auction products; omit for fixed-price.
+             */
+            bidPrice?: number;
+            /**
+             * Package standards. Viewability: MRC/GroupM. IVT ceiling; others floors. Update: null/[] clears.
+             */
+            performanceStandards?: Array<{
+                /**
+                 * Quality metric to commit.
+                 */
+                metric: 'viewability' | 'ivt' | 'completion_rate' | 'brand_safety' | 'attention_score';
+                /**
+                 * Value from 0 to 1.
+                 */
+                threshold: number;
+                /**
+                 * Required for viewability only.
+                 */
+                standard?: 'MRC' | 'GroupM';
+                /**
+                 * Optional measurement vendor.
+                 */
+                vendor?: {
+                    /**
+                     * Vendor brand domain.
+                     */
+                    domain: string;
+                    /**
+                     * Optional vendor brand ID.
+                     */
+                    brand_id?: string;
+                };
+            }> | null;
+            /**
+             * Meta Pixel/Dataset ID for conversion tracking. Required for Meta Sales; no auto-select.
+             */
+            pixelId?: string;
+            /**
+             * Meta Page for ad placements. Required when the account has more than one authorized Page; auto-selected otherwise.
+             */
+            pageId?: string;
+            /**
+             * Meta Instagram Business Account ID for Instagram Direct destinations. Required when the account has more than one authorized Instagram account.
+             */
+            instagramActorId?: string;
+            /**
+             * Meta welcome-message flow ID for lead-to-message destinations (Messenger, Instagram Direct, WhatsApp). Required for these products; never auto-selected.
+             */
+            welcomeMessageFlowId?: string;
+            /**
+             * Provider-native lead form ID. For Meta Instant Forms, must belong to the selected Page.
+             */
+            leadFormId?: string;
+            /**
+             * Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.
+             */
+            appId?: string;
+            /**
+             * Update only: true removes this line item.
+             */
+            remove?: boolean;
+            /**
+             * Update only: line-item handle from the read; needed for a repeated product.
+             */
+            lineItemRef?: string;
+            targetingOverlay?: {
+                geo_metros?: Array<{
+                    /**
+                     * Metro area classification system (e.g., 'nielsen_dma', 'uk_itl2')
+                     */
+                    system: 'nielsen_dma' | 'uk_itl1' | 'uk_itl2' | 'eurostat_nuts2' | 'custom';
+                    values: Array<string>;
+                }> | null;
+                geo_metros_exclude?: Array<{
+                    /**
+                     * Metro area classification system (e.g., 'nielsen_dma', 'uk_itl2')
+                     */
+                    system: 'nielsen_dma' | 'uk_itl1' | 'uk_itl2' | 'eurostat_nuts2' | 'custom';
+                    values: Array<string>;
+                }> | null;
+                geo_postal_areas?: Array<{
+                    country: string & 'US';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('zip' | 'zip_plus_four');
+                    values: Array<string>;
+                } | {
+                    country: string & 'GB';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('outward' | 'full');
+                    values: Array<string>;
+                } | {
+                    country: string & 'CA';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('fsa' | 'full');
+                    values: Array<string>;
+                } | {
+                    country: string & ('DE' | 'CH' | 'AT');
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'plz';
+                    values: Array<string>;
+                } | {
+                    country: string & 'FR';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'code_postal';
+                    values: Array<string>;
+                } | {
+                    country: string & 'AU';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'postcode';
+                    values: Array<string>;
+                } | {
+                    country: string & 'BR';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'cep';
+                    values: Array<string>;
+                } | {
+                    country: string & 'IN';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'pin';
+                    values: Array<string>;
+                } | {
+                    country: string & 'ZA';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'postal_code';
+                    values: Array<string>;
+                } | {
+                    country: string & string;
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'custom');
+                    values: Array<string>;
+                } | {
+                    /**
+                     * Deprecated country-fused postal code system (e.g., 'us_zip', 'gb_outward'). Prefer country + postal-system.
+                     */
+                    system: 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz';
+                    values: Array<string>;
+                }> | null;
+                geo_postal_areas_exclude?: Array<{
+                    country: string & 'US';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('zip' | 'zip_plus_four');
+                    values: Array<string>;
+                } | {
+                    country: string & 'GB';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('outward' | 'full');
+                    values: Array<string>;
+                } | {
+                    country: string & 'CA';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('fsa' | 'full');
+                    values: Array<string>;
+                } | {
+                    country: string & ('DE' | 'CH' | 'AT');
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'plz';
+                    values: Array<string>;
+                } | {
+                    country: string & 'FR';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'code_postal';
+                    values: Array<string>;
+                } | {
+                    country: string & 'AU';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'postcode';
+                    values: Array<string>;
+                } | {
+                    country: string & 'BR';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'cep';
+                    values: Array<string>;
+                } | {
+                    country: string & 'IN';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'pin';
+                    values: Array<string>;
+                } | {
+                    country: string & 'ZA';
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & 'postal_code';
+                    values: Array<string>;
+                } | {
+                    country: string & string;
+                    system: ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'zip' | 'zip_plus_four' | 'outward' | 'full' | 'fsa' | 'plz' | 'code_postal' | 'postcode' | 'cep' | 'pin' | 'custom' | 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz') & ('postal_code' | 'custom');
+                    values: Array<string>;
+                } | {
+                    /**
+                     * Deprecated country-fused postal code system (e.g., 'us_zip', 'gb_outward'). Prefer country + postal-system.
+                     */
+                    system: 'us_zip' | 'us_zip_plus_four' | 'gb_outward' | 'gb_full' | 'ca_fsa' | 'ca_full' | 'de_plz' | 'fr_code_postal' | 'au_postcode' | 'ch_plz' | 'at_plz';
+                    values: Array<string>;
+                }> | null;
+                geo_places?: Array<{
+                    /**
+                     * ISO 3166-1 alpha-2 country code containing the place.
+                     */
+                    country: string;
+                    system: 'geonames' | 'google_ads' | 'microsoft_ads' | string;
+                    /**
+                     * Optional exact catalog version from the seller's declared supported_versions. When omitted, the seller applies catalog.current_version and MUST echo that version on persisted package state.
+                     */
+                    system_version?: string;
+                    place_type: 'airport' | 'borough' | 'city' | 'city_region' | 'commune' | 'county' | 'district' | 'municipality' | 'neighborhood' | 'post_town' | 'prefecture' | 'province' | 'quarter' | 'state' | 'territory' | 'ward' | string;
+                    values: Array<string>;
+                    value_labels?: {
+                        [key: string]: string;
+                    };
+                    ext?: {
+                        [key: string]: unknown;
+                    };
+                } & (unknown | {
+                    system: 'geonames' | 'google_ads' | 'microsoft_ads';
+                    values?: unknown;
+                })> | null;
+                geo_places_exclude?: Array<{
+                    /**
+                     * ISO 3166-1 alpha-2 country code containing the place.
+                     */
+                    country: string;
+                    system: 'geonames' | 'google_ads' | 'microsoft_ads' | string;
+                    /**
+                     * Optional exact catalog version from the seller's declared supported_versions. When omitted, the seller applies catalog.current_version and MUST echo that version on persisted package state.
+                     */
+                    system_version?: string;
+                    place_type: 'airport' | 'borough' | 'city' | 'city_region' | 'commune' | 'county' | 'district' | 'municipality' | 'neighborhood' | 'post_town' | 'prefecture' | 'province' | 'quarter' | 'state' | 'territory' | 'ward' | string;
+                    values: Array<string>;
+                    value_labels?: {
+                        [key: string]: string;
+                    };
+                    ext?: {
+                        [key: string]: unknown;
+                    };
+                } & (unknown | {
+                    system: 'geonames' | 'google_ads' | 'microsoft_ads';
+                    values?: unknown;
+                })> | null;
+                daypart_targets?: Array<{
+                    days: Array<'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'>;
+                    /**
+                     * Start hour (inclusive), 0-23 in 24-hour format. 0 = midnight, 6 = 6:00am, 18 = 6:00pm.
+                     */
+                    start_hour: number;
+                    /**
+                     * End hour (exclusive), 1-24 in 24-hour format. 10 = 10:00am, 24 = midnight. Must be greater than start_hour.
+                     */
+                    end_hour: number;
+                    timezone?: 'inventory_local' | string;
+                    /**
+                     * Optional human-readable name for this time window (e.g., 'Morning Drive', 'Prime Time')
+                     */
+                    label?: string;
+                }> | null;
+                axe_include_segment?: string | null;
+                axe_exclude_segment?: string | null;
+                audience_include?: Array<string> | null;
+                audience_exclude?: Array<string> | null;
+                demographics?: {
+                    age: {
+                        /**
+                         * Inclusive minimum age in completed years. Omit for an open lower bound.
+                         */
+                        min?: number;
+                        /**
+                         * Inclusive maximum age in completed years. Omit for an open upper bound.
+                         */
+                        max?: number;
+                        /**
+                         * Whether delivery to people whose age is unavailable is part of this predicate. This field has no default and MUST be supplied.
+                         */
+                        include_unknown: boolean;
+                    } & ({
+                        min: unknown;
+                        [key: string]: unknown;
+                    } | {
+                        max: unknown;
+                        [key: string]: unknown;
+                    }) & {
+                        accepted_bases?: Array<'verified' | 'declared' | 'inferred'>;
+                        accepted_verification_methods?: Array<'facial_age_estimation' | 'id_document' | 'digital_id' | 'credit_card' | 'world_id'>;
+                        [key: string]: unknown;
+                    } & (unknown | {
+                        accepted_verification_methods: unknown;
+                        accepted_bases: unknown;
+                    });
+                } | null;
+                frequency_cap?: ({
+                    suppress?: {
+                        /**
+                         * Number of time units. Must be 1 when unit is 'campaign'.
+                         */
+                        interval: number;
+                        /**
+                         * Time unit. 'seconds' for sub-minute precision. 'campaign' spans the full campaign flight.
+                         */
+                        unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+                    };
+                    /**
+                     * Deprecated — use suppress instead. Cooldown period in minutes between consecutive exposures to the same entity (e.g. 60 for a 1-hour cooldown).
+                     */
+                    suppress_minutes?: number;
+                    /**
+                     * Maximum number of impressions per entity per window. For duration windows, implementations typically use a rolling window. campaign applies across the owning field's full flight: the package flight for a targeting overlay, or the MediaBuy flight for a root cap.
+                     */
+                    max_impressions?: number;
+                    /**
+                     * Entity granularity for impression counting. Required when max_impressions is set.
+                     */
+                    per?: 'individuals' | 'households' | 'devices' | 'accounts' | 'cookies' | 'custom';
+                    window?: {
+                        /**
+                         * Number of time units. Must be 1 when unit is 'campaign'.
+                         */
+                        interval: number;
+                        /**
+                         * Time unit. 'seconds' for sub-minute precision. 'campaign' spans the full campaign flight.
+                         */
+                        unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+                    };
+                } & ({
+                    suppress: unknown;
+                    [key: string]: unknown;
+                } | {
+                    suppress_minutes: unknown;
+                    [key: string]: unknown;
+                } | {
+                    max_impressions: unknown;
+                    [key: string]: unknown;
+                }) & (unknown | {
+                    max_impressions: unknown;
+                    per: unknown;
+                    window: unknown;
+                    [key: string]: unknown;
+                }) & (unknown | {
+                    per: unknown;
+                    max_impressions: unknown;
+                    [key: string]: unknown;
+                }) & (unknown | {
+                    window: unknown;
+                    max_impressions: unknown;
+                    [key: string]: unknown;
+                })) | null;
+                property_list?: {
+                    /**
+                     * URL of the agent managing the property list
+                     */
+                    agent_url: string;
+                    /**
+                     * Identifier for the property list within the agent
+                     */
+                    list_id: string;
+                    /**
+                     * JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.
+                     */
+                    auth_token?: string;
+                } | null;
+                property_list_exclude?: {
+                    /**
+                     * URL of the agent managing the property list
+                     */
+                    agent_url: string;
+                    /**
+                     * Identifier for the property list within the agent
+                     */
+                    list_id: string;
+                    /**
+                     * JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.
+                     */
+                    auth_token?: string;
+                } | null;
+                collection_list?: {
+                    /**
+                     * URL of the agent managing the collection list
+                     */
+                    agent_url: string;
+                    /**
+                     * Identifier for the collection list within the agent
+                     */
+                    list_id: string;
+                    /**
+                     * JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.
+                     */
+                    auth_token?: string;
+                } | null;
+                collection_list_exclude?: {
+                    /**
+                     * URL of the agent managing the collection list
+                     */
+                    agent_url: string;
+                    /**
+                     * Identifier for the collection list within the agent
+                     */
+                    list_id: string;
+                    /**
+                     * JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.
+                     */
+                    auth_token?: string;
+                } | null;
+                placement_selection?: {
+                    [key: string]: unknown;
+                } | null;
+                collection_selection?: {
+                    [key: string]: unknown;
+                } | null;
+                age_restriction?: {
+                    /**
+                     * Minimum age required
+                     */
+                    min: number;
+                    /**
+                     * Whether verified age (not inferred) is required for compliance
+                     */
+                    verification_required?: boolean;
+                    accepted_methods?: Array<'facial_age_estimation' | 'id_document' | 'digital_id' | 'credit_card' | 'world_id'>;
+                } | null;
+                device_platform?: Array<'ios' | 'android' | 'windows' | 'macos' | 'linux' | 'chromeos' | 'tvos' | 'tizen' | 'webos' | 'fire_os' | 'roku_os' | 'unknown'> | null;
+                device_platform_exclude?: Array<'ios' | 'android' | 'windows' | 'macos' | 'linux' | 'chromeos' | 'tvos' | 'tizen' | 'webos' | 'fire_os' | 'roku_os' | 'unknown'> | null;
+                device_type?: Array<'desktop' | 'mobile' | 'tablet' | 'ctv' | 'dooh' | 'unknown'> | null;
+                device_type_exclude?: Array<'desktop' | 'mobile' | 'tablet' | 'ctv' | 'dooh' | 'unknown'> | null;
+                browser?: Array<'chrome' | 'safari' | 'firefox' | 'edge' | 'opera' | 'samsung_internet' | 'android_webview' | 'other' | 'unknown'> | null;
+                browser_exclude?: Array<'chrome' | 'safari' | 'firefox' | 'edge' | 'opera' | 'samsung_internet' | 'android_webview' | 'other' | 'unknown'> | null;
+                store_catchments?: Array<{
+                    /**
+                     * Synced store-type catalog ID from sync_catalogs.
+                     */
+                    catalog_id: string;
+                    store_ids?: Array<string>;
+                    catchment_ids?: Array<string>;
+                }> | null;
+                geo_proximity?: Array<unknown & {
+                    /**
+                     * Latitude in decimal degrees (WGS 84). Required for travel_time and radius methods.
+                     */
+                    lat?: number;
+                    /**
+                     * Longitude in decimal degrees (WGS 84). Required for travel_time and radius methods.
+                     */
+                    lng?: number;
+                    /**
+                     * Human-readable label for this entry (e.g., 'Düsseldorf', 'Heathrow Airport', 'Primary trade area').
+                     */
+                    label?: string;
+                    travel_time?: {
+                        /**
+                         * Travel time limit.
+                         */
+                        value: number;
+                        /**
+                         * Time unit for isochrone (travel-time catchment) calculations.
+                         */
+                        unit: 'min' | 'hr';
+                    };
+                    /**
+                     * Transportation mode for isochrone calculation. Required when travel_time is provided.
+                     */
+                    transport_mode?: 'walking' | 'cycling' | 'driving' | 'public_transport';
+                    radius?: {
+                        /**
+                         * Radius distance.
+                         */
+                        value: number;
+                        /**
+                         * Distance unit.
+                         */
+                        unit: 'km' | 'mi' | 'm';
+                    };
+                    geometry?: {
+                        /**
+                         * GeoJSON geometry type.
+                         */
+                        type: 'Polygon' | 'MultiPolygon';
+                        coordinates: Array<unknown>;
+                    };
+                    ext?: {
+                        [key: string]: unknown;
+                    };
+                }> | null;
+                language?: Array<string> | null;
+                keyword_targets?: Array<{
+                    /**
+                     * The keyword to target
+                     */
+                    keyword: string;
+                    /**
+                     * Keyword targeting match type. broad: ads may serve on queries semantically related to the keyword. phrase: ads serve when the query contains the keyword phrase. exact: ads serve only when the query matches the keyword exactly.
+                     */
+                    match_type: 'broad' | 'phrase' | 'exact';
+                    /**
+                     * Per-keyword bid price, denominated in the same currency as the package's pricing option. Overrides the package-level bid_price for this keyword. Inherits the max_bid interpretation from the pricing option: when max_bid is true, this is the keyword's bid ceiling; when false, this is the exact bid. If omitted, the package bid_price applies.
+                     */
+                    bid_price?: number;
+                }> | null;
+                negative_keywords?: Array<{
+                    /**
+                     * The keyword to exclude
+                     */
+                    keyword: string;
+                    /**
+                     * Keyword targeting match type. broad: ads may serve on queries semantically related to the keyword. phrase: ads serve when the query contains the keyword phrase. exact: ads serve only when the query matches the keyword exactly.
+                     */
+                    match_type: 'broad' | 'phrase' | 'exact';
+                }> | null;
+                signal_targeting_groups?: {
+                    /**
+                     * All groups must match.
+                     */
+                    operator: 'all';
+                    /**
+                     * ANDed Signal groups.
+                     */
+                    groups: Array<{
+                        /**
+                         * Include any, or exclude all.
+                         */
+                        operator: 'any' | 'none';
+                        /**
+                         * Signals in this group.
+                         */
+                        signals: Array<{
+                            /**
+                             * Returned Signal reference.
+                             */
+                            signal_ref: SaveMediaBuyRequestProductsItemTargetingOverlaySignalTargetingGroupsGroupsItemSignalsItemSignalRef;
+                            /**
+                             * Returned pricing option ID.
+                             */
+                            pricing_option_id?: string;
+                            /**
+                             * Returned execution handle.
+                             */
+                            signal_agent_segment_id?: string;
+                            /**
+                             * Returned activation key.
+                             */
+                            activation_key?: unknown;
+                            /**
+                             * Binary Signal.
+                             */
+                            value_type: 'binary';
+                            /**
+                             * True; use group operator to exclude.
+                             */
+                            value: true;
+                            values?: never;
+                            min_value?: never;
+                            max_value?: never;
+                        } | {
+                            /**
+                             * Returned Signal reference.
+                             */
+                            signal_ref: SaveMediaBuyRequestProductsItemTargetingOverlaySignalTargetingGroupsGroupsItemSignalsItemSignalRef;
+                            /**
+                             * Returned pricing option ID.
+                             */
+                            pricing_option_id?: string;
+                            /**
+                             * Returned execution handle.
+                             */
+                            signal_agent_segment_id?: string;
+                            /**
+                             * Returned activation key.
+                             */
+                            activation_key?: unknown;
+                            /**
+                             * Categorical Signal.
+                             */
+                            value_type: 'categorical';
+                            /**
+                             * Returned category values.
+                             */
+                            values: Array<string>;
+                            value?: never;
+                            min_value?: never;
+                            max_value?: never;
+                        } | {
+                            /**
+                             * Returned Signal reference.
+                             */
+                            signal_ref: SaveMediaBuyRequestProductsItemTargetingOverlaySignalTargetingGroupsGroupsItemSignalsItemSignalRef;
+                            /**
+                             * Returned pricing option ID.
+                             */
+                            pricing_option_id?: string;
+                            /**
+                             * Returned execution handle.
+                             */
+                            signal_agent_segment_id?: string;
+                            /**
+                             * Returned activation key.
+                             */
+                            activation_key?: unknown;
+                            /**
+                             * Numeric Signal.
+                             */
+                            value_type: 'numeric';
+                            /**
+                             * Returned lower bound.
+                             */
+                            min_value?: number;
+                            /**
+                             * Returned upper bound.
+                             */
+                            max_value?: number;
+                            value?: never;
+                            values?: never;
+                        }>;
+                    }>;
+                } | null;
+                /**
+                 * Included ISO 3166-1 alpha-2 country codes.
+                 */
+                geo_countries?: Array<string> | null;
+                /**
+                 * Excluded ISO 3166-1 alpha-2 country codes.
+                 */
+                geo_countries_exclude?: Array<string> | null;
+                /**
+                 * Included ISO 3166-2 subdivision codes.
+                 */
+                geo_regions?: Array<string> | null;
+                /**
+                 * Excluded ISO 3166-2 subdivision codes.
+                 */
+                geo_regions_exclude?: Array<string> | null;
+            };
+        }>;
+        /**
+         * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         */
+        budget?: {
+            /**
+             * Total budget amount.
+             */
+            total: number;
+            /**
+             * ISO 4217 currency code (e.g. USD).
+             */
+            currency: string;
+        };
+        /**
+         * Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.
+         */
+        budgetAllocation?: {
+            /**
+             * Keep the stated per-package budgets.
+             */
+            mode: 'fixed';
+            optimization_goals?: never;
+        } | {
+            /**
+             * Let the seller distribute one campaign total.
+             */
+            mode: 'seller_optimized';
+            /**
+             * Goals that guide the seller allocation.
+             */
+            optimization_goals: Array<{
+                /**
+                 * Optimize a delivery metric.
+                 */
+                kind: 'metric';
+                /**
+                 * Delivery metric to optimize.
+                 */
+                metric: 'clicks' | 'views' | 'completed_views' | 'viewed_seconds' | 'attention_seconds' | 'attention_score' | 'engagements' | 'follows' | 'saves' | 'profile_visits' | 'reach';
+                /**
+                 * Reach unit; required for reach.
+                 */
+                reach_unit?: 'individuals' | 'households' | 'devices' | 'accounts' | 'cookies' | 'custom';
+                /**
+                 * Desired exposure frequency and window.
+                 */
+                target_frequency?: {
+                    /**
+                     * Minimum exposures in the window.
+                     */
+                    min?: number;
+                    /**
+                     * Maximum exposures in the window.
+                     */
+                    max?: number;
+                    window: SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemTargetFrequencyWindow;
+                };
+                /**
+                 * Minimum viewed seconds when optimizing views.
+                 */
+                view_duration_seconds?: SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemViewDurationSeconds;
+                /**
+                 * Optional delivery outcome target.
+                 */
+                target?: SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemTargetCostPer | SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemTargetThresholdRate;
+                /**
+                 * Goal priority; lower values take precedence.
+                 */
+                priority?: SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemPriority;
+                event_sources?: never;
+                attribution_window?: never;
+                vendor?: never;
+                metric_id?: never;
+            } | {
+                /**
+                 * Optimize tracked conversion events.
+                 */
+                kind: 'event';
+                /**
+                 * Event sources for this conversion goal.
+                 */
+                event_sources: Array<{
+                    /**
+                     * Identifier of the event source.
+                     */
+                    event_source_id: string;
+                    /**
+                     * Tracked event type to optimize.
+                     */
+                    event_type: 'page_view' | 'view_content' | 'select_content' | 'select_item' | 'search' | 'share' | 'add_to_cart' | 'remove_from_cart' | 'viewed_cart' | 'add_to_wishlist' | 'initiate_checkout' | 'add_payment_info' | 'purchase' | 'refund' | 'lead' | 'qualify_lead' | 'close_convert_lead' | 'disqualify_lead' | 'complete_registration' | 'subscribe' | 'follow' | 'content_view' | 'watch_milestone' | 'start_trial' | 'app_install' | 'app_launch' | 'contact' | 'schedule' | 'donate' | 'submit_application' | 'custom';
+                    /**
+                     * Custom event name when event_type is custom.
+                     */
+                    custom_event_name?: string;
+                    /**
+                     * Event property containing its value.
+                     */
+                    value_field?: string;
+                    /**
+                     * Multiplier applied to the event value.
+                     */
+                    value_factor?: number;
+                }>;
+                /**
+                 * Optional conversion outcome target.
+                 */
+                target?: SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemTargetCostPer | {
+                    /**
+                     * Optimize value relative to ad spend.
+                     */
+                    kind: 'per_ad_spend';
+                    /**
+                     * Positive value per ad-spend target.
+                     */
+                    value: SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemTargetValue;
+                    /**
+                     * Use a minimum floor or delivery target.
+                     */
+                    strength?: 'floor' | 'target';
+                } | {
+                    /**
+                     * Maximize attributed event value.
+                     */
+                    kind: 'maximize_value';
+                };
+                /**
+                 * Optional event attribution settings.
+                 */
+                attribution_window?: {
+                    /**
+                     * Attribution window after a click.
+                     */
+                    post_click?: SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemAttributionWindowPostClick;
+                    /**
+                     * Attribution window after a view.
+                     */
+                    post_view?: SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemAttributionWindowPostView;
+                    /**
+                     * Attribution model to apply.
+                     */
+                    model?: 'last_touch' | 'first_touch' | 'linear' | 'time_decay' | 'data_driven';
+                };
+                /**
+                 * Goal priority; lower values take precedence.
+                 */
+                priority?: SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemPriority;
+                metric?: never;
+                reach_unit?: never;
+                target_frequency?: never;
+                view_duration_seconds?: never;
+                vendor?: never;
+                metric_id?: never;
+            } | {
+                /**
+                 * Optimize a vendor-defined metric.
+                 */
+                kind: 'vendor_metric';
+                /**
+                 * Vendor that owns the metric definition.
+                 */
+                vendor: {
+                    /**
+                     * Vendor domain that defines the metric.
+                     */
+                    domain: string;
+                    /**
+                     * Optional vendor brand identifier.
+                     */
+                    brand_id?: string;
+                    [key: string]: unknown;
+                };
+                /**
+                 * Vendor-defined metric identifier.
+                 */
+                metric_id: string;
+                /**
+                 * Optional vendor-metric outcome target.
+                 */
+                target?: SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemTargetCostPer | SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemTargetThresholdRate;
+                /**
+                 * Goal priority; lower values take precedence.
+                 */
+                priority?: SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemPriority;
+                metric?: never;
+                reach_unit?: never;
+                target_frequency?: never;
+                view_duration_seconds?: never;
+                event_sources?: never;
+                attribution_window?: never;
+            }>;
+        };
+        /**
+         * Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.
+         */
+        flight?: {
+            /**
+             * ISO 8601 start date-time or "asap".
+             */
+            startAt: string;
+            /**
+             * ISO 8601 end date-time.
+             */
+            endAt: string;
+        };
+        /**
+         * Update only: true archives a DRAFT, FAILED, CANCELED, or REJECTED buy (campaign unaffected). Send alone. false unsupported.
+         */
+        isArchived?: boolean;
+        /**
+         * true pauses ACTIVE; false activates PAUSED; same state unchanged. Other states refuse. Send alone.
+         */
+        isPaused?: boolean;
+        /**
+         * Update only: true irreversibly requests cancellation of one buy; send as the only change. Seller confirmation may be pending; already canceled returns unchanged. false is unsupported.
+         */
+        isCanceled?: boolean;
+        /**
+         * Creation: returned productQueryId. Update: deduplication key. Unused with fromProposalId.
+         */
+        idempotencyKey: string;
+        expectedAccountId?: number | string;
+        sellerId?: never;
+        fromProposalId?: never;
+    } | {
+        /**
+         * sfp1: qualified Proposal ID from request_proposals to accept into a new DRAFT media buy.
+         */
+        fromProposalId: string;
+        /**
+         * Campaign to place the media buy under. Required for explicit creation.
+         */
+        campaignId?: string;
+        /**
+         * channelGroupId for a new buy. Required when campaign has channelGroups; invalid on updates.
+         */
+        channelGroupId?: string;
+        /**
+         * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         */
+        budget?: {
+            /**
+             * Total budget amount.
+             */
+            total: number;
+            /**
+             * ISO 4217 currency code (e.g. USD).
+             */
+            currency: string;
+        };
+        /**
+         * Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.
+         */
+        flight?: {
+            /**
+             * ISO 8601 start date-time or "asap".
+             */
+            startAt: string;
+            /**
+             * ISO 8601 end date-time.
+             */
+            endAt: string;
+        };
+        /**
+         * Update only: true archives a DRAFT, FAILED, CANCELED, or REJECTED buy (campaign unaffected). Send alone. false unsupported.
+         */
+        isArchived?: boolean;
+        /**
+         * true pauses ACTIVE; false activates PAUSED; same state unchanged. Other states refuse. Send alone.
+         */
+        isPaused?: boolean;
+        /**
+         * Update only: true irreversibly requests cancellation of one buy; send as the only change. Seller confirmation may be pending; already canceled returns unchanged. false is unsupported.
+         */
+        isCanceled?: boolean;
+        /**
+         * Creation: returned productQueryId. Update: deduplication key. Unused with fromProposalId.
+         */
+        idempotencyKey: string;
+        expectedAccountId?: number | string;
+        sellerId?: never;
+        products?: never;
+        budgetAllocation?: never;
+        mediaBuyId?: never;
+    }) & {
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
+        [key: string]: unknown;
     };
     headers: {
         /**
@@ -23871,9 +24789,9 @@ export type SaveSellerData = {
          */
         confirmOperatorDomainProfileReset?: boolean;
         /**
-         * Capabilities to patch; omitted flags stay unchanged.
+         * Flags to patch; any omitted flag stays unchanged.
          */
-        capabilities?: {
+        configuredCapabilities?: {
             /**
              * Advertise creative review to buyers.
              */
@@ -24516,23 +25434,23 @@ export type SaveWholesaleProductData = {
             [key: string]: unknown;
         };
         /**
-         * Canonical format: formatKind and params; publisher entries need publisherDomain and formatOptionId.
+         * Canonical format: format_kind and params; publisher entries need publisher_domain and format_option_id.
          */
         formatOptions?: Array<{
             /**
-             * Stable id in the publisher catalog. Required when publisherDomain is present.
+             * Publisher catalog id. Required when publisher_domain is set.
              */
-            formatOptionId?: string;
+            format_option_id?: string;
             /**
-             * Publisher catalog namespace for formatOptionId. Omit for a product-local format.
+             * Lower-case publisher catalog namespace for format_option_id. Omit for a product-local format.
              */
-            publisherDomain?: string;
+            publisher_domain?: string;
             /**
              * Canonical AdCP creative format kind.
              */
-            formatKind: 'image' | 'html5' | 'display_tag' | 'image_carousel' | 'video_hosted' | 'video_vast' | 'audio_hosted' | 'audio_vast' | 'audio_daast' | 'sponsored_placement' | 'native_in_feed' | 'responsive_creative' | 'agent_placement' | 'seller_rendered_stateful_display' | 'coordinated_placements' | 'custom';
+            format_kind: 'image' | 'html5' | 'display_tag' | 'image_carousel' | 'video_hosted' | 'video_vast' | 'audio_hosted' | 'audio_vast' | 'audio_daast' | 'sponsored_placement' | 'native_in_feed' | 'responsive_creative' | 'agent_placement' | 'seller_rendered_stateful_display' | 'coordinated_placements' | 'custom';
             /**
-             * Canonical constraints. Publisher formats must equal or narrow the catalog declaration.
+             * Canonical constraints, checked against the kind's AdCP params. Publisher formats must equal or narrow the catalog declaration.
              */
             params: {
                 [key: string]: unknown;
@@ -29607,7 +30525,7 @@ export type SearchData = {
         /**
          * The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.
          */
-        document?: string;
+        document: string;
         /**
          * The exact revision of an agreement docs hit, read together with its document. Docs only.
          */
