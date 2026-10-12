@@ -354,14 +354,14 @@ export class Apostra extends Transport {
   /** Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. Returns the data together with response headers and request ID. */
   getStatusWithResponse(input: GetStatusInput = {}, options?: RequestOptions): Promise<ResponseDetails<GetStatusResult>> { return this.requestDetailed("get_status", input, options) }
   /**
-   * Open the Advertisers Page: every advertiser on this account with its campaign and draft counts and one next action each. Use it for "show my advertisers" or "where do I start"; the Page self-fetches, so do not recite the list. For a text answer use search(kind: "advertiser").
+   * Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for "show my advertisers" or "where do I start"; the Page self-fetches. To add or set up an advertiser, pass intent: "add". For a text answer use search(kind: "advertiser").
    *
    * @example
    * await client.openAdvertisersPage(input)
    */
   openAdvertisersPage(input: OpenAdvertisersPageInput, options?: RequestOptions): Promise<OpenAdvertisersPageResult> { return this.request("open_advertisers_page", input, options) }
 
-  /** Open the Advertisers Page: every advertiser on this account with its campaign and draft counts and one next action each. Use it for "show my advertisers" or "where do I start"; the Page self-fetches, so do not recite the list. For a text answer use search(kind: "advertiser"). Returns the data together with response headers and request ID. */
+  /** Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for "show my advertisers" or "where do I start"; the Page self-fetches. To add or set up an advertiser, pass intent: "add". For a text answer use search(kind: "advertiser"). Returns the data together with response headers and request ID. */
   openAdvertisersPageWithResponse(input: OpenAdvertisersPageInput, options?: RequestOptions): Promise<ResponseDetails<OpenAdvertisersPageResult>> { return this.requestDetailed("open_advertisers_page", input, options) }
   /**
    * Open one agent owned by this Developer account.
