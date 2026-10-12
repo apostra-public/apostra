@@ -11,9 +11,9 @@ import type {
 
 import type {
   GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemQualifierAttributionWindow,
-  SaveCampaignRequestDuration,
-  SaveCampaignRequestEventGoal,
-  SaveCampaignRequestMetricGoal,
+  SaveCampaignRequestCampaignEventGoal,
+  SaveCampaignRequestCampaignGoalDuration,
+  SaveCampaignRequestCampaignMetricGoal,
 } from '../src/generated/types.gen.js'
 import type {
   Apostra,
@@ -55,13 +55,13 @@ export type ExactLeaves = [
   >,
   Assert<
     Exact<
-      SaveCampaignRequestEventGoal['eventSources'][number]['eventType'],
+      SaveCampaignRequestCampaignEventGoal['event_sources'][number]['event_type'],
       EventType
     >
   >,
   Assert<
     Exact<
-      SaveCampaignRequestMetricGoal['metric'],
+      SaveCampaignRequestCampaignMetricGoal['metric'],
       Extract<OptimizationGoal, { kind: 'metric' }>['metric']
     >
   >,
@@ -110,7 +110,7 @@ export function composeGoals(event: EventType): SaveCampaignInput {
     optimizationGoals: [
       {
         kind: 'event',
-        eventSources: [{ eventSourceId: 'source', eventType: event }],
+        event_sources: [{ event_source_id: 'source', event_type: event }],
       },
     ],
   }
@@ -132,11 +132,12 @@ export function boundaries(
   goal: Extract<OptimizationGoal, { kind: 'event' }>,
 ) {
   // @ts-expect-error campaign durations exclude the upstream seconds unit
-  const campaignDuration: SaveCampaignRequestDuration = duration
+  const campaignDuration: SaveCampaignRequestCampaignGoalDuration = duration
   // @ts-expect-error upstream front_loaded is not V3 frontloaded
   const budgetPacing: NonNullable<SaveCampaignInput['budget']>['pacing'] =
     pacing
-  // @ts-expect-error upstream event_sources is not V3 eventSources
-  const eventGoal: SaveCampaignRequestEventGoal = goal
+  // @ts-expect-error upstream attribution windows may omit post_click, use
+  // seconds, or name a model, none of which a campaign stores
+  const eventGoal: SaveCampaignRequestCampaignEventGoal = goal
   void [campaignDuration, budgetPacing, eventGoal]
 }
