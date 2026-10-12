@@ -1,4 +1,72 @@
 {
+  "downloadV3PublicDocumentRevision": {
+    "path": "/documents/{documentId}/revisions/{revisionId}/download",
+    "method": "GET",
+    "body": false,
+    "binary": true,
+    "idempotencyKey": false,
+    "parameters": [
+      {
+        "name": "documentId",
+        "location": "path",
+        "required": true
+      },
+      {
+        "name": "revisionId",
+        "location": "path",
+        "required": true
+      }
+    ],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Download a public immutable document revision"
+  },
+  "generate_variants": {
+    "path": "/tools/generate_variants",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Generate or refine new image, hosted video, or voice/audio (radio spots, voiceovers) from a saved Creative Engines brief. Reuse actionKey for an identical retry."
+  },
+  "get": {
+    "path": "/tools/get",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Read one object by kind plus the id that search returned, or an account singleton with no id. Never guess an id. include adds detail; each include value works only for the kinds that serve it."
+  },
   "getV3PublicDocumentRevisionSections": {
     "path": "/documents/{documentId}/revisions/{revisionId}/sections",
     "method": "GET",
@@ -49,20 +117,15 @@
     ],
     "summary": "Read a bounded public immutable document revision"
   },
-  "downloadV3PublicDocumentRevision": {
-    "path": "/documents/{documentId}/revisions/{revisionId}/download",
+  "getV3PublicMutationReceipt": {
+    "path": "/receipts/{receiptId}",
     "method": "GET",
     "body": false,
-    "binary": true,
+    "binary": false,
     "idempotencyKey": false,
     "parameters": [
       {
-        "name": "documentId",
-        "location": "path",
-        "required": true
-      },
-      {
-        "name": "revisionId",
+        "name": "receiptId",
         "location": "path",
         "required": true
       }
@@ -75,9 +138,71 @@
         "m2mOAuth": [
           "interchange:read"
         ]
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
       }
     ],
-    "summary": "Download a public immutable document revision"
+    "summary": "Read the state of a V3 HTTP write receipt"
+  },
+  "get_delivery": {
+    "path": "/tools/get_delivery",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Query seller delivery, stored or live buyer campaign delivery, or margin facts. Use live_campaign_delivery with one campaignId for the connected provider's current response. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded."
+  },
+  "get_rfp_performance": {
+    "path": "/tools/get_rfp_performance",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Query grouped Seller RFP quality, efficiency, and commercial metrics with metric-specific availability and immutable pages. Defaults to live terminal turns; synthetic purposes are opt-in and excluded from commercial metrics. Use get for individual RFPs or turns."
+  },
+  "get_seller_reporting_receipts": {
+    "path": "/tools/get_seller_reporting_receipts",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Show a seller what reporting we received for one buyer media buy, whether each receipt was accepted, and the current computed daily totals. Opens the Media Buy Timeline Glance."
   },
   "get_status": {
     "path": "/tools/get_status",
@@ -98,12 +223,12 @@
     ],
     "summary": "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand."
   },
-  "refresh_inventory_source_health": {
-    "path": "/tools/refresh_inventory_source_health",
+  "open_advertisers_page": {
+    "path": "/tools/open_advertisers_page",
     "method": "POST",
     "body": true,
     "binary": false,
-    "idempotencyKey": true,
+    "idempotencyKey": false,
     "parameters": [],
     "security": [
       {
@@ -111,33 +236,14 @@
       },
       {
         "m2mOAuth": [
-          "interchange:write"
+          "interchange:read"
         ]
       }
     ],
-    "summary": "Rechecks one external sales-agent source with no-spend get_products. Returns evidence IDs and seller readiness; no source configuration or media buy."
+    "summary": "Open the Advertisers Page: every advertiser on this account with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches, so do not recite the list. For a text answer use search(kind: \"advertiser\")."
   },
-  "save_account": {
-    "path": "/tools/save_account",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:admin"
-        ]
-      }
-    ],
-    "summary": "Rename an existing direct child Account or update settings.company. Never provisions, archives, or changes owners or members; use Account settings for access changes."
-  },
-  "review_buyer_child_account": {
-    "path": "/tools/review_buyer_child_account",
+  "open_agent_page": {
+    "path": "/tools/open_agent_page",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -153,15 +259,14 @@
         ]
       }
     ],
-    "summary": "Review a Buyer child under the selected Organization: name, role, capacity, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account."
+    "summary": "Open one agent owned by this Developer account."
   },
-  "request_buyer_child_account": {
-    "path": "/tools/request_buyer_child_account",
+  "open_agents_page": {
+    "path": "/tools/open_agents_page",
     "method": "POST",
     "body": true,
     "binary": false,
-    "idempotencyKey": true,
-    "bodyKeyField": "idempotencyKey",
+    "idempotencyKey": false,
     "parameters": [],
     "security": [
       {
@@ -173,86 +278,10 @@
         ]
       }
     ],
-    "summary": "Request a Buyer child under the selected Organization. Nothing is created until an Organization administrator approves it on our site; the result is approval_required with a link to show the person. Repeat with the same idempotencyKey and name for the outcome."
+    "summary": "Open Build an agent for this Developer account."
   },
-  "save_ask": {
-    "path": "/tools/save_ask",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:read"
-        ]
-      }
-    ],
-    "summary": "File or update a typed ask in the Apostra Support workflow; returns askId. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
-  },
-  "save_billing": {
-    "path": "/tools/save_billing",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:read"
-        ]
-      }
-    ],
-    "summary": "Accept current Terms or set up organization payment authority. Card setup uses a confirmed hosted link: request, confirm with its token, give the returned URL to the cardholder, then poll status. Card data never enters MCP."
-  },
-  "save_notification_config": {
-    "path": "/tools/save_notification_config",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:write"
-        ]
-      }
-    ],
-    "summary": "Create or update a notification subscription: scope, content, routes; no trigger type is creatable yet, no delivery policy yet. Omit subscriptionId to create, supply it to patch. Managed subscriptions are editable only within their mutability. Credentials belong to save_integration."
-  },
-  "save_advertiser_grant": {
-    "path": "/tools/save_advertiser_grant",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:admin"
-        ]
-      }
-    ],
-    "summary": "Invite another Organization to exact advertisers, accept/reject an invitation, or revoke a grant. Limited beta: eligible Organization, entitlement, server-side exposure, and direct human-admin authority are required."
-  },
-  "search": {
-    "path": "/tools/search",
+  "open_approvals": {
+    "path": "/tools/open_approvals",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -268,10 +297,10 @@
         ]
       }
     ],
-    "summary": "query/kind; no{}. conversation=Murph; session=retained;Creative requires exactly one filter.advertiserId or filter.campaignId;Seller Library=material/requests;Docs: reread hits; cite;kind=skill before workflows;Agent=org software, not seller/counterparty; seller identity/listing=get/save_seller"
+    "summary": "Open the Approvals Page for reviews, assignments, routing, evidence, decisions, and forward recovery. Focus by exact media-buy identity or reviewRef; creativeId works only for one loaded version."
   },
-  "get": {
-    "path": "/tools/get",
+  "open_campaign_receipt": {
+    "path": "/tools/open_campaign_receipt",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -287,48 +316,10 @@
         ]
       }
     ],
-    "summary": "Read object/singleton. billing: omit id; Terms/readiness/payment status. skill: exact user-supplied or search ID; versioned instructions+digest. conversation: bounded. Buyer/seller: search IDs. Seller: include:[\"listing\"] or [\"identity\"]. Distribution: host/CNAME/readiness."
+    "summary": "Open Review & go live for one draft campaign: budget, flight, staged media buys and their budget split, why each buy is not live yet, and the readiness blockers. Use when a buyer asks if a draft is ready to launch. Refuses non-draft campaigns; launching stays a separate confirmed save_campaign."
   },
-  "save_connection": {
-    "path": "/tools/save_connection",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:write"
-        ]
-      }
-    ],
-    "summary": "Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation."
-  },
-  "save_library_request": {
-    "path": "/tools/save_library_request",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:write"
-        ]
-      }
-    ],
-    "summary": "Open a seller library request or close it with seller Material."
-  },
-  "open_page": {
-    "path": "/tools/open_page",
+  "open_campaigns_page": {
+    "path": "/tools/open_campaigns_page",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -344,45 +335,7 @@
         ]
       }
     ],
-    "summary": "Open compatibility Pages. source_diagnostics lets a source owner create or attach the Agent when its relationship is missing. External hosts may return text. Credentials and authority changes remain human ceremonies."
-  },
-  "open_proposal_pass": {
-    "path": "/tools/open_proposal_pass",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": false,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:read"
-        ]
-      }
-    ],
-    "summary": "Open Proposal Pass on one exact immutable RFP turn. Supply the matching rfpId and turnId from save_rfp or get; the Page loads the private response itself."
-  },
-  "open_media_buys_page": {
-    "path": "/tools/open_media_buys_page",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": false,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:read"
-        ]
-      }
-    ],
-    "summary": "Open the Seller Media Buys Page. Optionally focus one seller-owned account relationship and its buys or creatives; the Page self-fetches."
+    "summary": "Open the Campaigns Page: campaigns with status, flight, and budget; open one for its media buys and creatives. The Page self-fetches, so do not list campaigns in prose. advertiserId scopes to one advertiser; campaignId focuses one campaign. A draft's go-live review is open_campaign_receipt."
   },
   "open_connections_page": {
     "path": "/tools/open_connections_page",
@@ -422,101 +375,6 @@
     ],
     "summary": "Open the buyer Creative Engines Page. Optionally focus an engine, connection, or its secure setup control; the buyer starts setup in the Page, and this does not authorize a provider or start generation."
   },
-  "open_advertisers_page": {
-    "path": "/tools/open_advertisers_page",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": false,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:read"
-        ]
-      }
-    ],
-    "summary": "Open the Advertisers Page: every advertiser on this account with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches, so do not recite the list. For a text answer use search(kind: \"advertiser\")."
-  },
-  "open_campaigns_page": {
-    "path": "/tools/open_campaigns_page",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": false,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:read"
-        ]
-      }
-    ],
-    "summary": "Open the Campaigns Page: campaigns with status, flight, and budget; open one for its media buys and creatives. The Page self-fetches, so do not list campaigns in prose. advertiserId scopes to one advertiser; campaignId focuses one campaign. A draft's go-live review is open_campaign_receipt."
-  },
-  "open_campaign_receipt": {
-    "path": "/tools/open_campaign_receipt",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": false,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:read"
-        ]
-      }
-    ],
-    "summary": "Open Review & go live for one draft campaign: budget, flight, staged media buys and their budget split, why each buy is not live yet, and the readiness blockers. Use when a buyer asks if a draft is ready to launch. Refuses non-draft campaigns; launching stays a separate confirmed save_campaign."
-  },
-  "upload_creative_asset": {
-    "path": "/tools/upload_creative_asset",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:read"
-        ]
-      }
-    ],
-    "summary": "Open the embedded Task for an advertiser. Returns accepted MIME types and exact byte limits by type. max_size_bytes is only the largest. Use fallback_url if the Task does not render. Uploading never creates or delivers a Creative."
-  },
-  "open_approvals": {
-    "path": "/tools/open_approvals",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": false,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:read"
-        ]
-      }
-    ],
-    "summary": "Open the Approvals Page for reviews, assignments, routing, evidence, decisions, and forward recovery. Focus by exact media-buy identity or reviewRef; creativeId works only for one loaded version."
-  },
   "open_creative_library": {
     "path": "/tools/open_creative_library",
     "method": "POST",
@@ -536,8 +394,8 @@
     ],
     "summary": "Open Creative Library. Use search for a plain object answer. Composer needs campaignId; assembly needs no Creative Engine. To save a draft, use exactly one format: a canonical format such as image, hosted video, or hosted audio, or a seller format."
   },
-  "get_delivery": {
-    "path": "/tools/get_delivery",
+  "open_media_buys_page": {
+    "path": "/tools/open_media_buys_page",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -553,10 +411,10 @@
         ]
       }
     ],
-    "summary": "Query seller delivery, stored or live buyer campaign delivery, or margin facts. Use live_campaign_delivery with one campaignId for the connected provider's current response. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded."
+    "summary": "Open the Seller Media Buys Page. Optionally focus one seller-owned account relationship and its buys or creatives; the Page self-fetches."
   },
-  "test_creative_macros": {
-    "path": "/tools/test_creative_macros",
+  "open_page": {
+    "path": "/tools/open_page",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -572,10 +430,10 @@
         ]
       }
     ],
-    "summary": "Dry-runs one tracker URL through exact raw input, canonical AdCP compilation, recipient translation, and deterministic synthetic substitution. Use it before preview or trafficking; unresolved required macros fail closed."
+    "summary": "Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies."
   },
-  "get_rfp_performance": {
-    "path": "/tools/get_rfp_performance",
+  "open_proposal_pass": {
+    "path": "/tools/open_proposal_pass",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -591,10 +449,48 @@
         ]
       }
     ],
-    "summary": "Query grouped Seller RFP quality, efficiency, and commercial metrics with metric-specific availability and immutable pages. Defaults to live terminal turns; synthetic purposes are opt-in and excluded from commercial metrics. Use get for individual RFPs or turns."
+    "summary": "Open Proposal Pass on one exact immutable RFP turn. Supply the matching rfpId and turnId from save_rfp or get; the Page loads the private response itself."
   },
-  "save_seller": {
-    "path": "/tools/save_seller",
+  "open_seller_dashboard": {
+    "path": "/tools/open_seller_dashboard",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open the Seller Dashboard Page: seller analytics, or the synthetic evaluation view of practice runs while this is an active demo Seller Account. The Page self-fetches."
+  },
+  "open_variant_gallery": {
+    "path": "/tools/open_variant_gallery",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Show a saved Creative Session’s variants (find via search/get kind creative_session). Not for generating new variants."
+  },
+  "refresh_inventory_source_health": {
+    "path": "/tools/refresh_inventory_source_health",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -610,10 +506,50 @@
         ]
       }
     ],
-    "summary": "Save Seller identity, capabilities, Marketplace, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, or a seller-controlled admission. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\")."
+    "summary": "Rechecks one external sales-agent source with no-spend get_products. Returns evidence IDs and seller readiness; no source configuration or media buy."
   },
-  "save_inventory_source": {
-    "path": "/tools/save_inventory_source",
+  "request_buyer_child_account": {
+    "path": "/tools/request_buyer_child_account",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "bodyKeyField": "idempotencyKey",
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:admin"
+        ]
+      }
+    ],
+    "summary": "Request a Buyer child under the selected Organization. Nothing is created until an Organization administrator approves it on our site; the result is approval_required with a link to show the person. Repeat with the same idempotencyKey and name for the outcome."
+  },
+  "request_proposals": {
+    "path": "/tools/request_proposals",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "bodyKeyField": "idempotencyKey",
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
+  },
+  "request_seller_reporting_update": {
+    "path": "/tools/request_seller_reporting_update",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -629,10 +565,48 @@
         ]
       }
     ],
-    "summary": "Create or update where a seller's inventory comes from. Pass `id` to change an existing source, omit it to add one. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it."
+    "summary": "Requests a scheduler-run reporting refresh or a bounded replay for one seller media buy. It never polls a provider directly."
   },
-  "save_coverage": {
-    "path": "/tools/save_coverage",
+  "review_buyer_child_account": {
+    "path": "/tools/review_buyer_child_account",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:admin"
+        ]
+      }
+    ],
+    "summary": "Review a Buyer child under the selected Organization: name, role, capacity, plan coverage, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account."
+  },
+  "save_account": {
+    "path": "/tools/save_account",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:admin"
+        ]
+      }
+    ],
+    "summary": "Rename an existing direct child Account or update settings.company. Never provisions, archives, or changes owners or members; use Account settings for access changes."
+  },
+  "save_advertiser": {
+    "path": "/tools/save_advertiser",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -648,10 +622,10 @@
         ]
       }
     ],
-    "summary": "Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, and `removeProperties` change named items only. Read authorization; never assume it."
+    "summary": "Save an advertiser or its mappings. `needs_input` = ask the buyer; never recreate to change currency. Use identityContract:confirmed-v1 for brand corrections. resolveBrand looks up public branding. Guide: /v2/setup/v3/identity-setup."
   },
-  "save_material": {
-    "path": "/tools/save_material",
+  "save_advertiser_grant": {
+    "path": "/tools/save_advertiser_grant",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -663,87 +637,11 @@
       },
       {
         "m2mOAuth": [
-          "interchange:write"
+          "interchange:admin"
         ]
       }
     ],
-    "summary": "Register, revise, archive, restore, or reprocess seller Materials; manage candidate decisions and receipts; mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND rejects document containers, UNIT_CONTAINS_PRICING rejects priced units)."
-  },
-  "save_wholesale_product": {
-    "path": "/tools/save_wholesale_product",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:write"
-        ]
-      }
-    ],
-    "summary": "Create, change, or delete one wholesale product on an ad-server source — what buyers discover and buy. Omit `id` to create: needs `name` and `inventory`, validated first. Pass `id` to change only the fields you name. `active` = buyable, `archived` = off the market and reversible, `delete` is not."
-  },
-  "save_media_kit": {
-    "path": "/tools/save_media_kit",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:write"
-        ]
-      }
-    ],
-    "summary": "Deprecated compatibility tool (\"listing\" is the modern term). It writes only the legacy businessProfile and does not update the canonical buyer-visible listing. New clients must read with `get({ kind: \"seller\", include: [\"listing\"] })` and write with `save_seller`."
-  },
-  "save_playbook": {
-    "path": "/tools/save_playbook",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:write"
-        ]
-      }
-    ],
-    "summary": "Write how the seller sells. `content` creates and activates a new version in one step — no separate activate; the response names the version created and replaced. `pricing` replaces the whole fact list. `discounts` sets or removes brand/operator rules one by one. Halves never roll back each other."
-  },
-  "save_business_rules": {
-    "path": "/tools/save_business_rules",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:write"
-        ]
-      }
-    ],
-    "summary": "Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto needs acknowledgeNoHumanReview."
+    "summary": "Invite another Organization to exact advertisers, accept/reject an invitation, or revoke a grant. Limited beta: eligible Organization, entitlement, server-side exposure, and direct human-admin authority are required."
   },
   "save_advertiser_instructions": {
     "path": "/tools/save_advertiser_instructions",
@@ -764,8 +662,8 @@
     ],
     "summary": "Save seller notes and instructions for an exact brand-domain × operator-domain pair. Configuration does not verify the registry; discounts, source routing, sponsored access, and buyer-account trust are read-only."
   },
-  "save_signal": {
-    "path": "/tools/save_signal",
+  "save_agent": {
+    "path": "/tools/save_agent",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -781,10 +679,29 @@
         ]
       }
     ],
-    "summary": "Create, replace, or archive a signal. Managed writes need a complete draft; read before updates. Without sourceId, writes the seller catalog."
+    "summary": "In a Developer account, register a Sales or Creative Agent, or rename an owned Agent. A registration requires an account administrator and an idempotency key. In a Seller account, confirm or correct one Sales Agent product mode."
   },
-  "save_work_item": {
-    "path": "/tools/save_work_item",
+  "save_ask": {
+    "path": "/tools/save_ask",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "File or update a typed ask in the Apostra Support workflow; returns askId. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
+  },
+  "save_audience": {
+    "path": "/tools/save_audience",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -800,10 +717,29 @@
         ]
       }
     ],
-    "summary": "Decide a creative or media-buy approval, or complete a modular-source follow-up. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page."
+    "summary": "Sync first-party CRM audiences for a buyer advertiser. Each audiences[] item may add, remove, or delete members. Returns an operationId; use get(kind: audience, advertiserId: \"...\") to read match status after it settles."
   },
-  "save_rfp": {
-    "path": "/tools/save_rfp",
+  "save_billing": {
+    "path": "/tools/save_billing",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Accept current Terms, choose the payment terms sellers are asked for, or manage payment authority. Card setup uses a confirmed hosted link; card data never enters MCP."
+  },
+  "save_business_rules": {
+    "path": "/tools/save_business_rules",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -819,46 +755,7 @@
         ]
       }
     ],
-    "summary": "Save RFPs and turns: imported origins, typed feedback, response pairs, endorsement, and proposal-file requests."
-  },
-  "save_advertiser": {
-    "path": "/tools/save_advertiser",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "bodyKeyField": "idempotencyKey",
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:write"
-        ]
-      }
-    ],
-    "summary": "Save an advertiser or its mappings. `needs_input` = ask the buyer; never recreate to change currency. Use identityContract:confirmed-v1 for brand corrections. resolveBrand looks up public branding. Guide: /v2/setup/v3/identity-setup."
-  },
-  "save_buyer_operator": {
-    "path": "/tools/save_buyer_operator",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:admin"
-        ]
-      }
-    ],
-    "summary": "Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v2/setup/v3/identity-setup."
+    "summary": "Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto needs acknowledgeNoHumanReview."
   },
   "save_buyer_agent": {
     "path": "/tools/save_buyer_agent",
@@ -879,8 +776,8 @@
     ],
     "summary": "Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call."
   },
-  "save_directed_campaign_subscription": {
-    "path": "/tools/save_directed_campaign_subscription",
+  "save_buyer_operator": {
+    "path": "/tools/save_buyer_operator",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -892,30 +789,11 @@
       },
       {
         "m2mOAuth": [
-          "interchange:write"
+          "interchange:admin"
         ]
       }
     ],
-    "summary": "Subscribe to a connected seller's directed campaigns, mirroring its media buys into this buyer's view. Set `unsubscribe: true` to remove the subscription and retire mirrored campaigns. Requires a mapped seller account and reachable advertiser."
-  },
-  "save_audience": {
-    "path": "/tools/save_audience",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:write"
-        ]
-      }
-    ],
-    "summary": "Sync first-party CRM audiences for a buyer advertiser. Each audiences[] item may add, remove, or delete members. Returns an operationId; use get(kind: audience, advertiserId: \"...\") to read match status after it settles."
+    "summary": "Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v2/setup/v3/identity-setup."
   },
   "save_campaign": {
     "path": "/tools/save_campaign",
@@ -957,13 +835,12 @@
     ],
     "summary": "Create or replace one flat catalog declaration by catalogId, or archive it with isArchived. URL saves refetch the feed."
   },
-  "save_event_source": {
-    "path": "/tools/save_event_source",
+  "save_connection": {
+    "path": "/tools/save_connection",
     "method": "POST",
     "body": true,
     "binary": false,
     "idempotencyKey": true,
-    "bodyKeyField": "idempotencyKey",
     "parameters": [],
     "security": [
       {
@@ -975,10 +852,10 @@
         ]
       }
     ],
-    "summary": "Create, change, archive, or restore up to 50 advertiser conversion event sources (pixels, server feeds). Each entry is keyed by eventSourceId and succeeds or fails alone. Setup is not proof events flow: check health with get, then use eventSourceId in an optimization goal."
+    "summary": "Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation."
   },
-  "save_dimension": {
-    "path": "/tools/save_dimension",
+  "save_coverage": {
+    "path": "/tools/save_coverage",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -994,26 +871,7 @@
         ]
       }
     ],
-    "summary": "Create a dimension, or update an existing dimension by its id. Tags is built in and open. Labels belong only to objects in appliesTo."
-  },
-  "save_property_list": {
-    "path": "/tools/save_property_list",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:write"
-        ]
-      }
-    ],
-    "summary": "Create, update, archive, or AAO-check an advertiser property list. Check uses identifiers without saving. Search/get read saved lists."
+    "summary": "Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, and `removeProperties` change named items only. Read authorization; never assume it."
   },
   "save_creative": {
     "path": "/tools/save_creative",
@@ -1021,7 +879,6 @@
     "body": true,
     "binary": false,
     "idempotencyKey": true,
-    "bodyKeyField": "idempotencyKey",
     "parameters": [],
     "security": [
       {
@@ -1033,7 +890,7 @@
         ]
       }
     ],
-    "summary": "Save creative in advertiserId/campaignId with name, message, assets, clickUrl, social, sourceAssetRef/sourceAssets. Use exactly one format selector: formatKind/formatParams for a canonical format such as image, hosted video, or hosted audio, or creativeFormatId; campaign formatOptionRef."
+    "summary": "Save creative in advertiserId/campaignId with name, message, assets, clickUrl, social, sourceAssetRef/sourceAssets. Use exactly one format selector: formatKind/formatParams, creativeFormatId, formatOptionRef. Supplied content/assets only; generate new media (radio spots) via save_creative_session."
   },
   "save_creative_collection": {
     "path": "/tools/save_creative_collection",
@@ -1041,7 +898,6 @@
     "body": true,
     "binary": false,
     "idempotencyKey": true,
-    "bodyKeyField": "idempotencyKey",
     "parameters": [],
     "security": [
       {
@@ -1072,10 +928,10 @@
         ]
       }
     ],
-    "summary": "Save a generation-backed campaign Creative Session draft, selection, approval, finalisation, or an immutable Library promotion of an exact approved output. Creative Engines is required; use save_creative to assemble uploaded assets without an engine. Never generates variants."
+    "summary": "Create image, video, or voice/audio variants from a brief (including radio spots). Scope: campaign/campaignId or advertiser/advertiserId."
   },
-  "generate_variants": {
-    "path": "/tools/generate_variants",
+  "save_dimension": {
+    "path": "/tools/save_dimension",
     "method": "POST",
     "body": true,
     "binary": false,
@@ -1091,7 +947,103 @@
         ]
       }
     ],
-    "summary": "Generate or refine a saved Creative Engines session revision. Creative Engines is required. Reuse actionKey for an identical retry."
+    "summary": "Create a dimension, or update an existing dimension by its id. Tags is built in and open. Labels belong only to objects in appliesTo."
+  },
+  "save_directed_campaign_subscription": {
+    "path": "/tools/save_directed_campaign_subscription",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Subscribe to a connected seller's directed campaigns, mirroring its media buys into this buyer's view. Set `unsubscribe: true` to remove the subscription and retire mirrored campaigns. Requires a mapped seller account and reachable advertiser."
+  },
+  "save_event_source": {
+    "path": "/tools/save_event_source",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "bodyKeyField": "idempotencyKey",
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Create, change, archive, or restore up to 50 advertiser conversion event sources (pixels, server feeds). Each entry is keyed by eventSourceId and succeeds or fails alone. Setup is not proof events flow: check health with get, then use eventSourceId in an optimization goal."
+  },
+  "save_inventory_source": {
+    "path": "/tools/save_inventory_source",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Create or update where a seller's inventory comes from. Pass `id` to change an existing source, omit it to add one. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it."
+  },
+  "save_library_request": {
+    "path": "/tools/save_library_request",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Open a seller library request or close it with seller Material."
+  },
+  "save_material": {
+    "path": "/tools/save_material",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Register, revise, archive, restore, or reprocess seller Materials; manage candidate decisions and receipts; mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND rejects document containers, UNIT_CONTAINS_PRICING rejects priced units)."
   },
   "save_media_buy": {
     "path": "/tools/save_media_buy",
@@ -1113,13 +1065,12 @@
     ],
     "summary": "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates."
   },
-  "request_proposals": {
-    "path": "/tools/request_proposals",
+  "save_media_kit": {
+    "path": "/tools/save_media_kit",
     "method": "POST",
     "body": true,
     "binary": false,
     "idempotencyKey": true,
-    "bodyKeyField": "idempotencyKey",
     "parameters": [],
     "security": [
       {
@@ -1131,6 +1082,215 @@
         ]
       }
     ],
-    "summary": "Request quotes and products from eligible sellers. With a campaign MediaBuy cap, only quotes confirming the exact cap are usable; compatible products may still be returned. Pass productQueryId as save_media_buy idempotencyKey. A new key starts a round; reuse replays it."
+    "summary": "Deprecated compatibility tool (\"listing\" is the modern term). It writes only the legacy businessProfile and does not update the canonical buyer-visible listing. New clients must read with `get({ kind: \"seller\", include: [\"listing\"] })` and write with `save_seller`."
+  },
+  "save_notification_config": {
+    "path": "/tools/save_notification_config",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Create or update a notification subscription: scope, content, routes; no trigger type is creatable yet, no delivery policy yet. Omit subscriptionId to create, supply it to patch. Managed subscriptions are editable only within their mutability. Credentials belong to save_integration."
+  },
+  "save_playbook": {
+    "path": "/tools/save_playbook",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Write how the seller sells. `active` creates and activates a new version in one step — no separate activate; the response names the version created and replaced. `pricing` replaces the whole fact list. `discounts` sets or removes brand/operator rules one by one. Halves never roll back each other."
+  },
+  "save_property_list": {
+    "path": "/tools/save_property_list",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Create, update, archive, or AAO-check an advertiser property list. Check uses identifiers without saving. Search/get read saved lists."
+  },
+  "save_rfp": {
+    "path": "/tools/save_rfp",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Save RFPs and turns: imported origins, typed feedback, response pairs, endorsement, and proposal-file requests."
+  },
+  "save_seller": {
+    "path": "/tools/save_seller",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, or a seller-controlled admission. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\")."
+  },
+  "save_signal": {
+    "path": "/tools/save_signal",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Create, replace, or archive a signal. Managed writes need a complete draft; read before updates. Without sourceId, writes the seller catalog."
+  },
+  "save_wholesale_product": {
+    "path": "/tools/save_wholesale_product",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Create, change, or delete one wholesale product on an ad-server source — what buyers discover and buy. Omit `id` to create: needs `name` and `inventory`, validated first. Pass `id` to change only the fields you name. `active` = buyable, `archived` = off the market and reversible, `delete` is not."
+  },
+  "save_work_item": {
+    "path": "/tools/save_work_item",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Decide a creative or media-buy approval, or complete a modular-source follow-up. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page."
+  },
+  "search": {
+    "path": "/tools/search",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Find objects in this account, or answer questions from the docs. Pass kind to list one object type, query to match text, or both. Before a multi-step task, search kind skill for a workflow. Reread a docs hit with its document (and revision, for agreements) before you cite it."
+  },
+  "test_creative_macros": {
+    "path": "/tools/test_creative_macros",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Dry-runs one tracker URL through exact raw input, canonical AdCP compilation, recipient translation, and deterministic synthetic substitution. Use it before preview or trafficking; unresolved required macros fail closed."
+  },
+  "upload_creative_asset": {
+    "path": "/tools/upload_creative_asset",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open the embedded Task for an advertiser. Returns accepted MIME types and exact byte limits by type. max_size_bytes is only the largest. Use fallback_url if the Task does not render. Uploading never creates or delivers a Creative."
   }
 }
