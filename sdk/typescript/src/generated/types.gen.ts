@@ -9402,7 +9402,7 @@ export type SaveAdvertiserData = {
          */
         confirmationToken?: string;
         /**
-         * ISO 4217, e.g. "EUR". Optional on create; defaults to "USD" when omitted. Update to change.
+         * ISO 4217, e.g. "EUR". Optional on create; defaults to brandCountries currency, else "USD". Update to change.
          */
         primaryCurrency?: string;
         /**
@@ -9410,7 +9410,7 @@ export type SaveAdvertiserData = {
          */
         brandCountries?: SaveAdvertiserRequestBrandCountries;
         /**
-         * IANA timezone for future account provisioning and reporting.
+         * IANA reporting timezone; defaults to brandCountries zone or UTC.
          */
         preferredTimezone?: string;
         /**
@@ -24559,6 +24559,55 @@ export type SaveWholesaleProductData = {
              */
             deliveryType: 'guaranteed' | 'non_guaranteed';
         }>;
+        /**
+         * Fixed age cohort every impression reaches (AdCP included signal). null clears; omit keeps.
+         */
+        includedAgeSignal?: {
+            /**
+             * AdCP demographic_predicate with a closed age range.
+             */
+            demographic_predicate: {
+                /**
+                 * Closed range of whole ages, 18-120.
+                 */
+                age: {
+                    /**
+                     * Youngest age reached, 18-120.
+                     */
+                    min: number;
+                    /**
+                     * Oldest age reached, 18-120.
+                     */
+                    max: number;
+                    /**
+                     * Also reaches people of unknown age.
+                     */
+                    include_unknown: boolean;
+                };
+            };
+            /**
+             * How ages are known: verified or declared. Never inferred.
+             */
+            age_determination_bases: Array<'verified' | 'declared'>;
+            /**
+             * Who supplied the age data.
+             */
+            data_provider: string;
+            /**
+             * Defaults to age_<min>_<max>.
+             */
+            signal_id?: string;
+            /**
+             * Defaults to 'Ages <min>-<max>'.
+             */
+            name?: string;
+        } | null;
+        /**
+         * AdCP 3.2 audience_evidence entries: planning evidence, never targeting. null clears; omit keeps.
+         */
+        audienceEvidence?: Array<{
+            [key: string]: unknown;
+        }> | null;
         /**
          * Validate a new product and report findings without writing it. Creates only.
          */
