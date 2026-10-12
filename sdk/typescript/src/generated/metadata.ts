@@ -778,7 +778,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call."
+    "summary": "Create or manage one buyer agent."
   },
   "save_buyer_operator": {
     "path": "/tools/save_buyer_operator",

@@ -11394,6 +11394,7 @@ export type SaveBusinessRulesSuccessMaterialReceipt = {
 
 export type SaveBuyerAgentData = {
     body: ({
+        operation: SaveBuyerAgentRequestSaveBuyerAgentCreateOperation;
         displayName: SaveBuyerAgentRequestDisplayName;
         /**
          * external is available. hosted creation is not available yet.
@@ -11405,6 +11406,7 @@ export type SaveBuyerAgentData = {
         lifecycle?: never;
         credentialHandoff?: never;
     } | {
+        operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation;
         id: SaveBuyerAgentRequestId;
         displayName: SaveBuyerAgentRequestDisplayName;
         expectedAccountId?: number | string;
@@ -11413,7 +11415,11 @@ export type SaveBuyerAgentData = {
         lifecycle?: never;
         credentialHandoff?: never;
     } | {
+        operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation;
         id: SaveBuyerAgentRequestId;
+        /**
+         * Complete replacement list of advertiser grants.
+         */
         access: {
             /**
              * Access revision returned by the most recent read.
@@ -11439,7 +11445,11 @@ export type SaveBuyerAgentData = {
         lifecycle?: never;
         credentialHandoff?: never;
     } | {
+        operation: SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation;
         id: SaveBuyerAgentRequestId;
+        /**
+         * One state-fenced suspend, resume, or retire action.
+         */
         lifecycle: {
             /**
              * Suspend an active buyer agent.
@@ -11477,7 +11487,11 @@ export type SaveBuyerAgentData = {
         access?: never;
         credentialHandoff?: never;
     } | {
+        operation: SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation;
         id: SaveBuyerAgentRequestId;
+        /**
+         * Prepare a safe reference for the administrator credential ceremony; never returns a secret.
+         */
         credentialHandoff: true;
         expectedAccountId?: number | string;
         displayName?: never;
@@ -11562,14 +11576,45 @@ export type SaveBuyerAgentErrors = {
     503: V3ToolErrorResponse;
 };
 
+/**
+ * Name for the buyer agent.
+ */
 export type SaveBuyerAgentRequestDisplayName = string;
 
+/**
+ * Buyer-agent principal ID.
+ */
 export type SaveBuyerAgentRequestId = string;
 
 /**
  * Exact current display name; required to suspend or retire.
  */
 export type SaveBuyerAgentRequestLifecycleConfirmationText = string;
+
+/**
+ * Create an external buyer agent.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentCreateOperation = 'create';
+
+/**
+ * Prepare the human credential handoff ceremony.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation = 'credential_handoff';
+
+/**
+ * Suspend, resume, or retire the buyer agent.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation = 'lifecycle';
+
+/**
+ * Replace the exact advertiser access list.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation = 'update_access';
+
+/**
+ * Change the buyer-agent display name.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation = 'update_display_name';
 
 export type SaveBuyerAgentResponse = SaveBuyerAgentResponses[keyof SaveBuyerAgentResponses];
 

@@ -29526,12 +29526,8 @@ paths:
   /tools/save_buyer_agent:
     post:
       operationId: save_buyer_agent
-      summary: >-
-        Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent
-        per call.
-      description: >-
-        Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent
-        per call.
+      summary: Create or manage one buyer agent.
+      description: Create or manage one buyer agent.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -29552,17 +29548,19 @@ paths:
         content:
           application/json:
             schema:
-              anyOf:
+              oneOf:
                 - type: object
                   properties:
+                    operation:
+                      $ref: '#/components/schemas/save_buyer_agent_request_SaveBuyerAgentCreateOperation'
                     displayName:
                       $ref: '#/components/schemas/save_buyer_agent_request_DisplayName'
                     kind:
-                      description: external is available. hosted creation is not available yet.
                       type: string
                       enum:
                         - external
                         - hosted
+                      description: external is available. hosted creation is not available yet.
                     expectedAccountId:
                       anyOf:
                         - type: integer
@@ -29570,10 +29568,13 @@ paths:
                         - type: string
                           pattern: ^[1-9][0-9]*$
                   required:
+                    - operation
                     - displayName
                   additionalProperties: false
                 - type: object
                   properties:
+                    operation:
+                      $ref: '#/components/schemas/save_buyer_agent_request_SaveBuyerAgentUpdateDisplayNameOperation'
                     id:
                       $ref: '#/components/schemas/save_buyer_agent_request_Id'
                     displayName:
@@ -29585,11 +29586,14 @@ paths:
                         - type: string
                           pattern: ^[1-9][0-9]*$
                   required:
+                    - operation
                     - id
                     - displayName
                   additionalProperties: false
                 - type: object
                   properties:
+                    operation:
+                      $ref: '#/components/schemas/save_buyer_agent_request_SaveBuyerAgentUpdateAccessOperation'
                     id:
                       $ref: '#/components/schemas/save_buyer_agent_request_Id'
                     access:
@@ -29625,6 +29629,7 @@ paths:
                         - expectedAccessRevision
                         - advertisers
                       additionalProperties: false
+                      description: Complete replacement list of advertiser grants.
                     expectedAccountId:
                       anyOf:
                         - type: integer
@@ -29632,11 +29637,14 @@ paths:
                         - type: string
                           pattern: ^[1-9][0-9]*$
                   required:
+                    - operation
                     - id
                     - access
                   additionalProperties: false
                 - type: object
                   properties:
+                    operation:
+                      $ref: '#/components/schemas/save_buyer_agent_request_SaveBuyerAgentLifecycleOperation'
                     id:
                       $ref: '#/components/schemas/save_buyer_agent_request_Id'
                     lifecycle:
@@ -29693,6 +29701,7 @@ paths:
                             - expectedLifecycleState
                             - confirmationText
                           additionalProperties: false
+                      description: One state-fenced suspend, resume, or retire action.
                     expectedAccountId:
                       anyOf:
                         - type: integer
@@ -29700,16 +29709,20 @@ paths:
                         - type: string
                           pattern: ^[1-9][0-9]*$
                   required:
+                    - operation
                     - id
                     - lifecycle
                   additionalProperties: false
                 - type: object
                   properties:
+                    operation:
+                      $ref: '#/components/schemas/save_buyer_agent_request_SaveBuyerAgentCredentialHandoffOperation'
                     id:
                       $ref: '#/components/schemas/save_buyer_agent_request_Id'
                     credentialHandoff:
                       type: boolean
                       const: true
+                      description: Prepare a safe reference for the administrator credential ceremony; never returns a secret.
                     expectedAccountId:
                       anyOf:
                         - type: integer
@@ -29717,6 +29730,7 @@ paths:
                         - type: string
                           pattern: ^[1-9][0-9]*$
                   required:
+                    - operation
                     - id
                     - credentialHandoff
                   additionalProperties: false
@@ -70814,14 +70828,36 @@ components:
       propertyNames:
         type: string
       additionalProperties: {}
+    save_buyer_agent_request_SaveBuyerAgentCreateOperation:
+      type: string
+      const: create
+      description: Create an external buyer agent.
+    save_buyer_agent_request_SaveBuyerAgentUpdateDisplayNameOperation:
+      type: string
+      const: update_display_name
+      description: Change the buyer-agent display name.
+    save_buyer_agent_request_SaveBuyerAgentUpdateAccessOperation:
+      type: string
+      const: update_access
+      description: Replace the exact advertiser access list.
+    save_buyer_agent_request_SaveBuyerAgentLifecycleOperation:
+      type: string
+      const: lifecycle
+      description: Suspend, resume, or retire the buyer agent.
+    save_buyer_agent_request_SaveBuyerAgentCredentialHandoffOperation:
+      type: string
+      const: credential_handoff
+      description: Prepare the human credential handoff ceremony.
     save_buyer_agent_request_DisplayName:
       type: string
       minLength: 1
       maxLength: 255
+      description: Name for the buyer agent.
     save_buyer_agent_request_Id:
       type: string
       minLength: 1
       maxLength: 255
+      description: Buyer-agent principal ID.
     save_buyer_agent_request_LifecycleConfirmationText:
       type: string
       minLength: 1
