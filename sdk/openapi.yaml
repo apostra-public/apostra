@@ -22024,13 +22024,13 @@ paths:
     post:
       operationId: open_advertisers_page
       summary: >-
-        Open the Advertisers Page: every advertiser on this account with its campaign and draft counts and one next
-        action each. Use it for "show my advertisers" or "where do I start"; the Page self-fetches, so do not recite the
-        list. For a text answer use search(kind: "advertiser").
+        Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it
+        for "show my advertisers" or "where do I start"; the Page self-fetches. To add or set up an advertiser, pass
+        intent: "add". For a text answer use search(kind: "advertiser").
       description: >-
-        Open the Advertisers Page: every advertiser on this account with its campaign and draft counts and one next
-        action each. Use it for "show my advertisers" or "where do I start"; the Page self-fetches, so do not recite the
-        list. For a text answer use search(kind: "advertiser").
+        Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it
+        for "show my advertisers" or "where do I start"; the Page self-fetches. To add or set up an advertiser, pass
+        intent: "add". For a text answer use search(kind: "advertiser").
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -22051,7 +22051,12 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {}
+              properties:
+                intent:
+                  description: Use "add" to open the Add advertiser form.
+                  type: string
+                  enum:
+                    - add
               additionalProperties: false
       responses:
         '200':
@@ -22064,7 +22069,11 @@ paths:
                 properties:
                   data:
                     type: object
-                    properties: {}
+                    properties:
+                      intent:
+                        type: string
+                        enum:
+                          - add
                     additionalProperties: false
                   error:
                     type: 'null'
@@ -26425,7 +26434,9 @@ paths:
                   minLength: 64
                   maxLength: 64
                 primaryCurrency:
-                  description: ISO 4217, e.g. "EUR". Optional on create; defaults to "USD" when omitted. Update to change.
+                  description: >-
+                    ISO 4217, e.g. "EUR". Optional on create; defaults to brandCountries currency, else "USD". Update to
+                    change.
                   type: string
                   minLength: 3
                   maxLength: 3
@@ -26435,7 +26446,7 @@ paths:
                   $ref: '#/components/schemas/save_advertiser_request_BrandCountries'
                   type: array
                 preferredTimezone:
-                  description: IANA timezone for future account provisioning and reporting.
+                  description: IANA reporting timezone; defaults to brandCountries zone or UTC.
                   type: string
                   minLength: 1
                   maxLength: 64

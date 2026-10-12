@@ -6419,7 +6419,10 @@ export type JsonValue = null | boolean | number | string | JsonValue[] | { [key:
 
 export type OpenAdvertisersPageData = {
     body: {
-        [key: string]: never;
+        /**
+         * Use "add" to open the Add advertiser form.
+         */
+        intent?: 'add';
     };
     headers?: {
         /**
@@ -6497,7 +6500,7 @@ export type OpenAdvertisersPageResponses = {
      */
     200: {
         data: {
-            [key: string]: never;
+            intent?: 'add';
         };
         error: null;
     };
@@ -9399,7 +9402,7 @@ export type SaveAdvertiserData = {
          */
         confirmationToken?: string;
         /**
-         * ISO 4217, e.g. "EUR". Optional on create; defaults to "USD" when omitted. Update to change.
+         * ISO 4217, e.g. "EUR". Optional on create; defaults to brandCountries currency, else "USD". Update to change.
          */
         primaryCurrency?: string;
         /**
@@ -9407,7 +9410,7 @@ export type SaveAdvertiserData = {
          */
         brandCountries?: SaveAdvertiserRequestBrandCountries;
         /**
-         * IANA timezone for future account provisioning and reporting.
+         * IANA reporting timezone; defaults to brandCountries zone or UTC.
          */
         preferredTimezone?: string;
         /**

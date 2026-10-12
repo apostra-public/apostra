@@ -9800,10 +9800,11 @@ class Ocr(TypedDict):
     '\n    Material confidence field.\n    '
 
 class OpenAdvertisersPageInput(TypedDict):
-    pass
+    intent: NotRequired[Literal['add']]
+    '\n    Use "add" to open the Add advertiser form.\n    '
 
 class OpenAdvertisersPageResult(TypedDict):
-    pass
+    intent: NotRequired[Literal['add']]
 
 class OpenAgentPageInput(TypedDict):
     agentId: str
@@ -11954,11 +11955,11 @@ class SaveAdvertiserInput(TypedDict):
     confirmationToken: NotRequired[str]
     '\n    Brand-change preview token, supplied only after the human confirms the exact change.\n    '
     primaryCurrency: NotRequired[str]
-    '\n    ISO 4217, e.g. "EUR". Optional on create; defaults to "USD" when omitted. Update to change.\n    '
+    '\n    ISO 4217, e.g. "EUR". Optional on create; defaults to brandCountries currency, else "USD". Update to change.\n    '
     brandCountries: NotRequired[list[str]]
     '\n    ISO 3166-1 alpha-2 brand-market countries; empty = all countries for seller matching.\n    '
     preferredTimezone: NotRequired[str]
-    '\n    IANA timezone for future account provisioning and reporting.\n    '
+    '\n    IANA reporting timezone; defaults to brandCountries zone or UTC.\n    '
     channels: NotRequired[list[Literal['display', 'olv', 'social', 'search', 'ctv', 'linear_tv', 'radio', 'streaming_audio', 'podcast', 'dooh', 'ooh', 'print', 'cinema', 'email', 'gaming', 'retail_media', 'influencer', 'affiliate', 'product_placement', 'sponsored_intelligence']]]
     '\n    Replacement AdCP channel preferences; empty = all channels for seller matching.\n    '
     footprintProposal: NotRequired[FootprintProposal]
