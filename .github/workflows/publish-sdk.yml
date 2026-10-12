@@ -133,11 +133,11 @@ jobs:
       # For the first npm package creation only, a scope owner supplies a
       # short-lived environment secret. Remove it after configuring OIDC.
       - if: (inputs.targets == 'typescript' || inputs.targets == 'both') && steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists != 'true'
-        run: npm publish artifacts/*.tgz --access public --provenance --ignore-scripts
+        run: npm publish ./artifacts/*.tgz --access public --provenance --ignore-scripts
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_BOOTSTRAP_TOKEN }}
       - if: (inputs.targets == 'typescript' || inputs.targets == 'both') && steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists == 'true'
-        run: npm publish artifacts/*.tgz --access public --provenance --ignore-scripts
+        run: npm publish ./artifacts/*.tgz --access public --provenance --ignore-scripts
       - if: inputs.targets == 'python' || inputs.targets == 'both'
         run: mkdir -p python-dist && cp artifacts/*.whl artifacts/*.tar.gz python-dist/
       - if: (inputs.targets == 'python' || inputs.targets == 'both') && steps.registry.outputs.pypi_version_exists != 'true'
@@ -175,13 +175,22 @@ jobs:
           trap 'rm -rf "$install_dir"' EXIT
           assets=()
           if [[ "$TARGETS" == 'typescript' || "$TARGETS" == 'both' ]]; then
-            npm install --prefix "$install_dir" --ignore-scripts "@apostra/sdk@$SDK_VERSION"
+            # A just-published version can take a few minutes to become installable.
+            for attempt in 1 2 3 4 5 6 7 8 9 10; do
+              npm install --prefix "$install_dir" --ignore-scripts "@apostra/sdk@$SDK_VERSION" && break
+              if [[ "$attempt" == 10 ]]; then exit 1; fi
+              sleep 30
+            done
             node sdk/testing/verify-installed.mjs sdk/release/manifest.json "$install_dir"
             assets+=(artifacts/*.tgz)
           fi
           if [[ "$TARGETS" == 'python' || "$TARGETS" == 'both' ]]; then
             uv venv --python 3.12 "$install_dir/venv"
-            uv pip install --python "$install_dir/venv/bin/python" "apostra==$SDK_VERSION"
+            for attempt in 1 2 3 4 5 6 7 8 9 10; do
+              uv pip install --refresh --python "$install_dir/venv/bin/python" "apostra==$SDK_VERSION" && break
+              if [[ "$attempt" == 10 ]]; then exit 1; fi
+              sleep 30
+            done
             node sdk/testing/verify-installed.mjs sdk/release/manifest.json "$install_dir" "$install_dir/venv/bin/python"
             assets+=(artifacts/*.whl artifacts/*.tar.gz)
           fi

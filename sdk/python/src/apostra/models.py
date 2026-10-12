@@ -208,6 +208,17 @@ class Age1(TypedDict):
     min: JsonValue
     '\n    Minimum age.\n    '
 
+class Age11(TypedDict):
+    """
+    Closed range of whole ages, 18-120.
+    """
+    min: int
+    '\n    Youngest age reached, 18-120.\n    '
+    max: int
+    '\n    Oldest age reached, 18-120.\n    '
+    include_unknown: bool
+    '\n    Also reaches people of unknown age.\n    '
+
 class Age2(TypedDict):
     accepted_verification_methods: JsonValue
     '\n    Methods.\n    '
@@ -1450,6 +1461,13 @@ class DemandContact(TypedDict):
     '\n    Name of the buyer-facing demand contact.\n    '
     email: str
     '\n    Email address of the buyer-facing demand contact.\n    '
+
+class DemographicPredicate(TypedDict):
+    """
+    AdCP demographic_predicate with a closed age range.
+    """
+    age: Age11
+    '\n    Closed range of whole ages, 18-120.\n    '
 
 class DemographicTargetingCursor(TypedDict):
     pagePath: list[str]
@@ -8788,6 +8806,21 @@ IncludeItem: TypeAlias = str
 
 IncludePattern: TypeAlias = str
 
+class IncludedAgeSignal(TypedDict):
+    """
+    Fixed age cohort every impression reaches (AdCP included signal). null clears; omit keeps.
+    """
+    demographic_predicate: DemographicPredicate
+    '\n    AdCP demographic_predicate with a closed age range.\n    '
+    age_determination_bases: list[Literal['verified', 'declared']]
+    '\n    How ages are known: verified or declared. Never inferred.\n    '
+    data_provider: str
+    '\n    Who supplied the age data.\n    '
+    signal_id: NotRequired[str]
+    '\n    Defaults to age_<min>_<max>.\n    '
+    name: NotRequired[str]
+    "\n    Defaults to 'Ages <min>-<max>'.\n    "
+
 class InclusionPropertyList(TypedDict):
     filterSupported: bool
     receiptMatchedCount: NotRequired[int]
@@ -11955,11 +11988,11 @@ class SaveAdvertiserInput(TypedDict):
     confirmationToken: NotRequired[str]
     '\n    Brand-change preview token, supplied only after the human confirms the exact change.\n    '
     primaryCurrency: NotRequired[str]
-    '\n    ISO 4217, e.g. "EUR". Optional on create; defaults to "USD" when omitted. Update to change.\n    '
+    '\n    ISO 4217, e.g. "EUR". Optional on create; defaults to brandCountries currency, else "USD". Update to change.\n    '
     brandCountries: NotRequired[list[str]]
     '\n    ISO 3166-1 alpha-2 brand-market countries; empty = all countries for seller matching.\n    '
     preferredTimezone: NotRequired[str]
-    '\n    IANA timezone for future account provisioning and reporting.\n    '
+    '\n    IANA reporting timezone; defaults to brandCountries zone or UTC.\n    '
     channels: NotRequired[list[Literal['display', 'olv', 'social', 'search', 'ctv', 'linear_tv', 'radio', 'streaming_audio', 'podcast', 'dooh', 'ooh', 'print', 'cinema', 'email', 'gaming', 'retail_media', 'influencer', 'affiliate', 'product_placement', 'sponsored_intelligence']]]
     '\n    Replacement AdCP channel preferences; empty = all channels for seller matching.\n    '
     footprintProposal: NotRequired[FootprintProposal]
@@ -15890,6 +15923,10 @@ class SaveWholesaleProductInput(TypedDict):
     '\n    Canonical format: formatKind and params; publisher entries need publisherDomain and formatOptionId.\n    '
     pricingOptions: NotRequired[list[PricingOption]]
     '\n    Price offers. A fixed rate is a complete price; omitting yields an auction with no floor.\n    '
+    includedAgeSignal: NotRequired[IncludedAgeSignal | None]
+    '\n    Fixed age cohort every impression reaches (AdCP included signal). null clears; omit keeps.\n    '
+    audienceEvidence: NotRequired[list[dict[str, JsonValue]] | None]
+    '\n    AdCP 3.2 audience_evidence entries: planning evidence, never targeting. null clears; omit keeps.\n    '
     dryRun: NotRequired[bool]
     '\n    Validate a new product and report findings without writing it. Creates only.\n    '
     delete: NotRequired[Literal[True]]
