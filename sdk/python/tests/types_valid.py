@@ -1,7 +1,7 @@
 from apostra import Apostra, AsyncApostra
-from apostra.models import EvidenceUrl, SaveRfpRequestJ, SaveRfpRequestRepresentationLocale, SaveCampaignInput, GetDeliveryResult, SaveLibraryRequestInput, SaveCreativeSessionInput, SaveDimensionInput, SaveDimensionResult, SearchInput, GetInput, SaveMaterialInput, TargetingOverlay3, RequestBuyerChildAccountInput
+from apostra.models import EvidenceUrl, SaveRfpRequestJsonValue, RepresentationLocale, SaveCampaignInput, GetDeliveryResult, SaveLibraryRequestInput, SaveCreativeSessionInput, SaveDimensionInput, SaveDimensionResult, SearchInput, GetInput, SaveMaterialInput, TargetingOverlay3, RequestBuyerChildAccountInput
 
-nested: SaveRfpRequestJ = {'deep': [{'nested': ['value', None, 2, True]}]}
+nested: SaveRfpRequestJsonValue = {'deep': [{'nested': ['value', None, 2, True]}]}
 campaign: SaveCampaignInput = {'idempotencyKey': 'k', 'channelGroups': [{'channelGroupId': 'g', 'presetId': 'ctv'}]}
 buyer_child: RequestBuyerChildAccountInput = {'parentId': 'parent', 'name': 'Buyer'}
 
@@ -17,8 +17,8 @@ def typed_dimension_fields(result: SaveDimensionResult) -> tuple[str, float]:
 async def typed_async(client: AsyncApostra) -> GetDeliveryResult:
     return await client.get_delivery({})
 
-library: SaveLibraryRequestInput = {'action': 'close', 'id': 'r', 'closedBy': 'upload', 'materialId': 'm'}
-creative: SaveCreativeSessionInput = {'operation': 'select_output', 'campaignId': 'c', 'sessionId': 's', 'variantId': 'v', 'expectedRevision': 1}
+library: SaveLibraryRequestInput = {'action': 'close', 'id': 'r', 'closedBy': 'upload', 'closingMaterialId': 'm'}
+creative: SaveCreativeSessionInput = {'scope': 'campaign', 'operation': 'select_output', 'campaignId': 'c', 'sessionId': 's', 'variantId': 'v', 'expectedRevision': 1}
 dimension: SaveDimensionInput = {'key': 'market', 'name': 'Market', 'valuesMode': 'open', 'appliesTo': ['campaign'], 'idempotencyKey': 'k'}
 search: SearchInput = {'kind': 'creative', 'filter': {'advertiserId': 'a'}}
 get: GetInput = {'kind': 'catalog', 'id': 'c', 'advertiserId': 'a'}
@@ -26,4 +26,4 @@ material: SaveMaterialInput = {'action': 'replace_source', 'materialId': 'm', 'e
 postal_targeting: TargetingOverlay3 = {'geo_postal_areas': [{'country': 'US', 'system': 'zip', 'values': ['94105']}]}
 postal_targeting_fallback: TargetingOverlay3 = {'geo_postal_areas': [{'country': 'NZ', 'system': 'custom', 'values': ['00100']}]}
 evidence_url: EvidenceUrl = 'https://example.test/evidence'
-locale: SaveRfpRequestRepresentationLocale = 'en-GB'
+locale: RepresentationLocale = 'en-GB'
