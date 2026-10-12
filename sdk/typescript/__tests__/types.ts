@@ -2,8 +2,11 @@ import type { SaveRfpRequestJ } from '../src/generated/types.gen.js'
 import {
   Apostra,
   type GetDeliveryResult,
+  type ResponseDetails,
+  type SaveBillingInput,
   type SaveCampaignInput,
   type SaveDimensionResult,
+  type SaveEventSourceResult,
   type SaveRfpInput,
 } from '../src/index.js'
 
@@ -19,23 +22,46 @@ const badCampaign: SaveCampaignInput = {
   // @ts-expect-error preset and custom inventory branches cannot mix
   channelGroups: [{ channelGroupId: 'g', presetId: 'ctv', inventory: {} }],
 }
+const billing: SaveBillingInput = {
+  operation: 'payment_authority',
+  paymentAuthority: { action: 'status' },
+}
+const badBilling: SaveBillingInput = {
+  operation: 'terms',
+  terms: { accepted: true, acceptedVersion: 'v1-1' },
+  // @ts-expect-error billing operation branches reject sibling fields
+  paymentTerms: 'net_60',
+}
 const api = new Apostra({ apiKey: 'test' })
 const delivery: Promise<GetDeliveryResult> = api.getDelivery({})
+const deliveryWithResponse: Promise<ResponseDetails<GetDeliveryResult>> =
+  api.getDeliveryWithResponse({})
+function eventSourceFields(result: SaveEventSourceResult): [string, string] {
+  return [result.advertiserId, result.eventSources[0]?.eventSourceId ?? '']
+}
 function dimensionFields(result: SaveDimensionResult): [string, number] {
   return [result.object.id, result.object.usage.advertiser]
 }
 // @ts-expect-error generated write methods require a caller-owned key
-const writeWithoutKey = api.saveAsk({ id: 'ask', requesterState: 'accepted' })
+const writeWithoutKey = api.saveAsk({
+  id: 'ask',
+  requester: { state: 'accepted' },
+})
 // @ts-expect-error detailed dispatch must also require a caller-owned key
 const detailedWriteWithoutKey = api.requestDetailed('save_ask', {
   id: 'ask',
-  requesterState: 'accepted',
+  requester: { state: 'accepted' },
 })
 const detailedWrite = api.requestDetailed(
   'save_ask',
-  { id: 'ask', requesterState: 'accepted' },
+  { id: 'ask', requester: { state: 'accepted' } },
   { idempotencyKey: 'ask' },
 )
+// @ts-expect-error generated response variants preserve write-key requirements
+const writeWithResponseWithoutKey = api.saveAskWithResponse({
+  id: 'ask',
+  requester: { state: 'accepted' },
+})
 // @ts-expect-error missing action fields
 const bad: SaveRfpInput = { action: 'feedback' }
 void [
@@ -43,10 +69,15 @@ void [
   invalid,
   campaign,
   badCampaign,
+  billing,
+  badBilling,
   delivery,
+  deliveryWithResponse,
+  eventSourceFields,
   dimensionFields,
   writeWithoutKey,
   detailedWriteWithoutKey,
   detailedWrite,
+  writeWithResponseWithoutKey,
   bad,
 ]
