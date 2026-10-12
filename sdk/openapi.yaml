@@ -26434,7 +26434,9 @@ paths:
                   minLength: 64
                   maxLength: 64
                 primaryCurrency:
-                  description: ISO 4217, e.g. "EUR". Optional on create; defaults to "USD" when omitted. Update to change.
+                  description: >-
+                    ISO 4217, e.g. "EUR". Optional on create; defaults to brandCountries currency, else "USD". Update to
+                    change.
                   type: string
                   minLength: 3
                   maxLength: 3
@@ -26444,7 +26446,7 @@ paths:
                   $ref: '#/components/schemas/save_advertiser_request_BrandCountries'
                   type: array
                 preferredTimezone:
-                  description: IANA timezone for future account provisioning and reporting.
+                  description: IANA reporting timezone; defaults to brandCountries zone or UTC.
                   type: string
                   minLength: 1
                   maxLength: 64
@@ -46563,6 +46565,97 @@ paths:
                     required:
                       - deliveryType
                     additionalProperties: false
+                includedAgeSignal:
+                  description: Fixed age cohort every impression reaches (AdCP included signal). null clears; omit keeps.
+                  anyOf:
+                    - type: object
+                      properties:
+                        demographic_predicate:
+                          type: object
+                          properties:
+                            age:
+                              type: object
+                              properties:
+                                min:
+                                  type: integer
+                                  minimum: 18
+                                  maximum: 120
+                                  description: Youngest age reached, 18-120.
+                                max:
+                                  type: integer
+                                  minimum: 18
+                                  maximum: 120
+                                  description: Oldest age reached, 18-120.
+                                include_unknown:
+                                  type: boolean
+                                  description: Also reaches people of unknown age.
+                              required:
+                                - min
+                                - max
+                                - include_unknown
+                              additionalProperties: false
+                              description: Closed range of whole ages, 18-120.
+                          required:
+                            - age
+                          additionalProperties: false
+                          description: AdCP demographic_predicate with a closed age range.
+                        age_determination_bases:
+                          minItems: 1
+                          type: array
+                          items:
+                            type: string
+                            enum:
+                              - verified
+                              - declared
+                          description: 'How ages are known: verified or declared. Never inferred.'
+                        data_provider:
+                          type: string
+                          minLength: 1
+                          maxLength: 200
+                          description: Who supplied the age data.
+                        signal_id:
+                          description: Defaults to age_<min>_<max>.
+                          type: string
+                          maxLength: 100
+                          pattern: ^[a-zA-Z0-9_-]+$
+                        name:
+                          description: Defaults to 'Ages <min>-<max>'.
+                          type: string
+                          minLength: 1
+                          maxLength: 200
+                      required:
+                        - demographic_predicate
+                        - age_determination_bases
+                        - data_provider
+                      additionalProperties: false
+                    - type: 'null'
+                audienceEvidence:
+                  description: 'AdCP 3.2 audience_evidence entries: planning evidence, never targeting. null clears; omit keeps.'
+                  anyOf:
+                    - minItems: 1
+                      type: array
+                      items:
+                        type: object
+                        propertyNames:
+                          type: string
+                        additionalProperties: {}
+                        required:
+                          - evidence_id
+                          - snapshot_id
+                          - version
+                          - content_digest
+                          - audience
+                          - relationship
+                          - value
+                          - unit
+                          - baseline
+                          - evidence_type
+                          - methodology
+                          - subject_type
+                          - provider
+                          - measurement_window
+                          - last_updated
+                    - type: 'null'
                 dryRun:
                   description: Validate a new product and report findings without writing it. Creates only.
                   type: boolean
