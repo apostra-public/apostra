@@ -27816,13 +27816,11 @@ paths:
     post:
       operationId: save_agent
       summary: >-
-        In a Developer account, register a Sales or Creative Agent, or rename an owned Agent. A registration requires an
-        account administrator and an idempotency key. In a Seller account, confirm or correct one Sales Agent product
-        mode.
+        Save a Sales Agent mode, register an Agent, or rename an owned Agent. Select seller_save, developer_create, or
+        developer_update.
       description: >-
-        In a Developer account, register a Sales or Creative Agent, or rename an owned Agent. A registration requires an
-        account administrator and an idempotency key. In a Seller account, confirm or correct one Sales Agent product
-        mode.
+        Save a Sales Agent mode, register an Agent, or rename an owned Agent. Select seller_save, developer_create, or
+        developer_update.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -27843,88 +27841,11 @@ paths:
         content:
           application/json:
             schema:
-              type: object
+              oneOf:
+                - $ref: '#/components/schemas/save_agent_request_SaveAgentSellerSaveInput'
+                - $ref: '#/components/schemas/save_agent_request_SaveAgentDeveloperCreateInput'
+                - $ref: '#/components/schemas/save_agent_request_SaveAgentDeveloperUpdateInput'
               properties:
-                agentId:
-                  description: Agent ID. Required for Seller mode confirmation or a Developer rename.
-                  type: string
-                  format: uuid
-                  pattern: >-
-                    ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
-                sourceId:
-                  description: Optional seller-owned inventory Source ID for Seller mode confirmation.
-                  type: string
-                  minLength: 1
-                  maxLength: 255
-                productMode:
-                  description: 'Required Seller product mode: WHOLESALE, COMPOSING, or BOTH.'
-                  type: string
-                  enum:
-                    - WHOLESALE
-                    - COMPOSING
-                    - BOTH
-                reason:
-                  description: Required reason for a Seller product-mode confirmation or correction.
-                  type: string
-                  minLength: 1
-                  maxLength: 2000
-                kind:
-                  description: 'Required kind for a new Developer Agent: SALES or CREATIVE.'
-                  type: string
-                  enum:
-                    - SALES
-                    - CREATIVE
-                displayName:
-                  description: Required name for a new Developer Agent or owned Agent rename.
-                  type: string
-                  minLength: 1
-                  maxLength: 255
-                operator:
-                  description: Optional operator for a new Developer Agent.
-                  oneOf:
-                    - type: object
-                      properties:
-                        kind:
-                          type: string
-                          const: EXISTING
-                          description: Reuse a claimed provider operator.
-                        operatorUid:
-                          type: string
-                          format: uuid
-                          pattern: >-
-                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
-                          description: Claimed provider operator ID to reuse.
-                      required:
-                        - kind
-                        - operatorUid
-                      additionalProperties: false
-                      description: Reuse an existing claimed provider operator.
-                    - type: object
-                      properties:
-                        kind:
-                          type: string
-                          const: NEW
-                          description: Create a provider operator.
-                        displayName:
-                          type: string
-                          minLength: 1
-                          maxLength: 255
-                          description: Name for the new provider operator.
-                      required:
-                        - kind
-                        - displayName
-                      additionalProperties: false
-                      description: Create a new provider operator.
-                endpoint:
-                  description: Reserved for an immutable implementation revision on the Agent Page.
-                  type: string
-                  format: uri
-                idempotencyKey:
-                  description: Required unique key for a new Developer Agent registration.
-                  type: string
-                  format: uuid
-                  pattern: >-
-                    ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -27932,7 +27853,6 @@ paths:
                       minimum: 1
                     - type: string
                       pattern: ^[1-9][0-9]*$
-              additionalProperties: false
       responses:
         '200':
           description: Typed operation result
@@ -27949,6 +27869,9 @@ paths:
                           kind:
                             type: string
                             const: agent
+                          outcome:
+                            type: string
+                            const: seller_saved
                           object:
                             type: object
                             properties:
@@ -27977,6 +27900,7 @@ paths:
                             additionalProperties: false
                         required:
                           - kind
+                          - outcome
                           - object
                         additionalProperties: false
                       - type: object
@@ -27984,6 +27908,9 @@ paths:
                           kind:
                             type: string
                             const: agent
+                          outcome:
+                            type: string
+                            const: developer_created
                           object:
                             type: object
                             properties:
@@ -28012,6 +27939,7 @@ paths:
                             additionalProperties: false
                         required:
                           - kind
+                          - outcome
                           - object
                         additionalProperties: false
                       - type: object
@@ -28019,6 +27947,9 @@ paths:
                           kind:
                             type: string
                             const: agent
+                          outcome:
+                            type: string
+                            const: developer_updated
                           object:
                             type: object
                             properties:
@@ -28035,6 +27966,7 @@ paths:
                             additionalProperties: false
                         required:
                           - kind
+                          - outcome
                           - object
                         additionalProperties: false
                   error:
@@ -29526,12 +29458,8 @@ paths:
   /tools/save_buyer_agent:
     post:
       operationId: save_buyer_agent
-      summary: >-
-        Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent
-        per call.
-      description: >-
-        Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent
-        per call.
+      summary: Create or manage one buyer agent.
+      description: Create or manage one buyer agent.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -29552,17 +29480,19 @@ paths:
         content:
           application/json:
             schema:
-              anyOf:
+              oneOf:
                 - type: object
                   properties:
+                    operation:
+                      $ref: '#/components/schemas/save_buyer_agent_request_SaveBuyerAgentCreateOperation'
                     displayName:
                       $ref: '#/components/schemas/save_buyer_agent_request_DisplayName'
                     kind:
-                      description: external is available. hosted creation is not available yet.
                       type: string
                       enum:
                         - external
                         - hosted
+                      description: external is available. hosted creation is not available yet.
                     expectedAccountId:
                       anyOf:
                         - type: integer
@@ -29570,10 +29500,13 @@ paths:
                         - type: string
                           pattern: ^[1-9][0-9]*$
                   required:
+                    - operation
                     - displayName
                   additionalProperties: false
                 - type: object
                   properties:
+                    operation:
+                      $ref: '#/components/schemas/save_buyer_agent_request_SaveBuyerAgentUpdateDisplayNameOperation'
                     id:
                       $ref: '#/components/schemas/save_buyer_agent_request_Id'
                     displayName:
@@ -29585,11 +29518,14 @@ paths:
                         - type: string
                           pattern: ^[1-9][0-9]*$
                   required:
+                    - operation
                     - id
                     - displayName
                   additionalProperties: false
                 - type: object
                   properties:
+                    operation:
+                      $ref: '#/components/schemas/save_buyer_agent_request_SaveBuyerAgentUpdateAccessOperation'
                     id:
                       $ref: '#/components/schemas/save_buyer_agent_request_Id'
                     access:
@@ -29625,6 +29561,7 @@ paths:
                         - expectedAccessRevision
                         - advertisers
                       additionalProperties: false
+                      description: Complete replacement list of advertiser grants.
                     expectedAccountId:
                       anyOf:
                         - type: integer
@@ -29632,11 +29569,14 @@ paths:
                         - type: string
                           pattern: ^[1-9][0-9]*$
                   required:
+                    - operation
                     - id
                     - access
                   additionalProperties: false
                 - type: object
                   properties:
+                    operation:
+                      $ref: '#/components/schemas/save_buyer_agent_request_SaveBuyerAgentLifecycleOperation'
                     id:
                       $ref: '#/components/schemas/save_buyer_agent_request_Id'
                     lifecycle:
@@ -29693,6 +29633,7 @@ paths:
                             - expectedLifecycleState
                             - confirmationText
                           additionalProperties: false
+                      description: One state-fenced suspend, resume, or retire action.
                     expectedAccountId:
                       anyOf:
                         - type: integer
@@ -29700,16 +29641,20 @@ paths:
                         - type: string
                           pattern: ^[1-9][0-9]*$
                   required:
+                    - operation
                     - id
                     - lifecycle
                   additionalProperties: false
                 - type: object
                   properties:
+                    operation:
+                      $ref: '#/components/schemas/save_buyer_agent_request_SaveBuyerAgentCredentialHandoffOperation'
                     id:
                       $ref: '#/components/schemas/save_buyer_agent_request_Id'
                     credentialHandoff:
                       type: boolean
                       const: true
+                      description: Prepare a safe reference for the administrator credential ceremony; never returns a secret.
                     expectedAccountId:
                       anyOf:
                         - type: integer
@@ -29717,6 +29662,7 @@ paths:
                         - type: string
                           pattern: ^[1-9][0-9]*$
                   required:
+                    - operation
                     - id
                     - credentialHandoff
                   additionalProperties: false
@@ -70664,6 +70610,165 @@ components:
       minLength: 1
       maxLength: 253
       description: Domain.
+    save_agent_request_SaveAgentSellerSaveInput:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/save_agent_request_SaveAgentSellerSaveOperation'
+        agentId:
+          type: string
+          format: uuid
+          pattern: >-
+            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+          description: Sales Agent ID returned by search or get.
+        sourceId:
+          description: >-
+            Optional seller-owned inventory Source ID. Omit it when one binding matches; pass it to select one when
+            several bindings match. Omit it for an Agent-owner confirmation, which rejects sourceId.
+          type: string
+          minLength: 1
+          maxLength: 255
+        productMode:
+          type: string
+          enum:
+            - WHOLESALE
+            - COMPOSING
+            - BOTH
+          description: 'Product mode to confirm or correct: WHOLESALE, COMPOSING, or BOTH.'
+        reason:
+          type: string
+          minLength: 1
+          maxLength: 2000
+          description: Why this product-mode confirmation or correction is needed.
+        expectedAccountId:
+          anyOf:
+            - type: integer
+              minimum: 1
+            - type: string
+              pattern: ^[1-9][0-9]*$
+      required:
+        - operation
+        - agentId
+        - productMode
+        - reason
+      additionalProperties: false
+    save_agent_request_SaveAgentSellerSaveOperation:
+      type: string
+      const: seller_save
+      description: Confirm or correct a Seller product mode.
+    save_agent_request_SaveAgentDeveloperCreateInput:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/save_agent_request_SaveAgentDeveloperCreateOperation'
+        kind:
+          type: string
+          enum:
+            - SALES
+            - CREATIVE
+          description: 'Kind for a new Agent: SALES or CREATIVE.'
+        displayName:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: Name for a new Agent.
+        operator:
+          description: Operator for a new Agent. Omit it to create an operator with the Agent name.
+          oneOf:
+            - type: object
+              properties:
+                kind:
+                  type: string
+                  const: EXISTING
+                  description: Reuse a claimed provider operator.
+                operatorUid:
+                  type: string
+                  format: uuid
+                  pattern: >-
+                    ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                  description: Claimed provider operator ID to reuse.
+              required:
+                - kind
+                - operatorUid
+              additionalProperties: false
+              description: Reuse an existing claimed provider operator.
+            - type: object
+              properties:
+                kind:
+                  type: string
+                  const: NEW
+                  description: Create a provider operator.
+                displayName:
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                  description: Name for the new provider operator.
+              required:
+                - kind
+                - displayName
+              additionalProperties: false
+              description: Create a new provider operator.
+        endpoint:
+          description: Reserved for an immutable implementation revision; register endpoints through the Agent Page.
+          type: string
+          format: uri
+        idempotencyKey:
+          type: string
+          format: uuid
+          pattern: >-
+            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+          description: Unique key for a new Agent registration.
+        expectedAccountId:
+          anyOf:
+            - type: integer
+              minimum: 1
+            - type: string
+              pattern: ^[1-9][0-9]*$
+      required:
+        - operation
+        - kind
+        - displayName
+        - idempotencyKey
+      additionalProperties: false
+    save_agent_request_SaveAgentDeveloperCreateOperation:
+      type: string
+      const: developer_create
+      description: Register a Developer-owned Agent.
+    save_agent_request_SaveAgentDeveloperUpdateInput:
+      type: object
+      properties:
+        operation:
+          $ref: '#/components/schemas/save_agent_request_SaveAgentDeveloperUpdateOperation'
+        agentId:
+          type: string
+          format: uuid
+          pattern: >-
+            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+          description: Owned Agent ID to rename.
+        displayName:
+          type: string
+          minLength: 1
+          maxLength: 255
+          description: New name for the owned Agent.
+        endpoint:
+          description: Reserved for an immutable implementation revision; register endpoints through the Agent Page.
+          type: string
+          format: uri
+        expectedAccountId:
+          anyOf:
+            - type: integer
+              minimum: 1
+            - type: string
+              pattern: ^[1-9][0-9]*$
+      required:
+        - operation
+        - agentId
+        - displayName
+      additionalProperties: false
+    save_agent_request_SaveAgentDeveloperUpdateOperation:
+      type: string
+      const: developer_update
+      description: Rename a Developer-owned Agent.
     save_ask_success_AskId:
       type:
         - string
@@ -70814,14 +70919,36 @@ components:
       propertyNames:
         type: string
       additionalProperties: {}
+    save_buyer_agent_request_SaveBuyerAgentCreateOperation:
+      type: string
+      const: create
+      description: Create an external buyer agent.
+    save_buyer_agent_request_SaveBuyerAgentUpdateDisplayNameOperation:
+      type: string
+      const: update_display_name
+      description: Change the buyer-agent display name.
+    save_buyer_agent_request_SaveBuyerAgentUpdateAccessOperation:
+      type: string
+      const: update_access
+      description: Replace the exact advertiser access list.
+    save_buyer_agent_request_SaveBuyerAgentLifecycleOperation:
+      type: string
+      const: lifecycle
+      description: Suspend, resume, or retire the buyer agent.
+    save_buyer_agent_request_SaveBuyerAgentCredentialHandoffOperation:
+      type: string
+      const: credential_handoff
+      description: Prepare the human credential handoff ceremony.
     save_buyer_agent_request_DisplayName:
       type: string
       minLength: 1
       maxLength: 255
+      description: Name for the buyer agent.
     save_buyer_agent_request_Id:
       type: string
       minLength: 1
       maxLength: 255
+      description: Buyer-agent principal ID.
     save_buyer_agent_request_LifecycleConfirmationText:
       type: string
       minLength: 1

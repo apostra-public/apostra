@@ -10204,63 +10204,7 @@ export type SaveAdvertiserResponses = {
 };
 
 export type SaveAgentData = {
-    body: {
-        /**
-         * Agent ID. Required for Seller mode confirmation or a Developer rename.
-         */
-        agentId?: string;
-        /**
-         * Optional seller-owned inventory Source ID for Seller mode confirmation.
-         */
-        sourceId?: string;
-        /**
-         * Required Seller product mode: WHOLESALE, COMPOSING, or BOTH.
-         */
-        productMode?: 'WHOLESALE' | 'COMPOSING' | 'BOTH';
-        /**
-         * Required reason for a Seller product-mode confirmation or correction.
-         */
-        reason?: string;
-        /**
-         * Required kind for a new Developer Agent: SALES or CREATIVE.
-         */
-        kind?: 'SALES' | 'CREATIVE';
-        /**
-         * Required name for a new Developer Agent or owned Agent rename.
-         */
-        displayName?: string;
-        /**
-         * Optional operator for a new Developer Agent.
-         */
-        operator?: {
-            /**
-             * Reuse a claimed provider operator.
-             */
-            kind: 'EXISTING';
-            /**
-             * Claimed provider operator ID to reuse.
-             */
-            operatorUid: string;
-            displayName?: never;
-        } | {
-            /**
-             * Create a provider operator.
-             */
-            kind: 'NEW';
-            /**
-             * Name for the new provider operator.
-             */
-            displayName: string;
-            operatorUid?: never;
-        };
-        /**
-         * Reserved for an immutable implementation revision on the Agent Page.
-         */
-        endpoint?: string;
-        /**
-         * Required unique key for a new Developer Agent registration.
-         */
-        idempotencyKey?: string;
+    body: (SaveAgentRequestSaveAgentSellerSaveInput | SaveAgentRequestSaveAgentDeveloperCreateInput | SaveAgentRequestSaveAgentDeveloperUpdateInput) & {
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -10338,6 +10282,104 @@ export type SaveAgentErrors = {
     503: V3ToolErrorResponse;
 };
 
+export type SaveAgentRequestSaveAgentDeveloperCreateInput = {
+    operation: SaveAgentRequestSaveAgentDeveloperCreateOperation;
+    /**
+     * Kind for a new Agent: SALES or CREATIVE.
+     */
+    kind: 'SALES' | 'CREATIVE';
+    /**
+     * Name for a new Agent.
+     */
+    displayName: string;
+    /**
+     * Operator for a new Agent. Omit it to create an operator with the Agent name.
+     */
+    operator?: {
+        /**
+         * Reuse a claimed provider operator.
+         */
+        kind: 'EXISTING';
+        /**
+         * Claimed provider operator ID to reuse.
+         */
+        operatorUid: string;
+        displayName?: never;
+    } | {
+        /**
+         * Create a provider operator.
+         */
+        kind: 'NEW';
+        /**
+         * Name for the new provider operator.
+         */
+        displayName: string;
+        operatorUid?: never;
+    };
+    /**
+     * Reserved for an immutable implementation revision; register endpoints through the Agent Page.
+     */
+    endpoint?: string;
+    /**
+     * Unique key for a new Agent registration.
+     */
+    idempotencyKey: string;
+    expectedAccountId?: number | string;
+};
+
+/**
+ * Register a Developer-owned Agent.
+ */
+export type SaveAgentRequestSaveAgentDeveloperCreateOperation = 'developer_create';
+
+export type SaveAgentRequestSaveAgentDeveloperUpdateInput = {
+    operation: SaveAgentRequestSaveAgentDeveloperUpdateOperation;
+    /**
+     * Owned Agent ID to rename.
+     */
+    agentId: string;
+    /**
+     * New name for the owned Agent.
+     */
+    displayName: string;
+    /**
+     * Reserved for an immutable implementation revision; register endpoints through the Agent Page.
+     */
+    endpoint?: string;
+    expectedAccountId?: number | string;
+};
+
+/**
+ * Rename a Developer-owned Agent.
+ */
+export type SaveAgentRequestSaveAgentDeveloperUpdateOperation = 'developer_update';
+
+export type SaveAgentRequestSaveAgentSellerSaveInput = {
+    operation: SaveAgentRequestSaveAgentSellerSaveOperation;
+    /**
+     * Sales Agent ID returned by search or get.
+     */
+    agentId: string;
+    /**
+     * Optional seller-owned inventory Source ID. Omit it when one binding matches; pass it to select one when several bindings match. Omit it for an Agent-owner confirmation, which rejects sourceId.
+     */
+    sourceId?: string;
+    /**
+     * Product mode to confirm or correct: WHOLESALE, COMPOSING, or BOTH.
+     */
+    productMode: 'WHOLESALE' | 'COMPOSING' | 'BOTH';
+    /**
+     * Why this product-mode confirmation or correction is needed.
+     */
+    reason: string;
+    expectedAccountId?: number | string;
+};
+
+/**
+ * Confirm or correct a Seller product mode.
+ */
+export type SaveAgentRequestSaveAgentSellerSaveOperation = 'seller_save';
+
 export type SaveAgentResponse = SaveAgentResponses[keyof SaveAgentResponses];
 
 export type SaveAgentResponses = {
@@ -10347,6 +10389,7 @@ export type SaveAgentResponses = {
     200: {
         data: {
             kind: 'agent';
+            outcome: 'seller_saved';
             object: {
                 agentId: string;
                 productMode: 'WHOLESALE' | 'COMPOSING' | 'BOTH';
@@ -10355,6 +10398,7 @@ export type SaveAgentResponses = {
             };
         } | {
             kind: 'agent';
+            outcome: 'developer_created';
             object: {
                 agentId: string;
                 displayName: string;
@@ -10364,6 +10408,7 @@ export type SaveAgentResponses = {
             };
         } | {
             kind: 'agent';
+            outcome: 'developer_updated';
             object: {
                 agentId: string;
                 displayName: string;
@@ -11394,6 +11439,7 @@ export type SaveBusinessRulesSuccessMaterialReceipt = {
 
 export type SaveBuyerAgentData = {
     body: ({
+        operation: SaveBuyerAgentRequestSaveBuyerAgentCreateOperation;
         displayName: SaveBuyerAgentRequestDisplayName;
         /**
          * external is available. hosted creation is not available yet.
@@ -11405,6 +11451,7 @@ export type SaveBuyerAgentData = {
         lifecycle?: never;
         credentialHandoff?: never;
     } | {
+        operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation;
         id: SaveBuyerAgentRequestId;
         displayName: SaveBuyerAgentRequestDisplayName;
         expectedAccountId?: number | string;
@@ -11413,7 +11460,11 @@ export type SaveBuyerAgentData = {
         lifecycle?: never;
         credentialHandoff?: never;
     } | {
+        operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation;
         id: SaveBuyerAgentRequestId;
+        /**
+         * Complete replacement list of advertiser grants.
+         */
         access: {
             /**
              * Access revision returned by the most recent read.
@@ -11439,7 +11490,11 @@ export type SaveBuyerAgentData = {
         lifecycle?: never;
         credentialHandoff?: never;
     } | {
+        operation: SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation;
         id: SaveBuyerAgentRequestId;
+        /**
+         * One state-fenced suspend, resume, or retire action.
+         */
         lifecycle: {
             /**
              * Suspend an active buyer agent.
@@ -11477,7 +11532,11 @@ export type SaveBuyerAgentData = {
         access?: never;
         credentialHandoff?: never;
     } | {
+        operation: SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation;
         id: SaveBuyerAgentRequestId;
+        /**
+         * Prepare a safe reference for the administrator credential ceremony; never returns a secret.
+         */
         credentialHandoff: true;
         expectedAccountId?: number | string;
         displayName?: never;
@@ -11562,14 +11621,45 @@ export type SaveBuyerAgentErrors = {
     503: V3ToolErrorResponse;
 };
 
+/**
+ * Name for the buyer agent.
+ */
 export type SaveBuyerAgentRequestDisplayName = string;
 
+/**
+ * Buyer-agent principal ID.
+ */
 export type SaveBuyerAgentRequestId = string;
 
 /**
  * Exact current display name; required to suspend or retire.
  */
 export type SaveBuyerAgentRequestLifecycleConfirmationText = string;
+
+/**
+ * Create an external buyer agent.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentCreateOperation = 'create';
+
+/**
+ * Prepare the human credential handoff ceremony.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation = 'credential_handoff';
+
+/**
+ * Suspend, resume, or retire the buyer agent.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation = 'lifecycle';
+
+/**
+ * Replace the exact advertiser access list.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation = 'update_access';
+
+/**
+ * Change the buyer-agent display name.
+ */
+export type SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation = 'update_display_name';
 
 export type SaveBuyerAgentResponse = SaveBuyerAgentResponses[keyof SaveBuyerAgentResponses];
 
