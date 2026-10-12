@@ -24,7 +24,7 @@ spelled as published even when they retain `interchange` in their names.
 
 3. If the host does not support the native package, set up a direct MCP
    connection using remote Streamable HTTP at
-   `https://api.interchange.io/mcp/v3`. If the skill was installed through
+   `https://api.apostra.com/mcp/v3`. If the skill was installed through
    `npx skills`, this connection is still a
    separate step. Skill dependencies describe the connection; do not assume
    the host automatically installed it.
