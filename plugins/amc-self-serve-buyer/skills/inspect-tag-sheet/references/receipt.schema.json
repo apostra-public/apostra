@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://api.interchange.io/skills/inspect-tag-sheet/1.0.0/references/receipt.schema.json",
+  "$id": "https://api.apostra.com/skills/inspect-tag-sheet/1.0.1/references/receipt.schema.json",
   "title": "Creative manifest parse receipt",
   "type": "object",
   "additionalProperties": false,
