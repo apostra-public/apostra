@@ -634,14 +634,14 @@ export class Apostra extends Transport {
   /** Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto needs acknowledgeNoHumanReview. Returns the data together with response headers and request ID. */
   saveBusinessRulesWithResponse(input: SaveBusinessRulesInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBusinessRulesResult>> { return this.requestDetailed("save_business_rules", input, options) }
   /**
-   * Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call.
+   * Create or manage one buyer agent.
    *
    * @example
    * await client.saveBuyerAgent(input, { idempotencyKey: 'stable-key' })
    */
   saveBuyerAgent(input: SaveBuyerAgentInput, options: WriteRequestOptions): Promise<SaveBuyerAgentResult> { return this.request("save_buyer_agent", input, options) }
 
-  /** Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call. Returns the data together with response headers and request ID. */
+  /** Create or manage one buyer agent. Returns the data together with response headers and request ID. */
   saveBuyerAgentWithResponse(input: SaveBuyerAgentInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBuyerAgentResult>> { return this.requestDetailed("save_buyer_agent", input, options) }
   /**
    * Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v2/setup/v3/identity-setup.

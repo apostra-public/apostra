@@ -32,6 +32,9 @@ class Access(TypedDict):
     advertisersTruncated: bool
 
 class Access1(TypedDict):
+    """
+    Complete replacement list of advertiser grants.
+    """
     expectedAccessRevision: int
     '\n    Access revision returned by the most recent read.\n    '
     advertisers: list[Advertiser3]
@@ -9117,6 +9120,9 @@ class LibraryRequirement(TypedDict):
     source: NotRequired[Source2]
 
 class Lifecycle(TypedDict):
+    """
+    One state-fenced suspend, resume, or retire action.
+    """
     action: Literal['suspend']
     '\n    Suspend an active buyer agent.\n    '
     expectedLifecycleState: Literal['active']
@@ -9124,6 +9130,9 @@ class Lifecycle(TypedDict):
     confirmationText: SaveBuyerAgentRequestLifecycleConfirmationText
 
 class Lifecycle1(TypedDict):
+    """
+    One state-fenced suspend, resume, or retire action.
+    """
     action: Literal['resume']
     '\n    Resume a suspended buyer agent.\n    '
     expectedLifecycleState: Literal['suspended']
@@ -9131,6 +9140,9 @@ class Lifecycle1(TypedDict):
     confirmationText: NotRequired[SaveBuyerAgentRequestLifecycleConfirmationText]
 
 class Lifecycle2(TypedDict):
+    """
+    One state-fenced suspend, resume, or retire action.
+    """
     action: Literal['retire']
     '\n    Permanently retire an active or suspended buyer agent.\n    '
     expectedLifecycleState: Literal['active', 'suspended']
@@ -12512,6 +12524,7 @@ SaveBusinessRulesSuccessMaterialReceipt: TypeAlias = dict[str, JsonValue]
 class SaveBuyerAgentInput1(TypedDict):
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    operation: SaveBuyerAgentRequestSaveBuyerAgentCreateOperation
     displayName: SaveBuyerAgentRequestDisplayName
     kind: NotRequired[Literal['external', 'hosted']]
     '\n    external is available. hosted creation is not available yet.\n    '
@@ -12519,35 +12532,59 @@ class SaveBuyerAgentInput1(TypedDict):
 class SaveBuyerAgentInput2(TypedDict):
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation
     id: SaveBuyerAgentRequestId
     displayName: SaveBuyerAgentRequestDisplayName
 
 class SaveBuyerAgentInput3(TypedDict):
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation
     id: SaveBuyerAgentRequestId
     access: Access1
+    '\n    Complete replacement list of advertiser grants.\n    '
 
 class SaveBuyerAgentInput4(TypedDict):
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    operation: SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation
     id: SaveBuyerAgentRequestId
     lifecycle: Lifecycle | Lifecycle1 | Lifecycle2
+    '\n    One state-fenced suspend, resume, or retire action.\n    '
 
 class SaveBuyerAgentInput5(TypedDict):
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    operation: SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation
     id: SaveBuyerAgentRequestId
     credentialHandoff: Literal[True]
+    '\n    Prepare a safe reference for the administrator credential ceremony; never returns a secret.\n    '
 
 SaveBuyerAgentInput: TypeAlias = SaveBuyerAgentInput1 | SaveBuyerAgentInput2 | SaveBuyerAgentInput3 | SaveBuyerAgentInput4 | SaveBuyerAgentInput5
 
 SaveBuyerAgentRequestDisplayName: TypeAlias = str
+'\nName for the buyer agent.\n'
 
 SaveBuyerAgentRequestId: TypeAlias = str
+'\nBuyer-agent principal ID.\n'
 
 SaveBuyerAgentRequestLifecycleConfirmationText: TypeAlias = str
 '\nExact current display name; required to suspend or retire.\n'
+
+SaveBuyerAgentRequestSaveBuyerAgentCreateOperation: TypeAlias = Literal['create']
+'\nCreate an external buyer agent.\n'
+
+SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation: TypeAlias = Literal['credential_handoff']
+'\nPrepare the human credential handoff ceremony.\n'
+
+SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation: TypeAlias = Literal['lifecycle']
+'\nSuspend, resume, or retire the buyer agent.\n'
+
+SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation: TypeAlias = Literal['update_access']
+'\nReplace the exact advertiser access list.\n'
+
+SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation: TypeAlias = Literal['update_display_name']
+'\nChange the buyer-agent display name.\n'
 
 class SaveBuyerAgentResult(TypedDict):
     kind: Literal['buyer_agent']

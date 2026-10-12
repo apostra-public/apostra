@@ -301,11 +301,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveBusinessRulesResult], self._request_with_response("save_business_rules", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_agent(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerAgentResult:
-        "Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call."
+        "Create or manage one buyer agent."
         return cast("models.SaveBuyerAgentResult", self._request("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_agent_with_response(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBuyerAgentResult]:
-        "Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call. Returns the data together with response headers and request ID."
+        "Create or manage one buyer agent. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBuyerAgentResult], self._request_with_response("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_operator(self, input: models.SaveBuyerOperatorInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerOperatorResult:
@@ -822,11 +822,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveBusinessRulesResult], await self._request_with_response("save_business_rules", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_agent(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerAgentResult:
-        "Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call."
+        "Create or manage one buyer agent."
         return cast("models.SaveBuyerAgentResult", await self._request("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_agent_with_response(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBuyerAgentResult]:
-        "Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call. Returns the data together with response headers and request ID."
+        "Create or manage one buyer agent. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBuyerAgentResult], await self._request_with_response("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_operator(self, input: models.SaveBuyerOperatorInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerOperatorResult:
