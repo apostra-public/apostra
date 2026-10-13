@@ -50,7 +50,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Generate or refine new image, hosted video, or voice/audio (radio spots, voiceovers) from a saved Creative Engines brief. Reuse actionKey for an identical retry."
+    "summary": "Generate variants from a saved brief; use Creative Sessions for voice/audio, radio spots, and voiceovers. Send scope and variantAction; reuse actionKey only on retries."
   },
   "get": {
     "path": "/tools/get",
@@ -628,6 +628,25 @@ export const operations = {
     ],
     "summary": "Save an advertiser or its mappings. Confirm markets/channels with the buyer first (see footprintProposal). `needs_input` = ask the buyer; never recreate to change currency. Use identityContract:confirmed-v1 for brand fixes. resolveBrand looks up public branding. Guide: /v2/setup/v3/identity-setup."
   },
+  "save_advertiser_access": {
+    "path": "/tools/save_advertiser_access",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:admin"
+        ]
+      }
+    ],
+    "summary": "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly."
+  },
   "save_advertiser_grant": {
     "path": "/tools/save_advertiser_grant",
     "method": "POST",
@@ -683,7 +702,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "In a Developer account, register a Sales or Creative Agent, or rename an owned Agent. A registration requires an account administrator and an idempotency key. In a Seller account, confirm or correct one Sales Agent product mode."
+    "summary": "Save a Sales Agent mode, register an Agent, or rename an owned Agent. Select seller_save, developer_create, or developer_update."
   },
   "save_ask": {
     "path": "/tools/save_ask",
@@ -778,7 +797,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call."
+    "summary": "Create or manage one buyer agent."
   },
   "save_buyer_operator": {
     "path": "/tools/save_buyer_operator",
@@ -1105,7 +1124,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create or update a notification subscription: scope, content, routes; no trigger type is creatable yet, no delivery policy yet. Omit subscriptionId to create, supply it to patch. Managed subscriptions are editable only within their mutability. Credentials belong to save_integration."
+    "summary": "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed."
   },
   "save_playbook": {
     "path": "/tools/save_playbook",
