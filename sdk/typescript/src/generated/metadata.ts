@@ -50,7 +50,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Generate or refine new image, hosted video, or voice/audio (radio spots, voiceovers) from a saved Creative Engines brief. Reuse actionKey for an identical retry."
+    "summary": "Generate variants from a saved brief; use Creative Sessions for voice/audio, radio spots, and voiceovers. Send scope and variantAction; reuse actionKey only on retries."
   },
   "get": {
     "path": "/tools/get",
@@ -683,7 +683,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "In a Developer account, register a Sales or Creative Agent, or rename an owned Agent. A registration requires an account administrator and an idempotency key. In a Seller account, confirm or correct one Sales Agent product mode."
+    "summary": "Save a Sales Agent mode, register an Agent, or rename an owned Agent. Select seller_save, developer_create, or developer_update."
   },
   "save_ask": {
     "path": "/tools/save_ask",
@@ -778,7 +778,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call."
+    "summary": "Create or manage one buyer agent."
   },
   "save_buyer_operator": {
     "path": "/tools/save_buyer_operator",
