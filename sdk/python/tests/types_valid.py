@@ -1,5 +1,5 @@
 from apostra import Apostra, AsyncApostra
-from apostra.models import EvidenceUrl, SaveRfpRequestJsonValue, RepresentationLocale, SaveCampaignInput, SaveBillingInput, GetDeliveryResult, SaveLibraryRequestInput, SaveCreativeSessionInput, SaveDimensionInput, SaveDimensionResult, SearchInput, GetInput, SaveMaterialInput, TargetingOverlay3, RequestBuyerChildAccountInput
+from apostra.models import EvidenceUrl, SaveRfpRequestJsonValue, RepresentationLocale, SaveCampaignInput, SaveBillingInput, GetDeliveryResult, SaveLibraryRequestInput, SaveCreativeSessionInput, SaveDimensionInput, SaveDimensionResult, SaveMediaBuyInput, SearchInput, GetInput, SaveMaterialInput, RequestBuyerChildAccountInput
 
 nested: SaveRfpRequestJsonValue = {'deep': [{'nested': ['value', None, 2, True]}]}
 campaign: SaveCampaignInput = {'idempotencyKey': 'k', 'channelGroups': [{'channelGroupId': 'g', 'presetId': 'ctv'}]}
@@ -21,10 +21,12 @@ async def typed_async(client: AsyncApostra) -> GetDeliveryResult:
 library: SaveLibraryRequestInput = {'action': 'close', 'id': 'r', 'closedBy': 'upload', 'closingMaterialId': 'm'}
 creative: SaveCreativeSessionInput = {'scope': 'campaign', 'operation': 'select_output', 'campaignId': 'c', 'sessionId': 's', 'variantId': 'v', 'expectedRevision': 1}
 dimension: SaveDimensionInput = {'key': 'market', 'name': 'Market', 'valuesMode': 'open', 'appliesTo': ['campaign'], 'idempotencyKey': 'k'}
+media_buy_create: SaveMediaBuyInput = {'idempotencyKey': 'k', 'sellerId': 'seller', 'products': [{'productId': 'product', 'targetingOverlay': {'geo_countries': ['US']}}]}
+media_buy_update: SaveMediaBuyInput = {'idempotencyKey': 'k', 'mediaBuyId': 'buy', 'products': [{'productId': 'product', 'targetingOverlay': {'geo_countries': None}}]}
 search: SearchInput = {'kind': 'creative', 'filter': {'advertiserId': 'a'}}
 get: GetInput = {'kind': 'catalog', 'id': 'c', 'advertiserId': 'a'}
 material: SaveMaterialInput = {'action': 'replace_source', 'materialId': 'm', 'expectedRevision': 1, 'clientRequestId': 'k', 'source': {'kind': 'inline', 'name': 'n', 'content': 'c'}}
-postal_targeting: TargetingOverlay3 = {'geo_postal_areas': [{'country': 'US', 'system': 'zip', 'values': ['94105']}]}
-postal_targeting_fallback: TargetingOverlay3 = {'geo_postal_areas': [{'country': 'NZ', 'system': 'custom', 'values': ['00100']}]}
+postal_targeting: SaveMediaBuyInput = {'idempotencyKey': 'postal-1', 'sellerId': 'seller', 'products': [{'productId': 'product', 'targetingOverlay': {'geo_postal_areas': [{'country': 'US', 'system': 'zip', 'values': ['94105']}]}}]}
+postal_targeting_fallback: SaveMediaBuyInput = {'idempotencyKey': 'postal-2', 'sellerId': 'seller', 'products': [{'productId': 'product', 'targetingOverlay': {'geo_postal_areas': [{'country': 'NZ', 'system': 'custom', 'values': ['00100']}]}}]}
 evidence_url: EvidenceUrl = 'https://example.test/evidence'
 locale: RepresentationLocale = 'en-GB'
