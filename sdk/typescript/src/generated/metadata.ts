@@ -50,7 +50,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Generate or refine new image, hosted video, or voice/audio (radio spots, voiceovers) from a saved Creative Engines brief. Reuse actionKey for an identical retry."
+    "summary": "Generate variants from a saved brief; use Creative Sessions for voice/audio, radio spots, and voiceovers. Send scope and variantAction; reuse actionKey only on retries."
   },
   "get": {
     "path": "/tools/get",
@@ -69,7 +69,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Read one object by kind plus the id that search returned, or an account singleton with no id. Never guess an id. include adds detail; each include value works only for the kinds that serve it."
+    "summary": "Read one object by kind and id, or an account singleton without id. Never guess ids. Campaign reads return targetingOverlay to verify before proposals. include adds detail only for kinds that serve it."
   },
   "getV3PublicDocumentRevisionSections": {
     "path": "/documents/{documentId}/revisions/{revisionId}/sections",
@@ -628,6 +628,25 @@ export const operations = {
     ],
     "summary": "Save an advertiser or its mappings. Confirm markets/channels with the buyer first (see footprintProposal). `needs_input` = ask the buyer; never recreate to change currency. Use identityContract:confirmed-v1 for brand fixes. resolveBrand looks up public branding. Guide: /v2/setup/v3/identity-setup."
   },
+  "save_advertiser_access": {
+    "path": "/tools/save_advertiser_access",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:admin"
+        ]
+      }
+    ],
+    "summary": "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly."
+  },
   "save_advertiser_grant": {
     "path": "/tools/save_advertiser_grant",
     "method": "POST",
@@ -683,7 +702,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "In a Developer account, register a Sales or Creative Agent, or rename an owned Agent. A registration requires an account administrator and an idempotency key. In a Seller account, confirm or correct one Sales Agent product mode."
+    "summary": "Save a Sales Agent mode, register an Agent, or rename an owned Agent. Select seller_save, developer_create, or developer_update."
   },
   "save_ask": {
     "path": "/tools/save_ask",
@@ -778,7 +797,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call."
+    "summary": "Create or manage one buyer agent."
   },
   "save_buyer_operator": {
     "path": "/tools/save_buyer_operator",
@@ -817,7 +836,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save a campaign. Create needs advertiserId and name; flight and budget are optional. Split inventory choices into separate media buys; presets expand dimensions. To launch, set desiredPhase: active with confirmLaunch: true; omit confirmation to preview. Cancellation never cancels media buys."
+    "summary": "Save a campaign. To create, send advertiserId and name; flight and budget are optional. Split inventory into media buys. Set desiredPhase: active to launch; omit confirmLaunch to preview. Cancellation is irreversible: desiredPhase: canceled cancels the campaign and every live media buy."
   },
   "save_catalog": {
     "path": "/tools/save_catalog",
@@ -837,7 +856,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create or replace one flat catalog declaration by catalogId, or archive it with isArchived. URL saves refetch the feed."
+    "summary": "Create or replace a catalog: type and exactly one of url (feed URL) or non-empty items are required. If missing, ask the buyer for the feed URL or items before calling. URL saves refetch the feed. To archive, set isArchived: true with identity only; type, url and items are not needed."
   },
   "save_connection": {
     "path": "/tools/save_connection",
@@ -1011,6 +1030,25 @@ export const operations = {
     ],
     "summary": "Create or update where a seller's inventory comes from. Pass `id` to change an existing source, omit it to add one. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it."
   },
+  "save_lesson": {
+    "path": "/tools/save_lesson",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Manage typed seller lessons for future responses. propose requires lesson. approve and retire require lessonId. Platform rules prevail."
+  },
   "save_library_request": {
     "path": "/tools/save_library_request",
     "method": "POST",
@@ -1105,7 +1143,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create or update a notification subscription: scope, content, routes; no trigger type is creatable yet, no delivery policy yet. Omit subscriptionId to create, supply it to patch. Managed subscriptions are editable only within their mutability. Credentials belong to save_integration."
+    "summary": "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed."
   },
   "save_playbook": {
     "path": "/tools/save_playbook",
