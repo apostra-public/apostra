@@ -13,11 +13,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[bytes], self._request_with_response("downloadV3PublicDocumentRevision", input, account_id=account_id, timeout=timeout))
 
     def generate_variants(self, input: models.GenerateVariantsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.GenerateVariantsResult:
-        "Generate or refine new image, hosted video, or voice/audio (radio spots, voiceovers) from a saved Creative Engines brief. Reuse actionKey for an identical retry."
+        "Generate variants from a saved brief; use Creative Sessions for voice/audio, radio spots, and voiceovers. Send scope and variantAction; reuse actionKey only on retries."
         return cast("models.GenerateVariantsResult", self._request("generate_variants", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def generate_variants_with_response(self, input: models.GenerateVariantsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.GenerateVariantsResult]:
-        "Generate or refine new image, hosted video, or voice/audio (radio spots, voiceovers) from a saved Creative Engines brief. Reuse actionKey for an identical retry. Returns the data together with response headers and request ID."
+        "Generate variants from a saved brief; use Creative Sessions for voice/audio, radio spots, and voiceovers. Send scope and variantAction; reuse actionKey only on retries. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.GenerateVariantsResult], self._request_with_response("generate_variants", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def get(self, input: models.GetInput, *, account_id: str | None = None, timeout: float | None = None) -> models.GetResult:
@@ -244,6 +244,14 @@ class Apostra(SyncTransport):
         "Save an advertiser or its mappings. Confirm markets/channels with the buyer first (see footprintProposal). `needs_input` = ask the buyer; never recreate to change currency. Use identityContract:confirmed-v1 for brand fixes. resolveBrand looks up public branding. Guide: /v2/setup/v3/identity-setup. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAdvertiserResult], self._request_with_response("save_advertiser", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    def save_advertiser_access(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserAccessResult:
+        "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly."
+        return cast("models.SaveAdvertiserAccessResult", self._request("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def save_advertiser_access_with_response(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAdvertiserAccessResult]:
+        "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveAdvertiserAccessResult], self._request_with_response("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def save_advertiser_grant(self, input: models.SaveAdvertiserGrantInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserGrantResult:
         "Invite another Organization to exact advertisers, accept/reject an invitation, or revoke a grant. Limited beta: eligible Organization, entitlement, server-side exposure, and direct human-admin authority are required."
         return cast("models.SaveAdvertiserGrantResult", self._request("save_advertiser_grant", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -261,11 +269,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveAdvertiserInstructionsResult], self._request_with_response("save_advertiser_instructions", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_agent(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAgentResult:
-        "In a Developer account, register a Sales or Creative Agent, or rename an owned Agent. A registration requires an account administrator and an idempotency key. In a Seller account, confirm or correct one Sales Agent product mode."
+        "Save a Sales Agent mode, register an Agent, or rename an owned Agent. Select seller_save, developer_create, or developer_update."
         return cast("models.SaveAgentResult", self._request("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_agent_with_response(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAgentResult]:
-        "In a Developer account, register a Sales or Creative Agent, or rename an owned Agent. A registration requires an account administrator and an idempotency key. In a Seller account, confirm or correct one Sales Agent product mode. Returns the data together with response headers and request ID."
+        "Save a Sales Agent mode, register an Agent, or rename an owned Agent. Select seller_save, developer_create, or developer_update. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAgentResult], self._request_with_response("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
@@ -301,11 +309,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveBusinessRulesResult], self._request_with_response("save_business_rules", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_agent(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerAgentResult:
-        "Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call."
+        "Create or manage one buyer agent."
         return cast("models.SaveBuyerAgentResult", self._request("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_agent_with_response(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBuyerAgentResult]:
-        "Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call. Returns the data together with response headers and request ID."
+        "Create or manage one buyer agent. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBuyerAgentResult], self._request_with_response("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_operator(self, input: models.SaveBuyerOperatorInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerOperatorResult:
@@ -404,6 +412,14 @@ class Apostra(SyncTransport):
         "Create or update where a seller's inventory comes from. Pass `id` to change an existing source, omit it to add one. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveInventorySourceResult], self._request_with_response("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    def save_lesson(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLessonResult:
+        "Manage typed seller lessons for future responses. propose requires lesson. approve and retire require lessonId. Platform rules prevail."
+        return cast("models.SaveLessonResult", self._request("save_lesson", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def save_lesson_with_response(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveLessonResult]:
+        "Manage typed seller lessons for future responses. propose requires lesson. approve and retire require lessonId. Platform rules prevail. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveLessonResult], self._request_with_response("save_lesson", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def save_library_request(self, input: models.SaveLibraryRequestInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLibraryRequestResult:
         "Open a seller library request or close it with seller Material."
         return cast("models.SaveLibraryRequestResult", self._request("save_library_request", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -437,11 +453,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveMediaKitResult], self._request_with_response("save_media_kit", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_notification_config(self, input: models.SaveNotificationConfigInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveNotificationConfigResult:
-        "Create or update a notification subscription: scope, content, routes; no trigger type is creatable yet, no delivery policy yet. Omit subscriptionId to create, supply it to patch. Managed subscriptions are editable only within their mutability. Credentials belong to save_integration."
+        "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed."
         return cast("models.SaveNotificationConfigResult", self._request("save_notification_config", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_notification_config_with_response(self, input: models.SaveNotificationConfigInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveNotificationConfigResult]:
-        "Create or update a notification subscription: scope, content, routes; no trigger type is creatable yet, no delivery policy yet. Omit subscriptionId to create, supply it to patch. Managed subscriptions are editable only within their mutability. Credentials belong to save_integration. Returns the data together with response headers and request ID."
+        "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveNotificationConfigResult], self._request_with_response("save_notification_config", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_playbook(self, input: models.SavePlaybookInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SavePlaybookResult:
@@ -534,11 +550,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[bytes], await self._request_with_response("downloadV3PublicDocumentRevision", input, account_id=account_id, timeout=timeout))
 
     async def generate_variants(self, input: models.GenerateVariantsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.GenerateVariantsResult:
-        "Generate or refine new image, hosted video, or voice/audio (radio spots, voiceovers) from a saved Creative Engines brief. Reuse actionKey for an identical retry."
+        "Generate variants from a saved brief; use Creative Sessions for voice/audio, radio spots, and voiceovers. Send scope and variantAction; reuse actionKey only on retries."
         return cast("models.GenerateVariantsResult", await self._request("generate_variants", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def generate_variants_with_response(self, input: models.GenerateVariantsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.GenerateVariantsResult]:
-        "Generate or refine new image, hosted video, or voice/audio (radio spots, voiceovers) from a saved Creative Engines brief. Reuse actionKey for an identical retry. Returns the data together with response headers and request ID."
+        "Generate variants from a saved brief; use Creative Sessions for voice/audio, radio spots, and voiceovers. Send scope and variantAction; reuse actionKey only on retries. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.GenerateVariantsResult], await self._request_with_response("generate_variants", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def get(self, input: models.GetInput, *, account_id: str | None = None, timeout: float | None = None) -> models.GetResult:
@@ -765,6 +781,14 @@ class AsyncApostra(AsyncTransport):
         "Save an advertiser or its mappings. Confirm markets/channels with the buyer first (see footprintProposal). `needs_input` = ask the buyer; never recreate to change currency. Use identityContract:confirmed-v1 for brand fixes. resolveBrand looks up public branding. Guide: /v2/setup/v3/identity-setup. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAdvertiserResult], await self._request_with_response("save_advertiser", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    async def save_advertiser_access(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserAccessResult:
+        "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly."
+        return cast("models.SaveAdvertiserAccessResult", await self._request("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_advertiser_access_with_response(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAdvertiserAccessResult]:
+        "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveAdvertiserAccessResult], await self._request_with_response("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     async def save_advertiser_grant(self, input: models.SaveAdvertiserGrantInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserGrantResult:
         "Invite another Organization to exact advertisers, accept/reject an invitation, or revoke a grant. Limited beta: eligible Organization, entitlement, server-side exposure, and direct human-admin authority are required."
         return cast("models.SaveAdvertiserGrantResult", await self._request("save_advertiser_grant", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -782,11 +806,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveAdvertiserInstructionsResult], await self._request_with_response("save_advertiser_instructions", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_agent(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAgentResult:
-        "In a Developer account, register a Sales or Creative Agent, or rename an owned Agent. A registration requires an account administrator and an idempotency key. In a Seller account, confirm or correct one Sales Agent product mode."
+        "Save a Sales Agent mode, register an Agent, or rename an owned Agent. Select seller_save, developer_create, or developer_update."
         return cast("models.SaveAgentResult", await self._request("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_agent_with_response(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAgentResult]:
-        "In a Developer account, register a Sales or Creative Agent, or rename an owned Agent. A registration requires an account administrator and an idempotency key. In a Seller account, confirm or correct one Sales Agent product mode. Returns the data together with response headers and request ID."
+        "Save a Sales Agent mode, register an Agent, or rename an owned Agent. Select seller_save, developer_create, or developer_update. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAgentResult], await self._request_with_response("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
@@ -822,11 +846,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveBusinessRulesResult], await self._request_with_response("save_business_rules", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_agent(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerAgentResult:
-        "Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call."
+        "Create or manage one buyer agent."
         return cast("models.SaveBuyerAgentResult", await self._request("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_agent_with_response(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBuyerAgentResult]:
-        "Create, rename, reconcile access, change lifecycle, or prepare a human credential handoff for one buyer agent per call. Returns the data together with response headers and request ID."
+        "Create or manage one buyer agent. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBuyerAgentResult], await self._request_with_response("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_operator(self, input: models.SaveBuyerOperatorInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerOperatorResult:
@@ -925,6 +949,14 @@ class AsyncApostra(AsyncTransport):
         "Create or update where a seller's inventory comes from. Pass `id` to change an existing source, omit it to add one. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveInventorySourceResult], await self._request_with_response("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    async def save_lesson(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLessonResult:
+        "Manage typed seller lessons for future responses. propose requires lesson. approve and retire require lessonId. Platform rules prevail."
+        return cast("models.SaveLessonResult", await self._request("save_lesson", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_lesson_with_response(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveLessonResult]:
+        "Manage typed seller lessons for future responses. propose requires lesson. approve and retire require lessonId. Platform rules prevail. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveLessonResult], await self._request_with_response("save_lesson", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     async def save_library_request(self, input: models.SaveLibraryRequestInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLibraryRequestResult:
         "Open a seller library request or close it with seller Material."
         return cast("models.SaveLibraryRequestResult", await self._request("save_library_request", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -958,11 +990,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveMediaKitResult], await self._request_with_response("save_media_kit", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_notification_config(self, input: models.SaveNotificationConfigInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveNotificationConfigResult:
-        "Create or update a notification subscription: scope, content, routes; no trigger type is creatable yet, no delivery policy yet. Omit subscriptionId to create, supply it to patch. Managed subscriptions are editable only within their mutability. Credentials belong to save_integration."
+        "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed."
         return cast("models.SaveNotificationConfigResult", await self._request("save_notification_config", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_notification_config_with_response(self, input: models.SaveNotificationConfigInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveNotificationConfigResult]:
-        "Create or update a notification subscription: scope, content, routes; no trigger type is creatable yet, no delivery policy yet. Omit subscriptionId to create, supply it to patch. Managed subscriptions are editable only within their mutability. Credentials belong to save_integration. Returns the data together with response headers and request ID."
+        "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveNotificationConfigResult], await self._request_with_response("save_notification_config", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_playbook(self, input: models.SavePlaybookInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SavePlaybookResult:
