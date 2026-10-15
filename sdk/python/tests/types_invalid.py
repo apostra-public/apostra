@@ -1,4 +1,4 @@
-from apostra.models import SaveRfpRequestJsonValue, SaveCampaignInput, SaveBillingInput, SaveRfpInput, SaveLibraryRequestInput, SaveCreativeSessionInput, SaveDimensionInput, SearchInput, GetInput, SaveMaterialInput, RefreshInventorySourceHealthInput, GetDeliveryInput, GetStatusInput
+from apostra.models import SaveRfpRequestJsonValue, SaveCampaignInput, SaveBillingInput, SaveRfpInput, SaveLibraryRequestInput, SaveCreativeSessionInput, SaveDimensionInput, SaveMediaBuyInput, SearchInput, GetInput, SaveMaterialInput, RefreshInventorySourceHealthInput, GetDeliveryInput, GetStatusInput
 nested: SaveRfpRequestJsonValue = {'deep': [lambda: 0]}
 campaign: SaveCampaignInput = {'idempotencyKey': 'k', 'channelGroups': [{'channelGroupId': 'g', 'presetId': 'ctv', 'inventory': {}}]}
 billing: SaveBillingInput = {'operation': 'terms', 'terms': {'accepted': True, 'acceptedVersion': 'v1-1'}, 'paymentTerms': 'net_60'}
@@ -6,6 +6,7 @@ rfp: SaveRfpInput = {'action': 'feedback'}
 library: SaveLibraryRequestInput = {'action': 'close'}
 creative: SaveCreativeSessionInput = {'scope': 'campaign', 'operation': 'select_output', 'campaignId': 'c'}
 dimension: SaveDimensionInput = {'key': 'market', 'name': 'Market', 'valuesMode': 'open', 'appliesTo': ['campaign'], 'id': '42', 'idempotencyKey': 'k'}
+media_buy_create: SaveMediaBuyInput = {'idempotencyKey': 'k', 'sellerId': 'seller', 'products': [{'productId': 'product', 'targetingOverlay': {'geo_countries': None}}]}
 search: SearchInput = {'kind': 'creative', 'filter': {'advertiserId': 'a', 'campaignId': 'c'}}
 get: GetInput = {'kind': 'catalog', 'id': 'c'}
 material: SaveMaterialInput = {'action': 'replace_source', 'materialId': 'm', 'source': {'kind': 'inline', 'name': 'n', 'content': 'c'}}
