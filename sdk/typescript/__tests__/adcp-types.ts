@@ -133,7 +133,7 @@ export function boundaries(
 ) {
   // @ts-expect-error campaign durations exclude the upstream seconds unit
   const campaignDuration: SaveCampaignRequestCampaignGoalDuration = duration
-  // @ts-expect-error upstream front_loaded is not V3 frontloaded
+  // A campaign's budget pacing is upstream's `Pacing`.
   const budgetPacing: NonNullable<SaveCampaignInput['budget']>['pacing'] =
     pacing
   // @ts-expect-error upstream attribution windows may omit post_click, use
