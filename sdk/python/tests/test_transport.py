@@ -28,7 +28,7 @@ from apostra import (
     verify_webhook,
 )
 from apostra._version import __version__
-from apostra.models import SaveCatalogInput
+from apostra.models import SaveCatalogInput, SaveMediaBuyInput2
 from apostra.transport import OPERATIONS, WebhookHeaders, WebhookSecret
 
 
@@ -481,6 +481,31 @@ class TransportTests(unittest.TestCase):
                     idempotency_key="request-1",
                 )
             self.assertEqual(len(requests), 2)
+
+    def test_save_media_buy_update_copies_idempotency_key_into_body(self) -> None:
+        requests: list[httpx.Request] = []
+
+        def handle(request: httpx.Request) -> httpx.Response:
+            requests.append(request)
+            return httpx.Response(200, json={"data": {}, "error": None})
+
+        with httpx.Client(transport=httpx.MockTransport(handle)) as http:
+            Apostra(api_key="key", http_client=http).save_media_buy(
+                cast(
+                    SaveMediaBuyInput2,
+                    {"mediaBuyId": "buy-1", "isCanceled": True},
+                ),
+                idempotency_key="cancel-1",
+            )
+
+        self.assertEqual(
+            json.loads(requests[0].content),
+            {
+                "mediaBuyId": "buy-1",
+                "isCanceled": True,
+                "idempotencyKey": "cancel-1",
+            },
+        )
 
     def test_typed_failure_no_retry_or_secret_in_string(self) -> None:
         calls = 0
