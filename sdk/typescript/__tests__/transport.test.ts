@@ -256,6 +256,19 @@ describe('HTTP transport', () => {
     ).rejects.toThrow('idempotencyKey must match')
     expect(fetcher).toHaveBeenCalledTimes(2)
   })
+  it('copies an update key into the save_media_buy request body', async () => {
+    const fetcher = mockFetch(() => response({}))
+    const api = new Apostra({ apiKey: 'key', fetch: fetcher })
+
+    await api.saveMediaBuy(
+      { mediaBuyId: 'buy-1', isCanceled: true },
+      { idempotencyKey: 'cancel-1' },
+    )
+
+    expect(fetcher.mock.calls[0][1]?.body).toBe(
+      '{"mediaBuyId":"buy-1","isCanceled":true,"idempotencyKey":"cancel-1"}',
+    )
+  })
   it('fails safely on malformed success and HTML failures', async () => {
     for (const value of [
       Response.json({ data: {} }),
