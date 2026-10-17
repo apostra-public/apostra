@@ -28,7 +28,7 @@ from apostra import (
     verify_webhook,
 )
 from apostra._version import __version__
-from apostra.models import SaveCatalogInput
+from apostra.models import SaveCatalogInput, SaveMediaBuyInputKindUpdate
 from apostra.transport import OPERATIONS, WebhookHeaders, WebhookSecret
 
 
@@ -299,7 +299,11 @@ class TransportTests(unittest.TestCase):
         with httpx.Client(transport=httpx.MockTransport(handle)) as http:
             with self.assertRaises(ValueError):
                 Apostra(api_key="key", http_client=http).save_ask(
-                    {"id": "ask-1", "requester": {"state": "accepted"}},
+                    {
+                        "kind": "update",
+                        "id": "ask-1",
+                        "requester": {"state": "accepted"},
+                    },
                     idempotency_key="",
                 )
         self.assertEqual(requests, [])
@@ -325,7 +329,11 @@ class TransportTests(unittest.TestCase):
                 self.assertEqual(api.get_status({}), {})
                 self.assertEqual(
                     api.save_ask(
-                        {"id": "ask-1", "requester": {"state": "accepted"}},
+                        {
+                            "kind": "update",
+                            "id": "ask-1",
+                            "requester": {"state": "accepted"},
+                        },
                         idempotency_key="ask-1",
                     ),
                     {},
@@ -482,6 +490,31 @@ class TransportTests(unittest.TestCase):
                 )
             self.assertEqual(len(requests), 2)
 
+    def test_save_media_buy_update_copies_idempotency_key_into_body(self) -> None:
+        requests: list[httpx.Request] = []
+
+        def handle(request: httpx.Request) -> httpx.Response:
+            requests.append(request)
+            return httpx.Response(200, json={"data": {}, "error": None})
+
+        with httpx.Client(transport=httpx.MockTransport(handle)) as http:
+            Apostra(api_key="key", http_client=http).save_media_buy(
+                cast(
+                    SaveMediaBuyInputKindUpdate,
+                    {"mediaBuyId": "buy-1", "isCanceled": True},
+                ),
+                idempotency_key="cancel-1",
+            )
+
+        self.assertEqual(
+            json.loads(requests[0].content),
+            {
+                "mediaBuyId": "buy-1",
+                "isCanceled": True,
+                "idempotencyKey": "cancel-1",
+            },
+        )
+
     def test_typed_failure_no_retry_or_secret_in_string(self) -> None:
         calls = 0
 
@@ -608,7 +641,11 @@ class TransportTests(unittest.TestCase):
         with httpx.Client(transport=httpx.MockTransport(handle)) as http:
             with self.assertRaises(InFlightReceiptError) as raised:
                 Apostra(api_key="key", http_client=http).save_ask(
-                    {"id": "ask-1", "requester": {"state": "accepted"}},
+                    {
+                        "kind": "update",
+                        "id": "ask-1",
+                        "requester": {"state": "accepted"},
+                    },
                     idempotency_key="ask-1",
                 )
         self.assertEqual(raised.exception.status, 202)

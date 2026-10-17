@@ -11,10 +11,12 @@ from adcp.types import (
     DurationUnit,
     EventType,
     FeedFormat,
+    Pacing,
     UpdateFrequency,
 )
 from apostra.models import (
     GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemQualifierAttributionWindow,
+    SaveCampaignInput,
     SaveCampaignRequestCampaignEventGoal,
     SaveCatalogInput,
 )
@@ -46,6 +48,14 @@ def goal(event: EventType) -> SaveCampaignRequestCampaignEventGoal:
     }
 
 
+def campaign(pacing: Pacing) -> SaveCampaignInput:
+    # A campaign's budget pacing is upstream's `Pacing`.
+    return {
+        "idempotencyKey": "request",
+        "budget": {"total": 1, "currency": "USD", "pacing": pacing.value},
+    }
+
+
 def duration(value: Duration) -> GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemQualifierAttributionWindow:
     # Construct the actual wire dictionary. model_dump() erases its static type.
     # V3's safe-integer maximum remains a server constraint, not an AdCP claim.
@@ -69,6 +79,12 @@ class AdcpInteropTests(unittest.TestCase):
             self.assertEqual(value.get("type"), kind.value)
         for event in EventType:
             self.assertEqual(goal(event)["event_sources"][0]["event_type"], event.value)
+
+    def test_pacing_composition(self) -> None:
+        for pacing in Pacing:
+            budget = campaign(pacing).get("budget")
+            assert budget is not None
+            self.assertEqual(budget.get("pacing"), pacing.value)
 
     def test_duration_round_trip(self) -> None:
         for unit in DurationUnit:
