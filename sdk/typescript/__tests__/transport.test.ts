@@ -172,7 +172,7 @@ describe('HTTP transport', () => {
     })
     await client.getStatus({})
     await client.saveAsk(
-      { id: 'ask-1', requester: { state: 'accepted' } },
+      { kind: 'update', id: 'ask-1', requester: { state: 'accepted' } },
       { accountId: '34', idempotencyKey: 'ask-1' },
     )
     expect(new Headers(seen[0].headers).get('authorization')).toBe(
@@ -183,7 +183,9 @@ describe('HTTP transport', () => {
       `apostra-typescript/${version}`,
     )
     expect(new Headers(seen[1].headers).get('idempotency-key')).toBe('ask-1')
-    expect(seen[1].body).toBe('{"id":"ask-1","requester":{"state":"accepted"}}')
+    expect(seen[1].body).toBe(
+      '{"kind":"update","id":"ask-1","requester":{"state":"accepted"}}',
+    )
     expect(seen[1].redirect).toBe('error')
     expect(JSON.stringify(client)).not.toContain('token')
   })
@@ -209,7 +211,7 @@ describe('HTTP transport', () => {
     })
     const error = await client
       .saveAsk(
-        { id: 'ask-1', requester: { state: 'accepted' } },
+        { kind: 'update', id: 'ask-1', requester: { state: 'accepted' } },
         { idempotencyKey: 'ask-1' },
       )
       .catch((e) => e)
@@ -256,6 +258,19 @@ describe('HTTP transport', () => {
     ).rejects.toThrow('idempotencyKey must match')
     expect(fetcher).toHaveBeenCalledTimes(2)
   })
+  it('copies an update key into the save_media_buy request body', async () => {
+    const fetcher = mockFetch(() => response({}))
+    const api = new Apostra({ apiKey: 'key', fetch: fetcher })
+
+    await api.saveMediaBuy(
+      { kind: 'update', mediaBuyId: 'buy-1', isCanceled: true },
+      { idempotencyKey: 'cancel-1' },
+    )
+
+    expect(fetcher.mock.calls[0][1]?.body).toBe(
+      '{"kind":"update","mediaBuyId":"buy-1","isCanceled":true,"idempotencyKey":"cancel-1"}',
+    )
+  })
   it('fails safely on malformed success and HTML failures', async () => {
     for (const value of [
       Response.json({ data: {} }),
@@ -292,7 +307,7 @@ describe('HTTP transport', () => {
     const api = new Apostra({ apiKey: 'key', fetch: fetcher })
     const error = await api
       .saveAsk(
-        { id: 'ask-1', requester: { state: 'accepted' } },
+        { kind: 'update', id: 'ask-1', requester: { state: 'accepted' } },
         { idempotencyKey: 'ask-1' },
       )
       .catch((value: unknown) => value)
@@ -580,7 +595,7 @@ describe('credential and replay boundaries', () => {
     const api = new Apostra({ apiKey: 'key', fetch: fetcher })
     await expect(
       api.saveAsk(
-        { id: 'ask-1', requester: { state: 'accepted' } },
+        { kind: 'update', id: 'ask-1', requester: { state: 'accepted' } },
         {} as never,
       ),
     ).rejects.toThrow('idempotencyKey')
@@ -611,7 +626,7 @@ describe('credential and replay boundaries', () => {
     await expect(api.getStatus({})).resolves.toEqual({ read: true })
     await expect(
       api.saveAsk(
-        { id: 'ask-1', requester: { state: 'accepted' } },
+        { kind: 'update', id: 'ask-1', requester: { state: 'accepted' } },
         { idempotencyKey: 'ask-1' },
       ),
     ).resolves.toEqual({ write: true })

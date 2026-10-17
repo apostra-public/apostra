@@ -15,12 +15,14 @@ const nested: SaveRfpRequestJ = { deep: [{ nested: ['value', null, 2, true] }] }
 const invalid: SaveRfpRequestJ = { deep: [() => 0] }
 const campaign: SaveCampaignInput = {
   idempotencyKey: 'k',
-  channelGroups: [{ channelGroupId: 'g', presetId: 'ctv' }],
+  channelGroups: [{ channelGroupId: 'g', kind: 'preset', presetId: 'ctv' }],
 }
 const badCampaign: SaveCampaignInput = {
   idempotencyKey: 'k',
-  // @ts-expect-error preset and custom inventory branches cannot mix
-  channelGroups: [{ channelGroupId: 'g', presetId: 'ctv', inventory: {} }],
+  channelGroups: [
+    // @ts-expect-error preset and custom inventory branches cannot mix
+    { channelGroupId: 'g', kind: 'preset', presetId: 'ctv', inventory: {} },
+  ],
 }
 const billing: SaveBillingInput = {
   operation: 'payment_authority',
@@ -49,12 +51,13 @@ const writeWithoutKey = api.saveAsk({
 })
 // @ts-expect-error detailed dispatch must also require a caller-owned key
 const detailedWriteWithoutKey = api.requestDetailed('save_ask', {
+  kind: 'update',
   id: 'ask',
   requester: { state: 'accepted' },
 })
 const detailedWrite = api.requestDetailed(
   'save_ask',
-  { id: 'ask', requester: { state: 'accepted' } },
+  { kind: 'update', id: 'ask', requester: { state: 'accepted' } },
   { idempotencyKey: 'ask' },
 )
 // @ts-expect-error generated response variants preserve write-key requirements
