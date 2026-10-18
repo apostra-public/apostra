@@ -5955,7 +5955,7 @@ class SaveAudienceInputAudiencesItem(TypedDict):
 class SaveAudienceRequestAudienceSellerAccountRequest(TypedDict):
     accountId: str
     '\n    accounts[].id from get(kind:\'connection\').\n    '
-    sellerId: NotRequired[str]
+    platformId: NotRequired[str]
     '\n    The seller\'s audience ID on that account; checked at sync.\n    '
     unmap: NotRequired[Literal[True]]
     '\n    True removes the mapping; the seller\'s object is kept.\n    '
@@ -9679,7 +9679,7 @@ SaveEventSourceRequestEventSourceActionSource: TypeAlias = Literal["website", "a
 class SaveEventSourceRequestEventSourceSellerAccountRequest(TypedDict):
     accountId: str
     '\n    accounts[].id from get(kind:\'connection\').\n    '
-    sellerId: NotRequired[str]
+    platformId: NotRequired[str]
     '\n    Pixel ID on that account; checked at sync.\n    '
     unmap: NotRequired[Literal[True]]
     '\n    True removes the mapping; the seller\'s object is kept.\n    '
@@ -9772,8 +9772,8 @@ class SaveEventSourceSuccessSavedEventSourceEntrySellerAccountsItem(TypedDict):
     storefront: SaveEventSourceSuccessSavedEventSourceEntrySellerAccountsItemStorefront
     accountId: str
     '\n    Seller account ID.\n    '
-    sellerId: str | None
-    '\n    The seller\'s ID for this source; null until the sync is proved.\n    '
+    platformId: str | None
+    '\n    Pixel ID mapped on that account; status says if proved.\n    '
     status: SaveEventSourceSuccessSellerObjectSyncState
     lastSyncedAt: str | None
     '\n    When this source last synced to this account; null if never.\n    '
@@ -9887,8 +9887,8 @@ class SaveEventSourceSuccessUnchangedEventSourceEntrySellerAccountsItem(TypedDic
     storefront: SaveEventSourceSuccessUnchangedEventSourceEntrySellerAccountsItemStorefront
     accountId: str
     '\n    Seller account ID.\n    '
-    sellerId: str | None
-    '\n    The seller\'s ID for this source; null until the sync is proved.\n    '
+    platformId: str | None
+    '\n    Pixel ID mapped on that account; status says if proved.\n    '
     status: SaveEventSourceSuccessSellerObjectSyncState
     lastSyncedAt: str | None
     '\n    When this source last synced to this account; null if never.\n    '
@@ -9998,8 +9998,8 @@ class SaveEventSourceSuccessUpdatedEventSourceEntrySellerAccountsItem(TypedDict)
     storefront: SaveEventSourceSuccessUpdatedEventSourceEntrySellerAccountsItemStorefront
     accountId: str
     '\n    Seller account ID.\n    '
-    sellerId: str | None
-    '\n    The seller\'s ID for this source; null until the sync is proved.\n    '
+    platformId: str | None
+    '\n    Pixel ID mapped on that account; status says if proved.\n    '
     status: SaveEventSourceSuccessSellerObjectSyncState
     lastSyncedAt: str | None
     '\n    When this source last synced to this account; null if never.\n    '

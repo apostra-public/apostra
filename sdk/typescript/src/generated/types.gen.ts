@@ -11837,7 +11837,7 @@ export type SaveAudienceRequestAudienceSellerAccountRequest = {
     /**
      * The seller's audience ID on that account; checked at sync.
      */
-    sellerId?: string;
+    platformId?: string;
     /**
      * True removes the mapping; the seller's object is kept.
      */
@@ -18602,7 +18602,7 @@ export type SaveEventSourceRequestEventSourceSellerAccountRequest = {
     /**
      * Pixel ID on that account; checked at sync.
      */
-    sellerId?: string;
+    platformId?: string;
     /**
      * True removes the mapping; the seller's object is kept.
      */
@@ -18776,9 +18776,9 @@ export type SaveEventSourceSuccessSavedEventSourceEntrySellerAccounts = Array<{
      */
     accountId: string;
     /**
-     * The seller's ID for this source; null until the sync is proved.
+     * Pixel ID mapped on that account; status says if proved.
      */
-    sellerId: string | null;
+    platformId: string | null;
     status: SaveEventSourceSuccessSellerObjectSyncState;
     /**
      * When this source last synced to this account; null if never.
@@ -18928,9 +18928,9 @@ export type SaveEventSourceSuccessUnchangedEventSourceEntrySellerAccounts = Arra
      */
     accountId: string;
     /**
-     * The seller's ID for this source; null until the sync is proved.
+     * Pixel ID mapped on that account; status says if proved.
      */
-    sellerId: string | null;
+    platformId: string | null;
     status: SaveEventSourceSuccessSellerObjectSyncState;
     /**
      * When this source last synced to this account; null if never.
@@ -19070,9 +19070,9 @@ export type SaveEventSourceSuccessUpdatedEventSourceEntrySellerAccounts = Array<
      */
     accountId: string;
     /**
-     * The seller's ID for this source; null until the sync is proved.
+     * Pixel ID mapped on that account; status says if proved.
      */
-    sellerId: string | null;
+    platformId: string | null;
     status: SaveEventSourceSuccessSellerObjectSyncState;
     /**
      * When this source last synced to this account; null if never.
