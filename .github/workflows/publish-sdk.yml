@@ -129,7 +129,7 @@ jobs:
           name: sdk-artifacts
           path: artifacts
       - id: registry
-        run: node sdk/release/registry-state.mjs --targets "${{ inputs.targets }}"
+        run: node sdk/release/registry-state.mjs --targets "${{ inputs.targets }}" --version "${{ needs.build.outputs.version }}"
       # For the first npm package creation only, a scope owner supplies a
       # short-lived environment secret. Remove it after configuring OIDC.
       - if: (inputs.targets == 'typescript' || inputs.targets == 'both') && steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists != 'true'
@@ -171,6 +171,9 @@ jobs:
           TARGETS: ${{ needs.build.outputs.targets }}
           GH_TOKEN: ${{ github.token }}
         run: |
+          # This job checks out the unversioned source; apply the reviewed version
+          # so the installed-SDK check compares against what was published.
+          node sdk/release/set-release-version.mjs "$SDK_VERSION" "$TARGETS"
           install_dir=$(mktemp -d)
           trap 'rm -rf "$install_dir"' EXIT
           assets=()
