@@ -6,7 +6,11 @@ const targets=targetsIndex<0?'both':process.argv[targetsIndex+1]
 if(!['typescript','python','both'].includes(targets))throw new Error('Pass --targets typescript, python or both')
 const includesTypescript=targets==='typescript'||targets==='both'
 const includesPython=targets==='python'||targets==='both'
-const release=JSON.parse(readFileSync('sdk/release/release.json','utf8'))
+// The publish job checks out the unversioned source, so the build job's reviewed
+// version must be passed in; release.json only reflects the source default.
+const versionIndex=process.argv.indexOf('--version')
+const release={version:versionIndex<0?JSON.parse(readFileSync('sdk/release/release.json','utf8')).version:process.argv[versionIndex+1]}
+if(!/^\d+\.\d+\.\d+$/.test(release.version??''))throw new Error('Pass the reviewed SDK version as --version x.y.z')
 const files=readdirSync('artifacts')
 async function get(url) { const response=await fetch(url,{signal:AbortSignal.timeout(10_000)});if(response.status===404)return null;if(!response.ok)throw new Error(`Registry lookup failed: ${response.status}`);return response.json() }
 function versionGreaterThan(next,previous) { const nextParts=next.split('.').map(Number);const previousParts=previous.split('.').map(Number);if(nextParts.length!==3||previousParts.length!==3||nextParts.some(Number.isNaN)||previousParts.some(Number.isNaN))throw new Error('Registry latest version must be x.y.z');return nextParts.some((part,index)=>part>previousParts[index]&&nextParts.slice(0,index).every((value,earlier)=>value===previousParts[earlier])) }

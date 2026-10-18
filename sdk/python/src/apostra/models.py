@@ -3894,7 +3894,7 @@ class GetStatusResultNextActionsItem(TypedDict):
 
 class GetStatusResultOperatorIdentity(TypedDict):
     canManage: bool
-    sellerHistoryCoop: bool
+    sellerHistoryCoop: NotRequired[bool]
     operatorDomain: NotRequired[str | None]
     operatorDomainSource: NotRequired[str | None]
     operatorScope: NotRequired[str | None]
@@ -5754,9 +5754,11 @@ SaveAgentRequestSaveAgentDeveloperCreateOperation: TypeAlias = Literal["develope
 class SaveAgentRequestSaveAgentDeveloperUpdateInput(TypedDict):
     operation: SaveAgentRequestSaveAgentDeveloperUpdateOperation
     agentId: str
-    '\n    Owned Agent ID to rename.\n    '
-    displayName: str
+    '\n    Owned Agent ID to update.\n    '
+    displayName: NotRequired[str]
     '\n    New name for the owned Agent.\n    '
+    certificationRequested: NotRequired[bool]
+    '\n    true says this Sales Agent is ready for certification and asks us to start it. false stops new certification runs; running buys continue. Saving the current value changes nothing.\n    '
     endpoint: NotRequired[str]
     '\n    Reserved for an immutable implementation revision; register endpoints through the Agent Page.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -5801,6 +5803,7 @@ class SaveAgentResultKindAgentWithObjectDisplayName(TypedDict):
 class SaveAgentResultKindAgentWithObjectDisplayNameObject(TypedDict):
     agentId: str
     displayName: str
+    certificationRequested: NotRequired[bool]
 
 class SaveAgentResultKindAgentWithObjectProductModeAndObjectScope(TypedDict):
     kind: Literal["agent"]
