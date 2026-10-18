@@ -463,14 +463,14 @@ export class Apostra extends Transport {
   /** Open the Seller Media Buys Page. Optionally focus one seller-owned account relationship and its buys or creatives; the Page self-fetches. Returns the data together with response headers and request ID. */
   openMediaBuysPageWithResponse(input: OpenMediaBuysPageInput, options?: RequestOptions): Promise<ResponseDetails<OpenMediaBuysPageResult>> { return this.requestDetailed("open_media_buys_page", input, options) }
   /**
-   * Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies.
+   * Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies.
    *
    * @example
    * await client.openPage(input)
    */
   openPage(input: OpenPageInput, options?: RequestOptions): Promise<OpenPageResult> { return this.request("open_page", input, options) }
 
-  /** Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies. Returns the data together with response headers and request ID. */
+  /** Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies. Returns the data together with response headers and request ID. */
   openPageWithResponse(input: OpenPageInput, options?: RequestOptions): Promise<ResponseDetails<OpenPageResult>> { return this.requestDetailed("open_page", input, options) }
   /**
    * Open Proposal Pass on one exact immutable RFP turn. Supply the matching rfpId and turnId from save_rfp or get; the Page loads the private response itself.

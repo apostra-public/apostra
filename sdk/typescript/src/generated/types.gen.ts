@@ -8422,7 +8422,7 @@ export type OpenPageData = {
         blockedReason?: unknown;
     } & {
         /**
-         * Page to open. source_diagnostics repairs a missing Agent relationship.
+         * Page to open. Owners repair a missing Agent relationship in source_diagnostics.
          */
         page: 'connect_ad_server' | 'ad_server_source' | 'ad_server_diagnostics' | 'source_diagnostics' | 'seller_setup' | 'demo_seller' | 'modular_inventory_source' | 'modular_source_setup' | 'modular_inventory_feed' | 'listing' | 'discovery_card' | 'media_kit' | 'business_profile' | 'playbook' | 'library' | 'integrations' | 'product_marketing' | 'business_rules' | 'buyer_account_mapping' | 'property_roster' | 'plan_and_billing' | 'sellers' | 'creative_engines' | 'advertisers' | 'campaigns' | 'campaign_receipt' | 'approvals' | 'release_notes' | 'customer_requests' | 'notifications' | 'webhooks' | 'buyer_proposal_version';
         /**
@@ -12870,7 +12870,7 @@ export type SaveBuyerOperatorData = {
          */
         identityContract?: 'confirmed-v1';
         /**
-         * Join (true) or leave (false) the seller-history co-op; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.
+         * Join (true) or leave (false) the seller-history co-op, the data co-op of Terms of Service section 6.3; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.
          */
         sellerHistoryCoop?: boolean;
         /**
