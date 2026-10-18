@@ -40,9 +40,6 @@ if (targets === 'typescript' || targets === 'both') {
 }
 
 if (targets === 'python' || targets === 'both') {
-  const pythonPackage = readJson('sdk/python/package.json')
-  pythonPackage.version = version
-  writeJson('sdk/python/package.json', pythonPackage)
   replace('sdk/python/pyproject.toml', /^version = ".*"$/mu, `version = "${version}"`)
   replace('sdk/python/src/apostra/_version.py', /^__version__ = '.*'$/mu, `__version__ = '${version}'`)
 }
