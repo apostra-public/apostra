@@ -4544,7 +4544,7 @@ class OpenPageInput(TypedDict):
     blockedReason: NotRequired[str]
     '\n    Its known blocked reason.\n    '
     page: Literal["connect_ad_server", "ad_server_source", "ad_server_diagnostics", "source_diagnostics", "seller_setup", "demo_seller", "modular_inventory_source", "modular_source_setup", "modular_inventory_feed", "listing", "discovery_card", "media_kit", "business_profile", "playbook", "library", "integrations", "product_marketing", "business_rules", "buyer_account_mapping", "property_roster", "plan_and_billing", "sellers", "creative_engines", "advertisers", "campaigns", "campaign_receipt", "approvals", "release_notes", "customer_requests", "notifications", "webhooks", "buyer_proposal_version"]
-    '\n    Page to open. source_diagnostics repairs a missing Agent relationship.\n    '
+    '\n    Page to open. Owners repair a missing Agent relationship in source_diagnostics.\n    '
     sourceId: NotRequired[str]
     '\n    Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.\n    '
     sourceName: NotRequired[str]
@@ -6498,7 +6498,7 @@ class SaveBuyerOperatorInput(TypedDict):
     identityContract: NotRequired[Literal["confirmed-v1"]]
     '\n    Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.\n    '
     sellerHistoryCoop: NotRequired[bool]
-    '\n    Join (true) or leave (false) the seller-history co-op; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.\n    '
+    '\n    Join (true) or leave (false) the seller-history co-op, the data co-op of Terms of Service section 6.3; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.\n    '
     preview: NotRequired[bool]
     '\n    Preview this identity change without saving.\n    '
     confirmationToken: NotRequired[str]
