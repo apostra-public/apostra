@@ -797,6 +797,8 @@
       "SaveAgentResultKindAgentWithObjectDisplayNameObject": "object",
       "SaveAgentResultKindAgentWithObjectProductModeAndObjectScope": "object",
       "SaveAgentResultKindAgentWithObjectProductModeAndObjectScopeObject": "object",
+      "SaveAgentResultKindBuyerAgent": "object",
+      "SaveAgentResultKindBuyerAgentObject": "object",
       "SaveAskError": "other",
       "SaveAskInput": "other",
       "SaveAskInputKindCreate": "object",
