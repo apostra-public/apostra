@@ -20851,12 +20851,12 @@ paths:
                                     type: string
                                     format: date-time
                                     pattern: >-
-                                      ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                                      ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                   end:
                                     type: string
                                     format: date-time
                                     pattern: >-
-                                      ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                                      ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                   timezone:
                                     type: string
                                     minLength: 1
@@ -20881,7 +20881,7 @@ paths:
                                 type: string
                                 format: date-time
                                 pattern: >-
-                                  ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                                  ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                               pagination:
                                 $ref: '#/components/schemas/get_delivery_success_DeliverySummaryPagination'
                               sandbox:
@@ -21198,7 +21198,7 @@ paths:
                                       type: string
                                       format: date-time
                                       pattern: >-
-                                        ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                                        ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                     is_adjusted:
                                       type: boolean
                                     is_final:
@@ -21207,7 +21207,7 @@ paths:
                                       type: string
                                       format: date-time
                                       pattern: >-
-                                        ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                                        ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                     pricing_model:
                                       $ref: >-
                                         #/components/schemas/get_delivery_success_DeliverySummaryMediaBuyDeliveriesItemPricingModel
@@ -21541,7 +21541,7 @@ paths:
                                             type: string
                                             format: date-time
                                             pattern: >-
-                                              ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                                              ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                           measurement_window:
                                             type: string
                                             maxLength: 50
@@ -30608,7 +30608,7 @@ paths:
                             items:
                               oneOf:
                                 - required:
-                                    - sellerId
+                                    - platformId
                                 - required:
                                     - unmap
       responses:
@@ -37156,7 +37156,7 @@ paths:
                                 items:
                                   oneOf:
                                     - required:
-                                        - sellerId
+                                        - platformId
                                     - required:
                                         - unmap
       responses:
@@ -74275,7 +74275,7 @@ components:
           type: string
           pattern: ^[1-9]\d*$
           description: accounts[].id from get(kind:'connection').
-        sellerId:
+        platformId:
           description: The seller's audience ID on that account; checked at sync.
           type: string
           minLength: 1
@@ -79761,7 +79761,7 @@ components:
           type: string
           pattern: ^[1-9]\d*$
           description: accounts[].id from get(kind:'connection').
-        sellerId:
+        platformId:
           description: Pixel ID on that account; checked at sync.
           type: string
           minLength: 1
@@ -80223,11 +80223,11 @@ components:
           accountId:
             type: string
             description: Seller account ID.
-          sellerId:
+          platformId:
             anyOf:
               - type: string
               - type: 'null'
-            description: The seller's ID for this source; null until the sync is proved.
+            description: Pixel ID mapped on that account; status says if proved.
           status:
             $ref: '#/components/schemas/save_event_source_success_SellerObjectSyncState'
           lastSyncedAt:
@@ -80255,7 +80255,7 @@ components:
         required:
           - storefront
           - accountId
-          - sellerId
+          - platformId
           - status
           - lastSyncedAt
           - health
@@ -80476,11 +80476,11 @@ components:
           accountId:
             type: string
             description: Seller account ID.
-          sellerId:
+          platformId:
             anyOf:
               - type: string
               - type: 'null'
-            description: The seller's ID for this source; null until the sync is proved.
+            description: Pixel ID mapped on that account; status says if proved.
           status:
             $ref: '#/components/schemas/save_event_source_success_SellerObjectSyncState'
           lastSyncedAt:
@@ -80508,7 +80508,7 @@ components:
         required:
           - storefront
           - accountId
-          - sellerId
+          - platformId
           - status
           - lastSyncedAt
           - health
@@ -80729,11 +80729,11 @@ components:
           accountId:
             type: string
             description: Seller account ID.
-          sellerId:
+          platformId:
             anyOf:
               - type: string
               - type: 'null'
-            description: The seller's ID for this source; null until the sync is proved.
+            description: Pixel ID mapped on that account; status says if proved.
           status:
             $ref: '#/components/schemas/save_event_source_success_SellerObjectSyncState'
           lastSyncedAt:
@@ -80761,7 +80761,7 @@ components:
         required:
           - storefront
           - accountId
-          - sellerId
+          - platformId
           - status
           - lastSyncedAt
           - health
