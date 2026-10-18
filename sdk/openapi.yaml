@@ -23689,7 +23689,7 @@ paths:
       security:
         - apiKeyAuth: []
         - m2mOAuth:
-            - interchange:admin
+            - interchange:read
       parameters:
         - name: X-SCOPE3-CUSTOMER-ID
           in: header
@@ -23822,7 +23822,7 @@ paths:
       security:
         - apiKeyAuth: []
         - m2mOAuth:
-            - interchange:admin
+            - interchange:read
       parameters:
         - name: X-SCOPE3-CUSTOMER-ID
           in: header
@@ -25412,11 +25412,11 @@ paths:
     post:
       operationId: open_page
       summary: >-
-        Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text.
-        Credentials and authority changes remain human ceremonies.
+        Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return
+        text. Credentials and authority changes remain human ceremonies.
       description: >-
-        Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text.
-        Credentials and authority changes remain human ceremonies.
+        Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return
+        text. Credentials and authority changes remain human ceremonies.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -25473,7 +25473,7 @@ paths:
                     - notifications
                     - webhooks
                     - buyer_proposal_version
-                  description: Page to open. source_diagnostics repairs a missing Agent relationship.
+                  description: Page to open. Owners repair a missing Agent relationship in source_diagnostics.
                 sourceId:
                   description: Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.
                   type: string
@@ -29978,6 +29978,34 @@ paths:
                         properties:
                           kind:
                             type: string
+                            const: buyer_agent
+                          outcome:
+                            type: string
+                            const: developer_created
+                          object:
+                            type: object
+                            properties:
+                              principalId:
+                                type: string
+                              displayName:
+                                type: string
+                              lifecycleState:
+                                type: string
+                                const: active
+                            required:
+                              - principalId
+                              - displayName
+                              - lifecycleState
+                            additionalProperties: false
+                        required:
+                          - kind
+                          - outcome
+                          - object
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          kind:
+                            type: string
                             const: agent
                           outcome:
                             type: string
@@ -31666,8 +31694,9 @@ paths:
                   description: 'Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.'
                 sellerHistoryCoop:
                   description: >-
-                    Join (true) or leave (false) the seller-history co-op; needs preview and confirmation. Resend the
-                    saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.
+                    Join (true) or leave (false) the seller-history co-op, the data co-op of Terms of Service section
+                    6.3; needs preview and confirmation. Resend the saved identity to change only this. Guide:
+                    /v2/concepts/seller-history-co-op.
                   example: true
                   type: boolean
                 preview:
@@ -74080,16 +74109,19 @@ components:
         kind:
           type: string
           enum:
-            - SALES
-            - CREATIVE
-          description: 'Kind for a new Agent: SALES or CREATIVE.'
+            - sales
+            - creative
+            - buyer
+          description: 'Kind for a new agent: sales, creative or buyer.'
         displayName:
           type: string
           minLength: 1
           maxLength: 255
           description: Name for a new Agent.
         operator:
-          description: Operator for a new Agent. Omit it to create an operator with the Agent name.
+          description: >-
+            Operator for a new sales or creative agent. Omit it to create an operator with the agent name. A buyer agent
+            has no operator.
           oneOf:
             - type: object
               properties:
@@ -74129,11 +74161,13 @@ components:
           type: string
           format: uri
         idempotencyKey:
+          description: >-
+            Unique key that makes a retried sales or creative registration find the first agent. Required for sales and
+            creative; a buyer agent takes none.
           type: string
           format: uuid
           pattern: >-
             ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
-          description: Unique key for a new Agent registration.
         expectedAccountId:
           anyOf:
             - type: integer
@@ -74150,7 +74184,6 @@ components:
         - operation
         - kind
         - displayName
-        - idempotencyKey
       additionalProperties: false
     save_agent_request_SaveAgentDeveloperCreateOperation:
       type: string

@@ -4544,7 +4544,7 @@ class OpenPageInput(TypedDict):
     blockedReason: NotRequired[str]
     '\n    Its known blocked reason.\n    '
     page: Literal["connect_ad_server", "ad_server_source", "ad_server_diagnostics", "source_diagnostics", "seller_setup", "demo_seller", "modular_inventory_source", "modular_source_setup", "modular_inventory_feed", "listing", "discovery_card", "media_kit", "business_profile", "playbook", "library", "integrations", "product_marketing", "business_rules", "buyer_account_mapping", "property_roster", "plan_and_billing", "sellers", "creative_engines", "advertisers", "campaigns", "campaign_receipt", "approvals", "release_notes", "customer_requests", "notifications", "webhooks", "buyer_proposal_version"]
-    '\n    Page to open. source_diagnostics repairs a missing Agent relationship.\n    '
+    '\n    Page to open. Owners repair a missing Agent relationship in source_diagnostics.\n    '
     sourceId: NotRequired[str]
     '\n    Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.\n    '
     sourceName: NotRequired[str]
@@ -5724,16 +5724,16 @@ SaveAdvertiserSuccessValue: TypeAlias = JsonValue
 
 class SaveAgentRequestSaveAgentDeveloperCreateInput(TypedDict):
     operation: SaveAgentRequestSaveAgentDeveloperCreateOperation
-    kind: Literal["SALES", "CREATIVE"]
-    '\n    Kind for a new Agent: SALES or CREATIVE.\n    '
+    kind: Literal["sales", "creative", "buyer"]
+    '\n    Kind for a new agent: sales, creative or buyer.\n    '
     displayName: str
     '\n    Name for a new Agent.\n    '
     operator: NotRequired[SaveAgentRequestSaveAgentDeveloperCreateInputOperatorKindEXISTING | SaveAgentRequestSaveAgentDeveloperCreateInputOperatorKindNEW]
-    '\n    Operator for a new Agent. Omit it to create an operator with the Agent name.\n    '
+    '\n    Operator for a new sales or creative agent. Omit it to create an operator with the agent name. A buyer agent has no operator.\n    '
     endpoint: NotRequired[str]
     '\n    Reserved for an immutable implementation revision; register endpoints through the Agent Page.\n    '
-    idempotencyKey: str
-    '\n    Unique key for a new Agent registration.\n    '
+    idempotencyKey: NotRequired[str]
+    '\n    Unique key that makes a retried sales or creative registration find the first agent. Required for sales and creative; a buyer agent takes none.\n    '
     expectedAccountId: NotRequired[int | str]
     accountId: NotRequired[int | str]
 
@@ -5810,13 +5810,23 @@ class SaveAgentResultKindAgentWithObjectProductModeAndObjectScope(TypedDict):
     outcome: Literal["seller_saved"]
     object: SaveAgentResultKindAgentWithObjectProductModeAndObjectScopeObject
 
-SaveAgentResult: TypeAlias = "SaveAgentResultKindAgentWithObjectProductModeAndObjectScope | SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHrefAndObjectRole | SaveAgentResultKindAgentWithObjectDisplayName"
-
 class SaveAgentResultKindAgentWithObjectProductModeAndObjectScopeObject(TypedDict):
     agentId: str
     productMode: Literal["WHOLESALE", "COMPOSING", "BOTH"]
     scope: Literal["agent", "seller_binding"]
     bindingId: NotRequired[str]
+
+class SaveAgentResultKindBuyerAgent(TypedDict):
+    kind: Literal["buyer_agent"]
+    outcome: Literal["developer_created"]
+    object: SaveAgentResultKindBuyerAgentObject
+
+SaveAgentResult: TypeAlias = "SaveAgentResultKindAgentWithObjectProductModeAndObjectScope | SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHrefAndObjectRole | SaveAgentResultKindBuyerAgent | SaveAgentResultKindAgentWithObjectDisplayName"
+
+class SaveAgentResultKindBuyerAgentObject(TypedDict):
+    principalId: str
+    displayName: str
+    lifecycleState: Literal["active"]
 
 class SaveAskInputKindCreate(TypedDict):
     expectedAccountId: NotRequired[int | str]
@@ -6498,7 +6508,7 @@ class SaveBuyerOperatorInput(TypedDict):
     identityContract: NotRequired[Literal["confirmed-v1"]]
     '\n    Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.\n    '
     sellerHistoryCoop: NotRequired[bool]
-    '\n    Join (true) or leave (false) the seller-history co-op; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.\n    '
+    '\n    Join (true) or leave (false) the seller-history co-op, the data co-op of Terms of Service section 6.3; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.\n    '
     preview: NotRequired[bool]
     '\n    Preview this identity change without saving.\n    '
     confirmationToken: NotRequired[str]

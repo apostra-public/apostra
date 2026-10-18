@@ -8422,7 +8422,7 @@ export type OpenPageData = {
         blockedReason?: unknown;
     } & {
         /**
-         * Page to open. source_diagnostics repairs a missing Agent relationship.
+         * Page to open. Owners repair a missing Agent relationship in source_diagnostics.
          */
         page: 'connect_ad_server' | 'ad_server_source' | 'ad_server_diagnostics' | 'source_diagnostics' | 'seller_setup' | 'demo_seller' | 'modular_inventory_source' | 'modular_source_setup' | 'modular_inventory_feed' | 'listing' | 'discovery_card' | 'media_kit' | 'business_profile' | 'playbook' | 'library' | 'integrations' | 'product_marketing' | 'business_rules' | 'buyer_account_mapping' | 'property_roster' | 'plan_and_billing' | 'sellers' | 'creative_engines' | 'advertisers' | 'campaigns' | 'campaign_receipt' | 'approvals' | 'release_notes' | 'customer_requests' | 'notifications' | 'webhooks' | 'buyer_proposal_version';
         /**
@@ -11319,15 +11319,15 @@ export type SaveAgentErrors = {
 export type SaveAgentRequestSaveAgentDeveloperCreateInput = {
     operation: SaveAgentRequestSaveAgentDeveloperCreateOperation;
     /**
-     * Kind for a new Agent: SALES or CREATIVE.
+     * Kind for a new agent: sales, creative or buyer.
      */
-    kind: 'SALES' | 'CREATIVE';
+    kind: 'sales' | 'creative' | 'buyer';
     /**
      * Name for a new Agent.
      */
     displayName: string;
     /**
-     * Operator for a new Agent. Omit it to create an operator with the Agent name.
+     * Operator for a new sales or creative agent. Omit it to create an operator with the agent name. A buyer agent has no operator.
      */
     operator?: {
         /**
@@ -11355,9 +11355,9 @@ export type SaveAgentRequestSaveAgentDeveloperCreateInput = {
      */
     endpoint?: string;
     /**
-     * Unique key for a new Agent registration.
+     * Unique key that makes a retried sales or creative registration find the first agent. Required for sales and creative; a buyer agent takes none.
      */
-    idempotencyKey: string;
+    idempotencyKey?: string;
     expectedAccountId?: number | string;
     accountId?: number | string;
 };
@@ -11446,6 +11446,14 @@ export type SaveAgentResponses = {
                 role: 'SALES' | 'CREATIVE';
                 href: string;
                 created: boolean;
+            };
+        } | {
+            kind: 'buyer_agent';
+            outcome: 'developer_created';
+            object: {
+                principalId: string;
+                displayName: string;
+                lifecycleState: 'active';
             };
         } | {
             kind: 'agent';
@@ -12870,7 +12878,7 @@ export type SaveBuyerOperatorData = {
          */
         identityContract?: 'confirmed-v1';
         /**
-         * Join (true) or leave (false) the seller-history co-op; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.
+         * Join (true) or leave (false) the seller-history co-op, the data co-op of Terms of Service section 6.3; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.
          */
         sellerHistoryCoop?: boolean;
         /**
