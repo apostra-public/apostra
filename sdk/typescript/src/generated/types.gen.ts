@@ -12870,7 +12870,7 @@ export type SaveBuyerOperatorData = {
          */
         identityContract?: 'confirmed-v1';
         /**
-         * Join (true) or leave (false) the seller-history co-op; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.
+         * Join (true) or leave (false) the seller-history co-op, the data co-op of Terms of Service section 6.3; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.
          */
         sellerHistoryCoop?: boolean;
         /**

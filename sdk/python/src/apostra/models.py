@@ -6498,7 +6498,7 @@ class SaveBuyerOperatorInput(TypedDict):
     identityContract: NotRequired[Literal["confirmed-v1"]]
     '\n    Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.\n    '
     sellerHistoryCoop: NotRequired[bool]
-    '\n    Join (true) or leave (false) the seller-history co-op; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.\n    '
+    '\n    Join (true) or leave (false) the seller-history co-op, the data co-op of Terms of Service section 6.3; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.\n    '
     preview: NotRequired[bool]
     '\n    Preview this identity change without saving.\n    '
     confirmationToken: NotRequired[str]
