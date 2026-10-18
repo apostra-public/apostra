@@ -11370,13 +11370,17 @@ export type SaveAgentRequestSaveAgentDeveloperCreateOperation = 'developer_creat
 export type SaveAgentRequestSaveAgentDeveloperUpdateInput = {
     operation: SaveAgentRequestSaveAgentDeveloperUpdateOperation;
     /**
-     * Owned Agent ID to rename.
+     * Owned Agent ID to update.
      */
     agentId: string;
     /**
      * New name for the owned Agent.
      */
-    displayName: string;
+    displayName?: string;
+    /**
+     * true says this Sales Agent is ready for certification and asks us to start it. false stops new certification runs; running buys continue. Saving the current value changes nothing.
+     */
+    certificationRequested?: boolean;
     /**
      * Reserved for an immutable implementation revision; register endpoints through the Agent Page.
      */
@@ -11386,7 +11390,7 @@ export type SaveAgentRequestSaveAgentDeveloperUpdateInput = {
 };
 
 /**
- * Rename a Developer-owned Agent.
+ * Rename a Developer-owned Agent or say whether it is ready for certification.
  */
 export type SaveAgentRequestSaveAgentDeveloperUpdateOperation = 'developer_update';
 
@@ -11449,6 +11453,7 @@ export type SaveAgentResponses = {
             object: {
                 agentId: string;
                 displayName: string;
+                certificationRequested?: boolean;
             };
         };
         error: null;

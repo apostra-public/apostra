@@ -698,7 +698,7 @@
         ]
       }
     ],
-    "summary": "Save a Sales Agent mode, register an Agent, or rename an owned Agent. Select seller_save, developer_create, or developer_update."
+    "summary": "Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for certification. Select seller_save, developer_create, or developer_update."
   },
   "save_ask": {
     "path": "/tools/save_ask",

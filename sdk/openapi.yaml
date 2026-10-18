@@ -29842,11 +29842,11 @@ paths:
     post:
       operationId: save_agent
       summary: >-
-        Save a Sales Agent mode, register an Agent, or rename an owned Agent. Select seller_save, developer_create, or
-        developer_update.
+        Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for
+        certification. Select seller_save, developer_create, or developer_update.
       description: >-
-        Save a Sales Agent mode, register an Agent, or rename an owned Agent. Select seller_save, developer_create, or
-        developer_update.
+        Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for
+        certification. Select seller_save, developer_create, or developer_update.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -29993,6 +29993,8 @@ paths:
                                   ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                               displayName:
                                 type: string
+                              certificationRequested:
+                                type: boolean
                             required:
                               - agentId
                               - displayName
@@ -74165,12 +74167,17 @@ components:
           format: uuid
           pattern: >-
             ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
-          description: Owned Agent ID to rename.
+          description: Owned Agent ID to update.
         displayName:
+          description: New name for the owned Agent.
           type: string
           minLength: 1
           maxLength: 255
-          description: New name for the owned Agent.
+        certificationRequested:
+          description: >-
+            true says this Sales Agent is ready for certification and asks us to start it. false stops new certification
+            runs; running buys continue. Saving the current value changes nothing.
+          type: boolean
         endpoint:
           description: Reserved for an immutable implementation revision; register endpoints through the Agent Page.
           type: string
@@ -74190,12 +74197,11 @@ components:
       required:
         - operation
         - agentId
-        - displayName
       additionalProperties: false
     save_agent_request_SaveAgentDeveloperUpdateOperation:
       type: string
       const: developer_update
-      description: Rename a Developer-owned Agent.
+      description: Rename a Developer-owned Agent or say whether it is ready for certification.
     save_ask_success_AskId:
       type:
         - string
