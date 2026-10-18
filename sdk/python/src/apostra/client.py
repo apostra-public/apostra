@@ -157,11 +157,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.OpenMediaBuysPageResult], self._request_with_response("open_media_buys_page", input, account_id=account_id, timeout=timeout))
 
     def open_page(self, input: models.OpenPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenPageResult:
-        "Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies."
+        "Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies."
         return cast("models.OpenPageResult", self._request("open_page", input, account_id=account_id, timeout=timeout))
 
     def open_page_with_response(self, input: models.OpenPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenPageResult]:
-        "Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies. Returns the data together with response headers and request ID."
+        "Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenPageResult], self._request_with_response("open_page", input, account_id=account_id, timeout=timeout))
 
     def open_proposal_pass(self, input: models.OpenProposalPassInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenProposalPassResult:
@@ -694,11 +694,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.OpenMediaBuysPageResult], await self._request_with_response("open_media_buys_page", input, account_id=account_id, timeout=timeout))
 
     async def open_page(self, input: models.OpenPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenPageResult:
-        "Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies."
+        "Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies."
         return cast("models.OpenPageResult", await self._request("open_page", input, account_id=account_id, timeout=timeout))
 
     async def open_page_with_response(self, input: models.OpenPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenPageResult]:
-        "Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies. Returns the data together with response headers and request ID."
+        "Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenPageResult], await self._request_with_response("open_page", input, account_id=account_id, timeout=timeout))
 
     async def open_proposal_pass(self, input: models.OpenProposalPassInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenProposalPassResult:

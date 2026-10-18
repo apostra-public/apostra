@@ -434,7 +434,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies."
+    "summary": "Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies."
   },
   "open_proposal_pass": {
     "path": "/tools/open_proposal_pass",

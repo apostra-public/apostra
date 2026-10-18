@@ -25412,11 +25412,11 @@ paths:
     post:
       operationId: open_page
       summary: >-
-        Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text.
-        Credentials and authority changes remain human ceremonies.
+        Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return
+        text. Credentials and authority changes remain human ceremonies.
       description: >-
-        Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text.
-        Credentials and authority changes remain human ceremonies.
+        Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return
+        text. Credentials and authority changes remain human ceremonies.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -25473,7 +25473,7 @@ paths:
                     - notifications
                     - webhooks
                     - buyer_proposal_version
-                  description: Page to open. source_diagnostics repairs a missing Agent relationship.
+                  description: Page to open. Owners repair a missing Agent relationship in source_diagnostics.
                 sourceId:
                   description: Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.
                   type: string
@@ -31666,8 +31666,9 @@ paths:
                   description: 'Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.'
                 sellerHistoryCoop:
                   description: >-
-                    Join (true) or leave (false) the seller-history co-op; needs preview and confirmation. Resend the
-                    saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.
+                    Join (true) or leave (false) the seller-history co-op, the data co-op of Terms of Service section
+                    6.3; needs preview and confirmation. Resend the saved identity to change only this. Guide:
+                    /v2/concepts/seller-history-co-op.
                   example: true
                   type: boolean
                 preview:
