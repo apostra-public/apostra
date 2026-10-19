@@ -69,11 +69,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.GetSellerReportingReceiptsResult], self._request_with_response("get_seller_reporting_receipts", input, account_id=account_id, timeout=timeout))
 
     def get_status(self, input: models.GetStatusInput = {}, *, account_id: str | None = None, timeout: float | None = None) -> models.GetStatusResult:
-        "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand."
+        "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call."
         return cast("models.GetStatusResult", self._request("get_status", input, account_id=account_id, timeout=timeout))
 
     def get_status_with_response(self, input: models.GetStatusInput = {}, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.GetStatusResult]:
-        "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. Returns the data together with response headers and request ID."
+        "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.GetStatusResult], self._request_with_response("get_status", input, account_id=account_id, timeout=timeout))
 
     def open_advertisers_page(self, input: models.OpenAdvertisersPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAdvertisersPageResult:
@@ -157,11 +157,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.OpenMediaBuysPageResult], self._request_with_response("open_media_buys_page", input, account_id=account_id, timeout=timeout))
 
     def open_page(self, input: models.OpenPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenPageResult:
-        "Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies."
+        "Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies."
         return cast("models.OpenPageResult", self._request("open_page", input, account_id=account_id, timeout=timeout))
 
     def open_page_with_response(self, input: models.OpenPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenPageResult]:
-        "Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies. Returns the data together with response headers and request ID."
+        "Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenPageResult], self._request_with_response("open_page", input, account_id=account_id, timeout=timeout))
 
     def open_proposal_pass(self, input: models.OpenProposalPassInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenProposalPassResult:
@@ -606,11 +606,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.GetSellerReportingReceiptsResult], await self._request_with_response("get_seller_reporting_receipts", input, account_id=account_id, timeout=timeout))
 
     async def get_status(self, input: models.GetStatusInput = {}, *, account_id: str | None = None, timeout: float | None = None) -> models.GetStatusResult:
-        "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand."
+        "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call."
         return cast("models.GetStatusResult", await self._request("get_status", input, account_id=account_id, timeout=timeout))
 
     async def get_status_with_response(self, input: models.GetStatusInput = {}, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.GetStatusResult]:
-        "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. Returns the data together with response headers and request ID."
+        "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.GetStatusResult], await self._request_with_response("get_status", input, account_id=account_id, timeout=timeout))
 
     async def open_advertisers_page(self, input: models.OpenAdvertisersPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAdvertisersPageResult:
@@ -694,11 +694,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.OpenMediaBuysPageResult], await self._request_with_response("open_media_buys_page", input, account_id=account_id, timeout=timeout))
 
     async def open_page(self, input: models.OpenPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenPageResult:
-        "Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies."
+        "Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies."
         return cast("models.OpenPageResult", await self._request("open_page", input, account_id=account_id, timeout=timeout))
 
     async def open_page_with_response(self, input: models.OpenPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenPageResult]:
-        "Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies. Returns the data together with response headers and request ID."
+        "Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenPageResult], await self._request_with_response("open_page", input, account_id=account_id, timeout=timeout))
 
     async def open_proposal_pass(self, input: models.OpenProposalPassInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenProposalPassResult:

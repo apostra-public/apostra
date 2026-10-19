@@ -169,6 +169,7 @@ jobs:
         env:
           SDK_VERSION: ${{ needs.build.outputs.version }}
           TARGETS: ${{ needs.build.outputs.targets }}
+          INSTALL_ATTEMPTS: '30'
           GH_TOKEN: ${{ github.token }}
         run: |
           # This job checks out the unversioned source; apply the reviewed version
@@ -178,10 +179,11 @@ jobs:
           trap 'rm -rf "$install_dir"' EXIT
           assets=()
           if [[ "$TARGETS" == 'typescript' || "$TARGETS" == 'both' ]]; then
-            # A just-published version can take a few minutes to become installable.
-            for attempt in 1 2 3 4 5 6 7 8 9 10; do
-              npm install --prefix "$install_dir" --ignore-scripts "@apostra/sdk@$SDK_VERSION" && break
-              if [[ "$attempt" == 10 ]]; then exit 1; fi
+            # A just-published version can take several minutes to become
+            # installable; npm took longer than five minutes for 0.37.0 and 0.38.0.
+            for attempt in $(seq 1 "$INSTALL_ATTEMPTS"); do
+              npm install --prefer-online --prefix "$install_dir" --ignore-scripts "@apostra/sdk@$SDK_VERSION" && break
+              if [[ "$attempt" == "$INSTALL_ATTEMPTS" ]]; then exit 1; fi
               sleep 30
             done
             node sdk/testing/verify-installed.mjs sdk/release/manifest.json "$install_dir"
@@ -189,9 +191,9 @@ jobs:
           fi
           if [[ "$TARGETS" == 'python' || "$TARGETS" == 'both' ]]; then
             uv venv --python 3.12 "$install_dir/venv"
-            for attempt in 1 2 3 4 5 6 7 8 9 10; do
+            for attempt in $(seq 1 "$INSTALL_ATTEMPTS"); do
               uv pip install --refresh --python "$install_dir/venv/bin/python" "apostra==$SDK_VERSION" && break
-              if [[ "$attempt" == 10 ]]; then exit 1; fi
+              if [[ "$attempt" == "$INSTALL_ATTEMPTS" ]]; then exit 1; fi
               sleep 30
             done
             node sdk/testing/verify-installed.mjs sdk/release/manifest.json "$install_dir" "$install_dir/venv/bin/python"
