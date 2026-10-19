@@ -5505,49 +5505,6 @@ class SaveAccountResultObject(TypedDict):
 class SaveAccountResultObjectSettings(TypedDict):
     company: str
 
-class SaveAdvertiserAccessInput(TypedDict):
-    action: Literal["invite", "decide", "change_role", "revoke_lifecycle"]
-    '\n    invite sends a client access to one advertiser; decide approves, suspends, reactivates, or revokes a client; change_role sets a client role; revoke_lifecycle ends older self-serve access.\n    '
-    advertiserId: NotRequired[SaveAdvertiserAccessRequestAdvertiserId]
-    '\n    The advertiser. For revoke_lifecycle, the one that owns the lifecycle.\n    '
-    admissionId: NotRequired[str]
-    '\n    decide or change_role: the client admissionId from get advertiser_access.\n    '
-    lifecycleId: NotRequired[str]
-    '\n    revoke_lifecycle only: a lifecycleId with canRevoke from get advertiser_access.\n    '
-    email: NotRequired[str]
-    '\n    invite only: the one person to invite.\n    '
-    operatorDomain: NotRequired[str]
-    '\n    invite only: the invited company domain, for example example.com.\n    '
-    role: NotRequired[Literal["advertiser-viewer", "advertiser-editor", "advertiser-admin"]]
-    '\n    invite or change_role: the access the client gets.\n    '
-    decision: NotRequired[Literal["approve", "suspend", "reactivate", "revoke"]]
-    '\n    decide only: pick one of availableActions.\n    '
-    expectedRevision: NotRequired[SaveAdvertiserAccessRequestExpectedRevision]
-    '\n    decide or change_role: the client revision you read. A stale one is refused.\n    '
-    eligibilityRevision: NotRequired[str]
-    '\n    invite only: invite.eligibilityRevision you read. Omit to use the current one.\n    '
-    reason: NotRequired[str]
-    '\n    decide, change_role, or revoke_lifecycle: why. Audited.\n    '
-    expectedAccountId: NotRequired[int | str]
-    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
-    accountId: NotRequired[int | str]
-    '\n    Apostra accountId this call runs in, from get_status.\n    '
-
-SaveAdvertiserAccessRequestAdvertiserId: TypeAlias = str
-
-SaveAdvertiserAccessRequestExpectedRevision: TypeAlias = str
-
-class SaveAdvertiserAccessResult(TypedDict):
-    action: Literal["invite", "decide", "change_role", "revoke_lifecycle"]
-    advertiserId: NotRequired[str]
-    admissionId: NotRequired[str]
-    lifecycleId: NotRequired[str]
-    state: NotRequired[str]
-    roleSlug: NotRequired[Literal["advertiser-viewer", "advertiser-editor", "advertiser-admin"]]
-    revision: NotRequired[str]
-    deliveryState: NotRequired[Literal["requested", "sent", "failed", "cancelled"]]
-    replay: NotRequired[bool]
-
 class SaveAdvertiserGrantInput(TypedDict):
     action: Literal["invite", "accept", "reject", "revoke"]
     '\n    invite creates a reviewed exact scope; invited org accepts/rejects; grantor revokes.\n    '
@@ -6564,95 +6521,59 @@ SaveBusinessRulesResult: TypeAlias = "SaveBusinessRulesSuccessSaveBusinessRulesS
 
 SaveBusinessRulesSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
-class SaveBuyerAgentInputKindExternalAndHosted(TypedDict):
-    expectedAccountId: NotRequired[int | str]
-    accountId: NotRequired[int | str]
-    operation: SaveBuyerAgentRequestSaveBuyerAgentCreateOperation
-    displayName: SaveBuyerAgentRequestDisplayName
+class SaveBuyerAgentInput(TypedDict):
+    id: NotRequired[str]
+    '\n    Existing agent ID.\n    '
+    displayName: NotRequired[str]
+    '\n    Name for creation or rename.\n    '
     kind: NotRequired[Literal["external", "hosted"]]
     '\n    external is available. hosted creation is not available yet.\n    '
-
-class SaveBuyerAgentInputOperationCredentialHandoff(TypedDict):
+    access: NotRequired[SaveBuyerAgentInputAccess]
+    '\n    Replace exact grants.\n    '
+    lifecycleState: NotRequired[Literal["active", "suspended", "retired"]]
+    '\n    Desired state: active resumes, suspended pauses, retired is permanent.\n    '
+    expectedLifecycleState: NotRequired[Literal["active", "suspended"]]
+    '\n    Current state this change requires; sent with lifecycleState.\n    '
+    confirmationText: NotRequired[str]
+    '\n    Exact current display name; required to suspend or retire.\n    '
+    credentialHandoff: NotRequired[Literal[True]]
+    '\n    Prepare credential setup.\n    '
     expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
-    operation: SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation
-    id: SaveBuyerAgentRequestId
-    credentialHandoff: Literal[True]
-    '\n    Prepare a safe reference for the administrator credential ceremony; never returns a secret.\n    '
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-class SaveBuyerAgentInputOperationLifecycle(TypedDict):
-    expectedAccountId: NotRequired[int | str]
-    accountId: NotRequired[int | str]
-    operation: SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation
-    id: SaveBuyerAgentRequestId
-    lifecycle: SaveBuyerAgentInputOperationLifecycleLifecycleActionSuspend | SaveBuyerAgentInputOperationLifecycleLifecycleActionResume | SaveBuyerAgentInputOperationLifecycleLifecycleActionRetire
-    '\n    One state-fenced suspend, resume, or retire action.\n    '
-
-class SaveBuyerAgentInputOperationLifecycleLifecycleActionResume(TypedDict):
-    action: Literal["resume"]
-    '\n    Resume a suspended buyer agent.\n    '
-    expectedLifecycleState: Literal["suspended"]
-    '\n    State fence required before resumption.\n    '
-    confirmationText: NotRequired[SaveBuyerAgentRequestLifecycleConfirmationText]
-
-class SaveBuyerAgentInputOperationLifecycleLifecycleActionRetire(TypedDict):
-    action: Literal["retire"]
-    '\n    Permanently retire an active or suspended buyer agent.\n    '
-    expectedLifecycleState: Literal["active", "suspended"]
-    '\n    State fence required before retirement.\n    '
-    confirmationText: SaveBuyerAgentRequestLifecycleConfirmationText
-
-class SaveBuyerAgentInputOperationLifecycleLifecycleActionSuspend(TypedDict):
-    action: Literal["suspend"]
-    '\n    Suspend an active buyer agent.\n    '
-    expectedLifecycleState: Literal["active"]
-    '\n    State fence required before suspension.\n    '
-    confirmationText: SaveBuyerAgentRequestLifecycleConfirmationText
-
-class SaveBuyerAgentInputOperationUpdateAccess(TypedDict):
-    expectedAccountId: NotRequired[int | str]
-    accountId: NotRequired[int | str]
-    operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation
-    id: SaveBuyerAgentRequestId
-    access: SaveBuyerAgentInputOperationUpdateAccessAccess
-    '\n    Complete replacement list of advertiser grants.\n    '
-
-class SaveBuyerAgentInputOperationUpdateAccessAccess(TypedDict):
+class SaveBuyerAgentInputAccess(TypedDict):
     expectedAccessRevision: int
     '\n    Access revision returned by the most recent read.\n    '
-    advertisers: list[SaveBuyerAgentInputOperationUpdateAccessAccessAdvertisersItem]
+    advertisers: list[SaveBuyerAgentInputAccessAdvertisersItem]
     '\n    Complete replacement list of advertiser grants.\n    '
 
-class SaveBuyerAgentInputOperationUpdateAccessAccessAdvertisersItem(TypedDict):
+class SaveBuyerAgentInputAccessAdvertisersItem(TypedDict):
     advertiserId: str
     '\n    Advertiser ID receiving this exact role.\n    '
     role: Literal["READ", "READ_WRITE"]
     '\n    READ or READ_WRITE access for this advertiser.\n    '
 
-class SaveBuyerAgentInputOperationUpdateDisplayName(TypedDict):
-    expectedAccountId: NotRequired[int | str]
-    accountId: NotRequired[int | str]
-    operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation
-    id: SaveBuyerAgentRequestId
-    displayName: SaveBuyerAgentRequestDisplayName
+SaveBuyerAgentInputKindExternalAndHosted: TypeAlias = Literal["external", "hosted"]
 
-SaveBuyerAgentInput: TypeAlias = "SaveBuyerAgentInputKindExternalAndHosted | SaveBuyerAgentInputOperationUpdateDisplayName | SaveBuyerAgentInputOperationUpdateAccess | SaveBuyerAgentInputOperationLifecycle | SaveBuyerAgentInputOperationCredentialHandoff"
+SaveBuyerAgentInputOperationCredentialHandoff: TypeAlias = SaveBuyerAgentInput
 
-SaveBuyerAgentRequestDisplayName: TypeAlias = str
+SaveBuyerAgentInputOperationLifecycle: TypeAlias = SaveBuyerAgentInput
 
-SaveBuyerAgentRequestId: TypeAlias = str
+SaveBuyerAgentInputOperationLifecycleLifecycleActionResume: TypeAlias = SaveBuyerAgentInput
 
-SaveBuyerAgentRequestLifecycleConfirmationText: TypeAlias = str
+SaveBuyerAgentInputOperationLifecycleLifecycleActionRetire: TypeAlias = SaveBuyerAgentInput
 
-SaveBuyerAgentRequestSaveBuyerAgentCreateOperation: TypeAlias = Literal["create"]
+SaveBuyerAgentInputOperationLifecycleLifecycleActionSuspend: TypeAlias = SaveBuyerAgentInput
 
-SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation: TypeAlias = Literal["credential_handoff"]
+SaveBuyerAgentInputOperationUpdateAccess: TypeAlias = SaveBuyerAgentInput
 
-SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation: TypeAlias = Literal["lifecycle"]
+SaveBuyerAgentInputOperationUpdateAccessAccess: TypeAlias = SaveBuyerAgentInputAccess
 
-SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation: TypeAlias = Literal["update_access"]
+SaveBuyerAgentInputOperationUpdateAccessAccessAdvertisersItem: TypeAlias = SaveBuyerAgentInputAccessAdvertisersItem
 
-SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation: TypeAlias = Literal["update_display_name"]
+SaveBuyerAgentInputOperationUpdateDisplayName: TypeAlias = SaveBuyerAgentInput
 
 class SaveBuyerAgentResult(TypedDict):
     kind: Literal["buyer_agent"]
@@ -20210,8 +20131,6 @@ RequestSellerReportingUpdateError: TypeAlias = "V3ToolErrorResponse"
 ReviewBuyerChildAccountError: TypeAlias = "V3ToolErrorResponse"
 
 SaveAccountError: TypeAlias = "V3ToolErrorResponse"
-
-SaveAdvertiserAccessError: TypeAlias = "V3ToolErrorResponse"
 
 SaveAdvertiserError: TypeAlias = "V3ToolErrorResponse"
 

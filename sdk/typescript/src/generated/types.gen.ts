@@ -10584,175 +10584,6 @@ export type SaveAccountResponses = {
     };
 };
 
-export type SaveAdvertiserAccessData = {
-    body: unknown & {
-        /**
-         * invite sends a client access to one advertiser; decide approves, suspends, reactivates, or revokes a client; change_role sets a client role; revoke_lifecycle ends older self-serve access.
-         */
-        action: 'invite' | 'decide' | 'change_role' | 'revoke_lifecycle';
-        /**
-         * The advertiser. For revoke_lifecycle, the one that owns the lifecycle.
-         */
-        advertiserId?: SaveAdvertiserAccessRequestAdvertiserId;
-        /**
-         * decide or change_role: the client admissionId from get advertiser_access.
-         */
-        admissionId?: string;
-        /**
-         * revoke_lifecycle only: a lifecycleId with canRevoke from get advertiser_access.
-         */
-        lifecycleId?: string;
-        /**
-         * invite only: the one person to invite.
-         */
-        email?: string;
-        /**
-         * invite only: the invited company domain, for example example.com.
-         */
-        operatorDomain?: string;
-        /**
-         * invite or change_role: the access the client gets.
-         */
-        role?: 'advertiser-viewer' | 'advertiser-editor' | 'advertiser-admin';
-        /**
-         * decide only: pick one of availableActions.
-         */
-        decision?: 'approve' | 'suspend' | 'reactivate' | 'revoke';
-        /**
-         * decide or change_role: the client revision you read. A stale one is refused.
-         */
-        expectedRevision?: SaveAdvertiserAccessRequestExpectedRevision;
-        /**
-         * invite only: invite.eligibilityRevision you read. Omit to use the current one.
-         */
-        eligibilityRevision?: string;
-        /**
-         * decide, change_role, or revoke_lifecycle: why. Audited.
-         */
-        reason?: string;
-        /**
-         * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
-         */
-        expectedAccountId?: number | string;
-        /**
-         * Apostra accountId this call runs in, from get_status.
-         */
-        accountId?: number | string;
-    };
-    headers: {
-        /**
-         * Select an accessible customer account for this request. An explicit value must be a positive integer and must equal the account resolved by authentication.
-         */
-        'X-SCOPE3-CUSTOMER-ID'?: string;
-        /**
-         * Required for every write. Reuse the same key and validated body to replay the durable result for seven days. If this operation also accepts idempotencyKey in its JSON body, the values must match.
-         */
-        'Idempotency-Key': string;
-    };
-    path?: never;
-    query?: never;
-    url: '/tools/save_advertiser_access';
-};
-
-export type SaveAdvertiserAccessError = SaveAdvertiserAccessErrors[keyof SaveAdvertiserAccessErrors];
-
-export type SaveAdvertiserAccessErrors = {
-    /**
-     * Invalid operation input
-     */
-    400: V3ToolErrorResponse;
-    /**
-     * Missing or invalid API credential
-     */
-    401: V3ToolErrorResponse;
-    /**
-     * Account credit limit exceeded
-     */
-    402: V3ToolErrorResponse;
-    /**
-     * The credential or account cannot perform this operation
-     */
-    403: V3ToolErrorResponse;
-    /**
-     * Requested resource not found
-     */
-    404: V3ToolErrorResponse;
-    /**
-     * Operation conflicts with current resource state
-     */
-    409: V3ToolErrorResponse;
-    /**
-     * Request body exceeds the accepted size
-     */
-    413: V3ToolErrorResponse;
-    /**
-     * Request body encoding or character set is unsupported
-     */
-    415: V3ToolErrorResponse;
-    /**
-     * Operation cannot process the supplied input
-     */
-    422: V3ToolErrorResponse;
-    /**
-     * Request rate limit exceeded
-     */
-    429: V3ToolErrorResponse;
-    /**
-     * Unexpected operation failure
-     */
-    500: V3ToolErrorResponse;
-    /**
-     * Recognised operation behaviour is not implemented
-     */
-    501: V3ToolErrorResponse;
-    /**
-     * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
-     */
-    503: V3ToolErrorResponse;
-};
-
-export type SaveAdvertiserAccessRequestAdvertiserId = string;
-
-export type SaveAdvertiserAccessRequestExpectedRevision = string;
-
-export type SaveAdvertiserAccessResponse = SaveAdvertiserAccessResponses[keyof SaveAdvertiserAccessResponses];
-
-export type SaveAdvertiserAccessResponses = {
-    /**
-     * Typed operation result
-     */
-    200: {
-        data: {
-            action: 'invite' | 'decide' | 'change_role' | 'revoke_lifecycle';
-            advertiserId?: string;
-            admissionId?: string;
-            lifecycleId?: string;
-            state?: string;
-            roleSlug?: 'advertiser-viewer' | 'advertiser-editor' | 'advertiser-admin';
-            revision?: string;
-            deliveryState?: 'requested' | 'sent' | 'failed' | 'cancelled';
-            replay?: boolean;
-        };
-        error: null;
-    };
-    /**
-     * The write is still running or needs recovery. Retry this operation with the same Idempotency-Key and body; do not mint a new key.
-     */
-    202: {
-        data: {
-            receipt: {
-                id: string;
-                operation: string;
-                state: 'claimed' | 'running' | 'uncertain';
-                stateVersion: number;
-                stateChangedAt: string;
-                pendingReason: string;
-            };
-        };
-        error: null;
-    };
-};
-
 export type SaveAdvertiserData = {
     body: {
         /**
@@ -12918,36 +12749,23 @@ export type SaveBusinessRulesSuccessSellerSaveReplayedMaterialReceipt = {
 };
 
 export type SaveBuyerAgentData = {
-    body: ({
-        operation: SaveBuyerAgentRequestSaveBuyerAgentCreateOperation;
-        displayName: SaveBuyerAgentRequestDisplayName;
+    body: unknown & {
+        /**
+         * Existing agent ID.
+         */
+        id?: string;
+        /**
+         * Name for creation or rename.
+         */
+        displayName?: string;
         /**
          * external is available. hosted creation is not available yet.
          */
         kind?: 'external' | 'hosted';
-        expectedAccountId?: number | string;
-        accountId?: number | string;
-        id?: never;
-        access?: never;
-        lifecycle?: never;
-        credentialHandoff?: never;
-    } | {
-        operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation;
-        id: SaveBuyerAgentRequestId;
-        displayName: SaveBuyerAgentRequestDisplayName;
-        expectedAccountId?: number | string;
-        accountId?: number | string;
-        kind?: never;
-        access?: never;
-        lifecycle?: never;
-        credentialHandoff?: never;
-    } | {
-        operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation;
-        id: SaveBuyerAgentRequestId;
         /**
-         * Complete replacement list of advertiser grants.
+         * Replace exact grants.
          */
-        access: {
+        access?: {
             /**
              * Access revision returned by the most recent read.
              */
@@ -12966,69 +12784,22 @@ export type SaveBuyerAgentData = {
                 role: 'READ' | 'READ_WRITE';
             }>;
         };
-        expectedAccountId?: number | string;
-        accountId?: number | string;
-        displayName?: never;
-        kind?: never;
-        lifecycle?: never;
-        credentialHandoff?: never;
-    } | {
-        operation: SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation;
-        id: SaveBuyerAgentRequestId;
         /**
-         * One state-fenced suspend, resume, or retire action.
+         * Desired state: active resumes, suspended pauses, retired is permanent.
          */
-        lifecycle: {
-            /**
-             * Suspend an active buyer agent.
-             */
-            action: 'suspend';
-            /**
-             * State fence required before suspension.
-             */
-            expectedLifecycleState: 'active';
-            confirmationText: SaveBuyerAgentRequestLifecycleConfirmationText;
-        } | {
-            /**
-             * Resume a suspended buyer agent.
-             */
-            action: 'resume';
-            /**
-             * State fence required before resumption.
-             */
-            expectedLifecycleState: 'suspended';
-            confirmationText?: SaveBuyerAgentRequestLifecycleConfirmationText;
-        } | {
-            /**
-             * Permanently retire an active or suspended buyer agent.
-             */
-            action: 'retire';
-            /**
-             * State fence required before retirement.
-             */
-            expectedLifecycleState: 'active' | 'suspended';
-            confirmationText: SaveBuyerAgentRequestLifecycleConfirmationText;
-        };
-        expectedAccountId?: number | string;
-        accountId?: number | string;
-        displayName?: never;
-        kind?: never;
-        access?: never;
-        credentialHandoff?: never;
-    } | {
-        operation: SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation;
-        id: SaveBuyerAgentRequestId;
+        lifecycleState?: 'active' | 'suspended' | 'retired';
         /**
-         * Prepare a safe reference for the administrator credential ceremony; never returns a secret.
+         * Current state this change requires; sent with lifecycleState.
          */
-        credentialHandoff: true;
-        expectedAccountId?: number | string;
-        accountId?: number | string;
-        displayName?: never;
-        kind?: never;
-        access?: never;
-        lifecycle?: never;
-    }) & {
+        expectedLifecycleState?: 'active' | 'suspended';
+        /**
+         * Exact current display name; required to suspend or retire.
+         */
+        confirmationText?: string;
+        /**
+         * Prepare credential setup.
+         */
+        credentialHandoff?: true;
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -13110,45 +12881,29 @@ export type SaveBuyerAgentErrors = {
     503: V3ToolErrorResponse;
 };
 
-/**
- * Name for the buyer agent.
- */
-export type SaveBuyerAgentRequestDisplayName = string;
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestDisplayName = SaveBuyerAgentData;
 
-/**
- * Buyer-agent principal ID.
- */
-export type SaveBuyerAgentRequestId = string;
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestId = SaveBuyerAgentData;
 
-/**
- * Exact current display name; required to suspend or retire.
- */
-export type SaveBuyerAgentRequestLifecycleConfirmationText = string;
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestLifecycleConfirmationText = SaveBuyerAgentData;
 
-/**
- * Create an external buyer agent.
- */
-export type SaveBuyerAgentRequestSaveBuyerAgentCreateOperation = 'create';
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestSaveBuyerAgentCreateOperation = SaveBuyerAgentData;
 
-/**
- * Prepare the human credential handoff ceremony.
- */
-export type SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation = 'credential_handoff';
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation = SaveBuyerAgentData;
 
-/**
- * Suspend, resume, or retire the buyer agent.
- */
-export type SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation = 'lifecycle';
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation = SaveBuyerAgentData;
 
-/**
- * Replace the exact advertiser access list.
- */
-export type SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation = 'update_access';
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation = SaveBuyerAgentData;
 
-/**
- * Change the buyer-agent display name.
- */
-export type SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation = 'update_display_name';
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation = SaveBuyerAgentData;
 
 export type SaveBuyerAgentResponse = SaveBuyerAgentResponses[keyof SaveBuyerAgentResponses];
 

@@ -252,14 +252,6 @@ class Apostra(SyncTransport):
         "Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only; /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAdvertiserResult], self._request_with_response("save_advertiser", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
-    def save_advertiser_access(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserAccessResult:
-        "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly."
-        return cast("models.SaveAdvertiserAccessResult", self._request("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
-
-    def save_advertiser_access_with_response(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAdvertiserAccessResult]:
-        "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly. Returns the data together with response headers and request ID."
-        return cast(ResponseDetails[models.SaveAdvertiserAccessResult], self._request_with_response("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
-
     def save_advertiser_grant(self, input: models.SaveAdvertiserGrantInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserGrantResult:
         "Invite another Organization to exact advertisers, accept/reject an invitation, or revoke a grant. Limited beta: eligible Organization, entitlement, server-side exposure, and direct human-admin authority are required."
         return cast("models.SaveAdvertiserGrantResult", self._request("save_advertiser_grant", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -317,11 +309,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveBusinessRulesResult], self._request_with_response("save_business_rules", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_agent(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerAgentResult:
-        "Create or manage one buyer agent."
+        "Create a buyer agent, or with id make one change: name, advertiser access, lifecycle state, or credential handoff."
         return cast("models.SaveBuyerAgentResult", self._request("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_agent_with_response(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBuyerAgentResult]:
-        "Create or manage one buyer agent. Returns the data together with response headers and request ID."
+        "Create a buyer agent, or with id make one change: name, advertiser access, lifecycle state, or credential handoff. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBuyerAgentResult], self._request_with_response("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_operator(self, input: models.SaveBuyerOperatorInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerOperatorResult:
@@ -797,14 +789,6 @@ class AsyncApostra(AsyncTransport):
         "Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only; /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAdvertiserResult], await self._request_with_response("save_advertiser", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
-    async def save_advertiser_access(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserAccessResult:
-        "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly."
-        return cast("models.SaveAdvertiserAccessResult", await self._request("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
-
-    async def save_advertiser_access_with_response(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAdvertiserAccessResult]:
-        "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly. Returns the data together with response headers and request ID."
-        return cast(ResponseDetails[models.SaveAdvertiserAccessResult], await self._request_with_response("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
-
     async def save_advertiser_grant(self, input: models.SaveAdvertiserGrantInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserGrantResult:
         "Invite another Organization to exact advertisers, accept/reject an invitation, or revoke a grant. Limited beta: eligible Organization, entitlement, server-side exposure, and direct human-admin authority are required."
         return cast("models.SaveAdvertiserGrantResult", await self._request("save_advertiser_grant", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -862,11 +846,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveBusinessRulesResult], await self._request_with_response("save_business_rules", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_agent(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerAgentResult:
-        "Create or manage one buyer agent."
+        "Create a buyer agent, or with id make one change: name, advertiser access, lifecycle state, or credential handoff."
         return cast("models.SaveBuyerAgentResult", await self._request("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_agent_with_response(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBuyerAgentResult]:
-        "Create or manage one buyer agent. Returns the data together with response headers and request ID."
+        "Create a buyer agent, or with id make one change: name, advertiser access, lifecycle state, or credential handoff. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBuyerAgentResult], await self._request_with_response("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_operator(self, input: models.SaveBuyerOperatorInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerOperatorResult:

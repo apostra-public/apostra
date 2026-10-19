@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.0",
   "skillId": "test-sales-agent",
-  "skillVersion": "1.5.1",
+  "skillVersion": "1.5.4",
   "privacy": "fictional-synthetic-only",
   "fixtures": [
     {
@@ -13,7 +13,13 @@
       "currency": "USD",
       "budget": 100,
       "flightDays": 30,
-      "expectedFormatKinds": ["image"]
+      "expectedFormatKinds": ["image"],
+      "footprint": {
+        "brandCountries": ["US"],
+        "channels": ["display"],
+        "preferredTimezone": "America/New_York",
+        "basis": "The brief targets adults in the United States on owned-and-operated display inventory."
+      }
     },
     {
       "id": "ctv-awareness-v1",
@@ -24,7 +30,13 @@
       "currency": "USD",
       "budget": 100,
       "flightDays": 30,
-      "expectedFormatKinds": ["video_vast"]
+      "expectedFormatKinds": ["video_vast"],
+      "footprint": {
+        "brandCountries": ["US"],
+        "channels": ["ctv"],
+        "preferredTimezone": "America/New_York",
+        "basis": "The brief targets adults in the United States on owned-and-operated connected TV inventory."
+      }
     },
     {
       "id": "image-300x250-metadata-v1",
@@ -35,7 +47,7 @@
         "width": 300,
         "height": 250
       },
-      "reason": "Metadata-only placeholder. No approved public asset exists, so creative propagation and readback are not executable in version 1.5.1."
+      "reason": "Metadata-only placeholder. No approved public asset exists, so creative propagation and readback are not executable in version 1.5.4."
     },
     {
       "id": "video-vast-30s-metadata-v1",
@@ -45,7 +57,7 @@
       "params": {
         "duration_ms_exact": 30000
       },
-      "reason": "Metadata-only placeholder. No approved public asset exists, so creative propagation and readback are not executable in version 1.5.1."
+      "reason": "Metadata-only placeholder. No approved public asset exists, so creative propagation and readback are not executable in version 1.5.4."
     }
   ]
 }
