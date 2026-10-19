@@ -6620,9 +6620,7 @@ export type GetStatusResponses = {
                 priority: 'required' | 'recommended';
                 tool?: string;
                 page?: string;
-                arguments?: {
-                    [key: string]: string;
-                };
+                arguments?: GetStatusSuccessNextActionsItemArguments;
                 url?: string;
                 [key: string]: unknown;
             }>;
@@ -6640,12 +6638,41 @@ export type GetStatusResponses = {
                 results: Array<{
                     agentId: string;
                     displayName: string;
+                    kind: 'sales' | 'creative' | 'buyer';
+                    stage: GetStatusSuccessAgentsResultsItemStage;
+                    nextStage: GetStatusSuccessAgentsResultsItemNextStage | null;
+                    stuckOn: {
+                        reason: string;
+                        nextAction: {
+                            tool: string;
+                            arguments: GetStatusSuccessAgentsResultsItemStuckOnNextActionArguments;
+                        };
+                    } | null;
                 }>;
             };
+            resources?: Array<{
+                id: string;
+                title: string;
+                url: string;
+                description: string;
+                audience: 'all' | 'sales' | 'creative' | 'buyer';
+            }>;
             [key: string]: unknown;
         };
         error: null;
     };
+};
+
+export type GetStatusSuccessAgentsResultsItemNextStage = 'built' | 'connected' | 'tested' | 'certified' | 'listed';
+
+export type GetStatusSuccessAgentsResultsItemStage = 'built' | 'connected' | 'tested' | 'certified' | 'listed';
+
+export type GetStatusSuccessAgentsResultsItemStuckOnNextActionArguments = {
+    [key: string]: string | boolean | Array<string>;
+};
+
+export type GetStatusSuccessNextActionsItemArguments = {
+    [key: string]: string | boolean | Array<string>;
 };
 
 export type GetSuccessObjectOperationsByDestinationItemSellerAccountId = string;
@@ -8415,6 +8442,142 @@ export type OpenMediaBuysPageResponses = {
     };
 };
 
+export type OpenMediaPartnersPageData = {
+    body: {
+        advertiserId?: unknown;
+    } & {
+        sellerId?: unknown;
+    } & {
+        connectionId?: unknown;
+    } & {
+        connectionAccountId?: unknown;
+    } & {
+        /**
+         * Canonical advertiser ID; omit for account scope.
+         */
+        advertiserId?: string;
+        /**
+         * Canonical Seller ID to open.
+         */
+        sellerId?: string;
+        /**
+         * Open seller setup; requires sellerId and user confirmation.
+         */
+        connectionAction?: 'connect';
+        /**
+         * Connection ID to open.
+         */
+        connectionId?: string;
+        /**
+         * Its accounts[].id; opens event sources and audiences.
+         */
+        connectionAccountId?: string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers?: {
+        /**
+         * Select an accessible customer account for this request. An explicit value must be a positive integer and must equal the account resolved by authentication.
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/open_media_partners_page';
+};
+
+export type OpenMediaPartnersPageError = OpenMediaPartnersPageErrors[keyof OpenMediaPartnersPageErrors];
+
+export type OpenMediaPartnersPageErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * A required service is unavailable
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type OpenMediaPartnersPageResponse = OpenMediaPartnersPageResponses[keyof OpenMediaPartnersPageResponses];
+
+export type OpenMediaPartnersPageResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            /**
+             * Opened advertiser ID when advertiser-scoped.
+             */
+            advertiserId?: string;
+            /**
+             * Opened seller ID when seller-scoped.
+             */
+            sellerId?: string;
+            /**
+             * Requested seller action when supplied.
+             */
+            connectionAction?: 'connect';
+            /**
+             * Opened connection ID.
+             */
+            connectionId?: string;
+            /**
+             * Opened account ID.
+             */
+            accountId?: string;
+        };
+        error: null;
+    };
+};
+
 export type OpenPageData = {
     body: {
         relationshipId?: unknown;
@@ -8422,7 +8585,7 @@ export type OpenPageData = {
         blockedReason?: unknown;
     } & {
         /**
-         * Page to open. source_diagnostics repairs a missing Agent relationship.
+         * Page to open. Owners repair a missing Agent relationship in source_diagnostics.
          */
         page: 'connect_ad_server' | 'ad_server_source' | 'ad_server_diagnostics' | 'source_diagnostics' | 'seller_setup' | 'demo_seller' | 'modular_inventory_source' | 'modular_source_setup' | 'modular_inventory_feed' | 'listing' | 'discovery_card' | 'media_kit' | 'business_profile' | 'playbook' | 'library' | 'integrations' | 'product_marketing' | 'business_rules' | 'buyer_account_mapping' | 'property_roster' | 'plan_and_billing' | 'sellers' | 'creative_engines' | 'advertisers' | 'campaigns' | 'campaign_receipt' | 'approvals' | 'release_notes' | 'customer_requests' | 'notifications' | 'webhooks' | 'buyer_proposal_version';
         /**
@@ -11319,15 +11482,15 @@ export type SaveAgentErrors = {
 export type SaveAgentRequestSaveAgentDeveloperCreateInput = {
     operation: SaveAgentRequestSaveAgentDeveloperCreateOperation;
     /**
-     * Kind for a new Agent: SALES or CREATIVE.
+     * Kind for a new agent: sales, creative or buyer.
      */
-    kind: 'SALES' | 'CREATIVE';
+    kind: 'sales' | 'creative' | 'buyer';
     /**
      * Name for a new Agent.
      */
     displayName: string;
     /**
-     * Operator for a new Agent. Omit it to create an operator with the Agent name.
+     * Operator for a new sales or creative agent. Omit it to create an operator with the agent name. A buyer agent has no operator.
      */
     operator?: {
         /**
@@ -11355,9 +11518,9 @@ export type SaveAgentRequestSaveAgentDeveloperCreateInput = {
      */
     endpoint?: string;
     /**
-     * Unique key for a new Agent registration.
+     * Unique key that makes a retried sales or creative registration find the first agent. Required for sales and creative; a buyer agent takes none.
      */
-    idempotencyKey: string;
+    idempotencyKey?: string;
     expectedAccountId?: number | string;
     accountId?: number | string;
 };
@@ -11446,6 +11609,14 @@ export type SaveAgentResponses = {
                 role: 'SALES' | 'CREATIVE';
                 href: string;
                 created: boolean;
+            };
+        } | {
+            kind: 'buyer_agent';
+            outcome: 'developer_created';
+            object: {
+                principalId: string;
+                displayName: string;
+                lifecycleState: 'active';
             };
         } | {
             kind: 'agent';
@@ -12870,7 +13041,7 @@ export type SaveBuyerOperatorData = {
          */
         identityContract?: 'confirmed-v1';
         /**
-         * Join (true) or leave (false) the seller-history co-op; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.
+         * Join (true) or leave (false) the seller-history co-op, the data co-op of Terms of Service section 6.3; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.
          */
         sellerHistoryCoop?: boolean;
         /**
