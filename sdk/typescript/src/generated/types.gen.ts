@@ -5734,6 +5734,10 @@ export type GetResponses = {
                 organization: {
                     customerId: number;
                     name: string;
+                    /**
+                     * The organization’s company name, else its account name, else null.
+                     */
+                    displayName: string | null;
                 };
                 terms: {
                     requiredVersion: string;
@@ -5763,6 +5767,108 @@ export type GetResponses = {
                         reason: 'secure_handoff_unavailable' | 'card_collection_not_enabled';
                     };
                 };
+                plan: {
+                    /**
+                     * The plan in force.
+                     */
+                    current: GetSuccessObjectPlanCurrent | null;
+                    /**
+                     * An accepted plan waiting for the current term to end, or null.
+                     */
+                    upcoming: GetSuccessObjectPlanUpcoming | null;
+                    /**
+                     * The offer the organization may accept, or null when none applies.
+                     */
+                    offer: {
+                        /**
+                         * The exact version of this offer. A write that accepts or responds to the offer names it.
+                         */
+                        offerVersion: string;
+                        governedBy: {
+                            agreementKind: 'STANDARD_TOS' | 'CUSTOM_CONTRACT' | 'AAA';
+                            effectiveRateCard: {
+                                version: string;
+                                visibility: 'PUBLIC' | 'PRIVATE';
+                                displayName: string;
+                            } | null;
+                            /**
+                             * The private proposal that governs the offer. Null for a public offer, and for a read redacted for a service token.
+                             */
+                            proposal: {
+                                documentTitle: string;
+                                scopeIncluded: Array<string>;
+                                scopeExclusions: Array<string>;
+                                initialTermMonths: number;
+                                defaultPaymentOptionKey: string | null;
+                            } | null;
+                        };
+                        initialTermMonths: number;
+                        plans: Array<{
+                            planId: GetSuccessObjectPlanOfferPlansItemPlanId;
+                            planName: GetSuccessObjectPlanOfferPlansItemPlanName;
+                            currency: GetSuccessObjectPlanOfferPlansItemCurrency;
+                            commitmentMinor: GetSuccessObjectPlanOfferPlansItemCommitmentMinor;
+                            includedIus: GetSuccessObjectPlanOfferPlansItemIncludedIus;
+                            iuPriceMinor: GetSuccessObjectPlanOfferPlansItemIuPriceMinor;
+                            entitlements: GetSuccessObjectPlanOfferPlansItemEntitlements;
+                            displayOrder: number;
+                            /**
+                             * The payment options the offer lets the organization pick from. Empty for a public plan, which has none to choose, and for a read redacted for a service token.
+                             */
+                            paymentOptions: Array<GetSuccessObjectPlanOfferPlansItemPaymentOptionsItem>;
+                            /**
+                             * Whether accepting this plan promotes a standalone account to an organization first.
+                             */
+                            acceptanceConvertsStandaloneAccount: boolean;
+                        }>;
+                    } | null;
+                    renewal: {
+                        /**
+                         * The exact version of this renewal. A renewal change names it.
+                         */
+                        version: string;
+                        status: 'RENEWS' | 'NON_RENEWAL_SCHEDULED' | 'RENEWAL_BLOCKED' | 'ENDED' | 'PINNED';
+                        effectiveFreeAt: GetSuccessObjectPlanRenewalEffectiveFreeAt;
+                        /**
+                         * The deadline for changing the renewal.
+                         */
+                        changeAllowedUntil: GetSuccessObjectPlanRenewalChangeAllowedUntil;
+                        allowedActions: Array<'CANCEL_AT_TERM' | 'REINSTATE_AUTO_RENEWAL'>;
+                        latestInstruction: {
+                            instructionType: 'CANCEL_AT_TERM' | 'REINSTATE_AUTO_RENEWAL';
+                            effectiveAt: GetSuccessObjectPlanRenewalLatestInstructionEffectiveAt;
+                            recordedAt: GetSuccessObjectPlanRenewalLatestInstructionRecordedAt;
+                        } | null;
+                    } | null;
+                    /**
+                     * Whether a plan help request can be filed now.
+                     */
+                    helpAvailable: boolean;
+                };
+                /**
+                 * The most recent invoices, newest first, at most 10.
+                 */
+                invoices: Array<{
+                    number: number;
+                    reference: string;
+                    periodStart: GetSuccessObjectInvoicesItemPeriodStart;
+                    periodEnd: GetSuccessObjectInvoicesItemPeriodEnd;
+                    /**
+                     * The amount invoiced for the period, minor units.
+                     */
+                    amountMinor: number;
+                    /**
+                     * What is still owed on the invoice, minor units; 0 once settled.
+                     */
+                    balanceMinor: number;
+                    currency: GetSuccessObjectInvoicesItemCurrency;
+                    status: 'open' | 'overdue' | 'paid';
+                    dueAt: GetSuccessObjectInvoicesItemDueAt;
+                }>;
+                /**
+                 * True when the organization has older invoices than listed.
+                 */
+                invoicesTruncated: boolean;
                 nextAction: {
                     type: 'ACCEPT_TOS' | 'ACCEPT_GOVERNING_AGREEMENT' | 'SELECT_IU_PLAN' | 'CONTACT_SCOPE3' | 'ADD_BILLING_INFO' | 'ADD_PAYMENT_METHOD' | 'FUND_PREPAY' | 'APPLY_FOR_CREDIT' | 'RESOLVE_HOLD' | 'UPDATE_PAYMENT_METHOD' | 'NONE';
                     /**
@@ -5773,6 +5879,10 @@ export type GetResponses = {
                      * mintlify/v2 page explaining this action, when one exists.
                      */
                     docsUrl: string | null;
+                    /**
+                     * `success` when nothing is owed (`NONE`); `warning` for every action that needs doing.
+                     */
+                    severity: 'success' | 'warning';
                     canCompleteInChat: boolean;
                 };
             };
@@ -6620,9 +6730,7 @@ export type GetStatusResponses = {
                 priority: 'required' | 'recommended';
                 tool?: string;
                 page?: string;
-                arguments?: {
-                    [key: string]: string;
-                };
+                arguments?: GetStatusSuccessNextActionsItemArguments;
                 url?: string;
                 [key: string]: unknown;
             }>;
@@ -6640,13 +6748,50 @@ export type GetStatusResponses = {
                 results: Array<{
                     agentId: string;
                     displayName: string;
+                    kind: 'sales' | 'creative' | 'buyer';
+                    stage: GetStatusSuccessAgentsResultsItemStage;
+                    nextStage: GetStatusSuccessAgentsResultsItemNextStage | null;
+                    stuckOn: {
+                        reason: string;
+                        nextAction: {
+                            tool: string;
+                            arguments: GetStatusSuccessAgentsResultsItemStuckOnNextActionArguments;
+                        };
+                    } | null;
                 }>;
             };
+            resources?: Array<{
+                id: string;
+                title: string;
+                url: string;
+                description: string;
+                audience: 'all' | 'sales' | 'creative' | 'buyer';
+            }>;
             [key: string]: unknown;
         };
         error: null;
     };
 };
+
+export type GetStatusSuccessAgentsResultsItemNextStage = 'built' | 'connected' | 'tested' | 'certified' | 'listed';
+
+export type GetStatusSuccessAgentsResultsItemStage = 'built' | 'connected' | 'tested' | 'certified' | 'listed';
+
+export type GetStatusSuccessAgentsResultsItemStuckOnNextActionArguments = {
+    [key: string]: string | boolean | Array<string>;
+};
+
+export type GetStatusSuccessNextActionsItemArguments = {
+    [key: string]: string | boolean | Array<string>;
+};
+
+export type GetSuccessObjectInvoicesItemCurrency = string;
+
+export type GetSuccessObjectInvoicesItemDueAt = string;
+
+export type GetSuccessObjectInvoicesItemPeriodEnd = string;
+
+export type GetSuccessObjectInvoicesItemPeriodStart = string;
 
 export type GetSuccessObjectOperationsByDestinationItemSellerAccountId = string;
 
@@ -6655,6 +6800,217 @@ export type GetSuccessObjectOperationsByDestinationItemSellerName = string;
 export type GetSuccessObjectOperationsByDestinationItemSellerRouteId = string;
 
 export type GetSuccessObjectOperationsByDestinationItemUnassigned = true;
+
+export type GetSuccessObjectPlanCurrent = {
+    planId: GetSuccessObjectPlanCurrentPlanId;
+    planName: GetSuccessObjectPlanCurrentPlanName;
+    currency: GetSuccessObjectPlanCurrentCurrency;
+    commitmentMinor: GetSuccessObjectPlanCurrentCommitmentMinor;
+    includedIus: GetSuccessObjectPlanCurrentIncludedIus;
+    iuPriceMinor: GetSuccessObjectPlanCurrentIuPriceMinor;
+    entitlements: GetSuccessObjectPlanCurrentEntitlements;
+    offerVersion: string;
+    termStart: GetSuccessObjectPlanCurrentTermStart;
+    termEnd: GetSuccessObjectPlanCurrentTermEnd;
+    acceptedAt: GetSuccessObjectPlanCurrentAcceptedAt;
+    /**
+     * The payment option chosen at acceptance, or null for a plan accepted without one. Null too when the read is redacted for a service token.
+     */
+    paymentOption: GetSuccessObjectPlanCurrentPaymentOption | null;
+    /**
+     * True for a private contract rather than a public catalog plan.
+     */
+    custom: boolean;
+};
+
+export type GetSuccessObjectPlanCurrentAcceptedAt = string;
+
+/**
+ * Net monthly commitment, minor units of `currency`.
+ */
+export type GetSuccessObjectPlanCurrentCommitmentMinor = number;
+
+export type GetSuccessObjectPlanCurrentCurrency = string;
+
+export type GetSuccessObjectPlanCurrentEntitlements = {
+    bundleName: string;
+    /**
+     * Feature keys the plan grants.
+     */
+    features: Array<string>;
+    /**
+     * How many accounts the organization may hold, or null.
+     */
+    accountLimit: number | null;
+} | null;
+
+export type GetSuccessObjectPlanCurrentIncludedIus = number;
+
+/**
+ * Net price of one IU beyond the included IUs, minor units.
+ */
+export type GetSuccessObjectPlanCurrentIuPriceMinor = number;
+
+export type GetSuccessObjectPlanCurrentPaymentOption = {
+    optionKey: string;
+    kind: 'MONTHLY' | 'TERM_PREPAY';
+    displayName: string;
+    currency: GetSuccessObjectPlanCurrentPaymentOptionCurrency;
+    /**
+     * The monthly amount for `MONTHLY`; the whole prepaid amount for `TERM_PREPAY`. Minor units of `currency`.
+     */
+    amountMinor: number;
+    termMonths: number;
+    paymentTermsDays: number;
+    collectionMethods: Array<'ACH' | 'CARD' | 'INVOICE'>;
+};
+
+export type GetSuccessObjectPlanCurrentPaymentOptionCurrency = string;
+
+/**
+ * The plan’s stable plan code. The customer-safe read carries no internal plan row ids, so this is the identity a caller names a plan by.
+ */
+export type GetSuccessObjectPlanCurrentPlanId = string;
+
+export type GetSuccessObjectPlanCurrentPlanName = string;
+
+export type GetSuccessObjectPlanCurrentTermEnd = string;
+
+export type GetSuccessObjectPlanCurrentTermStart = string;
+
+/**
+ * Net monthly commitment, minor units of `currency`.
+ */
+export type GetSuccessObjectPlanOfferPlansItemCommitmentMinor = number;
+
+export type GetSuccessObjectPlanOfferPlansItemCurrency = string;
+
+export type GetSuccessObjectPlanOfferPlansItemEntitlements = {
+    bundleName: string;
+    /**
+     * Feature keys the plan grants.
+     */
+    features: Array<string>;
+    /**
+     * How many accounts the organization may hold, or null.
+     */
+    accountLimit: number | null;
+} | null;
+
+export type GetSuccessObjectPlanOfferPlansItemIncludedIus = number;
+
+/**
+ * Net price of one IU beyond the included IUs, minor units.
+ */
+export type GetSuccessObjectPlanOfferPlansItemIuPriceMinor = number;
+
+export type GetSuccessObjectPlanOfferPlansItemPaymentOptionsItem = {
+    optionKey: string;
+    kind: 'MONTHLY' | 'TERM_PREPAY';
+    displayName: string;
+    currency: GetSuccessObjectPlanOfferPlansItemPaymentOptionsItemCurrency;
+    /**
+     * The monthly amount for `MONTHLY`; the whole prepaid amount for `TERM_PREPAY`. Minor units of `currency`.
+     */
+    amountMinor: number;
+    termMonths: number;
+    paymentTermsDays: number;
+    collectionMethods: Array<'ACH' | 'CARD' | 'INVOICE'>;
+};
+
+export type GetSuccessObjectPlanOfferPlansItemPaymentOptionsItemCurrency = string;
+
+/**
+ * The plan’s stable plan code. The customer-safe read carries no internal plan row ids, so this is the identity a caller names a plan by.
+ */
+export type GetSuccessObjectPlanOfferPlansItemPlanId = string;
+
+export type GetSuccessObjectPlanOfferPlansItemPlanName = string;
+
+export type GetSuccessObjectPlanRenewalChangeAllowedUntil = string;
+
+export type GetSuccessObjectPlanRenewalEffectiveFreeAt = string;
+
+export type GetSuccessObjectPlanRenewalLatestInstructionEffectiveAt = string;
+
+export type GetSuccessObjectPlanRenewalLatestInstructionRecordedAt = string;
+
+export type GetSuccessObjectPlanUpcoming = {
+    planId: GetSuccessObjectPlanUpcomingPlanId;
+    planName: GetSuccessObjectPlanUpcomingPlanName;
+    currency: GetSuccessObjectPlanUpcomingCurrency;
+    commitmentMinor: GetSuccessObjectPlanUpcomingCommitmentMinor;
+    includedIus: GetSuccessObjectPlanUpcomingIncludedIus;
+    iuPriceMinor: GetSuccessObjectPlanUpcomingIuPriceMinor;
+    entitlements: GetSuccessObjectPlanUpcomingEntitlements;
+    offerVersion: string;
+    termStart: GetSuccessObjectPlanUpcomingTermStart;
+    termEnd: GetSuccessObjectPlanUpcomingTermEnd;
+    acceptedAt: GetSuccessObjectPlanUpcomingAcceptedAt;
+    /**
+     * The payment option chosen at acceptance, or null for a plan accepted without one. Null too when the read is redacted for a service token.
+     */
+    paymentOption: GetSuccessObjectPlanUpcomingPaymentOption | null;
+    /**
+     * True for a private contract rather than a public catalog plan.
+     */
+    custom: boolean;
+};
+
+export type GetSuccessObjectPlanUpcomingAcceptedAt = string;
+
+/**
+ * Net monthly commitment, minor units of `currency`.
+ */
+export type GetSuccessObjectPlanUpcomingCommitmentMinor = number;
+
+export type GetSuccessObjectPlanUpcomingCurrency = string;
+
+export type GetSuccessObjectPlanUpcomingEntitlements = {
+    bundleName: string;
+    /**
+     * Feature keys the plan grants.
+     */
+    features: Array<string>;
+    /**
+     * How many accounts the organization may hold, or null.
+     */
+    accountLimit: number | null;
+} | null;
+
+export type GetSuccessObjectPlanUpcomingIncludedIus = number;
+
+/**
+ * Net price of one IU beyond the included IUs, minor units.
+ */
+export type GetSuccessObjectPlanUpcomingIuPriceMinor = number;
+
+export type GetSuccessObjectPlanUpcomingPaymentOption = {
+    optionKey: string;
+    kind: 'MONTHLY' | 'TERM_PREPAY';
+    displayName: string;
+    currency: GetSuccessObjectPlanUpcomingPaymentOptionCurrency;
+    /**
+     * The monthly amount for `MONTHLY`; the whole prepaid amount for `TERM_PREPAY`. Minor units of `currency`.
+     */
+    amountMinor: number;
+    termMonths: number;
+    paymentTermsDays: number;
+    collectionMethods: Array<'ACH' | 'CARD' | 'INVOICE'>;
+};
+
+export type GetSuccessObjectPlanUpcomingPaymentOptionCurrency = string;
+
+/**
+ * The plan’s stable plan code. The customer-safe read carries no internal plan row ids, so this is the identity a caller names a plan by.
+ */
+export type GetSuccessObjectPlanUpcomingPlanId = string;
+
+export type GetSuccessObjectPlanUpcomingPlanName = string;
+
+export type GetSuccessObjectPlanUpcomingTermEnd = string;
+
+export type GetSuccessObjectPlanUpcomingTermStart = string;
 
 export type GetSuccessOperationDetailsItemDestinationSellerAccountId = string;
 
@@ -8415,6 +8771,142 @@ export type OpenMediaBuysPageResponses = {
     };
 };
 
+export type OpenMediaPartnersPageData = {
+    body: {
+        advertiserId?: unknown;
+    } & {
+        sellerId?: unknown;
+    } & {
+        connectionId?: unknown;
+    } & {
+        connectionAccountId?: unknown;
+    } & {
+        /**
+         * Canonical advertiser ID; omit for account scope.
+         */
+        advertiserId?: string;
+        /**
+         * Canonical Seller ID to open.
+         */
+        sellerId?: string;
+        /**
+         * Open seller setup; requires sellerId and user confirmation.
+         */
+        connectionAction?: 'connect';
+        /**
+         * Connection ID to open.
+         */
+        connectionId?: string;
+        /**
+         * Its accounts[].id; opens event sources and audiences.
+         */
+        connectionAccountId?: string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers?: {
+        /**
+         * Select an accessible customer account for this request. An explicit value must be a positive integer and must equal the account resolved by authentication.
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/open_media_partners_page';
+};
+
+export type OpenMediaPartnersPageError = OpenMediaPartnersPageErrors[keyof OpenMediaPartnersPageErrors];
+
+export type OpenMediaPartnersPageErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * A required service is unavailable
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type OpenMediaPartnersPageResponse = OpenMediaPartnersPageResponses[keyof OpenMediaPartnersPageResponses];
+
+export type OpenMediaPartnersPageResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            /**
+             * Opened advertiser ID when advertiser-scoped.
+             */
+            advertiserId?: string;
+            /**
+             * Opened seller ID when seller-scoped.
+             */
+            sellerId?: string;
+            /**
+             * Requested seller action when supplied.
+             */
+            connectionAction?: 'connect';
+            /**
+             * Opened connection ID.
+             */
+            connectionId?: string;
+            /**
+             * Opened account ID.
+             */
+            accountId?: string;
+        };
+        error: null;
+    };
+};
+
 export type OpenPageData = {
     body: {
         relationshipId?: unknown;
@@ -8422,7 +8914,7 @@ export type OpenPageData = {
         blockedReason?: unknown;
     } & {
         /**
-         * Page to open. source_diagnostics repairs a missing Agent relationship.
+         * Page to open. Owners repair a missing Agent relationship in source_diagnostics.
          */
         page: 'connect_ad_server' | 'ad_server_source' | 'ad_server_diagnostics' | 'source_diagnostics' | 'seller_setup' | 'demo_seller' | 'modular_inventory_source' | 'modular_source_setup' | 'modular_inventory_feed' | 'listing' | 'discovery_card' | 'media_kit' | 'business_profile' | 'playbook' | 'library' | 'integrations' | 'product_marketing' | 'business_rules' | 'buyer_account_mapping' | 'property_roster' | 'plan_and_billing' | 'sellers' | 'creative_engines' | 'advertisers' | 'campaigns' | 'campaign_receipt' | 'approvals' | 'release_notes' | 'customer_requests' | 'notifications' | 'webhooks' | 'buyer_proposal_version';
         /**
@@ -11319,15 +11811,15 @@ export type SaveAgentErrors = {
 export type SaveAgentRequestSaveAgentDeveloperCreateInput = {
     operation: SaveAgentRequestSaveAgentDeveloperCreateOperation;
     /**
-     * Kind for a new Agent: SALES or CREATIVE.
+     * Kind for a new agent: sales, creative or buyer.
      */
-    kind: 'SALES' | 'CREATIVE';
+    kind: 'sales' | 'creative' | 'buyer';
     /**
      * Name for a new Agent.
      */
     displayName: string;
     /**
-     * Operator for a new Agent. Omit it to create an operator with the Agent name.
+     * Operator for a new sales or creative agent. Omit it to create an operator with the agent name. A buyer agent has no operator.
      */
     operator?: {
         /**
@@ -11355,9 +11847,9 @@ export type SaveAgentRequestSaveAgentDeveloperCreateInput = {
      */
     endpoint?: string;
     /**
-     * Unique key for a new Agent registration.
+     * Unique key that makes a retried sales or creative registration find the first agent. Required for sales and creative; a buyer agent takes none.
      */
-    idempotencyKey: string;
+    idempotencyKey?: string;
     expectedAccountId?: number | string;
     accountId?: number | string;
 };
@@ -11446,6 +11938,14 @@ export type SaveAgentResponses = {
                 role: 'SALES' | 'CREATIVE';
                 href: string;
                 created: boolean;
+            };
+        } | {
+            kind: 'buyer_agent';
+            outcome: 'developer_created';
+            object: {
+                principalId: string;
+                displayName: string;
+                lifecycleState: 'active';
             };
         } | {
             kind: 'agent';
@@ -12870,7 +13370,7 @@ export type SaveBuyerOperatorData = {
          */
         identityContract?: 'confirmed-v1';
         /**
-         * Join (true) or leave (false) the seller-history co-op; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.
+         * Join (true) or leave (false) the seller-history co-op, the data co-op of Terms of Service section 6.3; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.
          */
         sellerHistoryCoop?: boolean;
         /**
