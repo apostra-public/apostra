@@ -5505,49 +5505,6 @@ class SaveAccountResultObject(TypedDict):
 class SaveAccountResultObjectSettings(TypedDict):
     company: str
 
-class SaveAdvertiserAccessInput(TypedDict):
-    action: Literal["invite", "decide", "change_role", "revoke_lifecycle"]
-    '\n    invite sends a client access to one advertiser; decide approves, suspends, reactivates, or revokes a client; change_role sets a client role; revoke_lifecycle ends older self-serve access.\n    '
-    advertiserId: NotRequired[SaveAdvertiserAccessRequestAdvertiserId]
-    '\n    The advertiser. For revoke_lifecycle, the one that owns the lifecycle.\n    '
-    admissionId: NotRequired[str]
-    '\n    decide or change_role: the client admissionId from get advertiser_access.\n    '
-    lifecycleId: NotRequired[str]
-    '\n    revoke_lifecycle only: a lifecycleId with canRevoke from get advertiser_access.\n    '
-    email: NotRequired[str]
-    '\n    invite only: the one person to invite.\n    '
-    operatorDomain: NotRequired[str]
-    '\n    invite only: the invited company domain, for example example.com.\n    '
-    role: NotRequired[Literal["advertiser-viewer", "advertiser-editor", "advertiser-admin"]]
-    '\n    invite or change_role: the access the client gets.\n    '
-    decision: NotRequired[Literal["approve", "suspend", "reactivate", "revoke"]]
-    '\n    decide only: pick one of availableActions.\n    '
-    expectedRevision: NotRequired[SaveAdvertiserAccessRequestExpectedRevision]
-    '\n    decide or change_role: the client revision you read. A stale one is refused.\n    '
-    eligibilityRevision: NotRequired[str]
-    '\n    invite only: invite.eligibilityRevision you read. Omit to use the current one.\n    '
-    reason: NotRequired[str]
-    '\n    decide, change_role, or revoke_lifecycle: why. Audited.\n    '
-    expectedAccountId: NotRequired[int | str]
-    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
-    accountId: NotRequired[int | str]
-    '\n    Apostra accountId this call runs in, from get_status.\n    '
-
-SaveAdvertiserAccessRequestAdvertiserId: TypeAlias = str
-
-SaveAdvertiserAccessRequestExpectedRevision: TypeAlias = str
-
-class SaveAdvertiserAccessResult(TypedDict):
-    action: Literal["invite", "decide", "change_role", "revoke_lifecycle"]
-    advertiserId: NotRequired[str]
-    admissionId: NotRequired[str]
-    lifecycleId: NotRequired[str]
-    state: NotRequired[str]
-    roleSlug: NotRequired[Literal["advertiser-viewer", "advertiser-editor", "advertiser-admin"]]
-    revision: NotRequired[str]
-    deliveryState: NotRequired[Literal["requested", "sent", "failed", "cancelled"]]
-    replay: NotRequired[bool]
-
 class SaveAdvertiserGrantInput(TypedDict):
     action: Literal["invite", "accept", "reject", "revoke"]
     '\n    invite creates a reviewed exact scope; invited org accepts/rejects; grantor revokes.\n    '
@@ -20210,8 +20167,6 @@ RequestSellerReportingUpdateError: TypeAlias = "V3ToolErrorResponse"
 ReviewBuyerChildAccountError: TypeAlias = "V3ToolErrorResponse"
 
 SaveAccountError: TypeAlias = "V3ToolErrorResponse"
-
-SaveAdvertiserAccessError: TypeAlias = "V3ToolErrorResponse"
 
 SaveAdvertiserError: TypeAlias = "V3ToolErrorResponse"
 

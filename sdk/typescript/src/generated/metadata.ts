@@ -647,25 +647,6 @@ export const operations = {
     ],
     "summary": "Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only; /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef."
   },
-  "save_advertiser_access": {
-    "path": "/tools/save_advertiser_access",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:admin"
-        ]
-      }
-    ],
-    "summary": "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly."
-  },
   "save_advertiser_grant": {
     "path": "/tools/save_advertiser_grant",
     "method": "POST",
