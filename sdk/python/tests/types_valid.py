@@ -3,7 +3,7 @@ from apostra.models import EvidenceUrl, SaveRfpRequestJsonValue, RepresentationL
 
 nested: SaveRfpRequestJsonValue = {'deep': [{'nested': ['value', None, 2, True]}]}
 campaign: SaveCampaignInput = {'idempotencyKey': 'k', 'channelGroups': [{'channelGroupId': 'g', 'kind': 'preset', 'presetId': 'ctv'}]}
-billing: SaveBillingInput = {'operation': 'payment_authority', 'paymentAuthority': {'action': 'status'}}
+billing: SaveBillingInput = {'terms': {'accepted': True, 'acceptedVersion': 'v1-1'}, 'paymentTerms': 'net_60'}
 buyer_child: RequestBuyerChildAccountInput = {'parentId': 'parent', 'name': 'Buyer'}
 
 def typed(client: Apostra) -> GetDeliveryResult:

@@ -4,6 +4,14 @@ from . import models
 from .transport import AsyncTransport, ResponseDetails, SyncTransport
 
 class Apostra(SyncTransport):
+    def confirm_payment_authority(self, input: models.ConfirmPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.ConfirmPaymentAuthorityResult:
+        "Issue the hosted card-capture link for a token from request_payment_authority. Give the link to the cardholder; cards stay off MCP."
+        return cast("models.ConfirmPaymentAuthorityResult", self._request("confirm_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def confirm_payment_authority_with_response(self, input: models.ConfirmPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.ConfirmPaymentAuthorityResult]:
+        "Issue the hosted card-capture link for a token from request_payment_authority. Give the link to the cardholder; cards stay off MCP. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.ConfirmPaymentAuthorityResult], self._request_with_response("confirm_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def download_v3_public_document_revision(self, input: models.DownloadV3PublicDocumentRevisionInput, *, account_id: str | None = None, timeout: float | None = None) -> bytes:
         "Download a public immutable document revision"
         return cast("bytes", self._request("downloadV3PublicDocumentRevision", input, account_id=account_id, timeout=timeout))
@@ -212,6 +220,14 @@ class Apostra(SyncTransport):
         "Request a Buyer child under the selected Organization. Nothing is created until an Organization administrator approves it on our site; the result is approval_required with a link to show the person. Repeat with the same idempotencyKey and name for the outcome. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.RequestBuyerChildAccountResult], self._request_with_response("request_buyer_child_account", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    def request_payment_authority(self, input: models.RequestPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestPaymentAuthorityResult:
+        "Stage a card handoff for the organization and return a confirmation token. No link is issued until confirm_payment_authority."
+        return cast("models.RequestPaymentAuthorityResult", self._request("request_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def request_payment_authority_with_response(self, input: models.RequestPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.RequestPaymentAuthorityResult]:
+        "Stage a card handoff for the organization and return a confirmation token. No link is issued until confirm_payment_authority. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.RequestPaymentAuthorityResult], self._request_with_response("request_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def request_proposals(self, input: models.RequestProposalsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestProposalsResult:
         "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
         return cast("models.RequestProposalsResult", self._request("request_proposals", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -251,14 +267,6 @@ class Apostra(SyncTransport):
     def save_advertiser_with_response(self, input: models.SaveAdvertiserInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAdvertiserResult]:
         "Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only; /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAdvertiserResult], self._request_with_response("save_advertiser", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
-
-    def save_advertiser_access(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserAccessResult:
-        "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly."
-        return cast("models.SaveAdvertiserAccessResult", self._request("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
-
-    def save_advertiser_access_with_response(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAdvertiserAccessResult]:
-        "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly. Returns the data together with response headers and request ID."
-        return cast(ResponseDetails[models.SaveAdvertiserAccessResult], self._request_with_response("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_advertiser_grant(self, input: models.SaveAdvertiserGrantInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserGrantResult:
         "Invite another Organization to exact advertisers, accept/reject an invitation, or revoke a grant. Limited beta: eligible Organization, entitlement, server-side exposure, and direct human-admin authority are required."
@@ -301,11 +309,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveAudienceResult], self._request_with_response("save_audience", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_billing(self, input: models.SaveBillingInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBillingResult:
-        "Accept Terms, set seller terms, or manage payment authority. Cards stay off MCP."
+        "Accept Terms or set the payment terms sellers are asked for. Cards stay off MCP."
         return cast("models.SaveBillingResult", self._request("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_billing_with_response(self, input: models.SaveBillingInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBillingResult]:
-        "Accept Terms, set seller terms, or manage payment authority. Cards stay off MCP. Returns the data together with response headers and request ID."
+        "Accept Terms or set the payment terms sellers are asked for. Cards stay off MCP. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBillingResult], self._request_with_response("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_business_rules(self, input: models.SaveBusinessRulesInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBusinessRulesResult:
@@ -317,11 +325,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveBusinessRulesResult], self._request_with_response("save_business_rules", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_agent(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerAgentResult:
-        "Create or manage one buyer agent."
+        "Create a buyer agent, or with id make one change: name, advertiser access, lifecycle state, or credential handoff."
         return cast("models.SaveBuyerAgentResult", self._request("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_agent_with_response(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBuyerAgentResult]:
-        "Create or manage one buyer agent. Returns the data together with response headers and request ID."
+        "Create a buyer agent, or with id make one change: name, advertiser access, lifecycle state, or credential handoff. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBuyerAgentResult], self._request_with_response("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_operator(self, input: models.SaveBuyerOperatorInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerOperatorResult:
@@ -413,11 +421,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveEventSourceResult], self._request_with_response("save_event_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_inventory_source(self, input: models.SaveInventorySourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveInventorySourceResult:
-        "Create or update where a seller's inventory comes from. Pass `id` to change an existing source, omit it to add one. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it."
+        "Create or update where a seller's inventory comes from. Pass `id` to change a source, omit it to add one, or pass only `agentId` to open a partner's connection form. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it."
         return cast("models.SaveInventorySourceResult", self._request("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_inventory_source_with_response(self, input: models.SaveInventorySourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveInventorySourceResult]:
-        "Create or update where a seller's inventory comes from. Pass `id` to change an existing source, omit it to add one. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it. Returns the data together with response headers and request ID."
+        "Create or update where a seller's inventory comes from. Pass `id` to change a source, omit it to add one, or pass only `agentId` to open a partner's connection form. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveInventorySourceResult], self._request_with_response("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_lesson(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLessonResult:
@@ -549,6 +557,14 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.UploadCreativeAssetResult], self._request_with_response("upload_creative_asset", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
 class AsyncApostra(AsyncTransport):
+    async def confirm_payment_authority(self, input: models.ConfirmPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.ConfirmPaymentAuthorityResult:
+        "Issue the hosted card-capture link for a token from request_payment_authority. Give the link to the cardholder; cards stay off MCP."
+        return cast("models.ConfirmPaymentAuthorityResult", await self._request("confirm_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def confirm_payment_authority_with_response(self, input: models.ConfirmPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.ConfirmPaymentAuthorityResult]:
+        "Issue the hosted card-capture link for a token from request_payment_authority. Give the link to the cardholder; cards stay off MCP. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.ConfirmPaymentAuthorityResult], await self._request_with_response("confirm_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     async def download_v3_public_document_revision(self, input: models.DownloadV3PublicDocumentRevisionInput, *, account_id: str | None = None, timeout: float | None = None) -> bytes:
         "Download a public immutable document revision"
         return cast("bytes", await self._request("downloadV3PublicDocumentRevision", input, account_id=account_id, timeout=timeout))
@@ -757,6 +773,14 @@ class AsyncApostra(AsyncTransport):
         "Request a Buyer child under the selected Organization. Nothing is created until an Organization administrator approves it on our site; the result is approval_required with a link to show the person. Repeat with the same idempotencyKey and name for the outcome. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.RequestBuyerChildAccountResult], await self._request_with_response("request_buyer_child_account", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    async def request_payment_authority(self, input: models.RequestPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestPaymentAuthorityResult:
+        "Stage a card handoff for the organization and return a confirmation token. No link is issued until confirm_payment_authority."
+        return cast("models.RequestPaymentAuthorityResult", await self._request("request_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def request_payment_authority_with_response(self, input: models.RequestPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.RequestPaymentAuthorityResult]:
+        "Stage a card handoff for the organization and return a confirmation token. No link is issued until confirm_payment_authority. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.RequestPaymentAuthorityResult], await self._request_with_response("request_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     async def request_proposals(self, input: models.RequestProposalsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestProposalsResult:
         "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
         return cast("models.RequestProposalsResult", await self._request("request_proposals", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -796,14 +820,6 @@ class AsyncApostra(AsyncTransport):
     async def save_advertiser_with_response(self, input: models.SaveAdvertiserInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAdvertiserResult]:
         "Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only; /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAdvertiserResult], await self._request_with_response("save_advertiser", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
-
-    async def save_advertiser_access(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserAccessResult:
-        "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly."
-        return cast("models.SaveAdvertiserAccessResult", await self._request("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
-
-    async def save_advertiser_access_with_response(self, input: models.SaveAdvertiserAccessInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAdvertiserAccessResult]:
-        "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly. Returns the data together with response headers and request ID."
-        return cast(ResponseDetails[models.SaveAdvertiserAccessResult], await self._request_with_response("save_advertiser_access", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_advertiser_grant(self, input: models.SaveAdvertiserGrantInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserGrantResult:
         "Invite another Organization to exact advertisers, accept/reject an invitation, or revoke a grant. Limited beta: eligible Organization, entitlement, server-side exposure, and direct human-admin authority are required."
@@ -846,11 +862,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveAudienceResult], await self._request_with_response("save_audience", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_billing(self, input: models.SaveBillingInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBillingResult:
-        "Accept Terms, set seller terms, or manage payment authority. Cards stay off MCP."
+        "Accept Terms or set the payment terms sellers are asked for. Cards stay off MCP."
         return cast("models.SaveBillingResult", await self._request("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_billing_with_response(self, input: models.SaveBillingInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBillingResult]:
-        "Accept Terms, set seller terms, or manage payment authority. Cards stay off MCP. Returns the data together with response headers and request ID."
+        "Accept Terms or set the payment terms sellers are asked for. Cards stay off MCP. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBillingResult], await self._request_with_response("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_business_rules(self, input: models.SaveBusinessRulesInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBusinessRulesResult:
@@ -862,11 +878,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveBusinessRulesResult], await self._request_with_response("save_business_rules", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_agent(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerAgentResult:
-        "Create or manage one buyer agent."
+        "Create a buyer agent, or with id make one change: name, advertiser access, lifecycle state, or credential handoff."
         return cast("models.SaveBuyerAgentResult", await self._request("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_agent_with_response(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBuyerAgentResult]:
-        "Create or manage one buyer agent. Returns the data together with response headers and request ID."
+        "Create a buyer agent, or with id make one change: name, advertiser access, lifecycle state, or credential handoff. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBuyerAgentResult], await self._request_with_response("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_operator(self, input: models.SaveBuyerOperatorInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerOperatorResult:
@@ -958,11 +974,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveEventSourceResult], await self._request_with_response("save_event_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_inventory_source(self, input: models.SaveInventorySourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveInventorySourceResult:
-        "Create or update where a seller's inventory comes from. Pass `id` to change an existing source, omit it to add one. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it."
+        "Create or update where a seller's inventory comes from. Pass `id` to change a source, omit it to add one, or pass only `agentId` to open a partner's connection form. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it."
         return cast("models.SaveInventorySourceResult", await self._request("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_inventory_source_with_response(self, input: models.SaveInventorySourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveInventorySourceResult]:
-        "Create or update where a seller's inventory comes from. Pass `id` to change an existing source, omit it to add one. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it. Returns the data together with response headers and request ID."
+        "Create or update where a seller's inventory comes from. Pass `id` to change a source, omit it to add one, or pass only `agentId` to open a partner's connection form. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveInventorySourceResult], await self._request_with_response("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_lesson(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLessonResult:
