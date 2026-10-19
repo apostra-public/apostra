@@ -19,6 +19,140 @@ export type ClientOptions = {
     baseUrl: 'https://api.apostra.com/api/v3' | (string & {});
 };
 
+export type ConfirmPaymentAuthorityData = {
+    body: {
+        /**
+         * Token returned by request_payment_authority.
+         */
+        confirmationToken: string;
+        /**
+         * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+         */
+        expectedAccountId?: number | string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers: {
+        /**
+         * Select an accessible customer account for this request. An explicit value must be a positive integer and must equal the account resolved by authentication.
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+        /**
+         * Required for every write. Reuse the same key and validated body to replay the durable result for seven days. If this operation also accepts idempotencyKey in its JSON body, the values must match.
+         */
+        'Idempotency-Key': string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/confirm_payment_authority';
+};
+
+export type ConfirmPaymentAuthorityError = ConfirmPaymentAuthorityErrors[keyof ConfirmPaymentAuthorityErrors];
+
+export type ConfirmPaymentAuthorityErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type ConfirmPaymentAuthorityResponse = ConfirmPaymentAuthorityResponses[keyof ConfirmPaymentAuthorityResponses];
+
+export type ConfirmPaymentAuthorityResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            action: 'human_action_required';
+            paymentAuthority: ConfirmPaymentAuthoritySuccessCaptureLinkIssuedResult;
+        };
+        error: null;
+    };
+    /**
+     * The write is still running or needs recovery. Retry this operation with the same Idempotency-Key and body; do not mint a new key.
+     */
+    202: {
+        data: {
+            receipt: {
+                id: string;
+                operation: string;
+                state: 'claimed' | 'running' | 'uncertain';
+                stateVersion: number;
+                stateChangedAt: string;
+                pendingReason: string;
+            };
+        };
+        error: null;
+    };
+};
+
+export type ConfirmPaymentAuthoritySuccessCaptureLinkIssuedResult = {
+    /**
+     * How the payment authority is captured. `capture_link` (the only value today): a hosted link for the org's human cardholder to open. Future methods (e.g. an agent-held payment token) will be additive values — switch on this field rather than assuming it.
+     */
+    method: 'capture_link';
+    /**
+     * The capture link. Hand this to your organization's cardholder — opening it does not require an Apostra session; the link itself is the authorization. Only present when the link is freshly issued, not on status polls.
+     */
+    url?: string;
+    /**
+     * `pending`: issued, not yet opened. `opened`: the hosted page exchanged the token at least once. `verified`: the card-rail webhook confirmed a payment method for this link. `expired`: the TTL elapsed before verification — terminal, never re-armed.
+     */
+    status: 'pending' | 'opened' | 'verified' | 'expired';
+    expiresAt: string;
+};
+
 export type DownloadV3PublicDocumentRevisionData = {
     body?: never;
     path: {
@@ -7406,7 +7540,7 @@ export type GetV3PublicMutationReceiptResponses = {
     };
 };
 
-export type InFlightReceipt = GenerateVariantsResponses[202]['data']['receipt'];
+export type InFlightReceipt = ConfirmPaymentAuthorityResponses[202]['data']['receipt'];
 
 export type JsonValue = null | boolean | number | string | JsonValue[] | { [key: string]: JsonValue };
 
@@ -9718,6 +9852,133 @@ export type RequestBuyerChildAccountSuccessAgentApproval = {
     failureCode: string | null;
 };
 
+export type RequestPaymentAuthorityData = {
+    body: {
+        /**
+         * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+         */
+        expectedAccountId?: number | string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers: {
+        /**
+         * Select an accessible customer account for this request. An explicit value must be a positive integer and must equal the account resolved by authentication.
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+        /**
+         * Required for every write. Reuse the same key and validated body to replay the durable result for seven days. If this operation also accepts idempotencyKey in its JSON body, the values must match.
+         */
+        'Idempotency-Key': string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/request_payment_authority';
+};
+
+export type RequestPaymentAuthorityError = RequestPaymentAuthorityErrors[keyof RequestPaymentAuthorityErrors];
+
+export type RequestPaymentAuthorityErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type RequestPaymentAuthorityResponse = RequestPaymentAuthorityResponses[keyof RequestPaymentAuthorityResponses];
+
+export type RequestPaymentAuthorityResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            action: 'confirmation_required';
+            paymentAuthority: RequestPaymentAuthoritySuccessPendingConfirmationResult;
+        };
+        error: null;
+    };
+    /**
+     * The write is still running or needs recovery. Retry this operation with the same Idempotency-Key and body; do not mint a new key.
+     */
+    202: {
+        data: {
+            receipt: {
+                id: string;
+                operation: string;
+                state: 'claimed' | 'running' | 'uncertain';
+                stateVersion: number;
+                stateChangedAt: string;
+                pendingReason: string;
+            };
+        };
+        error: null;
+    };
+};
+
+export type RequestPaymentAuthoritySuccessPendingConfirmationResult = {
+    status: 'pending_confirmation';
+    /**
+     * Single-use, short-lived token. Call `add_payment_authority` again with `action: "confirm"` and this token to issue the capture link.
+     */
+    confirmationToken: string;
+    summary: string;
+    /**
+     * When the confirmation token expires. Request again after this if it lapses.
+     */
+    expiresAt: string;
+};
+
 export type RequestProposalsData = {
     body: unknown & {
         /**
@@ -10563,175 +10824,6 @@ export type SaveAccountResponses = {
                     company: string;
                 };
             };
-        };
-        error: null;
-    };
-    /**
-     * The write is still running or needs recovery. Retry this operation with the same Idempotency-Key and body; do not mint a new key.
-     */
-    202: {
-        data: {
-            receipt: {
-                id: string;
-                operation: string;
-                state: 'claimed' | 'running' | 'uncertain';
-                stateVersion: number;
-                stateChangedAt: string;
-                pendingReason: string;
-            };
-        };
-        error: null;
-    };
-};
-
-export type SaveAdvertiserAccessData = {
-    body: unknown & {
-        /**
-         * invite sends a client access to one advertiser; decide approves, suspends, reactivates, or revokes a client; change_role sets a client role; revoke_lifecycle ends older self-serve access.
-         */
-        action: 'invite' | 'decide' | 'change_role' | 'revoke_lifecycle';
-        /**
-         * The advertiser. For revoke_lifecycle, the one that owns the lifecycle.
-         */
-        advertiserId?: SaveAdvertiserAccessRequestAdvertiserId;
-        /**
-         * decide or change_role: the client admissionId from get advertiser_access.
-         */
-        admissionId?: string;
-        /**
-         * revoke_lifecycle only: a lifecycleId with canRevoke from get advertiser_access.
-         */
-        lifecycleId?: string;
-        /**
-         * invite only: the one person to invite.
-         */
-        email?: string;
-        /**
-         * invite only: the invited company domain, for example example.com.
-         */
-        operatorDomain?: string;
-        /**
-         * invite or change_role: the access the client gets.
-         */
-        role?: 'advertiser-viewer' | 'advertiser-editor' | 'advertiser-admin';
-        /**
-         * decide only: pick one of availableActions.
-         */
-        decision?: 'approve' | 'suspend' | 'reactivate' | 'revoke';
-        /**
-         * decide or change_role: the client revision you read. A stale one is refused.
-         */
-        expectedRevision?: SaveAdvertiserAccessRequestExpectedRevision;
-        /**
-         * invite only: invite.eligibilityRevision you read. Omit to use the current one.
-         */
-        eligibilityRevision?: string;
-        /**
-         * decide, change_role, or revoke_lifecycle: why. Audited.
-         */
-        reason?: string;
-        /**
-         * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
-         */
-        expectedAccountId?: number | string;
-        /**
-         * Apostra accountId this call runs in, from get_status.
-         */
-        accountId?: number | string;
-    };
-    headers: {
-        /**
-         * Select an accessible customer account for this request. An explicit value must be a positive integer and must equal the account resolved by authentication.
-         */
-        'X-SCOPE3-CUSTOMER-ID'?: string;
-        /**
-         * Required for every write. Reuse the same key and validated body to replay the durable result for seven days. If this operation also accepts idempotencyKey in its JSON body, the values must match.
-         */
-        'Idempotency-Key': string;
-    };
-    path?: never;
-    query?: never;
-    url: '/tools/save_advertiser_access';
-};
-
-export type SaveAdvertiserAccessError = SaveAdvertiserAccessErrors[keyof SaveAdvertiserAccessErrors];
-
-export type SaveAdvertiserAccessErrors = {
-    /**
-     * Invalid operation input
-     */
-    400: V3ToolErrorResponse;
-    /**
-     * Missing or invalid API credential
-     */
-    401: V3ToolErrorResponse;
-    /**
-     * Account credit limit exceeded
-     */
-    402: V3ToolErrorResponse;
-    /**
-     * The credential or account cannot perform this operation
-     */
-    403: V3ToolErrorResponse;
-    /**
-     * Requested resource not found
-     */
-    404: V3ToolErrorResponse;
-    /**
-     * Operation conflicts with current resource state
-     */
-    409: V3ToolErrorResponse;
-    /**
-     * Request body exceeds the accepted size
-     */
-    413: V3ToolErrorResponse;
-    /**
-     * Request body encoding or character set is unsupported
-     */
-    415: V3ToolErrorResponse;
-    /**
-     * Operation cannot process the supplied input
-     */
-    422: V3ToolErrorResponse;
-    /**
-     * Request rate limit exceeded
-     */
-    429: V3ToolErrorResponse;
-    /**
-     * Unexpected operation failure
-     */
-    500: V3ToolErrorResponse;
-    /**
-     * Recognised operation behaviour is not implemented
-     */
-    501: V3ToolErrorResponse;
-    /**
-     * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
-     */
-    503: V3ToolErrorResponse;
-};
-
-export type SaveAdvertiserAccessRequestAdvertiserId = string;
-
-export type SaveAdvertiserAccessRequestExpectedRevision = string;
-
-export type SaveAdvertiserAccessResponse = SaveAdvertiserAccessResponses[keyof SaveAdvertiserAccessResponses];
-
-export type SaveAdvertiserAccessResponses = {
-    /**
-     * Typed operation result
-     */
-    200: {
-        data: {
-            action: 'invite' | 'decide' | 'change_role' | 'revoke_lifecycle';
-            advertiserId?: string;
-            admissionId?: string;
-            lifecycleId?: string;
-            state?: string;
-            roleSlug?: 'advertiser-viewer' | 'advertiser-editor' | 'advertiser-admin';
-            revision?: string;
-            deliveryState?: 'requested' | 'sent' | 'failed' | 'cancelled';
-            replay?: boolean;
         };
         error: null;
     };
@@ -12426,7 +12518,24 @@ export type SaveAudienceResponses = {
 };
 
 export type SaveBillingData = {
-    body: (SaveBillingRequestSaveBillingTermsInput | SaveBillingRequestSaveBillingPaymentAuthorityInput | SaveBillingRequestSaveBillingPaymentTermsInput) & {
+    body: {
+        /**
+         * Accept Terms.
+         */
+        terms?: {
+            /**
+             * Explicitly accept the named Terms version.
+             */
+            accepted: true;
+            /**
+             * Terms version shown in Plan & Billing.
+             */
+            acceptedVersion: string;
+        };
+        /**
+         * Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default.
+         */
+        paymentTerms?: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -12508,88 +12617,26 @@ export type SaveBillingErrors = {
     503: V3ToolErrorResponse;
 };
 
-export type SaveBillingRequestSaveBillingPaymentAuthorityInput = {
-    operation: SaveBillingRequestSaveBillingPaymentAuthorityOperation;
-    paymentAuthority: {
-        /**
-         * Hosted card capture.
-         */
-        method?: SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityMethod;
-        /**
-         * Stage the payment-authority handoff.
-         */
-        action: 'request';
-        confirmationToken?: never;
-    } | {
-        /**
-         * Hosted card capture.
-         */
-        method?: SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityMethod;
-        /**
-         * Confirm the payment-authority handoff.
-         */
-        action: 'confirm';
-        /**
-         * Token returned by the request stage.
-         */
-        confirmationToken: string;
-    } | {
-        /**
-         * Hosted card capture.
-         */
-        method?: SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityMethod;
-        /**
-         * Poll the payment-authority handoff.
-         */
-        action: 'status';
-        confirmationToken?: never;
-    };
-    expectedAccountId?: number | string;
-    accountId?: number | string;
-};
+/** @deprecated use SaveBillingData */
+export type SaveBillingRequestSaveBillingPaymentAuthorityInput = SaveBillingData;
 
-export type SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityMethod = 'capture_link';
+/** @deprecated use SaveBillingData */
+export type SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityMethod = SaveBillingData;
 
-/**
- * Request, confirm, or poll payment authority.
- */
-export type SaveBillingRequestSaveBillingPaymentAuthorityOperation = 'payment_authority';
+/** @deprecated use SaveBillingData */
+export type SaveBillingRequestSaveBillingPaymentAuthorityOperation = SaveBillingData;
 
-export type SaveBillingRequestSaveBillingPaymentTermsInput = {
-    operation: SaveBillingRequestSaveBillingPaymentTermsOperation;
-    /**
-     * Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default.
-     */
-    paymentTerms: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
-    expectedAccountId?: number | string;
-    accountId?: number | string;
-};
+/** @deprecated use SaveBillingData */
+export type SaveBillingRequestSaveBillingPaymentTermsInput = SaveBillingData;
 
-/**
- * Choose the payment terms sellers are asked for.
- */
-export type SaveBillingRequestSaveBillingPaymentTermsOperation = 'payment_terms';
+/** @deprecated use SaveBillingData */
+export type SaveBillingRequestSaveBillingPaymentTermsOperation = SaveBillingData;
 
-export type SaveBillingRequestSaveBillingTermsInput = {
-    operation: SaveBillingRequestSaveBillingTermsOperation;
-    terms: {
-        /**
-         * Explicitly accept the named Terms version.
-         */
-        accepted: true;
-        /**
-         * Terms version shown in Plan & Billing.
-         */
-        acceptedVersion: string;
-    };
-    expectedAccountId?: number | string;
-    accountId?: number | string;
-};
+/** @deprecated use SaveBillingData */
+export type SaveBillingRequestSaveBillingTermsInput = SaveBillingData;
 
-/**
- * Accept the current Terms of Service.
- */
-export type SaveBillingRequestSaveBillingTermsOperation = 'terms';
+/** @deprecated use SaveBillingData */
+export type SaveBillingRequestSaveBillingTermsOperation = SaveBillingData;
 
 export type SaveBillingResponse = SaveBillingResponses[keyof SaveBillingResponses];
 
@@ -12618,9 +12665,23 @@ export type SaveBillingResponses = {
             paymentAuthority?: never;
         } | {
             action: 'payment_terms_saved';
-            paymentTerms: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
+            paymentTerms: SaveBillingSuccessPaymentTerms;
             paymentTermsChosen: true;
             terms?: never;
+            paymentAuthority?: never;
+        } | {
+            action: 'billing_saved';
+            terms: {
+                accepted: true;
+                acceptedVersion: string;
+                governedByExistingContract?: never;
+            } | {
+                accepted: false;
+                governedByExistingContract: true;
+                acceptedVersion?: never;
+            };
+            paymentTerms: SaveBillingSuccessPaymentTerms;
+            paymentTermsChosen: true;
             paymentAuthority?: never;
         } | {
             paymentAuthority: SaveBillingSuccessPendingConfirmationResult;
@@ -12694,6 +12755,8 @@ export type SaveBillingSuccessCaptureLinkIssuedResult = {
     status: 'pending' | 'opened' | 'verified' | 'expired';
     expiresAt: string;
 };
+
+export type SaveBillingSuccessPaymentTerms = 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
 
 export type SaveBillingSuccessPendingConfirmationResult = {
     status: 'pending_confirmation';
@@ -12918,36 +12981,23 @@ export type SaveBusinessRulesSuccessSellerSaveReplayedMaterialReceipt = {
 };
 
 export type SaveBuyerAgentData = {
-    body: ({
-        operation: SaveBuyerAgentRequestSaveBuyerAgentCreateOperation;
-        displayName: SaveBuyerAgentRequestDisplayName;
+    body: unknown & {
+        /**
+         * Existing agent ID.
+         */
+        id?: string;
+        /**
+         * Name for creation or rename.
+         */
+        displayName?: string;
         /**
          * external is available. hosted creation is not available yet.
          */
         kind?: 'external' | 'hosted';
-        expectedAccountId?: number | string;
-        accountId?: number | string;
-        id?: never;
-        access?: never;
-        lifecycle?: never;
-        credentialHandoff?: never;
-    } | {
-        operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation;
-        id: SaveBuyerAgentRequestId;
-        displayName: SaveBuyerAgentRequestDisplayName;
-        expectedAccountId?: number | string;
-        accountId?: number | string;
-        kind?: never;
-        access?: never;
-        lifecycle?: never;
-        credentialHandoff?: never;
-    } | {
-        operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation;
-        id: SaveBuyerAgentRequestId;
         /**
-         * Complete replacement list of advertiser grants.
+         * Replace exact grants.
          */
-        access: {
+        access?: {
             /**
              * Access revision returned by the most recent read.
              */
@@ -12966,69 +13016,22 @@ export type SaveBuyerAgentData = {
                 role: 'READ' | 'READ_WRITE';
             }>;
         };
-        expectedAccountId?: number | string;
-        accountId?: number | string;
-        displayName?: never;
-        kind?: never;
-        lifecycle?: never;
-        credentialHandoff?: never;
-    } | {
-        operation: SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation;
-        id: SaveBuyerAgentRequestId;
         /**
-         * One state-fenced suspend, resume, or retire action.
+         * Desired state: active resumes, suspended pauses, retired is permanent.
          */
-        lifecycle: {
-            /**
-             * Suspend an active buyer agent.
-             */
-            action: 'suspend';
-            /**
-             * State fence required before suspension.
-             */
-            expectedLifecycleState: 'active';
-            confirmationText: SaveBuyerAgentRequestLifecycleConfirmationText;
-        } | {
-            /**
-             * Resume a suspended buyer agent.
-             */
-            action: 'resume';
-            /**
-             * State fence required before resumption.
-             */
-            expectedLifecycleState: 'suspended';
-            confirmationText?: SaveBuyerAgentRequestLifecycleConfirmationText;
-        } | {
-            /**
-             * Permanently retire an active or suspended buyer agent.
-             */
-            action: 'retire';
-            /**
-             * State fence required before retirement.
-             */
-            expectedLifecycleState: 'active' | 'suspended';
-            confirmationText: SaveBuyerAgentRequestLifecycleConfirmationText;
-        };
-        expectedAccountId?: number | string;
-        accountId?: number | string;
-        displayName?: never;
-        kind?: never;
-        access?: never;
-        credentialHandoff?: never;
-    } | {
-        operation: SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation;
-        id: SaveBuyerAgentRequestId;
+        lifecycleState?: 'active' | 'suspended' | 'retired';
         /**
-         * Prepare a safe reference for the administrator credential ceremony; never returns a secret.
+         * Current state this change requires; sent with lifecycleState.
          */
-        credentialHandoff: true;
-        expectedAccountId?: number | string;
-        accountId?: number | string;
-        displayName?: never;
-        kind?: never;
-        access?: never;
-        lifecycle?: never;
-    }) & {
+        expectedLifecycleState?: 'active' | 'suspended';
+        /**
+         * Exact current display name; required to suspend or retire.
+         */
+        confirmationText?: string;
+        /**
+         * Prepare credential setup.
+         */
+        credentialHandoff?: true;
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -13110,45 +13113,29 @@ export type SaveBuyerAgentErrors = {
     503: V3ToolErrorResponse;
 };
 
-/**
- * Name for the buyer agent.
- */
-export type SaveBuyerAgentRequestDisplayName = string;
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestDisplayName = SaveBuyerAgentData;
 
-/**
- * Buyer-agent principal ID.
- */
-export type SaveBuyerAgentRequestId = string;
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestId = SaveBuyerAgentData;
 
-/**
- * Exact current display name; required to suspend or retire.
- */
-export type SaveBuyerAgentRequestLifecycleConfirmationText = string;
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestLifecycleConfirmationText = SaveBuyerAgentData;
 
-/**
- * Create an external buyer agent.
- */
-export type SaveBuyerAgentRequestSaveBuyerAgentCreateOperation = 'create';
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestSaveBuyerAgentCreateOperation = SaveBuyerAgentData;
 
-/**
- * Prepare the human credential handoff ceremony.
- */
-export type SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation = 'credential_handoff';
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation = SaveBuyerAgentData;
 
-/**
- * Suspend, resume, or retire the buyer agent.
- */
-export type SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation = 'lifecycle';
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation = SaveBuyerAgentData;
 
-/**
- * Replace the exact advertiser access list.
- */
-export type SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation = 'update_access';
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation = SaveBuyerAgentData;
 
-/**
- * Change the buyer-agent display name.
- */
-export type SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation = 'update_display_name';
+/** @deprecated use SaveBuyerAgentData */
+export type SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation = SaveBuyerAgentData;
 
 export type SaveBuyerAgentResponse = SaveBuyerAgentResponses[keyof SaveBuyerAgentResponses];
 

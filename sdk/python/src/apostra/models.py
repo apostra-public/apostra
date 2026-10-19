@@ -12,6 +12,27 @@ class AdcpError(TypedDict):
     details: NotRequired[dict[str, JsonValue]]
     recovery: NotRequired[Literal["transient", "correctable", "terminal"]]
 
+class ConfirmPaymentAuthorityInput(TypedDict):
+    confirmationToken: str
+    '\n    Token returned by request_payment_authority.\n    '
+    expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class ConfirmPaymentAuthorityResult(TypedDict):
+    action: Literal["human_action_required"]
+    paymentAuthority: ConfirmPaymentAuthoritySuccessCaptureLinkIssuedResult
+
+class ConfirmPaymentAuthoritySuccessCaptureLinkIssuedResult(TypedDict):
+    method: Literal["capture_link"]
+    '\n    How the payment authority is captured. `capture_link` (the only value today): a hosted link for the org\'s human cardholder to open. Future methods (e.g. an agent-held payment token) will be additive values — switch on this field rather than assuming it.\n    '
+    url: NotRequired[str]
+    '\n    The capture link. Hand this to your organization\'s cardholder — opening it does not require an Apostra session; the link itself is the authorization. Only present when the link is freshly issued, not on status polls.\n    '
+    status: Literal["pending", "opened", "verified", "expired"]
+    '\n    `pending`: issued, not yet opened. `opened`: the hosted page exchanged the token at least once. `verified`: the card-rail webhook confirmed a payment method for this link. `expired`: the TTL elapsed before verification — terminal, never re-armed.\n    '
+    expiresAt: str
+
 class DownloadV3PublicDocumentRevisionErrorError(TypedDict):
     code: Literal["DOCUMENT_REFERENCE_INVALID", "DOCUMENT_NOT_FOUND", "DOCUMENT_CURSOR_STALE", "DOCUMENT_DEPENDENCY_UNAVAILABLE", "DOCUMENT_INTERNAL_ERROR"]
     message: str
@@ -5090,6 +5111,24 @@ class RequestBuyerChildAccountSuccessAgentApproval(TypedDict):
     failureCode: str | None
     '\n    Reason code when the action failed.\n    '
 
+class RequestPaymentAuthorityInput(TypedDict):
+    expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class RequestPaymentAuthorityResult(TypedDict):
+    action: Literal["confirmation_required"]
+    paymentAuthority: RequestPaymentAuthoritySuccessPendingConfirmationResult
+
+class RequestPaymentAuthoritySuccessPendingConfirmationResult(TypedDict):
+    status: Literal["pending_confirmation"]
+    confirmationToken: str
+    '\n    Single-use, short-lived token. Call `add_payment_authority` again with `action: "confirm"` and this token to issue the capture link.\n    '
+    summary: str
+    expiresAt: str
+    '\n    When the confirmation token expires. Request again after this if it lapses.\n    '
+
 class RequestProposalsInput(TypedDict):
     campaignId: str
     '\n    Campaign to request proposals for.\n    '
@@ -5504,49 +5543,6 @@ class SaveAccountResultObject(TypedDict):
 
 class SaveAccountResultObjectSettings(TypedDict):
     company: str
-
-class SaveAdvertiserAccessInput(TypedDict):
-    action: Literal["invite", "decide", "change_role", "revoke_lifecycle"]
-    '\n    invite sends a client access to one advertiser; decide approves, suspends, reactivates, or revokes a client; change_role sets a client role; revoke_lifecycle ends older self-serve access.\n    '
-    advertiserId: NotRequired[SaveAdvertiserAccessRequestAdvertiserId]
-    '\n    The advertiser. For revoke_lifecycle, the one that owns the lifecycle.\n    '
-    admissionId: NotRequired[str]
-    '\n    decide or change_role: the client admissionId from get advertiser_access.\n    '
-    lifecycleId: NotRequired[str]
-    '\n    revoke_lifecycle only: a lifecycleId with canRevoke from get advertiser_access.\n    '
-    email: NotRequired[str]
-    '\n    invite only: the one person to invite.\n    '
-    operatorDomain: NotRequired[str]
-    '\n    invite only: the invited company domain, for example example.com.\n    '
-    role: NotRequired[Literal["advertiser-viewer", "advertiser-editor", "advertiser-admin"]]
-    '\n    invite or change_role: the access the client gets.\n    '
-    decision: NotRequired[Literal["approve", "suspend", "reactivate", "revoke"]]
-    '\n    decide only: pick one of availableActions.\n    '
-    expectedRevision: NotRequired[SaveAdvertiserAccessRequestExpectedRevision]
-    '\n    decide or change_role: the client revision you read. A stale one is refused.\n    '
-    eligibilityRevision: NotRequired[str]
-    '\n    invite only: invite.eligibilityRevision you read. Omit to use the current one.\n    '
-    reason: NotRequired[str]
-    '\n    decide, change_role, or revoke_lifecycle: why. Audited.\n    '
-    expectedAccountId: NotRequired[int | str]
-    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
-    accountId: NotRequired[int | str]
-    '\n    Apostra accountId this call runs in, from get_status.\n    '
-
-SaveAdvertiserAccessRequestAdvertiserId: TypeAlias = str
-
-SaveAdvertiserAccessRequestExpectedRevision: TypeAlias = str
-
-class SaveAdvertiserAccessResult(TypedDict):
-    action: Literal["invite", "decide", "change_role", "revoke_lifecycle"]
-    advertiserId: NotRequired[str]
-    admissionId: NotRequired[str]
-    lifecycleId: NotRequired[str]
-    state: NotRequired[str]
-    roleSlug: NotRequired[Literal["advertiser-viewer", "advertiser-editor", "advertiser-admin"]]
-    revision: NotRequired[str]
-    deliveryState: NotRequired[Literal["requested", "sent", "failed", "cancelled"]]
-    replay: NotRequired[bool]
 
 class SaveAdvertiserGrantInput(TypedDict):
     action: Literal["invite", "accept", "reject", "revoke"]
@@ -6325,60 +6321,49 @@ class SaveAudienceResult(TypedDict):
     advertiserId: int
     audienceCount: int
 
-class SaveBillingRequestSaveBillingPaymentAuthorityInput(TypedDict):
-    operation: SaveBillingRequestSaveBillingPaymentAuthorityOperation
-    paymentAuthority: SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityActionRequest | SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityActionConfirm | SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityActionStatus
-    expectedAccountId: NotRequired[int | str]
-    accountId: NotRequired[int | str]
-
-class SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityActionConfirm(TypedDict):
-    method: NotRequired[SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityMethod]
-    '\n    Hosted card capture.\n    '
-    action: Literal["confirm"]
-    '\n    Confirm the payment-authority handoff.\n    '
-    confirmationToken: str
-    '\n    Token returned by the request stage.\n    '
-
-class SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityActionRequest(TypedDict):
-    method: NotRequired[SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityMethod]
-    '\n    Hosted card capture.\n    '
-    action: Literal["request"]
-    '\n    Stage the payment-authority handoff.\n    '
-
-class SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityActionStatus(TypedDict):
-    method: NotRequired[SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityMethod]
-    '\n    Hosted card capture.\n    '
-    action: Literal["status"]
-    '\n    Poll the payment-authority handoff.\n    '
-
-SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityMethod: TypeAlias = Literal["capture_link"]
-
-SaveBillingRequestSaveBillingPaymentAuthorityOperation: TypeAlias = Literal["payment_authority"]
-
-class SaveBillingRequestSaveBillingPaymentTermsInput(TypedDict):
-    operation: SaveBillingRequestSaveBillingPaymentTermsOperation
-    paymentTerms: Literal["net_15", "net_30", "net_45", "net_60", "net_90"]
+class SaveBillingInput(TypedDict):
+    terms: NotRequired[SaveBillingInputTerms]
+    '\n    Accept Terms.\n    '
+    paymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90"]]
     '\n    Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default.\n    '
     expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-SaveBillingRequestSaveBillingPaymentTermsOperation: TypeAlias = Literal["payment_terms"]
-
-class SaveBillingRequestSaveBillingTermsInput(TypedDict):
-    operation: SaveBillingRequestSaveBillingTermsOperation
-    terms: SaveBillingRequestSaveBillingTermsInputTerms
-    expectedAccountId: NotRequired[int | str]
-    accountId: NotRequired[int | str]
-
-SaveBillingInput: TypeAlias = "SaveBillingRequestSaveBillingTermsInput | SaveBillingRequestSaveBillingPaymentAuthorityInput | SaveBillingRequestSaveBillingPaymentTermsInput"
-
-class SaveBillingRequestSaveBillingTermsInputTerms(TypedDict):
+class SaveBillingInputTerms(TypedDict):
     accepted: Literal[True]
     '\n    Explicitly accept the named Terms version.\n    '
     acceptedVersion: str
     '\n    Terms version shown in Plan & Billing.\n    '
 
-SaveBillingRequestSaveBillingTermsOperation: TypeAlias = Literal["terms"]
+SaveBillingRequestSaveBillingPaymentAuthorityInput: TypeAlias = SaveBillingInput
+
+SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityActionConfirm: TypeAlias = SaveBillingInput
+
+SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityActionRequest: TypeAlias = SaveBillingInput
+
+SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityActionStatus: TypeAlias = SaveBillingInput
+
+SaveBillingRequestSaveBillingPaymentTermsInput: TypeAlias = SaveBillingInput
+
+SaveBillingRequestSaveBillingTermsInput: TypeAlias = SaveBillingInput
+
+SaveBillingRequestSaveBillingTermsInputTerms: TypeAlias = SaveBillingInput
+
+class SaveBillingResultActionBillingSaved(TypedDict):
+    action: Literal["billing_saved"]
+    terms: SaveBillingResultActionBillingSavedTermsAcceptedTrue | SaveBillingResultActionBillingSavedTermsAcceptedFalse
+    paymentTerms: SaveBillingSuccessPaymentTerms
+    paymentTermsChosen: Literal[True]
+
+class SaveBillingResultActionBillingSavedTermsAcceptedFalse(TypedDict):
+    accepted: Literal[False]
+    governedByExistingContract: Literal[True]
+
+class SaveBillingResultActionBillingSavedTermsAcceptedTrue(TypedDict):
+    accepted: Literal[True]
+    acceptedVersion: str
 
 class SaveBillingResultActionConfirmationRequired(TypedDict):
     paymentAuthority: SaveBillingSuccessPendingConfirmationResult
@@ -6406,7 +6391,7 @@ class SaveBillingResultActionPaymentAuthorityVerified(TypedDict):
 
 class SaveBillingResultActionPaymentTermsSaved(TypedDict):
     action: Literal["payment_terms_saved"]
-    paymentTerms: Literal["net_15", "net_30", "net_45", "net_60", "net_90"]
+    paymentTerms: SaveBillingSuccessPaymentTerms
     paymentTermsChosen: Literal[True]
 
 class SaveBillingResultActionTermsAccepted(TypedDict):
@@ -6421,7 +6406,7 @@ class SaveBillingResultActionTermsNotRequired(TypedDict):
     action: Literal["terms_not_required"]
     terms: SaveBillingResultActionTermsNotRequiredTerms
 
-SaveBillingResult: TypeAlias = "SaveBillingResultActionTermsAccepted | SaveBillingResultActionTermsNotRequired | SaveBillingResultActionPaymentTermsSaved | SaveBillingResultActionConfirmationRequired | SaveBillingResultActionHumanActionRequired | SaveBillingResultActionPaymentAuthorityPending | SaveBillingResultActionPaymentAuthorityOpened | SaveBillingResultActionPaymentAuthorityVerified | SaveBillingResultActionPaymentAuthorityExpired"
+SaveBillingResult: TypeAlias = "SaveBillingResultActionTermsAccepted | SaveBillingResultActionTermsNotRequired | SaveBillingResultActionPaymentTermsSaved | SaveBillingResultActionBillingSaved | SaveBillingResultActionConfirmationRequired | SaveBillingResultActionHumanActionRequired | SaveBillingResultActionPaymentAuthorityPending | SaveBillingResultActionPaymentAuthorityOpened | SaveBillingResultActionPaymentAuthorityVerified | SaveBillingResultActionPaymentAuthorityExpired"
 
 class SaveBillingResultActionTermsNotRequiredTerms(TypedDict):
     accepted: Literal[False]
@@ -6435,6 +6420,8 @@ class SaveBillingSuccessCaptureLinkIssuedResult(TypedDict):
     status: Literal["pending", "opened", "verified", "expired"]
     '\n    `pending`: issued, not yet opened. `opened`: the hosted page exchanged the token at least once. `verified`: the card-rail webhook confirmed a payment method for this link. `expired`: the TTL elapsed before verification — terminal, never re-armed.\n    '
     expiresAt: str
+
+SaveBillingSuccessPaymentTerms: TypeAlias = Literal["net_15", "net_30", "net_45", "net_60", "net_90"]
 
 class SaveBillingSuccessPendingConfirmationResult(TypedDict):
     status: Literal["pending_confirmation"]
@@ -6564,95 +6551,59 @@ SaveBusinessRulesResult: TypeAlias = "SaveBusinessRulesSuccessSaveBusinessRulesS
 
 SaveBusinessRulesSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
-class SaveBuyerAgentInputKindExternalAndHosted(TypedDict):
-    expectedAccountId: NotRequired[int | str]
-    accountId: NotRequired[int | str]
-    operation: SaveBuyerAgentRequestSaveBuyerAgentCreateOperation
-    displayName: SaveBuyerAgentRequestDisplayName
+class SaveBuyerAgentInput(TypedDict):
+    id: NotRequired[str]
+    '\n    Existing agent ID.\n    '
+    displayName: NotRequired[str]
+    '\n    Name for creation or rename.\n    '
     kind: NotRequired[Literal["external", "hosted"]]
     '\n    external is available. hosted creation is not available yet.\n    '
-
-class SaveBuyerAgentInputOperationCredentialHandoff(TypedDict):
+    access: NotRequired[SaveBuyerAgentInputAccess]
+    '\n    Replace exact grants.\n    '
+    lifecycleState: NotRequired[Literal["active", "suspended", "retired"]]
+    '\n    Desired state: active resumes, suspended pauses, retired is permanent.\n    '
+    expectedLifecycleState: NotRequired[Literal["active", "suspended"]]
+    '\n    Current state this change requires; sent with lifecycleState.\n    '
+    confirmationText: NotRequired[str]
+    '\n    Exact current display name; required to suspend or retire.\n    '
+    credentialHandoff: NotRequired[Literal[True]]
+    '\n    Prepare credential setup.\n    '
     expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
-    operation: SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation
-    id: SaveBuyerAgentRequestId
-    credentialHandoff: Literal[True]
-    '\n    Prepare a safe reference for the administrator credential ceremony; never returns a secret.\n    '
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-class SaveBuyerAgentInputOperationLifecycle(TypedDict):
-    expectedAccountId: NotRequired[int | str]
-    accountId: NotRequired[int | str]
-    operation: SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation
-    id: SaveBuyerAgentRequestId
-    lifecycle: SaveBuyerAgentInputOperationLifecycleLifecycleActionSuspend | SaveBuyerAgentInputOperationLifecycleLifecycleActionResume | SaveBuyerAgentInputOperationLifecycleLifecycleActionRetire
-    '\n    One state-fenced suspend, resume, or retire action.\n    '
-
-class SaveBuyerAgentInputOperationLifecycleLifecycleActionResume(TypedDict):
-    action: Literal["resume"]
-    '\n    Resume a suspended buyer agent.\n    '
-    expectedLifecycleState: Literal["suspended"]
-    '\n    State fence required before resumption.\n    '
-    confirmationText: NotRequired[SaveBuyerAgentRequestLifecycleConfirmationText]
-
-class SaveBuyerAgentInputOperationLifecycleLifecycleActionRetire(TypedDict):
-    action: Literal["retire"]
-    '\n    Permanently retire an active or suspended buyer agent.\n    '
-    expectedLifecycleState: Literal["active", "suspended"]
-    '\n    State fence required before retirement.\n    '
-    confirmationText: SaveBuyerAgentRequestLifecycleConfirmationText
-
-class SaveBuyerAgentInputOperationLifecycleLifecycleActionSuspend(TypedDict):
-    action: Literal["suspend"]
-    '\n    Suspend an active buyer agent.\n    '
-    expectedLifecycleState: Literal["active"]
-    '\n    State fence required before suspension.\n    '
-    confirmationText: SaveBuyerAgentRequestLifecycleConfirmationText
-
-class SaveBuyerAgentInputOperationUpdateAccess(TypedDict):
-    expectedAccountId: NotRequired[int | str]
-    accountId: NotRequired[int | str]
-    operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation
-    id: SaveBuyerAgentRequestId
-    access: SaveBuyerAgentInputOperationUpdateAccessAccess
-    '\n    Complete replacement list of advertiser grants.\n    '
-
-class SaveBuyerAgentInputOperationUpdateAccessAccess(TypedDict):
+class SaveBuyerAgentInputAccess(TypedDict):
     expectedAccessRevision: int
     '\n    Access revision returned by the most recent read.\n    '
-    advertisers: list[SaveBuyerAgentInputOperationUpdateAccessAccessAdvertisersItem]
+    advertisers: list[SaveBuyerAgentInputAccessAdvertisersItem]
     '\n    Complete replacement list of advertiser grants.\n    '
 
-class SaveBuyerAgentInputOperationUpdateAccessAccessAdvertisersItem(TypedDict):
+class SaveBuyerAgentInputAccessAdvertisersItem(TypedDict):
     advertiserId: str
     '\n    Advertiser ID receiving this exact role.\n    '
     role: Literal["READ", "READ_WRITE"]
     '\n    READ or READ_WRITE access for this advertiser.\n    '
 
-class SaveBuyerAgentInputOperationUpdateDisplayName(TypedDict):
-    expectedAccountId: NotRequired[int | str]
-    accountId: NotRequired[int | str]
-    operation: SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation
-    id: SaveBuyerAgentRequestId
-    displayName: SaveBuyerAgentRequestDisplayName
+SaveBuyerAgentInputKindExternalAndHosted: TypeAlias = Literal["external", "hosted"]
 
-SaveBuyerAgentInput: TypeAlias = "SaveBuyerAgentInputKindExternalAndHosted | SaveBuyerAgentInputOperationUpdateDisplayName | SaveBuyerAgentInputOperationUpdateAccess | SaveBuyerAgentInputOperationLifecycle | SaveBuyerAgentInputOperationCredentialHandoff"
+SaveBuyerAgentInputOperationCredentialHandoff: TypeAlias = SaveBuyerAgentInput
 
-SaveBuyerAgentRequestDisplayName: TypeAlias = str
+SaveBuyerAgentInputOperationLifecycle: TypeAlias = SaveBuyerAgentInput
 
-SaveBuyerAgentRequestId: TypeAlias = str
+SaveBuyerAgentInputOperationLifecycleLifecycleActionResume: TypeAlias = SaveBuyerAgentInput
 
-SaveBuyerAgentRequestLifecycleConfirmationText: TypeAlias = str
+SaveBuyerAgentInputOperationLifecycleLifecycleActionRetire: TypeAlias = SaveBuyerAgentInput
 
-SaveBuyerAgentRequestSaveBuyerAgentCreateOperation: TypeAlias = Literal["create"]
+SaveBuyerAgentInputOperationLifecycleLifecycleActionSuspend: TypeAlias = SaveBuyerAgentInput
 
-SaveBuyerAgentRequestSaveBuyerAgentCredentialHandoffOperation: TypeAlias = Literal["credential_handoff"]
+SaveBuyerAgentInputOperationUpdateAccess: TypeAlias = SaveBuyerAgentInput
 
-SaveBuyerAgentRequestSaveBuyerAgentLifecycleOperation: TypeAlias = Literal["lifecycle"]
+SaveBuyerAgentInputOperationUpdateAccessAccess: TypeAlias = SaveBuyerAgentInputAccess
 
-SaveBuyerAgentRequestSaveBuyerAgentUpdateAccessOperation: TypeAlias = Literal["update_access"]
+SaveBuyerAgentInputOperationUpdateAccessAccessAdvertisersItem: TypeAlias = SaveBuyerAgentInputAccessAdvertisersItem
 
-SaveBuyerAgentRequestSaveBuyerAgentUpdateDisplayNameOperation: TypeAlias = Literal["update_display_name"]
+SaveBuyerAgentInputOperationUpdateDisplayName: TypeAlias = SaveBuyerAgentInput
 
 class SaveBuyerAgentResult(TypedDict):
     kind: Literal["buyer_agent"]
@@ -20151,6 +20102,8 @@ class V3ToolErrorResponse(TypedDict):
     data: None
     error: AdcpError
 
+ConfirmPaymentAuthorityError: TypeAlias = "V3ToolErrorResponse"
+
 DownloadV3PublicDocumentRevisionError: TypeAlias = "DownloadV3PublicDocumentRevisionErrorWithDataError | V3ToolErrorResponse"
 
 GenerateVariantsError: TypeAlias = "V3ToolErrorResponse"
@@ -20203,6 +20156,8 @@ RefreshInventorySourceHealthError: TypeAlias = "V3ToolErrorResponse"
 
 RequestBuyerChildAccountError: TypeAlias = "V3ToolErrorResponse"
 
+RequestPaymentAuthorityError: TypeAlias = "V3ToolErrorResponse"
+
 RequestProposalsError: TypeAlias = "V3ToolErrorResponse"
 
 RequestSellerReportingUpdateError: TypeAlias = "V3ToolErrorResponse"
@@ -20210,8 +20165,6 @@ RequestSellerReportingUpdateError: TypeAlias = "V3ToolErrorResponse"
 ReviewBuyerChildAccountError: TypeAlias = "V3ToolErrorResponse"
 
 SaveAccountError: TypeAlias = "V3ToolErrorResponse"
-
-SaveAdvertiserAccessError: TypeAlias = "V3ToolErrorResponse"
 
 SaveAdvertiserError: TypeAlias = "V3ToolErrorResponse"
 

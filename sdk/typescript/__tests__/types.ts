@@ -25,14 +25,13 @@ const badCampaign: SaveCampaignInput = {
   ],
 }
 const billing: SaveBillingInput = {
-  operation: 'payment_authority',
-  paymentAuthority: { action: 'status' },
+  terms: { accepted: true, acceptedVersion: 'v1-1' },
+  paymentTerms: 'net_60',
 }
 const badBilling: SaveBillingInput = {
-  operation: 'terms',
   terms: { accepted: true, acceptedVersion: 'v1-1' },
-  // @ts-expect-error billing operation branches reject sibling fields
-  paymentTerms: 'net_60',
+  // @ts-expect-error the earlier operation field is no longer published
+  operation: 'terms',
 }
 const api = new Apostra({ apiKey: 'test' })
 const delivery: Promise<GetDeliveryResult> = api.getDelivery({})
