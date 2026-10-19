@@ -19875,9 +19875,16 @@ paths:
                                   name:
                                     type: string
                                     maxLength: 240
+                                  displayName:
+                                    anyOf:
+                                      - type: string
+                                        maxLength: 240
+                                      - type: 'null'
+                                    description: The organization’s company name, else its account name, else null.
                                 required:
                                   - customerId
                                   - name
+                                  - displayName
                                 additionalProperties: false
                               terms:
                                 type: object
@@ -20002,6 +20009,277 @@ paths:
                                   - submission
                                   - secureHandoff
                                 additionalProperties: false
+                              plan:
+                                type: object
+                                properties:
+                                  current:
+                                    anyOf:
+                                      - $ref: '#/components/schemas/get_success_ObjectPlanCurrent'
+                                      - type: 'null'
+                                    description: The plan in force.
+                                  upcoming:
+                                    anyOf:
+                                      - $ref: '#/components/schemas/get_success_ObjectPlanUpcoming'
+                                      - type: 'null'
+                                    description: An accepted plan waiting for the current term to end, or null.
+                                  offer:
+                                    anyOf:
+                                      - type: object
+                                        properties:
+                                          offerVersion:
+                                            type: string
+                                            description: >-
+                                              The exact version of this offer. A write that accepts or responds to the
+                                              offer names it.
+                                          governedBy:
+                                            type: object
+                                            properties:
+                                              agreementKind:
+                                                type: string
+                                                enum:
+                                                  - STANDARD_TOS
+                                                  - CUSTOM_CONTRACT
+                                                  - AAA
+                                              effectiveRateCard:
+                                                anyOf:
+                                                  - type: object
+                                                    properties:
+                                                      version:
+                                                        type: string
+                                                      visibility:
+                                                        type: string
+                                                        enum:
+                                                          - PUBLIC
+                                                          - PRIVATE
+                                                      displayName:
+                                                        type: string
+                                                    required:
+                                                      - version
+                                                      - visibility
+                                                      - displayName
+                                                    additionalProperties: false
+                                                  - type: 'null'
+                                              proposal:
+                                                anyOf:
+                                                  - type: object
+                                                    properties:
+                                                      documentTitle:
+                                                        type: string
+                                                      scopeIncluded:
+                                                        type: array
+                                                        items:
+                                                          type: string
+                                                      scopeExclusions:
+                                                        type: array
+                                                        items:
+                                                          type: string
+                                                      initialTermMonths:
+                                                        type: integer
+                                                        exclusiveMinimum: 0
+                                                        maximum: 9007199254740991
+                                                      defaultPaymentOptionKey:
+                                                        type:
+                                                          - string
+                                                          - 'null'
+                                                    required:
+                                                      - documentTitle
+                                                      - scopeIncluded
+                                                      - scopeExclusions
+                                                      - initialTermMonths
+                                                      - defaultPaymentOptionKey
+                                                    additionalProperties: false
+                                                  - type: 'null'
+                                                description: >-
+                                                  The private proposal that governs the offer. Null for a public offer,
+                                                  and for a read redacted for a service token.
+                                            required:
+                                              - agreementKind
+                                              - effectiveRateCard
+                                              - proposal
+                                            additionalProperties: false
+                                          initialTermMonths:
+                                            type: integer
+                                            exclusiveMinimum: 0
+                                            maximum: 9007199254740991
+                                          plans:
+                                            type: array
+                                            items:
+                                              type: object
+                                              properties:
+                                                planId:
+                                                  $ref: '#/components/schemas/get_success_ObjectPlanOfferPlansItemPlanId'
+                                                planName:
+                                                  $ref: '#/components/schemas/get_success_ObjectPlanOfferPlansItemPlanName'
+                                                currency:
+                                                  $ref: '#/components/schemas/get_success_ObjectPlanOfferPlansItemCurrency'
+                                                commitmentMinor:
+                                                  $ref: >-
+                                                    #/components/schemas/get_success_ObjectPlanOfferPlansItemCommitmentMinor
+                                                includedIus:
+                                                  $ref: '#/components/schemas/get_success_ObjectPlanOfferPlansItemIncludedIus'
+                                                iuPriceMinor:
+                                                  $ref: >-
+                                                    #/components/schemas/get_success_ObjectPlanOfferPlansItemIuPriceMinor
+                                                entitlements:
+                                                  $ref: >-
+                                                    #/components/schemas/get_success_ObjectPlanOfferPlansItemEntitlements
+                                                displayOrder:
+                                                  type: integer
+                                                  minimum: 0
+                                                  maximum: 9007199254740991
+                                                paymentOptions:
+                                                  type: array
+                                                  items:
+                                                    $ref: >-
+                                                      #/components/schemas/get_success_ObjectPlanOfferPlansItemPaymentOptionsItem
+                                                  description: >-
+                                                    The payment options the offer lets the organization pick from. Empty
+                                                    for a public plan, which has none to choose, and for a read redacted
+                                                    for a service token.
+                                                acceptanceConvertsStandaloneAccount:
+                                                  type: boolean
+                                                  description: >-
+                                                    Whether accepting this plan promotes a standalone account to an
+                                                    organization first.
+                                              required:
+                                                - planId
+                                                - planName
+                                                - currency
+                                                - commitmentMinor
+                                                - includedIus
+                                                - iuPriceMinor
+                                                - entitlements
+                                                - displayOrder
+                                                - paymentOptions
+                                                - acceptanceConvertsStandaloneAccount
+                                              additionalProperties: false
+                                        required:
+                                          - offerVersion
+                                          - governedBy
+                                          - initialTermMonths
+                                          - plans
+                                        additionalProperties: false
+                                      - type: 'null'
+                                    description: The offer the organization may accept, or null when none applies.
+                                  renewal:
+                                    anyOf:
+                                      - type: object
+                                        properties:
+                                          version:
+                                            type: string
+                                            description: The exact version of this renewal. A renewal change names it.
+                                          status:
+                                            type: string
+                                            enum:
+                                              - RENEWS
+                                              - NON_RENEWAL_SCHEDULED
+                                              - RENEWAL_BLOCKED
+                                              - ENDED
+                                              - PINNED
+                                          effectiveFreeAt:
+                                            $ref: '#/components/schemas/get_success_ObjectPlanRenewalEffectiveFreeAt'
+                                          changeAllowedUntil:
+                                            description: The deadline for changing the renewal.
+                                            $ref: '#/components/schemas/get_success_ObjectPlanRenewalChangeAllowedUntil'
+                                          allowedActions:
+                                            type: array
+                                            items:
+                                              type: string
+                                              enum:
+                                                - CANCEL_AT_TERM
+                                                - REINSTATE_AUTO_RENEWAL
+                                          latestInstruction:
+                                            anyOf:
+                                              - type: object
+                                                properties:
+                                                  instructionType:
+                                                    type: string
+                                                    enum:
+                                                      - CANCEL_AT_TERM
+                                                      - REINSTATE_AUTO_RENEWAL
+                                                  effectiveAt:
+                                                    $ref: >-
+                                                      #/components/schemas/get_success_ObjectPlanRenewalLatestInstructionEffectiveAt
+                                                  recordedAt:
+                                                    $ref: >-
+                                                      #/components/schemas/get_success_ObjectPlanRenewalLatestInstructionRecordedAt
+                                                required:
+                                                  - instructionType
+                                                  - effectiveAt
+                                                  - recordedAt
+                                                additionalProperties: false
+                                              - type: 'null'
+                                        required:
+                                          - version
+                                          - status
+                                          - effectiveFreeAt
+                                          - changeAllowedUntil
+                                          - allowedActions
+                                          - latestInstruction
+                                        additionalProperties: false
+                                      - type: 'null'
+                                  helpAvailable:
+                                    type: boolean
+                                    description: Whether a plan help request can be filed now.
+                                required:
+                                  - current
+                                  - upcoming
+                                  - offer
+                                  - renewal
+                                  - helpAvailable
+                                additionalProperties: false
+                              invoices:
+                                maxItems: 10
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    number:
+                                      type: integer
+                                      exclusiveMinimum: 0
+                                      maximum: 9007199254740991
+                                    reference:
+                                      type: string
+                                      example: FEE-000042
+                                    periodStart:
+                                      $ref: '#/components/schemas/get_success_ObjectInvoicesItemPeriodStart'
+                                    periodEnd:
+                                      $ref: '#/components/schemas/get_success_ObjectInvoicesItemPeriodEnd'
+                                    amountMinor:
+                                      type: integer
+                                      minimum: -9007199254740991
+                                      maximum: 9007199254740991
+                                      description: The amount invoiced for the period, minor units.
+                                    balanceMinor:
+                                      type: integer
+                                      minimum: -9007199254740991
+                                      maximum: 9007199254740991
+                                      description: What is still owed on the invoice, minor units; 0 once settled.
+                                    currency:
+                                      $ref: '#/components/schemas/get_success_ObjectInvoicesItemCurrency'
+                                    status:
+                                      type: string
+                                      enum:
+                                        - open
+                                        - overdue
+                                        - paid
+                                    dueAt:
+                                      $ref: '#/components/schemas/get_success_ObjectInvoicesItemDueAt'
+                                  required:
+                                    - number
+                                    - reference
+                                    - periodStart
+                                    - periodEnd
+                                    - amountMinor
+                                    - balanceMinor
+                                    - currency
+                                    - status
+                                    - dueAt
+                                  additionalProperties: false
+                                description: The most recent invoices, newest first, at most 10.
+                              invoicesTruncated:
+                                type: boolean
+                                description: True when the organization has older invoices than listed.
                               nextAction:
                                 type: object
                                 properties:
@@ -20027,18 +20305,30 @@ paths:
                                       - type: string
                                       - type: 'null'
                                     description: mintlify/v2 page explaining this action, when one exists.
+                                  severity:
+                                    type: string
+                                    enum:
+                                      - success
+                                      - warning
+                                    description: >-
+                                      `success` when nothing is owed (`NONE`); `warning` for every action that needs
+                                      doing.
                                   canCompleteInChat:
                                     type: boolean
                                 required:
                                   - type
                                   - message
                                   - docsUrl
+                                  - severity
                                   - canCompleteInChat
                                 additionalProperties: false
                             required:
                               - organization
                               - terms
                               - paymentAuthority
+                              - plan
+                              - invoices
+                              - invoicesTruncated
                               - nextAction
                             additionalProperties: false
                         required:
@@ -23050,9 +23340,11 @@ paths:
       summary: >-
         Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether
         readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand.
+        A Developer account adds each agent's stage, blocker, and next call.
       description: >-
         Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether
         readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand.
+        A Developer account adds each agent's stage, blocker, and next call.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -23405,11 +23697,7 @@ paths:
                             page:
                               type: string
                             arguments:
-                              type: object
-                              propertyNames:
-                                type: string
-                              additionalProperties:
-                                type: string
+                              $ref: '#/components/schemas/get_status_success_NextActionsItemArguments'
                             url:
                               type: string
                           required:
@@ -23458,9 +23746,48 @@ paths:
                                   type: string
                                 displayName:
                                   type: string
+                                kind:
+                                  type: string
+                                  enum:
+                                    - sales
+                                    - creative
+                                    - buyer
+                                stage:
+                                  $ref: '#/components/schemas/get_status_success_AgentsResultsItemStage'
+                                nextStage:
+                                  anyOf:
+                                    - $ref: '#/components/schemas/get_status_success_AgentsResultsItemNextStage'
+                                    - type: 'null'
+                                stuckOn:
+                                  anyOf:
+                                    - type: object
+                                      properties:
+                                        reason:
+                                          type: string
+                                        nextAction:
+                                          type: object
+                                          properties:
+                                            tool:
+                                              type: string
+                                            arguments:
+                                              $ref: >-
+                                                #/components/schemas/get_status_success_AgentsResultsItemStuckOnNextActionArguments
+                                          required:
+                                            - tool
+                                            - arguments
+                                          additionalProperties: false
+                                      required:
+                                        - reason
+                                        - nextAction
+                                      additionalProperties: false
+                                    - type: 'null'
                               required:
                                 - agentId
                                 - displayName
+                                - kind
+                                - stage
+                                - nextStage
+                                - stuckOn
                               additionalProperties: false
                         required:
                           - total
@@ -23468,6 +23795,33 @@ paths:
                           - truncated
                           - results
                         additionalProperties: false
+                      resources:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            title:
+                              type: string
+                            url:
+                              type: string
+                            description:
+                              type: string
+                            audience:
+                              type: string
+                              enum:
+                                - all
+                                - sales
+                                - creative
+                                - buyer
+                          required:
+                            - id
+                            - title
+                            - url
+                            - description
+                            - audience
+                          additionalProperties: false
                     required:
                       - serverTime
                       - account
@@ -23689,7 +24043,7 @@ paths:
       security:
         - apiKeyAuth: []
         - m2mOAuth:
-            - interchange:admin
+            - interchange:read
       parameters:
         - name: X-SCOPE3-CUSTOMER-ID
           in: header
@@ -23822,7 +24176,7 @@ paths:
       security:
         - apiKeyAuth: []
         - m2mOAuth:
-            - interchange:admin
+            - interchange:read
       parameters:
         - name: X-SCOPE3-CUSTOMER-ID
           in: header
@@ -24583,10 +24937,12 @@ paths:
       operationId: open_connections_page
       summary: >-
         Open the buyer Media Partners Page. Optionally scope to an advertiser or seller; connectionAction "connect"
-        opens that media partner at connection setup without mutating until the user confirms.
+        opens that media partner at connection setup without mutating until the user confirms. Replaced by
+        open_media_partners_page, which opens the same Page.
       description: >-
         Open the buyer Media Partners Page. Optionally scope to an advertiser or seller; connectionAction "connect"
-        opens that media partner at connection setup without mutating until the user confirms.
+        opens that media partner at connection setup without mutating until the user confirms. Replaced by
+        open_media_partners_page, which opens the same Page.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -25408,15 +25764,201 @@ paths:
           content:
             application/json:
               schema: *ref_24
+  /tools/open_media_partners_page:
+    post:
+      operationId: open_media_partners_page
+      summary: >-
+        Open the buyer Media Partners Page. Optionally scope to an advertiser or seller; connectionAction "connect"
+        opens that media partner at connection setup without mutating until the user confirms.
+      description: >-
+        Open the buyer Media Partners Page. Optionally scope to an advertiser or seller; connectionAction "connect"
+        opens that media partner at connection setup without mutating until the user confirms.
+      security:
+        - apiKeyAuth: []
+        - m2mOAuth:
+            - interchange:read
+      parameters:
+        - name: X-SCOPE3-CUSTOMER-ID
+          in: header
+          required: false
+          description: >-
+            Select an accessible customer account for this request. An explicit value must be a positive integer and
+            must equal the account resolved by authentication.
+          schema:
+            type: string
+            pattern: ^[1-9][0-9]*$
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                advertiserId:
+                  type: string
+                  pattern: ^[1-9]\d*$
+                  maxLength: 19
+                  description: Canonical advertiser ID; omit for account scope.
+                sellerId:
+                  type: string
+                  pattern: ^[1-9]\d*$
+                  maxLength: 19
+                  description: Canonical Seller ID to open.
+                connectionAction:
+                  type: string
+                  enum:
+                    - connect
+                  description: Open seller setup; requires sellerId and user confirmation.
+                connectionId:
+                  type: string
+                  pattern: ^[1-9]\d*$
+                  maxLength: 19
+                  description: Connection ID to open.
+                connectionAccountId:
+                  type: string
+                  pattern: ^[1-9]\d*$
+                  maxLength: 19
+                  description: Its accounts[].id; opens event sources and audiences.
+                accountId:
+                  description: Apostra accountId this call runs in, from get_status.
+                  anyOf:
+                    - type: integer
+                      minimum: 1
+                    - type: string
+                      pattern: ^[1-9][0-9]*$
+              dependentRequired:
+                connectionAction:
+                  - sellerId
+                connectionAccountId:
+                  - connectionId
+              additionalProperties: false
+              allOf:
+                - properties:
+                    advertiserId:
+                      pattern: >-
+                        ^(?:[1-9]\d{0,17}|[1-8]\d{18}|9[0-1]\d{17}|92[0-1]\d{16}|922[0-2]\d{15}|9223[0-2]\d{14}|92233[0-6]\d{13}|922337[0-1]\d{12}|92233720[0-2]\d{10}|922337203[0-5]\d{9}|9223372036[0-7]\d{8}|92233720368[0-4]\d{7}|922337203685[0-3]\d{6}|9223372036854[0-6]\d{5}|92233720368547[0-6]\d{4}|922337203685477[0-4]\d{3}|9223372036854775[0-7]\d{2}|922337203685477580[0-6]\d{0}|9223372036854775807)$
+                - properties:
+                    sellerId:
+                      pattern: >-
+                        ^(?:[1-9]\d{0,17}|[1-8]\d{18}|9[0-1]\d{17}|92[0-1]\d{16}|922[0-2]\d{15}|9223[0-2]\d{14}|92233[0-6]\d{13}|922337[0-1]\d{12}|92233720[0-2]\d{10}|922337203[0-5]\d{9}|9223372036[0-7]\d{8}|92233720368[0-4]\d{7}|922337203685[0-3]\d{6}|9223372036854[0-6]\d{5}|92233720368547[0-6]\d{4}|922337203685477[0-4]\d{3}|9223372036854775[0-7]\d{2}|922337203685477580[0-6]\d{0}|9223372036854775807)$
+                - properties:
+                    connectionId:
+                      pattern: >-
+                        ^(?:[1-9]\d{0,17}|[1-8]\d{18}|9[0-1]\d{17}|92[0-1]\d{16}|922[0-2]\d{15}|9223[0-2]\d{14}|92233[0-6]\d{13}|922337[0-1]\d{12}|92233720[0-2]\d{10}|922337203[0-5]\d{9}|9223372036[0-7]\d{8}|92233720368[0-4]\d{7}|922337203685[0-3]\d{6}|9223372036854[0-6]\d{5}|92233720368547[0-6]\d{4}|922337203685477[0-4]\d{3}|9223372036854775[0-7]\d{2}|922337203685477580[0-6]\d{0}|9223372036854775807)$
+                - properties:
+                    connectionAccountId:
+                      pattern: >-
+                        ^(?:[1-9]\d{0,17}|[1-8]\d{18}|9[0-1]\d{17}|92[0-1]\d{16}|922[0-2]\d{15}|9223[0-2]\d{14}|92233[0-6]\d{13}|922337[0-1]\d{12}|92233720[0-2]\d{10}|922337203[0-5]\d{9}|9223372036[0-7]\d{8}|92233720368[0-4]\d{7}|922337203685[0-3]\d{6}|9223372036854[0-6]\d{5}|92233720368547[0-6]\d{4}|922337203685477[0-4]\d{3}|9223372036854775[0-7]\d{2}|922337203685477580[0-6]\d{0}|9223372036854775807)$
+      responses:
+        '200':
+          description: Typed operation result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      advertiserId:
+                        type: string
+                        description: Opened advertiser ID when advertiser-scoped.
+                      sellerId:
+                        type: string
+                        description: Opened seller ID when seller-scoped.
+                      connectionAction:
+                        type: string
+                        enum:
+                          - connect
+                        description: Requested seller action when supplied.
+                      connectionId:
+                        type: string
+                        description: Opened connection ID.
+                      accountId:
+                        type: string
+                        description: Opened account ID.
+                    additionalProperties: false
+                  error:
+                    type: 'null'
+                required:
+                  - data
+                  - error
+        '400':
+          description: Invalid operation input
+          content:
+            application/json:
+              schema: &ref_25
+                $ref: '#/components/schemas/V3ToolErrorResponse'
+        '401':
+          description: Missing or invalid API credential
+          content:
+            application/json:
+              schema: *ref_25
+        '402':
+          description: Account credit limit exceeded
+          content:
+            application/json:
+              schema: *ref_25
+        '403':
+          description: The credential or account cannot perform this operation
+          content:
+            application/json:
+              schema: *ref_25
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema: *ref_25
+        '409':
+          description: Operation conflicts with current resource state
+          content:
+            application/json:
+              schema: *ref_25
+        '413':
+          description: Request body exceeds the accepted size
+          content:
+            application/json:
+              schema: *ref_25
+        '415':
+          description: Request body encoding or character set is unsupported
+          content:
+            application/json:
+              schema: *ref_25
+        '422':
+          description: Operation cannot process the supplied input
+          content:
+            application/json:
+              schema: *ref_25
+        '429':
+          description: Request rate limit exceeded
+          content:
+            application/json:
+              schema: *ref_25
+        '500':
+          description: Unexpected operation failure
+          content:
+            application/json:
+              schema: *ref_25
+        '501':
+          description: Recognised operation behaviour is not implemented
+          content:
+            application/json:
+              schema: *ref_25
+        '503':
+          description: A required service is unavailable
+          content:
+            application/json:
+              schema: *ref_25
   /tools/open_page:
     post:
       operationId: open_page
       summary: >-
-        Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text.
-        Credentials and authority changes remain human ceremonies.
+        Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return
+        text. Credentials and authority changes remain human ceremonies.
       description: >-
-        Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text.
-        Credentials and authority changes remain human ceremonies.
+        Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return
+        text. Credentials and authority changes remain human ceremonies.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -25473,7 +26015,7 @@ paths:
                     - notifications
                     - webhooks
                     - buyer_proposal_version
-                  description: Page to open. source_diagnostics repairs a missing Agent relationship.
+                  description: Page to open. Owners repair a missing Agent relationship in source_diagnostics.
                 sourceId:
                   description: Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.
                   type: string
@@ -25548,68 +26090,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_25
+              schema: &ref_26
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_25
+              schema: *ref_26
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_25
+              schema: *ref_26
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_25
+              schema: *ref_26
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_25
+              schema: *ref_26
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_25
+              schema: *ref_26
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_25
+              schema: *ref_26
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_25
+              schema: *ref_26
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_25
+              schema: *ref_26
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_25
+              schema: *ref_26
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_25
+              schema: *ref_26
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_25
+              schema: *ref_26
         '503':
           description: A required service is unavailable
           content:
             application/json:
-              schema: *ref_25
+              schema: *ref_26
   /tools/open_proposal_pass:
     post:
       operationId: open_proposal_pass
@@ -25709,128 +26251,6 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_26
-                $ref: '#/components/schemas/V3ToolErrorResponse'
-        '401':
-          description: Missing or invalid API credential
-          content:
-            application/json:
-              schema: *ref_26
-        '402':
-          description: Account credit limit exceeded
-          content:
-            application/json:
-              schema: *ref_26
-        '403':
-          description: The credential or account cannot perform this operation
-          content:
-            application/json:
-              schema: *ref_26
-        '404':
-          description: Requested resource not found
-          content:
-            application/json:
-              schema: *ref_26
-        '409':
-          description: Operation conflicts with current resource state
-          content:
-            application/json:
-              schema: *ref_26
-        '413':
-          description: Request body exceeds the accepted size
-          content:
-            application/json:
-              schema: *ref_26
-        '415':
-          description: Request body encoding or character set is unsupported
-          content:
-            application/json:
-              schema: *ref_26
-        '422':
-          description: Operation cannot process the supplied input
-          content:
-            application/json:
-              schema: *ref_26
-        '429':
-          description: Request rate limit exceeded
-          content:
-            application/json:
-              schema: *ref_26
-        '500':
-          description: Unexpected operation failure
-          content:
-            application/json:
-              schema: *ref_26
-        '501':
-          description: Recognised operation behaviour is not implemented
-          content:
-            application/json:
-              schema: *ref_26
-        '503':
-          description: A required service is unavailable
-          content:
-            application/json:
-              schema: *ref_26
-  /tools/open_seller_dashboard:
-    post:
-      operationId: open_seller_dashboard
-      summary: >-
-        Open the Seller Dashboard Page: seller analytics, or the synthetic evaluation view of practice runs while this
-        is an active demo Seller Account. The Page self-fetches.
-      description: >-
-        Open the Seller Dashboard Page: seller analytics, or the synthetic evaluation view of practice runs while this
-        is an active demo Seller Account. The Page self-fetches.
-      security:
-        - apiKeyAuth: []
-        - m2mOAuth:
-            - interchange:read
-      parameters:
-        - name: X-SCOPE3-CUSTOMER-ID
-          in: header
-          required: false
-          description: >-
-            Select an accessible customer account for this request. An explicit value must be a positive integer and
-            must equal the account resolved by authentication.
-          schema:
-            type: string
-            pattern: ^[1-9][0-9]*$
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                accountId:
-                  description: Apostra accountId this call runs in, from get_status.
-                  anyOf:
-                    - type: integer
-                      minimum: 1
-                    - type: string
-                      pattern: ^[1-9][0-9]*$
-              additionalProperties: false
-      responses:
-        '200':
-          description: Typed operation result
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: false
-                properties:
-                  data:
-                    type: object
-                    properties: {}
-                    additionalProperties: false
-                  error:
-                    type: 'null'
-                required:
-                  - data
-                  - error
-        '400':
-          description: Invalid operation input
-          content:
-            application/json:
               schema: &ref_27
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
@@ -25893,6 +26313,128 @@ paths:
           content:
             application/json:
               schema: *ref_27
+  /tools/open_seller_dashboard:
+    post:
+      operationId: open_seller_dashboard
+      summary: >-
+        Open the Seller Dashboard Page: seller analytics, or the synthetic evaluation view of practice runs while this
+        is an active demo Seller Account. The Page self-fetches.
+      description: >-
+        Open the Seller Dashboard Page: seller analytics, or the synthetic evaluation view of practice runs while this
+        is an active demo Seller Account. The Page self-fetches.
+      security:
+        - apiKeyAuth: []
+        - m2mOAuth:
+            - interchange:read
+      parameters:
+        - name: X-SCOPE3-CUSTOMER-ID
+          in: header
+          required: false
+          description: >-
+            Select an accessible customer account for this request. An explicit value must be a positive integer and
+            must equal the account resolved by authentication.
+          schema:
+            type: string
+            pattern: ^[1-9][0-9]*$
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accountId:
+                  description: Apostra accountId this call runs in, from get_status.
+                  anyOf:
+                    - type: integer
+                      minimum: 1
+                    - type: string
+                      pattern: ^[1-9][0-9]*$
+              additionalProperties: false
+      responses:
+        '200':
+          description: Typed operation result
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                    additionalProperties: false
+                  error:
+                    type: 'null'
+                required:
+                  - data
+                  - error
+        '400':
+          description: Invalid operation input
+          content:
+            application/json:
+              schema: &ref_28
+                $ref: '#/components/schemas/V3ToolErrorResponse'
+        '401':
+          description: Missing or invalid API credential
+          content:
+            application/json:
+              schema: *ref_28
+        '402':
+          description: Account credit limit exceeded
+          content:
+            application/json:
+              schema: *ref_28
+        '403':
+          description: The credential or account cannot perform this operation
+          content:
+            application/json:
+              schema: *ref_28
+        '404':
+          description: Requested resource not found
+          content:
+            application/json:
+              schema: *ref_28
+        '409':
+          description: Operation conflicts with current resource state
+          content:
+            application/json:
+              schema: *ref_28
+        '413':
+          description: Request body exceeds the accepted size
+          content:
+            application/json:
+              schema: *ref_28
+        '415':
+          description: Request body encoding or character set is unsupported
+          content:
+            application/json:
+              schema: *ref_28
+        '422':
+          description: Operation cannot process the supplied input
+          content:
+            application/json:
+              schema: *ref_28
+        '429':
+          description: Request rate limit exceeded
+          content:
+            application/json:
+              schema: *ref_28
+        '500':
+          description: Unexpected operation failure
+          content:
+            application/json:
+              schema: *ref_28
+        '501':
+          description: Recognised operation behaviour is not implemented
+          content:
+            application/json:
+              schema: *ref_28
+        '503':
+          description: A required service is unavailable
+          content:
+            application/json:
+              schema: *ref_28
   /tools/open_variant_gallery:
     post:
       operationId: open_variant_gallery
@@ -26070,68 +26612,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_28
+              schema: &ref_29
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_28
+              schema: *ref_29
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_28
+              schema: *ref_29
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_28
+              schema: *ref_29
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_28
+              schema: *ref_29
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_28
+              schema: *ref_29
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_28
+              schema: *ref_29
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_28
+              schema: *ref_29
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_28
+              schema: *ref_29
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_28
+              schema: *ref_29
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_28
+              schema: *ref_29
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_28
+              schema: *ref_29
         '503':
           description: A required service is unavailable
           content:
             application/json:
-              schema: *ref_28
+              schema: *ref_29
   /tools/refresh_inventory_source_health:
     post:
       operationId: refresh_inventory_source_health
@@ -26274,68 +26816,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_29
+              schema: &ref_30
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_29
+              schema: *ref_30
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_29
+              schema: *ref_30
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_29
+              schema: *ref_30
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_29
+              schema: *ref_30
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_29
+              schema: *ref_30
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_29
+              schema: *ref_30
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_29
+              schema: *ref_30
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_29
+              schema: *ref_30
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_29
+              schema: *ref_30
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_29
+              schema: *ref_30
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_29
+              schema: *ref_30
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_29
+              schema: *ref_30
   /tools/request_buyer_child_account:
     post:
       operationId: request_buyer_child_account
@@ -26438,68 +26980,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_30
+              schema: &ref_31
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_30
+              schema: *ref_31
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_30
+              schema: *ref_31
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_30
+              schema: *ref_31
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_30
+              schema: *ref_31
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_30
+              schema: *ref_31
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_30
+              schema: *ref_31
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_30
+              schema: *ref_31
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_30
+              schema: *ref_31
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_30
+              schema: *ref_31
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_30
+              schema: *ref_31
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_30
+              schema: *ref_31
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_30
+              schema: *ref_31
   /tools/request_proposals:
     post:
       operationId: request_proposals
@@ -27265,68 +27807,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_31
+              schema: &ref_32
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_31
+              schema: *ref_32
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_31
+              schema: *ref_32
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_31
+              schema: *ref_32
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_31
+              schema: *ref_32
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_31
+              schema: *ref_32
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_31
+              schema: *ref_32
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_31
+              schema: *ref_32
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_31
+              schema: *ref_32
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_31
+              schema: *ref_32
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_31
+              schema: *ref_32
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_31
+              schema: *ref_32
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_31
+              schema: *ref_32
   /tools/request_seller_reporting_update:
     post:
       operationId: request_seller_reporting_update
@@ -27495,68 +28037,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_32
+              schema: &ref_33
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_32
+              schema: *ref_33
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_32
+              schema: *ref_33
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_32
+              schema: *ref_33
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_32
+              schema: *ref_33
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_32
+              schema: *ref_33
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_32
+              schema: *ref_33
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_32
+              schema: *ref_33
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_32
+              schema: *ref_33
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_32
+              schema: *ref_33
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_32
+              schema: *ref_33
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_32
+              schema: *ref_33
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_32
+              schema: *ref_33
   /tools/review_buyer_child_account:
     post:
       operationId: review_buyer_child_account
@@ -27774,68 +28316,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_33
+              schema: &ref_34
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_33
+              schema: *ref_34
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_33
+              schema: *ref_34
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_33
+              schema: *ref_34
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_33
+              schema: *ref_34
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_33
+              schema: *ref_34
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_33
+              schema: *ref_34
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_33
+              schema: *ref_34
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_33
+              schema: *ref_34
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_33
+              schema: *ref_34
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_33
+              schema: *ref_34
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_33
+              schema: *ref_34
         '503':
           description: A required service is unavailable
           content:
             application/json:
-              schema: *ref_33
+              schema: *ref_34
   /tools/save_account:
     post:
       operationId: save_account
@@ -27990,68 +28532,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_34
+              schema: &ref_35
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_34
+              schema: *ref_35
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_34
+              schema: *ref_35
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_34
+              schema: *ref_35
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_34
+              schema: *ref_35
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_34
+              schema: *ref_35
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_34
+              schema: *ref_35
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_34
+              schema: *ref_35
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_34
+              schema: *ref_35
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_34
+              schema: *ref_35
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_34
+              schema: *ref_35
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_34
+              schema: *ref_35
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_34
+              schema: *ref_35
   /tools/save_advertiser:
     post:
       operationId: save_advertiser
@@ -28839,68 +29381,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_35
+              schema: &ref_36
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_35
+              schema: *ref_36
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_35
+              schema: *ref_36
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_35
+              schema: *ref_36
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_35
+              schema: *ref_36
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_35
+              schema: *ref_36
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_35
+              schema: *ref_36
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_35
+              schema: *ref_36
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_35
+              schema: *ref_36
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_35
+              schema: *ref_36
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_35
+              schema: *ref_36
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_35
+              schema: *ref_36
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_35
+              schema: *ref_36
   /tools/save_advertiser_access:
     post:
       operationId: save_advertiser_access
@@ -29208,68 +29750,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_36
+              schema: &ref_37
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_36
+              schema: *ref_37
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_36
+              schema: *ref_37
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_36
+              schema: *ref_37
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_36
+              schema: *ref_37
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_36
+              schema: *ref_37
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_36
+              schema: *ref_37
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_36
+              schema: *ref_37
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_36
+              schema: *ref_37
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_36
+              schema: *ref_37
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_36
+              schema: *ref_37
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_36
+              schema: *ref_37
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_36
+              schema: *ref_37
   /tools/save_advertiser_grant:
     post:
       operationId: save_advertiser_grant
@@ -29574,68 +30116,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_37
+              schema: &ref_38
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_37
+              schema: *ref_38
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_37
+              schema: *ref_38
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_37
+              schema: *ref_38
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_37
+              schema: *ref_38
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_37
+              schema: *ref_38
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_37
+              schema: *ref_38
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_37
+              schema: *ref_38
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_37
+              schema: *ref_38
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_37
+              schema: *ref_38
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_37
+              schema: *ref_38
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_37
+              schema: *ref_38
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_37
+              schema: *ref_38
   /tools/save_advertiser_instructions:
     post:
       operationId: save_advertiser_instructions
@@ -29775,68 +30317,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_38
+              schema: &ref_39
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_38
+              schema: *ref_39
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_38
+              schema: *ref_39
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_38
+              schema: *ref_39
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_38
+              schema: *ref_39
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_38
+              schema: *ref_39
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_38
+              schema: *ref_39
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_38
+              schema: *ref_39
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_38
+              schema: *ref_39
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_38
+              schema: *ref_39
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_38
+              schema: *ref_39
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_38
+              schema: *ref_39
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_38
+              schema: *ref_39
   /tools/save_agent:
     post:
       operationId: save_agent
@@ -29978,6 +30520,34 @@ paths:
                         properties:
                           kind:
                             type: string
+                            const: buyer_agent
+                          outcome:
+                            type: string
+                            const: developer_created
+                          object:
+                            type: object
+                            properties:
+                              principalId:
+                                type: string
+                              displayName:
+                                type: string
+                              lifecycleState:
+                                type: string
+                                const: active
+                            required:
+                              - principalId
+                              - displayName
+                              - lifecycleState
+                            additionalProperties: false
+                        required:
+                          - kind
+                          - outcome
+                          - object
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          kind:
+                            type: string
                             const: agent
                           outcome:
                             type: string
@@ -30013,68 +30583,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_39
+              schema: &ref_40
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_39
+              schema: *ref_40
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_39
+              schema: *ref_40
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_39
+              schema: *ref_40
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_39
+              schema: *ref_40
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_39
+              schema: *ref_40
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_39
+              schema: *ref_40
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_39
+              schema: *ref_40
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_39
+              schema: *ref_40
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_39
+              schema: *ref_40
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_39
+              schema: *ref_40
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_39
+              schema: *ref_40
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_39
+              schema: *ref_40
   /tools/save_ask:
     post:
       operationId: save_ask
@@ -30429,68 +30999,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_40
+              schema: &ref_41
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_40
+              schema: *ref_41
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_40
+              schema: *ref_41
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_40
+              schema: *ref_41
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_40
+              schema: *ref_41
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_40
+              schema: *ref_41
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_40
+              schema: *ref_41
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_40
+              schema: *ref_41
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_40
+              schema: *ref_41
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_40
+              schema: *ref_41
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_40
+              schema: *ref_41
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_40
+              schema: *ref_41
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_40
+              schema: *ref_41
   /tools/save_audience:
     post:
       operationId: save_audience
@@ -30659,68 +31229,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_41
+              schema: &ref_42
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_41
+              schema: *ref_42
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_41
+              schema: *ref_42
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_41
+              schema: *ref_42
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_41
+              schema: *ref_42
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_41
+              schema: *ref_42
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_41
+              schema: *ref_42
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_41
+              schema: *ref_42
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_41
+              schema: *ref_42
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_41
+              schema: *ref_42
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_41
+              schema: *ref_42
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_41
+              schema: *ref_42
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_41
+              schema: *ref_42
   /tools/save_billing:
     post:
       operationId: save_billing
@@ -30928,68 +31498,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_42
+              schema: &ref_43
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_42
+              schema: *ref_43
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_42
+              schema: *ref_43
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_42
+              schema: *ref_43
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_42
+              schema: *ref_43
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_42
+              schema: *ref_43
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_42
+              schema: *ref_43
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_42
+              schema: *ref_43
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_42
+              schema: *ref_43
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_42
+              schema: *ref_43
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_42
+              schema: *ref_43
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_42
+              schema: *ref_43
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_42
+              schema: *ref_43
   /tools/save_business_rules:
     post:
       operationId: save_business_rules
@@ -31193,68 +31763,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_43
+              schema: &ref_44
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_43
+              schema: *ref_44
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_43
+              schema: *ref_44
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_43
+              schema: *ref_44
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_43
+              schema: *ref_44
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_43
+              schema: *ref_44
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_43
+              schema: *ref_44
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_43
+              schema: *ref_44
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_43
+              schema: *ref_44
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_43
+              schema: *ref_44
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_43
+              schema: *ref_44
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_43
+              schema: *ref_44
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_43
+              schema: *ref_44
   /tools/save_buyer_agent:
     post:
       operationId: save_buyer_agent
@@ -31542,68 +32112,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_44
+              schema: &ref_45
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_44
+              schema: *ref_45
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_44
+              schema: *ref_45
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_44
+              schema: *ref_45
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_44
+              schema: *ref_45
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_44
+              schema: *ref_45
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_44
+              schema: *ref_45
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_44
+              schema: *ref_45
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_44
+              schema: *ref_45
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_44
+              schema: *ref_45
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_44
+              schema: *ref_45
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_44
+              schema: *ref_45
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_44
+              schema: *ref_45
   /tools/save_buyer_operator:
     post:
       operationId: save_buyer_operator
@@ -31666,8 +32236,9 @@ paths:
                   description: 'Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.'
                 sellerHistoryCoop:
                   description: >-
-                    Join (true) or leave (false) the seller-history co-op; needs preview and confirmation. Resend the
-                    saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.
+                    Join (true) or leave (false) the seller-history co-op, the data co-op of Terms of Service section
+                    6.3; needs preview and confirmation. Resend the saved identity to change only this. Guide:
+                    /v2/concepts/seller-history-co-op.
                   example: true
                   type: boolean
                 preview:
@@ -31886,68 +32457,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_45
+              schema: &ref_46
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_45
+              schema: *ref_46
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_45
+              schema: *ref_46
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_45
+              schema: *ref_46
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_45
+              schema: *ref_46
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_45
+              schema: *ref_46
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_45
+              schema: *ref_46
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_45
+              schema: *ref_46
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_45
+              schema: *ref_46
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_45
+              schema: *ref_46
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_45
+              schema: *ref_46
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_45
+              schema: *ref_46
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_45
+              schema: *ref_46
   /tools/save_campaign:
     post:
       operationId: save_campaign
@@ -33695,68 +34266,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_46
+              schema: &ref_47
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_46
+              schema: *ref_47
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_46
+              schema: *ref_47
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_46
+              schema: *ref_47
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_46
+              schema: *ref_47
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_46
+              schema: *ref_47
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_46
+              schema: *ref_47
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_46
+              schema: *ref_47
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_46
+              schema: *ref_47
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_46
+              schema: *ref_47
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_46
+              schema: *ref_47
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_46
+              schema: *ref_47
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_46
+              schema: *ref_47
   /tools/save_catalog:
     post:
       operationId: save_catalog
@@ -34156,68 +34727,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_47
+              schema: &ref_48
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_47
+              schema: *ref_48
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_47
+              schema: *ref_48
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_47
+              schema: *ref_48
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_47
+              schema: *ref_48
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_47
+              schema: *ref_48
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_47
+              schema: *ref_48
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_47
+              schema: *ref_48
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_47
+              schema: *ref_48
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_47
+              schema: *ref_48
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_47
+              schema: *ref_48
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_47
+              schema: *ref_48
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_47
+              schema: *ref_48
   /tools/save_connection:
     post:
       operationId: save_connection
@@ -34744,68 +35315,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_48
+              schema: &ref_49
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_48
+              schema: *ref_49
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_48
+              schema: *ref_49
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_48
+              schema: *ref_49
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_48
+              schema: *ref_49
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_48
+              schema: *ref_49
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_48
+              schema: *ref_49
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_48
+              schema: *ref_49
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_48
+              schema: *ref_49
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_48
+              schema: *ref_49
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_48
+              schema: *ref_49
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_48
+              schema: *ref_49
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_48
+              schema: *ref_49
   /tools/save_coverage:
     post:
       operationId: save_coverage
@@ -35003,68 +35574,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_49
+              schema: &ref_50
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_49
+              schema: *ref_50
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_49
+              schema: *ref_50
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_49
+              schema: *ref_50
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_49
+              schema: *ref_50
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_49
+              schema: *ref_50
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_49
+              schema: *ref_50
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_49
+              schema: *ref_50
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_49
+              schema: *ref_50
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_49
+              schema: *ref_50
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_49
+              schema: *ref_50
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_49
+              schema: *ref_50
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_49
+              schema: *ref_50
   /tools/save_creative:
     post:
       operationId: save_creative
@@ -35884,68 +36455,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_50
+              schema: &ref_51
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_50
+              schema: *ref_51
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_50
+              schema: *ref_51
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_50
+              schema: *ref_51
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_50
+              schema: *ref_51
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_50
+              schema: *ref_51
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_50
+              schema: *ref_51
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_50
+              schema: *ref_51
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_50
+              schema: *ref_51
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_50
+              schema: *ref_51
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_50
+              schema: *ref_51
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_50
+              schema: *ref_51
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_50
+              schema: *ref_51
   /tools/save_creative_collection:
     post:
       operationId: save_creative_collection
@@ -36208,68 +36779,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_51
+              schema: &ref_52
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_51
+              schema: *ref_52
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_51
+              schema: *ref_52
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_51
+              schema: *ref_52
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_51
+              schema: *ref_52
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_51
+              schema: *ref_52
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_51
+              schema: *ref_52
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_51
+              schema: *ref_52
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_51
+              schema: *ref_52
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_51
+              schema: *ref_52
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_51
+              schema: *ref_52
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_51
+              schema: *ref_52
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_51
+              schema: *ref_52
   /tools/save_creative_session:
     post:
       operationId: save_creative_session
@@ -36490,68 +37061,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_52
+              schema: &ref_53
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_52
+              schema: *ref_53
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_52
+              schema: *ref_53
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_52
+              schema: *ref_53
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_52
+              schema: *ref_53
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_52
+              schema: *ref_53
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_52
+              schema: *ref_53
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_52
+              schema: *ref_53
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_52
+              schema: *ref_53
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_52
+              schema: *ref_53
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_52
+              schema: *ref_53
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_52
+              schema: *ref_53
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_52
+              schema: *ref_53
   /tools/save_dimension:
     post:
       operationId: save_dimension
@@ -36719,68 +37290,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_53
+              schema: &ref_54
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_53
+              schema: *ref_54
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_53
+              schema: *ref_54
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_53
+              schema: *ref_54
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_53
+              schema: *ref_54
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_53
+              schema: *ref_54
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_53
+              schema: *ref_54
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_53
+              schema: *ref_54
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_53
+              schema: *ref_54
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_53
+              schema: *ref_54
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_53
+              schema: *ref_54
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_53
+              schema: *ref_54
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_53
+              schema: *ref_54
   /tools/save_directed_campaign_subscription:
     post:
       operationId: save_directed_campaign_subscription
@@ -36913,68 +37484,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_54
+              schema: &ref_55
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_54
+              schema: *ref_55
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_54
+              schema: *ref_55
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_54
+              schema: *ref_55
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_54
+              schema: *ref_55
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_54
+              schema: *ref_55
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_54
+              schema: *ref_55
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_54
+              schema: *ref_55
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_54
+              schema: *ref_55
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_54
+              schema: *ref_55
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_54
+              schema: *ref_55
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_54
+              schema: *ref_55
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_54
+              schema: *ref_55
   /tools/save_event_source:
     post:
       operationId: save_event_source
@@ -37201,68 +37772,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_55
+              schema: &ref_56
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_55
+              schema: *ref_56
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_55
+              schema: *ref_56
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_55
+              schema: *ref_56
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_55
+              schema: *ref_56
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_55
+              schema: *ref_56
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_55
+              schema: *ref_56
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_55
+              schema: *ref_56
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_55
+              schema: *ref_56
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_55
+              schema: *ref_56
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_55
+              schema: *ref_56
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_55
+              schema: *ref_56
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_55
+              schema: *ref_56
   /tools/save_inventory_source:
     post:
       operationId: save_inventory_source
@@ -37417,68 +37988,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_56
+              schema: &ref_57
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_56
+              schema: *ref_57
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_56
+              schema: *ref_57
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_56
+              schema: *ref_57
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_56
+              schema: *ref_57
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_56
+              schema: *ref_57
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_56
+              schema: *ref_57
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_56
+              schema: *ref_57
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_56
+              schema: *ref_57
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_56
+              schema: *ref_57
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_56
+              schema: *ref_57
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_56
+              schema: *ref_57
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_56
+              schema: *ref_57
   /tools/save_lesson:
     post:
       operationId: save_lesson
@@ -38145,68 +38716,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_57
+              schema: &ref_58
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_57
+              schema: *ref_58
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_57
+              schema: *ref_58
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_57
+              schema: *ref_58
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_57
+              schema: *ref_58
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_57
+              schema: *ref_58
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_57
+              schema: *ref_58
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_57
+              schema: *ref_58
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_57
+              schema: *ref_58
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_57
+              schema: *ref_58
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_57
+              schema: *ref_58
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_57
+              schema: *ref_58
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_57
+              schema: *ref_58
   /tools/save_library_request:
     post:
       operationId: save_library_request
@@ -38416,68 +38987,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_58
+              schema: &ref_59
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_58
+              schema: *ref_59
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_58
+              schema: *ref_59
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_58
+              schema: *ref_59
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_58
+              schema: *ref_59
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_58
+              schema: *ref_59
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_58
+              schema: *ref_59
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_58
+              schema: *ref_59
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_58
+              schema: *ref_59
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_58
+              schema: *ref_59
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_58
+              schema: *ref_59
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_58
+              schema: *ref_59
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_58
+              schema: *ref_59
   /tools/save_material:
     post:
       operationId: save_material
@@ -40428,68 +40999,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_59
+              schema: &ref_60
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_59
+              schema: *ref_60
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_59
+              schema: *ref_60
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_59
+              schema: *ref_60
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_59
+              schema: *ref_60
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_59
+              schema: *ref_60
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_59
+              schema: *ref_60
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_59
+              schema: *ref_60
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_59
+              schema: *ref_60
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_59
+              schema: *ref_60
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_59
+              schema: *ref_60
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_59
+              schema: *ref_60
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_59
+              schema: *ref_60
   /tools/save_media_buy:
     post:
       operationId: save_media_buy
@@ -44375,68 +44946,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_60
+              schema: &ref_61
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_60
+              schema: *ref_61
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_60
+              schema: *ref_61
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_60
+              schema: *ref_61
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_60
+              schema: *ref_61
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_60
+              schema: *ref_61
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_60
+              schema: *ref_61
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_60
+              schema: *ref_61
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_60
+              schema: *ref_61
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_60
+              schema: *ref_61
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_60
+              schema: *ref_61
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_60
+              schema: *ref_61
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_60
+              schema: *ref_61
   /tools/save_media_kit:
     post:
       operationId: save_media_kit
@@ -44609,68 +45180,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_61
+              schema: &ref_62
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_61
+              schema: *ref_62
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_61
+              schema: *ref_62
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_61
+              schema: *ref_62
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_61
+              schema: *ref_62
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_61
+              schema: *ref_62
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_61
+              schema: *ref_62
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_61
+              schema: *ref_62
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_61
+              schema: *ref_62
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_61
+              schema: *ref_62
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_61
+              schema: *ref_62
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_61
+              schema: *ref_62
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_61
+              schema: *ref_62
   /tools/save_notification_config:
     post:
       operationId: save_notification_config
@@ -45172,68 +45743,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_62
+              schema: &ref_63
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_62
+              schema: *ref_63
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_62
+              schema: *ref_63
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_62
+              schema: *ref_63
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_62
+              schema: *ref_63
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_62
+              schema: *ref_63
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_62
+              schema: *ref_63
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_62
+              schema: *ref_63
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_62
+              schema: *ref_63
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_62
+              schema: *ref_63
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_62
+              schema: *ref_63
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_62
+              schema: *ref_63
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_62
+              schema: *ref_63
   /tools/save_playbook:
     post:
       operationId: save_playbook
@@ -45622,68 +46193,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_63
+              schema: &ref_64
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_63
+              schema: *ref_64
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_63
+              schema: *ref_64
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_63
+              schema: *ref_64
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_63
+              schema: *ref_64
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_63
+              schema: *ref_64
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_63
+              schema: *ref_64
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_63
+              schema: *ref_64
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_63
+              schema: *ref_64
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_63
+              schema: *ref_64
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_63
+              schema: *ref_64
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_63
+              schema: *ref_64
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_63
+              schema: *ref_64
   /tools/save_property_list:
     post:
       operationId: save_property_list
@@ -45912,68 +46483,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_64
+              schema: &ref_65
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_64
+              schema: *ref_65
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_64
+              schema: *ref_65
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_64
+              schema: *ref_65
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_64
+              schema: *ref_65
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_64
+              schema: *ref_65
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_64
+              schema: *ref_65
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_64
+              schema: *ref_65
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_64
+              schema: *ref_65
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_64
+              schema: *ref_65
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_64
+              schema: *ref_65
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_64
+              schema: *ref_65
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_64
+              schema: *ref_65
   /tools/save_rfp:
     post:
       operationId: save_rfp
@@ -47531,68 +48102,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_65
+              schema: &ref_66
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_65
+              schema: *ref_66
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_65
+              schema: *ref_66
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_65
+              schema: *ref_66
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_65
+              schema: *ref_66
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_65
+              schema: *ref_66
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_65
+              schema: *ref_66
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_65
+              schema: *ref_66
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_65
+              schema: *ref_66
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_65
+              schema: *ref_66
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_65
+              schema: *ref_66
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_65
+              schema: *ref_66
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_65
+              schema: *ref_66
   /tools/save_seller:
     post:
       operationId: save_seller
@@ -48154,68 +48725,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_66
+              schema: &ref_67
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_66
+              schema: *ref_67
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_66
+              schema: *ref_67
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_66
+              schema: *ref_67
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_66
+              schema: *ref_67
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_66
+              schema: *ref_67
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_66
+              schema: *ref_67
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_66
+              schema: *ref_67
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_66
+              schema: *ref_67
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_66
+              schema: *ref_67
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_66
+              schema: *ref_67
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_66
+              schema: *ref_67
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_66
+              schema: *ref_67
   /tools/save_signal:
     post:
       operationId: save_signal
@@ -48376,68 +48947,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_67
+              schema: &ref_68
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_67
+              schema: *ref_68
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_67
+              schema: *ref_68
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_67
+              schema: *ref_68
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_67
+              schema: *ref_68
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_67
+              schema: *ref_68
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_67
+              schema: *ref_68
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_67
+              schema: *ref_68
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_67
+              schema: *ref_68
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_67
+              schema: *ref_68
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_67
+              schema: *ref_68
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_67
+              schema: *ref_68
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_67
+              schema: *ref_68
   /tools/save_wholesale_product:
     post:
       operationId: save_wholesale_product
@@ -48908,68 +49479,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_68
+              schema: &ref_69
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_68
+              schema: *ref_69
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_68
+              schema: *ref_69
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_68
+              schema: *ref_69
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_68
+              schema: *ref_69
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_68
+              schema: *ref_69
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_68
+              schema: *ref_69
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_68
+              schema: *ref_69
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_68
+              schema: *ref_69
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_68
+              schema: *ref_69
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_68
+              schema: *ref_69
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_68
+              schema: *ref_69
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_68
+              schema: *ref_69
   /tools/save_work_item:
     post:
       operationId: save_work_item
@@ -49152,68 +49723,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_69
+              schema: &ref_70
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_69
+              schema: *ref_70
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_69
+              schema: *ref_70
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_69
+              schema: *ref_70
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_69
+              schema: *ref_70
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_69
+              schema: *ref_70
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_69
+              schema: *ref_70
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_69
+              schema: *ref_70
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_69
+              schema: *ref_70
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_69
+              schema: *ref_70
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_69
+              schema: *ref_70
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_69
+              schema: *ref_70
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_69
+              schema: *ref_70
   /tools/search:
     post:
       operationId: search
@@ -69215,68 +69786,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_70
+              schema: &ref_71
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_70
+              schema: *ref_71
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_70
+              schema: *ref_71
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_70
+              schema: *ref_71
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_70
+              schema: *ref_71
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_70
+              schema: *ref_71
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_70
+              schema: *ref_71
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_70
+              schema: *ref_71
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_70
+              schema: *ref_71
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_70
+              schema: *ref_71
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_70
+              schema: *ref_71
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_70
+              schema: *ref_71
         '503':
           description: A required service is unavailable
           content:
             application/json:
-              schema: *ref_70
+              schema: *ref_71
   /tools/test_creative_macros:
     post:
       operationId: test_creative_macros
@@ -69889,68 +70460,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_71
+              schema: &ref_72
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_71
+              schema: *ref_72
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_71
+              schema: *ref_72
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_71
+              schema: *ref_72
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_71
+              schema: *ref_72
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_71
+              schema: *ref_72
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_71
+              schema: *ref_72
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_71
+              schema: *ref_72
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_71
+              schema: *ref_72
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_71
+              schema: *ref_72
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_71
+              schema: *ref_72
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_71
+              schema: *ref_72
         '503':
           description: A required service is unavailable
           content:
             application/json:
-              schema: *ref_71
+              schema: *ref_72
   /tools/upload_creative_asset:
     post:
       operationId: upload_creative_asset
@@ -70144,68 +70715,68 @@ paths:
           description: Invalid operation input
           content:
             application/json:
-              schema: &ref_72
+              schema: &ref_73
                 $ref: '#/components/schemas/V3ToolErrorResponse'
         '401':
           description: Missing or invalid API credential
           content:
             application/json:
-              schema: *ref_72
+              schema: *ref_73
         '402':
           description: Account credit limit exceeded
           content:
             application/json:
-              schema: *ref_72
+              schema: *ref_73
         '403':
           description: The credential or account cannot perform this operation
           content:
             application/json:
-              schema: *ref_72
+              schema: *ref_73
         '404':
           description: Requested resource not found
           content:
             application/json:
-              schema: *ref_72
+              schema: *ref_73
         '409':
           description: Operation conflicts with current resource state
           content:
             application/json:
-              schema: *ref_72
+              schema: *ref_73
         '413':
           description: Request body exceeds the accepted size
           content:
             application/json:
-              schema: *ref_72
+              schema: *ref_73
         '415':
           description: Request body encoding or character set is unsupported
           content:
             application/json:
-              schema: *ref_72
+              schema: *ref_73
         '422':
           description: Operation cannot process the supplied input
           content:
             application/json:
-              schema: *ref_72
+              schema: *ref_73
         '429':
           description: Request rate limit exceeded
           content:
             application/json:
-              schema: *ref_72
+              schema: *ref_73
         '500':
           description: Unexpected operation failure
           content:
             application/json:
-              schema: *ref_72
+              schema: *ref_73
         '501':
           description: Recognised operation behaviour is not implemented
           content:
             application/json:
-              schema: *ref_72
+              schema: *ref_73
         '503':
           description: The write could not be durably claimed before dispatch, so it is safe to retry with the same key
           content:
             application/json:
-              schema: *ref_72
+              schema: *ref_73
 components:
   securitySchemes:
     apiKeyAuth:
@@ -71001,6 +71572,218 @@ components:
           items:
             type: string
       additionalProperties: {}
+    get_success_ObjectPlanCurrent:
+      type: object
+      properties:
+        planId:
+          $ref: '#/components/schemas/get_success_ObjectPlanCurrentPlanId'
+        planName:
+          $ref: '#/components/schemas/get_success_ObjectPlanCurrentPlanName'
+        currency:
+          $ref: '#/components/schemas/get_success_ObjectPlanCurrentCurrency'
+        commitmentMinor:
+          $ref: '#/components/schemas/get_success_ObjectPlanCurrentCommitmentMinor'
+        includedIus:
+          $ref: '#/components/schemas/get_success_ObjectPlanCurrentIncludedIus'
+        iuPriceMinor:
+          $ref: '#/components/schemas/get_success_ObjectPlanCurrentIuPriceMinor'
+        entitlements:
+          $ref: '#/components/schemas/get_success_ObjectPlanCurrentEntitlements'
+        offerVersion:
+          type: string
+        termStart:
+          $ref: '#/components/schemas/get_success_ObjectPlanCurrentTermStart'
+        termEnd:
+          $ref: '#/components/schemas/get_success_ObjectPlanCurrentTermEnd'
+        acceptedAt:
+          $ref: '#/components/schemas/get_success_ObjectPlanCurrentAcceptedAt'
+        paymentOption:
+          anyOf:
+            - $ref: '#/components/schemas/get_success_ObjectPlanCurrentPaymentOption'
+            - type: 'null'
+          description: >-
+            The payment option chosen at acceptance, or null for a plan accepted without one. Null too when the read is
+            redacted for a service token.
+        custom:
+          type: boolean
+          description: True for a private contract rather than a public catalog plan.
+      required:
+        - planId
+        - planName
+        - currency
+        - commitmentMinor
+        - includedIus
+        - iuPriceMinor
+        - entitlements
+        - offerVersion
+        - termStart
+        - termEnd
+        - acceptedAt
+        - paymentOption
+        - custom
+      additionalProperties: false
+    get_success_ObjectPlanUpcoming:
+      type: object
+      properties:
+        planId:
+          $ref: '#/components/schemas/get_success_ObjectPlanUpcomingPlanId'
+        planName:
+          $ref: '#/components/schemas/get_success_ObjectPlanUpcomingPlanName'
+        currency:
+          $ref: '#/components/schemas/get_success_ObjectPlanUpcomingCurrency'
+        commitmentMinor:
+          $ref: '#/components/schemas/get_success_ObjectPlanUpcomingCommitmentMinor'
+        includedIus:
+          $ref: '#/components/schemas/get_success_ObjectPlanUpcomingIncludedIus'
+        iuPriceMinor:
+          $ref: '#/components/schemas/get_success_ObjectPlanUpcomingIuPriceMinor'
+        entitlements:
+          $ref: '#/components/schemas/get_success_ObjectPlanUpcomingEntitlements'
+        offerVersion:
+          type: string
+        termStart:
+          $ref: '#/components/schemas/get_success_ObjectPlanUpcomingTermStart'
+        termEnd:
+          $ref: '#/components/schemas/get_success_ObjectPlanUpcomingTermEnd'
+        acceptedAt:
+          $ref: '#/components/schemas/get_success_ObjectPlanUpcomingAcceptedAt'
+        paymentOption:
+          anyOf:
+            - $ref: '#/components/schemas/get_success_ObjectPlanUpcomingPaymentOption'
+            - type: 'null'
+          description: >-
+            The payment option chosen at acceptance, or null for a plan accepted without one. Null too when the read is
+            redacted for a service token.
+        custom:
+          type: boolean
+          description: True for a private contract rather than a public catalog plan.
+      required:
+        - planId
+        - planName
+        - currency
+        - commitmentMinor
+        - includedIus
+        - iuPriceMinor
+        - entitlements
+        - offerVersion
+        - termStart
+        - termEnd
+        - acceptedAt
+        - paymentOption
+        - custom
+      additionalProperties: false
+    get_success_ObjectPlanOfferPlansItemPlanId:
+      type: string
+      description: >-
+        The plan’s stable plan code. The customer-safe read carries no internal plan row ids, so this is the identity a
+        caller names a plan by.
+    get_success_ObjectPlanOfferPlansItemPlanName:
+      type: string
+    get_success_ObjectPlanOfferPlansItemCurrency:
+      type: string
+      minLength: 3
+      maxLength: 3
+    get_success_ObjectPlanOfferPlansItemCommitmentMinor:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: Net monthly commitment, minor units of `currency`.
+    get_success_ObjectPlanOfferPlansItemIncludedIus:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    get_success_ObjectPlanOfferPlansItemIuPriceMinor:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: Net price of one IU beyond the included IUs, minor units.
+    get_success_ObjectPlanOfferPlansItemEntitlements:
+      anyOf:
+        - type: object
+          properties:
+            bundleName:
+              type: string
+            features:
+              type: array
+              items:
+                type: string
+              description: Feature keys the plan grants.
+            accountLimit:
+              anyOf:
+                - type: integer
+                  minimum: 0
+                  maximum: 9007199254740991
+                - type: 'null'
+              description: How many accounts the organization may hold, or null.
+          required:
+            - bundleName
+            - features
+            - accountLimit
+          additionalProperties: false
+        - type: 'null'
+    get_success_ObjectPlanOfferPlansItemPaymentOptionsItem:
+      type: object
+      properties:
+        optionKey:
+          type: string
+        kind:
+          type: string
+          enum:
+            - MONTHLY
+            - TERM_PREPAY
+        displayName:
+          type: string
+        currency:
+          $ref: '#/components/schemas/get_success_ObjectPlanOfferPlansItemPaymentOptionsItemCurrency'
+        amountMinor:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: The monthly amount for `MONTHLY`; the whole prepaid amount for `TERM_PREPAY`. Minor units of `currency`.
+        termMonths:
+          type: integer
+          exclusiveMinimum: 0
+          maximum: 9007199254740991
+        paymentTermsDays:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        collectionMethods:
+          type: array
+          items:
+            type: string
+            enum:
+              - ACH
+              - CARD
+              - INVOICE
+      required:
+        - optionKey
+        - kind
+        - displayName
+        - currency
+        - amountMinor
+        - termMonths
+        - paymentTermsDays
+        - collectionMethods
+      additionalProperties: false
+    get_success_ObjectPlanRenewalEffectiveFreeAt:
+      type: string
+    get_success_ObjectPlanRenewalChangeAllowedUntil:
+      type: string
+    get_success_ObjectPlanRenewalLatestInstructionEffectiveAt:
+      type: string
+    get_success_ObjectPlanRenewalLatestInstructionRecordedAt:
+      type: string
+    get_success_ObjectInvoicesItemPeriodStart:
+      type: string
+    get_success_ObjectInvoicesItemPeriodEnd:
+      type: string
+    get_success_ObjectInvoicesItemCurrency:
+      type: string
+      minLength: 3
+      maxLength: 3
+    get_success_ObjectInvoicesItemDueAt:
+      type: string
     get_success_ObjectOperationsByDestinationItemSellerRouteId:
       type: string
     get_success_ObjectOperationsByDestinationItemUnassigned:
@@ -71019,6 +71802,218 @@ components:
       type: string
     get_success_OperationDetailsItemDestinationSellerName:
       type: string
+    get_success_ObjectPlanCurrentPlanId:
+      type: string
+      description: >-
+        The plan’s stable plan code. The customer-safe read carries no internal plan row ids, so this is the identity a
+        caller names a plan by.
+    get_success_ObjectPlanCurrentPlanName:
+      type: string
+    get_success_ObjectPlanCurrentCurrency:
+      type: string
+      minLength: 3
+      maxLength: 3
+    get_success_ObjectPlanCurrentCommitmentMinor:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: Net monthly commitment, minor units of `currency`.
+    get_success_ObjectPlanCurrentIncludedIus:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    get_success_ObjectPlanCurrentIuPriceMinor:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: Net price of one IU beyond the included IUs, minor units.
+    get_success_ObjectPlanCurrentEntitlements:
+      anyOf:
+        - type: object
+          properties:
+            bundleName:
+              type: string
+            features:
+              type: array
+              items:
+                type: string
+              description: Feature keys the plan grants.
+            accountLimit:
+              anyOf:
+                - type: integer
+                  minimum: 0
+                  maximum: 9007199254740991
+                - type: 'null'
+              description: How many accounts the organization may hold, or null.
+          required:
+            - bundleName
+            - features
+            - accountLimit
+          additionalProperties: false
+        - type: 'null'
+    get_success_ObjectPlanCurrentTermStart:
+      type: string
+    get_success_ObjectPlanCurrentTermEnd:
+      type: string
+    get_success_ObjectPlanCurrentAcceptedAt:
+      type: string
+    get_success_ObjectPlanCurrentPaymentOption:
+      type: object
+      properties:
+        optionKey:
+          type: string
+        kind:
+          type: string
+          enum:
+            - MONTHLY
+            - TERM_PREPAY
+        displayName:
+          type: string
+        currency:
+          $ref: '#/components/schemas/get_success_ObjectPlanCurrentPaymentOptionCurrency'
+        amountMinor:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: The monthly amount for `MONTHLY`; the whole prepaid amount for `TERM_PREPAY`. Minor units of `currency`.
+        termMonths:
+          type: integer
+          exclusiveMinimum: 0
+          maximum: 9007199254740991
+        paymentTermsDays:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        collectionMethods:
+          type: array
+          items:
+            type: string
+            enum:
+              - ACH
+              - CARD
+              - INVOICE
+      required:
+        - optionKey
+        - kind
+        - displayName
+        - currency
+        - amountMinor
+        - termMonths
+        - paymentTermsDays
+        - collectionMethods
+      additionalProperties: false
+    get_success_ObjectPlanUpcomingPlanId:
+      type: string
+      description: >-
+        The plan’s stable plan code. The customer-safe read carries no internal plan row ids, so this is the identity a
+        caller names a plan by.
+    get_success_ObjectPlanUpcomingPlanName:
+      type: string
+    get_success_ObjectPlanUpcomingCurrency:
+      type: string
+      minLength: 3
+      maxLength: 3
+    get_success_ObjectPlanUpcomingCommitmentMinor:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: Net monthly commitment, minor units of `currency`.
+    get_success_ObjectPlanUpcomingIncludedIus:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    get_success_ObjectPlanUpcomingIuPriceMinor:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: Net price of one IU beyond the included IUs, minor units.
+    get_success_ObjectPlanUpcomingEntitlements:
+      anyOf:
+        - type: object
+          properties:
+            bundleName:
+              type: string
+            features:
+              type: array
+              items:
+                type: string
+              description: Feature keys the plan grants.
+            accountLimit:
+              anyOf:
+                - type: integer
+                  minimum: 0
+                  maximum: 9007199254740991
+                - type: 'null'
+              description: How many accounts the organization may hold, or null.
+          required:
+            - bundleName
+            - features
+            - accountLimit
+          additionalProperties: false
+        - type: 'null'
+    get_success_ObjectPlanUpcomingTermStart:
+      type: string
+    get_success_ObjectPlanUpcomingTermEnd:
+      type: string
+    get_success_ObjectPlanUpcomingAcceptedAt:
+      type: string
+    get_success_ObjectPlanUpcomingPaymentOption:
+      type: object
+      properties:
+        optionKey:
+          type: string
+        kind:
+          type: string
+          enum:
+            - MONTHLY
+            - TERM_PREPAY
+        displayName:
+          type: string
+        currency:
+          $ref: '#/components/schemas/get_success_ObjectPlanUpcomingPaymentOptionCurrency'
+        amountMinor:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: The monthly amount for `MONTHLY`; the whole prepaid amount for `TERM_PREPAY`. Minor units of `currency`.
+        termMonths:
+          type: integer
+          exclusiveMinimum: 0
+          maximum: 9007199254740991
+        paymentTermsDays:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        collectionMethods:
+          type: array
+          items:
+            type: string
+            enum:
+              - ACH
+              - CARD
+              - INVOICE
+      required:
+        - optionKey
+        - kind
+        - displayName
+        - currency
+        - amountMinor
+        - termMonths
+        - paymentTermsDays
+        - collectionMethods
+      additionalProperties: false
+    get_success_ObjectPlanOfferPlansItemPaymentOptionsItemCurrency:
+      type: string
+      minLength: 3
+      maxLength: 3
+    get_success_ObjectPlanCurrentPaymentOptionCurrency:
+      type: string
+      minLength: 3
+      maxLength: 3
+    get_success_ObjectPlanUpcomingPaymentOptionCurrency:
+      type: string
+      minLength: 3
+      maxLength: 3
     get_delivery_success_DeliveryRevision:
       type: object
       properties:
@@ -72943,6 +73938,44 @@ components:
         - dataThrough
         - observedAt
       additionalProperties: false
+    get_status_success_NextActionsItemArguments:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties:
+        anyOf:
+          - type: string
+          - type: boolean
+          - type: array
+            items:
+              type: string
+    get_status_success_AgentsResultsItemStage:
+      type: string
+      enum:
+        - built
+        - connected
+        - tested
+        - certified
+        - listed
+    get_status_success_AgentsResultsItemNextStage:
+      type: string
+      enum:
+        - built
+        - connected
+        - tested
+        - certified
+        - listed
+    get_status_success_AgentsResultsItemStuckOnNextActionArguments:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties:
+        anyOf:
+          - type: string
+          - type: boolean
+          - type: array
+            items:
+              type: string
     open_campaign_receipt_success_ReceiptBudgetTotal:
       type: number
       description: Total amount.
@@ -74080,16 +75113,19 @@ components:
         kind:
           type: string
           enum:
-            - SALES
-            - CREATIVE
-          description: 'Kind for a new Agent: SALES or CREATIVE.'
+            - sales
+            - creative
+            - buyer
+          description: 'Kind for a new agent: sales, creative or buyer.'
         displayName:
           type: string
           minLength: 1
           maxLength: 255
           description: Name for a new Agent.
         operator:
-          description: Operator for a new Agent. Omit it to create an operator with the Agent name.
+          description: >-
+            Operator for a new sales or creative agent. Omit it to create an operator with the agent name. A buyer agent
+            has no operator.
           oneOf:
             - type: object
               properties:
@@ -74129,11 +75165,13 @@ components:
           type: string
           format: uri
         idempotencyKey:
+          description: >-
+            Unique key that makes a retried sales or creative registration find the first agent. Required for sales and
+            creative; a buyer agent takes none.
           type: string
           format: uuid
           pattern: >-
             ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
-          description: Unique key for a new Agent registration.
         expectedAccountId:
           anyOf:
             - type: integer
@@ -74150,7 +75188,6 @@ components:
         - operation
         - kind
         - displayName
-        - idempotencyKey
       additionalProperties: false
     save_agent_request_SaveAgentDeveloperCreateOperation:
       type: string

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { execFile } from 'node:child_process'
 import { createServer } from 'node:http'
 import { promisify } from 'node:util'
-import { copyFileSync, mkdtempSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { resolve, join } from 'node:path'
 
@@ -11,18 +11,77 @@ const root = resolve(process.argv[2] ?? '.')
 const publicTree = process.argv.includes('--public')
 const targetsIndex = process.argv.indexOf('--targets')
 const targets = targetsIndex < 0 ? 'both' : process.argv[targetsIndex + 1]
-if (!['typescript', 'python', 'both'].includes(targets))
-  throw new Error('Pass --targets typescript, python or both')
+if (!['typescript', 'python', 'both', 'mcp-app-host'].includes(targets))
+  throw new Error('Pass --targets typescript, python, both or mcp-app-host')
 const includesTypescript = targets === 'typescript' || targets === 'both'
 const includesPython = targets === 'python' || targets === 'both'
 const ts = join(root, publicTree ? 'sdk/typescript' : 'packages/apostra-sdk')
 const py = join(root, publicTree ? 'sdk/python' : 'packages/apostra-sdk-python')
 const manifest = join(root, publicTree ? 'sdk/release/manifest.json' : 'scripts/codegen/apostra-sdk/manifest.json')
 const verifier = join(root, publicTree ? 'sdk/testing/verify-installed.mjs' : 'scripts/testing/apostra-sdk/verify-installed.mjs')
-const tmp = mkdtempSync(join(tmpdir(), 'apostra-install-'))
 async function run(command, args, cwd = root, env = {}) {
   return (await promisify(execFile)(command,args,{cwd,env:{...process.env,...env},encoding:'utf8',timeout:180_000,maxBuffer:4*1024*1024})).stdout
 }
+// The MCP Apps host package ships no operations, so its archive is checked for
+// its own contract instead: the files and package.json that reach npm, an
+// install with no workspace links, entry points that import with and without
+// react, and a consumer that type-checks against the shipped declarations.
+async function smokeMcpAppHost() {
+  const pkg = join(root, publicTree ? 'sdk/mcp-app-host' : 'packages/mcp-app-host')
+  const verifier = join(root, publicTree ? 'sdk/testing/verify-installed.mjs' : 'scripts/testing/apostra-sdk/verify-installed.mjs')
+  const dir = mkdtempSync(join(tmpdir(), 'apostra-mcp-app-host-'))
+  try {
+    // The public tree's package.json is already in its published shape. The
+    // private package keeps source exports for workspace consumers, and pnpm
+    // applies its publishConfig overrides when it packs.
+    await run(publicTree ? 'npm' : 'pnpm', ['pack', '--pack-destination', dir], pkg)
+    const archive = readdirSync(dir).find(name => name.endsWith('.tgz'))
+    assert(archive, 'Packing produced no npm archive')
+    const listing = (await run('tar', ['-tzf', join(dir, archive)])).split('\n').filter(Boolean)
+    for (const required of ['package/LICENSE', 'package/README.md', 'package/dist/index.js', 'package/dist/index.d.ts', 'package/dist/react.js', 'package/dist/react.d.ts', 'package/dist/frame-security.js', 'package/dist/frame-security.d.ts'])
+      assert(listing.includes(required), `npm tarball is missing ${required}`)
+    assert(!listing.some(name => name.includes('__tests__') || name.startsWith('package/src/')), 'npm tarball must ship dist only, not sources or tests')
+    const manifest = JSON.parse(await run('tar', ['-xzOf', join(dir, archive), 'package/package.json']))
+    assert.equal(manifest.license, 'Apache-2.0')
+    assert.equal(manifest.private, undefined, 'The published package must not be private')
+    assert.equal(manifest.main, './dist/index.js')
+    assert.equal(manifest.exports['.'].import, './dist/index.js')
+    assert.equal(manifest.exports['./react'].import, './dist/react.js')
+    assert.equal(manifest.exports['./frame-security'].import, './dist/frame-security.js')
+    assert.equal(manifest.publishConfig.exports, undefined, 'publishConfig overrides must be applied, not shipped')
+    assert.equal(manifest.peerDependenciesMeta.react.optional, true)
+    const consumer = join(dir, 'consumer')
+    mkdirSync(consumer)
+    writeFileSync(join(consumer, 'package.json'), '{"type":"module"}')
+    await run('npm', ['install', '--ignore-scripts', '--no-audit', '--no-fund', join(dir, archive)], consumer)
+    await run('node', [verifier, '--mcp-app-host', consumer, manifest.version])
+    // With react absent the root entry still has to work: react is optional.
+    // The page path needs no DOM; the srcdoc path parses HTML in the browser.
+    writeFileSync(join(consumer, 'smoke.mjs'), `import assert from 'node:assert/strict';import {createRequire} from 'node:module';import {APOSTRA_WIDGET_PAGE_ORIGINS,resolveMcpAppFrame} from '@apostra/mcp-app-host';assert.throws(()=>createRequire(import.meta.url).resolve('react'),{code:'MODULE_NOT_FOUND'});const frame=resolveMcpAppFrame({meta:{'scope3/widget-page':{url:'https://widgets.apostra.com/campaigns',appearanceParams:['color-scheme']}},page:{appearance:{colorScheme:'dark',productBrand:'new'},allowedOrigins:APOSTRA_WIDGET_PAGE_ORIGINS}});assert.deepEqual({kind:frame?.kind,src:frame?.src,targetOrigin:frame?.targetOrigin},{kind:'page',src:'https://widgets.apostra.com/campaigns?color-scheme=dark',targetOrigin:'https://widgets.apostra.com'});`)
+    await run('node', ['smoke.mjs'], consumer)
+    const { react, 'react-dom': reactDom, '@types/react': reactTypes } = JSON.parse(readFileSync(join(pkg, 'package.json'), 'utf8')).devDependencies
+    await run('npm', ['install', '--ignore-scripts', '--no-audit', '--no-fund', `react@${react}`, `react-dom@${reactDom}`, `@types/react@${reactTypes}`], consumer)
+    await run('node', [verifier, '--mcp-app-host', consumer, manifest.version, 'react'])
+    writeFileSync(join(consumer, 'consumer.mts'), `import {APOSTRA_WIDGET_PAGE_ORIGINS, createAgentMcpAppBridge, resolveMcpAppFrame, type McpAppFrame} from '@apostra/mcp-app-host';import {HostedMcpAppFrame} from '@apostra/mcp-app-host/react';import {mcpAppProxyCsp} from '@apostra/mcp-app-host/frame-security';const frame: McpAppFrame | null = resolveMcpAppFrame({html: '<p>widget</p>', approveResourceOrigin: () => false});void [APOSTRA_WIDGET_PAGE_ORIGINS, createAgentMcpAppBridge, HostedMcpAppFrame, mcpAppProxyCsp, frame];`)
+    const tsc = join(pkg, 'node_modules/.bin/tsc6')
+    const consumerFlags = ['--noEmit', '--strict', '--target', 'ES2022', '--module', 'NodeNext', '--moduleResolution', 'NodeNext', '--lib', 'ES2022,DOM,DOM.Iterable', '--jsx', 'react-jsx']
+    // A browser consumer as browser toolchains configure one: no Node types,
+    // and library declarations not re-checked (Vite and Next set skipLibCheck).
+    await run(tsc, [...consumerFlags, '--skipLibCheck', 'consumer.mts'], consumer)
+    // Checking every library declaration needs Node types: an MCP SDK
+    // dependency's declarations name `Buffer`. The README states this.
+    await run('npm', ['install', '--ignore-scripts', '--no-audit', '--no-fund', '@types/node@22'], consumer)
+    await run(tsc, [...consumerFlags, '--types', 'node', 'consumer.mts'], consumer)
+    process.stdout.write(`@apostra/mcp-app-host ${manifest.version} archive installed; entry points import and its declarations type-check.\n`)
+  } finally {
+    rmSync(dir, { recursive: true, force: true })
+  }
+}
+if (targets === 'mcp-app-host') {
+  await smokeMcpAppHost()
+  process.exit(0)
+}
+const tmp = mkdtempSync(join(tmpdir(), 'apostra-install-'))
 // These fixtures prove example execution and HTTP mechanics, not live seller
 // behaviour, account authorisation or complete business-result schemas.
 const requests = []

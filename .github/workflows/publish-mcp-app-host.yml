@@ -1,0 +1,121 @@
+# Composed into apostra-public/apostra; never run this from the private source.
+name: Publish MCP App host
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Reviewed version of @apostra/mcp-app-host to publish
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: apostra-mcp-app-host-publication
+  cancel-in-progress: false
+jobs:
+  build:
+    if: github.repository == 'apostra-public/apostra' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: '26.9.0'
+          registry-url: https://registry.npmjs.org
+      - run: npm install --global npm@11.5.1
+      - name: Set the reviewed version for this release
+        id: version
+        env:
+          EXPECTED_VERSION: ${{ inputs.version }}
+        run: |
+          node sdk/release/set-release-version.mjs "$EXPECTED_VERSION" mcp-app-host
+          npm --prefix sdk/mcp-app-host install --package-lock-only --ignore-scripts --no-audit --no-fund
+          echo "version=$EXPECTED_VERSION" >> "$GITHUB_OUTPUT"
+          echo "Release @apostra/mcp-app-host $EXPECTED_VERSION from $GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"
+      - run: npm ci --ignore-scripts && npm run type-check && npm test
+        working-directory: sdk/mcp-app-host
+      - run: node sdk/testing/install-smoke.mjs . --public --targets mcp-app-host
+      - name: Build the npm archive
+        run: |
+          export SOURCE_DATE_EPOCH=$(git show -s --format=%ct HEAD)
+          mkdir -p artifacts
+          npm pack ./sdk/mcp-app-host --pack-destination artifacts
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: mcp-app-host-artifacts
+          path: artifacts/*
+  publish:
+    needs: build
+    environment: sdk-release
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: '26.9.0'
+          registry-url: https://registry.npmjs.org
+      - run: npm install --global npm@11.5.1
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: mcp-app-host-artifacts
+          path: artifacts
+      - name: Check the registry against the archive built for this version
+        id: registry
+        env:
+          EXPECTED_VERSION: ${{ needs.build.outputs.version }}
+        run: node sdk/release/registry-state.mjs --targets mcp-app-host --version "$EXPECTED_VERSION"
+      # For the first npm package creation only, a scope owner supplies a
+      # short-lived environment secret. Remove it after configuring OIDC.
+      - if: steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists != 'true'
+        run: npm publish ./artifacts/*.tgz --access public --provenance --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_BOOTSTRAP_TOKEN }}
+      - if: steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists == 'true'
+        run: npm publish ./artifacts/*.tgz --access public --provenance --ignore-scripts
+  release:
+    needs: [build, publish]
+    runs-on: ubuntu-latest
+    # 30 install attempts with 30-second pauses, each attempt bounded below.
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: '26.9.0'
+      - run: npm install --global npm@11.5.1
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: mcp-app-host-artifacts
+          path: artifacts
+      - name: Install the public version and create the release
+        env:
+          HOST_VERSION: ${{ needs.build.outputs.version }}
+          INSTALL_ATTEMPTS: '30'
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          install_dir=$(mktemp -d)
+          trap 'rm -rf "$install_dir"' EXIT
+          echo '{"type":"module"}' > "$install_dir/package.json"
+          # A just-published version can take several minutes to become installable.
+          for attempt in $(seq 1 "$INSTALL_ATTEMPTS"); do
+            timeout 60 npm install --prefer-online --prefix "$install_dir" --ignore-scripts "@apostra/mcp-app-host@$HOST_VERSION" && break
+            if [[ "$attempt" == "$INSTALL_ATTEMPTS" ]]; then exit 1; fi
+            sleep 30
+          done
+          node sdk/testing/verify-installed.mjs --mcp-app-host "$install_dir" "$HOST_VERSION"
+          tag="mcp-app-host-v$HOST_VERSION"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            test "$(git ls-remote origin "refs/tags/$tag" | cut -f1)" = "$GITHUB_SHA"
+          else
+            gh release create "$tag" --target "$GITHUB_SHA" --title "@apostra/mcp-app-host $HOST_VERSION" --generate-notes artifacts/*.tgz
+          fi

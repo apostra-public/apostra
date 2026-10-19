@@ -1,0 +1,80 @@
+{
+  "name": "@apostra/mcp-app-host",
+  "version": "0.1.0",
+  "description": "The host side of MCP Apps for Apostra widgets: the ext-apps bridge, proxy document, frame CSP and sandbox, link guard and widget page frame",
+  "keywords": [
+    "mcp",
+    "mcp-apps",
+    "apostra",
+    "widget",
+    "host"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apostra-public/apostra.git",
+    "directory": "sdk/mcp-app-host"
+  },
+  "homepage": "https://docs.apostra.com/v3/mcp-apps-host",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js"
+    },
+    "./frame-security": {
+      "types": "./dist/frame-security.d.ts",
+      "import": "./dist/frame-security.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build": "tsc6 -p tsconfig.build.json",
+    "type-check": "tsc6 --noEmit",
+    "test": "vitest run",
+    "lint": "npx @biomejs/biome check src --error-on-warnings",
+    "lint:fix": "npx @biomejs/biome check --write src",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/ext-apps": "^2.0.3",
+    "@modelcontextprotocol/sdk": "^1.31.0"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.1",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "jsdom": "^27.4.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "vitest": "4.1.8"
+  }
+}

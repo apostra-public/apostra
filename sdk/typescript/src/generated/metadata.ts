@@ -225,7 +225,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand."
+    "summary": "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call."
   },
   "open_advertisers_page": {
     "path": "/tools/open_advertisers_page",
@@ -259,7 +259,7 @@ export const operations = {
       },
       {
         "m2mOAuth": [
-          "interchange:admin"
+          "interchange:read"
         ]
       }
     ],
@@ -278,7 +278,7 @@ export const operations = {
       },
       {
         "m2mOAuth": [
-          "interchange:admin"
+          "interchange:read"
         ]
       }
     ],
@@ -358,7 +358,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Open the buyer Media Partners Page. Optionally scope to an advertiser or seller; connectionAction \"connect\" opens that media partner at connection setup without mutating until the user confirms."
+    "summary": "Open the buyer Media Partners Page. Optionally scope to an advertiser or seller; connectionAction \"connect\" opens that media partner at connection setup without mutating until the user confirms. Replaced by open_media_partners_page, which opens the same Page."
   },
   "open_creative_engines_page": {
     "path": "/tools/open_creative_engines_page",
@@ -417,6 +417,25 @@ export const operations = {
     ],
     "summary": "Open the Seller Media Buys Page. Optionally focus one seller-owned account relationship and its buys or creatives; the Page self-fetches."
   },
+  "open_media_partners_page": {
+    "path": "/tools/open_media_partners_page",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open the buyer Media Partners Page. Optionally scope to an advertiser or seller; connectionAction \"connect\" opens that media partner at connection setup without mutating until the user confirms."
+  },
   "open_page": {
     "path": "/tools/open_page",
     "method": "POST",
@@ -434,7 +453,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies."
+    "summary": "Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies."
   },
   "open_proposal_pass": {
     "path": "/tools/open_proposal_pass",
