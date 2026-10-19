@@ -1,14 +1,14 @@
 {
   "schemaVersion": "2.0",
   "skillId": "test-sales-agent",
-  "skillVersion": "1.5.1",
+  "skillVersion": "1.5.4",
   "endpoint": "/mcp/v3",
   "modelPolicy": "deterministic-no-model",
   "scenarios": [
     {
       "id": "brief-discovery",
       "title": "Discover terminal Products for one synthetic brief",
-      "mutationBoundary": "Creates one sandbox Advertiser and one draft Campaign, temporarily enables the exact own Seller for that run-owned Advertiser, and restores DEFAULT before Advertiser archival. It never stages a MediaBuy.",
+      "mutationBoundary": "Creates one sandbox Advertiser and one draft Campaign, temporarily enables the exact own Seller for that run-owned Advertiser, and restores DEFAULT before Advertiser archival. Its create-sandbox-advertiser attempts reuse one stable run-owned idempotency key, including after an unknown outcome, and set the fixture's markets and channels so the Seller account can be provisioned. It never stages a MediaBuy.",
       "cleanupPolicy": "always-reverse-order",
       "steps": [
         {
@@ -252,8 +252,8 @@
     },
     {
       "id": "own-supply-transaction",
-      "title": "Stage and activate one sandbox own-supply transaction",
-      "mutationBoundary": "Creates one sandbox Advertiser, Campaign, MediaBuy, and metadata-only Creative; activates only the sandbox Campaign; archives the Creative, containing Campaign, and Advertiser in reverse order; and reports the MediaBuy because V3 has no independent cancellation call.",
+      "title": "Stage, update, and activate one sandbox own-supply transaction",
+      "mutationBoundary": "Creates one sandbox Advertiser, temporarily enables the exact Seller and Advertiser connection, and creates one Campaign, MediaBuy, and metadata-only Creative; then updates that exact draft MediaBuy through save_media_buy(mediaBuyId, flight) before activation. Its create-sandbox-advertiser attempts reuse one stable run-owned idempotency key, including after an unknown outcome, and set the fixture's markets and channels so the Seller account can be provisioned. It activates only the sandbox Campaign; archives the Creative and containing Campaign, restores the Seller and Advertiser preference to DEFAULT, and archives the Advertiser in reverse order; and reports the MediaBuy because V3 has no independent cancellation call.",
       "cleanupPolicy": "always-reverse-order",
       "steps": [
         {
@@ -340,9 +340,69 @@
           ]
         },
         {
-          "id": "create-draft-campaign",
+          "id": "enable-advertiser-seller",
           "ordinal": 4,
           "dependsOn": ["create-sandbox-advertiser"],
+          "tool": "save_connection",
+          "role": "ordinary",
+          "mutates": true,
+          "mutationAuthority": "sandbox-bound",
+          "fixtureIds": [],
+          "execution": {
+            "timeoutMs": 30000,
+            "maxAttempts": 1,
+            "retryDelayMs": 0
+          },
+          "evidence": {
+            "requiredKeys": [
+              "action",
+              "sellerId",
+              "advertiserId",
+              "decision",
+              "effectiveDesired",
+              "reason"
+            ],
+            "optionalKeys": ["requestId", "traceId", "activityId"],
+            "forbiddenKeys": ["credentials"],
+            "requiredValues": {
+              "action": "advertiser_activation_updated",
+              "decision": "ENABLED",
+              "effectiveDesired": true,
+              "reason": "advertiser_enabled"
+            }
+          },
+          "cleanup": [
+            {
+              "id": "restore-advertiser-seller-default",
+              "tool": "save_connection",
+              "execution": {
+                "timeoutMs": 30000,
+                "maxAttempts": 3,
+                "retryDelayMs": 1000
+              },
+              "evidence": {
+                "requiredKeys": [
+                  "action",
+                  "sellerId",
+                  "advertiserId",
+                  "decision",
+                  "effectiveDesired",
+                  "reason"
+                ],
+                "optionalKeys": ["requestId", "traceId", "activityId"],
+                "forbiddenKeys": ["credentials"],
+                "requiredValues": {
+                  "action": "advertiser_activation_updated",
+                  "decision": "DEFAULT"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "create-draft-campaign",
+          "ordinal": 5,
+          "dependsOn": ["enable-advertiser-seller"],
           "tool": "save_campaign",
           "role": "ordinary",
           "mutates": true,
@@ -384,7 +444,7 @@
         },
         {
           "id": "select-terminal-product-catalog",
-          "ordinal": 5,
+          "ordinal": 6,
           "dependsOn": ["create-draft-campaign"],
           "tool": "get",
           "role": "terminal-product-selection",
@@ -415,7 +475,7 @@
         },
         {
           "id": "stage-media-buy",
-          "ordinal": 6,
+          "ordinal": 7,
           "dependsOn": ["select-terminal-product-catalog"],
           "tool": "save_media_buy",
           "role": "media-buy-save",
@@ -455,9 +515,43 @@
           "cleanupOwnedBy": "create-draft-campaign"
         },
         {
-          "id": "create-metadata-creative",
-          "ordinal": 7,
+          "id": "update-staged-media-buy",
+          "ordinal": 8,
           "dependsOn": ["stage-media-buy"],
+          "tool": "save_media_buy",
+          "role": "ordinary",
+          "mutates": true,
+          "mutationAuthority": "explicit-confirmation-or-canary",
+          "fixtureIds": [],
+          "execution": {
+            "timeoutMs": 30000,
+            "maxAttempts": 1,
+            "retryDelayMs": 0
+          },
+          "evidence": {
+            "requiredKeys": [
+              "action",
+              "mediaBuyId",
+              "updatedMediaBuyId",
+              "phase",
+              "requestedFlightStartAt",
+              "requestedFlightEndAt",
+              "observedFlightStartAt",
+              "observedFlightEndAt"
+            ],
+            "optionalKeys": ["requestId", "traceId", "activityId"],
+            "forbiddenKeys": ["credentials"],
+            "requiredValues": {
+              "action": "updated"
+            }
+          },
+          "cleanup": [],
+          "cleanupOwnedBy": "create-draft-campaign"
+        },
+        {
+          "id": "create-metadata-creative",
+          "ordinal": 9,
+          "dependsOn": ["update-staged-media-buy"],
           "tool": "save_creative",
           "role": "ordinary",
           "mutates": true,
@@ -498,7 +592,7 @@
         },
         {
           "id": "read-staged-campaign",
-          "ordinal": 8,
+          "ordinal": 10,
           "dependsOn": ["create-metadata-creative"],
           "tool": "get",
           "role": "ordinary",
@@ -523,7 +617,7 @@
         },
         {
           "id": "preview-campaign-activation",
-          "ordinal": 9,
+          "ordinal": 11,
           "dependsOn": ["read-staged-campaign"],
           "tool": "save_campaign",
           "role": "ordinary",
@@ -552,7 +646,7 @@
         },
         {
           "id": "activate-sandbox-campaign",
-          "ordinal": 10,
+          "ordinal": 12,
           "dependsOn": ["preview-campaign-activation"],
           "tool": "save_campaign",
           "role": "ordinary",
@@ -585,7 +679,7 @@
         },
         {
           "id": "read-seller-media-buy",
-          "ordinal": 11,
+          "ordinal": 13,
           "dependsOn": ["activate-sandbox-campaign"],
           "tool": "get",
           "role": "ordinary",
@@ -597,7 +691,13 @@
             "retryDelayMs": 2000
           },
           "evidence": {
-            "requiredKeys": ["mediaBuyId", "stages", "legs"],
+            "requiredKeys": [
+              "mediaBuyId",
+              "flightStartAt",
+              "flightEndAt",
+              "stages",
+              "legs"
+            ],
             "optionalKeys": ["requestId", "traceId", "activityId"],
             "forbiddenKeys": ["credentials", "rawPayload"]
           },
@@ -605,7 +705,7 @@
         },
         {
           "id": "read-bounded-delivery",
-          "ordinal": 12,
+          "ordinal": 14,
           "dependsOn": ["read-seller-media-buy"],
           "tool": "get_delivery",
           "role": "ordinary",
@@ -617,17 +717,12 @@
             "retryDelayMs": 5000
           },
           "evidence": {
-            "requiredKeys": [
-              "report",
-              "startDate",
-              "endDate",
-              "mediaBuyId",
-              "rows"
-            ],
+            "requiredKeys": ["report", "campaignId", "delivery", "authority"],
             "optionalKeys": ["requestId", "traceId", "activityId"],
             "forbiddenKeys": ["credentials", "unboundedReport"],
             "requiredValues": {
-              "report": "campaign_delivery"
+              "report": "live_campaign_delivery",
+              "authority": "live_provider"
             }
           },
           "cleanup": []

@@ -1,7 +1,7 @@
 from apostra.models import SaveRfpRequestJsonValue, SaveCampaignInput, SaveBillingInput, SaveRfpInput, SaveLibraryRequestInput, SaveCreativeSessionInput, SaveDimensionInput, SaveMediaBuyInput, SearchInput, GetInput, SaveMaterialInput, RefreshInventorySourceHealthInput, GetDeliveryInput, GetStatusInput
 nested: SaveRfpRequestJsonValue = {'deep': [lambda: 0]}
 campaign: SaveCampaignInput = {'idempotencyKey': 'k', 'channelGroups': [{'channelGroupId': 'g', 'kind': 'preset', 'presetId': 'ctv', 'inventory': {}}]}
-billing: SaveBillingInput = {'operation': 'terms', 'terms': {'accepted': True, 'acceptedVersion': 'v1-1'}, 'paymentTerms': 'net_60'}
+billing: SaveBillingInput = {'operation': 'terms', 'terms': {'accepted': True, 'acceptedVersion': 'v1-1'}}
 rfp: SaveRfpInput = {'action': 'feedback'}
 library: SaveLibraryRequestInput = {'action': 'close'}
 creative: SaveCreativeSessionInput = {'scope': 'campaign', 'operation': 'select_output', 'campaignId': 'c'}
