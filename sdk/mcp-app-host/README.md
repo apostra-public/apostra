@@ -7,10 +7,9 @@ design-system dependency. A React frame lives in a separate `./react` subpath
 that takes `react` as an optional peer dependency. Requires Node.js 22.18 or
 later for tooling; the runtime code runs in the browser.
 
-This package is not published to npm yet, so there is no install command
-today. Until the first release, follow the host contract linked below, which
-describes everything this package does. Once released, it installs with
-`npm install @apostra/mcp-app-host`.
+```bash
+npm install @apostra/mcp-app-host
+```
 
 TypeScript: the package's declarations depend on the MCP SDK, whose own
 declarations name Node's `Buffer`. A browser project with `skipLibCheck`

@@ -3,6 +3,25 @@ export const version = '0.37.0'
 export const baseUrl = "https://api.apostra.com/api/v3"
 export const m2mTokenUrl = "https://identity.scope3.com/oauth2/token"
 export const operations = {
+  "confirm_payment_authority": {
+    "path": "/tools/confirm_payment_authority",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Issue the hosted card-capture link for a token from request_payment_authority. Give the link to the cardholder; cards stay off MCP."
+  },
   "downloadV3PublicDocumentRevision": {
     "path": "/documents/{documentId}/revisions/{revisionId}/download",
     "method": "GET",
@@ -415,7 +434,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Open the Seller Media Buys Page. Optionally focus one seller-owned account relationship and its buys or creatives; the Page self-fetches."
+    "summary": "Open the Seller Media Buys Page. Optionally focus one account relationship or seller account (not both) and its buys or creatives; the Page self-fetches."
   },
   "open_media_partners_page": {
     "path": "/tools/open_media_partners_page",
@@ -551,6 +570,25 @@ export const operations = {
     ],
     "summary": "Request a Buyer child under the selected Organization. Nothing is created until an Organization administrator approves it on our site; the result is approval_required with a link to show the person. Repeat with the same idempotencyKey and name for the outcome."
   },
+  "request_payment_authority": {
+    "path": "/tools/request_payment_authority",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Stage a card handoff for the organization and return a confirmation token. No link is issued until confirm_payment_authority."
+  },
   "request_proposals": {
     "path": "/tools/request_proposals",
     "method": "POST",
@@ -647,25 +685,6 @@ export const operations = {
     ],
     "summary": "Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only; /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef."
   },
-  "save_advertiser_access": {
-    "path": "/tools/save_advertiser_access",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": true,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:admin"
-        ]
-      }
-    ],
-    "summary": "Invite a client to one of your advertisers, approve, suspend, reactivate, or revoke a client, or change a client's role. Read get kind advertiser_access first and use only what it offers. Needs an organization administrator signed in directly."
-  },
   "save_advertiser_grant": {
     "path": "/tools/save_advertiser_grant",
     "method": "POST",
@@ -721,7 +740,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for certification. Select seller_save, developer_create, or developer_update."
+    "summary": "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or say it is ready for certification."
   },
   "save_ask": {
     "path": "/tools/save_ask",
@@ -778,7 +797,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Accept Terms, set seller terms, or manage payment authority. Cards stay off MCP."
+    "summary": "Accept Terms or set the payment terms sellers are asked for. Cards stay off MCP."
   },
   "save_business_rules": {
     "path": "/tools/save_business_rules",
@@ -816,7 +835,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create or manage one buyer agent."
+    "summary": "Create a buyer agent, or with id make one change: name, advertiser access, lifecycle state, or credential handoff."
   },
   "save_buyer_operator": {
     "path": "/tools/save_buyer_operator",
@@ -1048,7 +1067,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create or update where a seller's inventory comes from. Pass `id` to change an existing source, omit it to add one. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it."
+    "summary": "Create or update where a seller's inventory comes from. Pass `id` to change a source, omit it to add one, or pass only `agentId` to open a partner's connection form. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it."
   },
   "save_lesson": {
     "path": "/tools/save_lesson",
