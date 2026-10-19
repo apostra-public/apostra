@@ -23050,9 +23050,11 @@ paths:
       summary: >-
         Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether
         readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand.
+        A Developer account adds each agent's stage, blocker, and next call.
       description: >-
         Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether
         readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand.
+        A Developer account adds each agent's stage, blocker, and next call.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -23405,11 +23407,7 @@ paths:
                             page:
                               type: string
                             arguments:
-                              type: object
-                              propertyNames:
-                                type: string
-                              additionalProperties:
-                                type: string
+                              $ref: '#/components/schemas/get_status_success_NextActionsItemArguments'
                             url:
                               type: string
                           required:
@@ -23458,9 +23456,48 @@ paths:
                                   type: string
                                 displayName:
                                   type: string
+                                kind:
+                                  type: string
+                                  enum:
+                                    - sales
+                                    - creative
+                                    - buyer
+                                stage:
+                                  $ref: '#/components/schemas/get_status_success_AgentsResultsItemStage'
+                                nextStage:
+                                  anyOf:
+                                    - $ref: '#/components/schemas/get_status_success_AgentsResultsItemNextStage'
+                                    - type: 'null'
+                                stuckOn:
+                                  anyOf:
+                                    - type: object
+                                      properties:
+                                        reason:
+                                          type: string
+                                        nextAction:
+                                          type: object
+                                          properties:
+                                            tool:
+                                              type: string
+                                            arguments:
+                                              $ref: >-
+                                                #/components/schemas/get_status_success_AgentsResultsItemStuckOnNextActionArguments
+                                          required:
+                                            - tool
+                                            - arguments
+                                          additionalProperties: false
+                                      required:
+                                        - reason
+                                        - nextAction
+                                      additionalProperties: false
+                                    - type: 'null'
                               required:
                                 - agentId
                                 - displayName
+                                - kind
+                                - stage
+                                - nextStage
+                                - stuckOn
                               additionalProperties: false
                         required:
                           - total
@@ -23468,6 +23505,33 @@ paths:
                           - truncated
                           - results
                         additionalProperties: false
+                      resources:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            title:
+                              type: string
+                            url:
+                              type: string
+                            description:
+                              type: string
+                            audience:
+                              type: string
+                              enum:
+                                - all
+                                - sales
+                                - creative
+                                - buyer
+                          required:
+                            - id
+                            - title
+                            - url
+                            - description
+                            - audience
+                          additionalProperties: false
                     required:
                       - serverTime
                       - account
@@ -23689,7 +23753,7 @@ paths:
       security:
         - apiKeyAuth: []
         - m2mOAuth:
-            - interchange:admin
+            - interchange:read
       parameters:
         - name: X-SCOPE3-CUSTOMER-ID
           in: header
@@ -23822,7 +23886,7 @@ paths:
       security:
         - apiKeyAuth: []
         - m2mOAuth:
-            - interchange:admin
+            - interchange:read
       parameters:
         - name: X-SCOPE3-CUSTOMER-ID
           in: header
@@ -25412,11 +25476,11 @@ paths:
     post:
       operationId: open_page
       summary: >-
-        Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text.
-        Credentials and authority changes remain human ceremonies.
+        Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return
+        text. Credentials and authority changes remain human ceremonies.
       description: >-
-        Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text.
-        Credentials and authority changes remain human ceremonies.
+        Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return
+        text. Credentials and authority changes remain human ceremonies.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -25473,7 +25537,7 @@ paths:
                     - notifications
                     - webhooks
                     - buyer_proposal_version
-                  description: Page to open. source_diagnostics repairs a missing Agent relationship.
+                  description: Page to open. Owners repair a missing Agent relationship in source_diagnostics.
                 sourceId:
                   description: Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.
                   type: string
@@ -29978,6 +30042,34 @@ paths:
                         properties:
                           kind:
                             type: string
+                            const: buyer_agent
+                          outcome:
+                            type: string
+                            const: developer_created
+                          object:
+                            type: object
+                            properties:
+                              principalId:
+                                type: string
+                              displayName:
+                                type: string
+                              lifecycleState:
+                                type: string
+                                const: active
+                            required:
+                              - principalId
+                              - displayName
+                              - lifecycleState
+                            additionalProperties: false
+                        required:
+                          - kind
+                          - outcome
+                          - object
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          kind:
+                            type: string
                             const: agent
                           outcome:
                             type: string
@@ -31666,8 +31758,9 @@ paths:
                   description: 'Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.'
                 sellerHistoryCoop:
                   description: >-
-                    Join (true) or leave (false) the seller-history co-op; needs preview and confirmation. Resend the
-                    saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.
+                    Join (true) or leave (false) the seller-history co-op, the data co-op of Terms of Service section
+                    6.3; needs preview and confirmation. Resend the saved identity to change only this. Guide:
+                    /v2/concepts/seller-history-co-op.
                   example: true
                   type: boolean
                 preview:
@@ -72943,6 +73036,44 @@ components:
         - dataThrough
         - observedAt
       additionalProperties: false
+    get_status_success_NextActionsItemArguments:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties:
+        anyOf:
+          - type: string
+          - type: boolean
+          - type: array
+            items:
+              type: string
+    get_status_success_AgentsResultsItemStage:
+      type: string
+      enum:
+        - built
+        - connected
+        - tested
+        - certified
+        - listed
+    get_status_success_AgentsResultsItemNextStage:
+      type: string
+      enum:
+        - built
+        - connected
+        - tested
+        - certified
+        - listed
+    get_status_success_AgentsResultsItemStuckOnNextActionArguments:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties:
+        anyOf:
+          - type: string
+          - type: boolean
+          - type: array
+            items:
+              type: string
     open_campaign_receipt_success_ReceiptBudgetTotal:
       type: number
       description: Total amount.
@@ -74080,16 +74211,19 @@ components:
         kind:
           type: string
           enum:
-            - SALES
-            - CREATIVE
-          description: 'Kind for a new Agent: SALES or CREATIVE.'
+            - sales
+            - creative
+            - buyer
+          description: 'Kind for a new agent: sales, creative or buyer.'
         displayName:
           type: string
           minLength: 1
           maxLength: 255
           description: Name for a new Agent.
         operator:
-          description: Operator for a new Agent. Omit it to create an operator with the Agent name.
+          description: >-
+            Operator for a new sales or creative agent. Omit it to create an operator with the agent name. A buyer agent
+            has no operator.
           oneOf:
             - type: object
               properties:
@@ -74129,11 +74263,13 @@ components:
           type: string
           format: uri
         idempotencyKey:
+          description: >-
+            Unique key that makes a retried sales or creative registration find the first agent. Required for sales and
+            creative; a buyer agent takes none.
           type: string
           format: uuid
           pattern: >-
             ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
-          description: Unique key for a new Agent registration.
         expectedAccountId:
           anyOf:
             - type: integer
@@ -74150,7 +74286,6 @@ components:
         - operation
         - kind
         - displayName
-        - idempotencyKey
       additionalProperties: false
     save_agent_request_SaveAgentDeveloperCreateOperation:
       type: string

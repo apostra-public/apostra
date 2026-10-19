@@ -353,14 +353,14 @@ export class Apostra extends Transport {
   /** Show a seller what reporting we received for one buyer media buy, whether each receipt was accepted, and the current computed daily totals. Opens the Media Buy Timeline Glance. Returns the data together with response headers and request ID. */
   getSellerReportingReceiptsWithResponse(input: GetSellerReportingReceiptsInput, options?: RequestOptions): Promise<ResponseDetails<GetSellerReportingReceiptsResult>> { return this.requestDetailed("get_seller_reporting_receipts", input, options) }
   /**
-   * Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand.
+   * Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call.
    *
    * @example
    * await client.getStatus(input)
    */
   getStatus(input: GetStatusInput = {}, options?: RequestOptions): Promise<GetStatusResult> { return this.request("get_status", input, options) }
 
-  /** Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. Returns the data together with response headers and request ID. */
+  /** Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call. Returns the data together with response headers and request ID. */
   getStatusWithResponse(input: GetStatusInput = {}, options?: RequestOptions): Promise<ResponseDetails<GetStatusResult>> { return this.requestDetailed("get_status", input, options) }
   /**
    * Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for "show my advertisers" or "where do I start"; the Page self-fetches. To add or set up an advertiser, pass intent: "add". For a text answer use search(kind: "advertiser").
@@ -463,14 +463,14 @@ export class Apostra extends Transport {
   /** Open the Seller Media Buys Page. Optionally focus one seller-owned account relationship and its buys or creatives; the Page self-fetches. Returns the data together with response headers and request ID. */
   openMediaBuysPageWithResponse(input: OpenMediaBuysPageInput, options?: RequestOptions): Promise<ResponseDetails<OpenMediaBuysPageResult>> { return this.requestDetailed("open_media_buys_page", input, options) }
   /**
-   * Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies.
+   * Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies.
    *
    * @example
    * await client.openPage(input)
    */
   openPage(input: OpenPageInput, options?: RequestOptions): Promise<OpenPageResult> { return this.request("open_page", input, options) }
 
-  /** Open a compatibility Page. source_diagnostics can create or attach the Agent. External hosts may return text. Credentials and authority changes remain human ceremonies. Returns the data together with response headers and request ID. */
+  /** Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies. Returns the data together with response headers and request ID. */
   openPageWithResponse(input: OpenPageInput, options?: RequestOptions): Promise<ResponseDetails<OpenPageResult>> { return this.requestDetailed("open_page", input, options) }
   /**
    * Open Proposal Pass on one exact immutable RFP turn. Supply the matching rfpId and turnId from save_rfp or get; the Page loads the private response itself.
