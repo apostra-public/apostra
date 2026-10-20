@@ -19,13 +19,13 @@ async def typed_async(client: AsyncApostra) -> GetDeliveryResult:
     return await client.get_delivery({})
 
 library: SaveLibraryRequestInput = {'action': 'close', 'id': 'r', 'closedBy': 'upload', 'closingMaterialId': 'm'}
-creative: SaveCreativeSessionInput = {'scope': 'campaign', 'operation': 'select_output', 'campaignId': 'c', 'sessionId': 's', 'variantId': 'v', 'expectedRevision': 1}
+creative: SaveCreativeSessionInput = {'campaignId': 'c', 'sessionId': 's', 'selectedVariantId': 'v', 'expectedRevision': 1}
 dimension: SaveDimensionInput = {'kind': 'create', 'key': 'market', 'name': 'Market', 'valuesMode': 'open', 'appliesTo': ['campaign'], 'idempotencyKey': 'k'}
 media_buy_create: SaveMediaBuyInput = {'kind': 'create', 'idempotencyKey': 'k', 'sellerId': 'seller', 'products': [{'productId': 'product', 'targetingOverlay': {'geo_countries': ['US']}}]}
 media_buy_update: SaveMediaBuyInput = {'kind': 'update', 'idempotencyKey': 'k', 'mediaBuyId': 'buy', 'products': [{'productId': 'product', 'targetingOverlay': {'geo_countries': None}}]}
 search: SearchInput = {'kind': 'creative', 'filter': {'advertiserId': 'a'}}
 get: GetInput = {'kind': 'catalog', 'id': 'c', 'advertiserId': 'a'}
-material: SaveMaterialInput = {'action': 'replace_source', 'materialId': 'm', 'expectedRevision': 1, 'clientRequestId': 'k', 'source': {'kind': 'inline', 'name': 'n', 'content': 'c'}}
+material: SaveMaterialInput = {'materialId': 'm', 'expectedRevision': 1, 'clientRequestId': 'k', 'source': {'kind': 'inline', 'name': 'n', 'content': 'c'}}
 postal_targeting: SaveMediaBuyInput = {'kind': 'create', 'idempotencyKey': 'postal-1', 'sellerId': 'seller', 'products': [{'productId': 'product', 'targetingOverlay': {'geo_postal_areas': [{'country': 'US', 'system': 'zip', 'values': ['94105']}]}}]}
 postal_targeting_fallback: SaveMediaBuyInput = {'kind': 'create', 'idempotencyKey': 'postal-2', 'sellerId': 'seller', 'products': [{'productId': 'product', 'targetingOverlay': {'geo_postal_areas': [{'country': 'NZ', 'system': 'custom', 'values': ['00100']}]}}]}
 evidence_url: EvidenceUrl = 'https://example.test/evidence'
