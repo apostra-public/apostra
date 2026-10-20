@@ -6043,17 +6043,14 @@ SaveAdvertiserSuccessResults: TypeAlias = "list[SaveAdvertiserSuccessResultsItem
 SaveAdvertiserSuccessValue: TypeAlias = JsonValue
 
 class SaveAgentRequestSaveAgentDeveloperCreateInput(TypedDict):
-    operation: SaveAgentRequestSaveAgentDeveloperCreateOperation
-    kind: Literal["sales", "creative", "buyer"]
-    '\n    Kind for a new agent: sales, creative or buyer.\n    '
+    kind: Literal["sales", "creative"]
+    '\n    Kind for a new agent: sales or creative.\n    '
     displayName: str
     '\n    Name for a new Agent.\n    '
     operator: NotRequired[SaveAgentRequestSaveAgentDeveloperCreateInputOperatorKindEXISTING | SaveAgentRequestSaveAgentDeveloperCreateInputOperatorKindNEW]
-    '\n    Operator for a new sales or creative agent. Omit it to create an operator with the agent name. A buyer agent has no operator.\n    '
-    endpoint: NotRequired[str]
-    '\n    Reserved for an immutable implementation revision; register endpoints through the Agent Page.\n    '
-    idempotencyKey: NotRequired[str]
-    '\n    Unique key that makes a retried sales or creative registration find the first agent. Required for sales and creative; a buyer agent takes none.\n    '
+    '\n    Operator for the new agent. Omit it to create an operator with the agent name.\n    '
+    idempotencyKey: str
+    '\n    Unique key that makes a retried registration find the first agent.\n    '
     expectedAccountId: NotRequired[int | str]
     accountId: NotRequired[int | str]
 
@@ -6069,25 +6066,17 @@ class SaveAgentRequestSaveAgentDeveloperCreateInputOperatorKindNEW(TypedDict):
     displayName: str
     '\n    Name for the new provider operator.\n    '
 
-SaveAgentRequestSaveAgentDeveloperCreateOperation: TypeAlias = Literal["developer_create"]
-
 class SaveAgentRequestSaveAgentDeveloperUpdateInput(TypedDict):
-    operation: SaveAgentRequestSaveAgentDeveloperUpdateOperation
     agentId: str
     '\n    Owned Agent ID to update.\n    '
     displayName: NotRequired[str]
     '\n    New name for the owned Agent.\n    '
     certificationRequested: NotRequired[bool]
     '\n    true says this Sales Agent is ready for certification and asks us to start it. false stops new certification runs; running buys continue. Saving the current value changes nothing.\n    '
-    endpoint: NotRequired[str]
-    '\n    Reserved for an immutable implementation revision; register endpoints through the Agent Page.\n    '
     expectedAccountId: NotRequired[int | str]
     accountId: NotRequired[int | str]
 
-SaveAgentRequestSaveAgentDeveloperUpdateOperation: TypeAlias = Literal["developer_update"]
-
 class SaveAgentRequestSaveAgentSellerSaveInput(TypedDict):
-    operation: SaveAgentRequestSaveAgentSellerSaveOperation
     agentId: str
     '\n    Sales Agent ID returned by search or get.\n    '
     sourceId: NotRequired[str]
@@ -6100,8 +6089,6 @@ class SaveAgentRequestSaveAgentSellerSaveInput(TypedDict):
     accountId: NotRequired[int | str]
 
 SaveAgentInput: TypeAlias = "SaveAgentRequestSaveAgentSellerSaveInput | SaveAgentRequestSaveAgentDeveloperCreateInput | SaveAgentRequestSaveAgentDeveloperUpdateInput"
-
-SaveAgentRequestSaveAgentSellerSaveOperation: TypeAlias = Literal["seller_save"]
 
 class SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHrefAndObjectRole(TypedDict):
     kind: Literal["agent"]
@@ -8679,13 +8666,13 @@ class SaveCreativeInput(TypedDict):
     creativeId: NotRequired[str]
     '\n    ID of the creative to update. Omit to create a new one.\n    '
     campaignId: NotRequired[str]
-    '\n    Campaign to create the creative in. Required on create unless advertiserId is set.\n    '
+    '\n    Campaign to create the creative in. Required on create unless advertiserId is set. On a draft it only records the intended campaign.\n    '
     campaignIds: NotRequired[list[str]]
     '\n    All campaigns this creative runs on; replaces membership, a missing id detaches. Omit to keep.\n    '
     advertiserId: NotRequired[str]
     '\n    Advertiser scope. Required on create when no campaignId, and on archive.\n    '
     mode: NotRequired[Literal["draft", "complete"]]
-    '\n    Save a partial draft or validate and complete it. Omission preserves complete-save behaviour.\n    '
+    '\n    Save a partial draft, or validate and complete it. Omitted means a complete save.\n    '
     expectedRevision: NotRequired[int]
     '\n    Current whole-state Creative stateRevision. Required for advertiser-scoped replacement.\n    '
     name: NotRequired[str]
@@ -8705,7 +8692,7 @@ class SaveCreativeInput(TypedDict):
     sourceAssetRef: NotRequired[str]
     '\n    Finalized private JPEG/PNG; create-only with advertiserId/campaignId, not with assets/sourceAssets.\n    '
     sourceAssets: NotRequired[list[SaveCreativeInputSourceAssetsItemKindAssetRef | SaveCreativeInputSourceAssetsItemKindAssetId]]
-    '\n    Finalized JPEG/PNG/promoted MP4 for formatOptionRef slots; supports pre-campaign advertiser scope.\n    '
+    '\n    Uploaded JPEG/PNG/MP4 for format slots. A draft may omit it.\n    '
     clickUrl: NotRequired[SaveCreativeRequestClickUrl]
     '\n    Click-through destination URL for this creative.\n    '
     macroAdditions: NotRequired[list[SaveCreativeInputMacroAdditionsItem]]
