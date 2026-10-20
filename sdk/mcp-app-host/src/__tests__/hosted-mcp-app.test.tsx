@@ -520,6 +520,60 @@ describe('HostedMcpAppFrame', () => {
     })
   })
 
+  it("delivers the launch result's _meta with its structured content", async () => {
+    const meta = {
+      'scope3/storefront-v3-page-capability': 'fixture-signed-capability',
+    }
+    render(
+      <HostedMcpAppFrame
+        directive={{ ...directive, meta }}
+        loadResource={() =>
+          Promise.resolve('<!doctype html><html><body>Review</body></html>')
+        }
+        createHostContext={() => ({ theme: 'light' })}
+        handlers={{}}
+      />,
+    )
+    await waitFor(() => expect(bridgeMocks.instances).toHaveLength(1))
+    bridgeMocks.instances[0]?.oninitialized()
+
+    expect(bridgeMocks.instances[0]?.sendToolResult).toHaveBeenCalledWith({
+      content: [],
+      structuredContent: { revision: 3 },
+      _meta: meta,
+    })
+  })
+
+  it('replaces and reconnects the bridge when the launch _meta changes', async () => {
+    const sharedProps = {
+      loadResource: () =>
+        Promise.resolve('<!doctype html><html><body>Review</body></html>'),
+      createHostContext: () => ({ theme: 'light' as const }),
+      handlers: {},
+    }
+    const { rerender } = render(
+      <HostedMcpAppFrame
+        directive={{ ...directive, meta: { capability: 'first' } }}
+        {...sharedProps}
+      />,
+    )
+    await waitFor(() => expect(bridgeMocks.instances).toHaveLength(1))
+
+    rerender(
+      <HostedMcpAppFrame
+        directive={{ ...directive, meta: { capability: 'second' } }}
+        {...sharedProps}
+      />,
+    )
+    await waitFor(() => expect(bridgeMocks.instances).toHaveLength(2))
+    bridgeMocks.instances[1]?.oninitialized()
+    expect(bridgeMocks.instances[1]?.sendToolResult).toHaveBeenCalledWith({
+      content: [],
+      structuredContent: { revision: 3 },
+      _meta: { capability: 'second' },
+    })
+  })
+
   it('ignores size changes from a retired bridge', async () => {
     const sharedProps = {
       directive,
