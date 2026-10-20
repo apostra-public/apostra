@@ -72,13 +72,8 @@ jobs:
         env:
           EXPECTED_VERSION: ${{ needs.build.outputs.version }}
         run: node sdk/release/registry-state.mjs --targets mcp-app-host --version "$EXPECTED_VERSION"
-      # For the first npm package creation only, a scope owner supplies a
-      # short-lived environment secret. Remove it after configuring OIDC.
-      - if: steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists != 'true'
-        run: npm publish ./artifacts/*.tgz --access public --provenance --ignore-scripts
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_BOOTSTRAP_TOKEN }}
-      - if: steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists == 'true'
+      # npm trusted publishing: npm authenticates this job by its OIDC token.
+      - if: steps.registry.outputs.npm_version_exists != 'true'
         run: npm publish ./artifacts/*.tgz --access public --provenance --ignore-scripts
   release:
     needs: [build, publish]
