@@ -740,7 +740,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for certification. Select seller_save, developer_create, or developer_update."
+    "summary": "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or say it is ready for certification."
   },
   "save_ask": {
     "path": "/tools/save_ask",

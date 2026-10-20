@@ -3981,8 +3981,9 @@ class GetStatusResultAgentsResultsItem(TypedDict):
     stuckOn: GetStatusResultAgentsResultsItemStuckOnValue | None
 
 class GetStatusResultAgentsResultsItemStuckOnNextAction(TypedDict):
-    tool: str
-    arguments: GetStatusSuccessAgentsResultsItemStuckOnNextActionArguments
+    tool: NotRequired[str]
+    arguments: NotRequired[GetStatusSuccessAgentsResultsItemStuckOnNextActionArguments]
+    resource: NotRequired[str]
 
 class GetStatusResultAgentsResultsItemStuckOnValue(TypedDict):
     reason: str
@@ -6043,17 +6044,14 @@ SaveAdvertiserSuccessResults: TypeAlias = "list[SaveAdvertiserSuccessResultsItem
 SaveAdvertiserSuccessValue: TypeAlias = JsonValue
 
 class SaveAgentRequestSaveAgentDeveloperCreateInput(TypedDict):
-    operation: SaveAgentRequestSaveAgentDeveloperCreateOperation
-    kind: Literal["sales", "creative", "buyer"]
-    '\n    Kind for a new agent: sales, creative or buyer.\n    '
+    kind: Literal["sales", "creative"]
+    '\n    Kind for a new agent: sales or creative.\n    '
     displayName: str
     '\n    Name for a new Agent.\n    '
     operator: NotRequired[SaveAgentRequestSaveAgentDeveloperCreateInputOperatorKindEXISTING | SaveAgentRequestSaveAgentDeveloperCreateInputOperatorKindNEW]
-    '\n    Operator for a new sales or creative agent. Omit it to create an operator with the agent name. A buyer agent has no operator.\n    '
-    endpoint: NotRequired[str]
-    '\n    Reserved for an immutable implementation revision; register endpoints through the Agent Page.\n    '
-    idempotencyKey: NotRequired[str]
-    '\n    Unique key that makes a retried sales or creative registration find the first agent. Required for sales and creative; a buyer agent takes none.\n    '
+    '\n    Operator for the new agent. Omit it to create an operator with the agent name.\n    '
+    idempotencyKey: str
+    '\n    Unique key that makes a retried registration find the first agent.\n    '
     expectedAccountId: NotRequired[int | str]
     accountId: NotRequired[int | str]
 
@@ -6069,25 +6067,17 @@ class SaveAgentRequestSaveAgentDeveloperCreateInputOperatorKindNEW(TypedDict):
     displayName: str
     '\n    Name for the new provider operator.\n    '
 
-SaveAgentRequestSaveAgentDeveloperCreateOperation: TypeAlias = Literal["developer_create"]
-
 class SaveAgentRequestSaveAgentDeveloperUpdateInput(TypedDict):
-    operation: SaveAgentRequestSaveAgentDeveloperUpdateOperation
     agentId: str
     '\n    Owned Agent ID to update.\n    '
     displayName: NotRequired[str]
     '\n    New name for the owned Agent.\n    '
     certificationRequested: NotRequired[bool]
     '\n    true says this Sales Agent is ready for certification and asks us to start it. false stops new certification runs; running buys continue. Saving the current value changes nothing.\n    '
-    endpoint: NotRequired[str]
-    '\n    Reserved for an immutable implementation revision; register endpoints through the Agent Page.\n    '
     expectedAccountId: NotRequired[int | str]
     accountId: NotRequired[int | str]
 
-SaveAgentRequestSaveAgentDeveloperUpdateOperation: TypeAlias = Literal["developer_update"]
-
 class SaveAgentRequestSaveAgentSellerSaveInput(TypedDict):
-    operation: SaveAgentRequestSaveAgentSellerSaveOperation
     agentId: str
     '\n    Sales Agent ID returned by search or get.\n    '
     sourceId: NotRequired[str]
@@ -6100,8 +6090,6 @@ class SaveAgentRequestSaveAgentSellerSaveInput(TypedDict):
     accountId: NotRequired[int | str]
 
 SaveAgentInput: TypeAlias = "SaveAgentRequestSaveAgentSellerSaveInput | SaveAgentRequestSaveAgentDeveloperCreateInput | SaveAgentRequestSaveAgentDeveloperUpdateInput"
-
-SaveAgentRequestSaveAgentSellerSaveOperation: TypeAlias = Literal["seller_save"]
 
 class SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHrefAndObjectRole(TypedDict):
     kind: Literal["agent"]
@@ -8679,13 +8667,13 @@ class SaveCreativeInput(TypedDict):
     creativeId: NotRequired[str]
     '\n    ID of the creative to update. Omit to create a new one.\n    '
     campaignId: NotRequired[str]
-    '\n    Campaign to create the creative in. Required on create unless advertiserId is set.\n    '
+    '\n    Campaign to create the creative in. Required on create unless advertiserId is set. On a draft it only records the intended campaign.\n    '
     campaignIds: NotRequired[list[str]]
     '\n    All campaigns this creative runs on; replaces membership, a missing id detaches. Omit to keep.\n    '
     advertiserId: NotRequired[str]
     '\n    Advertiser scope. Required on create when no campaignId, and on archive.\n    '
     mode: NotRequired[Literal["draft", "complete"]]
-    '\n    Save a partial draft or validate and complete it. Omission preserves complete-save behaviour.\n    '
+    '\n    Save a partial draft, or validate and complete it. Omitted means a complete save.\n    '
     expectedRevision: NotRequired[int]
     '\n    Current whole-state Creative stateRevision. Required for advertiser-scoped replacement.\n    '
     name: NotRequired[str]
@@ -8705,7 +8693,7 @@ class SaveCreativeInput(TypedDict):
     sourceAssetRef: NotRequired[str]
     '\n    Finalized private JPEG/PNG; create-only with advertiserId/campaignId, not with assets/sourceAssets.\n    '
     sourceAssets: NotRequired[list[SaveCreativeInputSourceAssetsItemKindAssetRef | SaveCreativeInputSourceAssetsItemKindAssetId]]
-    '\n    Finalized JPEG/PNG/promoted MP4 for formatOptionRef slots; supports pre-campaign advertiser scope.\n    '
+    '\n    Uploaded JPEG/PNG/MP4 for format slots. A draft may omit it.\n    '
     clickUrl: NotRequired[SaveCreativeRequestClickUrl]
     '\n    Click-through destination URL for this creative.\n    '
     macroAdditions: NotRequired[list[SaveCreativeInputMacroAdditionsItem]]
@@ -15389,6 +15377,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -15616,6 +15606,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict)
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision(TypedDict):
     accountId: NotRequired[int | str]
@@ -15647,6 +15639,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -16064,6 +16058,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -16292,6 +16288,8 @@ class SearchInputKindAdServerTargeting(TypedDict):
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 class SearchInputKindAdServerTargetingFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -16520,6 +16518,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSessionFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -16748,6 +16748,8 @@ class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -16976,6 +16978,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -17202,6 +17206,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -17422,6 +17428,8 @@ class SearchInputKindCreativeSessionWithFilterAdvertiserId(TypedDict):
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 class SearchInputKindCreativeSessionWithFilterAdvertiserIdFilter(TypedDict):
     advertiserId: str
@@ -17454,6 +17462,8 @@ class SearchInputKindCreativeSessionWithFilterCampaignId(TypedDict):
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 class SearchInputKindCreativeSessionWithFilterCampaignIdFilter(TypedDict):
     campaignId: str
@@ -17492,6 +17502,8 @@ class SearchInputKindCreativeWithFilterAdvertiserId(TypedDict):
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 class SearchInputKindCreativeWithFilterAdvertiserIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -17718,6 +17730,8 @@ class SearchInputKindCreativeWithFilterCampaignId(TypedDict):
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 class SearchInputKindCreativeWithFilterCampaignIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -17944,6 +17958,8 @@ class SearchInputKindEventSource(TypedDict):
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 class SearchInputKindEventSourceFilter(TypedDict):
     advertiserId: str
@@ -17980,6 +17996,8 @@ class SearchInputKindProposal(TypedDict):
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.\n    '
 
 SearchInput: TypeAlias = "SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSession | SearchInputKindCreativeAssetAndCatalog | SearchInputKindEventSource | SearchInputKindProposal | SearchInputKindCreativeWithFilterCampaignId | SearchInputKindCreativeWithFilterAdvertiserId | SearchInputKindCreativeCollectionWithFilterCampaignId | SearchInputKindCreativeCollectionWithFilterAdvertiserId | SearchInputKindCreativeSessionWithFilterCampaignId | SearchInputKindCreativeSessionWithFilterAdvertiserId | SearchInputKindAdServerTargeting | SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision | SearchInputDocsScopeCallerRelevantAndPublicResearch"
 
@@ -18185,7 +18203,7 @@ SearchRequestCreativeSource: TypeAlias = Literal["uploaded", "generated", "conne
 
 class SearchResult(TypedDict):
     sources: list[Literal["objects", "docs", "specs"]]
-    objects: NotRequired[SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchSessionPageOutput | SearchResultObjectsKindMaterial | SearchResultObjectsKindMixed]
+    objects: NotRequired[SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchSessionPageOutput | SearchResultObjectsWithGroupByAndGroupsAndTotal | SearchResultObjectsKindMaterial | SearchResultObjectsKindMixed]
     objectsUnavailable: NotRequired[str]
     knowledge: NotRequired[list[JsonValue]]
     knowledgeRelevance: NotRequired[JsonValue]
@@ -18205,6 +18223,18 @@ class SearchResultObjectsKindMixed(TypedDict):
     outcome: Literal["mixed"]
     kind: Literal["mixed"]
     sections: list[SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput]
+
+class SearchResultObjectsWithGroupByAndGroupsAndTotal(TypedDict):
+    kind: str
+    groupBy: str
+    total: float
+    groups: list[SearchResultObjectsWithGroupByAndGroupsAndTotalGroupsItem]
+    truncated: bool
+    otherCount: NotRequired[float]
+
+class SearchResultObjectsWithGroupByAndGroupsAndTotalGroupsItem(TypedDict):
+    value: str | None
+    count: float
 
 class SearchSuccessSearchAccountPageOutput(TypedDict):
     total: NotRequired[SearchSuccessSearchAccountPageOutputTotal]
