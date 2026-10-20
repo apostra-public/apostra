@@ -6888,8 +6888,9 @@ export type GetStatusResponses = {
                     stuckOn: {
                         reason: string;
                         nextAction: {
-                            tool: string;
-                            arguments: GetStatusSuccessAgentsResultsItemStuckOnNextActionArguments;
+                            tool?: string;
+                            arguments?: GetStatusSuccessAgentsResultsItemStuckOnNextActionArguments;
+                            resource?: string;
                         };
                     } | null;
                 }>;
@@ -11906,17 +11907,16 @@ export type SaveAgentErrors = {
 };
 
 export type SaveAgentRequestSaveAgentDeveloperCreateInput = {
-    operation: SaveAgentRequestSaveAgentDeveloperCreateOperation;
     /**
-     * Kind for a new agent: sales, creative or buyer.
+     * Kind for a new agent: sales or creative.
      */
-    kind: 'sales' | 'creative' | 'buyer';
+    kind: 'sales' | 'creative';
     /**
      * Name for a new Agent.
      */
     displayName: string;
     /**
-     * Operator for a new sales or creative agent. Omit it to create an operator with the agent name. A buyer agent has no operator.
+     * Operator for the new agent. Omit it to create an operator with the agent name.
      */
     operator?: {
         /**
@@ -11940,24 +11940,17 @@ export type SaveAgentRequestSaveAgentDeveloperCreateInput = {
         operatorUid?: never;
     };
     /**
-     * Reserved for an immutable implementation revision; register endpoints through the Agent Page.
+     * Unique key that makes a retried registration find the first agent.
      */
-    endpoint?: string;
-    /**
-     * Unique key that makes a retried sales or creative registration find the first agent. Required for sales and creative; a buyer agent takes none.
-     */
-    idempotencyKey?: string;
+    idempotencyKey: string;
     expectedAccountId?: number | string;
     accountId?: number | string;
 };
 
-/**
- * Register a Developer-owned Agent.
- */
-export type SaveAgentRequestSaveAgentDeveloperCreateOperation = 'developer_create';
+/** @deprecated use SaveAgentRequestSaveAgentDeveloperCreateInput */
+export type SaveAgentRequestSaveAgentDeveloperCreateOperation = SaveAgentRequestSaveAgentDeveloperCreateInput;
 
 export type SaveAgentRequestSaveAgentDeveloperUpdateInput = {
-    operation: SaveAgentRequestSaveAgentDeveloperUpdateOperation;
     /**
      * Owned Agent ID to update.
      */
@@ -11970,21 +11963,14 @@ export type SaveAgentRequestSaveAgentDeveloperUpdateInput = {
      * true says this Sales Agent is ready for certification and asks us to start it. false stops new certification runs; running buys continue. Saving the current value changes nothing.
      */
     certificationRequested?: boolean;
-    /**
-     * Reserved for an immutable implementation revision; register endpoints through the Agent Page.
-     */
-    endpoint?: string;
     expectedAccountId?: number | string;
     accountId?: number | string;
 };
 
-/**
- * Rename a Developer-owned Agent or say whether it is ready for certification.
- */
-export type SaveAgentRequestSaveAgentDeveloperUpdateOperation = 'developer_update';
+/** @deprecated use SaveAgentRequestSaveAgentDeveloperUpdateInput */
+export type SaveAgentRequestSaveAgentDeveloperUpdateOperation = SaveAgentRequestSaveAgentDeveloperUpdateInput;
 
 export type SaveAgentRequestSaveAgentSellerSaveInput = {
-    operation: SaveAgentRequestSaveAgentSellerSaveOperation;
     /**
      * Sales Agent ID returned by search or get.
      */
@@ -12005,10 +11991,8 @@ export type SaveAgentRequestSaveAgentSellerSaveInput = {
     accountId?: number | string;
 };
 
-/**
- * Confirm or correct a Seller product mode.
- */
-export type SaveAgentRequestSaveAgentSellerSaveOperation = 'seller_save';
+/** @deprecated use SaveAgentRequestSaveAgentSellerSaveInput */
+export type SaveAgentRequestSaveAgentSellerSaveOperation = SaveAgentRequestSaveAgentSellerSaveInput;
 
 export type SaveAgentResponse = SaveAgentResponses[keyof SaveAgentResponses];
 
@@ -16502,7 +16486,7 @@ export type SaveCreativeData = {
          */
         creativeId?: string;
         /**
-         * Campaign to create the creative in. Required on create unless advertiserId is set.
+         * Campaign to create the creative in. Required on create unless advertiserId is set. On a draft it only records the intended campaign.
          */
         campaignId?: string;
         /**
@@ -16514,7 +16498,7 @@ export type SaveCreativeData = {
          */
         advertiserId?: string;
         /**
-         * Save a partial draft or validate and complete it. Omission preserves complete-save behaviour.
+         * Save a partial draft, or validate and complete it. Omitted means a complete save.
          */
         mode?: 'draft' | 'complete';
         /**
@@ -16608,7 +16592,7 @@ export type SaveCreativeData = {
          */
         sourceAssetRef?: string;
         /**
-         * Finalized JPEG/PNG/promoted MP4 for formatOptionRef slots; supports pre-campaign advertiser scope.
+         * Uploaded JPEG/PNG/MP4 for format slots. A draft may omit it.
          */
         sourceAssets?: Array<{
             /**
@@ -29795,6 +29779,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
     }) | (unknown & {
         /**
@@ -30245,6 +30233,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
     }) | (unknown & {
         /**
@@ -30309,6 +30301,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
     }) | (unknown & {
         /**
@@ -30759,6 +30755,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
     }) | (unknown & {
         /**
@@ -31205,6 +31205,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
     }) | (unknown & {
         /**
@@ -31651,6 +31655,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
     }) | (unknown & {
         /**
@@ -32097,6 +32105,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
     }) | (unknown & {
         /**
@@ -32543,6 +32555,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
     }) | (unknown & {
         /**
@@ -32599,6 +32615,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
         query?: never;
         include?: never;
@@ -32658,6 +32678,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
         query?: never;
         include?: never;
@@ -33111,6 +33135,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
     }) | (unknown & {
         /**
@@ -33560,6 +33588,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
         kind?: never;
     }) | (unknown & {
@@ -34010,6 +34042,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
         kind?: never;
     }) | (unknown & {
@@ -34460,6 +34496,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
         kind?: never;
     }) | (unknown & {
@@ -34910,6 +34950,10 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source: status.
+         */
+        groupBy?: string;
         accountId?: number | string;
         kind?: never;
     })) & {
@@ -35006,6 +35050,17 @@ export type SearchResponses = {
         data: {
             sources: Array<'objects' | 'docs' | 'specs'>;
             objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchSessionPageOutput | {
+                kind: string;
+                groupBy: string;
+                total: number;
+                groups: Array<{
+                    value: string | null;
+                    count: number;
+                }>;
+                truncated: boolean;
+                otherCount?: number;
+                [key: string]: unknown;
+            } | {
                 outcome: 'library_browse';
                 kind: 'material';
                 returned: number;
