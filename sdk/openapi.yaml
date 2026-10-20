@@ -30305,11 +30305,11 @@ paths:
     post:
       operationId: save_agent
       summary: >-
-        Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for
-        certification. Select seller_save, developer_create, or developer_update.
+        Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or
+        say it is ready for certification.
       description: >-
-        Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for
-        certification. Select seller_save, developer_create, or developer_update.
+        Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or
+        say it is ready for certification.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -30330,7 +30330,7 @@ paths:
         content:
           application/json:
             schema:
-              oneOf:
+              anyOf:
                 - $ref: '#/components/schemas/save_agent_request_SaveAgentSellerSaveInput'
                 - $ref: '#/components/schemas/save_agent_request_SaveAgentDeveloperCreateInput'
                 - $ref: '#/components/schemas/save_agent_request_SaveAgentDeveloperUpdateInput'
@@ -35614,7 +35614,9 @@ paths:
                   type: string
                   minLength: 1
                 campaignId:
-                  description: Campaign to create the creative in. Required on create unless advertiserId is set.
+                  description: >-
+                    Campaign to create the creative in. Required on create unless advertiserId is set. On a draft it
+                    only records the intended campaign.
                   type: string
                   minLength: 1
                 campaignIds:
@@ -35630,7 +35632,7 @@ paths:
                   type: string
                   minLength: 1
                 mode:
-                  description: Save a partial draft or validate and complete it. Omission preserves complete-save behaviour.
+                  description: Save a partial draft, or validate and complete it. Omitted means a complete save.
                   type: string
                   enum:
                     - draft
@@ -35783,7 +35785,7 @@ paths:
                   type: string
                   pattern: ^scope3-asset:\/\/v1\/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
                 sourceAssets:
-                  description: Finalized JPEG/PNG/promoted MP4 for formatOptionRef slots; supports pre-campaign advertiser scope.
+                  description: Uploaded JPEG/PNG/MP4 for format slots. A draft may omit it.
                   maxItems: 10
                   type: array
                   items:
@@ -35970,13 +35972,37 @@ paths:
                       - mode
                   then:
                     allOf:
-                      - required:
-                          - sourceAssets
-                      - required:
-                          - advertiserId
+                      - anyOf:
+                          - required:
+                              - campaignId
+                          - required:
+                              - advertiserId
                       - not:
                           required:
-                            - campaignId
+                            - sourceAssetRef
+                      - if:
+                          required:
+                            - assets
+                        then:
+                          required:
+                            - sourceAssets
+                      - if:
+                          allOf:
+                            - anyOf:
+                                - not:
+                                    required:
+                                      - sourceAssets
+                                - properties:
+                                    sourceAssets:
+                                      maxItems: 0
+                                  required:
+                                    - sourceAssets
+                            - not:
+                                required:
+                                  - creativeId
+                        then:
+                          required:
+                            - creativeFormatId
                       - oneOf:
                           - allOf:
                               - required:
@@ -36006,8 +36032,14 @@ paths:
                       - creativeFormatId
                   then:
                     allOf:
-                      - required:
-                          - sourceAssets
+                      - anyOf:
+                          - required:
+                              - sourceAssets
+                          - properties:
+                              mode:
+                                const: draft
+                            required:
+                              - mode
                       - allOf:
                           - not:
                               required:
@@ -36018,9 +36050,15 @@ paths:
                           - not:
                               required:
                                 - formatOptionRef
+                      - anyOf:
                           - not:
                               required:
                                 - campaignId
+                          - properties:
+                              mode:
+                                const: draft
+                            required:
+                              - mode
                 - if:
                     required:
                       - expectedRevision
@@ -36028,16 +36066,28 @@ paths:
                     allOf:
                       - required:
                           - creativeId
-                      - required:
-                          - sourceAssets
+                      - anyOf:
+                          - required:
+                              - sourceAssets
+                          - properties:
+                              mode:
+                                const: draft
+                            required:
+                              - mode
                       - required:
                           - creativeFormatId
                 - if:
                     allOf:
                       - required:
                           - creativeId
-                      - required:
-                          - sourceAssets
+                      - anyOf:
+                          - required:
+                              - sourceAssets
+                          - properties:
+                              mode:
+                                const: draft
+                            required:
+                              - mode
                   then:
                     allOf:
                       - required:
@@ -36161,11 +36211,24 @@ paths:
                       - required:
                           - formatOptionRef
                       - allOf:
-                          - required:
-                              - advertiserId
-                          - not:
-                              required:
-                                - campaignId
+                          - anyOf:
+                              - allOf:
+                                  - required:
+                                      - advertiserId
+                                  - not:
+                                      required:
+                                        - campaignId
+                              - allOf:
+                                  - properties:
+                                      mode:
+                                        const: draft
+                                    required:
+                                      - mode
+                                  - anyOf:
+                                      - required:
+                                          - advertiserId
+                                      - required:
+                                          - campaignId
                           - required:
                               - formatKind
                 - if:
@@ -36173,11 +36236,24 @@ paths:
                       - formatParams
                   then:
                     allOf:
-                      - required:
-                          - advertiserId
-                      - not:
-                          required:
-                            - campaignId
+                      - anyOf:
+                          - allOf:
+                              - required:
+                                  - advertiserId
+                              - not:
+                                  required:
+                                    - campaignId
+                          - allOf:
+                              - properties:
+                                  mode:
+                                    const: draft
+                                required:
+                                  - mode
+                              - anyOf:
+                                  - required:
+                                      - advertiserId
+                                  - required:
+                                      - campaignId
                       - required:
                           - sourceAssets
                       - required:
@@ -50749,6 +50825,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -50949,6 +51032,27 @@ paths:
                         properties:
                           query:
                             maxLength: 512
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
                     - if:
                         properties:
                           kind:
@@ -52235,6 +52339,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -52436,6 +52547,27 @@ paths:
                         properties:
                           query:
                             maxLength: 512
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
                     - if:
                         properties:
                           kind:
@@ -52878,6 +53010,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -53079,6 +53218,27 @@ paths:
                         properties:
                           query:
                             maxLength: 512
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
                     - if:
                         properties:
                           kind:
@@ -54363,6 +54523,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -54564,6 +54731,27 @@ paths:
                         properties:
                           query:
                             maxLength: 512
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
                     - if:
                         properties:
                           kind:
@@ -55839,6 +56027,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -56040,6 +56235,27 @@ paths:
                         properties:
                           query:
                             maxLength: 512
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
                     - if:
                         properties:
                           kind:
@@ -57318,6 +57534,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -57519,6 +57742,27 @@ paths:
                         properties:
                           query:
                             maxLength: 512
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
                     - if:
                         properties:
                           kind:
@@ -58794,6 +59038,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -58995,6 +59246,27 @@ paths:
                         properties:
                           query:
                             maxLength: 512
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
                     - if:
                         properties:
                           kind:
@@ -60273,6 +60545,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -60474,6 +60753,27 @@ paths:
                         properties:
                           query:
                             maxLength: 512
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
                     - if:
                         properties:
                           kind:
@@ -60932,6 +61232,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -61133,6 +61440,27 @@ paths:
                         properties:
                           query:
                             maxLength: 512
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
                     - if:
                         properties:
                           kind:
@@ -61594,6 +61922,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -61795,6 +62130,27 @@ paths:
                         properties:
                           query:
                             maxLength: 512
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
                     - if:
                         properties:
                           kind:
@@ -63077,6 +63433,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -63279,6 +63642,27 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
+                    - if:
                         properties:
                           kind:
                             const: creative_asset
@@ -64558,6 +64942,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -64759,6 +65150,27 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
+                    - if:
                         properties:
                           kind:
                             const: creative_asset
@@ -66038,6 +66450,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -66239,6 +66658,27 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
+                    - if:
                         properties:
                           kind:
                             const: creative_asset
@@ -67518,6 +67958,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -67720,6 +68167,27 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
+                    - if:
                         properties:
                           kind:
                             const: creative_asset
@@ -68999,6 +69467,13 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
+                        Needs kind and takes no cursor. limit caps the values returned (at most 50). inventory_source:
+                        status.
+                      type: string
+                      minLength: 1
                     accountId:
                       anyOf:
                         - type: integer
@@ -69197,6 +69672,27 @@ paths:
                         properties:
                           query:
                             maxLength: 512
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
                     - if:
                         properties:
                           kind:
@@ -69592,6 +70088,40 @@ paths:
                               - $ref: '#/components/schemas/search_success_SearchBuyerAgentPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchDimensionPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchSessionPageOutput'
+                          - type: object
+                            properties:
+                              kind:
+                                type: string
+                              groupBy:
+                                type: string
+                              total:
+                                type: number
+                              groups:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    value:
+                                      type:
+                                        - string
+                                        - 'null'
+                                    count:
+                                      type: number
+                                  required:
+                                    - value
+                                    - count
+                                  additionalProperties: false
+                              truncated:
+                                type: boolean
+                              otherCount:
+                                type: number
+                            required:
+                              - kind
+                              - groupBy
+                              - total
+                              - groups
+                              - truncated
+                            additionalProperties: {}
                           - type: object
                             properties:
                               outcome:
@@ -75061,8 +75591,6 @@ components:
     save_agent_request_SaveAgentSellerSaveInput:
       type: object
       properties:
-        operation:
-          $ref: '#/components/schemas/save_agent_request_SaveAgentSellerSaveOperation'
         agentId:
           type: string
           format: uuid
@@ -75101,36 +75629,26 @@ components:
             - type: string
               pattern: ^[1-9][0-9]*$
       required:
-        - operation
         - agentId
         - productMode
         - reason
       additionalProperties: false
-    save_agent_request_SaveAgentSellerSaveOperation:
-      type: string
-      const: seller_save
-      description: Confirm or correct a Seller product mode.
     save_agent_request_SaveAgentDeveloperCreateInput:
       type: object
       properties:
-        operation:
-          $ref: '#/components/schemas/save_agent_request_SaveAgentDeveloperCreateOperation'
         kind:
           type: string
           enum:
             - sales
             - creative
-            - buyer
-          description: 'Kind for a new agent: sales, creative or buyer.'
+          description: 'Kind for a new agent: sales or creative.'
         displayName:
           type: string
           minLength: 1
           maxLength: 255
           description: Name for a new Agent.
         operator:
-          description: >-
-            Operator for a new sales or creative agent. Omit it to create an operator with the agent name. A buyer agent
-            has no operator.
+          description: Operator for the new agent. Omit it to create an operator with the agent name.
           oneOf:
             - type: object
               properties:
@@ -75165,18 +75683,12 @@ components:
                 - displayName
               additionalProperties: false
               description: Create a new provider operator.
-        endpoint:
-          description: Reserved for an immutable implementation revision; register endpoints through the Agent Page.
-          type: string
-          format: uri
         idempotencyKey:
-          description: >-
-            Unique key that makes a retried sales or creative registration find the first agent. Required for sales and
-            creative; a buyer agent takes none.
           type: string
           format: uuid
           pattern: >-
             ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+          description: Unique key that makes a retried registration find the first agent.
         expectedAccountId:
           anyOf:
             - type: integer
@@ -75190,19 +75702,13 @@ components:
             - type: string
               pattern: ^[1-9][0-9]*$
       required:
-        - operation
         - kind
         - displayName
+        - idempotencyKey
       additionalProperties: false
-    save_agent_request_SaveAgentDeveloperCreateOperation:
-      type: string
-      const: developer_create
-      description: Register a Developer-owned Agent.
     save_agent_request_SaveAgentDeveloperUpdateInput:
       type: object
       properties:
-        operation:
-          $ref: '#/components/schemas/save_agent_request_SaveAgentDeveloperUpdateOperation'
         agentId:
           type: string
           format: uuid
@@ -75219,10 +75725,6 @@ components:
             true says this Sales Agent is ready for certification and asks us to start it. false stops new certification
             runs; running buys continue. Saving the current value changes nothing.
           type: boolean
-        endpoint:
-          description: Reserved for an immutable implementation revision; register endpoints through the Agent Page.
-          type: string
-          format: uri
         expectedAccountId:
           anyOf:
             - type: integer
@@ -75236,13 +75738,8 @@ components:
             - type: string
               pattern: ^[1-9][0-9]*$
       required:
-        - operation
         - agentId
       additionalProperties: false
-    save_agent_request_SaveAgentDeveloperUpdateOperation:
-      type: string
-      const: developer_update
-      description: Rename a Developer-owned Agent or say whether it is ready for certification.
     save_ask_success_AskId:
       type:
         - string
