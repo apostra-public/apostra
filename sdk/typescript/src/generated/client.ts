@@ -631,14 +631,14 @@ export class Apostra extends Transport {
   /** Seller-only CRM notes for an exact brand × operator pair. Buyers use save_advertiser.privateNotes; see /v3/manage-ads#private-advertiser-notes. Effective discounts, routing, access and trust are read-only. Returns the data together with response headers and request ID. */
   saveAdvertiserInstructionsWithResponse(input: SaveAdvertiserInstructionsInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAdvertiserInstructionsResult>> { return this.requestDetailed("save_advertiser_instructions", input, options) }
   /**
-   * Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for certification. Select seller_save, developer_create, or developer_update.
+   * Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or say it is ready for certification.
    *
    * @example
    * await client.saveAgent(input, { idempotencyKey: 'stable-key' })
    */
   saveAgent(input: SaveAgentInput, options: WriteRequestOptions): Promise<SaveAgentResult> { return this.request("save_agent", input, options) }
 
-  /** Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for certification. Select seller_save, developer_create, or developer_update. Returns the data together with response headers and request ID. */
+  /** Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or say it is ready for certification. Returns the data together with response headers and request ID. */
   saveAgentWithResponse(input: SaveAgentInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAgentResult>> { return this.requestDetailed("save_agent", input, options) }
   /**
    * File or update a typed ask in the Apostra Support workflow; returns askId. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first.
@@ -831,14 +831,14 @@ export class Apostra extends Transport {
   /** Open a seller library request or close it with seller Material. Returns the data together with response headers and request ID. */
   saveLibraryRequestWithResponse(input: SaveLibraryRequestInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveLibraryRequestResult>> { return this.requestDetailed("save_library_request", input, options) }
   /**
-   * Register, revise, archive, restore, or reprocess seller Materials; manage candidate decisions and receipts; mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND rejects document containers, UNIT_CONTAINS_PRICING rejects priced units).
+   * Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call.
    *
    * @example
    * await client.saveMaterial(input, { idempotencyKey: 'stable-key' })
    */
   saveMaterial(input: SaveMaterialInput, options: WriteRequestOptions): Promise<SaveMaterialResult> { return this.request("save_material", input, options) }
 
-  /** Register, revise, archive, restore, or reprocess seller Materials; manage candidate decisions and receipts; mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND rejects document containers, UNIT_CONTAINS_PRICING rejects priced units). Returns the data together with response headers and request ID. */
+  /** Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call. Returns the data together with response headers and request ID. */
   saveMaterialWithResponse(input: SaveMaterialInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveMaterialResult>> { return this.requestDetailed("save_material", input, options) }
   /**
    * Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates.
