@@ -285,11 +285,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveAdvertiserInstructionsResult], self._request_with_response("save_advertiser_instructions", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_agent(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAgentResult:
-        "Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for certification. Select seller_save, developer_create, or developer_update."
+        "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or say it is ready for certification."
         return cast("models.SaveAgentResult", self._request("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_agent_with_response(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAgentResult]:
-        "Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for certification. Select seller_save, developer_create, or developer_update. Returns the data together with response headers and request ID."
+        "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or say it is ready for certification. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAgentResult], self._request_with_response("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
@@ -389,11 +389,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveCreativeCollectionResult], self._request_with_response("save_creative_collection", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative_session(self, input: models.SaveCreativeSessionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeSessionResult:
-        "Create image, video, or voice/audio variants from a brief (including radio spots). Scope: campaign/campaignId or advertiser/advertiserId."
+        "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. To save an approved output to the Library, use save_creative with fromCreativeSessionOutput."
         return cast("models.SaveCreativeSessionResult", self._request("save_creative_session", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative_session_with_response(self, input: models.SaveCreativeSessionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeSessionResult]:
-        "Create image, video, or voice/audio variants from a brief (including radio spots). Scope: campaign/campaignId or advertiser/advertiserId. Returns the data together with response headers and request ID."
+        "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. To save an approved output to the Library, use save_creative with fromCreativeSessionOutput. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCreativeSessionResult], self._request_with_response("save_creative_session", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_dimension(self, input: models.SaveDimensionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveDimensionResult:
@@ -445,11 +445,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveLibraryRequestResult], self._request_with_response("save_library_request", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_material(self, input: models.SaveMaterialInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMaterialResult:
-        "Register, revise, archive, restore, or reprocess seller Materials; manage candidate decisions and receipts; mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND rejects document containers, UNIT_CONTAINS_PRICING rejects priced units)."
+        "Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call."
         return cast("models.SaveMaterialResult", self._request("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_material_with_response(self, input: models.SaveMaterialInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveMaterialResult]:
-        "Register, revise, archive, restore, or reprocess seller Materials; manage candidate decisions and receipts; mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND rejects document containers, UNIT_CONTAINS_PRICING rejects priced units). Returns the data together with response headers and request ID."
+        "Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveMaterialResult], self._request_with_response("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_media_buy(self, input: models.SaveMediaBuyInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMediaBuyResult:
@@ -493,12 +493,20 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SavePropertyListResult], self._request_with_response("save_property_list", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_rfp(self, input: models.SaveRfpInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveRfpResult:
-        "Save RFPs and turns: imported origins, typed feedback, response pairs, endorsement, and proposal-file requests."
+        "Save an RFP: create it from an origin, revise it with a new request, endorse or unendorse its response, or attach an imported response. A turn’s feedback, release, proposal files and outcome use save_rfp_turn."
         return cast("models.SaveRfpResult", self._request("save_rfp", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_rfp_with_response(self, input: models.SaveRfpInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveRfpResult]:
-        "Save RFPs and turns: imported origins, typed feedback, response pairs, endorsement, and proposal-file requests. Returns the data together with response headers and request ID."
+        "Save an RFP: create it from an origin, revise it with a new request, endorse or unendorse its response, or attach an imported response. A turn’s feedback, release, proposal files and outcome use save_rfp_turn. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveRfpResult], self._request_with_response("save_rfp", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def save_rfp_turn(self, input: models.SaveRfpTurnInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveRfpTurnResult:
+        "Change one RFP turn: release it, request or cancel a proposal file, append feedback, or record its outcome. One of these per call; revise, endorse and attach a response with save_rfp."
+        return cast("models.SaveRfpTurnResult", self._request("save_rfp_turn", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def save_rfp_turn_with_response(self, input: models.SaveRfpTurnInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveRfpTurnResult]:
+        "Change one RFP turn: release it, request or cancel a proposal file, append feedback, or record its outcome. One of these per call; revise, endorse and attach a response with save_rfp. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveRfpTurnResult], self._request_with_response("save_rfp_turn", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_seller(self, input: models.SaveSellerInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSellerResult:
         "Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, or a seller-controlled admission. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\")."
@@ -838,11 +846,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveAdvertiserInstructionsResult], await self._request_with_response("save_advertiser_instructions", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_agent(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAgentResult:
-        "Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for certification. Select seller_save, developer_create, or developer_update."
+        "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or say it is ready for certification."
         return cast("models.SaveAgentResult", await self._request("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_agent_with_response(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAgentResult]:
-        "Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for certification. Select seller_save, developer_create, or developer_update. Returns the data together with response headers and request ID."
+        "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or say it is ready for certification. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAgentResult], await self._request_with_response("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
@@ -942,11 +950,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveCreativeCollectionResult], await self._request_with_response("save_creative_collection", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative_session(self, input: models.SaveCreativeSessionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeSessionResult:
-        "Create image, video, or voice/audio variants from a brief (including radio spots). Scope: campaign/campaignId or advertiser/advertiserId."
+        "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. To save an approved output to the Library, use save_creative with fromCreativeSessionOutput."
         return cast("models.SaveCreativeSessionResult", await self._request("save_creative_session", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative_session_with_response(self, input: models.SaveCreativeSessionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeSessionResult]:
-        "Create image, video, or voice/audio variants from a brief (including radio spots). Scope: campaign/campaignId or advertiser/advertiserId. Returns the data together with response headers and request ID."
+        "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. To save an approved output to the Library, use save_creative with fromCreativeSessionOutput. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCreativeSessionResult], await self._request_with_response("save_creative_session", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_dimension(self, input: models.SaveDimensionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveDimensionResult:
@@ -998,11 +1006,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveLibraryRequestResult], await self._request_with_response("save_library_request", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_material(self, input: models.SaveMaterialInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMaterialResult:
-        "Register, revise, archive, restore, or reprocess seller Materials; manage candidate decisions and receipts; mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND rejects document containers, UNIT_CONTAINS_PRICING rejects priced units)."
+        "Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call."
         return cast("models.SaveMaterialResult", await self._request("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_material_with_response(self, input: models.SaveMaterialInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveMaterialResult]:
-        "Register, revise, archive, restore, or reprocess seller Materials; manage candidate decisions and receipts; mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND rejects document containers, UNIT_CONTAINS_PRICING rejects priced units). Returns the data together with response headers and request ID."
+        "Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveMaterialResult], await self._request_with_response("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_media_buy(self, input: models.SaveMediaBuyInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMediaBuyResult:
@@ -1046,12 +1054,20 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SavePropertyListResult], await self._request_with_response("save_property_list", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_rfp(self, input: models.SaveRfpInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveRfpResult:
-        "Save RFPs and turns: imported origins, typed feedback, response pairs, endorsement, and proposal-file requests."
+        "Save an RFP: create it from an origin, revise it with a new request, endorse or unendorse its response, or attach an imported response. A turn’s feedback, release, proposal files and outcome use save_rfp_turn."
         return cast("models.SaveRfpResult", await self._request("save_rfp", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_rfp_with_response(self, input: models.SaveRfpInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveRfpResult]:
-        "Save RFPs and turns: imported origins, typed feedback, response pairs, endorsement, and proposal-file requests. Returns the data together with response headers and request ID."
+        "Save an RFP: create it from an origin, revise it with a new request, endorse or unendorse its response, or attach an imported response. A turn’s feedback, release, proposal files and outcome use save_rfp_turn. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveRfpResult], await self._request_with_response("save_rfp", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_rfp_turn(self, input: models.SaveRfpTurnInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveRfpTurnResult:
+        "Change one RFP turn: release it, request or cancel a proposal file, append feedback, or record its outcome. One of these per call; revise, endorse and attach a response with save_rfp."
+        return cast("models.SaveRfpTurnResult", await self._request("save_rfp_turn", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_rfp_turn_with_response(self, input: models.SaveRfpTurnInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveRfpTurnResult]:
+        "Change one RFP turn: release it, request or cancel a proposal file, append feedback, or record its outcome. One of these per call; revise, endorse and attach a response with save_rfp. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveRfpTurnResult], await self._request_with_response("save_rfp_turn", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_seller(self, input: models.SaveSellerInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSellerResult:
         "Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, or a seller-controlled admission. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\")."
