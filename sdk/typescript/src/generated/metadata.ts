@@ -740,7 +740,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for certification. Select seller_save, developer_create, or developer_update."
+    "summary": "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or say it is ready for certification."
   },
   "save_ask": {
     "path": "/tools/save_ask",
@@ -1124,7 +1124,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Register, revise, archive, restore, or reprocess seller Materials; manage candidate decisions and receipts; mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND rejects document containers, UNIT_CONTAINS_PRICING rejects priced units)."
+    "summary": "Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call."
   },
   "save_media_buy": {
     "path": "/tools/save_media_buy",
@@ -1228,6 +1228,7 @@ export const operations = {
     "body": true,
     "binary": false,
     "idempotencyKey": true,
+    "bodyKeyField": "clientRequestId",
     "parameters": [],
     "security": [
       {
@@ -1239,7 +1240,27 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save RFPs and turns: imported origins, typed feedback, response pairs, endorsement, and proposal-file requests."
+    "summary": "Save an RFP: create it from an origin, revise it with a new request, endorse or unendorse its response, or attach an imported response. A turn’s feedback, release, proposal files and outcome use save_rfp_turn."
+  },
+  "save_rfp_turn": {
+    "path": "/tools/save_rfp_turn",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "bodyKeyField": "clientRequestId",
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Change one RFP turn: release it, request or cancel a proposal file, append feedback, or record its outcome. One of these per call; revise, endorse and attach a response with save_rfp."
   },
   "save_seller": {
     "path": "/tools/save_seller",
