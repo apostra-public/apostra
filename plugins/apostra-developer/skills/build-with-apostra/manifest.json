@@ -2,7 +2,7 @@
   "schemaVersion": "3.0",
   "id": "build-with-apostra",
   "name": "Build with Apostra",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Use Apostra to plan or run ads, automate campaign work, read results, or build those jobs into tested software.",
   "steward": {
     "owner": "bokelley"
@@ -79,7 +79,7 @@
     "required": ["get_status", "search", "get"],
     "optional": [
       "switch_account",
-      "open_connections_page",
+      "open_media_partners_page",
       "save_buyer_agent",
       "save_connection",
       "save_directed_campaign_subscription",
@@ -124,7 +124,7 @@
       ]
     },
     "telemetry": {
-      "correlationSkillId": "build-with-apostra@1.0.7",
+      "correlationSkillId": "build-with-apostra@1.0.8",
       "outcomeSignals": [
         "workflow_terminal_state",
         "scenario_assertion_results"
