@@ -74636,6 +74636,7 @@ components:
                 - ui://agentic-api/merchandising-simulator/mcp-app.html
                 - ui://agentic-api/media-buys/mcp-app.html
                 - ui://agentic-api/media-buy-timeline/mcp-app.html
+                - ui://agentic-api/components/mcp-app.html
                 - ui://agentic-api/seller-accounts/mcp-app.html
             advertiserId:
               type: string
