@@ -284,6 +284,25 @@ export const operations = {
     ],
     "summary": "Open one agent owned by this Developer account."
   },
+  "open_agent_webhooks_page": {
+    "path": "/tools/open_agent_webhooks_page",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open one agent’s Webhooks Page: its recent inbound webhook outcomes, each refusal with its reason. Read-only."
+  },
   "open_agents_page": {
     "path": "/tools/open_agents_page",
     "method": "POST",
