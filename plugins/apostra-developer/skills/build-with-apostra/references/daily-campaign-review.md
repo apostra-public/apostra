@@ -23,7 +23,7 @@ account can use that provider; it does not prove that a customer connection is
 authorized. If the exact seller read shows that provider authorization is
 missing:
 
-- In a host that renders Apostra's MCP app, call `open_connections_page` with
+- In a host that renders Apostra's MCP app, call `open_media_partners_page` with
   the resolved `sellerId` and `connectionAction: "connect"`. The person
   confirms and completes authorization in the browser flow.
 - In a command-line or other headless host, call `save_connection` with the
