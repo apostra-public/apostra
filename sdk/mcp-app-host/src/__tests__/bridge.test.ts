@@ -134,7 +134,7 @@ describe('createAgentMcpAppBridge', () => {
       method: 'tools/call',
       params: {
         name: 'teach_save_material',
-        arguments: { action: 'create' },
+        arguments: { clientRequestId: 'teach-url:page:1' },
       },
     }
     const reservationResult = {
