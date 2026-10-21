@@ -24,13 +24,20 @@ import type { WidgetPageAppearance } from './widget-page.js'
 
 /**
  * What the frame needs to know about the launch: the resource to load, the
- * frame's accessible title and the data to hand the widget on initialization.
+ * frame's accessible title, and the launch result's `structuredContent`
+ * (`data`) and `_meta` (`meta`) to hand the widget on initialization.
  * `AgentHostDirective` in `@scope3/agent-host` satisfies it.
  */
 export interface HostedMcpAppDirective {
   resourceUri: string
   title: string
   data?: Record<string, unknown>
+  /**
+   * The launch result's `_meta`, delivered unchanged. A V3 widget reads its
+   * page capability and account from it, and shows a launch failure without
+   * them.
+   */
+  meta?: Record<string, unknown>
 }
 
 const defaultMaxFrameHeight = () => Math.max(320, globalThis.innerHeight - 260)
@@ -45,8 +52,10 @@ function frameDocumentIdentity(html: string | undefined): string {
   return `${html.length}:${hash >>> 0}`
 }
 
-function frameLaunchDataIdentity(data: Record<string, unknown> | undefined) {
-  return frameDocumentIdentity(data ? JSON.stringify(data) : undefined)
+function frameLaunchIdentity({ data, meta }: HostedMcpAppDirective) {
+  return frameDocumentIdentity(
+    data || meta ? JSON.stringify([data, meta]) : undefined,
+  )
 }
 
 export interface HostedMcpAppFrameProps {
@@ -193,7 +202,7 @@ export function HostedMcpAppFrame({
     frame?.kind === 'srcdoc'
       ? frame.allow
       : allowAttributeFor(resource?.permissions, approvedPermissions)
-  const frameKey = `${directive.resourceUri}:${contextKey}:${retry}:${frameDocumentIdentity(frameSource)}:${frameLaunchDataIdentity(directive.data)}`
+  const frameKey = `${directive.resourceUri}:${contextKey}:${retry}:${frameDocumentIdentity(frameSource)}:${frameLaunchIdentity(directive)}`
 
   useLayoutEffect(() => {
     void frameLoadSequence
@@ -223,9 +232,11 @@ export function HostedMcpAppFrame({
           void hosted.bridge.sendToolInput({
             arguments: directiveRef.current.data ?? {},
           })
+          const { data, meta } = directiveRef.current
           void hosted.bridge.sendToolResult({
             content: [],
-            structuredContent: directiveRef.current.data ?? {},
+            structuredContent: data ?? {},
+            ...(meta ? { _meta: meta } : {}),
           })
         },
         onSizeChange: (nextHeight) => {
