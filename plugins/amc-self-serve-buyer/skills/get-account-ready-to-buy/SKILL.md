@@ -21,12 +21,12 @@ Use the attached Interchange V3 buyer tools. Treat `get_status` as the authority
    - Call `save_buyer_operator` only after the user confirms the exact identity and scope.
 5. For terms or billing actions:
    - If Terms or full plan review is required, open or direct the user to the Plan & Billing Page and stop that step. The model-visible tools do not expose the complete Terms text and exact version needed for safe acceptance.
-   - For payment authority, ask for confirmation before requesting it.
-   - Follow the staged `save_billing` request, confirmation-token, hosted-link, and status flow exactly.
+   - For payment terms, call `save_billing` with `{ paymentTerms }` only after the user chooses the terms.
+   - For payment authority, ask for confirmation before requesting it. Then follow this flow exactly: `request_payment_authority` returns a single-use confirmation token, `confirm_payment_authority` spends that token to issue the hosted card-capture link, and `get({ kind: 'billing' })` reports the status afterwards.
    - Give the hosted link only to the organization cardholder. Never request or transmit card data in chat or MCP calls.
 6. For seller connections:
    - Use `search` and `get` to find the exact seller, connection, provider account, and advertiser mapping.
-   - Use `open_connections_page` when the host supports its UI; otherwise use `save_connection`.
+   - Use `open_media_partners_page` when the host supports its UI; otherwise use `save_connection`.
    - Send authorization through the returned browser URL. Never ask for provider credentials in chat.
    - Use one `save_connection` intent per call. Authorize only when the current connection state requires it, poll with `search` or `get`, then make separate confirmed calls to select a returned provider account and map it to the exact advertiser when required. Re-read after each step.
 7. Call `get_status` again. Report what is complete, what still requires the user or an administrator, and whether the account is ready to transact.

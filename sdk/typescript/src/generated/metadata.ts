@@ -548,7 +548,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Rechecks one external sales-agent source with no-spend get_products. Returns evidence IDs and seller readiness; no source configuration or media buy."
+    "summary": "Rechecks one external sales-agent source with no-spend get_products and, if it publishes one, a catalog refresh. Returns each check, findings still open, evidence IDs and readiness; no source configuration or media buy."
   },
   "request_buyer_child_account": {
     "path": "/tools/request_buyer_child_account",
@@ -664,7 +664,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Rename an existing direct child Account or update settings.company. Never provisions, archives, or changes owners or members; use Account settings for access changes."
+    "summary": "Create a child Account (omit id), rename one, or archive or restore it (isArchived). Each is recorded for website approval by an Organization administrator; repeat with the same idempotencyKey for the outcome. dryRun previews. settings.company saves at once. Never changes owners or members."
   },
   "save_advertiser": {
     "path": "/tools/save_advertiser",
@@ -740,7 +740,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save a Sales Agent mode, register an Agent, or update an owned Agent: rename it or say it is ready for certification. Select seller_save, developer_create, or developer_update."
+    "summary": "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or say it is ready for certification."
   },
   "save_ask": {
     "path": "/tools/save_ask",
@@ -797,7 +797,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Accept Terms or set the payment terms sellers are asked for. Cards stay off MCP."
+    "summary": "Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Cards stay off MCP."
   },
   "save_business_rules": {
     "path": "/tools/save_business_rules",
@@ -989,7 +989,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create image, video, or voice/audio variants from a brief (including radio spots). Scope: campaign/campaignId or advertiser/advertiserId."
+    "summary": "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. To save an approved output to the Library, use save_creative with fromCreativeSessionOutput."
   },
   "save_dimension": {
     "path": "/tools/save_dimension",
@@ -1067,7 +1067,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create or update where a seller's inventory comes from. Pass `id` to change a source, omit it to add one, or pass only `agentId` to open a partner's connection form. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it."
+    "summary": "Create or update where a seller's inventory comes from. Pass `id` to change a source, omit it to add one, or pass only `agentId` to open an agent's connection form. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it."
   },
   "save_lesson": {
     "path": "/tools/save_lesson",
@@ -1124,7 +1124,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Register, revise, archive, restore, or reprocess seller Materials; manage candidate decisions and receipts; mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND rejects document containers, UNIT_CONTAINS_PRICING rejects priced units)."
+    "summary": "Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call."
   },
   "save_media_buy": {
     "path": "/tools/save_media_buy",
@@ -1228,6 +1228,7 @@ export const operations = {
     "body": true,
     "binary": false,
     "idempotencyKey": true,
+    "bodyKeyField": "clientRequestId",
     "parameters": [],
     "security": [
       {
@@ -1239,7 +1240,27 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save RFPs and turns: imported origins, typed feedback, response pairs, endorsement, and proposal-file requests."
+    "summary": "Save an RFP: create it from an origin, revise it with a new request, endorse or unendorse its response, or attach an imported response. A turn’s feedback, release, proposal files and outcome use save_rfp_turn."
+  },
+  "save_rfp_turn": {
+    "path": "/tools/save_rfp_turn",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "bodyKeyField": "clientRequestId",
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Change one RFP turn: release it, request or cancel a proposal file, append feedback, or record its outcome. One of these per call; revise, endorse and attach a response with save_rfp."
   },
   "save_seller": {
     "path": "/tools/save_seller",
