@@ -88,8 +88,11 @@ the contract a host must meet. The source is mirrored at
    `hosted.close()` when you remove the frame.
 
    In React, `HostedMcpAppFrame` from `@apostra/mcp-app-host/react` does steps 2
-   and 3 for you. Pass `widgetPage={{ appearance, allowedOrigins }}` and return
-   the resource's `_meta` from `loadResource` to opt in to pages.
+   and 3 for you. Give it the launch result as
+   `directive={{ resourceUri, title, data: result.structuredContent, meta: result._meta }}`:
+   a V3 widget reads its page capability from that `_meta` and shows a launch
+   failure without it. Pass `widgetPage={{ appearance, allowedOrigins }}` and
+   return the resource's `_meta` from `loadResource` to opt in to pages.
 
 ### How the two paths differ
 
