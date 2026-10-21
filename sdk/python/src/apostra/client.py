@@ -509,11 +509,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveRfpTurnResult], self._request_with_response("save_rfp_turn", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_seller(self, input: models.SaveSellerInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSellerResult:
-        "Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, or a seller-controlled admission. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\")."
+        "Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, or the intake hold. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\")."
         return cast("models.SaveSellerResult", self._request("save_seller", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_seller_with_response(self, input: models.SaveSellerInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveSellerResult]:
-        "Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, or a seller-controlled admission. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\"). Returns the data together with response headers and request ID."
+        "Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, or the intake hold. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\"). Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveSellerResult], self._request_with_response("save_seller", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_signal(self, input: models.SaveSignalInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSignalResult:
@@ -1070,11 +1070,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveRfpTurnResult], await self._request_with_response("save_rfp_turn", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_seller(self, input: models.SaveSellerInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSellerResult:
-        "Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, or a seller-controlled admission. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\")."
+        "Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, or the intake hold. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\")."
         return cast("models.SaveSellerResult", await self._request("save_seller", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_seller_with_response(self, input: models.SaveSellerInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveSellerResult]:
-        "Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, or a seller-controlled admission. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\"). Returns the data together with response headers and request ID."
+        "Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, or the intake hold. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\"). Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveSellerResult], await self._request_with_response("save_seller", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_signal(self, input: models.SaveSignalInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSignalResult:

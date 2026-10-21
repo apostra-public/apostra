@@ -1279,7 +1279,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, or a seller-controlled admission. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\")."
+    "summary": "Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, or the intake hold. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\")."
   },
   "save_signal": {
     "path": "/tools/save_signal",

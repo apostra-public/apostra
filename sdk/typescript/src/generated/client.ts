@@ -915,14 +915,14 @@ export class Apostra extends Transport {
   /** Change one RFP turn: release it, request or cancel a proposal file, append feedback, or record its outcome. One of these per call; revise, endorse and attach a response with save_rfp. Returns the data together with response headers and request ID. */
   saveRfpTurnWithResponse(input: SaveRfpTurnInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveRfpTurnResult>> { return this.requestDetailed("save_rfp_turn", input, options) }
   /**
-   * Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, or a seller-controlled admission. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:"distribution").
+   * Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, or the intake hold. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:"distribution").
    *
    * @example
    * await client.saveSeller(input, { idempotencyKey: 'stable-key' })
    */
   saveSeller(input: SaveSellerInput, options: WriteRequestOptions): Promise<SaveSellerResult> { return this.request("save_seller", input, options) }
 
-  /** Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, or a seller-controlled admission. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:"distribution"). Returns the data together with response headers and request ID. */
+  /** Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, or the intake hold. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:"distribution"). Returns the data together with response headers and request ID. */
   saveSellerWithResponse(input: SaveSellerInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveSellerResult>> { return this.requestDetailed("save_seller", input, options) }
   /**
    * Create, replace, or archive a signal. Managed writes need a complete draft; read before updates. Without sourceId, writes the seller catalog.
