@@ -47917,11 +47917,11 @@ paths:
       operationId: save_seller
       summary: >-
         Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias),
-        Distribution's OpenAI challenge token, or a seller-controlled admission. Scope3 eligibility and Market Maker
+        Distribution's OpenAI challenge token, an admission, or the intake hold. Scope3 eligibility and Market Maker
         entitlements are read-only here. Read Distribution with get(kind:"distribution").
       description: >-
         Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias),
-        Distribution's OpenAI challenge token, or a seller-controlled admission. Scope3 eligibility and Market Maker
+        Distribution's OpenAI challenge token, an admission, or the intake hold. Scope3 eligibility and Market Maker
         entitlements are read-only here. Read Distribution with get(kind:"distribution").
       security:
         - apiKeyAuth: []
@@ -48177,6 +48177,14 @@ paths:
                         - message
                       additionalProperties: false
                       description: Decline one seller-controlled pending buyer-account intake with a reason.
+                isPaused:
+                  description: >-
+                    Hold (true) or resume (false) new business: buyers stop discovering the Seller and buying; existing
+                    delivery continues. Send alone.
+                  type: boolean
+                expectedIsPaused:
+                  description: 'With isPaused: the hold you last read; a changed hold returns CONFLICT.'
+                  type: boolean
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -48228,6 +48236,8 @@ paths:
                         - distribution
                     - required:
                         - admission
+                    - required:
+                        - isPaused
                 - if:
                     required:
                       - distribution
@@ -48375,6 +48385,86 @@ paths:
                       - not:
                           required:
                             - paymentCurrencies
+                      - not:
+                          required:
+                            - distribution
+                      - not:
+                          required:
+                            - admission
+                - if:
+                    required:
+                      - expectedIsPaused
+                  then:
+                    required:
+                      - isPaused
+                - if:
+                    required:
+                      - isPaused
+                  then:
+                    allOf:
+                      - not:
+                          required:
+                            - resolveBrand
+                      - not:
+                          required:
+                            - identityContract
+                      - not:
+                          required:
+                            - preview
+                      - not:
+                          required:
+                            - confirmationToken
+                      - not:
+                          required:
+                            - materialCandidate
+                      - not:
+                          required:
+                            - operatorDomain
+                      - not:
+                          required:
+                            - confirmOperatorDomainProfileReset
+                      - not:
+                          required:
+                            - configuredCapabilities
+                      - not:
+                          required:
+                            - setupIntent
+                      - not:
+                          required:
+                            - apostraParticipation
+                      - not:
+                          required:
+                            - marketplaceParticipation
+                      - not:
+                          required:
+                            - demandContact
+                      - not:
+                          required:
+                            - description
+                      - not:
+                          required:
+                            - channels
+                      - not:
+                          required:
+                            - countries
+                      - not:
+                          required:
+                            - acceptsAllCountries
+                      - not:
+                          required:
+                            - listing
+                      - not:
+                          required:
+                            - mediaKit
+                      - not:
+                          required:
+                            - defaultCurrency
+                      - not:
+                          required:
+                            - paymentCurrencies
+                      - not:
+                          required:
+                            - confirmCurrencyCatalogImpact
                       - not:
                           required:
                             - distribution
@@ -74636,6 +74726,7 @@ components:
                 - ui://agentic-api/merchandising-simulator/mcp-app.html
                 - ui://agentic-api/media-buys/mcp-app.html
                 - ui://agentic-api/media-buy-timeline/mcp-app.html
+                - ui://agentic-api/components/mcp-app.html
                 - ui://agentic-api/seller-accounts/mcp-app.html
             advertiserId:
               type: string
