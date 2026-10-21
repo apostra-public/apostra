@@ -100,6 +100,14 @@ class Apostra(SyncTransport):
         "Open one agent owned by this Developer account. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenAgentPageResult], self._request_with_response("open_agent_page", input, account_id=account_id, timeout=timeout))
 
+    def open_agent_webhooks_page(self, input: models.OpenAgentWebhooksPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentWebhooksPageResult:
+        "Open one agent’s Webhooks Page: its recent inbound webhook outcomes, each refusal with its reason. Read-only."
+        return cast("models.OpenAgentWebhooksPageResult", self._request("open_agent_webhooks_page", input, account_id=account_id, timeout=timeout))
+
+    def open_agent_webhooks_page_with_response(self, input: models.OpenAgentWebhooksPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAgentWebhooksPageResult]:
+        "Open one agent’s Webhooks Page: its recent inbound webhook outcomes, each refusal with its reason. Read-only. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenAgentWebhooksPageResult], self._request_with_response("open_agent_webhooks_page", input, account_id=account_id, timeout=timeout))
+
     def open_agents_page(self, input: models.OpenAgentsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentsPageResult:
         "Open Build an agent for this Developer account."
         return cast("models.OpenAgentsPageResult", self._request("open_agents_page", input, account_id=account_id, timeout=timeout))
@@ -660,6 +668,14 @@ class AsyncApostra(AsyncTransport):
     async def open_agent_page_with_response(self, input: models.OpenAgentPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAgentPageResult]:
         "Open one agent owned by this Developer account. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenAgentPageResult], await self._request_with_response("open_agent_page", input, account_id=account_id, timeout=timeout))
+
+    async def open_agent_webhooks_page(self, input: models.OpenAgentWebhooksPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentWebhooksPageResult:
+        "Open one agent’s Webhooks Page: its recent inbound webhook outcomes, each refusal with its reason. Read-only."
+        return cast("models.OpenAgentWebhooksPageResult", await self._request("open_agent_webhooks_page", input, account_id=account_id, timeout=timeout))
+
+    async def open_agent_webhooks_page_with_response(self, input: models.OpenAgentWebhooksPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAgentWebhooksPageResult]:
+        "Open one agent’s Webhooks Page: its recent inbound webhook outcomes, each refusal with its reason. Read-only. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenAgentWebhooksPageResult], await self._request_with_response("open_agent_webhooks_page", input, account_id=account_id, timeout=timeout))
 
     async def open_agents_page(self, input: models.OpenAgentsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentsPageResult:
         "Open Build an agent for this Developer account."
