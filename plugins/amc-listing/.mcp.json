@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "interchange": {
+    "apostra": {
       "type": "http",
       "url": "https://api.apostra.com/mcp/v3"
     }
