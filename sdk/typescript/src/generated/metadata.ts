@@ -284,6 +284,25 @@ export const operations = {
     ],
     "summary": "Open one agent owned by this Developer account."
   },
+  "open_agent_webhooks_page": {
+    "path": "/tools/open_agent_webhooks_page",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open one agent’s Webhooks Page: its recent inbound webhook outcomes, each refusal with its reason. Read-only."
+  },
   "open_agents_page": {
     "path": "/tools/open_agents_page",
     "method": "POST",
@@ -607,7 +626,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
+    "summary": "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds and sellerAccountIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
   },
   "request_seller_reporting_update": {
     "path": "/tools/request_seller_reporting_update",
@@ -951,7 +970,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save creative in advertiserId/campaignId with name, message, assets, clickUrl, social, sourceAssetRef/sourceAssets. Use exactly one format selector: formatKind/formatParams, creativeFormatId, formatOptionRef. Supplied content/assets only; generate new media (radio spots) via save_creative_session."
+    "summary": "advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset."
   },
   "save_creative_collection": {
     "path": "/tools/save_creative_collection",
