@@ -46,9 +46,21 @@ export type OpenAdvertisersPageInput = Wire.OpenAdvertisersPageData['body']
 export type OpenAdvertisersPageResult = Wire.OpenAdvertisersPageResponses[200]['data']
 export type OpenAdvertisersPageError = Wire.OpenAdvertisersPageErrors[keyof Wire.OpenAdvertisersPageErrors]
 
+export type OpenAgentCertificationPageInput = Wire.OpenAgentCertificationPageData['body']
+export type OpenAgentCertificationPageResult = Wire.OpenAgentCertificationPageResponses[200]['data']
+export type OpenAgentCertificationPageError = Wire.OpenAgentCertificationPageErrors[keyof Wire.OpenAgentCertificationPageErrors]
+
 export type OpenAgentPageInput = Wire.OpenAgentPageData['body']
 export type OpenAgentPageResult = Wire.OpenAgentPageResponses[200]['data']
 export type OpenAgentPageError = Wire.OpenAgentPageErrors[keyof Wire.OpenAgentPageErrors]
+
+export type OpenAgentSourcesPageInput = Wire.OpenAgentSourcesPageData['body']
+export type OpenAgentSourcesPageResult = Wire.OpenAgentSourcesPageResponses[200]['data']
+export type OpenAgentSourcesPageError = Wire.OpenAgentSourcesPageErrors[keyof Wire.OpenAgentSourcesPageErrors]
+
+export type OpenAgentWebhooksPageInput = Wire.OpenAgentWebhooksPageData['body']
+export type OpenAgentWebhooksPageResult = Wire.OpenAgentWebhooksPageResponses[200]['data']
+export type OpenAgentWebhooksPageError = Wire.OpenAgentWebhooksPageErrors[keyof Wire.OpenAgentWebhooksPageErrors]
 
 export type OpenAgentsPageInput = Wire.OpenAgentsPageData['body']
 export type OpenAgentsPageResult = Wire.OpenAgentsPageResponses[200]['data']
@@ -77,6 +89,10 @@ export type OpenCreativeEnginesPageError = Wire.OpenCreativeEnginesPageErrors[ke
 export type OpenCreativeLibraryInput = Wire.OpenCreativeLibraryData['body']
 export type OpenCreativeLibraryResult = Wire.OpenCreativeLibraryResponses[200]['data']
 export type OpenCreativeLibraryError = Wire.OpenCreativeLibraryErrors[keyof Wire.OpenCreativeLibraryErrors]
+
+export type OpenDeveloperHomeInput = Wire.OpenDeveloperHomeData['body']
+export type OpenDeveloperHomeResult = Wire.OpenDeveloperHomeResponses[200]['data']
+export type OpenDeveloperHomeError = Wire.OpenDeveloperHomeErrors[keyof Wire.OpenDeveloperHomeErrors]
 
 export type OpenMediaBuysPageInput = Wire.OpenMediaBuysPageData['body']
 export type OpenMediaBuysPageResult = Wire.OpenMediaBuysPageResponses[200]['data']
@@ -282,7 +298,7 @@ export type UploadCreativeAssetInput = Wire.UploadCreativeAssetData['body']
 export type UploadCreativeAssetResult = Wire.UploadCreativeAssetResponses[200]['data']
 export type UploadCreativeAssetError = Wire.UploadCreativeAssetErrors[keyof Wire.UploadCreativeAssetErrors]
 
-export interface OperationTypes { "confirm_payment_authority": { input: ConfirmPaymentAuthorityInput; result: ConfirmPaymentAuthorityResult }; "downloadV3PublicDocumentRevision": { input: DownloadV3PublicDocumentRevisionInput; result: DownloadV3PublicDocumentRevisionResult }; "generate_variants": { input: GenerateVariantsInput; result: GenerateVariantsResult }; "get": { input: GetInput; result: GetResult }; "getV3PublicDocumentRevisionSections": { input: GetV3PublicDocumentRevisionSectionsInput; result: GetV3PublicDocumentRevisionSectionsResult }; "getV3PublicMutationReceipt": { input: GetV3PublicMutationReceiptInput; result: GetV3PublicMutationReceiptResult }; "get_delivery": { input: GetDeliveryInput; result: GetDeliveryResult }; "get_rfp_performance": { input: GetRfpPerformanceInput; result: GetRfpPerformanceResult }; "get_seller_reporting_receipts": { input: GetSellerReportingReceiptsInput; result: GetSellerReportingReceiptsResult }; "get_status": { input: GetStatusInput; result: GetStatusResult }; "open_advertisers_page": { input: OpenAdvertisersPageInput; result: OpenAdvertisersPageResult }; "open_agent_page": { input: OpenAgentPageInput; result: OpenAgentPageResult }; "open_agents_page": { input: OpenAgentsPageInput; result: OpenAgentsPageResult }; "open_approvals": { input: OpenApprovalsInput; result: OpenApprovalsResult }; "open_campaign_receipt": { input: OpenCampaignReceiptInput; result: OpenCampaignReceiptResult }; "open_campaigns_page": { input: OpenCampaignsPageInput; result: OpenCampaignsPageResult }; "open_connections_page": { input: OpenConnectionsPageInput; result: OpenConnectionsPageResult }; "open_creative_engines_page": { input: OpenCreativeEnginesPageInput; result: OpenCreativeEnginesPageResult }; "open_creative_library": { input: OpenCreativeLibraryInput; result: OpenCreativeLibraryResult }; "open_media_buys_page": { input: OpenMediaBuysPageInput; result: OpenMediaBuysPageResult }; "open_media_partners_page": { input: OpenMediaPartnersPageInput; result: OpenMediaPartnersPageResult }; "open_page": { input: OpenPageInput; result: OpenPageResult }; "open_proposal_pass": { input: OpenProposalPassInput; result: OpenProposalPassResult }; "open_seller_dashboard": { input: OpenSellerDashboardInput; result: OpenSellerDashboardResult }; "open_variant_gallery": { input: OpenVariantGalleryInput; result: OpenVariantGalleryResult }; "refresh_inventory_source_health": { input: RefreshInventorySourceHealthInput; result: RefreshInventorySourceHealthResult }; "request_buyer_child_account": { input: RequestBuyerChildAccountInput; result: RequestBuyerChildAccountResult }; "request_payment_authority": { input: RequestPaymentAuthorityInput; result: RequestPaymentAuthorityResult }; "request_proposals": { input: RequestProposalsInput; result: RequestProposalsResult }; "request_seller_reporting_update": { input: RequestSellerReportingUpdateInput; result: RequestSellerReportingUpdateResult }; "review_buyer_child_account": { input: ReviewBuyerChildAccountInput; result: ReviewBuyerChildAccountResult }; "save_account": { input: SaveAccountInput; result: SaveAccountResult }; "save_advertiser": { input: SaveAdvertiserInput; result: SaveAdvertiserResult }; "save_advertiser_grant": { input: SaveAdvertiserGrantInput; result: SaveAdvertiserGrantResult }; "save_advertiser_instructions": { input: SaveAdvertiserInstructionsInput; result: SaveAdvertiserInstructionsResult }; "save_agent": { input: SaveAgentInput; result: SaveAgentResult }; "save_ask": { input: SaveAskInput; result: SaveAskResult }; "save_audience": { input: SaveAudienceInput; result: SaveAudienceResult }; "save_billing": { input: SaveBillingInput; result: SaveBillingResult }; "save_business_rules": { input: SaveBusinessRulesInput; result: SaveBusinessRulesResult }; "save_buyer_agent": { input: SaveBuyerAgentInput; result: SaveBuyerAgentResult }; "save_buyer_operator": { input: SaveBuyerOperatorInput; result: SaveBuyerOperatorResult }; "save_campaign": { input: SaveCampaignInput; result: SaveCampaignResult }; "save_catalog": { input: SaveCatalogInput; result: SaveCatalogResult }; "save_connection": { input: SaveConnectionInput; result: SaveConnectionResult }; "save_coverage": { input: SaveCoverageInput; result: SaveCoverageResult }; "save_creative": { input: SaveCreativeInput; result: SaveCreativeResult }; "save_creative_collection": { input: SaveCreativeCollectionInput; result: SaveCreativeCollectionResult }; "save_creative_session": { input: SaveCreativeSessionInput; result: SaveCreativeSessionResult }; "save_dimension": { input: SaveDimensionInput; result: SaveDimensionResult }; "save_directed_campaign_subscription": { input: SaveDirectedCampaignSubscriptionInput; result: SaveDirectedCampaignSubscriptionResult }; "save_event_source": { input: SaveEventSourceInput; result: SaveEventSourceResult }; "save_inventory_source": { input: SaveInventorySourceInput; result: SaveInventorySourceResult }; "save_lesson": { input: SaveLessonInput; result: SaveLessonResult }; "save_library_request": { input: SaveLibraryRequestInput; result: SaveLibraryRequestResult }; "save_material": { input: SaveMaterialInput; result: SaveMaterialResult }; "save_media_buy": { input: SaveMediaBuyInput; result: SaveMediaBuyResult }; "save_media_kit": { input: SaveMediaKitInput; result: SaveMediaKitResult }; "save_notification_config": { input: SaveNotificationConfigInput; result: SaveNotificationConfigResult }; "save_playbook": { input: SavePlaybookInput; result: SavePlaybookResult }; "save_property_list": { input: SavePropertyListInput; result: SavePropertyListResult }; "save_rfp": { input: SaveRfpInput; result: SaveRfpResult }; "save_rfp_turn": { input: SaveRfpTurnInput; result: SaveRfpTurnResult }; "save_seller": { input: SaveSellerInput; result: SaveSellerResult }; "save_signal": { input: SaveSignalInput; result: SaveSignalResult }; "save_wholesale_product": { input: SaveWholesaleProductInput; result: SaveWholesaleProductResult }; "save_work_item": { input: SaveWorkItemInput; result: SaveWorkItemResult }; "search": { input: SearchInput; result: SearchResult }; "test_creative_macros": { input: TestCreativeMacrosInput; result: TestCreativeMacrosResult }; "upload_creative_asset": { input: UploadCreativeAssetInput; result: UploadCreativeAssetResult } }
+export interface OperationTypes { "confirm_payment_authority": { input: ConfirmPaymentAuthorityInput; result: ConfirmPaymentAuthorityResult }; "downloadV3PublicDocumentRevision": { input: DownloadV3PublicDocumentRevisionInput; result: DownloadV3PublicDocumentRevisionResult }; "generate_variants": { input: GenerateVariantsInput; result: GenerateVariantsResult }; "get": { input: GetInput; result: GetResult }; "getV3PublicDocumentRevisionSections": { input: GetV3PublicDocumentRevisionSectionsInput; result: GetV3PublicDocumentRevisionSectionsResult }; "getV3PublicMutationReceipt": { input: GetV3PublicMutationReceiptInput; result: GetV3PublicMutationReceiptResult }; "get_delivery": { input: GetDeliveryInput; result: GetDeliveryResult }; "get_rfp_performance": { input: GetRfpPerformanceInput; result: GetRfpPerformanceResult }; "get_seller_reporting_receipts": { input: GetSellerReportingReceiptsInput; result: GetSellerReportingReceiptsResult }; "get_status": { input: GetStatusInput; result: GetStatusResult }; "open_advertisers_page": { input: OpenAdvertisersPageInput; result: OpenAdvertisersPageResult }; "open_agent_certification_page": { input: OpenAgentCertificationPageInput; result: OpenAgentCertificationPageResult }; "open_agent_page": { input: OpenAgentPageInput; result: OpenAgentPageResult }; "open_agent_sources_page": { input: OpenAgentSourcesPageInput; result: OpenAgentSourcesPageResult }; "open_agent_webhooks_page": { input: OpenAgentWebhooksPageInput; result: OpenAgentWebhooksPageResult }; "open_agents_page": { input: OpenAgentsPageInput; result: OpenAgentsPageResult }; "open_approvals": { input: OpenApprovalsInput; result: OpenApprovalsResult }; "open_campaign_receipt": { input: OpenCampaignReceiptInput; result: OpenCampaignReceiptResult }; "open_campaigns_page": { input: OpenCampaignsPageInput; result: OpenCampaignsPageResult }; "open_connections_page": { input: OpenConnectionsPageInput; result: OpenConnectionsPageResult }; "open_creative_engines_page": { input: OpenCreativeEnginesPageInput; result: OpenCreativeEnginesPageResult }; "open_creative_library": { input: OpenCreativeLibraryInput; result: OpenCreativeLibraryResult }; "open_developer_home": { input: OpenDeveloperHomeInput; result: OpenDeveloperHomeResult }; "open_media_buys_page": { input: OpenMediaBuysPageInput; result: OpenMediaBuysPageResult }; "open_media_partners_page": { input: OpenMediaPartnersPageInput; result: OpenMediaPartnersPageResult }; "open_page": { input: OpenPageInput; result: OpenPageResult }; "open_proposal_pass": { input: OpenProposalPassInput; result: OpenProposalPassResult }; "open_seller_dashboard": { input: OpenSellerDashboardInput; result: OpenSellerDashboardResult }; "open_variant_gallery": { input: OpenVariantGalleryInput; result: OpenVariantGalleryResult }; "refresh_inventory_source_health": { input: RefreshInventorySourceHealthInput; result: RefreshInventorySourceHealthResult }; "request_buyer_child_account": { input: RequestBuyerChildAccountInput; result: RequestBuyerChildAccountResult }; "request_payment_authority": { input: RequestPaymentAuthorityInput; result: RequestPaymentAuthorityResult }; "request_proposals": { input: RequestProposalsInput; result: RequestProposalsResult }; "request_seller_reporting_update": { input: RequestSellerReportingUpdateInput; result: RequestSellerReportingUpdateResult }; "review_buyer_child_account": { input: ReviewBuyerChildAccountInput; result: ReviewBuyerChildAccountResult }; "save_account": { input: SaveAccountInput; result: SaveAccountResult }; "save_advertiser": { input: SaveAdvertiserInput; result: SaveAdvertiserResult }; "save_advertiser_grant": { input: SaveAdvertiserGrantInput; result: SaveAdvertiserGrantResult }; "save_advertiser_instructions": { input: SaveAdvertiserInstructionsInput; result: SaveAdvertiserInstructionsResult }; "save_agent": { input: SaveAgentInput; result: SaveAgentResult }; "save_ask": { input: SaveAskInput; result: SaveAskResult }; "save_audience": { input: SaveAudienceInput; result: SaveAudienceResult }; "save_billing": { input: SaveBillingInput; result: SaveBillingResult }; "save_business_rules": { input: SaveBusinessRulesInput; result: SaveBusinessRulesResult }; "save_buyer_agent": { input: SaveBuyerAgentInput; result: SaveBuyerAgentResult }; "save_buyer_operator": { input: SaveBuyerOperatorInput; result: SaveBuyerOperatorResult }; "save_campaign": { input: SaveCampaignInput; result: SaveCampaignResult }; "save_catalog": { input: SaveCatalogInput; result: SaveCatalogResult }; "save_connection": { input: SaveConnectionInput; result: SaveConnectionResult }; "save_coverage": { input: SaveCoverageInput; result: SaveCoverageResult }; "save_creative": { input: SaveCreativeInput; result: SaveCreativeResult }; "save_creative_collection": { input: SaveCreativeCollectionInput; result: SaveCreativeCollectionResult }; "save_creative_session": { input: SaveCreativeSessionInput; result: SaveCreativeSessionResult }; "save_dimension": { input: SaveDimensionInput; result: SaveDimensionResult }; "save_directed_campaign_subscription": { input: SaveDirectedCampaignSubscriptionInput; result: SaveDirectedCampaignSubscriptionResult }; "save_event_source": { input: SaveEventSourceInput; result: SaveEventSourceResult }; "save_inventory_source": { input: SaveInventorySourceInput; result: SaveInventorySourceResult }; "save_lesson": { input: SaveLessonInput; result: SaveLessonResult }; "save_library_request": { input: SaveLibraryRequestInput; result: SaveLibraryRequestResult }; "save_material": { input: SaveMaterialInput; result: SaveMaterialResult }; "save_media_buy": { input: SaveMediaBuyInput; result: SaveMediaBuyResult }; "save_media_kit": { input: SaveMediaKitInput; result: SaveMediaKitResult }; "save_notification_config": { input: SaveNotificationConfigInput; result: SaveNotificationConfigResult }; "save_playbook": { input: SavePlaybookInput; result: SavePlaybookResult }; "save_property_list": { input: SavePropertyListInput; result: SavePropertyListResult }; "save_rfp": { input: SaveRfpInput; result: SaveRfpResult }; "save_rfp_turn": { input: SaveRfpTurnInput; result: SaveRfpTurnResult }; "save_seller": { input: SaveSellerInput; result: SaveSellerResult }; "save_signal": { input: SaveSignalInput; result: SaveSignalResult }; "save_wholesale_product": { input: SaveWholesaleProductInput; result: SaveWholesaleProductResult }; "save_work_item": { input: SaveWorkItemInput; result: SaveWorkItemResult }; "search": { input: SearchInput; result: SearchResult }; "test_creative_macros": { input: TestCreativeMacrosInput; result: TestCreativeMacrosResult }; "upload_creative_asset": { input: UploadCreativeAssetInput; result: UploadCreativeAssetResult } }
 export class Apostra extends Transport {
   /**
    * Issue the hosted card-capture link for a token from request_payment_authority. Give the link to the cardholder; cards stay off MCP.
@@ -395,6 +411,16 @@ export class Apostra extends Transport {
   /** Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for "show my advertisers" or "where do I start"; the Page self-fetches. To add or set up an advertiser, pass intent: "add". For a text answer use search(kind: "advertiser"). Returns the data together with response headers and request ID. */
   openAdvertisersPageWithResponse(input: OpenAdvertisersPageInput, options?: RequestOptions): Promise<ResponseDetails<OpenAdvertisersPageResult>> { return this.requestDetailed("open_advertisers_page", input, options) }
   /**
+   * Open one agent’s Test & certify Page: live certification per use case, recent test runs, AdCP 4.0 readiness and capability declarations. Read-only.
+   *
+   * @example
+   * await client.openAgentCertificationPage(input)
+   */
+  openAgentCertificationPage(input: OpenAgentCertificationPageInput, options?: RequestOptions): Promise<OpenAgentCertificationPageResult> { return this.request("open_agent_certification_page", input, options) }
+
+  /** Open one agent’s Test & certify Page: live certification per use case, recent test runs, AdCP 4.0 readiness and capability declarations. Read-only. Returns the data together with response headers and request ID. */
+  openAgentCertificationPageWithResponse(input: OpenAgentCertificationPageInput, options?: RequestOptions): Promise<ResponseDetails<OpenAgentCertificationPageResult>> { return this.requestDetailed("open_agent_certification_page", input, options) }
+  /**
    * Open one agent owned by this Developer account.
    *
    * @example
@@ -404,6 +430,26 @@ export class Apostra extends Transport {
 
   /** Open one agent owned by this Developer account. Returns the data together with response headers and request ID. */
   openAgentPageWithResponse(input: OpenAgentPageInput, options?: RequestOptions): Promise<ResponseDetails<OpenAgentPageResult>> { return this.requestDetailed("open_agent_page", input, options) }
+  /**
+   * Open one agent’s Inventory sources Page: the inventory sources it powers and the health of each. Read-only.
+   *
+   * @example
+   * await client.openAgentSourcesPage(input)
+   */
+  openAgentSourcesPage(input: OpenAgentSourcesPageInput, options?: RequestOptions): Promise<OpenAgentSourcesPageResult> { return this.request("open_agent_sources_page", input, options) }
+
+  /** Open one agent’s Inventory sources Page: the inventory sources it powers and the health of each. Read-only. Returns the data together with response headers and request ID. */
+  openAgentSourcesPageWithResponse(input: OpenAgentSourcesPageInput, options?: RequestOptions): Promise<ResponseDetails<OpenAgentSourcesPageResult>> { return this.requestDetailed("open_agent_sources_page", input, options) }
+  /**
+   * Open one agent’s Webhooks Page: its recent inbound webhook outcomes, each refusal with its reason. Read-only.
+   *
+   * @example
+   * await client.openAgentWebhooksPage(input)
+   */
+  openAgentWebhooksPage(input: OpenAgentWebhooksPageInput, options?: RequestOptions): Promise<OpenAgentWebhooksPageResult> { return this.request("open_agent_webhooks_page", input, options) }
+
+  /** Open one agent’s Webhooks Page: its recent inbound webhook outcomes, each refusal with its reason. Read-only. Returns the data together with response headers and request ID. */
+  openAgentWebhooksPageWithResponse(input: OpenAgentWebhooksPageInput, options?: RequestOptions): Promise<ResponseDetails<OpenAgentWebhooksPageResult>> { return this.requestDetailed("open_agent_webhooks_page", input, options) }
   /**
    * Open Build an agent for this Developer account.
    *
@@ -475,14 +521,24 @@ export class Apostra extends Transport {
   /** Open Creative Library. Use search for a plain object answer. Composer needs campaignId; assembly needs no Creative Engine. To save a draft, use exactly one format: a canonical format such as image, hosted video, or hosted audio, or a seller format. Returns the data together with response headers and request ID. */
   openCreativeLibraryWithResponse(input: OpenCreativeLibraryInput, options: WriteRequestOptions): Promise<ResponseDetails<OpenCreativeLibraryResult>> { return this.requestDetailed("open_creative_library", input, options) }
   /**
-   * Open the Seller Media Buys Page. Optionally focus one account relationship or seller account (not both) and its buys or creatives; the Page self-fetches.
+   * Open the Developer home for this Developer account: its agents, their stages and what to do next.
+   *
+   * @example
+   * await client.openDeveloperHome(input)
+   */
+  openDeveloperHome(input: OpenDeveloperHomeInput, options?: RequestOptions): Promise<OpenDeveloperHomeResult> { return this.request("open_developer_home", input, options) }
+
+  /** Open the Developer home for this Developer account: its agents, their stages and what to do next. Returns the data together with response headers and request ID. */
+  openDeveloperHomeWithResponse(input: OpenDeveloperHomeInput, options?: RequestOptions): Promise<ResponseDetails<OpenDeveloperHomeResult>> { return this.requestDetailed("open_developer_home", input, options) }
+  /**
+   * Open the Seller Media Buys Page. Optionally focus one account relationship or seller account mapping (not both) and its buys or creatives; the Page self-fetches.
    *
    * @example
    * await client.openMediaBuysPage(input)
    */
   openMediaBuysPage(input: OpenMediaBuysPageInput, options?: RequestOptions): Promise<OpenMediaBuysPageResult> { return this.request("open_media_buys_page", input, options) }
 
-  /** Open the Seller Media Buys Page. Optionally focus one account relationship or seller account (not both) and its buys or creatives; the Page self-fetches. Returns the data together with response headers and request ID. */
+  /** Open the Seller Media Buys Page. Optionally focus one account relationship or seller account mapping (not both) and its buys or creatives; the Page self-fetches. Returns the data together with response headers and request ID. */
   openMediaBuysPageWithResponse(input: OpenMediaBuysPageInput, options?: RequestOptions): Promise<ResponseDetails<OpenMediaBuysPageResult>> { return this.requestDetailed("open_media_buys_page", input, options) }
   /**
    * Open the buyer Media Partners Page. Optionally scope to an advertiser or seller; connectionAction "connect" opens that media partner at connection setup without mutating until the user confirms.
@@ -565,14 +621,14 @@ export class Apostra extends Transport {
   /** Stage a card handoff for the organization and return a confirmation token. No link is issued until confirm_payment_authority. Returns the data together with response headers and request ID. */
   requestPaymentAuthorityWithResponse(input: RequestPaymentAuthorityInput, options: WriteRequestOptions): Promise<ResponseDetails<RequestPaymentAuthorityResult>> { return this.requestDetailed("request_payment_authority", input, options) }
   /**
-   * Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true.
+   * Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds and sellerAccountIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true.
    *
    * @example
    * await client.requestProposals(input, { idempotencyKey: 'stable-key' })
    */
   requestProposals(input: RequestProposalsInput, options: WriteRequestOptions): Promise<RequestProposalsResult> { return this.request("request_proposals", input, options) }
 
-  /** Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true. Returns the data together with response headers and request ID. */
+  /** Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds and sellerAccountIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true. Returns the data together with response headers and request ID. */
   requestProposalsWithResponse(input: RequestProposalsInput, options: WriteRequestOptions): Promise<ResponseDetails<RequestProposalsResult>> { return this.requestDetailed("request_proposals", input, options) }
   /**
    * Requests a scheduler-run reporting refresh or a bounded replay for one seller media buy. It never polls a provider directly.
@@ -745,14 +801,14 @@ export class Apostra extends Transport {
   /** Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, and `removeProperties` change named items only. Read authorization; never assume it. Returns the data together with response headers and request ID. */
   saveCoverageWithResponse(input: SaveCoverageInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveCoverageResult>> { return this.requestDetailed("save_coverage", input, options) }
   /**
-   * Save creative in advertiserId/campaignId with name, message, assets, clickUrl, social, sourceAssetRef/sourceAssets. Use exactly one format selector: formatKind/formatParams, creativeFormatId, formatOptionRef. Supplied content/assets only; generate new media (radio spots) via save_creative_session.
+   * advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset.
    *
    * @example
    * await client.saveCreative(input, { idempotencyKey: 'stable-key' })
    */
   saveCreative(input: SaveCreativeInput, options: WriteRequestOptions): Promise<SaveCreativeResult> { return this.request("save_creative", input, options) }
 
-  /** Save creative in advertiserId/campaignId with name, message, assets, clickUrl, social, sourceAssetRef/sourceAssets. Use exactly one format selector: formatKind/formatParams, creativeFormatId, formatOptionRef. Supplied content/assets only; generate new media (radio spots) via save_creative_session. Returns the data together with response headers and request ID. */
+  /** advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset. Returns the data together with response headers and request ID. */
   saveCreativeWithResponse(input: SaveCreativeInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveCreativeResult>> { return this.requestDetailed("save_creative", input, options) }
   /**
    * Manage collections. Create with one owner and name: campaignId or advertiserId. Only advertiser mutations of an existing collection need expectedUpdatedAt; campaign writes and creates do not. isArchived archives or restores advertiser collections.
@@ -815,14 +871,14 @@ export class Apostra extends Transport {
   /** Create or update where a seller's inventory comes from. Pass `id` to change a source, omit it to add one, or pass only `agentId` to open an agent's connection form. Credentials are never passed here — a source that needs a secret comes back with the state and the page that collects it. Returns the data together with response headers and request ID. */
   saveInventorySourceWithResponse(input: SaveInventorySourceInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveInventorySourceResult>> { return this.requestDetailed("save_inventory_source", input, options) }
   /**
-   * Manage seller lessons. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear.
+   * Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear.
    *
    * @example
    * await client.saveLesson(input, { idempotencyKey: 'stable-key' })
    */
   saveLesson(input: SaveLessonInput, options: WriteRequestOptions): Promise<SaveLessonResult> { return this.request("save_lesson", input, options) }
 
-  /** Manage seller lessons. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear. Returns the data together with response headers and request ID. */
+  /** Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear. Returns the data together with response headers and request ID. */
   saveLessonWithResponse(input: SaveLessonInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveLessonResult>> { return this.requestDetailed("save_lesson", input, options) }
   /**
    * Open a seller library request or close it with seller Material.
@@ -875,14 +931,14 @@ export class Apostra extends Transport {
   /** Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed. Returns the data together with response headers and request ID. */
   saveNotificationConfigWithResponse(input: SaveNotificationConfigInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveNotificationConfigResult>> { return this.requestDetailed("save_notification_config", input, options) }
   /**
-   * Write how the seller sells. `active` creates and activates a new version in one step — no separate activate; the response names the version created and replaced. `pricing` replaces the whole fact list. `discounts` sets or removes brand/operator rules one by one. Halves never roll back each other.
+   * Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. Halves never roll back each other.
    *
    * @example
    * await client.savePlaybook(input, { idempotencyKey: 'stable-key' })
    */
   savePlaybook(input: SavePlaybookInput, options: WriteRequestOptions): Promise<SavePlaybookResult> { return this.request("save_playbook", input, options) }
 
-  /** Write how the seller sells. `active` creates and activates a new version in one step — no separate activate; the response names the version created and replaced. `pricing` replaces the whole fact list. `discounts` sets or removes brand/operator rules one by one. Halves never roll back each other. Returns the data together with response headers and request ID. */
+  /** Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. Halves never roll back each other. Returns the data together with response headers and request ID. */
   savePlaybookWithResponse(input: SavePlaybookInput, options: WriteRequestOptions): Promise<ResponseDetails<SavePlaybookResult>> { return this.requestDetailed("save_playbook", input, options) }
   /**
    * Create, update, archive, restore, or AAO-check an advertiser property list. Check uses identifiers without saving. Search/get read saved lists.

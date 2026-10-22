@@ -1,9 +1,10 @@
 # Connect, authenticate, and verify
 
-Read the public [quickstart](https://docs.interchange.io/v3/quickstart) and
-[MCP client setup](https://docs.interchange.io/v3/client-setup) for current
-host-specific commands. Keep the public repository and protocol identifiers
-spelled as published even when they retain `interchange` in their names.
+Read the public [quickstart](https://docs.apostra.com/v3/quickstart) and
+[MCP client setup](https://docs.apostra.com/v3/client-setup) for current
+host-specific commands. The MCP server is named `apostra` in the published
+plugin and in the documented `mcp add` commands; reuse an existing connection
+under whatever name it already has.
 
 ## Interactive coding agent
 
@@ -54,8 +55,8 @@ current host, give the exact connection action and finish locally testable work.
 
 ## Deployed application
 
-Read [authentication](https://docs.interchange.io/v3/authentication) and its
-[credential reference](https://docs.interchange.io/v2/authentication) before
+Read [authentication](https://docs.apostra.com/v3/authentication) and its
+[credential reference](https://docs.apostra.com/v2/authentication) before
 selecting credentials. Choose supported user authorization or a documented
 backend credential based on who the software represents. Store secrets in the
 deployment's secret manager and expose only environment-variable names in
@@ -88,7 +89,7 @@ through that same tool before implementing its contract. Use returned citation
 URLs in the handoff. Without MCP, use the public pages directly.
 
 Use a `/api/v3/tools/<operation>` route only when the operation appears in the
-published [V3 HTTP contract](https://docs.interchange.io/v3/http-api). An MCP
+published [V3 HTTP contract](https://docs.apostra.com/v3/http-api). An MCP
 tool that is absent from that catalogue has no supported V3 REST equivalent.
 The published schema defines the request shape; a documentation match, visible
 tool, or successful login does not grant authority.

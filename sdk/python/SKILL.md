@@ -5,7 +5,7 @@ description: Choose the Apostra Python SDK method for a coding task, then read t
 
 # Apostra Python SDK
 
-Read the [SDK guide](https://docs.apostra.com/v2/sdk), [V3 HTTP API
+Read the [SDK guide](https://docs.apostra.com/v3/sdk-guide), [V3 HTTP API
 guide](https://docs.apostra.com/v3/http-api), and [authentication
 guide](https://docs.apostra.com/v3/authentication) before relying on an
 operation. They are the source of truth for inputs, results, permissions, and
