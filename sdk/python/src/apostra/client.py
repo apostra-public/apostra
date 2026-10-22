@@ -92,6 +92,14 @@ class Apostra(SyncTransport):
         "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches. To add or set up an advertiser, pass intent: \"add\". For a text answer use search(kind: \"advertiser\"). Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenAdvertisersPageResult], self._request_with_response("open_advertisers_page", input, account_id=account_id, timeout=timeout))
 
+    def open_agent_certification_page(self, input: models.OpenAgentCertificationPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentCertificationPageResult:
+        "Open one agent’s Test & certify Page: live certification per use case, recent test runs, AdCP 4.0 readiness and capability declarations. Read-only."
+        return cast("models.OpenAgentCertificationPageResult", self._request("open_agent_certification_page", input, account_id=account_id, timeout=timeout))
+
+    def open_agent_certification_page_with_response(self, input: models.OpenAgentCertificationPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAgentCertificationPageResult]:
+        "Open one agent’s Test & certify Page: live certification per use case, recent test runs, AdCP 4.0 readiness and capability declarations. Read-only. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenAgentCertificationPageResult], self._request_with_response("open_agent_certification_page", input, account_id=account_id, timeout=timeout))
+
     def open_agent_page(self, input: models.OpenAgentPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentPageResult:
         "Open one agent owned by this Developer account."
         return cast("models.OpenAgentPageResult", self._request("open_agent_page", input, account_id=account_id, timeout=timeout))
@@ -99,6 +107,22 @@ class Apostra(SyncTransport):
     def open_agent_page_with_response(self, input: models.OpenAgentPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAgentPageResult]:
         "Open one agent owned by this Developer account. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenAgentPageResult], self._request_with_response("open_agent_page", input, account_id=account_id, timeout=timeout))
+
+    def open_agent_sources_page(self, input: models.OpenAgentSourcesPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentSourcesPageResult:
+        "Open one agent’s Inventory sources Page: the inventory sources it powers and the health of each. Read-only."
+        return cast("models.OpenAgentSourcesPageResult", self._request("open_agent_sources_page", input, account_id=account_id, timeout=timeout))
+
+    def open_agent_sources_page_with_response(self, input: models.OpenAgentSourcesPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAgentSourcesPageResult]:
+        "Open one agent’s Inventory sources Page: the inventory sources it powers and the health of each. Read-only. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenAgentSourcesPageResult], self._request_with_response("open_agent_sources_page", input, account_id=account_id, timeout=timeout))
+
+    def open_agent_webhooks_page(self, input: models.OpenAgentWebhooksPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentWebhooksPageResult:
+        "Open one agent’s Webhooks Page: its recent inbound webhook outcomes, each refusal with its reason. Read-only."
+        return cast("models.OpenAgentWebhooksPageResult", self._request("open_agent_webhooks_page", input, account_id=account_id, timeout=timeout))
+
+    def open_agent_webhooks_page_with_response(self, input: models.OpenAgentWebhooksPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAgentWebhooksPageResult]:
+        "Open one agent’s Webhooks Page: its recent inbound webhook outcomes, each refusal with its reason. Read-only. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenAgentWebhooksPageResult], self._request_with_response("open_agent_webhooks_page", input, account_id=account_id, timeout=timeout))
 
     def open_agents_page(self, input: models.OpenAgentsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentsPageResult:
         "Open Build an agent for this Developer account."
@@ -155,6 +179,14 @@ class Apostra(SyncTransport):
     def open_creative_library_with_response(self, input: models.OpenCreativeLibraryInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.OpenCreativeLibraryResult]:
         "Open Creative Library. Use search for a plain object answer. Composer needs campaignId; assembly needs no Creative Engine. To save a draft, use exactly one format: a canonical format such as image, hosted video, or hosted audio, or a seller format. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenCreativeLibraryResult], self._request_with_response("open_creative_library", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def open_developer_home(self, input: models.OpenDeveloperHomeInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenDeveloperHomeResult:
+        "Open the Developer home for this Developer account: its agents, their stages and what to do next."
+        return cast("models.OpenDeveloperHomeResult", self._request("open_developer_home", input, account_id=account_id, timeout=timeout))
+
+    def open_developer_home_with_response(self, input: models.OpenDeveloperHomeInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenDeveloperHomeResult]:
+        "Open the Developer home for this Developer account: its agents, their stages and what to do next. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenDeveloperHomeResult], self._request_with_response("open_developer_home", input, account_id=account_id, timeout=timeout))
 
     def open_media_buys_page(self, input: models.OpenMediaBuysPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenMediaBuysPageResult:
         "Open the Seller Media Buys Page. Optionally focus one account relationship or seller account (not both) and its buys or creatives; the Page self-fetches."
@@ -229,11 +261,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.RequestPaymentAuthorityResult], self._request_with_response("request_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def request_proposals(self, input: models.RequestProposalsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestProposalsResult:
-        "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
+        "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds and sellerAccountIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
         return cast("models.RequestProposalsResult", self._request("request_proposals", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def request_proposals_with_response(self, input: models.RequestProposalsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.RequestProposalsResult]:
-        "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true. Returns the data together with response headers and request ID."
+        "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds and sellerAccountIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.RequestProposalsResult], self._request_with_response("request_proposals", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def request_seller_reporting_update(self, input: models.RequestSellerReportingUpdateInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestSellerReportingUpdateResult:
@@ -373,11 +405,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveCoverageResult], self._request_with_response("save_coverage", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeResult:
-        "Save creative in advertiserId/campaignId with name, message, assets, clickUrl, social, sourceAssetRef/sourceAssets. Use exactly one format selector: formatKind/formatParams, creativeFormatId, formatOptionRef. Supplied content/assets only; generate new media (radio spots) via save_creative_session."
+        "advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset."
         return cast("models.SaveCreativeResult", self._request("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative_with_response(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeResult]:
-        "Save creative in advertiserId/campaignId with name, message, assets, clickUrl, social, sourceAssetRef/sourceAssets. Use exactly one format selector: formatKind/formatParams, creativeFormatId, formatOptionRef. Supplied content/assets only; generate new media (radio spots) via save_creative_session. Returns the data together with response headers and request ID."
+        "advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCreativeResult], self._request_with_response("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative_collection(self, input: models.SaveCreativeCollectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeCollectionResult:
@@ -653,6 +685,14 @@ class AsyncApostra(AsyncTransport):
         "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches. To add or set up an advertiser, pass intent: \"add\". For a text answer use search(kind: \"advertiser\"). Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenAdvertisersPageResult], await self._request_with_response("open_advertisers_page", input, account_id=account_id, timeout=timeout))
 
+    async def open_agent_certification_page(self, input: models.OpenAgentCertificationPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentCertificationPageResult:
+        "Open one agent’s Test & certify Page: live certification per use case, recent test runs, AdCP 4.0 readiness and capability declarations. Read-only."
+        return cast("models.OpenAgentCertificationPageResult", await self._request("open_agent_certification_page", input, account_id=account_id, timeout=timeout))
+
+    async def open_agent_certification_page_with_response(self, input: models.OpenAgentCertificationPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAgentCertificationPageResult]:
+        "Open one agent’s Test & certify Page: live certification per use case, recent test runs, AdCP 4.0 readiness and capability declarations. Read-only. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenAgentCertificationPageResult], await self._request_with_response("open_agent_certification_page", input, account_id=account_id, timeout=timeout))
+
     async def open_agent_page(self, input: models.OpenAgentPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentPageResult:
         "Open one agent owned by this Developer account."
         return cast("models.OpenAgentPageResult", await self._request("open_agent_page", input, account_id=account_id, timeout=timeout))
@@ -660,6 +700,22 @@ class AsyncApostra(AsyncTransport):
     async def open_agent_page_with_response(self, input: models.OpenAgentPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAgentPageResult]:
         "Open one agent owned by this Developer account. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenAgentPageResult], await self._request_with_response("open_agent_page", input, account_id=account_id, timeout=timeout))
+
+    async def open_agent_sources_page(self, input: models.OpenAgentSourcesPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentSourcesPageResult:
+        "Open one agent’s Inventory sources Page: the inventory sources it powers and the health of each. Read-only."
+        return cast("models.OpenAgentSourcesPageResult", await self._request("open_agent_sources_page", input, account_id=account_id, timeout=timeout))
+
+    async def open_agent_sources_page_with_response(self, input: models.OpenAgentSourcesPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAgentSourcesPageResult]:
+        "Open one agent’s Inventory sources Page: the inventory sources it powers and the health of each. Read-only. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenAgentSourcesPageResult], await self._request_with_response("open_agent_sources_page", input, account_id=account_id, timeout=timeout))
+
+    async def open_agent_webhooks_page(self, input: models.OpenAgentWebhooksPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentWebhooksPageResult:
+        "Open one agent’s Webhooks Page: its recent inbound webhook outcomes, each refusal with its reason. Read-only."
+        return cast("models.OpenAgentWebhooksPageResult", await self._request("open_agent_webhooks_page", input, account_id=account_id, timeout=timeout))
+
+    async def open_agent_webhooks_page_with_response(self, input: models.OpenAgentWebhooksPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAgentWebhooksPageResult]:
+        "Open one agent’s Webhooks Page: its recent inbound webhook outcomes, each refusal with its reason. Read-only. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenAgentWebhooksPageResult], await self._request_with_response("open_agent_webhooks_page", input, account_id=account_id, timeout=timeout))
 
     async def open_agents_page(self, input: models.OpenAgentsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentsPageResult:
         "Open Build an agent for this Developer account."
@@ -716,6 +772,14 @@ class AsyncApostra(AsyncTransport):
     async def open_creative_library_with_response(self, input: models.OpenCreativeLibraryInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.OpenCreativeLibraryResult]:
         "Open Creative Library. Use search for a plain object answer. Composer needs campaignId; assembly needs no Creative Engine. To save a draft, use exactly one format: a canonical format such as image, hosted video, or hosted audio, or a seller format. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenCreativeLibraryResult], await self._request_with_response("open_creative_library", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def open_developer_home(self, input: models.OpenDeveloperHomeInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenDeveloperHomeResult:
+        "Open the Developer home for this Developer account: its agents, their stages and what to do next."
+        return cast("models.OpenDeveloperHomeResult", await self._request("open_developer_home", input, account_id=account_id, timeout=timeout))
+
+    async def open_developer_home_with_response(self, input: models.OpenDeveloperHomeInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenDeveloperHomeResult]:
+        "Open the Developer home for this Developer account: its agents, their stages and what to do next. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenDeveloperHomeResult], await self._request_with_response("open_developer_home", input, account_id=account_id, timeout=timeout))
 
     async def open_media_buys_page(self, input: models.OpenMediaBuysPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenMediaBuysPageResult:
         "Open the Seller Media Buys Page. Optionally focus one account relationship or seller account (not both) and its buys or creatives; the Page self-fetches."
@@ -790,11 +854,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.RequestPaymentAuthorityResult], await self._request_with_response("request_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def request_proposals(self, input: models.RequestProposalsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestProposalsResult:
-        "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
+        "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds and sellerAccountIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
         return cast("models.RequestProposalsResult", await self._request("request_proposals", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def request_proposals_with_response(self, input: models.RequestProposalsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.RequestProposalsResult]:
-        "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true. Returns the data together with response headers and request ID."
+        "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds and sellerAccountIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.RequestProposalsResult], await self._request_with_response("request_proposals", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def request_seller_reporting_update(self, input: models.RequestSellerReportingUpdateInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestSellerReportingUpdateResult:
@@ -934,11 +998,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveCoverageResult], await self._request_with_response("save_coverage", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeResult:
-        "Save creative in advertiserId/campaignId with name, message, assets, clickUrl, social, sourceAssetRef/sourceAssets. Use exactly one format selector: formatKind/formatParams, creativeFormatId, formatOptionRef. Supplied content/assets only; generate new media (radio spots) via save_creative_session."
+        "advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset."
         return cast("models.SaveCreativeResult", await self._request("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative_with_response(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeResult]:
-        "Save creative in advertiserId/campaignId with name, message, assets, clickUrl, social, sourceAssetRef/sourceAssets. Use exactly one format selector: formatKind/formatParams, creativeFormatId, formatOptionRef. Supplied content/assets only; generate new media (radio spots) via save_creative_session. Returns the data together with response headers and request ID."
+        "advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCreativeResult], await self._request_with_response("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative_collection(self, input: models.SaveCreativeCollectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeCollectionResult:
