@@ -130,7 +130,7 @@ async function exerciseJourneys(command, args, language) {
     assert.match(request.headers['user-agent'], new RegExp(`^apostra-${language}/`))
   }
   assert.deepEqual(requests[0].body, {})
-  assert.deepEqual(requests[1].body, { kind: 'inventory_source', limit: 20 })
+  assert.deepEqual(requests[1].body, { kind: 'campaign', limit: 20 })
   const delivery = {
     report: 'campaign_delivery', filters: { campaignId: 'fixture-campaign' },
     range: { startDate: '2026-01-01', endDate: '2026-01-02' }, limit: 100,
