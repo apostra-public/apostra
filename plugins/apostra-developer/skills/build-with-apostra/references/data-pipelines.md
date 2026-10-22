@@ -7,7 +7,7 @@ retry behavior without sending customer data.
 
 ## Event ingestion handoff
 
-Read [bring data in](https://docs.interchange.io/v3/bring-data-in) and retrieve
+Read [bring data in](https://docs.apostra.com/v3/bring-data-in) and retrieve
 the applicable `set-up-an-event-source` skill through the active account's
 `get` tool before source mutations.
 
@@ -35,7 +35,7 @@ observable receipt or health state still needed.
 
 ## Reporting pipeline
 
-Read [build a reporting pipeline](https://docs.interchange.io/v3/reporting-pipeline)
+Read [build a reporting pipeline](https://docs.apostra.com/v3/reporting-pipeline)
 and its linked contract guides. Choose the
 output the developer actually needs:
 
@@ -47,7 +47,7 @@ output the developer actually needs:
 | Recurring log-level data in owned cloud storage | Data Delivery credential and Output configuration with an observed destination probe |
 
 For agent reports, read the current `get_delivery` schema and
-[delivery workflow](https://docs.interchange.io/v2/setup/v3/buyer-workflows#7-query-campaign-delivery).
+[delivery workflow](https://docs.apostra.com/v2/setup/v3/buyer-workflows#7-query-campaign-delivery).
 Campaign delivery does not accept metric selection, dimensions, other filters,
 or pagination. Preserve the provider response, currency, reporting period, and
 unavailable metrics. Do not reinterpret missing data as zero. Seller-reported

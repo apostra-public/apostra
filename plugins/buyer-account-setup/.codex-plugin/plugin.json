@@ -1,6 +1,6 @@
 {
   "name": "buyer-account-setup",
-  "version": "1.0.0+f8932fb6ee74",
+  "version": "1.0.0+326a027c9e34",
   "description": "Prepare an Interchange buyer account for campaign execution.",
   "author": {
     "name": "Scope3 PBC",
