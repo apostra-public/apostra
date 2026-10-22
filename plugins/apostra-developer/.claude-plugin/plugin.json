@@ -2,12 +2,12 @@
   "name": "apostra-developer",
   "displayName": "Apostra Developer",
   "description": "Plan, run, automate, and report on advertising across sellers, or build those jobs into an application.",
-  "version": "1.0.0+eabe12a32393",
+  "version": "1.0.0+92d592967237",
   "author": {
     "name": "Scope3 PBC",
-    "url": "https://interchange.io"
+    "url": "https://apostra.com"
   },
-  "homepage": "https://docs.interchange.io/v3/overview",
+  "homepage": "https://docs.apostra.com/v3/overview",
   "repository": "https://github.com/apostra-public/apostra",
   "license": "Apache-2.0",
   "keywords": [
