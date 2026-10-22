@@ -6,7 +6,7 @@ interface:
 dependencies:
   tools:
     - type: "mcp"
-      value: "interchange"
+      value: "apostra"
       description: "Apostra account-resolved MCP server"
       transport: "streamable_http"
       url: "https://api.apostra.com/mcp/v3"
