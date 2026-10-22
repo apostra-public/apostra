@@ -16,9 +16,9 @@ Use the attached Interchange V3 buyer tools. Treat `get_status` as the authority
    - Read `operatorIdentity` from `get_status` first.
    - If `locked` is true or `canManage` is false, stop and follow the returned administrator or support action.
    - If `usableForBuying` is true, reuse its returned domain; otherwise ask for the buyer's real business domain.
-   - Explain `whole_operator` versus a stable `specific_unit` and ask the user to choose.
    - Never invent a domain, unit identifier, or the value `default`.
-   - Call `save_buyer_operator` only after the user confirms the exact identity and scope.
+   - Call `save_buyer_operator` only after the user confirms the exact identity.
+   - Buyer readiness treats this check as complete when the account has a usable operator domain and the organization has proved control of it. It does not require a separate identity-scope confirmation.
 5. For terms or billing actions:
    - If Terms or full plan review is required, open or direct the user to the Plan & Billing Page and stop that step. The model-visible tools do not expose the complete Terms text and exact version needed for safe acceptance.
    - For payment terms, call `save_billing` with `{ paymentTerms }` only after the user chooses the terms.
