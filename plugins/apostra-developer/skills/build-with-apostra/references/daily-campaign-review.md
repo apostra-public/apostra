@@ -1,6 +1,6 @@
 # Review campaign performance each morning
 
-Read the public [daily campaign review](https://docs.interchange.io/v3/daily-campaign-review)
+Read the public [daily campaign review](https://docs.apostra.com/v3/daily-campaign-review)
 and the current `search`, `get`, and `get_delivery` schemas before making calls.
 The reporting review is read-only. Authorization setup is a separate,
 human-gated step that may establish a provider connection only after the person

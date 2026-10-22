@@ -12,7 +12,7 @@ to know terms such as advertising agent, seller discovery, orchestration, or
 MCP.
 
 Apostra provides the account, campaign, seller connection, execution, and
-reporting state behind the work. Read the [developer docs](https://docs.interchange.io/v3/overview)
+reporting state behind the work. Read the [developer docs](https://docs.apostra.com/v3/overview)
 for the product model and the order of operations. For MCP, take every call
 shape from the connected account's `tools/list` schemas. For fixed V3 HTTP
 routes, take request and response shapes from the published OpenAPI contract.
@@ -45,11 +45,11 @@ plugin, or when instructions were installed separately with `npx skills`.
 In either case, let the host complete OAuth and store the interactive
 credential.
 
-For deterministic server or ETL work, first read the [V3 HTTP guide](https://docs.interchange.io/v3/http-api).
+For deterministic server or ETL work, first read the [V3 HTTP guide](https://docs.apostra.com/v3/http-api).
 When an operation appears in its public catalogue, call its fixed
 `POST /api/v3/tools/<operation>` route and generate client types from
 `https://api.apostra.com/api/v3/openapi-3.1.yaml`. Follow the
-[authentication and account-binding guide](https://docs.interchange.io/v3/authentication):
+[authentication and account-binding guide](https://docs.apostra.com/v3/authentication):
 use a supported API key or M2M credential, keep the request on the resolved
 account, and never reuse an MCP-audience token for REST. If authorization or
 account access is missing, use the human handoff in
@@ -144,5 +144,5 @@ an assumed shape is an open risk even when every local test passes. Never report
 account access, ingestion, delivery, or launch from an inferred outcome.
 When collecting activation evidence, record bounded outcomes and timestamps;
 exclude prompts, source code, credentials, payloads, and signed URLs. Follow
-the [skill correlation contract](https://docs.interchange.io/v2/skill#correlate-a-skill-run)
+the [skill correlation contract](https://docs.apostra.com/v2/skill#correlate-a-skill-run)
 when the host supports it; correlation metadata does not prove completion.
