@@ -12,8 +12,8 @@ async def main() -> None:
         base_url=os.environ.get('APOSTRA_BASE_URL', 'https://api.apostra.com/api/v3'),
     ) as api:
         status = await api.get_status({})
-        sources = await api.search({'kind': 'inventory_source', 'limit': 20})
-        assert status['account'] and sources.get('objects')
+        campaigns = await api.search({'kind': 'campaign', 'limit': 20})
+        assert status['account'] and campaigns.get('objects')
         query: GetDeliveryInput = {
             'report': 'campaign_delivery',
             'filters': {'campaignId': os.environ['APOSTRA_CAMPAIGN_ID']},

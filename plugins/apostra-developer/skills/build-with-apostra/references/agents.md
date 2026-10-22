@@ -1,7 +1,7 @@
 # Build an application or agent
 
-Read [build an agent](https://docs.interchange.io/v3/build-an-agent)
-and the [buyer workflow](https://docs.interchange.io/v2/setup/v3/buyer-workflows)
+Read [build an agent](https://docs.apostra.com/v3/build-an-agent)
+and the [buyer workflow](https://docs.apostra.com/v2/setup/v3/buyer-workflows)
 for the requested part of the loop. Apostra keeps the canonical campaign,
 transaction, and delivery state. The application may keep IDs, approvals,
 checkpoints, and its own data without rebuilding seller-specific adapters.
@@ -37,8 +37,8 @@ overwrite existing files to reproduce a blank-repository example.
 
 First establish whether the developer means connecting a buyer to an existing
 seller or publishing their own inventory. Read the applicable
-[buyer workflow](https://docs.interchange.io/v2/setup/v3/buyer-workflows) or
-[seller workflow](https://docs.interchange.io/v2/setup/v3/seller-workflows).
+[buyer workflow](https://docs.apostra.com/v2/setup/v3/buyer-workflows) or
+[seller workflow](https://docs.apostra.com/v2/setup/v3/seller-workflows).
 
 Resolve an existing seller through the authenticated catalog and inspect the
 returned connection/readiness state. Follow the specific supported connection
@@ -87,7 +87,7 @@ An interactive coding agent using a user's connection is not automatically an
 installed buyer agent. Register only when the software needs its own identity,
 credentials, advertiser grants, and lifecycle.
 
-Read [manage buyer agents](https://docs.interchange.io/v2/setup/buyer-agent-credentials)
+Read [manage buyer agents](https://docs.apostra.com/v2/setup/buyer-agent-credentials)
 before implementing registration or access. Where advertised by the current
 catalog, `save_buyer_agent` supports external-agent management under its
 direct-administrator boundary. Use the documented console or REST path for

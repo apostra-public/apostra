@@ -8,10 +8,10 @@ const api = new Apostra({
 })
 const signal = AbortSignal.timeout(30_000)
 
-// Journey 1: inspect readiness and discover inventory sources.
+// Journey 1: inspect readiness and find your campaigns.
 const status = await api.getStatus({}, {signal})
-const sources = await api.search({kind:'inventory_source', limit:20}, {signal})
-if (!status.account || !sources.objects) throw new Error('Missing discovery result')
+const campaigns = await api.search({kind:'campaign', limit:20}, {signal})
+if (!status.account || !campaigns.objects) throw new Error('Missing discovery result')
 
 // Journey 2: read every delivery page for a known synthetic campaign.
 const query: GetDeliveryInput = {
