@@ -349,8 +349,10 @@ class GetDeliveryInputFilters(TypedDict):
     '\n    Campaign delivery: filter to one campaign.\n    '
     channelGroupId: NotRequired[str]
     '\n    Campaign delivery: filter to one channel group.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    Margin: filter to one buyer Account id.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    Margin: filter to one buyer customer.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     mediaBuyId: NotRequired[str]
     '\n    Filter to one media buy.\n    '
     packageId: NotRequired[str]
@@ -1082,8 +1084,10 @@ class GetDeliverySuccessQueryFilters(TypedDict):
     '\n    Campaign delivery: filter to one campaign.\n    '
     channelGroupId: NotRequired[str]
     '\n    Campaign delivery: filter to one channel group.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    Margin: filter to one buyer Account id.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    Margin: filter to one buyer customer.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     mediaBuyId: NotRequired[str]
     '\n    Filter to one media buy.\n    '
     packageId: NotRequired[str]
@@ -1196,8 +1200,10 @@ class GetInputKindAdvertiserAccess(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -1218,7 +1224,7 @@ class GetInputKindAdvertiserAccess(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAdvertiserAccessItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1321,8 +1327,10 @@ class GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAd
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -1343,7 +1351,7 @@ class GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAd
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1444,8 +1452,10 @@ class GetInputKindAudience(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -1466,7 +1476,7 @@ class GetInputKindAudience(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAudienceItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1569,8 +1579,10 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -1591,7 +1603,7 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCatalogAndEventSourceItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1694,8 +1706,10 @@ class GetInputKindConnection(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -1716,7 +1730,7 @@ class GetInputKindConnection(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindConnectionItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1819,8 +1833,10 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -1841,7 +1857,7 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCreativeAndCreativeCollectionWithAdvertiserIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1944,8 +1960,10 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -1964,7 +1982,7 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCreativeAndCreativeCollectionWithSourceIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2067,8 +2085,10 @@ class GetInputKindCreativeEngine(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2190,8 +2210,10 @@ class GetInputKindCreativeFormat(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2313,8 +2335,10 @@ class GetInputKindCreativeSession(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2436,8 +2460,10 @@ class GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDis
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2458,7 +2484,7 @@ class GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDis
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2561,8 +2587,10 @@ class GetInputKindMaterial(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2583,7 +2611,7 @@ class GetInputKindMaterial(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindMaterialItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2686,8 +2714,10 @@ class GetInputKindProposal(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2708,7 +2738,7 @@ class GetInputKindProposal(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindProposalItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2811,8 +2841,10 @@ class GetInputKindSeller(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2833,7 +2865,7 @@ class GetInputKindSeller(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindSellerItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2936,8 +2968,10 @@ class GetInputKindSession(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2958,7 +2992,7 @@ class GetInputKindSession(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindSessionItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3061,8 +3095,10 @@ class GetInputKindWholesaleProduct(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -3083,7 +3119,7 @@ class GetInputKindWholesaleProduct(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindWholesaleProductItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3186,8 +3222,10 @@ class GetInputKindWorkItem(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -3208,7 +3246,7 @@ class GetInputKindWorkItem(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: Literal["creative_review", "media_buy_approval", "modular_source"]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindWorkItemItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3847,8 +3885,10 @@ class GetRfpPerformanceResultSemanticsMetricFamilies(TypedDict):
 class GetSellerReportingReceiptsInput(TypedDict):
     mediaBuyId: str
     '\n    Seller media-buy identifier.\n    '
-    buyerCustomerId: int
-    '\n    Buyer customer that owns the media buy.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    Buyer Account id that owns the media buy.\n    '
+    buyerCustomerId: NotRequired[int]
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
@@ -3927,7 +3967,8 @@ class GetSellerReportingReceiptsResultComputedDailyTotalsItem(TypedDict):
 
 class GetSellerReportingReceiptsResultParams(TypedDict):
     mediaBuyId: str
-    buyerCustomerId: int
+    buyerCustomerId: GetSellerReportingReceiptsSuccessParamsBuyerCustomerId
+    buyerAccountId: NotRequired[GetSellerReportingReceiptsSuccessParamsBuyerAccountId]
 
 class GetSellerReportingReceiptsResultReceiptsItem(TypedDict):
     receiptId: str
@@ -4003,6 +4044,10 @@ GetSellerReportingReceiptsSuccessComputedDailyTotalsItemSpend: TypeAlias = str |
 GetSellerReportingReceiptsSuccessComputedDailyTotalsItemVideoCompletions: TypeAlias = str | None
 
 GetSellerReportingReceiptsSuccessComputedDailyTotalsItemViews: TypeAlias = str | None
+
+GetSellerReportingReceiptsSuccessParamsBuyerAccountId: TypeAlias = int
+
+GetSellerReportingReceiptsSuccessParamsBuyerCustomerId: TypeAlias = int
 
 class GetSellerReportingReceiptsSuccessReceiptsItemAcceptanceReason(TypedDict):
     code: Literal["ingestion_failed", "processing_failed", "processing_partial_success", "polling_scheduled", "polling_delayed", "unrecognised_processing_status"]
@@ -4669,6 +4714,15 @@ class OpenAgentPageInput(TypedDict):
 class OpenAgentPageResult(TypedDict):
     agentId: str
 
+class OpenAgentWebhooksPageInput(TypedDict):
+    agentId: str
+    '\n    The agent whose webhook results to open, from search or get.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class OpenAgentWebhooksPageResult(TypedDict):
+    agentId: str
+
 class OpenAgentsPageInput(TypedDict):
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
@@ -4700,6 +4754,8 @@ class OpenApprovalsResultParams(TypedDict):
     '\n    Legacy creative id to focus only when exactly one loaded review version matches. Prefer reviewRef.\n    '
     reviewRef: NotRequired[str]
     '\n    Exact reviewRef from the approval queue; focuses one creative review version.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    The buyer Account id; the same number as buyerCustomerId.\n    '
 
 class OpenCampaignReceiptInput(TypedDict):
     campaignId: str
@@ -4863,7 +4919,7 @@ class OpenCampaignsPageSuccessPageHumanHandoffRequiredAccount(TypedDict):
     name: str
 
 class OpenCampaignsPageSuccessPageHumanHandoffRequiredPage(TypedDict):
-    resourceUri: Literal["ui://agentic-api/conversation-history/mcp-app.html", "ui://agentic-api/agent-v2/mcp-app.html", "ui://agentic-api/agents/mcp-app.html", "ui://agentic-api/create-agent/mcp-app.html", "ui://agentic-api/claim-agent/mcp-app.html", "ui://agentic-api/configure-agent-connection/mcp-app.html", "ui://agentic-api/register-agent-observed-revision/mcp-app.html", "ui://agentic-api/buyer-account-admission/mcp-app.html", "ui://agentic-api/tars-org-supply-asks/mcp-app.html", "ui://agentic-api/tars-run-rate/mcp-app.html", "ui://agentic-api/tars-marketing-email-library/mcp-app.html", "ui://agentic-api/tars-approved-deck-modules/mcp-app.html", "ui://agentic-api/tars-marketing-email-operations/mcp-app.html", "ui://agentic-api/business-rules/mcp-app.html", "ui://agentic-api/demo-storefront/mcp-app.html", "ui://agentic-api/modular-inventory-source/mcp-app.html", "ui://agentic-api/modular-connect/mcp-app.html", "ui://agentic-api/source-discovery-preview/mcp-app.html", "ui://agentic-api/partner-connection/mcp-app.html", "ui://agentic-api/modular-avails-commit/mcp-app.html", "ui://agentic-api/plan-billing/mcp-app.html", "ui://agentic-api/connections/mcp-app.html", "ui://agentic-api/creative-engines/mcp-app.html", "ui://agentic-api/all-advertisers-home/mcp-app.html", "ui://agentic-api/add-advertiser/mcp-app.html", "ui://agentic-api/campaigns/mcp-app.html", "ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html", "ui://agentic-api/creative-library-v3/mcp-app.html", "ui://agentic-api/upload-creative-asset/mcp-app.html", "ui://agentic-api/creative-composer-task/mcp-app.html", "ui://agentic-api/variant-gallery/mcp-app.html", "ui://agentic-api/seller-setup/mcp-app.html", "ui://agentic-api/approvals/mcp-app.html", "ui://agentic-api/notifications/mcp-app.html", "ui://agentic-api/buyer-notifications/mcp-app.html", "ui://agentic-api/buyer-webhooks/mcp-app.html", "ui://agentic-api/proposal-pass-v3/mcp-app.html", "ui://agentic-api/sessions/mcp-app.html", "ui://agentic-api/seller-dashboard/mcp-app.html", "ui://agentic-api/seller-dashboard-v3/mcp-app.html", "ui://agentic-api/product-marketing-v3/mcp-app.html", "ui://agentic-api/library/mcp-app.html", "ui://agentic-api/integrations/mcp-app.html", "ui://agentic-api/release-notes/mcp-app.html", "ui://agentic-api/playbook/mcp-app.html", "ui://agentic-api/media-kit/mcp-app.html", "ui://agentic-api/business-profile/mcp-app.html", "ui://agentic-api/buyer-discounts/mcp-app.html", "ui://agentic-api/sponsored-buyers/mcp-app.html", "ui://agentic-api/pending-operations/mcp-app.html", "ui://agentic-api/storefront-briefs/mcp-app.html", "ui://agentic-api/merchandising-simulator/mcp-app.html", "ui://agentic-api/media-buys/mcp-app.html", "ui://agentic-api/media-buy-timeline/mcp-app.html", "ui://agentic-api/components/mcp-app.html", "ui://agentic-api/seller-accounts/mcp-app.html"]
+    resourceUri: Literal["ui://agentic-api/conversation-history/mcp-app.html", "ui://agentic-api/agent-v2/mcp-app.html", "ui://agentic-api/agents/mcp-app.html", "ui://agentic-api/create-agent/mcp-app.html", "ui://agentic-api/claim-agent/mcp-app.html", "ui://agentic-api/configure-agent-connection/mcp-app.html", "ui://agentic-api/register-agent-observed-revision/mcp-app.html", "ui://agentic-api/buyer-account-admission/mcp-app.html", "ui://agentic-api/tars-org-supply-asks/mcp-app.html", "ui://agentic-api/tars-run-rate/mcp-app.html", "ui://agentic-api/tars-marketing-email-library/mcp-app.html", "ui://agentic-api/tars-approved-deck-modules/mcp-app.html", "ui://agentic-api/tars-marketing-email-operations/mcp-app.html", "ui://agentic-api/business-rules/mcp-app.html", "ui://agentic-api/demo-storefront/mcp-app.html", "ui://agentic-api/modular-inventory-source/mcp-app.html", "ui://agentic-api/modular-connect/mcp-app.html", "ui://agentic-api/source-discovery-preview/mcp-app.html", "ui://agentic-api/partner-connection/mcp-app.html", "ui://agentic-api/agent-webhooks/mcp-app.html", "ui://agentic-api/modular-avails-commit/mcp-app.html", "ui://agentic-api/plan-billing/mcp-app.html", "ui://agentic-api/connections/mcp-app.html", "ui://agentic-api/creative-engines/mcp-app.html", "ui://agentic-api/all-advertisers-home/mcp-app.html", "ui://agentic-api/add-advertiser/mcp-app.html", "ui://agentic-api/campaigns/mcp-app.html", "ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html", "ui://agentic-api/creative-library-v3/mcp-app.html", "ui://agentic-api/upload-creative-asset/mcp-app.html", "ui://agentic-api/creative-composer-task/mcp-app.html", "ui://agentic-api/variant-gallery/mcp-app.html", "ui://agentic-api/seller-setup/mcp-app.html", "ui://agentic-api/approvals/mcp-app.html", "ui://agentic-api/notifications/mcp-app.html", "ui://agentic-api/buyer-notifications/mcp-app.html", "ui://agentic-api/buyer-webhooks/mcp-app.html", "ui://agentic-api/proposal-pass-v3/mcp-app.html", "ui://agentic-api/sessions/mcp-app.html", "ui://agentic-api/seller-dashboard/mcp-app.html", "ui://agentic-api/seller-dashboard-v3/mcp-app.html", "ui://agentic-api/product-marketing-v3/mcp-app.html", "ui://agentic-api/library/mcp-app.html", "ui://agentic-api/integrations/mcp-app.html", "ui://agentic-api/release-notes/mcp-app.html", "ui://agentic-api/playbook/mcp-app.html", "ui://agentic-api/media-kit/mcp-app.html", "ui://agentic-api/business-profile/mcp-app.html", "ui://agentic-api/buyer-discounts/mcp-app.html", "ui://agentic-api/sponsored-buyers/mcp-app.html", "ui://agentic-api/pending-operations/mcp-app.html", "ui://agentic-api/storefront-briefs/mcp-app.html", "ui://agentic-api/merchandising-simulator/mcp-app.html", "ui://agentic-api/media-buys/mcp-app.html", "ui://agentic-api/media-buy-timeline/mcp-app.html", "ui://agentic-api/components/mcp-app.html", "ui://agentic-api/seller-accounts/mcp-app.html"]
     advertiserId: NotRequired[str]
     campaignId: NotRequired[str]
     capability: Literal["reauthenticate_in_browser", "manage_webhooks"]
@@ -5292,10 +5348,14 @@ class RequestProposalsInput(TypedDict):
     '\n    Campaign to request proposals for.\n    '
     expectedCampaignRevision: int
     '\n    revision from the last get. Rejected with REVISION_CONFLICT if the campaign has changed since.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    Optional seller Account ids, not seller object ids or sellerIds, which are different numbers. Intersect the campaign seller list. Omit for its list. To contact all eligible sellers, omit sellerIds and sellerAccountIds and set confirmBroadcast true.\n    '
     sellerIds: NotRequired[list[str]]
     '\n    Optional seller IDs; intersect the campaign seller list. Omit for its list. To contact all eligible sellers, omit sellerIds and set confirmBroadcast true.\n    '
     confirmBroadcast: NotRequired[bool]
     '\n    Required as true only when neither sellerIds nor a campaign seller list applies, before contacting all eligible sellers. Ignored when a selector applies.\n    '
+    expectedSellerAccountId: NotRequired[int]
+    '\n    The seller\'s Account id, not a seller object id or expectedSellerId, which are different numbers. Optional fail-closed seller check; never grants access. Requires matching current server authority.\n    '
     expectedSellerId: NotRequired[str]
     '\n    Optional fail-closed seller check; never grants access. Requires matching current server authority.\n    '
     evaluation: NotRequired[RequestProposalsInputEvaluation]
@@ -5566,8 +5626,10 @@ class RequestProposalsSuccessProposalRequestSellerErrorBuyerReason(TypedDict):
 class RequestSellerReportingUpdateInput(TypedDict):
     mediaBuyId: str
     '\n    Seller media-buy identifier.\n    '
-    buyerCustomerId: int
-    '\n    Buyer customer that owns the media buy.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    Buyer Account id that owns the media buy.\n    '
+    buyerCustomerId: NotRequired[int]
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     action: RequestSellerReportingUpdateInputActionKindRefresh | RequestSellerReportingUpdateInputActionKindReplay
     '\n    Refresh current reporting or replay a bounded day range.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -7184,6 +7246,8 @@ class SaveCampaignInput(TypedDict):
     '\n    Per-seller AdCP 3.2 MediaBuy cap. Null clears it; draft only. Other levels are unavailable.\n    '
     confirmLaunch: NotRequired[bool]
     '\n    Use with desiredPhase: active. Omit = preview what will launch. true = execute.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    Seller Account ids, not seller object ids, sellerIds or platform IDs, which are different numbers. Unknown or inaccessible sellers are rejected and never omitted.\n    '
     sellerIds: NotRequired[list[str]]
     '\n    Seller platform IDs returned by campaign reads, or numeric seller IDs. Unknown or inaccessible sellers are rejected and never omitted.\n    '
     creativeIds: NotRequired[list[str]]
@@ -8556,6 +8620,8 @@ class SaveCatalogResult(TypedDict):
 class SaveConnectionInput(TypedDict):
     target: NotRequired[SaveConnectionInputTarget]
     '\n    Service to authorize. Existing connections cannot change target.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    The seller\'s Account id. Not the seller object\'s id or any sellerId, which are different numbers.\n    '
     sellerId: NotRequired[SaveConnectionRequestSellerId]
     '\n    Seller ID.\n    '
     connectionId: NotRequired[SaveConnectionRequestConnectionId]
@@ -8642,7 +8708,9 @@ class SaveConnectionInputSelection(TypedDict):
 class SaveConnectionInputTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
     '\n    Service role.\n    '
-    id: str
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id or target.id, which are different numbers.\n    '
+    id: NotRequired[str]
     '\n    Service ID.\n    '
 
 SaveConnectionRequestAdvertiserActivationAdvertiserId: TypeAlias = str
@@ -8886,11 +8954,11 @@ class SaveCreativeCollectionInputWithAdvertiserId(TypedDict):
     parentId: NotRequired[str | None]
     '\n    Parent ID; null clears it.\n    '
     role: NotRequired[Literal["creative_library", "source_assets", "approved_set", "test_set"]]
-    '\n    Campaign role; create-only; default creative_library.\n    '
+    '\n    Attached campaign role; default creative_library.\n    '
     syncPolicy: NotRequired[Literal["manual", "auto_include_new_members"]]
-    '\n    New-member sync; create-only; default manual.\n    '
+    '\n    Campaign member sync; default manual.\n    '
     attachToCampaign: NotRequired[bool]
-    '\n    Attach after creation; default true.\n    '
+    '\n    Attach to the campaign; default true on create.\n    '
     addMembers: NotRequired[list[SaveCreativeCollectionInputAddMembersItem]]
     '\n    Saved creatives or existing assets added after create/update.\n    '
     removeMembers: NotRequired[list[SaveCreativeCollectionInputRemoveMembersItem]]
@@ -8924,11 +8992,11 @@ class SaveCreativeCollectionInputWithCampaignId(TypedDict):
     parentId: NotRequired[str | None]
     '\n    Parent ID; null clears it.\n    '
     role: NotRequired[Literal["creative_library", "source_assets", "approved_set", "test_set"]]
-    '\n    Campaign role; create-only; default creative_library.\n    '
+    '\n    Attached campaign role; default creative_library.\n    '
     syncPolicy: NotRequired[Literal["manual", "auto_include_new_members"]]
-    '\n    New-member sync; create-only; default manual.\n    '
+    '\n    Campaign member sync; default manual.\n    '
     attachToCampaign: NotRequired[bool]
-    '\n    Attach after creation; default true.\n    '
+    '\n    Attach to the campaign; default true on create.\n    '
     addMembers: NotRequired[list[SaveCreativeCollectionInputAddMembersItem]]
     '\n    Saved creatives or existing assets added after create/update.\n    '
     removeMembers: NotRequired[list[SaveCreativeCollectionInputRemoveMembersItem]]
@@ -9011,10 +9079,10 @@ class SaveCreativeInput(TypedDict):
     '\n    Canonical format option; derived from creativeFormatId when supplied.\n    '
     creativeFormatId: NotRequired[str]
     '\n    Signed product-bound selection. Do not combine with formatKind/formatParams.\n    '
-    assets: NotRequired[list[SaveCreativeInputAssetsItem]]
-    '\n    Unbound hosted or inline assets; at most one primary. They cannot satisfy formatOptionRef slots.\n    '
+    assets: NotRequired[list[SaveCreativeInputAssetsItemAssetTypeIMAGEAndVIDEOAndAUDIOAndHTMLAndTEXTAndVAST | SaveCreativeInputAssetsItemAssetTypeDisplayTag]]
+    '\n    Unbound hosted or inline assets; at most one primary. A third-party tag is an AdCP 3.2.4 display_tag asset (validated against the pinned SDK schema on save), not HTML. They cannot satisfy formatOptionRef slots.\n    '
     sourceAssetRef: NotRequired[str]
-    '\n    Finalized private JPEG/PNG; create-only with advertiserId/campaignId, not with assets/sourceAssets.\n    '
+    '\n    Write-only private JPEG/PNG; create-only with advertiserId/campaignId, not with assets/sourceAssets.\n    '
     sourceAssets: NotRequired[list[SaveCreativeInputSourceAssetsItemKindAssetRef | SaveCreativeInputSourceAssetsItemKindAssetId]]
     '\n    Uploaded JPEG/PNG/MP4 for format slots. A draft may omit it.\n    '
     fromCreativeSessionOutput: NotRequired[SaveCreativeInputFromCreativeSessionOutput]
@@ -9038,7 +9106,25 @@ class SaveCreativeInput(TypedDict):
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-class SaveCreativeInputAssetsItem(TypedDict):
+class SaveCreativeInputAssetsItemAssetTypeDisplayTag(TypedDict):
+    asset_type: Literal["display_tag"]
+    '\n    An AdCP 3.2.4 display_tag asset, validated against the pinned SDK schema on save.\n    '
+    delivery_type: Literal["tag_url", "inline_markup", "paired_redirect"]
+    '\n    tag_url needs url; inline_markup needs markup and markup_type; paired_redirect needs ad_request_url and clickthrough_url.\n    '
+    url: NotRequired[SaveCreativeRequestDisplayTagUrl]
+    '\n    tag_url: the ad-request URL.\n    '
+    markup: NotRequired[str]
+    '\n    inline_markup: the tag markup, kept byte for byte.\n    '
+    markup_type: NotRequired[Literal["iframe_javascript", "javascript", "standard"]]
+    '\n    inline_markup: how the markup is trafficked.\n    '
+    ad_request_url: NotRequired[SaveCreativeRequestDisplayTagUrl]
+    '\n    paired_redirect: the ad-request URL.\n    '
+    clickthrough_url: NotRequired[SaveCreativeRequestDisplayTagUrl]
+    '\n    paired_redirect: the click-through URL.\n    '
+    macro_declarations: NotRequired[list[dict[str, JsonValue]]]
+    '\n    AdCP macro_declarations for the macros in the tag, kept as sent.\n    '
+
+class SaveCreativeInputAssetsItemAssetTypeIMAGEAndVIDEOAndAUDIOAndHTMLAndTEXTAndVAST(TypedDict):
     url: NotRequired[SaveCreativeRequestAssetsItemUrl]
     '\n    Public URL of a hosted asset.\n    '
     dataUrl: NotRequired[str]
@@ -9053,6 +9139,8 @@ class SaveCreativeInputAssetsItem(TypedDict):
     '\n    Make this the primary asset. Not allowed for TEXT.\n    '
     vastVersion: NotRequired[Literal["2.0", "3.0", "4.0", "4.1", "4.2", "4.3"]]
     '\n    VAST only. Overrides the version read from the tag.\n    '
+
+SaveCreativeInputAssetsItem: TypeAlias = SaveCreativeInputAssetsItemAssetTypeIMAGEAndVIDEOAndAUDIOAndHTMLAndTEXTAndVAST
 
 class SaveCreativeInputFormatOptionRefScopeProduct(TypedDict):
     scope: Literal["product"]
@@ -9135,6 +9223,8 @@ SaveCreativeInputSourceAssetsItemWithAssetRef: TypeAlias = SaveCreativeInputSour
 SaveCreativeRequestAssetsItemUrl: TypeAlias = str
 
 SaveCreativeRequestClickUrl: TypeAlias = str
+
+SaveCreativeRequestDisplayTagUrl: TypeAlias = str
 
 SaveCreativeRequestSocialComponentsItemUrl: TypeAlias = str
 
@@ -9823,7 +9913,7 @@ class SaveCreativeSuccessCreative(TypedDict):
 SaveCreativeSuccessProviderContacted: TypeAlias = Literal[False]
 
 class SaveCreativeSuccessReadinessWarningsItem(TypedDict):
-    code: Literal["destination_required"]
+    code: Literal["destination_required", "tag_not_sendable"]
     message: str
 
 SaveCreativeSuccessReadinessWarnings: TypeAlias = "list[SaveCreativeSuccessReadinessWarningsItem]"
@@ -11800,7 +11890,9 @@ class SaveMediaBuyInputKindCreate(TypedDict):
     '\n    Campaign to place the media buy under. Required for explicit creation.\n    '
     channelGroupId: NotRequired[str]
     '\n    channelGroupId for a new buy. Required when campaign has channelGroups; invalid on updates.\n    '
-    sellerId: str
+    sellerAccountId: NotRequired[int]
+    '\n    The seller\'s Account id. Not the seller object\'s id or any sellerId, which are different numbers. Required for explicit creation unless sellerId is sent.\n    '
+    sellerId: NotRequired[str]
     '\n    Seller ID. Required for explicit creation.\n    '
     products: list[SaveMediaBuyInputKindCreateProductsItem]
     budget: NotRequired[SaveMediaBuyInputKindCreateBudget]
@@ -13091,6 +13183,7 @@ class SaveMediaBuyResultMediaBuy(TypedDict):
     pendingAt: NotRequired[Literal["storefront", "salesagent", "unknown"]]
     errorCode: NotRequired[str]
     errorOwner: NotRequired[str]
+    errorMessage: NotRequired[str]
     forwardedAt: NotRequired[str]
     buyerReference: NotRequired[str]
     pendingChange: NotRequired[SaveMediaBuyResultMediaBuyPendingChange]
@@ -13132,7 +13225,7 @@ class SaveMediaBuyResultMediaBuyGoalCommitment(TypedDict):
     goalAnswers: list[SaveMediaBuyResultMediaBuyGoalCommitmentGoalAnswersItem]
     '\n    One answer per product on the buy: the product the accepted proposal answered keeps that answer, any other product is answered from its own terms.\n    '
     goalAnswersTruncated: NotRequired[Literal[True]]
-    '\n    Present when this read carries fewer goalAnswers than the buy has.\n    '
+    '\n    Returned goalAnswers are truncated.\n    '
 
 class SaveMediaBuyResultMediaBuyGoalCommitmentGoalAnswersItem(TypedDict):
     productId: str
@@ -15275,6 +15368,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
     '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -15349,6 +15444,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.\n    '
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
     sellerId: NotRequired[str]
     '\n    For kinds proposal and creative_format: only this seller, by seller id.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
@@ -15409,8 +15506,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: buys from this buyer customer id.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -15537,6 +15636,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
     '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -15611,6 +15712,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.\n    '
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
     sellerId: NotRequired[str]
     '\n    For kinds proposal and creative_format: only this seller, by seller id.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
@@ -15671,8 +15774,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: buys from this buyer customer id.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -15733,6 +15838,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
     '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -15807,6 +15914,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.\n    '
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
     sellerId: NotRequired[str]
     '\n    For kinds proposal and creative_format: only this seller, by seller id.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
@@ -15867,8 +15976,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: buys from this buyer customer id.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -15956,6 +16067,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
     '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -16030,6 +16143,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.\n    '
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
     sellerId: NotRequired[str]
     '\n    For kinds proposal and creative_format: only this seller, by seller id.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
@@ -16090,8 +16205,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: buys from this buyer customer id.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -16186,6 +16303,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
     '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -16260,6 +16379,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.\n    '
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
     sellerId: NotRequired[str]
     '\n    For kinds proposal and creative_format: only this seller, by seller id.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
@@ -16320,8 +16441,10 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: buys from this buyer customer id.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -16416,6 +16539,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
     '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -16490,6 +16615,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.\n    '
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
     sellerId: NotRequired[str]
     '\n    For kinds proposal and creative_format: only this seller, by seller id.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
@@ -16550,8 +16677,10 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: buys from this buyer customer id.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -16646,6 +16775,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
     '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -16720,6 +16851,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.\n    '
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
     sellerId: NotRequired[str]
     '\n    For kinds proposal and creative_format: only this seller, by seller id.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
@@ -16780,8 +16913,10 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: buys from this buyer customer id.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -16876,6 +17011,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
     '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -16948,6 +17085,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.\n    '
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
     sellerId: NotRequired[str]
     '\n    For kinds proposal and creative_format: only this seller, by seller id.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
@@ -17008,8 +17147,10 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: buys from this buyer customer id.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -17104,6 +17245,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
     '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -17176,6 +17319,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.\n    '
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
     sellerId: NotRequired[str]
     '\n    For kinds proposal and creative_format: only this seller, by seller id.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
@@ -17236,8 +17381,10 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: buys from this buyer customer id.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -17400,6 +17547,8 @@ class SearchInputKindCreativeWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
     '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -17472,6 +17621,8 @@ class SearchInputKindCreativeWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.\n    '
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
     sellerId: NotRequired[str]
     '\n    For kinds proposal and creative_format: only this seller, by seller id.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
@@ -17532,8 +17683,10 @@ class SearchInputKindCreativeWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: buys from this buyer customer id.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -17628,6 +17781,8 @@ class SearchInputKindCreativeWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
     '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -17700,6 +17855,8 @@ class SearchInputKindCreativeWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.\n    '
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
     sellerId: NotRequired[str]
     '\n    For kinds proposal and creative_format: only this seller, by seller id.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
@@ -17760,8 +17917,10 @@ class SearchInputKindCreativeWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: buys from this buyer customer id.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -17896,6 +18055,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
     '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -17970,6 +18131,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.\n    '
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
     sellerId: NotRequired[str]
     '\n    For kinds proposal and creative_format: only this seller, by seller id.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
@@ -18030,8 +18193,10 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
     buyerCustomerId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: buys from this buyer customer id.\n    '
+    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -20055,6 +20220,8 @@ GetV3PublicMutationReceiptError: TypeAlias = "V3ToolErrorResponse"
 OpenAdvertisersPageError: TypeAlias = "V3ToolErrorResponse"
 
 OpenAgentPageError: TypeAlias = "V3ToolErrorResponse"
+
+OpenAgentWebhooksPageError: TypeAlias = "V3ToolErrorResponse"
 
 OpenAgentsPageError: TypeAlias = "V3ToolErrorResponse"
 
