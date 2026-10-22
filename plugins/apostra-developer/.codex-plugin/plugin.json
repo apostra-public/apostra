@@ -1,12 +1,12 @@
 {
   "name": "apostra-developer",
-  "version": "1.0.0+eabe12a32393",
+  "version": "1.0.0+92d592967237",
   "description": "Plan, run, automate, and report on advertising across sellers, or build those jobs into an application.",
   "author": {
     "name": "Scope3 PBC",
-    "url": "https://interchange.io"
+    "url": "https://apostra.com"
   },
-  "homepage": "https://docs.interchange.io/v3/overview",
+  "homepage": "https://docs.apostra.com/v3/overview",
   "repository": "https://github.com/apostra-public/apostra",
   "license": "Apache-2.0",
   "keywords": [
@@ -32,7 +32,7 @@
       "Apostra MCP",
       "Agent skill"
     ],
-    "websiteURL": "https://docs.interchange.io/v3/overview",
+    "websiteURL": "https://docs.apostra.com/v3/overview",
     "defaultPrompt": [
       "Review my active Meta campaigns using Apostra. Verify the exact Meta connection, reporting state, and active campaign roster before reading delivery. Compare the latest seven complete days with the preceding seven. If authorization is missing, give me the secure browser URL and wait; never ask me to paste credentials. Treat missing delivery totals as unavailable, not zero. Show the evidence and do not change campaign state."
     ],

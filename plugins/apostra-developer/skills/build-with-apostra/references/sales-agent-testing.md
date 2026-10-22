@@ -1,7 +1,7 @@
 # Test a sales agent
 
-Use the [seller workflow](https://docs.interchange.io/v2/setup/v3/seller-workflows#test-your-own-supply)
-and [sandbox guide](https://docs.interchange.io/v2/features/sandbox) to establish
+Use the [seller workflow](https://docs.apostra.com/v2/setup/v3/seller-workflows#test-your-own-supply)
+and [sandbox guide](https://docs.apostra.com/v2/features/sandbox) to establish
 the current account's testing path. Retrieve
 `get({ kind: "skill", id: "test-sales-agent" })` before a remote test. Follow
 that returned version's declared scenarios, fixtures, bounds, and cleanup;
