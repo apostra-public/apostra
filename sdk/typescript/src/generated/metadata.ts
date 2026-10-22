@@ -265,6 +265,25 @@ export const operations = {
     ],
     "summary": "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches. To add or set up an advertiser, pass intent: \"add\". For a text answer use search(kind: \"advertiser\")."
   },
+  "open_agent_certification_page": {
+    "path": "/tools/open_agent_certification_page",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open one agent’s Test & certify Page: live certification per use case, recent test runs, AdCP 4.0 readiness and capability declarations. Read-only."
+  },
   "open_agent_page": {
     "path": "/tools/open_agent_page",
     "method": "POST",
@@ -283,6 +302,44 @@ export const operations = {
       }
     ],
     "summary": "Open one agent owned by this Developer account."
+  },
+  "open_agent_sources_page": {
+    "path": "/tools/open_agent_sources_page",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open one agent’s Inventory sources Page: the inventory sources it powers and the health of each. Read-only."
+  },
+  "open_agent_webhooks_page": {
+    "path": "/tools/open_agent_webhooks_page",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open one agent’s Webhooks Page: its recent inbound webhook outcomes, each refusal with its reason. Read-only."
   },
   "open_agents_page": {
     "path": "/tools/open_agents_page",
@@ -417,6 +474,25 @@ export const operations = {
     ],
     "summary": "Open Creative Library. Use search for a plain object answer. Composer needs campaignId; assembly needs no Creative Engine. To save a draft, use exactly one format: a canonical format such as image, hosted video, or hosted audio, or a seller format."
   },
+  "open_developer_home": {
+    "path": "/tools/open_developer_home",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open the Developer home for this Developer account: its agents, their stages and what to do next."
+  },
   "open_media_buys_page": {
     "path": "/tools/open_media_buys_page",
     "method": "POST",
@@ -434,7 +510,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Open the Seller Media Buys Page. Optionally focus one account relationship or seller account (not both) and its buys or creatives; the Page self-fetches."
+    "summary": "Open the Seller Media Buys Page. Optionally focus one account relationship or seller account mapping (not both) and its buys or creatives; the Page self-fetches."
   },
   "open_media_partners_page": {
     "path": "/tools/open_media_partners_page",
@@ -607,7 +683,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
+    "summary": "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds and sellerAccountIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
   },
   "request_seller_reporting_update": {
     "path": "/tools/request_seller_reporting_update",
@@ -951,7 +1027,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save creative in advertiserId/campaignId with name, message, assets, clickUrl, social, sourceAssetRef/sourceAssets. Use exactly one format selector: formatKind/formatParams, creativeFormatId, formatOptionRef. Supplied content/assets only; generate new media (radio spots) via save_creative_session."
+    "summary": "advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset."
   },
   "save_creative_collection": {
     "path": "/tools/save_creative_collection",
@@ -1086,7 +1162,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Manage seller lessons. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear."
+    "summary": "Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear."
   },
   "save_library_request": {
     "path": "/tools/save_library_request",
@@ -1201,7 +1277,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Write how the seller sells. `active` creates and activates a new version in one step — no separate activate; the response names the version created and replaced. `pricing` replaces the whole fact list. `discounts` sets or removes brand/operator rules one by one. Halves never roll back each other."
+    "summary": "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. Halves never roll back each other."
   },
   "save_property_list": {
     "path": "/tools/save_property_list",
