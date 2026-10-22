@@ -764,7 +764,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -814,7 +820,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -996,7 +1002,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -1046,7 +1058,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1228,7 +1240,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -1278,7 +1296,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1456,7 +1474,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -1506,7 +1530,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1685,7 +1709,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -1735,7 +1765,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1918,7 +1948,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -1968,7 +2004,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2150,7 +2186,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -2376,7 +2418,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -2422,7 +2470,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2605,7 +2653,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -2651,7 +2705,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2834,7 +2888,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -3063,7 +3123,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -3292,7 +3358,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -3342,7 +3414,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3524,7 +3596,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -3574,7 +3652,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3756,7 +3834,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -3806,7 +3890,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3988,7 +4072,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -4038,7 +4128,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4220,7 +4310,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -4270,7 +4366,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4452,7 +4548,13 @@ export type GetData = {
          */
         limit?: number;
         /**
-         * For kind media_buy in a seller account: the buyer customer id, needed when the media-buy id alone is ambiguous across buyers.
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -4502,7 +4604,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4736,7 +4838,13 @@ export type GetDeliveryData = {
              */
             channelGroupId?: string;
             /**
-             * Margin: filter to one buyer customer.
+             * Margin: filter to one buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * Deprecated: send buyerAccountId instead.
+             *
+             * @deprecated
              */
             buyerCustomerId?: number;
             /**
@@ -5621,7 +5729,13 @@ export type GetDeliverySuccessQuery = {
          */
         channelGroupId?: string;
         /**
-         * Margin: filter to one buyer customer.
+         * Margin: filter to one buyer Account id.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
          */
         buyerCustomerId?: number;
         /**
@@ -6522,9 +6636,15 @@ export type GetSellerReportingReceiptsData = {
          */
         mediaBuyId: string;
         /**
-         * Buyer customer that owns the media buy.
+         * Buyer Account id that owns the media buy.
          */
-        buyerCustomerId: number;
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
+         */
+        buyerCustomerId?: number;
         /**
          * Apostra accountId this call runs in, from get_status.
          */
@@ -6608,7 +6728,8 @@ export type GetSellerReportingReceiptsResponses = {
         data: {
             params: {
                 mediaBuyId: string;
-                buyerCustomerId: number;
+                buyerCustomerId: GetSellerReportingReceiptsSuccessParamsBuyerCustomerId;
+                buyerAccountId?: GetSellerReportingReceiptsSuccessParamsBuyerAccountId;
             };
             receipts: Array<{
                 receiptId: string;
@@ -6747,6 +6868,10 @@ export type GetSellerReportingReceiptsSuccessComputedDailyTotalsItemSpend = stri
 export type GetSellerReportingReceiptsSuccessComputedDailyTotalsItemVideoCompletions = string | null;
 
 export type GetSellerReportingReceiptsSuccessComputedDailyTotalsItemViews = string | null;
+
+export type GetSellerReportingReceiptsSuccessParamsBuyerAccountId = number;
+
+export type GetSellerReportingReceiptsSuccessParamsBuyerCustomerId = number;
 
 export type GetSellerReportingReceiptsSuccessReceiptsItemAcceptanceReason = {
     code: 'ingestion_failed' | 'processing_failed' | 'processing_partial_success' | 'polling_scheduled' | 'polling_delayed' | 'unrecognised_processing_status';
@@ -6888,6 +7013,10 @@ export type GetStatusResponses = {
                 blocked: number;
                 readyDestinations: Array<{
                     sellerId: string;
+                    /**
+                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                     */
+                    sellerAccountId?: number;
                     name: string;
                     [key: string]: unknown;
                 }>;
@@ -6963,6 +7092,9 @@ export type GetStatusResponses = {
                 page?: string;
                 arguments?: GetStatusSuccessNextActionsItemArguments;
                 url?: string;
+                unavailable?: {
+                    reason: string;
+                };
                 [key: string]: unknown;
             }>;
             reachableAccounts: Array<{
@@ -6981,6 +7113,7 @@ export type GetStatusResponses = {
                     displayName: string;
                     kind: 'sales' | 'creative' | 'buyer';
                     stage: GetStatusSuccessAgentsResultsItemStage;
+                    finalStage: GetStatusSuccessAgentsResultsItemFinalStage;
                     nextStage: GetStatusSuccessAgentsResultsItemNextStage | null;
                     stuckOn: {
                         reason: string;
@@ -7004,6 +7137,8 @@ export type GetStatusResponses = {
         error: null;
     };
 };
+
+export type GetStatusSuccessAgentsResultsItemFinalStage = 'built' | 'connected' | 'tested' | 'certified' | 'listed';
 
 export type GetStatusSuccessAgentsResultsItemNextStage = 'built' | 'connected' | 'tested' | 'certified' | 'listed';
 
@@ -7773,6 +7908,99 @@ export type OpenAdvertisersPageResponses = {
     };
 };
 
+export type OpenAgentCertificationPageData = {
+    body: {
+        /**
+         * The agent whose tests and certification to open, from search or get.
+         */
+        agentId: string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers?: {
+        /**
+         * Select an accessible customer account for this request. An explicit value must be a positive integer and must equal the account resolved by authentication.
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/open_agent_certification_page';
+};
+
+export type OpenAgentCertificationPageError = OpenAgentCertificationPageErrors[keyof OpenAgentCertificationPageErrors];
+
+export type OpenAgentCertificationPageErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * A required service is unavailable
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type OpenAgentCertificationPageResponse = OpenAgentCertificationPageResponses[keyof OpenAgentCertificationPageResponses];
+
+export type OpenAgentCertificationPageResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            agentId: string;
+        };
+        error: null;
+    };
+};
+
 export type OpenAgentPageData = {
     body: {
         /**
@@ -7855,6 +8083,192 @@ export type OpenAgentPageErrors = {
 export type OpenAgentPageResponse = OpenAgentPageResponses[keyof OpenAgentPageResponses];
 
 export type OpenAgentPageResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            agentId: string;
+        };
+        error: null;
+    };
+};
+
+export type OpenAgentSourcesPageData = {
+    body: {
+        /**
+         * The agent whose inventory sources to open, from search or get.
+         */
+        agentId: string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers?: {
+        /**
+         * Select an accessible customer account for this request. An explicit value must be a positive integer and must equal the account resolved by authentication.
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/open_agent_sources_page';
+};
+
+export type OpenAgentSourcesPageError = OpenAgentSourcesPageErrors[keyof OpenAgentSourcesPageErrors];
+
+export type OpenAgentSourcesPageErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * A required service is unavailable
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type OpenAgentSourcesPageResponse = OpenAgentSourcesPageResponses[keyof OpenAgentSourcesPageResponses];
+
+export type OpenAgentSourcesPageResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            agentId: string;
+        };
+        error: null;
+    };
+};
+
+export type OpenAgentWebhooksPageData = {
+    body: {
+        /**
+         * The agent whose webhook results to open, from search or get.
+         */
+        agentId: string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers?: {
+        /**
+         * Select an accessible customer account for this request. An explicit value must be a positive integer and must equal the account resolved by authentication.
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/open_agent_webhooks_page';
+};
+
+export type OpenAgentWebhooksPageError = OpenAgentWebhooksPageErrors[keyof OpenAgentWebhooksPageErrors];
+
+export type OpenAgentWebhooksPageErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * A required service is unavailable
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type OpenAgentWebhooksPageResponse = OpenAgentWebhooksPageResponses[keyof OpenAgentWebhooksPageResponses];
+
+export type OpenAgentWebhooksPageResponses = {
     /**
      * Typed operation result
      */
@@ -8071,6 +8485,10 @@ export type OpenApprovalsResponses = {
                  * Exact reviewRef from the approval queue; focuses one creative review version.
                  */
                 reviewRef?: string;
+                /**
+                 * The buyer Account id; the same number as buyerCustomerId.
+                 */
+                buyerAccountId?: number;
             };
         };
         error: null;
@@ -8245,6 +8663,10 @@ export type OpenCampaignReceiptResponses = {
                      * Seller the buy is placed with.
                      */
                     sellerId: string;
+                    /**
+                     * The seller Account id; not the Storefront id beside it.
+                     */
+                    sellerAccountId?: number;
                     /**
                      * Seller display name.
                      */
@@ -8511,7 +8933,7 @@ export type OpenCampaignsPageSuccessPageHumanHandoffRequired = {
         instruction: 'Show the account and action. Open only at the user’s request; otherwise return the URL. Do not log or post this link publicly.';
     };
     page: {
-        resourceUri: 'ui://agentic-api/conversation-history/mcp-app.html' | 'ui://agentic-api/agent-v2/mcp-app.html' | 'ui://agentic-api/agents/mcp-app.html' | 'ui://agentic-api/create-agent/mcp-app.html' | 'ui://agentic-api/claim-agent/mcp-app.html' | 'ui://agentic-api/configure-agent-connection/mcp-app.html' | 'ui://agentic-api/register-agent-observed-revision/mcp-app.html' | 'ui://agentic-api/buyer-account-admission/mcp-app.html' | 'ui://agentic-api/tars-org-supply-asks/mcp-app.html' | 'ui://agentic-api/tars-run-rate/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-library/mcp-app.html' | 'ui://agentic-api/tars-approved-deck-modules/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-operations/mcp-app.html' | 'ui://agentic-api/business-rules/mcp-app.html' | 'ui://agentic-api/demo-storefront/mcp-app.html' | 'ui://agentic-api/modular-inventory-source/mcp-app.html' | 'ui://agentic-api/modular-connect/mcp-app.html' | 'ui://agentic-api/source-discovery-preview/mcp-app.html' | 'ui://agentic-api/partner-connection/mcp-app.html' | 'ui://agentic-api/modular-avails-commit/mcp-app.html' | 'ui://agentic-api/plan-billing/mcp-app.html' | 'ui://agentic-api/connections/mcp-app.html' | 'ui://agentic-api/creative-engines/mcp-app.html' | 'ui://agentic-api/all-advertisers-home/mcp-app.html' | 'ui://agentic-api/add-advertiser/mcp-app.html' | 'ui://agentic-api/campaigns/mcp-app.html' | 'ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html' | 'ui://agentic-api/creative-library-v3/mcp-app.html' | 'ui://agentic-api/upload-creative-asset/mcp-app.html' | 'ui://agentic-api/creative-composer-task/mcp-app.html' | 'ui://agentic-api/variant-gallery/mcp-app.html' | 'ui://agentic-api/seller-setup/mcp-app.html' | 'ui://agentic-api/approvals/mcp-app.html' | 'ui://agentic-api/notifications/mcp-app.html' | 'ui://agentic-api/buyer-notifications/mcp-app.html' | 'ui://agentic-api/buyer-webhooks/mcp-app.html' | 'ui://agentic-api/proposal-pass-v3/mcp-app.html' | 'ui://agentic-api/sessions/mcp-app.html' | 'ui://agentic-api/seller-dashboard/mcp-app.html' | 'ui://agentic-api/seller-dashboard-v3/mcp-app.html' | 'ui://agentic-api/product-marketing-v3/mcp-app.html' | 'ui://agentic-api/library/mcp-app.html' | 'ui://agentic-api/integrations/mcp-app.html' | 'ui://agentic-api/release-notes/mcp-app.html' | 'ui://agentic-api/playbook/mcp-app.html' | 'ui://agentic-api/media-kit/mcp-app.html' | 'ui://agentic-api/business-profile/mcp-app.html' | 'ui://agentic-api/buyer-discounts/mcp-app.html' | 'ui://agentic-api/sponsored-buyers/mcp-app.html' | 'ui://agentic-api/pending-operations/mcp-app.html' | 'ui://agentic-api/storefront-briefs/mcp-app.html' | 'ui://agentic-api/merchandising-simulator/mcp-app.html' | 'ui://agentic-api/media-buys/mcp-app.html' | 'ui://agentic-api/media-buy-timeline/mcp-app.html' | 'ui://agentic-api/components/mcp-app.html' | 'ui://agentic-api/seller-accounts/mcp-app.html';
+        resourceUri: 'ui://agentic-api/conversation-history/mcp-app.html' | 'ui://agentic-api/agent-v2/mcp-app.html' | 'ui://agentic-api/developer-home/mcp-app.html' | 'ui://agentic-api/agents/mcp-app.html' | 'ui://agentic-api/create-agent/mcp-app.html' | 'ui://agentic-api/claim-agent/mcp-app.html' | 'ui://agentic-api/configure-agent-connection/mcp-app.html' | 'ui://agentic-api/register-agent-observed-revision/mcp-app.html' | 'ui://agentic-api/buyer-account-admission/mcp-app.html' | 'ui://agentic-api/tars-org-supply-asks/mcp-app.html' | 'ui://agentic-api/tars-run-rate/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-library/mcp-app.html' | 'ui://agentic-api/tars-approved-deck-modules/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-operations/mcp-app.html' | 'ui://agentic-api/business-rules/mcp-app.html' | 'ui://agentic-api/demo-storefront/mcp-app.html' | 'ui://agentic-api/modular-inventory-source/mcp-app.html' | 'ui://agentic-api/modular-connect/mcp-app.html' | 'ui://agentic-api/source-discovery-preview/mcp-app.html' | 'ui://agentic-api/partner-connection/mcp-app.html' | 'ui://agentic-api/agent-certification/mcp-app.html' | 'ui://agentic-api/agent-sources/mcp-app.html' | 'ui://agentic-api/agent-overview/mcp-app.html' | 'ui://agentic-api/agent-webhooks/mcp-app.html' | 'ui://agentic-api/modular-avails-commit/mcp-app.html' | 'ui://agentic-api/plan-billing/mcp-app.html' | 'ui://agentic-api/connections/mcp-app.html' | 'ui://agentic-api/creative-engines/mcp-app.html' | 'ui://agentic-api/all-advertisers-home/mcp-app.html' | 'ui://agentic-api/add-advertiser/mcp-app.html' | 'ui://agentic-api/campaigns/mcp-app.html' | 'ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html' | 'ui://agentic-api/creative-library-v3/mcp-app.html' | 'ui://agentic-api/upload-creative-asset/mcp-app.html' | 'ui://agentic-api/creative-composer-task/mcp-app.html' | 'ui://agentic-api/variant-gallery/mcp-app.html' | 'ui://agentic-api/seller-setup/mcp-app.html' | 'ui://agentic-api/approvals/mcp-app.html' | 'ui://agentic-api/notifications/mcp-app.html' | 'ui://agentic-api/buyer-notifications/mcp-app.html' | 'ui://agentic-api/buyer-webhooks/mcp-app.html' | 'ui://agentic-api/proposal-pass-v3/mcp-app.html' | 'ui://agentic-api/sessions/mcp-app.html' | 'ui://agentic-api/seller-dashboard/mcp-app.html' | 'ui://agentic-api/seller-dashboard-v3/mcp-app.html' | 'ui://agentic-api/product-marketing-v3/mcp-app.html' | 'ui://agentic-api/library/mcp-app.html' | 'ui://agentic-api/integrations/mcp-app.html' | 'ui://agentic-api/release-notes/mcp-app.html' | 'ui://agentic-api/playbook/mcp-app.html' | 'ui://agentic-api/media-kit/mcp-app.html' | 'ui://agentic-api/business-profile/mcp-app.html' | 'ui://agentic-api/buyer-discounts/mcp-app.html' | 'ui://agentic-api/sponsored-buyers/mcp-app.html' | 'ui://agentic-api/pending-operations/mcp-app.html' | 'ui://agentic-api/storefront-briefs/mcp-app.html' | 'ui://agentic-api/merchandising-simulator/mcp-app.html' | 'ui://agentic-api/media-buys/mcp-app.html' | 'ui://agentic-api/media-buy-timeline/mcp-app.html' | 'ui://agentic-api/components/mcp-app.html' | 'ui://agentic-api/seller-accounts/mcp-app.html';
         advertiserId?: string;
         campaignId?: string;
         capability: 'reauthenticate_in_browser' | 'manage_webhooks';
@@ -8548,7 +8970,13 @@ export type OpenConnectionsPageData = {
          */
         advertiserId?: string;
         /**
-         * Canonical Seller ID to open.
+         * The seller's Account id. Not the seller object's id or any sellerId, which are different numbers.
+         */
+        sellerAccountId?: number;
+        /**
+         * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads.
+         *
+         * @deprecated
          */
         sellerId?: string;
         /**
@@ -8652,6 +9080,10 @@ export type OpenConnectionsPageResponses = {
              * Opened seller ID when seller-scoped.
              */
             sellerId?: string;
+            /**
+             * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
+             */
+            sellerAccountId?: number;
             /**
              * Requested seller action when supplied.
              */
@@ -8941,6 +9373,95 @@ export type OpenCreativeLibraryResponses = {
     };
 };
 
+export type OpenDeveloperHomeData = {
+    body: {
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers?: {
+        /**
+         * Select an accessible customer account for this request. An explicit value must be a positive integer and must equal the account resolved by authentication.
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/open_developer_home';
+};
+
+export type OpenDeveloperHomeError = OpenDeveloperHomeErrors[keyof OpenDeveloperHomeErrors];
+
+export type OpenDeveloperHomeErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * A required service is unavailable
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type OpenDeveloperHomeResponse = OpenDeveloperHomeResponses[keyof OpenDeveloperHomeResponses];
+
+export type OpenDeveloperHomeResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            [key: string]: never;
+        };
+        error: null;
+    };
+};
+
 export type OpenMediaBuysPageData = {
     body: {
         /**
@@ -8948,9 +9469,15 @@ export type OpenMediaBuysPageData = {
          */
         accountRelationshipId?: string;
         /**
-         * Seller account to focus.
+         * Seller account mapping to focus: the id of a seller account mapping row, not a seller Account id.
          */
-        sellerAccountId?: string;
+        sellerAccountMappingId?: OpenMediaBuysPageRequestSellerAccountMappingId;
+        /**
+         * Being retired: send sellerAccountMappingId. This holds a seller account mapping id, not a seller Account id.
+         *
+         * @deprecated
+         */
+        sellerAccountId?: OpenMediaBuysPageRequestSellerAccountId;
         /**
          * Optional relationship view to open.
          */
@@ -9028,6 +9555,10 @@ export type OpenMediaBuysPageErrors = {
     503: V3ToolErrorResponse;
 };
 
+export type OpenMediaBuysPageRequestSellerAccountId = string;
+
+export type OpenMediaBuysPageRequestSellerAccountMappingId = string;
+
 export type OpenMediaBuysPageResponse = OpenMediaBuysPageResponses[keyof OpenMediaBuysPageResponses];
 
 export type OpenMediaBuysPageResponses = {
@@ -9038,13 +9569,18 @@ export type OpenMediaBuysPageResponses = {
         data: {
             params: {
                 accountRelationshipId?: string;
-                sellerAccountId?: string;
+                sellerAccountMappingId?: OpenMediaBuysPageSuccessParamsSellerAccountMappingId;
+                sellerAccountId?: OpenMediaBuysPageSuccessParamsSellerAccountId;
                 view?: 'media_buys' | 'creatives' | 'delivery';
             };
         };
         error: null;
     };
 };
+
+export type OpenMediaBuysPageSuccessParamsSellerAccountId = string;
+
+export type OpenMediaBuysPageSuccessParamsSellerAccountMappingId = string;
 
 export type OpenMediaPartnersPageData = {
     body: {
@@ -9061,7 +9597,13 @@ export type OpenMediaPartnersPageData = {
          */
         advertiserId?: string;
         /**
-         * Canonical Seller ID to open.
+         * The seller's Account id. Not the seller object's id or any sellerId, which are different numbers.
+         */
+        sellerAccountId?: number;
+        /**
+         * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads.
+         *
+         * @deprecated
          */
         sellerId?: string;
         /**
@@ -9165,6 +9707,10 @@ export type OpenMediaPartnersPageResponses = {
              * Opened seller ID when seller-scoped.
              */
             sellerId?: string;
+            /**
+             * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
+             */
+            sellerAccountId?: number;
             /**
              * Requested seller action when supplied.
              */
@@ -10142,7 +10688,13 @@ export type RequestProposalsData = {
          */
         expectedCampaignRevision: number;
         /**
-         * Optional seller IDs; intersect the campaign seller list. Omit for its list. To contact all eligible sellers, omit sellerIds and set confirmBroadcast true.
+         * Optional seller Account ids, not seller object ids or sellerIds, which are different numbers. Intersect the campaign seller list. Omit for its list. To contact all eligible sellers, omit sellerIds and sellerAccountIds and set confirmBroadcast true.
+         */
+        sellerAccountIds?: Array<number>;
+        /**
+         * Deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads. Optional seller IDs; intersect the campaign seller list. Omit for its list. To contact all eligible sellers, omit sellerIds and set confirmBroadcast true.
+         *
+         * @deprecated
          */
         sellerIds?: Array<string>;
         /**
@@ -10150,7 +10702,13 @@ export type RequestProposalsData = {
          */
         confirmBroadcast?: boolean;
         /**
-         * Optional fail-closed seller check; never grants access. Requires matching current server authority.
+         * The seller's Account id, not a seller object id or expectedSellerId, which are different numbers. Optional fail-closed seller check; never grants access. Requires matching current server authority.
+         */
+        expectedSellerAccountId?: number;
+        /**
+         * Deprecated: send expectedSellerAccountId, from the sellerAccountId field on seller reads. Optional fail-closed seller check; never grants access. Requires matching current server authority.
+         *
+         * @deprecated
          */
         expectedSellerId?: string;
         /**
@@ -10285,8 +10843,19 @@ export type RequestProposalsResponses = {
             status: 'running' | 'complete' | 'partial' | 'failed';
             perSeller: Array<{
                 sellerId: string;
+                /**
+                 * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                 */
+                sellerAccountId?: RequestProposalsSuccessPerSellerItemSellerAccountId;
                 sellerName?: string;
                 status: 'quoted' | 'products' | 'failed';
+                /**
+                 * The advertiser has no account at this seller, so only its public catalog was searched, without account pricing. `message` says where to see the account.
+                 */
+                accountNotice?: {
+                    reasonCode: 'catalog_only_pending' | 'catalog_only_needs_attention';
+                    message: string;
+                };
                 proposalIds?: Array<string>;
                 productQueryId?: string;
                 products?: Array<{
@@ -10294,6 +10863,10 @@ export type RequestProposalsResponses = {
                     name: string;
                     description?: string;
                     storefrontId: string;
+                    /**
+                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                     */
+                    sellerAccountId?: RequestProposalsSuccessPerSellerItemProductsItemSellerAccountId;
                     salesAgentId: string;
                     inventorySourceId?: string;
                     deliveryType?: 'guaranteed' | 'non_guaranteed';
@@ -10407,6 +10980,10 @@ export type RequestProposalsResponses = {
             appliedCohort: {
                 source: 'requested' | 'campaign' | 'authorized' | 'broadcast';
                 sellerIds: Array<string>;
+                /**
+                 * The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.
+                 */
+                sellerAccountIds?: Array<number>;
                 sellerIdsTotal: number;
                 sellerIdsTruncated: boolean;
             };
@@ -10416,6 +10993,10 @@ export type RequestProposalsResponses = {
                 missingProperties: Array<{
                     domain: string;
                     sellerId: string;
+                    /**
+                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                     */
+                    sellerAccountId?: RequestProposalsSuccessInclusionPropertyListMissingPropertiesItemSellerAccountId;
                     reason: 'not_in_seller_scope' | 'seller_reported_no_match' | 'seller_unsupported_filter';
                 }>;
                 missingPropertiesTotal?: number;
@@ -10423,6 +11004,10 @@ export type RequestProposalsResponses = {
                 incompleteProperties?: Array<{
                     domain: string;
                     sellerId: string;
+                    /**
+                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                     */
+                    sellerAccountId?: RequestProposalsSuccessInclusionPropertyListIncompletePropertiesItemSellerAccountId;
                 }>;
                 incompletePropertiesTotal?: number;
                 incompletePropertiesTruncated?: boolean;
@@ -10438,6 +11023,10 @@ export type RequestProposalsResponses = {
             capabilityPage?: {
                 field: 'demographicTargeting' | 'overlaySupport';
                 sellerId: string;
+                /**
+                 * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                 */
+                sellerAccountId?: RequestProposalsSuccessCapabilityPageSellerAccountId;
                 productId: string;
                 pagePath?: Array<string>;
                 offset?: number;
@@ -10455,6 +11044,10 @@ export type RequestProposalsResponses = {
             };
             capabilityDescriptorPage?: {
                 sellerId: string;
+                /**
+                 * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                 */
+                sellerAccountId?: RequestProposalsSuccessCapabilityDescriptorPageSellerAccountId;
                 productId: string;
                 offset: number;
                 descriptors: Array<{
@@ -10482,6 +11075,10 @@ export type RequestProposalsResponses = {
                 requestedChannels: Array<string>;
                 sellers: Array<{
                     sellerId: string;
+                    /**
+                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                     */
+                    sellerAccountId?: RequestProposalsSuccessSkippedSellersSellersItemSellerAccountId;
                     sellerName?: string;
                     reason: 'channel_mismatch';
                     sellerChannels: Array<string>;
@@ -10510,6 +11107,10 @@ export type RequestProposalsResponses = {
     };
 };
 
+export type RequestProposalsSuccessCapabilityDescriptorPageSellerAccountId = number;
+
+export type RequestProposalsSuccessCapabilityPageSellerAccountId = number;
+
 /**
  * Why the goal was not sent: the product's AdCP optimization declaration (metric_optimization, conversion_tracking, vendor_metric_optimization) does not cover the goal's kind, metric, target kind, reach unit, view duration, viewability standard or vendor metric, or the product's max_optimization_goals was reached.
  */
@@ -10526,6 +11127,14 @@ export type RequestProposalsSuccessExpectedGoalPerformance = {
     required: number;
     verdict: 'likely' | 'possible' | 'unlikely';
 };
+
+export type RequestProposalsSuccessInclusionPropertyListIncompletePropertiesItemSellerAccountId = number;
+
+export type RequestProposalsSuccessInclusionPropertyListMissingPropertiesItemSellerAccountId = number;
+
+export type RequestProposalsSuccessPerSellerItemProductsItemSellerAccountId = number;
+
+export type RequestProposalsSuccessPerSellerItemSellerAccountId = number;
 
 export type RequestProposalsSuccessProposalGoalCoverage = {
     coversPrimaryGoal: boolean;
@@ -10549,6 +11158,8 @@ export type RequestProposalsSuccessProposalRequestSellerError = {
     [key: string]: unknown;
 };
 
+export type RequestProposalsSuccessSkippedSellersSellersItemSellerAccountId = number;
+
 export type RequestSellerReportingUpdateData = {
     body: {
         mediaBuyId: unknown;
@@ -10558,9 +11169,15 @@ export type RequestSellerReportingUpdateData = {
          */
         mediaBuyId: string;
         /**
-         * Buyer customer that owns the media buy.
+         * Buyer Account id that owns the media buy.
          */
-        buyerCustomerId: number;
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
+         */
+        buyerCustomerId?: number;
         /**
          * Refresh current reporting or replay a bounded day range.
          */
@@ -11906,12 +12523,17 @@ export type SaveAdvertiserResponses = {
                     sellers: Array<{
                         kind: 'storefront';
                         storefrontId: string;
+                        /**
+                         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                         */
+                        sellerAccountId?: number;
                         name?: string;
                         salesAgentId?: never;
                     } | {
                         kind: 'legacy_sales_agent';
                         salesAgentId: string;
                         storefrontId?: never;
+                        sellerAccountId?: never;
                         name?: never;
                     }>;
                     /**
@@ -14041,7 +14663,13 @@ export type SaveCampaignData = {
          */
         confirmLaunch?: boolean;
         /**
-         * Seller platform IDs returned by campaign reads, or numeric seller IDs. Unknown or inaccessible sellers are rejected and never omitted.
+         * Seller Account ids, not seller object ids, sellerIds or platform IDs, which are different numbers. Unknown or inaccessible sellers are rejected and never omitted.
+         */
+        sellerAccountIds?: Array<number>;
+        /**
+         * Deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads. Seller platform IDs returned by campaign reads, or numeric seller IDs. Unknown or inaccessible sellers are rejected and never omitted.
+         *
+         * @deprecated
          */
         sellerIds?: Array<string>;
         /**
@@ -15434,6 +16062,10 @@ export type SaveCampaignResponses = {
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
             skippedSellerIds?: SaveCampaignSuccessSkippedSellerIds;
+            /**
+             * The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.
+             */
+            skippedSellerAccountIds?: SaveCampaignSuccessSkippedSellerAccountIds;
             propertyListAttachment?: SaveCampaignSuccessPropertyListAttachment;
             propertyListClear?: SaveCampaignSuccessPropertyListClear;
             campaignPropertyLists?: SaveCampaignSuccessCampaignPropertyLists;
@@ -15441,7 +16073,7 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'created';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'created' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'created' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
@@ -15451,6 +16083,10 @@ export type SaveCampaignResponses = {
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
             skippedSellerIds?: SaveCampaignSuccessSkippedSellerIds;
+            /**
+             * The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.
+             */
+            skippedSellerAccountIds?: SaveCampaignSuccessSkippedSellerAccountIds;
             propertyListAttachment?: SaveCampaignSuccessPropertyListAttachment;
             propertyListClear?: SaveCampaignSuccessPropertyListClear;
             campaignPropertyLists?: SaveCampaignSuccessCampaignPropertyLists;
@@ -15458,7 +16094,7 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'updated';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'updated' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'updated' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
@@ -15468,6 +16104,10 @@ export type SaveCampaignResponses = {
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
             skippedSellerIds?: SaveCampaignSuccessSkippedSellerIds;
+            /**
+             * The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.
+             */
+            skippedSellerAccountIds?: SaveCampaignSuccessSkippedSellerAccountIds;
             propertyListAttachment?: SaveCampaignSuccessPropertyListAttachment;
             propertyListClear?: SaveCampaignSuccessPropertyListClear;
             campaignPropertyLists?: SaveCampaignSuccessCampaignPropertyLists;
@@ -15475,7 +16115,7 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'activated';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'activated' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'activated' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
@@ -15485,6 +16125,10 @@ export type SaveCampaignResponses = {
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
             skippedSellerIds?: SaveCampaignSuccessSkippedSellerIds;
+            /**
+             * The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.
+             */
+            skippedSellerAccountIds?: SaveCampaignSuccessSkippedSellerAccountIds;
             propertyListAttachment?: SaveCampaignSuccessPropertyListAttachment;
             propertyListClear?: SaveCampaignSuccessPropertyListClear;
             campaignPropertyLists?: SaveCampaignSuccessCampaignPropertyLists;
@@ -15492,7 +16136,7 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'restored';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'restored' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'restored' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
@@ -15502,6 +16146,10 @@ export type SaveCampaignResponses = {
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
             skippedSellerIds?: SaveCampaignSuccessSkippedSellerIds;
+            /**
+             * The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.
+             */
+            skippedSellerAccountIds?: SaveCampaignSuccessSkippedSellerAccountIds;
             propertyListAttachment?: SaveCampaignSuccessPropertyListAttachment;
             propertyListClear?: SaveCampaignSuccessPropertyListClear;
             campaignPropertyLists?: SaveCampaignSuccessCampaignPropertyLists;
@@ -15509,7 +16157,7 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'canceled';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'canceled' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'canceled' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
@@ -15519,6 +16167,10 @@ export type SaveCampaignResponses = {
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
             skippedSellerIds?: SaveCampaignSuccessSkippedSellerIds;
+            /**
+             * The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.
+             */
+            skippedSellerAccountIds?: SaveCampaignSuccessSkippedSellerAccountIds;
             propertyListAttachment?: SaveCampaignSuccessPropertyListAttachment;
             propertyListClear?: SaveCampaignSuccessPropertyListClear;
             campaignPropertyLists?: SaveCampaignSuccessCampaignPropertyLists;
@@ -15526,7 +16178,7 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'cancellation_requested';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'cancellation_requested' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'cancellation_requested' | undefined;
         } | {
             serverTime?: string;
             action: 'pending_approval';
@@ -15804,6 +16456,8 @@ export type SaveCampaignSuccessPropertyListClearCascade = {
 
 export type SaveCampaignSuccessServerTime = string;
 
+export type SaveCampaignSuccessSkippedSellerAccountIds = Array<number>;
+
 export type SaveCampaignSuccessSkippedSellerIds = Array<string>;
 
 export type SaveCampaignSuccessValue = unknown;
@@ -16053,12 +16707,26 @@ export type SaveConnectionData = {
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * Service ID.
+             * For kind seller: the seller's Account id. Not the seller object's id or target.id, which are different numbers.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id or target.id, which are different numbers.
+             */
+            engineAccountId?: number;
+            /**
+             * Service ID. For kind seller, deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kind creative_engine, the engine id; engineAccountId names the same engine by its Account id.
+             */
+            id?: string;
         };
         /**
-         * Seller ID.
+         * The seller's Account id. Not the seller object's id or any sellerId, which are different numbers.
+         */
+        sellerAccountId?: number;
+        /**
+         * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads.
+         *
+         * @deprecated
          */
         sellerId?: SaveConnectionRequestSellerId;
         /**
@@ -16687,15 +17355,15 @@ export type SaveCreativeCollectionData = {
          */
         parentId?: string | null;
         /**
-         * Campaign role; create-only; default creative_library.
+         * Attached campaign role; default creative_library.
          */
         role?: 'creative_library' | 'source_assets' | 'approved_set' | 'test_set';
         /**
-         * New-member sync; create-only; default manual.
+         * Campaign member sync; default manual.
          */
         syncPolicy?: 'manual' | 'auto_include_new_members';
         /**
-         * Attach after creation; default true.
+         * Attach to the campaign; default true on create.
          */
         attachToCampaign?: boolean;
         /**
@@ -16974,7 +17642,7 @@ export type SaveCreativeData = {
          */
         creativeFormatId?: string;
         /**
-         * Unbound hosted or inline assets; at most one primary. They cannot satisfy formatOptionRef slots.
+         * Unbound hosted or inline assets; at most one primary. A third-party tag is an AdCP 3.2.4 display_tag asset (validated against the pinned SDK schema on save), not HTML. They cannot satisfy formatOptionRef slots.
          */
         assets?: Array<{
             /**
@@ -17005,9 +17673,57 @@ export type SaveCreativeData = {
              * VAST only. Overrides the version read from the tag.
              */
             vastVersion?: '2.0' | '3.0' | '4.0' | '4.1' | '4.2' | '4.3';
+            asset_type?: never;
+            delivery_type?: never;
+            markup?: never;
+            markup_type?: never;
+            ad_request_url?: never;
+            clickthrough_url?: never;
+            macro_declarations?: never;
+        } | {
+            /**
+             * An AdCP 3.2.4 display_tag asset, validated against the pinned SDK schema on save.
+             */
+            asset_type: 'display_tag';
+            /**
+             * tag_url needs url; inline_markup needs markup and markup_type; paired_redirect needs ad_request_url and clickthrough_url.
+             */
+            delivery_type: 'tag_url' | 'inline_markup' | 'paired_redirect';
+            /**
+             * tag_url: the ad-request URL.
+             */
+            url?: SaveCreativeRequestDisplayTagUrl;
+            /**
+             * inline_markup: the tag markup, kept byte for byte.
+             */
+            markup?: string;
+            /**
+             * inline_markup: how the markup is trafficked.
+             */
+            markup_type?: 'iframe_javascript' | 'javascript' | 'standard';
+            /**
+             * paired_redirect: the ad-request URL.
+             */
+            ad_request_url?: SaveCreativeRequestDisplayTagUrl;
+            /**
+             * paired_redirect: the click-through URL.
+             */
+            clickthrough_url?: SaveCreativeRequestDisplayTagUrl;
+            /**
+             * AdCP macro_declarations for the macros in the tag, kept as sent.
+             */
+            macro_declarations?: Array<{
+                [key: string]: unknown;
+            }>;
+            dataUrl?: never;
+            assetType?: never;
+            contentType?: never;
+            label?: never;
+            makePrimary?: never;
+            vastVersion?: never;
         }>;
         /**
-         * Finalized private JPEG/PNG; create-only with advertiserId/campaignId, not with assets/sourceAssets.
+         * Write-only private JPEG/PNG; create-only with advertiserId/campaignId, not with assets/sourceAssets.
          */
         sourceAssetRef?: string;
         /**
@@ -17242,6 +17958,8 @@ export type SaveCreativeRequestAssetsItemUrl = string;
  * URL to add as asset (must be http/https)
  */
 export type SaveCreativeRequestClickUrl = string;
+
+export type SaveCreativeRequestDisplayTagUrl = string;
 
 /**
  * URL to add as asset (must be http/https)
@@ -18610,7 +19328,7 @@ export type SaveCreativeSuccessCreative = {
 export type SaveCreativeSuccessProviderContacted = false;
 
 export type SaveCreativeSuccessReadinessWarnings = Array<{
-    code: 'destination_required';
+    code: 'destination_required' | 'tag_not_sendable';
     message: string;
 }>;
 
@@ -19310,6 +20028,10 @@ export type SaveEventSourceSuccessSavedEventSourceEntrySellerAccounts = Array<{
          */
         id: string;
         /**
+         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+         */
+        sellerAccountId?: number;
+        /**
          * Storefront name.
          */
         name: string;
@@ -19462,6 +20184,10 @@ export type SaveEventSourceSuccessUnchangedEventSourceEntrySellerAccounts = Arra
          */
         id: string;
         /**
+         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+         */
+        sellerAccountId?: number;
+        /**
          * Storefront name.
          */
         name: string;
@@ -19603,6 +20329,10 @@ export type SaveEventSourceSuccessUpdatedEventSourceEntrySellerAccounts = Array<
          * Storefront ID.
          */
         id: string;
+        /**
+         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+         */
+        sellerAccountId?: number;
         /**
          * Storefront name.
          */
@@ -22403,9 +23133,15 @@ export type SaveMediaBuyData = {
          */
         channelGroupId?: string;
         /**
-         * Seller ID. Required for explicit creation.
+         * The seller's Account id. Not the seller object's id or any sellerId, which are different numbers. Required for explicit creation unless sellerId is sent.
          */
-        sellerId: string;
+        sellerAccountId?: number;
+        /**
+         * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. Still accepted for explicit creation until a later release.
+         *
+         * @deprecated
+         */
+        sellerId?: string;
         products: Array<{
             /**
              * Qualified ID returned by discovery. Pass it unchanged.
@@ -22463,6 +23199,20 @@ export type SaveMediaBuyData = {
                      * Optional vendor brand ID.
                      */
                     brand_id?: string;
+                };
+                /**
+                 * ext.apostra.metric_id names the vendor metric judged for an ivt, brand_safety or attention_score standard (needs vendor); never sent to the seller.
+                 */
+                ext?: {
+                    /**
+                     * Apostra extension fields.
+                     */
+                    apostra?: {
+                        /**
+                         * The vendor's metric id, from the vendor's measurement catalog.
+                         */
+                        metric_id: string;
+                    };
                 };
             }> | null;
             /**
@@ -23235,6 +23985,20 @@ export type SaveMediaBuyData = {
                      */
                     brand_id?: string;
                 };
+                /**
+                 * ext.apostra.metric_id names the vendor metric judged for an ivt, brand_safety or attention_score standard (needs vendor); never sent to the seller.
+                 */
+                ext?: {
+                    /**
+                     * Apostra extension fields.
+                     */
+                    apostra?: {
+                        /**
+                         * The vendor's metric id, from the vendor's measurement catalog.
+                         */
+                        metric_id: string;
+                    };
+                };
             }> | null;
             /**
              * Meta Pixel/Dataset ID for conversion tracking. Required for Meta Sales; no auto-select.
@@ -23917,6 +24681,7 @@ export type SaveMediaBuyData = {
         idempotencyKey: string;
         expectedAccountId?: number | string;
         accountId?: number | string;
+        sellerAccountId?: never;
         sellerId?: never;
         fromProposalId?: never;
     } | {
@@ -23977,6 +24742,7 @@ export type SaveMediaBuyData = {
         idempotencyKey: string;
         expectedAccountId?: number | string;
         accountId?: number | string;
+        sellerAccountId?: never;
         sellerId?: never;
         products?: never;
         budgetAllocation?: never;
@@ -24528,9 +25294,6 @@ export type SaveMediaBuyResponses = {
                      * Whether every product answers the asked target, judged by kind: a cost_per is met at or under the ask, a threshold_rate or per_ad_spend at or above it. false when any product misses it or did not answer with the same kind. null when the goal carries no target or a maximize_value target, which has no number to meet.
                      */
                     meetsAskedTarget: boolean | null;
-                    /**
-                     * One answer per product on the buy: the product the accepted proposal answered keeps that answer, any other product is answered from its own terms.
-                     */
                     goalAnswers: Array<{
                         productId: string;
                         /**
@@ -24547,9 +25310,13 @@ export type SaveMediaBuyResponses = {
                         askedGoal: SaveMediaBuySuccessMediaBuyGoalCommitmentGoalAnswersItemAskedGoal | null;
                         answeredTarget: SaveMediaBuySuccessMediaBuyGoalCommitmentGoalAnswersItemAnsweredTarget | null;
                         commitment: SaveMediaBuySuccessMediaBuyGoalCommitmentGoalAnswersItemCommitment;
+                        /**
+                         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                         */
+                        sellerAccountId?: number;
                     }>;
                     /**
-                     * Present when this read carries fewer goalAnswers than the buy has.
+                     * Returned goalAnswers are truncated.
                      */
                     goalAnswersTruncated?: true;
                     [key: string]: unknown;
@@ -24585,6 +25352,7 @@ export type SaveMediaBuyResponses = {
                 pendingAt?: 'storefront' | 'salesagent' | 'unknown';
                 errorCode?: string;
                 errorOwner?: string;
+                errorMessage?: string;
                 forwardedAt?: string;
                 buyerReference?: string;
                 pendingChange?: {
@@ -28300,9 +29068,13 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.
+             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
              */
             ids?: Array<string>;
+            /**
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             */
+            sellerAccountIds?: Array<number>;
             /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
              */
@@ -28454,7 +29226,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by seller id.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             */
+            sellerAccountId?: number;
+            /**
+             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
+             *
+             * @deprecated
              */
             sellerId?: string;
             /**
@@ -28574,7 +29352,13 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer customer id.
+             * For kind media_buy in a seller account: buys from this buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * Deprecated: send buyerAccountId instead.
+             *
+             * @deprecated
              */
             buyerCustomerId?: number;
             /**
@@ -28754,9 +29538,13 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.
+             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
              */
             ids?: Array<string>;
+            /**
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             */
+            sellerAccountIds?: Array<number>;
             /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
              */
@@ -28908,7 +29696,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by seller id.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             */
+            sellerAccountId?: number;
+            /**
+             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
+             *
+             * @deprecated
              */
             sellerId?: string;
             /**
@@ -29028,7 +29822,13 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer customer id.
+             * For kind media_buy in a seller account: buys from this buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * Deprecated: send buyerAccountId instead.
+             *
+             * @deprecated
              */
             buyerCustomerId?: number;
             /**
@@ -29276,9 +30076,13 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.
+             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
              */
             ids?: Array<string>;
+            /**
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             */
+            sellerAccountIds?: Array<number>;
             /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
              */
@@ -29430,7 +30234,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by seller id.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             */
+            sellerAccountId?: number;
+            /**
+             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
+             *
+             * @deprecated
              */
             sellerId?: string;
             /**
@@ -29550,7 +30360,13 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer customer id.
+             * For kind media_buy in a seller account: buys from this buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * Deprecated: send buyerAccountId instead.
+             *
+             * @deprecated
              */
             buyerCustomerId?: number;
             /**
@@ -29730,9 +30546,13 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.
+             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
              */
             ids?: Array<string>;
+            /**
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             */
+            sellerAccountIds?: Array<number>;
             /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
              */
@@ -29880,7 +30700,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by seller id.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             */
+            sellerAccountId?: number;
+            /**
+             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
+             *
+             * @deprecated
              */
             sellerId?: string;
             /**
@@ -30000,7 +30826,13 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer customer id.
+             * For kind media_buy in a seller account: buys from this buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * Deprecated: send buyerAccountId instead.
+             *
+             * @deprecated
              */
             buyerCustomerId?: number;
             /**
@@ -30180,9 +31012,13 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.
+             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
              */
             ids?: Array<string>;
+            /**
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             */
+            sellerAccountIds?: Array<number>;
             /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
              */
@@ -30330,7 +31166,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by seller id.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             */
+            sellerAccountId?: number;
+            /**
+             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
+             *
+             * @deprecated
              */
             sellerId?: string;
             /**
@@ -30450,7 +31292,13 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer customer id.
+             * For kind media_buy in a seller account: buys from this buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * Deprecated: send buyerAccountId instead.
+             *
+             * @deprecated
              */
             buyerCustomerId?: number;
             /**
@@ -30630,9 +31478,13 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.
+             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
              */
             ids?: Array<string>;
+            /**
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             */
+            sellerAccountIds?: Array<number>;
             /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
              */
@@ -30780,7 +31632,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by seller id.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             */
+            sellerAccountId?: number;
+            /**
+             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
+             *
+             * @deprecated
              */
             sellerId?: string;
             /**
@@ -30900,7 +31758,13 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer customer id.
+             * For kind media_buy in a seller account: buys from this buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * Deprecated: send buyerAccountId instead.
+             *
+             * @deprecated
              */
             buyerCustomerId?: number;
             /**
@@ -31080,9 +31944,13 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.
+             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
              */
             ids?: Array<string>;
+            /**
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             */
+            sellerAccountIds?: Array<number>;
             /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
              */
@@ -31230,7 +32098,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by seller id.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             */
+            sellerAccountId?: number;
+            /**
+             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
+             *
+             * @deprecated
              */
             sellerId?: string;
             /**
@@ -31350,7 +32224,13 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer customer id.
+             * For kind media_buy in a seller account: buys from this buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * Deprecated: send buyerAccountId instead.
+             *
+             * @deprecated
              */
             buyerCustomerId?: number;
             /**
@@ -31656,9 +32536,13 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.
+             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
              */
             ids?: Array<string>;
+            /**
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             */
+            sellerAccountIds?: Array<number>;
             /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
              */
@@ -31810,7 +32694,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by seller id.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             */
+            sellerAccountId?: number;
+            /**
+             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
+             *
+             * @deprecated
              */
             sellerId?: string;
             /**
@@ -31930,7 +32820,13 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer customer id.
+             * For kind media_buy in a seller account: buys from this buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * Deprecated: send buyerAccountId instead.
+             *
+             * @deprecated
              */
             buyerCustomerId?: number;
             /**
@@ -32109,9 +33005,13 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.
+             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
              */
             ids?: Array<string>;
+            /**
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             */
+            sellerAccountIds?: Array<number>;
             /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
              */
@@ -32263,7 +33163,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by seller id.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             */
+            sellerAccountId?: number;
+            /**
+             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
+             *
+             * @deprecated
              */
             sellerId?: string;
             /**
@@ -32383,7 +33289,13 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer customer id.
+             * For kind media_buy in a seller account: buys from this buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * Deprecated: send buyerAccountId instead.
+             *
+             * @deprecated
              */
             buyerCustomerId?: number;
             /**
@@ -32563,9 +33475,13 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.
+             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
              */
             ids?: Array<string>;
+            /**
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             */
+            sellerAccountIds?: Array<number>;
             /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
              */
@@ -32717,7 +33633,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by seller id.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             */
+            sellerAccountId?: number;
+            /**
+             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
+             *
+             * @deprecated
              */
             sellerId?: string;
             /**
@@ -32837,7 +33759,13 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer customer id.
+             * For kind media_buy in a seller account: buys from this buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * Deprecated: send buyerAccountId instead.
+             *
+             * @deprecated
              */
             buyerCustomerId?: number;
             /**
@@ -33017,9 +33945,13 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.
+             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
              */
             ids?: Array<string>;
+            /**
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             */
+            sellerAccountIds?: Array<number>;
             /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
              */
@@ -33171,7 +34103,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by seller id.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             */
+            sellerAccountId?: number;
+            /**
+             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
+             *
+             * @deprecated
              */
             sellerId?: string;
             /**
@@ -33291,7 +34229,13 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer customer id.
+             * For kind media_buy in a seller account: buys from this buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * Deprecated: send buyerAccountId instead.
+             *
+             * @deprecated
              */
             buyerCustomerId?: number;
             /**
@@ -33471,9 +34415,13 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds.
+             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
              */
             ids?: Array<string>;
+            /**
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             */
+            sellerAccountIds?: Array<number>;
             /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
              */
@@ -33625,7 +34573,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by seller id.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             */
+            sellerAccountId?: number;
+            /**
+             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
+             *
+             * @deprecated
              */
             sellerId?: string;
             /**
@@ -33745,7 +34699,13 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer customer id.
+             * For kind media_buy in a seller account: buys from this buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * Deprecated: send buyerAccountId instead.
+             *
+             * @deprecated
              */
             buyerCustomerId?: number;
             /**

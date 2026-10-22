@@ -12,7 +12,7 @@
       "description": "Plan, run, automate, and report on advertising across sellers, or build those jobs into an application.",
       "author": {
         "name": "Scope3 PBC",
-        "url": "https://interchange.io"
+        "url": "https://apostra.com"
       },
       "source": "./plugins/apostra-developer",
       "category": "development",
@@ -27,7 +27,7 @@
         "mcp",
         "agents"
       ],
-      "homepage": "https://docs.interchange.io/v3/overview",
+      "homepage": "https://docs.apostra.com/v3/overview",
       "license": "Apache-2.0"
     },
     {
