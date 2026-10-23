@@ -9194,11 +9194,11 @@ class SaveCreativeInput(TypedDict):
     creativeId: NotRequired[str]
     '\n    ID of the creative to update. Omit to create a new one.\n    '
     campaignId: NotRequired[str]
-    '\n    Campaign for create; required unless advertiserId is set. A draft records its intended campaign.\n    '
+    '\n    Campaign scope for create or update; required unless advertiserId is set. A draft records its intended campaign.\n    '
     campaignIds: NotRequired[list[str]]
     '\n    Replace campaign membership; omit to keep it.\n    '
     advertiserId: NotRequired[str]
-    '\n    Advertiser scope; required for advertiser create and archive.\n    '
+    '\n    Advertiser scope; required for advertiser-level create, update, and archive.\n    '
     mode: NotRequired[Literal["draft", "complete"]]
     '\n    draft saves partial state; complete validates it (default).\n    '
     expectedRevision: NotRequired[int]
@@ -9208,7 +9208,7 @@ class SaveCreativeInput(TypedDict):
     message: NotRequired[str]
     '\n    Creative brief or direction.\n    '
     formatKind: NotRequired[Literal["image", "html5", "display_tag", "image_carousel", "video_hosted", "video_vast", "audio_hosted", "audio_vast", "audio_daast", "sponsored_placement", "native_in_feed", "responsive_creative", "agent_placement", "seller_rendered_stateful_display", "coordinated_placements", "custom"]]
-    '\n    Direct draft format.\n    '
+    '\n    Canonical format for a draft or advertiser-level metadata update.\n    '
     formatParams: NotRequired[dict[str, JsonValue]]
     '\n    Docs: Format parameters.\n    '
     formatOptionRef: NotRequired[SaveCreativeInputFormatOptionRefScopePublisher | SaveCreativeInputFormatOptionRefScopeProduct]
