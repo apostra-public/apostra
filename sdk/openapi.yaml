@@ -38568,7 +38568,9 @@ paths:
                   type: string
                   minLength: 1
                 campaignId:
-                  description: Campaign for create; required unless advertiserId is set. A draft records its intended campaign.
+                  description: >-
+                    Campaign scope for create or update; required unless advertiserId is set. A draft records its
+                    intended campaign.
                   type: string
                   minLength: 1
                 campaignIds:
@@ -38580,7 +38582,7 @@ paths:
                     minLength: 1
                     maxLength: 128
                 advertiserId:
-                  description: Advertiser scope; required for advertiser create and archive.
+                  description: Advertiser scope; required for advertiser-level create, update, and archive.
                   type: string
                   minLength: 1
                 mode:
@@ -38601,7 +38603,7 @@ paths:
                   description: Creative brief or direction.
                   type: string
                 formatKind:
-                  description: Direct draft format.
+                  description: Canonical format for a draft or advertiser-level metadata update.
                   anyOf:
                     - type: string
                       const: image
@@ -46857,6 +46859,9 @@ paths:
                         format: date-time
                         pattern: >-
                           ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                      replayed:
+                        type: boolean
+                        const: true
                       action:
                         type: string
                         enum:
