@@ -24763,7 +24763,7 @@ paths:
                             $ref: '#/components/schemas/get_seller_reporting_receipts_success_ParamsBuyerAccountId'
                         required:
                           - mediaBuyId
-                          - buyerCustomerId
+                          - buyerAccountId
                         additionalProperties: false
                       receipts:
                         type: array
@@ -26957,8 +26957,8 @@ paths:
                                   type: string
                                   description: Media buy name.
                                 sellerId:
-                                  type: string
                                   description: Seller the buy is placed with.
+                                  type: string
                                 sellerAccountId:
                                   description: The seller Account id; not the Storefront id beside it.
                                   type: integer
@@ -27000,7 +27000,6 @@ paths:
                               required:
                                 - mediaBuyId
                                 - name
-                                - sellerId
                                 - phase
                                 - isPaused
                                 - budget
@@ -38536,11 +38535,11 @@ paths:
       summary: >-
         advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets
         only;generate new media (radio spots):save_creative_session;exactly one format
-        selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset.
+        selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only.
       description: >-
         advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets
         only;generate new media (radio spots):save_creative_session;exactly one format
-        selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset.
+        selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -38568,7 +38567,9 @@ paths:
                   type: string
                   minLength: 1
                 campaignId:
-                  description: Campaign for create; required unless advertiserId is set. A draft records its intended campaign.
+                  description: >-
+                    Campaign scope for create or update; required unless advertiserId is set. A draft records its
+                    intended campaign.
                   type: string
                   minLength: 1
                 campaignIds:
@@ -38580,7 +38581,7 @@ paths:
                     minLength: 1
                     maxLength: 128
                 advertiserId:
-                  description: Advertiser scope; required for advertiser create and archive.
+                  description: Advertiser scope; required for advertiser-level create, update, and archive.
                   type: string
                   minLength: 1
                 mode:
@@ -38601,7 +38602,7 @@ paths:
                   description: Creative brief or direction.
                   type: string
                 formatKind:
-                  description: Direct draft format.
+                  description: Canonical format for a draft or advertiser-level metadata update.
                   anyOf:
                     - type: string
                       const: image
@@ -38873,6 +38874,14 @@ paths:
                     - sessionRevision
                     - outputHash
                   additionalProperties: false
+                libraryRole:
+                  description: >-
+                    Buyer Account only. Durable advertiser Library role: evergreen remains delivery-eligible; reference
+                    is reusable input material and cannot be attached for delivery.
+                  type: string
+                  enum:
+                    - evergreen
+                    - reference
                 clickUrl:
                   description: Click-through destination URL for this creative.
                   $ref: '#/components/schemas/save_creative_request_ClickUrl'
@@ -39599,6 +39608,7 @@ paths:
                           - action
                           - processingState
                         additionalProperties: false
+                      - $ref: '#/components/schemas/save_creative_success_SaveCreativeLibraryRoleSuccess'
                   error:
                     type: 'null'
                 required:
@@ -46857,6 +46867,9 @@ paths:
                         format: date-time
                         pattern: >-
                           ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                      replayed:
+                        type: boolean
+                        const: true
                       action:
                         type: string
                         enum:
@@ -52252,6 +52265,11 @@ paths:
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
                           $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
                           $ref: '#/components/schemas/search_request_CreativeSource'
@@ -53790,6 +53808,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -56002,6 +56025,11 @@ paths:
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
                           $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
                           $ref: '#/components/schemas/search_request_CreativeSource'
@@ -57532,6 +57560,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -59067,6 +59100,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -60599,6 +60637,11 @@ paths:
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
                           $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
                           $ref: '#/components/schemas/search_request_CreativeSource'
@@ -62133,6 +62176,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -65050,6 +65098,11 @@ paths:
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
                           $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
                           $ref: '#/components/schemas/search_request_CreativeSource'
@@ -66586,6 +66639,11 @@ paths:
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
                           $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
                           $ref: '#/components/schemas/search_request_CreativeSource'
@@ -68121,6 +68179,11 @@ paths:
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
                           $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
                           $ref: '#/components/schemas/search_request_CreativeSource'
@@ -69655,6 +69718,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -71191,6 +71259,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -81438,6 +81511,40 @@ components:
       type: string
       format: uri
       description: URL to add as asset (must be http/https)
+    save_creative_success_SaveCreativeLibraryRoleSuccess:
+      type: object
+      properties:
+        action:
+          type: string
+          const: library_role_updated
+        creative:
+          $ref: '#/components/schemas/save_creative_success_SaveCreativeLibraryRoleCreative'
+        replayed:
+          type: boolean
+      required:
+        - action
+        - creative
+        - replayed
+      additionalProperties: false
+    save_creative_success_SaveCreativeLibraryRoleCreative:
+      type: object
+      properties:
+        creativeId:
+          type: string
+        libraryRole:
+          type: string
+          enum:
+            - evergreen
+            - reference
+        stateRevision:
+          type: integer
+          exclusiveMinimum: 0
+          maximum: 9007199254740991
+      required:
+        - creativeId
+        - libraryRole
+        - stateRevision
+      additionalProperties: false
     save_creative_success_Creative:
       type: object
       properties:
