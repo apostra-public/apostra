@@ -6766,8 +6766,8 @@ export type GetSellerReportingReceiptsResponses = {
         data: {
             params: {
                 mediaBuyId: string;
-                buyerCustomerId: GetSellerReportingReceiptsSuccessParamsBuyerCustomerId;
-                buyerAccountId?: GetSellerReportingReceiptsSuccessParamsBuyerAccountId;
+                buyerCustomerId?: GetSellerReportingReceiptsSuccessParamsBuyerCustomerId;
+                buyerAccountId: GetSellerReportingReceiptsSuccessParamsBuyerAccountId;
             };
             receipts: Array<{
                 receiptId: string;
@@ -8707,7 +8707,7 @@ export type OpenCampaignReceiptResponses = {
                     /**
                      * Seller the buy is placed with.
                      */
-                    sellerId: string;
+                    sellerId?: string;
                     /**
                      * The seller Account id; not the Storefront id beside it.
                      */
@@ -17622,7 +17622,7 @@ export type SaveCreativeData = {
          */
         creativeId?: string;
         /**
-         * Campaign for create; required unless advertiserId is set. A draft records its intended campaign.
+         * Campaign scope for create or update; required unless advertiserId is set. A draft records its intended campaign.
          */
         campaignId?: string;
         /**
@@ -17630,7 +17630,7 @@ export type SaveCreativeData = {
          */
         campaignIds?: Array<string>;
         /**
-         * Advertiser scope; required for advertiser create and archive.
+         * Advertiser scope; required for advertiser-level create, update, and archive.
          */
         advertiserId?: string;
         /**
@@ -17650,7 +17650,7 @@ export type SaveCreativeData = {
          */
         message?: string;
         /**
-         * Direct draft format.
+         * Canonical format for a draft or advertiser-level metadata update.
          */
         formatKind?: 'image' | 'html5' | 'display_tag' | 'image_carousel' | 'video_hosted' | 'video_vast' | 'audio_hosted' | 'audio_vast' | 'audio_daast' | 'sponsored_placement' | 'native_in_feed' | 'responsive_creative' | 'agent_placement' | 'seller_rendered_stateful_display' | 'coordinated_placements' | 'custom';
         /**
@@ -25287,6 +25287,7 @@ export type SaveMediaBuyResponses = {
     200: {
         data: {
             serverTime?: string;
+            replayed?: true;
             action: 'staged' | 'updated' | 'pending_approval' | 'paused' | 'resumed' | 'pause_requested' | 'resume_requested' | 'unchanged' | 'archived' | 'cancellation_requested' | 'canceled';
             campaignId?: string;
             mediaBuyId?: string;

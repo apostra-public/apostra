@@ -1,3 +1,4 @@
+import { cliLoginTokenProvider, storedCliLogin } from './cli-login.js'
 import type { OperationTypes } from './generated/client.js'
 import {
   baseUrl,
@@ -373,6 +374,23 @@ export class Transport {
         : environment?.APOSTRA_API_KEY,
       accountId: options.accountId ?? environment?.APOSTRA_ACCOUNT_ID,
       baseUrl: options.baseUrl ?? environment?.APOSTRA_BASE_URL,
+    }
+    if (!hasExplicitCredential && resolvedOptions.apiKey === undefined) {
+      // Last link of the default chain: `apostra login` for this base URL.
+      const login = storedCliLogin(resolvedOptions.baseUrl ?? baseUrl)
+      if (login) {
+        if (
+          resolvedOptions.accountId !== undefined &&
+          resolvedOptions.accountId !== login.accountId
+        )
+          throw new TypeError(
+            `accountId ${resolvedOptions.accountId} does not match account ${login.accountId}, the one you signed in to with \`apostra login\`. Run \`apostra login --account ${resolvedOptions.accountId}\` or remove accountId.`,
+          )
+        resolvedOptions.tokenProvider = cliLoginTokenProvider({
+          baseUrl: resolvedOptions.baseUrl,
+          fetch: options.fetch,
+        })
+      }
     }
     if (
       [
