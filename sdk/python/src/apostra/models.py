@@ -3987,8 +3987,8 @@ class GetSellerReportingReceiptsResultComputedDailyTotalsItem(TypedDict):
 
 class GetSellerReportingReceiptsResultParams(TypedDict):
     mediaBuyId: str
-    buyerCustomerId: GetSellerReportingReceiptsSuccessParamsBuyerCustomerId
-    buyerAccountId: NotRequired[GetSellerReportingReceiptsSuccessParamsBuyerAccountId]
+    buyerCustomerId: NotRequired[GetSellerReportingReceiptsSuccessParamsBuyerCustomerId]
+    buyerAccountId: GetSellerReportingReceiptsSuccessParamsBuyerAccountId
 
 class GetSellerReportingReceiptsResultReceiptsItem(TypedDict):
     receiptId: str
@@ -4877,7 +4877,7 @@ class OpenCampaignReceiptResultReceiptMediaBuysItem(TypedDict):
     '\n    Media buy id.\n    '
     name: str
     '\n    Media buy name.\n    '
-    sellerId: str
+    sellerId: NotRequired[str]
     '\n    Seller the buy is placed with.\n    '
     sellerAccountId: NotRequired[int]
     '\n    The seller Account id; not the Storefront id beside it.\n    '
@@ -9193,12 +9193,14 @@ SaveCreativeCollectionSuccessRemovedCount: TypeAlias = int
 class SaveCreativeInput(TypedDict):
     creativeId: NotRequired[str]
     '\n    ID of the creative to update. Omit to create a new one.\n    '
+    duplicateFromCreativeId: NotRequired[str]
+    '\n    Copy this visible campaign creative. Requires campaignId and idempotencyKey; the copy is named Copy of the source name.\n    '
     campaignId: NotRequired[str]
-    '\n    Campaign for create; required unless advertiserId is set. A draft records its intended campaign.\n    '
+    '\n    Campaign scope for create or update; required unless advertiserId is set. A draft records its intended campaign.\n    '
     campaignIds: NotRequired[list[str]]
     '\n    Replace campaign membership; omit to keep it.\n    '
     advertiserId: NotRequired[str]
-    '\n    Advertiser scope; required for advertiser create and archive.\n    '
+    '\n    Advertiser scope; required for advertiser-level create, update, and archive.\n    '
     mode: NotRequired[Literal["draft", "complete"]]
     '\n    draft saves partial state; complete validates it (default).\n    '
     expectedRevision: NotRequired[int]
@@ -9208,7 +9210,7 @@ class SaveCreativeInput(TypedDict):
     message: NotRequired[str]
     '\n    Creative brief or direction.\n    '
     formatKind: NotRequired[Literal["image", "html5", "display_tag", "image_carousel", "video_hosted", "video_vast", "audio_hosted", "audio_vast", "audio_daast", "sponsored_placement", "native_in_feed", "responsive_creative", "agent_placement", "seller_rendered_stateful_display", "coordinated_placements", "custom"]]
-    '\n    Direct draft format.\n    '
+    '\n    Canonical format for a draft or advertiser-level metadata update.\n    '
     formatParams: NotRequired[dict[str, JsonValue]]
     '\n    Docs: Format parameters.\n    '
     formatOptionRef: NotRequired[SaveCreativeInputFormatOptionRefScopePublisher | SaveCreativeInputFormatOptionRefScopeProduct]
@@ -9223,6 +9225,8 @@ class SaveCreativeInput(TypedDict):
     '\n    Uploaded JPEG/PNG/MP4 for format slots; a draft may omit it.\n    '
     fromCreativeSessionOutput: NotRequired[SaveCreativeInputFromCreativeSessionOutput]
     '\n    Save one approved session output to the advertiserId Library; campaignId is its session campaign. Needs idempotencyKey; send alone.\n    '
+    libraryRole: NotRequired[Literal["evergreen", "reference"]]
+    '\n    Buyer Account only. Durable advertiser Library role: evergreen remains delivery-eligible; reference is reusable input material and cannot be attached for delivery.\n    '
     clickUrl: NotRequired[SaveCreativeRequestClickUrl]
     '\n    Click-through destination URL for this creative.\n    '
     macroAdditions: NotRequired[list[SaveCreativeInputMacroAdditionsItem]]
@@ -9236,7 +9240,7 @@ class SaveCreativeInput(TypedDict):
     resync: NotRequired[Literal[True]]
     '\n    Re-send to every media buy on its campaigns, live ones included. With creativeId and advertiserId only.\n    '
     idempotencyKey: NotRequired[str]
-    '\n    Stable key per call. Best-effort dedup - V2 creative endpoints are not exactly-once.\n    '
+    '\n    Stable key per call. Duplicate requires it and replays exactly once; V2-backed writes are best-effort.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -9443,8 +9447,6 @@ class SaveCreativeResultActionUpdated(TypedDict):
     readinessWarnings: NotRequired[SaveCreativeSuccessReadinessWarnings]
     warnings: NotRequired[SaveCreativeSuccessWarnings]
     action: Literal["updated"]
-
-SaveCreativeResult: TypeAlias = "SaveCreativeResultActionCreated | SaveCreativeResultActionUpdated | SaveCreativeResultActionAssociated | SaveCreativeResultActionMembershipUpdated | SaveCreativeResultActionResynced | SaveCreativeResultActionArchived | SaveCreativeResultActionPromoted | SaveCreativeResultActionPromoting"
 
 class SaveCreativeSessionInputDraft(TypedDict):
     request: dict[str, JsonValue]
@@ -10048,6 +10050,18 @@ class SaveCreativeSuccessCreative(TypedDict):
     creativeId: str
     stateRevision: int
 
+class SaveCreativeSuccessCreativeDuplicate(TypedDict):
+    creativeId: str
+    name: str
+    campaignIds: list[str]
+    stateRevision: int
+
+class SaveCreativeSuccessDuplicateCreativeSuccess(TypedDict):
+    action: Literal["duplicated"]
+    sourceCreativeId: str
+    creative: SaveCreativeSuccessCreativeDuplicate
+    replayed: bool
+
 SaveCreativeSuccessProviderContacted: TypeAlias = Literal[False]
 
 class SaveCreativeSuccessReadinessWarningsItem(TypedDict):
@@ -10055,6 +10069,18 @@ class SaveCreativeSuccessReadinessWarningsItem(TypedDict):
     message: str
 
 SaveCreativeSuccessReadinessWarnings: TypeAlias = "list[SaveCreativeSuccessReadinessWarningsItem]"
+
+class SaveCreativeSuccessSaveCreativeLibraryRoleCreative(TypedDict):
+    creativeId: str
+    libraryRole: Literal["evergreen", "reference"]
+    stateRevision: int
+
+class SaveCreativeSuccessSaveCreativeLibraryRoleSuccess(TypedDict):
+    action: Literal["library_role_updated"]
+    creative: SaveCreativeSuccessSaveCreativeLibraryRoleCreative
+    replayed: bool
+
+SaveCreativeResult: TypeAlias = "SaveCreativeSuccessDuplicateCreativeSuccess | SaveCreativeResultActionCreated | SaveCreativeResultActionUpdated | SaveCreativeResultActionAssociated | SaveCreativeResultActionMembershipUpdated | SaveCreativeResultActionResynced | SaveCreativeResultActionArchived | SaveCreativeResultActionPromoted | SaveCreativeResultActionPromoting | SaveCreativeSuccessSaveCreativeLibraryRoleSuccess"
 
 SaveCreativeSuccessWarnings: TypeAlias = list[str]
 
@@ -13309,6 +13335,7 @@ SaveMediaBuyRequestProductsItemTargetingOverlaySignalTargetingGroupsGroupsItemSi
 
 class SaveMediaBuyResult(TypedDict):
     serverTime: NotRequired[str]
+    replayed: NotRequired[Literal[True]]
     action: Literal["staged", "updated", "pending_approval", "paused", "resumed", "pause_requested", "resume_requested", "unchanged", "archived", "cancellation_requested", "canceled"]
     campaignId: NotRequired[str]
     mediaBuyId: NotRequired[str]
@@ -15613,6 +15640,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -15883,6 +15912,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -16087,6 +16118,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -16318,6 +16351,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -16556,6 +16591,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -16794,6 +16831,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -17032,6 +17071,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -17268,6 +17309,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -17504,6 +17547,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -17808,6 +17853,8 @@ class SearchInputKindCreativeWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -18044,6 +18091,8 @@ class SearchInputKindCreativeWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -18322,6 +18371,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
