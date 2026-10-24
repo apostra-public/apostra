@@ -26,8 +26,11 @@ values. Use `accessToken` for an existing REST/M2M bearer token, or
 one credential source. `m2mTokenProvider` acquires and caches a server-side
 client-credentials token with the published M2M endpoint; it refreshes 60
 seconds before expiry and shares a concurrent refresh. Never put API keys or
-client secrets in browser bundles, URLs, examples or logs. The package does not
-persist credentials or replay 401 responses. M2M token refreshes have a
+client secrets in browser bundles, URLs, examples or logs. With no
+explicit credential and no `APOSTRA_API_KEY`, a Node.js client uses the login
+that `apostra login` stored for the base URL, if there is one; the SDK never
+opens a browser and writes only to that login's file (refreshed tokens). The
+package does not replay 401 responses. M2M token refreshes have a
 30-second deadline by default; pass `timeoutMs` to override it.
 
 ```ts
