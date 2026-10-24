@@ -317,11 +317,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveAdvertiserInstructionsResult], self._request_with_response("save_advertiser_instructions", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_agent(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAgentResult:
-        "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or say it is ready for certification."
+        "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or allow certification buys. To connect from a URL, send agentUrl with dryRun: true first, show the developer what was read, then save (saving by URL is not available yet)."
         return cast("models.SaveAgentResult", self._request("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_agent_with_response(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAgentResult]:
-        "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or say it is ready for certification. Returns the data together with response headers and request ID."
+        "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or allow certification buys. To connect from a URL, send agentUrl with dryRun: true first, show the developer what was read, then save (saving by URL is not available yet). Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAgentResult], self._request_with_response("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
@@ -373,11 +373,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveBuyerOperatorResult], self._request_with_response("save_buyer_operator", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_campaign(self, input: models.SaveCampaignInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCampaignResult:
-        "Save a campaign. To create, send advertiserId and name; flight and budget are optional. Split inventory into media buys. Set desiredPhase: active to launch; omit confirmLaunch to preview. Cancellation is irreversible: desiredPhase: canceled cancels the campaign and every live media buy."
+        "Create: advertiserId/name; flight/budget optional. Receipts and launch previews show local/UTC times in the applicable IANA timezone. desiredPhase: active previews; confirmLaunch: true launches. Cancellation is irreversible: desiredPhase: canceled cancels the campaign and every live media buy."
         return cast("models.SaveCampaignResult", self._request("save_campaign", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_campaign_with_response(self, input: models.SaveCampaignInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCampaignResult]:
-        "Save a campaign. To create, send advertiserId and name; flight and budget are optional. Split inventory into media buys. Set desiredPhase: active to launch; omit confirmLaunch to preview. Cancellation is irreversible: desiredPhase: canceled cancels the campaign and every live media buy. Returns the data together with response headers and request ID."
+        "Create: advertiserId/name; flight/budget optional. Receipts and launch previews show local/UTC times in the applicable IANA timezone. desiredPhase: active previews; confirmLaunch: true launches. Cancellation is irreversible: desiredPhase: canceled cancels the campaign and every live media buy. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCampaignResult], self._request_with_response("save_campaign", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_catalog(self, input: models.SaveCatalogInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCatalogResult:
@@ -405,11 +405,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveCoverageResult], self._request_with_response("save_coverage", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeResult:
-        "advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset."
+        "advertiserId/campaignId:name,message;assets/landing_page_url/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only."
         return cast("models.SaveCreativeResult", self._request("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative_with_response(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeResult]:
-        "advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset. Returns the data together with response headers and request ID."
+        "advertiserId/campaignId:name,message;assets/landing_page_url/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCreativeResult], self._request_with_response("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative_collection(self, input: models.SaveCreativeCollectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeCollectionResult:
@@ -477,11 +477,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveLibraryRequestResult], self._request_with_response("save_library_request", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_material(self, input: models.SaveMaterialInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMaterialResult:
-        "Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call."
+        "Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra"
         return cast("models.SaveMaterialResult", self._request("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_material_with_response(self, input: models.SaveMaterialInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveMaterialResult]:
-        "Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call. Returns the data together with response headers and request ID."
+        "Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveMaterialResult], self._request_with_response("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_media_buy(self, input: models.SaveMediaBuyInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMediaBuyResult:
@@ -910,11 +910,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveAdvertiserInstructionsResult], await self._request_with_response("save_advertiser_instructions", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_agent(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAgentResult:
-        "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or say it is ready for certification."
+        "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or allow certification buys. To connect from a URL, send agentUrl with dryRun: true first, show the developer what was read, then save (saving by URL is not available yet)."
         return cast("models.SaveAgentResult", await self._request("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_agent_with_response(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAgentResult]:
-        "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or say it is ready for certification. Returns the data together with response headers and request ID."
+        "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or allow certification buys. To connect from a URL, send agentUrl with dryRun: true first, show the developer what was read, then save (saving by URL is not available yet). Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAgentResult], await self._request_with_response("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
@@ -966,11 +966,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveBuyerOperatorResult], await self._request_with_response("save_buyer_operator", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_campaign(self, input: models.SaveCampaignInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCampaignResult:
-        "Save a campaign. To create, send advertiserId and name; flight and budget are optional. Split inventory into media buys. Set desiredPhase: active to launch; omit confirmLaunch to preview. Cancellation is irreversible: desiredPhase: canceled cancels the campaign and every live media buy."
+        "Create: advertiserId/name; flight/budget optional. Receipts and launch previews show local/UTC times in the applicable IANA timezone. desiredPhase: active previews; confirmLaunch: true launches. Cancellation is irreversible: desiredPhase: canceled cancels the campaign and every live media buy."
         return cast("models.SaveCampaignResult", await self._request("save_campaign", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_campaign_with_response(self, input: models.SaveCampaignInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCampaignResult]:
-        "Save a campaign. To create, send advertiserId and name; flight and budget are optional. Split inventory into media buys. Set desiredPhase: active to launch; omit confirmLaunch to preview. Cancellation is irreversible: desiredPhase: canceled cancels the campaign and every live media buy. Returns the data together with response headers and request ID."
+        "Create: advertiserId/name; flight/budget optional. Receipts and launch previews show local/UTC times in the applicable IANA timezone. desiredPhase: active previews; confirmLaunch: true launches. Cancellation is irreversible: desiredPhase: canceled cancels the campaign and every live media buy. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCampaignResult], await self._request_with_response("save_campaign", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_catalog(self, input: models.SaveCatalogInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCatalogResult:
@@ -998,11 +998,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveCoverageResult], await self._request_with_response("save_coverage", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeResult:
-        "advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset."
+        "advertiserId/campaignId:name,message;assets/landing_page_url/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only."
         return cast("models.SaveCreativeResult", await self._request("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative_with_response(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeResult]:
-        "advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset. Returns the data together with response headers and request ID."
+        "advertiserId/campaignId:name,message;assets/landing_page_url/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCreativeResult], await self._request_with_response("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative_collection(self, input: models.SaveCreativeCollectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeCollectionResult:
@@ -1070,11 +1070,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveLibraryRequestResult], await self._request_with_response("save_library_request", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_material(self, input: models.SaveMaterialInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMaterialResult:
-        "Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call."
+        "Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra"
         return cast("models.SaveMaterialResult", await self._request("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_material_with_response(self, input: models.SaveMaterialInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveMaterialResult]:
-        "Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call. Returns the data together with response headers and request ID."
+        "Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveMaterialResult], await self._request_with_response("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_media_buy(self, input: models.SaveMediaBuyInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMediaBuyResult:
