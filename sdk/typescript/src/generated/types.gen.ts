@@ -820,7 +820,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1058,7 +1058,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1296,7 +1296,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1530,7 +1530,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1765,7 +1765,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2004,7 +2004,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2470,7 +2470,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2705,7 +2705,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3414,7 +3414,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3652,7 +3652,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3890,7 +3890,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4128,7 +4128,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4366,7 +4366,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4604,7 +4604,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -6766,8 +6766,8 @@ export type GetSellerReportingReceiptsResponses = {
         data: {
             params: {
                 mediaBuyId: string;
-                buyerCustomerId: GetSellerReportingReceiptsSuccessParamsBuyerCustomerId;
-                buyerAccountId?: GetSellerReportingReceiptsSuccessParamsBuyerAccountId;
+                buyerCustomerId?: GetSellerReportingReceiptsSuccessParamsBuyerCustomerId;
+                buyerAccountId: GetSellerReportingReceiptsSuccessParamsBuyerAccountId;
             };
             receipts: Array<{
                 receiptId: string;
@@ -8707,7 +8707,7 @@ export type OpenCampaignReceiptResponses = {
                     /**
                      * Seller the buy is placed with.
                      */
-                    sellerId: string;
+                    sellerId?: string;
                     /**
                      * The seller Account id; not the Storefront id beside it.
                      */
@@ -14623,7 +14623,7 @@ export type SaveCampaignData = {
          */
         campaignId?: string;
         /**
-         * Required when creating. The advertiser this campaign belongs to.
+         * Campaign advertiser. Required for create unless the Campaigns Page workspace selects one.
          */
         advertiserId?: string;
         /**
@@ -14643,13 +14643,17 @@ export type SaveCampaignData = {
          */
         flight?: {
             /**
-             * ISO 8601 datetime. A start up to five minutes before server time is accepted for caller-server clock skew; anything earlier is refused. Use current time for today, not midnight (T00:00:00Z).
+             * ISO 8601 date or datetime. A date-only start means 00:00:00 in flight.timezone or the advertiser timezone. Prefer a naive local datetime with flight.timezone (for example, 2026-10-01T09:00:00) and let the server resolve the IANA timezone. An offset-bearing value remains accepted and is normalized to UTC. A start up to five minutes before server time is accepted for caller-server clock skew; anything earlier is refused.
              */
             startAt: string;
             /**
-             * ISO 8601 datetime (e.g. 2026-09-30T23:59:59Z). Must be after startAt.
+             * ISO 8601 date or datetime. A date-only end means 23:59:59 in flight.timezone or the advertiser timezone. Prefer a naive local datetime with flight.timezone; the server resolves it before storage. Must be after startAt.
              */
             endAt: string;
+            /**
+             * Optional IANA timezone used to resolve naive startAt and endAt values (for example, Australia/Sydney). With offset-bearing datetimes, it must match the offset at each exact instant. This input is never stored.
+             */
+            timezone?: string;
         } | null;
         /**
          * Campaign budget.
@@ -14747,7 +14751,7 @@ export type SaveCampaignData = {
          */
         isPaused?: boolean;
         /**
-         * true archives; false restores an archived campaign as a draft (send alone).
+         * true archives; false restores an archived campaign with its preserved phase (send alone).
          */
         isArchived?: boolean;
         /**
@@ -17622,7 +17626,11 @@ export type SaveCreativeData = {
          */
         creativeId?: string;
         /**
-         * Campaign for create; required unless advertiserId is set. A draft records its intended campaign.
+         * Copy this visible campaign creative. Requires campaignId and idempotencyKey; the copy is named Copy of the source name.
+         */
+        duplicateFromCreativeId?: string;
+        /**
+         * Campaign scope for create or update; required unless advertiserId is set. A draft records its intended campaign.
          */
         campaignId?: string;
         /**
@@ -17630,7 +17638,7 @@ export type SaveCreativeData = {
          */
         campaignIds?: Array<string>;
         /**
-         * Advertiser scope; required for advertiser create and archive.
+         * Advertiser scope; required for advertiser-level create, update, and archive.
          */
         advertiserId?: string;
         /**
@@ -17650,7 +17658,7 @@ export type SaveCreativeData = {
          */
         message?: string;
         /**
-         * Direct draft format.
+         * Canonical format for a draft or advertiser-level metadata update.
          */
         formatKind?: 'image' | 'html5' | 'display_tag' | 'image_carousel' | 'video_hosted' | 'video_vast' | 'audio_hosted' | 'audio_vast' | 'audio_daast' | 'sponsored_placement' | 'native_in_feed' | 'responsive_creative' | 'agent_placement' | 'seller_rendered_stateful_display' | 'coordinated_placements' | 'custom';
         /**
@@ -17845,6 +17853,10 @@ export type SaveCreativeData = {
             outputHash: string;
         };
         /**
+         * Buyer Account only. Durable advertiser Library role: evergreen remains delivery-eligible; reference is reusable input material and cannot be attached for delivery.
+         */
+        libraryRole?: 'evergreen' | 'reference';
+        /**
          * Click-through destination URL for this creative.
          */
         clickUrl?: SaveCreativeRequestClickUrl;
@@ -17914,7 +17926,7 @@ export type SaveCreativeData = {
          */
         resync?: true;
         /**
-         * Stable key per call. Best-effort dedup - V2 creative endpoints are not exactly-once.
+         * Stable key per call. Duplicate requires it and replays exactly once; V2-backed writes are best-effort.
          */
         idempotencyKey?: string;
         /**
@@ -18028,7 +18040,7 @@ export type SaveCreativeResponses = {
      * Typed operation result
      */
     200: {
-        data: {
+        data: SaveCreativeSuccessDuplicateCreativeSuccess | {
             creative: SaveCreativeSuccessCreative;
             alreadyExisted?: SaveCreativeSuccessAlreadyExisted;
             assetAttachWarning?: SaveCreativeSuccessAssetAttachWarning;
@@ -18039,20 +18051,6 @@ export type SaveCreativeResponses = {
             readinessWarnings?: SaveCreativeSuccessReadinessWarnings;
             warnings?: SaveCreativeSuccessWarnings;
             action: 'created';
-            creativeId?: never;
-            campaignId?: never;
-            packageAssignmentAttempted?: never;
-            providerDeliveryAttempted?: never;
-            campaignIds?: never;
-            attached?: never;
-            detached?: never;
-            campaigns?: never;
-            nameReleased?: never;
-            assetUid?: never;
-            revisionUid?: never;
-            sha256?: never;
-            receiptUid?: never;
-            processingState?: never;
         } | {
             creative: SaveCreativeSuccessCreative;
             alreadyExisted?: SaveCreativeSuccessAlreadyExisted;
@@ -18064,70 +18062,18 @@ export type SaveCreativeResponses = {
             readinessWarnings?: SaveCreativeSuccessReadinessWarnings;
             warnings?: SaveCreativeSuccessWarnings;
             action: 'updated';
-            creativeId?: never;
-            campaignId?: never;
-            packageAssignmentAttempted?: never;
-            providerDeliveryAttempted?: never;
-            campaignIds?: never;
-            attached?: never;
-            detached?: never;
-            campaigns?: never;
-            nameReleased?: never;
-            assetUid?: never;
-            revisionUid?: never;
-            sha256?: never;
-            receiptUid?: never;
-            processingState?: never;
         } | {
             action: 'associated';
             creativeId: string;
             campaignId: string;
             packageAssignmentAttempted: false;
             providerDeliveryAttempted: false;
-            creative?: never;
-            alreadyExisted?: never;
-            assetAttachWarning?: never;
-            assetsRequested?: never;
-            assetsAttached?: never;
-            clickUrlAttached?: never;
-            providerContacted?: never;
-            readinessWarnings?: never;
-            warnings?: never;
-            campaignIds?: never;
-            attached?: never;
-            detached?: never;
-            campaigns?: never;
-            nameReleased?: never;
-            assetUid?: never;
-            revisionUid?: never;
-            sha256?: never;
-            receiptUid?: never;
-            processingState?: never;
         } | {
             action: 'membership_updated';
             creativeId: string;
             campaignIds: Array<string>;
             attached: Array<string>;
             detached: Array<string>;
-            creative?: never;
-            alreadyExisted?: never;
-            assetAttachWarning?: never;
-            assetsRequested?: never;
-            assetsAttached?: never;
-            clickUrlAttached?: never;
-            providerContacted?: never;
-            readinessWarnings?: never;
-            warnings?: never;
-            campaignId?: never;
-            packageAssignmentAttempted?: never;
-            providerDeliveryAttempted?: never;
-            campaigns?: never;
-            nameReleased?: never;
-            assetUid?: never;
-            revisionUid?: never;
-            sha256?: never;
-            receiptUid?: never;
-            processingState?: never;
         } | {
             action: 'resynced';
             creativeId: string;
@@ -18146,105 +18092,22 @@ export type SaveCreativeResponses = {
                 retryable: boolean;
                 mediaBuyIds?: never;
             }>;
-            creative?: never;
-            alreadyExisted?: never;
-            assetAttachWarning?: never;
-            assetsRequested?: never;
-            assetsAttached?: never;
-            clickUrlAttached?: never;
-            providerContacted?: never;
-            readinessWarnings?: never;
-            warnings?: never;
-            campaignId?: never;
-            packageAssignmentAttempted?: never;
-            providerDeliveryAttempted?: never;
-            campaignIds?: never;
-            attached?: never;
-            detached?: never;
-            nameReleased?: never;
-            assetUid?: never;
-            revisionUid?: never;
-            sha256?: never;
-            receiptUid?: never;
-            processingState?: never;
         } | {
             action: 'archived';
             creative: {
                 creativeId: string;
             };
             nameReleased: true;
-            alreadyExisted?: never;
-            assetAttachWarning?: never;
-            assetsRequested?: never;
-            assetsAttached?: never;
-            clickUrlAttached?: never;
-            providerContacted?: never;
-            readinessWarnings?: never;
-            warnings?: never;
-            creativeId?: never;
-            campaignId?: never;
-            packageAssignmentAttempted?: never;
-            providerDeliveryAttempted?: never;
-            campaignIds?: never;
-            attached?: never;
-            detached?: never;
-            campaigns?: never;
-            assetUid?: never;
-            revisionUid?: never;
-            sha256?: never;
-            receiptUid?: never;
-            processingState?: never;
         } | {
             action: 'promoted';
             assetUid: string;
             revisionUid: string;
             sha256: string;
             receiptUid: string;
-            creative?: never;
-            alreadyExisted?: never;
-            assetAttachWarning?: never;
-            assetsRequested?: never;
-            assetsAttached?: never;
-            clickUrlAttached?: never;
-            providerContacted?: never;
-            readinessWarnings?: never;
-            warnings?: never;
-            creativeId?: never;
-            campaignId?: never;
-            packageAssignmentAttempted?: never;
-            providerDeliveryAttempted?: never;
-            campaignIds?: never;
-            attached?: never;
-            detached?: never;
-            campaigns?: never;
-            nameReleased?: never;
-            processingState?: never;
         } | {
             action: 'promoting';
             processingState: 'quarantined' | 'inspecting' | 'approved';
-            creative?: never;
-            alreadyExisted?: never;
-            assetAttachWarning?: never;
-            assetsRequested?: never;
-            assetsAttached?: never;
-            clickUrlAttached?: never;
-            providerContacted?: never;
-            readinessWarnings?: never;
-            warnings?: never;
-            creativeId?: never;
-            campaignId?: never;
-            packageAssignmentAttempted?: never;
-            providerDeliveryAttempted?: never;
-            campaignIds?: never;
-            attached?: never;
-            detached?: never;
-            campaigns?: never;
-            nameReleased?: never;
-            assetUid?: never;
-            revisionUid?: never;
-            sha256?: never;
-            receiptUid?: never;
-        };
+        } | SaveCreativeSuccessSaveCreativeLibraryRoleSuccess;
         error: null;
     };
     /**
@@ -19380,12 +19243,38 @@ export type SaveCreativeSuccessCreative = {
     [key: string]: unknown;
 };
 
+export type SaveCreativeSuccessCreativeDuplicate = {
+    creativeId: string;
+    name: string;
+    campaignIds: Array<string>;
+    stateRevision: number;
+};
+
+export type SaveCreativeSuccessDuplicateCreativeSuccess = {
+    action: 'duplicated';
+    sourceCreativeId: string;
+    creative: SaveCreativeSuccessCreativeDuplicate;
+    replayed: boolean;
+};
+
 export type SaveCreativeSuccessProviderContacted = false;
 
 export type SaveCreativeSuccessReadinessWarnings = Array<{
     code: 'destination_required' | 'tag_not_sendable';
     message: string;
 }>;
+
+export type SaveCreativeSuccessSaveCreativeLibraryRoleCreative = {
+    creativeId: string;
+    libraryRole: 'evergreen' | 'reference';
+    stateRevision: number;
+};
+
+export type SaveCreativeSuccessSaveCreativeLibraryRoleSuccess = {
+    action: 'library_role_updated';
+    creative: SaveCreativeSuccessSaveCreativeLibraryRoleCreative;
+    replayed: boolean;
+};
 
 export type SaveCreativeSuccessWarnings = Array<string>;
 
@@ -21989,6 +21878,14 @@ export type SaveMaterialData = {
          * For an inline rate-card create only, return its preview without committing facts.
          */
         dryRun?: boolean;
+        /**
+         * Material action field.
+         */
+        action?: 'preview_permanent_delete' | 'delete_permanently' | 'undo_permanent_delete';
+        /**
+         * Exact server-issued permanent-deletion preview confirmation. Required only for delete_permanently.
+         */
+        confirmationId?: string;
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -25287,6 +25184,7 @@ export type SaveMediaBuyResponses = {
     200: {
         data: {
             serverTime?: string;
+            replayed?: true;
             action: 'staged' | 'updated' | 'pending_approval' | 'paused' | 'resumed' | 'pause_requested' | 'resume_requested' | 'unchanged' | 'archived' | 'cancellation_requested' | 'canceled';
             campaignId?: string;
             mediaBuyId?: string;
@@ -29279,6 +29177,10 @@ export type SearchData = {
              */
             role?: SearchRequestCreativeRole;
             /**
+             * For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.
+             */
+            libraryRole?: SearchRequestCreativeRole;
+            /**
              * For kind creative: where the creative came from: uploaded, generated, or connected.
              */
             source?: SearchRequestCreativeSource;
@@ -29752,6 +29654,10 @@ export type SearchData = {
              * For kind creative: evergreen or reference, the creative's role in the advertiser's creative library. Not the seller Library.
              */
             role?: SearchRequestCreativeRole;
+            /**
+             * For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.
+             */
+            libraryRole?: SearchRequestCreativeRole;
             /**
              * For kind creative: where the creative came from: uploaded, generated, or connected.
              */
@@ -30295,6 +30201,10 @@ export type SearchData = {
              */
             role?: SearchRequestCreativeRole;
             /**
+             * For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.
+             */
+            libraryRole?: SearchRequestCreativeRole;
+            /**
              * For kind creative: where the creative came from: uploaded, generated, or connected.
              */
             source?: SearchRequestCreativeSource;
@@ -30764,6 +30674,10 @@ export type SearchData = {
              * For kind creative: evergreen or reference, the creative's role in the advertiser's creative library. Not the seller Library.
              */
             role?: SearchRequestCreativeRole;
+            /**
+             * For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.
+             */
+            libraryRole?: SearchRequestCreativeRole;
             /**
              * For kind creative: where the creative came from: uploaded, generated, or connected.
              */
@@ -31235,6 +31149,10 @@ export type SearchData = {
              */
             role?: SearchRequestCreativeRole;
             /**
+             * For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.
+             */
+            libraryRole?: SearchRequestCreativeRole;
+            /**
              * For kind creative: where the creative came from: uploaded, generated, or connected.
              */
             source?: SearchRequestCreativeSource;
@@ -31705,6 +31623,10 @@ export type SearchData = {
              */
             role?: SearchRequestCreativeRole;
             /**
+             * For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.
+             */
+            libraryRole?: SearchRequestCreativeRole;
+            /**
              * For kind creative: where the creative came from: uploaded, generated, or connected.
              */
             source?: SearchRequestCreativeSource;
@@ -32174,6 +32096,10 @@ export type SearchData = {
              * For kind creative: evergreen or reference, the creative's role in the advertiser's creative library. Not the seller Library.
              */
             role?: SearchRequestCreativeRole;
+            /**
+             * For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.
+             */
+            libraryRole?: SearchRequestCreativeRole;
             /**
              * For kind creative: where the creative came from: uploaded, generated, or connected.
              */
@@ -32775,6 +32701,10 @@ export type SearchData = {
              */
             role?: SearchRequestCreativeRole;
             /**
+             * For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.
+             */
+            libraryRole?: SearchRequestCreativeRole;
+            /**
              * For kind creative: where the creative came from: uploaded, generated, or connected.
              */
             source?: SearchRequestCreativeSource;
@@ -33247,6 +33177,10 @@ export type SearchData = {
              * For kind creative: evergreen or reference, the creative's role in the advertiser's creative library. Not the seller Library.
              */
             role?: SearchRequestCreativeRole;
+            /**
+             * For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.
+             */
+            libraryRole?: SearchRequestCreativeRole;
             /**
              * For kind creative: where the creative came from: uploaded, generated, or connected.
              */
@@ -33721,6 +33655,10 @@ export type SearchData = {
              * For kind creative: evergreen or reference, the creative's role in the advertiser's creative library. Not the seller Library.
              */
             role?: SearchRequestCreativeRole;
+            /**
+             * For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.
+             */
+            libraryRole?: SearchRequestCreativeRole;
             /**
              * For kind creative: where the creative came from: uploaded, generated, or connected.
              */
@@ -34196,6 +34134,10 @@ export type SearchData = {
              */
             role?: SearchRequestCreativeRole;
             /**
+             * For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.
+             */
+            libraryRole?: SearchRequestCreativeRole;
+            /**
              * For kind creative: where the creative came from: uploaded, generated, or connected.
              */
             source?: SearchRequestCreativeSource;
@@ -34669,6 +34611,10 @@ export type SearchData = {
              * For kind creative: evergreen or reference, the creative's role in the advertiser's creative library. Not the seller Library.
              */
             role?: SearchRequestCreativeRole;
+            /**
+             * For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.
+             */
+            libraryRole?: SearchRequestCreativeRole;
             /**
              * For kind creative: where the creative came from: uploaded, generated, or connected.
              */

@@ -1907,6 +1907,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -2804,6 +2805,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -3109,6 +3123,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -4005,6 +4020,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -4288,6 +4316,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -5184,6 +5213,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -5455,6 +5497,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -6352,6 +6395,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -6623,6 +6679,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -7520,6 +7577,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -7798,6 +7868,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -8696,6 +8767,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -9806,6 +9890,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -10069,6 +10166,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -10976,6 +11074,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -11239,6 +11350,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -12137,6 +12249,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -13252,6 +13377,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -14358,6 +14496,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -14625,6 +14776,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -15532,6 +15684,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -15799,6 +15964,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -16696,6 +16862,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -16972,6 +17151,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -17869,6 +18049,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -18145,6 +18338,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -19042,6 +19236,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -19318,6 +19525,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -20224,6 +20432,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -20491,6 +20712,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -21389,6 +21611,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -24763,7 +24998,7 @@ paths:
                             $ref: '#/components/schemas/get_seller_reporting_receipts_success_ParamsBuyerAccountId'
                         required:
                           - mediaBuyId
-                          - buyerCustomerId
+                          - buyerAccountId
                         additionalProperties: false
                       receipts:
                         type: array
@@ -26957,8 +27192,8 @@ paths:
                                   type: string
                                   description: Media buy name.
                                 sellerId:
-                                  type: string
                                   description: Seller the buy is placed with.
+                                  type: string
                                 sellerAccountId:
                                   description: The seller Account id; not the Storefront id beside it.
                                   type: integer
@@ -27000,7 +27235,6 @@ paths:
                               required:
                                 - mediaBuyId
                                 - name
-                                - sellerId
                                 - phase
                                 - isPaused
                                 - budget
@@ -35347,13 +35581,13 @@ paths:
     post:
       operationId: save_campaign
       summary: >-
-        Save a campaign. To create, send advertiserId and name; flight and budget are optional. Split inventory into
-        media buys. Set desiredPhase: active to launch; omit confirmLaunch to preview. Cancellation is irreversible:
-        desiredPhase: canceled cancels the campaign and every live media buy.
+        Create: advertiserId/name; flight/budget optional. Receipts and launch previews show local/UTC times in the
+        applicable IANA timezone. desiredPhase: active previews; confirmLaunch: true launches. Cancellation is
+        irreversible: desiredPhase: canceled cancels the campaign and every live media buy.
       description: >-
-        Save a campaign. To create, send advertiserId and name; flight and budget are optional. Split inventory into
-        media buys. Set desiredPhase: active to launch; omit confirmLaunch to preview. Cancellation is irreversible:
-        desiredPhase: canceled cancels the campaign and every live media buy.
+        Create: advertiserId/name; flight/budget optional. Receipts and launch previews show local/UTC times in the
+        applicable IANA timezone. desiredPhase: active previews; confirmLaunch: true launches. Cancellation is
+        irreversible: desiredPhase: canceled cancels the campaign and every live media buy.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -35385,7 +35619,7 @@ paths:
                   description: ID of the campaign to update. Omit to create a new one.
                   type: string
                 advertiserId:
-                  description: Required when creating. The advertiser this campaign belongs to.
+                  description: Campaign advertiser. Required for create unless the Campaigns Page workspace selects one.
                   type: string
                 name:
                   description: Campaign name.
@@ -35408,12 +35642,25 @@ paths:
                         startAt:
                           type: string
                           description: >-
-                            ISO 8601 datetime. A start up to five minutes before server time is accepted for
-                            caller-server clock skew; anything earlier is refused. Use current time for today, not
-                            midnight (T00:00:00Z).
+                            ISO 8601 date or datetime. A date-only start means 00:00:00 in flight.timezone or the
+                            advertiser timezone. Prefer a naive local datetime with flight.timezone (for example,
+                            2026-10-01T09:00:00) and let the server resolve the IANA timezone. An offset-bearing value
+                            remains accepted and is normalized to UTC. A start up to five minutes before server time is
+                            accepted for caller-server clock skew; anything earlier is refused.
                         endAt:
                           type: string
-                          description: ISO 8601 datetime (e.g. 2026-09-30T23:59:59Z). Must be after startAt.
+                          description: >-
+                            ISO 8601 date or datetime. A date-only end means 23:59:59 in flight.timezone or the
+                            advertiser timezone. Prefer a naive local datetime with flight.timezone; the server resolves
+                            it before storage. Must be after startAt.
+                        timezone:
+                          description: >-
+                            Optional IANA timezone used to resolve naive startAt and endAt values (for example,
+                            Australia/Sydney). With offset-bearing datetimes, it must match the offset at each exact
+                            instant. This input is never stored.
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                       required:
                         - startAt
                         - endAt
@@ -35569,7 +35816,7 @@ paths:
                   description: true to pause; false to reactivate. Only valid on active campaigns.
                   type: boolean
                 isArchived:
-                  description: true archives; false restores an archived campaign as a draft (send alone).
+                  description: true archives; false restores an archived campaign with its preserved phase (send alone).
                   type: boolean
                 optimizationGoals:
                   description: >-
@@ -38536,11 +38783,11 @@ paths:
       summary: >-
         advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets
         only;generate new media (radio spots):save_creative_session;exactly one format
-        selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset.
+        selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only.
       description: >-
         advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets
         only;generate new media (radio spots):save_creative_session;exactly one format
-        selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset.
+        selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -38567,8 +38814,16 @@ paths:
                   description: ID of the creative to update. Omit to create a new one.
                   type: string
                   minLength: 1
+                duplicateFromCreativeId:
+                  description: >-
+                    Copy this visible campaign creative. Requires campaignId and idempotencyKey; the copy is named Copy
+                    of the source name.
+                  type: string
+                  minLength: 1
                 campaignId:
-                  description: Campaign for create; required unless advertiserId is set. A draft records its intended campaign.
+                  description: >-
+                    Campaign scope for create or update; required unless advertiserId is set. A draft records its
+                    intended campaign.
                   type: string
                   minLength: 1
                 campaignIds:
@@ -38580,7 +38835,7 @@ paths:
                     minLength: 1
                     maxLength: 128
                 advertiserId:
-                  description: Advertiser scope; required for advertiser create and archive.
+                  description: Advertiser scope; required for advertiser-level create, update, and archive.
                   type: string
                   minLength: 1
                 mode:
@@ -38601,7 +38856,7 @@ paths:
                   description: Creative brief or direction.
                   type: string
                 formatKind:
-                  description: Direct draft format.
+                  description: Canonical format for a draft or advertiser-level metadata update.
                   anyOf:
                     - type: string
                       const: image
@@ -38873,6 +39128,14 @@ paths:
                     - sessionRevision
                     - outputHash
                   additionalProperties: false
+                libraryRole:
+                  description: >-
+                    Buyer Account only. Durable advertiser Library role: evergreen remains delivery-eligible; reference
+                    is reusable input material and cannot be attached for delivery.
+                  type: string
+                  enum:
+                    - evergreen
+                    - reference
                 clickUrl:
                   description: Click-through destination URL for this creative.
                   $ref: '#/components/schemas/save_creative_request_ClickUrl'
@@ -38973,7 +39236,9 @@ paths:
                   type: boolean
                   const: true
                 idempotencyKey:
-                  description: Stable key per call. Best-effort dedup - V2 creative endpoints are not exactly-once.
+                  description: >-
+                    Stable key per call. Duplicate requires it and replays exactly once; V2-backed writes are
+                    best-effort.
                   type: string
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
@@ -39389,6 +39654,7 @@ paths:
                 properties:
                   data:
                     oneOf:
+                      - $ref: '#/components/schemas/save_creative_success_DuplicateCreativeSuccess'
                       - type: object
                         properties:
                           creative:
@@ -39599,6 +39865,7 @@ paths:
                           - action
                           - processingState
                         additionalProperties: false
+                      - $ref: '#/components/schemas/save_creative_success_SaveCreativeLibraryRoleSuccess'
                   error:
                     type: 'null'
                 required:
@@ -42566,13 +42833,13 @@ paths:
     post:
       operationId: save_material
       summary: >-
-        Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or
-        avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures
-        (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call.
+        Create or update seller Materials. Seller beta: preview, delete, or Undo deletion of one imported Library
+        document. Delete archives it, excludes its source until Include again, and purges it after 30 days.
+        https://docs.apostra.com/v3/delete-from-apostra
       description: >-
-        Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or
-        avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures
-        (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call.
+        Create or update seller Materials. Seller beta: preview, delete, or Undo deletion of one imported Library
+        document. Delete archives it, excludes its source until Include again, and purges it after 30 days.
+        https://docs.apostra.com/v3/delete-from-apostra
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -43218,6 +43485,18 @@ paths:
                 dryRun:
                   description: For an inline rate-card create only, return its preview without committing facts.
                   type: boolean
+                action:
+                  type: string
+                  enum:
+                    - preview_permanent_delete
+                    - delete_permanently
+                    - undo_permanent_delete
+                  description: Material action field.
+                confirmationId:
+                  description: Exact server-issued permanent-deletion preview confirmation. Required only for delete_permanently.
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -46857,6 +47136,9 @@ paths:
                         format: date-time
                         pattern: >-
                           ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                      replayed:
+                        type: boolean
+                        const: true
                       action:
                         type: string
                         enum:
@@ -52252,6 +52534,11 @@ paths:
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
                           $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
                           $ref: '#/components/schemas/search_request_CreativeSource'
@@ -53790,6 +54077,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -56002,6 +56294,11 @@ paths:
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
                           $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
                           $ref: '#/components/schemas/search_request_CreativeSource'
@@ -57532,6 +57829,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -59067,6 +59369,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -60599,6 +60906,11 @@ paths:
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
                           $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
                           $ref: '#/components/schemas/search_request_CreativeSource'
@@ -62133,6 +62445,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -65050,6 +65367,11 @@ paths:
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
                           $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
                           $ref: '#/components/schemas/search_request_CreativeSource'
@@ -66586,6 +66908,11 @@ paths:
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
                           $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
                           $ref: '#/components/schemas/search_request_CreativeSource'
@@ -68121,6 +68448,11 @@ paths:
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
                           $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
                           $ref: '#/components/schemas/search_request_CreativeSource'
@@ -69655,6 +69987,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -71191,6 +71528,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -81438,6 +81780,79 @@ components:
       type: string
       format: uri
       description: URL to add as asset (must be http/https)
+    save_creative_success_DuplicateCreativeSuccess:
+      type: object
+      properties:
+        action:
+          type: string
+          const: duplicated
+        sourceCreativeId:
+          type: string
+        creative:
+          $ref: '#/components/schemas/save_creative_success_CreativeDuplicate'
+        replayed:
+          type: boolean
+      required:
+        - action
+        - sourceCreativeId
+        - creative
+        - replayed
+      additionalProperties: false
+    save_creative_success_CreativeDuplicate:
+      type: object
+      properties:
+        creativeId:
+          type: string
+        name:
+          type: string
+        campaignIds:
+          type: array
+          items:
+            type: string
+        stateRevision:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+      required:
+        - creativeId
+        - name
+        - campaignIds
+        - stateRevision
+      additionalProperties: false
+    save_creative_success_SaveCreativeLibraryRoleSuccess:
+      type: object
+      properties:
+        action:
+          type: string
+          const: library_role_updated
+        creative:
+          $ref: '#/components/schemas/save_creative_success_SaveCreativeLibraryRoleCreative'
+        replayed:
+          type: boolean
+      required:
+        - action
+        - creative
+        - replayed
+      additionalProperties: false
+    save_creative_success_SaveCreativeLibraryRoleCreative:
+      type: object
+      properties:
+        creativeId:
+          type: string
+        libraryRole:
+          type: string
+          enum:
+            - evergreen
+            - reference
+        stateRevision:
+          type: integer
+          exclusiveMinimum: 0
+          maximum: 9007199254740991
+      required:
+        - creativeId
+        - libraryRole
+        - stateRevision
+      additionalProperties: false
     save_creative_success_Creative:
       type: object
       properties:
