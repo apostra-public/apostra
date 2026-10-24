@@ -1244,7 +1244,7 @@ class GetInputKindAdvertiserAccess(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAdvertiserAccessItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1371,7 +1371,7 @@ class GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAd
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1496,7 +1496,7 @@ class GetInputKindAudience(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAudienceItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1623,7 +1623,7 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCatalogAndEventSourceItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1750,7 +1750,7 @@ class GetInputKindConnection(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindConnectionItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1877,7 +1877,7 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCreativeAndCreativeCollectionWithAdvertiserIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2002,7 +2002,7 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCreativeAndCreativeCollectionWithSourceIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2504,7 +2504,7 @@ class GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDis
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2631,7 +2631,7 @@ class GetInputKindMaterial(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindMaterialItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2758,7 +2758,7 @@ class GetInputKindProposal(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindProposalItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2885,7 +2885,7 @@ class GetInputKindSeller(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindSellerItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3012,7 +3012,7 @@ class GetInputKindSession(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindSessionItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3139,7 +3139,7 @@ class GetInputKindWholesaleProduct(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindWholesaleProductItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3266,7 +3266,7 @@ class GetInputKindWorkItem(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: Literal["creative_review", "media_buy_approval", "modular_source"]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindWorkItemItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3987,8 +3987,8 @@ class GetSellerReportingReceiptsResultComputedDailyTotalsItem(TypedDict):
 
 class GetSellerReportingReceiptsResultParams(TypedDict):
     mediaBuyId: str
-    buyerCustomerId: GetSellerReportingReceiptsSuccessParamsBuyerCustomerId
-    buyerAccountId: NotRequired[GetSellerReportingReceiptsSuccessParamsBuyerAccountId]
+    buyerCustomerId: NotRequired[GetSellerReportingReceiptsSuccessParamsBuyerCustomerId]
+    buyerAccountId: GetSellerReportingReceiptsSuccessParamsBuyerAccountId
 
 class GetSellerReportingReceiptsResultReceiptsItem(TypedDict):
     receiptId: str
@@ -4877,7 +4877,7 @@ class OpenCampaignReceiptResultReceiptMediaBuysItem(TypedDict):
     '\n    Media buy id.\n    '
     name: str
     '\n    Media buy name.\n    '
-    sellerId: str
+    sellerId: NotRequired[str]
     '\n    Seller the buy is placed with.\n    '
     sellerAccountId: NotRequired[int]
     '\n    The seller Account id; not the Storefront id beside it.\n    '
@@ -7351,7 +7351,7 @@ class SaveCampaignInput(TypedDict):
     campaignId: NotRequired[str]
     '\n    ID of the campaign to update. Omit to create a new one.\n    '
     advertiserId: NotRequired[str]
-    '\n    Required when creating. The advertiser this campaign belongs to.\n    '
+    '\n    Campaign advertiser. Required for create unless the Campaigns Page workspace selects one.\n    '
     name: NotRequired[str]
     '\n    Campaign name.\n    '
     expectedRevision: NotRequired[int]
@@ -7379,7 +7379,7 @@ class SaveCampaignInput(TypedDict):
     isPaused: NotRequired[bool]
     '\n    true to pause; false to reactivate. Only valid on active campaigns.\n    '
     isArchived: NotRequired[bool]
-    '\n    true archives; false restores an archived campaign as a draft (send alone).\n    '
+    '\n    true archives; false restores an archived campaign with its preserved phase (send alone).\n    '
     optimizationGoals: NotRequired[list[SaveCampaignRequestCampaignEventGoal | SaveCampaignRequestCampaignMetricGoal | SaveCampaignRequestCampaignVendorMetricGoal] | None]
     '\n    Only when the buyer states a goal. Never infer from name or brief. Cost or return targets go in bidding. null clears.\n    '
     bidding: NotRequired[SaveCampaignInputBiddingKindCostPer | SaveCampaignInputBiddingKindRoas | None]
@@ -7491,9 +7491,11 @@ class SaveCampaignInputChannelGroupsItemKindPreset(TypedDict):
 
 class SaveCampaignInputFlightValue(TypedDict):
     startAt: str
-    '\n    ISO 8601 datetime. A start up to five minutes before server time is accepted for caller-server clock skew; anything earlier is refused. Use current time for today, not midnight (T00:00:00Z).\n    '
+    '\n    ISO 8601 date or datetime. A date-only start means 00:00:00 in flight.timezone or the advertiser timezone. Prefer a naive local datetime with flight.timezone (for example, 2026-10-01T09:00:00) and let the server resolve the IANA timezone. An offset-bearing value remains accepted and is normalized to UTC. A start up to five minutes before server time is accepted for caller-server clock skew; anything earlier is refused.\n    '
     endAt: str
-    '\n    ISO 8601 datetime (e.g. 2026-09-30T23:59:59Z). Must be after startAt.\n    '
+    '\n    ISO 8601 date or datetime. A date-only end means 23:59:59 in flight.timezone or the advertiser timezone. Prefer a naive local datetime with flight.timezone; the server resolves it before storage. Must be after startAt.\n    '
+    timezone: NotRequired[str]
+    '\n    Optional IANA timezone used to resolve naive startAt and endAt values (for example, Australia/Sydney). With offset-bearing datetimes, it must match the offset at each exact instant. This input is never stored.\n    '
 
 class SaveCampaignInputFrequencyCapLevelMediaBuyConfig(TypedDict):
     maxImpressions: int
@@ -9193,12 +9195,14 @@ SaveCreativeCollectionSuccessRemovedCount: TypeAlias = int
 class SaveCreativeInput(TypedDict):
     creativeId: NotRequired[str]
     '\n    ID of the creative to update. Omit to create a new one.\n    '
+    duplicateFromCreativeId: NotRequired[str]
+    '\n    Copy this visible campaign creative. Requires campaignId and idempotencyKey; the copy is named Copy of the source name.\n    '
     campaignId: NotRequired[str]
-    '\n    Campaign for create; required unless advertiserId is set. A draft records its intended campaign.\n    '
+    '\n    Campaign scope for create or update; required unless advertiserId is set. A draft records its intended campaign.\n    '
     campaignIds: NotRequired[list[str]]
     '\n    Replace campaign membership; omit to keep it.\n    '
     advertiserId: NotRequired[str]
-    '\n    Advertiser scope; required for advertiser create and archive.\n    '
+    '\n    Advertiser scope; required for advertiser-level create, update, and archive.\n    '
     mode: NotRequired[Literal["draft", "complete"]]
     '\n    draft saves partial state; complete validates it (default).\n    '
     expectedRevision: NotRequired[int]
@@ -9208,7 +9212,7 @@ class SaveCreativeInput(TypedDict):
     message: NotRequired[str]
     '\n    Creative brief or direction.\n    '
     formatKind: NotRequired[Literal["image", "html5", "display_tag", "image_carousel", "video_hosted", "video_vast", "audio_hosted", "audio_vast", "audio_daast", "sponsored_placement", "native_in_feed", "responsive_creative", "agent_placement", "seller_rendered_stateful_display", "coordinated_placements", "custom"]]
-    '\n    Direct draft format.\n    '
+    '\n    Canonical format for a draft or advertiser-level metadata update.\n    '
     formatParams: NotRequired[dict[str, JsonValue]]
     '\n    Docs: Format parameters.\n    '
     formatOptionRef: NotRequired[SaveCreativeInputFormatOptionRefScopePublisher | SaveCreativeInputFormatOptionRefScopeProduct]
@@ -9223,6 +9227,8 @@ class SaveCreativeInput(TypedDict):
     '\n    Uploaded JPEG/PNG/MP4 for format slots; a draft may omit it.\n    '
     fromCreativeSessionOutput: NotRequired[SaveCreativeInputFromCreativeSessionOutput]
     '\n    Save one approved session output to the advertiserId Library; campaignId is its session campaign. Needs idempotencyKey; send alone.\n    '
+    libraryRole: NotRequired[Literal["evergreen", "reference"]]
+    '\n    Buyer Account only. Durable advertiser Library role: evergreen remains delivery-eligible; reference is reusable input material and cannot be attached for delivery.\n    '
     clickUrl: NotRequired[SaveCreativeRequestClickUrl]
     '\n    Click-through destination URL for this creative.\n    '
     macroAdditions: NotRequired[list[SaveCreativeInputMacroAdditionsItem]]
@@ -9236,7 +9242,7 @@ class SaveCreativeInput(TypedDict):
     resync: NotRequired[Literal[True]]
     '\n    Re-send to every media buy on its campaigns, live ones included. With creativeId and advertiserId only.\n    '
     idempotencyKey: NotRequired[str]
-    '\n    Stable key per call. Best-effort dedup - V2 creative endpoints are not exactly-once.\n    '
+    '\n    Stable key per call. Duplicate requires it and replays exactly once; V2-backed writes are best-effort.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -9443,8 +9449,6 @@ class SaveCreativeResultActionUpdated(TypedDict):
     readinessWarnings: NotRequired[SaveCreativeSuccessReadinessWarnings]
     warnings: NotRequired[SaveCreativeSuccessWarnings]
     action: Literal["updated"]
-
-SaveCreativeResult: TypeAlias = "SaveCreativeResultActionCreated | SaveCreativeResultActionUpdated | SaveCreativeResultActionAssociated | SaveCreativeResultActionMembershipUpdated | SaveCreativeResultActionResynced | SaveCreativeResultActionArchived | SaveCreativeResultActionPromoted | SaveCreativeResultActionPromoting"
 
 class SaveCreativeSessionInputDraft(TypedDict):
     request: dict[str, JsonValue]
@@ -10048,6 +10052,18 @@ class SaveCreativeSuccessCreative(TypedDict):
     creativeId: str
     stateRevision: int
 
+class SaveCreativeSuccessCreativeDuplicate(TypedDict):
+    creativeId: str
+    name: str
+    campaignIds: list[str]
+    stateRevision: int
+
+class SaveCreativeSuccessDuplicateCreativeSuccess(TypedDict):
+    action: Literal["duplicated"]
+    sourceCreativeId: str
+    creative: SaveCreativeSuccessCreativeDuplicate
+    replayed: bool
+
 SaveCreativeSuccessProviderContacted: TypeAlias = Literal[False]
 
 class SaveCreativeSuccessReadinessWarningsItem(TypedDict):
@@ -10055,6 +10071,18 @@ class SaveCreativeSuccessReadinessWarningsItem(TypedDict):
     message: str
 
 SaveCreativeSuccessReadinessWarnings: TypeAlias = "list[SaveCreativeSuccessReadinessWarningsItem]"
+
+class SaveCreativeSuccessSaveCreativeLibraryRoleCreative(TypedDict):
+    creativeId: str
+    libraryRole: Literal["evergreen", "reference"]
+    stateRevision: int
+
+class SaveCreativeSuccessSaveCreativeLibraryRoleSuccess(TypedDict):
+    action: Literal["library_role_updated"]
+    creative: SaveCreativeSuccessSaveCreativeLibraryRoleCreative
+    replayed: bool
+
+SaveCreativeResult: TypeAlias = "SaveCreativeSuccessDuplicateCreativeSuccess | SaveCreativeResultActionCreated | SaveCreativeResultActionUpdated | SaveCreativeResultActionAssociated | SaveCreativeResultActionMembershipUpdated | SaveCreativeResultActionResynced | SaveCreativeResultActionArchived | SaveCreativeResultActionPromoted | SaveCreativeResultActionPromoting | SaveCreativeSuccessSaveCreativeLibraryRoleSuccess"
 
 SaveCreativeSuccessWarnings: TypeAlias = list[str]
 
@@ -13309,6 +13337,7 @@ SaveMediaBuyRequestProductsItemTargetingOverlaySignalTargetingGroupsGroupsItemSi
 
 class SaveMediaBuyResult(TypedDict):
     serverTime: NotRequired[str]
+    replayed: NotRequired[Literal[True]]
     action: Literal["staged", "updated", "pending_approval", "paused", "resumed", "pause_requested", "resume_requested", "unchanged", "archived", "cancellation_requested", "canceled"]
     campaignId: NotRequired[str]
     mediaBuyId: NotRequired[str]
@@ -15613,6 +15642,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -15883,6 +15914,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -16087,6 +16120,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -16318,6 +16353,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -16556,6 +16593,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -16794,6 +16833,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -17032,6 +17073,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -17268,6 +17311,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -17504,6 +17549,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -17808,6 +17855,8 @@ class SearchInputKindCreativeWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -18044,6 +18093,8 @@ class SearchInputKindCreativeWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
@@ -18322,6 +18373,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
     '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
     source: NotRequired[SearchRequestCreativeSource]
     '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
     promoted: NotRequired[bool]
