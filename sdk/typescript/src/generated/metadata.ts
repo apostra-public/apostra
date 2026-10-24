@@ -950,7 +950,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save a campaign. To create, send advertiserId and name; flight and budget are optional. Split inventory into media buys. Set desiredPhase: active to launch; omit confirmLaunch to preview. Cancellation is irreversible: desiredPhase: canceled cancels the campaign and every live media buy."
+    "summary": "Create: advertiserId/name; flight/budget optional. Receipts and launch previews show local/UTC times in the applicable IANA timezone. desiredPhase: active previews; confirmLaunch: true launches. Cancellation is irreversible: desiredPhase: canceled cancels the campaign and every live media buy."
   },
   "save_catalog": {
     "path": "/tools/save_catalog",
@@ -1027,7 +1027,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset."
+    "summary": "advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only."
   },
   "save_creative_collection": {
     "path": "/tools/save_creative_collection",
