@@ -1,0 +1,44 @@
+{
+  "name": "@apostra/cli",
+  "version": "0.1.0",
+  "description": "The official Apostra command-line client",
+  "type": "module",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apostra-public/apostra.git",
+    "directory": "sdk/cli"
+  },
+  "homepage": "https://docs.apostra.com/v3/cli",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "bin": {
+    "apostra": "./dist/bin.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "build": "tsc6 -p tsconfig.build.json",
+    "type-check": "tsc6 --noEmit",
+    "test": "vitest run",
+    "lint": "biome check src __tests__ --error-on-warnings",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "@apostra/sdk": "^0.39.0",
+    "commander": "^14.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.17",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "vitest": "^4.1.9"
+  }
+}

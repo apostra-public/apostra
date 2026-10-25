@@ -5,19 +5,31 @@ const version = process.argv[2]
 const targets = process.argv[3] ?? 'both'
 if (!/^\d+\.\d+\.\d+$/.test(version ?? ''))
   throw new Error('Pass the reviewed SDK version as x.y.z')
-if (!['typescript', 'python', 'both', 'mcp-app-host'].includes(targets))
-  throw new Error('Pass targets as typescript, python, both or mcp-app-host')
+// Packages that version on their own, each by the package.json it ships.
+const standalonePackages = {
+  'mcp-app-host': 'sdk/mcp-app-host/package.json',
+  cli: 'sdk/cli/package.json',
+}
+if (
+  !['typescript', 'python', 'both'].includes(targets) &&
+  !Object.hasOwn(standalonePackages, targets)
+)
+  throw new Error(
+    'Pass targets as typescript, python, both, mcp-app-host or cli',
+  )
 
 const readJson = (path) => JSON.parse(readFileSync(path, 'utf8'))
 const writeJson = (path, value) =>
   writeFileSync(path, `${JSON.stringify(value, null, 2)}\n`)
 
-// The MCP Apps host package versions on its own: it is not generated from the
-// V3 OpenAPI document, so it has no release manifest or generated version file.
-if (targets === 'mcp-app-host') {
-  const packageJson = readJson('sdk/mcp-app-host/package.json')
+// The MCP Apps host and the CLI version on their own: neither is generated from
+// the V3 OpenAPI document, so neither has a release manifest or generated
+// version file. The CLI reads its version from its package.json at run time.
+if (Object.hasOwn(standalonePackages, targets)) {
+  const path = standalonePackages[targets]
+  const packageJson = readJson(path)
   packageJson.version = version
-  writeJson('sdk/mcp-app-host/package.json', packageJson)
+  writeJson(path, packageJson)
   process.exit(0)
 }
 // A reviewed version equal to the generated one leaves the file unchanged,
