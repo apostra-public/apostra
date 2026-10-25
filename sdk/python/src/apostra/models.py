@@ -5175,7 +5175,7 @@ class OpenPageInput(TypedDict):
     '\n    Relationship to focus on.\n    '
     blockedReason: NotRequired[str]
     '\n    Its known blocked reason.\n    '
-    page: Literal["connect_ad_server", "ad_server_source", "ad_server_diagnostics", "source_diagnostics", "seller_setup", "demo_seller", "modular_inventory_source", "modular_source_setup", "modular_inventory_feed", "listing", "discovery_card", "media_kit", "business_profile", "playbook", "library", "integrations", "product_marketing", "business_rules", "buyer_account_mapping", "property_roster", "plan_and_billing", "buyer_setup", "sellers", "creative_engines", "advertisers", "campaigns", "campaign_receipt", "approvals", "release_notes", "customer_requests", "notifications", "webhooks", "buyer_proposal_version"]
+    page: Literal["connect_ad_server", "ad_server_source", "ad_server_diagnostics", "source_diagnostics", "seller_setup", "demo_seller", "connect_sales_agent", "modular_inventory_source", "modular_source_setup", "modular_inventory_feed", "listing", "discovery_card", "media_kit", "business_profile", "playbook", "library", "integrations", "product_marketing", "business_rules", "buyer_account_mapping", "property_roster", "plan_and_billing", "buyer_setup", "sellers", "creative_engines", "advertisers", "campaigns", "campaign_receipt", "approvals", "release_notes", "customer_requests", "notifications", "webhooks", "buyer_proposal_version"]
     '\n    Page to open. Owners repair a missing Agent relationship in source_diagnostics.\n    '
     sourceId: NotRequired[str]
     '\n    Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.\n    '
@@ -6833,7 +6833,7 @@ class SaveBillingInput(TypedDict):
     paymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90"]]
     '\n    Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default.\n    '
     plan: NotRequired[SaveBillingRequestSaveBillingPlan]
-    '\n    Accept or switch plans. Send alone.\n    '
+    '\n    Accept or switch plans; returns approval_required. Send alone.\n    '
     offerResponse: NotRequired[SaveBillingRequestSaveBillingOfferResponse]
     '\n    Decline the offer or decide later. Send alone.\n    '
     renewal: NotRequired[SaveBillingRequestSaveBillingRenewal]
@@ -6881,7 +6881,7 @@ class SaveBillingRequestSaveBillingPlan(TypedDict):
     paymentOptionKey: NotRequired[str]
     '\n    Server optionKey of the chosen payment option; required when the offer lists payment options. Never a price.\n    '
     idempotencyKey: str
-    '\n    Stable key; repeat it to retry.\n    '
+    '\n    Stable key; repeat it with the same plan to read the approval outcome.\n    '
 
 SaveBillingRequestSaveBillingPlanOfferVersion: TypeAlias = str
 
@@ -6987,11 +6987,40 @@ class SaveBillingResultActionTermsNotRequired(TypedDict):
     action: Literal["terms_not_required"]
     terms: SaveBillingResultActionTermsNotRequiredTerms
 
-SaveBillingResult: TypeAlias = "SaveBillingResultActionTermsAccepted | SaveBillingResultActionTermsNotRequired | SaveBillingResultActionPaymentTermsSaved | SaveBillingResultActionBillingSaved | SaveBillingResultActionConfirmationRequired | SaveBillingResultActionHumanActionRequired | SaveBillingResultActionPaymentAuthorityPending | SaveBillingResultActionPaymentAuthorityOpened | SaveBillingResultActionPaymentAuthorityVerified | SaveBillingResultActionPaymentAuthorityExpired | SaveBillingResultActionPlanAccepted | SaveBillingResultActionOfferResponseRecorded | SaveBillingResultActionRenewalChanged"
-
 class SaveBillingResultActionTermsNotRequiredTerms(TypedDict):
     accepted: Literal[False]
     governedByExistingContract: Literal[True]
+
+class SaveBillingSuccessAgentApproval(TypedDict):
+    id: str
+    '\n    Approval id.\n    '
+    kind: str
+    '\n    Kind of sensitive action, for example `buyer_child_account.create`.\n    '
+    state: Literal["pending", "executing", "succeeded", "failed", "rejected", "expired"]
+    '\n    `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.\n    '
+    targetCustomerId: str
+    '\n    Account the action applies to.\n    '
+    requiredRole: Literal["ADMIN", "SUPER_ADMIN"] | None
+    '\n    Role the approver must hold on the account.\n    '
+    summary: str | None
+    '\n    What will happen, in one line. Null once the approval is final.\n    '
+    url: str
+    '\n    Page on our site where a signed-in person approves or rejects the request.\n    '
+    createdAt: str
+    expiresAt: str
+    decidedAt: str | None
+    completedAt: str | None
+    resultReference: dict[str, str | float | bool] | None
+    '\n    Reference to the result once succeeded.\n    '
+    failureCode: str | None
+    '\n    Reason code when the action failed.\n    '
+
+class SaveBillingSuccessAgentApprovalRequired(TypedDict):
+    action: Literal["approval_required"]
+    message: str
+    approval: SaveBillingSuccessAgentApproval
+
+SaveBillingResult: TypeAlias = "SaveBillingResultActionTermsAccepted | SaveBillingResultActionTermsNotRequired | SaveBillingResultActionPaymentTermsSaved | SaveBillingResultActionBillingSaved | SaveBillingResultActionConfirmationRequired | SaveBillingResultActionHumanActionRequired | SaveBillingResultActionPaymentAuthorityPending | SaveBillingResultActionPaymentAuthorityOpened | SaveBillingResultActionPaymentAuthorityVerified | SaveBillingResultActionPaymentAuthorityExpired | SaveBillingResultActionPlanAccepted | SaveBillingSuccessAgentApprovalRequired | SaveBillingResultActionOfferResponseRecorded | SaveBillingResultActionRenewalChanged"
 
 class SaveBillingSuccessCaptureLinkIssuedResult(TypedDict):
     method: Literal["capture_link"]
@@ -7034,7 +7063,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: list[Literal["brief_acceptance", "creative_policy"]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -7052,7 +7081,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -7070,7 +7099,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -7088,7 +7117,7 @@ class SaveBusinessRulesInputWithPolicy(TypedDict):
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -8506,7 +8535,8 @@ class SaveCampaignResultActionPendingConfirmationLaunchBlockersItem(TypedDict):
 class SaveCampaignResultActionPendingConfirmationLaunchMediaBuysItem(TypedDict):
     mediaBuyId: str
     name: str
-    phase: Literal["draft"]
+    phase: Literal["draft", "pendingApproval", "active"]
+    willStart: NotRequired[bool]
     budget: NotRequired[SaveCampaignSuccessLaunchMediaBuysItemBudget]
     sellerName: NotRequired[str]
 
@@ -9705,7 +9735,7 @@ class SaveCreativeSessionInputWithAdvertiserId(TypedDict):
     idempotencyKey: NotRequired[str]
     '\n    Required for a draft; optional for selecting or approving.\n    '
     engine: NotRequired[SaveCreativeSessionInputEngine]
-    '\n    Leave unset for funded image drafts unless user names an engine. See Creative Engines guide.\n    '
+    '\n    Leave unset unless the buyer names a connected engine. The server chooses a compatible connected or Scope3-funded engine.\n    '
     draft: NotRequired[SaveCreativeSessionInputDraft]
     '\n    Copy exact user brief to request.creative_brief.prompt; requested count to request.variant_count.\n    '
     selectedVariantId: NotRequired[str]
@@ -9731,7 +9761,7 @@ class SaveCreativeSessionInputWithCampaignId(TypedDict):
     idempotencyKey: NotRequired[str]
     '\n    Required for a draft; optional for selecting or approving.\n    '
     engine: NotRequired[SaveCreativeSessionInputEngine]
-    '\n    Leave unset for funded image drafts unless user names an engine. See Creative Engines guide.\n    '
+    '\n    Leave unset unless the buyer names a connected engine. The server chooses a compatible connected or Scope3-funded engine.\n    '
     draft: NotRequired[SaveCreativeSessionInputDraft]
     '\n    Copy exact user brief to request.creative_brief.prompt; requested count to request.variant_count.\n    '
     selectedVariantId: NotRequired[str]

@@ -23287,14 +23287,8 @@ paths:
                                 properties:
                                   start:
                                     type: string
-                                    format: date-time
-                                    pattern: >-
-                                      ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                   end:
                                     type: string
-                                    format: date-time
-                                    pattern: >-
-                                      ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                   timezone:
                                     type: string
                                     minLength: 1
@@ -23317,9 +23311,6 @@ paths:
                                 maximum: 9007199254740991
                               next_expected_at:
                                 type: string
-                                format: date-time
-                                pattern: >-
-                                  ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                               pagination:
                                 $ref: '#/components/schemas/get_delivery_success_DeliverySummaryPagination'
                               sandbox:
@@ -23634,18 +23625,12 @@ paths:
                                           const: reporting_delayed
                                     expected_availability:
                                       type: string
-                                      format: date-time
-                                      pattern: >-
-                                        ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                     is_adjusted:
                                       type: boolean
                                     is_final:
                                       type: boolean
                                     finalized_at:
                                       type: string
-                                      format: date-time
-                                      pattern: >-
-                                        ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                     pricing_model:
                                       $ref: >-
                                         #/components/schemas/get_delivery_success_DeliverySummaryMediaBuyDeliveriesItemPricingModel
@@ -23977,9 +23962,6 @@ paths:
                                             type: boolean
                                           finalized_at:
                                             type: string
-                                            format: date-time
-                                            pattern: >-
-                                              ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                           measurement_window:
                                             type: string
                                             maxLength: 50
@@ -28788,6 +28770,7 @@ paths:
                     - source_diagnostics
                     - seller_setup
                     - demo_seller
+                    - connect_sales_agent
                     - modular_inventory_source
                     - modular_source_setup
                     - modular_inventory_feed
@@ -34450,10 +34433,10 @@ paths:
       operationId: save_billing
       summary: >-
         Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its
-        renewal. Cards stay off MCP.
+        renewal. Accepting a plan needs an administrator to approve it on our site. Cards stay off MCP.
       description: >-
         Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its
-        renewal. Cards stay off MCP.
+        renewal. Accepting a plan needs an administrator to approve it on our site. Cards stay off MCP.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -34514,7 +34497,7 @@ paths:
                     - net_60
                     - net_90
                 plan:
-                  description: Accept or switch plans. Send alone.
+                  description: Accept or switch plans; returns approval_required. Send alone.
                   $ref: '#/components/schemas/save_billing_request_SaveBillingPlan'
                   type: object
                   additionalProperties: false
@@ -34765,6 +34748,7 @@ paths:
                           - action
                           - plan
                         additionalProperties: false
+                      - $ref: '#/components/schemas/save_billing_success_AgentApprovalRequired'
                       - type: object
                         properties:
                           action:
@@ -34969,7 +34953,9 @@ paths:
                   description: Required to move either approval to auto. Confirms nobody will review those.
                   type: boolean
                 advertisingPolicyDisclosure:
-                  description: Policy sections to show buyers on the listing. Empty hides them.
+                  description: >-
+                    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote
+                    the rule a creative broke.
                   maxItems: 2
                   type: array
                   items:
@@ -37471,7 +37457,12 @@ paths:
                                       type: string
                                     phase:
                                       type: string
-                                      const: draft
+                                      enum:
+                                        - draft
+                                        - pendingApproval
+                                        - active
+                                    willStart:
+                                      type: boolean
                                     budget:
                                       $ref: '#/components/schemas/save_campaign_success_LaunchMediaBuysItemBudget'
                                     sellerName:
@@ -40515,7 +40506,9 @@ paths:
                   required:
                     - connectionId
                   additionalProperties: false
-                  description: Leave unset for funded image drafts unless user names an engine. See Creative Engines guide.
+                  description: >-
+                    Leave unset unless the buyer names a connected engine. The server chooses a compatible connected or
+                    Scope3-funded engine.
                 draft:
                   description: Copy exact user brief to request.creative_brief.prompt; requested count to request.variant_count.
                   type: object
@@ -79204,7 +79197,7 @@ components:
           minLength: 8
           maxLength: 128
           pattern: ^[A-Za-z0-9._:-]+$
-          description: Stable key; repeat it to retry.
+          description: Stable key; repeat it with the same plan to read the approval outcome.
       required:
         - offerVersion
         - planId
@@ -79342,6 +79335,121 @@ components:
         - method
         - status
         - expiresAt
+      additionalProperties: false
+    save_billing_success_AgentApprovalRequired:
+      type: object
+      properties:
+        action:
+          type: string
+          const: approval_required
+        message:
+          type: string
+        approval:
+          $ref: '#/components/schemas/save_billing_success_AgentApproval'
+      required:
+        - action
+        - message
+        - approval
+      additionalProperties: false
+    save_billing_success_AgentApproval:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          pattern: >-
+            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+          description: Approval id.
+        kind:
+          type: string
+          description: Kind of sensitive action, for example `buyer_child_account.create`.
+        state:
+          type: string
+          enum:
+            - pending
+            - executing
+            - succeeded
+            - failed
+            - rejected
+            - expired
+          description: >-
+            `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and
+            `expired` are final.
+        targetCustomerId:
+          type: string
+          description: Account the action applies to.
+        requiredRole:
+          anyOf:
+            - type: string
+              enum:
+                - ADMIN
+                - SUPER_ADMIN
+            - type: 'null'
+          description: Role the approver must hold on the account.
+        summary:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: What will happen, in one line. Null once the approval is final.
+        url:
+          type: string
+          format: uri
+          description: Page on our site where a signed-in person approves or rejects the request.
+        createdAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        expiresAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        decidedAt:
+          anyOf:
+            - type: string
+              format: date-time
+              pattern: >-
+                ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+            - type: 'null'
+        completedAt:
+          anyOf:
+            - type: string
+              format: date-time
+              pattern: >-
+                ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+            - type: 'null'
+        resultReference:
+          anyOf:
+            - type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type:
+                  - string
+                  - number
+                  - boolean
+            - type: 'null'
+          description: Reference to the result once succeeded.
+        failureCode:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Reason code when the action failed.
+      required:
+        - id
+        - kind
+        - state
+        - targetCustomerId
+        - requiredRole
+        - summary
+        - url
+        - createdAt
+        - expiresAt
+        - decidedAt
+        - completedAt
+        - resultReference
+        - failureCode
       additionalProperties: false
     save_billing_success_PaymentTerms:
       type: string

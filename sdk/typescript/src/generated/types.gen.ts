@@ -9799,7 +9799,7 @@ export type OpenPageData = {
         /**
          * Page to open. Owners repair a missing Agent relationship in source_diagnostics.
          */
-        page: 'connect_ad_server' | 'ad_server_source' | 'ad_server_diagnostics' | 'source_diagnostics' | 'seller_setup' | 'demo_seller' | 'modular_inventory_source' | 'modular_source_setup' | 'modular_inventory_feed' | 'listing' | 'discovery_card' | 'media_kit' | 'business_profile' | 'playbook' | 'library' | 'integrations' | 'product_marketing' | 'business_rules' | 'buyer_account_mapping' | 'property_roster' | 'plan_and_billing' | 'buyer_setup' | 'sellers' | 'creative_engines' | 'advertisers' | 'campaigns' | 'campaign_receipt' | 'approvals' | 'release_notes' | 'customer_requests' | 'notifications' | 'webhooks' | 'buyer_proposal_version';
+        page: 'connect_ad_server' | 'ad_server_source' | 'ad_server_diagnostics' | 'source_diagnostics' | 'seller_setup' | 'demo_seller' | 'connect_sales_agent' | 'modular_inventory_source' | 'modular_source_setup' | 'modular_inventory_feed' | 'listing' | 'discovery_card' | 'media_kit' | 'business_profile' | 'playbook' | 'library' | 'integrations' | 'product_marketing' | 'business_rules' | 'buyer_account_mapping' | 'property_roster' | 'plan_and_billing' | 'buyer_setup' | 'sellers' | 'creative_engines' | 'advertisers' | 'campaigns' | 'campaign_receipt' | 'approvals' | 'release_notes' | 'customer_requests' | 'notifications' | 'webhooks' | 'buyer_proposal_version';
         /**
          * Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.
          */
@@ -13553,7 +13553,7 @@ export type SaveBillingData = {
          */
         paymentTerms?: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
         /**
-         * Accept or switch plans. Send alone.
+         * Accept or switch plans; returns approval_required. Send alone.
          */
         plan?: SaveBillingRequestSaveBillingPlan;
         /**
@@ -13697,7 +13697,7 @@ export type SaveBillingRequestSaveBillingPlan = {
      */
     paymentOptionKey?: string;
     /**
-     * Stable key; repeat it to retry.
+     * Stable key; repeat it with the same plan to read the approval outcome.
      */
     idempotencyKey: string;
 };
@@ -13744,33 +13744,16 @@ export type SaveBillingResponses = {
                 accepted: true;
                 acceptedVersion: string;
             };
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            paymentAuthority?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             action: 'terms_not_required';
             terms: {
                 accepted: false;
                 governedByExistingContract: true;
             };
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            paymentAuthority?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             action: 'payment_terms_saved';
             paymentTerms: SaveBillingSuccessPaymentTerms;
             paymentTermsChosen: true;
-            terms?: never;
-            paymentAuthority?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             action: 'billing_saved';
             terms: {
@@ -13784,64 +13767,24 @@ export type SaveBillingResponses = {
             };
             paymentTerms: SaveBillingSuccessPaymentTerms;
             paymentTermsChosen: true;
-            paymentAuthority?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             paymentAuthority: SaveBillingSuccessPendingConfirmationResult;
             action: 'confirmation_required';
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             paymentAuthority: SaveBillingSuccessCaptureLinkIssuedResult;
             action: 'human_action_required';
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             paymentAuthority: SaveBillingSuccessCaptureLinkIssuedResult;
             action: 'payment_authority_pending';
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             paymentAuthority: SaveBillingSuccessCaptureLinkIssuedResult;
             action: 'payment_authority_opened';
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             paymentAuthority: SaveBillingSuccessCaptureLinkIssuedResult;
             action: 'payment_authority_verified';
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             paymentAuthority: SaveBillingSuccessCaptureLinkIssuedResult;
             action: 'payment_authority_expired';
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             action: 'plan_accepted';
             plan: {
@@ -13853,24 +13796,12 @@ export type SaveBillingResponses = {
                 termStart: string;
                 termEnd: string;
             };
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            paymentAuthority?: never;
-            offerResponse?: never;
-            renewal?: never;
-        } | {
+        } | SaveBillingSuccessAgentApprovalRequired | {
             action: 'offer_response_recorded';
             offerResponse: {
                 eventId: string;
                 outcome: 'DECLINED' | 'DEFERRED';
             };
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            paymentAuthority?: never;
-            plan?: never;
-            renewal?: never;
         } | {
             action: 'renewal_changed';
             renewal: {
@@ -13879,12 +13810,6 @@ export type SaveBillingResponses = {
                 effectiveAt: string;
                 changeCutoffAt: string;
             };
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            paymentAuthority?: never;
-            plan?: never;
-            offerResponse?: never;
         };
         error: null;
     };
@@ -13904,6 +13829,57 @@ export type SaveBillingResponses = {
         };
         error: null;
     };
+};
+
+export type SaveBillingSuccessAgentApproval = {
+    /**
+     * Approval id.
+     */
+    id: string;
+    /**
+     * Kind of sensitive action, for example `buyer_child_account.create`.
+     */
+    kind: string;
+    /**
+     * `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.
+     */
+    state: 'pending' | 'executing' | 'succeeded' | 'failed' | 'rejected' | 'expired';
+    /**
+     * Account the action applies to.
+     */
+    targetCustomerId: string;
+    /**
+     * Role the approver must hold on the account.
+     */
+    requiredRole: 'ADMIN' | 'SUPER_ADMIN' | null;
+    /**
+     * What will happen, in one line. Null once the approval is final.
+     */
+    summary: string | null;
+    /**
+     * Page on our site where a signed-in person approves or rejects the request.
+     */
+    url: string;
+    createdAt: string;
+    expiresAt: string;
+    decidedAt: string | null;
+    completedAt: string | null;
+    /**
+     * Reference to the result once succeeded.
+     */
+    resultReference: {
+        [key: string]: string | number | boolean;
+    } | null;
+    /**
+     * Reason code when the action failed.
+     */
+    failureCode: string | null;
+};
+
+export type SaveBillingSuccessAgentApprovalRequired = {
+    action: 'approval_required';
+    message: string;
+    approval: SaveBillingSuccessAgentApproval;
 };
 
 export type SaveBillingSuccessCaptureLinkIssuedResult = {
@@ -13979,7 +13955,7 @@ export type SaveBusinessRulesData = {
          */
         acknowledgeNoHumanReview?: boolean;
         /**
-         * Policy sections to show buyers on the listing. Empty hides them.
+         * Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.
          */
         advertisingPolicyDisclosure?: Array<'brief_acceptance' | 'creative_policy'>;
         /**
@@ -16333,7 +16309,8 @@ export type SaveCampaignResponses = {
                 mediaBuys: Array<{
                     mediaBuyId: string;
                     name: string;
-                    phase: 'draft';
+                    phase: 'draft' | 'pendingApproval' | 'active';
+                    willStart?: boolean;
                     budget?: SaveCampaignSuccessLaunchMediaBuysItemBudget;
                     sellerName?: string;
                 }>;
@@ -18304,7 +18281,7 @@ export type SaveCreativeSessionData = {
          */
         idempotencyKey?: string;
         /**
-         * Leave unset for funded image drafts unless user names an engine. See Creative Engines guide.
+         * Leave unset unless the buyer names a connected engine. The server chooses a compatible connected or Scope3-funded engine.
          */
         engine?: {
             /**
