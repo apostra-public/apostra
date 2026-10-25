@@ -1,0 +1,129 @@
+# Composed into apostra-public/apostra; never run this from the private source.
+name: Publish Apostra CLI
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Reviewed version of @apostra/cli to publish
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: apostra-cli-publication
+  cancel-in-progress: false
+jobs:
+  build:
+    if: github.repository == 'apostra-public/apostra' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: '26.12.1'
+          registry-url: https://registry.npmjs.org
+      - run: npm install --global npm@11.5.1
+      - name: Set the reviewed version for this release
+        id: version
+        env:
+          EXPECTED_VERSION: ${{ inputs.version }}
+        run: |
+          node sdk/release/set-release-version.mjs "$EXPECTED_VERSION" cli
+          echo "version=$EXPECTED_VERSION" >> "$GITHUB_OUTPUT"
+          echo "Release @apostra/cli $EXPECTED_VERSION from $GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"
+      # The CLI depends on a published @apostra/sdk range, not on the SDK source in
+      # this tree. Resolving that range fails here while the SDK release that
+      # holds the login store is not on npm, so the SDK is always published first.
+      - name: Resolve the published SDK the CLI depends on
+        run: npm --prefix sdk/cli install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - run: npm ci --ignore-scripts && npm run type-check && npm test
+        working-directory: sdk/cli
+      # Packs the CLI, installs it into an empty directory with the published SDK
+      # and runs `apostra --version` and `apostra operations list` from there.
+      - run: node sdk/testing/install-smoke.mjs . --public --targets cli --published-sdk
+      - name: Build the npm archive
+        run: |
+          export SOURCE_DATE_EPOCH=$(git show -s --format=%ct HEAD)
+          mkdir -p artifacts
+          npm pack ./sdk/cli --pack-destination artifacts
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: apostra-cli-artifacts
+          path: artifacts/*
+  publish:
+    needs: build
+    environment: sdk-release
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: '26.12.1'
+          registry-url: https://registry.npmjs.org
+      - run: npm install --global npm@11.5.1
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: apostra-cli-artifacts
+          path: artifacts
+      - name: Check the registry against the archive built for this version
+        id: registry
+        env:
+          EXPECTED_VERSION: ${{ needs.build.outputs.version }}
+        run: node sdk/release/registry-state.mjs --targets cli --version "$EXPECTED_VERSION"
+      # For the first npm package creation only, a scope owner supplies a
+      # short-lived environment secret. Remove it after configuring trusted
+      # publishing for @apostra/cli.
+      - if: steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists != 'true'
+        run: npm publish ./artifacts/apostra-cli-*.tgz --access public --provenance --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_BOOTSTRAP_TOKEN }}
+      # npm trusted publishing: npm authenticates this job by its OIDC token.
+      - if: steps.registry.outputs.npm_version_exists != 'true' && steps.registry.outputs.npm_package_exists == 'true'
+        run: npm publish ./artifacts/apostra-cli-*.tgz --access public --provenance --ignore-scripts
+  release:
+    needs: [build, publish]
+    runs-on: ubuntu-latest
+    # 30 install attempts with 30-second pauses, each attempt bounded below.
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: '26.12.1'
+      - run: npm install --global npm@11.5.1
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0
+        with:
+          name: apostra-cli-artifacts
+          path: artifacts
+      - name: Install the public version and create the release
+        env:
+          CLI_VERSION: ${{ needs.build.outputs.version }}
+          INSTALL_ATTEMPTS: '30'
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          install_dir=$(mktemp -d)
+          trap 'rm -rf "$install_dir"' EXIT
+          echo '{"type":"module"}' > "$install_dir/package.json"
+          # A just-published version can take several minutes to become installable.
+          for attempt in $(seq 1 "$INSTALL_ATTEMPTS"); do
+            timeout 60 npm install --prefer-online --prefix "$install_dir" --ignore-scripts "@apostra/cli@$CLI_VERSION" && break
+            if [[ "$attempt" == "$INSTALL_ATTEMPTS" ]]; then exit 1; fi
+            sleep 30
+          done
+          node sdk/testing/verify-installed.mjs --cli "$install_dir" "$CLI_VERSION"
+          tag="cli-v$CLI_VERSION"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            test "$(git ls-remote origin "refs/tags/$tag" | cut -f1)" = "$GITHUB_SHA"
+          else
+            gh release create "$tag" --target "$GITHUB_SHA" --title "@apostra/cli $CLI_VERSION" --generate-notes artifacts/*.tgz
+          fi

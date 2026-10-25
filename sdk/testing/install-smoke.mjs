@@ -11,8 +11,12 @@ const root = resolve(process.argv[2] ?? '.')
 const publicTree = process.argv.includes('--public')
 const targetsIndex = process.argv.indexOf('--targets')
 const targets = targetsIndex < 0 ? 'both' : process.argv[targetsIndex + 1]
-if (!['typescript', 'python', 'both', 'mcp-app-host'].includes(targets))
-  throw new Error('Pass --targets typescript, python, both or mcp-app-host')
+if (!['typescript', 'python', 'both', 'mcp-app-host', 'cli'].includes(targets))
+  throw new Error('Pass --targets typescript, python, both, mcp-app-host or cli')
+// By default the CLI is installed with the SDK from this same tree, because the
+// SDK release it needs may not be on npm yet. This asks for the registry's SDK.
+const publishedSdk = process.argv.includes('--published-sdk')
+if (publishedSdk && targets !== 'cli') throw new Error('--published-sdk applies only to --targets cli')
 const includesTypescript = targets === 'typescript' || targets === 'both'
 const includesPython = targets === 'python' || targets === 'both'
 const ts = join(root, publicTree ? 'sdk/typescript' : 'packages/apostra-sdk')
@@ -77,8 +81,58 @@ async function smokeMcpAppHost() {
     rmSync(dir, { recursive: true, force: true })
   }
 }
+// The CLI ships no operations of its own, so its archive is checked for its own
+// contract: the files and package.json that reach npm, an install into an empty
+// directory with no workspace links, and the installed `apostra` program run
+// under Node (see verify-installed.mjs --cli for exactly what that proves). It
+// does not sign in or call the API.
+async function smokeCli() {
+  const pkg = join(root, publicTree ? 'sdk/cli' : 'packages/apostra-cli')
+  const dir = mkdtempSync(join(tmpdir(), 'apostra-cli-'))
+  try {
+    // The private package names the SDK as a workspace dependency, which pnpm
+    // turns into a version range when it packs. The public tree's package.json
+    // already carries the published range.
+    await run(publicTree ? 'npm' : 'pnpm', ['pack', '--pack-destination', dir], pkg)
+    const archive = readdirSync(dir).find(name => name.endsWith('.tgz'))
+    assert(archive, 'Packing produced no npm archive')
+    const listing = (await run('tar', ['-tzf', join(dir, archive)])).split('\n').filter(Boolean)
+    for (const required of ['package/LICENSE', 'package/README.md', 'package/package.json', 'package/dist/bin.js', 'package/dist/program.js'])
+      assert(listing.includes(required), `npm tarball is missing ${required}`)
+    assert(!listing.some(name => name.includes('__tests__') || name.startsWith('package/src/')), 'npm tarball must ship dist only, not sources or tests')
+    const published = JSON.parse(await run('tar', ['-xzOf', join(dir, archive), 'package/package.json']))
+    assert.equal(published.name, '@apostra/cli')
+    assert.equal(published.license, 'Apache-2.0')
+    assert.equal(published.private, undefined, 'The published package must not be private')
+    assert.deepEqual(published.bin, { apostra: './dist/bin.js' })
+    assert.equal(published.repository?.url, 'https://github.com/apostra-public/apostra.git', 'npm provenance needs the repository the workflow runs in')
+    assert(!JSON.stringify(published).includes('workspace:'), 'The published package must not name a workspace dependency')
+    assert.match(published.dependencies['@apostra/sdk'], /^\^\d+\.\d+\.\d+$/, '@apostra/sdk must be an npm range')
+    const consumer = join(dir, 'consumer')
+    mkdirSync(consumer)
+    const consumerManifest = { type: 'module', private: true }
+    if (!publishedSdk) {
+      // Pack the SDK from this tree and let it stand in for the declared range
+      // everywhere in the consumer's dependency tree.
+      const sdkDir = join(dir, 'sdk')
+      mkdirSync(sdkDir)
+      const sdk = JSON.parse(await run('npm', ['pack', '--json', '--pack-destination', sdkDir], ts))[0].filename
+      consumerManifest.overrides = { '@apostra/sdk': `file:${join(sdkDir, sdk)}` }
+    }
+    writeFileSync(join(consumer, 'package.json'), JSON.stringify(consumerManifest))
+    await run('npm', ['install', '--ignore-scripts', '--no-audit', '--no-fund', join(dir, archive)], consumer)
+    process.stdout.write(await run('node', [verifier, '--cli', consumer, published.version, ...(publishedSdk ? [] : [manifest])]))
+    process.stdout.write(`@apostra/cli ${published.version} archive installed with ${publishedSdk ? 'the published' : 'the in-tree'} SDK.\n`)
+  } finally {
+    rmSync(dir, { recursive: true, force: true })
+  }
+}
 if (targets === 'mcp-app-host') {
   await smokeMcpAppHost()
+  process.exit(0)
+}
+if (targets === 'cli') {
+  await smokeCli()
   process.exit(0)
 }
 const tmp = mkdtempSync(join(tmpdir(), 'apostra-install-'))
