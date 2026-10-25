@@ -4978,7 +4978,7 @@ class OpenCampaignsPageSuccessPageHumanHandoffRequiredAccount(TypedDict):
     name: str
 
 class OpenCampaignsPageSuccessPageHumanHandoffRequiredPage(TypedDict):
-    resourceUri: Literal["ui://agentic-api/conversation-history/mcp-app.html", "ui://agentic-api/agent-v2/mcp-app.html", "ui://agentic-api/developer-home/mcp-app.html", "ui://agentic-api/agents/mcp-app.html", "ui://agentic-api/create-agent/mcp-app.html", "ui://agentic-api/claim-agent/mcp-app.html", "ui://agentic-api/configure-agent-connection/mcp-app.html", "ui://agentic-api/register-agent-observed-revision/mcp-app.html", "ui://agentic-api/buyer-account-admission/mcp-app.html", "ui://agentic-api/tars-org-supply-asks/mcp-app.html", "ui://agentic-api/tars-run-rate/mcp-app.html", "ui://agentic-api/tars-marketing-email-library/mcp-app.html", "ui://agentic-api/tars-approved-deck-modules/mcp-app.html", "ui://agentic-api/tars-marketing-email-operations/mcp-app.html", "ui://agentic-api/business-rules/mcp-app.html", "ui://agentic-api/demo-storefront/mcp-app.html", "ui://agentic-api/modular-inventory-source/mcp-app.html", "ui://agentic-api/modular-connect/mcp-app.html", "ui://agentic-api/source-discovery-preview/mcp-app.html", "ui://agentic-api/partner-connection/mcp-app.html", "ui://agentic-api/agent-certification/mcp-app.html", "ui://agentic-api/agent-sources/mcp-app.html", "ui://agentic-api/agent-overview/mcp-app.html", "ui://agentic-api/agent-webhooks/mcp-app.html", "ui://agentic-api/modular-avails-commit/mcp-app.html", "ui://agentic-api/plan-billing/mcp-app.html", "ui://agentic-api/connections/mcp-app.html", "ui://agentic-api/creative-engines/mcp-app.html", "ui://agentic-api/all-advertisers-home/mcp-app.html", "ui://agentic-api/add-advertiser/mcp-app.html", "ui://agentic-api/campaigns/mcp-app.html", "ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html", "ui://agentic-api/creative-library-v3/mcp-app.html", "ui://agentic-api/upload-creative-asset/mcp-app.html", "ui://agentic-api/creative-composer-task/mcp-app.html", "ui://agentic-api/variant-gallery/mcp-app.html", "ui://agentic-api/seller-setup/mcp-app.html", "ui://agentic-api/approvals/mcp-app.html", "ui://agentic-api/notifications/mcp-app.html", "ui://agentic-api/buyer-notifications/mcp-app.html", "ui://agentic-api/buyer-webhooks/mcp-app.html", "ui://agentic-api/proposal-pass-v3/mcp-app.html", "ui://agentic-api/sessions/mcp-app.html", "ui://agentic-api/seller-dashboard/mcp-app.html", "ui://agentic-api/seller-dashboard-v3/mcp-app.html", "ui://agentic-api/product-marketing-v3/mcp-app.html", "ui://agentic-api/library/mcp-app.html", "ui://agentic-api/integrations/mcp-app.html", "ui://agentic-api/release-notes/mcp-app.html", "ui://agentic-api/playbook/mcp-app.html", "ui://agentic-api/media-kit/mcp-app.html", "ui://agentic-api/business-profile/mcp-app.html", "ui://agentic-api/buyer-discounts/mcp-app.html", "ui://agentic-api/sponsored-buyers/mcp-app.html", "ui://agentic-api/pending-operations/mcp-app.html", "ui://agentic-api/storefront-briefs/mcp-app.html", "ui://agentic-api/merchandising-simulator/mcp-app.html", "ui://agentic-api/media-buys/mcp-app.html", "ui://agentic-api/media-buy-timeline/mcp-app.html", "ui://agentic-api/components/mcp-app.html", "ui://agentic-api/seller-accounts/mcp-app.html"]
+    resourceUri: Literal["ui://agentic-api/conversation-history/mcp-app.html", "ui://agentic-api/agent-v2/mcp-app.html", "ui://agentic-api/developer-home/mcp-app.html", "ui://agentic-api/agents/mcp-app.html", "ui://agentic-api/create-agent/mcp-app.html", "ui://agentic-api/claim-agent/mcp-app.html", "ui://agentic-api/configure-agent-connection/mcp-app.html", "ui://agentic-api/register-agent-observed-revision/mcp-app.html", "ui://agentic-api/buyer-account-admission/mcp-app.html", "ui://agentic-api/tars-org-supply-asks/mcp-app.html", "ui://agentic-api/tars-run-rate/mcp-app.html", "ui://agentic-api/tars-marketing-email-library/mcp-app.html", "ui://agentic-api/tars-approved-deck-modules/mcp-app.html", "ui://agentic-api/tars-marketing-email-operations/mcp-app.html", "ui://agentic-api/business-rules/mcp-app.html", "ui://agentic-api/demo-storefront/mcp-app.html", "ui://agentic-api/modular-inventory-source/mcp-app.html", "ui://agentic-api/modular-connect/mcp-app.html", "ui://agentic-api/source-discovery-preview/mcp-app.html", "ui://agentic-api/partner-connection/mcp-app.html", "ui://agentic-api/agent-certification/mcp-app.html", "ui://agentic-api/agent-sources/mcp-app.html", "ui://agentic-api/agent-overview/mcp-app.html", "ui://agentic-api/agent-webhooks/mcp-app.html", "ui://agentic-api/modular-avails-commit/mcp-app.html", "ui://agentic-api/plan-billing/mcp-app.html", "ui://agentic-api/connections/mcp-app.html", "ui://agentic-api/creative-engines/mcp-app.html", "ui://agentic-api/all-advertisers-home/mcp-app.html", "ui://agentic-api/add-advertiser/mcp-app.html", "ui://agentic-api/campaigns/mcp-app.html", "ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html", "ui://agentic-api/creative-library-v3/mcp-app.html", "ui://agentic-api/upload-creative-asset/mcp-app.html", "ui://agentic-api/creative-composer-task/mcp-app.html", "ui://agentic-api/variant-gallery/mcp-app.html", "ui://agentic-api/seller-setup/mcp-app.html", "ui://agentic-api/approvals/mcp-app.html", "ui://agentic-api/notifications/mcp-app.html", "ui://agentic-api/buyer-notifications/mcp-app.html", "ui://agentic-api/buyer-webhooks/mcp-app.html", "ui://agentic-api/proposal-pass-v3/mcp-app.html", "ui://agentic-api/sessions/mcp-app.html", "ui://agentic-api/seller-dashboard/mcp-app.html", "ui://agentic-api/seller-dashboard-v3/mcp-app.html", "ui://agentic-api/product-marketing-v3/mcp-app.html", "ui://agentic-api/library/mcp-app.html", "ui://agentic-api/integrations/mcp-app.html", "ui://agentic-api/release-notes/mcp-app.html", "ui://agentic-api/playbook/mcp-app.html", "ui://agentic-api/media-kit/mcp-app.html", "ui://agentic-api/business-profile/mcp-app.html", "ui://agentic-api/buyer-discounts/mcp-app.html", "ui://agentic-api/sponsored-buyers/mcp-app.html", "ui://agentic-api/pending-operations/mcp-app.html", "ui://agentic-api/storefront-briefs/mcp-app.html", "ui://agentic-api/activity-log/mcp-app.html", "ui://agentic-api/merchandising-simulator/mcp-app.html", "ui://agentic-api/media-buys/mcp-app.html", "ui://agentic-api/media-buy-timeline/mcp-app.html", "ui://agentic-api/components/mcp-app.html", "ui://agentic-api/seller-accounts/mcp-app.html"]
     advertiserId: NotRequired[str]
     campaignId: NotRequired[str]
     capability: Literal["reauthenticate_in_browser", "manage_webhooks"]
@@ -5175,7 +5175,7 @@ class OpenPageInput(TypedDict):
     '\n    Relationship to focus on.\n    '
     blockedReason: NotRequired[str]
     '\n    Its known blocked reason.\n    '
-    page: Literal["connect_ad_server", "ad_server_source", "ad_server_diagnostics", "source_diagnostics", "seller_setup", "demo_seller", "modular_inventory_source", "modular_source_setup", "modular_inventory_feed", "listing", "discovery_card", "media_kit", "business_profile", "playbook", "library", "integrations", "product_marketing", "business_rules", "buyer_account_mapping", "property_roster", "plan_and_billing", "buyer_setup", "sellers", "creative_engines", "advertisers", "campaigns", "campaign_receipt", "approvals", "release_notes", "customer_requests", "notifications", "webhooks", "buyer_proposal_version"]
+    page: Literal["connect_ad_server", "ad_server_source", "ad_server_diagnostics", "source_diagnostics", "seller_setup", "demo_seller", "connect_sales_agent", "modular_inventory_source", "modular_source_setup", "modular_inventory_feed", "listing", "discovery_card", "media_kit", "business_profile", "playbook", "library", "integrations", "product_marketing", "business_rules", "buyer_account_mapping", "property_roster", "plan_and_billing", "buyer_setup", "sellers", "creative_engines", "advertisers", "campaigns", "campaign_receipt", "approvals", "release_notes", "customer_requests", "notifications", "webhooks", "buyer_proposal_version"]
     '\n    Page to open. Owners repair a missing Agent relationship in source_diagnostics.\n    '
     sourceId: NotRequired[str]
     '\n    Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.\n    '
@@ -6833,7 +6833,7 @@ class SaveBillingInput(TypedDict):
     paymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90"]]
     '\n    Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default.\n    '
     plan: NotRequired[SaveBillingRequestSaveBillingPlan]
-    '\n    Accept or switch plans. Send alone.\n    '
+    '\n    Accept or switch plans; returns approval_required. Send alone.\n    '
     offerResponse: NotRequired[SaveBillingRequestSaveBillingOfferResponse]
     '\n    Decline the offer or decide later. Send alone.\n    '
     renewal: NotRequired[SaveBillingRequestSaveBillingRenewal]
@@ -6881,7 +6881,7 @@ class SaveBillingRequestSaveBillingPlan(TypedDict):
     paymentOptionKey: NotRequired[str]
     '\n    Server optionKey of the chosen payment option; required when the offer lists payment options. Never a price.\n    '
     idempotencyKey: str
-    '\n    Stable key; repeat it to retry.\n    '
+    '\n    Stable key; repeat it with the same plan to read the approval outcome.\n    '
 
 SaveBillingRequestSaveBillingPlanOfferVersion: TypeAlias = str
 
@@ -6987,11 +6987,40 @@ class SaveBillingResultActionTermsNotRequired(TypedDict):
     action: Literal["terms_not_required"]
     terms: SaveBillingResultActionTermsNotRequiredTerms
 
-SaveBillingResult: TypeAlias = "SaveBillingResultActionTermsAccepted | SaveBillingResultActionTermsNotRequired | SaveBillingResultActionPaymentTermsSaved | SaveBillingResultActionBillingSaved | SaveBillingResultActionConfirmationRequired | SaveBillingResultActionHumanActionRequired | SaveBillingResultActionPaymentAuthorityPending | SaveBillingResultActionPaymentAuthorityOpened | SaveBillingResultActionPaymentAuthorityVerified | SaveBillingResultActionPaymentAuthorityExpired | SaveBillingResultActionPlanAccepted | SaveBillingResultActionOfferResponseRecorded | SaveBillingResultActionRenewalChanged"
-
 class SaveBillingResultActionTermsNotRequiredTerms(TypedDict):
     accepted: Literal[False]
     governedByExistingContract: Literal[True]
+
+class SaveBillingSuccessAgentApproval(TypedDict):
+    id: str
+    '\n    Approval id.\n    '
+    kind: str
+    '\n    Kind of sensitive action, for example `buyer_child_account.create`.\n    '
+    state: Literal["pending", "executing", "succeeded", "failed", "rejected", "expired"]
+    '\n    `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.\n    '
+    targetCustomerId: str
+    '\n    Account the action applies to.\n    '
+    requiredRole: Literal["ADMIN", "SUPER_ADMIN"] | None
+    '\n    Role the approver must hold on the account.\n    '
+    summary: str | None
+    '\n    What will happen, in one line. Null once the approval is final.\n    '
+    url: str
+    '\n    Page on our site where a signed-in person approves or rejects the request.\n    '
+    createdAt: str
+    expiresAt: str
+    decidedAt: str | None
+    completedAt: str | None
+    resultReference: dict[str, str | float | bool] | None
+    '\n    Reference to the result once succeeded.\n    '
+    failureCode: str | None
+    '\n    Reason code when the action failed.\n    '
+
+class SaveBillingSuccessAgentApprovalRequired(TypedDict):
+    action: Literal["approval_required"]
+    message: str
+    approval: SaveBillingSuccessAgentApproval
+
+SaveBillingResult: TypeAlias = "SaveBillingResultActionTermsAccepted | SaveBillingResultActionTermsNotRequired | SaveBillingResultActionPaymentTermsSaved | SaveBillingResultActionBillingSaved | SaveBillingResultActionConfirmationRequired | SaveBillingResultActionHumanActionRequired | SaveBillingResultActionPaymentAuthorityPending | SaveBillingResultActionPaymentAuthorityOpened | SaveBillingResultActionPaymentAuthorityVerified | SaveBillingResultActionPaymentAuthorityExpired | SaveBillingResultActionPlanAccepted | SaveBillingSuccessAgentApprovalRequired | SaveBillingResultActionOfferResponseRecorded | SaveBillingResultActionRenewalChanged"
 
 class SaveBillingSuccessCaptureLinkIssuedResult(TypedDict):
     method: Literal["capture_link"]
@@ -7022,7 +7051,7 @@ class SaveBusinessRulesInputMaterialCandidate(TypedDict):
     advertiserRef: NotRequired[str]
     '\n    Required exact advertiser scope for advertiser-confidential Material.\n    '
 
-class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure(TypedDict):
+class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure(TypedDict):
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
@@ -7031,16 +7060,20 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     '\n    auto approves creatives with no review; manual queues them.\n    '
     mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
+    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: list[Literal["brief_acceptance", "creative_policy"]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithCreativeApproval(TypedDict):
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure
+
+class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval(TypedDict):
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
@@ -7049,16 +7082,40 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     '\n    auto approves creatives with no review; manual queues them.\n    '
     mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
+    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithMediaBuyApproval(TypedDict):
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithCreativeApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval
+
+class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithGuaranteedOverForecast(TypedDict):
+    materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
+    '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
+    policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
+    '\n    The policy version to write, as the read returns it.\n    '
+    creativeApproval: NotRequired[Literal["auto", "manual"]]
+    '\n    auto approves creatives with no review; manual queues them.\n    '
+    mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
+    '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    guaranteedOverForecast: Literal["overbook", "hold_for_review"]
+    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
+    acknowledgeNoHumanReview: NotRequired[bool]
+    '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
+    advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
+    expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval(TypedDict):
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
@@ -7067,14 +7124,18 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     '\n    auto approves creatives with no review; manual queues them.\n    '
     mediaBuyApproval: Literal["auto", "manual"]
     '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
+    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithMediaBuyApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval
 
 class SaveBusinessRulesInputWithPolicy(TypedDict):
     policy: SaveBusinessRulesRequestSaveBusinessRulesPolicy
@@ -7085,16 +7146,18 @@ class SaveBusinessRulesInputWithPolicy(TypedDict):
     '\n    auto approves creatives with no review; manual queues them.\n    '
     mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
+    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-SaveBusinessRulesInput: TypeAlias = "SaveBusinessRulesInputWithPolicy | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithCreativeApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithMediaBuyApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure"
+SaveBusinessRulesInput: TypeAlias = "SaveBusinessRulesInputWithPolicy | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithGuaranteedOverForecast | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure"
 
 class SaveBusinessRulesRequestSaveBusinessRulesPolicy(TypedDict):
     content: NotRequired[str]
@@ -7442,6 +7505,8 @@ class SaveCampaignInput(TypedDict):
     '\n    Flight window. Null clears it; omit to leave it unchanged.\n    '
     budget: NotRequired[SaveCampaignInputBudget]
     '\n    Campaign budget.\n    '
+    operatorFees: NotRequired[list[SaveCampaignInputOperatorFeesItem]]
+    '\n    Operator\'s fee on the campaign, AdCP adjustment fields: [{name: \'operator_fee\', rate: 0.02}] is 2% of gross budget, up to 0.49. [] clears. Only the operator organisation, when enabled; needs a budget. New media buys lock it.\n    '
     frequencyCap: NotRequired[SaveCampaignInputFrequencyCapValue | None]
     '\n    Per-seller AdCP 3.2 MediaBuy cap. Null clears it; draft only. Other levels are unavailable.\n    '
     confirmLaunch: NotRequired[bool]
@@ -7596,6 +7661,14 @@ class SaveCampaignInputFrequencyCapValue(TypedDict):
     '\n    Counter scope. Only mediaBuy is available.\n    '
     config: SaveCampaignInputFrequencyCapLevelMediaBuyConfig
     '\n    Seller-enforced AdCP 3.2 cap configuration.\n    '
+
+class SaveCampaignInputOperatorFeesItem(TypedDict):
+    name: str
+    '\n    The kind of fee. Always `operator_fee`.\n    '
+    rate: float
+    '\n    Decimal share of the campaign\'s gross budget: 0.02 for 2%.\n    '
+    beneficiary: NotRequired[str]
+    '\n    Account id of the operator organisation; must be the account\'s parent organisation, the default.\n    '
 
 class SaveCampaignInputTargetingDaypartsItem(TypedDict):
     requirementId: str
@@ -8506,7 +8579,8 @@ class SaveCampaignResultActionPendingConfirmationLaunchBlockersItem(TypedDict):
 class SaveCampaignResultActionPendingConfirmationLaunchMediaBuysItem(TypedDict):
     mediaBuyId: str
     name: str
-    phase: Literal["draft"]
+    phase: Literal["draft", "pendingApproval", "active"]
+    willStart: NotRequired[bool]
     budget: NotRequired[SaveCampaignSuccessLaunchMediaBuysItemBudget]
     sellerName: NotRequired[str]
 
@@ -9705,7 +9779,7 @@ class SaveCreativeSessionInputWithAdvertiserId(TypedDict):
     idempotencyKey: NotRequired[str]
     '\n    Required for a draft; optional for selecting or approving.\n    '
     engine: NotRequired[SaveCreativeSessionInputEngine]
-    '\n    Leave unset for funded image drafts unless user names an engine. See Creative Engines guide.\n    '
+    '\n    Leave unset unless the buyer names a connected engine. The server chooses a compatible connected or Scope3-funded engine.\n    '
     draft: NotRequired[SaveCreativeSessionInputDraft]
     '\n    Copy exact user brief to request.creative_brief.prompt; requested count to request.variant_count.\n    '
     selectedVariantId: NotRequired[str]
@@ -9731,7 +9805,7 @@ class SaveCreativeSessionInputWithCampaignId(TypedDict):
     idempotencyKey: NotRequired[str]
     '\n    Required for a draft; optional for selecting or approving.\n    '
     engine: NotRequired[SaveCreativeSessionInputEngine]
-    '\n    Leave unset for funded image drafts unless user names an engine. See Creative Engines guide.\n    '
+    '\n    Leave unset unless the buyer names a connected engine. The server chooses a compatible connected or Scope3-funded engine.\n    '
     draft: NotRequired[SaveCreativeSessionInputDraft]
     '\n    Copy exact user brief to request.creative_brief.prompt; requested count to request.variant_count.\n    '
     selectedVariantId: NotRequired[str]

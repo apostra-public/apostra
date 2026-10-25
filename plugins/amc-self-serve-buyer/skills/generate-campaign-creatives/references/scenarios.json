@@ -2,7 +2,7 @@
   "schemaVersion": "2.0",
   "contract": "deterministic-v3-tool-v1",
   "skillId": "generate-campaign-creatives",
-  "skillVersion": "1.9.0",
+  "skillVersion": "1.10.0",
   "endpoint": "/mcp/v3",
   "modelPolicy": "deterministic-no-model",
   "analytics": {
@@ -37,17 +37,10 @@
   "scenarios": [
     {
       "id": "creative-engine-discovery-no-spend",
-      "title": "Discover enrolled Creative Engines without generation",
-      "description": "Read buyer readiness and the account-visible Creative Engines catalogue without a generation action.",
+      "title": "Check enrolled creative generation readiness without an engine choice",
+      "description": "Read buyer readiness without choosing an engine or starting generation.",
       "mutationBoundary": "Read-only discovery only; performs no connection mutation, provider request, generation action, campaign launch, or spend.",
       "cleanupPolicy": "always-reverse-order",
-      "runInputs": [
-        {
-          "name": "creativeEngineKind",
-          "source": "constant",
-          "value": "creative_engine"
-        }
-      ],
       "steps": [
         {
           "id": "check-account-status",
@@ -73,51 +66,8 @@
           },
           "outputBindings": [],
           "cleanup": []
-        },
-        {
-          "id": "discover-creative-engines",
-          "ordinal": 2,
-          "dependsOn": ["check-account-status"],
-          "tool": "search",
-          "role": "ordinary",
-          "mutates": false,
-          "arguments": {
-            "kind": { "source": "run_input", "name": "creativeEngineKind" }
-          },
-          "execution": {
-            "timeoutMs": 30000,
-            "maxAttempts": 2,
-            "retryDelayMs": 1000,
-            "idempotency": "read_only"
-          },
-          "evidence": {
-            "projection": "structured_tool_response",
-            "requiredPointers": ["/structuredContent/objects/results"],
-            "optionalPointers": []
-          },
-          "outputBindings": [],
-          "cleanup": []
         }
       ]
-    },
-    {
-      "id": "scope3-preview-image-short-path",
-      "title": "Staging-verified enrolled buyer image short path",
-      "description": "This is staging evidence, not an executable acceptance scenario. The acceptance fixture has no deterministic creative provider, so its executable contract remains read-only discovery.",
-      "verification": {
-        "kind": "staging-verified",
-        "observedAt": "2026-09-28",
-        "evidence": [
-          {
-            "engine": "OpenAI",
-            "result": "returned a 1024x1024 JPEG asset URL"
-          },
-          {
-            "engine": "Gemini",
-            "result": "returned a 1024x1024 JPEG asset URL"
-          }
-        ]
-      }
     }
   ]
 }
