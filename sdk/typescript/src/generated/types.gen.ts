@@ -13979,7 +13979,7 @@ export type SaveBusinessRulesData = {
          */
         acknowledgeNoHumanReview?: boolean;
         /**
-         * Policy sections to show buyers on the listing. Empty hides them.
+         * Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.
          */
         advertisingPolicyDisclosure?: Array<'brief_acceptance' | 'creative_policy'>;
         /**

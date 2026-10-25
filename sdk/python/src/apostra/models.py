@@ -7034,7 +7034,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: list[Literal["brief_acceptance", "creative_policy"]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -7052,7 +7052,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -7070,7 +7070,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -7088,7 +7088,7 @@ class SaveBusinessRulesInputWithPolicy(TypedDict):
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]

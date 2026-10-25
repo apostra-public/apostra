@@ -34969,7 +34969,9 @@ paths:
                   description: Required to move either approval to auto. Confirms nobody will review those.
                   type: boolean
                 advertisingPolicyDisclosure:
-                  description: Policy sections to show buyers on the listing. Empty hides them.
+                  description: >-
+                    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote
+                    the rule a creative broke.
                   maxItems: 2
                   type: array
                   items:
