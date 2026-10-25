@@ -5175,7 +5175,7 @@ class OpenPageInput(TypedDict):
     '\n    Relationship to focus on.\n    '
     blockedReason: NotRequired[str]
     '\n    Its known blocked reason.\n    '
-    page: Literal["connect_ad_server", "ad_server_source", "ad_server_diagnostics", "source_diagnostics", "seller_setup", "demo_seller", "modular_inventory_source", "modular_source_setup", "modular_inventory_feed", "listing", "discovery_card", "media_kit", "business_profile", "playbook", "library", "integrations", "product_marketing", "business_rules", "buyer_account_mapping", "property_roster", "plan_and_billing", "buyer_setup", "sellers", "creative_engines", "advertisers", "campaigns", "campaign_receipt", "approvals", "release_notes", "customer_requests", "notifications", "webhooks", "buyer_proposal_version"]
+    page: Literal["connect_ad_server", "ad_server_source", "ad_server_diagnostics", "source_diagnostics", "seller_setup", "demo_seller", "connect_sales_agent", "modular_inventory_source", "modular_source_setup", "modular_inventory_feed", "listing", "discovery_card", "media_kit", "business_profile", "playbook", "library", "integrations", "product_marketing", "business_rules", "buyer_account_mapping", "property_roster", "plan_and_billing", "buyer_setup", "sellers", "creative_engines", "advertisers", "campaigns", "campaign_receipt", "approvals", "release_notes", "customer_requests", "notifications", "webhooks", "buyer_proposal_version"]
     '\n    Page to open. Owners repair a missing Agent relationship in source_diagnostics.\n    '
     sourceId: NotRequired[str]
     '\n    Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.\n    '
@@ -7034,7 +7034,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: list[Literal["brief_acceptance", "creative_policy"]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -7052,7 +7052,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -7070,7 +7070,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -7088,7 +7088,7 @@ class SaveBusinessRulesInputWithPolicy(TypedDict):
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]

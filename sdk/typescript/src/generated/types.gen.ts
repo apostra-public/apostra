@@ -9799,7 +9799,7 @@ export type OpenPageData = {
         /**
          * Page to open. Owners repair a missing Agent relationship in source_diagnostics.
          */
-        page: 'connect_ad_server' | 'ad_server_source' | 'ad_server_diagnostics' | 'source_diagnostics' | 'seller_setup' | 'demo_seller' | 'modular_inventory_source' | 'modular_source_setup' | 'modular_inventory_feed' | 'listing' | 'discovery_card' | 'media_kit' | 'business_profile' | 'playbook' | 'library' | 'integrations' | 'product_marketing' | 'business_rules' | 'buyer_account_mapping' | 'property_roster' | 'plan_and_billing' | 'buyer_setup' | 'sellers' | 'creative_engines' | 'advertisers' | 'campaigns' | 'campaign_receipt' | 'approvals' | 'release_notes' | 'customer_requests' | 'notifications' | 'webhooks' | 'buyer_proposal_version';
+        page: 'connect_ad_server' | 'ad_server_source' | 'ad_server_diagnostics' | 'source_diagnostics' | 'seller_setup' | 'demo_seller' | 'connect_sales_agent' | 'modular_inventory_source' | 'modular_source_setup' | 'modular_inventory_feed' | 'listing' | 'discovery_card' | 'media_kit' | 'business_profile' | 'playbook' | 'library' | 'integrations' | 'product_marketing' | 'business_rules' | 'buyer_account_mapping' | 'property_roster' | 'plan_and_billing' | 'buyer_setup' | 'sellers' | 'creative_engines' | 'advertisers' | 'campaigns' | 'campaign_receipt' | 'approvals' | 'release_notes' | 'customer_requests' | 'notifications' | 'webhooks' | 'buyer_proposal_version';
         /**
          * Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.
          */
@@ -13979,7 +13979,7 @@ export type SaveBusinessRulesData = {
          */
         acknowledgeNoHumanReview?: boolean;
         /**
-         * Policy sections to show buyers on the listing. Empty hides them.
+         * Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.
          */
         advertisingPolicyDisclosure?: Array<'brief_acceptance' | 'creative_policy'>;
         /**
