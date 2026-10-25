@@ -1,8 +1,9 @@
 /** Compare installed archives with their generated release manifest, not a fixed count. */
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join, resolve } from 'node:path'
 
 // The MCP Apps host package has no operation manifest. Check instead that every
 // public entry point the package declares imports from the installed archive and
@@ -38,6 +39,43 @@ process.stdout.write(metadata.version);
     { cwd: resolve(installDirectory), encoding: 'utf8', timeout: 30_000 },
   )
   process.stdout.write(`@apostra/mcp-app-host ${installedVersion} installed; entry points import${withReact === 'react' ? ', including ./react' : ' without react'}.\n`)
+  process.exit(0)
+}
+
+// The CLI has no operation manifest of its own. Run the installed `apostra`
+// program as a user would, through the bin link npm created, and check that it
+// reports the expected version and the operations of the SDK installed beside
+// it. With a manifest path, those operations must also be the generated ones.
+// Nothing here signs in, calls the API, or reads real credentials: both
+// commands run offline, with the config directory pointed at an empty one.
+if (process.argv[2] === '--cli') {
+  const [, , , installDirectory, expectedVersion, manifestPath] = process.argv
+  assert(installDirectory, 'Usage: verify-installed.mjs --cli INSTALL_DIRECTORY [VERSION] [SDK_MANIFEST]')
+  const directory = resolve(installDirectory)
+  const home = mkdtempSync(join(tmpdir(), 'apostra-cli-home-'))
+  try {
+    const apostra = (...args) => execFileSync(join(directory, 'node_modules/.bin/apostra'), args, {
+      cwd: directory, encoding: 'utf8', timeout: 30_000,
+      env: { ...process.env, HOME: home, XDG_CONFIG_HOME: home, APPDATA: home },
+    })
+    const version = apostra('--version').trim()
+    if (expectedVersion) assert.equal(version, expectedVersion, 'Installed CLI reports a different version')
+    const listed = JSON.parse(apostra('operations', 'list', '--json'))
+    assert.equal(listed.version, 1, 'Unexpected operations envelope version')
+    const names = listed.operations.map(operation => operation.name)
+    assert(names.length > 0 && names.includes('get_delivery'), 'The CLI lists no SDK operations')
+    assert.equal(new Set(names).size, names.length, 'The CLI lists a duplicate operation')
+    const installedSdk = JSON.parse(readFileSync(join(directory, 'node_modules/@apostra/sdk/package.json'), 'utf8'))
+    assert.equal(listed.sdkVersion, installedSdk.version, 'The CLI did not read the SDK installed beside it')
+    if (manifestPath) {
+      const manifest = JSON.parse(readFileSync(resolve(manifestPath), 'utf8'))
+      assert.equal(listed.sdkVersion, manifest.version, 'The CLI SDK version differs from the manifest')
+      assert.deepEqual([...names].sort(), [...manifest.operations].sort(), 'The CLI operations differ from the manifest')
+    }
+    process.stdout.write(`@apostra/cli ${version} installed; it runs and lists ${names.length} operations from @apostra/sdk ${installedSdk.version}.\n`)
+  } finally {
+    rmSync(home, { recursive: true, force: true })
+  }
   process.exit(0)
 }
 

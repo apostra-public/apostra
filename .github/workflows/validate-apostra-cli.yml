@@ -1,0 +1,37 @@
+name: Validate Apostra CLI
+on:
+  pull_request:
+    paths: ['sdk/cli/**', 'sdk/typescript/**', 'sdk/testing/**', 'sdk/release/**', '.github/workflows/*apostra-cli*.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        node: ['22.18.0', '24', '26.12.1']
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: ${{ matrix.node }}
+      # Node 22.18 ships npm 10, which crashes installing the packed SDK tarball
+      # over the CLI's unpublished range. Use the npm the publish workflows use.
+      - run: npm install --global npm@11.5.1
+      # The CLI needs an SDK release that may not be on npm yet, so it is checked
+      # against the SDK in this same tree: pack that SDK, then install the CLI's
+      # dependencies with it standing in for the published range (--no-save leaves
+      # package.json as it is).
+      - run: npm ci --ignore-scripts
+        working-directory: sdk/typescript
+      - name: Pack the SDK from this tree
+        run: mkdir -p "$RUNNER_TEMP/sdk" && npm pack --pack-destination "$RUNNER_TEMP/sdk"
+        working-directory: sdk/typescript
+      - name: Install the CLI's dependencies against that SDK
+        run: npm install --no-save --ignore-scripts --no-audit --no-fund "$RUNNER_TEMP"/sdk/apostra-sdk-*.tgz
+        working-directory: sdk/cli
+      - run: npm run type-check && npm test
+        working-directory: sdk/cli
+      - run: node sdk/testing/install-smoke.mjs . --public --targets cli
