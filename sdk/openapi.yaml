@@ -1907,6 +1907,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -2804,6 +2805,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -3109,6 +3123,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -4005,6 +4020,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -4288,6 +4316,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -5184,6 +5213,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -5455,6 +5497,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -6352,6 +6395,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -6623,6 +6679,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -7520,6 +7577,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -7798,6 +7868,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -8696,6 +8767,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -9806,6 +9890,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -10069,6 +10166,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -10976,6 +11074,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -11239,6 +11350,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -12137,6 +12249,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -13252,6 +13377,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -14358,6 +14496,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -14625,6 +14776,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -15532,6 +15684,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -15799,6 +15964,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -16696,6 +16862,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -16972,6 +17151,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -17869,6 +18049,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -18145,6 +18338,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -19042,6 +19236,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -19318,6 +19525,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -20224,6 +20432,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -20491,6 +20712,7 @@ paths:
                           - readiness
                           - operating
                           - entitlements
+                          - teaching
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -21389,6 +21611,19 @@ paths:
                           include:
                             contains:
                               const: readiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: teaching
                         required:
                           - include
                       then:
@@ -24763,7 +24998,7 @@ paths:
                             $ref: '#/components/schemas/get_seller_reporting_receipts_success_ParamsBuyerAccountId'
                         required:
                           - mediaBuyId
-                          - buyerCustomerId
+                          - buyerAccountId
                         additionalProperties: false
                       receipts:
                         type: array
@@ -26684,10 +26919,15 @@ paths:
                 mediaBuyId:
                   type: string
                   description: Optional media-buy id to open directly in the queue.
+                buyerAccountId:
+                  type: integer
+                  minimum: 1
+                  description: The buyer Account id that disambiguates a buyer-scoped media-buy id.
                 buyerCustomerId:
                   type: integer
                   minimum: 1
-                  description: Optional buyer customer id that disambiguates a buyer-scoped media-buy id.
+                  description: 'Deprecated: send buyerAccountId instead.'
+                  deprecated: true
                 creativeId:
                   type: string
                   description: Legacy creative id to focus only when exactly one loaded review version matches. Prefer reviewRef.
@@ -26957,8 +27197,8 @@ paths:
                                   type: string
                                   description: Media buy name.
                                 sellerId:
-                                  type: string
                                   description: Seller the buy is placed with.
+                                  type: string
                                 sellerAccountId:
                                   description: The seller Account id; not the Storefront id beside it.
                                   type: integer
@@ -27000,7 +27240,6 @@ paths:
                               required:
                                 - mediaBuyId
                                 - name
-                                - sellerId
                                 - phase
                                 - isPaused
                                 - budget
@@ -28559,6 +28798,7 @@ paths:
                     - buyer_account_mapping
                     - property_roster
                     - plan_and_billing
+                    - buyer_setup
                     - sellers
                     - creative_engines
                     - advertisers
@@ -30000,23 +30240,6 @@ paths:
                                 - quoted
                                 - products
                                 - failed
-                            accountNotice:
-                              type: object
-                              properties:
-                                reasonCode:
-                                  type: string
-                                  enum:
-                                    - catalog_only_pending
-                                    - catalog_only_needs_attention
-                                message:
-                                  type: string
-                              required:
-                                - reasonCode
-                                - message
-                              additionalProperties: false
-                              description: >-
-                                The advertiser has no account at this seller, so only its public catalog was searched,
-                                without account pricing. `message` says where to see the account.
                             proposalIds:
                               type: array
                               items:
@@ -31867,8 +32090,9 @@ paths:
                                 maxLength: 500
                               - type: 'null'
                             description: >-
-                              Literal or canonical AdCP macro template such as {CAMPAIGN_ID}; null suppresses the
-                              inherited key.
+                              Literal text, AdCP universal macros such as {CACHEBUSTER}, or Apostra extension macros,
+                              which AdCP does not define: CAMPAIGN_ID, TRACKING_TAG_ID, DATA_SET_ID, TACTIC_ID,
+                              SALES_AGENT_ID, ATTRIBUTION_TRACKING_ID. null suppresses the inherited key.
                         required:
                           - paramKey
                           - value
@@ -33042,10 +33266,12 @@ paths:
       operationId: save_agent
       summary: >-
         Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or
-        say it is ready for certification.
+        allow certification buys. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send
+        it without dryRun. A connected agent is not yet verified as theirs.
       description: >-
         Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or
-        say it is ready for certification.
+        allow certification buys. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send
+        it without dryRun. A connected agent is not yet verified as theirs.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -33105,7 +33331,7 @@ paths:
                   minLength: 1
                   maxLength: 255
                 certificationRequested:
-                  description: Ready for certification.
+                  description: Allow certification buys.
                   type: boolean
                 operator:
                   description: New Agent operator.
@@ -33149,6 +33375,21 @@ paths:
                   format: uuid
                   pattern: >-
                     ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                agentUrl:
+                  description: Agent https URL.
+                  type: string
+                  minLength: 1
+                  maxLength: 2048
+                dryRun:
+                  description: Read agentUrl and save nothing.
+                  type: boolean
+                salesMode:
+                  description: Sales Agent mode.
+                  type: string
+                  enum:
+                    - WHOLESALE
+                    - COMPOSING
+                    - BOTH
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -33214,6 +33455,7 @@ paths:
                           - outcome
                           - object
                         additionalProperties: false
+                      - $ref: '#/components/schemas/save_agent_success_SaveAgentDeveloperPreviewedOutput'
                       - type: object
                         properties:
                           kind:
@@ -33241,6 +33483,164 @@ paths:
                                 type: string
                               created:
                                 type: boolean
+                              stage:
+                                type: string
+                                enum:
+                                  - built
+                                  - connected
+                                  - tested
+                                  - certified
+                                  - listed
+                              reading:
+                                anyOf:
+                                  - type: object
+                                    properties:
+                                      agentUrl:
+                                        type:
+                                          - string
+                                          - 'null'
+                                      transport:
+                                        anyOf:
+                                          - type: string
+                                            const: mcp
+                                          - type: 'null'
+                                      protocols:
+                                        type: array
+                                        items:
+                                          type: string
+                                      adcpVersions:
+                                        type: array
+                                        items:
+                                          type: string
+                                      buyingModes:
+                                        type: array
+                                        items:
+                                          type: string
+                                      alsoDeclares:
+                                        type: array
+                                        items:
+                                          type: string
+                                      brandJsonUrl:
+                                        type:
+                                          - string
+                                          - 'null'
+                                    required:
+                                      - agentUrl
+                                      - transport
+                                      - protocols
+                                      - adcpVersions
+                                      - buyingModes
+                                      - alsoDeclares
+                                      - brandJsonUrl
+                                    additionalProperties: false
+                                  - type: 'null'
+                              inferred:
+                                anyOf:
+                                  - type: object
+                                    properties:
+                                      kind:
+                                        anyOf:
+                                          - $ref: '#/components/schemas/save_agent_success_ObjectInferredKind'
+                                          - type: 'null'
+                                      kindReason:
+                                        anyOf:
+                                          - type: string
+                                            enum:
+                                              - declared_protocol
+                                              - declared_buyer_specialism
+                                              - brand_json_buying_agent
+                                          - type: 'null'
+                                      alternativeKinds:
+                                        type: array
+                                        items:
+                                          $ref: '#/components/schemas/save_agent_success_ObjectInferredAlternativeKindsItem'
+                                      salesMode:
+                                        anyOf:
+                                          - type: string
+                                            enum:
+                                              - WHOLESALE
+                                              - COMPOSING
+                                              - BOTH
+                                          - type: 'null'
+                                      salesModeProvenance:
+                                        anyOf:
+                                          - type: string
+                                            enum:
+                                              - AGENT_DECLARED
+                                              - OWNER_CONFIRMED
+                                          - type: 'null'
+                                      displayName:
+                                        type: string
+                                      displayNameSource:
+                                        type: string
+                                        enum:
+                                          - agent
+                                          - host
+                                          - developer
+                                    required:
+                                      - kind
+                                      - kindReason
+                                      - alternativeKinds
+                                      - salesMode
+                                      - salesModeProvenance
+                                      - displayName
+                                      - displayNameSource
+                                    additionalProperties: false
+                                  - type: 'null'
+                              connection:
+                                type: object
+                                properties:
+                                  state:
+                                    type: string
+                                    const: connected
+                                  revision:
+                                    anyOf:
+                                      - type: string
+                                        format: uuid
+                                        pattern: >-
+                                          ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                                      - type: 'null'
+                                required:
+                                  - state
+                                  - revision
+                                additionalProperties: false
+                              test:
+                                type: object
+                                properties:
+                                  profile:
+                                    type: string
+                                    enum:
+                                      - endpoint-brief
+                                      - creative-conformance
+                                  state:
+                                    type: string
+                                    enum:
+                                      - passed
+                                      - failed
+                                      - timed_out
+                                      - not_started
+                                  reason:
+                                    type: string
+                                    enum:
+                                      - rate_limited
+                                      - unavailable
+                                  finding:
+                                    type: string
+                                  start:
+                                    type: object
+                                    properties:
+                                      taskCall:
+                                        type: string
+                                      assistantCall:
+                                        type: string
+                                    required:
+                                      - taskCall
+                                      - assistantCall
+                                    additionalProperties: false
+                                required:
+                                  - profile
+                                  - state
+                                additionalProperties: false
                             required:
                               - agentId
                               - displayName
@@ -35347,13 +35747,13 @@ paths:
     post:
       operationId: save_campaign
       summary: >-
-        Save a campaign. To create, send advertiserId and name; flight and budget are optional. Split inventory into
-        media buys. Set desiredPhase: active to launch; omit confirmLaunch to preview. Cancellation is irreversible:
-        desiredPhase: canceled cancels the campaign and every live media buy.
+        Create: advertiserId/name; flight/budget optional. Receipts and launch previews show local/UTC times in the
+        applicable IANA timezone. desiredPhase: active previews; confirmLaunch: true launches. Cancellation is
+        irreversible: desiredPhase: canceled cancels the campaign and every live media buy.
       description: >-
-        Save a campaign. To create, send advertiserId and name; flight and budget are optional. Split inventory into
-        media buys. Set desiredPhase: active to launch; omit confirmLaunch to preview. Cancellation is irreversible:
-        desiredPhase: canceled cancels the campaign and every live media buy.
+        Create: advertiserId/name; flight/budget optional. Receipts and launch previews show local/UTC times in the
+        applicable IANA timezone. desiredPhase: active previews; confirmLaunch: true launches. Cancellation is
+        irreversible: desiredPhase: canceled cancels the campaign and every live media buy.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -35385,7 +35785,7 @@ paths:
                   description: ID of the campaign to update. Omit to create a new one.
                   type: string
                 advertiserId:
-                  description: Required when creating. The advertiser this campaign belongs to.
+                  description: Campaign advertiser. Required for create unless the Campaigns Page workspace selects one.
                   type: string
                 name:
                   description: Campaign name.
@@ -35408,12 +35808,25 @@ paths:
                         startAt:
                           type: string
                           description: >-
-                            ISO 8601 datetime. A start up to five minutes before server time is accepted for
-                            caller-server clock skew; anything earlier is refused. Use current time for today, not
-                            midnight (T00:00:00Z).
+                            ISO 8601 date or datetime. A date-only start means 00:00:00 in flight.timezone or the
+                            advertiser timezone. Prefer a naive local datetime with flight.timezone (for example,
+                            2026-10-01T09:00:00) and let the server resolve the IANA timezone. An offset-bearing value
+                            remains accepted and is normalized to UTC. A start up to five minutes before server time is
+                            accepted for caller-server clock skew; anything earlier is refused.
                         endAt:
                           type: string
-                          description: ISO 8601 datetime (e.g. 2026-09-30T23:59:59Z). Must be after startAt.
+                          description: >-
+                            ISO 8601 date or datetime. A date-only end means 23:59:59 in flight.timezone or the
+                            advertiser timezone. Prefer a naive local datetime with flight.timezone; the server resolves
+                            it before storage. Must be after startAt.
+                        timezone:
+                          description: >-
+                            Optional IANA timezone used to resolve naive startAt and endAt values (for example,
+                            Australia/Sydney). With offset-bearing datetimes, it must match the offset at each exact
+                            instant. This input is never stored.
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                       required:
                         - startAt
                         - endAt
@@ -35569,7 +35982,7 @@ paths:
                   description: true to pause; false to reactivate. Only valid on active campaigns.
                   type: boolean
                 isArchived:
-                  description: true archives; false restores an archived campaign as a draft (send alone).
+                  description: true archives; false restores an archived campaign with its preserved phase (send alone).
                   type: boolean
                 optimizationGoals:
                   description: >-
@@ -35764,8 +36177,9 @@ paths:
                                 maxLength: 500
                               - type: 'null'
                             description: >-
-                              Literal or canonical AdCP macro template such as {CAMPAIGN_ID}; null suppresses the
-                              inherited key.
+                              Literal text, AdCP universal macros such as {CACHEBUSTER}, or Apostra extension macros,
+                              which AdCP does not define: CAMPAIGN_ID, TRACKING_TAG_ID, DATA_SET_ID, TACTIC_ID,
+                              SALES_AGENT_ID, ATTRIBUTION_TRACKING_ID. null suppresses the inherited key.
                         required:
                           - paramKey
                           - value
@@ -38534,13 +38948,13 @@ paths:
     post:
       operationId: save_creative
       summary: >-
-        advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets
-        only;generate new media (radio spots):save_creative_session;exactly one format
-        selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset.
+        advertiserId/campaignId:name,message;assets/landing_page_url/social/sourceAssetRef/sourceAssets;Supplied
+        content/assets only;generate new media (radio spots):save_creative_session;exactly one format
+        selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only.
       description: >-
-        advertiserId/campaignId:name,message;assets/clickUrl/social/sourceAssetRef/sourceAssets;Supplied content/assets
-        only;generate new media (radio spots):save_creative_session;exactly one format
-        selector:formatKind/formatParams,creativeFormatId/formatOptionRef;sourceAssetRef:write-only;resolved asset.
+        advertiserId/campaignId:name,message;assets/landing_page_url/social/sourceAssetRef/sourceAssets;Supplied
+        content/assets only;generate new media (radio spots):save_creative_session;exactly one format
+        selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -38567,8 +38981,16 @@ paths:
                   description: ID of the creative to update. Omit to create a new one.
                   type: string
                   minLength: 1
+                duplicateFromCreativeId:
+                  description: >-
+                    Copy this visible campaign creative. Requires campaignId and idempotencyKey; the copy is named Copy
+                    of the source name.
+                  type: string
+                  minLength: 1
                 campaignId:
-                  description: Campaign for create; required unless advertiserId is set. A draft records its intended campaign.
+                  description: >-
+                    Campaign scope for create or update; required unless advertiserId is set. A draft records its
+                    intended campaign.
                   type: string
                   minLength: 1
                 campaignIds:
@@ -38580,7 +39002,7 @@ paths:
                     minLength: 1
                     maxLength: 128
                 advertiserId:
-                  description: Advertiser scope; required for advertiser create and archive.
+                  description: Advertiser scope; required for advertiser-level create, update, and archive.
                   type: string
                   minLength: 1
                 mode:
@@ -38601,7 +39023,7 @@ paths:
                   description: Creative brief or direction.
                   type: string
                 formatKind:
-                  description: Direct draft format.
+                  description: Canonical format for a draft or advertiser-level metadata update.
                   anyOf:
                     - type: string
                       const: image
@@ -38873,9 +39295,17 @@ paths:
                     - sessionRevision
                     - outputHash
                   additionalProperties: false
-                clickUrl:
+                libraryRole:
+                  description: >-
+                    Buyer Account only. Durable advertiser Library role: evergreen remains delivery-eligible; reference
+                    is reusable input material and cannot be attached for delivery.
+                  type: string
+                  enum:
+                    - evergreen
+                    - reference
+                landing_page_url:
                   description: Click-through destination URL for this creative.
-                  $ref: '#/components/schemas/save_creative_request_ClickUrl'
+                  $ref: '#/components/schemas/save_creative_request_LandingPageUrl'
                   type: string
                 macroAdditions:
                   description: Creative URL parameters. Same keys override inherited values; null suppresses them.
@@ -38897,8 +39327,9 @@ paths:
                             maxLength: 500
                           - type: 'null'
                         description: >-
-                          Literal or canonical AdCP macro template such as {CAMPAIGN_ID}; null suppresses the inherited
-                          key.
+                          Literal text, AdCP universal macros such as {CACHEBUSTER}, or Apostra extension macros, which
+                          AdCP does not define: CAMPAIGN_ID, TRACKING_TAG_ID, DATA_SET_ID, TACTIC_ID, SALES_AGENT_ID,
+                          ATTRIBUTION_TRACKING_ID. null suppresses the inherited key.
                     required:
                       - paramKey
                       - value
@@ -38912,17 +39343,17 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 255
-                    body:
+                    primary_text:
                       description: Primary/body text; slot primary_text.
                       type: string
                       minLength: 1
                       maxLength: 5000
-                    callToAction:
+                    cta:
                       description: Call-to-action label; slot cta.
                       type: string
                       minLength: 1
                       maxLength: 60
-                    displayName:
+                    brand_name:
                       description: Brand/display name; slot brand_name.
                       type: string
                       minLength: 1
@@ -38973,7 +39404,9 @@ paths:
                   type: boolean
                   const: true
                 idempotencyKey:
-                  description: Stable key per call. Best-effort dedup - V2 creative endpoints are not exactly-once.
+                  description: >-
+                    Stable key per call. Duplicate requires it and replays exactly once; V2-backed writes are
+                    best-effort.
                   type: string
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
@@ -39161,7 +39594,7 @@ paths:
                             - formatOptionRef
                       - not:
                           required:
-                            - clickUrl
+                            - landing_page_url
                       - not:
                           required:
                             - macroAdditions
@@ -39216,7 +39649,7 @@ paths:
                                 - sourceAssets
                           - not:
                               required:
-                                - clickUrl
+                                - landing_page_url
                           - not:
                               required:
                                 - macroAdditions
@@ -39279,7 +39712,7 @@ paths:
                                 - sourceAssets
                           - not:
                               required:
-                                - clickUrl
+                                - landing_page_url
                           - not:
                               required:
                                 - macroAdditions
@@ -39389,6 +39822,7 @@ paths:
                 properties:
                   data:
                     oneOf:
+                      - $ref: '#/components/schemas/save_creative_success_DuplicateCreativeSuccess'
                       - type: object
                         properties:
                           creative:
@@ -39599,6 +40033,7 @@ paths:
                           - action
                           - processingState
                         additionalProperties: false
+                      - $ref: '#/components/schemas/save_creative_success_SaveCreativeLibraryRoleSuccess'
                   error:
                     type: 'null'
                 required:
@@ -41342,13 +41777,13 @@ paths:
     post:
       operationId: save_inventory_source
       summary: >-
-        Create or update where a seller's inventory comes from. Pass `id` to change a source, omit it to add one, or
-        pass only `agentId` to open an agent's connection form. Credentials are never passed here — a source that needs
-        a secret comes back with the state and the page that collects it.
+        Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Pass
+        only `agentId` or `adServer` to open the form that connects an agent or an ad server. Credentials are never
+        passed here; a source that needs one returns the page that collects it.
       description: >-
-        Create or update where a seller's inventory comes from. Pass `id` to change a source, omit it to add one, or
-        pass only `agentId` to open an agent's connection form. Credentials are never passed here — a source that needs
-        a secret comes back with the state and the page that collects it.
+        Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Pass
+        only `agentId` or `adServer` to open the form that connects an agent or an ad server. Credentials are never
+        passed here; a source that needs one returns the page that collects it.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -41458,6 +41893,25 @@ paths:
                     - moduleInstanceId
                     - config
                   additionalProperties: false
+                adServer:
+                  description: >-
+                    Send alone to open the form that connects an ad server. For google_ad_manager the result names the
+                    service account to add to the network.
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum:
+                        - google_ad_manager
+                        - freewheel
+                        - springserve
+                        - adswizz
+                        - broadsign
+                        - citrusad
+                      description: citrusad is Epsilon Retail Media.
+                  required:
+                    - type
+                  additionalProperties: false
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -41488,6 +41942,7 @@ paths:
                       - $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessUpdated'
                       - $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessUnchanged'
                       - $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessConnectionForm'
+                      - $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessAdServerForm'
                       - $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessLegacyCreated'
                   error:
                     type: 'null'
@@ -42566,13 +43021,13 @@ paths:
     post:
       operationId: save_material
       summary: >-
-        Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or
-        avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures
-        (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call.
+        Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one
+        imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30
+        days. https://docs.apostra.com/v3/delete-from-apostra
       description: >-
-        Register or revise seller Materials, archive or restore them, reprocess one, commit a previewed rate card or
-        avails sheet, decide candidates, or mark a slide, page, or sheet reusable only when it has no commercial figures
-        (UNIT_NOT_REUSABLE_KIND, UNIT_CONTAINS_PRICING). One change per call.
+        Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one
+        imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30
+        days. https://docs.apostra.com/v3/delete-from-apostra
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -43218,6 +43673,19 @@ paths:
                 dryRun:
                   description: For an inline rate-card create only, return its preview without committing facts.
                   type: boolean
+                action:
+                  type: string
+                  enum:
+                    - preview_permanent_delete
+                    - delete_permanently
+                    - undo_permanent_delete
+                    - include_again
+                  description: Material action field.
+                confirmationId:
+                  description: Exact server-issued permanent-deletion preview confirmation. Required only for delete_permanently.
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -46857,6 +47325,9 @@ paths:
                         format: date-time
                         pattern: >-
                           ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                      replayed:
+                        type: boolean
+                        const: true
                       action:
                         type: string
                         enum:
@@ -48792,9 +49263,12 @@ paths:
                             const: archived
                           propertyListId:
                             type: string
+                          cascadeSummary:
+                            $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummary'
                         required:
                           - action
                           - propertyListId
+                          - cascadeSummary
                         additionalProperties: false
                       - type: object
                         properties:
@@ -50297,6 +50771,55 @@ paths:
                         - message
                       additionalProperties: false
                       description: Decline one seller-controlled pending buyer-account intake with a reason.
+                sourceDecision:
+                  description: >-
+                    Which account serves an admitted buyer on one source (see get(account_relationship) sources). Send
+                    alone.
+                  oneOf:
+                    - type: object
+                      properties:
+                        relationshipId:
+                          $ref: '#/components/schemas/save_seller_request_SourceDecisionRelationshipId'
+                        inventorySourceKey:
+                          $ref: '#/components/schemas/save_seller_request_SourceDecisionInventorySourceKey'
+                        expectedVersion:
+                          $ref: '#/components/schemas/save_seller_request_SourceDecisionExpectedVersion'
+                        decision:
+                          type: string
+                          const: bound
+                          description: Map an account.
+                        sourceExternalAccountId:
+                          type: string
+                          minLength: 1
+                          maxLength: 255
+                          description: Source account to map, usually a candidate.
+                      required:
+                        - relationshipId
+                        - inventorySourceKey
+                        - expectedVersion
+                        - decision
+                        - sourceExternalAccountId
+                      additionalProperties: false
+                      description: Map the buyer to one source account.
+                    - type: object
+                      properties:
+                        relationshipId:
+                          $ref: '#/components/schemas/save_seller_request_SourceDecisionRelationshipId'
+                        inventorySourceKey:
+                          $ref: '#/components/schemas/save_seller_request_SourceDecisionInventorySourceKey'
+                        expectedVersion:
+                          $ref: '#/components/schemas/save_seller_request_SourceDecisionExpectedVersion'
+                        decision:
+                          type: string
+                          const: not_required
+                          description: No account needed.
+                      required:
+                        - relationshipId
+                        - inventorySourceKey
+                        - expectedVersion
+                        - decision
+                      additionalProperties: false
+                      description: The source needs no account for the buyer.
                 isPaused:
                   description: >-
                     Hold (true) or resume (false) new business: buyers stop discovering the Seller and buying; existing
@@ -50357,7 +50880,14 @@ paths:
                     - required:
                         - admission
                     - required:
+                        - sourceDecision
+                    - required:
                         - isPaused
+                - if:
+                    required:
+                      - sourceDecision
+                  then:
+                    maxProperties: 1
                 - if:
                     required:
                       - distribution
@@ -50666,6 +51196,7 @@ paths:
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessBrandResolved'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessAdmissionRecorded'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessDeclineRecorded'
+                      - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessSourceDecisionRecorded'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessPreview'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessUpdated'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessUnchanged'
@@ -51885,9 +52416,10 @@ paths:
                           - executionResources
                     sourceId:
                       description: >-
-                        One inventory source to read from, sent here at the top level and not as filter.sourceId.
-                        Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller
-                        media_buy, which list every source when it is omitted.
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting.
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -52251,6 +52783,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -52621,8 +53158,9 @@ paths:
                         partnerStatus:
                           description: >-
                             For kind seller in a buyer account: sellers whose partnerStatus is any of these, across
-                            every seller listed on Apostra. ACTIVE are set up for you (for filter.advertiserId when
-                            given), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not set up.
+                            every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when
+                            given), even while the account is still being set up (controlPlane.activation on get),
+                            NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on.
                             Combines with sellerType and transactable. Not with ids.
                           minItems: 1
                           maxItems: 3
@@ -53424,9 +53962,10 @@ paths:
                           - executionResources
                     sourceId:
                       description: >-
-                        One inventory source to read from, sent here at the top level and not as filter.sourceId.
-                        Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller
-                        media_buy, which list every source when it is omitted.
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting.
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -53790,6 +54329,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -54160,8 +54704,9 @@ paths:
                         partnerStatus:
                           description: >-
                             For kind seller in a buyer account: sellers whose partnerStatus is any of these, across
-                            every seller listed on Apostra. ACTIVE are set up for you (for filter.advertiserId when
-                            given), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not set up.
+                            every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when
+                            given), even while the account is still being set up (controlPlane.activation on get),
+                            NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on.
                             Combines with sellerType and transactable. Not with ids.
                           minItems: 1
                           maxItems: 3
@@ -54964,9 +55509,10 @@ paths:
                           - executionResources
                     sourceId:
                       description: >-
-                        One inventory source to read from, sent here at the top level and not as filter.sourceId.
-                        Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller
-                        media_buy, which list every source when it is omitted.
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting.
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -55635,9 +56181,10 @@ paths:
                           - executionResources
                     sourceId:
                       description: >-
-                        One inventory source to read from, sent here at the top level and not as filter.sourceId.
-                        Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller
-                        media_buy, which list every source when it is omitted.
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting.
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -56001,6 +56548,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -56371,8 +56923,9 @@ paths:
                         partnerStatus:
                           description: >-
                             For kind seller in a buyer account: sellers whose partnerStatus is any of these, across
-                            every seller listed on Apostra. ACTIVE are set up for you (for filter.advertiserId when
-                            given), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not set up.
+                            every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when
+                            given), even while the account is still being set up (controlPlane.activation on get),
+                            NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on.
                             Combines with sellerType and transactable. Not with ids.
                           minItems: 1
                           maxItems: 3
@@ -57175,9 +57728,10 @@ paths:
                           - executionResources
                     sourceId:
                       description: >-
-                        One inventory source to read from, sent here at the top level and not as filter.sourceId.
-                        Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller
-                        media_buy, which list every source when it is omitted.
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting.
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -57532,6 +58086,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -57902,8 +58461,9 @@ paths:
                         partnerStatus:
                           description: >-
                             For kind seller in a buyer account: sellers whose partnerStatus is any of these, across
-                            every seller listed on Apostra. ACTIVE are set up for you (for filter.advertiserId when
-                            given), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not set up.
+                            every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when
+                            given), even while the account is still being set up (controlPlane.activation on get),
+                            NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on.
                             Combines with sellerType and transactable. Not with ids.
                           minItems: 1
                           maxItems: 3
@@ -58706,9 +59266,10 @@ paths:
                           - executionResources
                     sourceId:
                       description: >-
-                        One inventory source to read from, sent here at the top level and not as filter.sourceId.
-                        Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller
-                        media_buy, which list every source when it is omitted.
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting.
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -59067,6 +59628,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -59437,8 +60003,9 @@ paths:
                         partnerStatus:
                           description: >-
                             For kind seller in a buyer account: sellers whose partnerStatus is any of these, across
-                            every seller listed on Apostra. ACTIVE are set up for you (for filter.advertiserId when
-                            given), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not set up.
+                            every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when
+                            given), even while the account is still being set up (controlPlane.activation on get),
+                            NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on.
                             Combines with sellerType and transactable. Not with ids.
                           minItems: 1
                           maxItems: 3
@@ -60241,9 +60808,10 @@ paths:
                           - executionResources
                     sourceId:
                       description: >-
-                        One inventory source to read from, sent here at the top level and not as filter.sourceId.
-                        Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller
-                        media_buy, which list every source when it is omitted.
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting.
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -60598,6 +61166,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -60968,8 +61541,9 @@ paths:
                         partnerStatus:
                           description: >-
                             For kind seller in a buyer account: sellers whose partnerStatus is any of these, across
-                            every seller listed on Apostra. ACTIVE are set up for you (for filter.advertiserId when
-                            given), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not set up.
+                            every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when
+                            given), even while the account is still being set up (controlPlane.activation on get),
+                            NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on.
                             Combines with sellerType and transactable. Not with ids.
                           minItems: 1
                           maxItems: 3
@@ -61772,9 +62346,10 @@ paths:
                           - executionResources
                     sourceId:
                       description: >-
-                        One inventory source to read from, sent here at the top level and not as filter.sourceId.
-                        Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller
-                        media_buy, which list every source when it is omitted.
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting.
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -62133,6 +62708,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -62503,8 +63083,9 @@ paths:
                         partnerStatus:
                           description: >-
                             For kind seller in a buyer account: sellers whose partnerStatus is any of these, across
-                            every seller listed on Apostra. ACTIVE are set up for you (for filter.advertiserId when
-                            given), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not set up.
+                            every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when
+                            given), even while the account is still being set up (controlPlane.activation on get),
+                            NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on.
                             Combines with sellerType and transactable. Not with ids.
                           minItems: 1
                           maxItems: 3
@@ -64683,9 +65264,10 @@ paths:
                           - executionResources
                     sourceId:
                       description: >-
-                        One inventory source to read from, sent here at the top level and not as filter.sourceId.
-                        Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller
-                        media_buy, which list every source when it is omitted.
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting.
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -65049,6 +65631,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -65419,8 +66006,9 @@ paths:
                         partnerStatus:
                           description: >-
                             For kind seller in a buyer account: sellers whose partnerStatus is any of these, across
-                            every seller listed on Apostra. ACTIVE are set up for you (for filter.advertiserId when
-                            given), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not set up.
+                            every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when
+                            given), even while the account is still being set up (controlPlane.activation on get),
+                            NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on.
                             Combines with sellerType and transactable. Not with ids.
                           minItems: 1
                           maxItems: 3
@@ -66219,9 +66807,10 @@ paths:
                           - executionResources
                     sourceId:
                       description: >-
-                        One inventory source to read from, sent here at the top level and not as filter.sourceId.
-                        Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller
-                        media_buy, which list every source when it is omitted.
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting.
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -66585,6 +67174,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -66955,8 +67549,9 @@ paths:
                         partnerStatus:
                           description: >-
                             For kind seller in a buyer account: sellers whose partnerStatus is any of these, across
-                            every seller listed on Apostra. ACTIVE are set up for you (for filter.advertiserId when
-                            given), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not set up.
+                            every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when
+                            given), even while the account is still being set up (controlPlane.activation on get),
+                            NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on.
                             Combines with sellerType and transactable. Not with ids.
                           minItems: 1
                           maxItems: 3
@@ -67754,9 +68349,10 @@ paths:
                           - executionResources
                     sourceId:
                       description: >-
-                        One inventory source to read from, sent here at the top level and not as filter.sourceId.
-                        Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller
-                        media_buy, which list every source when it is omitted.
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting.
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -68120,6 +68716,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -68490,8 +69091,9 @@ paths:
                         partnerStatus:
                           description: >-
                             For kind seller in a buyer account: sellers whose partnerStatus is any of these, across
-                            every seller listed on Apostra. ACTIVE are set up for you (for filter.advertiserId when
-                            given), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not set up.
+                            every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when
+                            given), even while the account is still being set up (controlPlane.activation on get),
+                            NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on.
                             Combines with sellerType and transactable. Not with ids.
                           minItems: 1
                           maxItems: 3
@@ -69289,9 +69891,10 @@ paths:
                           - executionResources
                     sourceId:
                       description: >-
-                        One inventory source to read from, sent here at the top level and not as filter.sourceId.
-                        Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller
-                        media_buy, which list every source when it is omitted.
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting.
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -69655,6 +70258,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -70025,8 +70633,9 @@ paths:
                         partnerStatus:
                           description: >-
                             For kind seller in a buyer account: sellers whose partnerStatus is any of these, across
-                            every seller listed on Apostra. ACTIVE are set up for you (for filter.advertiserId when
-                            given), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not set up.
+                            every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when
+                            given), even while the account is still being set up (controlPlane.activation on get),
+                            NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on.
                             Combines with sellerType and transactable. Not with ids.
                           minItems: 1
                           maxItems: 3
@@ -70825,9 +71434,10 @@ paths:
                           - executionResources
                     sourceId:
                       description: >-
-                        One inventory source to read from, sent here at the top level and not as filter.sourceId.
-                        Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller
-                        media_buy, which list every source when it is omitted.
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting.
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -71191,6 +71801,11 @@ paths:
                           description: >-
                             For kind creative: evergreen or reference, the creative's role in the advertiser's creative
                             library. Not the seller Library.
+                          $ref: '#/components/schemas/search_request_CreativeRole'
+                        libraryRole:
+                          description: >-
+                            For kind creative: durable advertiser Library role. Same stored value as role; use evergreen
+                            for delivery-eligible reuse or reference for delivery-ineligible reference material.
                           $ref: '#/components/schemas/search_request_CreativeRole'
                         source:
                           description: 'For kind creative: where the creative came from: uploaded, generated, or connected.'
@@ -71561,8 +72176,9 @@ paths:
                         partnerStatus:
                           description: >-
                             For kind seller in a buyer account: sellers whose partnerStatus is any of these, across
-                            every seller listed on Apostra. ACTIVE are set up for you (for filter.advertiserId when
-                            given), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not set up.
+                            every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when
+                            given), even while the account is still being set up (controlPlane.activation on get),
+                            NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on.
                             Combines with sellerType and transactable. Not with ids.
                           minItems: 1
                           maxItems: 3
@@ -72623,15 +73239,25 @@ paths:
                   maxLength: 8192
                   description: Exact tracker URL to test. It is preserved separately from compiled output.
                 sourceDialect:
-                  default: auto
-                  description: Source syntax. Use auto only for a registry-recognized origin; never guess ambiguous vendor tokens.
+                  description: >-
+                    AdCP macro dialect of the tracker's tokens: adcp, iab_vast or vendor. Omit to detect it from the
+                    URL's origin; never guess ambiguous vendor tokens.
                   type: string
                   enum:
-                    - auto
                     - adcp
-                    - happydemics
-                    - gam
-                    - vast
+                    - iab_vast
+                    - vendor
+                sourceDialectNamespace:
+                  description: >-
+                    URI of the macro reference that defines a vendor dialect. Required for vendor; optional for
+                    iab_vast.
+                  type: string
+                  maxLength: 2048
+                  pattern: ^https?:\/\/[A-Za-z0-9\-._~:/?#[\]@!$&'()*+,;=%]+$
+                sourceDialectRevision:
+                  description: Revision of that reference. Required for a vendor namespace Apostra has no mapping for.
+                  type: string
+                  pattern: ^[A-Za-z0-9._:-]{1,64}$
                 targetDialect:
                   type: string
                   enum:
@@ -72658,100 +73284,17 @@ paths:
                   type: integer
                   exclusiveMinimum: 0
                   maximum: 1000000
-                values:
-                  description: Optional explicit synthetic bindings. Their output source is labeled provided, not synthetic.
-                  maxItems: 64
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      macro:
-                        type: string
-                        enum:
-                          - MEDIA_BUY_ID
-                          - PACKAGE_ID
-                          - CREATIVE_ID
-                          - CACHEBUSTER
-                          - TIMESTAMP
-                          - CLICK_URL
-                          - GDPR
-                          - GDPR_CONSENT
-                          - US_PRIVACY
-                          - GPP_STRING
-                          - GPP_SID
-                          - IP_ADDRESS
-                          - LIMIT_AD_TRACKING
-                          - DEVICE_TYPE
-                          - OS
-                          - OS_VERSION
-                          - DEVICE_MAKE
-                          - DEVICE_MODEL
-                          - USER_AGENT
-                          - APP_BUNDLE
-                          - APP_NAME
-                          - COUNTRY
-                          - REGION
-                          - CITY
-                          - ZIP
-                          - DMA
-                          - LAT
-                          - LONG
-                          - DEVICE_ID
-                          - DEVICE_ID_TYPE
-                          - DOMAIN
-                          - PAGE_URL
-                          - REFERRER
-                          - KEYWORDS
-                          - PLACEMENT_ID
-                          - FOLD_POSITION
-                          - AD_WIDTH
-                          - AD_HEIGHT
-                          - VIDEO_ID
-                          - VIDEO_TITLE
-                          - VIDEO_DURATION
-                          - VIDEO_CATEGORY
-                          - CONTENT_GENRE
-                          - CONTENT_RATING
-                          - PLAYER_WIDTH
-                          - PLAYER_HEIGHT
-                          - POD_POSITION
-                          - POD_SIZE
-                          - AD_BREAK_ID
-                          - STATION_ID
-                          - COLLECTION_NAME
-                          - INSTALLMENT_ID
-                          - AUDIO_DURATION
-                          - TMPX
-                          - IMPRESSION_ID
-                          - AXEM
-                          - CATALOG_ID
-                          - SKU
-                          - GTIN
-                          - OFFERING_ID
-                          - JOB_ID
-                          - HOTEL_ID
-                          - FLIGHT_ID
-                          - VEHICLE_ID
-                          - LISTING_ID
-                          - STORE_ID
-                          - PROGRAM_ID
-                          - DESTINATION_ID
-                          - CREATIVE_VARIANT_ID
-                          - APP_ITEM_ID
-                          - ITEM_NAME
-                          - ITEM_DESCRIPTION
-                          - ITEM_TAGLINE
-                          - ITEM_PRICE
-                          - ITEM_PRICE_CURRENCY
-                        description: AdCP universal macro name.
-                      value:
-                        type: string
-                        maxLength: 2048
-                        description: Raw synthetic test value; do not pre-encode it and never submit a real user identifier.
-                    required:
-                      - macro
-                      - value
-                    additionalProperties: false
+                macro_values:
+                  description: >-
+                    Optional explicit synthetic values keyed by AdCP universal macro name without braces, such as
+                    DEVICE_ID. Their output source is labeled provided, not synthetic.
+                  type: object
+                  propertyNames:
+                    type: string
+                  additionalProperties:
+                    type: string
+                    maxLength: 2048
+                    description: Raw synthetic test value; do not pre-encode it and never submit a real user identifier.
                 requiredMacros:
                   description: Required macros must occur and have values. Absence fails; defaults to all canonical macros present.
                   maxItems: 64
@@ -72883,6 +73426,14 @@ paths:
                         type: string
                       sourceDialect:
                         type: string
+                        enum:
+                          - adcp
+                          - iab_vast
+                          - vendor
+                      sourceDialectNamespace:
+                        type: string
+                      sourceDialectRevision:
+                        type: string
                       targetDialect:
                         type: string
                         enum:
@@ -72965,21 +73516,41 @@ paths:
                         items:
                           type: object
                           properties:
-                            rawToken:
+                            token:
                               type: string
-                            canonicalMacro:
+                              minLength: 1
+                            dialect:
+                              anyOf:
+                                - type: string
+                                  const: adcp
+                                - type: string
+                                  const: iab_vast
+                                - type: string
+                                  const: iab_daast
+                                - type: string
+                                  const: vendor
+                                - type: string
+                                  const: unknown
+                            dialect_namespace:
                               type: string
-                            semantic:
+                            dialect_revision:
                               type: string
-                            sourceDialect:
+                              minLength: 1
+                            dialect_semantic:
                               type: string
-                            status:
+                            mapping_status:
+                              anyOf:
+                                - type: string
+                                  const: verified_universal
+                                - type: string
+                                  const: dialect_defined
+                                - type: string
+                                  const: unresolved
+                            universal_semantic:
+                              description: >-
+                                AdCP universal macro name without braces. Present exactly when mapping_status is
+                                verified_universal.
                               type: string
-                              enum:
-                                - canonical
-                                - mapped
-                                - unresolved
-                                - ambiguous
                             start:
                               type: integer
                               minimum: 0
@@ -72988,14 +73559,12 @@ paths:
                               type: integer
                               minimum: 0
                               maximum: 9007199254740991
-                            registryEntryId:
-                              type: string
                             registryVersion:
                               type: string
                           required:
-                            - rawToken
-                            - sourceDialect
-                            - status
+                            - token
+                            - dialect
+                            - mapping_status
                             - start
                             - end
                           additionalProperties: false
@@ -73180,7 +73749,6 @@ paths:
                       - syntheticDataOnly
                       - scenario
                       - scenarioKey
-                      - sourceDialect
                       - targetDialect
                       - stages
                       - mappings
@@ -78365,6 +78933,152 @@ components:
       propertyNames:
         type: string
       additionalProperties: {}
+    save_agent_success_SaveAgentDeveloperPreviewedOutput:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: agent
+        outcome:
+          type: string
+          const: developer_previewed
+        object:
+          type: object
+          properties:
+            reading:
+              type: object
+              properties:
+                agentUrl:
+                  type:
+                    - string
+                    - 'null'
+                transport:
+                  anyOf:
+                    - type: string
+                      const: mcp
+                    - type: 'null'
+                protocols:
+                  type: array
+                  items:
+                    type: string
+                adcpVersions:
+                  type: array
+                  items:
+                    type: string
+                buyingModes:
+                  type: array
+                  items:
+                    type: string
+                alsoDeclares:
+                  type: array
+                  items:
+                    type: string
+                brandJsonUrl:
+                  type:
+                    - string
+                    - 'null'
+              required:
+                - agentUrl
+                - transport
+                - protocols
+                - adcpVersions
+                - buyingModes
+                - alsoDeclares
+                - brandJsonUrl
+              additionalProperties: false
+            inferred:
+              type: object
+              properties:
+                kind:
+                  anyOf:
+                    - $ref: '#/components/schemas/save_agent_success_SaveAgentDeveloperPreviewedOutputObjectInferredKind'
+                    - type: 'null'
+                kindReason:
+                  anyOf:
+                    - type: string
+                      enum:
+                        - declared_protocol
+                        - declared_buyer_specialism
+                        - brand_json_buying_agent
+                    - type: 'null'
+                alternativeKinds:
+                  type: array
+                  items:
+                    $ref: >-
+                      #/components/schemas/save_agent_success_SaveAgentDeveloperPreviewedOutputObjectInferredAlternativeKindsItem
+                salesMode:
+                  anyOf:
+                    - type: string
+                      enum:
+                        - WHOLESALE
+                        - COMPOSING
+                        - BOTH
+                    - type: 'null'
+                salesModeProvenance:
+                  anyOf:
+                    - type: string
+                      enum:
+                        - AGENT_DECLARED
+                        - OWNER_CONFIRMED
+                    - type: 'null'
+                displayName:
+                  type: string
+                displayNameSource:
+                  type: string
+                  enum:
+                    - agent
+                    - host
+                    - developer
+              required:
+                - kind
+                - kindReason
+                - alternativeKinds
+                - salesMode
+                - salesModeProvenance
+                - displayName
+                - displayNameSource
+              additionalProperties: false
+            needs:
+              type: array
+              items:
+                type: string
+                enum:
+                  - kind
+                  - salesMode
+          required:
+            - reading
+            - inferred
+            - needs
+          additionalProperties: false
+      required:
+        - kind
+        - outcome
+        - object
+      additionalProperties: false
+    save_agent_success_ObjectInferredKind:
+      type: string
+      enum:
+        - sales
+        - creative
+        - buyer
+    save_agent_success_ObjectInferredAlternativeKindsItem:
+      type: string
+      enum:
+        - sales
+        - creative
+        - buyer
+    save_agent_success_SaveAgentDeveloperPreviewedOutputObjectInferredKind:
+      type: string
+      enum:
+        - sales
+        - creative
+        - buyer
+    save_agent_success_SaveAgentDeveloperPreviewedOutputObjectInferredAlternativeKindsItem:
+      type: string
+      enum:
+        - sales
+        - creative
+        - buyer
     save_ask_success_AskId:
       type:
         - string
@@ -80548,6 +81262,66 @@ components:
         Why the goal was not sent: the product's AdCP optimization declaration (metric_optimization,
         conversion_tracking, vendor_metric_optimization) does not cover the goal's kind, metric, target kind, reach
         unit, view duration, viewability standard or vendor metric, or the product's max_optimization_goals was reached.
+    save_campaign_success_PropertyListPushActionRequired:
+      oneOf:
+        - type: object
+          properties:
+            mediaBuyId:
+              type: string
+              description: The media buy affected
+            outcome:
+              type: string
+              const: paused
+              description: The buy was paused. It stays paused until the buyer resumes it.
+            reason:
+              $ref: '#/components/schemas/save_campaign_success_PropertyListPushActionRequiredReason'
+          required:
+            - mediaBuyId
+            - outcome
+            - reason
+          additionalProperties: false
+        - type: object
+          properties:
+            mediaBuyId:
+              type: string
+              description: The media buy affected
+            outcome:
+              type: string
+              const: pause_failed
+              description: The buy could not be paused. It may still be delivering without its property lists enforced.
+            reason:
+              $ref: '#/components/schemas/save_campaign_success_PropertyListPushActionRequiredReason'
+            pauseError:
+              type: object
+              properties:
+                code:
+                  type: string
+                message:
+                  type: string
+              required:
+                - code
+                - message
+              additionalProperties: false
+              description: Why the pause failed
+          required:
+            - mediaBuyId
+            - outcome
+            - reason
+            - pauseError
+          additionalProperties: false
+      description: >-
+        An active media buy that did not take a property list change, or whose property lists no route enforces after
+        it, and needs the buyer to act.
+    save_campaign_success_PropertyListPushPending:
+      type: object
+      properties:
+        mediaBuyId:
+          type: string
+          description: The media buy affected
+      required:
+        - mediaBuyId
+      additionalProperties: false
+      description: An active media buy whose seller has not yet confirmed the property list change.
     save_campaign_success_ServerTime:
       type: string
       format: date-time
@@ -81033,6 +81807,15 @@ components:
         - total
         - currency
       additionalProperties: {}
+    save_campaign_success_PropertyListPushActionRequiredReason:
+      type: string
+      enum:
+        - list_update_not_applied
+        - list_not_enforceable
+      description: >-
+        Why the buy needs action. `list_update_not_applied`: the seller did not take the list change.
+        `list_not_enforceable`: after the change, no route enforces every property list that applies to the buy (its
+        seller does not apply the list, and its products do not name only sites and apps the list allows).
     save_campaign_success_ExecutionWarningsItemDroppedItemRequestedPacing:
       type: string
       enum:
@@ -81064,6 +81847,42 @@ components:
           type: integer
           minimum: 0
           maximum: 9007199254740991
+        sellerUpdatedCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        sellerFailedCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        enforcedByAnotherRouteCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        pausedCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        pauseFailedCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        actionRequired:
+          type: array
+          items:
+            $ref: '#/components/schemas/save_campaign_success_PropertyListPushActionRequired'
+        pendingCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        pendingSellerApproval:
+          type: array
+          items:
+            $ref: '#/components/schemas/save_campaign_success_PropertyListPushPending'
+        failedCampaignCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
       required:
         - totalMediaBuys
         - updatedCount
@@ -81089,6 +81908,42 @@ components:
           type: integer
           minimum: 0
           maximum: 9007199254740991
+        sellerUpdatedCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        sellerFailedCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        enforcedByAnotherRouteCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        pausedCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        pauseFailedCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        actionRequired:
+          type: array
+          items:
+            $ref: '#/components/schemas/save_campaign_success_PropertyListPushActionRequired'
+        pendingCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        pendingSellerApproval:
+          type: array
+          items:
+            $ref: '#/components/schemas/save_campaign_success_PropertyListPushPending'
+        failedCampaignCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
       required:
         - totalMediaBuys
         - updatedCount
@@ -81111,6 +81966,42 @@ components:
           minimum: 0
           maximum: 9007199254740991
         skippedCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        sellerUpdatedCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        sellerFailedCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        enforcedByAnotherRouteCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        pausedCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        pauseFailedCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        actionRequired:
+          type: array
+          items:
+            $ref: '#/components/schemas/save_campaign_success_PropertyListPushActionRequired'
+        pendingCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        pendingSellerApproval:
+          type: array
+          items:
+            $ref: '#/components/schemas/save_campaign_success_PropertyListPushPending'
+        failedCampaignCount:
           type: integer
           minimum: 0
           maximum: 9007199254740991
@@ -81430,7 +82321,7 @@ components:
       maxLength: 255
     save_creative_request_SourceAssetsItemMakePrimary:
       type: boolean
-    save_creative_request_ClickUrl:
+    save_creative_request_LandingPageUrl:
       type: string
       format: uri
       description: URL to add as asset (must be http/https)
@@ -81438,6 +82329,79 @@ components:
       type: string
       format: uri
       description: URL to add as asset (must be http/https)
+    save_creative_success_DuplicateCreativeSuccess:
+      type: object
+      properties:
+        action:
+          type: string
+          const: duplicated
+        sourceCreativeId:
+          type: string
+        creative:
+          $ref: '#/components/schemas/save_creative_success_CreativeDuplicate'
+        replayed:
+          type: boolean
+      required:
+        - action
+        - sourceCreativeId
+        - creative
+        - replayed
+      additionalProperties: false
+    save_creative_success_CreativeDuplicate:
+      type: object
+      properties:
+        creativeId:
+          type: string
+        name:
+          type: string
+        campaignIds:
+          type: array
+          items:
+            type: string
+        stateRevision:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+      required:
+        - creativeId
+        - name
+        - campaignIds
+        - stateRevision
+      additionalProperties: false
+    save_creative_success_SaveCreativeLibraryRoleSuccess:
+      type: object
+      properties:
+        action:
+          type: string
+          const: library_role_updated
+        creative:
+          $ref: '#/components/schemas/save_creative_success_SaveCreativeLibraryRoleCreative'
+        replayed:
+          type: boolean
+      required:
+        - action
+        - creative
+        - replayed
+      additionalProperties: false
+    save_creative_success_SaveCreativeLibraryRoleCreative:
+      type: object
+      properties:
+        creativeId:
+          type: string
+        libraryRole:
+          type: string
+          enum:
+            - evergreen
+            - reference
+        stateRevision:
+          type: integer
+          exclusiveMinimum: 0
+          maximum: 9007199254740991
+      required:
+        - creativeId
+        - libraryRole
+        - stateRevision
+      additionalProperties: false
     save_creative_success_Creative:
       type: object
       properties:
@@ -83808,6 +84772,26 @@ components:
         - outcome
         - action
         - agentId
+      additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessAdServerForm:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: ad_server_form
+        action:
+          type: string
+          const: ad_server_form
+        adServerType:
+          type: string
+        serviceAccountEmail:
+          type:
+            - string
+            - 'null'
+      required:
+        - outcome
+        - action
+        - adServerType
       additionalProperties: {}
     save_inventory_source_success_SaveInventorySourceSuccessLegacyCreated:
       type: object
@@ -88573,25 +89557,64 @@ components:
       type: object
       properties:
         totalMediaBuys:
-          type: integer
-          minimum: 0
-          maximum: 9007199254740991
-          description: >-
-            Active media buys found whose advertisers reference this list. Each received an update_media_buy call with
-            the refreshed list reference.
-          example: 4
+          $ref: '#/components/schemas/save_property_list_success_PropertyListSaveCascadeSummaryTotalMediaBuys'
         updatedCount:
-          type: integer
-          minimum: 0
-          maximum: 9007199254740991
-          description: Active media buys that were successfully notified of the updated list
-          example: 3
+          $ref: '#/components/schemas/save_property_list_success_PropertyListSaveCascadeSummaryUpdatedCount'
         failedCount:
-          type: integer
-          minimum: 0
-          maximum: 9007199254740991
-          description: Active media buys where the update_media_buy call failed. See server logs for details.
+          $ref: '#/components/schemas/save_property_list_success_PropertyListSaveCascadeSummaryFailedCount'
+        sellerUpdatedCount:
+          description: >-
+            Active media buys whose seller confirmed an update_media_buy call. Present whenever at least one active
+            media buy was checked.
+          example: 2
+          $ref: '#/components/schemas/save_property_list_success_PropertyListSaveCascadeSummarySellerUpdatedCount'
+        sellerFailedCount:
+          description: >-
+            Active media buys whose update_media_buy call failed. Present whenever at least one active media buy was
+            checked.
           example: 1
+          $ref: '#/components/schemas/save_property_list_success_PropertyListSaveCascadeSummarySellerFailedCount'
+        enforcedByAnotherRouteCount:
+          description: >-
+            Active media buys proved enforceable by another route, so no update_media_buy call was needed. Present
+            whenever at least one active media buy was checked for enforcement.
+          example: 1
+          $ref: '#/components/schemas/save_property_list_success_PropertyListSaveCascadeSummaryEnforcedByAnotherRouteCount'
+        pausedCount:
+          description: >-
+            Active media buys that were paused because they did not take the change or no route enforces their lists.
+            Present whenever at least one active media buy was checked.
+          example: 1
+          $ref: '#/components/schemas/save_property_list_success_PropertyListSaveCascadeSummaryPausedCount'
+        pauseFailedCount:
+          description: >-
+            Active media buys that needed pausing but could not be paused. Present whenever at least one active media
+            buy was checked.
+          example: 0
+          $ref: '#/components/schemas/save_property_list_success_PropertyListSaveCascadeSummaryPauseFailedCount'
+        failedCampaignCount:
+          description: >-
+            Present only when the push could not run for one or more campaigns at all. Their active media buys are not
+            counted above and were neither updated nor paused; save the list again to retry.
+          example: 0
+          $ref: '#/components/schemas/save_property_list_success_PropertyListSaveCascadeSummaryFailedCampaignCount'
+        pendingCount:
+          description: >-
+            Active media buys whose seller has not yet confirmed the change, either because it queued the change or
+            because the shared cascade deadline elapsed before a push completed or started. They remain pending for the
+            buyer to retry or follow up. Present whenever at least one active media buy was checked.
+          example: 0
+          $ref: '#/components/schemas/save_property_list_success_PropertyListSaveCascadeSummaryPendingCount'
+        pendingSellerApproval:
+          description: >-
+            One entry per active media buy awaiting seller confirmation, including buys whose campaign had not started
+            before the shared cascade deadline. Present whenever at least one active media buy was checked.
+          $ref: '#/components/schemas/save_property_list_success_PropertyListSaveCascadeSummaryPendingSellerApproval'
+        actionRequired:
+          description: >-
+            One entry per active media buy that did not take the change or whose property lists no route enforces after
+            it; every other checked buy took it. Present whenever at least one active media buy was checked.
+          $ref: '#/components/schemas/save_property_list_success_PropertyListSaveCascadeSummaryActionRequired'
         errorMessage:
           description: >-
             Restore committed, but active-buy updates could not be completed. Counts are unavailable when this field is
@@ -88602,6 +89625,259 @@ components:
         - updatedCount
         - failedCount
       additionalProperties: false
+    save_property_list_success_PropertyListPushPending:
+      type: object
+      properties:
+        mediaBuyId:
+          type: string
+          description: The media buy affected
+      required:
+        - mediaBuyId
+      additionalProperties: false
+      description: An active media buy whose seller has not yet confirmed the property list change.
+    save_property_list_success_PropertyListPushActionRequired:
+      oneOf:
+        - type: object
+          properties:
+            mediaBuyId:
+              type: string
+              description: The media buy affected
+            outcome:
+              type: string
+              const: paused
+              description: The buy was paused. It stays paused until the buyer resumes it.
+            reason:
+              $ref: '#/components/schemas/save_property_list_success_PropertyListPushActionRequiredReason'
+          required:
+            - mediaBuyId
+            - outcome
+            - reason
+          additionalProperties: false
+        - type: object
+          properties:
+            mediaBuyId:
+              type: string
+              description: The media buy affected
+            outcome:
+              type: string
+              const: pause_failed
+              description: The buy could not be paused. It may still be delivering without its property lists enforced.
+            reason:
+              $ref: '#/components/schemas/save_property_list_success_PropertyListPushActionRequiredReason'
+            pauseError:
+              type: object
+              properties:
+                code:
+                  type: string
+                message:
+                  type: string
+              required:
+                - code
+                - message
+              additionalProperties: false
+              description: Why the pause failed
+          required:
+            - mediaBuyId
+            - outcome
+            - reason
+            - pauseError
+          additionalProperties: false
+      description: >-
+        An active media buy that did not take a property list change, or whose property lists no route enforces after
+        it, and needs the buyer to act.
+    save_property_list_success_PropertyListCascadeSummary:
+      type: object
+      properties:
+        totalMediaBuys:
+          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryTotalMediaBuys'
+        updatedCount:
+          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryUpdatedCount'
+        failedCount:
+          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryFailedCount'
+        sellerUpdatedCount:
+          description: >-
+            Active media buys whose seller confirmed an update_media_buy call. Present whenever at least one active
+            media buy was checked.
+          example: 2
+          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummarySellerUpdatedCount'
+        sellerFailedCount:
+          description: >-
+            Active media buys whose update_media_buy call failed. Present whenever at least one active media buy was
+            checked.
+          example: 1
+          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummarySellerFailedCount'
+        enforcedByAnotherRouteCount:
+          description: >-
+            Active media buys proved enforceable by another route, so no update_media_buy call was needed. Present
+            whenever at least one active media buy was checked for enforcement.
+          example: 1
+          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryEnforcedByAnotherRouteCount'
+        pausedCount:
+          description: >-
+            Active media buys that were paused because they did not take the change or no route enforces their lists.
+            Present whenever at least one active media buy was checked.
+          example: 1
+          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryPausedCount'
+        pauseFailedCount:
+          description: >-
+            Active media buys that needed pausing but could not be paused. Present whenever at least one active media
+            buy was checked.
+          example: 0
+          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryPauseFailedCount'
+        failedCampaignCount:
+          description: >-
+            Present only when the push could not run for one or more campaigns at all. Their active media buys are not
+            counted above and were neither updated nor paused; save the list again to retry.
+          example: 0
+          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryFailedCampaignCount'
+        pendingCount:
+          description: >-
+            Active media buys whose seller has not yet confirmed the change, either because it queued the change or
+            because the shared cascade deadline elapsed before a push completed or started. They remain pending for the
+            buyer to retry or follow up. Present whenever at least one active media buy was checked.
+          example: 0
+          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryPendingCount'
+        pendingSellerApproval:
+          description: >-
+            One entry per active media buy awaiting seller confirmation, including buys whose campaign had not started
+            before the shared cascade deadline. Present whenever at least one active media buy was checked.
+          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryPendingSellerApproval'
+        actionRequired:
+          description: >-
+            One entry per active media buy that did not take the change or whose property lists no route enforces after
+            it; every other checked buy took it. Present whenever at least one active media buy was checked.
+          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryActionRequired'
+      required:
+        - totalMediaBuys
+        - updatedCount
+        - failedCount
+      additionalProperties: false
+      description: Summary of the retroactive push of this updated property list to active media buys.
+    save_property_list_success_PropertyListSaveCascadeSummaryTotalMediaBuys:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: Active media buys found whose campaigns this list change applies to.
+      example: 4
+    save_property_list_success_PropertyListSaveCascadeSummaryUpdatedCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: >-
+        Active media buys that took the change: their seller confirmed an update_media_buy call with the refreshed list
+        reference, or another route already enforces their lists.
+      example: 3
+    save_property_list_success_PropertyListSaveCascadeSummaryFailedCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: >-
+        Active media buys that did not take the change: their update_media_buy call failed, or no route enforces their
+        lists after it, so they were paused without an update. See actionRequired for each one.
+      example: 1
+    save_property_list_success_PropertyListSaveCascadeSummarySellerUpdatedCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    save_property_list_success_PropertyListSaveCascadeSummarySellerFailedCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    save_property_list_success_PropertyListSaveCascadeSummaryEnforcedByAnotherRouteCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    save_property_list_success_PropertyListSaveCascadeSummaryPausedCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    save_property_list_success_PropertyListSaveCascadeSummaryPauseFailedCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    save_property_list_success_PropertyListSaveCascadeSummaryFailedCampaignCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    save_property_list_success_PropertyListSaveCascadeSummaryPendingCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    save_property_list_success_PropertyListSaveCascadeSummaryPendingSellerApproval:
+      type: array
+      items:
+        $ref: '#/components/schemas/save_property_list_success_PropertyListPushPending'
+    save_property_list_success_PropertyListSaveCascadeSummaryActionRequired:
+      type: array
+      items:
+        $ref: '#/components/schemas/save_property_list_success_PropertyListPushActionRequired'
+    save_property_list_success_PropertyListPushActionRequiredReason:
+      type: string
+      enum:
+        - list_update_not_applied
+        - list_not_enforceable
+      description: >-
+        Why the buy needs action. `list_update_not_applied`: the seller did not take the list change.
+        `list_not_enforceable`: after the change, no route enforces every property list that applies to the buy (its
+        seller does not apply the list, and its products do not name only sites and apps the list allows).
+    save_property_list_success_PropertyListCascadeSummaryTotalMediaBuys:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: Active media buys found whose campaigns this list change applies to.
+      example: 4
+    save_property_list_success_PropertyListCascadeSummaryUpdatedCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: >-
+        Active media buys that took the change: their seller confirmed an update_media_buy call with the refreshed list
+        reference, or another route already enforces their lists.
+      example: 3
+    save_property_list_success_PropertyListCascadeSummaryFailedCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: >-
+        Active media buys that did not take the change: their update_media_buy call failed, or no route enforces their
+        lists after it, so they were paused without an update. See actionRequired for each one.
+      example: 1
+    save_property_list_success_PropertyListCascadeSummarySellerUpdatedCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    save_property_list_success_PropertyListCascadeSummarySellerFailedCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    save_property_list_success_PropertyListCascadeSummaryEnforcedByAnotherRouteCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    save_property_list_success_PropertyListCascadeSummaryPausedCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    save_property_list_success_PropertyListCascadeSummaryPauseFailedCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    save_property_list_success_PropertyListCascadeSummaryFailedCampaignCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    save_property_list_success_PropertyListCascadeSummaryPendingCount:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    save_property_list_success_PropertyListCascadeSummaryPendingSellerApproval:
+      type: array
+      items:
+        $ref: '#/components/schemas/save_property_list_success_PropertyListPushPending'
+    save_property_list_success_PropertyListCascadeSummaryActionRequired:
+      type: array
+      items:
+        $ref: '#/components/schemas/save_property_list_success_PropertyListPushActionRequired'
     save_rfp_request_i:
       type: string
       description: >-
@@ -89628,6 +90904,21 @@ components:
         - MXN
         - BRL
         - ZAR
+    save_seller_request_SourceDecisionRelationshipId:
+      type: string
+      maxLength: 19
+      pattern: ^[1-9]\d*$
+      description: From get(account_relationship).
+    save_seller_request_SourceDecisionInventorySourceKey:
+      type: string
+      minLength: 1
+      maxLength: 255
+      description: A key from the relationship sources.
+    save_seller_request_SourceDecisionExpectedVersion:
+      type: integer
+      minimum: 0
+      maximum: 2147483647
+      description: The source's expectedVersion.
     save_seller_request_ListingChannelsItem:
       type: string
       enum:
@@ -89769,6 +91060,43 @@ components:
         - action
         - intakeId
         - decision
+      additionalProperties: {}
+    save_seller_success_SaveSellerSuccessSourceDecisionRecorded:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: source_decision_recorded
+        action:
+          type: string
+          const: source_decision_recorded
+        relationshipId:
+          type: string
+        inventorySourceKey:
+          type: string
+        decision:
+          type: string
+          enum:
+            - bound
+            - not_required
+        sourceExternalAccountId:
+          type:
+            - string
+            - 'null'
+        version:
+          anyOf:
+            - type: integer
+              exclusiveMinimum: 0
+              maximum: 9007199254740991
+            - type: 'null'
+      required:
+        - outcome
+        - action
+        - relationshipId
+        - inventorySourceKey
+        - decision
+        - sourceExternalAccountId
+        - version
       additionalProperties: {}
     save_seller_success_SaveSellerSuccessPreview:
       type: object
