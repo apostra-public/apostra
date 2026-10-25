@@ -23287,14 +23287,8 @@ paths:
                                 properties:
                                   start:
                                     type: string
-                                    format: date-time
-                                    pattern: >-
-                                      ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                   end:
                                     type: string
-                                    format: date-time
-                                    pattern: >-
-                                      ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                   timezone:
                                     type: string
                                     minLength: 1
@@ -23317,9 +23311,6 @@ paths:
                                 maximum: 9007199254740991
                               next_expected_at:
                                 type: string
-                                format: date-time
-                                pattern: >-
-                                  ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                               pagination:
                                 $ref: '#/components/schemas/get_delivery_success_DeliverySummaryPagination'
                               sandbox:
@@ -23634,18 +23625,12 @@ paths:
                                           const: reporting_delayed
                                     expected_availability:
                                       type: string
-                                      format: date-time
-                                      pattern: >-
-                                        ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                     is_adjusted:
                                       type: boolean
                                     is_final:
                                       type: boolean
                                     finalized_at:
                                       type: string
-                                      format: date-time
-                                      pattern: >-
-                                        ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                     pricing_model:
                                       $ref: >-
                                         #/components/schemas/get_delivery_success_DeliverySummaryMediaBuyDeliveriesItemPricingModel
@@ -23977,9 +23962,6 @@ paths:
                                             type: boolean
                                           finalized_at:
                                             type: string
-                                            format: date-time
-                                            pattern: >-
-                                              ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z))$
                                           measurement_window:
                                             type: string
                                             maxLength: 50
@@ -28788,6 +28770,7 @@ paths:
                     - source_diagnostics
                     - seller_setup
                     - demo_seller
+                    - connect_sales_agent
                     - modular_inventory_source
                     - modular_source_setup
                     - modular_inventory_feed
@@ -34969,7 +34952,9 @@ paths:
                   description: Required to move either approval to auto. Confirms nobody will review those.
                   type: boolean
                 advertisingPolicyDisclosure:
-                  description: Policy sections to show buyers on the listing. Empty hides them.
+                  description: >-
+                    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote
+                    the rule a creative broke.
                   maxItems: 2
                   type: array
                   items:
@@ -37471,7 +37456,12 @@ paths:
                                       type: string
                                     phase:
                                       type: string
-                                      const: draft
+                                      enum:
+                                        - draft
+                                        - pendingApproval
+                                        - active
+                                    willStart:
+                                      type: boolean
                                     budget:
                                       $ref: '#/components/schemas/save_campaign_success_LaunchMediaBuysItemBudget'
                                     sellerName:
@@ -40515,7 +40505,9 @@ paths:
                   required:
                     - connectionId
                   additionalProperties: false
-                  description: Leave unset for funded image drafts unless user names an engine. See Creative Engines guide.
+                  description: >-
+                    Leave unset unless the buyer names a connected engine. The server chooses a compatible connected or
+                    Scope3-funded engine.
                 draft:
                   description: Copy exact user brief to request.creative_brief.prompt; requested count to request.variant_count.
                   type: object
