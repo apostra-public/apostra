@@ -782,7 +782,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
         /**
@@ -1020,7 +1020,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
         /**
@@ -1258,7 +1258,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
         /**
@@ -1492,7 +1492,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId: string;
         /**
@@ -1727,7 +1727,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId: string;
         /**
@@ -1966,7 +1966,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId: string;
         /**
@@ -2204,7 +2204,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId: string;
         /**
@@ -2671,7 +2671,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId: string;
         /**
@@ -2906,7 +2906,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
         /**
@@ -3141,7 +3141,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
         /**
@@ -3376,10 +3376,6 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
-         */
-        advertiserId?: string;
-        /**
          * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
          */
         reportId?: string;
@@ -3577,6 +3573,242 @@ export type GetData = {
          * For kind proposal with include products: the cursor from the previous products page of the same proposal.
          */
         proposalProductsCursor?: string;
+        advertiserId?: never;
+    }) | (unknown & {
+        kind: 'wholesale_product';
+        /**
+         * The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.
+         */
+        id: string;
+        /**
+         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         */
+        after?: string;
+        /**
+         * For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.
+         */
+        through?: string;
+        /**
+         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         */
+        limit?: number;
+        /**
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Deprecated: send buyerAccountId instead.
+         *
+         * @deprecated
+         */
+        buyerCustomerId?: number;
+        /**
+         * Required for kind member: the account the member belongs to, this account or a direct child.
+         */
+        memberAccountId?: number;
+        /**
+         * The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.
+         */
+        accountId?: number;
+        /**
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
+         */
+        advertiserId: string;
+        /**
+         * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
+         */
+        reportId?: string;
+        /**
+         * For kind property_list: where to start the next page of identifiers, from the previous read.
+         */
+        identifierOffset?: number;
+        /**
+         * For kind property_list: which identifiers to page through: all (the default), unresolved, or registered.
+         */
+        identifierCategory?: 'all' | 'unresolved' | 'registered';
+        /**
+         * For kind seller with include products and advertiserId: the productQueryId from the previous read, to poll products that were still loading.
+         */
+        productQueryId?: string;
+        /**
+         * For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.
+         */
+        productRevision?: number;
+        /**
+         * For kind agent with include diagnostics: one validation run id taken from validationRuns.
+         */
+        validationRunId?: string;
+        /**
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         */
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        /**
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.
+         */
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        /**
+         * For kind catalog with include items: which items to return and the cursor for the next page.
+         */
+        items?: {
+            /**
+             * Filters for the catalog items page; every filter given must match.
+             */
+            filter?: {
+                /**
+                 * Only catalog items with these exact AdCP item keys (e.g. hotel_id), up to 50.
+                 */
+                ids?: Array<string>;
+                /**
+                 * Only catalog items with these exact product GTINs, up to 50.
+                 */
+                gtins?: Array<string>;
+                /**
+                 * Only catalog items carrying any of these tags.
+                 */
+                tags?: Array<string>;
+                /**
+                 * Only catalog items in exactly this category.
+                 */
+                category?: string;
+                /**
+                 * Only catalog items whose text contains this phrase.
+                 */
+                text?: string;
+            };
+            /**
+             * The cursor from the previous catalog items page.
+             */
+            cursor?: string;
+        };
+        /**
+         * For kind material: which revision to read, paging for each collection, and selectors that narrow them.
+         */
+        options?: {
+            /**
+             * Read this exact past source revision instead of the current one.
+             */
+            sourceRevision?: number;
+            /**
+             * Read this rendition of the source revision; omit for the active rendition.
+             */
+            renditionRevision?: number;
+            /**
+             * Paging for each collection in a material read. A candidates page needs no include; a page for any other collection applies only when you also request its matching include.
+             */
+            pages?: {
+                /**
+                 * Page through the extracted facts proposed for the playbook, rules, products, or seller profile. Default 25 rows; no include needed.
+                 */
+                candidates?: GetRequestOptionsPagesCandidates;
+                /**
+                 * Page through extracted text blocks in reading order. Needs include rendition_blocks; default 50 rows.
+                 */
+                rendition_blocks?: GetRequestOptionsPagesRenditionBlocks;
+                /**
+                 * Page through extracted images. Needs include visual_assets; default 25 rows, at most 50.
+                 */
+                visual_assets?: GetRequestOptionsPagesVisualAssets;
+                /**
+                 * Page through extraction warnings and errors. Needs include extraction_diagnostics; default 50 rows.
+                 */
+                extraction_diagnostics?: GetRequestOptionsPagesExtractionDiagnostics;
+                /**
+                 * Page through records of this material being used in RFP responses. Needs include composition_receipts; default 50 rows.
+                 */
+                composition_receipts?: GetRequestOptionsPagesCompositionReceipts;
+                /**
+                 * Page through where this material was used. Needs include usage; at most 48 rows, sent to the app rather than to you.
+                 */
+                usage?: GetRequestOptionsPagesUsage;
+            };
+            /**
+             * Narrow the text blocks, images, and usage returned. A selector is ignored for collections it does not apply to.
+             */
+            select?: {
+                /**
+                 * Keep only text blocks of these kinds, such as heading, table, or speaker_notes.
+                 */
+                blockKinds?: Array<'heading' | 'paragraph' | 'list' | 'table' | 'caption' | 'speaker_notes' | 'ocr' | 'accessibility_text' | 'other'>;
+                /**
+                 * Limit text blocks, images, and usage to one page, slide, or sheet by its unit ID.
+                 */
+                unitId?: string;
+                /**
+                 * Keep only images of these kinds, such as photo, logo, or chart.
+                 */
+                assetKinds?: Array<'photo' | 'illustration' | 'logo' | 'chart' | 'diagram' | 'screenshot' | 'background' | 'other'>;
+                /**
+                 * Keep only images whose reuse rights are any of these, for example allowed or requires_approval.
+                 */
+                reusePolicies?: Array<'allowed' | 'requires_approval' | 'prohibited' | 'unknown'>;
+                /**
+                 * Keep only images whose extraction finished as ready, degraded, or failed.
+                 */
+                assetStatuses?: Array<'ready' | 'degraded' | 'failed'>;
+            };
+        };
+        /**
+         * For kind playbook: read this past version with its content, for example to save it again as current.
+         */
+        version?: number;
+        /**
+         * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
+         */
+        subscriptionsOffset?: number;
+        /**
+         * For kind connection: where to start the next page of provider accounts found on the connection.
+         */
+        connectionAccountsOffset?: number;
+        /**
+         * For kind connection: where to start the next page of advertiser-to-account mappings.
+         */
+        connectionMappingsOffset?: number;
+        /**
+         * Required for kind connection with include inventory: the accounts[].id whose event sources and audiences to list.
+         */
+        connectionAccountId?: string;
+        /**
+         * For kind connection with include inventory: where to start the next page, 50 per page.
+         */
+        connectionInventoryOffset?: number;
+        /**
+         * For kind connection with include inventory: limit the page to seller audiences or event sources.
+         */
+        connectionInventoryObjectType?: 'audience' | 'event_source';
+        /**
+         * For kind connection: the seller or creative engine you expect this connection to reach. The read fails if it reaches another one.
+         */
+        connectionTarget?: {
+            /**
+             * Whether you expect a seller or a creative engine.
+             */
+            kind: 'seller' | 'creative_engine';
+            /**
+             * The id of the seller or creative engine you expect.
+             */
+            id: string;
+        };
+        /**
+         * For kind rfp_turn: where to start the next page of feedback, 20 per page.
+         */
+        feedbackOffset?: number;
+        /**
+         * For kind rfp_turn: where to start the next page of representations, 50 per page. Not with representationCursor.
+         */
+        representationOffset?: number;
+        /**
+         * For kind rfp_turn: the representations cursor from the previous read, which keeps pages stable. Not with representationOffset.
+         */
+        representationCursor?: string;
+        /**
+         * For kind audience: where to start the next page of audiences, 50 per page; default 0.
+         */
+        audienceOffset?: number;
+        /**
+         * For kind proposal with include products: the cursor from the previous products page of the same proposal.
+         */
+        proposalProductsCursor?: string;
+        sourceId?: never;
     }) | (unknown & {
         kind: 'material';
         /**
@@ -3614,7 +3846,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
         /**
@@ -3852,7 +4084,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
         /**
@@ -4090,7 +4322,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
         /**
@@ -4328,7 +4560,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
         /**
@@ -4566,7 +4798,7 @@ export type GetData = {
          */
         accountId?: number;
         /**
-         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
          */
         advertiserId?: string;
         /**
@@ -7157,9 +7389,39 @@ export type GetStatusResponses = {
                         summary: string;
                         [key: string]: unknown;
                     } | null;
+                    /**
+                     * Independent facts about the agent; a key that does not apply to its kind is null.
+                     */
+                    states: {
+                        endpointRegistered: boolean | null;
+                        storefronts: {
+                            total: number;
+                            listed: number;
+                            private: number;
+                        } | null;
+                        certified: boolean | null;
+                        listedForOtherOrganizations: boolean | null;
+                        latestTest: 'passed' | 'failed' | null;
+                        credential: {
+                            issued: boolean;
+                            authenticated: boolean;
+                        } | null;
+                    };
+                    /**
+                     * Deprecated: read `states`. Removed after 3 Dec 2026.
+                     */
                     stage: GetStatusSuccessAgentsResultsItemStage;
+                    /**
+                     * Deprecated: read `states`. Removed after 3 Dec 2026.
+                     */
                     finalStage: GetStatusSuccessAgentsResultsItemFinalStage;
+                    /**
+                     * Deprecated: read `states`. Removed after 3 Dec 2026.
+                     */
                     nextStage: GetStatusSuccessAgentsResultsItemNextStage | null;
+                    /**
+                     * Deprecated: the headline finding says what to do next. Removed after 3 Dec 2026.
+                     */
                     stuckOn: {
                         reason: string;
                         nextAction: {
@@ -8985,7 +9247,7 @@ export type OpenCampaignsPageSuccessPageHumanHandoffRequired = {
         instruction: 'Show the account and action. Open only at the user’s request; otherwise return the URL. Do not log or post this link publicly.';
     };
     page: {
-        resourceUri: 'ui://agentic-api/conversation-history/mcp-app.html' | 'ui://agentic-api/agent-v2/mcp-app.html' | 'ui://agentic-api/developer-home/mcp-app.html' | 'ui://agentic-api/agents/mcp-app.html' | 'ui://agentic-api/create-agent/mcp-app.html' | 'ui://agentic-api/claim-agent/mcp-app.html' | 'ui://agentic-api/configure-agent-connection/mcp-app.html' | 'ui://agentic-api/register-agent-observed-revision/mcp-app.html' | 'ui://agentic-api/buyer-account-admission/mcp-app.html' | 'ui://agentic-api/tars-org-supply-asks/mcp-app.html' | 'ui://agentic-api/tars-run-rate/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-library/mcp-app.html' | 'ui://agentic-api/tars-approved-deck-modules/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-operations/mcp-app.html' | 'ui://agentic-api/business-rules/mcp-app.html' | 'ui://agentic-api/demo-storefront/mcp-app.html' | 'ui://agentic-api/modular-inventory-source/mcp-app.html' | 'ui://agentic-api/modular-connect/mcp-app.html' | 'ui://agentic-api/source-discovery-preview/mcp-app.html' | 'ui://agentic-api/partner-connection/mcp-app.html' | 'ui://agentic-api/agent-certification/mcp-app.html' | 'ui://agentic-api/agent-sources/mcp-app.html' | 'ui://agentic-api/agent-overview/mcp-app.html' | 'ui://agentic-api/agent-webhooks/mcp-app.html' | 'ui://agentic-api/modular-avails-commit/mcp-app.html' | 'ui://agentic-api/plan-billing/mcp-app.html' | 'ui://agentic-api/connections/mcp-app.html' | 'ui://agentic-api/creative-engines/mcp-app.html' | 'ui://agentic-api/all-advertisers-home/mcp-app.html' | 'ui://agentic-api/add-advertiser/mcp-app.html' | 'ui://agentic-api/campaigns/mcp-app.html' | 'ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html' | 'ui://agentic-api/creative-library-v3/mcp-app.html' | 'ui://agentic-api/upload-creative-asset/mcp-app.html' | 'ui://agentic-api/creative-composer-task/mcp-app.html' | 'ui://agentic-api/variant-gallery/mcp-app.html' | 'ui://agentic-api/seller-setup/mcp-app.html' | 'ui://agentic-api/approvals/mcp-app.html' | 'ui://agentic-api/notifications/mcp-app.html' | 'ui://agentic-api/buyer-notifications/mcp-app.html' | 'ui://agentic-api/buyer-webhooks/mcp-app.html' | 'ui://agentic-api/proposal-pass-v3/mcp-app.html' | 'ui://agentic-api/sessions/mcp-app.html' | 'ui://agentic-api/seller-dashboard/mcp-app.html' | 'ui://agentic-api/seller-dashboard-v3/mcp-app.html' | 'ui://agentic-api/product-marketing-v3/mcp-app.html' | 'ui://agentic-api/library/mcp-app.html' | 'ui://agentic-api/integrations/mcp-app.html' | 'ui://agentic-api/release-notes/mcp-app.html' | 'ui://agentic-api/playbook/mcp-app.html' | 'ui://agentic-api/media-kit/mcp-app.html' | 'ui://agentic-api/business-profile/mcp-app.html' | 'ui://agentic-api/buyer-discounts/mcp-app.html' | 'ui://agentic-api/sponsored-buyers/mcp-app.html' | 'ui://agentic-api/pending-operations/mcp-app.html' | 'ui://agentic-api/storefront-briefs/mcp-app.html' | 'ui://agentic-api/merchandising-simulator/mcp-app.html' | 'ui://agentic-api/media-buys/mcp-app.html' | 'ui://agentic-api/media-buy-timeline/mcp-app.html' | 'ui://agentic-api/components/mcp-app.html' | 'ui://agentic-api/seller-accounts/mcp-app.html';
+        resourceUri: 'ui://agentic-api/conversation-history/mcp-app.html' | 'ui://agentic-api/agent-v2/mcp-app.html' | 'ui://agentic-api/developer-home/mcp-app.html' | 'ui://agentic-api/agents/mcp-app.html' | 'ui://agentic-api/create-agent/mcp-app.html' | 'ui://agentic-api/claim-agent/mcp-app.html' | 'ui://agentic-api/configure-agent-connection/mcp-app.html' | 'ui://agentic-api/register-agent-observed-revision/mcp-app.html' | 'ui://agentic-api/buyer-account-admission/mcp-app.html' | 'ui://agentic-api/tars-org-supply-asks/mcp-app.html' | 'ui://agentic-api/tars-run-rate/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-library/mcp-app.html' | 'ui://agentic-api/tars-approved-deck-modules/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-operations/mcp-app.html' | 'ui://agentic-api/business-rules/mcp-app.html' | 'ui://agentic-api/demo-storefront/mcp-app.html' | 'ui://agentic-api/agent-source-credentials/mcp-app.html' | 'ui://agentic-api/property-roster/mcp-app.html' | 'ui://agentic-api/seller-account-feed/mcp-app.html' | 'ui://agentic-api/media-buy-retry/mcp-app.html' | 'ui://agentic-api/modular-inventory-source/mcp-app.html' | 'ui://agentic-api/modular-connect/mcp-app.html' | 'ui://agentic-api/source-discovery-preview/mcp-app.html' | 'ui://agentic-api/partner-connection/mcp-app.html' | 'ui://agentic-api/agent-certification/mcp-app.html' | 'ui://agentic-api/agent-sources/mcp-app.html' | 'ui://agentic-api/agent-overview/mcp-app.html' | 'ui://agentic-api/agent-webhooks/mcp-app.html' | 'ui://agentic-api/modular-avails-commit/mcp-app.html' | 'ui://agentic-api/plan-billing/mcp-app.html' | 'ui://agentic-api/connections/mcp-app.html' | 'ui://agentic-api/creative-engines/mcp-app.html' | 'ui://agentic-api/all-advertisers-home/mcp-app.html' | 'ui://agentic-api/add-advertiser/mcp-app.html' | 'ui://agentic-api/campaigns/mcp-app.html' | 'ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html' | 'ui://agentic-api/creative-library-v3/mcp-app.html' | 'ui://agentic-api/upload-creative-asset/mcp-app.html' | 'ui://agentic-api/creative-composer-task/mcp-app.html' | 'ui://agentic-api/variant-gallery/mcp-app.html' | 'ui://agentic-api/seller-setup/mcp-app.html' | 'ui://agentic-api/approvals/mcp-app.html' | 'ui://agentic-api/notifications/mcp-app.html' | 'ui://agentic-api/buyer-notifications/mcp-app.html' | 'ui://agentic-api/buyer-webhooks/mcp-app.html' | 'ui://agentic-api/proposal-pass-v3/mcp-app.html' | 'ui://agentic-api/sessions/mcp-app.html' | 'ui://agentic-api/seller-dashboard/mcp-app.html' | 'ui://agentic-api/seller-dashboard-v3/mcp-app.html' | 'ui://agentic-api/product-marketing-v3/mcp-app.html' | 'ui://agentic-api/library/mcp-app.html' | 'ui://agentic-api/integrations/mcp-app.html' | 'ui://agentic-api/release-notes/mcp-app.html' | 'ui://agentic-api/playbook/mcp-app.html' | 'ui://agentic-api/media-kit/mcp-app.html' | 'ui://agentic-api/business-profile/mcp-app.html' | 'ui://agentic-api/buyer-discounts/mcp-app.html' | 'ui://agentic-api/sponsored-buyers/mcp-app.html' | 'ui://agentic-api/pending-operations/mcp-app.html' | 'ui://agentic-api/storefront-briefs/mcp-app.html' | 'ui://agentic-api/activity-log/mcp-app.html' | 'ui://agentic-api/merchandising-simulator/mcp-app.html' | 'ui://agentic-api/media-buys/mcp-app.html' | 'ui://agentic-api/media-buy-timeline/mcp-app.html' | 'ui://agentic-api/components/mcp-app.html' | 'ui://agentic-api/seller-accounts/mcp-app.html';
         advertiserId?: string;
         campaignId?: string;
         capability: 'reauthenticate_in_browser' | 'manage_webhooks';
@@ -9799,7 +10061,7 @@ export type OpenPageData = {
         /**
          * Page to open. Owners repair a missing Agent relationship in source_diagnostics.
          */
-        page: 'connect_ad_server' | 'ad_server_source' | 'ad_server_diagnostics' | 'source_diagnostics' | 'seller_setup' | 'demo_seller' | 'modular_inventory_source' | 'modular_source_setup' | 'modular_inventory_feed' | 'listing' | 'discovery_card' | 'media_kit' | 'business_profile' | 'playbook' | 'library' | 'integrations' | 'product_marketing' | 'business_rules' | 'buyer_account_mapping' | 'property_roster' | 'plan_and_billing' | 'buyer_setup' | 'sellers' | 'creative_engines' | 'advertisers' | 'campaigns' | 'campaign_receipt' | 'approvals' | 'release_notes' | 'customer_requests' | 'notifications' | 'webhooks' | 'buyer_proposal_version';
+        page: 'connect_ad_server' | 'ad_server_source' | 'ad_server_diagnostics' | 'source_diagnostics' | 'seller_setup' | 'demo_seller' | 'connect_sales_agent' | 'modular_inventory_source' | 'modular_source_setup' | 'modular_inventory_feed' | 'listing' | 'discovery_card' | 'media_kit' | 'business_profile' | 'playbook' | 'library' | 'integrations' | 'product_marketing' | 'business_rules' | 'buyer_account_mapping' | 'property_roster' | 'plan_and_billing' | 'buyer_setup' | 'sellers' | 'creative_engines' | 'advertisers' | 'campaigns' | 'campaign_receipt' | 'approvals' | 'release_notes' | 'customer_requests' | 'notifications' | 'webhooks' | 'buyer_proposal_version';
         /**
          * Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.
          */
@@ -13553,7 +13815,7 @@ export type SaveBillingData = {
          */
         paymentTerms?: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
         /**
-         * Accept or switch plans. Send alone.
+         * Accept or switch plans; returns approval_required. Send alone.
          */
         plan?: SaveBillingRequestSaveBillingPlan;
         /**
@@ -13697,7 +13959,7 @@ export type SaveBillingRequestSaveBillingPlan = {
      */
     paymentOptionKey?: string;
     /**
-     * Stable key; repeat it to retry.
+     * Stable key; repeat it with the same plan to read the approval outcome.
      */
     idempotencyKey: string;
 };
@@ -13744,33 +14006,16 @@ export type SaveBillingResponses = {
                 accepted: true;
                 acceptedVersion: string;
             };
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            paymentAuthority?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             action: 'terms_not_required';
             terms: {
                 accepted: false;
                 governedByExistingContract: true;
             };
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            paymentAuthority?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             action: 'payment_terms_saved';
             paymentTerms: SaveBillingSuccessPaymentTerms;
             paymentTermsChosen: true;
-            terms?: never;
-            paymentAuthority?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             action: 'billing_saved';
             terms: {
@@ -13784,64 +14029,24 @@ export type SaveBillingResponses = {
             };
             paymentTerms: SaveBillingSuccessPaymentTerms;
             paymentTermsChosen: true;
-            paymentAuthority?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             paymentAuthority: SaveBillingSuccessPendingConfirmationResult;
             action: 'confirmation_required';
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             paymentAuthority: SaveBillingSuccessCaptureLinkIssuedResult;
             action: 'human_action_required';
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             paymentAuthority: SaveBillingSuccessCaptureLinkIssuedResult;
             action: 'payment_authority_pending';
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             paymentAuthority: SaveBillingSuccessCaptureLinkIssuedResult;
             action: 'payment_authority_opened';
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             paymentAuthority: SaveBillingSuccessCaptureLinkIssuedResult;
             action: 'payment_authority_verified';
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             paymentAuthority: SaveBillingSuccessCaptureLinkIssuedResult;
             action: 'payment_authority_expired';
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            plan?: never;
-            offerResponse?: never;
-            renewal?: never;
         } | {
             action: 'plan_accepted';
             plan: {
@@ -13853,24 +14058,12 @@ export type SaveBillingResponses = {
                 termStart: string;
                 termEnd: string;
             };
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            paymentAuthority?: never;
-            offerResponse?: never;
-            renewal?: never;
-        } | {
+        } | SaveBillingSuccessAgentApprovalRequired | {
             action: 'offer_response_recorded';
             offerResponse: {
                 eventId: string;
                 outcome: 'DECLINED' | 'DEFERRED';
             };
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            paymentAuthority?: never;
-            plan?: never;
-            renewal?: never;
         } | {
             action: 'renewal_changed';
             renewal: {
@@ -13879,12 +14072,6 @@ export type SaveBillingResponses = {
                 effectiveAt: string;
                 changeCutoffAt: string;
             };
-            terms?: never;
-            paymentTerms?: never;
-            paymentTermsChosen?: never;
-            paymentAuthority?: never;
-            plan?: never;
-            offerResponse?: never;
         };
         error: null;
     };
@@ -13904,6 +14091,57 @@ export type SaveBillingResponses = {
         };
         error: null;
     };
+};
+
+export type SaveBillingSuccessAgentApproval = {
+    /**
+     * Approval id.
+     */
+    id: string;
+    /**
+     * Kind of sensitive action, for example `buyer_child_account.create`.
+     */
+    kind: string;
+    /**
+     * `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.
+     */
+    state: 'pending' | 'executing' | 'succeeded' | 'failed' | 'rejected' | 'expired';
+    /**
+     * Account the action applies to.
+     */
+    targetCustomerId: string;
+    /**
+     * Role the approver must hold on the account.
+     */
+    requiredRole: 'ADMIN' | 'SUPER_ADMIN' | null;
+    /**
+     * What will happen, in one line. Null once the approval is final.
+     */
+    summary: string | null;
+    /**
+     * Page on our site where a signed-in person approves or rejects the request.
+     */
+    url: string;
+    createdAt: string;
+    expiresAt: string;
+    decidedAt: string | null;
+    completedAt: string | null;
+    /**
+     * Reference to the result once succeeded.
+     */
+    resultReference: {
+        [key: string]: string | number | boolean;
+    } | null;
+    /**
+     * Reason code when the action failed.
+     */
+    failureCode: string | null;
+};
+
+export type SaveBillingSuccessAgentApprovalRequired = {
+    action: 'approval_required';
+    message: string;
+    approval: SaveBillingSuccessAgentApproval;
 };
 
 export type SaveBillingSuccessCaptureLinkIssuedResult = {
@@ -13975,11 +14213,15 @@ export type SaveBusinessRulesData = {
          */
         mediaBuyApproval?: 'auto' | 'manual';
         /**
+         * Guaranteed buys over the ad server forecast: send anyway, or hold for review.
+         */
+        guaranteedOverForecast?: 'overbook' | 'hold_for_review';
+        /**
          * Required to move either approval to auto. Confirms nobody will review those.
          */
         acknowledgeNoHumanReview?: boolean;
         /**
-         * Policy sections to show buyers on the listing. Empty hides them.
+         * Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.
          */
         advertisingPolicyDisclosure?: Array<'brief_acceptance' | 'creative_policy'>;
         /**
@@ -14756,6 +14998,23 @@ export type SaveCampaignData = {
              */
             pacing?: 'even' | 'asap' | 'front_loaded';
         };
+        /**
+         * Operator's fee on the campaign, AdCP adjustment fields: [{name: 'operator_fee', rate: 0.02}] is 2% of gross budget, up to 0.49. [] clears. Only the operator organisation, when enabled; needs a budget. New media buys lock it.
+         */
+        operatorFees?: Array<{
+            /**
+             * The kind of fee. Always `operator_fee`.
+             */
+            name: string;
+            /**
+             * Decimal share of the campaign's gross budget: 0.02 for 2%.
+             */
+            rate: number;
+            /**
+             * Account id of the operator organisation; must be the account's parent organisation, the default.
+             */
+            beneficiary?: string;
+        }>;
         /**
          * Per-seller AdCP 3.2 MediaBuy cap. Null clears it; draft only. Other levels are unavailable.
          */
@@ -16333,7 +16592,8 @@ export type SaveCampaignResponses = {
                 mediaBuys: Array<{
                     mediaBuyId: string;
                     name: string;
-                    phase: 'draft';
+                    phase: 'draft' | 'pendingApproval' | 'active';
+                    willStart?: boolean;
                     budget?: SaveCampaignSuccessLaunchMediaBuysItemBudget;
                     sellerName?: string;
                 }>;
@@ -18304,7 +18564,7 @@ export type SaveCreativeSessionData = {
          */
         idempotencyKey?: string;
         /**
-         * Leave unset for funded image drafts unless user names an engine. See Creative Engines guide.
+         * Leave unset unless the buyer names a connected engine. The server chooses a compatible connected or Scope3-funded engine.
          */
         engine?: {
             /**

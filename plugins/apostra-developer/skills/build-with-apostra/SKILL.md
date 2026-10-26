@@ -45,7 +45,18 @@ plugin, or when instructions were installed separately with `npx skills`.
 In either case, let the host complete OAuth and store the interactive
 credential.
 
-For deterministic server or ETL work, first read the [V3 HTTP guide](https://docs.apostra.com/v3/http-api).
+For local development with the TypeScript SDK, have the person run
+`npx @apostra/cli login` once and approve one account in the browser. Then
+`new Apostra()` with no credential uses that sign-in, with
+`@apostra/sdk@0.39.0` or later in Node. Do not write `APOSTRA_API_KEY` code
+for a script that only runs on the developer's machine. The
+[Apostra CLI](https://docs.apostra.com/v3/cli),
+[SDK quickstart](https://docs.apostra.com/v3/sdk-quickstart) and
+[SDK guide](https://docs.apostra.com/v3/sdk-guide) carry the options, the
+credential order and the limits.
+
+For CI, servers and deployed software, and for deterministic server or ETL
+work, first read the [V3 HTTP guide](https://docs.apostra.com/v3/http-api).
 When an operation appears in its public catalogue, call its fixed
 `POST /api/v3/tools/<operation>` route and generate client types from
 `https://api.apostra.com/api/v3/openapi-3.1.yaml`. Follow the
