@@ -869,7 +869,7 @@
         ]
       }
     ],
-    "summary": "Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Cards stay off MCP."
+    "summary": "Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Accepting a plan needs an administrator to approve it on our site. Cards stay off MCP."
   },
   "save_business_rules": {
     "path": "/tools/save_business_rules",
