@@ -35,7 +35,7 @@ only-include = ["src/apostra", "tests", "examples", "LICENSE", "README.md", "SKI
 strict = true
 
 [tool.pyright]
-include = ["src", "tests/types_valid.py", "tests/test_transport.py", "examples/first_value.py"]
+include = ["src", "tests/types_valid.py", "tests/test_transport.py", "tests/test_cli_login.py", "examples/first_value.py"]
 typeCheckingMode = "strict"
 pythonVersion = "3.11"
 

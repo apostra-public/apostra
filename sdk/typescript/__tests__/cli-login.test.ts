@@ -1,4 +1,5 @@
 import {
+  existsSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
@@ -241,6 +242,7 @@ describe('refresh', () => {
     const old = new Date(Date.now() - 60_000)
     utimesSync(lock, old, old)
     await expect(refreshCliLogin(fake.resource)).resolves.toBeDefined()
+    expect(existsSync(`${lock}.takeover`)).toBe(false)
   })
 })
 

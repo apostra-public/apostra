@@ -1,5 +1,9 @@
 from ._version import __version__ as __version__
 from .client import Apostra as Apostra, AsyncApostra as AsyncApostra
+from .cli_login import (
+    cli_login_token_provider as cli_login_token_provider,
+    cli_login_token_provider_async as cli_login_token_provider_async,
+)
 from .transport import (
     ApostraError as ApostraError,
     AuthenticationError as AuthenticationError,

@@ -190,6 +190,39 @@ export const isFresh = (entry: Pick<CliLoginEntry, 'expiresAt'>) =>
   Date.parse(entry.expiresAt) - FRESH_MARGIN_MS > Date.now()
 
 /**
+ * Remove a lock whose heartbeat stopped, without ever removing a live one.
+ * Only the holder of the takeover guard checks and removes. Checking again
+ * under the guard means a lock another process took after the first check is
+ * fresh and is left alone. A guard a crashed process left behind goes stale
+ * like a lock does. Returns whether this call held the guard, so the caller
+ * retries at once; otherwise it waits like any other contender.
+ */
+function breakStaleLock(fs: NodeFs, lock: string): boolean {
+  const guard = `${lock}.takeover`
+  try {
+    fs.closeSync(fs.openSync(guard, 'wx', 0o600))
+  } catch (error) {
+    if (errorCode(error) !== 'EEXIST') throw error
+    try {
+      if (Date.now() - fs.statSync(guard).mtimeMs > LOCK_STALE_MS)
+        fs.rmSync(guard, { force: true })
+    } catch {
+      // The guard went away between the two calls; the caller retries.
+    }
+    return false
+  }
+  try {
+    if (Date.now() - fs.statSync(lock).mtimeMs > LOCK_STALE_MS)
+      fs.rmSync(lock, { force: true })
+  } catch {
+    // The lock went away; the caller retries.
+  } finally {
+    fs.rmSync(guard, { force: true })
+  }
+  return true
+}
+
+/**
  * Serialise every read-modify-write of the store, across processes. Refresh
  * tokens rotate, so two processes must never present the same one outside the
  * server's reuse grace. A lock older than 30 seconds belongs to a dead process.
@@ -222,10 +255,8 @@ export async function withCliLoginLock<T>(fn: () => Promise<T>): Promise<T> {
     } catch (error) {
       if (errorCode(error) !== 'EEXIST') throw error
       try {
-        const stale = ownerOf()
         if (Date.now() - fs.statSync(lock).mtimeMs > LOCK_STALE_MS) {
-          if (ownerOf() === stale) fs.rmSync(lock, { force: true })
-          continue
+          if (breakStaleLock(fs, lock)) continue
         }
       } catch {
         continue
