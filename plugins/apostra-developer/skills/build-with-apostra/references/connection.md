@@ -53,6 +53,21 @@ installation check pass. Explain a returned readiness blocker and proceed
 only with the work the account can perform. If OAuth cannot complete in the
 current host, give the exact connection action and finish locally testable work.
 
+## Local development with the SDK
+
+For a script that runs only on the developer's machine, ask the person to run
+`npx @apostra/cli login` in their terminal and approve one account in the
+browser. With `@apostra/sdk@0.39.0` or later in Node, `new Apostra()` with no
+credential then uses that sign-in. It is bound to the one account they approved,
+and the SDK never opens a browser. Do not run the login on their behalf, and do
+not ask for a token, key or the stored credentials file. The
+[Apostra CLI](https://docs.apostra.com/v3/cli) page covers options, lifetime and
+storage; the [SDK guide](https://docs.apostra.com/v3/sdk-guide#credentials-and-accounts)
+covers the credential order. Python does not read the sign-in yet.
+
+Do not use `apostra login` in CI, in a container or on a server. Use an API key
+or M2M credential from the deployment's secret manager there.
+
 ## Deployed application
 
 Read [authentication](https://docs.apostra.com/v3/authentication) and its

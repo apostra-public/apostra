@@ -39,9 +39,15 @@ values. Use `access_token` for an existing REST/M2M bearer token or
 `token_provider` for application-managed refresh. `m2m_token_provider` and
 `m2m_token_provider_async` acquire and cache server-side client-credentials
 tokens, refresh 60 seconds before expiry, and share a concurrent refresh. The
-async client requires the async provider. Supply exactly one source. Never
-expose keys or client secrets in browser code, URLs or logs. Credentials are
-neither persisted nor included in exception strings. M2M token refreshes have a
+async client requires the async provider. Supply exactly one source. With no
+explicit credential and no `APOSTRA_API_KEY`, the client uses the login that
+`apostra login` stored for the base URL, if there is one; the SDK never opens
+a browser and writes only to that login's file (refreshed tokens). An explicit
+`account_id` that differs from the login's account raises `ValueError`.
+`cli_login_token_provider` and `cli_login_token_provider_async` expose the
+login as a `token_provider`. Never expose keys or client secrets in browser
+code, URLs or logs. Credentials are never included in exception strings, and
+the only thing the SDK persists is the refreshed tokens of an `apostra login`. M2M token refreshes have a
 30-second deadline by default; pass `timeout` to override it.
 
 ```python
