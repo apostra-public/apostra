@@ -40475,6 +40475,150 @@ paths:
                     intended campaign.
                   type: string
                   minLength: 1
+                previewBulkUpdate:
+                  description: 'Read-only bulk-update preview: selects up to 200 Creatives and returns a 15-minute token.'
+                  type: object
+                  properties:
+                    selection:
+                      type: object
+                      properties:
+                        creativeIds:
+                          description: Creative IDs to intersect with the other selectors.
+                          maxItems: 200
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                        collectionId:
+                          description: Collection whose Creatives must be selected.
+                          type: string
+                          minLength: 1
+                        nameContains:
+                          description: Case-insensitive Creative-name substring to match.
+                          type: string
+                          minLength: 1
+                        createdAfter:
+                          description: Select Creatives created after this timestamp.
+                          type: string
+                          format: date-time
+                          pattern: >-
+                            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                        createdBefore:
+                          description: Select Creatives created before this timestamp.
+                          type: string
+                          format: date-time
+                          pattern: >-
+                            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                        updatedAfter:
+                          description: Select Creatives updated after this timestamp.
+                          type: string
+                          format: date-time
+                          pattern: >-
+                            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                        updatedBefore:
+                          description: Select Creatives updated before this timestamp.
+                          type: string
+                          format: date-time
+                          pattern: >-
+                            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                        formatKind:
+                          description: Canonical format kind to match.
+                          $ref: '#/components/schemas/save_creative_request_PreviewBulkUpdateSelectionFormatKind'
+                        assetType:
+                          description: Creative asset type to match.
+                          type: string
+                          enum:
+                            - IMAGE
+                            - VIDEO
+                            - AUDIO
+                            - HTML
+                            - TEXT
+                            - VAST
+                      additionalProperties: false
+                      description: Creative-selection predicates; all supplied predicates intersect.
+                    update:
+                      type: object
+                      properties:
+                        clickUrl:
+                          description: Replacement click-through URL for every selected Creative.
+                          $ref: '#/components/schemas/save_creative_request_PreviewBulkUpdateUpdateClickUrl'
+                        formatKind:
+                          description: Replacement canonical format kind for every selected Creative.
+                          $ref: '#/components/schemas/save_creative_request_PreviewBulkUpdateUpdateFormatKind'
+                        formatParams:
+                          description: Parameters for the replacement canonical format.
+                          $ref: '#/components/schemas/save_creative_request_PreviewBulkUpdateUpdateFormatParams'
+                        formatOptionRef:
+                          description: Publisher or product canonical format option to apply.
+                          oneOf:
+                            - type: object
+                              properties:
+                                scope:
+                                  type: string
+                                  const: publisher
+                                  description: Resolve the format option from a publisher catalog.
+                                publisher_domain:
+                                  type: string
+                                  minLength: 1
+                                  description: Publisher domain that owns the catalog option.
+                                format_option_id:
+                                  type: string
+                                  minLength: 1
+                                  description: Canonical format option ID from the publisher catalog.
+                              required:
+                                - scope
+                                - publisher_domain
+                                - format_option_id
+                              additionalProperties: false
+                            - type: object
+                              properties:
+                                scope:
+                                  type: string
+                                  const: product
+                                  description: Resolve the format option from the selected product.
+                                format_option_id:
+                                  type: string
+                                  minLength: 1
+                                  description: Canonical format option ID declared by the product.
+                              required:
+                                - scope
+                                - format_option_id
+                              additionalProperties: false
+                      additionalProperties: false
+                      description: Fields to change on every selected Creative.
+                    excludeCreativeIds:
+                      description: Selected Creative IDs to remove from the final batch.
+                      maxItems: 200
+                      type: array
+                      items:
+                        type: string
+                        minLength: 1
+                    limit:
+                      description: Fixed maximum number of Creatives allowed in one batch.
+                      type: number
+                      const: 200
+                  required:
+                    - selection
+                    - update
+                  additionalProperties: false
+                applyBulkUpdate:
+                  description: Apply the exact preview atomically; idempotencyKey is required alongside this field.
+                  type: object
+                  properties:
+                    previewToken:
+                      type: string
+                      format: uuid
+                      pattern: >-
+                        ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                      description: Server-issued bulk preview token, valid for 15 minutes.
+                    selectionDigest:
+                      type: string
+                      pattern: ^sha256:[a-f0-9]{64}$
+                      description: Digest returned by the exact preview being applied.
+                  required:
+                    - previewToken
+                    - selectionDigest
+                  additionalProperties: false
                 campaignIds:
                   description: Replace campaign membership; omit to keep it.
                   maxItems: 200
@@ -40506,45 +40650,12 @@ paths:
                   type: string
                 formatKind:
                   description: Canonical format for a draft or advertiser-level metadata update.
-                  anyOf:
-                    - type: string
-                      const: image
-                    - type: string
-                      const: html5
-                    - type: string
-                      const: display_tag
-                    - type: string
-                      const: image_carousel
-                    - type: string
-                      const: video_hosted
-                    - type: string
-                      const: video_vast
-                    - type: string
-                      const: audio_hosted
-                    - type: string
-                      const: audio_vast
-                    - type: string
-                      const: audio_daast
-                    - type: string
-                      const: sponsored_placement
-                    - type: string
-                      const: native_in_feed
-                    - type: string
-                      const: responsive_creative
-                    - type: string
-                      const: agent_placement
-                    - type: string
-                      const: seller_rendered_stateful_display
-                    - type: string
-                      const: coordinated_placements
-                    - type: string
-                      const: custom
+                  $ref: '#/components/schemas/save_creative_request_FormatKind'
                 formatParams:
                   description: 'Docs: Format parameters.'
+                  $ref: '#/components/schemas/save_creative_request_FormatParams'
                   type: object
-                  propertyNames:
-                    type: string
-                  additionalProperties: {}
+                  additionalProperties: false
                 formatOptionRef:
                   description: Canonical format option; derived from creativeFormatId when supplied.
                   oneOf:
@@ -41305,6 +41416,137 @@ paths:
                   data:
                     oneOf:
                       - $ref: '#/components/schemas/save_creative_success_DuplicateCreativeSuccess'
+                      - $ref: '#/components/schemas/save_creative_success_AgentApprovalRequired'
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: bulk_update_previewed
+                          preview:
+                            type: object
+                            properties:
+                              previewToken:
+                                type: string
+                              expiresAt:
+                                type: string
+                              selectionDigest:
+                                type: string
+                              matchedCount:
+                                type: integer
+                                minimum: -9007199254740991
+                                maximum: 9007199254740991
+                              returnedCount:
+                                type: integer
+                                minimum: -9007199254740991
+                                maximum: 9007199254740991
+                              totalMatches:
+                                type: integer
+                                minimum: -9007199254740991
+                                maximum: 9007199254740991
+                              truncated:
+                                type: boolean
+                              creatives:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    creativeId:
+                                      type: string
+                                    stateRevision:
+                                      type: integer
+                                      minimum: -9007199254740991
+                                      maximum: 9007199254740991
+                                    deliveryAttached:
+                                      type: boolean
+                                  required:
+                                    - creativeId
+                                    - stateRevision
+                                    - deliveryAttached
+                                  additionalProperties: false
+                            required:
+                              - previewToken
+                              - expiresAt
+                              - selectionDigest
+                              - matchedCount
+                              - returnedCount
+                              - totalMatches
+                              - truncated
+                              - creatives
+                            additionalProperties: false
+                        required:
+                          - action
+                          - preview
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: bulk_updated
+                          batch:
+                            type: object
+                            properties:
+                              previewToken:
+                                type: string
+                              selectionDigest:
+                                type: string
+                              matchedCount:
+                                type: integer
+                                minimum: -9007199254740991
+                                maximum: 9007199254740991
+                              updatedCount:
+                                type: integer
+                                minimum: -9007199254740991
+                                maximum: 9007199254740991
+                              unchangedCount:
+                                type: integer
+                                minimum: -9007199254740991
+                                maximum: 9007199254740991
+                              creatives:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    creativeId:
+                                      type: string
+                                    stateRevision:
+                                      type: integer
+                                      minimum: -9007199254740991
+                                      maximum: 9007199254740991
+                                    status:
+                                      type: string
+                                      const: updated
+                                    deliverySync:
+                                      type: string
+                                      enum:
+                                        - not_required
+                                        - queued
+                                        - completed
+                                        - failed
+                                    deliveryOperationIds:
+                                      type: array
+                                      items:
+                                        type: string
+                                  required:
+                                    - creativeId
+                                    - stateRevision
+                                    - status
+                                    - deliverySync
+                                  additionalProperties: false
+                            required:
+                              - previewToken
+                              - selectionDigest
+                              - matchedCount
+                              - updatedCount
+                              - unchangedCount
+                              - creatives
+                            additionalProperties: false
+                          replayed:
+                            type: boolean
+                        required:
+                          - action
+                          - batch
+                          - replayed
+                        additionalProperties: false
                       - type: object
                         properties:
                           creative:
@@ -43504,11 +43746,11 @@ paths:
     post:
       operationId: save_lesson
       summary: >-
-        Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve
+        Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve
         and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session
         note and ask if kind or scope is unclear.
       description: >-
-        Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve
+        Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve
         and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session
         note and ask if kind or scope is unclear.
       security:
@@ -83945,6 +84187,122 @@ components:
       minLength: 1
       maxLength: 8192
       pattern: ^https?:\/\/
+    save_creative_request_PreviewBulkUpdateSelectionFormatKind:
+      anyOf:
+        - type: string
+          const: image
+        - type: string
+          const: html5
+        - type: string
+          const: display_tag
+        - type: string
+          const: image_carousel
+        - type: string
+          const: video_hosted
+        - type: string
+          const: video_vast
+        - type: string
+          const: audio_hosted
+        - type: string
+          const: audio_vast
+        - type: string
+          const: audio_daast
+        - type: string
+          const: sponsored_placement
+        - type: string
+          const: native_in_feed
+        - type: string
+          const: responsive_creative
+        - type: string
+          const: agent_placement
+        - type: string
+          const: seller_rendered_stateful_display
+        - type: string
+          const: coordinated_placements
+        - type: string
+          const: custom
+    save_creative_request_PreviewBulkUpdateUpdateClickUrl:
+      type: string
+      format: uri
+      description: URL to add as asset (must be http/https)
+    save_creative_request_PreviewBulkUpdateUpdateFormatKind:
+      anyOf:
+        - type: string
+          const: image
+        - type: string
+          const: html5
+        - type: string
+          const: display_tag
+        - type: string
+          const: image_carousel
+        - type: string
+          const: video_hosted
+        - type: string
+          const: video_vast
+        - type: string
+          const: audio_hosted
+        - type: string
+          const: audio_vast
+        - type: string
+          const: audio_daast
+        - type: string
+          const: sponsored_placement
+        - type: string
+          const: native_in_feed
+        - type: string
+          const: responsive_creative
+        - type: string
+          const: agent_placement
+        - type: string
+          const: seller_rendered_stateful_display
+        - type: string
+          const: coordinated_placements
+        - type: string
+          const: custom
+    save_creative_request_PreviewBulkUpdateUpdateFormatParams:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    save_creative_request_FormatKind:
+      anyOf:
+        - type: string
+          const: image
+        - type: string
+          const: html5
+        - type: string
+          const: display_tag
+        - type: string
+          const: image_carousel
+        - type: string
+          const: video_hosted
+        - type: string
+          const: video_vast
+        - type: string
+          const: audio_hosted
+        - type: string
+          const: audio_vast
+        - type: string
+          const: audio_daast
+        - type: string
+          const: sponsored_placement
+        - type: string
+          const: native_in_feed
+        - type: string
+          const: responsive_creative
+        - type: string
+          const: agent_placement
+        - type: string
+          const: seller_rendered_stateful_display
+        - type: string
+          const: coordinated_placements
+        - type: string
+          const: custom
+    save_creative_request_FormatParams:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
     save_creative_request_AssetsItemUrl:
       type: string
       format: uri
@@ -84005,6 +84363,121 @@ components:
         - name
         - campaignIds
         - stateRevision
+      additionalProperties: false
+    save_creative_success_AgentApprovalRequired:
+      type: object
+      properties:
+        action:
+          type: string
+          const: approval_required
+        message:
+          type: string
+        approval:
+          $ref: '#/components/schemas/save_creative_success_AgentApproval'
+      required:
+        - action
+        - message
+        - approval
+      additionalProperties: false
+    save_creative_success_AgentApproval:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          pattern: >-
+            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+          description: Approval id.
+        kind:
+          type: string
+          description: Kind of sensitive action, for example `buyer_child_account.create`.
+        state:
+          type: string
+          enum:
+            - pending
+            - executing
+            - succeeded
+            - failed
+            - rejected
+            - expired
+          description: >-
+            `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and
+            `expired` are final.
+        targetCustomerId:
+          type: string
+          description: Account the action applies to.
+        requiredRole:
+          anyOf:
+            - type: string
+              enum:
+                - ADMIN
+                - SUPER_ADMIN
+            - type: 'null'
+          description: Role the approver must hold on the account.
+        summary:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: What will happen, in one line. Null once the approval is final.
+        url:
+          type: string
+          format: uri
+          description: Page on our site where a signed-in person approves or rejects the request.
+        createdAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        expiresAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        decidedAt:
+          anyOf:
+            - type: string
+              format: date-time
+              pattern: >-
+                ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+            - type: 'null'
+        completedAt:
+          anyOf:
+            - type: string
+              format: date-time
+              pattern: >-
+                ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+            - type: 'null'
+        resultReference:
+          anyOf:
+            - type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type:
+                  - string
+                  - number
+                  - boolean
+            - type: 'null'
+          description: Reference to the result once succeeded.
+        failureCode:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Reason code when the action failed.
+      required:
+        - id
+        - kind
+        - state
+        - targetCustomerId
+        - requiredRole
+        - summary
+        - url
+        - createdAt
+        - expiresAt
+        - decidedAt
+        - completedAt
+        - resultReference
+        - failureCode
       additionalProperties: false
     save_creative_success_SaveCreativeLibraryRoleSuccess:
       type: object

@@ -461,11 +461,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveInventorySourceResult], self._request_with_response("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_lesson(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLessonResult:
-        "Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear."
+        "Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear."
         return cast("models.SaveLessonResult", self._request("save_lesson", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_lesson_with_response(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveLessonResult]:
-        "Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear. Returns the data together with response headers and request ID."
+        "Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveLessonResult], self._request_with_response("save_lesson", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_library_request(self, input: models.SaveLibraryRequestInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLibraryRequestResult:
@@ -1054,11 +1054,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveInventorySourceResult], await self._request_with_response("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_lesson(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLessonResult:
-        "Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear."
+        "Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear."
         return cast("models.SaveLessonResult", await self._request("save_lesson", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_lesson_with_response(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveLessonResult]:
-        "Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear. Returns the data together with response headers and request ID."
+        "Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveLessonResult], await self._request_with_response("save_lesson", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_library_request(self, input: models.SaveLibraryRequestInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLibraryRequestResult:
