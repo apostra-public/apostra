@@ -9570,6 +9570,10 @@ class SaveCreativeInput(TypedDict):
     '\n    Copy this visible campaign creative. Requires campaignId and idempotencyKey; the copy is named Copy of the source name.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign scope for create or update; required unless advertiserId is set. A draft records its intended campaign.\n    '
+    previewBulkUpdate: NotRequired[SaveCreativeInputPreviewBulkUpdate]
+    '\n    Read-only bulk-update preview: selects up to 200 Creatives and returns a 15-minute token.\n    '
+    applyBulkUpdate: NotRequired[SaveCreativeInputApplyBulkUpdate]
+    '\n    Apply the exact preview atomically; idempotencyKey is required alongside this field.\n    '
     campaignIds: NotRequired[list[str]]
     '\n    Replace campaign membership; omit to keep it.\n    '
     advertiserId: NotRequired[str]
@@ -9582,9 +9586,9 @@ class SaveCreativeInput(TypedDict):
     '\n    Creative name.\n    '
     message: NotRequired[str]
     '\n    Creative brief or direction.\n    '
-    formatKind: NotRequired[Literal["image", "html5", "display_tag", "image_carousel", "video_hosted", "video_vast", "audio_hosted", "audio_vast", "audio_daast", "sponsored_placement", "native_in_feed", "responsive_creative", "agent_placement", "seller_rendered_stateful_display", "coordinated_placements", "custom"]]
+    formatKind: NotRequired[SaveCreativeRequestFormatKind]
     '\n    Canonical format for a draft or advertiser-level metadata update.\n    '
-    formatParams: NotRequired[dict[str, JsonValue]]
+    formatParams: NotRequired[SaveCreativeRequestFormatParams]
     '\n    Docs: Format parameters.\n    '
     formatOptionRef: NotRequired[SaveCreativeInputFormatOptionRefScopePublisher | SaveCreativeInputFormatOptionRefScopeProduct]
     '\n    Canonical format option; derived from creativeFormatId when supplied.\n    '
@@ -9618,6 +9622,12 @@ class SaveCreativeInput(TypedDict):
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveCreativeInputApplyBulkUpdate(TypedDict):
+    previewToken: str
+    '\n    Server-issued bulk preview token, valid for 15 minutes.\n    '
+    selectionDigest: str
+    '\n    Digest returned by the exact preview being applied.\n    '
 
 class SaveCreativeInputAssetsItemAssetTypeDisplayTag(TypedDict):
     asset_type: Literal["display_tag"]
@@ -9685,6 +9695,60 @@ class SaveCreativeInputMacroAdditionsItem(TypedDict):
     value: str | None
     '\n    Literal text, AdCP universal macros such as {CACHEBUSTER}, or Apostra extension macros, which AdCP does not define: CAMPAIGN_ID, TRACKING_TAG_ID, DATA_SET_ID, TACTIC_ID, SALES_AGENT_ID, ATTRIBUTION_TRACKING_ID. null suppresses the inherited key.\n    '
 
+class SaveCreativeInputPreviewBulkUpdate(TypedDict):
+    selection: SaveCreativeInputPreviewBulkUpdateSelection
+    '\n    Creative-selection predicates; all supplied predicates intersect.\n    '
+    update: SaveCreativeInputPreviewBulkUpdateUpdate
+    '\n    Fields to change on every selected Creative.\n    '
+    excludeCreativeIds: NotRequired[list[str]]
+    '\n    Selected Creative IDs to remove from the final batch.\n    '
+    limit: NotRequired[Literal[200]]
+    '\n    Fixed maximum number of Creatives allowed in one batch.\n    '
+
+class SaveCreativeInputPreviewBulkUpdateSelection(TypedDict):
+    creativeIds: NotRequired[list[str]]
+    '\n    Creative IDs to intersect with the other selectors.\n    '
+    collectionId: NotRequired[str]
+    '\n    Collection whose Creatives must be selected.\n    '
+    nameContains: NotRequired[str]
+    '\n    Case-insensitive Creative-name substring to match.\n    '
+    createdAfter: NotRequired[str]
+    '\n    Select Creatives created after this timestamp.\n    '
+    createdBefore: NotRequired[str]
+    '\n    Select Creatives created before this timestamp.\n    '
+    updatedAfter: NotRequired[str]
+    '\n    Select Creatives updated after this timestamp.\n    '
+    updatedBefore: NotRequired[str]
+    '\n    Select Creatives updated before this timestamp.\n    '
+    formatKind: NotRequired[SaveCreativeRequestPreviewBulkUpdateSelectionFormatKind]
+    '\n    Canonical format kind to match.\n    '
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "TEXT", "VAST"]]
+    '\n    Creative asset type to match.\n    '
+
+class SaveCreativeInputPreviewBulkUpdateUpdate(TypedDict):
+    clickUrl: NotRequired[SaveCreativeRequestPreviewBulkUpdateUpdateClickUrl]
+    '\n    Replacement click-through URL for every selected Creative.\n    '
+    formatKind: NotRequired[SaveCreativeRequestPreviewBulkUpdateUpdateFormatKind]
+    '\n    Replacement canonical format kind for every selected Creative.\n    '
+    formatParams: NotRequired[SaveCreativeRequestPreviewBulkUpdateUpdateFormatParams]
+    '\n    Parameters for the replacement canonical format.\n    '
+    formatOptionRef: NotRequired[SaveCreativeInputPreviewBulkUpdateUpdateFormatOptionRefScopePublisher | SaveCreativeInputPreviewBulkUpdateUpdateFormatOptionRefScopeProduct]
+    '\n    Publisher or product canonical format option to apply.\n    '
+
+class SaveCreativeInputPreviewBulkUpdateUpdateFormatOptionRefScopeProduct(TypedDict):
+    scope: Literal["product"]
+    '\n    Resolve the format option from the selected product.\n    '
+    format_option_id: str
+    '\n    Canonical format option ID declared by the product.\n    '
+
+class SaveCreativeInputPreviewBulkUpdateUpdateFormatOptionRefScopePublisher(TypedDict):
+    scope: Literal["publisher"]
+    '\n    Resolve the format option from a publisher catalog.\n    '
+    publisher_domain: str
+    '\n    Publisher domain that owns the catalog option.\n    '
+    format_option_id: str
+    '\n    Canonical format option ID from the publisher catalog.\n    '
+
 class SaveCreativeInputSocial(TypedDict):
     headline: NotRequired[str]
     '\n    Headline; slot headline.\n    '
@@ -9737,7 +9801,19 @@ SaveCreativeRequestAssetsItemUrl: TypeAlias = str
 
 SaveCreativeRequestDisplayTagUrl: TypeAlias = str
 
+SaveCreativeRequestFormatKind: TypeAlias = Literal["image", "html5", "display_tag", "image_carousel", "video_hosted", "video_vast", "audio_hosted", "audio_vast", "audio_daast", "sponsored_placement", "native_in_feed", "responsive_creative", "agent_placement", "seller_rendered_stateful_display", "coordinated_placements", "custom"]
+
+SaveCreativeRequestFormatParams: TypeAlias = dict[str, JsonValue]
+
 SaveCreativeRequestLandingPageUrl: TypeAlias = str
+
+SaveCreativeRequestPreviewBulkUpdateSelectionFormatKind: TypeAlias = Literal["image", "html5", "display_tag", "image_carousel", "video_hosted", "video_vast", "audio_hosted", "audio_vast", "audio_daast", "sponsored_placement", "native_in_feed", "responsive_creative", "agent_placement", "seller_rendered_stateful_display", "coordinated_placements", "custom"]
+
+SaveCreativeRequestPreviewBulkUpdateUpdateClickUrl: TypeAlias = str
+
+SaveCreativeRequestPreviewBulkUpdateUpdateFormatKind: TypeAlias = Literal["image", "html5", "display_tag", "image_carousel", "video_hosted", "video_vast", "audio_hosted", "audio_vast", "audio_daast", "sponsored_placement", "native_in_feed", "responsive_creative", "agent_placement", "seller_rendered_stateful_display", "coordinated_placements", "custom"]
+
+SaveCreativeRequestPreviewBulkUpdateUpdateFormatParams: TypeAlias = dict[str, JsonValue]
 
 SaveCreativeRequestSocialComponentsItemUrl: TypeAlias = str
 
@@ -9761,6 +9837,44 @@ class SaveCreativeResultActionAssociated(TypedDict):
     campaignId: str
     packageAssignmentAttempted: Literal[False]
     providerDeliveryAttempted: Literal[False]
+
+class SaveCreativeResultActionBulkUpdatePreviewed(TypedDict):
+    action: Literal["bulk_update_previewed"]
+    preview: SaveCreativeResultActionBulkUpdatePreviewedPreview
+
+class SaveCreativeResultActionBulkUpdatePreviewedPreview(TypedDict):
+    previewToken: str
+    expiresAt: str
+    selectionDigest: str
+    matchedCount: int
+    returnedCount: int
+    totalMatches: int
+    truncated: bool
+    creatives: list[SaveCreativeResultActionBulkUpdatePreviewedPreviewCreativesItem]
+
+class SaveCreativeResultActionBulkUpdatePreviewedPreviewCreativesItem(TypedDict):
+    creativeId: str
+    stateRevision: int
+    deliveryAttached: bool
+
+class SaveCreativeResultActionBulkUpdated(TypedDict):
+    action: Literal["bulk_updated"]
+    batch: SaveCreativeResultActionBulkUpdatedBatch
+    replayed: bool
+
+class SaveCreativeResultActionBulkUpdatedBatch(TypedDict):
+    previewToken: str
+    selectionDigest: str
+    matchedCount: int
+    updatedCount: int
+    unchangedCount: int
+    creatives: list[SaveCreativeResultActionBulkUpdatedBatchCreativesItem]
+
+class SaveCreativeResultActionBulkUpdatedBatchCreativesItem(TypedDict):
+    creativeId: str
+    stateRevision: int
+    status: Literal["updated"]
+    deliverySync: Literal["not_required", "completed", "failed"]
 
 class SaveCreativeResultActionCreated(TypedDict):
     creative: SaveCreativeSuccessCreative
@@ -10453,7 +10567,7 @@ class SaveCreativeSuccessSaveCreativeLibraryRoleSuccess(TypedDict):
     creative: SaveCreativeSuccessSaveCreativeLibraryRoleCreative
     replayed: bool
 
-SaveCreativeResult: TypeAlias = "SaveCreativeSuccessDuplicateCreativeSuccess | SaveCreativeResultActionCreated | SaveCreativeResultActionUpdated | SaveCreativeResultActionAssociated | SaveCreativeResultActionMembershipUpdated | SaveCreativeResultActionResynced | SaveCreativeResultActionArchived | SaveCreativeResultActionPromoted | SaveCreativeResultActionPromoting | SaveCreativeSuccessSaveCreativeLibraryRoleSuccess"
+SaveCreativeResult: TypeAlias = "SaveCreativeSuccessDuplicateCreativeSuccess | SaveCreativeResultActionBulkUpdatePreviewed | SaveCreativeResultActionBulkUpdated | SaveCreativeResultActionCreated | SaveCreativeResultActionUpdated | SaveCreativeResultActionAssociated | SaveCreativeResultActionMembershipUpdated | SaveCreativeResultActionResynced | SaveCreativeResultActionArchived | SaveCreativeResultActionPromoted | SaveCreativeResultActionPromoting | SaveCreativeSuccessSaveCreativeLibraryRoleSuccess"
 
 SaveCreativeSuccessWarnings: TypeAlias = list[str]
 

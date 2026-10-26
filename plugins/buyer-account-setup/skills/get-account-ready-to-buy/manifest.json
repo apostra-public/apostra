@@ -2,7 +2,7 @@
   "schemaVersion": "3.0",
   "id": "get-account-ready-to-buy",
   "name": "Get an Account Ready to Buy",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Prepare an Apostra buyer account to transact, including operator identity, billing readiness, and seller connections.",
   "steward": {
     "owner": "bokelley"
@@ -42,7 +42,6 @@
   "tools": {
     "required": ["get_status", "search", "get"],
     "optional": [
-      "switch_account",
       "save_buyer_operator",
       "save_billing",
       "request_payment_authority",
@@ -61,7 +60,7 @@
       "scenarioIds": ["payment-authority-two-step"]
     },
     "telemetry": {
-      "correlationSkillId": "get-account-ready-to-buy@1.1.0",
+      "correlationSkillId": "get-account-ready-to-buy@1.1.1",
       "outcomeSignals": [
         "workflow_terminal_state",
         "payment_authority_status",
