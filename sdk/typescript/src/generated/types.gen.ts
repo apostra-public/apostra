@@ -18049,6 +18049,117 @@ export type SaveCreativeData = {
          */
         campaignId?: string;
         /**
+         * Read-only bulk-update preview: selects up to 200 Creatives and returns a 15-minute token.
+         */
+        previewBulkUpdate?: {
+            /**
+             * Creative-selection predicates; all supplied predicates intersect.
+             */
+            selection: {
+                /**
+                 * Creative IDs to intersect with the other selectors.
+                 */
+                creativeIds?: Array<string>;
+                /**
+                 * Collection whose Creatives must be selected.
+                 */
+                collectionId?: string;
+                /**
+                 * Case-insensitive Creative-name substring to match.
+                 */
+                nameContains?: string;
+                /**
+                 * Select Creatives created after this timestamp.
+                 */
+                createdAfter?: string;
+                /**
+                 * Select Creatives created before this timestamp.
+                 */
+                createdBefore?: string;
+                /**
+                 * Select Creatives updated after this timestamp.
+                 */
+                updatedAfter?: string;
+                /**
+                 * Select Creatives updated before this timestamp.
+                 */
+                updatedBefore?: string;
+                /**
+                 * Canonical format kind to match.
+                 */
+                formatKind?: SaveCreativeRequestPreviewBulkUpdateSelectionFormatKind;
+                /**
+                 * Creative asset type to match.
+                 */
+                assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'TEXT' | 'VAST';
+            };
+            /**
+             * Fields to change on every selected Creative.
+             */
+            update: {
+                /**
+                 * Replacement click-through URL for every selected Creative.
+                 */
+                clickUrl?: SaveCreativeRequestPreviewBulkUpdateUpdateClickUrl;
+                /**
+                 * Replacement canonical format kind for every selected Creative.
+                 */
+                formatKind?: SaveCreativeRequestPreviewBulkUpdateUpdateFormatKind;
+                /**
+                 * Parameters for the replacement canonical format.
+                 */
+                formatParams?: SaveCreativeRequestPreviewBulkUpdateUpdateFormatParams;
+                /**
+                 * Publisher or product canonical format option to apply.
+                 */
+                formatOptionRef?: {
+                    /**
+                     * Resolve the format option from a publisher catalog.
+                     */
+                    scope: 'publisher';
+                    /**
+                     * Publisher domain that owns the catalog option.
+                     */
+                    publisher_domain: string;
+                    /**
+                     * Canonical format option ID from the publisher catalog.
+                     */
+                    format_option_id: string;
+                } | {
+                    /**
+                     * Resolve the format option from the selected product.
+                     */
+                    scope: 'product';
+                    /**
+                     * Canonical format option ID declared by the product.
+                     */
+                    format_option_id: string;
+                    publisher_domain?: never;
+                };
+            };
+            /**
+             * Selected Creative IDs to remove from the final batch.
+             */
+            excludeCreativeIds?: Array<string>;
+            /**
+             * Fixed maximum number of Creatives allowed in one batch.
+             */
+            limit?: 200;
+        };
+        /**
+         * Apply the exact preview atomically; idempotencyKey is required alongside this field.
+         */
+        applyBulkUpdate?: {
+            /**
+             * Server-issued bulk preview token, valid for 15 minutes.
+             */
+            previewToken: string;
+            /**
+             * Digest returned by the exact preview being applied.
+             */
+            selectionDigest: string;
+        };
+        /**
          * Replace campaign membership; omit to keep it.
          */
         campaignIds?: Array<string>;
@@ -18075,13 +18186,11 @@ export type SaveCreativeData = {
         /**
          * Canonical format for a draft or advertiser-level metadata update.
          */
-        formatKind?: 'image' | 'html5' | 'display_tag' | 'image_carousel' | 'video_hosted' | 'video_vast' | 'audio_hosted' | 'audio_vast' | 'audio_daast' | 'sponsored_placement' | 'native_in_feed' | 'responsive_creative' | 'agent_placement' | 'seller_rendered_stateful_display' | 'coordinated_placements' | 'custom';
+        formatKind?: SaveCreativeRequestFormatKind;
         /**
          * Docs: Format parameters.
          */
-        formatParams?: {
-            [key: string]: unknown;
-        };
+        formatParams?: SaveCreativeRequestFormatParams;
         /**
          * Canonical format option; derived from creativeFormatId when supplied.
          */
@@ -18434,10 +18543,29 @@ export type SaveCreativeRequestClickUrl = SaveCreativeRequestLandingPageUrl;
 
 export type SaveCreativeRequestDisplayTagUrl = string;
 
+export type SaveCreativeRequestFormatKind = 'image' | 'html5' | 'display_tag' | 'image_carousel' | 'video_hosted' | 'video_vast' | 'audio_hosted' | 'audio_vast' | 'audio_daast' | 'sponsored_placement' | 'native_in_feed' | 'responsive_creative' | 'agent_placement' | 'seller_rendered_stateful_display' | 'coordinated_placements' | 'custom';
+
+export type SaveCreativeRequestFormatParams = {
+    [key: string]: unknown;
+};
+
 /**
  * URL to add as asset (must be http/https)
  */
 export type SaveCreativeRequestLandingPageUrl = string;
+
+export type SaveCreativeRequestPreviewBulkUpdateSelectionFormatKind = 'image' | 'html5' | 'display_tag' | 'image_carousel' | 'video_hosted' | 'video_vast' | 'audio_hosted' | 'audio_vast' | 'audio_daast' | 'sponsored_placement' | 'native_in_feed' | 'responsive_creative' | 'agent_placement' | 'seller_rendered_stateful_display' | 'coordinated_placements' | 'custom';
+
+/**
+ * URL to add as asset (must be http/https)
+ */
+export type SaveCreativeRequestPreviewBulkUpdateUpdateClickUrl = string;
+
+export type SaveCreativeRequestPreviewBulkUpdateUpdateFormatKind = 'image' | 'html5' | 'display_tag' | 'image_carousel' | 'video_hosted' | 'video_vast' | 'audio_hosted' | 'audio_vast' | 'audio_daast' | 'sponsored_placement' | 'native_in_feed' | 'responsive_creative' | 'agent_placement' | 'seller_rendered_stateful_display' | 'coordinated_placements' | 'custom';
+
+export type SaveCreativeRequestPreviewBulkUpdateUpdateFormatParams = {
+    [key: string]: unknown;
+};
 
 /**
  * URL to add as asset (must be http/https)
@@ -18458,6 +18586,38 @@ export type SaveCreativeResponses = {
      */
     200: {
         data: SaveCreativeSuccessDuplicateCreativeSuccess | {
+            action: 'bulk_update_previewed';
+            preview: {
+                previewToken: string;
+                expiresAt: string;
+                selectionDigest: string;
+                matchedCount: number;
+                returnedCount: number;
+                totalMatches: number;
+                truncated: boolean;
+                creatives: Array<{
+                    creativeId: string;
+                    stateRevision: number;
+                    deliveryAttached: boolean;
+                }>;
+            };
+        } | {
+            action: 'bulk_updated';
+            batch: {
+                previewToken: string;
+                selectionDigest: string;
+                matchedCount: number;
+                updatedCount: number;
+                unchangedCount: number;
+                creatives: Array<{
+                    creativeId: string;
+                    stateRevision: number;
+                    status: 'updated';
+                    deliverySync: 'not_required' | 'completed' | 'failed';
+                }>;
+            };
+            replayed: boolean;
+        } | {
             creative: SaveCreativeSuccessCreative;
             alreadyExisted?: SaveCreativeSuccessAlreadyExisted;
             assetAttachWarning?: SaveCreativeSuccessAssetAttachWarning;
