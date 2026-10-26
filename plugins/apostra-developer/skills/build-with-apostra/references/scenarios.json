@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "build-with-apostra",
-  "skillVersion": "1.0.8",
+  "skillVersion": "1.0.10",
   "scenarios": [
     {
       "id": "install-and-discover",
@@ -38,6 +38,18 @@
         "The agent treats authentication, account readiness, operation authority and contract conformance as separate checks and does not report one as evidence of another.",
         "Fixture tests are written against schema-derived shapes, so passing tests are not offered as proof that a call will be accepted.",
         "The handoff separates request and response shapes verified against the live schemas from shapes that remain assumed."
+      ]
+    },
+    {
+      "id": "local-sdk-sign-in",
+      "title": "Choose the right credential for a local script and for CI",
+      "given": "A developer asks for a TypeScript script that calls Apostra from their laptop and runs the same job in CI. No API key exists yet.",
+      "expect": [
+        "For the local script, the agent asks the person to run `npx @apostra/cli login` and approve one account, then constructs `new Apostra()` with no credential and requires `@apostra/sdk@0.39.0` or later.",
+        "It does not write APOSTRA_API_KEY code for the local-only script and does not run the login itself.",
+        "For CI and servers, it uses an API key or M2M credential from the secret manager and does not use `apostra login`.",
+        "It never asks the person to paste a credential, token or the stored credentials file into chat.",
+        "It links the public CLI, SDK quickstart and SDK guide pages instead of restating their options."
       ]
     },
     {
