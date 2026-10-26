@@ -2,8 +2,8 @@
   "schemaVersion": "3.0",
   "id": "generate-campaign-creatives",
   "name": "Generate Campaign Creatives",
-  "version": "1.9.0",
-  "description": "Generate an enrolled buyer's campaign or advertiser Library image, video, or voice creative and return its usable URL before optional Library finalisation.",
+  "version": "1.10.0",
+  "description": "Generate an enrolled buyer's campaign or advertiser Library image, video, or voice creative without choosing an engine, then return its usable URL before optional Library finalisation.",
   "steward": { "owner": "bokelley" },
   "entrypoint": "SKILL.md",
   "assets": [
@@ -58,7 +58,7 @@
       "scenarioIds": ["creative-engine-discovery-no-spend"]
     },
     "telemetry": {
-      "correlationSkillId": "generate-campaign-creatives@1.9.0",
+      "correlationSkillId": "generate-campaign-creatives@1.10.0",
       "outcomeSignals": [
         "workflow_terminal_state",
         "creative_session_action_receipt"

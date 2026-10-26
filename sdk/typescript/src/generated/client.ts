@@ -721,14 +721,14 @@ export class Apostra extends Transport {
   /** Sync first-party CRM audiences for a buyer advertiser. Each audiences[] item may add, remove, or delete members. Returns an operationId; use get(kind: audience, advertiserId: "...") to read match status after it settles. Returns the data together with response headers and request ID. */
   saveAudienceWithResponse(input: SaveAudienceInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAudienceResult>> { return this.requestDetailed("save_audience", input, options) }
   /**
-   * Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Cards stay off MCP.
+   * Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Accepting a plan needs an administrator to approve it on our site. Cards stay off MCP.
    *
    * @example
    * await client.saveBilling(input, { idempotencyKey: 'stable-key' })
    */
   saveBilling(input: SaveBillingInput, options: WriteRequestOptions): Promise<SaveBillingResult> { return this.request("save_billing", input, options) }
 
-  /** Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Cards stay off MCP. Returns the data together with response headers and request ID. */
+  /** Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Accepting a plan needs an administrator to approve it on our site. Cards stay off MCP. Returns the data together with response headers and request ID. */
   saveBillingWithResponse(input: SaveBillingInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBillingResult>> { return this.requestDetailed("save_billing", input, options) }
   /**
    * Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto needs acknowledgeNoHumanReview.

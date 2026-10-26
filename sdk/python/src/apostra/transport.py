@@ -406,6 +406,22 @@ def _base_url(value: str) -> str:
     return value.rstrip("/")
 
 
+def _stored_login(base_url: str, account_id: str | None) -> bool:
+    """Whether `apostra login` holds a sign-in for this base URL, the last link of the credential chain."""
+    from .cli_login import stored_cli_login
+
+    login = stored_cli_login(base_url)
+    if login is None:
+        return False
+    if account_id is not None and account_id != login["accountId"]:
+        raise ValueError(
+            f"account_id {account_id} does not match account {login['accountId']}, "
+            f"the one you signed in to with `apostra login`. Run "
+            f"`apostra login --account {account_id}` or remove account_id."
+        )
+    return True
+
+
 def _recovery_for_status(
     status: int,
 ) -> Literal["transient", "correctable", "terminal"]:
@@ -639,6 +655,14 @@ class SyncTransport:
             if base_url is not None
             else environ.get("APOSTRA_BASE_URL", BASE_URL)
         )
+        if api_key is None and not any(
+            value is not None for value in (access_token, token_provider)
+        ) and _stored_login(base_url, account_id):
+            from .cli_login import cli_login_token_provider
+
+            token_provider = cli_login_token_provider(
+                base_url=base_url, http_client=http_client
+            )
         if (
             sum(value is not None for value in (api_key, access_token, token_provider))
             != 1
@@ -768,6 +792,12 @@ class AsyncTransport:
             if base_url is not None
             else environ.get("APOSTRA_BASE_URL", BASE_URL)
         )
+        if api_key is None and not any(
+            value is not None for value in (access_token, token_provider)
+        ) and _stored_login(base_url, account_id):
+            from .cli_login import cli_login_token_provider_async
+
+            token_provider = cli_login_token_provider_async(base_url=base_url)
         if (
             sum(value is not None for value in (api_key, access_token, token_provider))
             != 1

@@ -1229,7 +1229,7 @@ class GetInputKindAdvertiserAccess(TypedDict):
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: str
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -1356,7 +1356,7 @@ class GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAd
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -1481,7 +1481,7 @@ class GetInputKindAudience(TypedDict):
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: str
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -1608,7 +1608,7 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: str
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -1735,7 +1735,7 @@ class GetInputKindConnection(TypedDict):
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -1862,7 +1862,7 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: str
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -2114,7 +2114,7 @@ class GetInputKindCreativeEngine(TypedDict):
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -2239,7 +2239,7 @@ class GetInputKindCreativeFormat(TypedDict):
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: str
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -2364,7 +2364,7 @@ class GetInputKindCreativeSession(TypedDict):
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -2489,7 +2489,7 @@ class GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDis
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -2616,7 +2616,7 @@ class GetInputKindMaterial(TypedDict):
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -2743,7 +2743,7 @@ class GetInputKindProposal(TypedDict):
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -2870,7 +2870,7 @@ class GetInputKindSeller(TypedDict):
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -2997,7 +2997,7 @@ class GetInputKindSession(TypedDict):
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -3105,7 +3105,7 @@ class GetInputKindSessionOptionsSelect(TypedDict):
     assetStatuses: NotRequired[list[Literal["ready", "degraded", "failed"]]]
     '\n    Keep only images whose extraction finished as ready, degraded, or failed.\n    '
 
-class GetInputKindWholesaleProduct(TypedDict):
+class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     kind: Literal["wholesale_product"]
     id: str
     '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
@@ -3123,8 +3123,8 @@ class GetInputKindWholesaleProduct(TypedDict):
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
-    advertiserId: NotRequired[str]
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    advertiserId: str
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -3141,9 +3141,9 @@ class GetInputKindWholesaleProduct(TypedDict):
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
-    items: NotRequired[GetInputKindWholesaleProductItems]
+    items: NotRequired[GetInputKindWholesaleProductWithAdvertiserIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
-    options: NotRequired[GetInputKindWholesaleProductOptions]
+    options: NotRequired[GetInputKindWholesaleProductWithAdvertiserIdOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
     '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
@@ -3159,7 +3159,7 @@ class GetInputKindWholesaleProduct(TypedDict):
     '\n    For kind connection with include inventory: where to start the next page, 50 per page.\n    '
     connectionInventoryObjectType: NotRequired[Literal["audience", "event_source"]]
     '\n    For kind connection with include inventory: limit the page to seller audiences or event sources.\n    '
-    connectionTarget: NotRequired[GetInputKindWholesaleProductConnectionTarget]
+    connectionTarget: NotRequired[GetInputKindWholesaleProductWithAdvertiserIdConnectionTarget]
     '\n    For kind connection: the seller or creative engine you expect this connection to reach. The read fails if it reaches another one.\n    '
     feedbackOffset: NotRequired[int]
     '\n    For kind rfp_turn: where to start the next page of feedback, 20 per page.\n    '
@@ -3172,19 +3172,19 @@ class GetInputKindWholesaleProduct(TypedDict):
     proposalProductsCursor: NotRequired[str]
     '\n    For kind proposal with include products: the cursor from the previous products page of the same proposal.\n    '
 
-class GetInputKindWholesaleProductConnectionTarget(TypedDict):
+class GetInputKindWholesaleProductWithAdvertiserIdConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
     '\n    Whether you expect a seller or a creative engine.\n    '
     id: str
     '\n    The id of the seller or creative engine you expect.\n    '
 
-class GetInputKindWholesaleProductItems(TypedDict):
-    filter: NotRequired[GetInputKindWholesaleProductItemsFilter]
+class GetInputKindWholesaleProductWithAdvertiserIdItems(TypedDict):
+    filter: NotRequired[GetInputKindWholesaleProductWithAdvertiserIdItemsFilter]
     '\n    Filters for the catalog items page; every filter given must match.\n    '
     cursor: NotRequired[str]
     '\n    The cursor from the previous catalog items page.\n    '
 
-class GetInputKindWholesaleProductItemsFilter(TypedDict):
+class GetInputKindWholesaleProductWithAdvertiserIdItemsFilter(TypedDict):
     ids: NotRequired[list[str]]
     '\n    Only catalog items with these exact AdCP item keys (e.g. hotel_id), up to 50.\n    '
     gtins: NotRequired[list[str]]
@@ -3196,17 +3196,17 @@ class GetInputKindWholesaleProductItemsFilter(TypedDict):
     text: NotRequired[str]
     '\n    Only catalog items whose text contains this phrase.\n    '
 
-class GetInputKindWholesaleProductOptions(TypedDict):
+class GetInputKindWholesaleProductWithAdvertiserIdOptions(TypedDict):
     sourceRevision: NotRequired[int]
     '\n    Read this exact past source revision instead of the current one.\n    '
     renditionRevision: NotRequired[int]
     '\n    Read this rendition of the source revision; omit for the active rendition.\n    '
-    pages: NotRequired[GetInputKindWholesaleProductOptionsPages]
+    pages: NotRequired[GetInputKindWholesaleProductWithAdvertiserIdOptionsPages]
     '\n    Paging for each collection in a material read. A candidates page needs no include; a page for any other collection applies only when you also request its matching include.\n    '
-    select: NotRequired[GetInputKindWholesaleProductOptionsSelect]
+    select: NotRequired[GetInputKindWholesaleProductWithAdvertiserIdOptionsSelect]
     '\n    Narrow the text blocks, images, and usage returned. A selector is ignored for collections it does not apply to.\n    '
 
-class GetInputKindWholesaleProductOptionsPages(TypedDict):
+class GetInputKindWholesaleProductWithAdvertiserIdOptionsPages(TypedDict):
     candidates: NotRequired[GetRequestOptionsPagesCandidates]
     '\n    Page through the extracted facts proposed for the playbook, rules, products, or seller profile. Default 25 rows; no include needed.\n    '
     rendition_blocks: NotRequired[GetRequestOptionsPagesRenditionBlocks]
@@ -3220,7 +3220,7 @@ class GetInputKindWholesaleProductOptionsPages(TypedDict):
     usage: NotRequired[GetRequestOptionsPagesUsage]
     '\n    Page through where this material was used. Needs include usage; at most 48 rows, sent to the app rather than to you.\n    '
 
-class GetInputKindWholesaleProductOptionsSelect(TypedDict):
+class GetInputKindWholesaleProductWithAdvertiserIdOptionsSelect(TypedDict):
     blockKinds: NotRequired[list[Literal["heading", "paragraph", "list", "table", "caption", "speaker_notes", "ocr", "accessibility_text", "other"]]]
     '\n    Keep only text blocks of these kinds, such as heading, table, or speaker_notes.\n    '
     unitId: NotRequired[str]
@@ -3231,6 +3231,145 @@ class GetInputKindWholesaleProductOptionsSelect(TypedDict):
     '\n    Keep only images whose reuse rights are any of these, for example allowed or requires_approval.\n    '
     assetStatuses: NotRequired[list[Literal["ready", "degraded", "failed"]]]
     '\n    Keep only images whose extraction finished as ready, degraded, or failed.\n    '
+
+class GetInputKindWholesaleProductWithSourceId(TypedDict):
+    kind: Literal["wholesale_product"]
+    id: str
+    '\n    The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.\n    '
+    after: NotRequired[str]
+    '\n    For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.\n    '
+    through: NotRequired[str]
+    '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
+    limit: NotRequired[int]
+    '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
+    buyerCustomerId: NotRequired[int]
+    '\n    Deprecated: send buyerAccountId instead.\n    '
+    memberAccountId: NotRequired[int]
+    '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
+    accountId: NotRequired[int]
+    '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
+    reportId: NotRequired[str]
+    '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
+    identifierOffset: NotRequired[int]
+    '\n    For kind property_list: where to start the next page of identifiers, from the previous read.\n    '
+    identifierCategory: NotRequired[Literal["all", "unresolved", "registered"]]
+    '\n    For kind property_list: which identifiers to page through: all (the default), unresolved, or registered.\n    '
+    productQueryId: NotRequired[str]
+    '\n    For kind seller with include products and advertiserId: the productQueryId from the previous read, to poll products that were still loading.\n    '
+    productRevision: NotRequired[int]
+    '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
+    validationRunId: NotRequired[str]
+    '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
+    '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
+    items: NotRequired[GetInputKindWholesaleProductWithSourceIdItems]
+    '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
+    options: NotRequired[GetInputKindWholesaleProductWithSourceIdOptions]
+    '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
+    version: NotRequired[int]
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    subscriptionsOffset: NotRequired[int]
+    '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
+    connectionAccountsOffset: NotRequired[int]
+    '\n    For kind connection: where to start the next page of provider accounts found on the connection.\n    '
+    connectionMappingsOffset: NotRequired[int]
+    '\n    For kind connection: where to start the next page of advertiser-to-account mappings.\n    '
+    connectionAccountId: NotRequired[str]
+    '\n    Required for kind connection with include inventory: the accounts[].id whose event sources and audiences to list.\n    '
+    connectionInventoryOffset: NotRequired[int]
+    '\n    For kind connection with include inventory: where to start the next page, 50 per page.\n    '
+    connectionInventoryObjectType: NotRequired[Literal["audience", "event_source"]]
+    '\n    For kind connection with include inventory: limit the page to seller audiences or event sources.\n    '
+    connectionTarget: NotRequired[GetInputKindWholesaleProductWithSourceIdConnectionTarget]
+    '\n    For kind connection: the seller or creative engine you expect this connection to reach. The read fails if it reaches another one.\n    '
+    feedbackOffset: NotRequired[int]
+    '\n    For kind rfp_turn: where to start the next page of feedback, 20 per page.\n    '
+    representationOffset: NotRequired[int]
+    '\n    For kind rfp_turn: where to start the next page of representations, 50 per page. Not with representationCursor.\n    '
+    representationCursor: NotRequired[str]
+    '\n    For kind rfp_turn: the representations cursor from the previous read, which keeps pages stable. Not with representationOffset.\n    '
+    audienceOffset: NotRequired[int]
+    '\n    For kind audience: where to start the next page of audiences, 50 per page; default 0.\n    '
+    proposalProductsCursor: NotRequired[str]
+    '\n    For kind proposal with include products: the cursor from the previous products page of the same proposal.\n    '
+
+GetInputKindWholesaleProduct: TypeAlias = GetInputKindWholesaleProductWithSourceId
+
+class GetInputKindWholesaleProductWithSourceIdConnectionTarget(TypedDict):
+    kind: Literal["seller", "creative_engine"]
+    '\n    Whether you expect a seller or a creative engine.\n    '
+    id: str
+    '\n    The id of the seller or creative engine you expect.\n    '
+
+GetInputKindWholesaleProductConnectionTarget: TypeAlias = GetInputKindWholesaleProductWithSourceIdConnectionTarget
+
+class GetInputKindWholesaleProductWithSourceIdItems(TypedDict):
+    filter: NotRequired[GetInputKindWholesaleProductWithSourceIdItemsFilter]
+    '\n    Filters for the catalog items page; every filter given must match.\n    '
+    cursor: NotRequired[str]
+    '\n    The cursor from the previous catalog items page.\n    '
+
+GetInputKindWholesaleProductItems: TypeAlias = GetInputKindWholesaleProductWithSourceIdItems
+
+class GetInputKindWholesaleProductWithSourceIdItemsFilter(TypedDict):
+    ids: NotRequired[list[str]]
+    '\n    Only catalog items with these exact AdCP item keys (e.g. hotel_id), up to 50.\n    '
+    gtins: NotRequired[list[str]]
+    '\n    Only catalog items with these exact product GTINs, up to 50.\n    '
+    tags: NotRequired[list[str]]
+    '\n    Only catalog items carrying any of these tags.\n    '
+    category: NotRequired[str]
+    '\n    Only catalog items in exactly this category.\n    '
+    text: NotRequired[str]
+    '\n    Only catalog items whose text contains this phrase.\n    '
+
+GetInputKindWholesaleProductItemsFilter: TypeAlias = GetInputKindWholesaleProductWithSourceIdItemsFilter
+
+class GetInputKindWholesaleProductWithSourceIdOptions(TypedDict):
+    sourceRevision: NotRequired[int]
+    '\n    Read this exact past source revision instead of the current one.\n    '
+    renditionRevision: NotRequired[int]
+    '\n    Read this rendition of the source revision; omit for the active rendition.\n    '
+    pages: NotRequired[GetInputKindWholesaleProductWithSourceIdOptionsPages]
+    '\n    Paging for each collection in a material read. A candidates page needs no include; a page for any other collection applies only when you also request its matching include.\n    '
+    select: NotRequired[GetInputKindWholesaleProductWithSourceIdOptionsSelect]
+    '\n    Narrow the text blocks, images, and usage returned. A selector is ignored for collections it does not apply to.\n    '
+
+GetInputKindWholesaleProductOptions: TypeAlias = GetInputKindWholesaleProductWithSourceIdOptions
+
+class GetInputKindWholesaleProductWithSourceIdOptionsPages(TypedDict):
+    candidates: NotRequired[GetRequestOptionsPagesCandidates]
+    '\n    Page through the extracted facts proposed for the playbook, rules, products, or seller profile. Default 25 rows; no include needed.\n    '
+    rendition_blocks: NotRequired[GetRequestOptionsPagesRenditionBlocks]
+    '\n    Page through extracted text blocks in reading order. Needs include rendition_blocks; default 50 rows.\n    '
+    visual_assets: NotRequired[GetRequestOptionsPagesVisualAssets]
+    '\n    Page through extracted images. Needs include visual_assets; default 25 rows, at most 50.\n    '
+    extraction_diagnostics: NotRequired[GetRequestOptionsPagesExtractionDiagnostics]
+    '\n    Page through extraction warnings and errors. Needs include extraction_diagnostics; default 50 rows.\n    '
+    composition_receipts: NotRequired[GetRequestOptionsPagesCompositionReceipts]
+    '\n    Page through records of this material being used in RFP responses. Needs include composition_receipts; default 50 rows.\n    '
+    usage: NotRequired[GetRequestOptionsPagesUsage]
+    '\n    Page through where this material was used. Needs include usage; at most 48 rows, sent to the app rather than to you.\n    '
+
+GetInputKindWholesaleProductOptionsPages: TypeAlias = GetInputKindWholesaleProductWithSourceIdOptionsPages
+
+class GetInputKindWholesaleProductWithSourceIdOptionsSelect(TypedDict):
+    blockKinds: NotRequired[list[Literal["heading", "paragraph", "list", "table", "caption", "speaker_notes", "ocr", "accessibility_text", "other"]]]
+    '\n    Keep only text blocks of these kinds, such as heading, table, or speaker_notes.\n    '
+    unitId: NotRequired[str]
+    '\n    Limit text blocks, images, and usage to one page, slide, or sheet by its unit ID.\n    '
+    assetKinds: NotRequired[list[Literal["photo", "illustration", "logo", "chart", "diagram", "screenshot", "background", "other"]]]
+    '\n    Keep only images of these kinds, such as photo, logo, or chart.\n    '
+    reusePolicies: NotRequired[list[Literal["allowed", "requires_approval", "prohibited", "unknown"]]]
+    '\n    Keep only images whose reuse rights are any of these, for example allowed or requires_approval.\n    '
+    assetStatuses: NotRequired[list[Literal["ready", "degraded", "failed"]]]
+    '\n    Keep only images whose extraction finished as ready, degraded, or failed.\n    '
+
+GetInputKindWholesaleProductOptionsSelect: TypeAlias = GetInputKindWholesaleProductWithSourceIdOptionsSelect
 
 class GetInputKindWorkItem(TypedDict):
     kind: Literal["work_item"]
@@ -3251,7 +3390,7 @@ class GetInputKindWorkItem(TypedDict):
     accountId: NotRequired[int]
     '\n    The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.\n    '
     advertiserId: NotRequired[str]
-    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. For seller, the advertiser to price for with include products, and the advertiser partnerStatus is read for instead of the account.\n    '
+    '\n    The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.\n    '
     reportId: NotRequired[str]
     '\n    For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.\n    '
     identifierOffset: NotRequired[int]
@@ -3299,7 +3438,7 @@ class GetInputKindWorkItem(TypedDict):
     proposalProductsCursor: NotRequired[str]
     '\n    For kind proposal with include products: the cursor from the previous products page of the same proposal.\n    '
 
-GetInput: TypeAlias = "GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationship | GetInputKindSeller | GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfig | GetInputKindAudience | GetInputKindAdvertiserAccess | GetInputKindCatalogAndEventSource | GetInputKindCreativeFormat | GetInputKindCreativeAndCreativeCollectionWithSourceId | GetInputKindCreativeAndCreativeCollectionWithAdvertiserId | GetInputKindCreativeEngine | GetInputKindCreativeSession | GetInputKindWholesaleProduct | GetInputKindMaterial | GetInputKindProposal | GetInputKindConnection | GetInputKindSession | GetInputKindWorkItem"
+GetInput: TypeAlias = "GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationship | GetInputKindSeller | GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfig | GetInputKindAudience | GetInputKindAdvertiserAccess | GetInputKindCatalogAndEventSource | GetInputKindCreativeFormat | GetInputKindCreativeAndCreativeCollectionWithSourceId | GetInputKindCreativeAndCreativeCollectionWithAdvertiserId | GetInputKindCreativeEngine | GetInputKindCreativeSession | GetInputKindWholesaleProductWithSourceId | GetInputKindWholesaleProductWithAdvertiserId | GetInputKindMaterial | GetInputKindProposal | GetInputKindConnection | GetInputKindSession | GetInputKindWorkItem"
 
 class GetInputKindWorkItemConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
@@ -4148,10 +4287,16 @@ class GetStatusResultAgentsResultsItem(TypedDict):
     kind: Literal["sales", "creative", "buyer"]
     findingCount: NotRequired[int]
     findingsHeadline: NotRequired[GetStatusResultAgentsResultsItemFindingsHeadlineValue | None]
+    states: GetStatusResultAgentsResultsItemStates
+    '\n    Independent facts about the agent; a key that does not apply to its kind is null.\n    '
     stage: GetStatusSuccessAgentsResultsItemStage
+    '\n    Deprecated: read `states`. Removed after 3 Dec 2026.\n    '
     finalStage: GetStatusSuccessAgentsResultsItemFinalStage
+    '\n    Deprecated: read `states`. Removed after 3 Dec 2026.\n    '
     nextStage: GetStatusSuccessAgentsResultsItemNextStage | None
+    '\n    Deprecated: read `states`. Removed after 3 Dec 2026.\n    '
     stuckOn: GetStatusResultAgentsResultsItemStuckOnValue | None
+    '\n    Deprecated: the headline finding says what to do next. Removed after 3 Dec 2026.\n    '
     endpointControl: NotRequired[Literal["unverified", "verified"]]
 
 class GetStatusResultAgentsResultsItemFindingsHeadlineValue(TypedDict):
@@ -4160,6 +4305,23 @@ class GetStatusResultAgentsResultsItemFindingsHeadlineValue(TypedDict):
     outcome: Literal["passed", "failing"] | None
     severity: NotRequired[Literal["blocking", "attention", "advisory"]]
     summary: str
+
+class GetStatusResultAgentsResultsItemStates(TypedDict):
+    endpointRegistered: bool | None
+    storefronts: GetStatusResultAgentsResultsItemStatesStorefrontsValue | None
+    certified: bool | None
+    listedForOtherOrganizations: bool | None
+    latestTest: Literal["passed", "failed"] | None
+    credential: GetStatusResultAgentsResultsItemStatesCredentialValue | None
+
+class GetStatusResultAgentsResultsItemStatesCredentialValue(TypedDict):
+    issued: bool
+    authenticated: bool
+
+class GetStatusResultAgentsResultsItemStatesStorefrontsValue(TypedDict):
+    total: int
+    listed: int
+    private: int
 
 class GetStatusResultAgentsResultsItemStuckOnNextAction(TypedDict):
     tool: NotRequired[str]
@@ -4978,7 +5140,7 @@ class OpenCampaignsPageSuccessPageHumanHandoffRequiredAccount(TypedDict):
     name: str
 
 class OpenCampaignsPageSuccessPageHumanHandoffRequiredPage(TypedDict):
-    resourceUri: Literal["ui://agentic-api/conversation-history/mcp-app.html", "ui://agentic-api/agent-v2/mcp-app.html", "ui://agentic-api/developer-home/mcp-app.html", "ui://agentic-api/agents/mcp-app.html", "ui://agentic-api/create-agent/mcp-app.html", "ui://agentic-api/claim-agent/mcp-app.html", "ui://agentic-api/configure-agent-connection/mcp-app.html", "ui://agentic-api/register-agent-observed-revision/mcp-app.html", "ui://agentic-api/buyer-account-admission/mcp-app.html", "ui://agentic-api/tars-org-supply-asks/mcp-app.html", "ui://agentic-api/tars-run-rate/mcp-app.html", "ui://agentic-api/tars-marketing-email-library/mcp-app.html", "ui://agentic-api/tars-approved-deck-modules/mcp-app.html", "ui://agentic-api/tars-marketing-email-operations/mcp-app.html", "ui://agentic-api/business-rules/mcp-app.html", "ui://agentic-api/demo-storefront/mcp-app.html", "ui://agentic-api/modular-inventory-source/mcp-app.html", "ui://agentic-api/modular-connect/mcp-app.html", "ui://agentic-api/source-discovery-preview/mcp-app.html", "ui://agentic-api/partner-connection/mcp-app.html", "ui://agentic-api/agent-certification/mcp-app.html", "ui://agentic-api/agent-sources/mcp-app.html", "ui://agentic-api/agent-overview/mcp-app.html", "ui://agentic-api/agent-webhooks/mcp-app.html", "ui://agentic-api/modular-avails-commit/mcp-app.html", "ui://agentic-api/plan-billing/mcp-app.html", "ui://agentic-api/connections/mcp-app.html", "ui://agentic-api/creative-engines/mcp-app.html", "ui://agentic-api/all-advertisers-home/mcp-app.html", "ui://agentic-api/add-advertiser/mcp-app.html", "ui://agentic-api/campaigns/mcp-app.html", "ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html", "ui://agentic-api/creative-library-v3/mcp-app.html", "ui://agentic-api/upload-creative-asset/mcp-app.html", "ui://agentic-api/creative-composer-task/mcp-app.html", "ui://agentic-api/variant-gallery/mcp-app.html", "ui://agentic-api/seller-setup/mcp-app.html", "ui://agentic-api/approvals/mcp-app.html", "ui://agentic-api/notifications/mcp-app.html", "ui://agentic-api/buyer-notifications/mcp-app.html", "ui://agentic-api/buyer-webhooks/mcp-app.html", "ui://agentic-api/proposal-pass-v3/mcp-app.html", "ui://agentic-api/sessions/mcp-app.html", "ui://agentic-api/seller-dashboard/mcp-app.html", "ui://agentic-api/seller-dashboard-v3/mcp-app.html", "ui://agentic-api/product-marketing-v3/mcp-app.html", "ui://agentic-api/library/mcp-app.html", "ui://agentic-api/integrations/mcp-app.html", "ui://agentic-api/release-notes/mcp-app.html", "ui://agentic-api/playbook/mcp-app.html", "ui://agentic-api/media-kit/mcp-app.html", "ui://agentic-api/business-profile/mcp-app.html", "ui://agentic-api/buyer-discounts/mcp-app.html", "ui://agentic-api/sponsored-buyers/mcp-app.html", "ui://agentic-api/pending-operations/mcp-app.html", "ui://agentic-api/storefront-briefs/mcp-app.html", "ui://agentic-api/merchandising-simulator/mcp-app.html", "ui://agentic-api/media-buys/mcp-app.html", "ui://agentic-api/media-buy-timeline/mcp-app.html", "ui://agentic-api/components/mcp-app.html", "ui://agentic-api/seller-accounts/mcp-app.html"]
+    resourceUri: Literal["ui://agentic-api/conversation-history/mcp-app.html", "ui://agentic-api/agent-v2/mcp-app.html", "ui://agentic-api/developer-home/mcp-app.html", "ui://agentic-api/agents/mcp-app.html", "ui://agentic-api/create-agent/mcp-app.html", "ui://agentic-api/claim-agent/mcp-app.html", "ui://agentic-api/configure-agent-connection/mcp-app.html", "ui://agentic-api/register-agent-observed-revision/mcp-app.html", "ui://agentic-api/buyer-account-admission/mcp-app.html", "ui://agentic-api/tars-org-supply-asks/mcp-app.html", "ui://agentic-api/tars-run-rate/mcp-app.html", "ui://agentic-api/tars-marketing-email-library/mcp-app.html", "ui://agentic-api/tars-approved-deck-modules/mcp-app.html", "ui://agentic-api/tars-marketing-email-operations/mcp-app.html", "ui://agentic-api/business-rules/mcp-app.html", "ui://agentic-api/demo-storefront/mcp-app.html", "ui://agentic-api/agent-source-credentials/mcp-app.html", "ui://agentic-api/property-roster/mcp-app.html", "ui://agentic-api/modular-inventory-source/mcp-app.html", "ui://agentic-api/modular-connect/mcp-app.html", "ui://agentic-api/source-discovery-preview/mcp-app.html", "ui://agentic-api/partner-connection/mcp-app.html", "ui://agentic-api/agent-certification/mcp-app.html", "ui://agentic-api/agent-sources/mcp-app.html", "ui://agentic-api/agent-overview/mcp-app.html", "ui://agentic-api/agent-webhooks/mcp-app.html", "ui://agentic-api/modular-avails-commit/mcp-app.html", "ui://agentic-api/plan-billing/mcp-app.html", "ui://agentic-api/connections/mcp-app.html", "ui://agentic-api/creative-engines/mcp-app.html", "ui://agentic-api/all-advertisers-home/mcp-app.html", "ui://agentic-api/add-advertiser/mcp-app.html", "ui://agentic-api/campaigns/mcp-app.html", "ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html", "ui://agentic-api/creative-library-v3/mcp-app.html", "ui://agentic-api/upload-creative-asset/mcp-app.html", "ui://agentic-api/creative-composer-task/mcp-app.html", "ui://agentic-api/variant-gallery/mcp-app.html", "ui://agentic-api/seller-setup/mcp-app.html", "ui://agentic-api/approvals/mcp-app.html", "ui://agentic-api/notifications/mcp-app.html", "ui://agentic-api/buyer-notifications/mcp-app.html", "ui://agentic-api/buyer-webhooks/mcp-app.html", "ui://agentic-api/proposal-pass-v3/mcp-app.html", "ui://agentic-api/sessions/mcp-app.html", "ui://agentic-api/seller-dashboard/mcp-app.html", "ui://agentic-api/seller-dashboard-v3/mcp-app.html", "ui://agentic-api/product-marketing-v3/mcp-app.html", "ui://agentic-api/library/mcp-app.html", "ui://agentic-api/integrations/mcp-app.html", "ui://agentic-api/release-notes/mcp-app.html", "ui://agentic-api/playbook/mcp-app.html", "ui://agentic-api/media-kit/mcp-app.html", "ui://agentic-api/business-profile/mcp-app.html", "ui://agentic-api/buyer-discounts/mcp-app.html", "ui://agentic-api/sponsored-buyers/mcp-app.html", "ui://agentic-api/pending-operations/mcp-app.html", "ui://agentic-api/storefront-briefs/mcp-app.html", "ui://agentic-api/activity-log/mcp-app.html", "ui://agentic-api/merchandising-simulator/mcp-app.html", "ui://agentic-api/media-buys/mcp-app.html", "ui://agentic-api/media-buy-timeline/mcp-app.html", "ui://agentic-api/components/mcp-app.html", "ui://agentic-api/seller-accounts/mcp-app.html"]
     advertiserId: NotRequired[str]
     campaignId: NotRequired[str]
     capability: Literal["reauthenticate_in_browser", "manage_webhooks"]
@@ -5175,7 +5337,7 @@ class OpenPageInput(TypedDict):
     '\n    Relationship to focus on.\n    '
     blockedReason: NotRequired[str]
     '\n    Its known blocked reason.\n    '
-    page: Literal["connect_ad_server", "ad_server_source", "ad_server_diagnostics", "source_diagnostics", "seller_setup", "demo_seller", "modular_inventory_source", "modular_source_setup", "modular_inventory_feed", "listing", "discovery_card", "media_kit", "business_profile", "playbook", "library", "integrations", "product_marketing", "business_rules", "buyer_account_mapping", "property_roster", "plan_and_billing", "buyer_setup", "sellers", "creative_engines", "advertisers", "campaigns", "campaign_receipt", "approvals", "release_notes", "customer_requests", "notifications", "webhooks", "buyer_proposal_version"]
+    page: Literal["connect_ad_server", "ad_server_source", "ad_server_diagnostics", "source_diagnostics", "seller_setup", "demo_seller", "connect_sales_agent", "modular_inventory_source", "modular_source_setup", "modular_inventory_feed", "listing", "discovery_card", "media_kit", "business_profile", "playbook", "library", "integrations", "product_marketing", "business_rules", "buyer_account_mapping", "property_roster", "plan_and_billing", "buyer_setup", "sellers", "creative_engines", "advertisers", "campaigns", "campaign_receipt", "approvals", "release_notes", "customer_requests", "notifications", "webhooks", "buyer_proposal_version"]
     '\n    Page to open. Owners repair a missing Agent relationship in source_diagnostics.\n    '
     sourceId: NotRequired[str]
     '\n    Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.\n    '
@@ -6833,7 +6995,7 @@ class SaveBillingInput(TypedDict):
     paymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90"]]
     '\n    Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default.\n    '
     plan: NotRequired[SaveBillingRequestSaveBillingPlan]
-    '\n    Accept or switch plans. Send alone.\n    '
+    '\n    Accept or switch plans; returns approval_required. Send alone.\n    '
     offerResponse: NotRequired[SaveBillingRequestSaveBillingOfferResponse]
     '\n    Decline the offer or decide later. Send alone.\n    '
     renewal: NotRequired[SaveBillingRequestSaveBillingRenewal]
@@ -6881,7 +7043,7 @@ class SaveBillingRequestSaveBillingPlan(TypedDict):
     paymentOptionKey: NotRequired[str]
     '\n    Server optionKey of the chosen payment option; required when the offer lists payment options. Never a price.\n    '
     idempotencyKey: str
-    '\n    Stable key; repeat it to retry.\n    '
+    '\n    Stable key; repeat it with the same plan to read the approval outcome.\n    '
 
 SaveBillingRequestSaveBillingPlanOfferVersion: TypeAlias = str
 
@@ -6987,11 +7149,40 @@ class SaveBillingResultActionTermsNotRequired(TypedDict):
     action: Literal["terms_not_required"]
     terms: SaveBillingResultActionTermsNotRequiredTerms
 
-SaveBillingResult: TypeAlias = "SaveBillingResultActionTermsAccepted | SaveBillingResultActionTermsNotRequired | SaveBillingResultActionPaymentTermsSaved | SaveBillingResultActionBillingSaved | SaveBillingResultActionConfirmationRequired | SaveBillingResultActionHumanActionRequired | SaveBillingResultActionPaymentAuthorityPending | SaveBillingResultActionPaymentAuthorityOpened | SaveBillingResultActionPaymentAuthorityVerified | SaveBillingResultActionPaymentAuthorityExpired | SaveBillingResultActionPlanAccepted | SaveBillingResultActionOfferResponseRecorded | SaveBillingResultActionRenewalChanged"
-
 class SaveBillingResultActionTermsNotRequiredTerms(TypedDict):
     accepted: Literal[False]
     governedByExistingContract: Literal[True]
+
+class SaveBillingSuccessAgentApproval(TypedDict):
+    id: str
+    '\n    Approval id.\n    '
+    kind: str
+    '\n    Kind of sensitive action, for example `buyer_child_account.create`.\n    '
+    state: Literal["pending", "executing", "succeeded", "failed", "rejected", "expired"]
+    '\n    `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.\n    '
+    targetCustomerId: str
+    '\n    Account the action applies to.\n    '
+    requiredRole: Literal["ADMIN", "SUPER_ADMIN"] | None
+    '\n    Role the approver must hold on the account.\n    '
+    summary: str | None
+    '\n    What will happen, in one line. Null once the approval is final.\n    '
+    url: str
+    '\n    Page on our site where a signed-in person approves or rejects the request.\n    '
+    createdAt: str
+    expiresAt: str
+    decidedAt: str | None
+    completedAt: str | None
+    resultReference: dict[str, str | float | bool] | None
+    '\n    Reference to the result once succeeded.\n    '
+    failureCode: str | None
+    '\n    Reason code when the action failed.\n    '
+
+class SaveBillingSuccessAgentApprovalRequired(TypedDict):
+    action: Literal["approval_required"]
+    message: str
+    approval: SaveBillingSuccessAgentApproval
+
+SaveBillingResult: TypeAlias = "SaveBillingResultActionTermsAccepted | SaveBillingResultActionTermsNotRequired | SaveBillingResultActionPaymentTermsSaved | SaveBillingResultActionBillingSaved | SaveBillingResultActionConfirmationRequired | SaveBillingResultActionHumanActionRequired | SaveBillingResultActionPaymentAuthorityPending | SaveBillingResultActionPaymentAuthorityOpened | SaveBillingResultActionPaymentAuthorityVerified | SaveBillingResultActionPaymentAuthorityExpired | SaveBillingResultActionPlanAccepted | SaveBillingSuccessAgentApprovalRequired | SaveBillingResultActionOfferResponseRecorded | SaveBillingResultActionRenewalChanged"
 
 class SaveBillingSuccessCaptureLinkIssuedResult(TypedDict):
     method: Literal["capture_link"]
@@ -7022,7 +7213,7 @@ class SaveBusinessRulesInputMaterialCandidate(TypedDict):
     advertiserRef: NotRequired[str]
     '\n    Required exact advertiser scope for advertiser-confidential Material.\n    '
 
-class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure(TypedDict):
+class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure(TypedDict):
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
@@ -7031,16 +7222,20 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     '\n    auto approves creatives with no review; manual queues them.\n    '
     mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
+    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: list[Literal["brief_acceptance", "creative_policy"]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithCreativeApproval(TypedDict):
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure
+
+class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval(TypedDict):
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
@@ -7049,16 +7244,40 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     '\n    auto approves creatives with no review; manual queues them.\n    '
     mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
+    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithMediaBuyApproval(TypedDict):
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithCreativeApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval
+
+class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithGuaranteedOverForecast(TypedDict):
+    materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
+    '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
+    policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
+    '\n    The policy version to write, as the read returns it.\n    '
+    creativeApproval: NotRequired[Literal["auto", "manual"]]
+    '\n    auto approves creatives with no review; manual queues them.\n    '
+    mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
+    '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    guaranteedOverForecast: Literal["overbook", "hold_for_review"]
+    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
+    acknowledgeNoHumanReview: NotRequired[bool]
+    '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
+    advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
+    expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval(TypedDict):
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
@@ -7067,14 +7286,18 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolic
     '\n    auto approves creatives with no review; manual queues them.\n    '
     mediaBuyApproval: Literal["auto", "manual"]
     '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
+    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithMediaBuyApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval
 
 class SaveBusinessRulesInputWithPolicy(TypedDict):
     policy: SaveBusinessRulesRequestSaveBusinessRulesPolicy
@@ -7085,16 +7308,18 @@ class SaveBusinessRulesInputWithPolicy(TypedDict):
     '\n    auto approves creatives with no review; manual queues them.\n    '
     mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
+    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
     '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
-    '\n    Policy sections to show buyers on the listing. Empty hides them.\n    '
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-SaveBusinessRulesInput: TypeAlias = "SaveBusinessRulesInputWithPolicy | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithCreativeApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithMediaBuyApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure"
+SaveBusinessRulesInput: TypeAlias = "SaveBusinessRulesInputWithPolicy | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithGuaranteedOverForecast | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure"
 
 class SaveBusinessRulesRequestSaveBusinessRulesPolicy(TypedDict):
     content: NotRequired[str]
@@ -7442,6 +7667,8 @@ class SaveCampaignInput(TypedDict):
     '\n    Flight window. Null clears it; omit to leave it unchanged.\n    '
     budget: NotRequired[SaveCampaignInputBudget]
     '\n    Campaign budget.\n    '
+    operatorFees: NotRequired[list[SaveCampaignInputOperatorFeesItem]]
+    '\n    Operator\'s fee on the campaign, AdCP adjustment fields: [{name: \'operator_fee\', rate: 0.02}] is 2% of gross budget, up to 0.49. [] clears. Only the operator organisation, when enabled; needs a budget. New media buys lock it.\n    '
     frequencyCap: NotRequired[SaveCampaignInputFrequencyCapValue | None]
     '\n    Per-seller AdCP 3.2 MediaBuy cap. Null clears it; draft only. Other levels are unavailable.\n    '
     confirmLaunch: NotRequired[bool]
@@ -7596,6 +7823,14 @@ class SaveCampaignInputFrequencyCapValue(TypedDict):
     '\n    Counter scope. Only mediaBuy is available.\n    '
     config: SaveCampaignInputFrequencyCapLevelMediaBuyConfig
     '\n    Seller-enforced AdCP 3.2 cap configuration.\n    '
+
+class SaveCampaignInputOperatorFeesItem(TypedDict):
+    name: str
+    '\n    The kind of fee. Always `operator_fee`.\n    '
+    rate: float
+    '\n    Decimal share of the campaign\'s gross budget: 0.02 for 2%.\n    '
+    beneficiary: NotRequired[str]
+    '\n    Account id of the operator organisation; must be the account\'s parent organisation, the default.\n    '
 
 class SaveCampaignInputTargetingDaypartsItem(TypedDict):
     requirementId: str
@@ -8506,7 +8741,8 @@ class SaveCampaignResultActionPendingConfirmationLaunchBlockersItem(TypedDict):
 class SaveCampaignResultActionPendingConfirmationLaunchMediaBuysItem(TypedDict):
     mediaBuyId: str
     name: str
-    phase: Literal["draft"]
+    phase: Literal["draft", "pendingApproval", "active"]
+    willStart: NotRequired[bool]
     budget: NotRequired[SaveCampaignSuccessLaunchMediaBuysItemBudget]
     sellerName: NotRequired[str]
 
@@ -9705,7 +9941,7 @@ class SaveCreativeSessionInputWithAdvertiserId(TypedDict):
     idempotencyKey: NotRequired[str]
     '\n    Required for a draft; optional for selecting or approving.\n    '
     engine: NotRequired[SaveCreativeSessionInputEngine]
-    '\n    Leave unset for funded image drafts unless user names an engine. See Creative Engines guide.\n    '
+    '\n    Leave unset unless the buyer names a connected engine. The server chooses a compatible connected or Scope3-funded engine.\n    '
     draft: NotRequired[SaveCreativeSessionInputDraft]
     '\n    Copy exact user brief to request.creative_brief.prompt; requested count to request.variant_count.\n    '
     selectedVariantId: NotRequired[str]
@@ -9731,7 +9967,7 @@ class SaveCreativeSessionInputWithCampaignId(TypedDict):
     idempotencyKey: NotRequired[str]
     '\n    Required for a draft; optional for selecting or approving.\n    '
     engine: NotRequired[SaveCreativeSessionInputEngine]
-    '\n    Leave unset for funded image drafts unless user names an engine. See Creative Engines guide.\n    '
+    '\n    Leave unset unless the buyer names a connected engine. The server chooses a compatible connected or Scope3-funded engine.\n    '
     draft: NotRequired[SaveCreativeSessionInputDraft]
     '\n    Copy exact user brief to request.creative_brief.prompt; requested count to request.variant_count.\n    '
     selectedVariantId: NotRequired[str]
