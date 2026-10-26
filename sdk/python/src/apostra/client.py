@@ -341,11 +341,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveAudienceResult], self._request_with_response("save_audience", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_billing(self, input: models.SaveBillingInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBillingResult:
-        "Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Cards stay off MCP."
+        "Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Accepting a plan needs an administrator to approve it on our site. Cards stay off MCP."
         return cast("models.SaveBillingResult", self._request("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_billing_with_response(self, input: models.SaveBillingInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBillingResult]:
-        "Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Cards stay off MCP. Returns the data together with response headers and request ID."
+        "Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Accepting a plan needs an administrator to approve it on our site. Cards stay off MCP. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBillingResult], self._request_with_response("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_business_rules(self, input: models.SaveBusinessRulesInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBusinessRulesResult:
@@ -934,11 +934,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveAudienceResult], await self._request_with_response("save_audience", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_billing(self, input: models.SaveBillingInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBillingResult:
-        "Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Cards stay off MCP."
+        "Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Accepting a plan needs an administrator to approve it on our site. Cards stay off MCP."
         return cast("models.SaveBillingResult", await self._request("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_billing_with_response(self, input: models.SaveBillingInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBillingResult]:
-        "Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Cards stay off MCP. Returns the data together with response headers and request ID."
+        "Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its renewal. Accepting a plan needs an administrator to approve it on our site. Cards stay off MCP. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBillingResult], await self._request_with_response("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_business_rules(self, input: models.SaveBusinessRulesInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBusinessRulesResult:
