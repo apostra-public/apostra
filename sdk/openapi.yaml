@@ -43504,11 +43504,11 @@ paths:
     post:
       operationId: save_lesson
       summary: >-
-        Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve
+        Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve
         and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session
         note and ask if kind or scope is unclear.
       description: >-
-        Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve
+        Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve
         and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session
         note and ask if kind or scope is unclear.
       security:

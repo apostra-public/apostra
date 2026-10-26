@@ -871,14 +871,14 @@ export class Apostra extends Transport {
   /** Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Pass only `agentId` or `adServer` to open the form that connects an agent or an ad server. Credentials are never passed here; a source that needs one returns the page that collects it. Returns the data together with response headers and request ID. */
   saveInventorySourceWithResponse(input: SaveInventorySourceInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveInventorySourceResult>> { return this.requestDetailed("save_inventory_source", input, options) }
   /**
-   * Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear.
+   * Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear.
    *
    * @example
    * await client.saveLesson(input, { idempotencyKey: 'stable-key' })
    */
   saveLesson(input: SaveLessonInput, options: WriteRequestOptions): Promise<SaveLessonResult> { return this.request("save_lesson", input, options) }
 
-  /** Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear. Returns the data together with response headers and request ID. */
+  /** Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear. Returns the data together with response headers and request ID. */
   saveLessonWithResponse(input: SaveLessonInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveLessonResult>> { return this.requestDetailed("save_lesson", input, options) }
   /**
    * Open a seller library request or close it with seller Material.
