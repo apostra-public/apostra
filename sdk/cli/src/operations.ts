@@ -7,8 +7,11 @@ export type OperationSummary = {
   path: string
   summary: string
 }
-
-export const cliEnvelopeVersion = 1
+export type OperationDetail = OperationSummary & {
+  /** True for a write: `call` then requires `--idempotency-key`. */
+  idempotencyKey: boolean
+  parameters: { name: string; location: string; required: boolean }[]
+}
 
 export function listOperations(): OperationSummary[] {
   return (
@@ -30,10 +33,20 @@ export function describeOperation(name: string): OperationSummary | undefined {
   return listOperations().find((operation) => operation.name === name)
 }
 
-export function operationsEnvelope() {
+export function operationDetail(summary: OperationSummary): OperationDetail {
+  const { idempotencyKey, parameters } = operations[summary.name]
   return {
-    version: cliEnvelopeVersion,
-    sdkVersion: version,
-    operations: listOperations(),
+    ...summary,
+    idempotencyKey,
+    parameters: parameters.map(({ name, location, required }) => ({
+      name,
+      location,
+      required,
+    })),
   }
 }
+
+export const operationsData = () => ({
+  sdkVersion: version,
+  operations: listOperations(),
+})
