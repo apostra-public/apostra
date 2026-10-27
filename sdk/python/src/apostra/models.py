@@ -445,7 +445,7 @@ class GetDeliveryResultReportLiveCampaignDeliveryDeliverySummaryAggregatedTotals
 
 class GetDeliveryResultReportLiveCampaignDeliveryDeliverySummaryAggregatedTotalsMetricAggregatesItemScopeStandard(TypedDict):
     scope: Literal["standard"]
-    metric_id: Literal["impressions", "spend", "clicks", "ctr", "views", "completed_views", "completion_rate", "conversions", "conversion_value", "commissionable_value", "roas", "cost_per_acquisition", "new_to_brand_rate", "leads", "reach", "frequency", "grps", "engagements", "engagement_rate", "follows", "saves", "profile_visits", "viewability", "viewable_rate", "viewable_impressions", "measurable_impressions", "viewed_seconds", "viewed_seconds_percentiles", "viewed_seconds_histogram", "quartile_data", "quartile_25", "quartile_50", "quartile_75", "quartile_100", "time_based_views", "dooh_metrics", "ooh_metrics", "cost_per_click", "cost_per_completed_view", "cpm", "downloads", "units_sold", "new_to_brand_units", "plays", "incremental_sales_lift", "brand_lift", "foot_traffic", "conversion_lift", "brand_search_lift"]
+    metric_id: Literal["impressions", "spend", "clicks", "ctr", "views", "completed_views", "completion_rate", "conversions", "conversion_value", "commissionable_value", "roas", "cost_per_acquisition", "new_to_brand_rate", "leads", "reach", "frequency", "grps", "engagements", "engagement_rate", "follows", "saves", "profile_visits", "viewability", "viewable_rate", "viewable_impressions", "measurable_impressions", "viewed_seconds", "viewed_seconds_percentiles", "viewed_seconds_histogram", "quartile_data", "quartile_25", "quartile_50", "quartile_75", "quartile_100", "time_based_views", "dooh_metrics", "ooh_metrics", "print_metrics", "publication", "cost_per_click", "cost_per_completed_view", "cpm", "downloads", "units_sold", "new_to_brand_units", "plays", "incremental_sales_lift", "brand_lift", "foot_traffic", "conversion_lift", "brand_search_lift"]
     qualifier: NotRequired[GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemQualifier]
     value: float
     measurable_impressions: NotRequired[float]
@@ -5385,6 +5385,7 @@ class OpenCreativeLibraryResultKindAssetParams(TypedDict):
     assetId: str
     assetState: NotRequired[Literal["active", "draft"]]
     initialAction: Literal["focus_asset"]
+    creativeEnginesEligible: NotRequired[bool]
 
 class OpenCreativeLibraryResultKindLibrary(TypedDict):
     kind: Literal["library"]
@@ -5403,6 +5404,7 @@ class OpenCreativeLibraryResultKindLibraryParams(TypedDict):
     creativeId: NotRequired[str]
     initialAction: NotRequired[Literal["upload", "compose"]]
     sessionId: NotRequired[str]
+    creativeEnginesEligible: NotRequired[bool]
 
 class OpenDeveloperHomeInput(TypedDict):
     accountId: NotRequired[int | str]
@@ -7641,6 +7643,7 @@ class SaveBuyerAgentSuccessBuyerAgentNotificationDestinationIssuesItem(TypedDict
     issues: NotRequired[list[SaveBuyerAgentSuccessBuyerAgentNotificationDestinationIssuesItemIssuesItem]]
     details: NotRequired[SaveBuyerAgentSuccessBuyerAgentNotificationDestinationIssuesItemDetails]
     recovery: NotRequired[Literal["transient", "correctable", "terminal"]]
+    mutation_outcome: NotRequired[str]
     source: NotRequired[Literal["producer", "sdk"]]
     sdk_id: NotRequired[str]
 
@@ -7671,7 +7674,7 @@ class SaveBuyerAgentSuccessBuyerAgentNotificationDestinationSetup(TypedDict):
 class SaveBuyerAgentSuccessBuyerAgentNotificationSubscription(TypedDict):
     subscriber_id: str
     url: str
-    event_types: list[Literal["scheduled", "final", "delayed", "adjusted", "window_update", "impairment", "creative.status_changed", "creative.assignment_changed", "indicators.changed", "creative.purged", "account.status_changed", "account.change_recorded", "product.created", "product.updated", "product.priced", "product.removed", "signal.created", "signal.updated", "signal.priced", "signal.removed", "wholesale_feed.bulk_change", "capabilities.changed", "reporting.delivery_ready", "reporting.status_changed", "reporting.ledger_changed", "principal.changed"]]
+    event_types: list[Literal["scheduled", "final", "delayed", "adjusted", "window_update", "impairment", "creative.status_changed", "creative.assignment_changed", "indicators.changed", "creative.purged", "account.status_changed", "account.change_recorded", "product.created", "product.updated", "product.priced", "product.removed", "signal.created", "signal.updated", "signal.priced", "signal.removed", "wholesale_feed.bulk_change", "collection_card.updated", "collection_card.removed", "collection_catalog.bulk_change", "capabilities.changed", "reporting.delivery_ready", "reporting.status_changed", "reporting.ledger_changed", "principal.changed", "proposal.created"]]
     all_authorized_accounts: NotRequired[bool]
     include_future_event_types: NotRequired[bool]
     active: NotRequired[bool]
@@ -8059,10 +8062,14 @@ class SaveCampaignInputTargetingOverlayAgeRestriction(TypedDict):
 class SaveCampaignInputTargetingOverlayDaypartTargetsItem(TypedDict):
     days: list[Literal["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]]
     '\n    Weekdays in this window.\n    '
-    start_hour: int
+    start_hour: NotRequired[int]
     '\n    Start hour.\n    '
-    end_hour: int
+    end_hour: NotRequired[int]
     '\n    End hour.\n    '
+    start_time: NotRequired[str]
+    '\n    Targeting value.\n    '
+    end_time: NotRequired[str]
+    '\n    Targeting value.\n    '
     timezone: NotRequired[Literal["inventory_local"] | JsonValue]
     '\n    IANA timezone.\n    '
     label: NotRequired[str]
@@ -9494,6 +9501,8 @@ class SaveCoverageInput(TypedDict):
     '\n    Property claims; the read nests them under `domains[].properties`.\n    '
     removeProperties: NotRequired[list[SaveCoverageInputRemovePropertiesItem]]
     '\n    Claims to retract. A publisher-origin property cannot be removed here.\n    '
+    refresh: NotRequired[SaveCoverageRequestRefresh]
+    '\n    Declared domains to re-check now: re-reads each publisher\'s adagents.json and format catalog, and returns the refreshed states.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -9527,6 +9536,8 @@ class SaveCoverageInputRemovePropertiesItem(TypedDict):
 
 SaveCoverageRequestAdd: TypeAlias = list[str]
 
+SaveCoverageRequestRefresh: TypeAlias = list[str]
+
 SaveCoverageRequestRemove: TypeAlias = list[str]
 
 class SaveCoverageSuccessSaveCoverageSuccessDeclared(TypedDict):
@@ -9534,6 +9545,7 @@ class SaveCoverageSuccessSaveCoverageSuccessDeclared(TypedDict):
     changed: bool
     declared: SaveCoverageSuccessSaveCoverageSuccessDeclaredDeclared
     removed: SaveCoverageSuccessSaveCoverageSuccessDeclaredRemoved
+    refreshed: SaveCoverageSuccessSaveCoverageSuccessDeclaredRefreshed
     failures: SaveCoverageSuccessSaveCoverageSuccessDeclaredFailures
 
 class SaveCoverageSuccessSaveCoverageSuccessDeclaredDeclared(TypedDict):
@@ -9542,6 +9554,11 @@ class SaveCoverageSuccessSaveCoverageSuccessDeclaredDeclared(TypedDict):
     truncated: bool
 
 class SaveCoverageSuccessSaveCoverageSuccessDeclaredFailures(TypedDict):
+    items: list[JsonValue]
+    count: int
+    truncated: bool
+
+class SaveCoverageSuccessSaveCoverageSuccessDeclaredRefreshed(TypedDict):
     items: list[JsonValue]
     count: int
     truncated: bool
@@ -12938,6 +12955,8 @@ class SaveMediaBuyInputKindCreateProductsItemTargetingOverlay(TypedDict):
     property_list_exclude: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayPropertyListExclude]
     collection_list: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayCollectionList]
     collection_list_exclude: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayCollectionListExclude]
+    collection_lists: NotRequired[list[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayCollectionListsItem]]
+    collection_lists_exclude: NotRequired[list[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayCollectionListsExcludeItem]]
     placement_selection: NotRequired[dict[str, JsonValue]]
     collection_selection: NotRequired[dict[str, JsonValue]]
     age_restriction: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayAgeRestriction]
@@ -12990,12 +13009,32 @@ class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayCollectionListExclu
     auth_token: NotRequired[str]
     '\n    JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.\n    '
 
+class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayCollectionListsExcludeItem(TypedDict):
+    agent_url: str
+    '\n    URL of the agent managing the collection list\n    '
+    list_id: str
+    '\n    Identifier for the collection list within the agent\n    '
+    auth_token: NotRequired[str]
+    '\n    JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.\n    '
+
+class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayCollectionListsItem(TypedDict):
+    agent_url: str
+    '\n    URL of the agent managing the collection list\n    '
+    list_id: str
+    '\n    Identifier for the collection list within the agent\n    '
+    auth_token: NotRequired[str]
+    '\n    JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.\n    '
+
 class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDaypartTargetsItem(TypedDict):
     days: list[Literal["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]]
-    start_hour: int
-    '\n    Start hour (inclusive), 0-23 in 24-hour format. 0 = midnight, 6 = 6:00am, 18 = 6:00pm.\n    '
-    end_hour: int
-    '\n    End hour (exclusive), 1-24 in 24-hour format. 10 = 10:00am, 24 = midnight. Must be greater than start_hour.\n    '
+    start_hour: NotRequired[int]
+    '\n    Start hour (inclusive), 0-23 in 24-hour format. 0 = midnight, 6 = 6:00am, 18 = 6:00pm. Whole-hour form: pair with end_hour; mutually exclusive with start_time and end_time.\n    '
+    end_hour: NotRequired[int]
+    '\n    End hour (exclusive), 1-24 in 24-hour format. 10 = 10:00am, 24 = midnight. Must be greater than start_hour; whole-hour windows never cross midnight. Whole-hour form: pair with start_hour; mutually exclusive with start_time and end_time.\n    '
+    start_time: NotRequired[str]
+    '\n    Experimental in AdCP 3.3. Start of the window (inclusive) as a 24-hour HH:MM civil clock time on the entry\'s timezone clock, such as \'19:30\'. Use for windows that do not fall on whole hours (linear TV programme junctions, quarter-hour schedules). Pair with end_time; mutually exclusive with start_hour and end_hour. A window whose end_time is earlier than its start_time crosses midnight and belongs to the day it starts on. A product accepts only the finest time granularity it declares in overlay_support.daypart_targets.time_granularity; sellers MUST reject, never round, a clock time the product does not honor.\n    '
+    end_time: NotRequired[str]
+    '\n    Experimental in AdCP 3.3. End of the window (exclusive) as a 24-hour HH:MM civil clock time, such as \'23:00\'. Pair with start_time; mutually exclusive with start_hour and end_hour. end_time earlier than start_time means the window crosses midnight and ends at end_time on the following civil day (for example, 22:00 to 02:00 runs from 22:00 on a listed day until 02:00 the next morning); \'00:00\' therefore ends the window at the midnight closing the start day. end_time MUST NOT equal start_time: a zero-length or full-day window is invalid, and a full day uses start_hour 0 with end_hour 24. Sellers MUST reject an equal pair with INVALID_REQUEST.\n    '
     timezone: NotRequired[str]
     label: NotRequired[str]
     '\n    Optional human-readable name for this time window (e.g., \'Morning Drive\', \'Prime Time\')\n    '
@@ -13152,19 +13191,19 @@ class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayNegativeKeywordsIte
 
 class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayPropertyList(TypedDict):
     agent_url: str
-    '\n    URL of the agent managing the property list\n    '
+    '\n    AdCP task endpoint of the agent exposing get_property_list. Receivers MUST support resolution over MCP; another advertised AdCP task transport MAY be used by agreement. This is not a base URL for an inferred /lists/{list_id} HTTP path.\n    '
     list_id: str
     '\n    Identifier for the property list within the agent\n    '
     auth_token: NotRequired[str]
-    '\n    JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.\n    '
+    '\n    Bearer credential authorizing read-only get_property_list access to this list_id, including every pagination request. When supplied, the managing agent MUST accept it instead of its normal credentials, without requiring the recipient to have an account. It MUST NOT grant access to other lists or mutations. Omit for a public list or independently authorized receiver. Deliver this credential to the intended receiver inside the reference, including in seller task arguments. When authenticating get_property_list requests to the managing agent, send it only in the Authorization header, never in those task arguments or a URL.\n    '
 
 class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayPropertyListExclude(TypedDict):
     agent_url: str
-    '\n    URL of the agent managing the property list\n    '
+    '\n    AdCP task endpoint of the agent exposing get_property_list. Receivers MUST support resolution over MCP; another advertised AdCP task transport MAY be used by agreement. This is not a base URL for an inferred /lists/{list_id} HTTP path.\n    '
     list_id: str
     '\n    Identifier for the property list within the agent\n    '
     auth_token: NotRequired[str]
-    '\n    JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.\n    '
+    '\n    Bearer credential authorizing read-only get_property_list access to this list_id, including every pagination request. When supplied, the managing agent MUST accept it instead of its normal credentials, without requiring the recipient to have an account. It MUST NOT grant access to other lists or mutations. Omit for a public list or independently authorized receiver. Deliver this credential to the intended receiver inside the reference, including in seller task arguments. When authenticating get_property_list requests to the managing agent, send it only in the Authorization header, never in those task arguments or a URL.\n    '
 
 class SaveMediaBuyInputKindCreateProductsItemTargetingOverlaySignalTargetingGroups(TypedDict):
     operator: Literal["all"]
@@ -13477,6 +13516,8 @@ class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlay(TypedDict):
     property_list_exclude: NotRequired[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayPropertyListExcludeValue | None]
     collection_list: NotRequired[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayCollectionListValue | None]
     collection_list_exclude: NotRequired[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayCollectionListExcludeValue | None]
+    collection_lists: NotRequired[list[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayCollectionListsItem] | None]
+    collection_lists_exclude: NotRequired[list[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayCollectionListsExcludeItem] | None]
     placement_selection: NotRequired[dict[str, JsonValue] | None]
     collection_selection: NotRequired[dict[str, JsonValue] | None]
     age_restriction: NotRequired[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayAgeRestrictionValue | None]
@@ -13526,12 +13567,32 @@ class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayCollectionListValue
     auth_token: NotRequired[str]
     '\n    JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.\n    '
 
+class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayCollectionListsExcludeItem(TypedDict):
+    agent_url: str
+    '\n    URL of the agent managing the collection list\n    '
+    list_id: str
+    '\n    Identifier for the collection list within the agent\n    '
+    auth_token: NotRequired[str]
+    '\n    JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.\n    '
+
+class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayCollectionListsItem(TypedDict):
+    agent_url: str
+    '\n    URL of the agent managing the collection list\n    '
+    list_id: str
+    '\n    Identifier for the collection list within the agent\n    '
+    auth_token: NotRequired[str]
+    '\n    JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.\n    '
+
 class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDaypartTargetsItem(TypedDict):
     days: list[Literal["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]]
-    start_hour: int
-    '\n    Start hour (inclusive), 0-23 in 24-hour format. 0 = midnight, 6 = 6:00am, 18 = 6:00pm.\n    '
-    end_hour: int
-    '\n    End hour (exclusive), 1-24 in 24-hour format. 10 = 10:00am, 24 = midnight. Must be greater than start_hour.\n    '
+    start_hour: NotRequired[int]
+    '\n    Start hour (inclusive), 0-23 in 24-hour format. 0 = midnight, 6 = 6:00am, 18 = 6:00pm. Whole-hour form: pair with end_hour; mutually exclusive with start_time and end_time.\n    '
+    end_hour: NotRequired[int]
+    '\n    End hour (exclusive), 1-24 in 24-hour format. 10 = 10:00am, 24 = midnight. Must be greater than start_hour; whole-hour windows never cross midnight. Whole-hour form: pair with start_hour; mutually exclusive with start_time and end_time.\n    '
+    start_time: NotRequired[str]
+    '\n    Experimental in AdCP 3.3. Start of the window (inclusive) as a 24-hour HH:MM civil clock time on the entry\'s timezone clock, such as \'19:30\'. Use for windows that do not fall on whole hours (linear TV programme junctions, quarter-hour schedules). Pair with end_time; mutually exclusive with start_hour and end_hour. A window whose end_time is earlier than its start_time crosses midnight and belongs to the day it starts on. A product accepts only the finest time granularity it declares in overlay_support.daypart_targets.time_granularity; sellers MUST reject, never round, a clock time the product does not honor.\n    '
+    end_time: NotRequired[str]
+    '\n    Experimental in AdCP 3.3. End of the window (exclusive) as a 24-hour HH:MM civil clock time, such as \'23:00\'. Pair with start_time; mutually exclusive with start_hour and end_hour. end_time earlier than start_time means the window crosses midnight and ends at end_time on the following civil day (for example, 22:00 to 02:00 runs from 22:00 on a listed day until 02:00 the next morning); \'00:00\' therefore ends the window at the midnight closing the start day. end_time MUST NOT equal start_time: a zero-length or full-day window is invalid, and a full day uses start_hour 0 with end_hour 24. Sellers MUST reject an equal pair with INVALID_REQUEST.\n    '
     timezone: NotRequired[str]
     label: NotRequired[str]
     '\n    Optional human-readable name for this time window (e.g., \'Morning Drive\', \'Prime Time\')\n    '
@@ -13688,19 +13749,19 @@ class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayNegativeKeywordsIte
 
 class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayPropertyListExcludeValue(TypedDict):
     agent_url: str
-    '\n    URL of the agent managing the property list\n    '
+    '\n    AdCP task endpoint of the agent exposing get_property_list. Receivers MUST support resolution over MCP; another advertised AdCP task transport MAY be used by agreement. This is not a base URL for an inferred /lists/{list_id} HTTP path.\n    '
     list_id: str
     '\n    Identifier for the property list within the agent\n    '
     auth_token: NotRequired[str]
-    '\n    JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.\n    '
+    '\n    Bearer credential authorizing read-only get_property_list access to this list_id, including every pagination request. When supplied, the managing agent MUST accept it instead of its normal credentials, without requiring the recipient to have an account. It MUST NOT grant access to other lists or mutations. Omit for a public list or independently authorized receiver. Deliver this credential to the intended receiver inside the reference, including in seller task arguments. When authenticating get_property_list requests to the managing agent, send it only in the Authorization header, never in those task arguments or a URL.\n    '
 
 class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayPropertyListValue(TypedDict):
     agent_url: str
-    '\n    URL of the agent managing the property list\n    '
+    '\n    AdCP task endpoint of the agent exposing get_property_list. Receivers MUST support resolution over MCP; another advertised AdCP task transport MAY be used by agreement. This is not a base URL for an inferred /lists/{list_id} HTTP path.\n    '
     list_id: str
     '\n    Identifier for the property list within the agent\n    '
     auth_token: NotRequired[str]
-    '\n    JWT or other authorization token for accessing the list. Optional if the list is public or caller has implicit access.\n    '
+    '\n    Bearer credential authorizing read-only get_property_list access to this list_id, including every pagination request. When supplied, the managing agent MUST accept it instead of its normal credentials, without requiring the recipient to have an account. It MUST NOT grant access to other lists or mutations. Omit for a public list or independently authorized receiver. Deliver this credential to the intended receiver inside the reference, including in seller task arguments. When authenticating get_property_list requests to the managing agent, send it only in the Authorization header, never in those task arguments or a URL.\n    '
 
 class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlaySignalTargetingGroupsOperatorAllGroupsItem(TypedDict):
     operator: Literal["any", "none"]
@@ -14697,10 +14758,10 @@ class SavePropertyListInput(TypedDict):
     '\n    include or exclude. Required when creating and immutable afterwards.\n    '
     domains: NotRequired[list[str]]
     '\n    Domain shorthand for typed identifiers.\n    '
-    identifiers: NotRequired[list[SavePropertyListRequestPropertyListIdentifier]]
-    '\n    AdCP typed property identifiers.\n    '
+    identifiers: NotRequired[list[SavePropertyListInputIdentifiersItem]]
+    '\n    AdCP typed property identifiers. Each may carry `features`: your scores for that property, e.g. {spektre_aspi: {value: 94}}.\n    '
     filters: NotRequired[SavePropertyListRequestPropertyListFilters | None]
-    '\n    Create-only AdCP property filters.\n    '
+    '\n    Create-only filters. feature_requirements are judged against your saved scores; with them, a list may have no identifiers and resolves over every property you have scored.\n    '
     appliesToAllCampaigns: NotRequired[bool]
     '\n    Required on create. Ask the buyer: true applies to all campaigns; false saves for campaign use. Immutable.\n    '
     check: NotRequired[bool]
@@ -14712,6 +14773,35 @@ class SavePropertyListInput(TypedDict):
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
+class SavePropertyListInputIdentifiersItem(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    '\n    AdCP property identifier type, such as domain, app, CTV, DOOH, audio, radio, or network.\n    '
+    value: str
+    '\n    Identifier value for the selected AdCP property type.\n    '
+    features: NotRequired[dict[str, SavePropertyListInputIdentifiersItemFeaturesValue]]
+    '\n    Scores for this property: a map from your feature id to AdCP\'s property feature value, for example {spektre_aspi: {value: 94}}. Scores belong to the account, not the list; a later save replaces the value for that feature and keeps the earlier one as history.\n    '
+
+class SavePropertyListInputIdentifiersItemFeaturesValue(TypedDict):
+    value: bool | float | str
+    '\n    The score: a number, a string or a boolean.\n    '
+    unit: NotRequired[str]
+    '\n    Unit of a numeric value, for example "percentage".\n    '
+    confidence: NotRequired[float]
+    '\n    Confidence in the value, from 0 to 1.\n    '
+    measured_at: NotRequired[str]
+    '\n    ISO 8601 date-time the value was measured.\n    '
+    expires_at: NotRequired[str]
+    '\n    ISO 8601 date-time after which the value no longer counts; the property is then treated as not covered for this feature.\n    '
+    methodology_version: NotRequired[str]
+    '\n    Version of the method that produced the value.\n    '
+    details: NotRequired[SavePropertyListInputIdentifiersItemFeaturesValueDetails]
+    '\n    Vendor-specific detail about the measurement; stored, not applied.\n    '
+    ext: NotRequired[dict[str, JsonValue]]
+    '\n    AdCP extension values; stored, not applied.\n    '
+
+class SavePropertyListInputIdentifiersItemFeaturesValueDetails(TypedDict):
+    pass
+
 class SavePropertyListRequestPropertyListFilters(TypedDict):
     channels_any: NotRequired[list[Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement"]] | None]
     '\n    AdCP channel filter. Does not limit where the list applies.\n    '
@@ -14720,25 +14810,23 @@ class SavePropertyListRequestPropertyListFilters(TypedDict):
     property_types: NotRequired[list[Literal["website", "mobile_app", "ctv_app", "desktop_app", "dooh", "podcast", "radio", "streaming_audio"]] | None]
     '\n    Property inventory types\n    '
     feature_requirements: NotRequired[list[SavePropertyListRequestPropertyListFiltersFeatureRequirementsItem] | None]
-    '\n    Feature-based requirements (e.g. IVT, MFA, green)\n    '
+    '\n    AdCP feature requirements, all of which a property must meet, judged against the account\'s saved scores (e.g. spektre_aspi min_value 20).\n    '
 
 class SavePropertyListRequestPropertyListFiltersFeatureRequirementsItem(TypedDict):
     feature_id: str
-    '\n    Feature identifier.\n    '
+    '\n    Feature to judge, as saved on the identifiers, for example spektre_aspi.\n    '
     min_value: NotRequired[float | None]
-    '\n    Minimum acceptable feature value.\n    '
+    '\n    Lowest numeric value that passes.\n    '
     max_value: NotRequired[float | None]
-    '\n    Maximum acceptable feature value.\n    '
+    '\n    Highest numeric value that passes.\n    '
     allowed_values: NotRequired[list[JsonValue] | None]
-    '\n    Accepted categorical feature values.\n    '
+    '\n    Values that pass, for boolean or categorical features.\n    '
     if_not_covered: NotRequired[Literal["exclude", "include"] | None]
-    '\n    How to treat properties without this feature.\n    '
+    '\n    exclude (default) removes a property with no live value for this feature; include keeps it.\n    '
+    policy_id: NotRequired[str]
+    '\n    Optional AdCP attribution to the policy that authorizes this threshold.\n    '
 
-class SavePropertyListRequestPropertyListIdentifier(TypedDict):
-    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
-    '\n    AdCP property identifier type, such as domain, app, CTV, DOOH, audio, radio, or network.\n    '
-    value: str
-    '\n    Identifier value for the selected AdCP property type.\n    '
+SavePropertyListRequestPropertyListIdentifier: TypeAlias = SavePropertyListInputIdentifiersItem
 
 class SavePropertyListResultActionArchived(TypedDict):
     action: Literal["archived"]
@@ -14826,25 +14914,43 @@ class SavePropertyListSuccessPropertyListFilters(TypedDict):
     property_types: NotRequired[list[Literal["website", "mobile_app", "ctv_app", "desktop_app", "dooh", "podcast", "radio", "streaming_audio"]] | None]
     '\n    Property inventory types\n    '
     feature_requirements: NotRequired[list[SavePropertyListSuccessPropertyListFiltersFeatureRequirementsItem] | None]
-    '\n    Feature-based requirements (e.g. IVT, MFA, green)\n    '
+    '\n    AdCP feature requirements, all of which a property must meet, judged against the account\'s saved scores (e.g. spektre_aspi min_value 20).\n    '
 
 class SavePropertyListSuccessPropertyListFiltersFeatureRequirementsItem(TypedDict):
     feature_id: str
-    '\n    Feature identifier.\n    '
+    '\n    Feature to judge, as saved on the identifiers, for example spektre_aspi.\n    '
     min_value: NotRequired[float | None]
-    '\n    Minimum acceptable feature value.\n    '
+    '\n    Lowest numeric value that passes.\n    '
     max_value: NotRequired[float | None]
-    '\n    Maximum acceptable feature value.\n    '
+    '\n    Highest numeric value that passes.\n    '
     allowed_values: NotRequired[list[JsonValue] | None]
-    '\n    Accepted categorical feature values.\n    '
+    '\n    Values that pass, for boolean or categorical features.\n    '
     if_not_covered: NotRequired[Literal["exclude", "include"] | None]
-    '\n    How to treat properties without this feature.\n    '
+    '\n    exclude (default) removes a property with no live value for this feature; include keeps it.\n    '
+    policy_id: NotRequired[str]
+    '\n    Optional AdCP attribution to the policy that authorizes this threshold.\n    '
 
 class SavePropertyListSuccessPropertyListIdentifierPageItem(TypedDict):
     type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
     value: str
     value_truncated: NotRequired[Literal[True]]
     '\n    True when value was cut to 512 bytes and ends with an ellipsis; it no longer matches a property.\n    '
+    features: NotRequired[dict[str, SavePropertyListSuccessPropertyListIdentifierPageItemFeaturesValue]]
+    '\n    Your current scores for this property, as saved: a map from feature id to AdCP\'s property feature value (without its free-form details and ext).\n    '
+
+class SavePropertyListSuccessPropertyListIdentifierPageItemFeaturesValue(TypedDict):
+    value: bool | float | str
+    '\n    The score: a number, a string or a boolean.\n    '
+    unit: NotRequired[str]
+    '\n    Unit of a numeric value.\n    '
+    confidence: NotRequired[float]
+    '\n    Confidence in the value, from 0 to 1.\n    '
+    measured_at: NotRequired[str]
+    '\n    When the value was measured.\n    '
+    expires_at: NotRequired[str]
+    '\n    When the value stops counting.\n    '
+    methodology_version: NotRequired[str]
+    '\n    Version of the method that produced the value.\n    '
 
 class SavePropertyListSuccessPropertyListProjection(TypedDict):
     id: str
@@ -15806,6 +15912,8 @@ class SaveSellerInput(TypedDict):
     '\n    Seller-only pending buyer relationship decision; read its intake version immediately before saving.\n    '
     sourceDecision: NotRequired[SaveSellerInputSourceDecisionDecisionBound | SaveSellerInputSourceDecisionDecisionNotRequired]
     '\n    Which account serves an admitted buyer on one source (see get(account_relationship) sources). Send alone.\n    '
+    demo: NotRequired[SaveSellerInputDemo]
+    '\n    Demo expiry and sample sources, as desired state. Send alone. Create, reset and delete are on the demo Page.\n    '
     isPaused: NotRequired[bool]
     '\n    Hold (true) or resume (false) new business: buyers stop discovering the Seller and buying; existing delivery continues. Send alone.\n    '
     expectedIsPaused: NotRequired[bool]
@@ -15846,6 +15954,12 @@ class SaveSellerInputDemandContactValue(TypedDict):
     '\n    Name of the buyer-facing demand contact.\n    '
     email: str
     '\n    Email address of the buyer-facing demand contact.\n    '
+
+class SaveSellerInputDemo(TypedDict):
+    expiresAt: NotRequired[str]
+    '\n    New expiry: after the current one, at most 7 days past it.\n    '
+    sourceRecipeIds: NotRequired[list[Literal["sample-publisher-display", "sample-publisher-ctv", "sample-retail-media"]]]
+    '\n    The complete set of sample sources; keep sample-publisher-display.\n    '
 
 class SaveSellerInputDistribution(TypedDict):
     openaiChallengeToken: str | None
@@ -16444,7 +16558,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -16716,7 +16830,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -16922,7 +17036,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -17155,7 +17269,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -17395,7 +17509,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -17635,7 +17749,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -17875,7 +17989,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -18113,7 +18227,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -18351,7 +18465,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -18657,7 +18771,7 @@ class SearchInputKindCreativeWithFilterAdvertiserIdFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -18895,7 +19009,7 @@ class SearchInputKindCreativeWithFilterCampaignIdFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -19175,7 +19289,7 @@ class SearchInputKindProposalFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -21114,7 +21228,7 @@ class SearchSuccessV3CampaignListResponse(TypedDict):
     results: list[SearchSuccessV3CampaignListItem]
 
 class TestCreativeMacrosInput(TypedDict):
-    requiredMacros: NotRequired[list[Literal["MEDIA_BUY_ID", "PACKAGE_ID", "CREATIVE_ID", "CACHEBUSTER", "TIMESTAMP", "CLICK_URL", "GDPR", "GDPR_CONSENT", "US_PRIVACY", "GPP_STRING", "GPP_SID", "IP_ADDRESS", "LIMIT_AD_TRACKING", "DEVICE_TYPE", "OS", "OS_VERSION", "DEVICE_MAKE", "DEVICE_MODEL", "USER_AGENT", "APP_BUNDLE", "APP_NAME", "COUNTRY", "REGION", "CITY", "ZIP", "DMA", "LAT", "LONG", "DEVICE_ID", "DEVICE_ID_TYPE", "DOMAIN", "PAGE_URL", "REFERRER", "KEYWORDS", "PLACEMENT_ID", "FOLD_POSITION", "AD_WIDTH", "AD_HEIGHT", "VIDEO_ID", "VIDEO_TITLE", "VIDEO_DURATION", "VIDEO_CATEGORY", "CONTENT_GENRE", "CONTENT_RATING", "PLAYER_WIDTH", "PLAYER_HEIGHT", "POD_POSITION", "POD_SIZE", "AD_BREAK_ID", "STATION_ID", "COLLECTION_NAME", "INSTALLMENT_ID", "AUDIO_DURATION", "TMPX", "IMPRESSION_ID", "AXEM", "CATALOG_ID", "SKU", "GTIN", "OFFERING_ID", "JOB_ID", "HOTEL_ID", "FLIGHT_ID", "VEHICLE_ID", "LISTING_ID", "STORE_ID", "PROGRAM_ID", "DESTINATION_ID", "CREATIVE_VARIANT_ID", "APP_ITEM_ID", "ITEM_NAME", "ITEM_DESCRIPTION", "ITEM_TAGLINE", "ITEM_PRICE", "ITEM_PRICE_CURRENCY"]]]
+    requiredMacros: NotRequired[list[Literal["MEDIA_BUY_ID", "PACKAGE_ID", "CREATIVE_ID", "CACHEBUSTER", "TIMESTAMP", "CLICK_URL", "GDPR", "GDPR_CONSENT", "ADDTL_CONSENT", "US_PRIVACY", "GPP_STRING", "GPP_SID", "IP_ADDRESS", "LIMIT_AD_TRACKING", "DEVICE_TYPE", "OS", "OS_VERSION", "DEVICE_MAKE", "DEVICE_MODEL", "USER_AGENT", "APP_BUNDLE", "APP_NAME", "COUNTRY", "REGION", "CITY", "ZIP", "DMA", "LAT", "LONG", "DEVICE_ID", "DEVICE_ID_TYPE", "DOMAIN", "PAGE_URL", "REFERRER", "KEYWORDS", "PLACEMENT_ID", "FOLD_POSITION", "AD_WIDTH", "AD_HEIGHT", "VIDEO_ID", "VIDEO_TITLE", "VIDEO_DURATION", "VIDEO_CATEGORY", "CONTENT_GENRE", "CONTENT_RATING", "PLAYER_WIDTH", "PLAYER_HEIGHT", "POD_POSITION", "POD_SIZE", "AD_BREAK_ID", "STATION_ID", "COLLECTION_NAME", "INSTALLMENT_ID", "AUDIO_DURATION", "TMPX", "IMPRESSION_ID", "AXEM", "CATALOG_ID", "SKU", "GTIN", "OFFERING_ID", "JOB_ID", "HOTEL_ID", "FLIGHT_ID", "VEHICLE_ID", "LISTING_ID", "STORE_ID", "PROGRAM_ID", "DESTINATION_ID", "CREATIVE_VARIANT_ID", "APP_ITEM_ID", "ITEM_NAME", "ITEM_DESCRIPTION", "ITEM_TAGLINE", "ITEM_PRICE", "ITEM_PRICE_CURRENCY"]]]
     '\n    Required macros must occur and have values. Absence fails; defaults to all canonical macros present.\n    '
     rawInput: str
     '\n    Exact tracker URL to test. It is preserved separately from compiled output.\n    '
@@ -21157,7 +21271,7 @@ class TestCreativeMacrosResult(TypedDict):
     projection: TestCreativeMacrosResultProjection
 
 class TestCreativeMacrosResultBindingsItem(TypedDict):
-    macro: Literal["MEDIA_BUY_ID", "PACKAGE_ID", "CREATIVE_ID", "CACHEBUSTER", "TIMESTAMP", "CLICK_URL", "GDPR", "GDPR_CONSENT", "US_PRIVACY", "GPP_STRING", "GPP_SID", "IP_ADDRESS", "LIMIT_AD_TRACKING", "DEVICE_TYPE", "OS", "OS_VERSION", "DEVICE_MAKE", "DEVICE_MODEL", "USER_AGENT", "APP_BUNDLE", "APP_NAME", "COUNTRY", "REGION", "CITY", "ZIP", "DMA", "LAT", "LONG", "DEVICE_ID", "DEVICE_ID_TYPE", "DOMAIN", "PAGE_URL", "REFERRER", "KEYWORDS", "PLACEMENT_ID", "FOLD_POSITION", "AD_WIDTH", "AD_HEIGHT", "VIDEO_ID", "VIDEO_TITLE", "VIDEO_DURATION", "VIDEO_CATEGORY", "CONTENT_GENRE", "CONTENT_RATING", "PLAYER_WIDTH", "PLAYER_HEIGHT", "POD_POSITION", "POD_SIZE", "AD_BREAK_ID", "STATION_ID", "COLLECTION_NAME", "INSTALLMENT_ID", "AUDIO_DURATION", "TMPX", "IMPRESSION_ID", "AXEM", "CATALOG_ID", "SKU", "GTIN", "OFFERING_ID", "JOB_ID", "HOTEL_ID", "FLIGHT_ID", "VEHICLE_ID", "LISTING_ID", "STORE_ID", "PROGRAM_ID", "DESTINATION_ID", "CREATIVE_VARIANT_ID", "APP_ITEM_ID", "ITEM_NAME", "ITEM_DESCRIPTION", "ITEM_TAGLINE", "ITEM_PRICE", "ITEM_PRICE_CURRENCY"]
+    macro: Literal["MEDIA_BUY_ID", "PACKAGE_ID", "CREATIVE_ID", "CACHEBUSTER", "TIMESTAMP", "CLICK_URL", "GDPR", "GDPR_CONSENT", "ADDTL_CONSENT", "US_PRIVACY", "GPP_STRING", "GPP_SID", "IP_ADDRESS", "LIMIT_AD_TRACKING", "DEVICE_TYPE", "OS", "OS_VERSION", "DEVICE_MAKE", "DEVICE_MODEL", "USER_AGENT", "APP_BUNDLE", "APP_NAME", "COUNTRY", "REGION", "CITY", "ZIP", "DMA", "LAT", "LONG", "DEVICE_ID", "DEVICE_ID_TYPE", "DOMAIN", "PAGE_URL", "REFERRER", "KEYWORDS", "PLACEMENT_ID", "FOLD_POSITION", "AD_WIDTH", "AD_HEIGHT", "VIDEO_ID", "VIDEO_TITLE", "VIDEO_DURATION", "VIDEO_CATEGORY", "CONTENT_GENRE", "CONTENT_RATING", "PLAYER_WIDTH", "PLAYER_HEIGHT", "POD_POSITION", "POD_SIZE", "AD_BREAK_ID", "STATION_ID", "COLLECTION_NAME", "INSTALLMENT_ID", "AUDIO_DURATION", "TMPX", "IMPRESSION_ID", "AXEM", "CATALOG_ID", "SKU", "GTIN", "OFFERING_ID", "JOB_ID", "HOTEL_ID", "FLIGHT_ID", "VEHICLE_ID", "LISTING_ID", "STORE_ID", "PROGRAM_ID", "DESTINATION_ID", "CREATIVE_VARIANT_ID", "APP_ITEM_ID", "ITEM_NAME", "ITEM_DESCRIPTION", "ITEM_TAGLINE", "ITEM_PRICE", "ITEM_PRICE_CURRENCY"]
     '\n    AdCP universal macro name.\n    '
     value: NotRequired[str]
     source: Literal["synthetic", "provided", "privacy_suppressed", "missing"]
