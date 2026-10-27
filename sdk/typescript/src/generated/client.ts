@@ -525,14 +525,14 @@ export class Apostra extends Transport {
   /** Open the buyer Creative Engines Page. Optionally focus an engine, connection, or its secure setup control; the buyer starts setup in the Page, and this does not authorize a provider or start generation. Returns the data together with response headers and request ID. */
   openCreativeEnginesPageWithResponse(input: OpenCreativeEnginesPageInput, options?: RequestOptions): Promise<ResponseDetails<OpenCreativeEnginesPageResult>> { return this.requestDetailed("open_creative_engines_page", input, options) }
   /**
-   * Open Creative Library. Use search for a plain object answer. Composer needs campaignId; assembly needs no Creative Engine. To save a draft, use exactly one format: a canonical format such as image, hosted video, or hosted audio, or a seller format.
+   * Open Creative Library. Use search for a plain object answer. The composer can start from an advertiser or a campaign and does not need a Creative Engine. To save a draft, use exactly one format: a canonical format such as image, hosted video, or hosted audio, or a seller format.
    *
    * @example
    * await client.openCreativeLibrary(input, { idempotencyKey: 'stable-key' })
    */
   openCreativeLibrary(input: OpenCreativeLibraryInput, options: WriteRequestOptions): Promise<OpenCreativeLibraryResult> { return this.request("open_creative_library", input, options) }
 
-  /** Open Creative Library. Use search for a plain object answer. Composer needs campaignId; assembly needs no Creative Engine. To save a draft, use exactly one format: a canonical format such as image, hosted video, or hosted audio, or a seller format. Returns the data together with response headers and request ID. */
+  /** Open Creative Library. Use search for a plain object answer. The composer can start from an advertiser or a campaign and does not need a Creative Engine. To save a draft, use exactly one format: a canonical format such as image, hosted video, or hosted audio, or a seller format. Returns the data together with response headers and request ID. */
   openCreativeLibraryWithResponse(input: OpenCreativeLibraryInput, options: WriteRequestOptions): Promise<ResponseDetails<OpenCreativeLibraryResult>> { return this.requestDetailed("open_creative_library", input, options) }
   /**
    * Open the Developer home for this Developer account: its agents, their stages and what to do next.
@@ -805,14 +805,14 @@ export class Apostra extends Transport {
   /** Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation. Returns the data together with response headers and request ID. */
   saveConnectionWithResponse(input: SaveConnectionInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveConnectionResult>> { return this.requestDetailed("save_connection", input, options) }
   /**
-   * Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, and `removeProperties` change named items only. Read authorization; never assume it.
+   * Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read authorization; never assume it.
    *
    * @example
    * await client.saveCoverage(input, { idempotencyKey: 'stable-key' })
    */
   saveCoverage(input: SaveCoverageInput, options: WriteRequestOptions): Promise<SaveCoverageResult> { return this.request("save_coverage", input, options) }
 
-  /** Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, and `removeProperties` change named items only. Read authorization; never assume it. Returns the data together with response headers and request ID. */
+  /** Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read authorization; never assume it. Returns the data together with response headers and request ID. */
   saveCoverageWithResponse(input: SaveCoverageInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveCoverageResult>> { return this.requestDetailed("save_coverage", input, options) }
   /**
    * advertiserId/campaignId:name,message;assets/landing_page_url/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only.
@@ -985,14 +985,14 @@ export class Apostra extends Transport {
   /** Change one RFP turn: release it, request or cancel a proposal file, append feedback, or record its outcome. One of these per call; revise, endorse and attach a response with save_rfp. Returns the data together with response headers and request ID. */
   saveRfpTurnWithResponse(input: SaveRfpTurnInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveRfpTurnResult>> { return this.requestDetailed("save_rfp_turn", input, options) }
   /**
-   * Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, or the intake hold. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:"distribution").
+   * Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, the intake hold, or the demo's expiry and sample sources. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get.
    *
    * @example
    * await client.saveSeller(input, { idempotencyKey: 'stable-key' })
    */
   saveSeller(input: SaveSellerInput, options: WriteRequestOptions): Promise<SaveSellerResult> { return this.request("save_seller", input, options) }
 
-  /** Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, or the intake hold. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:"distribution"). Returns the data together with response headers and request ID. */
+  /** Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, the intake hold, or the demo's expiry and sample sources. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get. Returns the data together with response headers and request ID. */
   saveSellerWithResponse(input: SaveSellerInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveSellerResult>> { return this.requestDetailed("save_seller", input, options) }
   /**
    * Create, replace, or archive a signal. Managed writes need a complete draft; read before updates. Without sourceId, writes the seller catalog.
