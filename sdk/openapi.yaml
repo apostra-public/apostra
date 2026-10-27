@@ -30042,6 +30042,8 @@ paths:
                                 type: string
                                 minLength: 1
                                 maxLength: 128
+                              creativeEnginesEligible:
+                                type: boolean
                             required:
                               - advertiserId
                               - advertiserName
@@ -30088,6 +30090,8 @@ paths:
                               initialAction:
                                 type: string
                                 const: focus_asset
+                              creativeEnginesEligible:
+                                type: boolean
                             required:
                               - advertiserId
                               - advertiserName

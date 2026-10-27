@@ -10008,6 +10008,7 @@ export type OpenCreativeLibraryResponses = {
                 creativeId?: string;
                 initialAction?: 'upload' | 'compose';
                 sessionId?: string;
+                creativeEnginesEligible?: boolean;
             };
             openInBrowserUrl?: string;
         } | {
@@ -10020,6 +10021,7 @@ export type OpenCreativeLibraryResponses = {
                 assetId: string;
                 assetState?: 'active' | 'draft';
                 initialAction: 'focus_asset';
+                creativeEnginesEligible?: boolean;
             };
             openInBrowserUrl?: string;
         };

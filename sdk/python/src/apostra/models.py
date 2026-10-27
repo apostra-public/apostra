@@ -5385,6 +5385,7 @@ class OpenCreativeLibraryResultKindAssetParams(TypedDict):
     assetId: str
     assetState: NotRequired[Literal["active", "draft"]]
     initialAction: Literal["focus_asset"]
+    creativeEnginesEligible: NotRequired[bool]
 
 class OpenCreativeLibraryResultKindLibrary(TypedDict):
     kind: Literal["library"]
@@ -5403,6 +5404,7 @@ class OpenCreativeLibraryResultKindLibraryParams(TypedDict):
     creativeId: NotRequired[str]
     initialAction: NotRequired[Literal["upload", "compose"]]
     sessionId: NotRequired[str]
+    creativeEnginesEligible: NotRequired[bool]
 
 class OpenDeveloperHomeInput(TypedDict):
     accountId: NotRequired[int | str]
