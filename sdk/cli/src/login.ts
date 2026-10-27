@@ -14,7 +14,7 @@ import {
 } from '@apostra/sdk/cli-login'
 
 export const loginTimeoutMs = 5 * 60_000
-export const scopeNames = ['read', 'write', 'admin'] as const
+export const scopeNames = ['read', 'write'] as const
 type Fetch = typeof globalThis.fetch
 
 const base64url = (bytes: Buffer) => bytes.toString('base64url')

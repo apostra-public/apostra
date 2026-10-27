@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "get-account-ready-to-buy",
-  "skillVersion": "1.1.0",
+  "skillVersion": "1.1.1",
   "scenarios": [
     {
       "id": "payment-authority-two-step",
@@ -10,7 +10,7 @@
       "expect": [
         "The agent asks for confirmation, then calls request_payment_authority and keeps the returned single-use confirmation token.",
         "The agent calls confirm_payment_authority with that token and gives the hosted card-capture link only to the organization cardholder.",
-        "The agent reads the result with get({ kind: 'billing' }) and never asks for card data in chat or in a tool call."
+        "The agent reads the result with get({ kind: 'billing', accountId }), naming the account on every call, and never asks for card data in chat or in a tool call."
       ]
     }
   ]

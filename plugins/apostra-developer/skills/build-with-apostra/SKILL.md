@@ -73,8 +73,9 @@ job, not a version-selection exercise.
 ## Connect and prove access
 
 Read [connection.md](references/connection.md) when installing, authenticating,
-or changing account context. Complete read-only verification before any remote
-write. For MCP, call `get_status`, inspect the current tools, and read the
+or changing account context. Send `accountId` on every call; see
+[name the account on every call](https://docs.apostra.com/v3/name-the-account).
+Complete read-only verification before any remote write. For MCP, call `get_status`, inspect the current tools, and read the
 intended account resource. For a REST-only integration, use the documented
 authorized resource read. Report the observed account and any readiness blocker.
 

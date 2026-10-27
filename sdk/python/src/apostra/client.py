@@ -84,6 +84,14 @@ class Apostra(SyncTransport):
         "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.GetStatusResult], self._request_with_response("get_status", input, account_id=account_id, timeout=timeout))
 
+    def log_event(self, input: models.LogEventInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.LogEventResult:
+        "Send up to 10,000 AdCP conversion events (log_event) to an event source the advertiser registered with save_event_source. Events must also pass the v2 rules: no raw email or phone in user_match, each event_type + event_id once per call. One invalid event refuses the whole call."
+        return cast("models.LogEventResult", self._request("log_event", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def log_event_with_response(self, input: models.LogEventInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.LogEventResult]:
+        "Send up to 10,000 AdCP conversion events (log_event) to an event source the advertiser registered with save_event_source. Events must also pass the v2 rules: no raw email or phone in user_match, each event_type + event_id once per call. One invalid event refuses the whole call. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.LogEventResult], self._request_with_response("log_event", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def open_advertisers_page(self, input: models.OpenAdvertisersPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAdvertisersPageResult:
         "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches. To add or set up an advertiser, pass intent: \"add\". For a text answer use search(kind: \"advertiser\")."
         return cast("models.OpenAdvertisersPageResult", self._request("open_advertisers_page", input, account_id=account_id, timeout=timeout))
@@ -461,11 +469,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveInventorySourceResult], self._request_with_response("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_lesson(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLessonResult:
-        "Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear."
+        "Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear."
         return cast("models.SaveLessonResult", self._request("save_lesson", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_lesson_with_response(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveLessonResult]:
-        "Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear. Returns the data together with response headers and request ID."
+        "Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveLessonResult], self._request_with_response("save_lesson", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_library_request(self, input: models.SaveLibraryRequestInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLibraryRequestResult:
@@ -676,6 +684,14 @@ class AsyncApostra(AsyncTransport):
     async def get_status_with_response(self, input: models.GetStatusInput = {}, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.GetStatusResult]:
         "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.GetStatusResult], await self._request_with_response("get_status", input, account_id=account_id, timeout=timeout))
+
+    async def log_event(self, input: models.LogEventInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.LogEventResult:
+        "Send up to 10,000 AdCP conversion events (log_event) to an event source the advertiser registered with save_event_source. Events must also pass the v2 rules: no raw email or phone in user_match, each event_type + event_id once per call. One invalid event refuses the whole call."
+        return cast("models.LogEventResult", await self._request("log_event", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def log_event_with_response(self, input: models.LogEventInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.LogEventResult]:
+        "Send up to 10,000 AdCP conversion events (log_event) to an event source the advertiser registered with save_event_source. Events must also pass the v2 rules: no raw email or phone in user_match, each event_type + event_id once per call. One invalid event refuses the whole call. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.LogEventResult], await self._request_with_response("log_event", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def open_advertisers_page(self, input: models.OpenAdvertisersPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAdvertisersPageResult:
         "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches. To add or set up an advertiser, pass intent: \"add\". For a text answer use search(kind: \"advertiser\")."
@@ -1054,11 +1070,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveInventorySourceResult], await self._request_with_response("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_lesson(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLessonResult:
-        "Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear."
+        "Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear."
         return cast("models.SaveLessonResult", await self._request("save_lesson", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_lesson_with_response(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveLessonResult]:
-        "Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear. Returns the data together with response headers and request ID."
+        "Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveLessonResult], await self._request_with_response("save_lesson", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_library_request(self, input: models.SaveLibraryRequestInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLibraryRequestResult:
