@@ -5385,6 +5385,7 @@ class OpenCreativeLibraryResultKindAssetParams(TypedDict):
     assetId: str
     assetState: NotRequired[Literal["active", "draft"]]
     initialAction: Literal["focus_asset"]
+    creativeEnginesEligible: NotRequired[bool]
 
 class OpenCreativeLibraryResultKindLibrary(TypedDict):
     kind: Literal["library"]
@@ -5403,6 +5404,7 @@ class OpenCreativeLibraryResultKindLibraryParams(TypedDict):
     creativeId: NotRequired[str]
     initialAction: NotRequired[Literal["upload", "compose"]]
     sessionId: NotRequired[str]
+    creativeEnginesEligible: NotRequired[bool]
 
 class OpenDeveloperHomeInput(TypedDict):
     accountId: NotRequired[int | str]
@@ -16444,7 +16446,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -16716,7 +16718,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -16922,7 +16924,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -17155,7 +17157,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -17395,7 +17397,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -17635,7 +17637,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -17875,7 +17877,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -18113,7 +18115,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -18351,7 +18353,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -18657,7 +18659,7 @@ class SearchInputKindCreativeWithFilterAdvertiserIdFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -18895,7 +18897,7 @@ class SearchInputKindCreativeWithFilterCampaignIdFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -19175,7 +19177,7 @@ class SearchInputKindProposalFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]

@@ -10008,6 +10008,7 @@ export type OpenCreativeLibraryResponses = {
                 creativeId?: string;
                 initialAction?: 'upload' | 'compose';
                 sessionId?: string;
+                creativeEnginesEligible?: boolean;
             };
             openInBrowserUrl?: string;
         } | {
@@ -10020,6 +10021,7 @@ export type OpenCreativeLibraryResponses = {
                 assetId: string;
                 assetState?: 'active' | 'draft';
                 initialAction: 'focus_asset';
+                creativeEnginesEligible?: boolean;
             };
             openInBrowserUrl?: string;
         };
@@ -30377,7 +30379,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -30855,7 +30857,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -31401,7 +31403,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -31875,7 +31877,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -32349,7 +32351,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -32823,7 +32825,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -33297,7 +33299,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -33901,7 +33903,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -34378,7 +34380,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -34856,7 +34858,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -35334,7 +35336,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -35812,7 +35814,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**

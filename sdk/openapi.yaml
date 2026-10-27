@@ -30042,6 +30042,8 @@ paths:
                                 type: string
                                 minLength: 1
                                 maxLength: 128
+                              creativeEnginesEligible:
+                                type: boolean
                             required:
                               - advertiserId
                               - advertiserName
@@ -30088,6 +30090,8 @@ paths:
                               initialAction:
                                 type: string
                                 const: focus_asset
+                              creativeEnginesEligible:
+                                type: boolean
                             required:
                               - advertiserId
                               - advertiserName
@@ -54921,7 +54925,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -56467,7 +56471,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -58686,7 +58690,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -60224,7 +60228,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -61766,7 +61770,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -63304,7 +63308,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -64846,7 +64850,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -67769,7 +67773,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -69312,7 +69316,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -70854,7 +70858,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -72396,7 +72400,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -73939,7 +73943,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
