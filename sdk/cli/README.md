@@ -12,10 +12,12 @@ npx @apostra/cli operations list
 npx @apostra/cli operations describe get_delivery --json
 ```
 
-`apostra login` stores one login per API in
-`${XDG_CONFIG_HOME:-~/.config}/apostra/credentials.json` (`%APPDATA%\apostra`
-on Windows), and `@apostra/sdk` in Node.js uses it when no other credential is
-set. It needs the server support for the V3 OAuth resource. See the
-[CLI guide](https://docs.apostra.com/v3/cli).
+`apostra login` stores one login per API in your OS credential store (Keychain,
+Credential Manager or Secret Service), and `@apostra/sdk` in Node.js uses it
+when no other credential is set. Without an available credential store, it
+falls back to `${XDG_CONFIG_HOME:-~/.config}/apostra/credentials.json`
+(`%APPDATA%\apostra` on Windows) with a one-time warning and 0600 permissions.
+It needs the server support for the V3 OAuth resource. See the [CLI
+guide](https://docs.apostra.com/v3/cli).
 
 API calls and human handoffs will follow their public V3 contracts.
