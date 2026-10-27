@@ -10008,6 +10008,7 @@ export type OpenCreativeLibraryResponses = {
                 creativeId?: string;
                 initialAction?: 'upload' | 'compose';
                 sessionId?: string;
+                creativeEnginesEligible?: boolean;
             };
             openInBrowserUrl?: string;
         } | {
@@ -10020,6 +10021,7 @@ export type OpenCreativeLibraryResponses = {
                 assetId: string;
                 assetState?: 'active' | 'draft';
                 initialAction: 'focus_asset';
+                creativeEnginesEligible?: boolean;
             };
             openInBrowserUrl?: string;
         };
@@ -17970,6 +17972,10 @@ export type SaveCoverageData = {
             property_key: string;
         }>;
         /**
+         * Declared domains to re-check now: re-reads each publisher's adagents.json and format catalog, and returns the refreshed states.
+         */
+        refresh?: SaveCoverageRequestRefresh;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -18052,6 +18058,8 @@ export type SaveCoverageErrors = {
 
 export type SaveCoverageRequestAdd = Array<string>;
 
+export type SaveCoverageRequestRefresh = Array<string>;
+
 export type SaveCoverageRequestRemove = Array<string>;
 
 export type SaveCoverageResponse = SaveCoverageResponses[keyof SaveCoverageResponses];
@@ -18087,6 +18095,7 @@ export type SaveCoverageSuccessSaveCoverageSuccessDeclared = {
     changed: boolean;
     declared: SaveCoverageSuccessSaveCoverageSuccessDeclaredDeclared;
     removed: SaveCoverageSuccessSaveCoverageSuccessDeclaredRemoved;
+    refreshed: SaveCoverageSuccessSaveCoverageSuccessDeclaredRefreshed;
     failures: SaveCoverageSuccessSaveCoverageSuccessDeclaredFailures;
     [key: string]: unknown;
 };
@@ -18099,6 +18108,13 @@ export type SaveCoverageSuccessSaveCoverageSuccessDeclaredDeclared = {
 };
 
 export type SaveCoverageSuccessSaveCoverageSuccessDeclaredFailures = {
+    items: Array<unknown>;
+    count: number;
+    truncated: boolean;
+    [key: string]: unknown;
+};
+
+export type SaveCoverageSuccessSaveCoverageSuccessDeclaredRefreshed = {
     items: Array<unknown>;
     count: number;
     truncated: boolean;
@@ -27443,11 +27459,64 @@ export type SavePropertyListData = {
          */
         domains?: Array<string>;
         /**
-         * AdCP typed property identifiers.
+         * AdCP typed property identifiers. Each may carry `features`: your scores for that property, e.g. {spektre_aspi: {value: 94}}.
          */
-        identifiers?: Array<SavePropertyListRequestPropertyListIdentifier>;
+        identifiers?: Array<{
+            /**
+             * AdCP property identifier type, such as domain, app, CTV, DOOH, audio, radio, or network.
+             */
+            type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+            /**
+             * Identifier value for the selected AdCP property type.
+             */
+            value: string;
+            /**
+             * Scores for this property: a map from your feature id to AdCP's property feature value, for example {spektre_aspi: {value: 94}}. Scores belong to the account, not the list; a later save replaces the value for that feature and keeps the earlier one as history.
+             */
+            features?: {
+                [key: string]: {
+                    /**
+                     * The score: a number, a string or a boolean.
+                     */
+                    value: boolean | number | string;
+                    /**
+                     * Unit of a numeric value, for example "percentage".
+                     */
+                    unit?: string;
+                    /**
+                     * Confidence in the value, from 0 to 1.
+                     */
+                    confidence?: number;
+                    /**
+                     * ISO 8601 date-time the value was measured.
+                     */
+                    measured_at?: string;
+                    /**
+                     * ISO 8601 date-time after which the value no longer counts; the property is then treated as not covered for this feature.
+                     */
+                    expires_at?: string;
+                    /**
+                     * Version of the method that produced the value.
+                     */
+                    methodology_version?: string;
+                    /**
+                     * Vendor-specific detail about the measurement; stored, not applied.
+                     */
+                    details?: {
+                        [key: string]: unknown;
+                    };
+                    /**
+                     * AdCP extension values; stored, not applied.
+                     */
+                    ext?: {
+                        [key: string]: unknown;
+                    };
+                    [key: string]: unknown;
+                };
+            };
+        }>;
         /**
-         * Create-only AdCP property filters.
+         * Create-only filters. feature_requirements are judged against your saved scores; with them, a list may have no identifiers and resolves over every property you have scored.
          */
         filters?: SavePropertyListRequestPropertyListFilters | null;
         /**
@@ -27557,44 +27626,34 @@ export type SavePropertyListRequestPropertyListFilters = {
      */
     property_types?: Array<'website' | 'mobile_app' | 'ctv_app' | 'desktop_app' | 'dooh' | 'podcast' | 'radio' | 'streaming_audio'> | null;
     /**
-     * Feature-based requirements (e.g. IVT, MFA, green)
+     * AdCP feature requirements, all of which a property must meet, judged against the account's saved scores (e.g. spektre_aspi min_value 20).
      */
     feature_requirements?: Array<{
         /**
-         * Feature identifier.
+         * Feature to judge, as saved on the identifiers, for example spektre_aspi.
          */
         feature_id: string;
         /**
-         * Minimum acceptable feature value.
+         * Lowest numeric value that passes.
          */
         min_value?: number | null;
         /**
-         * Maximum acceptable feature value.
+         * Highest numeric value that passes.
          */
         max_value?: number | null;
         /**
-         * Accepted categorical feature values.
+         * Values that pass, for boolean or categorical features.
          */
         allowed_values?: Array<unknown> | null;
         /**
-         * How to treat properties without this feature.
+         * exclude (default) removes a property with no live value for this feature; include keeps it.
          */
         if_not_covered?: 'exclude' | 'include' | null;
+        /**
+         * Optional AdCP attribution to the policy that authorizes this threshold.
+         */
+        policy_id?: string;
     }> | null;
-};
-
-/**
- * A typed property identifier (AdCP-aligned, sourced from `@adcp/sdk`). Read-side note: Apple App Store bundles share a single backing column, so `apple_tv_bundle` write-time entries normalize to `ios_bundle` on subsequent get/list responses. `bundle_id` (generic fallback) likewise normalizes to the resolved app row's store-typed form (`ios_bundle` or `android_package`).
- */
-export type SavePropertyListRequestPropertyListIdentifier = {
-    /**
-     * AdCP property identifier type, such as domain, app, CTV, DOOH, audio, radio, or network.
-     */
-    type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
-    /**
-     * Identifier value for the selected AdCP property type.
-     */
-    value: string;
 };
 
 export type SavePropertyListResponse = SavePropertyListResponses[keyof SavePropertyListResponses];
@@ -27762,29 +27821,33 @@ export type SavePropertyListSuccessPropertyListFilters = {
      */
     property_types?: Array<'website' | 'mobile_app' | 'ctv_app' | 'desktop_app' | 'dooh' | 'podcast' | 'radio' | 'streaming_audio'> | null;
     /**
-     * Feature-based requirements (e.g. IVT, MFA, green)
+     * AdCP feature requirements, all of which a property must meet, judged against the account's saved scores (e.g. spektre_aspi min_value 20).
      */
     feature_requirements?: Array<{
         /**
-         * Feature identifier.
+         * Feature to judge, as saved on the identifiers, for example spektre_aspi.
          */
         feature_id: string;
         /**
-         * Minimum acceptable feature value.
+         * Lowest numeric value that passes.
          */
         min_value?: number | null;
         /**
-         * Maximum acceptable feature value.
+         * Highest numeric value that passes.
          */
         max_value?: number | null;
         /**
-         * Accepted categorical feature values.
+         * Values that pass, for boolean or categorical features.
          */
         allowed_values?: Array<unknown> | null;
         /**
-         * How to treat properties without this feature.
+         * exclude (default) removes a property with no live value for this feature; include keeps it.
          */
         if_not_covered?: 'exclude' | 'include' | null;
+        /**
+         * Optional AdCP attribution to the policy that authorizes this threshold.
+         */
+        policy_id?: string;
     }> | null;
 };
 
@@ -27795,6 +27858,37 @@ export type SavePropertyListSuccessPropertyListIdentifierPageItem = {
      * True when value was cut to 512 bytes and ends with an ellipsis; it no longer matches a property.
      */
     value_truncated?: true;
+    /**
+     * Your current scores for this property, as saved: a map from feature id to AdCP's property feature value (without its free-form details and ext).
+     */
+    features?: {
+        [key: string]: {
+            /**
+             * The score: a number, a string or a boolean.
+             */
+            value: boolean | number | string;
+            /**
+             * Unit of a numeric value.
+             */
+            unit?: string;
+            /**
+             * Confidence in the value, from 0 to 1.
+             */
+            confidence?: number;
+            /**
+             * When the value was measured.
+             */
+            measured_at?: string;
+            /**
+             * When the value stops counting.
+             */
+            expires_at?: string;
+            /**
+             * Version of the method that produced the value.
+             */
+            methodology_version?: string;
+        };
+    };
 };
 
 export type SavePropertyListSuccessPropertyListProjection = {
@@ -29069,6 +29163,19 @@ export type SaveSellerData = {
              */
             decision: 'not_required';
             sourceExternalAccountId?: never;
+        };
+        /**
+         * Demo expiry and sample sources, as desired state. Send alone. Create, reset and delete are on the demo Page.
+         */
+        demo?: {
+            /**
+             * New expiry: after the current one, at most 7 days past it.
+             */
+            expiresAt?: string;
+            /**
+             * The complete set of sample sources; keep sample-publisher-display.
+             */
+            sourceRecipeIds?: Array<'sample-publisher-display' | 'sample-publisher-ctv' | 'sample-retail-media'>;
         };
         /**
          * Hold (true) or resume (false) new business: buyers stop discovering the Seller and buying; existing delivery continues. Send alone.
@@ -30377,7 +30484,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -30855,7 +30962,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -31401,7 +31508,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -31875,7 +31982,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -32349,7 +32456,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -32823,7 +32930,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -33297,7 +33404,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -33901,7 +34008,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -34378,7 +34485,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -34856,7 +34963,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -35334,7 +35441,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**
@@ -35812,7 +35919,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
              */
             productId?: string;
             /**

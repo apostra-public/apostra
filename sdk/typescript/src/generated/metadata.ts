@@ -1028,7 +1028,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, and `removeProperties` change named items only. Read authorization; never assume it."
+    "summary": "Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read authorization; never assume it."
   },
   "save_creative": {
     "path": "/tools/save_creative",
@@ -1375,7 +1375,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save Seller identity, capabilities, Apostra listing, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, or the intake hold. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get(kind:\"distribution\")."
+    "summary": "Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, the intake hold, or the demo's expiry and sample sources. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get."
   },
   "save_signal": {
     "path": "/tools/save_signal",
