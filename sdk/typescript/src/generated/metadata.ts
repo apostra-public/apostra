@@ -1028,7 +1028,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, and `removeProperties` change named items only. Read authorization; never assume it."
+    "summary": "Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read authorization; never assume it."
   },
   "save_creative": {
     "path": "/tools/save_creative",

@@ -5385,6 +5385,7 @@ class OpenCreativeLibraryResultKindAssetParams(TypedDict):
     assetId: str
     assetState: NotRequired[Literal["active", "draft"]]
     initialAction: Literal["focus_asset"]
+    creativeEnginesEligible: NotRequired[bool]
 
 class OpenCreativeLibraryResultKindLibrary(TypedDict):
     kind: Literal["library"]
@@ -5403,6 +5404,7 @@ class OpenCreativeLibraryResultKindLibraryParams(TypedDict):
     creativeId: NotRequired[str]
     initialAction: NotRequired[Literal["upload", "compose"]]
     sessionId: NotRequired[str]
+    creativeEnginesEligible: NotRequired[bool]
 
 class OpenDeveloperHomeInput(TypedDict):
     accountId: NotRequired[int | str]
@@ -9494,6 +9496,8 @@ class SaveCoverageInput(TypedDict):
     '\n    Property claims; the read nests them under `domains[].properties`.\n    '
     removeProperties: NotRequired[list[SaveCoverageInputRemovePropertiesItem]]
     '\n    Claims to retract. A publisher-origin property cannot be removed here.\n    '
+    refresh: NotRequired[SaveCoverageRequestRefresh]
+    '\n    Declared domains to re-check now: re-reads each publisher\'s adagents.json and format catalog, and returns the refreshed states.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -9527,6 +9531,8 @@ class SaveCoverageInputRemovePropertiesItem(TypedDict):
 
 SaveCoverageRequestAdd: TypeAlias = list[str]
 
+SaveCoverageRequestRefresh: TypeAlias = list[str]
+
 SaveCoverageRequestRemove: TypeAlias = list[str]
 
 class SaveCoverageSuccessSaveCoverageSuccessDeclared(TypedDict):
@@ -9534,6 +9540,7 @@ class SaveCoverageSuccessSaveCoverageSuccessDeclared(TypedDict):
     changed: bool
     declared: SaveCoverageSuccessSaveCoverageSuccessDeclaredDeclared
     removed: SaveCoverageSuccessSaveCoverageSuccessDeclaredRemoved
+    refreshed: SaveCoverageSuccessSaveCoverageSuccessDeclaredRefreshed
     failures: SaveCoverageSuccessSaveCoverageSuccessDeclaredFailures
 
 class SaveCoverageSuccessSaveCoverageSuccessDeclaredDeclared(TypedDict):
@@ -9542,6 +9549,11 @@ class SaveCoverageSuccessSaveCoverageSuccessDeclaredDeclared(TypedDict):
     truncated: bool
 
 class SaveCoverageSuccessSaveCoverageSuccessDeclaredFailures(TypedDict):
+    items: list[JsonValue]
+    count: int
+    truncated: bool
+
+class SaveCoverageSuccessSaveCoverageSuccessDeclaredRefreshed(TypedDict):
     items: list[JsonValue]
     count: int
     truncated: bool
@@ -14697,10 +14709,10 @@ class SavePropertyListInput(TypedDict):
     '\n    include or exclude. Required when creating and immutable afterwards.\n    '
     domains: NotRequired[list[str]]
     '\n    Domain shorthand for typed identifiers.\n    '
-    identifiers: NotRequired[list[SavePropertyListRequestPropertyListIdentifier]]
-    '\n    AdCP typed property identifiers.\n    '
+    identifiers: NotRequired[list[SavePropertyListInputIdentifiersItem]]
+    '\n    AdCP typed property identifiers. Each may carry `features`: your scores for that property, e.g. {spektre_aspi: {value: 94}}.\n    '
     filters: NotRequired[SavePropertyListRequestPropertyListFilters | None]
-    '\n    Create-only AdCP property filters.\n    '
+    '\n    Create-only filters. feature_requirements are judged against your saved scores; with them, a list may have no identifiers and resolves over every property you have scored.\n    '
     appliesToAllCampaigns: NotRequired[bool]
     '\n    Required on create. Ask the buyer: true applies to all campaigns; false saves for campaign use. Immutable.\n    '
     check: NotRequired[bool]
@@ -14712,6 +14724,35 @@ class SavePropertyListInput(TypedDict):
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
+class SavePropertyListInputIdentifiersItem(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    '\n    AdCP property identifier type, such as domain, app, CTV, DOOH, audio, radio, or network.\n    '
+    value: str
+    '\n    Identifier value for the selected AdCP property type.\n    '
+    features: NotRequired[dict[str, SavePropertyListInputIdentifiersItemFeaturesValue]]
+    '\n    Scores for this property: a map from your feature id to AdCP\'s property feature value, for example {spektre_aspi: {value: 94}}. Scores belong to the account, not the list; a later save replaces the value for that feature and keeps the earlier one as history.\n    '
+
+class SavePropertyListInputIdentifiersItemFeaturesValue(TypedDict):
+    value: bool | float | str
+    '\n    The score: a number, a string or a boolean.\n    '
+    unit: NotRequired[str]
+    '\n    Unit of a numeric value, for example "percentage".\n    '
+    confidence: NotRequired[float]
+    '\n    Confidence in the value, from 0 to 1.\n    '
+    measured_at: NotRequired[str]
+    '\n    ISO 8601 date-time the value was measured.\n    '
+    expires_at: NotRequired[str]
+    '\n    ISO 8601 date-time after which the value no longer counts; the property is then treated as not covered for this feature.\n    '
+    methodology_version: NotRequired[str]
+    '\n    Version of the method that produced the value.\n    '
+    details: NotRequired[SavePropertyListInputIdentifiersItemFeaturesValueDetails]
+    '\n    Vendor-specific detail about the measurement; stored, not applied.\n    '
+    ext: NotRequired[dict[str, JsonValue]]
+    '\n    AdCP extension values; stored, not applied.\n    '
+
+class SavePropertyListInputIdentifiersItemFeaturesValueDetails(TypedDict):
+    pass
+
 class SavePropertyListRequestPropertyListFilters(TypedDict):
     channels_any: NotRequired[list[Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement"]] | None]
     '\n    AdCP channel filter. Does not limit where the list applies.\n    '
@@ -14720,25 +14761,23 @@ class SavePropertyListRequestPropertyListFilters(TypedDict):
     property_types: NotRequired[list[Literal["website", "mobile_app", "ctv_app", "desktop_app", "dooh", "podcast", "radio", "streaming_audio"]] | None]
     '\n    Property inventory types\n    '
     feature_requirements: NotRequired[list[SavePropertyListRequestPropertyListFiltersFeatureRequirementsItem] | None]
-    '\n    Feature-based requirements (e.g. IVT, MFA, green)\n    '
+    '\n    AdCP feature requirements, all of which a property must meet, judged against the account\'s saved scores (e.g. spektre_aspi min_value 20).\n    '
 
 class SavePropertyListRequestPropertyListFiltersFeatureRequirementsItem(TypedDict):
     feature_id: str
-    '\n    Feature identifier.\n    '
+    '\n    Feature to judge, as saved on the identifiers, for example spektre_aspi.\n    '
     min_value: NotRequired[float | None]
-    '\n    Minimum acceptable feature value.\n    '
+    '\n    Lowest numeric value that passes.\n    '
     max_value: NotRequired[float | None]
-    '\n    Maximum acceptable feature value.\n    '
+    '\n    Highest numeric value that passes.\n    '
     allowed_values: NotRequired[list[JsonValue] | None]
-    '\n    Accepted categorical feature values.\n    '
+    '\n    Values that pass, for boolean or categorical features.\n    '
     if_not_covered: NotRequired[Literal["exclude", "include"] | None]
-    '\n    How to treat properties without this feature.\n    '
+    '\n    exclude (default) removes a property with no live value for this feature; include keeps it.\n    '
+    policy_id: NotRequired[str]
+    '\n    Optional AdCP attribution to the policy that authorizes this threshold.\n    '
 
-class SavePropertyListRequestPropertyListIdentifier(TypedDict):
-    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
-    '\n    AdCP property identifier type, such as domain, app, CTV, DOOH, audio, radio, or network.\n    '
-    value: str
-    '\n    Identifier value for the selected AdCP property type.\n    '
+SavePropertyListRequestPropertyListIdentifier: TypeAlias = SavePropertyListInputIdentifiersItem
 
 class SavePropertyListResultActionArchived(TypedDict):
     action: Literal["archived"]
@@ -14826,25 +14865,43 @@ class SavePropertyListSuccessPropertyListFilters(TypedDict):
     property_types: NotRequired[list[Literal["website", "mobile_app", "ctv_app", "desktop_app", "dooh", "podcast", "radio", "streaming_audio"]] | None]
     '\n    Property inventory types\n    '
     feature_requirements: NotRequired[list[SavePropertyListSuccessPropertyListFiltersFeatureRequirementsItem] | None]
-    '\n    Feature-based requirements (e.g. IVT, MFA, green)\n    '
+    '\n    AdCP feature requirements, all of which a property must meet, judged against the account\'s saved scores (e.g. spektre_aspi min_value 20).\n    '
 
 class SavePropertyListSuccessPropertyListFiltersFeatureRequirementsItem(TypedDict):
     feature_id: str
-    '\n    Feature identifier.\n    '
+    '\n    Feature to judge, as saved on the identifiers, for example spektre_aspi.\n    '
     min_value: NotRequired[float | None]
-    '\n    Minimum acceptable feature value.\n    '
+    '\n    Lowest numeric value that passes.\n    '
     max_value: NotRequired[float | None]
-    '\n    Maximum acceptable feature value.\n    '
+    '\n    Highest numeric value that passes.\n    '
     allowed_values: NotRequired[list[JsonValue] | None]
-    '\n    Accepted categorical feature values.\n    '
+    '\n    Values that pass, for boolean or categorical features.\n    '
     if_not_covered: NotRequired[Literal["exclude", "include"] | None]
-    '\n    How to treat properties without this feature.\n    '
+    '\n    exclude (default) removes a property with no live value for this feature; include keeps it.\n    '
+    policy_id: NotRequired[str]
+    '\n    Optional AdCP attribution to the policy that authorizes this threshold.\n    '
 
 class SavePropertyListSuccessPropertyListIdentifierPageItem(TypedDict):
     type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
     value: str
     value_truncated: NotRequired[Literal[True]]
     '\n    True when value was cut to 512 bytes and ends with an ellipsis; it no longer matches a property.\n    '
+    features: NotRequired[dict[str, SavePropertyListSuccessPropertyListIdentifierPageItemFeaturesValue]]
+    '\n    Your current scores for this property, as saved: a map from feature id to AdCP\'s property feature value (without its free-form details and ext).\n    '
+
+class SavePropertyListSuccessPropertyListIdentifierPageItemFeaturesValue(TypedDict):
+    value: bool | float | str
+    '\n    The score: a number, a string or a boolean.\n    '
+    unit: NotRequired[str]
+    '\n    Unit of a numeric value.\n    '
+    confidence: NotRequired[float]
+    '\n    Confidence in the value, from 0 to 1.\n    '
+    measured_at: NotRequired[str]
+    '\n    When the value was measured.\n    '
+    expires_at: NotRequired[str]
+    '\n    When the value stops counting.\n    '
+    methodology_version: NotRequired[str]
+    '\n    Version of the method that produced the value.\n    '
 
 class SavePropertyListSuccessPropertyListProjection(TypedDict):
     id: str
@@ -16444,7 +16501,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -16716,7 +16773,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -16922,7 +16979,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -17155,7 +17212,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -17395,7 +17452,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -17635,7 +17692,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -17875,7 +17932,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -18113,7 +18170,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -18351,7 +18408,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -18657,7 +18714,7 @@ class SearchInputKindCreativeWithFilterAdvertiserIdFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -18895,7 +18952,7 @@ class SearchInputKindCreativeWithFilterCampaignIdFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
@@ -19175,7 +19232,7 @@ class SearchInputKindProposalFilter(TypedDict):
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
     '\n    Lifecycle statuses used to select creative results.\n    '
     productId: NotRequired[str]
-    '\n    Required for kind creative_format: the exact product whose formats to list. With include executionResources: the product to read resource options for.\n    '
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]

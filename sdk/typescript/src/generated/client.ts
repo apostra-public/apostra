@@ -805,14 +805,14 @@ export class Apostra extends Transport {
   /** Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation. Returns the data together with response headers and request ID. */
   saveConnectionWithResponse(input: SaveConnectionInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveConnectionResult>> { return this.requestDetailed("save_connection", input, options) }
   /**
-   * Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, and `removeProperties` change named items only. Read authorization; never assume it.
+   * Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read authorization; never assume it.
    *
    * @example
    * await client.saveCoverage(input, { idempotencyKey: 'stable-key' })
    */
   saveCoverage(input: SaveCoverageInput, options: WriteRequestOptions): Promise<SaveCoverageResult> { return this.request("save_coverage", input, options) }
 
-  /** Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, and `removeProperties` change named items only. Read authorization; never assume it. Returns the data together with response headers and request ID. */
+  /** Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read authorization; never assume it. Returns the data together with response headers and request ID. */
   saveCoverageWithResponse(input: SaveCoverageInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveCoverageResult>> { return this.requestDetailed("save_coverage", input, options) }
   /**
    * advertiserId/campaignId:name,message;assets/landing_page_url/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only.
