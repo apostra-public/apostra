@@ -30042,6 +30042,8 @@ paths:
                                 type: string
                                 minLength: 1
                                 maxLength: 128
+                              creativeEnginesEligible:
+                                type: boolean
                             required:
                               - advertiserId
                               - advertiserName
@@ -30088,6 +30090,8 @@ paths:
                               initialAction:
                                 type: string
                                 const: focus_asset
+                              creativeEnginesEligible:
+                                type: boolean
                             required:
                               - advertiserId
                               - advertiserName
@@ -51360,16 +51364,127 @@ paths:
                     type: string
                     minLength: 1
                 identifiers:
-                  description: AdCP typed property identifiers.
+                  description: >-
+                    AdCP typed property identifiers. Each may carry `features`: your scores for that property, e.g.
+                    {spektre_aspi: {value: 94}}.
                   maxItems: 100000
                   type: array
                   items:
-                    $ref: '#/components/schemas/save_property_list_request_PropertyListIdentifier'
+                    type: object
+                    properties:
+                      type:
+                        anyOf:
+                          - type: string
+                            const: domain
+                          - type: string
+                            const: subdomain
+                          - type: string
+                            const: network_id
+                          - type: string
+                            const: ios_bundle
+                          - type: string
+                            const: android_package
+                          - type: string
+                            const: apple_app_store_id
+                          - type: string
+                            const: google_play_id
+                          - type: string
+                            const: roku_store_id
+                          - type: string
+                            const: fire_tv_asin
+                          - type: string
+                            const: samsung_app_id
+                          - type: string
+                            const: apple_tv_bundle
+                          - type: string
+                            const: bundle_id
+                          - type: string
+                            const: venue_id
+                          - type: string
+                            const: screen_id
+                          - type: string
+                            const: openooh_venue_type
+                          - type: string
+                            const: rss_url
+                          - type: string
+                            const: apple_podcast_id
+                          - type: string
+                            const: spotify_collection_id
+                          - type: string
+                            const: podcast_guid
+                          - type: string
+                            const: station_id
+                          - type: string
+                            const: facility_id
+                        description: AdCP property identifier type, such as domain, app, CTV, DOOH, audio, radio, or network.
+                        example: domain
+                      value:
+                        type: string
+                        minLength: 1
+                        description: Identifier value for the selected AdCP property type.
+                      features:
+                        description: >-
+                          Scores for this property: a map from your feature id to AdCP's property feature value, for
+                          example {spektre_aspi: {value: 94}}. Scores belong to the account, not the list; a later save
+                          replaces the value for that feature and keeps the earlier one as history.
+                        type: object
+                        propertyNames:
+                          type: string
+                          minLength: 1
+                          maxLength: 128
+                        additionalProperties:
+                          type: object
+                          properties:
+                            value:
+                              anyOf:
+                                - type: boolean
+                                - type: number
+                                - type: string
+                              description: 'The score: a number, a string or a boolean.'
+                            unit:
+                              description: Unit of a numeric value, for example "percentage".
+                              type: string
+                            confidence:
+                              description: Confidence in the value, from 0 to 1.
+                              type: number
+                              minimum: 0
+                              maximum: 1
+                            measured_at:
+                              description: ISO 8601 date-time the value was measured.
+                              type: string
+                            expires_at:
+                              description: >-
+                                ISO 8601 date-time after which the value no longer counts; the property is then treated
+                                as not covered for this feature.
+                              type: string
+                            methodology_version:
+                              description: Version of the method that produced the value.
+                              type: string
+                            details:
+                              description: Vendor-specific detail about the measurement; stored, not applied.
+                              type: object
+                              properties: {}
+                              additionalProperties: {}
+                            ext:
+                              description: AdCP extension values; stored, not applied.
+                              type: object
+                              propertyNames:
+                                type: string
+                              additionalProperties: {}
+                          required:
+                            - value
+                          additionalProperties: {}
+                    required:
+                      - type
+                      - value
+                    additionalProperties: false
                 filters:
                   anyOf:
                     - $ref: '#/components/schemas/save_property_list_request_PropertyListFilters'
                     - type: 'null'
-                  description: Create-only AdCP property filters.
+                  description: >-
+                    Create-only filters. feature_requirements are judged against your saved scores; with them, a list
+                    may have no identifiers and resolves over every property you have scored.
                 appliesToAllCampaigns:
                   description: >-
                     Required on create. Ask the buyer: true applies to all campaigns; false saves for campaign use.
@@ -54921,7 +55036,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -56467,7 +56582,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -58686,7 +58801,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -60224,7 +60339,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -61766,7 +61881,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -63304,7 +63419,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -64846,7 +64961,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -67769,7 +67884,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -69312,7 +69427,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -70854,7 +70969,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -72396,7 +72511,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -73939,7 +74054,7 @@ paths:
                             $ref: '#/components/schemas/search_request_AdcpCreativeStatus'
                         productId:
                           description: >-
-                            Required for kind creative_format: the exact product whose formats to list. With include
+                            For kind creative_format: narrow formats to this exact product. With include
                             executionResources: the product to read resource options for.
                           type: string
                           minLength: 1
@@ -91735,68 +91850,6 @@ components:
       propertyNames:
         type: string
       additionalProperties: {}
-    save_property_list_request_PropertyListIdentifier:
-      type: object
-      properties:
-        type:
-          anyOf:
-            - type: string
-              const: domain
-            - type: string
-              const: subdomain
-            - type: string
-              const: network_id
-            - type: string
-              const: ios_bundle
-            - type: string
-              const: android_package
-            - type: string
-              const: apple_app_store_id
-            - type: string
-              const: google_play_id
-            - type: string
-              const: roku_store_id
-            - type: string
-              const: fire_tv_asin
-            - type: string
-              const: samsung_app_id
-            - type: string
-              const: apple_tv_bundle
-            - type: string
-              const: bundle_id
-            - type: string
-              const: venue_id
-            - type: string
-              const: screen_id
-            - type: string
-              const: openooh_venue_type
-            - type: string
-              const: rss_url
-            - type: string
-              const: apple_podcast_id
-            - type: string
-              const: spotify_collection_id
-            - type: string
-              const: podcast_guid
-            - type: string
-              const: station_id
-            - type: string
-              const: facility_id
-          description: AdCP property identifier type, such as domain, app, CTV, DOOH, audio, radio, or network.
-          example: domain
-        value:
-          type: string
-          minLength: 1
-          description: Identifier value for the selected AdCP property type.
-      required:
-        - type
-        - value
-      additionalProperties: false
-      description: >-
-        A typed property identifier (AdCP-aligned, sourced from `@adcp/sdk`). Read-side note: Apple App Store bundles
-        share a single backing column, so `apple_tv_bundle` write-time entries normalize to `ios_bundle` on subsequent
-        get/list responses. `bundle_id` (generic fallback) likewise normalizes to the resolved app row's store-typed
-        form (`ios_bundle` or `android_package`).
     save_property_list_request_PropertyListFilters:
       type: object
       properties:
@@ -91866,36 +91919,42 @@ components:
                 properties:
                   feature_id:
                     type: string
-                    description: Feature identifier.
+                    description: Feature to judge, as saved on the identifiers, for example spektre_aspi.
                   min_value:
                     anyOf:
                       - type: number
                       - type: 'null'
-                    description: Minimum acceptable feature value.
+                    description: Lowest numeric value that passes.
                   max_value:
                     anyOf:
                       - type: number
                       - type: 'null'
-                    description: Maximum acceptable feature value.
+                    description: Highest numeric value that passes.
                   allowed_values:
                     anyOf:
                       - type: array
                         items: {}
                       - type: 'null'
-                    description: Accepted categorical feature values.
+                    description: Values that pass, for boolean or categorical features.
                   if_not_covered:
                     anyOf:
-                      - type: string
-                        enum:
-                          - exclude
-                          - include
+                      - anyOf:
+                          - type: string
+                            const: exclude
+                          - type: string
+                            const: include
                       - type: 'null'
-                    description: How to treat properties without this feature.
+                    description: exclude (default) removes a property with no live value for this feature; include keeps it.
+                  policy_id:
+                    description: Optional AdCP attribution to the policy that authorizes this threshold.
+                    type: string
                 required:
                   - feature_id
                 additionalProperties: false
             - type: 'null'
-          description: Feature-based requirements (e.g. IVT, MFA, green)
+          description: >-
+            AdCP feature requirements, all of which a property must meet, judged against the account's saved scores
+            (e.g. spektre_aspi min_value 20).
       additionalProperties: false
     save_property_list_success_PropertyListProjection:
       type: object
@@ -92059,6 +92118,42 @@ components:
           description: True when value was cut to 512 bytes and ends with an ellipsis; it no longer matches a property.
           type: boolean
           const: true
+        features:
+          description: >-
+            Your current scores for this property, as saved: a map from feature id to AdCP's property feature value
+            (without its free-form details and ext).
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties:
+            type: object
+            properties:
+              value:
+                anyOf:
+                  - type: boolean
+                  - type: number
+                  - type: string
+                description: 'The score: a number, a string or a boolean.'
+              unit:
+                description: Unit of a numeric value.
+                type: string
+              confidence:
+                description: Confidence in the value, from 0 to 1.
+                type: number
+                minimum: 0
+                maximum: 1
+              measured_at:
+                description: When the value was measured.
+                type: string
+              expires_at:
+                description: When the value stops counting.
+                type: string
+              methodology_version:
+                description: Version of the method that produced the value.
+                type: string
+            required:
+              - value
+            additionalProperties: false
       required:
         - type
         - value
@@ -92132,36 +92227,42 @@ components:
                 properties:
                   feature_id:
                     type: string
-                    description: Feature identifier.
+                    description: Feature to judge, as saved on the identifiers, for example spektre_aspi.
                   min_value:
                     anyOf:
                       - type: number
                       - type: 'null'
-                    description: Minimum acceptable feature value.
+                    description: Lowest numeric value that passes.
                   max_value:
                     anyOf:
                       - type: number
                       - type: 'null'
-                    description: Maximum acceptable feature value.
+                    description: Highest numeric value that passes.
                   allowed_values:
                     anyOf:
                       - type: array
                         items: {}
                       - type: 'null'
-                    description: Accepted categorical feature values.
+                    description: Values that pass, for boolean or categorical features.
                   if_not_covered:
                     anyOf:
-                      - type: string
-                        enum:
-                          - exclude
-                          - include
+                      - anyOf:
+                          - type: string
+                            const: exclude
+                          - type: string
+                            const: include
                       - type: 'null'
-                    description: How to treat properties without this feature.
+                    description: exclude (default) removes a property with no live value for this feature; include keeps it.
+                  policy_id:
+                    description: Optional AdCP attribution to the policy that authorizes this threshold.
+                    type: string
                 required:
                   - feature_id
                 additionalProperties: false
             - type: 'null'
-          description: Feature-based requirements (e.g. IVT, MFA, green)
+          description: >-
+            AdCP feature requirements, all of which a property must meet, judged against the account's saved scores
+            (e.g. spektre_aspi min_value 20).
       additionalProperties: false
     save_property_list_success_PropertyListResolutionSummary:
       type: object
