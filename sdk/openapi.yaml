@@ -24510,6 +24510,11 @@ paths:
                               Present only for campaign_delivery: campaign goal progress without V2-only pace or
                               denominator fields.
                             $ref: '#/components/schemas/get_delivery_success_CampaignGoalProgress'
+                          coverage:
+                            description: >-
+                              Present only for an account-wide campaign_delivery read over a bounded range: the
+                              in-flight campaigns that have no stored rows, each with the live read to call next.
+                            $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
                           synthetic:
                             description: >-
                               Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is
@@ -24544,6 +24549,11 @@ paths:
                               Present only for campaign_delivery: campaign goal progress without V2-only pace or
                               denominator fields.
                             $ref: '#/components/schemas/get_delivery_success_CampaignGoalProgress'
+                          coverage:
+                            description: >-
+                              Present only for an account-wide campaign_delivery read over a bounded range: the
+                              in-flight campaigns that have no stored rows, each with the live read to call next.
+                            $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
                           synthetic:
                             description: >-
                               Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is
@@ -24578,6 +24588,11 @@ paths:
                               Present only for campaign_delivery: campaign goal progress without V2-only pace or
                               denominator fields.
                             $ref: '#/components/schemas/get_delivery_success_CampaignGoalProgress'
+                          coverage:
+                            description: >-
+                              Present only for an account-wide campaign_delivery read over a bounded range: the
+                              in-flight campaigns that have no stored rows, each with the live read to call next.
+                            $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
                           synthetic:
                             description: >-
                               Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is
@@ -78873,6 +78888,89 @@ components:
         - mediaBuyId
         - campaignId
         - progress
+      additionalProperties: false
+    get_delivery_success_CampaignDeliveryCoverage:
+      type: object
+      properties:
+        inFlightCampaigns:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: Campaigns in scope with a current media buy that was booked or running during the range.
+        withoutStoredRows:
+          type: object
+          properties:
+            count:
+              type: integer
+              minimum: 0
+              maximum: 9007199254740991
+              description: In-flight campaigns with no stored delivery row for the range. Absence is not zero delivery.
+            truncated:
+              type: boolean
+              description: True when `campaigns` lists fewer than `count`.
+            campaigns:
+              maxItems: 20
+              type: array
+              items:
+                type: object
+                properties:
+                  campaignId:
+                    type: string
+                  campaignName:
+                    type: string
+                  nextAction:
+                    type: object
+                    properties:
+                      tool:
+                        type: string
+                        const: get_delivery
+                      arguments:
+                        type: object
+                        properties:
+                          report:
+                            type: string
+                            const: live_campaign_delivery
+                          range:
+                            type: object
+                            properties:
+                              startDate:
+                                type: string
+                              endDate:
+                                type: string
+                            required:
+                              - startDate
+                              - endDate
+                            additionalProperties: false
+                          filters:
+                            type: object
+                            properties:
+                              campaignId:
+                                type: string
+                            required:
+                              - campaignId
+                            additionalProperties: false
+                        required:
+                          - report
+                          - range
+                          - filters
+                        additionalProperties: false
+                    required:
+                      - tool
+                      - arguments
+                    additionalProperties: false
+                required:
+                  - campaignId
+                  - campaignName
+                  - nextAction
+                additionalProperties: false
+          required:
+            - count
+            - truncated
+            - campaigns
+          additionalProperties: false
+      required:
+        - inFlightCampaigns
+        - withoutStoredRows
       additionalProperties: false
     get_delivery_success_Query:
       type: object

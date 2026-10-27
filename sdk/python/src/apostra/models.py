@@ -378,6 +378,8 @@ class GetDeliveryResultReportCampaignDelivery(TypedDict):
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
+    coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
+    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -391,6 +393,8 @@ class GetDeliveryResultReportDelivery(TypedDict):
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
+    coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
+    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -643,10 +647,45 @@ class GetDeliveryResultReportMargin(TypedDict):
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
+    coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
+    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
 GetDeliveryResult: TypeAlias = "GetDeliveryResultReportDelivery | GetDeliveryResultReportCampaignDelivery | GetDeliveryResultReportMargin | GetDeliveryResultReportLiveCampaignDelivery"
+
+class GetDeliverySuccessCampaignDeliveryCoverage(TypedDict):
+    inFlightCampaigns: int
+    '\n    Campaigns in scope with a current media buy that was booked or running during the range.\n    '
+    withoutStoredRows: GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRows
+
+class GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRows(TypedDict):
+    count: int
+    '\n    In-flight campaigns with no stored delivery row for the range. Absence is not zero delivery.\n    '
+    truncated: bool
+    '\n    True when `campaigns` lists fewer than `count`.\n    '
+    campaigns: list[GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItem]
+
+class GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItem(TypedDict):
+    campaignId: str
+    campaignName: str
+    nextAction: GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextAction
+
+class GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextAction(TypedDict):
+    tool: Literal["get_delivery"]
+    arguments: GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextActionArguments
+
+class GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextActionArguments(TypedDict):
+    report: Literal["live_campaign_delivery"]
+    range: GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextActionArgumentsRange
+    filters: GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextActionArgumentsFilters
+
+class GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextActionArgumentsFilters(TypedDict):
+    campaignId: str
+
+class GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextActionArgumentsRange(TypedDict):
+    startDate: str
+    endDate: str
 
 class GetDeliverySuccessCampaignGoalProgress(TypedDict):
     campaigns: list[GetDeliverySuccessCampaignGoalProgressCampaign]
