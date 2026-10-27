@@ -133,8 +133,48 @@ const entry = (
 
 let dir: string
 let fake: Fake
+let credentialStoreAvailable: boolean
+const keyring = new Map<string, string>()
+
+class TestKeyringEntry {
+  constructor(
+    _service: string,
+    private readonly account: string,
+  ) {
+    if (!credentialStoreAvailable) throw new Error('Secret Service unavailable')
+  }
+
+  getPassword() {
+    return keyring.get(this.account) ?? null
+  }
+
+  setPassword(password: string) {
+    keyring.set(this.account, password)
+  }
+
+  deletePassword() {
+    return keyring.delete(this.account)
+  }
+}
+
 beforeEach(async () => {
   dir = mkdtempSync(join(tmpdir(), 'apostra-login-'))
+  credentialStoreAvailable = true
+  keyring.clear()
+  const nodeProcess = process as typeof process & {
+    getBuiltinModule(id: string): unknown
+  }
+  const getBuiltinModule = nodeProcess.getBuiltinModule.bind(process)
+  vi.spyOn(nodeProcess, 'getBuiltinModule').mockImplementation((id) => {
+    if (id === 'node:module')
+      return {
+        createRequire: () => (module: string) => {
+          if (module === '@napi-rs/keyring') return { Entry: TestKeyringEntry }
+          return undefined
+        },
+      }
+    return getBuiltinModule(id)
+  })
   vi.stubEnv('XDG_CONFIG_HOME', dir)
   vi.stubEnv('APPDATA', dir)
   vi.stubEnv('APOSTRA_API_KEY', undefined)
@@ -143,28 +183,66 @@ beforeEach(async () => {
   fake = await startFake()
 })
 afterEach(async () => {
+  vi.restoreAllMocks()
   vi.unstubAllEnvs()
   await fake.close()
   rmSync(dir, { recursive: true, force: true })
 })
 
 describe('credential store', () => {
-  it('writes atomically with 0700 directory and 0600 file, keyed per base URL', async () => {
+  it('stores entries in the OS credential store, keyed per base URL', async () => {
     const other = 'https://other.example/api/v3'
     await withCliLoginLock(async () => {
       writeCliLogin(fake.resource, entry(fake))
       writeCliLogin(other, entry(fake, { resource: other, accountId: '9' }))
     })
     expect(credentialsPath()).toBe(join(dir, 'apostra', 'credentials.json'))
+    expect(existsSync(credentialsPath())).toBe(false)
+    expect(JSON.parse(keyring.get(fake.resource) ?? '{}')).toMatchObject({
+      accessToken: 'at-0',
+    })
+    expect(readCliLogin(`${fake.resource}/`)?.accountId).toBe('7')
+    expect(readCliLogin(other)?.accountId).toBe('9')
+    expect(readCliLogin('https://nobody.example/api/v3')).toBeUndefined()
+  })
+
+  it('migrates every existing file login to the credential store and deletes the file', () => {
+    const other = 'https://other.example/api/v3'
+    mkdirSync(join(dir, 'apostra'))
+    writeFileSync(
+      credentialsPath(),
+      JSON.stringify({
+        version: 1,
+        logins: {
+          [fake.resource]: entry(fake),
+          [other]: entry(fake, { resource: other, accountId: '9' }),
+        },
+      }),
+    )
+
+    expect(readCliLogin(fake.resource)?.accountId).toBe('7')
+    expect(readCliLogin(other)?.accountId).toBe('9')
+    expect(keyring.size).toBe(2)
+    expect(existsSync(credentialsPath())).toBe(false)
+  })
+
+  it('uses the legacy 0600 file with one warning when no credential store exists', async () => {
+    credentialStoreAvailable = false
+    const warning = vi
+      .spyOn(process, 'emitWarning')
+      .mockImplementation(() => {})
+    await withCliLoginLock(async () => {
+      writeCliLogin(fake.resource, entry(fake))
+      writeCliLogin(fake.resource, entry(fake, { accessToken: 'at-1' }))
+    })
+
     if (process.platform !== 'win32') {
       expect(statSync(join(dir, 'apostra')).mode & 0o777).toBe(0o700)
       expect(statSync(credentialsPath()).mode & 0o777).toBe(0o600)
     }
-    expect(readCliLogin(`${fake.resource}/`)?.accountId).toBe('7')
-    expect(readCliLogin(other)?.accountId).toBe('9')
-    expect(readCliLogin('https://nobody.example/api/v3')).toBeUndefined()
-    const files = (await import('node:fs')).readdirSync(join(dir, 'apostra'))
-    expect(files).toEqual(['credentials.json'])
+    expect(readCliLogin(fake.resource)?.accessToken).toBe('at-1')
+    expect(warning).toHaveBeenCalledTimes(1)
+    expect(warning).toHaveBeenCalledWith(expect.stringContaining('0600'))
   })
 
   it('treats a corrupt file as no login and normalizes URLs', () => {
@@ -289,6 +367,22 @@ describe('logout', () => {
     })
     expect(readCliLogin(fake.resource)).toBeUndefined()
     fake = await startFake()
+  })
+
+  it('deletes a fallback-file login even when the credential store is unavailable', async () => {
+    credentialStoreAvailable = false
+    await withCliLoginLock(async () =>
+      writeCliLogin(fake.resource, entry(fake)),
+    )
+    expect(existsSync(credentialsPath())).toBe(true)
+
+    await expect(logoutCliLogin(fake.resource)).resolves.toEqual({
+      found: true,
+      revoked: true,
+    })
+
+    expect(existsSync(credentialsPath())).toBe(false)
+    expect(readCliLogin(fake.resource)).toBeUndefined()
   })
 })
 

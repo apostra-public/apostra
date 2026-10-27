@@ -46,6 +46,7 @@ type NodeProcess = {
   env: Record<string, string | undefined>
   platform: string
   pid: number
+  emitWarning?: (warning: string) => void
   getBuiltinModule?: (id: string) => unknown
 }
 type NodeFs = {
@@ -68,6 +69,21 @@ type NodePath = {
   dirname(path: string): string
   isAbsolute(path: string): boolean
 }
+type NodeModule = {
+  createRequire(url: string): (id: string) => unknown
+}
+type KeyringEntry = {
+  getPassword(): string | null
+  setPassword(password: string): void
+  deletePassword(): boolean
+}
+type Keyring = {
+  Entry: new (
+    service: string,
+    username: string,
+    options?: { linux?: { store: 'secret-service' } },
+  ) => KeyringEntry
+}
 
 function proc(): NodeProcess {
   const p = (globalThis as { process?: NodeProcess }).process
@@ -82,6 +98,7 @@ function node() {
     fs: get('node:fs') as NodeFs,
     os: get('node:os') as { homedir(): string },
     path: get('node:path') as NodePath,
+    module: get('node:module') as NodeModule,
   }
 }
 const isRecord = (v: unknown): v is Record<string, unknown> =>
@@ -144,7 +161,7 @@ function parseEntry(value: unknown): CliLoginEntry | undefined {
   return value as CliLoginEntry
 }
 
-function readAll(): Record<string, unknown> {
+function readFileLogins(): Record<string, unknown> {
   const { fs } = node()
   try {
     const file: unknown = JSON.parse(fs.readFileSync(credentialsPath(), 'utf8'))
@@ -155,7 +172,7 @@ function readAll(): Record<string, unknown> {
 }
 
 /** Atomic (temp file + rename), directory 0700, file 0600. */
-function writeAll(logins: Record<string, unknown>): void {
+function writeFileLogins(logins: Record<string, unknown>): void {
   const { fs, path } = node()
   const file = credentialsPath()
   const dir = path.dirname(file)
@@ -175,8 +192,143 @@ function writeAll(logins: Record<string, unknown>): void {
   fs.renameSync(temp, file)
 }
 
+const keyringService = 'Apostra CLI login'
+
+/**
+ * Resolve the native binding only when this Node-only feature is used. A static
+ * import would make the browser SDK bundle a native module.
+ */
+function keyringEntry(resource: string): KeyringEntry {
+  const { module } = node()
+  const required = module.createRequire(import.meta.url)('@napi-rs/keyring')
+  if (!isRecord(required) || typeof required.Entry !== 'function')
+    throw new Error('Apostra credential-store binding is unavailable')
+  const Entry = required.Entry as Keyring['Entry']
+  // Do not accept keyutils on Linux. It is ephemeral and is not the requested
+  // Secret Service store, so an inaccessible service deliberately uses the
+  // documented 0600-file fallback instead.
+  return new Entry(
+    keyringService,
+    resource,
+    proc().platform === 'linux'
+      ? { linux: { store: 'secret-service' } }
+      : undefined,
+  )
+}
+
+type SecureRead = { available: boolean; entry?: CliLoginEntry }
+
+function readSecureLogin(resource: string): SecureRead {
+  try {
+    const password = keyringEntry(resource).getPassword()
+    if (!password) return { available: true }
+    return { available: true, entry: parseEntry(JSON.parse(password)) }
+  } catch {
+    return { available: false }
+  }
+}
+
+function writeSecureLogin(resource: string, entry: CliLoginEntry): boolean {
+  try {
+    keyringEntry(resource).setPassword(JSON.stringify(entry))
+    return true
+  } catch {
+    return false
+  }
+}
+
+function deleteSecureLogin(resource: string): boolean | undefined {
+  try {
+    return keyringEntry(resource).deletePassword()
+  } catch {
+    return undefined
+  }
+}
+
+function warnFileFallback(): void {
+  const { fs, path } = node()
+  const dir = path.dirname(credentialsPath())
+  const marker = path.join(dir, '.file-store-warning')
+  try {
+    fs.mkdirSync(dir, { recursive: true, mode: 0o700 })
+    fs.chmodSync(dir, 0o700)
+    const fd = fs.openSync(marker, 'wx', 0o600)
+    fs.closeSync(fd)
+  } catch (error) {
+    if (errorCode(error) === 'EEXIST') return
+    // If the marker cannot be written, warn for this process rather than
+    // silently accepting plaintext storage.
+  }
+  proc().emitWarning?.(
+    `Apostra could not access your OS credential store. Login tokens are stored in ${credentialsPath()} with 0600 permissions. Use Keychain, Credential Manager, or Secret Service when available.`,
+  )
+}
+
+/**
+ * Move every legacy entry while holding the normal refresh lock. Reads that
+ * arrive first use a short synchronous instance of the same lock; contenders
+ * keep reading the legacy file until the migration finishes.
+ */
+function migrateFileLogins(lockHeld = false): boolean {
+  const { fs, path } = node()
+  const fileLogins = readFileLogins()
+  const entries = Object.entries(fileLogins).flatMap(([resource, value]) => {
+    const entry = parseEntry(value)
+    return entry ? [[resource, entry] as const] : []
+  })
+  if (entries.length === 0) return false
+
+  const lock = `${credentialsPath()}.lock`
+  let owner: string | undefined
+  if (!lockHeld) {
+    fs.mkdirSync(path.dirname(lock), { recursive: true, mode: 0o700 })
+    owner = `migration:${proc().pid}:${globalThis.crypto.randomUUID()}`
+    try {
+      const fd = fs.openSync(lock, 'wx', 0o600)
+      try {
+        fs.writeSync(fd, owner)
+      } finally {
+        fs.closeSync(fd)
+      }
+    } catch {
+      return false
+    }
+  }
+
+  try {
+    for (const [resource, entry] of entries) {
+      // A keyring value is authoritative: preserving it avoids overwriting a
+      // token another process has already refreshed during an interrupted
+      // earlier migration.
+      const stored = readSecureLogin(resource)
+      if (stored.entry) continue
+      if (!stored.available || !writeSecureLogin(resource, entry)) return false
+    }
+    fs.rmSync(credentialsPath(), { force: true })
+    return true
+  } finally {
+    if (owner) {
+      try {
+        if (fs.readFileSync(lock, 'utf8') === owner)
+          fs.rmSync(lock, { force: true })
+      } catch {
+        // The regular lock protocol protects against removing another owner.
+      }
+    }
+  }
+}
+
 export function readCliLogin(baseUrl: string): CliLoginEntry | undefined {
-  return parseEntry(readAll()[normalizeBaseUrl(baseUrl)])
+  const resource = normalizeBaseUrl(baseUrl)
+  const secure = readSecureLogin(resource)
+  if (secure.entry) return secure.entry
+
+  const fileLogins = readFileLogins()
+  if (Object.keys(fileLogins).length === 0) return undefined
+  if (migrateFileLogins()) return readSecureLogin(resource).entry
+
+  if (!secure.available) warnFileFallback()
+  return parseEntry(fileLogins[resource])
 }
 /** Like `readCliLogin`, but never throws: for the SDK's default credential chain. */
 export function storedCliLogin(baseUrl: string): CliLoginEntry | undefined {
@@ -284,7 +436,13 @@ export async function withCliLoginLock<T>(fn: () => Promise<T>): Promise<T> {
 
 /** Save a login. Call inside `withCliLoginLock`. */
 export function writeCliLogin(baseUrl: string, entry: CliLoginEntry): void {
-  writeAll({ ...readAll(), [normalizeBaseUrl(baseUrl)]: entry })
+  const resource = normalizeBaseUrl(baseUrl)
+  // Callers hold the cross-process lock, so the legacy file cannot overwrite
+  // a rotated credential while it is being migrated.
+  migrateFileLogins(true)
+  if (writeSecureLogin(resource, entry)) return
+  warnFileFallback()
+  writeFileLogins({ ...readFileLogins(), [resource]: entry })
 }
 
 async function send(
@@ -425,8 +583,8 @@ export function exchangeCliLoginCode(
 
 /**
  * Return a usable login for `baseUrl`, refreshing it if the access token is
- * about to expire. After taking the lock the file is read again: if another
- * process refreshed first, its token is used and no request is made.
+ * about to expire. After taking the lock the credential store is read again:
+ * if another process refreshed first, its token is used and no request is made.
  */
 export async function refreshCliLogin(
   baseUrl: string,
@@ -492,8 +650,12 @@ export async function logoutCliLogin(
     } catch {
       revoked = false
     }
-    const { [key]: _removed, ...rest } = readAll()
-    writeAll(rest)
+    deleteSecureLogin(key)
+    // A prior fallback login can still be present even when the credential
+    // store has no entry (or is available again). Remove it unconditionally:
+    // otherwise its refresh token could be migrated back after logout.
+    const { [key]: _removed, ...rest } = readFileLogins()
+    writeFileLogins(rest)
     return { found: true, revoked }
   })
 }
