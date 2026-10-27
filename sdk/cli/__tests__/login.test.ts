@@ -17,6 +17,7 @@ import {
   createState,
   login,
   pkceChallenge,
+  scopeNames,
   startCallbackServer,
 } from '../src/login.js'
 import { createProgram } from '../src/program.js'
@@ -270,6 +271,10 @@ describe('apostra login, status, token and logout', () => {
       'interchange:read interchange:write',
     )
     expect(fake.authorize?.searchParams.has('account_id')).toBe(false)
+  })
+
+  it('offers read and write as the only interactive scopes', () => {
+    expect(scopeNames).toEqual(['read', 'write'])
   })
 
   it('prints the URL instead of opening a browser with --no-browser or when opening fails', async () => {

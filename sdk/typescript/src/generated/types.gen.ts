@@ -8123,6 +8123,352 @@ export type InFlightReceipt = ConfirmPaymentAuthorityResponses[202]['data']['rec
 
 export type JsonValue = null | boolean | number | string | JsonValue[] | { [key: string]: JsonValue };
 
+export type LogEventData = {
+    body: {
+        /**
+         * Advertiser that owns the event source.
+         */
+        advertiserId: string;
+        /**
+         * Event source registered with save_event_source.
+         */
+        eventSourceId: string;
+        /**
+         * Client-generated key for this call. Same key + same events replays the prior result.
+         */
+        idempotencyKey: string;
+        /**
+         * Marks the call as test traffic.
+         */
+        testEventCode?: string;
+        /**
+         * Up to 10,000 AdCP events. Each event_type + event_id appears once per call; resends across calls are deduplicated.
+         */
+        events: Array<{
+            /**
+             * Unique event ID, scoped to event_type and the event source.
+             */
+            event_id: string;
+            /**
+             * AdCP event type.
+             */
+            event_type: 'page_view' | 'view_content' | 'select_content' | 'select_item' | 'search' | 'share' | 'add_to_cart' | 'remove_from_cart' | 'viewed_cart' | 'add_to_wishlist' | 'initiate_checkout' | 'add_payment_info' | 'purchase' | 'refund' | 'lead' | 'qualify_lead' | 'close_convert_lead' | 'disqualify_lead' | 'complete_registration' | 'subscribe' | 'follow' | 'content_view' | 'watch_milestone' | 'start_trial' | 'app_install' | 'app_launch' | 'contact' | 'schedule' | 'donate' | 'submit_application' | 'custom';
+            /**
+             * When the event happened (ISO 8601).
+             */
+            event_time: string;
+            /**
+             * Identifiers to match the event to a person. Hash email and phone; raw values are refused.
+             */
+            user_match?: {
+                /**
+                 * Universal IDs (rampid, id5, uid2, ...).
+                 */
+                uids?: Array<{
+                    /**
+                     * Universal ID type.
+                     */
+                    type: 'rampid' | 'rampid_derived' | 'id5' | 'uid2' | 'euid' | 'pairid' | 'maid' | 'hashed_email' | 'publisher_first_party' | 'world_id_nullifier' | 'other';
+                    /**
+                     * Universal ID value.
+                     */
+                    value: string;
+                    [key: string]: unknown;
+                }>;
+                /**
+                 * SHA-256 of the lowercased, trimmed email.
+                 */
+                hashed_email?: string;
+                /**
+                 * SHA-256 of the E.164 phone number.
+                 */
+                hashed_phone?: string;
+                /**
+                 * Platform click ID (fbclid, gclid, ...).
+                 */
+                click_id?: string;
+                /**
+                 * Click ID type.
+                 */
+                click_id_type?: string;
+                /**
+                 * Client IP address.
+                 */
+                client_ip?: string;
+                /**
+                 * Client user agent.
+                 */
+                client_user_agent?: string;
+                /**
+                 * AdCP extension object.
+                 */
+                ext?: LogEventRequestEventsItemUserMatchExt;
+                [key: string]: unknown;
+            };
+            /**
+             * Event data: value, currency, and items.
+             */
+            custom_data?: {
+                /**
+                 * Monetary value, not negative.
+                 */
+                value?: number;
+                /**
+                 * ISO 4217 currency code.
+                 */
+                currency?: string;
+                /**
+                 * Order or transaction ID.
+                 */
+                order_id?: string;
+                /**
+                 * Product or content IDs.
+                 */
+                content_ids?: Array<string>;
+                /**
+                 * Content type, e.g. product.
+                 */
+                content_type?: string;
+                /**
+                 * Content name.
+                 */
+                content_name?: string;
+                /**
+                 * Content category.
+                 */
+                content_category?: string;
+                /**
+                 * Number of items.
+                 */
+                num_items?: number;
+                /**
+                 * Search query.
+                 */
+                search_string?: string;
+                /**
+                 * Watch progress, 0 to 100.
+                 */
+                progress_percent?: number;
+                /**
+                 * Watch progress in seconds.
+                 */
+                progress_seconds?: number;
+                /**
+                 * Per-item details.
+                 */
+                contents?: Array<{
+                    /**
+                     * Item ID.
+                     */
+                    id: string;
+                    /**
+                     * Quantity, at least 1.
+                     */
+                    quantity?: number;
+                    /**
+                     * Unit price, not negative.
+                     */
+                    price?: number;
+                    /**
+                     * Brand.
+                     */
+                    brand?: string;
+                    [key: string]: unknown;
+                }>;
+                /**
+                 * AdCP extension object.
+                 */
+                ext?: LogEventRequestEventsItemCustomDataExt;
+                [key: string]: unknown;
+            };
+            /**
+             * Where the event happened.
+             */
+            action_source?: 'website' | 'app' | 'offline' | 'phone_call' | 'chat' | 'email' | 'in_store' | 'system_generated' | 'other';
+            /**
+             * AdCP surface, when action_source is too coarse.
+             */
+            surface?: {
+                /**
+                 * Generic surface category; owned_property = durable creator/brand property (channel, feed, etc).
+                 */
+                category: 'owned_property' | 'website' | 'app' | 'offline' | 'phone_call' | 'chat' | 'email' | 'in_store' | 'system_generated' | 'other';
+                /**
+                 * Open vocabulary for the property kind, e.g. channel, profile, feed, podcast, playlist, newsletter.
+                 */
+                property_type?: string;
+                /**
+                 * Platform, publisher, or system namespace for the property, e.g. video_platform, audio_service.
+                 */
+                namespace?: string;
+                /**
+                 * Identifier for the property within namespace.
+                 */
+                property_id?: string;
+                /**
+                 * AdCP extension object, namespaced by vendor key.
+                 */
+                ext?: LogEventRequestEventsItemSurfaceExt;
+                [key: string]: unknown;
+            };
+            /**
+             * URL where the event happened.
+             */
+            event_source_url?: string;
+            /**
+             * Name of a custom event.
+             */
+            custom_event_name?: string;
+            /**
+             * AdCP extension object.
+             */
+            ext?: LogEventRequestEventsItemExt;
+            [key: string]: unknown;
+        }>;
+        /**
+         * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+         */
+        expectedAccountId?: number | string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers: {
+        /**
+         * Select an accessible customer account for this request. An explicit value must be a positive integer and must equal the account resolved by authentication.
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+        /**
+         * Required for every write. Reuse the same key and validated body to replay the durable result for seven days. If this operation also accepts idempotencyKey in its JSON body, the values must match.
+         */
+        'Idempotency-Key': string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/log_event';
+};
+
+export type LogEventError = LogEventErrors[keyof LogEventErrors];
+
+export type LogEventErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type LogEventRequestEventsItemCustomDataExt = {
+    [key: string]: unknown;
+};
+
+export type LogEventRequestEventsItemExt = {
+    [key: string]: unknown;
+};
+
+export type LogEventRequestEventsItemSurfaceExt = {
+    [key: string]: unknown;
+};
+
+export type LogEventRequestEventsItemUserMatchExt = {
+    [key: string]: unknown;
+};
+
+export type LogEventResponse = LogEventResponses[keyof LogEventResponses];
+
+export type LogEventResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            advertiserId: string;
+            eventSourceId: string;
+            replayed: boolean;
+            ingestion: LogEventSuccessLogEventIngestion;
+        };
+        error: null;
+    };
+    /**
+     * The write is still running or needs recovery. Retry this operation with the same Idempotency-Key and body; do not mint a new key.
+     */
+    202: {
+        data: {
+            receipt: {
+                id: string;
+                operation: string;
+                state: 'claimed' | 'running' | 'uncertain';
+                stateVersion: number;
+                stateChangedAt: string;
+                pendingReason: string;
+            };
+        };
+        error: null;
+    };
+};
+
+export type LogEventSuccessLogEventIngestion = {
+    events_received: number;
+    events_processed: number;
+    partial_failures?: Array<{
+        event_id: string;
+        code: string;
+        message: string;
+        [key: string]: unknown;
+    }>;
+    warnings?: Array<string>;
+    match_quality?: number;
+    [key: string]: unknown;
+};
+
 export type OpenAdvertisersPageData = {
     body: {
         /**
@@ -18049,6 +18395,117 @@ export type SaveCreativeData = {
          */
         campaignId?: string;
         /**
+         * Read-only bulk-update preview: selects up to 200 Creatives and returns a 15-minute token.
+         */
+        previewBulkUpdate?: {
+            /**
+             * Creative-selection predicates; all supplied predicates intersect.
+             */
+            selection: {
+                /**
+                 * Creative IDs to intersect with the other selectors.
+                 */
+                creativeIds?: Array<string>;
+                /**
+                 * Collection whose Creatives must be selected.
+                 */
+                collectionId?: string;
+                /**
+                 * Case-insensitive Creative-name substring to match.
+                 */
+                nameContains?: string;
+                /**
+                 * Select Creatives created after this timestamp.
+                 */
+                createdAfter?: string;
+                /**
+                 * Select Creatives created before this timestamp.
+                 */
+                createdBefore?: string;
+                /**
+                 * Select Creatives updated after this timestamp.
+                 */
+                updatedAfter?: string;
+                /**
+                 * Select Creatives updated before this timestamp.
+                 */
+                updatedBefore?: string;
+                /**
+                 * Canonical format kind to match.
+                 */
+                formatKind?: SaveCreativeRequestPreviewBulkUpdateSelectionFormatKind;
+                /**
+                 * Creative asset type to match.
+                 */
+                assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'TEXT' | 'VAST';
+            };
+            /**
+             * Fields to change on every selected Creative.
+             */
+            update: {
+                /**
+                 * Replacement click-through URL for every selected Creative.
+                 */
+                clickUrl?: SaveCreativeRequestPreviewBulkUpdateUpdateClickUrl;
+                /**
+                 * Replacement canonical format kind for every selected Creative.
+                 */
+                formatKind?: SaveCreativeRequestPreviewBulkUpdateUpdateFormatKind;
+                /**
+                 * Parameters for the replacement canonical format.
+                 */
+                formatParams?: SaveCreativeRequestPreviewBulkUpdateUpdateFormatParams;
+                /**
+                 * Publisher or product canonical format option to apply.
+                 */
+                formatOptionRef?: {
+                    /**
+                     * Resolve the format option from a publisher catalog.
+                     */
+                    scope: 'publisher';
+                    /**
+                     * Publisher domain that owns the catalog option.
+                     */
+                    publisher_domain: string;
+                    /**
+                     * Canonical format option ID from the publisher catalog.
+                     */
+                    format_option_id: string;
+                } | {
+                    /**
+                     * Resolve the format option from the selected product.
+                     */
+                    scope: 'product';
+                    /**
+                     * Canonical format option ID declared by the product.
+                     */
+                    format_option_id: string;
+                    publisher_domain?: never;
+                };
+            };
+            /**
+             * Selected Creative IDs to remove from the final batch.
+             */
+            excludeCreativeIds?: Array<string>;
+            /**
+             * Fixed maximum number of Creatives allowed in one batch.
+             */
+            limit?: 200;
+        };
+        /**
+         * Apply the exact preview atomically; idempotencyKey is required alongside this field.
+         */
+        applyBulkUpdate?: {
+            /**
+             * Server-issued bulk preview token, valid for 15 minutes.
+             */
+            previewToken: string;
+            /**
+             * Digest returned by the exact preview being applied.
+             */
+            selectionDigest: string;
+        };
+        /**
          * Replace campaign membership; omit to keep it.
          */
         campaignIds?: Array<string>;
@@ -18075,13 +18532,11 @@ export type SaveCreativeData = {
         /**
          * Canonical format for a draft or advertiser-level metadata update.
          */
-        formatKind?: 'image' | 'html5' | 'display_tag' | 'image_carousel' | 'video_hosted' | 'video_vast' | 'audio_hosted' | 'audio_vast' | 'audio_daast' | 'sponsored_placement' | 'native_in_feed' | 'responsive_creative' | 'agent_placement' | 'seller_rendered_stateful_display' | 'coordinated_placements' | 'custom';
+        formatKind?: SaveCreativeRequestFormatKind;
         /**
          * Docs: Format parameters.
          */
-        formatParams?: {
-            [key: string]: unknown;
-        };
+        formatParams?: SaveCreativeRequestFormatParams;
         /**
          * Canonical format option; derived from creativeFormatId when supplied.
          */
@@ -18434,10 +18889,29 @@ export type SaveCreativeRequestClickUrl = SaveCreativeRequestLandingPageUrl;
 
 export type SaveCreativeRequestDisplayTagUrl = string;
 
+export type SaveCreativeRequestFormatKind = 'image' | 'html5' | 'display_tag' | 'image_carousel' | 'video_hosted' | 'video_vast' | 'audio_hosted' | 'audio_vast' | 'audio_daast' | 'sponsored_placement' | 'native_in_feed' | 'responsive_creative' | 'agent_placement' | 'seller_rendered_stateful_display' | 'coordinated_placements' | 'custom';
+
+export type SaveCreativeRequestFormatParams = {
+    [key: string]: unknown;
+};
+
 /**
  * URL to add as asset (must be http/https)
  */
 export type SaveCreativeRequestLandingPageUrl = string;
+
+export type SaveCreativeRequestPreviewBulkUpdateSelectionFormatKind = 'image' | 'html5' | 'display_tag' | 'image_carousel' | 'video_hosted' | 'video_vast' | 'audio_hosted' | 'audio_vast' | 'audio_daast' | 'sponsored_placement' | 'native_in_feed' | 'responsive_creative' | 'agent_placement' | 'seller_rendered_stateful_display' | 'coordinated_placements' | 'custom';
+
+/**
+ * URL to add as asset (must be http/https)
+ */
+export type SaveCreativeRequestPreviewBulkUpdateUpdateClickUrl = string;
+
+export type SaveCreativeRequestPreviewBulkUpdateUpdateFormatKind = 'image' | 'html5' | 'display_tag' | 'image_carousel' | 'video_hosted' | 'video_vast' | 'audio_hosted' | 'audio_vast' | 'audio_daast' | 'sponsored_placement' | 'native_in_feed' | 'responsive_creative' | 'agent_placement' | 'seller_rendered_stateful_display' | 'coordinated_placements' | 'custom';
+
+export type SaveCreativeRequestPreviewBulkUpdateUpdateFormatParams = {
+    [key: string]: unknown;
+};
 
 /**
  * URL to add as asset (must be http/https)
@@ -18457,7 +18931,40 @@ export type SaveCreativeResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveCreativeSuccessDuplicateCreativeSuccess | {
+        data: SaveCreativeSuccessDuplicateCreativeSuccess | SaveCreativeSuccessAgentApprovalRequired | {
+            action: 'bulk_update_previewed';
+            preview: {
+                previewToken: string;
+                expiresAt: string;
+                selectionDigest: string;
+                matchedCount: number;
+                returnedCount: number;
+                totalMatches: number;
+                truncated: boolean;
+                creatives: Array<{
+                    creativeId: string;
+                    stateRevision: number;
+                    deliveryAttached: boolean;
+                }>;
+            };
+        } | {
+            action: 'bulk_updated';
+            batch: {
+                previewToken: string;
+                selectionDigest: string;
+                matchedCount: number;
+                updatedCount: number;
+                unchangedCount: number;
+                creatives: Array<{
+                    creativeId: string;
+                    stateRevision: number;
+                    status: 'updated';
+                    deliverySync: 'not_required' | 'queued' | 'completed' | 'failed';
+                    deliveryOperationIds?: Array<string>;
+                }>;
+            };
+            replayed: boolean;
+        } | {
             creative: SaveCreativeSuccessCreative;
             alreadyExisted?: SaveCreativeSuccessAlreadyExisted;
             assetAttachWarning?: SaveCreativeSuccessAssetAttachWarning;
@@ -19643,6 +20150,57 @@ export type SaveCreativeSessionSuccessCreativeSessionSavedDraftOperation = 'save
 export type SaveCreativeSessionSuccessCreativeSessionSelectedOutputOperation = 'selected_output';
 
 export type SaveCreativeSessionSuccessCreativeSessionTruncated = true;
+
+export type SaveCreativeSuccessAgentApproval = {
+    /**
+     * Approval id.
+     */
+    id: string;
+    /**
+     * Kind of sensitive action, for example `buyer_child_account.create`.
+     */
+    kind: string;
+    /**
+     * `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.
+     */
+    state: 'pending' | 'executing' | 'succeeded' | 'failed' | 'rejected' | 'expired';
+    /**
+     * Account the action applies to.
+     */
+    targetCustomerId: string;
+    /**
+     * Role the approver must hold on the account.
+     */
+    requiredRole: 'ADMIN' | 'SUPER_ADMIN' | null;
+    /**
+     * What will happen, in one line. Null once the approval is final.
+     */
+    summary: string | null;
+    /**
+     * Page on our site where a signed-in person approves or rejects the request.
+     */
+    url: string;
+    createdAt: string;
+    expiresAt: string;
+    decidedAt: string | null;
+    completedAt: string | null;
+    /**
+     * Reference to the result once succeeded.
+     */
+    resultReference: {
+        [key: string]: string | number | boolean;
+    } | null;
+    /**
+     * Reason code when the action failed.
+     */
+    failureCode: string | null;
+};
+
+export type SaveCreativeSuccessAgentApprovalRequired = {
+    action: 'approval_required';
+    message: string;
+    approval: SaveCreativeSuccessAgentApproval;
+};
 
 export type SaveCreativeSuccessAlreadyExisted = true;
 

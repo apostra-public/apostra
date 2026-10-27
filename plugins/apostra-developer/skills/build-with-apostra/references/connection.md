@@ -33,8 +33,10 @@ under whatever name it already has.
    the user to paste a token into chat or a repository file.
 5. Call `get_status` first. Record the active account ID, account kind,
    readiness, and returned next actions without printing credential material.
-6. Inspect `tools/list`. Use a returned account ID if an account switch is
-   needed, then call `get_status` again. An account ID is not a seller ID.
+6. Inspect `tools/list`. Send the account ID `get_status` returned as
+   `accountId` on every call, and call `get_status` with no `accountId` to list
+   the accounts you can reach. To work in another account, send that account's
+   `accountId`; nothing needs switching. An account ID is not a seller ID.
    Keep these schemas: they are the contract for every call you write later,
    and reading one costs a fraction of debugging a rejected request.
 7. Make one scoped read appropriate to the task. A buyer's seller discovery

@@ -242,6 +242,26 @@
     ],
     "summary": "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call."
   },
+  "log_event": {
+    "path": "/tools/log_event",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "bodyKeyField": "idempotencyKey",
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Send up to 10,000 AdCP conversion events (log_event) to an event source the advertiser registered with save_event_source. Events must also pass the v2 rules: no raw email or phone in user_match, each event_type + event_id once per call. One invalid event refuses the whole call."
+  },
   "open_advertisers_page": {
     "path": "/tools/open_advertisers_page",
     "method": "POST",
@@ -1158,7 +1178,7 @@
         ]
       }
     ],
-    "summary": "Manage seller lessons in a seller account context; use switch_account first. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear."
+    "summary": "Manage seller lessons in a seller account; send the accountId of that account. propose requires lesson; approve and retire require lessonId; preview requires lessonId and brief. Preserve seller words from a private Session note and ask if kind or scope is unclear."
   },
   "save_library_request": {
     "path": "/tools/save_library_request",

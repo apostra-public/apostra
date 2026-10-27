@@ -10,7 +10,7 @@ Use the attached Interchange V3 buyer tools. Treat `get_status` as the authority
 ## Workflow
 
 1. Call `get_status` before changing anything.
-2. Confirm the active account is the buyer account the user intends to configure. If it is not, present reachable accounts and use `switch_account` only when that tool is available and the user selects an account.
+2. Confirm the account is the buyer account the user intends to configure. If it is not, present the reachable accounts and ask the user which one they mean. Send that account's `accountId` on every call, as `get_status` returns it; do not call `switch_account`.
 3. Work through the returned blockers and `nextActions` in priority order. Do not invent missing requirements or treat a readable public seller page as authorization.
 4. For an operator-identity action:
    - Read `operatorIdentity` from `get_status` first.
@@ -22,7 +22,7 @@ Use the attached Interchange V3 buyer tools. Treat `get_status` as the authority
 5. For terms or billing actions:
    - If Terms or full plan review is required, open or direct the user to the Plan & Billing Page and stop that step. The model-visible tools do not expose the complete Terms text and exact version needed for safe acceptance.
    - For payment terms, call `save_billing` with `{ paymentTerms }` only after the user chooses the terms.
-   - For payment authority, ask for confirmation before requesting it. Then follow this flow exactly: `request_payment_authority` returns a single-use confirmation token, `confirm_payment_authority` spends that token to issue the hosted card-capture link, and `get({ kind: 'billing' })` reports the status afterwards.
+   - For payment authority, ask for confirmation before requesting it. Then follow this flow exactly: `request_payment_authority` returns a single-use confirmation token, `confirm_payment_authority` spends that token to issue the hosted card-capture link, and `get({ kind: 'billing', accountId })` reports the status afterwards. Send the chosen `accountId` on every call in this flow.
    - Give the hosted link only to the organization cardholder. Never request or transmit card data in chat or MCP calls.
 6. For seller connections:
    - Use `search` and `get` to find the exact seller, connection, provider account, and advertiser mapping.

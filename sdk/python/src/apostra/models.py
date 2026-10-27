@@ -4895,6 +4895,144 @@ class InFlightReceipt(TypedDict):
 
 JsonValue: TypeAlias = Union[str, int, float, bool, None, list['JsonValue'], dict[str, 'JsonValue']]
 
+class LogEventInput(TypedDict):
+    advertiserId: str
+    '\n    Advertiser that owns the event source.\n    '
+    eventSourceId: str
+    '\n    Event source registered with save_event_source.\n    '
+    idempotencyKey: NotRequired[str]
+    '\n    Client-generated key for this call. Same key + same events replays the prior result.\n    '
+    testEventCode: NotRequired[str]
+    '\n    Marks the call as test traffic.\n    '
+    events: list[LogEventInputEventsItem]
+    '\n    Up to 10,000 AdCP events. Each event_type + event_id appears once per call; resends across calls are deduplicated.\n    '
+    expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class LogEventInputEventsItem(TypedDict):
+    event_id: str
+    '\n    Unique event ID, scoped to event_type and the event source.\n    '
+    event_type: Literal["page_view", "view_content", "select_content", "select_item", "search", "share", "add_to_cart", "remove_from_cart", "viewed_cart", "add_to_wishlist", "initiate_checkout", "add_payment_info", "purchase", "refund", "lead", "qualify_lead", "close_convert_lead", "disqualify_lead", "complete_registration", "subscribe", "follow", "content_view", "watch_milestone", "start_trial", "app_install", "app_launch", "contact", "schedule", "donate", "submit_application", "custom"]
+    '\n    AdCP event type.\n    '
+    event_time: str
+    '\n    When the event happened (ISO 8601).\n    '
+    user_match: NotRequired[LogEventInputEventsItemUserMatch]
+    '\n    Identifiers to match the event to a person. Hash email and phone; raw values are refused.\n    '
+    custom_data: NotRequired[LogEventInputEventsItemCustomData]
+    '\n    Event data: value, currency, and items.\n    '
+    action_source: NotRequired[Literal["website", "app", "offline", "phone_call", "chat", "email", "in_store", "system_generated", "other"]]
+    '\n    Where the event happened.\n    '
+    surface: NotRequired[LogEventInputEventsItemSurface]
+    '\n    AdCP surface, when action_source is too coarse.\n    '
+    event_source_url: NotRequired[str]
+    '\n    URL where the event happened.\n    '
+    custom_event_name: NotRequired[str]
+    '\n    Name of a custom event.\n    '
+    ext: NotRequired[LogEventRequestEventsItemExt]
+    '\n    AdCP extension object.\n    '
+
+class LogEventInputEventsItemCustomData(TypedDict):
+    value: NotRequired[float]
+    '\n    Monetary value, not negative.\n    '
+    currency: NotRequired[str]
+    '\n    ISO 4217 currency code.\n    '
+    order_id: NotRequired[str]
+    '\n    Order or transaction ID.\n    '
+    content_ids: NotRequired[list[str]]
+    '\n    Product or content IDs.\n    '
+    content_type: NotRequired[str]
+    '\n    Content type, e.g. product.\n    '
+    content_name: NotRequired[str]
+    '\n    Content name.\n    '
+    content_category: NotRequired[str]
+    '\n    Content category.\n    '
+    num_items: NotRequired[int]
+    '\n    Number of items.\n    '
+    search_string: NotRequired[str]
+    '\n    Search query.\n    '
+    progress_percent: NotRequired[float]
+    '\n    Watch progress, 0 to 100.\n    '
+    progress_seconds: NotRequired[float]
+    '\n    Watch progress in seconds.\n    '
+    contents: NotRequired[list[LogEventInputEventsItemCustomDataContentsItem]]
+    '\n    Per-item details.\n    '
+    ext: NotRequired[LogEventRequestEventsItemCustomDataExt]
+    '\n    AdCP extension object.\n    '
+
+class LogEventInputEventsItemCustomDataContentsItem(TypedDict):
+    id: str
+    '\n    Item ID.\n    '
+    quantity: NotRequired[int]
+    '\n    Quantity, at least 1.\n    '
+    price: NotRequired[float]
+    '\n    Unit price, not negative.\n    '
+    brand: NotRequired[str]
+    '\n    Brand.\n    '
+
+class LogEventInputEventsItemSurface(TypedDict):
+    category: Literal["owned_property", "website", "app", "offline", "phone_call", "chat", "email", "in_store", "system_generated", "other"]
+    '\n    Generic surface category; owned_property = durable creator/brand property (channel, feed, etc).\n    '
+    property_type: NotRequired[str]
+    '\n    Open vocabulary for the property kind, e.g. channel, profile, feed, podcast, playlist, newsletter.\n    '
+    namespace: NotRequired[str]
+    '\n    Platform, publisher, or system namespace for the property, e.g. video_platform, audio_service.\n    '
+    property_id: NotRequired[str]
+    '\n    Identifier for the property within namespace.\n    '
+    ext: NotRequired[LogEventRequestEventsItemSurfaceExt]
+    '\n    AdCP extension object, namespaced by vendor key.\n    '
+
+class LogEventInputEventsItemUserMatch(TypedDict):
+    uids: NotRequired[list[LogEventInputEventsItemUserMatchUidsItem]]
+    '\n    Universal IDs (rampid, id5, uid2, ...).\n    '
+    hashed_email: NotRequired[str]
+    '\n    SHA-256 of the lowercased, trimmed email.\n    '
+    hashed_phone: NotRequired[str]
+    '\n    SHA-256 of the E.164 phone number.\n    '
+    click_id: NotRequired[str]
+    '\n    Platform click ID (fbclid, gclid, ...).\n    '
+    click_id_type: NotRequired[str]
+    '\n    Click ID type.\n    '
+    client_ip: NotRequired[str]
+    '\n    Client IP address.\n    '
+    client_user_agent: NotRequired[str]
+    '\n    Client user agent.\n    '
+    ext: NotRequired[LogEventRequestEventsItemUserMatchExt]
+    '\n    AdCP extension object.\n    '
+
+class LogEventInputEventsItemUserMatchUidsItem(TypedDict):
+    type: Literal["rampid", "rampid_derived", "id5", "uid2", "euid", "pairid", "maid", "hashed_email", "publisher_first_party", "world_id_nullifier", "other"]
+    '\n    Universal ID type.\n    '
+    value: str
+    '\n    Universal ID value.\n    '
+
+LogEventRequestEventsItemCustomDataExt: TypeAlias = dict[str, JsonValue]
+
+LogEventRequestEventsItemExt: TypeAlias = dict[str, JsonValue]
+
+LogEventRequestEventsItemSurfaceExt: TypeAlias = dict[str, JsonValue]
+
+LogEventRequestEventsItemUserMatchExt: TypeAlias = dict[str, JsonValue]
+
+class LogEventResult(TypedDict):
+    advertiserId: str
+    eventSourceId: str
+    replayed: bool
+    ingestion: LogEventSuccessLogEventIngestion
+
+class LogEventSuccessLogEventIngestion(TypedDict):
+    events_received: int
+    events_processed: int
+    partial_failures: NotRequired[list[LogEventSuccessLogEventIngestionPartialFailuresItem]]
+    warnings: NotRequired[list[str]]
+    match_quality: NotRequired[float]
+
+class LogEventSuccessLogEventIngestionPartialFailuresItem(TypedDict):
+    event_id: str
+    code: str
+    message: str
+
 class OpenAdvertisersPageInput(TypedDict):
     intent: NotRequired[Literal["add"]]
     '\n    Use "add" to open the Add advertiser form.\n    '
@@ -9570,6 +9708,10 @@ class SaveCreativeInput(TypedDict):
     '\n    Copy this visible campaign creative. Requires campaignId and idempotencyKey; the copy is named Copy of the source name.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign scope for create or update; required unless advertiserId is set. A draft records its intended campaign.\n    '
+    previewBulkUpdate: NotRequired[SaveCreativeInputPreviewBulkUpdate]
+    '\n    Read-only bulk-update preview: selects up to 200 Creatives and returns a 15-minute token.\n    '
+    applyBulkUpdate: NotRequired[SaveCreativeInputApplyBulkUpdate]
+    '\n    Apply the exact preview atomically; idempotencyKey is required alongside this field.\n    '
     campaignIds: NotRequired[list[str]]
     '\n    Replace campaign membership; omit to keep it.\n    '
     advertiserId: NotRequired[str]
@@ -9582,9 +9724,9 @@ class SaveCreativeInput(TypedDict):
     '\n    Creative name.\n    '
     message: NotRequired[str]
     '\n    Creative brief or direction.\n    '
-    formatKind: NotRequired[Literal["image", "html5", "display_tag", "image_carousel", "video_hosted", "video_vast", "audio_hosted", "audio_vast", "audio_daast", "sponsored_placement", "native_in_feed", "responsive_creative", "agent_placement", "seller_rendered_stateful_display", "coordinated_placements", "custom"]]
+    formatKind: NotRequired[SaveCreativeRequestFormatKind]
     '\n    Canonical format for a draft or advertiser-level metadata update.\n    '
-    formatParams: NotRequired[dict[str, JsonValue]]
+    formatParams: NotRequired[SaveCreativeRequestFormatParams]
     '\n    Docs: Format parameters.\n    '
     formatOptionRef: NotRequired[SaveCreativeInputFormatOptionRefScopePublisher | SaveCreativeInputFormatOptionRefScopeProduct]
     '\n    Canonical format option; derived from creativeFormatId when supplied.\n    '
@@ -9618,6 +9760,12 @@ class SaveCreativeInput(TypedDict):
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveCreativeInputApplyBulkUpdate(TypedDict):
+    previewToken: str
+    '\n    Server-issued bulk preview token, valid for 15 minutes.\n    '
+    selectionDigest: str
+    '\n    Digest returned by the exact preview being applied.\n    '
 
 class SaveCreativeInputAssetsItemAssetTypeDisplayTag(TypedDict):
     asset_type: Literal["display_tag"]
@@ -9685,6 +9833,60 @@ class SaveCreativeInputMacroAdditionsItem(TypedDict):
     value: str | None
     '\n    Literal text, AdCP universal macros such as {CACHEBUSTER}, or Apostra extension macros, which AdCP does not define: CAMPAIGN_ID, TRACKING_TAG_ID, DATA_SET_ID, TACTIC_ID, SALES_AGENT_ID, ATTRIBUTION_TRACKING_ID. null suppresses the inherited key.\n    '
 
+class SaveCreativeInputPreviewBulkUpdate(TypedDict):
+    selection: SaveCreativeInputPreviewBulkUpdateSelection
+    '\n    Creative-selection predicates; all supplied predicates intersect.\n    '
+    update: SaveCreativeInputPreviewBulkUpdateUpdate
+    '\n    Fields to change on every selected Creative.\n    '
+    excludeCreativeIds: NotRequired[list[str]]
+    '\n    Selected Creative IDs to remove from the final batch.\n    '
+    limit: NotRequired[Literal[200]]
+    '\n    Fixed maximum number of Creatives allowed in one batch.\n    '
+
+class SaveCreativeInputPreviewBulkUpdateSelection(TypedDict):
+    creativeIds: NotRequired[list[str]]
+    '\n    Creative IDs to intersect with the other selectors.\n    '
+    collectionId: NotRequired[str]
+    '\n    Collection whose Creatives must be selected.\n    '
+    nameContains: NotRequired[str]
+    '\n    Case-insensitive Creative-name substring to match.\n    '
+    createdAfter: NotRequired[str]
+    '\n    Select Creatives created after this timestamp.\n    '
+    createdBefore: NotRequired[str]
+    '\n    Select Creatives created before this timestamp.\n    '
+    updatedAfter: NotRequired[str]
+    '\n    Select Creatives updated after this timestamp.\n    '
+    updatedBefore: NotRequired[str]
+    '\n    Select Creatives updated before this timestamp.\n    '
+    formatKind: NotRequired[SaveCreativeRequestPreviewBulkUpdateSelectionFormatKind]
+    '\n    Canonical format kind to match.\n    '
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "TEXT", "VAST"]]
+    '\n    Creative asset type to match.\n    '
+
+class SaveCreativeInputPreviewBulkUpdateUpdate(TypedDict):
+    clickUrl: NotRequired[SaveCreativeRequestPreviewBulkUpdateUpdateClickUrl]
+    '\n    Replacement click-through URL for every selected Creative.\n    '
+    formatKind: NotRequired[SaveCreativeRequestPreviewBulkUpdateUpdateFormatKind]
+    '\n    Replacement canonical format kind for every selected Creative.\n    '
+    formatParams: NotRequired[SaveCreativeRequestPreviewBulkUpdateUpdateFormatParams]
+    '\n    Parameters for the replacement canonical format.\n    '
+    formatOptionRef: NotRequired[SaveCreativeInputPreviewBulkUpdateUpdateFormatOptionRefScopePublisher | SaveCreativeInputPreviewBulkUpdateUpdateFormatOptionRefScopeProduct]
+    '\n    Publisher or product canonical format option to apply.\n    '
+
+class SaveCreativeInputPreviewBulkUpdateUpdateFormatOptionRefScopeProduct(TypedDict):
+    scope: Literal["product"]
+    '\n    Resolve the format option from the selected product.\n    '
+    format_option_id: str
+    '\n    Canonical format option ID declared by the product.\n    '
+
+class SaveCreativeInputPreviewBulkUpdateUpdateFormatOptionRefScopePublisher(TypedDict):
+    scope: Literal["publisher"]
+    '\n    Resolve the format option from a publisher catalog.\n    '
+    publisher_domain: str
+    '\n    Publisher domain that owns the catalog option.\n    '
+    format_option_id: str
+    '\n    Canonical format option ID from the publisher catalog.\n    '
+
 class SaveCreativeInputSocial(TypedDict):
     headline: NotRequired[str]
     '\n    Headline; slot headline.\n    '
@@ -9737,7 +9939,19 @@ SaveCreativeRequestAssetsItemUrl: TypeAlias = str
 
 SaveCreativeRequestDisplayTagUrl: TypeAlias = str
 
+SaveCreativeRequestFormatKind: TypeAlias = Literal["image", "html5", "display_tag", "image_carousel", "video_hosted", "video_vast", "audio_hosted", "audio_vast", "audio_daast", "sponsored_placement", "native_in_feed", "responsive_creative", "agent_placement", "seller_rendered_stateful_display", "coordinated_placements", "custom"]
+
+SaveCreativeRequestFormatParams: TypeAlias = dict[str, JsonValue]
+
 SaveCreativeRequestLandingPageUrl: TypeAlias = str
+
+SaveCreativeRequestPreviewBulkUpdateSelectionFormatKind: TypeAlias = Literal["image", "html5", "display_tag", "image_carousel", "video_hosted", "video_vast", "audio_hosted", "audio_vast", "audio_daast", "sponsored_placement", "native_in_feed", "responsive_creative", "agent_placement", "seller_rendered_stateful_display", "coordinated_placements", "custom"]
+
+SaveCreativeRequestPreviewBulkUpdateUpdateClickUrl: TypeAlias = str
+
+SaveCreativeRequestPreviewBulkUpdateUpdateFormatKind: TypeAlias = Literal["image", "html5", "display_tag", "image_carousel", "video_hosted", "video_vast", "audio_hosted", "audio_vast", "audio_daast", "sponsored_placement", "native_in_feed", "responsive_creative", "agent_placement", "seller_rendered_stateful_display", "coordinated_placements", "custom"]
+
+SaveCreativeRequestPreviewBulkUpdateUpdateFormatParams: TypeAlias = dict[str, JsonValue]
 
 SaveCreativeRequestSocialComponentsItemUrl: TypeAlias = str
 
@@ -9761,6 +9975,45 @@ class SaveCreativeResultActionAssociated(TypedDict):
     campaignId: str
     packageAssignmentAttempted: Literal[False]
     providerDeliveryAttempted: Literal[False]
+
+class SaveCreativeResultActionBulkUpdatePreviewed(TypedDict):
+    action: Literal["bulk_update_previewed"]
+    preview: SaveCreativeResultActionBulkUpdatePreviewedPreview
+
+class SaveCreativeResultActionBulkUpdatePreviewedPreview(TypedDict):
+    previewToken: str
+    expiresAt: str
+    selectionDigest: str
+    matchedCount: int
+    returnedCount: int
+    totalMatches: int
+    truncated: bool
+    creatives: list[SaveCreativeResultActionBulkUpdatePreviewedPreviewCreativesItem]
+
+class SaveCreativeResultActionBulkUpdatePreviewedPreviewCreativesItem(TypedDict):
+    creativeId: str
+    stateRevision: int
+    deliveryAttached: bool
+
+class SaveCreativeResultActionBulkUpdated(TypedDict):
+    action: Literal["bulk_updated"]
+    batch: SaveCreativeResultActionBulkUpdatedBatch
+    replayed: bool
+
+class SaveCreativeResultActionBulkUpdatedBatch(TypedDict):
+    previewToken: str
+    selectionDigest: str
+    matchedCount: int
+    updatedCount: int
+    unchangedCount: int
+    creatives: list[SaveCreativeResultActionBulkUpdatedBatchCreativesItem]
+
+class SaveCreativeResultActionBulkUpdatedBatchCreativesItem(TypedDict):
+    creativeId: str
+    stateRevision: int
+    status: Literal["updated"]
+    deliverySync: Literal["not_required", "queued", "completed", "failed"]
+    deliveryOperationIds: NotRequired[list[str]]
 
 class SaveCreativeResultActionCreated(TypedDict):
     creative: SaveCreativeSuccessCreative
@@ -10409,6 +10662,35 @@ SaveCreativeSessionSuccessCreativeSessionSelectedOutputOperation: TypeAlias = Li
 
 SaveCreativeSessionSuccessCreativeSessionTruncated: TypeAlias = Literal[True]
 
+class SaveCreativeSuccessAgentApproval(TypedDict):
+    id: str
+    '\n    Approval id.\n    '
+    kind: str
+    '\n    Kind of sensitive action, for example `buyer_child_account.create`.\n    '
+    state: Literal["pending", "executing", "succeeded", "failed", "rejected", "expired"]
+    '\n    `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.\n    '
+    targetCustomerId: str
+    '\n    Account the action applies to.\n    '
+    requiredRole: Literal["ADMIN", "SUPER_ADMIN"] | None
+    '\n    Role the approver must hold on the account.\n    '
+    summary: str | None
+    '\n    What will happen, in one line. Null once the approval is final.\n    '
+    url: str
+    '\n    Page on our site where a signed-in person approves or rejects the request.\n    '
+    createdAt: str
+    expiresAt: str
+    decidedAt: str | None
+    completedAt: str | None
+    resultReference: dict[str, str | float | bool] | None
+    '\n    Reference to the result once succeeded.\n    '
+    failureCode: str | None
+    '\n    Reason code when the action failed.\n    '
+
+class SaveCreativeSuccessAgentApprovalRequired(TypedDict):
+    action: Literal["approval_required"]
+    message: str
+    approval: SaveCreativeSuccessAgentApproval
+
 SaveCreativeSuccessAlreadyExisted: TypeAlias = Literal[True]
 
 SaveCreativeSuccessAssetAttachWarning: TypeAlias = Literal[True]
@@ -10453,7 +10735,7 @@ class SaveCreativeSuccessSaveCreativeLibraryRoleSuccess(TypedDict):
     creative: SaveCreativeSuccessSaveCreativeLibraryRoleCreative
     replayed: bool
 
-SaveCreativeResult: TypeAlias = "SaveCreativeSuccessDuplicateCreativeSuccess | SaveCreativeResultActionCreated | SaveCreativeResultActionUpdated | SaveCreativeResultActionAssociated | SaveCreativeResultActionMembershipUpdated | SaveCreativeResultActionResynced | SaveCreativeResultActionArchived | SaveCreativeResultActionPromoted | SaveCreativeResultActionPromoting | SaveCreativeSuccessSaveCreativeLibraryRoleSuccess"
+SaveCreativeResult: TypeAlias = "SaveCreativeSuccessDuplicateCreativeSuccess | SaveCreativeSuccessAgentApprovalRequired | SaveCreativeResultActionBulkUpdatePreviewed | SaveCreativeResultActionBulkUpdated | SaveCreativeResultActionCreated | SaveCreativeResultActionUpdated | SaveCreativeResultActionAssociated | SaveCreativeResultActionMembershipUpdated | SaveCreativeResultActionResynced | SaveCreativeResultActionArchived | SaveCreativeResultActionPromoted | SaveCreativeResultActionPromoting | SaveCreativeSuccessSaveCreativeLibraryRoleSuccess"
 
 SaveCreativeSuccessWarnings: TypeAlias = list[str]
 
@@ -21011,6 +21293,8 @@ GetStatusError: TypeAlias = "V3ToolErrorResponse"
 GetV3PublicDocumentRevisionSectionsError: TypeAlias = "GetV3PublicDocumentRevisionSectionsErrorWithDataError | V3ToolErrorResponse"
 
 GetV3PublicMutationReceiptError: TypeAlias = "V3ToolErrorResponse"
+
+LogEventError: TypeAlias = "V3ToolErrorResponse"
 
 OpenAdvertisersPageError: TypeAlias = "V3ToolErrorResponse"
 
