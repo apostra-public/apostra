@@ -1486,6 +1486,7 @@
       "SaveCreativeResultActionResynced": "object",
       "SaveCreativeResultActionResyncedCampaignsItemStatusConfirmed": "object",
       "SaveCreativeResultActionResyncedCampaignsItemStatusFailed": "object",
+      "SaveCreativeResultActionResyncedCampaignsItemStatusQueued": "object",
       "SaveCreativeResultActionUpdated": "object",
       "SaveCreativeSessionError": "other",
       "SaveCreativeSessionInput": "other",

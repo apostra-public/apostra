@@ -19118,6 +19118,15 @@ export type SaveCreativeResponses = {
                 campaignId: string;
                 status: 'confirmed';
                 mediaBuyIds: Array<string>;
+                queuedMediaBuyIds?: Array<string>;
+                code?: never;
+                message?: never;
+                retryable?: never;
+            } | {
+                campaignId: string;
+                status: 'queued';
+                queuedMediaBuyIds: Array<string>;
+                mediaBuyIds?: never;
                 code?: never;
                 message?: never;
                 retryable?: never;
@@ -19127,6 +19136,7 @@ export type SaveCreativeResponses = {
                 code: string;
                 message: string;
                 retryable: boolean;
+                queuedMediaBuyIds?: Array<string>;
                 mediaBuyIds?: never;
             }>;
         } | {
@@ -24782,7 +24792,7 @@ export type SaveMediaBuyData = {
             };
         }>;
         /**
-         * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
          */
         budget?: {
             /**
@@ -24795,7 +24805,7 @@ export type SaveMediaBuyData = {
             currency: string;
         };
         /**
-         * Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.
+         * Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.
          */
         budgetAllocation?: {
             /**
@@ -25585,7 +25595,7 @@ export type SaveMediaBuyData = {
             };
         }>;
         /**
-         * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
          */
         budget?: {
             /**
@@ -25598,7 +25608,7 @@ export type SaveMediaBuyData = {
             currency: string;
         };
         /**
-         * Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.
+         * Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.
          */
         budgetAllocation?: {
             /**
@@ -25828,7 +25838,7 @@ export type SaveMediaBuyData = {
          */
         channelGroupId?: string;
         /**
-         * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
          */
         budget?: {
             /**

@@ -493,11 +493,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveMaterialResult], self._request_with_response("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_media_buy(self, input: models.SaveMediaBuyInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMediaBuyResult:
-        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates."
+        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates."
         return cast("models.SaveMediaBuyResult", self._request("save_media_buy", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_media_buy_with_response(self, input: models.SaveMediaBuyInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveMediaBuyResult]:
-        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates. Returns the data together with response headers and request ID."
+        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveMediaBuyResult], self._request_with_response("save_media_buy", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_media_kit(self, input: models.SaveMediaKitInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMediaKitResult:
@@ -1094,11 +1094,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveMaterialResult], await self._request_with_response("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_media_buy(self, input: models.SaveMediaBuyInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMediaBuyResult:
-        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates."
+        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates."
         return cast("models.SaveMediaBuyResult", await self._request("save_media_buy", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_media_buy_with_response(self, input: models.SaveMediaBuyInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveMediaBuyResult]:
-        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates. Returns the data together with response headers and request ID."
+        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveMediaBuyResult], await self._request_with_response("save_media_buy", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_media_kit(self, input: models.SaveMediaKitInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMediaKitResult:
