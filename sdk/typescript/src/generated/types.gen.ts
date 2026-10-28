@@ -5193,6 +5193,10 @@ export type GetDeliveryResponses = {
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
+             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             */
+            coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
+            /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
             synthetic?: GetDeliverySuccessSynthetic;
@@ -5213,6 +5217,10 @@ export type GetDeliveryResponses = {
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
+             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             */
+            coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
+            /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
             synthetic?: GetDeliverySuccessSynthetic;
@@ -5232,6 +5240,10 @@ export type GetDeliveryResponses = {
              * Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
+            /**
+             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             */
+            coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
             /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
@@ -5481,9 +5493,44 @@ export type GetDeliveryResponses = {
             totals?: never;
             page?: never;
             goalProgress?: never;
+            coverage?: never;
             synthetic?: never;
         };
         error: null;
+    };
+};
+
+export type GetDeliverySuccessCampaignDeliveryCoverage = {
+    /**
+     * Campaigns in scope with a current media buy that was booked or running during the range.
+     */
+    inFlightCampaigns: number;
+    withoutStoredRows: {
+        /**
+         * In-flight campaigns with no stored delivery row for the range. Absence is not zero delivery.
+         */
+        count: number;
+        /**
+         * True when `campaigns` lists fewer than `count`.
+         */
+        truncated: boolean;
+        campaigns: Array<{
+            campaignId: string;
+            campaignName: string;
+            nextAction: {
+                tool: 'get_delivery';
+                arguments: {
+                    report: 'live_campaign_delivery';
+                    range: {
+                        startDate: string;
+                        endDate: string;
+                    };
+                    filters: {
+                        campaignId: string;
+                    };
+                };
+            };
+        }>;
     };
 };
 
@@ -26653,7 +26700,7 @@ export type SaveMediaKitData = {
          */
         channels?: Array<'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence'>;
         /**
-         * Legacy regions; use save_seller's listing field for countries.
+         * Legacy regions, saved as your countries; prefer save_seller's listing countries.
          */
         regions?: Array<string>;
         /**

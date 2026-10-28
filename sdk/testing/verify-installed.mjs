@@ -1,6 +1,6 @@
 /** Compare installed archives with their generated release manifest, not a fixed count. */
 import assert from 'node:assert/strict'
-import { execFileSync } from 'node:child_process'
+import { execFileSync, spawnSync } from 'node:child_process'
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
@@ -60,8 +60,10 @@ if (process.argv[2] === '--cli') {
     })
     const version = apostra('--version').trim()
     if (expectedVersion) assert.equal(version, expectedVersion, 'Installed CLI reports a different version')
-    const listed = JSON.parse(apostra('operations', 'list', '--json'))
-    assert.equal(listed.version, 1, 'Unexpected operations envelope version')
+    const envelope = JSON.parse(apostra('operations', 'list', '--json'))
+    assert.equal(envelope.schemaVersion, 1, 'Unexpected CLI envelope version')
+    assert.equal(envelope.ok, true, 'The CLI operations envelope is not a success')
+    const listed = envelope.data
     const names = listed.operations.map(operation => operation.name)
     assert(names.length > 0 && names.includes('get_delivery'), 'The CLI lists no SDK operations')
     assert.equal(new Set(names).size, names.length, 'The CLI lists a duplicate operation')
@@ -72,6 +74,16 @@ if (process.argv[2] === '--cli') {
       assert.equal(listed.sdkVersion, manifest.version, 'The CLI SDK version differs from the manifest')
       assert.deepEqual([...names].sort(), [...manifest.operations].sort(), 'The CLI operations differ from the manifest')
     }
+    // `call` is installed and reports failures in the envelope with its exit code.
+    // An unknown operation is refused before any credential is read.
+    const refused = spawnSync(join(directory, 'node_modules/.bin/apostra'), ['call', 'no_such_operation', '--account', '1', '--json'], {
+      cwd: directory, encoding: 'utf8', timeout: 30_000,
+      env: { ...process.env, HOME: home, XDG_CONFIG_HOME: home, APPDATA: home },
+    })
+    assert.equal(refused.status, 2, 'apostra call must exit 2 for an unknown operation')
+    const refusal = JSON.parse(refused.stdout)
+    assert.equal(refusal.ok, false)
+    assert.equal(refusal.error.code, 'UNKNOWN_OPERATION')
     process.stdout.write(`@apostra/cli ${version} installed; it runs and lists ${names.length} operations from @apostra/sdk ${installedSdk.version}.\n`)
   } finally {
     rmSync(home, { recursive: true, force: true })
