@@ -9,7 +9,6 @@ import type { AddressInfo } from 'node:net'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
-import { CommanderError } from 'commander'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import {
@@ -20,7 +19,7 @@ import {
   scopeNames,
   startCallbackServer,
 } from '../src/login.js'
-import { createProgram } from '../src/program.js'
+import { runCli } from '../src/program.js'
 
 describe('PKCE and state', () => {
   it('matches the RFC 7636 appendix B vector', () => {
@@ -98,6 +97,7 @@ type Fake = {
   tokenForms: URLSearchParams[]
   revokes: string[]
   revokeOk: boolean
+  calls: { path: string; account?: string; authorization?: string }[]
   close: () => Promise<void>
 }
 
@@ -107,6 +107,7 @@ async function startFake(): Promise<Fake> {
     tokenForms: [],
     revokes: [],
     revokeOk: true,
+    calls: [],
   } as unknown as Fake
   const json = (res: ServerResponse, status: number, body: unknown) => {
     res.writeHead(status, { 'Content-Type': 'application/json' })
@@ -154,6 +155,14 @@ async function startFake(): Promise<Fake> {
         },
         error: null,
       })
+    if (path.startsWith('/api/v3/tools/')) {
+      fake.calls.push({
+        path,
+        account: req.headers['x-scope3-customer-id'] as string | undefined,
+        authorization: req.headers.authorization,
+      })
+      return json(res, 200, { data: { delivered: true }, error: null })
+    }
     json(res, 404, {})
   })
   await new Promise<void>((r) => server.listen(0, '127.0.0.1', r))
@@ -196,28 +205,18 @@ describe('apostra login, status, token and logout', () => {
   const run = async (args: string[], open = browser) => {
     let out = ''
     let err = ''
-    const program = createProgram(
-      (text) => {
-        out += text
+    const code = await runCli(
+      args,
+      {
+        stdout: (text) => {
+          out += text
+        },
+        stderr: (text) => {
+          err += text
+        },
       },
       { open },
     )
-    program.exitOverride()
-    program.configureOutput({
-      writeOut: (text) => {
-        out += text
-      },
-      writeErr: (text) => {
-        err += text
-      },
-    })
-    let code = 0
-    try {
-      await program.parseAsync(['node', 'apostra', ...args])
-    } catch (error) {
-      if (!(error instanceof CommanderError)) throw error
-      code = error.exitCode
-    }
     return { out, err, code }
   }
 
@@ -312,7 +311,7 @@ describe('apostra login, status, token and logout', () => {
 
   it('prints only the access token for `token`, and fails clearly when signed out', async () => {
     const signedOut = await run(['token', '--base-url', fake.origin])
-    expect(signedOut.code).toBe(1)
+    expect(signedOut.code).toBe(3)
     expect(signedOut.out).toBe('')
     expect(signedOut.err).toContain('Run `apostra login`')
     await run(['login', '--base-url', fake.origin])
@@ -333,7 +332,7 @@ describe('apostra login, status, token and logout', () => {
     fake.revokeOk = false
     const failed = await run(['logout', '--base-url', fake.origin])
     expect(failed.out).toContain('could not revoke')
-    expect((await run(['token', '--base-url', fake.origin])).code).toBe(1)
+    expect((await run(['token', '--base-url', fake.origin])).code).toBe(3)
   })
 
   it('rejects an invalid --account before opening anything', async () => {
@@ -342,7 +341,7 @@ describe('apostra login, status, token and logout', () => {
       ['login', '--base-url', fake.origin, '--account', 'abc'],
       open,
     )
-    expect(result.code).toBe(1)
+    expect(result.code).toBe(2)
     expect(open).not.toHaveBeenCalled()
   })
 
@@ -354,7 +353,69 @@ describe('apostra login, status, token and logout', () => {
     const result = await run(['login', '--base-url', fake.origin], denied)
     expect(result.code).toBe(1)
     expect(result.err).toContain('Sign-in failed: access_denied')
-    expect((await run(['token', '--base-url', fake.origin])).code).toBe(1)
+    expect((await run(['token', '--base-url', fake.origin])).code).toBe(3)
+  })
+
+  it('calls an operation as the signed-in account and says which account on stderr', async () => {
+    await run(['login', '--base-url', fake.origin])
+    const result = await run([
+      'call',
+      'get_delivery',
+      '--base-url',
+      fake.origin,
+      '--json',
+    ])
+    expect(result.code).toBe(0)
+    expect(result.err).toBe('Using account 42 (your sign-in).\n')
+    expect(JSON.parse(result.out)).toEqual({
+      schemaVersion: 1,
+      ok: true,
+      data: { delivered: true },
+      meta: { operation: 'get_delivery', accountId: '42', requestId: null },
+    })
+    expect(fake.calls).toEqual([
+      {
+        path: '/api/v3/tools/get_delivery',
+        account: '42',
+        authorization: 'Bearer at-1',
+      },
+    ])
+  })
+
+  it('refuses to call another account than the one signed in, before any request', async () => {
+    await run(['login', '--base-url', fake.origin])
+    for (const args of [
+      ['--account', '7'],
+      ['--set', 'accountId=7'],
+    ]) {
+      const result = await run([
+        'call',
+        'get_delivery',
+        '--base-url',
+        fake.origin,
+        '--json',
+        ...args,
+      ])
+      expect(result.code).toBe(4)
+      expect(JSON.parse(result.out).error).toMatchObject({
+        code: 'ACCOUNT_MISMATCH',
+        exitCode: 4,
+      })
+    }
+    expect(fake.calls).toEqual([])
+  })
+
+  it('reports the sign-in as missing with the authentication exit code', async () => {
+    const result = await run([
+      'call',
+      'get_delivery',
+      '--base-url',
+      fake.origin,
+      '--json',
+    ])
+    expect(result.code).toBe(3)
+    expect(JSON.parse(result.out).error.code).toBe('NOT_SIGNED_IN')
+    expect(fake.calls).toEqual([])
   })
 
   it('times out after the configured wait', async () => {
