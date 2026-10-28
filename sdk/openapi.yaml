@@ -24510,6 +24510,11 @@ paths:
                               Present only for campaign_delivery: campaign goal progress without V2-only pace or
                               denominator fields.
                             $ref: '#/components/schemas/get_delivery_success_CampaignGoalProgress'
+                          coverage:
+                            description: >-
+                              Present only for an account-wide campaign_delivery read over a bounded range: the
+                              in-flight campaigns that have no stored rows, each with the live read to call next.
+                            $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
                           synthetic:
                             description: >-
                               Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is
@@ -24544,6 +24549,11 @@ paths:
                               Present only for campaign_delivery: campaign goal progress without V2-only pace or
                               denominator fields.
                             $ref: '#/components/schemas/get_delivery_success_CampaignGoalProgress'
+                          coverage:
+                            description: >-
+                              Present only for an account-wide campaign_delivery read over a bounded range: the
+                              in-flight campaigns that have no stored rows, each with the live read to call next.
+                            $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
                           synthetic:
                             description: >-
                               Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is
@@ -24578,6 +24588,11 @@ paths:
                               Present only for campaign_delivery: campaign goal progress without V2-only pace or
                               denominator fields.
                             $ref: '#/components/schemas/get_delivery_success_CampaignGoalProgress'
+                          coverage:
+                            description: >-
+                              Present only for an account-wide campaign_delivery read over a bounded range: the
+                              in-flight campaigns that have no stored rows, each with the live read to call next.
+                            $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
                           synthetic:
                             description: >-
                               Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is
@@ -40226,6 +40241,27 @@ paths:
                     - accountId
                     - enabled
                   additionalProperties: false
+                identitySelection:
+                  description: Set/clear TikTok identity; needs connectionId.
+                  type: object
+                  properties:
+                    accountId:
+                      $ref: '#/components/schemas/save_connection_request_IdentitySelectionAccountId'
+                    identityId:
+                      anyOf:
+                        - type: string
+                          minLength: 1
+                        - type: 'null'
+                      description: >-
+                        TikTok identity to use, from list_storefront_connection_account_identities; null clears the
+                        selection.
+                    onlyShowAsAds:
+                      description: Restrict the identity to ad use only; defaults to true.
+                      type: boolean
+                  required:
+                    - accountId
+                    - identityId
+                  additionalProperties: false
                 refreshAccounts:
                   description: Refresh provider accounts; requires connectionId.
                   type: boolean
@@ -40511,6 +40547,19 @@ paths:
                           action:
                             type: string
                             const: enhanced_reporting_updated
+                          object:
+                            $ref: '#/components/schemas/save_connection_success_Object'
+                          mutationReceipt:
+                            $ref: '#/components/schemas/save_connection_success_MutationReceipt'
+                        required:
+                          - action
+                          - object
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: identity_selection_updated
                           object:
                             $ref: '#/components/schemas/save_connection_success_Object'
                           mutationReceipt:
@@ -50312,7 +50361,7 @@ paths:
                       - sponsored_intelligence
                     description: Channel.
                 regions:
-                  description: Legacy regions; use save_seller's listing field for countries.
+                  description: Legacy regions, saved as your countries; prefer save_seller's listing countries.
                   maxItems: 64
                   type: array
                   items:
@@ -53338,17 +53387,24 @@ paths:
                           type: string
                           const: bound
                           description: Map an account.
+                        bindingMode:
+                          description: >-
+                            dedicated (the default) maps sourceExternalAccountId. shared_default binds the source
+                            default account instead and takes no account id; see the source interchangeDefault.
+                          type: string
+                          enum:
+                            - dedicated
+                            - shared_default
                         sourceExternalAccountId:
+                          description: Source account to map, usually a candidate. Required unless bindingMode is shared_default.
                           type: string
                           minLength: 1
                           maxLength: 255
-                          description: Source account to map, usually a candidate.
                       required:
                         - relationshipId
                         - inventorySourceKey
                         - expectedVersion
                         - decision
-                        - sourceExternalAccountId
                       additionalProperties: false
                       description: Map the buyer to one source account.
                     - type: object
@@ -53392,6 +53448,187 @@ paths:
                           - sample-publisher-ctv
                           - sample-retail-media
                   additionalProperties: false
+                informationRequest:
+                  description: >-
+                    Ask a buyer for information on a pending intake, confirm it, or withdraw it (see
+                    get(account_relationship) case). Send alone.
+                  oneOf:
+                    - type: object
+                      properties:
+                        action:
+                          type: string
+                          const: request
+                          description: Ask the buyer for information or an external action.
+                        intakeId:
+                          type: string
+                          maxLength: 19
+                          pattern: ^[1-9]\d*$
+                          description: Pending intake ID from get(account_relationship).
+                        setup:
+                          type: object
+                          properties:
+                            message:
+                              type: string
+                              description: 'What you need from the buyer: plain text, 1-2000 characters, no markup.'
+                            url:
+                              description: Your own HTTPS process link for the buyer (credit form, portal); no credentials.
+                              type: string
+                            expires_at:
+                              type: string
+                              description: 'When the request lapses: in the future, within 365 days.'
+                          required:
+                            - message
+                            - expires_at
+                          additionalProperties: false
+                          description: 'AdCP''s account setup object: what you ask the buyer to do.'
+                      required:
+                        - action
+                        - intakeId
+                        - setup
+                      additionalProperties: false
+                      description: Ask the buyer for information. The result gives the launch link to hand to the buyer.
+                    - type: object
+                      properties:
+                        action:
+                          type: string
+                          const: confirm
+                          description: Confirm the buyer provided what you asked for.
+                        requestId:
+                          type: string
+                          maxLength: 19
+                          pattern: ^[1-9]\d*$
+                          description: The information request id from get(account_relationship) case.informationRequest.
+                      required:
+                        - action
+                        - requestId
+                      additionalProperties: false
+                      description: Confirm the information arrived.
+                    - type: object
+                      properties:
+                        action:
+                          type: string
+                          const: withdraw
+                          description: Drop your own pending request without deciding the intake.
+                        requestId:
+                          type: string
+                          maxLength: 19
+                          pattern: ^[1-9]\d*$
+                          description: The information request id from get(account_relationship) case.informationRequest.
+                        reason:
+                          description: Why you are withdrawing it.
+                          type: string
+                          minLength: 1
+                          maxLength: 500
+                      required:
+                        - action
+                        - requestId
+                      additionalProperties: false
+                      description: Withdraw your pending information request.
+                readyToInvoice:
+                  description: >-
+                    Assert or revoke that a direct-billed buyer is billable (see get(account_relationship) billingGate).
+                    Send alone.
+                  oneOf:
+                    - type: object
+                      properties:
+                        action:
+                          type: string
+                          const: assert
+                          description: Assert that the billing party is billable for this relationship.
+                        relationshipId:
+                          type: string
+                          maxLength: 19
+                          pattern: ^[1-9]\d*$
+                          description: From get(account_relationship).
+                        billing:
+                          type: string
+                          enum:
+                            - operator
+                            - advertiser
+                          description: 'Who you invoice: operator or advertiser.'
+                        billing_entity:
+                          type: object
+                          properties:
+                            legal_name:
+                              type: string
+                              minLength: 1
+                              maxLength: 200
+                              description: Legal name of the invoiced entity.
+                            vat_id:
+                              description: VAT id, if the gate shows one.
+                              type: string
+                              pattern: ^[A-Z]{2}[A-Z0-9]{2,13}$
+                            tax_id:
+                              description: Tax id, if the gate shows one.
+                              type: string
+                              maxLength: 30
+                            registration_number:
+                              description: Company registration number, if the gate shows one.
+                              type: string
+                              maxLength: 50
+                          required:
+                            - legal_name
+                          additionalProperties: false
+                          description: >-
+                            The legal entity invoiced. Repeat the gate billing_entity exactly, including every
+                            identifier it shows.
+                        authority:
+                          type: string
+                          enum:
+                            - crm
+                            - erp
+                            - finance_staff
+                            - external_workflow
+                          description: Where the confirmation comes from.
+                        evidence:
+                          description: A short reference or note; never a document.
+                          type: object
+                          properties:
+                            reference:
+                              description: Reference in your finance system.
+                              type: string
+                              maxLength: 200
+                            note:
+                              description: Short note.
+                              type: string
+                              maxLength: 1000
+                          additionalProperties: false
+                        validUntil:
+                          description: When the assertion stops counting; in the future.
+                          type: string
+                          format: date-time
+                          pattern: >-
+                            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                      required:
+                        - action
+                        - relationshipId
+                        - billing
+                        - billing_entity
+                        - authority
+                      additionalProperties: false
+                      description: Assert billability. A new assertion for the same party supersedes the old one.
+                    - type: object
+                      properties:
+                        action:
+                          type: string
+                          const: revoke
+                          description: 'Revoke an assertion: grants billed to that party return to payment_required.'
+                        assertionId:
+                          type: string
+                          maxLength: 19
+                          pattern: ^[1-9]\d*$
+                          description: From get(account_relationship) billingReadiness.
+                        reason:
+                          type: string
+                          minLength: 1
+                          maxLength: 500
+                          description: Why billability is withdrawn.
+                      required:
+                        - action
+                        - assertionId
+                        - reason
+                      additionalProperties: false
+                      description: Revoke a ready-to-invoice assertion.
                 isPaused:
                   description: >-
                     Hold (true) or resume (false) new business: buyers stop discovering the Seller and buying; existing
@@ -53454,10 +53691,24 @@ paths:
                     - required:
                         - sourceDecision
                     - required:
+                        - informationRequest
+                    - required:
+                        - readyToInvoice
+                    - required:
                         - isPaused
                 - if:
                     required:
                       - sourceDecision
+                  then:
+                    maxProperties: 1
+                - if:
+                    required:
+                      - informationRequest
+                  then:
+                    maxProperties: 1
+                - if:
+                    required:
+                      - readyToInvoice
                   then:
                     maxProperties: 1
                 - if:
@@ -53769,6 +54020,11 @@ paths:
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessAdmissionRecorded'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessDeclineRecorded'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessSourceDecisionRecorded'
+                      - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessInformationRequested'
+                      - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessInformationConfirmed'
+                      - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessInformationWithdrawn'
+                      - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessReadyToInvoiceAsserted'
+                      - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessReadyToInvoiceRevoked'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessPreview'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessUpdated'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessUnchanged'
@@ -78874,6 +79130,89 @@ components:
         - campaignId
         - progress
       additionalProperties: false
+    get_delivery_success_CampaignDeliveryCoverage:
+      type: object
+      properties:
+        inFlightCampaigns:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: Campaigns in scope with a current media buy that was booked or running during the range.
+        withoutStoredRows:
+          type: object
+          properties:
+            count:
+              type: integer
+              minimum: 0
+              maximum: 9007199254740991
+              description: In-flight campaigns with no stored delivery row for the range. Absence is not zero delivery.
+            truncated:
+              type: boolean
+              description: True when `campaigns` lists fewer than `count`.
+            campaigns:
+              maxItems: 20
+              type: array
+              items:
+                type: object
+                properties:
+                  campaignId:
+                    type: string
+                  campaignName:
+                    type: string
+                  nextAction:
+                    type: object
+                    properties:
+                      tool:
+                        type: string
+                        const: get_delivery
+                      arguments:
+                        type: object
+                        properties:
+                          report:
+                            type: string
+                            const: live_campaign_delivery
+                          range:
+                            type: object
+                            properties:
+                              startDate:
+                                type: string
+                              endDate:
+                                type: string
+                            required:
+                              - startDate
+                              - endDate
+                            additionalProperties: false
+                          filters:
+                            type: object
+                            properties:
+                              campaignId:
+                                type: string
+                            required:
+                              - campaignId
+                            additionalProperties: false
+                        required:
+                          - report
+                          - range
+                          - filters
+                        additionalProperties: false
+                    required:
+                      - tool
+                      - arguments
+                    additionalProperties: false
+                required:
+                  - campaignId
+                  - campaignName
+                  - nextAction
+                additionalProperties: false
+          required:
+            - count
+            - truncated
+            - campaigns
+          additionalProperties: false
+      required:
+        - inFlightCampaigns
+        - withoutStoredRows
+      additionalProperties: false
     get_delivery_success_Query:
       type: object
       properties:
@@ -84805,6 +85144,9 @@ components:
       type: string
       pattern: ^[1-9]\d*$
     save_connection_request_EnhancedReportingAccountId:
+      type: string
+      pattern: ^[1-9]\d*$
+    save_connection_request_IdentitySelectionAccountId:
       type: string
       pattern: ^[1-9]\d*$
     save_connection_request_SelectedAccountId:
@@ -94092,6 +94434,11 @@ components:
           enum:
             - bound
             - not_required
+        bindingMode:
+          type: string
+          enum:
+            - dedicated
+            - shared_default
         sourceExternalAccountId:
           type:
             - string
@@ -94110,6 +94457,121 @@ components:
         - decision
         - sourceExternalAccountId
         - version
+      additionalProperties: {}
+    save_seller_success_SaveSellerSuccessInformationRequested:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: information_requested
+        action:
+          type: string
+          const: information_requested
+        intakeId:
+          type: string
+        requestId:
+          type:
+            - string
+            - 'null'
+        setup:
+          type: object
+          properties:
+            message:
+              type: string
+            url:
+              type: string
+            expires_at:
+              type: string
+          required:
+            - message
+            - expires_at
+          additionalProperties: false
+        launchUrl:
+          type:
+            - string
+            - 'null'
+      required:
+        - outcome
+        - action
+        - intakeId
+        - requestId
+        - setup
+        - launchUrl
+      additionalProperties: {}
+    save_seller_success_SaveSellerSuccessInformationConfirmed:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: information_confirmed
+        action:
+          type: string
+          const: information_confirmed
+        requestId:
+          type: string
+      required:
+        - outcome
+        - action
+        - requestId
+      additionalProperties: {}
+    save_seller_success_SaveSellerSuccessInformationWithdrawn:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: information_withdrawn
+        action:
+          type: string
+          const: information_withdrawn
+        requestId:
+          type: string
+      required:
+        - outcome
+        - action
+        - requestId
+      additionalProperties: {}
+    save_seller_success_SaveSellerSuccessReadyToInvoiceAsserted:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: ready_to_invoice_asserted
+        action:
+          type: string
+          const: ready_to_invoice_asserted
+        relationshipId:
+          type: string
+        assertionId:
+          type:
+            - string
+            - 'null'
+        billing:
+          type: string
+          enum:
+            - operator
+            - advertiser
+      required:
+        - outcome
+        - action
+        - relationshipId
+        - assertionId
+        - billing
+      additionalProperties: {}
+    save_seller_success_SaveSellerSuccessReadyToInvoiceRevoked:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: ready_to_invoice_revoked
+        action:
+          type: string
+          const: ready_to_invoice_revoked
+        assertionId:
+          type: string
+      required:
+        - outcome
+        - action
+        - assertionId
       additionalProperties: {}
     save_seller_success_SaveSellerSuccessPreview:
       type: object

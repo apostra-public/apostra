@@ -378,6 +378,8 @@ class GetDeliveryResultReportCampaignDelivery(TypedDict):
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
+    coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
+    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -391,6 +393,8 @@ class GetDeliveryResultReportDelivery(TypedDict):
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
+    coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
+    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -643,10 +647,45 @@ class GetDeliveryResultReportMargin(TypedDict):
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
+    coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
+    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
 GetDeliveryResult: TypeAlias = "GetDeliveryResultReportDelivery | GetDeliveryResultReportCampaignDelivery | GetDeliveryResultReportMargin | GetDeliveryResultReportLiveCampaignDelivery"
+
+class GetDeliverySuccessCampaignDeliveryCoverage(TypedDict):
+    inFlightCampaigns: int
+    '\n    Campaigns in scope with a current media buy that was booked or running during the range.\n    '
+    withoutStoredRows: GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRows
+
+class GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRows(TypedDict):
+    count: int
+    '\n    In-flight campaigns with no stored delivery row for the range. Absence is not zero delivery.\n    '
+    truncated: bool
+    '\n    True when `campaigns` lists fewer than `count`.\n    '
+    campaigns: list[GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItem]
+
+class GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItem(TypedDict):
+    campaignId: str
+    campaignName: str
+    nextAction: GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextAction
+
+class GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextAction(TypedDict):
+    tool: Literal["get_delivery"]
+    arguments: GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextActionArguments
+
+class GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextActionArguments(TypedDict):
+    report: Literal["live_campaign_delivery"]
+    range: GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextActionArgumentsRange
+    filters: GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextActionArgumentsFilters
+
+class GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextActionArgumentsFilters(TypedDict):
+    campaignId: str
+
+class GetDeliverySuccessCampaignDeliveryCoverageWithoutStoredRowsCampaignsItemNextActionArgumentsRange(TypedDict):
+    startDate: str
+    endDate: str
 
 class GetDeliverySuccessCampaignGoalProgress(TypedDict):
     campaigns: list[GetDeliverySuccessCampaignGoalProgressCampaign]
@@ -9290,6 +9329,8 @@ class SaveConnectionInput(TypedDict):
     '\n    Seller buy/events/feeds policy; requires seller target or sellerId.\n    '
     enhancedReporting: NotRequired[SaveConnectionInputEnhancedReporting]
     '\n    Set Enhanced Reporting for one account; requires connectionId.\n    '
+    identitySelection: NotRequired[SaveConnectionInputIdentitySelection]
+    '\n    Set/clear TikTok identity; needs connectionId.\n    '
     refreshAccounts: NotRequired[Literal[True]]
     '\n    Refresh provider accounts; requires connectionId.\n    '
     selectedAccountId: NotRequired[SaveConnectionRequestSelectedAccountId]
@@ -9353,6 +9394,13 @@ class SaveConnectionInputFeaturePolicy(TypedDict):
     feedsEnabled: NotRequired[bool]
     '\n    Whether buyer audience and feed data should be shared with this integration.\n    '
 
+class SaveConnectionInputIdentitySelection(TypedDict):
+    accountId: SaveConnectionRequestIdentitySelectionAccountId
+    identityId: str | None
+    '\n    TikTok identity to use, from list_storefront_connection_account_identities; null clears the selection.\n    '
+    onlyShowAsAds: NotRequired[bool]
+    '\n    Restrict the identity to ad use only; defaults to true.\n    '
+
 class SaveConnectionInputSelection(TypedDict):
     decision: SaveConnectionRequestBuyerStorefrontSelectionDecision
     '\n    Account decision.\n    '
@@ -9382,6 +9430,8 @@ SaveConnectionRequestBuyerStorefrontSelectionDecision: TypeAlias = Literal["DEFA
 SaveConnectionRequestConnectionId: TypeAlias = str
 
 SaveConnectionRequestEnhancedReportingAccountId: TypeAlias = str
+
+SaveConnectionRequestIdentitySelectionAccountId: TypeAlias = str
 
 SaveConnectionRequestSelectedAccountId: TypeAlias = str
 
@@ -9443,6 +9493,11 @@ class SaveConnectionResultActionFeaturePolicyUpdated(TypedDict):
     object: SaveConnectionSuccessObject
     mutationReceipt: NotRequired[SaveConnectionSuccessMutationReceipt]
 
+class SaveConnectionResultActionIdentitySelectionUpdated(TypedDict):
+    action: Literal["identity_selection_updated"]
+    object: SaveConnectionSuccessObject
+    mutationReceipt: NotRequired[SaveConnectionSuccessMutationReceipt]
+
 class SaveConnectionResultActionRemoved(TypedDict):
     action: Literal["removed"]
     object: SaveConnectionSuccessObject
@@ -9453,7 +9508,7 @@ class SaveConnectionResultActionSelectionUpdated(TypedDict):
     object: SaveConnectionSuccessObject
     mutationReceipt: NotRequired[SaveConnectionSuccessMutationReceipt]
 
-SaveConnectionResult: TypeAlias = "SaveConnectionResultActionAuthorizationRequired | SaveConnectionResultActionSelectionUpdated | SaveConnectionResultActionAdvertiserActivationUpdated | SaveConnectionResultActionBillingUpdated | SaveConnectionResultActionDirectBillingAccepted | SaveConnectionResultActionFeaturePolicyUpdated | SaveConnectionResultActionEnhancedReportingUpdated | SaveConnectionResultActionAccountsRefreshed | SaveConnectionResultActionAccountSelected | SaveConnectionResultActionAdvertiserMapped | SaveConnectionResultActionAdvertiserUnmapped | SaveConnectionResultActionRemoved"
+SaveConnectionResult: TypeAlias = "SaveConnectionResultActionAuthorizationRequired | SaveConnectionResultActionSelectionUpdated | SaveConnectionResultActionAdvertiserActivationUpdated | SaveConnectionResultActionBillingUpdated | SaveConnectionResultActionDirectBillingAccepted | SaveConnectionResultActionFeaturePolicyUpdated | SaveConnectionResultActionEnhancedReportingUpdated | SaveConnectionResultActionIdentitySelectionUpdated | SaveConnectionResultActionAccountsRefreshed | SaveConnectionResultActionAccountSelected | SaveConnectionResultActionAdvertiserMapped | SaveConnectionResultActionAdvertiserUnmapped | SaveConnectionResultActionRemoved"
 
 class SaveConnectionSuccessMutationReceiptStateCommitted(TypedDict):
     state: Literal["committed"]
@@ -14384,7 +14439,7 @@ class SaveMediaKitInput(TypedDict):
     channels: NotRequired[list[Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]]]
     '\n    Legacy channels; use save_seller\'s listing field for coverage.\n    '
     regions: NotRequired[list[str]]
-    '\n    Legacy regions; use save_seller\'s listing field for countries.\n    '
+    '\n    Legacy regions, saved as your countries; prefer save_seller\'s listing countries.\n    '
     verticals: NotRequired[list[str]]
     '\n    Deprecated legacy Business Profile topic or vertical focus areas.\n    '
     evidenceUrls: NotRequired[list[str]]
@@ -15914,6 +15969,10 @@ class SaveSellerInput(TypedDict):
     '\n    Which account serves an admitted buyer on one source (see get(account_relationship) sources). Send alone.\n    '
     demo: NotRequired[SaveSellerInputDemo]
     '\n    Demo expiry and sample sources, as desired state. Send alone. Create, reset and delete are on the demo Page.\n    '
+    informationRequest: NotRequired[SaveSellerInputInformationRequestActionRequest | SaveSellerInputInformationRequestActionConfirm | SaveSellerInputInformationRequestActionWithdraw]
+    '\n    Ask a buyer for information on a pending intake, confirm it, or withdraw it (see get(account_relationship) case). Send alone.\n    '
+    readyToInvoice: NotRequired[SaveSellerInputReadyToInvoiceActionAssert | SaveSellerInputReadyToInvoiceActionRevoke]
+    '\n    Assert or revoke that a direct-billed buyer is billable (see get(account_relationship) billingGate). Send alone.\n    '
     isPaused: NotRequired[bool]
     '\n    Hold (true) or resume (false) new business: buyers stop discovering the Seller and buying; existing delivery continues. Send alone.\n    '
     expectedIsPaused: NotRequired[bool]
@@ -15969,6 +16028,36 @@ class SaveSellerInputDistribution(TypedDict):
     confirmRemove: NotRequired[bool]
     '\n    Confirm removing the current OpenAI challenge token.\n    '
 
+class SaveSellerInputInformationRequestActionConfirm(TypedDict):
+    action: Literal["confirm"]
+    '\n    Confirm the buyer provided what you asked for.\n    '
+    requestId: str
+    '\n    The information request id from get(account_relationship) case.informationRequest.\n    '
+
+class SaveSellerInputInformationRequestActionRequest(TypedDict):
+    action: Literal["request"]
+    '\n    Ask the buyer for information or an external action.\n    '
+    intakeId: str
+    '\n    Pending intake ID from get(account_relationship).\n    '
+    setup: SaveSellerInputInformationRequestActionRequestSetup
+    '\n    AdCP\'s account setup object: what you ask the buyer to do.\n    '
+
+class SaveSellerInputInformationRequestActionRequestSetup(TypedDict):
+    message: str
+    '\n    What you need from the buyer: plain text, 1-2000 characters, no markup.\n    '
+    url: NotRequired[str]
+    '\n    Your own HTTPS process link for the buyer (credit form, portal); no credentials.\n    '
+    expires_at: str
+    '\n    When the request lapses: in the future, within 365 days.\n    '
+
+class SaveSellerInputInformationRequestActionWithdraw(TypedDict):
+    action: Literal["withdraw"]
+    '\n    Drop your own pending request without deciding the intake.\n    '
+    requestId: str
+    '\n    The information request id from get(account_relationship) case.informationRequest.\n    '
+    reason: NotRequired[str]
+    '\n    Why you are withdrawing it.\n    '
+
 class SaveSellerInputMaterialCandidate(TypedDict):
     sourceMaterialId: str
     '\n    Source Material id returned by get(material).\n    '
@@ -15979,14 +16068,56 @@ class SaveSellerInputMaterialCandidate(TypedDict):
     advertiserRef: NotRequired[str]
     '\n    Required exact advertiser scope for advertiser-confidential Material.\n    '
 
+class SaveSellerInputReadyToInvoiceActionAssert(TypedDict):
+    action: Literal["assert"]
+    '\n    Assert that the billing party is billable for this relationship.\n    '
+    relationshipId: str
+    '\n    From get(account_relationship).\n    '
+    billing: Literal["operator", "advertiser"]
+    '\n    Who you invoice: operator or advertiser.\n    '
+    billing_entity: SaveSellerInputReadyToInvoiceActionAssertBillingEntity
+    '\n    The legal entity invoiced. Repeat the gate billing_entity exactly, including every identifier it shows.\n    '
+    authority: Literal["crm", "erp", "finance_staff", "external_workflow"]
+    '\n    Where the confirmation comes from.\n    '
+    evidence: NotRequired[SaveSellerInputReadyToInvoiceActionAssertEvidence]
+    '\n    A short reference or note; never a document.\n    '
+    validUntil: NotRequired[str]
+    '\n    When the assertion stops counting; in the future.\n    '
+
+class SaveSellerInputReadyToInvoiceActionAssertBillingEntity(TypedDict):
+    legal_name: str
+    '\n    Legal name of the invoiced entity.\n    '
+    vat_id: NotRequired[str]
+    '\n    VAT id, if the gate shows one.\n    '
+    tax_id: NotRequired[str]
+    '\n    Tax id, if the gate shows one.\n    '
+    registration_number: NotRequired[str]
+    '\n    Company registration number, if the gate shows one.\n    '
+
+class SaveSellerInputReadyToInvoiceActionAssertEvidence(TypedDict):
+    reference: NotRequired[str]
+    '\n    Reference in your finance system.\n    '
+    note: NotRequired[str]
+    '\n    Short note.\n    '
+
+class SaveSellerInputReadyToInvoiceActionRevoke(TypedDict):
+    action: Literal["revoke"]
+    '\n    Revoke an assertion: grants billed to that party return to payment_required.\n    '
+    assertionId: str
+    '\n    From get(account_relationship) billingReadiness.\n    '
+    reason: str
+    '\n    Why billability is withdrawn.\n    '
+
 class SaveSellerInputSourceDecisionDecisionBound(TypedDict):
     relationshipId: SaveSellerRequestSourceDecisionRelationshipId
     inventorySourceKey: SaveSellerRequestSourceDecisionInventorySourceKey
     expectedVersion: SaveSellerRequestSourceDecisionExpectedVersion
     decision: Literal["bound"]
     '\n    Map an account.\n    '
-    sourceExternalAccountId: str
-    '\n    Source account to map, usually a candidate.\n    '
+    bindingMode: NotRequired[Literal["dedicated", "shared_default"]]
+    '\n    dedicated (the default) maps sourceExternalAccountId. shared_default binds the source default account instead and takes no account id; see the source interchangeDefault.\n    '
+    sourceExternalAccountId: NotRequired[str]
+    '\n    Source account to map, usually a candidate. Required unless bindingMode is shared_default.\n    '
 
 class SaveSellerInputSourceDecisionDecisionNotRequired(TypedDict):
     relationshipId: SaveSellerRequestSourceDecisionRelationshipId
@@ -16096,6 +16227,29 @@ class SaveSellerSuccessSaveSellerSuccessDeclineRecorded(TypedDict):
     intakeId: str
     decision: Literal["decline"]
 
+class SaveSellerSuccessSaveSellerSuccessInformationConfirmed(TypedDict):
+    outcome: Literal["information_confirmed"]
+    action: Literal["information_confirmed"]
+    requestId: str
+
+class SaveSellerSuccessSaveSellerSuccessInformationRequested(TypedDict):
+    outcome: Literal["information_requested"]
+    action: Literal["information_requested"]
+    intakeId: str
+    requestId: str | None
+    setup: SaveSellerSuccessSaveSellerSuccessInformationRequestedSetup
+    launchUrl: str | None
+
+class SaveSellerSuccessSaveSellerSuccessInformationRequestedSetup(TypedDict):
+    message: str
+    url: NotRequired[str]
+    expires_at: str
+
+class SaveSellerSuccessSaveSellerSuccessInformationWithdrawn(TypedDict):
+    outcome: Literal["information_withdrawn"]
+    action: Literal["information_withdrawn"]
+    requestId: str
+
 class SaveSellerSuccessSaveSellerSuccessPreview(TypedDict):
     outcome: Literal["preview"]
     action: Literal["preview"]
@@ -16116,12 +16270,25 @@ class SaveSellerSuccessSaveSellerSuccessReadbackUnavailable(TypedDict):
     warning: Literal["updated_but_readback_unavailable"]
     readback: Literal["unavailable"]
 
+class SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted(TypedDict):
+    outcome: Literal["ready_to_invoice_asserted"]
+    action: Literal["ready_to_invoice_asserted"]
+    relationshipId: str
+    assertionId: str | None
+    billing: Literal["operator", "advertiser"]
+
+class SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked(TypedDict):
+    outcome: Literal["ready_to_invoice_revoked"]
+    action: Literal["ready_to_invoice_revoked"]
+    assertionId: str
+
 class SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded(TypedDict):
     outcome: Literal["source_decision_recorded"]
     action: Literal["source_decision_recorded"]
     relationshipId: str
     inventorySourceKey: str
     decision: Literal["bound", "not_required"]
+    bindingMode: NotRequired[Literal["dedicated", "shared_default"]]
     sourceExternalAccountId: str | None
     version: int | None
 
@@ -16153,7 +16320,7 @@ class SaveSellerSuccessSellerSaveReplayed(TypedDict):
     destinationSaveReplayed: Literal[False]
     materialReceipt: SaveSellerSuccessSellerSaveReplayedMaterialReceipt
 
-SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
+SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
 
 SaveSellerSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
