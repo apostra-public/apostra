@@ -5193,6 +5193,10 @@ export type GetDeliveryResponses = {
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
+             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             */
+            coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
+            /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
             synthetic?: GetDeliverySuccessSynthetic;
@@ -5213,6 +5217,10 @@ export type GetDeliveryResponses = {
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
+             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             */
+            coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
+            /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
             synthetic?: GetDeliverySuccessSynthetic;
@@ -5232,6 +5240,10 @@ export type GetDeliveryResponses = {
              * Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
+            /**
+             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             */
+            coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
             /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
@@ -5481,9 +5493,44 @@ export type GetDeliveryResponses = {
             totals?: never;
             page?: never;
             goalProgress?: never;
+            coverage?: never;
             synthetic?: never;
         };
         error: null;
+    };
+};
+
+export type GetDeliverySuccessCampaignDeliveryCoverage = {
+    /**
+     * Campaigns in scope with a current media buy that was booked or running during the range.
+     */
+    inFlightCampaigns: number;
+    withoutStoredRows: {
+        /**
+         * In-flight campaigns with no stored delivery row for the range. Absence is not zero delivery.
+         */
+        count: number;
+        /**
+         * True when `campaigns` lists fewer than `count`.
+         */
+        truncated: boolean;
+        campaigns: Array<{
+            campaignId: string;
+            campaignName: string;
+            nextAction: {
+                tool: 'get_delivery';
+                arguments: {
+                    report: 'live_campaign_delivery';
+                    range: {
+                        startDate: string;
+                        endDate: string;
+                    };
+                    filters: {
+                        campaignId: string;
+                    };
+                };
+            };
+        }>;
     };
 };
 
@@ -10913,6 +10960,10 @@ export type RefreshInventorySourceHealthData = {
          */
         sourceId: string;
         /**
+         * health (default) rechecks the source. accounts asks the source to list its accounts again, for sources that take account mappings.
+         */
+        scope?: 'health' | 'accounts';
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -11000,34 +11051,7 @@ export type RefreshInventorySourceHealthResponses = {
      * Typed operation result
      */
     200: {
-        data: {
-            sourceId: string;
-            outcome: 'passed' | 'empty' | 'failed' | 'not_reached';
-            checkedAt: string;
-            operation: 'get_products';
-            checks: Array<{
-                check: 'get_products' | 'catalog_warm';
-                outcome: 'passed' | 'empty' | 'failed' | 'not_reached' | 'not_applicable';
-                message: string;
-            }>;
-            openFindings: Array<{
-                check: string;
-                status: 'degraded' | 'unhealthy';
-                cause: string | null;
-                observedAt: string;
-            }>;
-            evidence: {
-                runId: string | null;
-                taskId: string | null;
-                operationId: string | null;
-                debugId: string | null;
-                correlationId: string | null;
-            };
-            readiness: {
-                status: string;
-                canTransact: boolean;
-            };
-        };
+        data: RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthChecked | RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthAccountsListed;
         error: null;
     };
     /**
@@ -11045,6 +11069,49 @@ export type RefreshInventorySourceHealthResponses = {
             };
         };
         error: null;
+    };
+};
+
+export type RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthAccountsListed = {
+    sourceId: string;
+    scope: 'accounts';
+    accounts: {
+        reconciliationState: 'complete' | 'incomplete';
+        listed: number;
+        observed: number;
+        archived: number;
+        authoritative: boolean;
+        truncated: boolean;
+        diagnosticCode: string | null;
+    };
+};
+
+export type RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthChecked = {
+    sourceId: string;
+    outcome: 'passed' | 'empty' | 'failed' | 'not_reached';
+    checkedAt: string;
+    operation: 'get_products';
+    checks: Array<{
+        check: 'get_products' | 'catalog_warm';
+        outcome: 'passed' | 'empty' | 'failed' | 'not_reached' | 'not_applicable';
+        message: string;
+    }>;
+    openFindings: Array<{
+        check: string;
+        status: 'degraded' | 'unhealthy';
+        cause: string | null;
+        observedAt: string;
+    }>;
+    evidence: {
+        runId: string | null;
+        taskId: string | null;
+        operationId: string | null;
+        debugId: string | null;
+        correlationId: string | null;
+    };
+    readiness: {
+        status: string;
+        canTransact: boolean;
     };
 };
 
@@ -17650,6 +17717,20 @@ export type SaveConnectionData = {
             enabled: boolean;
         };
         /**
+         * Set/clear TikTok identity; needs connectionId.
+         */
+        identitySelection?: {
+            accountId: SaveConnectionRequestIdentitySelectionAccountId;
+            /**
+             * TikTok identity to use, from list_storefront_connection_account_identities; null clears the selection.
+             */
+            identityId: string | null;
+            /**
+             * Restrict the identity to ad use only; defaults to true.
+             */
+            onlyShowAsAds?: boolean;
+        };
+        /**
          * Refresh provider accounts; requires connectionId.
          */
         refreshAccounts?: true;
@@ -17789,6 +17870,8 @@ export type SaveConnectionRequestConnectionId = string;
 
 export type SaveConnectionRequestEnhancedReportingAccountId = string;
 
+export type SaveConnectionRequestIdentitySelectionAccountId = string;
+
 export type SaveConnectionRequestSelectedAccountId = string;
 
 export type SaveConnectionRequestSellerId = string;
@@ -17836,6 +17919,11 @@ export type SaveConnectionResponses = {
             authorization?: never;
         } | {
             action: 'enhanced_reporting_updated';
+            object: SaveConnectionSuccessObject;
+            mutationReceipt?: SaveConnectionSuccessMutationReceipt;
+            authorization?: never;
+        } | {
+            action: 'identity_selection_updated';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
@@ -26653,7 +26741,7 @@ export type SaveMediaKitData = {
          */
         channels?: Array<'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence'>;
         /**
-         * Legacy regions; use save_seller's listing field for countries.
+         * Legacy regions, saved as your countries; prefer save_seller's listing countries.
          */
         regions?: Array<string>;
         /**
@@ -29232,9 +29320,13 @@ export type SaveSellerData = {
              */
             decision: 'bound';
             /**
-             * Source account to map, usually a candidate.
+             * dedicated (the default) maps sourceExternalAccountId. shared_default binds the source default account instead and takes no account id; see the source interchangeDefault.
              */
-            sourceExternalAccountId: string;
+            bindingMode?: 'dedicated' | 'shared_default';
+            /**
+             * Source account to map, usually a candidate. Required unless bindingMode is shared_default.
+             */
+            sourceExternalAccountId?: string;
         } | {
             relationshipId: SaveSellerRequestSourceDecisionRelationshipId;
             inventorySourceKey: SaveSellerRequestSourceDecisionInventorySourceKey;
@@ -29243,6 +29335,7 @@ export type SaveSellerData = {
              * No account needed.
              */
             decision: 'not_required';
+            bindingMode?: never;
             sourceExternalAccountId?: never;
         };
         /**
@@ -29257,6 +29350,145 @@ export type SaveSellerData = {
              * The complete set of sample sources; keep sample-publisher-display.
              */
             sourceRecipeIds?: Array<'sample-publisher-display' | 'sample-publisher-ctv' | 'sample-retail-media'>;
+        };
+        /**
+         * Ask a buyer for information on a pending intake, confirm it, or withdraw it (see get(account_relationship) case). Send alone.
+         */
+        informationRequest?: {
+            /**
+             * Ask the buyer for information or an external action.
+             */
+            action: 'request';
+            /**
+             * Pending intake ID from get(account_relationship).
+             */
+            intakeId: string;
+            /**
+             * AdCP's account setup object: what you ask the buyer to do.
+             */
+            setup: {
+                /**
+                 * What you need from the buyer: plain text, 1-2000 characters, no markup.
+                 */
+                message: string;
+                /**
+                 * Your own HTTPS process link for the buyer (credit form, portal); no credentials.
+                 */
+                url?: string;
+                /**
+                 * When the request lapses: in the future, within 365 days.
+                 */
+                expires_at: string;
+            };
+            requestId?: never;
+            reason?: never;
+        } | {
+            /**
+             * Confirm the buyer provided what you asked for.
+             */
+            action: 'confirm';
+            /**
+             * The information request id from get(account_relationship) case.informationRequest.
+             */
+            requestId: string;
+            intakeId?: never;
+            setup?: never;
+            reason?: never;
+        } | {
+            /**
+             * Drop your own pending request without deciding the intake.
+             */
+            action: 'withdraw';
+            /**
+             * The information request id from get(account_relationship) case.informationRequest.
+             */
+            requestId: string;
+            /**
+             * Why you are withdrawing it.
+             */
+            reason?: string;
+            intakeId?: never;
+            setup?: never;
+        };
+        /**
+         * Assert or revoke that a direct-billed buyer is billable (see get(account_relationship) billingGate). Send alone.
+         */
+        readyToInvoice?: {
+            /**
+             * Assert that the billing party is billable for this relationship.
+             */
+            action: 'assert';
+            /**
+             * From get(account_relationship).
+             */
+            relationshipId: string;
+            /**
+             * Who you invoice: operator or advertiser.
+             */
+            billing: 'operator' | 'advertiser';
+            /**
+             * The legal entity invoiced. Repeat the gate billing_entity exactly, including every identifier it shows.
+             */
+            billing_entity: {
+                /**
+                 * Legal name of the invoiced entity.
+                 */
+                legal_name: string;
+                /**
+                 * VAT id, if the gate shows one.
+                 */
+                vat_id?: string;
+                /**
+                 * Tax id, if the gate shows one.
+                 */
+                tax_id?: string;
+                /**
+                 * Company registration number, if the gate shows one.
+                 */
+                registration_number?: string;
+            };
+            /**
+             * Where the confirmation comes from.
+             */
+            authority: 'crm' | 'erp' | 'finance_staff' | 'external_workflow';
+            /**
+             * A short reference or note; never a document.
+             */
+            evidence?: {
+                /**
+                 * Reference in your finance system.
+                 */
+                reference?: string;
+                /**
+                 * Short note.
+                 */
+                note?: string;
+            };
+            /**
+             * When the assertion stops counting; in the future.
+             */
+            validUntil?: string;
+            assertionId?: never;
+            reason?: never;
+        } | {
+            /**
+             * Revoke an assertion: grants billed to that party return to payment_required.
+             */
+            action: 'revoke';
+            /**
+             * From get(account_relationship) billingReadiness.
+             */
+            assertionId: string;
+            /**
+             * Why billability is withdrawn.
+             */
+            reason: string;
+            relationshipId?: never;
+            billing?: never;
+            billing_entity?: never;
+            authority?: never;
+            evidence?: never;
+            validUntil?: never;
         };
         /**
          * Hold (true) or resume (false) new business: buyers stop discovering the Seller and buying; existing delivery continues. Send alone.
@@ -29492,7 +29724,7 @@ export type SaveSellerResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
+        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
         error: null;
     };
     /**
@@ -29540,6 +29772,34 @@ export type SaveSellerSuccessSaveSellerSuccessDeclineRecorded = {
     [key: string]: unknown;
 };
 
+export type SaveSellerSuccessSaveSellerSuccessInformationConfirmed = {
+    outcome: 'information_confirmed';
+    action: 'information_confirmed';
+    requestId: string;
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessInformationRequested = {
+    outcome: 'information_requested';
+    action: 'information_requested';
+    intakeId: string;
+    requestId: string | null;
+    setup: {
+        message: string;
+        url?: string;
+        expires_at: string;
+    };
+    launchUrl: string | null;
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessInformationWithdrawn = {
+    outcome: 'information_withdrawn';
+    action: 'information_withdrawn';
+    requestId: string;
+    [key: string]: unknown;
+};
+
 export type SaveSellerSuccessSaveSellerSuccessPreview = {
     outcome: 'preview';
     action: 'preview';
@@ -29568,12 +29828,29 @@ export type SaveSellerSuccessSaveSellerSuccessReadbackUnavailable = {
     [key: string]: unknown;
 };
 
+export type SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted = {
+    outcome: 'ready_to_invoice_asserted';
+    action: 'ready_to_invoice_asserted';
+    relationshipId: string;
+    assertionId: string | null;
+    billing: 'operator' | 'advertiser';
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked = {
+    outcome: 'ready_to_invoice_revoked';
+    action: 'ready_to_invoice_revoked';
+    assertionId: string;
+    [key: string]: unknown;
+};
+
 export type SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded = {
     outcome: 'source_decision_recorded';
     action: 'source_decision_recorded';
     relationshipId: string;
     inventorySourceKey: string;
     decision: 'bound' | 'not_required';
+    bindingMode?: 'dedicated' | 'shared_default';
     sourceExternalAccountId: string | null;
     version: number | null;
     [key: string]: unknown;
@@ -30445,7 +30722,7 @@ export type SearchData = {
          */
         include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources'>;
         /**
-         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
         /**
@@ -30923,7 +31200,7 @@ export type SearchData = {
          */
         include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources'>;
         /**
-         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
         /**
@@ -31401,7 +31678,7 @@ export type SearchData = {
          */
         include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources'>;
         /**
-         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
         /**
@@ -31469,7 +31746,7 @@ export type SearchData = {
          */
         include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources'>;
         /**
-         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
         /**
@@ -31947,7 +32224,7 @@ export type SearchData = {
          */
         include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources'>;
         /**
-         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
         /**
@@ -32421,7 +32698,7 @@ export type SearchData = {
          */
         include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources'>;
         /**
-         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
         /**
@@ -32895,7 +33172,7 @@ export type SearchData = {
          */
         include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources'>;
         /**
-         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
         /**
@@ -33369,7 +33646,7 @@ export type SearchData = {
          */
         include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources'>;
         /**
-         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
         /**
@@ -33969,7 +34246,485 @@ export type SearchData = {
          */
         include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources'>;
         /**
-         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         */
+        sourceId: string;
+        /**
+         * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
+         */
+        filter?: {
+            /**
+             * For kind connection: list connections to sellers (the default) or to creative engines.
+             */
+            targetKind?: 'seller' | 'creative_engine';
+            /**
+             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
+             */
+            ids?: Array<string>;
+            /**
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             */
+            sellerAccountIds?: Array<number>;
+            /**
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             */
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            /**
+             * For kind library_request: only gaps opened from this RFP turn, by its id.
+             */
+            originRfpTurnId?: string;
+            /**
+             * For kind coverage: domains with exactly this adagents.json authorization verdict, such as authorized.
+             */
+            authorization?: string;
+            /**
+             * For kind wholesale_product in a seller account: products in this lifecycle status. Read buyerVisibility on each result to know whether buyers can find it.
+             */
+            productStatus?: 'draft' | 'active' | 'archived';
+            /**
+             * For kind ask: requests routed as this type, such as support or supply.
+             */
+            askType?: 'support' | 'product' | 'supply' | 'integration' | 'commercial';
+            /**
+             * For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).
+             */
+            askState?: 'open' | 'closed';
+            /**
+             * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
+             */
+            candidateType?: string;
+            /**
+             * For kind ad_server_targeting: list the children of this candidate, for example the values under one key.
+             */
+            parentId?: string;
+            /**
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             */
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            /**
+             * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
+             */
+            queue?: 'overdue' | 'unowned';
+            /**
+             * For kind house_discount: preview which discount rule applies to this buyer domain, resolved up its corporate parents.
+             */
+            buyerDomain?: string;
+            /**
+             * For kind campaign: campaigns in any of these statuses. archived returns archived campaigns; every other value returns campaigns that are not archived.
+             */
+            campaignStatus?: Array<'needs_attention' | 'active' | 'draft' | 'completed' | 'paused' | 'canceled' | 'archived'>;
+            /**
+             * For kind campaign: managed campaigns are built on this platform; tracked campaigns mirror a provider account.
+             */
+            campaignMode?: 'managed' | 'tracked';
+            /**
+             * For kind campaign: campaigns whose name contains this text, ignoring case. Used instead of query.
+             */
+            campaignName?: string;
+            /**
+             * The owning advertiser id. Required for event_source, catalog, property_list, creative_asset, creative_format, and buyer wholesale_product. creative, creative_collection, and creative_session take this or campaignId, not both. Over MCP, a buyer search of any of these kinds that sends neither uses the only active advertiser, or names the choices. Buyer media_buy needs this or campaignId. Narrows campaign. For seller, partnerStatus is read for this advertiser, not the account.
+             */
+            advertiserId?: string;
+            /**
+             * For kind catalog: catalogs of exactly this AdCP catalog type.
+             */
+            type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
+            /**
+             * For kind property_list: only include lists or only exclude lists.
+             */
+            propertyListPurpose?: 'include' | 'exclude';
+            /**
+             * For kinds campaign and media_buy (buyer): items in any of these phases. active includes paused and cancel-pending buys. Campaigns use only draft, active, completed, and canceled. ending appears on results but is not a filter value.
+             */
+            phase?: Array<'draft' | 'active' | 'completed' | 'canceled' | 'pendingApproval' | 'inputRequired' | 'failed' | 'rejected'>;
+            /**
+             * For kind campaign: tracking keeps campaigns that mirror a provider account; managing keeps campaigns built on this platform. Both or neither means no filter.
+             */
+            handling?: Array<'tracking' | 'managing'>;
+            /**
+             * For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.
+             */
+            isPaused?: boolean;
+            /**
+             * Campaign, creative, buyer media_buy: true archived; false active.
+             */
+            isArchived?: boolean;
+            /**
+             * Not applied yet: results come back in stored order whatever you send.
+             */
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            /**
+             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             */
+            campaignId?: string;
+            /**
+             * Exact format identifier for creative results.
+             */
+            formatKind?: string;
+            /**
+             * Lifecycle statuses used to select creative results.
+             */
+            statuses?: Array<SearchRequestAdcpCreativeStatus>;
+            /**
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             */
+            productId?: string;
+            /**
+             * Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.
+             */
+            resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
+            /**
+             * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
+             */
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            /**
+             * creative_asset: assets carrying every tag.
+             */
+            tags?: Array<string>;
+            /**
+             * creative and creative_asset: items in these advertiser collections.
+             */
+            collectionIds?: Array<string>;
+            /**
+             * creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.
+             */
+            assetState?: 'active' | 'draft';
+            /**
+             * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
+             */
+            catalogState?: 'active' | 'draft';
+            /**
+             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             */
+            labels?: {
+                [key: string]: 'unlabeled' | Array<string>;
+            };
+            /**
+             * For kind dimension: only label dimensions that can tag this kind of object.
+             */
+            appliesTo?: 'advertiser' | 'campaign' | 'material' | 'creative_asset' | 'creative';
+            /**
+             * For kind creative: evergreen or reference, the creative's role in the advertiser's creative library. Not the seller Library.
+             */
+            role?: SearchRequestCreativeRole;
+            /**
+             * For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.
+             */
+            libraryRole?: SearchRequestCreativeRole;
+            /**
+             * For kind creative: where the creative came from: uploaded, generated, or connected.
+             */
+            source?: SearchRequestCreativeSource;
+            /**
+             * For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.
+             */
+            promoted?: boolean;
+            /**
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             */
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            /**
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             */
+            sellerAccountId?: number;
+            /**
+             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
+             *
+             * @deprecated
+             */
+            sellerId?: string;
+            /**
+             * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
+             */
+            origin?: Array<'quick' | 'uploaded' | 'inbound' | 'manual' | 'imported'>;
+            /**
+             * For kinds rfp and rfp_turn: a list of RFP purposes to match. For kind session: one value, live, draft, or evaluation (RFP sessions only).
+             */
+            purpose?: Array<'live' | 'draft' | 'evaluation'> | 'live' | 'draft' | 'evaluation';
+            /**
+             * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
+             */
+            lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
+             */
+            live?: boolean;
+            /**
+             * For kind session (RFP sessions): approval_needed keeps sessions waiting on an approval.
+             */
+            attention?: 'approval_needed';
+            /**
+             * For kind session (RFP sessions): the exact operator domain recorded on the session.
+             */
+            operatorDomain?: string;
+            /**
+             * For kind session: keep sessions run by a human or by an agent, as recorded by their source.
+             */
+            actorKind?: 'human' | 'agent';
+            /**
+             * For kind session: up to 50 exact advertiser ids. Use ids from search, never names.
+             */
+            advertiserIds?: Array<string>;
+            /**
+             * For kind session: up to 50 exact buyer account ids. Use ids from search, never names.
+             */
+            buyerAccountIds?: Array<string>;
+            /**
+             * For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.
+             */
+            transport?: 'chat' | 'mcp' | 'adcp' | 'email' | 'slack' | 'sms' | 'discord' | 'fax';
+            /**
+             * For kind session: sessions updated strictly after this instant.
+             */
+            updatedAfter?: string;
+            /**
+             * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
+             */
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1';
+            /**
+             * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
+             */
+            buyer?: Array<string>;
+            /**
+             * For kinds rfp, rfp_turn, and session (RFP sessions): exact advertiser names recorded on the RFP. A label, not an advertiser id.
+             */
+            advertiser?: Array<string>;
+            /**
+             * For kinds rfp and rfp_turn: RFPs whose recorded category matches any of these exactly.
+             */
+            category?: Array<string>;
+            /**
+             * For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.
+             */
+            market?: Array<string>;
+            /**
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             */
+            channel?: Array<string>;
+            /**
+             * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
+             */
+            selectedPosture?: Array<string>;
+            /**
+             * For kinds rfp and rfp_turn: turns composed with any of these playbook versions. For rfp, its latest turn is checked.
+             */
+            playbookVersion?: Array<number>;
+            /**
+             * For kinds rfp and rfp_turn: turns whose response came from any of these cache paths. For rfp, its latest turn is checked.
+             */
+            cacheMode?: Array<'miss_full_compose' | 'hit_hydrated' | 'hit_customized' | 'bypassed'>;
+            /**
+             * For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.
+             */
+            outcome?: Array<string>;
+            /**
+             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             */
+            rfpId?: string;
+            /**
+             * For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.
+             */
+            responseState?: Array<'queued' | 'processing' | 'ready' | 'passed' | 'needs_clarification' | 'failed'>;
+            /**
+             * For kind rfp_turn: turns whose evaluation is in any of these states.
+             */
+            evaluationState?: Array<string>;
+            /**
+             * For kind rfp_turn: turns built with any of these response recipe versions.
+             */
+            responseRecipeVersion?: Array<string>;
+            /**
+             * For kind rfp_turn: turns written by any of these composer model versions.
+             */
+            modelVersion?: Array<string>;
+            /**
+             * For kind rfp_turn: turns checked by any of these judge (truth gate) versions.
+             */
+            judgeVersion?: Array<string>;
+            /**
+             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             */
+            feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
+            /**
+             * For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.
+             */
+            sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
+            /**
+             * For kind media_buy in a seller account: buys from this buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * Deprecated: send buyerAccountId instead.
+             *
+             * @deprecated
+             */
+            buyerCustomerId?: number;
+            /**
+             * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
+             */
+            accountId?: number;
+            /**
+             * For kind advertiser: true keeps sandbox advertisers, false keeps live ones; omit for both. In a seller account it needs own-supply campaigns.
+             */
+            sandbox?: boolean;
+            /**
+             * For kind advertiser in a buyer account: advertisers linked through this sales agent, by the agent record's agent_id. Not a seller id.
+             */
+            linkedAccountPartnerId?: string;
+            /**
+             * For kind advertiser_grant: grants in any of these states, from invited and active to expired, rejected, or revoked.
+             */
+            grantStatus?: Array<'invited' | 'active' | 'expired' | 'rejected' | 'revoked'>;
+            /**
+             * For kind media_buy in a seller account: buys whose flight starts at or after this full ISO date-time.
+             */
+            flightStartFrom?: string;
+            /**
+             * For kind media_buy in a seller account: buys whose flight starts at or before this full ISO date-time.
+             */
+            flightStartTo?: string;
+            /**
+             * For kind seller in a buyer account: sellers of this type, a global or regional market maker or an Apostra seller.
+             */
+            sellerType?: 'global_market_maker' | 'regional_market_maker' | 'apostra_seller';
+            /**
+             * Deprecated: use sellerType, which takes the same values. Here marketplace_seller means apostra_seller.
+             */
+            classification?: 'global_market_maker' | 'regional_market_maker' | 'marketplace_seller' | 'apostra_seller';
+            /**
+             * For kind seller in a buyer account: true keeps sellers you can transact with through Apostra, false keeps the rest.
+             */
+            transactable?: boolean;
+            /**
+             * Deprecated: use transactable, which takes the same true or false value.
+             */
+            marketplaceReady?: boolean;
+            /**
+             * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
+             */
+            partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
+             */
+            marketplace?: boolean;
+            /**
+             * For kind seller in a buyer account: sellers that serve this region code.
+             */
+            region?: string;
+            /**
+             * For kind material: documents whose extraction state is any of these. needs_upload has no file yet; queued and processing are waiting or running; partial kept only some content.
+             */
+            processingState?: Array<'needs_upload' | 'queued' | 'processing' | 'ready' | 'partial' | 'failed'>;
+            /**
+             * For kind material: response returns RFP responses and imported past proposals; document returns everything else.
+             */
+            materialKind?: 'document' | 'response';
+            /**
+             * For kind material: documents that came from any of these sources: a web page (url), a site crawl, an upload, a crawl manifest, pasted text (inline), or an imported record (history).
+             */
+            sourceKind?: Array<'url' | 'site' | 'upload' | 'crawl_manifest' | 'inline' | 'history'>;
+            /**
+             * For kind material: documents with any of these visibility settings. New documents default to seller_private.
+             */
+            visibility?: Array<'public' | 'seller_private' | 'advertiser_confidential'>;
+            /**
+             * For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.
+             */
+            sourceExtension?: string;
+            /**
+             * For kind material: one Library document category. uncategorized also matches documents with no category.
+             */
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            /**
+             * For kind material: documents tagged with any of these industry verticals, case-insensitive.
+             */
+            vertical?: Array<string>;
+            /**
+             * For kind material: documents in effect at this instant. A missing start or end date counts as open-ended.
+             */
+            effectiveOn?: string;
+            /**
+             * For kind material: documents with no expiry date or one at or after this instant.
+             */
+            expiresAfter?: string;
+            /**
+             * For kind material with include ["browse"]: true keeps documents with at least one page or slide, false keeps documents with none.
+             */
+            hasUnits?: boolean;
+            /**
+             * For kind material: live documents whose status is any of these. processing is waiting on its file or on extraction, incomplete is failed or only partly extracted, ready is usable. Not with materialState draft or archived.
+             */
+            documentStatus?: Array<'processing' | 'incomplete' | 'ready'>;
+            /**
+             * For kind material: live (the default), draft, or archived. Drafts return review details and gaps, never content.
+             */
+            materialState?: 'live' | 'draft' | 'archived';
+            /**
+             * For kind conversation: chats started at or after this UTC time.
+             */
+            conversationStartedAfter?: string;
+            /**
+             * For kind conversation: chats started at or before this UTC time.
+             */
+            conversationStartedBefore?: string;
+        };
+        /**
+         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         */
+        cursor?: string;
+        /**
+         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         */
+        limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         */
+        groupBy?: string;
+        accountId?: number | string;
+    }) | (unknown & {
+        /**
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.
+         */
+        query?: string;
+        /**
+         * The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.
+         */
+        document?: string;
+        /**
+         * The exact revision of an agreement docs hit, read together with its document. Docs only.
+         */
+        revision?: string;
+        /**
+         * One section of an agreement revision. Needs both document and revision.
+         */
+        section?: string;
+        /**
+         * The time to evaluate docs at; defaults to now. When continuing an agreement read with cursor, send the same asOf again.
+         */
+        asOf?: string;
+        /**
+         * What to search: objects, docs, or specs. When omitted, a call with query searches all three and a call without query lists objects. docs and specs need a query, except an agreement read by document and revision.
+         */
+        sources?: Array<'objects' | 'docs' | 'specs'>;
+        /**
+         * Which docs to rank. caller_relevant (the default) skips docs written for other account types; public_research searches every public doc.
+         */
+        docsScope?: 'caller_relevant' | 'public_research';
+        kind: 'source_account';
+        /**
+         * For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.
+         */
+        sponsoredBuyerCustomerId?: string;
+        /**
+         * For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.
+         */
+        scope?: 'unit';
+        /**
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+         */
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources'>;
+        /**
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId: string;
         /**
@@ -34446,7 +35201,7 @@ export type SearchData = {
          */
         include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources'>;
         /**
-         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
         /**
@@ -34924,7 +35679,7 @@ export type SearchData = {
          */
         include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources'>;
         /**
-         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
         /**
@@ -35402,7 +36157,7 @@ export type SearchData = {
          */
         include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources'>;
         /**
-         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
         /**
@@ -35880,7 +36635,7 @@ export type SearchData = {
          */
         include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources'>;
         /**
-         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting. Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
         sourceId?: string;
         /**
@@ -36411,7 +37166,7 @@ export type SearchResponses = {
     200: {
         data: {
             sources: Array<'objects' | 'docs' | 'specs'>;
-            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchSessionPageOutput | {
+            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchSessionPageOutput | {
                 kind: string;
                 groupBy: string;
                 total: number;
@@ -36431,7 +37186,7 @@ export type SearchResponses = {
             } | {
                 outcome: 'mixed';
                 kind: 'mixed';
-                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
+                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
                 [key: string]: unknown;
             };
             objectsUnavailable?: string;
@@ -37997,6 +38752,48 @@ export type SearchSuccessSearchSkillPageOutputValue = unknown;
 export type SearchSuccessSearchSkillUnavailableOutput = {
     outcome: 'unavailable_skill';
     kind: 'skill';
+    unavailable: string;
+    message: string;
+    [key: string]: unknown;
+};
+
+export type SearchSuccessSearchSourceAccountPageOutput = {
+    total?: SearchSuccessSearchSourceAccountPageOutputTotal;
+    totalLowerBound?: SearchSuccessSearchSourceAccountPageOutputTotalLowerBound;
+    returned?: SearchSuccessSearchSourceAccountPageOutputReturned;
+    hasMore?: SearchSuccessSearchSourceAccountPageOutputHasMore;
+    truncated?: SearchSuccessSearchSourceAccountPageOutputTruncated;
+    nextCursor?: SearchSuccessSearchSourceAccountPageOutputNextCursor;
+    results: SearchSuccessSearchSourceAccountPageOutputResults;
+    outcome: 'page_source_account';
+    kind: 'source_account';
+    [key: string]: SearchSuccessSearchSourceAccountPageOutputValue | SearchSuccessSearchSourceAccountPageOutputTotal | SearchSuccessSearchSourceAccountPageOutputTotalLowerBound | SearchSuccessSearchSourceAccountPageOutputReturned | SearchSuccessSearchSourceAccountPageOutputHasMore | SearchSuccessSearchSourceAccountPageOutputTruncated | SearchSuccessSearchSourceAccountPageOutputNextCursor | SearchSuccessSearchSourceAccountPageOutputResults | 'page_source_account' | 'source_account' | undefined;
+};
+
+export type SearchSuccessSearchSourceAccountPageOutputHasMore = boolean;
+
+export type SearchSuccessSearchSourceAccountPageOutputNextCursor = string;
+
+export type SearchSuccessSearchSourceAccountPageOutputResults = Array<{
+    advertiserId?: string;
+    name?: string | null;
+    sandbox?: boolean;
+    [key: string]: unknown;
+}>;
+
+export type SearchSuccessSearchSourceAccountPageOutputReturned = number;
+
+export type SearchSuccessSearchSourceAccountPageOutputTotal = number;
+
+export type SearchSuccessSearchSourceAccountPageOutputTotalLowerBound = number;
+
+export type SearchSuccessSearchSourceAccountPageOutputTruncated = boolean;
+
+export type SearchSuccessSearchSourceAccountPageOutputValue = unknown;
+
+export type SearchSuccessSearchSourceAccountUnavailableOutput = {
+    outcome: 'unavailable_source_account';
+    kind: 'source_account';
     unavailable: string;
     message: string;
     [key: string]: unknown;
