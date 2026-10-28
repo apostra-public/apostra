@@ -26866,13 +26866,13 @@ paths:
     post:
       operationId: get_status
       summary: >-
-        Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether
-        readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand.
-        A Developer account adds each agent's stage, blocker, and next call.
+        Current account, state, blockers, exact fixes, accounts to pick from. For seller demand, tells if readiness
+        stops requests before source calls; read before diagnosing source health, empty responses, or demand. A
+        Developer account adds each agent's stage, blocker, next call.
       description: >-
-        Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether
-        readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand.
-        A Developer account adds each agent's stage, blocker, and next call.
+        Current account, state, blockers, exact fixes, accounts to pick from. For seller demand, tells if readiness
+        stops requests before source calls; read before diagnosing source health, empty responses, or demand. A
+        Developer account adds each agent's stage, blocker, next call.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -26895,6 +26895,9 @@ paths:
               default: {}
               type: object
               properties:
+                cursor:
+                  description: accounts.nextCursor
+                  type: string
                 accountId:
                   description: Apostra accountId this call runs in, from get_status.
                   anyOf:
@@ -27264,6 +27267,45 @@ paths:
                           additionalProperties: {}
                       reachableAccountsTruncated:
                         type: boolean
+                      accounts:
+                        type: object
+                        properties:
+                          total:
+                            type: number
+                          returned:
+                            type: number
+                          truncated:
+                            type: boolean
+                          nextCursor:
+                            type: string
+                          results:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                accountId:
+                                  type: number
+                                kind:
+                                  type: string
+                                  enum:
+                                    - buyer
+                                    - seller
+                                    - org
+                                    - developer
+                                name:
+                                  type: string
+                                needsYou:
+                                  type: boolean
+                              required:
+                                - accountId
+                                - name
+                              additionalProperties: {}
+                        required:
+                          - total
+                          - returned
+                          - truncated
+                          - results
+                        additionalProperties: false
                       agents:
                         type: object
                         properties:
@@ -42114,10 +42156,30 @@ paths:
                                       type: array
                                       items:
                                         type: string
+                                    queuedMediaBuyIds:
+                                      type: array
+                                      items:
+                                        type: string
                                   required:
                                     - campaignId
                                     - status
                                     - mediaBuyIds
+                                  additionalProperties: false
+                                - type: object
+                                  properties:
+                                    campaignId:
+                                      type: string
+                                    status:
+                                      type: string
+                                      const: queued
+                                    queuedMediaBuyIds:
+                                      type: array
+                                      items:
+                                        type: string
+                                  required:
+                                    - campaignId
+                                    - status
+                                    - queuedMediaBuyIds
                                   additionalProperties: false
                                 - type: object
                                   properties:
@@ -42132,6 +42194,10 @@ paths:
                                       type: string
                                     retryable:
                                       type: boolean
+                                    queuedMediaBuyIds:
+                                      type: array
+                                      items:
+                                        type: string
                                   required:
                                     - campaignId
                                     - status
@@ -45969,11 +46035,11 @@ paths:
       operationId: save_media_buy
       summary: >-
         Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if
-        unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget;
+        unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget;
         omit products. channelGroupId: required if grouped; invalid ungrouped/updates.
       description: >-
         Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if
-        unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget;
+        unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget;
         omit products. channelGroupId: required if grouped; invalid ungrouped/updates.
       security:
         - apiKeyAuth: []
@@ -47404,7 +47470,9 @@ paths:
                           - productId
                         additionalProperties: false
                     budget:
-                      description: 'Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.'
+                      description: >-
+                        Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal
+                        allowed; multi: products[].budget; else retain allocation.
                       type: object
                       properties:
                         total:
@@ -47420,8 +47488,8 @@ paths:
                       additionalProperties: false
                     budgetAllocation:
                       description: >-
-                        Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear;
-                        required when both modes are supported.
+                        Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when
+                        both modes are supported.
                       oneOf:
                         - type: object
                           properties:
@@ -49241,7 +49309,9 @@ paths:
                           - productId
                         additionalProperties: false
                     budget:
-                      description: 'Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.'
+                      description: >-
+                        Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal
+                        allowed; multi: products[].budget; else retain allocation.
                       type: object
                       properties:
                         total:
@@ -49257,8 +49327,8 @@ paths:
                       additionalProperties: false
                     budgetAllocation:
                       description: >-
-                        Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear;
-                        required when both modes are supported.
+                        Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when
+                        both modes are supported.
                       oneOf:
                         - type: object
                           properties:
@@ -49603,7 +49673,9 @@ paths:
                       minLength: 1
                       maxLength: 128
                     budget:
-                      description: 'Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.'
+                      description: >-
+                        Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal
+                        allowed; multi: products[].budget; else retain allocation.
                       type: object
                       properties:
                         total:
