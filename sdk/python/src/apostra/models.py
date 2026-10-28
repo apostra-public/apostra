@@ -12835,9 +12835,9 @@ class SaveMediaBuyInputKindCreate(TypedDict):
     '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. Still accepted for explicit creation until a later release.\n    '
     products: list[SaveMediaBuyInputKindCreateProductsItem]
     budget: NotRequired[SaveMediaBuyInputKindCreateBudget]
-    '\n    Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
+    '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
     budgetAllocation: NotRequired[SaveMediaBuyInputKindCreateBudgetAllocationModeFixed | SaveMediaBuyInputKindCreateBudgetAllocationModeSellerOptimized]
-    '\n    Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.\n    '
+    '\n    Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.\n    '
     flight: NotRequired[SaveMediaBuyInputKindCreateFlight]
     '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     isArchived: NotRequired[bool]
@@ -13359,7 +13359,7 @@ class SaveMediaBuyInputKindProposal(TypedDict):
     channelGroupId: NotRequired[str]
     '\n    channelGroupId for a new buy. Required when campaign has channelGroups; invalid on updates.\n    '
     budget: NotRequired[SaveMediaBuyInputKindProposalBudget]
-    '\n    Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
+    '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
     flight: NotRequired[SaveMediaBuyInputKindProposalFlight]
     '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     isArchived: NotRequired[bool]
@@ -13395,9 +13395,9 @@ class SaveMediaBuyInputKindUpdate(TypedDict):
     '\n    channelGroupId for a new buy. Required when campaign has channelGroups; invalid on updates.\n    '
     products: NotRequired[list[SaveMediaBuyInputKindUpdateProductsItem]]
     budget: NotRequired[SaveMediaBuyInputKindUpdateBudget]
-    '\n    Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
+    '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
     budgetAllocation: NotRequired[SaveMediaBuyInputKindUpdateBudgetAllocationModeFixed | SaveMediaBuyInputKindUpdateBudgetAllocationModeSellerOptimized]
-    '\n    Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.\n    '
+    '\n    Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.\n    '
     flight: NotRequired[SaveMediaBuyInputKindUpdateFlight]
     '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     name: NotRequired[str]

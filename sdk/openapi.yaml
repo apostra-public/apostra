@@ -45969,11 +45969,11 @@ paths:
       operationId: save_media_buy
       summary: >-
         Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if
-        unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget;
+        unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget;
         omit products. channelGroupId: required if grouped; invalid ungrouped/updates.
       description: >-
         Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if
-        unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget;
+        unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget;
         omit products. channelGroupId: required if grouped; invalid ungrouped/updates.
       security:
         - apiKeyAuth: []
@@ -47404,7 +47404,9 @@ paths:
                           - productId
                         additionalProperties: false
                     budget:
-                      description: 'Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.'
+                      description: >-
+                        Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal
+                        allowed; multi: products[].budget; else retain allocation.
                       type: object
                       properties:
                         total:
@@ -47420,8 +47422,8 @@ paths:
                       additionalProperties: false
                     budgetAllocation:
                       description: >-
-                        Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear;
-                        required when both modes are supported.
+                        Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when
+                        both modes are supported.
                       oneOf:
                         - type: object
                           properties:
@@ -49241,7 +49243,9 @@ paths:
                           - productId
                         additionalProperties: false
                     budget:
-                      description: 'Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.'
+                      description: >-
+                        Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal
+                        allowed; multi: products[].budget; else retain allocation.
                       type: object
                       properties:
                         total:
@@ -49257,8 +49261,8 @@ paths:
                       additionalProperties: false
                     budgetAllocation:
                       description: >-
-                        Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear;
-                        required when both modes are supported.
+                        Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when
+                        both modes are supported.
                       oneOf:
                         - type: object
                           properties:
@@ -49603,7 +49607,9 @@ paths:
                       minLength: 1
                       maxLength: 128
                     budget:
-                      description: 'Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.'
+                      description: >-
+                        Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal
+                        allowed; multi: products[].budget; else retain allocation.
                       type: object
                       properties:
                         total:

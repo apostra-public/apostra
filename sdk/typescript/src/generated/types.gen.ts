@@ -24782,7 +24782,7 @@ export type SaveMediaBuyData = {
             };
         }>;
         /**
-         * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
          */
         budget?: {
             /**
@@ -24795,7 +24795,7 @@ export type SaveMediaBuyData = {
             currency: string;
         };
         /**
-         * Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.
+         * Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.
          */
         budgetAllocation?: {
             /**
@@ -25585,7 +25585,7 @@ export type SaveMediaBuyData = {
             };
         }>;
         /**
-         * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
          */
         budget?: {
             /**
@@ -25598,7 +25598,7 @@ export type SaveMediaBuyData = {
             currency: string;
         };
         /**
-         * Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.
+         * Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.
          */
         budgetAllocation?: {
             /**
@@ -25828,7 +25828,7 @@ export type SaveMediaBuyData = {
          */
         channelGroupId?: string;
         /**
-         * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
          */
         budget?: {
             /**
