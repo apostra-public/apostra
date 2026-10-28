@@ -5193,6 +5193,10 @@ export type GetDeliveryResponses = {
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
+             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             */
+            coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
+            /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
             synthetic?: GetDeliverySuccessSynthetic;
@@ -5213,6 +5217,10 @@ export type GetDeliveryResponses = {
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
+             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             */
+            coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
+            /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
             synthetic?: GetDeliverySuccessSynthetic;
@@ -5232,6 +5240,10 @@ export type GetDeliveryResponses = {
              * Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
+            /**
+             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             */
+            coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
             /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
@@ -5481,9 +5493,44 @@ export type GetDeliveryResponses = {
             totals?: never;
             page?: never;
             goalProgress?: never;
+            coverage?: never;
             synthetic?: never;
         };
         error: null;
+    };
+};
+
+export type GetDeliverySuccessCampaignDeliveryCoverage = {
+    /**
+     * Campaigns in scope with a current media buy that was booked or running during the range.
+     */
+    inFlightCampaigns: number;
+    withoutStoredRows: {
+        /**
+         * In-flight campaigns with no stored delivery row for the range. Absence is not zero delivery.
+         */
+        count: number;
+        /**
+         * True when `campaigns` lists fewer than `count`.
+         */
+        truncated: boolean;
+        campaigns: Array<{
+            campaignId: string;
+            campaignName: string;
+            nextAction: {
+                tool: 'get_delivery';
+                arguments: {
+                    report: 'live_campaign_delivery';
+                    range: {
+                        startDate: string;
+                        endDate: string;
+                    };
+                    filters: {
+                        campaignId: string;
+                    };
+                };
+            };
+        }>;
     };
 };
 
@@ -26653,7 +26700,7 @@ export type SaveMediaKitData = {
          */
         channels?: Array<'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence'>;
         /**
-         * Legacy regions; use save_seller's listing field for countries.
+         * Legacy regions, saved as your countries; prefer save_seller's listing countries.
          */
         regions?: Array<string>;
         /**
@@ -29232,9 +29279,13 @@ export type SaveSellerData = {
              */
             decision: 'bound';
             /**
-             * Source account to map, usually a candidate.
+             * dedicated (the default) maps sourceExternalAccountId. shared_default binds the source default account instead and takes no account id; see the source interchangeDefault.
              */
-            sourceExternalAccountId: string;
+            bindingMode?: 'dedicated' | 'shared_default';
+            /**
+             * Source account to map, usually a candidate. Required unless bindingMode is shared_default.
+             */
+            sourceExternalAccountId?: string;
         } | {
             relationshipId: SaveSellerRequestSourceDecisionRelationshipId;
             inventorySourceKey: SaveSellerRequestSourceDecisionInventorySourceKey;
@@ -29243,6 +29294,7 @@ export type SaveSellerData = {
              * No account needed.
              */
             decision: 'not_required';
+            bindingMode?: never;
             sourceExternalAccountId?: never;
         };
         /**
@@ -29257,6 +29309,145 @@ export type SaveSellerData = {
              * The complete set of sample sources; keep sample-publisher-display.
              */
             sourceRecipeIds?: Array<'sample-publisher-display' | 'sample-publisher-ctv' | 'sample-retail-media'>;
+        };
+        /**
+         * Ask a buyer for information on a pending intake, confirm it, or withdraw it (see get(account_relationship) case). Send alone.
+         */
+        informationRequest?: {
+            /**
+             * Ask the buyer for information or an external action.
+             */
+            action: 'request';
+            /**
+             * Pending intake ID from get(account_relationship).
+             */
+            intakeId: string;
+            /**
+             * AdCP's account setup object: what you ask the buyer to do.
+             */
+            setup: {
+                /**
+                 * What you need from the buyer: plain text, 1-2000 characters, no markup.
+                 */
+                message: string;
+                /**
+                 * Your own HTTPS process link for the buyer (credit form, portal); no credentials.
+                 */
+                url?: string;
+                /**
+                 * When the request lapses: in the future, within 365 days.
+                 */
+                expires_at: string;
+            };
+            requestId?: never;
+            reason?: never;
+        } | {
+            /**
+             * Confirm the buyer provided what you asked for.
+             */
+            action: 'confirm';
+            /**
+             * The information request id from get(account_relationship) case.informationRequest.
+             */
+            requestId: string;
+            intakeId?: never;
+            setup?: never;
+            reason?: never;
+        } | {
+            /**
+             * Drop your own pending request without deciding the intake.
+             */
+            action: 'withdraw';
+            /**
+             * The information request id from get(account_relationship) case.informationRequest.
+             */
+            requestId: string;
+            /**
+             * Why you are withdrawing it.
+             */
+            reason?: string;
+            intakeId?: never;
+            setup?: never;
+        };
+        /**
+         * Assert or revoke that a direct-billed buyer is billable (see get(account_relationship) billingGate). Send alone.
+         */
+        readyToInvoice?: {
+            /**
+             * Assert that the billing party is billable for this relationship.
+             */
+            action: 'assert';
+            /**
+             * From get(account_relationship).
+             */
+            relationshipId: string;
+            /**
+             * Who you invoice: operator or advertiser.
+             */
+            billing: 'operator' | 'advertiser';
+            /**
+             * The legal entity invoiced. Repeat the gate billing_entity exactly, including every identifier it shows.
+             */
+            billing_entity: {
+                /**
+                 * Legal name of the invoiced entity.
+                 */
+                legal_name: string;
+                /**
+                 * VAT id, if the gate shows one.
+                 */
+                vat_id?: string;
+                /**
+                 * Tax id, if the gate shows one.
+                 */
+                tax_id?: string;
+                /**
+                 * Company registration number, if the gate shows one.
+                 */
+                registration_number?: string;
+            };
+            /**
+             * Where the confirmation comes from.
+             */
+            authority: 'crm' | 'erp' | 'finance_staff' | 'external_workflow';
+            /**
+             * A short reference or note; never a document.
+             */
+            evidence?: {
+                /**
+                 * Reference in your finance system.
+                 */
+                reference?: string;
+                /**
+                 * Short note.
+                 */
+                note?: string;
+            };
+            /**
+             * When the assertion stops counting; in the future.
+             */
+            validUntil?: string;
+            assertionId?: never;
+            reason?: never;
+        } | {
+            /**
+             * Revoke an assertion: grants billed to that party return to payment_required.
+             */
+            action: 'revoke';
+            /**
+             * From get(account_relationship) billingReadiness.
+             */
+            assertionId: string;
+            /**
+             * Why billability is withdrawn.
+             */
+            reason: string;
+            relationshipId?: never;
+            billing?: never;
+            billing_entity?: never;
+            authority?: never;
+            evidence?: never;
+            validUntil?: never;
         };
         /**
          * Hold (true) or resume (false) new business: buyers stop discovering the Seller and buying; existing delivery continues. Send alone.
@@ -29492,7 +29683,7 @@ export type SaveSellerResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
+        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
         error: null;
     };
     /**
@@ -29540,6 +29731,34 @@ export type SaveSellerSuccessSaveSellerSuccessDeclineRecorded = {
     [key: string]: unknown;
 };
 
+export type SaveSellerSuccessSaveSellerSuccessInformationConfirmed = {
+    outcome: 'information_confirmed';
+    action: 'information_confirmed';
+    requestId: string;
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessInformationRequested = {
+    outcome: 'information_requested';
+    action: 'information_requested';
+    intakeId: string;
+    requestId: string | null;
+    setup: {
+        message: string;
+        url?: string;
+        expires_at: string;
+    };
+    launchUrl: string | null;
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessInformationWithdrawn = {
+    outcome: 'information_withdrawn';
+    action: 'information_withdrawn';
+    requestId: string;
+    [key: string]: unknown;
+};
+
 export type SaveSellerSuccessSaveSellerSuccessPreview = {
     outcome: 'preview';
     action: 'preview';
@@ -29568,12 +29787,29 @@ export type SaveSellerSuccessSaveSellerSuccessReadbackUnavailable = {
     [key: string]: unknown;
 };
 
+export type SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted = {
+    outcome: 'ready_to_invoice_asserted';
+    action: 'ready_to_invoice_asserted';
+    relationshipId: string;
+    assertionId: string | null;
+    billing: 'operator' | 'advertiser';
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked = {
+    outcome: 'ready_to_invoice_revoked';
+    action: 'ready_to_invoice_revoked';
+    assertionId: string;
+    [key: string]: unknown;
+};
+
 export type SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded = {
     outcome: 'source_decision_recorded';
     action: 'source_decision_recorded';
     relationshipId: string;
     inventorySourceKey: string;
     decision: 'bound' | 'not_required';
+    bindingMode?: 'dedicated' | 'shared_default';
     sourceExternalAccountId: string | null;
     version: number | null;
     [key: string]: unknown;
