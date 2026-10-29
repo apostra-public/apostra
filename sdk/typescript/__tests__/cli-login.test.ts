@@ -42,6 +42,7 @@ type Fake = {
   apiTokens: string[]
   refreshStatus: number
   omitRefreshToken: boolean
+  onRefresh?: () => void
   close: () => Promise<void>
 }
 
@@ -83,6 +84,7 @@ async function startFake(): Promise<Fake> {
       if (body.get('resource') !== fake.resource)
         return json(res, 400, { error: 'invalid_target' })
       fake.refreshRequests++
+      fake.onRefresh?.()
       await new Promise((r) => setTimeout(r, 40))
       if (fake.refreshStatus !== 200)
         return json(res, fake.refreshStatus, { error: 'invalid_grant' })
@@ -134,6 +136,8 @@ const entry = (
 let dir: string
 let fake: Fake
 let credentialStoreAvailable: boolean
+let credentialStoreWritable: boolean
+const unwritableAccounts = new Set<string>()
 const keyring = new Map<string, string>()
 
 class TestKeyringEntry {
@@ -149,6 +153,8 @@ class TestKeyringEntry {
   }
 
   setPassword(password: string) {
+    if (!credentialStoreWritable || unwritableAccounts.has(this.account))
+      throw new Error('Secret Service is read-only')
     keyring.set(this.account, password)
   }
 
@@ -160,6 +166,8 @@ class TestKeyringEntry {
 beforeEach(async () => {
   dir = mkdtempSync(join(tmpdir(), 'apostra-login-'))
   credentialStoreAvailable = true
+  credentialStoreWritable = true
+  unwritableAccounts.clear()
   keyring.clear()
   const nodeProcess = process as typeof process & {
     getBuiltinModule(id: string): unknown
@@ -256,6 +264,22 @@ describe('credential store', () => {
       TypeError,
     )
   })
+
+  it('normalizes a stored login expiry to milliseconds', async () => {
+    await withCliLoginLock(async () =>
+      writeCliLogin(
+        fake.resource,
+        entry(fake, { expiresAt: '2030-01-02T03:04:05.678912Z' }),
+      ),
+    )
+
+    expect(readCliLogin(fake.resource)?.expiresAt).toBe(
+      '2030-01-02T03:04:05.678Z',
+    )
+    expect(JSON.parse(keyring.get(fake.resource) ?? '{}')).toMatchObject({
+      expiresAt: '2030-01-02T03:04:05.678Z',
+    })
+  })
 })
 
 describe('refresh', () => {
@@ -299,6 +323,75 @@ describe('refresh', () => {
     fake.omitRefreshToken = true
     await refreshCliLogin(fake.resource)
     expect(readCliLogin(fake.resource)?.refreshToken).toBe('rt-0')
+  })
+
+  it('keeps a rotated credential usable when its secure-store update fails', async () => {
+    await withCliLoginLock(async () =>
+      writeCliLogin(fake.resource, entry(fake)),
+    )
+    credentialStoreWritable = false
+
+    await expect(refreshCliLogin(fake.resource)).resolves.toMatchObject({
+      refreshToken: 'rt-1',
+    })
+
+    expect(JSON.parse(readFileSync(credentialsPath(), 'utf8'))).toMatchObject({
+      authoritativeFileLogins: [fake.resource],
+      logins: { [fake.resource]: { refreshToken: 'rt-1' } },
+    })
+    expect(JSON.parse(keyring.get(fake.resource) ?? '{}')).toMatchObject({
+      refreshToken: 'rt-0',
+    })
+    expect(readCliLogin(fake.resource)?.refreshToken).toBe('rt-1')
+  })
+
+  it('keeps a rotated credential authoritative when the secure store disappears', async () => {
+    await withCliLoginLock(async () =>
+      writeCliLogin(fake.resource, entry(fake)),
+    )
+    fake.onRefresh = () => {
+      credentialStoreAvailable = false
+    }
+
+    const refreshed = await refreshCliLogin(fake.resource)
+
+    expect(JSON.parse(readFileSync(credentialsPath(), 'utf8'))).toMatchObject({
+      authoritativeFileLogins: [fake.resource],
+      logins: { [fake.resource]: { refreshToken: 'rt-1' } },
+    })
+    credentialStoreAvailable = true
+    expect(readCliLogin(fake.resource)).toEqual(refreshed)
+  })
+
+  it('prunes an authoritative entry that migrates before another entry fails', () => {
+    const other = 'https://other.example/api/v3'
+    keyring.set(
+      fake.resource,
+      JSON.stringify(entry(fake, { refreshToken: 'rt-stale' })),
+    )
+    mkdirSync(join(dir, 'apostra'))
+    writeFileSync(
+      credentialsPath(),
+      JSON.stringify({
+        version: 1,
+        logins: {
+          [fake.resource]: entry(fake, { refreshToken: 'rt-current' }),
+          [other]: entry(fake, { resource: other, accountId: '9' }),
+        },
+        authoritativeFileLogins: [fake.resource],
+      }),
+    )
+    unwritableAccounts.add(other)
+
+    expect(readCliLogin(other)?.accountId).toBe('9')
+
+    expect(JSON.parse(readFileSync(credentialsPath(), 'utf8'))).toMatchObject({
+      logins: { [other]: expect.any(Object) },
+    })
+    expect(readFileSync(credentialsPath(), 'utf8')).not.toContain(fake.resource)
+    expect(JSON.parse(keyring.get(fake.resource) ?? '{}')).toMatchObject({
+      refreshToken: 'rt-current',
+    })
   })
 
   it('never removes a lock another process owns', async () => {
