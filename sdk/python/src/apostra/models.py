@@ -61,6 +61,36 @@ DownloadV3PublicDocumentRevisionResult: TypeAlias = str
 
 EvidenceUrl: TypeAlias = str
 
+class GenerateVariantsRequestGenerateVariantsAdvertiserCopyInput(TypedDict):
+    kind: Literal["advertiser_copy"]
+    scope: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputScope
+    variantAction: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputVariantAction
+    advertiserId: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputAdvertiserId
+    sessionId: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionId
+    actionKey: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputActionKey
+    expectedRevision: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputExpectedRevision
+    sessionGeneration: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionGeneration
+    slotIds: NotRequired[GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSlotIds]
+    '\n    Composer copy slots to explicitly regenerate. Omit to fill only empty copy slots.\n    '
+    expectedAccountId: NotRequired[int | str]
+    accountId: NotRequired[int | str]
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputActionKey: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputAdvertiserId: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputExpectedRevision: TypeAlias = int
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputScope: TypeAlias = Literal["advertiser"]
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionGeneration: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionId: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSlotIds: TypeAlias = list[str]
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputVariantAction: TypeAlias = Literal["copy"]
+
 class GenerateVariantsRequestGenerateVariantsAdvertiserFeedbackInput(TypedDict):
     kind: Literal["advertiser_feedback"]
     scope: GenerateVariantsRequestGenerateVariantsAdvertiserFeedbackInputScope
@@ -119,6 +149,36 @@ GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInputSessionId: TypeAli
 
 GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInputVariantAction: TypeAlias = Literal["generate"]
 
+class GenerateVariantsRequestGenerateVariantsCampaignCopyInput(TypedDict):
+    kind: Literal["campaign_copy"]
+    scope: GenerateVariantsRequestGenerateVariantsCampaignCopyInputScope
+    variantAction: GenerateVariantsRequestGenerateVariantsCampaignCopyInputVariantAction
+    campaignId: GenerateVariantsRequestGenerateVariantsCampaignCopyInputCampaignId
+    sessionId: GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionId
+    actionKey: GenerateVariantsRequestGenerateVariantsCampaignCopyInputActionKey
+    expectedRevision: GenerateVariantsRequestGenerateVariantsCampaignCopyInputExpectedRevision
+    sessionGeneration: GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionGeneration
+    slotIds: NotRequired[GenerateVariantsRequestGenerateVariantsCampaignCopyInputSlotIds]
+    '\n    Composer copy slots to explicitly regenerate. Omit to fill only empty copy slots.\n    '
+    expectedAccountId: NotRequired[int | str]
+    accountId: NotRequired[int | str]
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputActionKey: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputCampaignId: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputExpectedRevision: TypeAlias = int
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputScope: TypeAlias = Literal["campaign"]
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionGeneration: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionId: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputSlotIds: TypeAlias = list[str]
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputVariantAction: TypeAlias = Literal["copy"]
+
 class GenerateVariantsRequestGenerateVariantsCampaignFeedbackInput(TypedDict):
     kind: Literal["campaign_feedback"]
     scope: GenerateVariantsRequestGenerateVariantsCampaignFeedbackInputScope
@@ -163,7 +223,7 @@ class GenerateVariantsRequestGenerateVariantsCampaignGenerateInput(TypedDict):
     expectedAccountId: NotRequired[int | str]
     accountId: NotRequired[int | str]
 
-GenerateVariantsInput: TypeAlias = "GenerateVariantsRequestGenerateVariantsCampaignGenerateInput | GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInput | GenerateVariantsRequestGenerateVariantsCampaignFeedbackInput | GenerateVariantsRequestGenerateVariantsAdvertiserFeedbackInput"
+GenerateVariantsInput: TypeAlias = "GenerateVariantsRequestGenerateVariantsCampaignGenerateInput | GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInput | GenerateVariantsRequestGenerateVariantsCampaignFeedbackInput | GenerateVariantsRequestGenerateVariantsAdvertiserFeedbackInput | GenerateVariantsRequestGenerateVariantsCampaignCopyInput | GenerateVariantsRequestGenerateVariantsAdvertiserCopyInput"
 
 GenerateVariantsRequestGenerateVariantsCampaignGenerateInputActionKey: TypeAlias = str
 
@@ -4285,6 +4345,8 @@ GetSellerReportingReceiptsSuccessReceiptsItemReceivedTotalsVideoCompletions: Typ
 GetSellerReportingReceiptsSuccessReceiptsItemReceivedTotalsViews: TypeAlias = str | None
 
 class GetStatusInput(TypedDict):
+    cursor: NotRequired[str]
+    '\n    accounts.nextCursor\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
@@ -4306,6 +4368,7 @@ class GetStatusResult(TypedDict):
     nextActions: list[GetStatusResultNextActionsItem]
     reachableAccounts: list[GetStatusResultReachableAccountsItem]
     reachableAccountsTruncated: NotRequired[bool]
+    accounts: NotRequired[GetStatusResultAccounts]
     agents: NotRequired[GetStatusResultAgents]
     resources: NotRequired[list[GetStatusResultResourcesItem]]
 
@@ -4313,6 +4376,19 @@ class GetStatusResultAccount(TypedDict):
     accountId: float
     company: str
     kind: Literal["buyer", "seller", "org", "developer"] | None
+
+class GetStatusResultAccounts(TypedDict):
+    total: float
+    returned: float
+    truncated: bool
+    nextCursor: NotRequired[str]
+    results: list[GetStatusResultAccountsResultsItem]
+
+class GetStatusResultAccountsResultsItem(TypedDict):
+    accountId: float
+    kind: NotRequired[Literal["buyer", "seller", "org", "developer"]]
+    name: str
+    needsYou: NotRequired[bool]
 
 class GetStatusResultAgents(TypedDict):
     total: float
@@ -4459,6 +4535,10 @@ class GetStatusResultReachableAccountsItem(TypedDict):
     customerId: float
     company: str
     kind: Literal["buyer", "seller", "org", "developer"]
+    nameWith: NotRequired[Literal["advertiserId"]]
+    advertiserIds: NotRequired[list[float]]
+    advertiserCount: NotRequired[float]
+    access: NotRequired[Literal["read", "read_write"]]
 
 class GetStatusResultResourcesItem(TypedDict):
     id: str
@@ -5081,23 +5161,18 @@ class OpenAdvertisersPageInput(TypedDict):
 class OpenAdvertisersPageResult(TypedDict):
     intent: NotRequired[Literal["add"]]
 
-class OpenAgentCertificationPageInput(TypedDict):
-    agentId: str
-    '\n    The agent whose tests and certification to open, from search or get.\n    '
-    accountId: NotRequired[int | str]
-    '\n    Apostra accountId this call runs in, from get_status.\n    '
-
-class OpenAgentCertificationPageResult(TypedDict):
-    agentId: str
-
 class OpenAgentPageInput(TypedDict):
     agentId: str
     '\n    Agent identifier.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
+OpenAgentCertificationPageInput: TypeAlias = OpenAgentPageInput
+
 class OpenAgentPageResult(TypedDict):
     agentId: str
+
+OpenAgentCertificationPageResult: TypeAlias = OpenAgentPageResult
 
 class OpenAgentSourcesPageInput(TypedDict):
     agentId: str
@@ -5317,7 +5392,7 @@ class OpenCampaignsPageSuccessPageHumanHandoffRequiredAccount(TypedDict):
     name: str
 
 class OpenCampaignsPageSuccessPageHumanHandoffRequiredPage(TypedDict):
-    resourceUri: Literal["ui://agentic-api/conversation-history/mcp-app.html", "ui://agentic-api/agent-v2/mcp-app.html", "ui://agentic-api/developer-home/mcp-app.html", "ui://agentic-api/agents/mcp-app.html", "ui://agentic-api/create-agent/mcp-app.html", "ui://agentic-api/claim-agent/mcp-app.html", "ui://agentic-api/configure-agent-connection/mcp-app.html", "ui://agentic-api/register-agent-observed-revision/mcp-app.html", "ui://agentic-api/buyer-account-admission/mcp-app.html", "ui://agentic-api/tars-org-supply-asks/mcp-app.html", "ui://agentic-api/tars-run-rate/mcp-app.html", "ui://agentic-api/tars-marketing-email-library/mcp-app.html", "ui://agentic-api/tars-approved-deck-modules/mcp-app.html", "ui://agentic-api/tars-marketing-email-operations/mcp-app.html", "ui://agentic-api/business-rules/mcp-app.html", "ui://agentic-api/demo-storefront/mcp-app.html", "ui://agentic-api/agent-source-credentials/mcp-app.html", "ui://agentic-api/property-roster/mcp-app.html", "ui://agentic-api/seller-account-feed/mcp-app.html", "ui://agentic-api/media-buy-retry/mcp-app.html", "ui://agentic-api/modular-inventory-source/mcp-app.html", "ui://agentic-api/modular-connect/mcp-app.html", "ui://agentic-api/source-discovery-preview/mcp-app.html", "ui://agentic-api/partner-connection/mcp-app.html", "ui://agentic-api/agent-certification/mcp-app.html", "ui://agentic-api/agent-sources/mcp-app.html", "ui://agentic-api/agent-overview/mcp-app.html", "ui://agentic-api/agent-webhooks/mcp-app.html", "ui://agentic-api/modular-avails-commit/mcp-app.html", "ui://agentic-api/plan-billing/mcp-app.html", "ui://agentic-api/connections/mcp-app.html", "ui://agentic-api/creative-engines/mcp-app.html", "ui://agentic-api/all-advertisers-home/mcp-app.html", "ui://agentic-api/add-advertiser/mcp-app.html", "ui://agentic-api/campaigns/mcp-app.html", "ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html", "ui://agentic-api/creative-library-v3/mcp-app.html", "ui://agentic-api/upload-creative-asset/mcp-app.html", "ui://agentic-api/creative-composer-task/mcp-app.html", "ui://agentic-api/variant-gallery/mcp-app.html", "ui://agentic-api/seller-setup/mcp-app.html", "ui://agentic-api/approvals/mcp-app.html", "ui://agentic-api/notifications/mcp-app.html", "ui://agentic-api/buyer-notifications/mcp-app.html", "ui://agentic-api/buyer-webhooks/mcp-app.html", "ui://agentic-api/proposal-pass-v3/mcp-app.html", "ui://agentic-api/sessions/mcp-app.html", "ui://agentic-api/seller-dashboard/mcp-app.html", "ui://agentic-api/seller-dashboard-v3/mcp-app.html", "ui://agentic-api/product-marketing-v3/mcp-app.html", "ui://agentic-api/library/mcp-app.html", "ui://agentic-api/integrations/mcp-app.html", "ui://agentic-api/release-notes/mcp-app.html", "ui://agentic-api/playbook/mcp-app.html", "ui://agentic-api/media-kit/mcp-app.html", "ui://agentic-api/business-profile/mcp-app.html", "ui://agentic-api/buyer-discounts/mcp-app.html", "ui://agentic-api/sponsored-buyers/mcp-app.html", "ui://agentic-api/pending-operations/mcp-app.html", "ui://agentic-api/storefront-briefs/mcp-app.html", "ui://agentic-api/activity-log/mcp-app.html", "ui://agentic-api/merchandising-simulator/mcp-app.html", "ui://agentic-api/media-buys/mcp-app.html", "ui://agentic-api/media-buy-timeline/mcp-app.html", "ui://agentic-api/components/mcp-app.html", "ui://agentic-api/seller-accounts/mcp-app.html"]
+    resourceUri: Literal["ui://agentic-api/conversation-history/mcp-app.html", "ui://agentic-api/agent-v2/mcp-app.html", "ui://agentic-api/developer-home/mcp-app.html", "ui://agentic-api/agents/mcp-app.html", "ui://agentic-api/create-agent/mcp-app.html", "ui://agentic-api/claim-agent/mcp-app.html", "ui://agentic-api/configure-agent-connection/mcp-app.html", "ui://agentic-api/register-agent-observed-revision/mcp-app.html", "ui://agentic-api/buyer-account-admission/mcp-app.html", "ui://agentic-api/tars-org-supply-asks/mcp-app.html", "ui://agentic-api/tars-run-rate/mcp-app.html", "ui://agentic-api/tars-marketing-email-library/mcp-app.html", "ui://agentic-api/tars-approved-deck-modules/mcp-app.html", "ui://agentic-api/tars-marketing-email-operations/mcp-app.html", "ui://agentic-api/business-rules/mcp-app.html", "ui://agentic-api/demo-storefront/mcp-app.html", "ui://agentic-api/agent-source-credentials/mcp-app.html", "ui://agentic-api/property-roster/mcp-app.html", "ui://agentic-api/seller-account-feed/mcp-app.html", "ui://agentic-api/media-buy-retry/mcp-app.html", "ui://agentic-api/modular-inventory-source/mcp-app.html", "ui://agentic-api/modular-connect/mcp-app.html", "ui://agentic-api/source-discovery-preview/mcp-app.html", "ui://agentic-api/partner-connection/mcp-app.html", "ui://agentic-api/agent-sources/mcp-app.html", "ui://agentic-api/agent-overview/mcp-app.html", "ui://agentic-api/agent-webhooks/mcp-app.html", "ui://agentic-api/modular-avails-commit/mcp-app.html", "ui://agentic-api/plan-billing/mcp-app.html", "ui://agentic-api/connections/mcp-app.html", "ui://agentic-api/creative-engines/mcp-app.html", "ui://agentic-api/all-advertisers-home/mcp-app.html", "ui://agentic-api/add-advertiser/mcp-app.html", "ui://agentic-api/campaigns/mcp-app.html", "ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html", "ui://agentic-api/creative-library-v3/mcp-app.html", "ui://agentic-api/upload-creative-asset/mcp-app.html", "ui://agentic-api/creative-composer-task/mcp-app.html", "ui://agentic-api/variant-gallery/mcp-app.html", "ui://agentic-api/seller-setup/mcp-app.html", "ui://agentic-api/approvals/mcp-app.html", "ui://agentic-api/notifications/mcp-app.html", "ui://agentic-api/buyer-notifications/mcp-app.html", "ui://agentic-api/buyer-webhooks/mcp-app.html", "ui://agentic-api/proposal-pass-v3/mcp-app.html", "ui://agentic-api/sessions/mcp-app.html", "ui://agentic-api/seller-dashboard/mcp-app.html", "ui://agentic-api/seller-dashboard-v3/mcp-app.html", "ui://agentic-api/product-marketing-v3/mcp-app.html", "ui://agentic-api/library/mcp-app.html", "ui://agentic-api/integrations/mcp-app.html", "ui://agentic-api/release-notes/mcp-app.html", "ui://agentic-api/playbook/mcp-app.html", "ui://agentic-api/media-kit/mcp-app.html", "ui://agentic-api/business-profile/mcp-app.html", "ui://agentic-api/buyer-discounts/mcp-app.html", "ui://agentic-api/sponsored-buyers/mcp-app.html", "ui://agentic-api/pending-operations/mcp-app.html", "ui://agentic-api/storefront-briefs/mcp-app.html", "ui://agentic-api/activity-log/mcp-app.html", "ui://agentic-api/merchandising-simulator/mcp-app.html", "ui://agentic-api/media-buys/mcp-app.html", "ui://agentic-api/media-buy-timeline/mcp-app.html", "ui://agentic-api/components/mcp-app.html", "ui://agentic-api/seller-accounts/mcp-app.html"]
     advertiserId: NotRequired[str]
     campaignId: NotRequired[str]
     capability: Literal["reauthenticate_in_browser", "manage_webhooks"]
@@ -5516,7 +5591,7 @@ class OpenPageInput(TypedDict):
     '\n    Relationship to focus on.\n    '
     blockedReason: NotRequired[str]
     '\n    Its known blocked reason.\n    '
-    page: Literal["connect_ad_server", "ad_server_source", "ad_server_diagnostics", "source_diagnostics", "seller_setup", "demo_seller", "connect_sales_agent", "modular_inventory_source", "modular_source_setup", "modular_inventory_feed", "listing", "discovery_card", "media_kit", "business_profile", "playbook", "library", "integrations", "product_marketing", "business_rules", "buyer_account_mapping", "property_roster", "plan_and_billing", "buyer_setup", "sellers", "creative_engines", "advertisers", "campaigns", "campaign_receipt", "approvals", "release_notes", "customer_requests", "notifications", "webhooks", "buyer_proposal_version"]
+    page: Literal["connect_ad_server", "ad_server_source", "ad_server_diagnostics", "source_diagnostics", "seller_setup", "demo_seller", "connect_sales_agent", "modular_inventory_source", "modular_source_setup", "modular_inventory_feed", "listing", "discovery_card", "media_kit", "business_profile", "playbook", "library", "integrations", "product_marketing", "business_rules", "buyer_account_mapping", "property_roster", "plan_and_billing", "buyer_setup", "sellers", "creative_engines", "advertisers", "campaigns", "campaign_receipt", "approvals", "release_notes", "customer_requests", "notifications", "webhooks", "buyer_proposal_version", "sessions"]
     '\n    Page to open. Owners repair a missing Agent relationship in source_diagnostics.\n    '
     sourceId: NotRequired[str]
     '\n    Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.\n    '
@@ -6221,7 +6296,7 @@ class SaveAccountInput(TypedDict):
     id: NotRequired[int]
     '\n    Existing direct child Account id returned by search. Omit it to create a child Account.\n    '
     accountId: NotRequired[int]
-    '\n    With id: the Apostra accountId this call runs in, from get_status. Without id: deprecated, read as id.\n    '
+    '\n    Apostra accountId this call runs in, from get_status. Without id or accountType: deprecated, read as id.\n    '
     name: NotRequired[str]
     '\n    Account name: the name of a new Account, or the new name of an existing one (needs reason, and website approval).\n    '
     settings: NotRequired[SaveAccountInputSettings]
@@ -7036,9 +7111,9 @@ class SaveAskInputKindCreate(TypedDict):
     severity: NotRequired[Literal["low", "medium", "high", "urgent"]]
     '\n    high = one customer blocked. urgent = outage, several customers, or data risk.\n    '
     subject: NotRequired[str]
-    '\n    Supply domain or integration vendor.\n    '
+    '\n    Supply domain or integration vendor. Not for support, product or commercial.\n    '
     channel: NotRequired[str]
-    '\n    Supply channel or integration channel name.\n    '
+    '\n    Supply only: the inventory channel.\n    '
 
 class SaveAskInputKindUpdate(TypedDict):
     expectedAccountId: NotRequired[int | str]
@@ -7739,7 +7814,7 @@ class SaveBuyerAgentSuccessBuyerAgentNotificationDestinationSetup(TypedDict):
 class SaveBuyerAgentSuccessBuyerAgentNotificationSubscription(TypedDict):
     subscriber_id: str
     url: str
-    event_types: list[Literal["scheduled", "final", "delayed", "adjusted", "window_update", "impairment", "creative.status_changed", "creative.assignment_changed", "indicators.changed", "creative.purged", "account.status_changed", "account.change_recorded", "product.created", "product.updated", "product.priced", "product.removed", "signal.created", "signal.updated", "signal.priced", "signal.removed", "wholesale_feed.bulk_change", "collection_card.updated", "collection_card.removed", "collection_catalog.bulk_change", "capabilities.changed", "reporting.delivery_ready", "reporting.status_changed", "reporting.ledger_changed", "principal.changed", "proposal.created"]]
+    event_types: list[Literal["scheduled", "final", "delayed", "adjusted", "window_update", "impairment", "creative.status_changed", "creative.assignment_changed", "indicators.changed", "creative.purged", "account.status_changed", "account.change_recorded", "product.created", "product.updated", "product.priced", "product.removed", "signal.created", "signal.updated", "signal.priced", "signal.removed", "wholesale_feed.bulk_change", "collection_card.updated", "collection_card.removed", "collection_catalog.bulk_change", "capabilities.changed", "reporting.delivery_ready", "reporting.status_changed", "reporting.ledger_changed", "principal.changed", "proposal.created", "account_request.changed"]]
     all_authorized_accounts: NotRequired[bool]
     include_future_event_types: NotRequired[bool]
     active: NotRequired[bool]
@@ -8243,10 +8318,10 @@ class SaveCampaignInputTargetingOverlayValue(TypedDict):
     device_platform_exclude: NotRequired[SaveCampaignRequestTargetingOverlayDevicePlatformExclude]
     browser: NotRequired[SaveCampaignRequestTargetingOverlayBrowser]
     browser_exclude: NotRequired[SaveCampaignRequestTargetingOverlayBrowserExclude]
-    daypart_targets: NotRequired[list[SaveCampaignInputTargetingOverlayDaypartTargetsItem]]
-    '\n    Delivery windows.\n    '
     demographics: NotRequired[SaveCampaignInputTargetingOverlayDemographics]
     '\n    Demographic criteria.\n    '
+    daypart_targets: NotRequired[list[SaveCampaignInputTargetingOverlayDaypartTargetsItem]]
+    '\n    Delivery windows.\n    '
     age_restriction: NotRequired[SaveCampaignInputTargetingOverlayAgeRestriction]
     '\n    Minimum audience age.\n    '
 
@@ -8273,6 +8348,8 @@ class SaveCampaignInputTracking(TypedDict):
     '\n    Enable or disable inherited advertiser trackers by stable tracker ID.\n    '
     macroAdditions: NotRequired[list[SaveCampaignInputTrackingMacroAdditionsItem]]
     '\n    Campaign URL parameters. Same keys override advertiser values; null suppresses inheritance.\n    '
+    autoUtm: NotRequired[bool]
+    '\n    Whether Apostra adds its own UTM tags (utm_source, utm_medium, utm_campaign, utm_content) to this campaign\'s click URLs. Default true. false turns all four off and leaves the parameters you set alone.\n    '
 
 class SaveCampaignInputTrackingMacroAdditionsItem(TypedDict):
     paramKey: str
@@ -9846,6 +9923,8 @@ class SaveCreativeInput(TypedDict):
     '\n    Creative URL parameters. Same keys override inherited values; null suppresses them.\n    '
     social: NotRequired[SaveCreativeInputSocial]
     '\n    Authored social copy slots.\n    '
+    industry_identifiers: NotRequired[list[SaveCreativeInputIndustryIdentifiersItem]]
+    '\n    AdCP industry IDs broadcast sellers require. Replaces the list.\n    '
     labels: NotRequired[dict[str, list[str]]]
     '\n    Dimension values; [] clears.\n    '
     isArchived: NotRequired[bool]
@@ -9924,6 +10003,12 @@ class SaveCreativeInputFromCreativeSessionOutput(TypedDict):
     '\n    Session revision that recorded the approval.\n    '
     outputHash: str
     '\n    SHA-256 digest recorded by the exact output approval.\n    '
+
+class SaveCreativeInputIndustryIdentifiersItem(TypedDict):
+    type: Literal["ad_id", "isci", "clearcast_clock", "idcrea"]
+    '\n    Identifier scheme.\n    '
+    value: str
+    '\n    The code.\n    '
 
 class SaveCreativeInputMacroAdditionsItem(TypedDict):
     paramKey: str
@@ -10131,6 +10216,11 @@ class SaveCreativeResultActionMembershipUpdated(TypedDict):
     campaignIds: list[str]
     attached: list[str]
     detached: list[str]
+    liveMediaBuys: NotRequired[SaveCreativeResultActionMembershipUpdatedLiveMediaBuys]
+
+class SaveCreativeResultActionMembershipUpdatedLiveMediaBuys(TypedDict):
+    attached: list[SaveCreativeSuccessLiveMediaBuysAttachedItem]
+    detached: list[SaveCreativeSuccessLiveMediaBuysDetachedItem]
 
 class SaveCreativeResultActionPromoted(TypedDict):
     action: Literal["promoted"]
@@ -10146,12 +10236,13 @@ class SaveCreativeResultActionPromoting(TypedDict):
 class SaveCreativeResultActionResynced(TypedDict):
     action: Literal["resynced"]
     creativeId: str
-    campaigns: list[SaveCreativeResultActionResyncedCampaignsItemStatusConfirmed | SaveCreativeResultActionResyncedCampaignsItemStatusFailed]
+    campaigns: list[SaveCreativeResultActionResyncedCampaignsItemStatusConfirmed | SaveCreativeResultActionResyncedCampaignsItemStatusQueued | SaveCreativeResultActionResyncedCampaignsItemStatusFailed]
 
 class SaveCreativeResultActionResyncedCampaignsItemStatusConfirmed(TypedDict):
     campaignId: str
     status: Literal["confirmed"]
     mediaBuyIds: list[str]
+    queuedMediaBuyIds: NotRequired[list[str]]
 
 class SaveCreativeResultActionResyncedCampaignsItemStatusFailed(TypedDict):
     campaignId: str
@@ -10159,6 +10250,12 @@ class SaveCreativeResultActionResyncedCampaignsItemStatusFailed(TypedDict):
     code: str
     message: str
     retryable: bool
+    queuedMediaBuyIds: NotRequired[list[str]]
+
+class SaveCreativeResultActionResyncedCampaignsItemStatusQueued(TypedDict):
+    campaignId: str
+    status: Literal["queued"]
+    queuedMediaBuyIds: list[str]
 
 class SaveCreativeResultActionUpdated(TypedDict):
     creative: SaveCreativeSuccessCreative
@@ -10814,6 +10911,14 @@ class SaveCreativeSuccessDuplicateCreativeSuccess(TypedDict):
     sourceCreativeId: str
     creative: SaveCreativeSuccessCreativeDuplicate
     replayed: bool
+
+class SaveCreativeSuccessLiveMediaBuysAttachedItem(TypedDict):
+    mediaBuyId: str
+    status: str
+
+class SaveCreativeSuccessLiveMediaBuysDetachedItem(TypedDict):
+    mediaBuyId: str
+    status: str
 
 SaveCreativeSuccessProviderContacted: TypeAlias = Literal[False]
 
@@ -12122,7 +12227,7 @@ SaveMaterialRequestMetadataDescription: TypeAlias = str
 
 SaveMaterialRequestMetadataDisplayName: TypeAlias = str
 
-SaveMaterialRequestMetadataDocumentPurpose: TypeAlias = Literal["sales_deck", "one_sheet", "case_study", "response", "specification_sheet", "media_kit"] | None
+SaveMaterialRequestMetadataDocumentPurpose: TypeAlias = Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit"] | None
 
 SaveMaterialRequestMetadataEffectiveFrom: TypeAlias = str
 
@@ -12835,9 +12940,9 @@ class SaveMediaBuyInputKindCreate(TypedDict):
     '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. Still accepted for explicit creation until a later release.\n    '
     products: list[SaveMediaBuyInputKindCreateProductsItem]
     budget: NotRequired[SaveMediaBuyInputKindCreateBudget]
-    '\n    Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
+    '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
     budgetAllocation: NotRequired[SaveMediaBuyInputKindCreateBudgetAllocationModeFixed | SaveMediaBuyInputKindCreateBudgetAllocationModeSellerOptimized]
-    '\n    Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.\n    '
+    '\n    Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.\n    '
     flight: NotRequired[SaveMediaBuyInputKindCreateFlight]
     '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     isArchived: NotRequired[bool]
@@ -12987,6 +13092,8 @@ class SaveMediaBuyInputKindCreateProductsItem(TypedDict):
     '\n    Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.\n    '
     remove: NotRequired[bool]
     '\n    Update only: true removes this line item.\n    '
+    pacing: NotRequired[Literal["even", "asap", "front_loaded"]]
+    '\n    Update only: delivery pacing of this line item. On a running buy the seller must take the change.\n    '
     lineItemRef: NotRequired[str]
     '\n    Update only: line-item handle from the read; needed for a repeated product.\n    '
     targetingOverlay: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlay]
@@ -13359,7 +13466,7 @@ class SaveMediaBuyInputKindProposal(TypedDict):
     channelGroupId: NotRequired[str]
     '\n    channelGroupId for a new buy. Required when campaign has channelGroups; invalid on updates.\n    '
     budget: NotRequired[SaveMediaBuyInputKindProposalBudget]
-    '\n    Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
+    '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
     flight: NotRequired[SaveMediaBuyInputKindProposalFlight]
     '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     isArchived: NotRequired[bool]
@@ -13395,9 +13502,9 @@ class SaveMediaBuyInputKindUpdate(TypedDict):
     '\n    channelGroupId for a new buy. Required when campaign has channelGroups; invalid on updates.\n    '
     products: NotRequired[list[SaveMediaBuyInputKindUpdateProductsItem]]
     budget: NotRequired[SaveMediaBuyInputKindUpdateBudget]
-    '\n    Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
+    '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
     budgetAllocation: NotRequired[SaveMediaBuyInputKindUpdateBudgetAllocationModeFixed | SaveMediaBuyInputKindUpdateBudgetAllocationModeSellerOptimized]
-    '\n    Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.\n    '
+    '\n    Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.\n    '
     flight: NotRequired[SaveMediaBuyInputKindUpdateFlight]
     '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     name: NotRequired[str]
@@ -13551,6 +13658,8 @@ class SaveMediaBuyInputKindUpdateProductsItem(TypedDict):
     '\n    Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.\n    '
     remove: NotRequired[bool]
     '\n    Update only: true removes this line item.\n    '
+    pacing: NotRequired[Literal["even", "asap", "front_loaded"]]
+    '\n    Update only: delivery pacing of this line item. On a running buy the seller must take the change.\n    '
     lineItemRef: NotRequired[str]
     '\n    Update only: line-item handle from the read; needed for a repeated product.\n    '
     targetingOverlay: NotRequired[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlay]
@@ -15989,7 +16098,7 @@ class SaveSellerInput(TypedDict):
     '\n    Allow a settlement-currency change even when it hides currently buyer-visible fixed prices.\n    '
     distribution: NotRequired[SaveSellerInputDistribution]
     '\n    Admin-only Distribution configuration. Send separately from other Seller changes.\n    '
-    admission: NotRequired[SaveSellerInputAdmissionDecisionAdmit | SaveSellerInputAdmissionDecisionDecline]
+    admission: NotRequired[SaveSellerInputAdmissionDecisionAdmit | SaveSellerInputAdmissionDecisionDecline | SaveSellerInputAdmissionDecisionReopen]
     '\n    Seller-only pending buyer relationship decision; read its intake version immediately before saving.\n    '
     sourceDecision: NotRequired[SaveSellerInputSourceDecisionDecisionBound | SaveSellerInputSourceDecisionDecisionNotRequired]
     '\n    Which account serves an admitted buyer on one source (see get(account_relationship) sources). Send alone.\n    '
@@ -16027,6 +16136,16 @@ class SaveSellerInputAdmissionDecisionDecline(TypedDict):
     '\n    Decline this pending buyer-account intake.\n    '
     message: str
     '\n    Reason recorded with the decision to decline this intake.\n    '
+
+class SaveSellerInputAdmissionDecisionReopen(TypedDict):
+    intakeId: str
+    '\n    Declined buyer-account intake ID from get(account_relationship).\n    '
+    expectedVersion: int
+    '\n    Current intake version from get(account_relationship).\n    '
+    decision: Literal["reopen"]
+    '\n    Return this declined intake to pending review.\n    '
+    message: NotRequired[str]
+    '\n    Optional note recorded with this decision.\n    '
 
 class SaveSellerInputConfiguredCapabilities(TypedDict):
     offersCreativeReview: NotRequired[bool]
@@ -16308,6 +16427,12 @@ class SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked(TypedDict):
     action: Literal["ready_to_invoice_revoked"]
     assertionId: str
 
+class SaveSellerSuccessSaveSellerSuccessReopenRecorded(TypedDict):
+    outcome: Literal["reopen_recorded"]
+    action: Literal["reopen_recorded"]
+    intakeId: str
+    decision: Literal["reopen"]
+
 class SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded(TypedDict):
     outcome: Literal["source_decision_recorded"]
     action: Literal["source_decision_recorded"]
@@ -16346,7 +16471,7 @@ class SaveSellerSuccessSellerSaveReplayed(TypedDict):
     destinationSaveReplayed: Literal[False]
     materialReceipt: SaveSellerSuccessSellerSaveReplayedMaterialReceipt
 
-SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
+SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
 
 SaveSellerSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
@@ -16460,7 +16585,7 @@ class SaveWholesaleProductInput(TypedDict):
     channels: NotRequired[list[Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]]]
     '\n    AdCP channels. Required on create; omit keeps them.\n    '
     inventory: NotRequired[dict[str, JsonValue]]
-    '\n    The ad-server selectors to sell, in the source\'s own shape. Required to create.\n    '
+    '\n    Source shape. A create needs `execution.adapter`; copy `execution` from `get` of a product on this source.\n    '
     formatOptions: NotRequired[list[SaveWholesaleProductInputFormatOptionsItem]]
     '\n    Canonical format: format_kind and params; publisher entries need publisher_domain and format_option_id.\n    '
     pricingOptions: NotRequired[list[SaveWholesaleProductInputPricingOptionsItem]]
@@ -16691,7 +16816,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -16880,7 +17005,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "response", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -16930,7 +17055,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict)
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision(TypedDict):
     accountId: NotRequired[int | str]
@@ -16963,7 +17088,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -17152,7 +17277,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "response", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -17358,7 +17483,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "response", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -17402,7 +17527,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -17591,7 +17716,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "response", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -17642,7 +17767,7 @@ class SearchInputKindAdServerTargeting(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
 class SearchInputKindAdServerTargetingFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -17831,7 +17956,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "response", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -17882,7 +18007,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
 class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSessionFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -18071,7 +18196,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "response", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -18089,6 +18214,40 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind conversation: chats started at or after this UTC time.\n    '
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
+
+class SearchInputKindCreative(TypedDict):
+    accountId: NotRequired[int | str]
+    query: NotRequired[str]
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    document: NotRequired[str]
+    '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
+    revision: NotRequired[str]
+    '\n    The exact revision of an agreement docs hit, read together with its document. Docs only.\n    '
+    section: NotRequired[str]
+    '\n    One section of an agreement revision. Needs both document and revision.\n    '
+    asOf: NotRequired[str]
+    '\n    The time to evaluate docs at; defaults to now. When continuing an agreement read with cursor, send the same asOf again.\n    '
+    sources: NotRequired[list[Literal["objects", "docs", "specs"]]]
+    '\n    What to search: objects, docs, or specs. When omitted, a call with query searches all three and a call without query lists objects. docs and specs need a query, except an agreement read by document and revision.\n    '
+    docsScope: NotRequired[Literal["caller_relevant", "public_research"]]
+    '\n    Which docs to rank. caller_relevant (the default) skips docs written for other account types; public_research searches every public doc.\n    '
+    kind: Literal["creative"]
+    sponsoredBuyerCustomerId: NotRequired[str]
+    '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
+    scope: NotRequired[Literal["unit"]]
+    '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    sourceId: NotRequired[str]
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    filter: NotRequired[SearchInputKindCreativeFilter]
+    '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
+    cursor: NotRequired[str]
+    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    limit: NotRequired[int]
+    '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
 class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     accountId: NotRequired[int | str]
@@ -18122,7 +18281,7 @@ class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
 class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -18311,7 +18470,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "response", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -18362,7 +18521,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
 class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -18549,7 +18708,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "response", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -18600,7 +18759,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
 class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -18787,7 +18946,211 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "response", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
+    vertical: NotRequired[list[str]]
+    '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
+    effectiveOn: NotRequired[str]
+    '\n    For kind material: documents in effect at this instant. A missing start or end date counts as open-ended.\n    '
+    expiresAfter: NotRequired[str]
+    '\n    For kind material: documents with no expiry date or one at or after this instant.\n    '
+    hasUnits: NotRequired[bool]
+    '\n    For kind material with include ["browse"]: true keeps documents with at least one page or slide, false keeps documents with none.\n    '
+    documentStatus: NotRequired[list[Literal["processing", "incomplete", "ready"]]]
+    '\n    For kind material: live documents whose status is any of these. processing is waiting on its file or on extraction, incomplete is failed or only partly extracted, ready is usable. Not with materialState draft or archived.\n    '
+    materialState: NotRequired[Literal["live", "draft", "archived"]]
+    '\n    For kind material: live (the default), draft, or archived. Drafts return review details and gaps, never content.\n    '
+    conversationStartedAfter: NotRequired[str]
+    '\n    For kind conversation: chats started at or after this UTC time.\n    '
+    conversationStartedBefore: NotRequired[str]
+    '\n    For kind conversation: chats started at or before this UTC time.\n    '
+
+class SearchInputKindCreativeFilter(TypedDict):
+    targetKind: NotRequired[Literal["seller", "creative_engine"]]
+    '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
+    ids: NotRequired[list[str]]
+    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
+    sellerAccountIds: NotRequired[list[int]]
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
+    status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
+    '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
+    originRfpTurnId: NotRequired[str]
+    '\n    For kind library_request: only gaps opened from this RFP turn, by its id.\n    '
+    authorization: NotRequired[str]
+    '\n    For kind coverage: domains with exactly this adagents.json authorization verdict, such as authorized.\n    '
+    productStatus: NotRequired[Literal["draft", "active", "archived"]]
+    '\n    For kind wholesale_product in a seller account: products in this lifecycle status. Read buyerVisibility on each result to know whether buyers can find it.\n    '
+    askType: NotRequired[Literal["support", "product", "supply", "integration", "commercial"]]
+    '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
+    askState: NotRequired[Literal["open", "closed"]]
+    '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
+    candidateType: NotRequired[str]
+    '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
+    parentId: NotRequired[str]
+    '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
+    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
+    queue: NotRequired[Literal["overdue", "unowned"]]
+    '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
+    buyerDomain: NotRequired[str]
+    '\n    For kind house_discount: preview which discount rule applies to this buyer domain, resolved up its corporate parents.\n    '
+    campaignStatus: NotRequired[list[Literal["needs_attention", "active", "draft", "completed", "paused", "canceled", "archived"]]]
+    '\n    For kind campaign: campaigns in any of these statuses. archived returns archived campaigns; every other value returns campaigns that are not archived.\n    '
+    campaignMode: NotRequired[Literal["managed", "tracked"]]
+    '\n    For kind campaign: managed campaigns are built on this platform; tracked campaigns mirror a provider account.\n    '
+    campaignName: NotRequired[str]
+    '\n    For kind campaign: campaigns whose name contains this text, ignoring case. Used instead of query.\n    '
+    advertiserId: NotRequired[str]
+    '\n    The owning advertiser id. Required for event_source, catalog, property_list, creative_asset, creative_format, and buyer wholesale_product. creative, creative_collection, and creative_session take this or campaignId, not both. Over MCP, a buyer search of any of these kinds that sends neither uses the only active advertiser, or names the choices. Buyer media_buy needs this or campaignId. Narrows campaign. For seller, partnerStatus is read for this advertiser, not the account.\n    '
+    type: NotRequired[Literal["offering", "product", "inventory", "store", "promotion", "hotel", "flight", "job", "vehicle", "real_estate", "education", "destination", "app"]]
+    '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
+    propertyListPurpose: NotRequired[Literal["include", "exclude"]]
+    '\n    For kind property_list: only include lists or only exclude lists.\n    '
+    phase: NotRequired[list[Literal["draft", "active", "completed", "canceled", "pendingApproval", "inputRequired", "failed", "rejected"]]]
+    '\n    For kinds campaign and media_buy (buyer): items in any of these phases. active includes paused and cancel-pending buys. Campaigns use only draft, active, completed, and canceled. ending appears on results but is not a filter value.\n    '
+    handling: NotRequired[list[Literal["tracking", "managing"]]]
+    '\n    For kind campaign: tracking keeps campaigns that mirror a provider account; managing keeps campaigns built on this platform. Both or neither means no filter.\n    '
+    isPaused: NotRequired[bool]
+    '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
+    isArchived: NotRequired[bool]
+    '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
+    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    formatKind: NotRequired[str]
+    '\n    Exact format identifier for creative results.\n    '
+    statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
+    '\n    Lifecycle statuses used to select creative results.\n    '
+    productId: NotRequired[str]
+    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
+    resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
+    '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
+    tags: NotRequired[list[str]]
+    '\n    creative_asset: assets carrying every tag.\n    '
+    collectionIds: NotRequired[list[str]]
+    '\n    creative and creative_asset: items in these advertiser collections.\n    '
+    assetState: NotRequired[Literal["active", "draft"]]
+    '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
+    catalogState: NotRequired[Literal["active", "draft"]]
+    '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
+    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
+    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
+    appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
+    '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
+    role: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
+    libraryRole: NotRequired[SearchRequestCreativeRole]
+    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
+    source: NotRequired[SearchRequestCreativeSource]
+    '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
+    promoted: NotRequired[bool]
+    '\n    For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.\n    '
+    state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
+    '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
+    sellerId: NotRequired[str]
+    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
+    origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
+    '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
+    purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
+    '\n    For kinds rfp and rfp_turn: a list of RFP purposes to match. For kind session: one value, live, draft, or evaluation (RFP sessions only).\n    '
+    lifecycle: NotRequired[Literal["active", "closed", "archived"]]
+    '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
+    live: NotRequired[bool]
+    '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
+    attention: NotRequired[Literal["approval_needed"]]
+    '\n    For kind session (RFP sessions): approval_needed keeps sessions waiting on an approval.\n    '
+    operatorDomain: NotRequired[str]
+    '\n    For kind session (RFP sessions): the exact operator domain recorded on the session.\n    '
+    actorKind: NotRequired[Literal["human", "agent"]]
+    '\n    For kind session: keep sessions run by a human or by an agent, as recorded by their source.\n    '
+    advertiserIds: NotRequired[list[str]]
+    '\n    For kind session: up to 50 exact advertiser ids. Use ids from search, never names.\n    '
+    buyerAccountIds: NotRequired[list[str]]
+    '\n    For kind session: up to 50 exact buyer account ids. Use ids from search, never names.\n    '
+    transport: NotRequired[Literal["chat", "mcp", "adcp", "email", "slack", "sms", "discord", "fax"]]
+    '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
+    updatedAfter: NotRequired[str]
+    '\n    For kind session: sessions updated strictly after this instant.\n    '
+    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1"]]
+    '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
+    buyer: NotRequired[list[str]]
+    '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
+    advertiser: NotRequired[list[str]]
+    '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact advertiser names recorded on the RFP. A label, not an advertiser id.\n    '
+    category: NotRequired[list[str]]
+    '\n    For kinds rfp and rfp_turn: RFPs whose recorded category matches any of these exactly.\n    '
+    market: NotRequired[list[str]]
+    '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
+    channel: NotRequired[list[str]]
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    selectedPosture: NotRequired[list[str]]
+    '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
+    playbookVersion: NotRequired[list[int]]
+    '\n    For kinds rfp and rfp_turn: turns composed with any of these playbook versions. For rfp, its latest turn is checked.\n    '
+    cacheMode: NotRequired[list[Literal["miss_full_compose", "hit_hydrated", "hit_customized", "bypassed"]]]
+    '\n    For kinds rfp and rfp_turn: turns whose response came from any of these cache paths. For rfp, its latest turn is checked.\n    '
+    outcome: NotRequired[list[str]]
+    '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
+    rfpId: NotRequired[str]
+    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
+    responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
+    '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
+    evaluationState: NotRequired[list[str]]
+    '\n    For kind rfp_turn: turns whose evaluation is in any of these states.\n    '
+    responseRecipeVersion: NotRequired[list[str]]
+    '\n    For kind rfp_turn: turns built with any of these response recipe versions.\n    '
+    modelVersion: NotRequired[list[str]]
+    '\n    For kind rfp_turn: turns written by any of these composer model versions.\n    '
+    judgeVersion: NotRequired[list[str]]
+    '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
+    feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
+    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
+    '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
+    buyerAccountId: NotRequired[int]
+    '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
+    buyerCustomerId: NotRequired[int]
+    '\n    Deprecated: send buyerAccountId instead.\n    '
+    accountId: NotRequired[int]
+    '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
+    sandbox: NotRequired[bool]
+    '\n    For kind advertiser: true keeps sandbox advertisers, false keeps live ones; omit for both. In a seller account it needs own-supply campaigns.\n    '
+    linkedAccountPartnerId: NotRequired[str]
+    '\n    For kind advertiser in a buyer account: advertisers linked through this sales agent, by the agent record\'s agent_id. Not a seller id.\n    '
+    grantStatus: NotRequired[list[Literal["invited", "active", "expired", "rejected", "revoked"]]]
+    '\n    For kind advertiser_grant: grants in any of these states, from invited and active to expired, rejected, or revoked.\n    '
+    flightStartFrom: NotRequired[str]
+    '\n    For kind media_buy in a seller account: buys whose flight starts at or after this full ISO date-time.\n    '
+    flightStartTo: NotRequired[str]
+    '\n    For kind media_buy in a seller account: buys whose flight starts at or before this full ISO date-time.\n    '
+    sellerType: NotRequired[Literal["global_market_maker", "regional_market_maker", "apostra_seller"]]
+    '\n    For kind seller in a buyer account: sellers of this type, a global or regional market maker or an Apostra seller.\n    '
+    classification: NotRequired[Literal["global_market_maker", "regional_market_maker", "marketplace_seller", "apostra_seller"]]
+    '\n    Deprecated: use sellerType, which takes the same values. Here marketplace_seller means apostra_seller.\n    '
+    transactable: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers you can transact with through Apostra, false keeps the rest.\n    '
+    marketplaceReady: NotRequired[bool]
+    '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
+    partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
+    '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    marketplace: NotRequired[bool]
+    '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
+    region: NotRequired[str]
+    '\n    For kind seller in a buyer account: sellers that serve this region code.\n    '
+    processingState: NotRequired[list[Literal["needs_upload", "queued", "processing", "ready", "partial", "failed"]]]
+    '\n    For kind material: documents whose extraction state is any of these. needs_upload has no file yet; queued and processing are waiting or running; partial kept only some content.\n    '
+    materialKind: NotRequired[Literal["document", "response"]]
+    '\n    For kind material: response returns RFP responses and imported past proposals; document returns everything else.\n    '
+    sourceKind: NotRequired[list[Literal["url", "site", "upload", "crawl_manifest", "inline", "history"]]]
+    '\n    For kind material: documents that came from any of these sources: a web page (url), a site crawl, an upload, a crawl manifest, pasted text (inline), or an imported record (history).\n    '
+    visibility: NotRequired[list[Literal["public", "seller_private", "advertiser_confidential"]]]
+    '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
+    sourceExtension: NotRequired[str]
+    '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -18832,7 +19195,7 @@ class SearchInputKindCreativeSessionWithFilterAdvertiserId(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
 class SearchInputKindCreativeSessionWithFilterAdvertiserIdFilter(TypedDict):
     advertiserId: str
@@ -18866,7 +19229,7 @@ class SearchInputKindCreativeSessionWithFilterCampaignId(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
 class SearchInputKindCreativeSessionWithFilterCampaignIdFilter(TypedDict):
     campaignId: str
@@ -18874,7 +19237,11 @@ class SearchInputKindCreativeSessionWithFilterCampaignIdFilter(TypedDict):
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
 
-class SearchInputKindCreativeWithFilterAdvertiserId(TypedDict):
+SearchInputKindCreativeWithFilterAdvertiserId: TypeAlias = SearchInputKindCreative
+
+SearchInputKindCreativeWithFilterAdvertiserIdFilter: TypeAlias = SearchInputKindCreativeFilter
+
+class SearchInputKindCreativeWithFilterAndFilterCampaignId(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
     '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
@@ -18899,254 +19266,14 @@ class SearchInputKindCreativeWithFilterAdvertiserId(TypedDict):
     '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
-    filter: SearchInputKindCreativeWithFilterAdvertiserIdFilter
+    filter: SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
-    groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
 
-class SearchInputKindCreativeWithFilterAdvertiserIdFilter(TypedDict):
-    targetKind: NotRequired[Literal["seller", "creative_engine"]]
-    '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
-    ids: NotRequired[list[str]]
-    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
-    sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
-    status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
-    '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
-    originRfpTurnId: NotRequired[str]
-    '\n    For kind library_request: only gaps opened from this RFP turn, by its id.\n    '
-    authorization: NotRequired[str]
-    '\n    For kind coverage: domains with exactly this adagents.json authorization verdict, such as authorized.\n    '
-    productStatus: NotRequired[Literal["draft", "active", "archived"]]
-    '\n    For kind wholesale_product in a seller account: products in this lifecycle status. Read buyerVisibility on each result to know whether buyers can find it.\n    '
-    askType: NotRequired[Literal["support", "product", "supply", "integration", "commercial"]]
-    '\n    For kind ask: requests routed as this type, such as support or supply.\n    '
-    askState: NotRequired[Literal["open", "closed"]]
-    '\n    For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).\n    '
-    candidateType: NotRequired[str]
-    '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
-    parentId: NotRequired[str]
-    '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
-    '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
-    queue: NotRequired[Literal["overdue", "unowned"]]
-    '\n    For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.\n    '
-    buyerDomain: NotRequired[str]
-    '\n    For kind house_discount: preview which discount rule applies to this buyer domain, resolved up its corporate parents.\n    '
-    campaignStatus: NotRequired[list[Literal["needs_attention", "active", "draft", "completed", "paused", "canceled", "archived"]]]
-    '\n    For kind campaign: campaigns in any of these statuses. archived returns archived campaigns; every other value returns campaigns that are not archived.\n    '
-    campaignMode: NotRequired[Literal["managed", "tracked"]]
-    '\n    For kind campaign: managed campaigns are built on this platform; tracked campaigns mirror a provider account.\n    '
-    campaignName: NotRequired[str]
-    '\n    For kind campaign: campaigns whose name contains this text, ignoring case. Used instead of query.\n    '
-    advertiserId: str
-    '\n    The owning advertiser id. Required for event_source, catalog, property_list, creative_asset, creative_format, and buyer wholesale_product. creative, creative_collection, and creative_session take this or campaignId, not both. Over MCP, a buyer search of any of these kinds that sends neither uses the only active advertiser, or names the choices. Buyer media_buy needs this or campaignId. Narrows campaign. For seller, partnerStatus is read for this advertiser, not the account.\n    '
-    type: NotRequired[Literal["offering", "product", "inventory", "store", "promotion", "hotel", "flight", "job", "vehicle", "real_estate", "education", "destination", "app"]]
-    '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
-    propertyListPurpose: NotRequired[Literal["include", "exclude"]]
-    '\n    For kind property_list: only include lists or only exclude lists.\n    '
-    phase: NotRequired[list[Literal["draft", "active", "completed", "canceled", "pendingApproval", "inputRequired", "failed", "rejected"]]]
-    '\n    For kinds campaign and media_buy (buyer): items in any of these phases. active includes paused and cancel-pending buys. Campaigns use only draft, active, completed, and canceled. ending appears on results but is not a filter value.\n    '
-    handling: NotRequired[list[Literal["tracking", "managing"]]]
-    '\n    For kind campaign: tracking keeps campaigns that mirror a provider account; managing keeps campaigns built on this platform. Both or neither means no filter.\n    '
-    isPaused: NotRequired[bool]
-    '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
-    isArchived: NotRequired[bool]
-    '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
-    formatKind: NotRequired[str]
-    '\n    Exact format identifier for creative results.\n    '
-    statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
-    '\n    Lifecycle statuses used to select creative results.\n    '
-    productId: NotRequired[str]
-    '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.\n    '
-    resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
-    '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
-    '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
-    tags: NotRequired[list[str]]
-    '\n    creative_asset: assets carrying every tag.\n    '
-    collectionIds: NotRequired[list[str]]
-    '\n    creative and creative_asset: items in these advertiser collections.\n    '
-    assetState: NotRequired[Literal["active", "draft"]]
-    '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
-    catalogState: NotRequired[Literal["active", "draft"]]
-    '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
-    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
-    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
-    appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
-    '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
-    role: NotRequired[SearchRequestCreativeRole]
-    '\n    For kind creative: evergreen or reference, the creative\'s role in the advertiser\'s creative library. Not the seller Library.\n    '
-    libraryRole: NotRequired[SearchRequestCreativeRole]
-    '\n    For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.\n    '
-    source: NotRequired[SearchRequestCreativeSource]
-    '\n    For kind creative: where the creative came from: uploaded, generated, or connected.\n    '
-    promoted: NotRequired[bool]
-    '\n    For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.\n    '
-    state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
-    '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
-    sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
-    origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
-    '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
-    purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
-    '\n    For kinds rfp and rfp_turn: a list of RFP purposes to match. For kind session: one value, live, draft, or evaluation (RFP sessions only).\n    '
-    lifecycle: NotRequired[Literal["active", "closed", "archived"]]
-    '\n    For kind session: active, closed, or archived. archived reads only Murph chat sessions.\n    '
-    live: NotRequired[bool]
-    '\n    For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.\n    '
-    attention: NotRequired[Literal["approval_needed"]]
-    '\n    For kind session (RFP sessions): approval_needed keeps sessions waiting on an approval.\n    '
-    operatorDomain: NotRequired[str]
-    '\n    For kind session (RFP sessions): the exact operator domain recorded on the session.\n    '
-    actorKind: NotRequired[Literal["human", "agent"]]
-    '\n    For kind session: keep sessions run by a human or by an agent, as recorded by their source.\n    '
-    advertiserIds: NotRequired[list[str]]
-    '\n    For kind session: up to 50 exact advertiser ids. Use ids from search, never names.\n    '
-    buyerAccountIds: NotRequired[list[str]]
-    '\n    For kind session: up to 50 exact buyer account ids. Use ids from search, never names.\n    '
-    transport: NotRequired[Literal["chat", "mcp", "adcp", "email", "slack", "sms", "discord", "fax"]]
-    '\n    For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.\n    '
-    updatedAfter: NotRequired[str]
-    '\n    For kind session: sessions updated strictly after this instant.\n    '
-    sessionSource: NotRequired[Literal["murph_conversation_v1", "storefront_rfp_v1", "storefront_media_buy_v1", "storefront_compose_run_v1"]]
-    '\n    For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.\n    '
-    buyer: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.\n    '
-    advertiser: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and session (RFP sessions): exact advertiser names recorded on the RFP. A label, not an advertiser id.\n    '
-    category: NotRequired[list[str]]
-    '\n    For kinds rfp and rfp_turn: RFPs whose recorded category matches any of these exactly.\n    '
-    market: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
-    channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
-    selectedPosture: NotRequired[list[str]]
-    '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
-    playbookVersion: NotRequired[list[int]]
-    '\n    For kinds rfp and rfp_turn: turns composed with any of these playbook versions. For rfp, its latest turn is checked.\n    '
-    cacheMode: NotRequired[list[Literal["miss_full_compose", "hit_hydrated", "hit_customized", "bypassed"]]]
-    '\n    For kinds rfp and rfp_turn: turns whose response came from any of these cache paths. For rfp, its latest turn is checked.\n    '
-    outcome: NotRequired[list[str]]
-    '\n    For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.\n    '
-    rfpId: NotRequired[str]
-    '\n    For kind rfp_turn: only turns of this RFP, by the RFP id from search.\n    '
-    responseState: NotRequired[list[Literal["queued", "processing", "ready", "passed", "needs_clarification", "failed"]]]
-    '\n    For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.\n    '
-    evaluationState: NotRequired[list[str]]
-    '\n    For kind rfp_turn: turns whose evaluation is in any of these states.\n    '
-    responseRecipeVersion: NotRequired[list[str]]
-    '\n    For kind rfp_turn: turns built with any of these response recipe versions.\n    '
-    modelVersion: NotRequired[list[str]]
-    '\n    For kind rfp_turn: turns written by any of these composer model versions.\n    '
-    judgeVersion: NotRequired[list[str]]
-    '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
-    feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
-    sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
-    '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
-    buyerAccountId: NotRequired[int]
-    '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
-    accountId: NotRequired[int]
-    '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
-    sandbox: NotRequired[bool]
-    '\n    For kind advertiser: true keeps sandbox advertisers, false keeps live ones; omit for both. In a seller account it needs own-supply campaigns.\n    '
-    linkedAccountPartnerId: NotRequired[str]
-    '\n    For kind advertiser in a buyer account: advertisers linked through this sales agent, by the agent record\'s agent_id. Not a seller id.\n    '
-    grantStatus: NotRequired[list[Literal["invited", "active", "expired", "rejected", "revoked"]]]
-    '\n    For kind advertiser_grant: grants in any of these states, from invited and active to expired, rejected, or revoked.\n    '
-    flightStartFrom: NotRequired[str]
-    '\n    For kind media_buy in a seller account: buys whose flight starts at or after this full ISO date-time.\n    '
-    flightStartTo: NotRequired[str]
-    '\n    For kind media_buy in a seller account: buys whose flight starts at or before this full ISO date-time.\n    '
-    sellerType: NotRequired[Literal["global_market_maker", "regional_market_maker", "apostra_seller"]]
-    '\n    For kind seller in a buyer account: sellers of this type, a global or regional market maker or an Apostra seller.\n    '
-    classification: NotRequired[Literal["global_market_maker", "regional_market_maker", "marketplace_seller", "apostra_seller"]]
-    '\n    Deprecated: use sellerType, which takes the same values. Here marketplace_seller means apostra_seller.\n    '
-    transactable: NotRequired[bool]
-    '\n    For kind seller in a buyer account: true keeps sellers you can transact with through Apostra, false keeps the rest.\n    '
-    marketplaceReady: NotRequired[bool]
-    '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
-    partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
-    '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
-    marketplace: NotRequired[bool]
-    '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
-    region: NotRequired[str]
-    '\n    For kind seller in a buyer account: sellers that serve this region code.\n    '
-    processingState: NotRequired[list[Literal["needs_upload", "queued", "processing", "ready", "partial", "failed"]]]
-    '\n    For kind material: documents whose extraction state is any of these. needs_upload has no file yet; queued and processing are waiting or running; partial kept only some content.\n    '
-    materialKind: NotRequired[Literal["document", "response"]]
-    '\n    For kind material: response returns RFP responses and imported past proposals; document returns everything else.\n    '
-    sourceKind: NotRequired[list[Literal["url", "site", "upload", "crawl_manifest", "inline", "history"]]]
-    '\n    For kind material: documents that came from any of these sources: a web page (url), a site crawl, an upload, a crawl manifest, pasted text (inline), or an imported record (history).\n    '
-    visibility: NotRequired[list[Literal["public", "seller_private", "advertiser_confidential"]]]
-    '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
-    sourceExtension: NotRequired[str]
-    '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "response", "specification_sheet", "media_kit", "uncategorized"]]
-    '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
-    vertical: NotRequired[list[str]]
-    '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
-    effectiveOn: NotRequired[str]
-    '\n    For kind material: documents in effect at this instant. A missing start or end date counts as open-ended.\n    '
-    expiresAfter: NotRequired[str]
-    '\n    For kind material: documents with no expiry date or one at or after this instant.\n    '
-    hasUnits: NotRequired[bool]
-    '\n    For kind material with include ["browse"]: true keeps documents with at least one page or slide, false keeps documents with none.\n    '
-    documentStatus: NotRequired[list[Literal["processing", "incomplete", "ready"]]]
-    '\n    For kind material: live documents whose status is any of these. processing is waiting on its file or on extraction, incomplete is failed or only partly extracted, ready is usable. Not with materialState draft or archived.\n    '
-    materialState: NotRequired[Literal["live", "draft", "archived"]]
-    '\n    For kind material: live (the default), draft, or archived. Drafts return review details and gaps, never content.\n    '
-    conversationStartedAfter: NotRequired[str]
-    '\n    For kind conversation: chats started at or after this UTC time.\n    '
-    conversationStartedBefore: NotRequired[str]
-    '\n    For kind conversation: chats started at or before this UTC time.\n    '
-
-class SearchInputKindCreativeWithFilterCampaignId(TypedDict):
-    accountId: NotRequired[int | str]
-    query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
-    document: NotRequired[str]
-    '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
-    revision: NotRequired[str]
-    '\n    The exact revision of an agreement docs hit, read together with its document. Docs only.\n    '
-    section: NotRequired[str]
-    '\n    One section of an agreement revision. Needs both document and revision.\n    '
-    asOf: NotRequired[str]
-    '\n    The time to evaluate docs at; defaults to now. When continuing an agreement read with cursor, send the same asOf again.\n    '
-    sources: NotRequired[list[Literal["objects", "docs", "specs"]]]
-    '\n    What to search: objects, docs, or specs. When omitted, a call with query searches all three and a call without query lists objects. docs and specs need a query, except an agreement read by document and revision.\n    '
-    docsScope: NotRequired[Literal["caller_relevant", "public_research"]]
-    '\n    Which docs to rank. caller_relevant (the default) skips docs written for other account types; public_research searches every public doc.\n    '
-    kind: Literal["creative"]
-    sponsoredBuyerCustomerId: NotRequired[str]
-    '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
-    scope: NotRequired[Literal["unit"]]
-    '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
-    sourceId: NotRequired[str]
-    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
-    filter: SearchInputKindCreativeWithFilterCampaignIdFilter
-    '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
-    cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
-    limit: NotRequired[int]
-    '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
-    groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
-
-class SearchInputKindCreativeWithFilterCampaignIdFilter(TypedDict):
+class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
@@ -19331,7 +19458,7 @@ class SearchInputKindCreativeWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "response", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -19349,6 +19476,10 @@ class SearchInputKindCreativeWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind conversation: chats started at or after this UTC time.\n    '
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
+
+SearchInputKindCreativeWithFilterCampaignId: TypeAlias = SearchInputKindCreativeWithFilterAndFilterCampaignId
+
+SearchInputKindCreativeWithFilterCampaignIdFilter: TypeAlias = SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter
 
 class SearchInputKindEventSource(TypedDict):
     accountId: NotRequired[int | str]
@@ -19375,17 +19506,17 @@ class SearchInputKindEventSource(TypedDict):
     '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
-    filter: SearchInputKindEventSourceFilter
+    filter: NotRequired[SearchInputKindEventSourceFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
     '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
 class SearchInputKindEventSourceFilter(TypedDict):
-    advertiserId: str
+    advertiserId: NotRequired[str]
     '\n    The owning advertiser id. Required for event_source, catalog, property_list, creative_asset, creative_format, and buyer wholesale_product. creative, creative_collection, and creative_session take this or campaignId, not both. Over MCP, a buyer search of any of these kinds that sends neither uses the only active advertiser, or names the choices. Buyer media_buy needs this or campaignId. Narrows campaign. For seller, partnerStatus is read for this advertiser, not the account.\n    '
 
 class SearchInputKindProposal(TypedDict):
@@ -19420,7 +19551,7 @@ class SearchInputKindProposal(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
 class SearchInputKindProposalFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -19609,7 +19740,7 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "response", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -19660,9 +19791,9 @@ class SearchInputKindSourceAccount(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
-SearchInput: TypeAlias = "SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSession | SearchInputKindCreativeAssetAndCatalog | SearchInputKindEventSource | SearchInputKindProposal | SearchInputKindCreativeWithFilterCampaignId | SearchInputKindCreativeWithFilterAdvertiserId | SearchInputKindCreativeCollectionWithFilterCampaignId | SearchInputKindCreativeCollectionWithFilterAdvertiserId | SearchInputKindCreativeSessionWithFilterCampaignId | SearchInputKindCreativeSessionWithFilterAdvertiserId | SearchInputKindAdServerTargeting | SearchInputKindSourceAccount | SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision | SearchInputDocsScopeCallerRelevantAndPublicResearch"
+SearchInput: TypeAlias = "SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSession | SearchInputKindCreativeAssetAndCatalog | SearchInputKindEventSource | SearchInputKindProposal | SearchInputKindCreativeWithFilterAndFilterCampaignId | SearchInputKindCreative | SearchInputKindCreativeCollectionWithFilterCampaignId | SearchInputKindCreativeCollectionWithFilterAdvertiserId | SearchInputKindCreativeSessionWithFilterCampaignId | SearchInputKindCreativeSessionWithFilterAdvertiserId | SearchInputKindAdServerTargeting | SearchInputKindSourceAccount | SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision | SearchInputDocsScopeCallerRelevantAndPublicResearch"
 
 class SearchInputKindSourceAccountFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -19851,7 +19982,7 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "response", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -21820,8 +21951,6 @@ class UploadCreativeAssetInputCampaignComposition(TypedDict):
     '\n    Optional campaign name for the upload experience.\n    '
     creative_name: NotRequired[str]
     '\n    Optional creative name for the upload experience.\n    '
-    required_authored_fields: list[str]
-    '\n    Creative fields that remain to be authored.\n    '
 
 UploadCreativeAssetRequestAdvertiserId: TypeAlias = str
 
@@ -21837,7 +21966,6 @@ class UploadCreativeAssetResult(TypedDict):
     '\n    Exact byte limits keyed by accepted_content_types.\n    '
     fallback_url: str
     campaign_composition: NotRequired[UploadCreativeAssetResultCampaignComposition]
-    '\n    Optional campaign context for composing the uploaded creative.\n    '
 
 class UploadCreativeAssetResultCampaignComposition(TypedDict):
     campaign_id: str
@@ -21848,8 +21976,8 @@ class UploadCreativeAssetResultCampaignComposition(TypedDict):
     '\n    Optional campaign name for the upload experience.\n    '
     creative_name: NotRequired[str]
     '\n    Optional creative name for the upload experience.\n    '
-    required_authored_fields: list[str]
-    '\n    Creative fields that remain to be authored.\n    '
+    required_authored_fields: list[Literal["headline", "primary_text", "cta", "brand_name"]]
+    '\n    Copy fields every image format of the campaign\'s products requires; a save without one is refused.\n    '
 
 UploadCreativeAssetSuccessAdvertiserId: TypeAlias = str
 
@@ -21882,8 +22010,6 @@ GetV3PublicMutationReceiptError: TypeAlias = "V3ToolErrorResponse"
 LogEventError: TypeAlias = "V3ToolErrorResponse"
 
 OpenAdvertisersPageError: TypeAlias = "V3ToolErrorResponse"
-
-OpenAgentCertificationPageError: TypeAlias = "V3ToolErrorResponse"
 
 OpenAgentPageError: TypeAlias = "V3ToolErrorResponse"
 
