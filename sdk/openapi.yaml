@@ -1324,6 +1324,8 @@ paths:
                 - $ref: '#/components/schemas/generate_variants_request_GenerateVariantsAdvertiserGenerateInput'
                 - $ref: '#/components/schemas/generate_variants_request_GenerateVariantsCampaignFeedbackInput'
                 - $ref: '#/components/schemas/generate_variants_request_GenerateVariantsAdvertiserFeedbackInput'
+                - $ref: '#/components/schemas/generate_variants_request_GenerateVariantsCampaignCopyInput'
+                - $ref: '#/components/schemas/generate_variants_request_GenerateVariantsAdvertiserCopyInput'
               properties:
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
@@ -26866,13 +26868,13 @@ paths:
     post:
       operationId: get_status
       summary: >-
-        Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether
-        readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand.
-        A Developer account adds each agent's stage, blocker, and next call.
+        Current account, state, blockers, exact fixes, accounts to pick from. For seller demand, tells if readiness
+        stops requests before source calls; read before diagnosing source health, empty responses, or demand. A
+        Developer account adds each agent's stage, blocker, next call.
       description: >-
-        Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether
-        readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand.
-        A Developer account adds each agent's stage, blocker, and next call.
+        Current account, state, blockers, exact fixes, accounts to pick from. For seller demand, tells if readiness
+        stops requests before source calls; read before diagnosing source health, empty responses, or demand. A
+        Developer account adds each agent's stage, blocker, next call.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -26895,6 +26897,9 @@ paths:
               default: {}
               type: object
               properties:
+                cursor:
+                  description: accounts.nextCursor
+                  type: string
                 accountId:
                   description: Apostra accountId this call runs in, from get_status.
                   anyOf:
@@ -27264,6 +27269,45 @@ paths:
                           additionalProperties: {}
                       reachableAccountsTruncated:
                         type: boolean
+                      accounts:
+                        type: object
+                        properties:
+                          total:
+                            type: number
+                          returned:
+                            type: number
+                          truncated:
+                            type: boolean
+                          nextCursor:
+                            type: string
+                          results:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                accountId:
+                                  type: number
+                                kind:
+                                  type: string
+                                  enum:
+                                    - buyer
+                                    - seller
+                                    - org
+                                    - developer
+                                name:
+                                  type: string
+                                needsYou:
+                                  type: boolean
+                              required:
+                                - accountId
+                                - name
+                              additionalProperties: {}
+                        required:
+                          - total
+                          - returned
+                          - truncated
+                          - results
+                        additionalProperties: false
                       agents:
                         type: object
                         properties:
@@ -30739,6 +30783,7 @@ paths:
                     - notifications
                     - webhooks
                     - buyer_proposal_version
+                    - sessions
                   description: Page to open. Owners repair a missing Agent relationship in source_diagnostics.
                 sourceId:
                   description: Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.
@@ -42085,6 +42130,21 @@ paths:
                             type: array
                             items:
                               type: string
+                          liveMediaBuys:
+                            type: object
+                            properties:
+                              attached:
+                                type: array
+                                items:
+                                  $ref: '#/components/schemas/save_creative_success_LiveMediaBuysAttachedItem'
+                              detached:
+                                type: array
+                                items:
+                                  $ref: '#/components/schemas/save_creative_success_LiveMediaBuysDetachedItem'
+                            required:
+                              - attached
+                              - detached
+                            additionalProperties: false
                         required:
                           - action
                           - creativeId
@@ -42114,10 +42174,30 @@ paths:
                                       type: array
                                       items:
                                         type: string
+                                    queuedMediaBuyIds:
+                                      type: array
+                                      items:
+                                        type: string
                                   required:
                                     - campaignId
                                     - status
                                     - mediaBuyIds
+                                  additionalProperties: false
+                                - type: object
+                                  properties:
+                                    campaignId:
+                                      type: string
+                                    status:
+                                      type: string
+                                      const: queued
+                                    queuedMediaBuyIds:
+                                      type: array
+                                      items:
+                                        type: string
+                                  required:
+                                    - campaignId
+                                    - status
+                                    - queuedMediaBuyIds
                                   additionalProperties: false
                                 - type: object
                                   properties:
@@ -42132,6 +42212,10 @@ paths:
                                       type: string
                                     retryable:
                                       type: boolean
+                                    queuedMediaBuyIds:
+                                      type: array
+                                      items:
+                                        type: string
                                   required:
                                     - campaignId
                                     - status
@@ -45969,11 +46053,11 @@ paths:
       operationId: save_media_buy
       summary: >-
         Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if
-        unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget;
+        unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget;
         omit products. channelGroupId: required if grouped; invalid ungrouped/updates.
       description: >-
         Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if
-        unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget;
+        unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget;
         omit products. channelGroupId: required if grouped; invalid ungrouped/updates.
       security:
         - apiKeyAuth: []
@@ -46170,6 +46254,15 @@ paths:
                           remove:
                             description: 'Update only: true removes this line item.'
                             type: boolean
+                          pacing:
+                            description: >-
+                              Update only: delivery pacing of this line item. On a running buy the seller must take the
+                              change.
+                            type: string
+                            enum:
+                              - even
+                              - asap
+                              - front_loaded
                           lineItemRef:
                             description: 'Update only: line-item handle from the read; needed for a repeated product.'
                             type: string
@@ -47404,7 +47497,9 @@ paths:
                           - productId
                         additionalProperties: false
                     budget:
-                      description: 'Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.'
+                      description: >-
+                        Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal
+                        allowed; multi: products[].budget; else retain allocation.
                       type: object
                       properties:
                         total:
@@ -47420,8 +47515,8 @@ paths:
                       additionalProperties: false
                     budgetAllocation:
                       description: >-
-                        Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear;
-                        required when both modes are supported.
+                        Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when
+                        both modes are supported.
                       oneOf:
                         - type: object
                           properties:
@@ -47911,6 +48006,15 @@ paths:
                           remove:
                             description: 'Update only: true removes this line item.'
                             type: boolean
+                          pacing:
+                            description: >-
+                              Update only: delivery pacing of this line item. On a running buy the seller must take the
+                              change.
+                            type: string
+                            enum:
+                              - even
+                              - asap
+                              - front_loaded
                           lineItemRef:
                             description: 'Update only: line-item handle from the read; needed for a repeated product.'
                             type: string
@@ -49241,7 +49345,9 @@ paths:
                           - productId
                         additionalProperties: false
                     budget:
-                      description: 'Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.'
+                      description: >-
+                        Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal
+                        allowed; multi: products[].budget; else retain allocation.
                       type: object
                       properties:
                         total:
@@ -49257,8 +49363,8 @@ paths:
                       additionalProperties: false
                     budgetAllocation:
                       description: >-
-                        Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear;
-                        required when both modes are supported.
+                        Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when
+                        both modes are supported.
                       oneOf:
                         - type: object
                           properties:
@@ -49603,7 +49709,9 @@ paths:
                       minLength: 1
                       maxLength: 128
                     budget:
-                      description: 'Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.'
+                      description: >-
+                        Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal
+                        allowed; multi: products[].budget; else retain allocation.
                       type: object
                       properties:
                         total:
@@ -56054,9 +56162,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -56296,7 +56405,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -56307,11 +56416,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -56533,11 +56646,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -56545,14 +56661,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -57611,9 +57729,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -57854,7 +57973,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -57865,11 +57984,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -58091,11 +58214,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -58103,14 +58229,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -58276,8 +58404,6 @@ paths:
                             this advertiser, not the account.
                           type: string
                       additionalProperties: false
-                      required:
-                        - advertiserId
                     cursor:
                       description: >-
                         The nextCursor from the previous page of the same search. Not accepted for kinds account and
@@ -58292,9 +58418,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -58306,7 +58433,6 @@ paths:
                   additionalProperties: false
                   required:
                     - kind
-                    - filter
                   allOf:
                     - anyOf:
                         - required:
@@ -58535,7 +58661,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -58546,11 +58672,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -58772,11 +58902,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -58784,14 +58917,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -59848,9 +59983,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -60091,7 +60227,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -60102,11 +60238,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -60328,11 +60468,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -60340,14 +60483,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -61394,12 +61539,7 @@ paths:
                       minimum: 1
                       maximum: 200
                     groupBy:
-                      description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
-                      type: string
-                      minLength: 1
+                      not: {}
                     accountId:
                       anyOf:
                         - type: integer
@@ -61638,7 +61778,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -61649,11 +61789,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -61875,11 +62019,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -61887,14 +62034,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -62930,8 +63079,6 @@ paths:
                           pattern: >-
                             ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
                       additionalProperties: false
-                      required:
-                        - advertiserId
                     cursor:
                       description: >-
                         The nextCursor from the previous page of the same search. Not accepted for kinds account and
@@ -62946,9 +63093,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -62960,7 +63108,6 @@ paths:
                   additionalProperties: false
                   required:
                     - kind
-                    - filter
                   allOf:
                     - anyOf:
                         - required:
@@ -63189,7 +63336,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -63200,11 +63347,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -63426,11 +63577,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -63438,14 +63592,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -64493,9 +64649,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -64736,7 +64893,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -64747,11 +64904,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -64973,11 +65134,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -64985,14 +65149,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -66044,9 +66210,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -66287,7 +66454,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -66298,11 +66465,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -66524,11 +66695,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -66536,14 +66710,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -66739,9 +66915,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -66982,7 +67159,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -66993,11 +67170,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -67219,11 +67400,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -67231,14 +67415,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -67438,9 +67624,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -67681,7 +67868,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -67692,11 +67879,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -67918,11 +68109,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -67930,14 +68124,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -68992,9 +69188,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -69235,7 +69432,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -69246,11 +69443,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -69472,11 +69673,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -69484,14 +69688,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -70546,9 +70752,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -70789,7 +70996,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -70800,11 +71007,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -71026,11 +71237,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -71038,14 +71252,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -72098,9 +72314,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -72340,7 +72557,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -72351,11 +72568,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -72577,11 +72798,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -72589,14 +72813,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -73649,9 +73875,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -73891,7 +74118,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -73902,11 +74129,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -74128,11 +74359,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -74140,14 +74374,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -75200,9 +75436,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -75443,7 +75680,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -75454,11 +75691,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -75680,11 +75921,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -75692,14 +75936,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -76752,9 +76998,10 @@ paths:
                       maximum: 200
                     groupBy:
                       description: >-
-                        Count the kind by one field instead of listing it: you get each value with its count, no rows.
-                        Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState,
-                        askType. inventory_source: status.
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
                       type: string
                       minLength: 1
                     accountId:
@@ -76992,7 +77239,7 @@ paths:
                     - if:
                         properties:
                           kind:
-                            const: event_source
+                            const: catalog
                         required:
                           - kind
                       then:
@@ -77003,11 +77250,15 @@ paths:
                         required:
                           - filter
                     - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         properties:
                           filter:
@@ -77229,11 +77480,14 @@ paths:
                                 required:
                                   - filter
                     - if:
-                        properties:
-                          kind:
-                            const: event_source
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
                       then:
                         properties:
                           filter:
@@ -77241,14 +77495,16 @@ paths:
                             properties:
                               advertiserId: {}
                             additionalProperties: false
-                        required:
-                          - filter
                     - if:
-                        properties:
-                          kind:
-                            const: creative
-                        required:
-                          - kind
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
                       then:
                         oneOf:
                           - allOf:
@@ -78783,6 +79039,96 @@ components:
         - parentVariantId
         - feedback
       additionalProperties: false
+    generate_variants_request_GenerateVariantsCampaignCopyInput:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: campaign_copy
+        scope:
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsCampaignCopyInputScope'
+        variantAction:
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsCampaignCopyInputVariantAction'
+        campaignId:
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsCampaignCopyInputCampaignId'
+        sessionId:
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsCampaignCopyInputSessionId'
+        actionKey:
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsCampaignCopyInputActionKey'
+        expectedRevision:
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsCampaignCopyInputExpectedRevision'
+        sessionGeneration:
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsCampaignCopyInputSessionGeneration'
+        slotIds:
+          description: Composer copy slots to explicitly regenerate. Omit to fill only empty copy slots.
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsCampaignCopyInputSlotIds'
+        expectedAccountId:
+          anyOf:
+            - type: integer
+              minimum: 1
+            - type: string
+              pattern: ^[1-9][0-9]*$
+        accountId:
+          anyOf:
+            - type: integer
+              minimum: 1
+            - type: string
+              pattern: ^[1-9][0-9]*$
+      required:
+        - kind
+        - scope
+        - variantAction
+        - campaignId
+        - sessionId
+        - actionKey
+        - expectedRevision
+        - sessionGeneration
+      additionalProperties: false
+    generate_variants_request_GenerateVariantsAdvertiserCopyInput:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: advertiser_copy
+        scope:
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsAdvertiserCopyInputScope'
+        variantAction:
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsAdvertiserCopyInputVariantAction'
+        advertiserId:
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsAdvertiserCopyInputAdvertiserId'
+        sessionId:
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsAdvertiserCopyInputSessionId'
+        actionKey:
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsAdvertiserCopyInputActionKey'
+        expectedRevision:
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsAdvertiserCopyInputExpectedRevision'
+        sessionGeneration:
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsAdvertiserCopyInputSessionGeneration'
+        slotIds:
+          description: Composer copy slots to explicitly regenerate. Omit to fill only empty copy slots.
+          $ref: '#/components/schemas/generate_variants_request_GenerateVariantsAdvertiserCopyInputSlotIds'
+        expectedAccountId:
+          anyOf:
+            - type: integer
+              minimum: 1
+            - type: string
+              pattern: ^[1-9][0-9]*$
+        accountId:
+          anyOf:
+            - type: integer
+              minimum: 1
+            - type: string
+              pattern: ^[1-9][0-9]*$
+      required:
+        - kind
+        - scope
+        - variantAction
+        - advertiserId
+        - sessionId
+        - actionKey
+        - expectedRevision
+        - sessionGeneration
+      additionalProperties: false
     generate_variants_request_GenerateVariantsCampaignGenerateInputScope:
       type: string
       const: campaign
@@ -78933,6 +79279,87 @@ components:
       minLength: 1
       maxLength: 2000
       description: Refinement request.
+    generate_variants_request_GenerateVariantsCampaignCopyInputScope:
+      type: string
+      const: campaign
+      description: Campaign session.
+    generate_variants_request_GenerateVariantsCampaignCopyInputVariantAction:
+      type: string
+      const: copy
+      description: Generate copy for every empty composer slot, or explicitly regenerate the named copy slots.
+    generate_variants_request_GenerateVariantsCampaignCopyInputCampaignId:
+      type: string
+      minLength: 1
+      description: Campaign scope.
+    generate_variants_request_GenerateVariantsCampaignCopyInputSessionId:
+      type: string
+      minLength: 1
+      description: Saved session ID.
+    generate_variants_request_GenerateVariantsCampaignCopyInputActionKey:
+      type: string
+      minLength: 1
+      maxLength: 200
+      description: Action key; reuse only for an identical retry.
+    generate_variants_request_GenerateVariantsCampaignCopyInputExpectedRevision:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
+      description: Saved revision to generate from.
+    generate_variants_request_GenerateVariantsCampaignCopyInputSessionGeneration:
+      type: string
+      format: uuid
+      pattern: >-
+        ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+      description: Current session lifecycle ID.
+    generate_variants_request_GenerateVariantsCampaignCopyInputSlotIds:
+      minItems: 1
+      maxItems: 12
+      type: array
+      items:
+        type: string
+        minLength: 1
+        maxLength: 80
+    generate_variants_request_GenerateVariantsAdvertiserCopyInputScope:
+      type: string
+      const: advertiser
+      description: Advertiser-library session.
+    generate_variants_request_GenerateVariantsAdvertiserCopyInputVariantAction:
+      type: string
+      const: copy
+      description: Generate copy for every empty composer slot, or explicitly regenerate the named copy slots.
+    generate_variants_request_GenerateVariantsAdvertiserCopyInputAdvertiserId:
+      type: string
+      maxLength: 19
+      pattern: ^[1-9][0-9]*$
+      description: Advertiser library scope.
+    generate_variants_request_GenerateVariantsAdvertiserCopyInputSessionId:
+      type: string
+      minLength: 1
+      description: Saved session ID.
+    generate_variants_request_GenerateVariantsAdvertiserCopyInputActionKey:
+      type: string
+      minLength: 1
+      maxLength: 200
+      description: Action key; reuse only for an identical retry.
+    generate_variants_request_GenerateVariantsAdvertiserCopyInputExpectedRevision:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
+      description: Saved revision to generate from.
+    generate_variants_request_GenerateVariantsAdvertiserCopyInputSessionGeneration:
+      type: string
+      format: uuid
+      pattern: >-
+        ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+      description: Current session lifecycle ID.
+    generate_variants_request_GenerateVariantsAdvertiserCopyInputSlotIds:
+      minItems: 1
+      maxItems: 12
+      type: array
+      items:
+        type: string
+        minLength: 1
+        maxLength: 80
     generate_variants_success_GallerySessionId:
       type: string
       minLength: 1
@@ -87579,6 +88006,28 @@ components:
       type: array
       items:
         type: string
+    save_creative_success_LiveMediaBuysAttachedItem:
+      type: object
+      properties:
+        mediaBuyId:
+          type: string
+        status:
+          type: string
+      required:
+        - mediaBuyId
+        - status
+      additionalProperties: false
+    save_creative_success_LiveMediaBuysDetachedItem:
+      type: object
+      properties:
+        mediaBuyId:
+          type: string
+        status:
+          type: string
+      required:
+        - mediaBuyId
+        - status
+      additionalProperties: false
     save_creative_collection_success_Collection:
       type: object
       properties:
