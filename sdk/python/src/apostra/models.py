@@ -61,6 +61,36 @@ DownloadV3PublicDocumentRevisionResult: TypeAlias = str
 
 EvidenceUrl: TypeAlias = str
 
+class GenerateVariantsRequestGenerateVariantsAdvertiserCopyInput(TypedDict):
+    kind: Literal["advertiser_copy"]
+    scope: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputScope
+    variantAction: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputVariantAction
+    advertiserId: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputAdvertiserId
+    sessionId: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionId
+    actionKey: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputActionKey
+    expectedRevision: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputExpectedRevision
+    sessionGeneration: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionGeneration
+    slotIds: NotRequired[GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSlotIds]
+    '\n    Composer copy slots to explicitly regenerate. Omit to fill only empty copy slots.\n    '
+    expectedAccountId: NotRequired[int | str]
+    accountId: NotRequired[int | str]
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputActionKey: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputAdvertiserId: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputExpectedRevision: TypeAlias = int
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputScope: TypeAlias = Literal["advertiser"]
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionGeneration: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionId: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSlotIds: TypeAlias = list[str]
+
+GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputVariantAction: TypeAlias = Literal["copy"]
+
 class GenerateVariantsRequestGenerateVariantsAdvertiserFeedbackInput(TypedDict):
     kind: Literal["advertiser_feedback"]
     scope: GenerateVariantsRequestGenerateVariantsAdvertiserFeedbackInputScope
@@ -119,6 +149,36 @@ GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInputSessionId: TypeAli
 
 GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInputVariantAction: TypeAlias = Literal["generate"]
 
+class GenerateVariantsRequestGenerateVariantsCampaignCopyInput(TypedDict):
+    kind: Literal["campaign_copy"]
+    scope: GenerateVariantsRequestGenerateVariantsCampaignCopyInputScope
+    variantAction: GenerateVariantsRequestGenerateVariantsCampaignCopyInputVariantAction
+    campaignId: GenerateVariantsRequestGenerateVariantsCampaignCopyInputCampaignId
+    sessionId: GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionId
+    actionKey: GenerateVariantsRequestGenerateVariantsCampaignCopyInputActionKey
+    expectedRevision: GenerateVariantsRequestGenerateVariantsCampaignCopyInputExpectedRevision
+    sessionGeneration: GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionGeneration
+    slotIds: NotRequired[GenerateVariantsRequestGenerateVariantsCampaignCopyInputSlotIds]
+    '\n    Composer copy slots to explicitly regenerate. Omit to fill only empty copy slots.\n    '
+    expectedAccountId: NotRequired[int | str]
+    accountId: NotRequired[int | str]
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputActionKey: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputCampaignId: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputExpectedRevision: TypeAlias = int
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputScope: TypeAlias = Literal["campaign"]
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionGeneration: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionId: TypeAlias = str
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputSlotIds: TypeAlias = list[str]
+
+GenerateVariantsRequestGenerateVariantsCampaignCopyInputVariantAction: TypeAlias = Literal["copy"]
+
 class GenerateVariantsRequestGenerateVariantsCampaignFeedbackInput(TypedDict):
     kind: Literal["campaign_feedback"]
     scope: GenerateVariantsRequestGenerateVariantsCampaignFeedbackInputScope
@@ -163,7 +223,7 @@ class GenerateVariantsRequestGenerateVariantsCampaignGenerateInput(TypedDict):
     expectedAccountId: NotRequired[int | str]
     accountId: NotRequired[int | str]
 
-GenerateVariantsInput: TypeAlias = "GenerateVariantsRequestGenerateVariantsCampaignGenerateInput | GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInput | GenerateVariantsRequestGenerateVariantsCampaignFeedbackInput | GenerateVariantsRequestGenerateVariantsAdvertiserFeedbackInput"
+GenerateVariantsInput: TypeAlias = "GenerateVariantsRequestGenerateVariantsCampaignGenerateInput | GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInput | GenerateVariantsRequestGenerateVariantsCampaignFeedbackInput | GenerateVariantsRequestGenerateVariantsAdvertiserFeedbackInput | GenerateVariantsRequestGenerateVariantsCampaignCopyInput | GenerateVariantsRequestGenerateVariantsAdvertiserCopyInput"
 
 GenerateVariantsRequestGenerateVariantsCampaignGenerateInputActionKey: TypeAlias = str
 
@@ -4285,6 +4345,8 @@ GetSellerReportingReceiptsSuccessReceiptsItemReceivedTotalsVideoCompletions: Typ
 GetSellerReportingReceiptsSuccessReceiptsItemReceivedTotalsViews: TypeAlias = str | None
 
 class GetStatusInput(TypedDict):
+    cursor: NotRequired[str]
+    '\n    accounts.nextCursor\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
@@ -4306,6 +4368,7 @@ class GetStatusResult(TypedDict):
     nextActions: list[GetStatusResultNextActionsItem]
     reachableAccounts: list[GetStatusResultReachableAccountsItem]
     reachableAccountsTruncated: NotRequired[bool]
+    accounts: NotRequired[GetStatusResultAccounts]
     agents: NotRequired[GetStatusResultAgents]
     resources: NotRequired[list[GetStatusResultResourcesItem]]
 
@@ -4313,6 +4376,19 @@ class GetStatusResultAccount(TypedDict):
     accountId: float
     company: str
     kind: Literal["buyer", "seller", "org", "developer"] | None
+
+class GetStatusResultAccounts(TypedDict):
+    total: float
+    returned: float
+    truncated: bool
+    nextCursor: NotRequired[str]
+    results: list[GetStatusResultAccountsResultsItem]
+
+class GetStatusResultAccountsResultsItem(TypedDict):
+    accountId: float
+    kind: NotRequired[Literal["buyer", "seller", "org", "developer"]]
+    name: str
+    needsYou: NotRequired[bool]
 
 class GetStatusResultAgents(TypedDict):
     total: float
@@ -10146,12 +10222,13 @@ class SaveCreativeResultActionPromoting(TypedDict):
 class SaveCreativeResultActionResynced(TypedDict):
     action: Literal["resynced"]
     creativeId: str
-    campaigns: list[SaveCreativeResultActionResyncedCampaignsItemStatusConfirmed | SaveCreativeResultActionResyncedCampaignsItemStatusFailed]
+    campaigns: list[SaveCreativeResultActionResyncedCampaignsItemStatusConfirmed | SaveCreativeResultActionResyncedCampaignsItemStatusQueued | SaveCreativeResultActionResyncedCampaignsItemStatusFailed]
 
 class SaveCreativeResultActionResyncedCampaignsItemStatusConfirmed(TypedDict):
     campaignId: str
     status: Literal["confirmed"]
     mediaBuyIds: list[str]
+    queuedMediaBuyIds: NotRequired[list[str]]
 
 class SaveCreativeResultActionResyncedCampaignsItemStatusFailed(TypedDict):
     campaignId: str
@@ -10159,6 +10236,12 @@ class SaveCreativeResultActionResyncedCampaignsItemStatusFailed(TypedDict):
     code: str
     message: str
     retryable: bool
+    queuedMediaBuyIds: NotRequired[list[str]]
+
+class SaveCreativeResultActionResyncedCampaignsItemStatusQueued(TypedDict):
+    campaignId: str
+    status: Literal["queued"]
+    queuedMediaBuyIds: list[str]
 
 class SaveCreativeResultActionUpdated(TypedDict):
     creative: SaveCreativeSuccessCreative
@@ -12835,9 +12918,9 @@ class SaveMediaBuyInputKindCreate(TypedDict):
     '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. Still accepted for explicit creation until a later release.\n    '
     products: list[SaveMediaBuyInputKindCreateProductsItem]
     budget: NotRequired[SaveMediaBuyInputKindCreateBudget]
-    '\n    Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
+    '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
     budgetAllocation: NotRequired[SaveMediaBuyInputKindCreateBudgetAllocationModeFixed | SaveMediaBuyInputKindCreateBudgetAllocationModeSellerOptimized]
-    '\n    Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.\n    '
+    '\n    Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.\n    '
     flight: NotRequired[SaveMediaBuyInputKindCreateFlight]
     '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     isArchived: NotRequired[bool]
@@ -13359,7 +13442,7 @@ class SaveMediaBuyInputKindProposal(TypedDict):
     channelGroupId: NotRequired[str]
     '\n    channelGroupId for a new buy. Required when campaign has channelGroups; invalid on updates.\n    '
     budget: NotRequired[SaveMediaBuyInputKindProposalBudget]
-    '\n    Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
+    '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
     flight: NotRequired[SaveMediaBuyInputKindProposalFlight]
     '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     isArchived: NotRequired[bool]
@@ -13395,9 +13478,9 @@ class SaveMediaBuyInputKindUpdate(TypedDict):
     '\n    channelGroupId for a new buy. Required when campaign has channelGroups; invalid on updates.\n    '
     products: NotRequired[list[SaveMediaBuyInputKindUpdateProductsItem]]
     budget: NotRequired[SaveMediaBuyInputKindUpdateBudget]
-    '\n    Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
+    '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
     budgetAllocation: NotRequired[SaveMediaBuyInputKindUpdateBudgetAllocationModeFixed | SaveMediaBuyInputKindUpdateBudgetAllocationModeSellerOptimized]
-    '\n    Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.\n    '
+    '\n    Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.\n    '
     flight: NotRequired[SaveMediaBuyInputKindUpdateFlight]
     '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     name: NotRequired[str]
