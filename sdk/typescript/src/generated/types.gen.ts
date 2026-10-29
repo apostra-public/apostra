@@ -282,7 +282,7 @@ export type DownloadV3PublicDocumentRevisionResponses = {
 };
 
 export type GenerateVariantsData = {
-    body: (GenerateVariantsRequestGenerateVariantsCampaignGenerateInput | GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInput | GenerateVariantsRequestGenerateVariantsCampaignFeedbackInput | GenerateVariantsRequestGenerateVariantsAdvertiserFeedbackInput) & {
+    body: (GenerateVariantsRequestGenerateVariantsCampaignGenerateInput | GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInput | GenerateVariantsRequestGenerateVariantsCampaignFeedbackInput | GenerateVariantsRequestGenerateVariantsAdvertiserFeedbackInput | GenerateVariantsRequestGenerateVariantsCampaignCopyInput | GenerateVariantsRequestGenerateVariantsAdvertiserCopyInput) & {
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -363,6 +363,60 @@ export type GenerateVariantsErrors = {
      */
     503: V3ToolErrorResponse;
 };
+
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInput = {
+    kind: 'advertiser_copy';
+    scope: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputScope;
+    variantAction: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputVariantAction;
+    advertiserId: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputAdvertiserId;
+    sessionId: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionId;
+    actionKey: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputActionKey;
+    expectedRevision: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputExpectedRevision;
+    sessionGeneration: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionGeneration;
+    /**
+     * Composer copy slots to explicitly regenerate. Omit to fill only empty copy slots.
+     */
+    slotIds?: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSlotIds;
+    expectedAccountId?: number | string;
+    accountId?: number | string;
+};
+
+/**
+ * Action key; reuse only for an identical retry.
+ */
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputActionKey = string;
+
+/**
+ * Advertiser library scope.
+ */
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputAdvertiserId = string;
+
+/**
+ * Saved revision to generate from.
+ */
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputExpectedRevision = number;
+
+/**
+ * Advertiser-library session.
+ */
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputScope = 'advertiser';
+
+/**
+ * Current session lifecycle ID.
+ */
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionGeneration = string;
+
+/**
+ * Saved session ID.
+ */
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionId = string;
+
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSlotIds = Array<string>;
+
+/**
+ * Generate copy for every empty composer slot, or explicitly regenerate the named copy slots.
+ */
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputVariantAction = 'copy';
 
 export type GenerateVariantsRequestGenerateVariantsAdvertiserFeedbackInput = {
     kind: 'advertiser_feedback';
@@ -471,6 +525,60 @@ export type GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInputSessio
  * Start a generation.
  */
 export type GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInputVariantAction = 'generate';
+
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInput = {
+    kind: 'campaign_copy';
+    scope: GenerateVariantsRequestGenerateVariantsCampaignCopyInputScope;
+    variantAction: GenerateVariantsRequestGenerateVariantsCampaignCopyInputVariantAction;
+    campaignId: GenerateVariantsRequestGenerateVariantsCampaignCopyInputCampaignId;
+    sessionId: GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionId;
+    actionKey: GenerateVariantsRequestGenerateVariantsCampaignCopyInputActionKey;
+    expectedRevision: GenerateVariantsRequestGenerateVariantsCampaignCopyInputExpectedRevision;
+    sessionGeneration: GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionGeneration;
+    /**
+     * Composer copy slots to explicitly regenerate. Omit to fill only empty copy slots.
+     */
+    slotIds?: GenerateVariantsRequestGenerateVariantsCampaignCopyInputSlotIds;
+    expectedAccountId?: number | string;
+    accountId?: number | string;
+};
+
+/**
+ * Action key; reuse only for an identical retry.
+ */
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputActionKey = string;
+
+/**
+ * Campaign scope.
+ */
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputCampaignId = string;
+
+/**
+ * Saved revision to generate from.
+ */
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputExpectedRevision = number;
+
+/**
+ * Campaign session.
+ */
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputScope = 'campaign';
+
+/**
+ * Current session lifecycle ID.
+ */
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionGeneration = string;
+
+/**
+ * Saved session ID.
+ */
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionId = string;
+
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputSlotIds = Array<string>;
+
+/**
+ * Generate copy for every empty composer slot, or explicitly regenerate the named copy slots.
+ */
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputVariantAction = 'copy';
 
 export type GenerateVariantsRequestGenerateVariantsCampaignFeedbackInput = {
     kind: 'campaign_feedback';
@@ -7231,6 +7339,10 @@ export type GetSellerReportingReceiptsSuccessReceiptsItemReceivedTotalsViews = s
 export type GetStatusData = {
     body: {
         /**
+         * accounts.nextCursor
+         */
+        cursor?: string;
+        /**
          * Apostra accountId this call runs in, from get_status.
          */
         accountId?: number | string;
@@ -7419,6 +7531,19 @@ export type GetStatusResponses = {
                 [key: string]: unknown;
             }>;
             reachableAccountsTruncated?: boolean;
+            accounts?: {
+                total: number;
+                returned: number;
+                truncated: boolean;
+                nextCursor?: string;
+                results: Array<{
+                    accountId: number;
+                    kind?: 'buyer' | 'seller' | 'org' | 'developer';
+                    name: string;
+                    needsYou?: boolean;
+                    [key: string]: unknown;
+                }>;
+            };
             agents?: {
                 total: number;
                 returned: number;
@@ -10456,7 +10581,7 @@ export type OpenPageData = {
         /**
          * Page to open. Owners repair a missing Agent relationship in source_diagnostics.
          */
-        page: 'connect_ad_server' | 'ad_server_source' | 'ad_server_diagnostics' | 'source_diagnostics' | 'seller_setup' | 'demo_seller' | 'connect_sales_agent' | 'modular_inventory_source' | 'modular_source_setup' | 'modular_inventory_feed' | 'listing' | 'discovery_card' | 'media_kit' | 'business_profile' | 'playbook' | 'library' | 'integrations' | 'product_marketing' | 'business_rules' | 'buyer_account_mapping' | 'property_roster' | 'plan_and_billing' | 'buyer_setup' | 'sellers' | 'creative_engines' | 'advertisers' | 'campaigns' | 'campaign_receipt' | 'approvals' | 'release_notes' | 'customer_requests' | 'notifications' | 'webhooks' | 'buyer_proposal_version';
+        page: 'connect_ad_server' | 'ad_server_source' | 'ad_server_diagnostics' | 'source_diagnostics' | 'seller_setup' | 'demo_seller' | 'connect_sales_agent' | 'modular_inventory_source' | 'modular_source_setup' | 'modular_inventory_feed' | 'listing' | 'discovery_card' | 'media_kit' | 'business_profile' | 'playbook' | 'library' | 'integrations' | 'product_marketing' | 'business_rules' | 'buyer_account_mapping' | 'property_roster' | 'plan_and_billing' | 'buyer_setup' | 'sellers' | 'creative_engines' | 'advertisers' | 'campaigns' | 'campaign_receipt' | 'approvals' | 'release_notes' | 'customer_requests' | 'notifications' | 'webhooks' | 'buyer_proposal_version' | 'sessions';
         /**
          * Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.
          */
@@ -13790,11 +13915,11 @@ export type SaveAskData = {
          */
         severity?: 'low' | 'medium' | 'high' | 'urgent';
         /**
-         * Supply domain or integration vendor.
+         * Supply domain or integration vendor. Not for support, product or commercial.
          */
         subject?: string;
         /**
-         * Supply channel or integration channel name.
+         * Supply only: the inventory channel.
          */
         channel?: string;
         expectedAccountId?: number | string;
@@ -18895,6 +19020,20 @@ export type SaveCreativeData = {
             }>;
         };
         /**
+         * AdCP industry IDs broadcast sellers require. Replaces the list.
+         */
+        industry_identifiers?: Array<{
+            /**
+             * Identifier scheme.
+             */
+            type: 'ad_id' | 'isci' | 'clearcast_clock' | 'idcrea';
+            /**
+             * The code.
+             */
+            value: string;
+            [key: string]: unknown;
+        }>;
+        /**
          * Dimension values; [] clears.
          */
         labels?: {
@@ -19111,6 +19250,10 @@ export type SaveCreativeResponses = {
             campaignIds: Array<string>;
             attached: Array<string>;
             detached: Array<string>;
+            liveMediaBuys?: {
+                attached: Array<SaveCreativeSuccessLiveMediaBuysAttachedItem>;
+                detached: Array<SaveCreativeSuccessLiveMediaBuysDetachedItem>;
+            };
         } | {
             action: 'resynced';
             creativeId: string;
@@ -19118,6 +19261,15 @@ export type SaveCreativeResponses = {
                 campaignId: string;
                 status: 'confirmed';
                 mediaBuyIds: Array<string>;
+                queuedMediaBuyIds?: Array<string>;
+                code?: never;
+                message?: never;
+                retryable?: never;
+            } | {
+                campaignId: string;
+                status: 'queued';
+                queuedMediaBuyIds: Array<string>;
+                mediaBuyIds?: never;
                 code?: never;
                 message?: never;
                 retryable?: never;
@@ -19127,6 +19279,7 @@ export type SaveCreativeResponses = {
                 code: string;
                 message: string;
                 retryable: boolean;
+                queuedMediaBuyIds?: Array<string>;
                 mediaBuyIds?: never;
             }>;
         } | {
@@ -20343,6 +20496,16 @@ export type SaveCreativeSuccessDuplicateCreativeSuccess = {
     sourceCreativeId: string;
     creative: SaveCreativeSuccessCreativeDuplicate;
     replayed: boolean;
+};
+
+export type SaveCreativeSuccessLiveMediaBuysAttachedItem = {
+    mediaBuyId: string;
+    status: string;
+};
+
+export type SaveCreativeSuccessLiveMediaBuysDetachedItem = {
+    mediaBuyId: string;
+    status: string;
 };
 
 export type SaveCreativeSuccessProviderContacted = false;
@@ -24301,6 +24464,10 @@ export type SaveMediaBuyData = {
              */
             remove?: boolean;
             /**
+             * Update only: delivery pacing of this line item. On a running buy the seller must take the change.
+             */
+            pacing?: 'even' | 'asap' | 'front_loaded';
+            /**
              * Update only: line-item handle from the read; needed for a repeated product.
              */
             lineItemRef?: string;
@@ -24782,7 +24949,7 @@ export type SaveMediaBuyData = {
             };
         }>;
         /**
-         * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
          */
         budget?: {
             /**
@@ -24795,7 +24962,7 @@ export type SaveMediaBuyData = {
             currency: string;
         };
         /**
-         * Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.
+         * Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.
          */
         budgetAllocation?: {
             /**
@@ -25121,6 +25288,10 @@ export type SaveMediaBuyData = {
              * Update only: true removes this line item.
              */
             remove?: boolean;
+            /**
+             * Update only: delivery pacing of this line item. On a running buy the seller must take the change.
+             */
+            pacing?: 'even' | 'asap' | 'front_loaded';
             /**
              * Update only: line-item handle from the read; needed for a repeated product.
              */
@@ -25585,7 +25756,7 @@ export type SaveMediaBuyData = {
             };
         }>;
         /**
-         * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
          */
         budget?: {
             /**
@@ -25598,7 +25769,7 @@ export type SaveMediaBuyData = {
             currency: string;
         };
         /**
-         * Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.
+         * Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.
          */
         budgetAllocation?: {
             /**
@@ -25828,7 +25999,7 @@ export type SaveMediaBuyData = {
          */
         channelGroupId?: string;
         /**
-         * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
          */
         budget?: {
             /**
@@ -30178,7 +30349,7 @@ export type SaveWholesaleProductData = {
          */
         channels?: Array<'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence'>;
         /**
-         * The ad-server selectors to sell, in the source's own shape. Required to create.
+         * Source shape. A create needs `execution.adapter`; copy `execution` from `get` of a product on this source.
          */
         inventory?: {
             [key: string]: unknown;
@@ -31153,7 +31324,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -31631,7 +31802,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -31684,11 +31855,11 @@ export type SearchData = {
         /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
-        filter: {
+        filter?: {
             /**
              * The owning advertiser id. Required for event_source, catalog, property_list, creative_asset, creative_format, and buyer wholesale_product. creative, creative_collection, and creative_session take this or campaignId, not both. Over MCP, a buyer search of any of these kinds that sends neither uses the only active advertiser, or names the choices. Buyer media_buy needs this or campaignId. Narrows campaign. For seller, partnerStatus is read for this advertiser, not the account.
              */
-            advertiserId: string;
+            advertiserId?: string;
         };
         /**
          * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
@@ -31699,7 +31870,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -32177,7 +32348,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -32650,11 +32821,8 @@ export type SearchData = {
          * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
          */
         limit?: number;
-        /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
-         */
-        groupBy?: string;
         accountId?: number | string;
+        groupBy?: never;
     }) | (unknown & {
         /**
          * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.
@@ -32704,7 +32872,7 @@ export type SearchData = {
         /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
-        filter: {
+        filter?: {
             /**
              * For kind connection: list connections to sellers (the default) or to creative engines.
              */
@@ -32776,7 +32944,7 @@ export type SearchData = {
             /**
              * The owning advertiser id. Required for event_source, catalog, property_list, creative_asset, creative_format, and buyer wholesale_product. creative, creative_collection, and creative_session take this or campaignId, not both. Over MCP, a buyer search of any of these kinds that sends neither uses the only active advertiser, or names the choices. Buyer media_buy needs this or campaignId. Narrows campaign. For seller, partnerStatus is read for this advertiser, not the account.
              */
-            advertiserId: string;
+            advertiserId?: string;
             /**
              * For kind catalog: catalogs of exactly this AdCP catalog type.
              */
@@ -33125,7 +33293,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -33599,7 +33767,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -34073,7 +34241,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -34133,7 +34301,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -34196,7 +34364,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -34677,7 +34845,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -35155,7 +35323,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -35632,7 +35800,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -36110,7 +36278,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -36588,7 +36756,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -37066,7 +37234,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
