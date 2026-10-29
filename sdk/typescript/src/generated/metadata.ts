@@ -244,7 +244,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call."
+    "summary": "Current account, state, blockers, exact fixes, accounts to pick from. For seller demand, tells if readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, next call."
   },
   "log_event": {
     "path": "/tools/log_event",
@@ -855,7 +855,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "File or update a typed ask in the Apostra Support workflow; returns askId. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
+    "summary": "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
   },
   "save_audience": {
     "path": "/tools/save_audience",
@@ -1240,7 +1240,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates."
+    "summary": "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates."
   },
   "save_media_kit": {
     "path": "/tools/save_media_kit",
