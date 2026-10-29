@@ -395,14 +395,14 @@ export class Apostra extends Transport {
   /** Show a seller what reporting we received for one buyer media buy, whether each receipt was accepted, and the current computed daily totals. Opens the Media Buy Timeline Glance. Returns the data together with response headers and request ID. */
   getSellerReportingReceiptsWithResponse(input: GetSellerReportingReceiptsInput, options?: RequestOptions): Promise<ResponseDetails<GetSellerReportingReceiptsResult>> { return this.requestDetailed("get_seller_reporting_receipts", input, options) }
   /**
-   * Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call.
+   * Current account, state, blockers, exact fixes, accounts to pick from. For seller demand, tells if readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, next call.
    *
    * @example
    * await client.getStatus(input)
    */
   getStatus(input: GetStatusInput = {}, options?: RequestOptions): Promise<GetStatusResult> { return this.request("get_status", input, options) }
 
-  /** Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call. Returns the data together with response headers and request ID. */
+  /** Current account, state, blockers, exact fixes, accounts to pick from. For seller demand, tells if readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, next call. Returns the data together with response headers and request ID. */
   getStatusWithResponse(input: GetStatusInput = {}, options?: RequestOptions): Promise<ResponseDetails<GetStatusResult>> { return this.requestDetailed("get_status", input, options) }
   /**
    * Send up to 10,000 AdCP conversion events (log_event) to an event source the advertiser registered with save_event_source. Events must also pass the v2 rules: no raw email or phone in user_match, each event_type + event_id once per call. One invalid event refuses the whole call.
@@ -915,14 +915,14 @@ export class Apostra extends Transport {
   /** Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra Returns the data together with response headers and request ID. */
   saveMaterialWithResponse(input: SaveMaterialInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveMaterialResult>> { return this.requestDetailed("save_material", input, options) }
   /**
-   * Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates.
+   * Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates.
    *
    * @example
    * await client.saveMediaBuy(input, { idempotencyKey: 'stable-key' })
    */
   saveMediaBuy(input: SaveMediaBuyInput, options: WriteRequestOptions): Promise<SaveMediaBuyResult> { return this.request("save_media_buy", input, options) }
 
-  /** Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates. Returns the data together with response headers and request ID. */
+  /** Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates. Returns the data together with response headers and request ID. */
   saveMediaBuyWithResponse(input: SaveMediaBuyInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveMediaBuyResult>> { return this.requestDetailed("save_media_buy", input, options) }
   /**
    * Deprecated compatibility tool ("listing" is the modern term). It writes only the legacy businessProfile and does not update the canonical buyer-visible listing. New clients must read with `get({ kind: "seller", include: ["listing"] })` and write with `save_seller`.
