@@ -24280,15 +24280,18 @@ paths:
                       - clicks
                       - views
                       - completed_views
+                      - quartile_100
                       - conversions
                       - leads
-                      - videoCompletions
                       - conversion_value
-                      - ecpm
-                      - cpc
+                      - viewable_impressions
+                      - measurable_impressions
+                      - cpm
+                      - cost_per_click
                       - ctr
                       - completion_rate
-                      - cpa
+                      - viewable_rate
+                      - cost_per_acquisition
                       - roas
                       - sellBooked
                       - sellRealized
@@ -24509,6 +24512,9 @@ paths:
                             $ref: '#/components/schemas/get_delivery_success_Rows'
                           totals:
                             $ref: '#/components/schemas/get_delivery_success_Totals'
+                          totalsByFinality:
+                            description: Totals per finality class, when classes differ.
+                            $ref: '#/components/schemas/get_delivery_success_TotalsByFinality'
                           page:
                             $ref: '#/components/schemas/get_delivery_success_Page'
                           semantics:
@@ -24520,8 +24526,8 @@ paths:
                             $ref: '#/components/schemas/get_delivery_success_CampaignGoalProgress'
                           coverage:
                             description: >-
-                              Present only for an account-wide campaign_delivery read over a bounded range: the
-                              in-flight campaigns that have no stored rows, each with the live read to call next.
+                              Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and
+                              the live read to call for each.
                             $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
                           synthetic:
                             description: >-
@@ -24548,6 +24554,9 @@ paths:
                             $ref: '#/components/schemas/get_delivery_success_Rows'
                           totals:
                             $ref: '#/components/schemas/get_delivery_success_Totals'
+                          totalsByFinality:
+                            description: Totals per finality class, when classes differ.
+                            $ref: '#/components/schemas/get_delivery_success_TotalsByFinality'
                           page:
                             $ref: '#/components/schemas/get_delivery_success_Page'
                           semantics:
@@ -24559,8 +24568,8 @@ paths:
                             $ref: '#/components/schemas/get_delivery_success_CampaignGoalProgress'
                           coverage:
                             description: >-
-                              Present only for an account-wide campaign_delivery read over a bounded range: the
-                              in-flight campaigns that have no stored rows, each with the live read to call next.
+                              Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and
+                              the live read to call for each.
                             $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
                           synthetic:
                             description: >-
@@ -24587,6 +24596,9 @@ paths:
                             $ref: '#/components/schemas/get_delivery_success_Rows'
                           totals:
                             $ref: '#/components/schemas/get_delivery_success_Totals'
+                          totalsByFinality:
+                            description: Totals per finality class, when classes differ.
+                            $ref: '#/components/schemas/get_delivery_success_TotalsByFinality'
                           page:
                             $ref: '#/components/schemas/get_delivery_success_Page'
                           semantics:
@@ -24598,8 +24610,8 @@ paths:
                             $ref: '#/components/schemas/get_delivery_success_CampaignGoalProgress'
                           coverage:
                             description: >-
-                              Present only for an account-wide campaign_delivery read over a bounded range: the
-                              in-flight campaigns that have no stored rows, each with the live read to call next.
+                              Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and
+                              the live read to call for each.
                             $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
                           synthetic:
                             description: >-
@@ -44527,11 +44539,13 @@ paths:
                       maxLength: 255
                       description: The seller-local module id returned by this source's readiness view.
                     config:
-                      type: object
-                      propertyNames:
-                        type: string
-                      additionalProperties: {}
-                      description: Non-secret module configuration. Nested values are deep-merged by default.
+                      maxItems: 100
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/save_inventory_source_request_ModuleConfigEntry'
+                      description: >-
+                        Non-secret module settings, one entry per field. Dotted keys name nested fields and are
+                        deep-merged by default.
                     merge:
                       default: true
                       description: Deep-merge by default; false replaces seller-writable configuration.
@@ -54058,6 +54072,14 @@ paths:
                 expectedIsPaused:
                   description: 'With isPaused: the hold you last read; a changed hold returns CONFLICT.'
                   type: boolean
+                sellingMode:
+                  description: >-
+                    Change the account type in place. Direct administrator only. `listing` is refused while Storefront
+                    agent work runs and closes Enhanced Reporting. Send alone.
+                  type: string
+                  enum:
+                    - listing
+                    - storefront_agent
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -54117,6 +54139,8 @@ paths:
                         - readyToInvoice
                     - required:
                         - isPaused
+                    - required:
+                        - sellingMode
                 - if:
                     required:
                       - sourceDecision
@@ -54130,6 +54154,11 @@ paths:
                 - if:
                     required:
                       - readyToInvoice
+                  then:
+                    maxProperties: 1
+                - if:
+                    required:
+                      - sellingMode
                   then:
                     maxProperties: 1
                 - if:
@@ -54447,6 +54476,8 @@ paths:
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessInformationWithdrawn'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessReadyToInvoiceAsserted'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessReadyToInvoiceRevoked'
+                      - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessSellingModeChanged'
+                      - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessSellingModeUnchanged'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessPreview'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessUpdated'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessUnchanged'
@@ -55344,11 +55375,11 @@ paths:
                   type: string
                   pattern: ^[a-f0-9]{64}$
                 result:
-                  description: Modular completion fields named by requiredResultFields. Never secrets.
-                  type: object
-                  propertyNames:
-                    type: string
-                  additionalProperties: {}
+                  description: Modular completion fields named by requiredResultFields, one entry per field. Never secrets.
+                  maxItems: 50
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/save_work_item_request_WorkItemResultEntry'
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -81650,15 +81681,18 @@ components:
               - clicks
               - views
               - completed_views
+              - quartile_100
               - conversions
               - leads
-              - videoCompletions
               - conversion_value
-              - ecpm
-              - cpc
+              - viewable_impressions
+              - measurable_impressions
+              - cpm
+              - cost_per_click
               - ctr
               - completion_rate
-              - cpa
+              - viewable_rate
+              - cost_per_acquisition
               - roas
               - sellBooked
               - sellRealized
@@ -81884,33 +81918,19 @@ components:
       type: object
       properties:
         rowsIncluded:
-          type: integer
-          minimum: 0
-          maximum: 9007199254740991
+          $ref: '#/components/schemas/get_delivery_success_TotalsRowsIncluded'
         currency:
-          type:
-            - string
-            - 'null'
+          $ref: '#/components/schemas/get_delivery_success_TotalsCurrency'
         metrics:
-          type: object
-          propertyNames:
-            type: string
-          additionalProperties:
-            $ref: '#/components/schemas/get_delivery_success_TotalsMetricsValue'
+          $ref: '#/components/schemas/get_delivery_success_TotalsMetrics'
         denomination:
-          type: string
-          enum:
-            - net
-            - gross_buyer
+          $ref: '#/components/schemas/get_delivery_success_TotalsDenomination'
         dataThrough:
-          type:
-            - string
-            - 'null'
+          $ref: '#/components/schemas/get_delivery_success_TotalsDataThrough'
         finality:
           $ref: '#/components/schemas/get_delivery_success_TotalsFinality'
         billingEligibility:
-          type: string
-          const: not_evaluated
+          $ref: '#/components/schemas/get_delivery_success_TotalsBillingEligibility'
       required:
         - rowsIncluded
         - currency
@@ -81920,6 +81940,35 @@ components:
         - finality
         - billingEligibility
       additionalProperties: false
+    get_delivery_success_TotalsByFinality:
+      maxItems: 3
+      type: array
+      items:
+        type: object
+        properties:
+          rowsIncluded:
+            $ref: '#/components/schemas/get_delivery_success_TotalsByFinalityItemRowsIncluded'
+          currency:
+            $ref: '#/components/schemas/get_delivery_success_TotalsByFinalityItemCurrency'
+          metrics:
+            $ref: '#/components/schemas/get_delivery_success_TotalsByFinalityItemMetrics'
+          denomination:
+            $ref: '#/components/schemas/get_delivery_success_TotalsByFinalityItemDenomination'
+          dataThrough:
+            $ref: '#/components/schemas/get_delivery_success_TotalsByFinalityItemDataThrough'
+          finality:
+            $ref: '#/components/schemas/get_delivery_success_TotalsByFinalityItemFinality'
+          billingEligibility:
+            $ref: '#/components/schemas/get_delivery_success_TotalsByFinalityItemBillingEligibility'
+        required:
+          - rowsIncluded
+          - currency
+          - metrics
+          - denomination
+          - dataThrough
+          - finality
+          - billingEligibility
+        additionalProperties: false
     get_delivery_success_Page:
       type: object
       properties:
@@ -82540,6 +82589,7 @@ components:
             - currency_unavailable
             - incomplete
             - revision_unreadable
+            - finality_mixed
       required:
         - value
         - status
@@ -82589,31 +82639,29 @@ components:
         - class
         - revision
       additionalProperties: false
-    get_delivery_success_TotalsMetricsValue:
+    get_delivery_success_TotalsRowsIncluded:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    get_delivery_success_TotalsCurrency:
+      type:
+        - string
+        - 'null'
+    get_delivery_success_TotalsMetrics:
       type: object
-      properties:
-        value:
-          type:
-            - number
-            - boolean
-            - 'null'
-        status:
-          type: string
-          enum:
-            - available
-            - unavailable
-        reason:
-          type: string
-          enum:
-            - projected_zero
-            - missing
-            - currency_unavailable
-            - incomplete
-            - revision_unreadable
-      required:
-        - value
-        - status
-      additionalProperties: false
+      propertyNames:
+        type: string
+      additionalProperties:
+        $ref: '#/components/schemas/get_delivery_success_TotalsMetricsValue'
+    get_delivery_success_TotalsDenomination:
+      type: string
+      enum:
+        - net
+        - gross_buyer
+    get_delivery_success_TotalsDataThrough:
+      type:
+        - string
+        - 'null'
     get_delivery_success_TotalsFinality:
       type: object
       properties:
@@ -82653,6 +82701,74 @@ components:
         - class
         - revision
       additionalProperties: false
+    get_delivery_success_TotalsBillingEligibility:
+      type: string
+      const: not_evaluated
+    get_delivery_success_TotalsByFinalityItemRowsIncluded:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    get_delivery_success_TotalsByFinalityItemCurrency:
+      type:
+        - string
+        - 'null'
+    get_delivery_success_TotalsByFinalityItemMetrics:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties:
+        $ref: '#/components/schemas/get_delivery_success_TotalsByFinalityItemMetricsValue'
+    get_delivery_success_TotalsByFinalityItemDenomination:
+      type: string
+      enum:
+        - net
+        - gross_buyer
+    get_delivery_success_TotalsByFinalityItemDataThrough:
+      type:
+        - string
+        - 'null'
+    get_delivery_success_TotalsByFinalityItemFinality:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - available
+            - unavailable
+            - not_applicable
+        class:
+          anyOf:
+            - type: string
+              enum:
+                - SNAPSHOT
+                - OFFICIAL
+            - type: 'null'
+        revision:
+          anyOf:
+            - $ref: '#/components/schemas/get_delivery_success_DeliveryRevision'
+            - type: 'null'
+        reason:
+          type: string
+          enum:
+            - revision_evidence_unavailable
+            - revision_evidence_mixed
+            - revision_unreadable
+            - cumulative_margin_ledger
+        supportedClasses:
+          type: array
+          items:
+            type: string
+            enum:
+              - SNAPSHOT
+              - OFFICIAL
+      required:
+        - status
+        - class
+        - revision
+      additionalProperties: false
+    get_delivery_success_TotalsByFinalityItemBillingEligibility:
+      type: string
+      const: not_evaluated
     get_delivery_success_SemanticsSourceOperation:
       type: string
       enum:
@@ -82727,6 +82843,58 @@ components:
       required:
         - interval
         - unit
+      additionalProperties: false
+    get_delivery_success_TotalsMetricsValue:
+      type: object
+      properties:
+        value:
+          type:
+            - number
+            - boolean
+            - 'null'
+        status:
+          type: string
+          enum:
+            - available
+            - unavailable
+        reason:
+          type: string
+          enum:
+            - projected_zero
+            - missing
+            - currency_unavailable
+            - incomplete
+            - revision_unreadable
+            - finality_mixed
+      required:
+        - value
+        - status
+      additionalProperties: false
+    get_delivery_success_TotalsByFinalityItemMetricsValue:
+      type: object
+      properties:
+        value:
+          type:
+            - number
+            - boolean
+            - 'null'
+        status:
+          type: string
+          enum:
+            - available
+            - unavailable
+        reason:
+          type: string
+          enum:
+            - projected_zero
+            - missing
+            - currency_unavailable
+            - incomplete
+            - revision_unreadable
+            - finality_mixed
+      required:
+        - value
+        - status
       additionalProperties: false
     get_seller_reporting_receipts_success_ParamsBuyerCustomerId:
       type: integer
@@ -90785,6 +90953,25 @@ components:
       required:
         - status
       additionalProperties: {}
+    save_inventory_source_request_ModuleConfigEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          minLength: 1
+          maxLength: 200
+          description: Dotted field key from the module contract, for example `cadent.endpointUrl`.
+        value:
+          anyOf:
+            - type: string
+              maxLength: 2000
+            - type: number
+            - type: boolean
+          description: A string, number or boolean setting.
+      required:
+        - key
+        - value
+      additionalProperties: false
     save_inventory_source_success_SaveInventorySourceSuccessCreated:
       type: object
       properties:
@@ -97343,6 +97530,87 @@ components:
         - action
         - assertionId
       additionalProperties: {}
+    save_seller_success_SaveSellerSuccessSellingModeChanged:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: selling_mode_changed
+        action:
+          type: string
+          const: selling_mode_changed
+        sellingMode:
+          type: object
+          properties:
+            current:
+              type: string
+              enum:
+                - listing
+                - storefront_agent
+            previous:
+              type: string
+              enum:
+                - listing
+                - storefront_agent
+            closedEnhancedReportingAccounts:
+              type: integer
+              minimum: 0
+              maximum: 9007199254740991
+            activitiesBecome:
+              type: string
+              enum:
+                - billable
+                - free
+            activities:
+              type: array
+              items:
+                type: object
+                properties:
+                  activityCode:
+                    type: string
+                  name:
+                    type: string
+                  ius:
+                    type: number
+                  unit:
+                    type: string
+                required:
+                  - activityCode
+                  - name
+                  - ius
+                  - unit
+                additionalProperties: {}
+          required:
+            - current
+            - previous
+            - closedEnhancedReportingAccounts
+            - activitiesBecome
+            - activities
+          additionalProperties: {}
+      required:
+        - outcome
+        - action
+        - sellingMode
+      additionalProperties: {}
+    save_seller_success_SaveSellerSuccessSellingModeUnchanged:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: selling_mode_unchanged
+        action:
+          type: string
+          const: selling_mode_unchanged
+        sellingMode:
+          type: string
+          enum:
+            - listing
+            - storefront_agent
+      required:
+        - outcome
+        - action
+        - sellingMode
+      additionalProperties: {}
     save_seller_success_SaveSellerSuccessPreview:
       type: object
       properties:
@@ -97891,6 +98159,52 @@ components:
       propertyNames:
         type: string
       additionalProperties: {}
+    save_work_item_request_WorkItemResultEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          minLength: 1
+          maxLength: 200
+          description: A key from the work item `requiredResultFields`, for example `upstream.campaignId`.
+        value:
+          anyOf:
+            - type: string
+              maxLength: 2000
+            - type: number
+            - maxItems: 400
+              type: array
+              items:
+                anyOf:
+                  - type: string
+                    maxLength: 500
+                  - $ref: '#/components/schemas/save_work_item_request_ModularDailyDelivery'
+          description: A string or number, a list of strings, or for `reporting.dailyBreakdown` the daily delivery rows.
+      required:
+        - key
+        - value
+      additionalProperties: false
+    save_work_item_request_ModularDailyDelivery:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Calendar day, YYYY-MM-DD.
+        impressions:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: Impressions delivered that day.
+        spend:
+          type: number
+          minimum: 0
+          description: Spend that day, in the report currency.
+      required:
+        - date
+        - impressions
+        - spend
+      additionalProperties: false
     save_work_item_success_SaveWorkItemSuccessCreated:
       type: object
       properties:

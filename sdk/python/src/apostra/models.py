@@ -381,7 +381,7 @@ class GenerateVariantsSuccessGalleryVariantsItemPreview(TypedDict):
     height: NotRequired[float]
 
 class GetDeliveryInput(TypedDict):
-    metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "conversions", "leads", "videoCompletions", "conversion_value", "ecpm", "cpc", "ctr", "completion_rate", "cpa", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
+    metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
     '\n    Metrics; omit for report defaults.\n    '
     dimensions: NotRequired[list[Literal["date", "advertiser", "campaign", "channel_group", "channel", "buyer", "media_buy", "package", "inventory_source", "seller", "sales_agent"] | str]]
     '\n    Group-by dimensions; campaign delivery also accepts labels.<dimension_key>. Omit for leaf grain.\n    '
@@ -434,12 +434,14 @@ class GetDeliveryResultReportCampaignDelivery(TypedDict):
     period: NotRequired[GetDeliverySuccessPeriod]
     rows: GetDeliverySuccessRows
     totals: NotRequired[GetDeliverySuccessTotals]
+    totalsByFinality: NotRequired[GetDeliverySuccessTotalsByFinality]
+    '\n    Totals per finality class, when classes differ.\n    '
     page: GetDeliverySuccessPage
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
-    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
+    '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -449,12 +451,14 @@ class GetDeliveryResultReportDelivery(TypedDict):
     period: NotRequired[GetDeliverySuccessPeriod]
     rows: GetDeliverySuccessRows
     totals: NotRequired[GetDeliverySuccessTotals]
+    totalsByFinality: NotRequired[GetDeliverySuccessTotalsByFinality]
+    '\n    Totals per finality class, when classes differ.\n    '
     page: GetDeliverySuccessPage
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
-    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
+    '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -703,12 +707,14 @@ class GetDeliveryResultReportMargin(TypedDict):
     period: NotRequired[GetDeliverySuccessPeriod]
     rows: GetDeliverySuccessRows
     totals: NotRequired[GetDeliverySuccessTotals]
+    totalsByFinality: NotRequired[GetDeliverySuccessTotalsByFinality]
+    '\n    Totals per finality class, when classes differ.\n    '
     page: GetDeliverySuccessPage
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
-    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
+    '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -1183,7 +1189,7 @@ class GetDeliverySuccessPeriod(TypedDict):
     endDate: str
 
 class GetDeliverySuccessQuery(TypedDict):
-    metrics: list[Literal["impressions", "spend", "clicks", "views", "completed_views", "conversions", "leads", "videoCompletions", "conversion_value", "ecpm", "cpc", "ctr", "completion_rate", "cpa", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]
+    metrics: list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]
     dimensions: list[str]
     range: NotRequired[GetDeliverySuccessQueryRange]
     filters: GetDeliverySuccessQueryFilters
@@ -1253,7 +1259,7 @@ GetDeliverySuccessRowsItemFinality = TypedDict(
 class GetDeliverySuccessRowsItemMetricsValue(TypedDict):
     value: float | bool | None
     status: Literal["available", "unavailable"]
-    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable"]]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed"]]
 
 class GetDeliverySuccessRowsItemSource(TypedDict):
     operation: GetDeliverySuccessRowsItemSourceOperation
@@ -1280,13 +1286,61 @@ class GetDeliverySuccessSynthetic(TypedDict):
     notice: Literal["Synthetic demo data only. It is unsuitable for commercial decisions."]
 
 class GetDeliverySuccessTotals(TypedDict):
-    rowsIncluded: int
-    currency: str | None
-    metrics: dict[str, GetDeliverySuccessTotalsMetricsValue]
-    denomination: Literal["net", "gross_buyer"]
-    dataThrough: str | None
+    rowsIncluded: GetDeliverySuccessTotalsRowsIncluded
+    currency: GetDeliverySuccessTotalsCurrency
+    metrics: GetDeliverySuccessTotalsMetrics
+    denomination: GetDeliverySuccessTotalsDenomination
+    dataThrough: GetDeliverySuccessTotalsDataThrough
     finality: GetDeliverySuccessTotalsFinality
-    billingEligibility: Literal["not_evaluated"]
+    billingEligibility: GetDeliverySuccessTotalsBillingEligibility
+
+GetDeliverySuccessTotalsBillingEligibility: TypeAlias = Literal["not_evaluated"]
+
+class GetDeliverySuccessTotalsByFinalityItem(TypedDict):
+    rowsIncluded: GetDeliverySuccessTotalsByFinalityItemRowsIncluded
+    currency: GetDeliverySuccessTotalsByFinalityItemCurrency
+    metrics: GetDeliverySuccessTotalsByFinalityItemMetrics
+    denomination: GetDeliverySuccessTotalsByFinalityItemDenomination
+    dataThrough: GetDeliverySuccessTotalsByFinalityItemDataThrough
+    finality: GetDeliverySuccessTotalsByFinalityItemFinality
+    billingEligibility: GetDeliverySuccessTotalsByFinalityItemBillingEligibility
+
+GetDeliverySuccessTotalsByFinality: TypeAlias = "list[GetDeliverySuccessTotalsByFinalityItem]"
+
+GetDeliverySuccessTotalsByFinalityItemBillingEligibility: TypeAlias = Literal["not_evaluated"]
+
+GetDeliverySuccessTotalsByFinalityItemCurrency: TypeAlias = str | None
+
+GetDeliverySuccessTotalsByFinalityItemDataThrough: TypeAlias = str | None
+
+GetDeliverySuccessTotalsByFinalityItemDenomination: TypeAlias = Literal["net", "gross_buyer"]
+
+GetDeliverySuccessTotalsByFinalityItemFinality = TypedDict(
+    "GetDeliverySuccessTotalsByFinalityItemFinality",
+    {
+        "status": Required["Literal[\"available\", \"unavailable\", \"not_applicable\"]"],
+        "class": Required["Literal[\"SNAPSHOT\", \"OFFICIAL\"] | None"],
+        "revision": Required["GetDeliverySuccessDeliveryRevision | None"],
+        "reason": NotRequired["Literal[\"revision_evidence_unavailable\", \"revision_evidence_mixed\", \"revision_unreadable\", \"cumulative_margin_ledger\"]"],
+        "supportedClasses": NotRequired["list[Literal[\"SNAPSHOT\", \"OFFICIAL\"]]"],
+    },
+    total=False,
+)
+
+class GetDeliverySuccessTotalsByFinalityItemMetricsValue(TypedDict):
+    value: float | bool | None
+    status: Literal["available", "unavailable"]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed"]]
+
+GetDeliverySuccessTotalsByFinalityItemMetrics: TypeAlias = "dict[str, GetDeliverySuccessTotalsByFinalityItemMetricsValue]"
+
+GetDeliverySuccessTotalsByFinalityItemRowsIncluded: TypeAlias = int
+
+GetDeliverySuccessTotalsCurrency: TypeAlias = str | None
+
+GetDeliverySuccessTotalsDataThrough: TypeAlias = str | None
+
+GetDeliverySuccessTotalsDenomination: TypeAlias = Literal["net", "gross_buyer"]
 
 GetDeliverySuccessTotalsFinality = TypedDict(
     "GetDeliverySuccessTotalsFinality",
@@ -1303,7 +1357,11 @@ GetDeliverySuccessTotalsFinality = TypedDict(
 class GetDeliverySuccessTotalsMetricsValue(TypedDict):
     value: float | bool | None
     status: Literal["available", "unavailable"]
-    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable"]]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed"]]
+
+GetDeliverySuccessTotalsMetrics: TypeAlias = "dict[str, GetDeliverySuccessTotalsMetricsValue]"
+
+GetDeliverySuccessTotalsRowsIncluded: TypeAlias = int
 
 class GetDeliverySuccessVendorLabel(TypedDict):
     name: str
@@ -11745,12 +11803,18 @@ class SaveInventorySourceInputAdServer(TypedDict):
 class SaveInventorySourceInputModuleConfig(TypedDict):
     moduleInstanceId: str
     '\n    The seller-local module id returned by this source\'s readiness view.\n    '
-    config: dict[str, JsonValue]
-    '\n    Non-secret module configuration. Nested values are deep-merged by default.\n    '
+    config: list[SaveInventorySourceRequestModuleConfigEntry]
+    '\n    Non-secret module settings, one entry per field. Dotted keys name nested fields and are deep-merged by default.\n    '
     merge: NotRequired[bool]
     '\n    Deep-merge by default; false replaces seller-writable configuration.\n    '
     status: NotRequired[Literal["CONFIGURING", "DISABLED", "ERROR"]]
     '\n    Optional manual module state. ACTIVE is derived by execution workflows.\n    '
+
+class SaveInventorySourceRequestModuleConfigEntry(TypedDict):
+    key: str
+    '\n    Dotted field key from the module contract, for example `cadent.endpointUrl`.\n    '
+    value: str | float | bool
+    '\n    A string, number or boolean setting.\n    '
 
 class SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerForm(TypedDict):
     outcome: Literal["ad_server_form"]
@@ -16334,6 +16398,8 @@ class SaveSellerInput(TypedDict):
     '\n    Hold (true) or resume (false) new business: buyers stop discovering the Seller and buying; existing delivery continues. Send alone.\n    '
     expectedIsPaused: NotRequired[bool]
     '\n    With isPaused: the hold you last read; a changed hold returns CONFLICT.\n    '
+    sellingMode: NotRequired[Literal["listing", "storefront_agent"]]
+    '\n    Change the account type in place. Direct administrator only. `listing` is refused while Storefront agent work runs and closes Enhanced Reporting. Send alone.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -16655,6 +16721,29 @@ class SaveSellerSuccessSaveSellerSuccessReopenRecorded(TypedDict):
     intakeId: str
     decision: Literal["reopen"]
 
+class SaveSellerSuccessSaveSellerSuccessSellingModeChanged(TypedDict):
+    outcome: Literal["selling_mode_changed"]
+    action: Literal["selling_mode_changed"]
+    sellingMode: SaveSellerSuccessSaveSellerSuccessSellingModeChangedSellingMode
+
+class SaveSellerSuccessSaveSellerSuccessSellingModeChangedSellingMode(TypedDict):
+    current: Literal["listing", "storefront_agent"]
+    previous: Literal["listing", "storefront_agent"]
+    closedEnhancedReportingAccounts: int
+    activitiesBecome: Literal["billable", "free"]
+    activities: list[SaveSellerSuccessSaveSellerSuccessSellingModeChangedSellingModeActivitiesItem]
+
+class SaveSellerSuccessSaveSellerSuccessSellingModeChangedSellingModeActivitiesItem(TypedDict):
+    activityCode: str
+    name: str
+    ius: float
+    unit: str
+
+class SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged(TypedDict):
+    outcome: Literal["selling_mode_unchanged"]
+    action: Literal["selling_mode_unchanged"]
+    sellingMode: Literal["listing", "storefront_agent"]
+
 class SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded(TypedDict):
     outcome: Literal["source_decision_recorded"]
     action: Literal["source_decision_recorded"]
@@ -16693,7 +16782,7 @@ class SaveSellerSuccessSellerSaveReplayed(TypedDict):
     destinationSaveReplayed: Literal[False]
     materialReceipt: SaveSellerSuccessSellerSaveReplayedMaterialReceipt
 
-SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
+SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
 
 SaveSellerSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
@@ -16974,12 +17063,26 @@ class SaveWorkItemInput(TypedDict):
     '\n    Optional note preserved with the decision.\n    '
     expectedContentDigest: NotRequired[str]
     '\n    Required for `creative_review`; copy contentDigest from the exact search or get result.\n    '
-    result: NotRequired[dict[str, JsonValue]]
-    '\n    Modular completion fields named by requiredResultFields. Never secrets.\n    '
+    result: NotRequired[list[SaveWorkItemRequestWorkItemResultEntry]]
+    '\n    Modular completion fields named by requiredResultFields, one entry per field. Never secrets.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveWorkItemRequestModularDailyDelivery(TypedDict):
+    date: str
+    '\n    Calendar day, YYYY-MM-DD.\n    '
+    impressions: int
+    '\n    Impressions delivered that day.\n    '
+    spend: float
+    '\n    Spend that day, in the report currency.\n    '
+
+class SaveWorkItemRequestWorkItemResultEntry(TypedDict):
+    key: str
+    '\n    A key from the work item `requiredResultFields`, for example `upstream.campaignId`.\n    '
+    value: str | float | list[str | SaveWorkItemRequestModularDailyDelivery]
+    '\n    A string or number, a list of strings, or for `reporting.dailyBreakdown` the daily delivery rows.\n    '
 
 class SaveWorkItemSuccessSaveWorkItemSuccessCreated(TypedDict):
     outcome: Literal["created"]
