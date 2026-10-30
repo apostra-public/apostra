@@ -156,14 +156,6 @@ class Apostra(SyncTransport):
         "Open the Campaigns Page: campaigns with status, flight, and budget; open one for its media buys and creatives. The Page self-fetches, so do not list campaigns in prose. advertiserId scopes to one advertiser; campaignId focuses one campaign. A draft's go-live review is open_campaign_receipt. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenCampaignsPageResult], self._request_with_response("open_campaigns_page", input, account_id=account_id, timeout=timeout))
 
-    def open_connections_page(self, input: models.OpenConnectionsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenConnectionsPageResult:
-        "Open the buyer Media Partners Page. Optionally scope to an advertiser or seller; connectionAction \"connect\" opens that media partner at connection setup without mutating until the user confirms. Replaced by open_media_partners_page, which opens the same Page."
-        return cast("models.OpenConnectionsPageResult", self._request("open_connections_page", input, account_id=account_id, timeout=timeout))
-
-    def open_connections_page_with_response(self, input: models.OpenConnectionsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenConnectionsPageResult]:
-        "Open the buyer Media Partners Page. Optionally scope to an advertiser or seller; connectionAction \"connect\" opens that media partner at connection setup without mutating until the user confirms. Replaced by open_media_partners_page, which opens the same Page. Returns the data together with response headers and request ID."
-        return cast(ResponseDetails[models.OpenConnectionsPageResult], self._request_with_response("open_connections_page", input, account_id=account_id, timeout=timeout))
-
     def open_creative_engines_page(self, input: models.OpenCreativeEnginesPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenCreativeEnginesPageResult:
         "Open the buyer Creative Engines Page. Optionally focus an engine, connection, or its secure setup control; the buyer starts setup in the Page, and this does not authorize a provider or start generation."
         return cast("models.OpenCreativeEnginesPageResult", self._request("open_creative_engines_page", input, account_id=account_id, timeout=timeout))
@@ -549,11 +541,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveSellerResult], self._request_with_response("save_seller", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_signal(self, input: models.SaveSignalInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSignalResult:
-        "Create, replace, or archive a signal. Managed writes need a complete draft; read before updates. Without sourceId, writes the seller catalog."
+        "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates."
         return cast("models.SaveSignalResult", self._request("save_signal", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_signal_with_response(self, input: models.SaveSignalInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveSignalResult]:
-        "Create, replace, or archive a signal. Managed writes need a complete draft; read before updates. Without sourceId, writes the seller catalog. Returns the data together with response headers and request ID."
+        "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveSignalResult], self._request_with_response("save_signal", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_wholesale_product(self, input: models.SaveWholesaleProductInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveWholesaleProductResult:
@@ -748,14 +740,6 @@ class AsyncApostra(AsyncTransport):
     async def open_campaigns_page_with_response(self, input: models.OpenCampaignsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenCampaignsPageResult]:
         "Open the Campaigns Page: campaigns with status, flight, and budget; open one for its media buys and creatives. The Page self-fetches, so do not list campaigns in prose. advertiserId scopes to one advertiser; campaignId focuses one campaign. A draft's go-live review is open_campaign_receipt. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenCampaignsPageResult], await self._request_with_response("open_campaigns_page", input, account_id=account_id, timeout=timeout))
-
-    async def open_connections_page(self, input: models.OpenConnectionsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenConnectionsPageResult:
-        "Open the buyer Media Partners Page. Optionally scope to an advertiser or seller; connectionAction \"connect\" opens that media partner at connection setup without mutating until the user confirms. Replaced by open_media_partners_page, which opens the same Page."
-        return cast("models.OpenConnectionsPageResult", await self._request("open_connections_page", input, account_id=account_id, timeout=timeout))
-
-    async def open_connections_page_with_response(self, input: models.OpenConnectionsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenConnectionsPageResult]:
-        "Open the buyer Media Partners Page. Optionally scope to an advertiser or seller; connectionAction \"connect\" opens that media partner at connection setup without mutating until the user confirms. Replaced by open_media_partners_page, which opens the same Page. Returns the data together with response headers and request ID."
-        return cast(ResponseDetails[models.OpenConnectionsPageResult], await self._request_with_response("open_connections_page", input, account_id=account_id, timeout=timeout))
 
     async def open_creative_engines_page(self, input: models.OpenCreativeEnginesPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenCreativeEnginesPageResult:
         "Open the buyer Creative Engines Page. Optionally focus an engine, connection, or its secure setup control; the buyer starts setup in the Page, and this does not authorize a provider or start generation."
@@ -1142,11 +1126,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveSellerResult], await self._request_with_response("save_seller", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_signal(self, input: models.SaveSignalInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSignalResult:
-        "Create, replace, or archive a signal. Managed writes need a complete draft; read before updates. Without sourceId, writes the seller catalog."
+        "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates."
         return cast("models.SaveSignalResult", await self._request("save_signal", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_signal_with_response(self, input: models.SaveSignalInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveSignalResult]:
-        "Create, replace, or archive a signal. Managed writes need a complete draft; read before updates. Without sourceId, writes the seller catalog. Returns the data together with response headers and request ID."
+        "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveSignalResult], await self._request_with_response("save_signal", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_wholesale_product(self, input: models.SaveWholesaleProductInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveWholesaleProductResult:

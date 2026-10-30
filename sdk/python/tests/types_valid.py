@@ -1,7 +1,7 @@
 from apostra import Apostra, AsyncApostra
-from apostra.models import EvidenceUrl, SaveRfpRequestJsonValue, RepresentationLocale, SaveCampaignInput, SaveBillingInput, GetDeliveryResult, SaveLibraryRequestInput, SaveCreativeSessionInput, SaveDimensionInput, SaveDimensionResult, SaveMediaBuyInput, SearchInput, GetInput, SaveMaterialInput, RequestBuyerChildAccountInput
+from apostra.models import EvidenceUrl, JsonValue, RepresentationLocale, SaveCampaignInput, SaveBillingInput, GetDeliveryResult, SaveLibraryRequestInput, SaveCreativeSessionInput, SaveDimensionInput, SaveDimensionResult, SaveMediaBuyInput, SearchInput, GetInput, SaveMaterialInput, RequestBuyerChildAccountInput
 
-nested: SaveRfpRequestJsonValue = {'deep': [{'nested': ['value', None, 2, True]}]}
+nested: JsonValue = {'deep': [{'nested': ['value', None, 2, True]}]}
 campaign: SaveCampaignInput = {'idempotencyKey': 'k', 'channelGroups': [{'channelGroupId': 'g', 'kind': 'preset', 'presetId': 'ctv'}]}
 billing: SaveBillingInput = {'terms': {'accepted': True, 'acceptedVersion': 'v1-1'}, 'paymentTerms': 'net_60'}
 buyer_child: RequestBuyerChildAccountInput = {'parentId': 'parent', 'name': 'Buyer'}
