@@ -24280,15 +24280,18 @@ paths:
                       - clicks
                       - views
                       - completed_views
+                      - quartile_100
                       - conversions
                       - leads
-                      - videoCompletions
                       - conversion_value
-                      - ecpm
-                      - cpc
+                      - viewable_impressions
+                      - measurable_impressions
+                      - cpm
+                      - cost_per_click
                       - ctr
                       - completion_rate
-                      - cpa
+                      - viewable_rate
+                      - cost_per_acquisition
                       - roas
                       - sellBooked
                       - sellRealized
@@ -44527,11 +44530,13 @@ paths:
                       maxLength: 255
                       description: The seller-local module id returned by this source's readiness view.
                     config:
-                      type: object
-                      propertyNames:
-                        type: string
-                      additionalProperties: {}
-                      description: Non-secret module configuration. Nested values are deep-merged by default.
+                      maxItems: 100
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/save_inventory_source_request_ModuleConfigEntry'
+                      description: >-
+                        Non-secret module settings, one entry per field. Dotted keys name nested fields and are
+                        deep-merged by default.
                     merge:
                       default: true
                       description: Deep-merge by default; false replaces seller-writable configuration.
@@ -55344,11 +55349,11 @@ paths:
                   type: string
                   pattern: ^[a-f0-9]{64}$
                 result:
-                  description: Modular completion fields named by requiredResultFields. Never secrets.
-                  type: object
-                  propertyNames:
-                    type: string
-                  additionalProperties: {}
+                  description: Modular completion fields named by requiredResultFields, one entry per field. Never secrets.
+                  maxItems: 50
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/save_work_item_request_WorkItemResultEntry'
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -81650,15 +81655,18 @@ components:
               - clicks
               - views
               - completed_views
+              - quartile_100
               - conversions
               - leads
-              - videoCompletions
               - conversion_value
-              - ecpm
-              - cpc
+              - viewable_impressions
+              - measurable_impressions
+              - cpm
+              - cost_per_click
               - ctr
               - completion_rate
-              - cpa
+              - viewable_rate
+              - cost_per_acquisition
               - roas
               - sellBooked
               - sellRealized
@@ -90785,6 +90793,25 @@ components:
       required:
         - status
       additionalProperties: {}
+    save_inventory_source_request_ModuleConfigEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          minLength: 1
+          maxLength: 200
+          description: Dotted field key from the module contract, for example `cadent.endpointUrl`.
+        value:
+          anyOf:
+            - type: string
+              maxLength: 2000
+            - type: number
+            - type: boolean
+          description: A string, number or boolean setting.
+      required:
+        - key
+        - value
+      additionalProperties: false
     save_inventory_source_success_SaveInventorySourceSuccessCreated:
       type: object
       properties:
@@ -97891,6 +97918,52 @@ components:
       propertyNames:
         type: string
       additionalProperties: {}
+    save_work_item_request_WorkItemResultEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          minLength: 1
+          maxLength: 200
+          description: A key from the work item `requiredResultFields`, for example `upstream.campaignId`.
+        value:
+          anyOf:
+            - type: string
+              maxLength: 2000
+            - type: number
+            - maxItems: 400
+              type: array
+              items:
+                anyOf:
+                  - type: string
+                    maxLength: 500
+                  - $ref: '#/components/schemas/save_work_item_request_ModularDailyDelivery'
+          description: A string or number, a list of strings, or for `reporting.dailyBreakdown` the daily delivery rows.
+      required:
+        - key
+        - value
+      additionalProperties: false
+    save_work_item_request_ModularDailyDelivery:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Calendar day, YYYY-MM-DD.
+        impressions:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: Impressions delivered that day.
+        spend:
+          type: number
+          minimum: 0
+          description: Spend that day, in the report currency.
+      required:
+        - date
+        - impressions
+        - spend
+      additionalProperties: false
     save_work_item_success_SaveWorkItemSuccessCreated:
       type: object
       properties:

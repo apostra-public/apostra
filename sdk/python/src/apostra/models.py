@@ -381,7 +381,7 @@ class GenerateVariantsSuccessGalleryVariantsItemPreview(TypedDict):
     height: NotRequired[float]
 
 class GetDeliveryInput(TypedDict):
-    metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "conversions", "leads", "videoCompletions", "conversion_value", "ecpm", "cpc", "ctr", "completion_rate", "cpa", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
+    metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
     '\n    Metrics; omit for report defaults.\n    '
     dimensions: NotRequired[list[Literal["date", "advertiser", "campaign", "channel_group", "channel", "buyer", "media_buy", "package", "inventory_source", "seller", "sales_agent"] | str]]
     '\n    Group-by dimensions; campaign delivery also accepts labels.<dimension_key>. Omit for leaf grain.\n    '
@@ -1183,7 +1183,7 @@ class GetDeliverySuccessPeriod(TypedDict):
     endDate: str
 
 class GetDeliverySuccessQuery(TypedDict):
-    metrics: list[Literal["impressions", "spend", "clicks", "views", "completed_views", "conversions", "leads", "videoCompletions", "conversion_value", "ecpm", "cpc", "ctr", "completion_rate", "cpa", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]
+    metrics: list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]
     dimensions: list[str]
     range: NotRequired[GetDeliverySuccessQueryRange]
     filters: GetDeliverySuccessQueryFilters
@@ -11745,12 +11745,18 @@ class SaveInventorySourceInputAdServer(TypedDict):
 class SaveInventorySourceInputModuleConfig(TypedDict):
     moduleInstanceId: str
     '\n    The seller-local module id returned by this source\'s readiness view.\n    '
-    config: dict[str, JsonValue]
-    '\n    Non-secret module configuration. Nested values are deep-merged by default.\n    '
+    config: list[SaveInventorySourceRequestModuleConfigEntry]
+    '\n    Non-secret module settings, one entry per field. Dotted keys name nested fields and are deep-merged by default.\n    '
     merge: NotRequired[bool]
     '\n    Deep-merge by default; false replaces seller-writable configuration.\n    '
     status: NotRequired[Literal["CONFIGURING", "DISABLED", "ERROR"]]
     '\n    Optional manual module state. ACTIVE is derived by execution workflows.\n    '
+
+class SaveInventorySourceRequestModuleConfigEntry(TypedDict):
+    key: str
+    '\n    Dotted field key from the module contract, for example `cadent.endpointUrl`.\n    '
+    value: str | float | bool
+    '\n    A string, number or boolean setting.\n    '
 
 class SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerForm(TypedDict):
     outcome: Literal["ad_server_form"]
@@ -16974,12 +16980,26 @@ class SaveWorkItemInput(TypedDict):
     '\n    Optional note preserved with the decision.\n    '
     expectedContentDigest: NotRequired[str]
     '\n    Required for `creative_review`; copy contentDigest from the exact search or get result.\n    '
-    result: NotRequired[dict[str, JsonValue]]
-    '\n    Modular completion fields named by requiredResultFields. Never secrets.\n    '
+    result: NotRequired[list[SaveWorkItemRequestWorkItemResultEntry]]
+    '\n    Modular completion fields named by requiredResultFields, one entry per field. Never secrets.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveWorkItemRequestModularDailyDelivery(TypedDict):
+    date: str
+    '\n    Calendar day, YYYY-MM-DD.\n    '
+    impressions: int
+    '\n    Impressions delivered that day.\n    '
+    spend: float
+    '\n    Spend that day, in the report currency.\n    '
+
+class SaveWorkItemRequestWorkItemResultEntry(TypedDict):
+    key: str
+    '\n    A key from the work item `requiredResultFields`, for example `upstream.campaignId`.\n    '
+    value: str | float | list[str | SaveWorkItemRequestModularDailyDelivery]
+    '\n    A string or number, a list of strings, or for `reporting.dailyBreakdown` the daily delivery rows.\n    '
 
 class SaveWorkItemSuccessSaveWorkItemSuccessCreated(TypedDict):
     outcome: Literal["created"]
