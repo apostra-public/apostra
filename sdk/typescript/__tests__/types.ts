@@ -1,4 +1,4 @@
-import type { SaveRfpRequestJ } from '../src/generated/types.gen.js'
+import type { JsonValue } from '../src/generated/types.gen.js'
 import {
   Apostra,
   type GetDeliveryResult,
@@ -10,9 +10,9 @@ import {
   type SaveRfpInput,
 } from '../src/index.js'
 
-const nested: SaveRfpRequestJ = { deep: [{ nested: ['value', null, 2, true] }] }
+const nested: JsonValue = { deep: [{ nested: ['value', null, 2, true] }] }
 // @ts-expect-error recursive JSON cannot contain functions
-const invalid: SaveRfpRequestJ = { deep: [() => 0] }
+const invalid: JsonValue = { deep: [() => 0] }
 const campaign: SaveCampaignInput = {
   idempotencyKey: 'k',
   channelGroups: [{ channelGroupId: 'g', kind: 'preset', presetId: 'ctv' }],

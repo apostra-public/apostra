@@ -418,25 +418,6 @@ export const operations = {
     ],
     "summary": "Open the Campaigns Page: campaigns with status, flight, and budget; open one for its media buys and creatives. The Page self-fetches, so do not list campaigns in prose. advertiserId scopes to one advertiser; campaignId focuses one campaign. A draft's go-live review is open_campaign_receipt."
   },
-  "open_connections_page": {
-    "path": "/tools/open_connections_page",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": false,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:read"
-        ]
-      }
-    ],
-    "summary": "Open the buyer Media Partners Page. Optionally scope to an advertiser or seller; connectionAction \"connect\" opens that media partner at connection setup without mutating until the user confirms. Replaced by open_media_partners_page, which opens the same Page."
-  },
   "open_creative_engines_page": {
     "path": "/tools/open_creative_engines_page",
     "method": "POST",
