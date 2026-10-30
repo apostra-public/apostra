@@ -5135,7 +5135,7 @@ export type GetDeliveryData = {
         /**
          * Metrics; omit for report defaults.
          */
-        metrics?: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'conversions' | 'leads' | 'videoCompletions' | 'conversion_value' | 'ecpm' | 'cpc' | 'ctr' | 'completion_rate' | 'cpa' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
+        metrics?: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
         /**
          * Group-by dimensions; campaign delivery also accepts labels.<dimension_key>. Omit for leaf grain.
          */
@@ -6115,7 +6115,7 @@ export type GetDeliverySuccessPeriod = {
 };
 
 export type GetDeliverySuccessQuery = {
-    metrics: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'conversions' | 'leads' | 'videoCompletions' | 'conversion_value' | 'ecpm' | 'cpc' | 'ctr' | 'completion_rate' | 'cpa' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
+    metrics: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
     dimensions: Array<string>;
     range?: {
         startDate?: string;
@@ -21883,11 +21883,9 @@ export type SaveInventorySourceData = {
              */
             moduleInstanceId: string;
             /**
-             * Non-secret module configuration. Nested values are deep-merged by default.
+             * Non-secret module settings, one entry per field. Dotted keys name nested fields and are deep-merged by default.
              */
-            config: {
-                [key: string]: unknown;
-            };
+            config: Array<SaveInventorySourceRequestModuleConfigEntry>;
             /**
              * Deep-merge by default; false replaces seller-writable configuration.
              */
@@ -21985,6 +21983,17 @@ export type SaveInventorySourceErrors = {
      * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
      */
     503: V3ToolErrorResponse;
+};
+
+export type SaveInventorySourceRequestModuleConfigEntry = {
+    /**
+     * Dotted field key from the module contract, for example `cadent.endpointUrl`.
+     */
+    key: string;
+    /**
+     * A string, number or boolean setting.
+     */
+    value: string | number | boolean;
 };
 
 export type SaveInventorySourceResponse = SaveInventorySourceResponses[keyof SaveInventorySourceResponses];
@@ -29919,6 +29928,10 @@ export type SaveSellerData = {
          */
         expectedIsPaused?: boolean;
         /**
+         * Change the account type in place. Direct administrator only. `listing` is refused while Storefront agent work runs and closes Enhanced Reporting. Send alone.
+         */
+        sellingMode?: 'listing' | 'storefront_agent';
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -30144,7 +30157,7 @@ export type SaveSellerResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
+        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
         error: null;
     };
     /**
@@ -30269,6 +30282,33 @@ export type SaveSellerSuccessSaveSellerSuccessReopenRecorded = {
     action: 'reopen_recorded';
     intakeId: string;
     decision: 'reopen';
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessSellingModeChanged = {
+    outcome: 'selling_mode_changed';
+    action: 'selling_mode_changed';
+    sellingMode: {
+        current: 'listing' | 'storefront_agent';
+        previous: 'listing' | 'storefront_agent';
+        closedEnhancedReportingAccounts: number;
+        activitiesBecome: 'billable' | 'free';
+        activities: Array<{
+            activityCode: string;
+            name: string;
+            ius: number;
+            unit: string;
+            [key: string]: unknown;
+        }>;
+        [key: string]: unknown;
+    };
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged = {
+    outcome: 'selling_mode_unchanged';
+    action: 'selling_mode_unchanged';
+    sellingMode: 'listing' | 'storefront_agent';
     [key: string]: unknown;
 };
 
@@ -30956,11 +30996,9 @@ export type SaveWorkItemData = {
          */
         expectedContentDigest?: string;
         /**
-         * Modular completion fields named by requiredResultFields. Never secrets.
+         * Modular completion fields named by requiredResultFields, one entry per field. Never secrets.
          */
-        result?: {
-            [key: string]: unknown;
-        };
+        result?: Array<SaveWorkItemRequestWorkItemResultEntry>;
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -31040,6 +31078,32 @@ export type SaveWorkItemErrors = {
      * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
      */
     503: V3ToolErrorResponse;
+};
+
+export type SaveWorkItemRequestModularDailyDelivery = {
+    /**
+     * Calendar day, YYYY-MM-DD.
+     */
+    date: string;
+    /**
+     * Impressions delivered that day.
+     */
+    impressions: number;
+    /**
+     * Spend that day, in the report currency.
+     */
+    spend: number;
+};
+
+export type SaveWorkItemRequestWorkItemResultEntry = {
+    /**
+     * A key from the work item `requiredResultFields`, for example `upstream.campaignId`.
+     */
+    key: string;
+    /**
+     * A string or number, a list of strings, or for `reporting.dailyBreakdown` the daily delivery rows.
+     */
+    value: string | number | Array<string | SaveWorkItemRequestModularDailyDelivery>;
 };
 
 export type SaveWorkItemResponse = SaveWorkItemResponses[keyof SaveWorkItemResponses];
