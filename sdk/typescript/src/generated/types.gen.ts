@@ -282,7 +282,7 @@ export type DownloadV3PublicDocumentRevisionResponses = {
 };
 
 export type GenerateVariantsData = {
-    body: (GenerateVariantsRequestGenerateVariantsCampaignGenerateInput | GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInput | GenerateVariantsRequestGenerateVariantsCampaignFeedbackInput | GenerateVariantsRequestGenerateVariantsAdvertiserFeedbackInput) & {
+    body: (GenerateVariantsRequestGenerateVariantsCampaignGenerateInput | GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInput | GenerateVariantsRequestGenerateVariantsCampaignFeedbackInput | GenerateVariantsRequestGenerateVariantsAdvertiserFeedbackInput | GenerateVariantsRequestGenerateVariantsCampaignCopyInput | GenerateVariantsRequestGenerateVariantsAdvertiserCopyInput) & {
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -363,6 +363,60 @@ export type GenerateVariantsErrors = {
      */
     503: V3ToolErrorResponse;
 };
+
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInput = {
+    kind: 'advertiser_copy';
+    scope: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputScope;
+    variantAction: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputVariantAction;
+    advertiserId: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputAdvertiserId;
+    sessionId: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionId;
+    actionKey: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputActionKey;
+    expectedRevision: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputExpectedRevision;
+    sessionGeneration: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionGeneration;
+    /**
+     * Composer copy slots to explicitly regenerate. Omit to fill only empty copy slots.
+     */
+    slotIds?: GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSlotIds;
+    expectedAccountId?: number | string;
+    accountId?: number | string;
+};
+
+/**
+ * Action key; reuse only for an identical retry.
+ */
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputActionKey = string;
+
+/**
+ * Advertiser library scope.
+ */
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputAdvertiserId = string;
+
+/**
+ * Saved revision to generate from.
+ */
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputExpectedRevision = number;
+
+/**
+ * Advertiser-library session.
+ */
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputScope = 'advertiser';
+
+/**
+ * Current session lifecycle ID.
+ */
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionGeneration = string;
+
+/**
+ * Saved session ID.
+ */
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSessionId = string;
+
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputSlotIds = Array<string>;
+
+/**
+ * Generate copy for every empty composer slot, or explicitly regenerate the named copy slots.
+ */
+export type GenerateVariantsRequestGenerateVariantsAdvertiserCopyInputVariantAction = 'copy';
 
 export type GenerateVariantsRequestGenerateVariantsAdvertiserFeedbackInput = {
     kind: 'advertiser_feedback';
@@ -471,6 +525,60 @@ export type GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInputSessio
  * Start a generation.
  */
 export type GenerateVariantsRequestGenerateVariantsAdvertiserGenerateInputVariantAction = 'generate';
+
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInput = {
+    kind: 'campaign_copy';
+    scope: GenerateVariantsRequestGenerateVariantsCampaignCopyInputScope;
+    variantAction: GenerateVariantsRequestGenerateVariantsCampaignCopyInputVariantAction;
+    campaignId: GenerateVariantsRequestGenerateVariantsCampaignCopyInputCampaignId;
+    sessionId: GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionId;
+    actionKey: GenerateVariantsRequestGenerateVariantsCampaignCopyInputActionKey;
+    expectedRevision: GenerateVariantsRequestGenerateVariantsCampaignCopyInputExpectedRevision;
+    sessionGeneration: GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionGeneration;
+    /**
+     * Composer copy slots to explicitly regenerate. Omit to fill only empty copy slots.
+     */
+    slotIds?: GenerateVariantsRequestGenerateVariantsCampaignCopyInputSlotIds;
+    expectedAccountId?: number | string;
+    accountId?: number | string;
+};
+
+/**
+ * Action key; reuse only for an identical retry.
+ */
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputActionKey = string;
+
+/**
+ * Campaign scope.
+ */
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputCampaignId = string;
+
+/**
+ * Saved revision to generate from.
+ */
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputExpectedRevision = number;
+
+/**
+ * Campaign session.
+ */
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputScope = 'campaign';
+
+/**
+ * Current session lifecycle ID.
+ */
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionGeneration = string;
+
+/**
+ * Saved session ID.
+ */
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputSessionId = string;
+
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputSlotIds = Array<string>;
+
+/**
+ * Generate copy for every empty composer slot, or explicitly regenerate the named copy slots.
+ */
+export type GenerateVariantsRequestGenerateVariantsCampaignCopyInputVariantAction = 'copy';
 
 export type GenerateVariantsRequestGenerateVariantsCampaignFeedbackInput = {
     kind: 'campaign_feedback';
@@ -6607,6 +6715,7 @@ export type GetResponses = {
                             blocked: number;
                             failed: number;
                             done: number;
+                            closed: number;
                         };
                     }>;
                     truncated?: true;
@@ -6629,7 +6738,7 @@ export type GetResponses = {
             operationDetails?: Array<{
                 operationId: string;
                 kind: string;
-                state: 'pending' | 'blocked' | 'failed' | 'done';
+                state: 'pending' | 'blocked' | 'failed' | 'done' | 'closed';
                 since: string;
                 attempts: number;
                 destination: {
@@ -6640,6 +6749,7 @@ export type GetResponses = {
                 };
                 nextAction?: 'retry' | 'correct' | 'contactSupport';
                 blockedReason?: string;
+                closedReason?: string;
             }>;
             operationDetailsTruncated?: true;
             messages?: Array<unknown>;
@@ -7231,6 +7341,10 @@ export type GetSellerReportingReceiptsSuccessReceiptsItemReceivedTotalsViews = s
 export type GetStatusData = {
     body: {
         /**
+         * accounts.nextCursor
+         */
+        cursor?: string;
+        /**
          * Apostra accountId this call runs in, from get_status.
          */
         accountId?: number | string;
@@ -7416,9 +7530,26 @@ export type GetStatusResponses = {
                 customerId: number;
                 company: string;
                 kind: 'buyer' | 'seller' | 'org' | 'developer';
+                nameWith?: 'advertiserId';
+                advertiserIds?: Array<number>;
+                advertiserCount?: number;
+                access?: 'read' | 'read_write';
                 [key: string]: unknown;
             }>;
             reachableAccountsTruncated?: boolean;
+            accounts?: {
+                total: number;
+                returned: number;
+                truncated: boolean;
+                nextCursor?: string;
+                results: Array<{
+                    accountId: number;
+                    kind?: 'buyer' | 'seller' | 'org' | 'developer';
+                    name: string;
+                    needsYou?: boolean;
+                    [key: string]: unknown;
+                }>;
+            };
             agents?: {
                 total: number;
                 returned: number;
@@ -8609,98 +8740,20 @@ export type OpenAdvertisersPageResponses = {
     };
 };
 
-export type OpenAgentCertificationPageData = {
-    body: {
-        /**
-         * The agent whose tests and certification to open, from search or get.
-         */
-        agentId: string;
-        /**
-         * Apostra accountId this call runs in, from get_status.
-         */
-        accountId?: number | string;
-    };
-    headers?: {
-        /**
-         * Select an accessible customer account for this request. An explicit value must be a positive integer and must equal the account resolved by authentication.
-         */
-        'X-SCOPE3-CUSTOMER-ID'?: string;
-    };
-    path?: never;
-    query?: never;
-    url: '/tools/open_agent_certification_page';
-};
+/** @deprecated use OpenAgentPageData */
+export type OpenAgentCertificationPageData = OpenAgentPageData;
 
-export type OpenAgentCertificationPageError = OpenAgentCertificationPageErrors[keyof OpenAgentCertificationPageErrors];
+/** @deprecated use OpenAgentPageError */
+export type OpenAgentCertificationPageError = OpenAgentPageError;
 
-export type OpenAgentCertificationPageErrors = {
-    /**
-     * Invalid operation input
-     */
-    400: V3ToolErrorResponse;
-    /**
-     * Missing or invalid API credential
-     */
-    401: V3ToolErrorResponse;
-    /**
-     * Account credit limit exceeded
-     */
-    402: V3ToolErrorResponse;
-    /**
-     * The credential or account cannot perform this operation
-     */
-    403: V3ToolErrorResponse;
-    /**
-     * Requested resource not found
-     */
-    404: V3ToolErrorResponse;
-    /**
-     * Operation conflicts with current resource state
-     */
-    409: V3ToolErrorResponse;
-    /**
-     * Request body exceeds the accepted size
-     */
-    413: V3ToolErrorResponse;
-    /**
-     * Request body encoding or character set is unsupported
-     */
-    415: V3ToolErrorResponse;
-    /**
-     * Operation cannot process the supplied input
-     */
-    422: V3ToolErrorResponse;
-    /**
-     * Request rate limit exceeded
-     */
-    429: V3ToolErrorResponse;
-    /**
-     * Unexpected operation failure
-     */
-    500: V3ToolErrorResponse;
-    /**
-     * Recognised operation behaviour is not implemented
-     */
-    501: V3ToolErrorResponse;
-    /**
-     * A required service is unavailable
-     */
-    503: V3ToolErrorResponse;
-};
+/** @deprecated use OpenAgentPageErrors */
+export type OpenAgentCertificationPageErrors = OpenAgentPageErrors;
 
-export type OpenAgentCertificationPageResponse = OpenAgentCertificationPageResponses[keyof OpenAgentCertificationPageResponses];
+/** @deprecated use OpenAgentPageResponse */
+export type OpenAgentCertificationPageResponse = OpenAgentPageResponse;
 
-export type OpenAgentCertificationPageResponses = {
-    /**
-     * Typed operation result
-     */
-    200: {
-        data: {
-            agentId: string;
-        };
-        error: null;
-    };
-};
+/** @deprecated use OpenAgentPageResponses */
+export type OpenAgentCertificationPageResponses = OpenAgentPageResponses;
 
 export type OpenAgentPageData = {
     body: {
@@ -9640,7 +9693,7 @@ export type OpenCampaignsPageSuccessPageHumanHandoffRequired = {
         instruction: 'Show the account and action. Open only at the user’s request; otherwise return the URL. Do not log or post this link publicly.';
     };
     page: {
-        resourceUri: 'ui://agentic-api/conversation-history/mcp-app.html' | 'ui://agentic-api/agent-v2/mcp-app.html' | 'ui://agentic-api/developer-home/mcp-app.html' | 'ui://agentic-api/agents/mcp-app.html' | 'ui://agentic-api/create-agent/mcp-app.html' | 'ui://agentic-api/claim-agent/mcp-app.html' | 'ui://agentic-api/configure-agent-connection/mcp-app.html' | 'ui://agentic-api/register-agent-observed-revision/mcp-app.html' | 'ui://agentic-api/buyer-account-admission/mcp-app.html' | 'ui://agentic-api/tars-org-supply-asks/mcp-app.html' | 'ui://agentic-api/tars-run-rate/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-library/mcp-app.html' | 'ui://agentic-api/tars-approved-deck-modules/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-operations/mcp-app.html' | 'ui://agentic-api/business-rules/mcp-app.html' | 'ui://agentic-api/demo-storefront/mcp-app.html' | 'ui://agentic-api/agent-source-credentials/mcp-app.html' | 'ui://agentic-api/property-roster/mcp-app.html' | 'ui://agentic-api/seller-account-feed/mcp-app.html' | 'ui://agentic-api/media-buy-retry/mcp-app.html' | 'ui://agentic-api/modular-inventory-source/mcp-app.html' | 'ui://agentic-api/modular-connect/mcp-app.html' | 'ui://agentic-api/source-discovery-preview/mcp-app.html' | 'ui://agentic-api/partner-connection/mcp-app.html' | 'ui://agentic-api/agent-certification/mcp-app.html' | 'ui://agentic-api/agent-sources/mcp-app.html' | 'ui://agentic-api/agent-overview/mcp-app.html' | 'ui://agentic-api/agent-webhooks/mcp-app.html' | 'ui://agentic-api/modular-avails-commit/mcp-app.html' | 'ui://agentic-api/plan-billing/mcp-app.html' | 'ui://agentic-api/connections/mcp-app.html' | 'ui://agentic-api/creative-engines/mcp-app.html' | 'ui://agentic-api/all-advertisers-home/mcp-app.html' | 'ui://agentic-api/add-advertiser/mcp-app.html' | 'ui://agentic-api/campaigns/mcp-app.html' | 'ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html' | 'ui://agentic-api/creative-library-v3/mcp-app.html' | 'ui://agentic-api/upload-creative-asset/mcp-app.html' | 'ui://agentic-api/creative-composer-task/mcp-app.html' | 'ui://agentic-api/variant-gallery/mcp-app.html' | 'ui://agentic-api/seller-setup/mcp-app.html' | 'ui://agentic-api/approvals/mcp-app.html' | 'ui://agentic-api/notifications/mcp-app.html' | 'ui://agentic-api/buyer-notifications/mcp-app.html' | 'ui://agentic-api/buyer-webhooks/mcp-app.html' | 'ui://agentic-api/proposal-pass-v3/mcp-app.html' | 'ui://agentic-api/sessions/mcp-app.html' | 'ui://agentic-api/seller-dashboard/mcp-app.html' | 'ui://agentic-api/seller-dashboard-v3/mcp-app.html' | 'ui://agentic-api/product-marketing-v3/mcp-app.html' | 'ui://agentic-api/library/mcp-app.html' | 'ui://agentic-api/integrations/mcp-app.html' | 'ui://agentic-api/release-notes/mcp-app.html' | 'ui://agentic-api/playbook/mcp-app.html' | 'ui://agentic-api/media-kit/mcp-app.html' | 'ui://agentic-api/business-profile/mcp-app.html' | 'ui://agentic-api/buyer-discounts/mcp-app.html' | 'ui://agentic-api/sponsored-buyers/mcp-app.html' | 'ui://agentic-api/pending-operations/mcp-app.html' | 'ui://agentic-api/storefront-briefs/mcp-app.html' | 'ui://agentic-api/activity-log/mcp-app.html' | 'ui://agentic-api/merchandising-simulator/mcp-app.html' | 'ui://agentic-api/media-buys/mcp-app.html' | 'ui://agentic-api/media-buy-timeline/mcp-app.html' | 'ui://agentic-api/components/mcp-app.html' | 'ui://agentic-api/seller-accounts/mcp-app.html';
+        resourceUri: 'ui://agentic-api/conversation-history/mcp-app.html' | 'ui://agentic-api/agent-v2/mcp-app.html' | 'ui://agentic-api/developer-home/mcp-app.html' | 'ui://agentic-api/agents/mcp-app.html' | 'ui://agentic-api/create-agent/mcp-app.html' | 'ui://agentic-api/claim-agent/mcp-app.html' | 'ui://agentic-api/configure-agent-connection/mcp-app.html' | 'ui://agentic-api/register-agent-observed-revision/mcp-app.html' | 'ui://agentic-api/buyer-account-admission/mcp-app.html' | 'ui://agentic-api/tars-org-supply-asks/mcp-app.html' | 'ui://agentic-api/tars-run-rate/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-library/mcp-app.html' | 'ui://agentic-api/tars-approved-deck-modules/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-operations/mcp-app.html' | 'ui://agentic-api/business-rules/mcp-app.html' | 'ui://agentic-api/demo-storefront/mcp-app.html' | 'ui://agentic-api/agent-source-credentials/mcp-app.html' | 'ui://agentic-api/property-roster/mcp-app.html' | 'ui://agentic-api/seller-account-feed/mcp-app.html' | 'ui://agentic-api/esa-signals/mcp-app.html' | 'ui://agentic-api/media-buy-retry/mcp-app.html' | 'ui://agentic-api/inventory-selector/mcp-app.html' | 'ui://agentic-api/modular-inventory-source/mcp-app.html' | 'ui://agentic-api/modular-connect/mcp-app.html' | 'ui://agentic-api/source-discovery-preview/mcp-app.html' | 'ui://agentic-api/partner-connection/mcp-app.html' | 'ui://agentic-api/agent-sources/mcp-app.html' | 'ui://agentic-api/agent-overview/mcp-app.html' | 'ui://agentic-api/agent-webhooks/mcp-app.html' | 'ui://agentic-api/modular-avails-commit/mcp-app.html' | 'ui://agentic-api/plan-billing/mcp-app.html' | 'ui://agentic-api/connections/mcp-app.html' | 'ui://agentic-api/creative-engines/mcp-app.html' | 'ui://agentic-api/all-advertisers-home/mcp-app.html' | 'ui://agentic-api/add-advertiser/mcp-app.html' | 'ui://agentic-api/campaigns/mcp-app.html' | 'ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html' | 'ui://agentic-api/creative-library-v3/mcp-app.html' | 'ui://agentic-api/upload-creative-asset/mcp-app.html' | 'ui://agentic-api/creative-composer-task/mcp-app.html' | 'ui://agentic-api/variant-gallery/mcp-app.html' | 'ui://agentic-api/seller-setup/mcp-app.html' | 'ui://agentic-api/approvals/mcp-app.html' | 'ui://agentic-api/notifications/mcp-app.html' | 'ui://agentic-api/buyer-notifications/mcp-app.html' | 'ui://agentic-api/buyer-webhooks/mcp-app.html' | 'ui://agentic-api/proposal-pass-v3/mcp-app.html' | 'ui://agentic-api/sessions/mcp-app.html' | 'ui://agentic-api/seller-dashboard/mcp-app.html' | 'ui://agentic-api/seller-dashboard-v3/mcp-app.html' | 'ui://agentic-api/product-marketing-v3/mcp-app.html' | 'ui://agentic-api/library/mcp-app.html' | 'ui://agentic-api/integrations/mcp-app.html' | 'ui://agentic-api/release-notes/mcp-app.html' | 'ui://agentic-api/playbook/mcp-app.html' | 'ui://agentic-api/media-kit/mcp-app.html' | 'ui://agentic-api/business-profile/mcp-app.html' | 'ui://agentic-api/buyer-discounts/mcp-app.html' | 'ui://agentic-api/esa-sync-diagnostics/mcp-app.html' | 'ui://agentic-api/esa-inventory-source/mcp-app.html' | 'ui://agentic-api/source-diagnostics/mcp-app.html' | 'ui://agentic-api/sponsored-buyers/mcp-app.html' | 'ui://agentic-api/pending-operations/mcp-app.html' | 'ui://agentic-api/storefront-briefs/mcp-app.html' | 'ui://agentic-api/activity-log/mcp-app.html' | 'ui://agentic-api/merchandising-simulator/mcp-app.html' | 'ui://agentic-api/media-buys/mcp-app.html' | 'ui://agentic-api/media-buy-timeline/mcp-app.html' | 'ui://agentic-api/components/mcp-app.html' | 'ui://agentic-api/seller-accounts/mcp-app.html';
         advertiserId?: string;
         campaignId?: string;
         capability: 'reauthenticate_in_browser' | 'manage_webhooks';
@@ -10456,7 +10509,7 @@ export type OpenPageData = {
         /**
          * Page to open. Owners repair a missing Agent relationship in source_diagnostics.
          */
-        page: 'connect_ad_server' | 'ad_server_source' | 'ad_server_diagnostics' | 'source_diagnostics' | 'seller_setup' | 'demo_seller' | 'connect_sales_agent' | 'modular_inventory_source' | 'modular_source_setup' | 'modular_inventory_feed' | 'listing' | 'discovery_card' | 'media_kit' | 'business_profile' | 'playbook' | 'library' | 'integrations' | 'product_marketing' | 'business_rules' | 'buyer_account_mapping' | 'property_roster' | 'plan_and_billing' | 'buyer_setup' | 'sellers' | 'creative_engines' | 'advertisers' | 'campaigns' | 'campaign_receipt' | 'approvals' | 'release_notes' | 'customer_requests' | 'notifications' | 'webhooks' | 'buyer_proposal_version';
+        page: 'connect_ad_server' | 'ad_server_source' | 'ad_server_diagnostics' | 'source_diagnostics' | 'seller_setup' | 'demo_seller' | 'connect_sales_agent' | 'modular_inventory_source' | 'modular_source_setup' | 'modular_inventory_feed' | 'listing' | 'discovery_card' | 'media_kit' | 'business_profile' | 'playbook' | 'library' | 'integrations' | 'product_marketing' | 'business_rules' | 'buyer_account_mapping' | 'property_roster' | 'plan_and_billing' | 'buyer_setup' | 'sellers' | 'creative_engines' | 'advertisers' | 'campaigns' | 'campaign_receipt' | 'approvals' | 'release_notes' | 'customer_requests' | 'notifications' | 'webhooks' | 'buyer_proposal_version' | 'sessions';
         /**
          * Focus diagnostics, modular source, or modular feed pages on an inventory source returned by search.
          */
@@ -11812,7 +11865,7 @@ export type RequestProposalsResponses = {
                      */
                     sellerAccountId?: RequestProposalsSuccessSkippedSellersSellersItemSellerAccountId;
                     sellerName?: string;
-                    reason: 'channel_mismatch' | 'not_transactable';
+                    reason: 'channel_mismatch' | 'not_transactable' | 'wholesale_only';
                     sellerChannels: Array<string>;
                     skipCode?: 'account_requests_blocked' | 'go_live_blocked' | 'advertiser_not_accessible' | 'seller_unavailable_to_buyers';
                 }>;
@@ -12209,7 +12262,7 @@ export type SaveAccountData = {
          */
         id?: number;
         /**
-         * With id: the Apostra accountId this call runs in, from get_status. Without id: deprecated, read as id.
+         * Apostra accountId this call runs in, from get_status. Without id or accountType: deprecated, read as id.
          */
         accountId?: number;
         /**
@@ -12659,6 +12712,227 @@ export type SaveAdvertiserData = {
          */
         labels?: {
             [key: string]: Array<string>;
+        };
+        /**
+         * Advertiser-stated brand kit, voice rules, banned terms, disclaimers and pages. Save brandProfile in its own save_advertiser call with advertiserId. Available only in the V3 beta with Creative Engines access. `stated: null` clears stated values; `stated.statedAbsence` records that the advertiser confirmed it has no kit, voice or disclaimers.
+         */
+        brandProfile?: {
+            /**
+             * Stated profile; null clears it.
+             */
+            stated?: {
+                /**
+                 * AdCP-validated brand-kit details.
+                 */
+                brandKit?: {
+                    logo?: {
+                        asset_type: 'image';
+                        url: string;
+                        width: number;
+                        height: number;
+                        file_size_bytes?: number;
+                        pixel_ratio?: number;
+                        state_id?: string;
+                        breakpoint_id?: string;
+                        focal_point?: [
+                            number,
+                            number,
+                            never
+                        ];
+                        format?: string;
+                        alt_text?: string;
+                        provenance?: {
+                            digital_source_type?: 'digital_capture' | 'digital_creation' | 'trained_algorithmic_media' | 'composite_with_trained_algorithmic_media' | 'algorithmic_media' | 'composite_capture' | 'composite_synthetic' | 'human_edits' | 'data_driven_media';
+                            synthetic_depiction?: boolean;
+                            ai_tool?: {
+                                name: string;
+                                version?: string;
+                                provider?: string;
+                                [key: string]: unknown;
+                            };
+                            human_oversight?: 'none' | 'prompt_only' | 'selected' | 'edited' | 'directed';
+                            declared_by?: {
+                                agent_url?: string;
+                                role: 'creator' | 'advertiser' | 'agency' | 'platform' | 'tool';
+                                [key: string]: unknown;
+                            };
+                            declared_at?: string;
+                            created_time?: string;
+                            c2pa?: {
+                                manifest_url: string;
+                                [key: string]: unknown;
+                            };
+                            embedded_provenance?: Array<{
+                                method: 'manifest_wrapper' | 'provenance_markers';
+                                standard?: string;
+                                provider: string;
+                                verify_agent?: {
+                                    agent_url: string;
+                                    feature_id?: string;
+                                    [key: string]: unknown;
+                                };
+                                embedded_at?: string;
+                                [key: string]: unknown;
+                            }>;
+                            watermarks?: Array<{
+                                media_type: 'audio' | 'image' | 'video' | 'text';
+                                provider: string;
+                                verify_agent?: {
+                                    agent_url: string;
+                                    feature_id?: string;
+                                    [key: string]: unknown;
+                                };
+                                c2pa_action?: 'c2pa.watermarked.bound' | 'c2pa.watermarked.unbound';
+                                embedded_at?: string;
+                                [key: string]: unknown;
+                            }>;
+                            disclosure?: {
+                                required: boolean;
+                                jurisdictions?: Array<{
+                                    country: string;
+                                    region?: string;
+                                    regulation: string;
+                                    label_text?: string;
+                                    render_guidance?: {
+                                        persistence?: 'continuous' | 'initial' | 'flexible';
+                                        min_duration_ms?: number;
+                                        positions?: Array<'prominent' | 'footer' | 'audio' | 'subtitle' | 'overlay' | 'end_card' | 'pre_roll' | 'companion'>;
+                                        ext?: SaveAdvertiserRequestBrandProfileStatedBrandKitLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt;
+                                        [key: string]: unknown;
+                                    };
+                                    [key: string]: unknown;
+                                }>;
+                                [key: string]: unknown;
+                            };
+                            verification?: Array<{
+                                verified_by: string;
+                                verified_time?: string;
+                                result: 'authentic' | 'ai_generated' | 'ai_modified' | 'inconclusive';
+                                confidence?: number;
+                                details_url?: string;
+                                [key: string]: unknown;
+                            }>;
+                            ext?: SaveAdvertiserRequestBrandProfileStatedBrandKitLogoProvenanceExt;
+                            [key: string]: unknown;
+                        };
+                        [key: string]: unknown;
+                    };
+                    colors?: {
+                        primary?: string;
+                        secondary?: string;
+                        accent?: string;
+                        [key: string]: unknown;
+                    };
+                    voice?: string;
+                    tagline?: string;
+                    [key: string]: unknown;
+                };
+                /**
+                 * Voice guidance.
+                 */
+                voice?: {
+                    /**
+                     * Voice attributes.
+                     */
+                    attributes?: Array<SaveAdvertiserRequestBrandProfileStatedVoiceAttributesItem>;
+                    /**
+                     * Voice rules to follow.
+                     */
+                    dos?: Array<SaveAdvertiserRequestBrandProfileStatedVoiceDosItem>;
+                    /**
+                     * Voice rules to avoid.
+                     */
+                    donts?: Array<SaveAdvertiserRequestBrandProfileStatedVoiceDontsItem>;
+                };
+                /**
+                 * Banned copy terms.
+                 */
+                bannedTerms?: Array<string>;
+                /**
+                 * Copy disclaimers.
+                 */
+                disclaimers?: Array<{
+                    /**
+                     * Disclaimer text.
+                     */
+                    text: string;
+                    /**
+                     * Disclaimer context.
+                     */
+                    context?: string;
+                    /**
+                     * Required disclaimer.
+                     */
+                    required?: boolean;
+                }>;
+                /**
+                 * Official pages.
+                 */
+                pages?: Array<{
+                    /**
+                     * Page platform.
+                     */
+                    platform: string;
+                    /**
+                     * Page URL.
+                     */
+                    url?: string;
+                    /**
+                     * Page handle.
+                     */
+                    handle?: string;
+                    /**
+                     * Page name.
+                     */
+                    name?: string;
+                }>;
+                /**
+                 * Confirmed absences.
+                 */
+                statedAbsence?: {
+                    /**
+                     * No brand kit.
+                     */
+                    kit?: boolean;
+                    /**
+                     * No voice rules.
+                     */
+                    voice?: boolean;
+                    /**
+                     * No disclaimers.
+                     */
+                    disclaimers?: boolean;
+                };
+            } | null;
+            /**
+             * Pending differences.
+             */
+            pendingDifferences?: Array<{
+                /**
+                 * Different profile field.
+                 */
+                field: string;
+                /**
+                 * Advertiser value.
+                 */
+                stated: SaveAdvertiserRequestAdvertiserBrandProfilePendingDifferenceValue;
+                /**
+                 * Published value.
+                 */
+                published: SaveAdvertiserRequestAdvertiserBrandProfilePendingDifferenceValue;
+                /**
+                 * Whether either value was shortened to fit the saved size limit.
+                 */
+                truncated?: boolean;
+                /**
+                 * Combined byte size of the values before they were shortened.
+                 */
+                originalBytes?: number;
+            }>;
+            /**
+             * Expected revision.
+             */
+            expectedRevision?: number;
         };
         /**
          * Domain to resolve to a brand card preview. Set this alone — no other fields.
@@ -13211,7 +13485,36 @@ export type SaveAdvertiserInstructionsSuccessSaveAdvertiserInstructionsSuccessUp
     [key: string]: unknown;
 };
 
+export type SaveAdvertiserRequestAdvertiserBrandProfilePendingDifferenceObjectEntry = {
+    /**
+     * Field name in a flat pending-difference value.
+     */
+    key: string;
+    /**
+     * Scalar value for that field.
+     */
+    value: SaveAdvertiserRequestAdvertiserBrandProfilePendingDifferenceScalar;
+};
+
+export type SaveAdvertiserRequestAdvertiserBrandProfilePendingDifferenceScalar = string | number | boolean | null;
+
+export type SaveAdvertiserRequestAdvertiserBrandProfilePendingDifferenceValue = SaveAdvertiserRequestAdvertiserBrandProfilePendingDifferenceScalar | Array<SaveAdvertiserRequestAdvertiserBrandProfilePendingDifferenceScalar> | Array<SaveAdvertiserRequestAdvertiserBrandProfilePendingDifferenceObjectEntry>;
+
 export type SaveAdvertiserRequestBrandCountries = Array<string>;
+
+export type SaveAdvertiserRequestBrandProfileStatedBrandKitLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt = {
+    [key: string]: unknown;
+};
+
+export type SaveAdvertiserRequestBrandProfileStatedBrandKitLogoProvenanceExt = {
+    [key: string]: unknown;
+};
+
+export type SaveAdvertiserRequestBrandProfileStatedVoiceAttributesItem = string;
+
+export type SaveAdvertiserRequestBrandProfileStatedVoiceDontsItem = string;
+
+export type SaveAdvertiserRequestBrandProfileStatedVoiceDosItem = string;
 
 /**
  * AdCP media channels this advertiser expects to use; an empty list means All channels. Channel overlap affects automatic seller qualification. These editable planning preferences do not create advertiser-owned selection edges or prove that supply is available.
@@ -13790,11 +14093,11 @@ export type SaveAskData = {
          */
         severity?: 'low' | 'medium' | 'high' | 'urgent';
         /**
-         * Supply domain or integration vendor.
+         * Supply domain or integration vendor. Not for support, product or commercial.
          */
         subject?: string;
         /**
-         * Supply channel or integration channel name.
+         * Supply only: the inventory channel.
          */
         channel?: string;
         expectedAccountId?: number | string;
@@ -15114,7 +15417,7 @@ export type SaveBuyerAgentSuccessBuyerAgentNotificationDestinationConfigurationP
 export type SaveBuyerAgentSuccessBuyerAgentNotificationSubscription = {
     subscriber_id: string;
     url: string;
-    event_types: Array<'scheduled' | 'final' | 'delayed' | 'adjusted' | 'window_update' | 'impairment' | 'creative.status_changed' | 'creative.assignment_changed' | 'indicators.changed' | 'creative.purged' | 'account.status_changed' | 'account.change_recorded' | 'product.created' | 'product.updated' | 'product.priced' | 'product.removed' | 'signal.created' | 'signal.updated' | 'signal.priced' | 'signal.removed' | 'wholesale_feed.bulk_change' | 'collection_card.updated' | 'collection_card.removed' | 'collection_catalog.bulk_change' | 'capabilities.changed' | 'reporting.delivery_ready' | 'reporting.status_changed' | 'reporting.ledger_changed' | 'principal.changed' | 'proposal.created'>;
+    event_types: Array<'scheduled' | 'final' | 'delayed' | 'adjusted' | 'window_update' | 'impairment' | 'creative.status_changed' | 'creative.assignment_changed' | 'indicators.changed' | 'creative.purged' | 'account.status_changed' | 'account.change_recorded' | 'product.created' | 'product.updated' | 'product.priced' | 'product.removed' | 'signal.created' | 'signal.updated' | 'signal.priced' | 'signal.removed' | 'wholesale_feed.bulk_change' | 'collection_card.updated' | 'collection_card.removed' | 'collection_catalog.bulk_change' | 'capabilities.changed' | 'reporting.delivery_ready' | 'reporting.status_changed' | 'reporting.ledger_changed' | 'principal.changed' | 'proposal.created' | 'account_request.changed'>;
     all_authorized_accounts?: boolean;
     include_future_event_types?: boolean;
     active?: boolean;
@@ -15638,6 +15941,10 @@ export type SaveCampaignData = {
                  */
                 value: string | null;
             }>;
+            /**
+             * Whether Apostra adds its own UTM tags (utm_source, utm_medium, utm_campaign, utm_content) to this campaign's click URLs. Default true. false turns all four off and leaves the parameters you set alone.
+             */
+            autoUtm?: boolean;
         };
         /**
          * AdCP campaign targeting overlay.
@@ -15743,39 +16050,6 @@ export type SaveCampaignData = {
             browser?: SaveCampaignRequestTargetingOverlayBrowser;
             browser_exclude?: SaveCampaignRequestTargetingOverlayBrowserExclude;
             /**
-             * Delivery windows.
-             */
-            daypart_targets?: Array<{
-                /**
-                 * Weekdays in this window.
-                 */
-                days: Array<'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'>;
-                /**
-                 * Start hour.
-                 */
-                start_hour?: number;
-                /**
-                 * End hour.
-                 */
-                end_hour?: number;
-                /**
-                 * Targeting value.
-                 */
-                start_time?: string;
-                /**
-                 * Targeting value.
-                 */
-                end_time?: string;
-                /**
-                 * IANA timezone.
-                 */
-                timezone?: 'inventory_local' | unknown;
-                /**
-                 * Optional display label.
-                 */
-                label?: string;
-            } & unknown>;
-            /**
              * Demographic criteria.
              */
             demographics?: {
@@ -15853,6 +16127,39 @@ export type SaveCampaignData = {
                     accepted_verification_methods?: SaveCampaignRequestTargetingOverlayDemographicsAgeAcceptedVerificationMethods;
                 };
             };
+            /**
+             * Delivery windows.
+             */
+            daypart_targets?: Array<{
+                /**
+                 * Weekdays in this window.
+                 */
+                days: Array<'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday'>;
+                /**
+                 * Start hour.
+                 */
+                start_hour?: number;
+                /**
+                 * End hour.
+                 */
+                end_hour?: number;
+                /**
+                 * Targeting value.
+                 */
+                start_time?: string;
+                /**
+                 * Targeting value.
+                 */
+                end_time?: string;
+                /**
+                 * IANA timezone.
+                 */
+                timezone?: 'inventory_local' | unknown;
+                /**
+                 * Optional display label.
+                 */
+                label?: string;
+            } & unknown>;
             /**
              * Minimum audience age.
              */
@@ -18895,6 +19202,20 @@ export type SaveCreativeData = {
             }>;
         };
         /**
+         * AdCP industry IDs broadcast sellers require. Replaces the list.
+         */
+        industry_identifiers?: Array<{
+            /**
+             * Identifier scheme.
+             */
+            type: 'ad_id' | 'isci' | 'clearcast_clock' | 'idcrea';
+            /**
+             * The code.
+             */
+            value: string;
+            [key: string]: unknown;
+        }>;
+        /**
          * Dimension values; [] clears.
          */
         labels?: {
@@ -19111,6 +19432,10 @@ export type SaveCreativeResponses = {
             campaignIds: Array<string>;
             attached: Array<string>;
             detached: Array<string>;
+            liveMediaBuys?: {
+                attached: Array<SaveCreativeSuccessLiveMediaBuysAttachedItem>;
+                detached: Array<SaveCreativeSuccessLiveMediaBuysDetachedItem>;
+            };
         } | {
             action: 'resynced';
             creativeId: string;
@@ -19118,6 +19443,15 @@ export type SaveCreativeResponses = {
                 campaignId: string;
                 status: 'confirmed';
                 mediaBuyIds: Array<string>;
+                queuedMediaBuyIds?: Array<string>;
+                code?: never;
+                message?: never;
+                retryable?: never;
+            } | {
+                campaignId: string;
+                status: 'queued';
+                queuedMediaBuyIds: Array<string>;
+                mediaBuyIds?: never;
                 code?: never;
                 message?: never;
                 retryable?: never;
@@ -19127,6 +19461,7 @@ export type SaveCreativeResponses = {
                 code: string;
                 message: string;
                 retryable: boolean;
+                queuedMediaBuyIds?: Array<string>;
                 mediaBuyIds?: never;
             }>;
         } | {
@@ -20343,6 +20678,16 @@ export type SaveCreativeSuccessDuplicateCreativeSuccess = {
     sourceCreativeId: string;
     creative: SaveCreativeSuccessCreativeDuplicate;
     replayed: boolean;
+};
+
+export type SaveCreativeSuccessLiveMediaBuysAttachedItem = {
+    mediaBuyId: string;
+    status: string;
+};
+
+export type SaveCreativeSuccessLiveMediaBuysDetachedItem = {
+    mediaBuyId: string;
+    status: string;
 };
 
 export type SaveCreativeSuccessProviderContacted = false;
@@ -23087,7 +23432,7 @@ export type SaveMaterialRequestMetadataDescription = string;
 
 export type SaveMaterialRequestMetadataDisplayName = string;
 
-export type SaveMaterialRequestMetadataDocumentPurpose = 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | null;
+export type SaveMaterialRequestMetadataDocumentPurpose = 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | null;
 
 export type SaveMaterialRequestMetadataEffectiveFrom = string;
 
@@ -24301,6 +24646,10 @@ export type SaveMediaBuyData = {
              */
             remove?: boolean;
             /**
+             * Update only: delivery pacing of this line item. On a running buy the seller must take the change.
+             */
+            pacing?: 'even' | 'asap' | 'front_loaded';
+            /**
              * Update only: line-item handle from the read; needed for a repeated product.
              */
             lineItemRef?: string;
@@ -24782,7 +25131,7 @@ export type SaveMediaBuyData = {
             };
         }>;
         /**
-         * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
          */
         budget?: {
             /**
@@ -24795,7 +25144,7 @@ export type SaveMediaBuyData = {
             currency: string;
         };
         /**
-         * Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.
+         * Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.
          */
         budgetAllocation?: {
             /**
@@ -25121,6 +25470,10 @@ export type SaveMediaBuyData = {
              * Update only: true removes this line item.
              */
             remove?: boolean;
+            /**
+             * Update only: delivery pacing of this line item. On a running buy the seller must take the change.
+             */
+            pacing?: 'even' | 'asap' | 'front_loaded';
             /**
              * Update only: line-item handle from the read; needed for a repeated product.
              */
@@ -25585,7 +25938,7 @@ export type SaveMediaBuyData = {
             };
         }>;
         /**
-         * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
          */
         budget?: {
             /**
@@ -25598,7 +25951,7 @@ export type SaveMediaBuyData = {
             currency: string;
         };
         /**
-         * Meta: fixed = ad-set budgets; seller_optimized = shared campaign budget. Ask if unclear; required when both modes are supported.
+         * Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.
          */
         budgetAllocation?: {
             /**
@@ -25828,7 +26181,7 @@ export type SaveMediaBuyData = {
          */
         channelGroupId?: string;
         /**
-         * Single total. One-allocation proposal allowed; multi: products[].budget; else retain allocation.
+         * Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.
          */
         budget?: {
             /**
@@ -26507,6 +26860,7 @@ export type SaveMediaBuyResponses = {
                 };
                 createdAt: string;
                 updatedAt: string;
+                [key: string]: unknown;
             };
             warnings?: Array<string>;
             errors?: Array<{
@@ -29307,6 +29661,23 @@ export type SaveSellerData = {
              * Reason recorded with the decision to decline this intake.
              */
             message: string;
+        } | {
+            /**
+             * Declined buyer-account intake ID from get(account_relationship).
+             */
+            intakeId: string;
+            /**
+             * Current intake version from get(account_relationship).
+             */
+            expectedVersion: number;
+            /**
+             * Return this declined intake to pending review.
+             */
+            decision: 'reopen';
+            /**
+             * Optional note recorded with this decision.
+             */
+            message?: string;
         };
         /**
          * Which account serves an admitted buyer on one source (see get(account_relationship) sources). Send alone.
@@ -29724,7 +30095,7 @@ export type SaveSellerResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
+        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
         error: null;
     };
     /**
@@ -29841,6 +30212,14 @@ export type SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked = {
     outcome: 'ready_to_invoice_revoked';
     action: 'ready_to_invoice_revoked';
     assertionId: string;
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessReopenRecorded = {
+    outcome: 'reopen_recorded';
+    action: 'reopen_recorded';
+    intakeId: string;
+    decision: 'reopen';
     [key: string]: unknown;
 };
 
@@ -30178,7 +30557,7 @@ export type SaveWholesaleProductData = {
          */
         channels?: Array<'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence'>;
         /**
-         * The ad-server selectors to sell, in the source's own shape. Required to create.
+         * Source shape. A create needs `execution.adapter`; copy `execution` from `get` of a product on this source.
          */
         inventory?: {
             [key: string]: unknown;
@@ -30956,7 +31335,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -31084,7 +31463,7 @@ export type SearchData = {
              */
             marketplace?: boolean;
             /**
-             * For kind seller in a buyer account: sellers that serve this region code.
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
              */
             region?: string;
             /**
@@ -31110,7 +31489,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -31149,11 +31528,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -31434,7 +31813,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -31562,7 +31941,7 @@ export type SearchData = {
              */
             marketplace?: boolean;
             /**
-             * For kind seller in a buyer account: sellers that serve this region code.
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
              */
             region?: string;
             /**
@@ -31588,7 +31967,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -31627,11 +32006,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -31684,22 +32063,22 @@ export type SearchData = {
         /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
-        filter: {
+        filter?: {
             /**
              * The owning advertiser id. Required for event_source, catalog, property_list, creative_asset, creative_format, and buyer wholesale_product. creative, creative_collection, and creative_session take this or campaignId, not both. Over MCP, a buyer search of any of these kinds that sends neither uses the only active advertiser, or names the choices. Buyer media_buy needs this or campaignId. Narrows campaign. For seller, partnerStatus is read for this advertiser, not the account.
              */
-            advertiserId: string;
+            advertiserId?: string;
         };
         /**
          * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -31980,7 +32359,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -32108,7 +32487,7 @@ export type SearchData = {
              */
             marketplace?: boolean;
             /**
-             * For kind seller in a buyer account: sellers that serve this region code.
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
              */
             region?: string;
             /**
@@ -32134,7 +32513,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -32173,11 +32552,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -32454,7 +32833,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -32582,7 +32961,7 @@ export type SearchData = {
              */
             marketplace?: boolean;
             /**
-             * For kind seller in a buyer account: sellers that serve this region code.
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
              */
             region?: string;
             /**
@@ -32608,7 +32987,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -32647,14 +33026,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
-        /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
-         */
-        groupBy?: string;
         accountId?: number | string;
+        groupBy?: never;
     }) | (unknown & {
         /**
          * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.
@@ -32704,7 +33080,7 @@ export type SearchData = {
         /**
          * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
          */
-        filter: {
+        filter?: {
             /**
              * For kind connection: list connections to sellers (the default) or to creative engines.
              */
@@ -32776,7 +33152,7 @@ export type SearchData = {
             /**
              * The owning advertiser id. Required for event_source, catalog, property_list, creative_asset, creative_format, and buyer wholesale_product. creative, creative_collection, and creative_session take this or campaignId, not both. Over MCP, a buyer search of any of these kinds that sends neither uses the only active advertiser, or names the choices. Buyer media_buy needs this or campaignId. Narrows campaign. For seller, partnerStatus is read for this advertiser, not the account.
              */
-            advertiserId: string;
+            advertiserId?: string;
             /**
              * For kind catalog: catalogs of exactly this AdCP catalog type.
              */
@@ -32928,7 +33304,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -33056,7 +33432,7 @@ export type SearchData = {
              */
             marketplace?: boolean;
             /**
-             * For kind seller in a buyer account: sellers that serve this region code.
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
              */
             region?: string;
             /**
@@ -33082,7 +33458,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -33121,11 +33497,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -33402,7 +33778,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -33530,7 +33906,7 @@ export type SearchData = {
              */
             marketplace?: boolean;
             /**
-             * For kind seller in a buyer account: sellers that serve this region code.
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
              */
             region?: string;
             /**
@@ -33556,7 +33932,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -33595,11 +33971,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -33876,7 +34252,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -34004,7 +34380,7 @@ export type SearchData = {
              */
             marketplace?: boolean;
             /**
-             * For kind seller in a buyer account: sellers that serve this region code.
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
              */
             region?: string;
             /**
@@ -34030,7 +34406,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -34069,11 +34445,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -34129,11 +34505,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -34192,11 +34568,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -34480,7 +34856,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -34608,7 +34984,7 @@ export type SearchData = {
              */
             marketplace?: boolean;
             /**
-             * For kind seller in a buyer account: sellers that serve this region code.
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
              */
             region?: string;
             /**
@@ -34634,7 +35010,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -34673,11 +35049,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -34958,7 +35334,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -35086,7 +35462,7 @@ export type SearchData = {
              */
             marketplace?: boolean;
             /**
-             * For kind seller in a buyer account: sellers that serve this region code.
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
              */
             region?: string;
             /**
@@ -35112,7 +35488,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -35151,11 +35527,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -35435,7 +35811,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -35563,7 +35939,7 @@ export type SearchData = {
              */
             marketplace?: boolean;
             /**
-             * For kind seller in a buyer account: sellers that serve this region code.
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
              */
             region?: string;
             /**
@@ -35589,7 +35965,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -35628,11 +36004,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -35913,7 +36289,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -36041,7 +36417,7 @@ export type SearchData = {
              */
             marketplace?: boolean;
             /**
-             * For kind seller in a buyer account: sellers that serve this region code.
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
              */
             region?: string;
             /**
@@ -36067,7 +36443,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -36106,11 +36482,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -36391,7 +36767,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -36519,7 +36895,7 @@ export type SearchData = {
              */
             marketplace?: boolean;
             /**
-             * For kind seller in a buyer account: sellers that serve this region code.
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
              */
             region?: string;
             /**
@@ -36545,7 +36921,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -36584,11 +36960,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -36869,7 +37245,7 @@ export type SearchData = {
             /**
              * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
              */
-            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1';
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
             /**
              * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
              */
@@ -36997,7 +37373,7 @@ export type SearchData = {
              */
             marketplace?: boolean;
             /**
-             * For kind seller in a buyer account: sellers that serve this region code.
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
              */
             region?: string;
             /**
@@ -37023,7 +37399,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'response' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -37062,11 +37438,11 @@ export type SearchData = {
          */
         cursor?: string;
         /**
-         * Results per page, default 50. Some kinds cap it lower: skill returns at most 6, advertiser_grant 25, creative_collection 50, conversation and creative_asset 100.
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: you get each value with its count, no rows. Needs kind and takes no cursor. limit caps the values returned (at most 50). ask: askState, askType. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -39399,10 +39775,6 @@ export type UploadCreativeAssetData = {
              * Optional creative name for the upload experience.
              */
             creative_name?: string;
-            /**
-             * Creative fields that remain to be authored.
-             */
-            required_authored_fields: Array<string>;
         };
         /**
          * Apostra accountId this call runs in, from get_status.
@@ -39513,9 +39885,6 @@ export type UploadCreativeAssetResponses = {
                 [key: string]: number;
             };
             fallback_url: string;
-            /**
-             * Optional campaign context for composing the uploaded creative.
-             */
             campaign_composition?: {
                 /**
                  * Campaign receiving the uploaded creative.
@@ -39534,9 +39903,9 @@ export type UploadCreativeAssetResponses = {
                  */
                 creative_name?: string;
                 /**
-                 * Creative fields that remain to be authored.
+                 * Copy fields every image format of the campaign's products requires; a save without one is refused.
                  */
-                required_authored_fields: Array<string>;
+                required_authored_fields: Array<'headline' | 'primary_text' | 'cta' | 'brand_name'>;
             };
         };
         error: null;
