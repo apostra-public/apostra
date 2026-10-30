@@ -381,7 +381,7 @@ class GenerateVariantsSuccessGalleryVariantsItemPreview(TypedDict):
     height: NotRequired[float]
 
 class GetDeliveryInput(TypedDict):
-    metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "conversions", "leads", "videoCompletions", "conversion_value", "ecpm", "cpc", "ctr", "completion_rate", "cpa", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
+    metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
     '\n    Metrics; omit for report defaults.\n    '
     dimensions: NotRequired[list[Literal["date", "advertiser", "campaign", "channel_group", "channel", "buyer", "media_buy", "package", "inventory_source", "seller", "sales_agent"] | str]]
     '\n    Group-by dimensions; campaign delivery also accepts labels.<dimension_key>. Omit for leaf grain.\n    '
@@ -1183,7 +1183,7 @@ class GetDeliverySuccessPeriod(TypedDict):
     endDate: str
 
 class GetDeliverySuccessQuery(TypedDict):
-    metrics: list[Literal["impressions", "spend", "clicks", "views", "completed_views", "conversions", "leads", "videoCompletions", "conversion_value", "ecpm", "cpc", "ctr", "completion_rate", "cpa", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]
+    metrics: list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]
     dimensions: list[str]
     range: NotRequired[GetDeliverySuccessQueryRange]
     filters: GetDeliverySuccessQueryFilters
