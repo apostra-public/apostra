@@ -1,14 +1,16 @@
 """The credential store behind `apostra login`, shared with the CLI and the TypeScript SDK.
 
-The CLI writes `credentials.json`; this module reads it and refreshes the
-access token in place. It never opens a browser: sign-in stays in the CLI.
-Refresh tokens rotate, so a Python process and a Node process take the same
-lock file before they refresh, and one of them reuses the other's result.
+Login tokens live in the operating system credential store. Existing
+``credentials.json`` entries migrate on first use. It never opens a browser:
+sign-in stays in the CLI. Refresh tokens rotate, so a Python process and a
+Node process take the same lock file before they refresh, and one of them
+reuses the other's result.
 """
 
 from __future__ import annotations
 
 import asyncio
+import importlib
 import json
 import math
 import os
@@ -16,15 +18,17 @@ import random
 import sys
 import threading
 import uuid
+import warnings
 from collections.abc import Iterator
 from contextlib import contextmanager
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from time import monotonic, sleep, time
-from typing import TypedDict, cast
+from typing import Any, TypedDict, cast
 from urllib.parse import urlsplit
 
 import httpx
+import keyring
 
 from ._version import BASE_URL
 from .transport import AsyncTokenProvider, ConnectionError, TimeoutError, TokenProvider
@@ -36,6 +40,9 @@ _LOCK_HEARTBEAT_S = 5.0
 _LOCK_WAIT_S = 30.0
 _LOOPBACK_HOSTS = {"localhost", "127.0.0.1", "::1"}
 _DEFAULT_PORTS = {"https": 443, "http": 80}
+_KEYRING_SERVICE = "Apostra CLI login"
+_LINUX_SECRET_ATTRIBUTES = ("service", "username")
+_LINUX_KEYTAR_ATTRIBUTES = ("service", "account")
 
 
 class CliLoginEntry(TypedDict):
@@ -106,48 +113,80 @@ def _parse_time(value: object) -> datetime | None:
     return parsed if parsed.tzinfo else parsed.replace(tzinfo=UTC)
 
 
+def _format_time(value: datetime) -> str:
+    return value.astimezone(UTC).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+
+
 def _parse_entry(value: object) -> CliLoginEntry | None:
     if not isinstance(value, dict):
         return None
     fields = cast(dict[str, object], value)
     scopes = fields.get("scopes")
+    expires_at = _parse_time(fields.get("expiresAt"))
     if (
         not all(
             isinstance(fields.get(k), str) and fields[k]
             for k in ("issuer", "resource", "clientId", "accessToken", "refreshToken")
         )
-        or _parse_time(fields.get("expiresAt")) is None
+        or expires_at is None
         or not isinstance(fields.get("accountId"), str)
         or not isinstance(scopes, list)
         or not all(isinstance(s, str) for s in cast(list[object], scopes))
     ):
         return None
-    return cast(CliLoginEntry, fields)
+    # Credential stores round-trip text. Canonicalise at their boundary so a
+    # value with sub-millisecond precision cannot oscillate between clients.
+    return cast(CliLoginEntry, {**fields, "expiresAt": _format_time(expires_at)})
 
 
-def _read_all() -> dict[str, object]:
+def _read_file_store() -> tuple[dict[str, object], set[str]]:
     try:
         file: object = json.loads(credentials_path().read_text(encoding="utf-8"))
     except (OSError, ValueError):
-        return {}
-    logins = (
-        cast(dict[str, object], file).get("logins") if isinstance(file, dict) else None
+        return {}, set()
+    if not isinstance(file, dict):
+        return {}, set()
+    fields = cast(dict[str, object], file)
+    logins = fields.get("logins")
+    authoritative = fields.get("authoritativeFileLogins")
+    authoritative_values = cast(list[object], authoritative) if isinstance(authoritative, list) else []
+    return (
+        cast(dict[str, object], logins) if isinstance(logins, dict) else {},
+        {resource for resource in authoritative_values if isinstance(resource, str)},
     )
-    return cast(dict[str, object], logins) if isinstance(logins, dict) else {}
 
 
-def _write_all(logins: dict[str, object]) -> None:
+def _write_file_logins(
+    logins: dict[str, object], authoritative: set[str] | None = None
+) -> None:
     """Atomic (temp file + rename), directory 0700, file 0600."""
     path = credentials_path()
     path.parent.mkdir(parents=True, mode=0o700, exist_ok=True)
     os.chmod(path.parent, 0o700)
+    if not logins:
+        path.unlink(missing_ok=True)
+        return
     temp = path.with_name(f"{path.name}.{os.getpid()}.{uuid.uuid4().hex[:8]}.tmp")
     fd = os.open(temp, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as handle:
             handle.write(
                 json.dumps(
-                    {"version": 1, "logins": logins}, indent=2, ensure_ascii=False
+                    {
+                        "version": 1,
+                        "logins": logins,
+                        **(
+                            {
+                                "authoritativeFileLogins": sorted(
+                                    authoritative & set(logins)
+                                )
+                            }
+                            if authoritative
+                            else {}
+                        ),
+                    },
+                    indent=2,
+                    ensure_ascii=False,
                 )
                 + "\n"
             )
@@ -157,8 +196,196 @@ def _write_all(logins: dict[str, object]) -> None:
         raise
 
 
+def _secretstorage() -> Any:
+    """Load SecretStorage only where the CLI uses Secret Service directly."""
+    return importlib.import_module("secretstorage")
+
+
+def _unlock_linux_secret(item: Any) -> None:
+    if item.is_locked():
+        item.unlock()
+        if item.is_locked():
+            raise RuntimeError("Secret Service item remained locked")
+
+
+def _linux_secret_collection() -> tuple[Any, Any]:
+    secretstorage = _secretstorage()
+    connection = secretstorage.dbus_init()
+    try:
+        collection = secretstorage.get_default_collection(connection)
+        _unlock_linux_secret(collection)
+        return collection, connection
+    except BaseException:
+        connection.close()
+        raise
+
+
+def _linux_secret_items(collection: Any, resource: str) -> list[Any]:
+    # @napi-rs/keyring 2.1.1 builds a Rust keyring Entry, whose Secret Service
+    # implementation stores `service` and `username`. Some keytar-compatible
+    # stores expose the same Entry's second argument as `account`, so read that
+    # representation too without changing the CLI's current write contract.
+    native = list(
+        collection.search_items(
+            dict(zip(_LINUX_SECRET_ATTRIBUTES, (_KEYRING_SERVICE, resource)))
+        )
+    )
+    if native:
+        return native
+    return list(
+        collection.search_items(
+            dict(zip(_LINUX_KEYTAR_ATTRIBUTES, (_KEYRING_SERVICE, resource)))
+        )
+    )
+
+
+def _read_linux_secure_password(resource: str) -> str | None:
+    collection, connection = _linux_secret_collection()
+    try:
+        items = _linux_secret_items(collection, resource)
+        if len(items) > 1:
+            raise RuntimeError("Secret Service has ambiguous Apostra login entries")
+        if not items:
+            return None
+        _unlock_linux_secret(items[0])
+        return cast(bytes, items[0].get_secret()).decode("utf-8")
+    finally:
+        connection.close()
+
+
+def _write_linux_secure_password(resource: str, password: str) -> None:
+    collection, connection = _linux_secret_collection()
+    try:
+        items = _linux_secret_items(collection, resource)
+        if len(items) > 1:
+            raise RuntimeError("Secret Service has ambiguous Apostra login entries")
+        encoded = password.encode("utf-8")
+        if items:
+            _unlock_linux_secret(items[0])
+            items[0].set_secret(encoded, content_type="application/octet-stream")
+            return
+        collection.create_item(
+            f"keyring:{resource}@{_KEYRING_SERVICE}",
+            dict(zip(_LINUX_SECRET_ATTRIBUTES, (_KEYRING_SERVICE, resource))),
+            encoded,
+            replace=True,
+            content_type="application/octet-stream",
+        )
+    finally:
+        connection.close()
+
+
+def _read_secure_login(resource: str) -> tuple[bool, CliLoginEntry | None]:
+    try:
+        password = (
+            _read_linux_secure_password(resource)
+            if sys.platform == "linux"
+            else keyring.get_password(_KEYRING_SERVICE, resource)
+        )
+    except Exception:
+        return False, None
+    if password is None:
+        return True, None
+    try:
+        return True, _parse_entry(json.loads(password))
+    except ValueError:
+        return True, None
+
+
+def _write_secure_login(resource: str, entry: CliLoginEntry) -> bool:
+    try:
+        password = json.dumps(entry)
+        if sys.platform == "linux":
+            _write_linux_secure_password(resource, password)
+        else:
+            keyring.set_password(_KEYRING_SERVICE, resource, password)
+        return True
+    except Exception:
+        return False
+
+
+def _warn_file_fallback() -> None:
+    path = credentials_path()
+    marker = path.parent / ".file-store-warning"
+    try:
+        path.parent.mkdir(parents=True, mode=0o700, exist_ok=True)
+        os.chmod(path.parent, 0o700)
+        os.close(os.open(marker, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600))
+    except FileExistsError:
+        return
+    except OSError:
+        # If the marker cannot be written, warn for this process rather than
+        # silently accepting plaintext storage.
+        pass
+    warnings.warn(
+        "Apostra could not access your OS credential store. Login tokens are "
+        f"stored in {path} with 0600 permissions. Use Keychain, Credential "
+        "Manager, or Secret Service when available.",
+        RuntimeWarning,
+        stacklevel=3,
+    )
+
+
+def _migrate_file_logins(lock_held: bool = False) -> bool:
+    """Move all valid legacy entries without overwriting a refreshed credential."""
+    file_logins, authoritative = _read_file_store()
+    entries = [
+        (resource, entry)
+        for resource, value in file_logins.items()
+        if (entry := _parse_entry(value)) is not None
+    ]
+    if not entries:
+        return False
+    if not lock_held:
+        try:
+            with cli_login_lock():
+                return _migrate_file_logins(lock_held=True)
+        except TimeoutError:
+            return False
+    remaining = dict(file_logins)
+    remaining_authoritative = set(authoritative)
+    for resource, entry in entries:
+        available, stored = _read_secure_login(resource)
+        if resource not in authoritative and stored is not None:
+            remaining.pop(resource, None)
+            remaining_authoritative.discard(resource)
+            continue
+        if not available or not _write_secure_login(resource, entry):
+            # Retain only entries that still need migration. Otherwise a
+            # successfully migrated authoritative login could shadow its next
+            # secure-store refresh while another login remains in the file.
+            _write_file_logins(remaining, remaining_authoritative)
+            return False
+        remaining.pop(resource, None)
+        remaining_authoritative.discard(resource)
+    _write_file_logins(remaining, remaining_authoritative)
+    return True
+
+
+def _read_cli_login(base_url: str, *, lock_held: bool = False) -> CliLoginEntry | None:
+    resource = normalize_base_url(base_url)
+    file_logins, authoritative = _read_file_store()
+    file_login = _parse_entry(file_logins.get(resource))
+    # A refresh token can rotate before a credential store reports an update
+    # failure. This marker makes its 0600 fallback authoritative over the now
+    # invalid secure-store value until a later read can migrate it safely.
+    if resource in authoritative and file_login is not None:
+        return file_login
+    available, secure = _read_secure_login(resource)
+    if secure is not None:
+        return secure
+    if not file_logins:
+        return None
+    if _migrate_file_logins(lock_held=lock_held):
+        _, secure = _read_secure_login(resource)
+        return secure
+    if not available:
+        _warn_file_fallback()
+    return file_login
+
+
 def read_cli_login(base_url: str) -> CliLoginEntry | None:
-    return _parse_entry(_read_all().get(normalize_base_url(base_url)))
+    return _read_cli_login(base_url)
 
 
 def stored_cli_login(base_url: str) -> CliLoginEntry | None:
@@ -265,7 +492,25 @@ def cli_login_lock() -> Iterator[None]:
 
 def write_cli_login(base_url: str, entry: CliLoginEntry) -> None:
     """Save a login. Call inside `cli_login_lock`."""
-    _write_all({**_read_all(), normalize_base_url(base_url): entry})
+    resource = normalize_base_url(base_url)
+    normalized = _parse_entry(entry)
+    if normalized is None:
+        raise ValueError("Apostra login is invalid")
+    entry = normalized
+    _migrate_file_logins(lock_held=True)
+    secure_store_available, existing_secure_login = _read_secure_login(resource)
+    if _write_secure_login(resource, entry):
+        return
+    _warn_file_fallback()
+    file_logins, authoritative = _read_file_store()
+    if not secure_store_available or existing_secure_login is not None:
+        # Refresh-token rotation invalidates the old secure credential. Keep
+        # the replacement in the protected fallback file and mark it ahead of
+        # a stale secure-store value until it can be migrated. An unavailable
+        # read is also unsafe: the store may recover with the old credential
+        # after this write has failed.
+        authoritative.add(resource)
+    _write_file_logins({**file_logins, resource: entry}, authoritative)
 
 
 @contextmanager
@@ -395,7 +640,7 @@ def refresh_cli_login(
     if is_fresh(first):
         return first
     with cli_login_lock():
-        entry = read_cli_login(key)
+        entry = _read_cli_login(key, lock_held=True)
         if entry is None:
             raise missing()
         if is_fresh(entry):
