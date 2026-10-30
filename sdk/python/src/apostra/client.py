@@ -77,11 +77,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.GetSellerReportingReceiptsResult], self._request_with_response("get_seller_reporting_receipts", input, account_id=account_id, timeout=timeout))
 
     def get_status(self, input: models.GetStatusInput = {}, *, account_id: str | None = None, timeout: float | None = None) -> models.GetStatusResult:
-        "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call."
+        "Current account, state, blockers, exact fixes, accounts to pick from. For seller demand, tells if readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, next call."
         return cast("models.GetStatusResult", self._request("get_status", input, account_id=account_id, timeout=timeout))
 
     def get_status_with_response(self, input: models.GetStatusInput = {}, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.GetStatusResult]:
-        "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call. Returns the data together with response headers and request ID."
+        "Current account, state, blockers, exact fixes, accounts to pick from. For seller demand, tells if readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, next call. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.GetStatusResult], self._request_with_response("get_status", input, account_id=account_id, timeout=timeout))
 
     def log_event(self, input: models.LogEventInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.LogEventResult:
@@ -99,14 +99,6 @@ class Apostra(SyncTransport):
     def open_advertisers_page_with_response(self, input: models.OpenAdvertisersPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAdvertisersPageResult]:
         "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches. To add or set up an advertiser, pass intent: \"add\". For a text answer use search(kind: \"advertiser\"). Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenAdvertisersPageResult], self._request_with_response("open_advertisers_page", input, account_id=account_id, timeout=timeout))
-
-    def open_agent_certification_page(self, input: models.OpenAgentCertificationPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentCertificationPageResult:
-        "Open one agent’s Test & certify Page: live certification per use case, recent test runs, AdCP 4.0 readiness and capability declarations. Read-only."
-        return cast("models.OpenAgentCertificationPageResult", self._request("open_agent_certification_page", input, account_id=account_id, timeout=timeout))
-
-    def open_agent_certification_page_with_response(self, input: models.OpenAgentCertificationPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAgentCertificationPageResult]:
-        "Open one agent’s Test & certify Page: live certification per use case, recent test runs, AdCP 4.0 readiness and capability declarations. Read-only. Returns the data together with response headers and request ID."
-        return cast(ResponseDetails[models.OpenAgentCertificationPageResult], self._request_with_response("open_agent_certification_page", input, account_id=account_id, timeout=timeout))
 
     def open_agent_page(self, input: models.OpenAgentPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentPageResult:
         "Open one agent owned by this Developer account."
@@ -333,11 +325,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveAgentResult], self._request_with_response("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
-        "File or update a typed ask in the Apostra Support workflow; returns askId. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
+        "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
         return cast("models.SaveAskResult", self._request("save_ask", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_ask_with_response(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAskResult]:
-        "File or update a typed ask in the Apostra Support workflow; returns askId. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first. Returns the data together with response headers and request ID."
+        "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAskResult], self._request_with_response("save_ask", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_audience(self, input: models.SaveAudienceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAudienceResult:
@@ -413,11 +405,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveCoverageResult], self._request_with_response("save_coverage", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeResult:
-        "advertiserId/campaignId:name,message;assets/landing_page_url/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only."
+        "Save content you supply: advertiserId/campaignId, name, message, assets (landing_page_url, social, sourceAssetRef/sourceAssets). New media like radio spots: use save_creative_session. One format selector: formatKind+formatParams or creativeFormatId+formatOptionRef. libraryRole: Buyer Account only."
         return cast("models.SaveCreativeResult", self._request("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative_with_response(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeResult]:
-        "advertiserId/campaignId:name,message;assets/landing_page_url/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only. Returns the data together with response headers and request ID."
+        "Save content you supply: advertiserId/campaignId, name, message, assets (landing_page_url, social, sourceAssetRef/sourceAssets). New media like radio spots: use save_creative_session. One format selector: formatKind+formatParams or creativeFormatId+formatOptionRef. libraryRole: Buyer Account only. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCreativeResult], self._request_with_response("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative_collection(self, input: models.SaveCreativeCollectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeCollectionResult:
@@ -461,11 +453,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveEventSourceResult], self._request_with_response("save_event_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_inventory_source(self, input: models.SaveInventorySourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveInventorySourceResult:
-        "Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Pass only `agentId` or `adServer` to open the form that connects an agent or an ad server. Credentials are never passed here; a source that needs one returns the page that collects it."
+        "Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. Credentials are never passed here; a source that needs one returns its form."
         return cast("models.SaveInventorySourceResult", self._request("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_inventory_source_with_response(self, input: models.SaveInventorySourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveInventorySourceResult]:
-        "Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Pass only `agentId` or `adServer` to open the form that connects an agent or an ad server. Credentials are never passed here; a source that needs one returns the page that collects it. Returns the data together with response headers and request ID."
+        "Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. Credentials are never passed here; a source that needs one returns its form. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveInventorySourceResult], self._request_with_response("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_lesson(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLessonResult:
@@ -493,11 +485,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveMaterialResult], self._request_with_response("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_media_buy(self, input: models.SaveMediaBuyInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMediaBuyResult:
-        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates."
+        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates."
         return cast("models.SaveMediaBuyResult", self._request("save_media_buy", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_media_buy_with_response(self, input: models.SaveMediaBuyInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveMediaBuyResult]:
-        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates. Returns the data together with response headers and request ID."
+        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveMediaBuyResult], self._request_with_response("save_media_buy", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_media_kit(self, input: models.SaveMediaKitInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMediaKitResult:
@@ -678,11 +670,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.GetSellerReportingReceiptsResult], await self._request_with_response("get_seller_reporting_receipts", input, account_id=account_id, timeout=timeout))
 
     async def get_status(self, input: models.GetStatusInput = {}, *, account_id: str | None = None, timeout: float | None = None) -> models.GetStatusResult:
-        "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call."
+        "Current account, state, blockers, exact fixes, accounts to pick from. For seller demand, tells if readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, next call."
         return cast("models.GetStatusResult", await self._request("get_status", input, account_id=account_id, timeout=timeout))
 
     async def get_status_with_response(self, input: models.GetStatusInput = {}, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.GetStatusResult]:
-        "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call. Returns the data together with response headers and request ID."
+        "Current account, state, blockers, exact fixes, accounts to pick from. For seller demand, tells if readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, next call. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.GetStatusResult], await self._request_with_response("get_status", input, account_id=account_id, timeout=timeout))
 
     async def log_event(self, input: models.LogEventInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.LogEventResult:
@@ -700,14 +692,6 @@ class AsyncApostra(AsyncTransport):
     async def open_advertisers_page_with_response(self, input: models.OpenAdvertisersPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAdvertisersPageResult]:
         "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches. To add or set up an advertiser, pass intent: \"add\". For a text answer use search(kind: \"advertiser\"). Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenAdvertisersPageResult], await self._request_with_response("open_advertisers_page", input, account_id=account_id, timeout=timeout))
-
-    async def open_agent_certification_page(self, input: models.OpenAgentCertificationPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentCertificationPageResult:
-        "Open one agent’s Test & certify Page: live certification per use case, recent test runs, AdCP 4.0 readiness and capability declarations. Read-only."
-        return cast("models.OpenAgentCertificationPageResult", await self._request("open_agent_certification_page", input, account_id=account_id, timeout=timeout))
-
-    async def open_agent_certification_page_with_response(self, input: models.OpenAgentCertificationPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenAgentCertificationPageResult]:
-        "Open one agent’s Test & certify Page: live certification per use case, recent test runs, AdCP 4.0 readiness and capability declarations. Read-only. Returns the data together with response headers and request ID."
-        return cast(ResponseDetails[models.OpenAgentCertificationPageResult], await self._request_with_response("open_agent_certification_page", input, account_id=account_id, timeout=timeout))
 
     async def open_agent_page(self, input: models.OpenAgentPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenAgentPageResult:
         "Open one agent owned by this Developer account."
@@ -934,11 +918,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveAgentResult], await self._request_with_response("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
-        "File or update a typed ask in the Apostra Support workflow; returns askId. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
+        "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
         return cast("models.SaveAskResult", await self._request("save_ask", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_ask_with_response(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAskResult]:
-        "File or update a typed ask in the Apostra Support workflow; returns askId. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first. Returns the data together with response headers and request ID."
+        "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAskResult], await self._request_with_response("save_ask", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_audience(self, input: models.SaveAudienceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAudienceResult:
@@ -1014,11 +998,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveCoverageResult], await self._request_with_response("save_coverage", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeResult:
-        "advertiserId/campaignId:name,message;assets/landing_page_url/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only."
+        "Save content you supply: advertiserId/campaignId, name, message, assets (landing_page_url, social, sourceAssetRef/sourceAssets). New media like radio spots: use save_creative_session. One format selector: formatKind+formatParams or creativeFormatId+formatOptionRef. libraryRole: Buyer Account only."
         return cast("models.SaveCreativeResult", await self._request("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative_with_response(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeResult]:
-        "advertiserId/campaignId:name,message;assets/landing_page_url/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only. Returns the data together with response headers and request ID."
+        "Save content you supply: advertiserId/campaignId, name, message, assets (landing_page_url, social, sourceAssetRef/sourceAssets). New media like radio spots: use save_creative_session. One format selector: formatKind+formatParams or creativeFormatId+formatOptionRef. libraryRole: Buyer Account only. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCreativeResult], await self._request_with_response("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative_collection(self, input: models.SaveCreativeCollectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeCollectionResult:
@@ -1062,11 +1046,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveEventSourceResult], await self._request_with_response("save_event_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_inventory_source(self, input: models.SaveInventorySourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveInventorySourceResult:
-        "Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Pass only `agentId` or `adServer` to open the form that connects an agent or an ad server. Credentials are never passed here; a source that needs one returns the page that collects it."
+        "Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. Credentials are never passed here; a source that needs one returns its form."
         return cast("models.SaveInventorySourceResult", await self._request("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_inventory_source_with_response(self, input: models.SaveInventorySourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveInventorySourceResult]:
-        "Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Pass only `agentId` or `adServer` to open the form that connects an agent or an ad server. Credentials are never passed here; a source that needs one returns the page that collects it. Returns the data together with response headers and request ID."
+        "Create or update where a seller's inventory comes from. Pass `id` to change a source or omit it to add one. Add a sales agent with only `agentId`, never its address, or an ad server with only `adServer`; each opens a form. Credentials are never passed here; a source that needs one returns its form. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveInventorySourceResult], await self._request_with_response("save_inventory_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_lesson(self, input: models.SaveLessonInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveLessonResult:
@@ -1094,11 +1078,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveMaterialResult], await self._request_with_response("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_media_buy(self, input: models.SaveMediaBuyInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMediaBuyResult:
-        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates."
+        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates."
         return cast("models.SaveMediaBuyResult", await self._request("save_media_buy", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_media_buy_with_response(self, input: models.SaveMediaBuyInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveMediaBuyResult]:
-        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates. Returns the data together with response headers and request ID."
+        "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveMediaBuyResult], await self._request_with_response("save_media_buy", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_media_kit(self, input: models.SaveMediaKitInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMediaKitResult:
