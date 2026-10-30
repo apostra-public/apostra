@@ -381,7 +381,7 @@ class GenerateVariantsSuccessGalleryVariantsItemPreview(TypedDict):
     height: NotRequired[float]
 
 class GetDeliveryInput(TypedDict):
-    metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "conversions", "leads", "videoCompletions", "conversion_value", "ecpm", "cpc", "ctr", "completion_rate", "cpa", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
+    metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
     '\n    Metrics; omit for report defaults.\n    '
     dimensions: NotRequired[list[Literal["date", "advertiser", "campaign", "channel_group", "channel", "buyer", "media_buy", "package", "inventory_source", "seller", "sales_agent"] | str]]
     '\n    Group-by dimensions; campaign delivery also accepts labels.<dimension_key>. Omit for leaf grain.\n    '
@@ -434,12 +434,14 @@ class GetDeliveryResultReportCampaignDelivery(TypedDict):
     period: NotRequired[GetDeliverySuccessPeriod]
     rows: GetDeliverySuccessRows
     totals: NotRequired[GetDeliverySuccessTotals]
+    totalsByFinality: NotRequired[GetDeliverySuccessTotalsByFinality]
+    '\n    Totals per finality class, when classes differ.\n    '
     page: GetDeliverySuccessPage
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
-    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
+    '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -449,12 +451,14 @@ class GetDeliveryResultReportDelivery(TypedDict):
     period: NotRequired[GetDeliverySuccessPeriod]
     rows: GetDeliverySuccessRows
     totals: NotRequired[GetDeliverySuccessTotals]
+    totalsByFinality: NotRequired[GetDeliverySuccessTotalsByFinality]
+    '\n    Totals per finality class, when classes differ.\n    '
     page: GetDeliverySuccessPage
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
-    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
+    '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -703,12 +707,14 @@ class GetDeliveryResultReportMargin(TypedDict):
     period: NotRequired[GetDeliverySuccessPeriod]
     rows: GetDeliverySuccessRows
     totals: NotRequired[GetDeliverySuccessTotals]
+    totalsByFinality: NotRequired[GetDeliverySuccessTotalsByFinality]
+    '\n    Totals per finality class, when classes differ.\n    '
     page: GetDeliverySuccessPage
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
-    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
+    '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -1183,7 +1189,7 @@ class GetDeliverySuccessPeriod(TypedDict):
     endDate: str
 
 class GetDeliverySuccessQuery(TypedDict):
-    metrics: list[Literal["impressions", "spend", "clicks", "views", "completed_views", "conversions", "leads", "videoCompletions", "conversion_value", "ecpm", "cpc", "ctr", "completion_rate", "cpa", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]
+    metrics: list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]
     dimensions: list[str]
     range: NotRequired[GetDeliverySuccessQueryRange]
     filters: GetDeliverySuccessQueryFilters
@@ -1253,7 +1259,7 @@ GetDeliverySuccessRowsItemFinality = TypedDict(
 class GetDeliverySuccessRowsItemMetricsValue(TypedDict):
     value: float | bool | None
     status: Literal["available", "unavailable"]
-    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable"]]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed"]]
 
 class GetDeliverySuccessRowsItemSource(TypedDict):
     operation: GetDeliverySuccessRowsItemSourceOperation
@@ -1280,13 +1286,61 @@ class GetDeliverySuccessSynthetic(TypedDict):
     notice: Literal["Synthetic demo data only. It is unsuitable for commercial decisions."]
 
 class GetDeliverySuccessTotals(TypedDict):
-    rowsIncluded: int
-    currency: str | None
-    metrics: dict[str, GetDeliverySuccessTotalsMetricsValue]
-    denomination: Literal["net", "gross_buyer"]
-    dataThrough: str | None
+    rowsIncluded: GetDeliverySuccessTotalsRowsIncluded
+    currency: GetDeliverySuccessTotalsCurrency
+    metrics: GetDeliverySuccessTotalsMetrics
+    denomination: GetDeliverySuccessTotalsDenomination
+    dataThrough: GetDeliverySuccessTotalsDataThrough
     finality: GetDeliverySuccessTotalsFinality
-    billingEligibility: Literal["not_evaluated"]
+    billingEligibility: GetDeliverySuccessTotalsBillingEligibility
+
+GetDeliverySuccessTotalsBillingEligibility: TypeAlias = Literal["not_evaluated"]
+
+class GetDeliverySuccessTotalsByFinalityItem(TypedDict):
+    rowsIncluded: GetDeliverySuccessTotalsByFinalityItemRowsIncluded
+    currency: GetDeliverySuccessTotalsByFinalityItemCurrency
+    metrics: GetDeliverySuccessTotalsByFinalityItemMetrics
+    denomination: GetDeliverySuccessTotalsByFinalityItemDenomination
+    dataThrough: GetDeliverySuccessTotalsByFinalityItemDataThrough
+    finality: GetDeliverySuccessTotalsByFinalityItemFinality
+    billingEligibility: GetDeliverySuccessTotalsByFinalityItemBillingEligibility
+
+GetDeliverySuccessTotalsByFinality: TypeAlias = "list[GetDeliverySuccessTotalsByFinalityItem]"
+
+GetDeliverySuccessTotalsByFinalityItemBillingEligibility: TypeAlias = Literal["not_evaluated"]
+
+GetDeliverySuccessTotalsByFinalityItemCurrency: TypeAlias = str | None
+
+GetDeliverySuccessTotalsByFinalityItemDataThrough: TypeAlias = str | None
+
+GetDeliverySuccessTotalsByFinalityItemDenomination: TypeAlias = Literal["net", "gross_buyer"]
+
+GetDeliverySuccessTotalsByFinalityItemFinality = TypedDict(
+    "GetDeliverySuccessTotalsByFinalityItemFinality",
+    {
+        "status": Required["Literal[\"available\", \"unavailable\", \"not_applicable\"]"],
+        "class": Required["Literal[\"SNAPSHOT\", \"OFFICIAL\"] | None"],
+        "revision": Required["GetDeliverySuccessDeliveryRevision | None"],
+        "reason": NotRequired["Literal[\"revision_evidence_unavailable\", \"revision_evidence_mixed\", \"revision_unreadable\", \"cumulative_margin_ledger\"]"],
+        "supportedClasses": NotRequired["list[Literal[\"SNAPSHOT\", \"OFFICIAL\"]]"],
+    },
+    total=False,
+)
+
+class GetDeliverySuccessTotalsByFinalityItemMetricsValue(TypedDict):
+    value: float | bool | None
+    status: Literal["available", "unavailable"]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed"]]
+
+GetDeliverySuccessTotalsByFinalityItemMetrics: TypeAlias = "dict[str, GetDeliverySuccessTotalsByFinalityItemMetricsValue]"
+
+GetDeliverySuccessTotalsByFinalityItemRowsIncluded: TypeAlias = int
+
+GetDeliverySuccessTotalsCurrency: TypeAlias = str | None
+
+GetDeliverySuccessTotalsDataThrough: TypeAlias = str | None
+
+GetDeliverySuccessTotalsDenomination: TypeAlias = Literal["net", "gross_buyer"]
 
 GetDeliverySuccessTotalsFinality = TypedDict(
     "GetDeliverySuccessTotalsFinality",
@@ -1303,7 +1357,11 @@ GetDeliverySuccessTotalsFinality = TypedDict(
 class GetDeliverySuccessTotalsMetricsValue(TypedDict):
     value: float | bool | None
     status: Literal["available", "unavailable"]
-    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable"]]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed"]]
+
+GetDeliverySuccessTotalsMetrics: TypeAlias = "dict[str, GetDeliverySuccessTotalsMetricsValue]"
+
+GetDeliverySuccessTotalsRowsIncluded: TypeAlias = int
 
 class GetDeliverySuccessVendorLabel(TypedDict):
     name: str
@@ -5419,36 +5477,6 @@ class OpenCampaignsPageSuccessPageHumanHandoffUnavailableAccount(TypedDict):
     id: int
     name: str
 
-class OpenConnectionsPageInput(TypedDict):
-    advertiserId: NotRequired[str]
-    '\n    Canonical advertiser ID; omit for account scope.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads.\n    '
-    connectionId: NotRequired[str]
-    '\n    Connection ID to open.\n    '
-    accountId: NotRequired[int | str]
-    '\n    Apostra accountId this call runs in, from get_status.\n    '
-    sellerAccountId: NotRequired[int]
-    '\n    The seller\'s Account id. Not the seller object\'s id or any sellerId, which are different numbers.\n    '
-    connectionAction: NotRequired[Literal["connect"]]
-    '\n    Open seller setup; requires sellerId and user confirmation.\n    '
-    connectionAccountId: NotRequired[str]
-    '\n    Its accounts[].id; opens event sources and audiences.\n    '
-
-class OpenConnectionsPageResult(TypedDict):
-    advertiserId: NotRequired[str]
-    '\n    Opened advertiser ID when advertiser-scoped.\n    '
-    sellerId: NotRequired[str]
-    '\n    Opened seller ID when seller-scoped.\n    '
-    sellerAccountId: NotRequired[int]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
-    connectionAction: NotRequired[Literal["connect"]]
-    '\n    Requested seller action when supplied.\n    '
-    connectionId: NotRequired[str]
-    '\n    Opened connection ID.\n    '
-    accountId: NotRequired[str]
-    '\n    Opened account ID.\n    '
-
 class OpenCreativeEnginesPageInput(TypedDict):
     engineId: NotRequired[str]
     '\n    Deprecated: send engineAccountId, from the engineAccountId field on creative engine reads. Still focuses the engine with this id.\n    '
@@ -5574,6 +5602,8 @@ class OpenMediaPartnersPageInput(TypedDict):
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
+OpenConnectionsPageInput: TypeAlias = OpenMediaPartnersPageInput
+
 class OpenMediaPartnersPageResult(TypedDict):
     advertiserId: NotRequired[str]
     '\n    Opened advertiser ID when advertiser-scoped.\n    '
@@ -5587,6 +5617,8 @@ class OpenMediaPartnersPageResult(TypedDict):
     '\n    Opened connection ID.\n    '
     accountId: NotRequired[str]
     '\n    Opened account ID.\n    '
+
+OpenConnectionsPageResult: TypeAlias = OpenMediaPartnersPageResult
 
 class OpenPageInput(TypedDict):
     relationshipId: NotRequired[str]
@@ -11745,12 +11777,18 @@ class SaveInventorySourceInputAdServer(TypedDict):
 class SaveInventorySourceInputModuleConfig(TypedDict):
     moduleInstanceId: str
     '\n    The seller-local module id returned by this source\'s readiness view.\n    '
-    config: dict[str, JsonValue]
-    '\n    Non-secret module configuration. Nested values are deep-merged by default.\n    '
+    config: list[SaveInventorySourceRequestModuleConfigEntry]
+    '\n    Non-secret module settings, one entry per field. Dotted keys name nested fields and are deep-merged by default.\n    '
     merge: NotRequired[bool]
     '\n    Deep-merge by default; false replaces seller-writable configuration.\n    '
     status: NotRequired[Literal["CONFIGURING", "DISABLED", "ERROR"]]
     '\n    Optional manual module state. ACTIVE is derived by execution workflows.\n    '
+
+class SaveInventorySourceRequestModuleConfigEntry(TypedDict):
+    key: str
+    '\n    Dotted field key from the module contract, for example `cadent.endpointUrl`.\n    '
+    value: str | float | bool
+    '\n    A string, number or boolean setting.\n    '
 
 class SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerForm(TypedDict):
     outcome: Literal["ad_server_form"]
@@ -15531,7 +15569,7 @@ class SaveRfpInputOrigin(TypedDict):
     '\n    Origin type.\n    '
     presetId: NotRequired[str]
     '\n    Preset id.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    preset: NotRequired[SaveRfpInputOriginPresetKindTyped | SaveRfpInputOriginPresetKindLegacy]
+    preset: NotRequired[SaveRfpInputOriginPreset]
     '\n    Preset data.\n    '
     sourceMaterialId: NotRequired[str]
     '\n    Material id.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
@@ -15545,28 +15583,30 @@ class SaveRfpInputOrigin(TypedDict):
     '\n    Market.\n    '
     channels: NotRequired[SaveRfpRequestOriginChannels]
     '\n    Channels.\n    '
-    details: NotRequired[dict[str, SaveRfpRequestJsonValue]]
-    '\n    Origin facts.\n    '
+    details: NotRequired[list[SaveRfpInputOriginDetailsItem]]
+    '\n    Origin facts as name/value entries.\n    '
 
 SaveRfpInputActionCreateOrigin: TypeAlias = SaveRfpInputOrigin
 
-class SaveRfpInputOriginPresetKindLegacy(TypedDict):
-    kind: Literal["legacy"]
-    '\n    Bounded deployed Quick preset compatibility record.\n    '
-    value: dict[str, SaveRfpRequestJsonValue]
-    '\n    Legacy Quick preset data.\n    '
+class SaveRfpInputOriginDetailsItem(TypedDict):
+    key: str
+    '\n    Entry name.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
+    value: str | float | bool
+    '\n    Entry value: text, a number or true/false.\n    '
 
-SaveRfpInputActionCreateOriginPresetKindLegacy: TypeAlias = SaveRfpInputOriginPresetKindLegacy
-
-class SaveRfpInputOriginPresetKindTyped(TypedDict):
+class SaveRfpInputOriginPreset(TypedDict):
     kind: Literal["typed"]
     '\n    Current typed Quick preset.\n    '
-    value: SaveRfpInputOriginPresetKindTypedValue
+    value: SaveRfpInputOriginPresetValue
     '\n    Quick preset data.\n    '
 
-SaveRfpInputActionCreateOriginPresetKindTyped: TypeAlias = SaveRfpInputOriginPresetKindTyped
+SaveRfpInputActionCreateOriginPresetKindTyped: TypeAlias = SaveRfpInputOriginPreset
 
-class SaveRfpInputOriginPresetKindTypedValue(TypedDict):
+SaveRfpInputOriginPresetKindLegacy: TypeAlias = SaveRfpInputOriginPreset
+
+SaveRfpInputOriginPresetKindTyped: TypeAlias = SaveRfpInputOriginPreset
+
+class SaveRfpInputOriginPresetValue(TypedDict):
     buyer: NotRequired[str]
     '\n    Stable buyer segment or buyer name.\n    '
     advertiser: NotRequired[str]
@@ -15586,17 +15626,19 @@ class SaveRfpInputOriginPresetKindTypedValue(TypedDict):
     budgetBand: NotRequired[Literal["under_10k", "10k_50k", "50k_250k", "250k_1m", "over_1m"]]
     '\n    Stable planning budget band, never exact budget.\n    '
 
-SaveRfpInputActionCreateOriginPresetKindTypedValue: TypeAlias = SaveRfpInputOriginPresetKindTypedValue
+SaveRfpInputActionCreateOriginPresetKindTypedValue: TypeAlias = SaveRfpInputOriginPresetValue
 
-SaveRfpInputActionCreateOriginPresetValue: TypeAlias = SaveRfpInputOriginPresetKindTypedValue
+SaveRfpInputActionCreateOriginPresetValue: TypeAlias = SaveRfpInputOriginPresetValue
+
+SaveRfpInputOriginPresetKindTypedValue: TypeAlias = SaveRfpInputOriginPresetValue
 
 class SaveRfpInputRequest(TypedDict):
     brief: str
     '\n    Brief.\n    '
     budget: NotRequired[SaveRfpInputRequestBudgetKindZeroDecimal | SaveRfpInputRequestBudgetKindTwoDecimal | SaveRfpInputRequestBudgetKindThreeDecimal]
     '\n    Budget.\n    '
-    flight: NotRequired[dict[str, SaveRfpRequestJsonValue]]
-    '\n    Flight.\n    '
+    flight: NotRequired[SaveRfpInputRequestFlight]
+    '\n    Flight dates: start and end, as YYYY-MM-DD.\n    '
     dimensions: NotRequired[SaveRfpInputRequestDimensions]
     '\n    Intent.\n    '
     constraints: NotRequired[SaveRfpInputRequestConstraints]
@@ -15688,6 +15730,12 @@ SaveRfpInputActionAppendTurnRequestDimensions: TypeAlias = SaveRfpInputRequestDi
 
 SaveRfpInputActionCreateRequestDimensions: TypeAlias = SaveRfpInputRequestDimensions
 
+class SaveRfpInputRequestFlight(TypedDict):
+    start: str
+    '\n    Start date (inclusive), ISO 8601 calendar date.\n    '
+    end: str
+    '\n    End date (inclusive), ISO 8601 calendar date.\n    '
+
 class SaveRfpInputRequiredLibraryUnitIdsItem(TypedDict):
     materialId: str
     '\n    Material id.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
@@ -15714,9 +15762,9 @@ SaveRfpRequestAdvertiser: TypeAlias = str
 
 SaveRfpRequestClientRequestId: TypeAlias = str
 
-SaveRfpRequestJsonValue: TypeAlias = "SaveRfpRequestAdvertiser | list[JsonValue] | dict[str, JsonValue] | float | bool | None"
+SaveRfpRequestJ: TypeAlias = JsonValue
 
-SaveRfpRequestJ: TypeAlias = SaveRfpRequestJsonValue
+SaveRfpRequestJsonValue: TypeAlias = JsonValue
 
 SaveRfpRequestOriginAdvertiser: TypeAlias = str
 
@@ -15729,8 +15777,6 @@ SaveRfpRequestOriginChannelsItem: TypeAlias = str
 SaveRfpRequestOriginChannels: TypeAlias = "list[SaveRfpRequestOriginChannelsItem]"
 
 SaveRfpRequestOriginMarket: TypeAlias = str
-
-SaveRfpRequestPropertyNames: TypeAlias = str
 
 SaveRfpRequestRepresentationLocale: TypeAlias = RepresentationLocale
 
@@ -15908,15 +15954,27 @@ SaveRfpSuccessSaveRfpSuccessTurnSavedRfpId: TypeAlias = str
 
 SaveRfpSuccessSaveRfpSuccessTurnSavedTurnId: TypeAlias = str
 
+class SaveRfpTurnInputFeedbackItem(TypedDict):
+    key: SaveRfpTurnRequestFeedbackItemKey
+    '\n    Entry name.\n    '
+    value: SaveRfpTurnRequestFeedbackItemValue
+    '\n    Entry value: text, a number or true/false.\n    '
+
 class SaveRfpTurnInputOutcome(TypedDict):
     result: NotRequired[str]
     '\n    Result.\n    '
     finality: NotRequired[Literal["preliminary", "final", "mixed"]]
     '\n    Finality.\n    '
-    details: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Details.\n    '
+    details: NotRequired[list[SaveRfpTurnInputOutcomeDetailsItem]]
+    '\n    Details as name/value entries, such as bookedBudget (number) and currency.\n    '
 
 SaveRfpInputActionRecordOutcomeOutcome: TypeAlias = SaveRfpTurnInputOutcome
+
+class SaveRfpTurnInputOutcomeDetailsItem(TypedDict):
+    key: SaveRfpTurnRequestOutcomeDetailsItemKey
+    '\n    Entry name.\n    '
+    value: SaveRfpTurnRequestOutcomeDetailsItemValue
+    '\n    Entry value: text, a number or true/false.\n    '
 
 class SaveRfpTurnInputRepresentation(TypedDict):
     format: Literal["seller_response_json", "buyer_proposal_json", "semantic_document_json", "html", "pdf", "pptx"]
@@ -15943,8 +16001,8 @@ class SaveRfpTurnInputWithCancelRepresentationId(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: str
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Feedback.\n    '
+    feedback: NotRequired[list[SaveRfpTurnInputFeedbackItem]]
+    '\n    Feedback as name/value entries.\n    '
     grade: NotRequired[Literal["A", "B", "C", "D", "F"]]
     '\n    Seller grade.\n    '
     ledBy: NotRequired[Literal["agent", "human"]]
@@ -15973,8 +16031,8 @@ class SaveRfpTurnInputWithFeedbackGradeLedByCommentaryWithCommentary(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: NotRequired[str]
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Feedback.\n    '
+    feedback: NotRequired[list[SaveRfpTurnInputFeedbackItem]]
+    '\n    Feedback as name/value entries.\n    '
     grade: NotRequired[Literal["A", "B", "C", "D", "F"]]
     '\n    Seller grade.\n    '
     ledBy: NotRequired[Literal["agent", "human"]]
@@ -16001,8 +16059,8 @@ class SaveRfpTurnInputWithFeedbackGradeLedByCommentaryWithFeedback(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: NotRequired[str]
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: dict[str, SaveRfpTurnRequestDetails]
-    '\n    Feedback.\n    '
+    feedback: list[SaveRfpTurnInputFeedbackItem]
+    '\n    Feedback as name/value entries.\n    '
     grade: NotRequired[Literal["A", "B", "C", "D", "F"]]
     '\n    Seller grade.\n    '
     ledBy: NotRequired[Literal["agent", "human"]]
@@ -16039,8 +16097,8 @@ class SaveRfpTurnInputWithFeedbackGradeLedByCommentaryWithGrade(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: NotRequired[str]
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Feedback.\n    '
+    feedback: NotRequired[list[SaveRfpTurnInputFeedbackItem]]
+    '\n    Feedback as name/value entries.\n    '
     grade: Literal["A", "B", "C", "D", "F"]
     '\n    Seller grade.\n    '
     ledBy: NotRequired[Literal["agent", "human"]]
@@ -16067,8 +16125,8 @@ class SaveRfpTurnInputWithFeedbackGradeLedByCommentaryWithLedBy(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: NotRequired[str]
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Feedback.\n    '
+    feedback: NotRequired[list[SaveRfpTurnInputFeedbackItem]]
+    '\n    Feedback as name/value entries.\n    '
     grade: NotRequired[Literal["A", "B", "C", "D", "F"]]
     '\n    Seller grade.\n    '
     ledBy: Literal["agent", "human"]
@@ -16095,8 +16153,8 @@ class SaveRfpTurnInputWithOutcome(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: NotRequired[str]
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Feedback.\n    '
+    feedback: NotRequired[list[SaveRfpTurnInputFeedbackItem]]
+    '\n    Feedback as name/value entries.\n    '
     grade: NotRequired[Literal["A", "B", "C", "D", "F"]]
     '\n    Seller grade.\n    '
     ledBy: NotRequired[Literal["agent", "human"]]
@@ -16125,8 +16183,8 @@ class SaveRfpTurnInputWithReleased(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: NotRequired[str]
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Feedback.\n    '
+    feedback: NotRequired[list[SaveRfpTurnInputFeedbackItem]]
+    '\n    Feedback as name/value entries.\n    '
     grade: NotRequired[Literal["A", "B", "C", "D", "F"]]
     '\n    Seller grade.\n    '
     ledBy: NotRequired[Literal["agent", "human"]]
@@ -16155,8 +16213,8 @@ class SaveRfpTurnInputWithRepresentation(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: NotRequired[str]
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Feedback.\n    '
+    feedback: NotRequired[list[SaveRfpTurnInputFeedbackItem]]
+    '\n    Feedback as name/value entries.\n    '
     grade: NotRequired[Literal["A", "B", "C", "D", "F"]]
     '\n    Seller grade.\n    '
     ledBy: NotRequired[Literal["agent", "human"]]
@@ -16178,9 +16236,15 @@ SaveRfpTurnRequestCancelRepresentationId: TypeAlias = str
 
 SaveRfpTurnRequestCommentary: TypeAlias = str
 
-SaveRfpTurnRequestDetails: TypeAlias = "SaveRfpTurnRequestCommentary | list[SaveRfpTurnRequestDetails] | dict[str, SaveRfpTurnRequestDetails] | float | bool | None"
+SaveRfpTurnRequestDetails: TypeAlias = JsonValue
 
-SaveRfpTurnRequestPropertyNames: TypeAlias = str
+SaveRfpTurnRequestFeedbackItemKey: TypeAlias = str
+
+SaveRfpTurnRequestFeedbackItemValue: TypeAlias = str | float | bool
+
+SaveRfpTurnRequestOutcomeDetailsItemKey: TypeAlias = str
+
+SaveRfpTurnRequestOutcomeDetailsItemValue: TypeAlias = str | float | bool
 
 class SaveRfpTurnSuccessSaveRfpSuccessFeedbackSaved(TypedDict):
     outcome: Literal["feedback_saved"]
@@ -16334,6 +16398,8 @@ class SaveSellerInput(TypedDict):
     '\n    Hold (true) or resume (false) new business: buyers stop discovering the Seller and buying; existing delivery continues. Send alone.\n    '
     expectedIsPaused: NotRequired[bool]
     '\n    With isPaused: the hold you last read; a changed hold returns CONFLICT.\n    '
+    sellingMode: NotRequired[Literal["listing", "storefront_agent"]]
+    '\n    Change the account type in place. Direct administrator only. `listing` is refused while Storefront agent work runs and closes Enhanced Reporting. Send alone.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -16655,6 +16721,29 @@ class SaveSellerSuccessSaveSellerSuccessReopenRecorded(TypedDict):
     intakeId: str
     decision: Literal["reopen"]
 
+class SaveSellerSuccessSaveSellerSuccessSellingModeChanged(TypedDict):
+    outcome: Literal["selling_mode_changed"]
+    action: Literal["selling_mode_changed"]
+    sellingMode: SaveSellerSuccessSaveSellerSuccessSellingModeChangedSellingMode
+
+class SaveSellerSuccessSaveSellerSuccessSellingModeChangedSellingMode(TypedDict):
+    current: Literal["listing", "storefront_agent"]
+    previous: Literal["listing", "storefront_agent"]
+    closedEnhancedReportingAccounts: int
+    activitiesBecome: Literal["billable", "free"]
+    activities: list[SaveSellerSuccessSaveSellerSuccessSellingModeChangedSellingModeActivitiesItem]
+
+class SaveSellerSuccessSaveSellerSuccessSellingModeChangedSellingModeActivitiesItem(TypedDict):
+    activityCode: str
+    name: str
+    ius: float
+    unit: str
+
+class SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged(TypedDict):
+    outcome: Literal["selling_mode_unchanged"]
+    action: Literal["selling_mode_unchanged"]
+    sellingMode: Literal["listing", "storefront_agent"]
+
 class SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded(TypedDict):
     outcome: Literal["source_decision_recorded"]
     action: Literal["source_decision_recorded"]
@@ -16693,7 +16782,7 @@ class SaveSellerSuccessSellerSaveReplayed(TypedDict):
     destinationSaveReplayed: Literal[False]
     materialReceipt: SaveSellerSuccessSellerSaveReplayedMaterialReceipt
 
-SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
+SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
 
 SaveSellerSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
@@ -16974,12 +17063,26 @@ class SaveWorkItemInput(TypedDict):
     '\n    Optional note preserved with the decision.\n    '
     expectedContentDigest: NotRequired[str]
     '\n    Required for `creative_review`; copy contentDigest from the exact search or get result.\n    '
-    result: NotRequired[dict[str, JsonValue]]
-    '\n    Modular completion fields named by requiredResultFields. Never secrets.\n    '
+    result: NotRequired[list[SaveWorkItemRequestWorkItemResultEntry]]
+    '\n    Modular completion fields named by requiredResultFields, one entry per field. Never secrets.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveWorkItemRequestModularDailyDelivery(TypedDict):
+    date: str
+    '\n    Calendar day, YYYY-MM-DD.\n    '
+    impressions: int
+    '\n    Impressions delivered that day.\n    '
+    spend: float
+    '\n    Spend that day, in the report currency.\n    '
+
+class SaveWorkItemRequestWorkItemResultEntry(TypedDict):
+    key: str
+    '\n    A key from the work item `requiredResultFields`, for example `upstream.campaignId`.\n    '
+    value: str | float | list[str | SaveWorkItemRequestModularDailyDelivery]
+    '\n    A string or number, a list of strings, or for `reporting.dailyBreakdown` the daily delivery rows.\n    '
 
 class SaveWorkItemSuccessSaveWorkItemSuccessCreated(TypedDict):
     outcome: Literal["created"]
@@ -22246,8 +22349,6 @@ OpenApprovalsError: TypeAlias = "V3ToolErrorResponse"
 OpenCampaignReceiptError: TypeAlias = "V3ToolErrorResponse"
 
 OpenCampaignsPageError: TypeAlias = "V3ToolErrorResponse"
-
-OpenConnectionsPageError: TypeAlias = "V3ToolErrorResponse"
 
 OpenCreativeEnginesPageError: TypeAlias = "V3ToolErrorResponse"
 
