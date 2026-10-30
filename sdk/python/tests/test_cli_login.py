@@ -8,10 +8,11 @@ import tempfile
 import threading
 import time
 import unittest
+import warnings
 from datetime import UTC, datetime, timedelta
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 from unittest.mock import patch
 from urllib.parse import parse_qs, urlsplit
 
@@ -40,6 +41,7 @@ class FakeServer:
     def __init__(self) -> None:
         self.refresh_requests = 0
         self.refresh_forms: list[dict[str, list[str]]] = []
+        self.on_refresh: Callable[[], None] | None = None
         self.api_tokens: list[str] = []
         self.refresh_status = 200
         self.omit_refresh_token = False
@@ -90,6 +92,8 @@ class FakeServer:
                     fake.refresh_requests += 1
                     number = fake.refresh_requests
                     fake.refresh_forms.append(form)
+                if fake.on_refresh is not None:
+                    fake.on_refresh()
                 time.sleep(fake.refresh_delay)
                 if fake.refresh_status != 200:
                     return self.reply(fake.refresh_status, {"error": "invalid_grant"})
@@ -134,8 +138,103 @@ class FakeServer:
         self._server.server_close()
 
 
+class FakeSecretServiceConnection:
+    def close(self) -> None:
+        pass
+
+
+class FakeSecretServiceItem:
+    def __init__(
+        self,
+        label: str,
+        attributes: dict[str, str],
+        secret: bytes,
+        content_type: str,
+    ) -> None:
+        self.label = label
+        self.attributes = attributes
+        self.secret = secret
+        self.content_type = content_type
+        self.fail_writes = False
+
+    def is_locked(self) -> bool:
+        return False
+
+    def unlock(self) -> None:
+        pass
+
+    def get_secret(self) -> bytes:
+        return self.secret
+
+    def set_secret(self, secret: bytes, content_type: str = "text/plain") -> None:
+        if self.fail_writes:
+            raise RuntimeError("Secret Service is read-only")
+        self.secret = secret
+        self.content_type = content_type
+
+
+class FakeSecretServiceCollection:
+    def __init__(self) -> None:
+        self.items: list[FakeSecretServiceItem] = []
+        self.fail_writes = False
+        self.fail_usernames: set[str] = set()
+
+    def is_locked(self) -> bool:
+        return False
+
+    def unlock(self) -> None:
+        pass
+
+    def search_items(
+        self, attributes: dict[str, str]
+    ) -> list[FakeSecretServiceItem]:
+        return [
+            item
+            for item in self.items
+            if all(item.attributes.get(key) == value for key, value in attributes.items())
+        ]
+
+    def create_item(
+        self,
+        label: str,
+        attributes: dict[str, str],
+        secret: bytes,
+        replace: bool = False,
+        content_type: str = "text/plain",
+    ) -> FakeSecretServiceItem:
+        if self.fail_writes or attributes.get("username") in self.fail_usernames:
+            raise RuntimeError("Secret Service is read-only")
+        matches = self.search_items(attributes)
+        if replace and matches:
+            matches[0].set_secret(secret, content_type)
+            return matches[0]
+        item = FakeSecretServiceItem(label, attributes, secret, content_type)
+        self.items.append(item)
+        return item
+
+
+class FakeSecretStorage:
+    def __init__(self) -> None:
+        self.connection = FakeSecretServiceConnection()
+        self.collection = FakeSecretServiceCollection()
+
+    def dbus_init(self) -> FakeSecretServiceConnection:
+        return self.connection
+
+    def get_default_collection(
+        self, connection: FakeSecretServiceConnection
+    ) -> FakeSecretServiceCollection:
+        assert connection is self.connection
+        return self.collection
+
+
 class LoginTestCase(unittest.TestCase):
     def setUp(self) -> None:
+        warnings.filterwarnings(
+            "ignore",
+            message="Apostra could not access your OS credential store.*",
+            category=RuntimeWarning,
+        )
         directory = tempfile.TemporaryDirectory()
         self.addCleanup(directory.cleanup)
         self.dir = Path(directory.name)
@@ -147,8 +246,54 @@ class LoginTestCase(unittest.TestCase):
         self.addCleanup(environment.stop)
         for name in ("APOSTRA_API_KEY", "APOSTRA_ACCOUNT_ID", "APOSTRA_BASE_URL"):
             os.environ.pop(name, None)
+        self.keyring_available = False
+        self.keyring_entries: dict[str, str] = {}
+        self.secret_service_available = False
+        self.secret_storage = FakeSecretStorage()
+
+        def get_password(service: str, username: str) -> str | None:
+            self.assertEqual(service, "Apostra CLI login")
+            if not self.keyring_available:
+                raise RuntimeError("Secret Service unavailable")
+            return self.keyring_entries.get(username)
+
+        def set_password(service: str, username: str, password: str) -> None:
+            self.assertEqual(service, "Apostra CLI login")
+            if not self.keyring_available:
+                raise RuntimeError("Secret Service unavailable")
+            self.keyring_entries[username] = password
+
+        keyring_module = getattr(cli_login, "keyring")
+        get = patch.object(keyring_module, "get_password", side_effect=get_password)
+        set_ = patch.object(keyring_module, "set_password", side_effect=set_password)
+        get.start()
+        set_.start()
+        self.addCleanup(get.stop)
+        self.addCleanup(set_.stop)
+
+        def secretstorage() -> FakeSecretStorage:
+            if not self.secret_service_available:
+                raise RuntimeError("Secret Service unavailable")
+            return self.secret_storage
+
+        storage = patch.object(cli_login, "_secretstorage", side_effect=secretstorage)
+        storage.start()
+        self.addCleanup(storage.stop)
         self.fake = FakeServer()
         self.addCleanup(self.fake.close)
+
+    def enable_secure_store(self) -> None:
+        self.keyring_available = True
+        self.secret_service_available = True
+
+    def stored_secure_entry(self, resource: str) -> dict[str, Any]:
+        if sys.platform != "linux":
+            return json.loads(self.keyring_entries[resource])
+        items = self.secret_storage.collection.search_items(
+            {"service": "Apostra CLI login", "username": resource}
+        )
+        self.assertEqual(len(items), 1)
+        return json.loads(items[0].secret)
 
     def store(self, **over: Any) -> None:
         with cli_login_lock():
@@ -159,6 +304,120 @@ class LoginTestCase(unittest.TestCase):
 
 
 class StoreTests(LoginTestCase):
+    def test_stores_the_login_in_the_os_credential_store(self) -> None:
+        self.enable_secure_store()
+        self.store()
+
+        self.assertFalse(credentials_path().exists())
+        stored = self.stored_secure_entry(self.fake.resource)
+        self.assertEqual(stored["accessToken"], "at-0")
+        if sys.platform == "linux":
+            item = self.secret_storage.collection.items[0]
+            self.assertEqual(
+                item.label, f"keyring:{self.fake.resource}@Apostra CLI login"
+            )
+            self.assertEqual(
+                item.attributes,
+                {"service": "Apostra CLI login", "username": self.fake.resource},
+            )
+            self.assertEqual(item.content_type, "application/octet-stream")
+        login = read_cli_login(self.fake.resource)
+        assert login is not None
+        self.assertEqual(login["accountId"], "7")
+
+    def test_migrates_all_file_logins_to_the_os_credential_store(self) -> None:
+        other = "https://other.example/api/v3"
+        credentials_path().parent.mkdir(parents=True, exist_ok=True)
+        credentials_path().write_text(
+            json.dumps(
+                {
+                    "version": 1,
+                    "logins": {
+                        self.fake.resource: self.fake.entry(),
+                        other: self.fake.entry(resource=other, accountId="9"),
+                    },
+                }
+            )
+        )
+        self.enable_secure_store()
+
+        login = read_cli_login(self.fake.resource)
+        assert login is not None
+        self.assertEqual(login["accountId"], "7")
+        other_login = read_cli_login(other)
+        assert other_login is not None
+        self.assertEqual(other_login["accountId"], "9")
+        if sys.platform == "linux":
+            self.assertEqual(
+                {
+                    item.attributes["username"]
+                    for item in self.secret_storage.collection.items
+                },
+                {self.fake.resource, other},
+            )
+        else:
+            self.assertEqual(set(self.keyring_entries), {self.fake.resource, other})
+        self.assertFalse(credentials_path().exists())
+
+    def test_reads_a_login_stored_by_the_cli(self) -> None:
+        self.enable_secure_store()
+        expected = self.fake.entry()
+        if sys.platform == "linux":
+            # This is the native @napi-rs/keyring Secret Service entry schema:
+            # its Entry constructor calls the second argument "account", while
+            # the D-Bus attribute is named "username".
+            self.secret_storage.collection.create_item(
+                f"keyring:{self.fake.resource}@Apostra CLI login",
+                {"service": "Apostra CLI login", "username": self.fake.resource},
+                json.dumps(expected).encode("utf-8"),
+                content_type="application/octet-stream",
+            )
+        else:
+            # Keychain and Credential Manager use the same service and account
+            # arguments as the CLI's @napi-rs/keyring Entry constructor.
+            self.keyring_entries[self.fake.resource] = json.dumps(expected)
+
+        login = read_cli_login(self.fake.resource)
+
+        self.assertEqual(login, expected)
+
+    @unittest.skipUnless(sys.platform == "linux", "Linux Secret Service schema")
+    def test_reads_a_login_stored_with_keytars_account_attribute(self) -> None:
+        self.enable_secure_store()
+        expected = self.fake.entry()
+        self.secret_storage.collection.create_item(
+            f"keyring:{self.fake.resource}@Apostra CLI login",
+            {"service": "Apostra CLI login", "account": self.fake.resource},
+            json.dumps(expected).encode("utf-8"),
+            content_type="application/octet-stream",
+        )
+
+        self.assertEqual(read_cli_login(self.fake.resource), expected)
+
+    def test_normalizes_login_expiry_to_milliseconds(self) -> None:
+        self.enable_secure_store()
+        self.store(expiresAt="2030-01-02T03:04:05.678912+00:00")
+
+        stored = self.stored_secure_entry(self.fake.resource)
+        self.assertEqual(stored["expiresAt"], "2030-01-02T03:04:05.678Z")
+        login = read_cli_login(self.fake.resource)
+        assert login is not None
+        self.assertEqual(login["expiresAt"], "2030-01-02T03:04:05.678Z")
+
+    def test_warns_once_when_the_credential_store_is_unavailable(self) -> None:
+        with warnings.catch_warnings(record=True) as emitted:
+            warnings.simplefilter("always")
+            self.store()
+            with cli_login_lock():
+                write_cli_login(self.fake.resource, self.fake.entry(accessToken="at-1"))
+
+        store_warnings = [
+            warning
+            for warning in emitted
+            if "could not access your OS credential store" in str(warning.message)
+        ]
+        self.assertEqual(len(store_warnings), 1)
+
     @unittest.skipIf(sys.platform == "win32", "POSIX file modes")
     def test_writes_atomically_with_private_modes_keyed_per_base_url(self) -> None:
         self.store()
@@ -179,7 +438,7 @@ class StoreTests(LoginTestCase):
 
     def test_corrupt_or_incomplete_file_is_no_login(self) -> None:
         self.assertIsNone(read_cli_login(self.fake.resource))
-        credentials_path().parent.mkdir(parents=True)
+        credentials_path().parent.mkdir(parents=True, exist_ok=True)
         credentials_path().write_text("{not json")
         self.assertIsNone(read_cli_login(self.fake.resource))
         credentials_path().write_text(
@@ -220,6 +479,85 @@ class StoreTests(LoginTestCase):
 
 
 class RefreshTests(LoginTestCase):
+    def test_rotates_a_credential_store_login(self) -> None:
+        self.enable_secure_store()
+        self.store()
+
+        self.assertEqual(refresh_cli_login(self.fake.resource)["accessToken"], "at-1")
+        stored = self.stored_secure_entry(self.fake.resource)
+        self.assertEqual(stored["refreshToken"], "rt-1")
+
+    def test_preserves_a_rotated_login_when_the_secure_store_cannot_save_it(
+        self,
+    ) -> None:
+        self.enable_secure_store()
+        self.store()
+        self.secret_storage.collection.items[0].fail_writes = True
+
+        refreshed = refresh_cli_login(self.fake.resource)
+
+        self.assertEqual(refreshed["refreshToken"], "rt-1")
+        stored_file = json.loads(credentials_path().read_text())
+        self.assertEqual(
+            stored_file["authoritativeFileLogins"], [self.fake.resource]
+        )
+        self.assertEqual(
+            stored_file["logins"][self.fake.resource]["refreshToken"], "rt-1"
+        )
+        stored = self.stored_secure_entry(self.fake.resource)
+        self.assertEqual(stored["refreshToken"], "rt-0")
+        self.assertEqual(read_cli_login(self.fake.resource), refreshed)
+
+    def test_preserves_a_rotated_login_when_the_secure_store_disappears(
+        self,
+    ) -> None:
+        self.enable_secure_store()
+        self.store()
+        self.fake.on_refresh = lambda: setattr(self, "secret_service_available", False)
+
+        refreshed = refresh_cli_login(self.fake.resource)
+
+        stored_file = json.loads(credentials_path().read_text())
+        self.assertEqual(
+            stored_file["authoritativeFileLogins"], [self.fake.resource]
+        )
+        self.assertEqual(
+            stored_file["logins"][self.fake.resource]["refreshToken"], "rt-1"
+        )
+        self.secret_service_available = True
+        self.assertEqual(read_cli_login(self.fake.resource), refreshed)
+
+    def test_prunes_a_migrated_authoritative_login_before_another_fails(
+        self,
+    ) -> None:
+        self.enable_secure_store()
+        other = "https://other.example/api/v3"
+        # The secure entry is stale. The authoritative file entry must replace
+        # it, then disappear even though the other entry cannot migrate.
+        self.store(refreshToken="rt-stale")
+        credentials_path().parent.mkdir(parents=True, exist_ok=True)
+        credentials_path().write_text(
+            json.dumps(
+                {
+                    "version": 1,
+                    "logins": {
+                        self.fake.resource: self.fake.entry(refreshToken="rt-current"),
+                        other: self.fake.entry(resource=other, accountId="9"),
+                    },
+                    "authoritativeFileLogins": [self.fake.resource],
+                }
+            )
+        )
+        self.secret_storage.collection.fail_usernames.add(other)
+
+        self.assertIsNotNone(read_cli_login(other))
+
+        remaining = json.loads(credentials_path().read_text())
+        self.assertEqual(set(remaining["logins"]), {other})
+        self.assertNotIn("authoritativeFileLogins", remaining)
+        stored = self.stored_secure_entry(self.fake.resource)
+        self.assertEqual(stored["refreshToken"], "rt-current")
+
     def test_rotates_the_refresh_token_and_writes_it_back(self) -> None:
         self.store()
         entry = refresh_cli_login(self.fake.resource)
@@ -485,6 +823,7 @@ class CredentialChainTests(LoginTestCase):
             Apostra(base_url="http://example.com")
 
     def test_refuses_an_explicit_account_that_differs_from_the_login(self) -> None:
+        self.enable_secure_store()
         self.fresh()
         with self.assertRaisesRegex(ValueError, "does not match account 7"):
             Apostra(base_url=self.fake.resource, account_id="8")
@@ -517,6 +856,7 @@ class AsyncCredentialChainTests(LoginTestCase, unittest.IsolatedAsyncioTestCase)
         self.assertEqual(self.fake.refresh_requests, 1)
 
     async def test_async_client_refuses_a_different_account(self) -> None:
+        self.enable_secure_store()
         self.fresh()
         with self.assertRaisesRegex(ValueError, "does not match account 7"):
             AsyncApostra(base_url=self.fake.resource, account_id="8")
