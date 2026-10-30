@@ -149,30 +149,55 @@ export const cliClientId = (resource: string) =>
 function parseEntry(value: unknown): CliLoginEntry | undefined {
   if (!isRecord(value)) return undefined
   const text = ['issuer', 'resource', 'clientId', 'accessToken', 'refreshToken']
+  const expiresAt =
+    typeof value.expiresAt === 'string' &&
+    !Number.isNaN(Date.parse(value.expiresAt))
+      ? new Date(value.expiresAt).toISOString()
+      : undefined
   if (
     !text.every((k) => typeof value[k] === 'string' && value[k]) ||
-    typeof value.expiresAt !== 'string' ||
-    Number.isNaN(Date.parse(value.expiresAt)) ||
+    !expiresAt ||
     typeof value.accountId !== 'string' ||
     !Array.isArray(value.scopes) ||
     !value.scopes.every((s) => typeof s === 'string')
   )
     return undefined
-  return value as CliLoginEntry
+  // Credential stores round-trip text. Canonicalise at their boundary so a
+  // value with sub-millisecond precision cannot oscillate between clients.
+  return { ...value, expiresAt } as CliLoginEntry
 }
 
-function readFileLogins(): Record<string, unknown> {
+type FileLogins = {
+  logins: Record<string, unknown>
+  authoritative: Set<string>
+}
+
+function readFileStore(): FileLogins {
   const { fs } = node()
   try {
     const file: unknown = JSON.parse(fs.readFileSync(credentialsPath(), 'utf8'))
-    return isRecord(file) && isRecord(file.logins) ? file.logins : {}
+    if (!isRecord(file) || !isRecord(file.logins))
+      return { logins: {}, authoritative: new Set() }
+    return {
+      logins: file.logins,
+      authoritative: new Set(
+        Array.isArray(file.authoritativeFileLogins)
+          ? file.authoritativeFileLogins.filter(
+              (resource): resource is string => typeof resource === 'string',
+            )
+          : [],
+      ),
+    }
   } catch {
-    return {}
+    return { logins: {}, authoritative: new Set() }
   }
 }
 
 /** Atomic (temp file + rename), directory 0700, file 0600. */
-function writeFileLogins(logins: Record<string, unknown>): void {
+function writeFileLogins(
+  logins: Record<string, unknown>,
+  authoritative = new Set<string>(),
+): void {
   const { fs, path } = node()
   const file = credentialsPath()
   const dir = path.dirname(file)
@@ -185,7 +210,24 @@ function writeFileLogins(logins: Record<string, unknown>): void {
   const temp = `${file}.${proc().pid}.${Math.random().toString(36).slice(2)}.tmp`
   const fd = fs.openSync(temp, 'wx', 0o600)
   try {
-    fs.writeSync(fd, `${JSON.stringify({ version: 1, logins }, null, 2)}\n`)
+    fs.writeSync(
+      fd,
+      `${JSON.stringify(
+        {
+          version: 1,
+          logins,
+          ...(authoritative.size > 0
+            ? {
+                authoritativeFileLogins: [...authoritative]
+                  .filter((resource) => resource in logins)
+                  .sort(),
+              }
+            : {}),
+        },
+        null,
+        2,
+      )}\n`,
+    )
   } finally {
     fs.closeSync(fd)
   }
@@ -271,7 +313,8 @@ function warnFileFallback(): void {
  */
 function migrateFileLogins(lockHeld = false): boolean {
   const { fs, path } = node()
-  const fileLogins = readFileLogins()
+  const fileStore = readFileStore()
+  const fileLogins = fileStore.logins
   const entries = Object.entries(fileLogins).flatMap(([resource, value]) => {
     const entry = parseEntry(value)
     return entry ? [[resource, entry] as const] : []
@@ -296,15 +339,30 @@ function migrateFileLogins(lockHeld = false): boolean {
   }
 
   try {
+    const remaining = { ...fileLogins }
+    const remainingAuthoritative = new Set(fileStore.authoritative)
     for (const [resource, entry] of entries) {
       // A keyring value is authoritative: preserving it avoids overwriting a
       // token another process has already refreshed during an interrupted
-      // earlier migration.
+      // earlier migration, unless the protected fallback marks a replacement
+      // as authoritative after a failed secure-store rotation.
       const stored = readSecureLogin(resource)
-      if (stored.entry) continue
-      if (!stored.available || !writeSecureLogin(resource, entry)) return false
+      if (!fileStore.authoritative.has(resource) && stored.entry) {
+        delete remaining[resource]
+        remainingAuthoritative.delete(resource)
+        continue
+      }
+      if (!stored.available || !writeSecureLogin(resource, entry)) {
+        // Retain only entries that still need migration. Otherwise a
+        // successfully migrated authoritative login could shadow its next
+        // secure-store refresh while another login remains in the file.
+        writeFileLogins(remaining, remainingAuthoritative)
+        return false
+      }
+      delete remaining[resource]
+      remainingAuthoritative.delete(resource)
     }
-    fs.rmSync(credentialsPath(), { force: true })
+    writeFileLogins(remaining, remainingAuthoritative)
     return true
   } finally {
     if (owner) {
@@ -320,15 +378,21 @@ function migrateFileLogins(lockHeld = false): boolean {
 
 export function readCliLogin(baseUrl: string): CliLoginEntry | undefined {
   const resource = normalizeBaseUrl(baseUrl)
+  const fileStore = readFileStore()
+  const fileEntry = parseEntry(fileStore.logins[resource])
+  // A refresh token can rotate before a credential store reports an update
+  // failure. This marker makes its 0600 fallback authoritative over the now
+  // invalid secure-store value until a later read can migrate it safely.
+  if (fileStore.authoritative.has(resource) && fileEntry) return fileEntry
   const secure = readSecureLogin(resource)
   if (secure.entry) return secure.entry
 
-  const fileLogins = readFileLogins()
+  const fileLogins = fileStore.logins
   if (Object.keys(fileLogins).length === 0) return undefined
   if (migrateFileLogins()) return readSecureLogin(resource).entry
 
   if (!secure.available) warnFileFallback()
-  return parseEntry(fileLogins[resource])
+  return fileEntry
 }
 /** Like `readCliLogin`, but never throws: for the SDK's default credential chain. */
 export function storedCliLogin(baseUrl: string): CliLoginEntry | undefined {
@@ -437,12 +501,25 @@ export async function withCliLoginLock<T>(fn: () => Promise<T>): Promise<T> {
 /** Save a login. Call inside `withCliLoginLock`. */
 export function writeCliLogin(baseUrl: string, entry: CliLoginEntry): void {
   const resource = normalizeBaseUrl(baseUrl)
+  const normalised = parseEntry(entry)
+  if (!normalised) throw new TypeError('Apostra login is invalid')
   // Callers hold the cross-process lock, so the legacy file cannot overwrite
   // a rotated credential while it is being migrated.
   migrateFileLogins(true)
-  if (writeSecureLogin(resource, entry)) return
+  const existing = readSecureLogin(resource)
+  if (writeSecureLogin(resource, normalised)) return
   warnFileFallback()
-  writeFileLogins({ ...readFileLogins(), [resource]: entry })
+  const fileStore = readFileStore()
+  // A refresh token may rotate while the OS credential store disappears. Its
+  // next read could reveal the older credential, so the protected fallback is
+  // authoritative both when we saw an old entry and when availability is
+  // unknown.
+  if (!existing.available || existing.entry)
+    fileStore.authoritative.add(resource)
+  writeFileLogins(
+    { ...fileStore.logins, [resource]: normalised },
+    fileStore.authoritative,
+  )
 }
 
 async function send(
@@ -654,8 +731,10 @@ export async function logoutCliLogin(
     // A prior fallback login can still be present even when the credential
     // store has no entry (or is available again). Remove it unconditionally:
     // otherwise its refresh token could be migrated back after logout.
-    const { [key]: _removed, ...rest } = readFileLogins()
-    writeFileLogins(rest)
+    const fileStore = readFileStore()
+    const { [key]: _removed, ...rest } = fileStore.logins
+    fileStore.authoritative.delete(key)
+    writeFileLogins(rest, fileStore.authoritative)
     return { found: true, revoked }
   })
 }
