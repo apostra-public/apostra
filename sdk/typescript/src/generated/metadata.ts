@@ -244,7 +244,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Current account, state, blockers, exact fixes, and reachable accounts. For seller demand, use it to tell whether readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, and next call."
+    "summary": "Current account, state, blockers, exact fixes, accounts to pick from. For seller demand, tells if readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, next call."
   },
   "log_event": {
     "path": "/tools/log_event",
@@ -284,25 +284,6 @@ export const operations = {
       }
     ],
     "summary": "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches. To add or set up an advertiser, pass intent: \"add\". For a text answer use search(kind: \"advertiser\")."
-  },
-  "open_agent_certification_page": {
-    "path": "/tools/open_agent_certification_page",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": false,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:read"
-        ]
-      }
-    ],
-    "summary": "Open one agent’s Test & certify Page: live certification per use case, recent test runs, AdCP 4.0 readiness and capability declarations. Read-only."
   },
   "open_agent_page": {
     "path": "/tools/open_agent_page",
@@ -855,7 +836,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "File or update a typed ask in the Apostra Support workflow; returns askId. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
+    "summary": "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
   },
   "save_audience": {
     "path": "/tools/save_audience",
@@ -1047,7 +1028,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "advertiserId/campaignId:name,message;assets/landing_page_url/social/sourceAssetRef/sourceAssets;Supplied content/assets only;generate new media (radio spots):save_creative_session;exactly one format selector:formatKind/formatParams,creativeFormatId/formatOptionRef;libraryRole:Buyer Account only."
+    "summary": "Save content you supply: advertiserId/campaignId, name, message, assets (landing_page_url, social, sourceAssetRef/sourceAssets). New media like radio spots: use save_creative_session. One format selector: formatKind+formatParams or creativeFormatId+formatOptionRef. libraryRole: Buyer Account only."
   },
   "save_creative_collection": {
     "path": "/tools/save_creative_collection",
@@ -1240,7 +1221,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit buy/product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates."
+    "summary": "Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates."
   },
   "save_media_kit": {
     "path": "/tools/save_media_kit",
