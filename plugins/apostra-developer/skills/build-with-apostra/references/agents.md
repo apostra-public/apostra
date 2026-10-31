@@ -12,7 +12,9 @@ Build a read-only slice first:
 
 1. Complete connection verification and retain the account kind.
 2. Inspect the current `search` schema and search `kind: "seller"` with the
-   developer's query. Preserve each returned seller ID and name.
+   developer's query. Preserve each returned seller `id`, `sellerAccountId` and
+   name. A write names the seller by `sellerAccountId`, a different number from
+   the seller `id`; never copy one into the other.
 3. Follow the returned pagination contract within an explicit result/page
    bound. Distinguish no matches, partial results, account denial, and a tool
    error. Never turn an MCP `isError` result into a successful empty list.

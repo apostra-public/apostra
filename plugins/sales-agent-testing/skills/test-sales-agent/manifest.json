@@ -2,7 +2,7 @@
   "schemaVersion": "3.0",
   "id": "test-sales-agent",
   "name": "Test a Sales Agent",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "description": "Validate an AdCP Sales Agent or Interchange Storefront through an owned-inventory advertiser sandbox and ordinary V3 APIs.",
   "steward": {
     "owner": "bokelley"
@@ -74,7 +74,7 @@
       "scenarioIds": ["brief-discovery", "own-supply-transaction"]
     },
     "telemetry": {
-      "correlationSkillId": "test-sales-agent@1.5.5",
+      "correlationSkillId": "test-sales-agent@1.5.6",
       "outcomeSignals": [
         "workflow_terminal_state",
         "scenario_assertion_results",
