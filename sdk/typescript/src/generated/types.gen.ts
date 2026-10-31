@@ -5135,7 +5135,7 @@ export type GetDeliveryData = {
         /**
          * Metrics; omit for report defaults.
          */
-        metrics?: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'conversions' | 'leads' | 'videoCompletions' | 'conversion_value' | 'ecpm' | 'cpc' | 'ctr' | 'completion_rate' | 'cpa' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
+        metrics?: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
         /**
          * Group-by dimensions; campaign delivery also accepts labels.<dimension_key>. Omit for leaf grain.
          */
@@ -5294,6 +5294,10 @@ export type GetDeliveryResponses = {
             period?: GetDeliverySuccessPeriod;
             rows: GetDeliverySuccessRows;
             totals?: GetDeliverySuccessTotals;
+            /**
+             * Totals per finality class, when classes differ.
+             */
+            totalsByFinality?: GetDeliverySuccessTotalsByFinality;
             page: GetDeliverySuccessPage;
             semantics: GetDeliverySuccessSemantics;
             /**
@@ -5301,7 +5305,7 @@ export type GetDeliveryResponses = {
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
-             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             * Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.
              */
             coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
             /**
@@ -5318,6 +5322,10 @@ export type GetDeliveryResponses = {
             period?: GetDeliverySuccessPeriod;
             rows: GetDeliverySuccessRows;
             totals?: GetDeliverySuccessTotals;
+            /**
+             * Totals per finality class, when classes differ.
+             */
+            totalsByFinality?: GetDeliverySuccessTotalsByFinality;
             page: GetDeliverySuccessPage;
             semantics: GetDeliverySuccessSemantics;
             /**
@@ -5325,7 +5333,7 @@ export type GetDeliveryResponses = {
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
-             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             * Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.
              */
             coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
             /**
@@ -5342,6 +5350,10 @@ export type GetDeliveryResponses = {
             period?: GetDeliverySuccessPeriod;
             rows: GetDeliverySuccessRows;
             totals?: GetDeliverySuccessTotals;
+            /**
+             * Totals per finality class, when classes differ.
+             */
+            totalsByFinality?: GetDeliverySuccessTotalsByFinality;
             page: GetDeliverySuccessPage;
             semantics: GetDeliverySuccessSemantics;
             /**
@@ -5349,7 +5361,7 @@ export type GetDeliveryResponses = {
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
-             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             * Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.
              */
             coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
             /**
@@ -5599,6 +5611,7 @@ export type GetDeliveryResponses = {
             period?: never;
             rows?: never;
             totals?: never;
+            totalsByFinality?: never;
             page?: never;
             goalProgress?: never;
             coverage?: never;
@@ -6115,7 +6128,7 @@ export type GetDeliverySuccessPeriod = {
 };
 
 export type GetDeliverySuccessQuery = {
-    metrics: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'conversions' | 'leads' | 'videoCompletions' | 'conversion_value' | 'ecpm' | 'cpc' | 'ctr' | 'completion_rate' | 'cpa' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
+    metrics: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
     dimensions: Array<string>;
     range?: {
         startDate?: string;
@@ -6208,7 +6221,7 @@ export type GetDeliverySuccessRowsItemFinality = {
 export type GetDeliverySuccessRowsItemMetricsValue = {
     value: number | boolean | null;
     status: 'available' | 'unavailable';
-    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable';
+    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed';
 };
 
 export type GetDeliverySuccessRowsItemSourceOperation = 'get_seller_reporting_metrics' | 'get_buyer_reporting_metrics' | 'get_seller_margin_reporting';
@@ -6231,16 +6244,60 @@ export type GetDeliverySuccessSynthetic = {
 };
 
 export type GetDeliverySuccessTotals = {
-    rowsIncluded: number;
-    currency: string | null;
-    metrics: {
-        [key: string]: GetDeliverySuccessTotalsMetricsValue;
-    };
-    denomination: 'net' | 'gross_buyer';
-    dataThrough: string | null;
+    rowsIncluded: GetDeliverySuccessTotalsRowsIncluded;
+    currency: GetDeliverySuccessTotalsCurrency;
+    metrics: GetDeliverySuccessTotalsMetrics;
+    denomination: GetDeliverySuccessTotalsDenomination;
+    dataThrough: GetDeliverySuccessTotalsDataThrough;
     finality: GetDeliverySuccessTotalsFinality;
-    billingEligibility: 'not_evaluated';
+    billingEligibility: GetDeliverySuccessTotalsBillingEligibility;
 };
+
+export type GetDeliverySuccessTotalsBillingEligibility = 'not_evaluated';
+
+export type GetDeliverySuccessTotalsByFinality = Array<{
+    rowsIncluded: GetDeliverySuccessTotalsByFinalityItemRowsIncluded;
+    currency: GetDeliverySuccessTotalsByFinalityItemCurrency;
+    metrics: GetDeliverySuccessTotalsByFinalityItemMetrics;
+    denomination: GetDeliverySuccessTotalsByFinalityItemDenomination;
+    dataThrough: GetDeliverySuccessTotalsByFinalityItemDataThrough;
+    finality: GetDeliverySuccessTotalsByFinalityItemFinality;
+    billingEligibility: GetDeliverySuccessTotalsByFinalityItemBillingEligibility;
+}>;
+
+export type GetDeliverySuccessTotalsByFinalityItemBillingEligibility = 'not_evaluated';
+
+export type GetDeliverySuccessTotalsByFinalityItemCurrency = string | null;
+
+export type GetDeliverySuccessTotalsByFinalityItemDataThrough = string | null;
+
+export type GetDeliverySuccessTotalsByFinalityItemDenomination = 'net' | 'gross_buyer';
+
+export type GetDeliverySuccessTotalsByFinalityItemFinality = {
+    status: 'available' | 'unavailable' | 'not_applicable';
+    class: 'SNAPSHOT' | 'OFFICIAL' | null;
+    revision: GetDeliverySuccessDeliveryRevision | null;
+    reason?: 'revision_evidence_unavailable' | 'revision_evidence_mixed' | 'revision_unreadable' | 'cumulative_margin_ledger';
+    supportedClasses?: Array<'SNAPSHOT' | 'OFFICIAL'>;
+};
+
+export type GetDeliverySuccessTotalsByFinalityItemMetrics = {
+    [key: string]: GetDeliverySuccessTotalsByFinalityItemMetricsValue;
+};
+
+export type GetDeliverySuccessTotalsByFinalityItemMetricsValue = {
+    value: number | boolean | null;
+    status: 'available' | 'unavailable';
+    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed';
+};
+
+export type GetDeliverySuccessTotalsByFinalityItemRowsIncluded = number;
+
+export type GetDeliverySuccessTotalsCurrency = string | null;
+
+export type GetDeliverySuccessTotalsDataThrough = string | null;
+
+export type GetDeliverySuccessTotalsDenomination = 'net' | 'gross_buyer';
 
 export type GetDeliverySuccessTotalsFinality = {
     status: 'available' | 'unavailable' | 'not_applicable';
@@ -6250,11 +6307,17 @@ export type GetDeliverySuccessTotalsFinality = {
     supportedClasses?: Array<'SNAPSHOT' | 'OFFICIAL'>;
 };
 
+export type GetDeliverySuccessTotalsMetrics = {
+    [key: string]: GetDeliverySuccessTotalsMetricsValue;
+};
+
 export type GetDeliverySuccessTotalsMetricsValue = {
     value: number | boolean | null;
     status: 'available' | 'unavailable';
-    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable';
+    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed';
 };
+
+export type GetDeliverySuccessTotalsRowsIncluded = number;
 
 /**
  * Display label for the measurement vendor beside it. Names are display only; the vendor domain stays the identifier.
@@ -6749,6 +6812,7 @@ export type GetResponses = {
                 };
                 nextAction?: 'retry' | 'correct' | 'contactSupport';
                 blockedReason?: string;
+                failedReason?: string;
                 closedReason?: string;
             }>;
             operationDetailsTruncated?: true;
@@ -9715,151 +9779,15 @@ export type OpenCampaignsPageSuccessPageHumanHandoffUnavailable = {
     instruction: 'This Page has no supported browser URL. Use an MCP UI host for this Page. Do not construct a platform URL or treat this result as completion.';
 };
 
-export type OpenConnectionsPageData = {
-    body: {
-        advertiserId?: unknown;
-    } & {
-        sellerId?: unknown;
-    } & {
-        connectionId?: unknown;
-    } & {
-        accountId?: unknown;
-    } & {
-        /**
-         * Canonical advertiser ID; omit for account scope.
-         */
-        advertiserId?: string;
-        /**
-         * The seller's Account id. Not the seller object's id or any sellerId, which are different numbers.
-         */
-        sellerAccountId?: number;
-        /**
-         * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads.
-         *
-         * @deprecated
-         */
-        sellerId?: string;
-        /**
-         * Open seller setup; requires sellerId and user confirmation.
-         */
-        connectionAction?: 'connect';
-        /**
-         * Connection ID to open.
-         */
-        connectionId?: string;
-        /**
-         * Its accounts[].id; opens event sources and audiences.
-         */
-        connectionAccountId?: string;
-        /**
-         * Apostra accountId this call runs in, from get_status.
-         */
-        accountId?: number | string;
-    };
-    headers?: {
-        /**
-         * Select an accessible customer account for this request. An explicit value must be a positive integer and must equal the account resolved by authentication.
-         */
-        'X-SCOPE3-CUSTOMER-ID'?: string;
-    };
-    path?: never;
-    query?: never;
-    url: '/tools/open_connections_page';
-};
+export type OpenConnectionsPageData = OpenMediaPartnersPageData;
 
-export type OpenConnectionsPageError = OpenConnectionsPageErrors[keyof OpenConnectionsPageErrors];
+export type OpenConnectionsPageError = OpenMediaPartnersPageError;
 
-export type OpenConnectionsPageErrors = {
-    /**
-     * Invalid operation input
-     */
-    400: V3ToolErrorResponse;
-    /**
-     * Missing or invalid API credential
-     */
-    401: V3ToolErrorResponse;
-    /**
-     * Account credit limit exceeded
-     */
-    402: V3ToolErrorResponse;
-    /**
-     * The credential or account cannot perform this operation
-     */
-    403: V3ToolErrorResponse;
-    /**
-     * Requested resource not found
-     */
-    404: V3ToolErrorResponse;
-    /**
-     * Operation conflicts with current resource state
-     */
-    409: V3ToolErrorResponse;
-    /**
-     * Request body exceeds the accepted size
-     */
-    413: V3ToolErrorResponse;
-    /**
-     * Request body encoding or character set is unsupported
-     */
-    415: V3ToolErrorResponse;
-    /**
-     * Operation cannot process the supplied input
-     */
-    422: V3ToolErrorResponse;
-    /**
-     * Request rate limit exceeded
-     */
-    429: V3ToolErrorResponse;
-    /**
-     * Unexpected operation failure
-     */
-    500: V3ToolErrorResponse;
-    /**
-     * Recognised operation behaviour is not implemented
-     */
-    501: V3ToolErrorResponse;
-    /**
-     * A required service is unavailable
-     */
-    503: V3ToolErrorResponse;
-};
+export type OpenConnectionsPageErrors = OpenMediaPartnersPageErrors;
 
-export type OpenConnectionsPageResponse = OpenConnectionsPageResponses[keyof OpenConnectionsPageResponses];
+export type OpenConnectionsPageResponse = OpenMediaPartnersPageResponse;
 
-export type OpenConnectionsPageResponses = {
-    /**
-     * Typed operation result
-     */
-    200: {
-        data: {
-            /**
-             * Opened advertiser ID when advertiser-scoped.
-             */
-            advertiserId?: string;
-            /**
-             * Opened seller ID when seller-scoped.
-             */
-            sellerId?: string;
-            /**
-             * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
-             */
-            sellerAccountId?: number;
-            /**
-             * Requested seller action when supplied.
-             */
-            connectionAction?: 'connect';
-            /**
-             * Opened connection ID.
-             */
-            connectionId?: string;
-            /**
-             * Opened account ID.
-             */
-            accountId?: string;
-        };
-        error: null;
-    };
-};
+export type OpenConnectionsPageResponses = OpenMediaPartnersPageResponses;
 
 export type OpenCreativeEnginesPageData = {
     body: {
@@ -12708,11 +12636,9 @@ export type SaveAdvertiserData = {
             }>;
         };
         /**
-         * Replace labels for each supplied dimension; [] clears.
+         * Replace labels per dimension; empty values clears.
          */
-        labels?: {
-            [key: string]: Array<string>;
-        };
+        labels?: Array<SaveAdvertiserRequestLabelWriteEntry>;
         /**
          * Advertiser-stated brand kit, voice rules, banned terms, disclaimers and pages. Save brandProfile in its own save_advertiser call with advertiserId. Available only in the V3 beta with Creative Engines access. `stated: null` clears stated values; `stated.statedAbsence` records that the advertiser confirmed it has no kit, voice or disclaimers.
          */
@@ -13527,6 +13453,17 @@ export type SaveAdvertiserRequestFootprintProposalBrandCountries = Array<string>
  * AdCP media channels this advertiser expects to use; an empty list means All channels. Channel overlap affects automatic seller qualification. These editable planning preferences do not create advertiser-owned selection edges or prove that supply is available.
  */
 export type SaveAdvertiserRequestFootprintProposalChannels = Array<'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence'>;
+
+export type SaveAdvertiserRequestLabelWriteEntry = {
+    /**
+     * Key of a dimension, such as audience or vertical.
+     */
+    dimension: string;
+    /**
+     * Value slugs; [] clears.
+     */
+    values: Array<string>;
+};
 
 export type SaveAdvertiserResponse = SaveAdvertiserResponses[keyof SaveAdvertiserResponses];
 
@@ -16413,11 +16350,9 @@ export type SaveCampaignData = {
             deleteMissing?: boolean;
         };
         /**
-         * Replace labels for each supplied dimension; [] clears.
+         * Replace labels per dimension; empty values clears.
          */
-        labels?: {
-            [key: string]: Array<string>;
-        };
+        labels?: Array<SaveCampaignRequestLabelWriteEntry>;
         /**
          * Campaign's own advertiser-owned include list; narrows the advertiser's. Null clears only this.
          */
@@ -16713,6 +16648,17 @@ export type SaveCampaignRequestCampaignVendorMetricGoal = {
 export type SaveCampaignRequestChannelGroupsItemChannelGroupId = string;
 
 export type SaveCampaignRequestChannelGroupsItemName = string;
+
+export type SaveCampaignRequestLabelWriteEntry = {
+    /**
+     * Key of a dimension, such as audience or vertical.
+     */
+    dimension: string;
+    /**
+     * Value slugs; [] clears.
+     */
+    values: Array<string>;
+};
 
 export type SaveCampaignRequestTargetingDaypartsItemStrength = 'required' | 'preferred';
 
@@ -19216,11 +19162,9 @@ export type SaveCreativeData = {
             [key: string]: unknown;
         }>;
         /**
-         * Dimension values; [] clears.
+         * Replace labels per dimension; empty values clears.
          */
-        labels?: {
-            [key: string]: Array<string>;
-        };
+        labels?: Array<SaveCreativeRequestLabelWriteEntry>;
         /**
          * true archives globally (frees the name); false is not supported.
          */
@@ -19327,6 +19271,17 @@ export type SaveCreativeRequestFormatKind = 'image' | 'html5' | 'display_tag' | 
 
 export type SaveCreativeRequestFormatParams = {
     [key: string]: unknown;
+};
+
+export type SaveCreativeRequestLabelWriteEntry = {
+    /**
+     * Key of a dimension, such as audience or vertical.
+     */
+    dimension: string;
+    /**
+     * Value slugs; [] clears.
+     */
+    values: Array<string>;
 };
 
 /**
@@ -21883,11 +21838,9 @@ export type SaveInventorySourceData = {
              */
             moduleInstanceId: string;
             /**
-             * Non-secret module configuration. Nested values are deep-merged by default.
+             * Non-secret module settings, one entry per field. Dotted keys name nested fields and are deep-merged by default.
              */
-            config: {
-                [key: string]: unknown;
-            };
+            config: Array<SaveInventorySourceRequestModuleConfigEntry>;
             /**
              * Deep-merge by default; false replaces seller-writable configuration.
              */
@@ -21985,6 +21938,17 @@ export type SaveInventorySourceErrors = {
      * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
      */
     503: V3ToolErrorResponse;
+};
+
+export type SaveInventorySourceRequestModuleConfigEntry = {
+    /**
+     * Dotted field key from the module contract, for example `cadent.endpointUrl`.
+     */
+    key: string;
+    /**
+     * A string, number or boolean setting.
+     */
+    value: string | number | boolean;
 };
 
 export type SaveInventorySourceResponse = SaveInventorySourceResponses[keyof SaveInventorySourceResponses];
@@ -23344,11 +23308,9 @@ export type SaveMaterialData = {
             buyerScope?: never;
         };
         /**
-         * Replace labels for each supplied dimension; [] clears.
+         * Replace labels per dimension; empty values clears.
          */
-        labels?: {
-            [key: string]: Array<string>;
-        };
+        labels?: Array<SaveMaterialRequestLabelWriteEntry>;
         /**
          * true archives the Material; false restores it. Send it alone with materialId.
          */
@@ -23469,6 +23431,56 @@ export type SaveMaterialErrors = {
 /** @deprecated use SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrectionCorrectedContentSourceTextDigest */
 export type SaveMaterialRequestDecisionCorrectionCorrectedContentSourceTextDigest = SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrectionCorrectedContentSourceTextDigest;
 
+export type SaveMaterialRequestLabelWriteEntry = {
+    /**
+     * Key of a dimension, such as audience or vertical.
+     */
+    dimension: string;
+    /**
+     * Value slugs; [] clears.
+     */
+    values: Array<string>;
+};
+
+/**
+ * How completely each facet was extracted. Leave out a facet that is not known.
+ */
+export type SaveMaterialRequestMaterialExtractionCompleteness = {
+    /**
+     * Extraction of text.
+     */
+    text?: SaveMaterialRequestMaterialFacetCompleteness;
+    /**
+     * Extraction of structure.
+     */
+    structure?: SaveMaterialRequestMaterialFacetCompleteness;
+    /**
+     * Extraction of tables.
+     */
+    tables?: SaveMaterialRequestMaterialFacetCompleteness;
+    /**
+     * Extraction of visuals.
+     */
+    visuals?: SaveMaterialRequestMaterialFacetCompleteness;
+    /**
+     * Extraction of styles.
+     */
+    styles?: SaveMaterialRequestMaterialFacetCompleteness;
+};
+
+export type SaveMaterialRequestMaterialFacetCompleteness = 'complete' | 'degraded' | 'unsupported' | 'failed';
+
+export type SaveMaterialRequestMaterialProvenanceEntry = {
+    /**
+     * What the parser recorded, e.g. `parser` or `page`.
+     */
+    key: string;
+    /**
+     * What it recorded.
+     */
+    value: string;
+};
+
 export type SaveMaterialRequestMetadataAdvertiserRef = string;
 
 export type SaveMaterialRequestMetadataBuyerScopeBrandDomain = string;
@@ -23529,7 +23541,7 @@ export type SaveMaterialRequestSaveMaterialCandidateDecision = {
             /**
              * Replacement proposedContent for this candidate.
              */
-            correctedContent?: {
+            correctedContent: {
                 /**
                  * Corrected candidate title to show on get(material).
                  */
@@ -23542,21 +23554,6 @@ export type SaveMaterialRequestSaveMaterialCandidateDecision = {
                  * Optional digest of the corrected source text.
                  */
                 sourceTextDigest?: SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrectionCorrectedContentSourceTextDigest;
-            };
-            /**
-             * Replacement typed proposal; correction does not confirm or save it.
-             */
-            proposedMutation?: {
-                /**
-                 * Material tool field.
-                 */
-                tool: 'save_playbook' | 'save_business_rules' | 'save_wholesale_product' | 'save_signal' | 'save_seller';
-                /**
-                 * Material arguments field.
-                 */
-                arguments: {
-                    [key: string]: unknown;
-                };
             };
         };
     };
@@ -23708,9 +23705,7 @@ export type SaveMaterialRequestSourceDerivedStructure = {
         /**
          * Material provenance field.
          */
-        provenance?: {
-            [key: string]: string;
-        };
+        provenance?: Array<SaveMaterialRequestMaterialProvenanceEntry>;
     }>;
     /**
      * Material artifacts field.
@@ -23981,9 +23976,7 @@ export type SaveMaterialRequestSourceItemsItemDerivedStructure = {
         /**
          * Material provenance field.
          */
-        provenance?: {
-            [key: string]: string;
-        };
+        provenance?: Array<SaveMaterialRequestMaterialProvenanceEntry>;
     }>;
     /**
      * Material artifacts field.
@@ -24191,9 +24184,7 @@ export type SaveMaterialRequestSourceRenditionRefs = Array<{
     /**
      * Material completeness field.
      */
-    completeness?: {
-        [key: string]: 'complete' | 'degraded' | 'unsupported' | 'failed';
-    };
+    completeness?: SaveMaterialRequestMaterialExtractionCompleteness;
 }>;
 
 export type SaveMaterialRequestSourceRenditionRefsItemConfigurationDigest = string;
@@ -28088,7 +28079,7 @@ export type SavePropertyListData = {
             };
         }>;
         /**
-         * Create-only filters. feature_requirements are judged against your saved scores; with them, a list may have no identifiers and resolves over every property you have scored.
+         * Filters. feature_requirements are judged against your saved scores; with them, a list may have no identifiers and resolves over every property you have scored. On update this replaces the list filters (null clears them); channels_any is fixed at creation.
          */
         filters?: SavePropertyListRequestPropertyListFilters | null;
         /**
@@ -28609,9 +28600,17 @@ export type SavePropertyListSuccessPropertyListSaveCascadeSummary = {
      */
     actionRequired?: SavePropertyListSuccessPropertyListSaveCascadeSummaryActionRequired;
     /**
-     * Restore committed, but active-buy updates could not be completed. Counts are unavailable when this field is present.
+     * Active-buy updates could not be completed for part of the change, such as a restore or a score change whose affected lists could not be looked up. The counts cover only the pushes that completed.
      */
     errorMessage?: string;
+    /**
+     * Property lists affected by a score change in this save whose push to active media buys finished inside the request.
+     */
+    pushedListIds?: Array<string>;
+    /**
+     * Property lists affected by a score change in this save whose push was cancelled or never started when the request ran out of time. Not a failure: the scheduled live-buy re-check catches their buys on its next run.
+     */
+    leftToRecheckListIds?: Array<string>;
 };
 
 export type SavePropertyListSuccessPropertyListSaveCascadeSummaryActionRequired = Array<SavePropertyListSuccessPropertyListPushActionRequired>;
@@ -28725,17 +28724,6 @@ export type SaveRfpData = {
                      */
                     budgetBand?: 'under_10k' | '10k_50k' | '50k_250k' | '250k_1m' | 'over_1m';
                 };
-            } | {
-                /**
-                 * Bounded deployed Quick preset compatibility record.
-                 */
-                kind: SaveRfpRequestAdvertiser;
-                /**
-                 * Legacy Quick preset data.
-                 */
-                value: {
-                    [key in SaveRfpRequestAdvertiser]?: SaveRfpRequestJsonValue;
-                };
             };
             /**
              * Material id.
@@ -28762,11 +28750,18 @@ export type SaveRfpData = {
              */
             channels?: SaveRfpRequestOriginChannels;
             /**
-             * Origin facts.
+             * Origin facts as name/value entries.
              */
-            details?: {
-                [key in SaveRfpRequestPropertyNames]?: SaveRfpRequestJsonValue;
-            };
+            details?: Array<{
+                /**
+                 * Entry name.
+                 */
+                key: unknown & SaveRfpRequestClientRequestId;
+                /**
+                 * Entry value: text, a number or true/false.
+                 */
+                value: SaveRfpRequestAdvertiser | number | boolean;
+            }>;
         };
         /**
          * Purpose.
@@ -28824,29 +28819,101 @@ export type SaveRfpData = {
                 currency: 'BHD' | 'JOD' | 'KWD' | 'LYD' | 'OMR' | 'TND';
             };
             /**
-             * Flight.
+             * Flight dates: start and end, as YYYY-MM-DD.
              */
             flight?: {
-                [key in SaveRfpRequestPropertyNames]?: SaveRfpRequestJsonValue;
+                /**
+                 * Start date (inclusive), ISO 8601 calendar date.
+                 */
+                start: string;
+                /**
+                 * End date (inclusive), ISO 8601 calendar date.
+                 */
+                end: string;
             };
             /**
              * Intent.
              */
             dimensions?: {
-                [key in SaveRfpRequestPropertyNames]?: SaveRfpRequestJsonValue | SaveRfpRequestRequestDimensionsChannels | SaveRfpRequestRequestDimensionsChannel | SaveRfpRequestRequestDimensionsFormatKinds | SaveRfpRequestRequestDimensionsProductCount | SaveRfpRequestRequestDimensionsPlanRoles | SaveRfpRequestRequestDimensionsAudience | SaveRfpRequestRequestDimensionsCreativeInputs | undefined;
+                /**
+                 * Channels.
+                 */
+                channels?: SaveRfpRequestRequestDimensionsChannels;
+                /**
+                 * Channel.
+                 */
+                channel?: SaveRfpRequestRequestDimensionsChannel;
+                /**
+                 * Formats.
+                 */
+                format_kinds?: SaveRfpRequestRequestDimensionsFormatKinds;
+                /**
+                 * Products.
+                 */
+                productCount?: SaveRfpRequestRequestDimensionsProductCount;
+                /**
+                 * Buyer requests; counter-pitch unsupported roles.
+                 */
+                planRoles?: SaveRfpRequestRequestDimensionsPlanRoles;
+                /**
+                 * Audience.
+                 */
+                audience?: SaveRfpRequestRequestDimensionsAudience;
+                /**
+                 * Creative inputs.
+                 */
+                creativeInputs?: SaveRfpRequestRequestDimensionsCreativeInputs;
             };
             /**
              * Constraints.
              */
             constraints?: {
-                [key in SaveRfpRequestPropertyNames]?: SaveRfpRequestJsonValue | SaveRfpRequestRequestConstraintsFormatKinds | SaveRfpRequestRequestConstraintsProductCount | SaveRfpRequestRequestConstraintsPlanRoles | Array<'brand_lift' | 'closed_loop_attribution' | 'sales_attribution'> | Array<'flight' | 'audience'> | SaveRfpRequestRequestConstraintsRequiredCreativeInputs | (unknown & unknown) | Array<SaveRfpRequestRequestConstraintsMustIncludeItem> | undefined;
+                /**
+                 * Formats.
+                 */
+                format_kinds?: SaveRfpRequestRequestConstraintsFormatKinds;
+                /**
+                 * Products.
+                 */
+                productCount?: SaveRfpRequestRequestConstraintsProductCount;
+                /**
+                 * Roles.
+                 */
+                planRoles?: SaveRfpRequestRequestConstraintsPlanRoles;
+                /**
+                 * Measurements.
+                 */
+                measurementRequirements?: Array<'brand_lift' | 'closed_loop_attribution' | 'sales_attribution'>;
+                /**
+                 * Required inputs.
+                 */
+                requiredInputs?: Array<'flight' | 'audience'>;
+                /**
+                 * Creative inputs.
+                 */
+                requiredCreativeInputs?: SaveRfpRequestRequestConstraintsRequiredCreativeInputs;
+                /**
+                 * Locale.
+                 */
+                locale?: unknown & unknown;
+                /**
+                 * Legacy inputs (1-16, 1-160 chars).
+                 */
+                mustInclude?: Array<SaveRfpRequestRequestConstraintsMustIncludeItem>;
             };
         };
         /**
          * Strategy.
          */
         strategy?: {
-            [key in SaveRfpRequestPropertyNames]?: SaveRfpRequestJsonValue | SaveRfpRequestStrategyPosture | (unknown & SaveRfpRequestAdvertiser) | undefined;
+            /**
+             * Posture.
+             */
+            posture?: SaveRfpRequestStrategyPosture;
+            /**
+             * Pass reason.
+             */
+            passReason?: unknown & SaveRfpRequestAdvertiser;
         };
         /**
          * Exact currently endorsed seller response pair to require for this composed turn.
@@ -28969,12 +29036,11 @@ export type SaveRfpRequestAdvertiser = string;
  */
 export type SaveRfpRequestClientRequestId = string;
 
-/** @deprecated use SaveRfpRequestJsonValue */
-export type SaveRfpRequestJ = SaveRfpRequestJsonValue;
+/** @deprecated use JsonValue */
+export type SaveRfpRequestJ = JsonValue;
 
-export type SaveRfpRequestJsonValue = SaveRfpRequestAdvertiser | Array<SaveRfpRequestJsonValue> | {
-    [key in SaveRfpRequestPropertyNames]?: SaveRfpRequestJsonValue;
-} | number | boolean | null;
+/** @deprecated use JsonValue */
+export type SaveRfpRequestJsonValue = JsonValue;
 
 export type SaveRfpRequestOriginAdvertiser = string;
 
@@ -28988,10 +29054,8 @@ export type SaveRfpRequestOriginChannelsItem = string;
 
 export type SaveRfpRequestOriginMarket = string;
 
-/**
- * Leading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.
- */
-export type SaveRfpRequestPropertyNames = string;
+/** @deprecated use SaveRfpTurnRequestFeedbackItemKey */
+export type SaveRfpRequestPropertyNames = SaveRfpTurnRequestFeedbackItemKey;
 
 export type SaveRfpRequestRepresentationLocale = RepresentationLocale;
 
@@ -29269,11 +29333,18 @@ export type SaveRfpTurnData = {
          */
         cancelRepresentationId?: unknown & SaveRfpTurnRequestCancelRepresentationId;
         /**
-         * Feedback.
+         * Feedback as name/value entries.
          */
-        feedback?: {
-            [key in SaveRfpTurnRequestPropertyNames]?: SaveRfpTurnRequestDetails;
-        };
+        feedback?: Array<{
+            /**
+             * Entry name.
+             */
+            key: SaveRfpTurnRequestFeedbackItemKey;
+            /**
+             * Entry value: text, a number or true/false.
+             */
+            value: SaveRfpTurnRequestFeedbackItemValue;
+        }>;
         /**
          * Seller grade.
          */
@@ -29299,11 +29370,18 @@ export type SaveRfpTurnData = {
              */
             finality?: 'preliminary' | 'final' | 'mixed';
             /**
-             * Details.
+             * Details as name/value entries, such as bookedBudget (number) and currency.
              */
-            details?: {
-                [key in SaveRfpTurnRequestPropertyNames]?: SaveRfpTurnRequestDetails;
-            };
+            details?: Array<{
+                /**
+                 * Entry name.
+                 */
+                key: SaveRfpTurnRequestOutcomeDetailsItemKey;
+                /**
+                 * Entry value: text, a number or true/false.
+                 */
+                value: SaveRfpTurnRequestOutcomeDetailsItemValue;
+            }>;
         };
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
@@ -29393,14 +29471,25 @@ export type SaveRfpTurnRequestCancelRepresentationId = string;
 
 export type SaveRfpTurnRequestCommentary = string;
 
-export type SaveRfpTurnRequestDetails = SaveRfpTurnRequestCommentary | Array<SaveRfpTurnRequestDetails> | {
-    [key in SaveRfpTurnRequestPropertyNames]?: SaveRfpTurnRequestDetails;
-} | number | boolean | null;
+/** @deprecated use JsonValue */
+export type SaveRfpTurnRequestDetails = JsonValue;
 
 /**
  * Leading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.
  */
-export type SaveRfpTurnRequestPropertyNames = string;
+export type SaveRfpTurnRequestFeedbackItemKey = string;
+
+export type SaveRfpTurnRequestFeedbackItemValue = string | number | boolean;
+
+/**
+ * Leading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.
+ */
+export type SaveRfpTurnRequestOutcomeDetailsItemKey = string;
+
+export type SaveRfpTurnRequestOutcomeDetailsItemValue = string | number | boolean;
+
+/** @deprecated use SaveRfpTurnRequestFeedbackItemKey */
+export type SaveRfpTurnRequestPropertyNames = SaveRfpTurnRequestFeedbackItemKey;
 
 export type SaveRfpTurnResponse = SaveRfpTurnResponses[keyof SaveRfpTurnResponses];
 
@@ -29919,6 +30008,10 @@ export type SaveSellerData = {
          */
         expectedIsPaused?: boolean;
         /**
+         * Change the account type in place. Direct administrator only. `listing` is refused while Storefront agent work runs and closes Enhanced Reporting. Send alone.
+         */
+        sellingMode?: 'listing' | 'storefront_agent';
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -30144,7 +30237,7 @@ export type SaveSellerResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
+        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
         error: null;
     };
     /**
@@ -30272,6 +30365,33 @@ export type SaveSellerSuccessSaveSellerSuccessReopenRecorded = {
     [key: string]: unknown;
 };
 
+export type SaveSellerSuccessSaveSellerSuccessSellingModeChanged = {
+    outcome: 'selling_mode_changed';
+    action: 'selling_mode_changed';
+    sellingMode: {
+        current: 'listing' | 'storefront_agent';
+        previous: 'listing' | 'storefront_agent';
+        closedEnhancedReportingAccounts: number;
+        activitiesBecome: 'billable' | 'free';
+        activities: Array<{
+            activityCode: string;
+            name: string;
+            ius: number;
+            unit: string;
+            [key: string]: unknown;
+        }>;
+        [key: string]: unknown;
+    };
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged = {
+    outcome: 'selling_mode_unchanged';
+    action: 'selling_mode_unchanged';
+    sellingMode: 'listing' | 'storefront_agent';
+    [key: string]: unknown;
+};
+
 export type SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded = {
     outcome: 'source_decision_recorded';
     action: 'source_decision_recorded';
@@ -30364,11 +30484,9 @@ export type SaveSignalData = {
          */
         id?: string;
         /**
-         * Signal. Managed writes fully replace; include signalId, name, valueType, and adapterConfig.
+         * Signal. `kind` chooses the shape: managed (with sourceId) or catalog (without).
          */
-        draft?: {
-            [key: string]: unknown;
-        };
+        draft?: SaveSignalRequestManagedSignalDraft | SaveSignalRequestCatalogSignalDraft;
         /**
          * Use archived to delete an existing signal.
          */
@@ -30456,6 +30574,235 @@ export type SaveSignalErrors = {
      * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
      */
     503: V3ToolErrorResponse;
+};
+
+export type SaveSignalRequestCatalogSignalDraft = {
+    /**
+     * A signal in the seller catalog. Omit sourceId. Create needs signalId and keyType; an update changes name, description, countries, isLive or access.
+     */
+    kind: 'catalog';
+    /**
+     * Your own stable id; fixed once registered.
+     */
+    signalId?: string;
+    /**
+     * Display name; needed to create.
+     */
+    name?: string;
+    /**
+     * What the signal is.
+     */
+    description?: string;
+    /**
+     * What it is keyed on; fixed once registered. All context keys or all identity keys.
+     */
+    keyType?: Array<'country' | 'region' | 'metro' | 'topic' | 'eidr' | 'gracenote' | 'isrc' | 'gtin' | 'rss_guid' | 'isbn' | 'url' | 'url_hash' | 'custom' | 'maid' | 'rampid' | 'rampid_derived' | 'hashed_email' | 'hashed_phone' | 'id5' | 'uid2' | 'euid' | 'pairid'>;
+    /**
+     * ISO country codes it is limited to; null lifts the limit.
+     */
+    countries?: Array<string> | null;
+    /**
+     * Your own notes as entries; fixed once registered.
+     */
+    metadata?: SaveSignalRequestCatalogSignalDraftMetadata;
+    /**
+     * External signals agent that registered it; fixed once registered.
+     */
+    agentId?: string;
+    /**
+     * Whether buyers can use it.
+     */
+    isLive?: boolean;
+    /**
+     * Grants at create. To change them use addAccess.
+     */
+    access?: Array<SaveSignalRequestSignalAccessGrant>;
+    /**
+     * Grants to add to a registered signal.
+     */
+    addAccess?: Array<SaveSignalRequestSignalAccessGrant>;
+    /**
+     * Grants to change on a registered signal.
+     */
+    updateAccess?: Array<SaveSignalRequestSignalAccessUpdate>;
+    /**
+     * accessId values to archive.
+     */
+    archiveAccess?: Array<number>;
+};
+
+export type SaveSignalRequestCatalogSignalDraftMetadata = Array<SaveSignalRequestSignalConfigEntry>;
+
+export type SaveSignalRequestManagedSignalDraft = {
+    /**
+     * A signal on an ad-server source. Send sourceId. A write fully replaces the signal, so send every field you keep.
+     */
+    kind: 'managed';
+    /**
+     * Stable id: letters, numbers, _ and -.
+     */
+    signalId: string;
+    /**
+     * Display name.
+     */
+    name: string;
+    /**
+     * binary, categorical or numeric.
+     */
+    valueType: 'binary' | 'categorical' | 'numeric';
+    /**
+     * The ad-server mapping as entries, one per setting: key is its path (`kind`, `groups[0].criteria[0].keyId`), e.g. key `kind`, value `audience_segment`.
+     */
+    adapterConfig: SaveSignalRequestManagedSignalDraftAdapterConfig;
+    /**
+     * What the signal is.
+     */
+    description?: string | null;
+    /**
+     * Values when valueType is categorical.
+     */
+    categories?: Array<string>;
+    /**
+     * Bounds when valueType is numeric.
+     */
+    range?: {
+        /**
+         * Lower bound.
+         */
+        min?: number | string | null;
+        /**
+         * Upper bound.
+         */
+        max?: number | string | null;
+    } | null;
+    /**
+     * What it narrows: `age` for an age signal, `property` for a property signal, else e.g. `audience`.
+     */
+    targetingDimension?: string | null;
+    /**
+     * Required for an age signal.
+     */
+    ageDetermination?: 'survey_based' | 'assumptive' | 'user_provided' | 'user_verified';
+    /**
+     * Who supplies the data.
+     */
+    dataProvider?: string | null;
+    /**
+     * Free labels.
+     */
+    tags?: Array<string>;
+    /**
+     * Price to layer this signal onto a buy.
+     */
+    pricing_options?: Array<SaveSignalRequestSignalPricingOption>;
+};
+
+export type SaveSignalRequestManagedSignalDraftAdapterConfig = Array<SaveSignalRequestSignalConfigEntry>;
+
+export type SaveSignalRequestSignalAccessGrant = {
+    /**
+     * Scope3 advertiser id.
+     */
+    advertiserId: string;
+    visibility: SaveSignalRequestSignalAccessGrantVisibility;
+    /**
+     * Price for this advertiser.
+     */
+    price?: SaveSignalRequestSignalPricingOption;
+};
+
+/**
+ * PUBLIC or PROPRIETARY.
+ */
+export type SaveSignalRequestSignalAccessGrantVisibility = 'PUBLIC' | 'PROPRIETARY';
+
+export type SaveSignalRequestSignalAccessUpdate = {
+    /**
+     * Id of the grant to change.
+     */
+    accessId: number;
+    visibility?: SaveSignalRequestSignalAccessUpdateVisibility;
+    /**
+     * New price for this advertiser.
+     */
+    price?: SaveSignalRequestSignalPricingOption;
+};
+
+/**
+ * PUBLIC or PROPRIETARY.
+ */
+export type SaveSignalRequestSignalAccessUpdateVisibility = 'PUBLIC' | 'PROPRIETARY';
+
+export type SaveSignalRequestSignalConfigEntry = {
+    /**
+     * Path to one setting: dotted names, [n] for a list item, ["a.b"] for a name with a dot or bracket, e.g. `groups[0].criteria[0].keyId`.
+     */
+    key: string;
+    /**
+     * A string, number, boolean, list of strings, null, or an empty object.
+     */
+    value: string | number | boolean | Array<string> | null | {
+        [key: string]: never;
+    };
+};
+
+/**
+ * AdCP vendor pricing option: cpm, percent_of_media, flat_fee, per_unit or custom, each with its own currency.
+ */
+export type SaveSignalRequestSignalPricingOption = {
+    pricing_option_id: string;
+    applies_to_output_format_ids?: Array<{
+        agent_url: string;
+        id: string;
+        width?: number;
+        height?: number;
+        duration_ms?: number;
+        pixel_ratio?: number;
+        [key: string]: unknown;
+    }>;
+    applies_to_output_capability_ids?: Array<string>;
+    [key: string]: unknown;
+} & ({
+    model: 'cpm';
+    cpm: number;
+    currency: string;
+    ext?: SaveSignalRequestSignalPricingOptionExt;
+    [key: string]: unknown;
+} | {
+    model: 'percent_of_media';
+    percent: number;
+    max_cpm?: number;
+    currency: string;
+    ext?: SaveSignalRequestSignalPricingOptionExt;
+    [key: string]: unknown;
+} | {
+    model: 'flat_fee';
+    amount: number;
+    period: 'monthly' | 'quarterly' | 'annual' | 'campaign';
+    currency: string;
+    ext?: SaveSignalRequestSignalPricingOptionExt;
+    [key: string]: unknown;
+} | {
+    model: 'per_unit';
+    unit: string;
+    unit_price: number;
+    currency: string;
+    ext?: SaveSignalRequestSignalPricingOptionExt;
+    [key: string]: unknown;
+} | {
+    model: 'custom';
+    description: string;
+    metadata: {
+        summary_for_operator?: string;
+        [key: string]: unknown;
+    };
+    currency?: string;
+    ext?: SaveSignalRequestSignalPricingOptionExt;
+    [key: string]: unknown;
+});
+
+export type SaveSignalRequestSignalPricingOptionExt = {
+    [key: string]: unknown;
 };
 
 export type SaveSignalResponse = SaveSignalResponses[keyof SaveSignalResponses];
@@ -30956,11 +31303,9 @@ export type SaveWorkItemData = {
          */
         expectedContentDigest?: string;
         /**
-         * Modular completion fields named by requiredResultFields. Never secrets.
+         * Modular completion fields named by requiredResultFields, one entry per field. Never secrets.
          */
-        result?: {
-            [key: string]: unknown;
-        };
+        result?: Array<SaveWorkItemRequestWorkItemResultEntry>;
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -31040,6 +31385,32 @@ export type SaveWorkItemErrors = {
      * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
      */
     503: V3ToolErrorResponse;
+};
+
+export type SaveWorkItemRequestModularDailyDelivery = {
+    /**
+     * Calendar day, YYYY-MM-DD.
+     */
+    date: string;
+    /**
+     * Impressions delivered that day.
+     */
+    impressions: number;
+    /**
+     * Spend that day, in the report currency.
+     */
+    spend: number;
+};
+
+export type SaveWorkItemRequestWorkItemResultEntry = {
+    /**
+     * A key from the work item `requiredResultFields`, for example `upstream.campaignId`.
+     */
+    key: string;
+    /**
+     * A string or number, a list of strings, or for `reporting.dailyBreakdown` the daily delivery rows.
+     */
+    value: string | number | Array<string | SaveWorkItemRequestModularDailyDelivery>;
 };
 
 export type SaveWorkItemResponse = SaveWorkItemResponses[keyof SaveWorkItemResponses];
@@ -31298,11 +31669,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -31776,11 +32145,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -32322,11 +32689,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -32796,11 +33161,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -33267,11 +33630,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -33741,11 +34102,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -34215,11 +34574,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -34819,11 +35176,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -35297,11 +35652,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -35774,11 +36127,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -36252,11 +36603,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -36730,11 +37079,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -37208,11 +37555,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -37582,6 +37927,17 @@ export type SearchRequestCreativeRole = 'evergreen' | 'reference';
  */
 export type SearchRequestCreativeSource = 'uploaded' | 'generated' | 'connected';
 
+export type SearchRequestLabelFilterEntry = {
+    /**
+     * Key of a dimension, such as audience or vertical.
+     */
+    dimension: string;
+    /**
+     * Value slugs; ["unlabeled"] alone matches items with none.
+     */
+    values: Array<string>;
+};
+
 export type SearchResponse = SearchResponses[keyof SearchResponses];
 
 export type SearchResponses = {
@@ -37626,6 +37982,11 @@ export type SearchResponses = {
         };
         error: null;
     };
+};
+
+export type SearchSuccessLabelEntry = {
+    dimension: string;
+    values: Array<string>;
 };
 
 export type SearchSuccessSearchAccountPageOutput = {
@@ -39370,9 +39731,7 @@ export type SearchSuccessV3CampaignListItem = {
         };
         createdAt: string;
         updatedAt: string;
-        labels?: {
-            [key: string]: Array<string>;
-        };
+        labels?: Array<SearchSuccessLabelEntry>;
         budget?: SearchSuccessV3CampaignListBudget;
         channelGroups?: Array<SearchSuccessV3CampaignListChannelGroup>;
         [key: string]: unknown;
