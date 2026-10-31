@@ -2,7 +2,7 @@
   "schemaVersion": "2.0",
   "contract": "deterministic-v3-tool-v1",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.8.0",
+  "skillVersion": "1.9.0",
   "endpoint": "/mcp/v3",
   "modelPolicy": "deterministic-no-model",
   "analytics": {
@@ -52,7 +52,7 @@
         {
           "name": "createIdempotencyKey",
           "source": "server_template",
-          "template": "set-up-a-campaign-1.8.0-{serverRunId}",
+          "template": "set-up-a-campaign-1.9.0-{serverRunId}",
           "maxLength": 255
         },
         {
