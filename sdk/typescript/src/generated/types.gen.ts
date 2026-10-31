@@ -876,12 +876,6 @@ export type GetData = {
          */
         buyerAccountId?: number;
         /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
-        /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
         memberAccountId?: number;
@@ -1063,13 +1057,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -1114,12 +1112,6 @@ export type GetData = {
          */
         buyerAccountId?: number;
         /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
-        /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
         memberAccountId?: number;
@@ -1301,13 +1293,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -1352,12 +1348,6 @@ export type GetData = {
          */
         buyerAccountId?: number;
         /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
-        /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
         memberAccountId?: number;
@@ -1539,13 +1529,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -1585,12 +1579,6 @@ export type GetData = {
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
-        /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
         /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
@@ -1773,13 +1761,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -1821,12 +1813,6 @@ export type GetData = {
          */
         buyerAccountId?: number;
         /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
-        /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
         memberAccountId?: number;
@@ -2008,13 +1994,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -2060,12 +2050,6 @@ export type GetData = {
          */
         buyerAccountId?: number;
         /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
-        /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
         memberAccountId?: number;
@@ -2247,13 +2231,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -2297,12 +2285,6 @@ export type GetData = {
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
-        /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
         /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
@@ -2477,13 +2459,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -2529,12 +2515,6 @@ export type GetData = {
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
-        /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
         /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
@@ -2713,13 +2693,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -2764,12 +2748,6 @@ export type GetData = {
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
-        /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
         /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
@@ -2948,13 +2926,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -3000,12 +2982,6 @@ export type GetData = {
          */
         buyerAccountId?: number;
         /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
-        /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
         memberAccountId?: number;
@@ -3183,13 +3159,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -3235,12 +3215,6 @@ export type GetData = {
          */
         buyerAccountId?: number;
         /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
-        /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
         memberAccountId?: number;
@@ -3418,13 +3392,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -3469,12 +3447,6 @@ export type GetData = {
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
-        /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
         /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
@@ -3653,13 +3625,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -3704,12 +3680,6 @@ export type GetData = {
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
-        /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
         /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
@@ -3888,13 +3858,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -3940,12 +3914,6 @@ export type GetData = {
          */
         buyerAccountId?: number;
         /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
-        /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
         memberAccountId?: number;
@@ -4127,13 +4095,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -4178,12 +4150,6 @@ export type GetData = {
          */
         buyerAccountId?: number;
         /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
-        /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
         memberAccountId?: number;
@@ -4365,13 +4331,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -4416,12 +4386,6 @@ export type GetData = {
          */
         buyerAccountId?: number;
         /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
-        /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
         memberAccountId?: number;
@@ -4603,13 +4567,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -4654,12 +4622,6 @@ export type GetData = {
          */
         buyerAccountId?: number;
         /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
-        /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
         memberAccountId?: number;
@@ -4841,13 +4803,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -4891,12 +4857,6 @@ export type GetData = {
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
-        /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
         /**
          * Required for kind member: the account the member belongs to, this account or a direct child.
          */
@@ -5079,13 +5039,17 @@ export type GetData = {
          */
         connectionTarget?: {
             /**
-             * Whether you expect a seller or a creative engine.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * The id of the seller or creative engine you expect.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
-            id: string;
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
         };
         /**
          * For kind rfp_turn: where to start the next page of feedback, 20 per page.
@@ -5135,7 +5099,7 @@ export type GetDeliveryData = {
         /**
          * Metrics; omit for report defaults.
          */
-        metrics?: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'conversions' | 'leads' | 'videoCompletions' | 'conversion_value' | 'ecpm' | 'cpc' | 'ctr' | 'completion_rate' | 'cpa' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
+        metrics?: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
         /**
          * Group-by dimensions; campaign delivery also accepts labels.<dimension_key>. Omit for leaf grain.
          */
@@ -5181,12 +5145,6 @@ export type GetDeliveryData = {
              * Margin: filter to one buyer Account id.
              */
             buyerAccountId?: number;
-            /**
-             * Deprecated: send buyerAccountId instead.
-             *
-             * @deprecated
-             */
-            buyerCustomerId?: number;
             /**
              * Filter to one media buy.
              */
@@ -5294,6 +5252,10 @@ export type GetDeliveryResponses = {
             period?: GetDeliverySuccessPeriod;
             rows: GetDeliverySuccessRows;
             totals?: GetDeliverySuccessTotals;
+            /**
+             * Totals per finality class, when classes differ.
+             */
+            totalsByFinality?: GetDeliverySuccessTotalsByFinality;
             page: GetDeliverySuccessPage;
             semantics: GetDeliverySuccessSemantics;
             /**
@@ -5301,7 +5263,7 @@ export type GetDeliveryResponses = {
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
-             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             * Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.
              */
             coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
             /**
@@ -5318,6 +5280,10 @@ export type GetDeliveryResponses = {
             period?: GetDeliverySuccessPeriod;
             rows: GetDeliverySuccessRows;
             totals?: GetDeliverySuccessTotals;
+            /**
+             * Totals per finality class, when classes differ.
+             */
+            totalsByFinality?: GetDeliverySuccessTotalsByFinality;
             page: GetDeliverySuccessPage;
             semantics: GetDeliverySuccessSemantics;
             /**
@@ -5325,7 +5291,7 @@ export type GetDeliveryResponses = {
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
-             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             * Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.
              */
             coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
             /**
@@ -5342,6 +5308,10 @@ export type GetDeliveryResponses = {
             period?: GetDeliverySuccessPeriod;
             rows: GetDeliverySuccessRows;
             totals?: GetDeliverySuccessTotals;
+            /**
+             * Totals per finality class, when classes differ.
+             */
+            totalsByFinality?: GetDeliverySuccessTotalsByFinality;
             page: GetDeliverySuccessPage;
             semantics: GetDeliverySuccessSemantics;
             /**
@@ -5349,7 +5319,7 @@ export type GetDeliveryResponses = {
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
-             * Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.
+             * Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.
              */
             coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
             /**
@@ -5599,6 +5569,7 @@ export type GetDeliveryResponses = {
             period?: never;
             rows?: never;
             totals?: never;
+            totalsByFinality?: never;
             page?: never;
             goalProgress?: never;
             coverage?: never;
@@ -6115,7 +6086,7 @@ export type GetDeliverySuccessPeriod = {
 };
 
 export type GetDeliverySuccessQuery = {
-    metrics: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'conversions' | 'leads' | 'videoCompletions' | 'conversion_value' | 'ecpm' | 'cpc' | 'ctr' | 'completion_rate' | 'cpa' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
+    metrics: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
     dimensions: Array<string>;
     range?: {
         startDate?: string;
@@ -6143,12 +6114,6 @@ export type GetDeliverySuccessQuery = {
          * Margin: filter to one buyer Account id.
          */
         buyerAccountId?: number;
-        /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
         /**
          * Filter to one media buy.
          */
@@ -6208,7 +6173,7 @@ export type GetDeliverySuccessRowsItemFinality = {
 export type GetDeliverySuccessRowsItemMetricsValue = {
     value: number | boolean | null;
     status: 'available' | 'unavailable';
-    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable';
+    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed';
 };
 
 export type GetDeliverySuccessRowsItemSourceOperation = 'get_seller_reporting_metrics' | 'get_buyer_reporting_metrics' | 'get_seller_margin_reporting';
@@ -6231,16 +6196,60 @@ export type GetDeliverySuccessSynthetic = {
 };
 
 export type GetDeliverySuccessTotals = {
-    rowsIncluded: number;
-    currency: string | null;
-    metrics: {
-        [key: string]: GetDeliverySuccessTotalsMetricsValue;
-    };
-    denomination: 'net' | 'gross_buyer';
-    dataThrough: string | null;
+    rowsIncluded: GetDeliverySuccessTotalsRowsIncluded;
+    currency: GetDeliverySuccessTotalsCurrency;
+    metrics: GetDeliverySuccessTotalsMetrics;
+    denomination: GetDeliverySuccessTotalsDenomination;
+    dataThrough: GetDeliverySuccessTotalsDataThrough;
     finality: GetDeliverySuccessTotalsFinality;
-    billingEligibility: 'not_evaluated';
+    billingEligibility: GetDeliverySuccessTotalsBillingEligibility;
 };
+
+export type GetDeliverySuccessTotalsBillingEligibility = 'not_evaluated';
+
+export type GetDeliverySuccessTotalsByFinality = Array<{
+    rowsIncluded: GetDeliverySuccessTotalsByFinalityItemRowsIncluded;
+    currency: GetDeliverySuccessTotalsByFinalityItemCurrency;
+    metrics: GetDeliverySuccessTotalsByFinalityItemMetrics;
+    denomination: GetDeliverySuccessTotalsByFinalityItemDenomination;
+    dataThrough: GetDeliverySuccessTotalsByFinalityItemDataThrough;
+    finality: GetDeliverySuccessTotalsByFinalityItemFinality;
+    billingEligibility: GetDeliverySuccessTotalsByFinalityItemBillingEligibility;
+}>;
+
+export type GetDeliverySuccessTotalsByFinalityItemBillingEligibility = 'not_evaluated';
+
+export type GetDeliverySuccessTotalsByFinalityItemCurrency = string | null;
+
+export type GetDeliverySuccessTotalsByFinalityItemDataThrough = string | null;
+
+export type GetDeliverySuccessTotalsByFinalityItemDenomination = 'net' | 'gross_buyer';
+
+export type GetDeliverySuccessTotalsByFinalityItemFinality = {
+    status: 'available' | 'unavailable' | 'not_applicable';
+    class: 'SNAPSHOT' | 'OFFICIAL' | null;
+    revision: GetDeliverySuccessDeliveryRevision | null;
+    reason?: 'revision_evidence_unavailable' | 'revision_evidence_mixed' | 'revision_unreadable' | 'cumulative_margin_ledger';
+    supportedClasses?: Array<'SNAPSHOT' | 'OFFICIAL'>;
+};
+
+export type GetDeliverySuccessTotalsByFinalityItemMetrics = {
+    [key: string]: GetDeliverySuccessTotalsByFinalityItemMetricsValue;
+};
+
+export type GetDeliverySuccessTotalsByFinalityItemMetricsValue = {
+    value: number | boolean | null;
+    status: 'available' | 'unavailable';
+    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed';
+};
+
+export type GetDeliverySuccessTotalsByFinalityItemRowsIncluded = number;
+
+export type GetDeliverySuccessTotalsCurrency = string | null;
+
+export type GetDeliverySuccessTotalsDataThrough = string | null;
+
+export type GetDeliverySuccessTotalsDenomination = 'net' | 'gross_buyer';
 
 export type GetDeliverySuccessTotalsFinality = {
     status: 'available' | 'unavailable' | 'not_applicable';
@@ -6250,11 +6259,17 @@ export type GetDeliverySuccessTotalsFinality = {
     supportedClasses?: Array<'SNAPSHOT' | 'OFFICIAL'>;
 };
 
+export type GetDeliverySuccessTotalsMetrics = {
+    [key: string]: GetDeliverySuccessTotalsMetricsValue;
+};
+
 export type GetDeliverySuccessTotalsMetricsValue = {
     value: number | boolean | null;
     status: 'available' | 'unavailable';
-    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable';
+    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed';
 };
+
+export type GetDeliverySuccessTotalsRowsIncluded = number;
 
 /**
  * Display label for the measurement vendor beside it. Names are display only; the vendor domain stays the identifier.
@@ -6749,6 +6764,7 @@ export type GetResponses = {
                 };
                 nextAction?: 'retry' | 'correct' | 'contactSupport';
                 blockedReason?: string;
+                failedReason?: string;
                 closedReason?: string;
             }>;
             operationDetailsTruncated?: true;
@@ -7065,13 +7081,7 @@ export type GetSellerReportingReceiptsData = {
         /**
          * Buyer Account id that owns the media buy.
          */
-        buyerAccountId?: number;
-        /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
+        buyerAccountId: number;
         /**
          * Apostra accountId this call runs in, from get_status.
          */
@@ -7155,7 +7165,6 @@ export type GetSellerReportingReceiptsResponses = {
         data: {
             params: {
                 mediaBuyId: string;
-                buyerCustomerId?: GetSellerReportingReceiptsSuccessParamsBuyerCustomerId;
                 buyerAccountId: GetSellerReportingReceiptsSuccessParamsBuyerAccountId;
             };
             receipts: Array<{
@@ -7298,7 +7307,8 @@ export type GetSellerReportingReceiptsSuccessComputedDailyTotalsItemViews = stri
 
 export type GetSellerReportingReceiptsSuccessParamsBuyerAccountId = number;
 
-export type GetSellerReportingReceiptsSuccessParamsBuyerCustomerId = number;
+/** @deprecated use GetSellerReportingReceiptsSuccessParamsBuyerAccountId */
+export type GetSellerReportingReceiptsSuccessParamsBuyerCustomerId = GetSellerReportingReceiptsSuccessParamsBuyerAccountId;
 
 export type GetSellerReportingReceiptsSuccessReceiptsItemAcceptanceReason = {
     code: 'ingestion_failed' | 'processing_failed' | 'processing_partial_success' | 'polling_scheduled' | 'polling_delayed' | 'unrecognised_processing_status';
@@ -7443,9 +7453,8 @@ export type GetStatusResponses = {
                 needsConnection: number;
                 blocked: number;
                 readyDestinations: Array<{
-                    sellerId: string;
                     /**
-                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
                      */
                     sellerAccountId?: number;
                     name: string;
@@ -7568,6 +7577,10 @@ export type GetStatusResponses = {
                         [key: string]: unknown;
                     } | null;
                     /**
+                     * Where certification stands; null for a kind with no certification.
+                     */
+                    certificationStage?: 'not_started' | 'testing' | 'waiting_on_you' | 'waiting_on_apostra' | 'waiting_on_seller' | 'certified' | null;
+                    /**
                      * Independent facts about the agent; a key that does not apply to its kind is null.
                      */
                     states: {
@@ -7611,6 +7624,16 @@ export type GetStatusResponses = {
                     endpointControl?: 'unverified' | 'verified';
                 }>;
             };
+            /**
+             * The page a Developer account lands on.
+             */
+            landing?: {
+                page: 'home';
+                agentId?: never;
+            } | {
+                page: 'agent';
+                agentId: string;
+            };
             resources?: Array<{
                 id: string;
                 title: string;
@@ -7648,7 +7671,7 @@ export type GetSuccessObjectInvoicesItemPeriodEnd = string;
 
 export type GetSuccessObjectInvoicesItemPeriodStart = string;
 
-export type GetSuccessObjectOperationsByDestinationItemSellerAccountId = string;
+export type GetSuccessObjectOperationsByDestinationItemSellerAccountId = number;
 
 export type GetSuccessObjectOperationsByDestinationItemSellerName = string;
 
@@ -7903,7 +7926,7 @@ export type GetSuccessObjectPlanUpcomingTermStart = string;
 
 export type GetSuccessObjectStandingHoldsItemCreatedAt = string;
 
-export type GetSuccessOperationDetailsItemDestinationSellerAccountId = string;
+export type GetSuccessOperationDetailsItemDestinationSellerAccountId = number;
 
 export type GetSuccessOperationDetailsItemDestinationSellerName = string;
 
@@ -9134,12 +9157,6 @@ export type OpenApprovalsData = {
          */
         buyerAccountId?: number;
         /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
-        /**
          * Legacy creative id to focus only when exactly one loaded review version matches. Prefer reviewRef.
          */
         creativeId?: string;
@@ -9236,7 +9253,7 @@ export type OpenApprovalsResponses = {
                 /**
                  * Optional buyer customer id that disambiguates a buyer-scoped media-buy id.
                  */
-                buyerCustomerId?: number;
+                buyerAccountId?: number;
                 /**
                  * Legacy creative id to focus only when exactly one loaded review version matches. Prefer reviewRef.
                  */
@@ -9245,10 +9262,6 @@ export type OpenApprovalsResponses = {
                  * Exact reviewRef from the approval queue; focuses one creative review version.
                  */
                 reviewRef?: string;
-                /**
-                 * The buyer Account id; the same number as buyerCustomerId.
-                 */
-                buyerAccountId?: number;
             };
         };
         error: null;
@@ -9419,10 +9432,6 @@ export type OpenCampaignReceiptResponses = {
                      * Media buy name.
                      */
                     name: string;
-                    /**
-                     * Seller the buy is placed with.
-                     */
-                    sellerId?: string;
                     /**
                      * The seller Account id; not the Storefront id beside it.
                      */
@@ -9715,151 +9724,15 @@ export type OpenCampaignsPageSuccessPageHumanHandoffUnavailable = {
     instruction: 'This Page has no supported browser URL. Use an MCP UI host for this Page. Do not construct a platform URL or treat this result as completion.';
 };
 
-export type OpenConnectionsPageData = {
-    body: {
-        advertiserId?: unknown;
-    } & {
-        sellerId?: unknown;
-    } & {
-        connectionId?: unknown;
-    } & {
-        accountId?: unknown;
-    } & {
-        /**
-         * Canonical advertiser ID; omit for account scope.
-         */
-        advertiserId?: string;
-        /**
-         * The seller's Account id. Not the seller object's id or any sellerId, which are different numbers.
-         */
-        sellerAccountId?: number;
-        /**
-         * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads.
-         *
-         * @deprecated
-         */
-        sellerId?: string;
-        /**
-         * Open seller setup; requires sellerId and user confirmation.
-         */
-        connectionAction?: 'connect';
-        /**
-         * Connection ID to open.
-         */
-        connectionId?: string;
-        /**
-         * Its accounts[].id; opens event sources and audiences.
-         */
-        connectionAccountId?: string;
-        /**
-         * Apostra accountId this call runs in, from get_status.
-         */
-        accountId?: number | string;
-    };
-    headers?: {
-        /**
-         * Select an accessible customer account for this request. An explicit value must be a positive integer and must equal the account resolved by authentication.
-         */
-        'X-SCOPE3-CUSTOMER-ID'?: string;
-    };
-    path?: never;
-    query?: never;
-    url: '/tools/open_connections_page';
-};
+export type OpenConnectionsPageData = OpenMediaPartnersPageData;
 
-export type OpenConnectionsPageError = OpenConnectionsPageErrors[keyof OpenConnectionsPageErrors];
+export type OpenConnectionsPageError = OpenMediaPartnersPageError;
 
-export type OpenConnectionsPageErrors = {
-    /**
-     * Invalid operation input
-     */
-    400: V3ToolErrorResponse;
-    /**
-     * Missing or invalid API credential
-     */
-    401: V3ToolErrorResponse;
-    /**
-     * Account credit limit exceeded
-     */
-    402: V3ToolErrorResponse;
-    /**
-     * The credential or account cannot perform this operation
-     */
-    403: V3ToolErrorResponse;
-    /**
-     * Requested resource not found
-     */
-    404: V3ToolErrorResponse;
-    /**
-     * Operation conflicts with current resource state
-     */
-    409: V3ToolErrorResponse;
-    /**
-     * Request body exceeds the accepted size
-     */
-    413: V3ToolErrorResponse;
-    /**
-     * Request body encoding or character set is unsupported
-     */
-    415: V3ToolErrorResponse;
-    /**
-     * Operation cannot process the supplied input
-     */
-    422: V3ToolErrorResponse;
-    /**
-     * Request rate limit exceeded
-     */
-    429: V3ToolErrorResponse;
-    /**
-     * Unexpected operation failure
-     */
-    500: V3ToolErrorResponse;
-    /**
-     * Recognised operation behaviour is not implemented
-     */
-    501: V3ToolErrorResponse;
-    /**
-     * A required service is unavailable
-     */
-    503: V3ToolErrorResponse;
-};
+export type OpenConnectionsPageErrors = OpenMediaPartnersPageErrors;
 
-export type OpenConnectionsPageResponse = OpenConnectionsPageResponses[keyof OpenConnectionsPageResponses];
+export type OpenConnectionsPageResponse = OpenMediaPartnersPageResponse;
 
-export type OpenConnectionsPageResponses = {
-    /**
-     * Typed operation result
-     */
-    200: {
-        data: {
-            /**
-             * Opened advertiser ID when advertiser-scoped.
-             */
-            advertiserId?: string;
-            /**
-             * Opened seller ID when seller-scoped.
-             */
-            sellerId?: string;
-            /**
-             * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
-             */
-            sellerAccountId?: number;
-            /**
-             * Requested seller action when supplied.
-             */
-            connectionAction?: 'connect';
-            /**
-             * Opened connection ID.
-             */
-            connectionId?: string;
-            /**
-             * Opened account ID.
-             */
-            accountId?: string;
-        };
-        error: null;
-    };
-};
+export type OpenConnectionsPageResponses = OpenMediaPartnersPageResponses;
 
 export type OpenCreativeEnginesPageData = {
     body: {
@@ -9868,15 +9741,9 @@ export type OpenCreativeEnginesPageData = {
         connectionId?: unknown;
     } & {
         /**
-         * The creative engine's Account id. Not the engine object's id or any engineId, which are different numbers.
+         * The creative engine's Account id. Not the engine object's id, which is a different number.
          */
         engineAccountId?: number;
-        /**
-         * Deprecated: send engineAccountId, from the engineAccountId field on creative engine reads. Still focuses the engine with this id.
-         *
-         * @deprecated
-         */
-        engineId?: string;
         /**
          * Optional creative-engine connection focus hint.
          */
@@ -9966,7 +9833,6 @@ export type OpenCreativeEnginesPageResponses = {
      */
     200: {
         data: {
-            engineId?: string;
             /**
              * The creative engine Account id: the Account that owns this engine. Send it as engineAccountId.
              */
@@ -10243,13 +10109,7 @@ export type OpenMediaBuysPageData = {
         /**
          * Seller account mapping to focus: the id of a seller account mapping row, not a seller Account id.
          */
-        sellerAccountMappingId?: OpenMediaBuysPageRequestSellerAccountMappingId;
-        /**
-         * Being retired: send sellerAccountMappingId. This holds a seller account mapping id, not a seller Account id.
-         *
-         * @deprecated
-         */
-        sellerAccountId?: OpenMediaBuysPageRequestSellerAccountId;
+        sellerAccountMappingId?: string;
         /**
          * Optional relationship view to open.
          */
@@ -10327,9 +10187,11 @@ export type OpenMediaBuysPageErrors = {
     503: V3ToolErrorResponse;
 };
 
-export type OpenMediaBuysPageRequestSellerAccountId = string;
+/** @deprecated use SaveConnectionRequestAdvertiserMappingLinkId */
+export type OpenMediaBuysPageRequestSellerAccountId = SaveConnectionRequestAdvertiserMappingLinkId;
 
-export type OpenMediaBuysPageRequestSellerAccountMappingId = string;
+/** @deprecated use SaveConnectionRequestAdvertiserMappingLinkId */
+export type OpenMediaBuysPageRequestSellerAccountMappingId = SaveConnectionRequestAdvertiserMappingLinkId;
 
 export type OpenMediaBuysPageResponse = OpenMediaBuysPageResponses[keyof OpenMediaBuysPageResponses];
 
@@ -10341,8 +10203,7 @@ export type OpenMediaBuysPageResponses = {
         data: {
             params: {
                 accountRelationshipId?: string;
-                sellerAccountMappingId?: OpenMediaBuysPageSuccessParamsSellerAccountMappingId;
-                sellerAccountId?: OpenMediaBuysPageSuccessParamsSellerAccountId;
+                sellerAccountMappingId?: string;
                 view?: 'media_buys' | 'creatives' | 'delivery';
             };
         };
@@ -10350,15 +10211,15 @@ export type OpenMediaBuysPageResponses = {
     };
 };
 
-export type OpenMediaBuysPageSuccessParamsSellerAccountId = string;
+/** @deprecated use SaveConnectionRequestAdvertiserMappingLinkId */
+export type OpenMediaBuysPageSuccessParamsSellerAccountId = SaveConnectionRequestAdvertiserMappingLinkId;
 
-export type OpenMediaBuysPageSuccessParamsSellerAccountMappingId = string;
+/** @deprecated use SaveConnectionRequestAdvertiserMappingLinkId */
+export type OpenMediaBuysPageSuccessParamsSellerAccountMappingId = SaveConnectionRequestAdvertiserMappingLinkId;
 
 export type OpenMediaPartnersPageData = {
     body: {
         advertiserId?: unknown;
-    } & {
-        sellerId?: unknown;
     } & {
         connectionId?: unknown;
     } & {
@@ -10369,17 +10230,11 @@ export type OpenMediaPartnersPageData = {
          */
         advertiserId?: string;
         /**
-         * The seller's Account id. Not the seller object's id or any sellerId, which are different numbers.
+         * The seller's Account id. Not the seller object's id, which is a different number.
          */
         sellerAccountId?: number;
         /**
-         * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads.
-         *
-         * @deprecated
-         */
-        sellerId?: string;
-        /**
-         * Open seller setup; requires sellerId and user confirmation.
+         * Open seller setup; requires sellerAccountId and user confirmation.
          */
         connectionAction?: 'connect';
         /**
@@ -10475,10 +10330,6 @@ export type OpenMediaPartnersPageResponses = {
              * Opened advertiser ID when advertiser-scoped.
              */
             advertiserId?: string;
-            /**
-             * Opened seller ID when seller-scoped.
-             */
-            sellerId?: string;
             /**
              * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
              */
@@ -11480,29 +11331,17 @@ export type RequestProposalsData = {
          */
         expectedCampaignRevision: number;
         /**
-         * Optional seller Account ids, not seller object ids or sellerIds, which are different numbers. Intersect the campaign seller list. Omit for its list. To contact all eligible sellers, omit sellerIds and sellerAccountIds and set confirmBroadcast true.
+         * Optional seller Account ids, not seller object ids, which are a different number. Intersect the campaign seller list. Omit for its list. To contact all eligible sellers, omit sellerAccountIds and set confirmBroadcast true.
          */
         sellerAccountIds?: Array<number>;
         /**
-         * Deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads. Optional seller IDs; intersect the campaign seller list. Omit for its list. To contact all eligible sellers, omit sellerIds and set confirmBroadcast true.
-         *
-         * @deprecated
-         */
-        sellerIds?: Array<string>;
-        /**
-         * Required as true only when neither sellerIds nor a campaign seller list applies, before contacting all eligible sellers. Ignored when a selector applies.
+         * Required as true only when neither sellerAccountIds nor a campaign seller list applies, before contacting all eligible sellers. Ignored when a selector applies.
          */
         confirmBroadcast?: boolean;
         /**
-         * The seller's Account id, not a seller object id or expectedSellerId, which are different numbers. Optional fail-closed seller check; never grants access. Requires matching current server authority.
+         * The seller's Account id, not a seller object id, which is a different number. Optional fail-closed seller check; never grants access. Requires matching current server authority.
          */
         expectedSellerAccountId?: number;
-        /**
-         * Deprecated: send expectedSellerAccountId, from the sellerAccountId field on seller reads. Optional fail-closed seller check; never grants access. Requires matching current server authority.
-         *
-         * @deprecated
-         */
-        expectedSellerId?: string;
         /**
          * Evaluation instructions, inline or by saved policyId. Not yet applied to results.
          */
@@ -11634,9 +11473,8 @@ export type RequestProposalsResponses = {
             executionId: string;
             status: 'running' | 'complete' | 'partial' | 'failed';
             perSeller: Array<{
-                sellerId: string;
                 /**
-                 * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                 * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
                  */
                 sellerAccountId?: RequestProposalsSuccessPerSellerItemSellerAccountId;
                 sellerName?: string;
@@ -11647,9 +11485,8 @@ export type RequestProposalsResponses = {
                     productId: string;
                     name: string;
                     description?: string;
-                    storefrontId: string;
                     /**
-                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
                      */
                     sellerAccountId?: RequestProposalsSuccessPerSellerItemProductsItemSellerAccountId;
                     salesAgentId: string;
@@ -11764,9 +11601,8 @@ export type RequestProposalsResponses = {
             };
             appliedCohort: {
                 source: 'requested' | 'campaign' | 'authorized' | 'broadcast';
-                sellerIds: Array<string>;
                 /**
-                 * The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.
+                 * The seller Account ids of the sellers in the list. Send them as sellerAccountIds.
                  */
                 sellerAccountIds?: Array<number>;
                 sellerIdsTotal: number;
@@ -11777,9 +11613,8 @@ export type RequestProposalsResponses = {
                 coveredDomains?: number;
                 missingProperties: Array<{
                     domain: string;
-                    sellerId: string;
                     /**
-                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
                      */
                     sellerAccountId?: RequestProposalsSuccessInclusionPropertyListMissingPropertiesItemSellerAccountId;
                     reason: 'not_in_seller_scope' | 'seller_reported_no_match' | 'seller_unsupported_filter';
@@ -11788,9 +11623,8 @@ export type RequestProposalsResponses = {
                 missingPropertiesTruncated?: boolean;
                 incompleteProperties?: Array<{
                     domain: string;
-                    sellerId: string;
                     /**
-                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
                      */
                     sellerAccountId?: RequestProposalsSuccessInclusionPropertyListIncompletePropertiesItemSellerAccountId;
                 }>;
@@ -11807,9 +11641,8 @@ export type RequestProposalsResponses = {
             };
             capabilityPage?: {
                 field: 'demographicTargeting' | 'overlaySupport';
-                sellerId: string;
                 /**
-                 * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                 * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
                  */
                 sellerAccountId?: RequestProposalsSuccessCapabilityPageSellerAccountId;
                 productId: string;
@@ -11828,9 +11661,8 @@ export type RequestProposalsResponses = {
                 unavailableReason?: string;
             };
             capabilityDescriptorPage?: {
-                sellerId: string;
                 /**
-                 * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                 * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
                  */
                 sellerAccountId?: RequestProposalsSuccessCapabilityDescriptorPageSellerAccountId;
                 productId: string;
@@ -11859,9 +11691,8 @@ export type RequestProposalsResponses = {
             skippedSellers?: {
                 requestedChannels: Array<string>;
                 sellers: Array<{
-                    sellerId: string;
                     /**
-                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
                      */
                     sellerAccountId?: RequestProposalsSuccessSkippedSellersSellersItemSellerAccountId;
                     sellerName?: string;
@@ -11957,13 +11788,7 @@ export type RequestSellerReportingUpdateData = {
         /**
          * Buyer Account id that owns the media buy.
          */
-        buyerAccountId?: number;
-        /**
-         * Deprecated: send buyerAccountId instead.
-         *
-         * @deprecated
-         */
-        buyerCustomerId?: number;
+        buyerAccountId: number;
         /**
          * Refresh current reporting or replay a bounded day range.
          */
@@ -12708,11 +12533,9 @@ export type SaveAdvertiserData = {
             }>;
         };
         /**
-         * Replace labels for each supplied dimension; [] clears.
+         * Replace labels per dimension; empty values clears.
          */
-        labels?: {
-            [key: string]: Array<string>;
-        };
+        labels?: Array<SaveAdvertiserRequestLabelWriteEntry>;
         /**
          * Advertiser-stated brand kit, voice rules, banned terms, disclaimers and pages. Save brandProfile in its own save_advertiser call with advertiserId. Available only in the V3 beta with Creative Engines access. `stated: null` clears stated values; `stated.statedAbsence` records that the advertiser confirmed it has no kit, voice or disclaimers.
          */
@@ -13528,6 +13351,17 @@ export type SaveAdvertiserRequestFootprintProposalBrandCountries = Array<string>
  */
 export type SaveAdvertiserRequestFootprintProposalChannels = Array<'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence'>;
 
+export type SaveAdvertiserRequestLabelWriteEntry = {
+    /**
+     * Key of a dimension, such as audience or vertical.
+     */
+    dimension: string;
+    /**
+     * Value slugs; [] clears.
+     */
+    values: Array<string>;
+};
+
 export type SaveAdvertiserResponse = SaveAdvertiserResponses[keyof SaveAdvertiserResponses];
 
 export type SaveAdvertiserResponses = {
@@ -13558,9 +13392,8 @@ export type SaveAdvertiserResponses = {
                     count: number;
                     sellers: Array<{
                         kind: 'storefront';
-                        storefrontId: string;
                         /**
-                         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
                          */
                         sellerAccountId?: number;
                         name?: string;
@@ -13568,7 +13401,6 @@ export type SaveAdvertiserResponses = {
                     } | {
                         kind: 'legacy_sales_agent';
                         salesAgentId: string;
-                        storefrontId?: never;
                         sellerAccountId?: never;
                         name?: never;
                     }>;
@@ -15774,15 +15606,9 @@ export type SaveCampaignData = {
          */
         confirmLaunch?: boolean;
         /**
-         * Seller Account ids, not seller object ids, sellerIds or platform IDs, which are different numbers. Unknown or inaccessible sellers are rejected and never omitted.
+         * Seller Account ids, not seller object ids or platform IDs, which are different numbers. Unknown or inaccessible sellers are rejected and never omitted.
          */
         sellerAccountIds?: Array<number>;
-        /**
-         * Deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads. Seller platform IDs returned by campaign reads, or numeric seller IDs. Unknown or inaccessible sellers are rejected and never omitted.
-         *
-         * @deprecated
-         */
-        sellerIds?: Array<string>;
         /**
          * All creatives on this campaign; replaces membership, a missing id detaches. Omit to keep.
          */
@@ -16413,11 +16239,9 @@ export type SaveCampaignData = {
             deleteMissing?: boolean;
         };
         /**
-         * Replace labels for each supplied dimension; [] clears.
+         * Replace labels per dimension; empty values clears.
          */
-        labels?: {
-            [key: string]: Array<string>;
-        };
+        labels?: Array<SaveCampaignRequestLabelWriteEntry>;
         /**
          * Campaign's own advertiser-owned include list; narrows the advertiser's. Null clears only this.
          */
@@ -16713,6 +16537,17 @@ export type SaveCampaignRequestCampaignVendorMetricGoal = {
 export type SaveCampaignRequestChannelGroupsItemChannelGroupId = string;
 
 export type SaveCampaignRequestChannelGroupsItemName = string;
+
+export type SaveCampaignRequestLabelWriteEntry = {
+    /**
+     * Key of a dimension, such as audience or vertical.
+     */
+    dimension: string;
+    /**
+     * Value slugs; [] clears.
+     */
+    values: Array<string>;
+};
 
 export type SaveCampaignRequestTargetingDaypartsItemStrength = 'required' | 'preferred';
 
@@ -17184,9 +17019,8 @@ export type SaveCampaignResponses = {
             membership?: SaveCampaignSuccessMembership;
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
-            skippedSellerIds?: SaveCampaignSuccessSkippedSellerIds;
             /**
-             * The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.
+             * The seller Account ids of the sellers in the list. Send them as sellerAccountIds.
              */
             skippedSellerAccountIds?: SaveCampaignSuccessSkippedSellerAccountIds;
             propertyListAttachment?: SaveCampaignSuccessPropertyListAttachment;
@@ -17196,7 +17030,7 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'created';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'created' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'created' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
@@ -17205,9 +17039,8 @@ export type SaveCampaignResponses = {
             membership?: SaveCampaignSuccessMembership;
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
-            skippedSellerIds?: SaveCampaignSuccessSkippedSellerIds;
             /**
-             * The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.
+             * The seller Account ids of the sellers in the list. Send them as sellerAccountIds.
              */
             skippedSellerAccountIds?: SaveCampaignSuccessSkippedSellerAccountIds;
             propertyListAttachment?: SaveCampaignSuccessPropertyListAttachment;
@@ -17217,7 +17050,7 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'updated';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'updated' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'updated' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
@@ -17226,9 +17059,8 @@ export type SaveCampaignResponses = {
             membership?: SaveCampaignSuccessMembership;
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
-            skippedSellerIds?: SaveCampaignSuccessSkippedSellerIds;
             /**
-             * The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.
+             * The seller Account ids of the sellers in the list. Send them as sellerAccountIds.
              */
             skippedSellerAccountIds?: SaveCampaignSuccessSkippedSellerAccountIds;
             propertyListAttachment?: SaveCampaignSuccessPropertyListAttachment;
@@ -17238,7 +17070,7 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'activated';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'activated' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'activated' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
@@ -17247,9 +17079,8 @@ export type SaveCampaignResponses = {
             membership?: SaveCampaignSuccessMembership;
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
-            skippedSellerIds?: SaveCampaignSuccessSkippedSellerIds;
             /**
-             * The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.
+             * The seller Account ids of the sellers in the list. Send them as sellerAccountIds.
              */
             skippedSellerAccountIds?: SaveCampaignSuccessSkippedSellerAccountIds;
             propertyListAttachment?: SaveCampaignSuccessPropertyListAttachment;
@@ -17259,7 +17090,7 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'restored';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'restored' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'restored' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
@@ -17268,9 +17099,8 @@ export type SaveCampaignResponses = {
             membership?: SaveCampaignSuccessMembership;
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
-            skippedSellerIds?: SaveCampaignSuccessSkippedSellerIds;
             /**
-             * The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.
+             * The seller Account ids of the sellers in the list. Send them as sellerAccountIds.
              */
             skippedSellerAccountIds?: SaveCampaignSuccessSkippedSellerAccountIds;
             propertyListAttachment?: SaveCampaignSuccessPropertyListAttachment;
@@ -17280,7 +17110,7 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'canceled';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'canceled' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'canceled' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
@@ -17289,9 +17119,8 @@ export type SaveCampaignResponses = {
             membership?: SaveCampaignSuccessMembership;
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
-            skippedSellerIds?: SaveCampaignSuccessSkippedSellerIds;
             /**
-             * The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.
+             * The seller Account ids of the sellers in the list. Send them as sellerAccountIds.
              */
             skippedSellerAccountIds?: SaveCampaignSuccessSkippedSellerAccountIds;
             propertyListAttachment?: SaveCampaignSuccessPropertyListAttachment;
@@ -17301,7 +17130,7 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'cancellation_requested';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerIds | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'cancellation_requested' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'cancellation_requested' | undefined;
         } | {
             serverTime?: string;
             action: 'pending_approval';
@@ -17657,7 +17486,8 @@ export type SaveCampaignSuccessServerTime = string;
 
 export type SaveCampaignSuccessSkippedSellerAccountIds = Array<number>;
 
-export type SaveCampaignSuccessSkippedSellerIds = Array<string>;
+/** @deprecated use SaveCampaignSuccessSkippedSellerAccountIds */
+export type SaveCampaignSuccessSkippedSellerIds = SaveCampaignSuccessSkippedSellerAccountIds;
 
 export type SaveCampaignSuccessValue = unknown;
 
@@ -17902,38 +17732,28 @@ export type SaveConnectionData = {
          */
         target?: {
             /**
-             * Service role.
+             * Whether the target is a seller or a creative engine.
              */
             kind: 'seller' | 'creative_engine';
             /**
-             * For kind seller: the seller's Account id. Not the seller object's id or target.id, which are different numbers.
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
              */
             sellerAccountId?: number;
             /**
-             * For kind creative_engine: the engine's Account id. Not the engine object's id or target.id, which are different numbers.
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
              */
             engineAccountId?: number;
-            /**
-             * Service ID. For kind seller, deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kind creative_engine, deprecated: send engineAccountId, from the engineAccountId field on creative engine reads.
-             */
-            id?: string;
         };
         /**
-         * The seller's Account id. Not the seller object's id or any sellerId, which are different numbers.
+         * The seller's Account id. Not the seller object's id, which is a different number.
          */
         sellerAccountId?: number;
-        /**
-         * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads.
-         *
-         * @deprecated
-         */
-        sellerId?: SaveConnectionRequestSellerId;
         /**
          * Connection ID.
          */
         connectionId?: SaveConnectionRequestConnectionId;
         /**
-         * Authorize target, sellerId, or an existing connectionId.
+         * Authorize target, sellerAccountId, or an existing connectionId.
          */
         authorization?: {
             /**
@@ -17942,7 +17762,7 @@ export type SaveConnectionData = {
             mode?: 'oauth' | 'bearer';
         };
         /**
-         * Seller selection; requires seller target or sellerId.
+         * Seller selection; requires seller target or sellerAccountId.
          */
         selection?: {
             /**
@@ -17951,7 +17771,7 @@ export type SaveConnectionData = {
             decision: SaveConnectionRequestBuyerStorefrontSelectionDecision;
         };
         /**
-         * Seller advertiser activation (limited rollout); requires seller target or sellerId.
+         * Seller advertiser activation (limited rollout); requires seller target or sellerAccountId.
          */
         advertiserActivation?: {
             /**
@@ -17970,7 +17790,7 @@ export type SaveConnectionData = {
             requestAccount?: true;
         };
         /**
-         * Seller billing; requires seller target or sellerId.
+         * Seller billing; requires seller target or sellerAccountId.
          */
         billing?: {
             /**
@@ -17994,7 +17814,7 @@ export type SaveConnectionData = {
             requestedParty?: never;
         };
         /**
-         * Seller buy/events/feeds policy; requires seller target or sellerId.
+         * Seller buy/events/feeds policy; requires seller target or sellerAccountId.
          */
         featurePolicy?: {
             /**
@@ -18181,7 +18001,8 @@ export type SaveConnectionRequestIdentitySelectionAccountId = string;
 
 export type SaveConnectionRequestSelectedAccountId = string;
 
-export type SaveConnectionRequestSellerId = string;
+/** @deprecated use SaveConnectionRequestConnectionId */
+export type SaveConnectionRequestSellerId = SaveConnectionRequestConnectionId;
 
 export type SaveConnectionResponse = SaveConnectionResponses[keyof SaveConnectionResponses];
 
@@ -19216,11 +19037,9 @@ export type SaveCreativeData = {
             [key: string]: unknown;
         }>;
         /**
-         * Dimension values; [] clears.
+         * Replace labels per dimension; empty values clears.
          */
-        labels?: {
-            [key: string]: Array<string>;
-        };
+        labels?: Array<SaveCreativeRequestLabelWriteEntry>;
         /**
          * true archives globally (frees the name); false is not supported.
          */
@@ -19327,6 +19146,17 @@ export type SaveCreativeRequestFormatKind = 'image' | 'html5' | 'display_tag' | 
 
 export type SaveCreativeRequestFormatParams = {
     [key: string]: unknown;
+};
+
+export type SaveCreativeRequestLabelWriteEntry = {
+    /**
+     * Key of a dimension, such as audience or vertical.
+     */
+    dimension: string;
+    /**
+     * Value slugs; [] clears.
+     */
+    values: Array<string>;
 };
 
 /**
@@ -19531,15 +19361,9 @@ export type SaveCreativeSessionData = {
          */
         engine?: {
             /**
-             * The engine's Account id, from the engineAccountId field on creative engine reads. Not the engine's engineId, which is a different number.
+             * The engine's Account id, from the engineAccountId field on creative engine reads. Not the engine's id, which is a different number.
              */
-            engineAccountId?: number;
-            /**
-             * Deprecated: send engineAccountId, from the engineAccountId field on creative engine reads. Saved Creative Engine identifier.
-             *
-             * @deprecated
-             */
-            engineId?: string;
+            engineAccountId: number;
             /**
              * Saved engine connection identifier.
              */
@@ -21450,11 +21274,7 @@ export type SaveEventSourceSuccessSavedEventSourceEntryName = string;
 export type SaveEventSourceSuccessSavedEventSourceEntrySellerAccounts = Array<{
     storefront: {
         /**
-         * Storefront ID.
-         */
-        id: string;
-        /**
-         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
          */
         sellerAccountId?: number;
         /**
@@ -21606,11 +21426,7 @@ export type SaveEventSourceSuccessUnchangedEventSourceEntryName = string;
 export type SaveEventSourceSuccessUnchangedEventSourceEntrySellerAccounts = Array<{
     storefront: {
         /**
-         * Storefront ID.
-         */
-        id: string;
-        /**
-         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
          */
         sellerAccountId?: number;
         /**
@@ -21752,11 +21568,7 @@ export type SaveEventSourceSuccessUpdatedEventSourceEntryName = string;
 export type SaveEventSourceSuccessUpdatedEventSourceEntrySellerAccounts = Array<{
     storefront: {
         /**
-         * Storefront ID.
-         */
-        id: string;
-        /**
-         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
          */
         sellerAccountId?: number;
         /**
@@ -21883,11 +21695,9 @@ export type SaveInventorySourceData = {
              */
             moduleInstanceId: string;
             /**
-             * Non-secret module configuration. Nested values are deep-merged by default.
+             * Non-secret module settings, one entry per field. Dotted keys name nested fields and are deep-merged by default.
              */
-            config: {
-                [key: string]: unknown;
-            };
+            config: Array<SaveInventorySourceRequestModuleConfigEntry>;
             /**
              * Deep-merge by default; false replaces seller-writable configuration.
              */
@@ -21985,6 +21795,17 @@ export type SaveInventorySourceErrors = {
      * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
      */
     503: V3ToolErrorResponse;
+};
+
+export type SaveInventorySourceRequestModuleConfigEntry = {
+    /**
+     * Dotted field key from the module contract, for example `cadent.endpointUrl`.
+     */
+    key: string;
+    /**
+     * A string, number or boolean setting.
+     */
+    value: string | number | boolean;
 };
 
 export type SaveInventorySourceResponse = SaveInventorySourceResponses[keyof SaveInventorySourceResponses];
@@ -23344,11 +23165,9 @@ export type SaveMaterialData = {
             buyerScope?: never;
         };
         /**
-         * Replace labels for each supplied dimension; [] clears.
+         * Replace labels per dimension; empty values clears.
          */
-        labels?: {
-            [key: string]: Array<string>;
-        };
+        labels?: Array<SaveMaterialRequestLabelWriteEntry>;
         /**
          * true archives the Material; false restores it. Send it alone with materialId.
          */
@@ -23469,6 +23288,56 @@ export type SaveMaterialErrors = {
 /** @deprecated use SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrectionCorrectedContentSourceTextDigest */
 export type SaveMaterialRequestDecisionCorrectionCorrectedContentSourceTextDigest = SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrectionCorrectedContentSourceTextDigest;
 
+export type SaveMaterialRequestLabelWriteEntry = {
+    /**
+     * Key of a dimension, such as audience or vertical.
+     */
+    dimension: string;
+    /**
+     * Value slugs; [] clears.
+     */
+    values: Array<string>;
+};
+
+/**
+ * How completely each facet was extracted. Leave out a facet that is not known.
+ */
+export type SaveMaterialRequestMaterialExtractionCompleteness = {
+    /**
+     * Extraction of text.
+     */
+    text?: SaveMaterialRequestMaterialFacetCompleteness;
+    /**
+     * Extraction of structure.
+     */
+    structure?: SaveMaterialRequestMaterialFacetCompleteness;
+    /**
+     * Extraction of tables.
+     */
+    tables?: SaveMaterialRequestMaterialFacetCompleteness;
+    /**
+     * Extraction of visuals.
+     */
+    visuals?: SaveMaterialRequestMaterialFacetCompleteness;
+    /**
+     * Extraction of styles.
+     */
+    styles?: SaveMaterialRequestMaterialFacetCompleteness;
+};
+
+export type SaveMaterialRequestMaterialFacetCompleteness = 'complete' | 'degraded' | 'unsupported' | 'failed';
+
+export type SaveMaterialRequestMaterialProvenanceEntry = {
+    /**
+     * What the parser recorded, e.g. `parser` or `page`.
+     */
+    key: string;
+    /**
+     * What it recorded.
+     */
+    value: string;
+};
+
 export type SaveMaterialRequestMetadataAdvertiserRef = string;
 
 export type SaveMaterialRequestMetadataBuyerScopeBrandDomain = string;
@@ -23529,7 +23398,7 @@ export type SaveMaterialRequestSaveMaterialCandidateDecision = {
             /**
              * Replacement proposedContent for this candidate.
              */
-            correctedContent?: {
+            correctedContent: {
                 /**
                  * Corrected candidate title to show on get(material).
                  */
@@ -23542,21 +23411,6 @@ export type SaveMaterialRequestSaveMaterialCandidateDecision = {
                  * Optional digest of the corrected source text.
                  */
                 sourceTextDigest?: SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrectionCorrectedContentSourceTextDigest;
-            };
-            /**
-             * Replacement typed proposal; correction does not confirm or save it.
-             */
-            proposedMutation?: {
-                /**
-                 * Material tool field.
-                 */
-                tool: 'save_playbook' | 'save_business_rules' | 'save_wholesale_product' | 'save_signal' | 'save_seller';
-                /**
-                 * Material arguments field.
-                 */
-                arguments: {
-                    [key: string]: unknown;
-                };
             };
         };
     };
@@ -23708,9 +23562,7 @@ export type SaveMaterialRequestSourceDerivedStructure = {
         /**
          * Material provenance field.
          */
-        provenance?: {
-            [key: string]: string;
-        };
+        provenance?: Array<SaveMaterialRequestMaterialProvenanceEntry>;
     }>;
     /**
      * Material artifacts field.
@@ -23981,9 +23833,7 @@ export type SaveMaterialRequestSourceItemsItemDerivedStructure = {
         /**
          * Material provenance field.
          */
-        provenance?: {
-            [key: string]: string;
-        };
+        provenance?: Array<SaveMaterialRequestMaterialProvenanceEntry>;
     }>;
     /**
      * Material artifacts field.
@@ -24191,9 +24041,7 @@ export type SaveMaterialRequestSourceRenditionRefs = Array<{
     /**
      * Material completeness field.
      */
-    completeness?: {
-        [key: string]: 'complete' | 'degraded' | 'unsupported' | 'failed';
-    };
+    completeness?: SaveMaterialRequestMaterialExtractionCompleteness;
 }>;
 
 export type SaveMaterialRequestSourceRenditionRefsItemConfigurationDigest = string;
@@ -24584,15 +24432,9 @@ export type SaveMediaBuyData = {
          */
         channelGroupId?: string;
         /**
-         * The seller's Account id. Not the seller object's id or any sellerId, which are different numbers. Required for explicit creation unless sellerId is sent.
+         * The seller's Account id. Not the seller object's id, which is a different number. Required for explicit creation.
          */
-        sellerAccountId?: number;
-        /**
-         * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. Still accepted for explicit creation until a later release.
-         *
-         * @deprecated
-         */
-        sellerId?: string;
+        sellerAccountId: number;
         products: Array<{
             /**
              * Qualified ID returned by discovery. Pass it unchanged.
@@ -26213,7 +26055,6 @@ export type SaveMediaBuyData = {
         expectedAccountId?: number | string;
         accountId?: number | string;
         sellerAccountId?: never;
-        sellerId?: never;
         fromProposalId?: never;
     } | {
         kind: 'proposal';
@@ -26274,7 +26115,6 @@ export type SaveMediaBuyData = {
         expectedAccountId?: number | string;
         accountId?: number | string;
         sellerAccountId?: never;
-        sellerId?: never;
         products?: never;
         budgetAllocation?: never;
         mediaBuyId?: never;
@@ -26828,10 +26668,6 @@ export type SaveMediaBuyResponses = {
                     meetsAskedTarget: boolean | null;
                     goalAnswers: Array<{
                         productId: string;
-                        /**
-                         * The Storefront the answered line resolves to, fixed when the answer was booked so a later refresh keeps it for exactly that Storefront's line. Present on every booked answer whose line resolved to a Storefront, campaign-derived or copied from an accepted proposal alike.
-                         */
-                        storefrontId?: string | null;
                         pricingOptionId: string | null;
                         pricingModel: string | null;
                         fixedPrice: number | null;
@@ -26843,7 +26679,7 @@ export type SaveMediaBuyResponses = {
                         answeredTarget: SaveMediaBuySuccessMediaBuyGoalCommitmentGoalAnswersItemAnsweredTarget | null;
                         commitment: SaveMediaBuySuccessMediaBuyGoalCommitmentGoalAnswersItemCommitment;
                         /**
-                         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.
+                         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
                          */
                         sellerAccountId?: number;
                     }>;
@@ -28088,7 +27924,7 @@ export type SavePropertyListData = {
             };
         }>;
         /**
-         * Create-only filters. feature_requirements are judged against your saved scores; with them, a list may have no identifiers and resolves over every property you have scored.
+         * Filters. feature_requirements are judged against your saved scores; with them, a list may have no identifiers and resolves over every property you have scored. On update this replaces the list filters (null clears them); channels_any is fixed at creation.
          */
         filters?: SavePropertyListRequestPropertyListFilters | null;
         /**
@@ -28609,9 +28445,17 @@ export type SavePropertyListSuccessPropertyListSaveCascadeSummary = {
      */
     actionRequired?: SavePropertyListSuccessPropertyListSaveCascadeSummaryActionRequired;
     /**
-     * Restore committed, but active-buy updates could not be completed. Counts are unavailable when this field is present.
+     * Active-buy updates could not be completed for part of the change, such as a restore or a score change whose affected lists could not be looked up. The counts cover only the pushes that completed.
      */
     errorMessage?: string;
+    /**
+     * Property lists affected by a score change in this save whose push to active media buys finished inside the request.
+     */
+    pushedListIds?: Array<string>;
+    /**
+     * Property lists affected by a score change in this save whose push was cancelled or never started when the request ran out of time. Not a failure: the scheduled live-buy re-check catches their buys on its next run.
+     */
+    leftToRecheckListIds?: Array<string>;
 };
 
 export type SavePropertyListSuccessPropertyListSaveCascadeSummaryActionRequired = Array<SavePropertyListSuccessPropertyListPushActionRequired>;
@@ -28725,17 +28569,6 @@ export type SaveRfpData = {
                      */
                     budgetBand?: 'under_10k' | '10k_50k' | '50k_250k' | '250k_1m' | 'over_1m';
                 };
-            } | {
-                /**
-                 * Bounded deployed Quick preset compatibility record.
-                 */
-                kind: SaveRfpRequestAdvertiser;
-                /**
-                 * Legacy Quick preset data.
-                 */
-                value: {
-                    [key in SaveRfpRequestAdvertiser]?: SaveRfpRequestJsonValue;
-                };
             };
             /**
              * Material id.
@@ -28762,11 +28595,18 @@ export type SaveRfpData = {
              */
             channels?: SaveRfpRequestOriginChannels;
             /**
-             * Origin facts.
+             * Origin facts as name/value entries.
              */
-            details?: {
-                [key in SaveRfpRequestPropertyNames]?: SaveRfpRequestJsonValue;
-            };
+            details?: Array<{
+                /**
+                 * Entry name.
+                 */
+                key: unknown & SaveRfpRequestClientRequestId;
+                /**
+                 * Entry value: text, a number or true/false.
+                 */
+                value: SaveRfpRequestAdvertiser | number | boolean;
+            }>;
         };
         /**
          * Purpose.
@@ -28824,29 +28664,101 @@ export type SaveRfpData = {
                 currency: 'BHD' | 'JOD' | 'KWD' | 'LYD' | 'OMR' | 'TND';
             };
             /**
-             * Flight.
+             * Flight dates: start and end, as YYYY-MM-DD.
              */
             flight?: {
-                [key in SaveRfpRequestPropertyNames]?: SaveRfpRequestJsonValue;
+                /**
+                 * Start date (inclusive), ISO 8601 calendar date.
+                 */
+                start: string;
+                /**
+                 * End date (inclusive), ISO 8601 calendar date.
+                 */
+                end: string;
             };
             /**
              * Intent.
              */
             dimensions?: {
-                [key in SaveRfpRequestPropertyNames]?: SaveRfpRequestJsonValue | SaveRfpRequestRequestDimensionsChannels | SaveRfpRequestRequestDimensionsChannel | SaveRfpRequestRequestDimensionsFormatKinds | SaveRfpRequestRequestDimensionsProductCount | SaveRfpRequestRequestDimensionsPlanRoles | SaveRfpRequestRequestDimensionsAudience | SaveRfpRequestRequestDimensionsCreativeInputs | undefined;
+                /**
+                 * Channels.
+                 */
+                channels?: SaveRfpRequestRequestDimensionsChannels;
+                /**
+                 * Channel.
+                 */
+                channel?: SaveRfpRequestRequestDimensionsChannel;
+                /**
+                 * Formats.
+                 */
+                format_kinds?: SaveRfpRequestRequestDimensionsFormatKinds;
+                /**
+                 * Products.
+                 */
+                productCount?: SaveRfpRequestRequestDimensionsProductCount;
+                /**
+                 * Buyer requests; counter-pitch unsupported roles.
+                 */
+                planRoles?: SaveRfpRequestRequestDimensionsPlanRoles;
+                /**
+                 * Audience.
+                 */
+                audience?: SaveRfpRequestRequestDimensionsAudience;
+                /**
+                 * Creative inputs.
+                 */
+                creativeInputs?: SaveRfpRequestRequestDimensionsCreativeInputs;
             };
             /**
              * Constraints.
              */
             constraints?: {
-                [key in SaveRfpRequestPropertyNames]?: SaveRfpRequestJsonValue | SaveRfpRequestRequestConstraintsFormatKinds | SaveRfpRequestRequestConstraintsProductCount | SaveRfpRequestRequestConstraintsPlanRoles | Array<'brand_lift' | 'closed_loop_attribution' | 'sales_attribution'> | Array<'flight' | 'audience'> | SaveRfpRequestRequestConstraintsRequiredCreativeInputs | (unknown & unknown) | Array<SaveRfpRequestRequestConstraintsMustIncludeItem> | undefined;
+                /**
+                 * Formats.
+                 */
+                format_kinds?: SaveRfpRequestRequestConstraintsFormatKinds;
+                /**
+                 * Products.
+                 */
+                productCount?: SaveRfpRequestRequestConstraintsProductCount;
+                /**
+                 * Roles.
+                 */
+                planRoles?: SaveRfpRequestRequestConstraintsPlanRoles;
+                /**
+                 * Measurements.
+                 */
+                measurementRequirements?: Array<'brand_lift' | 'closed_loop_attribution' | 'sales_attribution'>;
+                /**
+                 * Required inputs.
+                 */
+                requiredInputs?: Array<'flight' | 'audience'>;
+                /**
+                 * Creative inputs.
+                 */
+                requiredCreativeInputs?: SaveRfpRequestRequestConstraintsRequiredCreativeInputs;
+                /**
+                 * Locale.
+                 */
+                locale?: unknown & unknown;
+                /**
+                 * Legacy inputs (1-16, 1-160 chars).
+                 */
+                mustInclude?: Array<SaveRfpRequestRequestConstraintsMustIncludeItem>;
             };
         };
         /**
          * Strategy.
          */
         strategy?: {
-            [key in SaveRfpRequestPropertyNames]?: SaveRfpRequestJsonValue | SaveRfpRequestStrategyPosture | (unknown & SaveRfpRequestAdvertiser) | undefined;
+            /**
+             * Posture.
+             */
+            posture?: SaveRfpRequestStrategyPosture;
+            /**
+             * Pass reason.
+             */
+            passReason?: unknown & SaveRfpRequestAdvertiser;
         };
         /**
          * Exact currently endorsed seller response pair to require for this composed turn.
@@ -28969,12 +28881,11 @@ export type SaveRfpRequestAdvertiser = string;
  */
 export type SaveRfpRequestClientRequestId = string;
 
-/** @deprecated use SaveRfpRequestJsonValue */
-export type SaveRfpRequestJ = SaveRfpRequestJsonValue;
+/** @deprecated use JsonValue */
+export type SaveRfpRequestJ = JsonValue;
 
-export type SaveRfpRequestJsonValue = SaveRfpRequestAdvertiser | Array<SaveRfpRequestJsonValue> | {
-    [key in SaveRfpRequestPropertyNames]?: SaveRfpRequestJsonValue;
-} | number | boolean | null;
+/** @deprecated use JsonValue */
+export type SaveRfpRequestJsonValue = JsonValue;
 
 export type SaveRfpRequestOriginAdvertiser = string;
 
@@ -28988,10 +28899,8 @@ export type SaveRfpRequestOriginChannelsItem = string;
 
 export type SaveRfpRequestOriginMarket = string;
 
-/**
- * Leading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.
- */
-export type SaveRfpRequestPropertyNames = string;
+/** @deprecated use SaveRfpTurnRequestFeedbackItemKey */
+export type SaveRfpRequestPropertyNames = SaveRfpTurnRequestFeedbackItemKey;
 
 export type SaveRfpRequestRepresentationLocale = RepresentationLocale;
 
@@ -29269,11 +29178,18 @@ export type SaveRfpTurnData = {
          */
         cancelRepresentationId?: unknown & SaveRfpTurnRequestCancelRepresentationId;
         /**
-         * Feedback.
+         * Feedback as name/value entries.
          */
-        feedback?: {
-            [key in SaveRfpTurnRequestPropertyNames]?: SaveRfpTurnRequestDetails;
-        };
+        feedback?: Array<{
+            /**
+             * Entry name.
+             */
+            key: SaveRfpTurnRequestFeedbackItemKey;
+            /**
+             * Entry value: text, a number or true/false.
+             */
+            value: SaveRfpTurnRequestFeedbackItemValue;
+        }>;
         /**
          * Seller grade.
          */
@@ -29299,11 +29215,18 @@ export type SaveRfpTurnData = {
              */
             finality?: 'preliminary' | 'final' | 'mixed';
             /**
-             * Details.
+             * Details as name/value entries, such as bookedBudget (number) and currency.
              */
-            details?: {
-                [key in SaveRfpTurnRequestPropertyNames]?: SaveRfpTurnRequestDetails;
-            };
+            details?: Array<{
+                /**
+                 * Entry name.
+                 */
+                key: SaveRfpTurnRequestOutcomeDetailsItemKey;
+                /**
+                 * Entry value: text, a number or true/false.
+                 */
+                value: SaveRfpTurnRequestOutcomeDetailsItemValue;
+            }>;
         };
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
@@ -29393,14 +29316,25 @@ export type SaveRfpTurnRequestCancelRepresentationId = string;
 
 export type SaveRfpTurnRequestCommentary = string;
 
-export type SaveRfpTurnRequestDetails = SaveRfpTurnRequestCommentary | Array<SaveRfpTurnRequestDetails> | {
-    [key in SaveRfpTurnRequestPropertyNames]?: SaveRfpTurnRequestDetails;
-} | number | boolean | null;
+/** @deprecated use JsonValue */
+export type SaveRfpTurnRequestDetails = JsonValue;
 
 /**
  * Leading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.
  */
-export type SaveRfpTurnRequestPropertyNames = string;
+export type SaveRfpTurnRequestFeedbackItemKey = string;
+
+export type SaveRfpTurnRequestFeedbackItemValue = string | number | boolean;
+
+/**
+ * Leading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.
+ */
+export type SaveRfpTurnRequestOutcomeDetailsItemKey = string;
+
+export type SaveRfpTurnRequestOutcomeDetailsItemValue = string | number | boolean;
+
+/** @deprecated use SaveRfpTurnRequestFeedbackItemKey */
+export type SaveRfpTurnRequestPropertyNames = SaveRfpTurnRequestFeedbackItemKey;
 
 export type SaveRfpTurnResponse = SaveRfpTurnResponses[keyof SaveRfpTurnResponses];
 
@@ -29919,6 +29853,10 @@ export type SaveSellerData = {
          */
         expectedIsPaused?: boolean;
         /**
+         * Change the account type in place. Direct administrator only. `listing` is refused while Storefront agent work runs and closes Enhanced Reporting. Send alone.
+         */
+        sellingMode?: 'listing' | 'storefront_agent';
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -30144,7 +30082,7 @@ export type SaveSellerResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
+        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
         error: null;
     };
     /**
@@ -30272,6 +30210,33 @@ export type SaveSellerSuccessSaveSellerSuccessReopenRecorded = {
     [key: string]: unknown;
 };
 
+export type SaveSellerSuccessSaveSellerSuccessSellingModeChanged = {
+    outcome: 'selling_mode_changed';
+    action: 'selling_mode_changed';
+    sellingMode: {
+        current: 'listing' | 'storefront_agent';
+        previous: 'listing' | 'storefront_agent';
+        closedEnhancedReportingAccounts: number;
+        activitiesBecome: 'billable' | 'free';
+        activities: Array<{
+            activityCode: string;
+            name: string;
+            ius: number;
+            unit: string;
+            [key: string]: unknown;
+        }>;
+        [key: string]: unknown;
+    };
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged = {
+    outcome: 'selling_mode_unchanged';
+    action: 'selling_mode_unchanged';
+    sellingMode: 'listing' | 'storefront_agent';
+    [key: string]: unknown;
+};
+
 export type SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded = {
     outcome: 'source_decision_recorded';
     action: 'source_decision_recorded';
@@ -30364,11 +30329,9 @@ export type SaveSignalData = {
          */
         id?: string;
         /**
-         * Signal. Managed writes fully replace; include signalId, name, valueType, and adapterConfig.
+         * Signal. `kind` chooses the shape: managed (with sourceId) or catalog (without).
          */
-        draft?: {
-            [key: string]: unknown;
-        };
+        draft?: SaveSignalRequestManagedSignalDraft | SaveSignalRequestCatalogSignalDraft;
         /**
          * Use archived to delete an existing signal.
          */
@@ -30457,6 +30420,316 @@ export type SaveSignalErrors = {
      */
     503: V3ToolErrorResponse;
 };
+
+export type SaveSignalRequestCatalogSignalDraft = {
+    /**
+     * A signal in the seller catalog. Omit sourceId. Create needs signalId and keyType; an update changes name, description, countries, isLive or access.
+     */
+    kind: 'catalog';
+    /**
+     * Your own stable id; fixed once registered.
+     */
+    signalId?: string;
+    /**
+     * Display name; needed to create.
+     */
+    name?: string;
+    /**
+     * What the signal is.
+     */
+    description?: string;
+    /**
+     * What it is keyed on; fixed once registered. All context keys or all identity keys.
+     */
+    keyType?: Array<'country' | 'region' | 'metro' | 'topic' | 'eidr' | 'gracenote' | 'isrc' | 'gtin' | 'rss_guid' | 'isbn' | 'url' | 'url_hash' | 'custom' | 'maid' | 'rampid' | 'rampid_derived' | 'hashed_email' | 'hashed_phone' | 'id5' | 'uid2' | 'euid' | 'pairid'>;
+    /**
+     * ISO country codes it is limited to; null lifts the limit.
+     */
+    countries?: Array<string> | null;
+    /**
+     * Your own notes as entries; fixed once registered.
+     */
+    metadata?: SaveSignalRequestCatalogSignalDraftMetadata;
+    /**
+     * External signals agent that registered it; fixed once registered.
+     */
+    agentId?: string;
+    /**
+     * Whether buyers can use it.
+     */
+    isLive?: boolean;
+    /**
+     * Grants at create. To change them use addAccess.
+     */
+    access?: Array<SaveSignalRequestSignalAccessGrant>;
+    /**
+     * Grants to add to a registered signal.
+     */
+    addAccess?: Array<SaveSignalRequestSignalAccessGrant>;
+    /**
+     * Grants to change on a registered signal.
+     */
+    updateAccess?: Array<SaveSignalRequestSignalAccessUpdate>;
+    /**
+     * accessId values to archive.
+     */
+    archiveAccess?: Array<number>;
+};
+
+export type SaveSignalRequestCatalogSignalDraftMetadata = Array<SaveSignalRequestSignalConfigEntry>;
+
+export type SaveSignalRequestManagedSignalDraft = {
+    /**
+     * A signal on an ad-server source. Send sourceId. A write fully replaces the signal, so send every field you keep.
+     */
+    kind: 'managed';
+    /**
+     * Stable id: letters, numbers, _ and -.
+     */
+    signalId: string;
+    /**
+     * Display name.
+     */
+    name: string;
+    /**
+     * binary, categorical or numeric.
+     */
+    valueType: 'binary' | 'categorical' | 'numeric';
+    /**
+     * The ad-server mapping as entries, one per setting: key is its path (`kind`, `groups[0].criteria[0].keyId`), e.g. key `kind`, value `audience_segment`.
+     */
+    adapterConfig: SaveSignalRequestManagedSignalDraftAdapterConfig;
+    /**
+     * What the signal is.
+     */
+    description?: string | null;
+    /**
+     * Values when valueType is categorical.
+     */
+    categories?: Array<string>;
+    /**
+     * Bounds when valueType is numeric.
+     */
+    range?: {
+        /**
+         * Lower bound.
+         */
+        min?: number | string | null;
+        /**
+         * Upper bound.
+         */
+        max?: number | string | null;
+    } | null;
+    /**
+     * What it narrows: `age` for an age signal, `property` for a property signal, else e.g. `audience`.
+     */
+    targetingDimension?: string | null;
+    /**
+     * Required for an age signal.
+     */
+    ageDetermination?: 'survey_based' | 'assumptive' | 'user_provided' | 'user_verified';
+    /**
+     * Who supplies the data.
+     */
+    dataProvider?: string | null;
+    /**
+     * Free labels.
+     */
+    tags?: Array<string>;
+    /**
+     * Price to layer this signal onto a buy.
+     */
+    pricing_options?: Array<SaveSignalRequestSignalPricingOption>;
+};
+
+export type SaveSignalRequestManagedSignalDraftAdapterConfig = Array<SaveSignalRequestSignalConfigEntry>;
+
+export type SaveSignalRequestSignalAccessGrant = {
+    /**
+     * Scope3 advertiser id.
+     */
+    advertiserId: string;
+    visibility: SaveSignalRequestSignalAccessGrantVisibility;
+    /**
+     * Price for this advertiser.
+     */
+    price?: SaveSignalRequestSignalPricingOption;
+};
+
+/**
+ * PUBLIC or PROPRIETARY.
+ */
+export type SaveSignalRequestSignalAccessGrantVisibility = 'PUBLIC' | 'PROPRIETARY';
+
+export type SaveSignalRequestSignalAccessUpdate = {
+    /**
+     * Id of the grant to change.
+     */
+    accessId: number;
+    visibility?: SaveSignalRequestSignalAccessUpdateVisibility;
+    /**
+     * New price for this advertiser.
+     */
+    price?: SaveSignalRequestSignalPricingOption;
+};
+
+/**
+ * PUBLIC or PROPRIETARY.
+ */
+export type SaveSignalRequestSignalAccessUpdateVisibility = 'PUBLIC' | 'PROPRIETARY';
+
+export type SaveSignalRequestSignalConfigEntry = {
+    /**
+     * Path to one setting: dotted names, [n] for a list item, ["a.b"] for a name with a dot or bracket, e.g. `groups[0].criteria[0].keyId`.
+     */
+    key: string;
+    /**
+     * A string, number, boolean, list of strings, null, or an empty object.
+     */
+    value: string | number | boolean | Array<string> | null | {
+        [key: string]: never;
+    };
+};
+
+/**
+ * AdCP vendor pricing option: cpm, percent_of_media, flat_fee, per_unit or custom, each with its own currency. Leave out AdCP's `ext`; a price that carries it is still accepted.
+ */
+export type SaveSignalRequestSignalPricingOption = {
+    pricing_option_id: SaveSignalRequestSignalPricingOptionPricingOptionId;
+    /**
+     * Fixed price per thousand impressions.
+     */
+    model: 'cpm';
+    /**
+     * Price per thousand impressions.
+     */
+    cpm: number;
+    /**
+     * ISO 4217 currency code.
+     */
+    currency: string;
+    percent?: never;
+    max_cpm?: never;
+    amount?: never;
+    period?: never;
+    unit?: never;
+    unit_price?: never;
+    description?: never;
+    metadata?: never;
+} | {
+    pricing_option_id: SaveSignalRequestSignalPricingOptionPricingOptionId;
+    /**
+     * Percentage of media spend.
+     */
+    model: 'percent_of_media';
+    /**
+     * Percentage of media spend, 0 to 100.
+     */
+    percent: number;
+    /**
+     * Cap on the resulting price per thousand impressions.
+     */
+    max_cpm?: number;
+    /**
+     * ISO 4217 currency code.
+     */
+    currency: string;
+    cpm?: never;
+    amount?: never;
+    period?: never;
+    unit?: never;
+    unit_price?: never;
+    description?: never;
+    metadata?: never;
+} | {
+    pricing_option_id: SaveSignalRequestSignalPricingOptionPricingOptionId;
+    /**
+     * Flat fee per period.
+     */
+    model: 'flat_fee';
+    /**
+     * Fee for the period.
+     */
+    amount: number;
+    /**
+     * Billing period.
+     */
+    period: 'monthly' | 'quarterly' | 'annual' | 'campaign';
+    /**
+     * ISO 4217 currency code.
+     */
+    currency: string;
+    cpm?: never;
+    percent?: never;
+    max_cpm?: never;
+    unit?: never;
+    unit_price?: never;
+    description?: never;
+    metadata?: never;
+} | {
+    pricing_option_id: SaveSignalRequestSignalPricingOptionPricingOptionId;
+    /**
+     * Price per unit of something else.
+     */
+    model: 'per_unit';
+    /**
+     * What one unit is.
+     */
+    unit: string;
+    /**
+     * Price of one unit.
+     */
+    unit_price: number;
+    /**
+     * ISO 4217 currency code.
+     */
+    currency: string;
+    cpm?: never;
+    percent?: never;
+    max_cpm?: never;
+    amount?: never;
+    period?: never;
+    description?: never;
+    metadata?: never;
+} | {
+    pricing_option_id: SaveSignalRequestSignalPricingOptionPricingOptionId;
+    /**
+     * Pricing agreed outside the standard models.
+     */
+    model: 'custom';
+    /**
+     * How the price works.
+     */
+    description: string;
+    /**
+     * Operator-facing notes on the price.
+     */
+    metadata: {
+        /**
+         * One line the operator sees for this price.
+         */
+        summary_for_operator?: string;
+    };
+    /**
+     * ISO 4217 currency code.
+     */
+    currency?: string;
+    cpm?: never;
+    percent?: never;
+    max_cpm?: never;
+    amount?: never;
+    period?: never;
+    unit?: never;
+    unit_price?: never;
+};
+
+/** @deprecated use LogEventRequestEventsItemExt */
+export type SaveSignalRequestSignalPricingOptionExt = LogEventRequestEventsItemExt;
+
+/**
+ * Opaque id for this pricing option.
+ */
+export type SaveSignalRequestSignalPricingOptionPricingOptionId = string;
 
 export type SaveSignalResponse = SaveSignalResponses[keyof SaveSignalResponses];
 
@@ -30606,11 +30879,9 @@ export type SaveWholesaleProductData = {
          */
         channels?: Array<'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence'>;
         /**
-         * Source shape. A create needs `execution.adapter`; copy `execution` from `get` of a product on this source.
+         * Ad-server selectors to sell and publisher scope. A create needs `execution.adapter`.
          */
-        inventory?: {
-            [key: string]: unknown;
-        };
+        inventory?: SaveWholesaleProductRequestWholesaleInventory;
         /**
          * Canonical format: format_kind and params; publisher entries need publisher_domain and format_option_id.
          */
@@ -30797,6 +31068,109 @@ export type SaveWholesaleProductErrors = {
     503: V3ToolErrorResponse;
 };
 
+export type SaveWholesaleProductRequestWholesaleFormatBinding = {
+    /**
+     * The `format_option_id` of the format option it binds.
+     */
+    format_option_id: string;
+    /**
+     * Ad-server creative setup as entries, e.g. key `roadblocking`, value `as_many_as_possible`.
+     */
+    adapter_config?: SaveWholesaleProductRequestWholesaleFormatBindingAdapterConfig;
+};
+
+export type SaveWholesaleProductRequestWholesaleFormatBindingAdapterConfig = Array<SaveWholesaleProductRequestWholesaleInventorySettingEntry>;
+
+/**
+ * Ad-server selectors to sell and the publisher scope, as the sales agent defines them.
+ */
+export type SaveWholesaleProductRequestWholesaleInventory = {
+    /**
+     * How the ad server runs the product. Needed to create. A change replaces it whole; omit or null keeps it.
+     */
+    execution?: SaveWholesaleProductRequestWholesaleInventoryExecution | null;
+    /**
+     * Publisher scope buyers see, as AdCP publisher selectors. A change replaces it whole; [] clears it.
+     */
+    publisher_properties?: Array<{
+        /**
+         * Required here: the sales agent takes one publisher domain per selector.
+         */
+        publisher_domain: string;
+        publisher_domains?: Array<string>;
+        selection_type: 'all';
+        property_ids?: never;
+        property_tags?: never;
+    } | {
+        /**
+         * Required here: the sales agent takes one publisher domain per selector.
+         */
+        publisher_domain: string;
+        selection_type: 'by_id';
+        property_ids: Array<string>;
+        publisher_domains?: never;
+        property_tags?: never;
+    } | {
+        /**
+         * Required here: the sales agent takes one publisher domain per selector.
+         */
+        publisher_domain: string;
+        publisher_domains?: Array<string>;
+        selection_type: 'by_tag';
+        property_tags: Array<string>;
+        property_ids?: never;
+    }>;
+};
+
+export type SaveWholesaleProductRequestWholesaleInventoryExecution = {
+    /**
+     * The source's ad-server adapter, e.g. `google_ad_manager`.
+     */
+    adapter: string;
+    /**
+     * The ad-server objects the product sells.
+     */
+    selectors?: Array<SaveWholesaleProductRequestWholesaleInventorySelector>;
+    /**
+     * How each accepted format becomes an ad-server creative.
+     */
+    format_bindings?: Array<SaveWholesaleProductRequestWholesaleFormatBinding>;
+};
+
+export type SaveWholesaleProductRequestWholesaleInventorySelector = {
+    /**
+     * What the selector names, such as `ad_unit` or `placement`. The adapter declares its types.
+     */
+    selector_type: string;
+    /**
+     * The ad server id of the selected object.
+     */
+    external_id: string;
+    /**
+     * Display name of the selected object.
+     */
+    name?: string | null;
+    /**
+     * Adapter options as entries, e.g. key `include_descendants`, value true. Omit for none.
+     */
+    options?: SaveWholesaleProductRequestWholesaleInventorySelectorOptions;
+};
+
+export type SaveWholesaleProductRequestWholesaleInventorySelectorOptions = Array<SaveWholesaleProductRequestWholesaleInventorySettingEntry>;
+
+export type SaveWholesaleProductRequestWholesaleInventorySettingEntry = {
+    /**
+     * Path to one setting: dotted names, [n] for a list item, ["a.b"] for a name with a dot or bracket, e.g. `groups[0].criteria[0].keyId`.
+     */
+    key: string;
+    /**
+     * A string, number, boolean, list of strings, null, or an empty object.
+     */
+    value: string | number | boolean | Array<string> | null | {
+        [key: string]: never;
+    };
+};
+
 export type SaveWholesaleProductResponse = SaveWholesaleProductResponses[keyof SaveWholesaleProductResponses];
 
 export type SaveWholesaleProductResponses = {
@@ -30956,11 +31330,9 @@ export type SaveWorkItemData = {
          */
         expectedContentDigest?: string;
         /**
-         * Modular completion fields named by requiredResultFields. Never secrets.
+         * Modular completion fields named by requiredResultFields, one entry per field. Never secrets.
          */
-        result?: {
-            [key: string]: unknown;
-        };
+        result?: Array<SaveWorkItemRequestWorkItemResultEntry>;
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -31040,6 +31412,32 @@ export type SaveWorkItemErrors = {
      * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
      */
     503: V3ToolErrorResponse;
+};
+
+export type SaveWorkItemRequestModularDailyDelivery = {
+    /**
+     * Calendar day, YYYY-MM-DD.
+     */
+    date: string;
+    /**
+     * Impressions delivered that day.
+     */
+    impressions: number;
+    /**
+     * Spend that day, in the report currency.
+     */
+    spend: number;
+};
+
+export type SaveWorkItemRequestWorkItemResultEntry = {
+    /**
+     * A key from the work item `requiredResultFields`, for example `upstream.campaignId`.
+     */
+    key: string;
+    /**
+     * A string or number, a list of strings, or for `reporting.dailyBreakdown` the daily delivery rows.
+     */
+    value: string | number | Array<string | SaveWorkItemRequestModularDailyDelivery>;
 };
 
 export type SaveWorkItemResponse = SaveWorkItemResponses[keyof SaveWorkItemResponses];
@@ -31162,11 +31560,11 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
+             * For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -31298,11 +31696,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -31328,15 +31724,9 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
-            /**
-             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
-             *
-             * @deprecated
-             */
-            sellerId?: string;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -31457,12 +31847,6 @@ export type SearchData = {
              * For kind media_buy in a seller account: buys from this buyer Account id.
              */
             buyerAccountId?: number;
-            /**
-             * Deprecated: send buyerAccountId instead.
-             *
-             * @deprecated
-             */
-            buyerCustomerId?: number;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -31640,11 +32024,11 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
+             * For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -31776,11 +32160,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -31806,15 +32188,9 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
-            /**
-             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
-             *
-             * @deprecated
-             */
-            sellerId?: string;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -31935,12 +32311,6 @@ export type SearchData = {
              * For kind media_buy in a seller account: buys from this buyer Account id.
              */
             buyerAccountId?: number;
-            /**
-             * Deprecated: send buyerAccountId instead.
-             *
-             * @deprecated
-             */
-            buyerCustomerId?: number;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -32186,11 +32556,11 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
+             * For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -32322,11 +32692,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -32352,15 +32720,9 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
-            /**
-             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
-             *
-             * @deprecated
-             */
-            sellerId?: string;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -32481,12 +32843,6 @@ export type SearchData = {
              * For kind media_buy in a seller account: buys from this buyer Account id.
              */
             buyerAccountId?: number;
-            /**
-             * Deprecated: send buyerAccountId instead.
-             *
-             * @deprecated
-             */
-            buyerCustomerId?: number;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -32664,11 +33020,11 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
+             * For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -32796,11 +33152,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -32826,15 +33180,9 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
-            /**
-             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
-             *
-             * @deprecated
-             */
-            sellerId?: string;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -32955,12 +33303,6 @@ export type SearchData = {
              * For kind media_buy in a seller account: buys from this buyer Account id.
              */
             buyerAccountId?: number;
-            /**
-             * Deprecated: send buyerAccountId instead.
-             *
-             * @deprecated
-             */
-            buyerCustomerId?: number;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -33135,11 +33477,11 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
+             * For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -33267,11 +33609,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -33297,15 +33637,9 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
-            /**
-             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
-             *
-             * @deprecated
-             */
-            sellerId?: string;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -33426,12 +33760,6 @@ export type SearchData = {
              * For kind media_buy in a seller account: buys from this buyer Account id.
              */
             buyerAccountId?: number;
-            /**
-             * Deprecated: send buyerAccountId instead.
-             *
-             * @deprecated
-             */
-            buyerCustomerId?: number;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -33609,11 +33937,11 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
+             * For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -33741,11 +34069,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -33771,15 +34097,9 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
-            /**
-             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
-             *
-             * @deprecated
-             */
-            sellerId?: string;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -33900,12 +34220,6 @@ export type SearchData = {
              * For kind media_buy in a seller account: buys from this buyer Account id.
              */
             buyerAccountId?: number;
-            /**
-             * Deprecated: send buyerAccountId instead.
-             *
-             * @deprecated
-             */
-            buyerCustomerId?: number;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -34083,11 +34397,11 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
+             * For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -34215,11 +34529,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -34245,15 +34557,9 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
-            /**
-             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
-             *
-             * @deprecated
-             */
-            sellerId?: string;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -34374,12 +34680,6 @@ export type SearchData = {
              * For kind media_buy in a seller account: buys from this buyer Account id.
              */
             buyerAccountId?: number;
-            /**
-             * Deprecated: send buyerAccountId instead.
-             *
-             * @deprecated
-             */
-            buyerCustomerId?: number;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -34683,11 +34983,11 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
+             * For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -34819,11 +35119,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -34849,15 +35147,9 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
-            /**
-             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
-             *
-             * @deprecated
-             */
-            sellerId?: string;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -34978,12 +35270,6 @@ export type SearchData = {
              * For kind media_buy in a seller account: buys from this buyer Account id.
              */
             buyerAccountId?: number;
-            /**
-             * Deprecated: send buyerAccountId instead.
-             *
-             * @deprecated
-             */
-            buyerCustomerId?: number;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -35161,11 +35447,11 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
+             * For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -35297,11 +35583,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -35327,15 +35611,9 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
-            /**
-             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
-             *
-             * @deprecated
-             */
-            sellerId?: string;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -35456,12 +35734,6 @@ export type SearchData = {
              * For kind media_buy in a seller account: buys from this buyer Account id.
              */
             buyerAccountId?: number;
-            /**
-             * Deprecated: send buyerAccountId instead.
-             *
-             * @deprecated
-             */
-            buyerCustomerId?: number;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -35638,11 +35910,11 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
+             * For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -35774,11 +36046,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -35804,15 +36074,9 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
-            /**
-             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
-             *
-             * @deprecated
-             */
-            sellerId?: string;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -35933,12 +36197,6 @@ export type SearchData = {
              * For kind media_buy in a seller account: buys from this buyer Account id.
              */
             buyerAccountId?: number;
-            /**
-             * Deprecated: send buyerAccountId instead.
-             *
-             * @deprecated
-             */
-            buyerCustomerId?: number;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -36116,11 +36374,11 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
+             * For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -36252,11 +36510,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -36282,15 +36538,9 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
-            /**
-             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
-             *
-             * @deprecated
-             */
-            sellerId?: string;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -36411,12 +36661,6 @@ export type SearchData = {
              * For kind media_buy in a seller account: buys from this buyer Account id.
              */
             buyerAccountId?: number;
-            /**
-             * Deprecated: send buyerAccountId instead.
-             *
-             * @deprecated
-             */
-            buyerCustomerId?: number;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -36594,11 +36838,11 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
+             * For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -36730,11 +36974,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -36760,15 +37002,9 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
-            /**
-             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
-             *
-             * @deprecated
-             */
-            sellerId?: string;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -36889,12 +37125,6 @@ export type SearchData = {
              * For kind media_buy in a seller account: buys from this buyer Account id.
              */
             buyerAccountId?: number;
-            /**
-             * Deprecated: send buyerAccountId instead.
-             *
-             * @deprecated
-             */
-            buyerCustomerId?: number;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -37072,11 +37302,11 @@ export type SearchData = {
              */
             targetKind?: 'seller' | 'creative_engine';
             /**
-             * For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.
+             * For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -37208,11 +37438,9 @@ export type SearchData = {
              */
             catalogState?: 'active' | 'draft';
             /**
-             * For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
              */
-            labels?: {
-                [key: string]: 'unlabeled' | Array<string>;
-            };
+            labels?: Array<SearchRequestLabelFilterEntry>;
             /**
              * For kind dimension: only label dimensions that can tag this kind of object.
              */
@@ -37238,15 +37466,9 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
-            /**
-             * Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.
-             *
-             * @deprecated
-             */
-            sellerId?: string;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -37367,12 +37589,6 @@ export type SearchData = {
              * For kind media_buy in a seller account: buys from this buyer Account id.
              */
             buyerAccountId?: number;
-            /**
-             * Deprecated: send buyerAccountId instead.
-             *
-             * @deprecated
-             */
-            buyerCustomerId?: number;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -37582,6 +37798,17 @@ export type SearchRequestCreativeRole = 'evergreen' | 'reference';
  */
 export type SearchRequestCreativeSource = 'uploaded' | 'generated' | 'connected';
 
+export type SearchRequestLabelFilterEntry = {
+    /**
+     * Key of a dimension, such as audience or vertical.
+     */
+    dimension: string;
+    /**
+     * Value slugs; ["unlabeled"] alone matches items with none.
+     */
+    values: Array<string>;
+};
+
 export type SearchResponse = SearchResponses[keyof SearchResponses];
 
 export type SearchResponses = {
@@ -37626,6 +37853,11 @@ export type SearchResponses = {
         };
         error: null;
     };
+};
+
+export type SearchSuccessLabelEntry = {
+    dimension: string;
+    values: Array<string>;
 };
 
 export type SearchSuccessSearchAccountPageOutput = {
@@ -39370,9 +39602,7 @@ export type SearchSuccessV3CampaignListItem = {
         };
         createdAt: string;
         updatedAt: string;
-        labels?: {
-            [key: string]: Array<string>;
-        };
+        labels?: Array<SearchSuccessLabelEntry>;
         budget?: SearchSuccessV3CampaignListBudget;
         channelGroups?: Array<SearchSuccessV3CampaignListChannelGroup>;
         [key: string]: unknown;
