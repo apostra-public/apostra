@@ -15,19 +15,19 @@ the person the host's OAuth link or login prompt and stop until they complete
 it. Do not ask them to paste an access token into chat.
 
 When the person names a reporting provider such as Meta, use `search` with
-`kind: "seller"` to resolve its exact seller ID, then call
-`get({ kind: "seller", id: "<sellerId>" })`. The exact read returns the
-connection, credential, selected provider account, mapping, and directed
-campaign subscription state. A provider in `get_status` destinations means the
+`kind: "seller"` to resolve the seller, then call
+`get({ kind: "seller", id: "<seller id>" })` with the returned seller `id`. The
+exact read returns the connection, credential, selected provider account,
+mapping, and directed campaign subscription state. A provider in `get_status` destinations means the
 account can use that provider; it does not prove that a customer connection is
 authorized. If the exact seller read shows that provider authorization is
 missing:
 
 - In a host that renders Apostra's MCP app, call `open_media_partners_page` with
-  the resolved `sellerId` and `connectionAction: "connect"`. The person
+  the resolved `sellerAccountId` and `connectionAction: "connect"`. The person
   confirms and completes authorization in the browser flow.
 - In a command-line or other headless host, call `save_connection` with the
-  resolved `sellerId` and `authorization: {}`. Relay the returned
+  resolved `sellerAccountId` and `authorization: {}`. Relay the returned
   `url` from the returned `authorization` to the person and stop. Never ask for
   the underlying provider credential.
 
