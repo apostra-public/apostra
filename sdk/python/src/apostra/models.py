@@ -381,7 +381,7 @@ class GenerateVariantsSuccessGalleryVariantsItemPreview(TypedDict):
     height: NotRequired[float]
 
 class GetDeliveryInput(TypedDict):
-    metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "conversions", "leads", "videoCompletions", "conversion_value", "ecpm", "cpc", "ctr", "completion_rate", "cpa", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
+    metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
     '\n    Metrics; omit for report defaults.\n    '
     dimensions: NotRequired[list[Literal["date", "advertiser", "campaign", "channel_group", "channel", "buyer", "media_buy", "package", "inventory_source", "seller", "sales_agent"] | str]]
     '\n    Group-by dimensions; campaign delivery also accepts labels.<dimension_key>. Omit for leaf grain.\n    '
@@ -411,8 +411,6 @@ class GetDeliveryInputFilters(TypedDict):
     '\n    Campaign delivery: filter to one channel group.\n    '
     buyerAccountId: NotRequired[int]
     '\n    Margin: filter to one buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     mediaBuyId: NotRequired[str]
     '\n    Filter to one media buy.\n    '
     packageId: NotRequired[str]
@@ -434,12 +432,14 @@ class GetDeliveryResultReportCampaignDelivery(TypedDict):
     period: NotRequired[GetDeliverySuccessPeriod]
     rows: GetDeliverySuccessRows
     totals: NotRequired[GetDeliverySuccessTotals]
+    totalsByFinality: NotRequired[GetDeliverySuccessTotalsByFinality]
+    '\n    Totals per finality class, when classes differ.\n    '
     page: GetDeliverySuccessPage
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
-    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
+    '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -449,12 +449,14 @@ class GetDeliveryResultReportDelivery(TypedDict):
     period: NotRequired[GetDeliverySuccessPeriod]
     rows: GetDeliverySuccessRows
     totals: NotRequired[GetDeliverySuccessTotals]
+    totalsByFinality: NotRequired[GetDeliverySuccessTotalsByFinality]
+    '\n    Totals per finality class, when classes differ.\n    '
     page: GetDeliverySuccessPage
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
-    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
+    '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -703,12 +705,14 @@ class GetDeliveryResultReportMargin(TypedDict):
     period: NotRequired[GetDeliverySuccessPeriod]
     rows: GetDeliverySuccessRows
     totals: NotRequired[GetDeliverySuccessTotals]
+    totalsByFinality: NotRequired[GetDeliverySuccessTotalsByFinality]
+    '\n    Totals per finality class, when classes differ.\n    '
     page: GetDeliverySuccessPage
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
-    '\n    Present only for an account-wide campaign_delivery read over a bounded range: the in-flight campaigns that have no stored rows, each with the live read to call next.\n    '
+    '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -1183,7 +1187,7 @@ class GetDeliverySuccessPeriod(TypedDict):
     endDate: str
 
 class GetDeliverySuccessQuery(TypedDict):
-    metrics: list[Literal["impressions", "spend", "clicks", "views", "completed_views", "conversions", "leads", "videoCompletions", "conversion_value", "ecpm", "cpc", "ctr", "completion_rate", "cpa", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]
+    metrics: list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]
     dimensions: list[str]
     range: NotRequired[GetDeliverySuccessQueryRange]
     filters: GetDeliverySuccessQueryFilters
@@ -1199,8 +1203,6 @@ class GetDeliverySuccessQueryFilters(TypedDict):
     '\n    Campaign delivery: filter to one channel group.\n    '
     buyerAccountId: NotRequired[int]
     '\n    Margin: filter to one buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     mediaBuyId: NotRequired[str]
     '\n    Filter to one media buy.\n    '
     packageId: NotRequired[str]
@@ -1253,7 +1255,7 @@ GetDeliverySuccessRowsItemFinality = TypedDict(
 class GetDeliverySuccessRowsItemMetricsValue(TypedDict):
     value: float | bool | None
     status: Literal["available", "unavailable"]
-    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable"]]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed"]]
 
 class GetDeliverySuccessRowsItemSource(TypedDict):
     operation: GetDeliverySuccessRowsItemSourceOperation
@@ -1280,13 +1282,61 @@ class GetDeliverySuccessSynthetic(TypedDict):
     notice: Literal["Synthetic demo data only. It is unsuitable for commercial decisions."]
 
 class GetDeliverySuccessTotals(TypedDict):
-    rowsIncluded: int
-    currency: str | None
-    metrics: dict[str, GetDeliverySuccessTotalsMetricsValue]
-    denomination: Literal["net", "gross_buyer"]
-    dataThrough: str | None
+    rowsIncluded: GetDeliverySuccessTotalsRowsIncluded
+    currency: GetDeliverySuccessTotalsCurrency
+    metrics: GetDeliverySuccessTotalsMetrics
+    denomination: GetDeliverySuccessTotalsDenomination
+    dataThrough: GetDeliverySuccessTotalsDataThrough
     finality: GetDeliverySuccessTotalsFinality
-    billingEligibility: Literal["not_evaluated"]
+    billingEligibility: GetDeliverySuccessTotalsBillingEligibility
+
+GetDeliverySuccessTotalsBillingEligibility: TypeAlias = Literal["not_evaluated"]
+
+class GetDeliverySuccessTotalsByFinalityItem(TypedDict):
+    rowsIncluded: GetDeliverySuccessTotalsByFinalityItemRowsIncluded
+    currency: GetDeliverySuccessTotalsByFinalityItemCurrency
+    metrics: GetDeliverySuccessTotalsByFinalityItemMetrics
+    denomination: GetDeliverySuccessTotalsByFinalityItemDenomination
+    dataThrough: GetDeliverySuccessTotalsByFinalityItemDataThrough
+    finality: GetDeliverySuccessTotalsByFinalityItemFinality
+    billingEligibility: GetDeliverySuccessTotalsByFinalityItemBillingEligibility
+
+GetDeliverySuccessTotalsByFinality: TypeAlias = "list[GetDeliverySuccessTotalsByFinalityItem]"
+
+GetDeliverySuccessTotalsByFinalityItemBillingEligibility: TypeAlias = Literal["not_evaluated"]
+
+GetDeliverySuccessTotalsByFinalityItemCurrency: TypeAlias = str | None
+
+GetDeliverySuccessTotalsByFinalityItemDataThrough: TypeAlias = str | None
+
+GetDeliverySuccessTotalsByFinalityItemDenomination: TypeAlias = Literal["net", "gross_buyer"]
+
+GetDeliverySuccessTotalsByFinalityItemFinality = TypedDict(
+    "GetDeliverySuccessTotalsByFinalityItemFinality",
+    {
+        "status": Required["Literal[\"available\", \"unavailable\", \"not_applicable\"]"],
+        "class": Required["Literal[\"SNAPSHOT\", \"OFFICIAL\"] | None"],
+        "revision": Required["GetDeliverySuccessDeliveryRevision | None"],
+        "reason": NotRequired["Literal[\"revision_evidence_unavailable\", \"revision_evidence_mixed\", \"revision_unreadable\", \"cumulative_margin_ledger\"]"],
+        "supportedClasses": NotRequired["list[Literal[\"SNAPSHOT\", \"OFFICIAL\"]]"],
+    },
+    total=False,
+)
+
+class GetDeliverySuccessTotalsByFinalityItemMetricsValue(TypedDict):
+    value: float | bool | None
+    status: Literal["available", "unavailable"]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed"]]
+
+GetDeliverySuccessTotalsByFinalityItemMetrics: TypeAlias = "dict[str, GetDeliverySuccessTotalsByFinalityItemMetricsValue]"
+
+GetDeliverySuccessTotalsByFinalityItemRowsIncluded: TypeAlias = int
+
+GetDeliverySuccessTotalsCurrency: TypeAlias = str | None
+
+GetDeliverySuccessTotalsDataThrough: TypeAlias = str | None
+
+GetDeliverySuccessTotalsDenomination: TypeAlias = Literal["net", "gross_buyer"]
 
 GetDeliverySuccessTotalsFinality = TypedDict(
     "GetDeliverySuccessTotalsFinality",
@@ -1303,7 +1353,11 @@ GetDeliverySuccessTotalsFinality = TypedDict(
 class GetDeliverySuccessTotalsMetricsValue(TypedDict):
     value: float | bool | None
     status: Literal["available", "unavailable"]
-    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable"]]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed"]]
+
+GetDeliverySuccessTotalsMetrics: TypeAlias = "dict[str, GetDeliverySuccessTotalsMetricsValue]"
+
+GetDeliverySuccessTotalsRowsIncluded: TypeAlias = int
 
 class GetDeliverySuccessVendorLabel(TypedDict):
     name: str
@@ -1321,8 +1375,6 @@ class GetInputKindAdvertiserAccess(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -1343,7 +1395,7 @@ class GetInputKindAdvertiserAccess(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAdvertiserAccessItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1378,9 +1430,11 @@ class GetInputKindAdvertiserAccess(TypedDict):
 
 class GetInputKindAdvertiserAccessConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindAdvertiserAccessItems(TypedDict):
     filter: NotRequired[GetInputKindAdvertiserAccessItemsFilter]
@@ -1448,8 +1502,6 @@ class GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAd
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -1470,7 +1522,7 @@ class GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAd
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1505,9 +1557,11 @@ class GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAd
 
 class GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipItems(TypedDict):
     filter: NotRequired[GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipItemsFilter]
@@ -1573,8 +1627,6 @@ class GetInputKindAudience(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -1595,7 +1647,7 @@ class GetInputKindAudience(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAudienceItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1630,9 +1682,11 @@ class GetInputKindAudience(TypedDict):
 
 class GetInputKindAudienceConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindAudienceItems(TypedDict):
     filter: NotRequired[GetInputKindAudienceItemsFilter]
@@ -1700,8 +1754,6 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -1722,7 +1774,7 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCatalogAndEventSourceItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1757,9 +1809,11 @@ class GetInputKindCatalogAndEventSource(TypedDict):
 
 class GetInputKindCatalogAndEventSourceConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindCatalogAndEventSourceItems(TypedDict):
     filter: NotRequired[GetInputKindCatalogAndEventSourceItemsFilter]
@@ -1827,8 +1881,6 @@ class GetInputKindConnection(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -1849,7 +1901,7 @@ class GetInputKindConnection(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindConnectionItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1884,9 +1936,11 @@ class GetInputKindConnection(TypedDict):
 
 class GetInputKindConnectionConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindConnectionItems(TypedDict):
     filter: NotRequired[GetInputKindConnectionItemsFilter]
@@ -1954,8 +2008,6 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -1976,7 +2028,7 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCreativeAndCreativeCollectionWithAdvertiserIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2011,9 +2063,11 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
 
 class GetInputKindCreativeAndCreativeCollectionWithAdvertiserIdConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindCreativeAndCreativeCollectionWithAdvertiserIdItems(TypedDict):
     filter: NotRequired[GetInputKindCreativeAndCreativeCollectionWithAdvertiserIdItemsFilter]
@@ -2081,8 +2135,6 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2101,7 +2153,7 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCreativeAndCreativeCollectionWithSourceIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2136,9 +2188,11 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
 
 class GetInputKindCreativeAndCreativeCollectionWithSourceIdConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindCreativeAndCreativeCollectionWithSourceIdItems(TypedDict):
     filter: NotRequired[GetInputKindCreativeAndCreativeCollectionWithSourceIdItemsFilter]
@@ -2206,8 +2260,6 @@ class GetInputKindCreativeEngine(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2261,9 +2313,11 @@ class GetInputKindCreativeEngine(TypedDict):
 
 class GetInputKindCreativeEngineConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindCreativeEngineItems(TypedDict):
     filter: NotRequired[GetInputKindCreativeEngineItemsFilter]
@@ -2331,8 +2385,6 @@ class GetInputKindCreativeFormat(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2386,9 +2438,11 @@ class GetInputKindCreativeFormat(TypedDict):
 
 class GetInputKindCreativeFormatConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindCreativeFormatItems(TypedDict):
     filter: NotRequired[GetInputKindCreativeFormatItemsFilter]
@@ -2456,8 +2510,6 @@ class GetInputKindCreativeSession(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2511,9 +2563,11 @@ class GetInputKindCreativeSession(TypedDict):
 
 class GetInputKindCreativeSessionConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindCreativeSessionItems(TypedDict):
     filter: NotRequired[GetInputKindCreativeSessionItemsFilter]
@@ -2581,8 +2635,6 @@ class GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDis
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2603,7 +2655,7 @@ class GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDis
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2638,9 +2690,11 @@ class GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDis
 
 class GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigItems(TypedDict):
     filter: NotRequired[GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigItemsFilter]
@@ -2708,8 +2762,6 @@ class GetInputKindMaterial(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2730,7 +2782,7 @@ class GetInputKindMaterial(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindMaterialItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2765,9 +2817,11 @@ class GetInputKindMaterial(TypedDict):
 
 class GetInputKindMaterialConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindMaterialItems(TypedDict):
     filter: NotRequired[GetInputKindMaterialItemsFilter]
@@ -2835,8 +2889,6 @@ class GetInputKindProposal(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2857,7 +2909,7 @@ class GetInputKindProposal(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindProposalItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2892,9 +2944,11 @@ class GetInputKindProposal(TypedDict):
 
 class GetInputKindProposalConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindProposalItems(TypedDict):
     filter: NotRequired[GetInputKindProposalItemsFilter]
@@ -2962,8 +3016,6 @@ class GetInputKindSeller(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -2984,7 +3036,7 @@ class GetInputKindSeller(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindSellerItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3019,9 +3071,11 @@ class GetInputKindSeller(TypedDict):
 
 class GetInputKindSellerConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindSellerItems(TypedDict):
     filter: NotRequired[GetInputKindSellerItemsFilter]
@@ -3089,8 +3143,6 @@ class GetInputKindSession(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -3111,7 +3163,7 @@ class GetInputKindSession(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindSessionItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3146,9 +3198,11 @@ class GetInputKindSession(TypedDict):
 
 class GetInputKindSessionConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindSessionItems(TypedDict):
     filter: NotRequired[GetInputKindSessionItemsFilter]
@@ -3216,8 +3270,6 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -3238,7 +3290,7 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindWholesaleProductWithAdvertiserIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3273,9 +3325,11 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
 
 class GetInputKindWholesaleProductWithAdvertiserIdConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindWholesaleProductWithAdvertiserIdItems(TypedDict):
     filter: NotRequired[GetInputKindWholesaleProductWithAdvertiserIdItemsFilter]
@@ -3343,8 +3397,6 @@ class GetInputKindWholesaleProductWithSourceId(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -3363,7 +3415,7 @@ class GetInputKindWholesaleProductWithSourceId(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindWholesaleProductWithSourceIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3400,9 +3452,11 @@ GetInputKindWholesaleProduct: TypeAlias = GetInputKindWholesaleProductWithSource
 
 class GetInputKindWholesaleProductWithSourceIdConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 GetInputKindWholesaleProductConnectionTarget: TypeAlias = GetInputKindWholesaleProductWithSourceIdConnectionTarget
 
@@ -3482,8 +3536,6 @@ class GetInputKindWorkItem(TypedDict):
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     memberAccountId: NotRequired[int]
     '\n    Required for kind member: the account the member belongs to, this account or a direct child.\n    '
     accountId: NotRequired[int]
@@ -3504,7 +3556,7 @@ class GetInputKindWorkItem(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     workItemKind: Literal["creative_review", "media_buy_approval", "modular_source"]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs buyer advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items. material: source_access, repeats, each options.pages key but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindWorkItemItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3541,9 +3593,11 @@ GetInput: TypeAlias = "GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceA
 
 class GetInputKindWorkItemConnectionTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Whether you expect a seller or a creative engine.\n    '
-    id: str
-    '\n    The id of the seller or creative engine you expect.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
+    sellerAccountId: NotRequired[int]
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
+    engineAccountId: NotRequired[int]
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 class GetInputKindWorkItemItems(TypedDict):
     filter: NotRequired[GetInputKindWorkItemItemsFilter]
@@ -3646,6 +3700,7 @@ class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySour
     accounts: NotRequired[list[JsonValue]]
     accountsTotal: NotRequired[float]
     unavailableIncludes: NotRequired[list[JsonValue]]
+    pulse: NotRequired[GetSuccessCampaignPulse]
     operationDetails: NotRequired[list[GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigOperationDetailsItem]]
     operationDetailsTruncated: NotRequired[Literal[True]]
     messages: NotRequired[list[JsonValue]]
@@ -3691,6 +3746,7 @@ class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySour
     destination: GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigOperationDetailsItemDestination
     nextAction: NotRequired[Literal["retry", "correct", "contactSupport"]]
     blockedReason: NotRequired[str]
+    failedReason: NotRequired[str]
     closedReason: NotRequired[str]
 
 class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigOperationDetailsItemDestination(TypedDict):
@@ -3699,28 +3755,32 @@ class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySour
     sellerAccountId: NotRequired[GetSuccessOperationDetailsItemDestinationSellerAccountId]
     sellerName: NotRequired[GetSuccessOperationDetailsItemDestinationSellerName]
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIus(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIus(TypedDict):
     outcome: Literal["billing_readiness"]
     kind: Literal["billing"]
-    object: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObject
+    object: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObject
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObject(TypedDict):
-    organization: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectOrganization
-    terms: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectTerms
-    paymentAuthority: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthority
-    standing: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectStanding
-    balance: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectBalance
-    usage: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectUsage
-    payout: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPayout
-    permissions: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPermissions
-    plan: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlan
-    invoices: list[GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectInvoicesItem]
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObject(TypedDict):
+    organization: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectOrganization
+    terms: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectTerms
+    paymentAuthority: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthority
+    paymentTerms: Literal["net_15", "net_30", "net_45", "net_60", "net_90"]
+    '\n    The payment terms sellers are asked for on this organization’s behalf: the choice `save_billing` recorded, or net_60 when none has been chosen.\n    '
+    paymentTermsChosen: bool
+    '\n    `false` when no payment terms have been chosen and the `net_60` default applies.\n    '
+    standing: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectStanding
+    balance: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectBalance
+    usage: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectUsage
+    payout: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPayout
+    permissions: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPermissions
+    plan: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlan
+    invoices: list[GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectInvoicesItem]
     '\n    The most recent invoices, newest first, at most 10.\n    '
     invoicesTruncated: bool
     '\n    True when the organization has older invoices than listed.\n    '
-    nextAction: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectNextAction
+    nextAction: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectNextAction
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectBalance(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectBalance(TypedDict):
     currency: GetSuccessObjectBalanceCurrency
     fundedMinor: int
     owedMinor: int
@@ -3729,7 +3789,7 @@ class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObje
     showsAvailable: bool
     '\n    True only for an organization that prepays and holds funded money. Show `availableMinor` only when it is true.\n    '
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectInvoicesItem(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectInvoicesItem(TypedDict):
     number: int
     reference: str
     periodStart: GetSuccessObjectInvoicesItemPeriodStart
@@ -3742,7 +3802,7 @@ class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObje
     status: Literal["open", "overdue", "paid"]
     dueAt: GetSuccessObjectInvoicesItemDueAt
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectNextAction(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectNextAction(TypedDict):
     type: Literal["ACCEPT_TOS", "ACCEPT_GOVERNING_AGREEMENT", "SELECT_IU_PLAN", "CONTACT_SCOPE3", "ADD_BILLING_INFO", "ADD_PAYMENT_METHOD", "FUND_PREPAY", "APPLY_FOR_CREDIT", "RESOLVE_HOLD", "UPDATE_PAYMENT_METHOD", "NONE"]
     message: str
     '\n    Human sentence describing the action, for direct display.\n    '
@@ -3752,77 +3812,77 @@ class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObje
     '\n    `success` when nothing is owed (`NONE`); `warning` for every action that needs doing.\n    '
     canCompleteInChat: bool
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectOrganization(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectOrganization(TypedDict):
     customerId: int
     name: str
     displayName: str | None
     '\n    The organization’s company name, else its account name, else null.\n    '
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthority(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthority(TypedDict):
     verified: bool
     status: Literal["pending", "opened", "verified", "expired"] | None
     expiresAt: str | None
-    submission: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySubmissionValue | None
-    secureHandoff: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySecureHandoff
+    submission: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySubmissionValue | None
+    secureHandoff: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySecureHandoff
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySecureHandoff(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySecureHandoff(TypedDict):
     available: Literal[False]
     reason: Literal["secure_handoff_unavailable", "card_collection_not_enabled"]
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySubmissionValue(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySubmissionValue(TypedDict):
     status: Literal["processing", "verified", "failed", "expired"]
     '\n    Durable card-confirmation state. Only `verified` produces a usable payment authority; `processing`, `failed`, and `expired` are inert.\n    '
     submittedAt: str
     completedAt: str | None
     failureReason: Literal["verification_failed", "canceled", "expired"] | None
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPayout(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPayout(TypedDict):
     setupRequired: bool
     '\n    Whether this Seller is paid out through Interchange and must provide payout details. It carries no destination detail.\n    '
     onboardingStatus: Literal["pending", "complete"] | None
     '\n    Storefront billing onboarding, or null when there is none.\n    '
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPermissions(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPermissions(TypedDict):
     canEditBillingInfo: bool
     canSetPayout: bool
     '\n    Whether the signed-in person may set payout details. They are set only on the Plan & Billing Page.\n    '
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlan(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlan(TypedDict):
     current: GetSuccessObjectPlanCurrent | None
     '\n    The plan in force.\n    '
     upcoming: GetSuccessObjectPlanUpcoming | None
     '\n    An accepted plan waiting for the current term to end, or null.\n    '
-    offer: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValue | None
+    offer: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValue | None
     '\n    The offer the organization may accept, or null when none applies.\n    '
-    renewal: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValue | None
+    renewal: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValue | None
     helpAvailable: bool
     '\n    Whether a plan help request can be filed now.\n    '
     showsChoices: bool
     '\n    Whether the plan choices are on display: the organization is being asked to choose, with no accepted successor and no ended plan awaiting renewal review. Show the choices only when this is true.\n    '
-    setupGrant: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanSetupGrantValue | None
+    setupGrant: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanSetupGrantValue | None
     '\n    The Storefront setup credit the organization holds, or null. Always null for an organization with no Storefront.\n    '
     passThroughAvailable: bool
     '\n    Whether the organization may continue on Listing with a third-party sales agent and no plan. Continuing is an offer response that declines the offer.\n    '
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedBy(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedBy(TypedDict):
     agreementKind: Literal["STANDARD_TOS", "CUSTOM_CONTRACT", "AAA"]
-    effectiveRateCard: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByEffectiveRateCardValue | None
-    proposal: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByProposalValue | None
+    effectiveRateCard: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByEffectiveRateCardValue | None
+    proposal: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByProposalValue | None
     '\n    The private proposal that governs the offer. Null for a public offer, and for a read redacted for a service token.\n    '
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByEffectiveRateCardValue(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByEffectiveRateCardValue(TypedDict):
     version: str
     visibility: Literal["PUBLIC", "PRIVATE"]
     displayName: str
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByProposalValue(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByProposalValue(TypedDict):
     documentTitle: str
     scopeIncluded: list[str]
     scopeExclusions: list[str]
     initialTermMonths: int
     defaultPaymentOptionKey: str | None
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferPlansItem(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferPlansItem(TypedDict):
     planId: GetSuccessObjectPlanOfferPlansItemPlanId
     planName: GetSuccessObjectPlanOfferPlansItemPlanName
     currency: GetSuccessObjectPlanOfferPlansItemCurrency
@@ -3844,23 +3904,29 @@ class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObje
     acceptanceConvertsStandaloneAccount: bool
     '\n    Whether accepting this plan promotes a standalone account to an organization first.\n    '
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValue(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValue(TypedDict):
     offerVersion: str
     '\n    The exact version of this offer. A write that accepts or responds to the offer names it.\n    '
-    governedBy: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedBy
+    governedBy: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedBy
     initialTermMonths: int
-    discount: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValueDiscountValue | None
+    lastResponse: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValueLastResponseValue | None
+    '\n    How the organization last answered this exact version of the offer, or null when it has not. `DEFERRED` means decide later: the sign-in prompt stays quiet for this version. A new version of the offer starts again with null.\n    '
+    discount: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValueDiscountValue | None
     '\n    The corporate discount that applies to the offer, or null.\n    '
     activitySchedule: list[GetSuccessObjectPlanOfferActivityScheduleItem]
     '\n    What each priced activity costs under the offer, keyed by `activityCode`. Order is presentation only.\n    '
-    plans: list[GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferPlansItem]
+    plans: list[GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferPlansItem]
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValueDiscountValue(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValueDiscountValue(TypedDict):
     basisPoints: int
     effectiveDate: GetSuccessObjectPlanOfferDiscountEffectiveDate
     endDate: GetSuccessObjectPlanOfferDiscountEndDate | None
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValue(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValueLastResponseValue(TypedDict):
+    outcome: Literal["ACCEPTED", "DECLINED", "DEFERRED"]
+    at: GetSuccessObjectPlanOfferLastResponseAt
+
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValue(TypedDict):
     version: str
     '\n    The exact version of this renewal. A renewal change names it.\n    '
     status: Literal["RENEWS", "NON_RENEWAL_SCHEDULED", "RENEWAL_BLOCKED", "ENDED", "PINNED"]
@@ -3868,14 +3934,14 @@ class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObje
     changeAllowedUntil: GetSuccessObjectPlanRenewalChangeAllowedUntil
     '\n    The deadline for changing the renewal.\n    '
     allowedActions: list[Literal["CANCEL_AT_TERM", "REINSTATE_AUTO_RENEWAL"]]
-    latestInstruction: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValueLatestInstructionValue | None
+    latestInstruction: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValueLatestInstructionValue | None
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValueLatestInstructionValue(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValueLatestInstructionValue(TypedDict):
     instructionType: Literal["CANCEL_AT_TERM", "REINSTATE_AUTO_RENEWAL"]
     effectiveAt: GetSuccessObjectPlanRenewalLatestInstructionEffectiveAt
     recordedAt: GetSuccessObjectPlanRenewalLatestInstructionRecordedAt
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanSetupGrantValue(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanSetupGrantValue(TypedDict):
     grantedIus: int
     rolloverEnabled: Literal[False]
     grantedAt: str
@@ -3883,16 +3949,16 @@ class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObje
     status: Literal["ACTIVE", "EXPIRED"]
     attributionKind: Literal["PROMOTION", "REFERRAL"] | None
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectStanding(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectStanding(TypedDict):
     posture: Literal["PREPAY", "CREDIT"]
     '\n    `PREPAY` when the organization must fund a balance to spend; `CREDIT` when it pays on terms.\n    '
-    holds: list[GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectStandingHoldsItem]
+    holds: list[GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectStandingHoldsItem]
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectStandingHoldsItem(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectStandingHoldsItem(TypedDict):
     reason: str
     createdAt: GetSuccessObjectStandingHoldsItemCreatedAt
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectTerms(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectTerms(TypedDict):
     requiredVersion: str
     url: str
     acceptedVersion: str | None
@@ -3902,11 +3968,61 @@ class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObje
     governedByExistingContract: bool
     canAccept: bool
 
-class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectUsage(TypedDict):
+class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectUsage(TypedDict):
     usedIus: float | None
     '\n    IUs used in the current period on the organization’s IU account, or null when it has none.\n    '
     activityIus: float | None
     '\n    IUs rated for the organization’s activity, or null.\n    '
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIus: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIus
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObject: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObject
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectBalance: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectBalance
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectInvoicesItem: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectInvoicesItem
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectNextAction: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectNextAction
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectOrganization: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectOrganization
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthority: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthority
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySecureHandoff: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySecureHandoff
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySubmissionValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySubmissionValue
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPayout: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPayout
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPermissions: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPermissions
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlan: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlan
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedBy: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedBy
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByEffectiveRateCardValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByEffectiveRateCardValue
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByProposalValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByProposalValue
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferPlansItem: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferPlansItem
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValue
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValueDiscountValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValueDiscountValue
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValue
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValueLatestInstructionValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValueLatestInstructionValue
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanSetupGrantValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanSetupGrantValue
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectStanding: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectStanding
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectStandingHoldsItem: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectStandingHoldsItem
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectTerms: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectTerms
+
+GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectUsage: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectUsage
 
 class GetResultKindBillingWithObjectChangeableByAndObjectManagedByAndObjectManagedByCustomerIdAndObjectScopeAndObjectScopeBoundary(TypedDict):
     outcome: Literal["billing_managed"]
@@ -3932,62 +4048,62 @@ class GetResultKindBillingWithObjectChangeableByAndObjectManagedByAndObjectManag
     boundary: Literal["ORG"]
     '\n    The exact boundary that owns billing. This bounded projection is organization-only.\n    '
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrl: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIus
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrl: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIus
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObject: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObject
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObject: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObject
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectInvoicesItem: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectInvoicesItem
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectInvoicesItem: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectInvoicesItem
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectNextAction: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectNextAction
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectNextAction: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectNextAction
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectOrganization: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectOrganization
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectOrganization: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectOrganization
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPaymentAuthority: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthority
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPaymentAuthority: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthority
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPaymentAuthoritySecureHandoff: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySecureHandoff
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPaymentAuthoritySecureHandoff: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySecureHandoff
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPaymentAuthoritySubmissionValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySubmissionValue
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPaymentAuthoritySubmissionValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySubmissionValue
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlan: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlan
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlan: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlan
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlanOfferGovernedBy: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedBy
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlanOfferGovernedBy: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedBy
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlanOfferGovernedByEffectiveRateCardValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByEffectiveRateCardValue
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlanOfferGovernedByEffectiveRateCardValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByEffectiveRateCardValue
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlanOfferGovernedByProposalValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByProposalValue
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlanOfferGovernedByProposalValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferGovernedByProposalValue
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlanOfferPlansItem: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferPlansItem
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlanOfferPlansItem: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferPlansItem
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlanOfferValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValue
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlanOfferValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanOfferValue
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlanRenewalValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValue
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlanRenewalValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValue
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlanRenewalValueLatestInstructionValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValueLatestInstructionValue
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPlanRenewalValueLatestInstructionValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPlanRenewalValueLatestInstructionValue
 
-GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectTerms: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectTerms
+GetResultKindBillingWithObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanRenewalAndObjectPlanUpcomingAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectTerms: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectTerms
 
-GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrl: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIus
+GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrl: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIus
 
-GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObject: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObject
+GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObject: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObject
 
-GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectNextAction: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectNextAction
+GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectNextAction: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectNextAction
 
-GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectOrganization: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectOrganization
+GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectOrganization: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectOrganization
 
-GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPaymentAuthority: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthority
+GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPaymentAuthority: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthority
 
-GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPaymentAuthoritySecureHandoff: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySecureHandoff
+GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPaymentAuthoritySecureHandoff: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySecureHandoff
 
-GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPaymentAuthoritySubmissionValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySubmissionValue
+GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectPaymentAuthoritySubmissionValue: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPaymentAuthoritySubmissionValue
 
-GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectTerms: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectTerms
+GetResultKindBillingWithObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlObjectTerms: TypeAlias = GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectTerms
 
 class GetResultKindRfpTurn(TypedDict):
     outcome: Literal["rfp_turn"]
     kind: Literal["rfp_turn"]
     object: GetResultKindRfpTurnObject
 
-GetResult: TypeAlias = "GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIus | GetResultKindBillingWithObjectChangeableByAndObjectManagedByAndObjectManagedByCustomerIdAndObjectScopeAndObjectScopeBoundary | GetResultKindRfpTurn | GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipAndAdvertiserAccessAndNotificationConfig"
+GetResult: TypeAlias = "GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIus | GetResultKindBillingWithObjectChangeableByAndObjectManagedByAndObjectManagedByCustomerIdAndObjectScopeAndObjectScopeBoundary | GetResultKindRfpTurn | GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipAndAdvertiserAccessAndNotificationConfig"
 
 class GetResultKindRfpTurnObject(TypedDict):
     request: GetSuccessRfpTurnRequest
@@ -4145,10 +4261,8 @@ class GetRfpPerformanceResultSemanticsMetricFamilies(TypedDict):
 class GetSellerReportingReceiptsInput(TypedDict):
     mediaBuyId: str
     '\n    Seller media-buy identifier.\n    '
-    buyerAccountId: NotRequired[int]
+    buyerAccountId: int
     '\n    Buyer Account id that owns the media buy.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
@@ -4227,7 +4341,6 @@ class GetSellerReportingReceiptsResultComputedDailyTotalsItem(TypedDict):
 
 class GetSellerReportingReceiptsResultParams(TypedDict):
     mediaBuyId: str
-    buyerCustomerId: NotRequired[GetSellerReportingReceiptsSuccessParamsBuyerCustomerId]
     buyerAccountId: GetSellerReportingReceiptsSuccessParamsBuyerAccountId
 
 class GetSellerReportingReceiptsResultReceiptsItem(TypedDict):
@@ -4307,8 +4420,6 @@ GetSellerReportingReceiptsSuccessComputedDailyTotalsItemViews: TypeAlias = str |
 
 GetSellerReportingReceiptsSuccessParamsBuyerAccountId: TypeAlias = int
 
-GetSellerReportingReceiptsSuccessParamsBuyerCustomerId: TypeAlias = int
-
 class GetSellerReportingReceiptsSuccessReceiptsItemAcceptanceReason(TypedDict):
     code: Literal["ingestion_failed", "processing_failed", "processing_partial_success", "polling_scheduled", "polling_delayed", "unrecognised_processing_status"]
     sourceCode: str | None
@@ -4349,6 +4460,10 @@ GetSellerReportingReceiptsSuccessReceiptsItemReceivedTotalsViews: TypeAlias = st
 class GetStatusInput(TypedDict):
     cursor: NotRequired[str]
     '\n    accounts.nextCursor\n    '
+    include: NotRequired[list[Literal["setup"]]]
+    '\n    Buyer accounts only. setup adds the setup checklist and a page of sellers, each with its next step as a tool call.\n    '
+    sellersCursor: NotRequired[str]
+    '\n    Buyer accounts only, with include setup: the setup.sellers.nextCursor of the previous page.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
@@ -4362,6 +4477,8 @@ class GetStatusResult(TypedDict):
     canBuyAnywhere: NotRequired[bool]
     destinations: NotRequired[GetStatusResultDestinations]
     operatorIdentity: NotRequired[GetStatusResultOperatorIdentity]
+    setup: NotRequired[GetStatusResultSetup]
+    agent: NotRequired[GetStatusResultAgentValue | None]
     phase: NotRequired[str]
     libraryRequirements: NotRequired[list[GetStatusResultLibraryRequirementsItem] | None]
     libraryRequirementsOmitted: NotRequired[int]
@@ -4372,6 +4489,8 @@ class GetStatusResult(TypedDict):
     reachableAccountsTruncated: NotRequired[bool]
     accounts: NotRequired[GetStatusResultAccounts]
     agents: NotRequired[GetStatusResultAgents]
+    landing: NotRequired[GetStatusResultLandingPageHome | GetStatusResultLandingPageAgent]
+    '\n    The page an Agents account lands on.\n    '
     resources: NotRequired[list[GetStatusResultResourcesItem]]
 
 class GetStatusResultAccount(TypedDict):
@@ -4392,6 +4511,12 @@ class GetStatusResultAccountsResultsItem(TypedDict):
     name: str
     needsYou: NotRequired[bool]
 
+class GetStatusResultAgentValue(TypedDict):
+    principalId: str
+    displayName: str
+    hosting: Literal["on_demand", "always_on"]
+    lifecycleState: Literal["active", "suspended", "retired"]
+
 class GetStatusResultAgents(TypedDict):
     total: float
     returned: float
@@ -4404,6 +4529,8 @@ class GetStatusResultAgentsResultsItem(TypedDict):
     kind: Literal["sales", "creative", "buyer"]
     findingCount: NotRequired[int]
     findingsHeadline: NotRequired[GetStatusResultAgentsResultsItemFindingsHeadlineValue | None]
+    certificationStage: NotRequired[Literal["not_started", "testing", "waiting_on_you", "waiting_on_apostra", "waiting_on_seller", "certified"] | None]
+    '\n    Where certification stands; null for a kind with no certification.\n    '
     states: GetStatusResultAgentsResultsItemStates
     '\n    Independent facts about the agent; a key that does not apply to its kind is null.\n    '
     stage: GetStatusSuccessAgentsResultsItemStage
@@ -4430,10 +4557,14 @@ class GetStatusResultAgentsResultsItemStates(TypedDict):
     listedForOtherOrganizations: bool | None
     latestTest: Literal["passed", "failed"] | None
     credential: GetStatusResultAgentsResultsItemStatesCredentialValue | None
+    notReadYet: GetStatusResultAgentsResultsItemStatesNotReadYetValue | None
 
 class GetStatusResultAgentsResultsItemStatesCredentialValue(TypedDict):
     issued: bool
     authenticated: bool
+
+class GetStatusResultAgentsResultsItemStatesNotReadYetValue(TypedDict):
+    reason: Literal["authentication_required"]
 
 class GetStatusResultAgentsResultsItemStatesStorefrontsValue(TypedDict):
     total: int
@@ -4466,10 +4597,16 @@ class GetStatusResultDestinations(TypedDict):
     readyDestinationsTruncated: bool
 
 class GetStatusResultDestinationsReadyDestinationsItem(TypedDict):
-    sellerId: str
-    sellerAccountId: NotRequired[int]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.\n    '
+    sellerAccountId: NotRequired[GetStatusSuccessDestinationsReadyDestinationsItemSellerAccountId]
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
     name: str
+
+class GetStatusResultLandingPageAgent(TypedDict):
+    page: Literal["agent"]
+    agentId: str
+
+class GetStatusResultLandingPageHome(TypedDict):
+    page: Literal["home"]
 
 class GetStatusResultLibraryRequirementsItem(TypedDict):
     id: Literal["merchandising_agent", "guaranteed_inventory", "catalogue"]
@@ -4501,7 +4638,9 @@ class GetStatusResultOperatorIdentity(TypedDict):
     sellerHistoryCoop: NotRequired[bool]
     operatorDomain: NotRequired[str | None]
     operatorDomainSource: NotRequired[str | None]
-    operator_unit: NotRequired[GetStatusResultOperatorIdentityOperatorUnitValue | None]
+    operator_unit: NotRequired[GetStatusSuccessOperatorIdentityOperatorUnit | None]
+    suggested_operator_unit: NotRequired[GetStatusSuccessOperatorIdentitySuggestedOperatorUnit | None]
+    accountName: NotRequired[str]
     domainProof: NotRequired[GetStatusResultOperatorIdentityDomainProof]
     organization: NotRequired[GetStatusResultOperatorIdentityOrganization]
     aao: NotRequired[GetStatusResultOperatorIdentityAao]
@@ -4524,10 +4663,6 @@ class GetStatusResultOperatorIdentityDomainProof(TypedDict):
     source: Literal["member_or_admin", "aao_oauth"] | None
     confirmedAt: str | None
 
-class GetStatusResultOperatorIdentityOperatorUnitValue(TypedDict):
-    id: str
-    name: NotRequired[str]
-
 class GetStatusResultOperatorIdentityOrganization(TypedDict):
     domain: str | None
     relationship: Literal["same_organization", "portfolio_brand", "external_operator", "unresolved"]
@@ -4549,6 +4684,49 @@ class GetStatusResultResourcesItem(TypedDict):
     description: str
     audience: Literal["all", "sales", "creative", "buyer"]
 
+class GetStatusResultSetup(TypedDict):
+    checks: list[GetStatusResultSetupChecksItem]
+    sellers: GetStatusResultSetupSellers
+    commercial: GetStatusResultSetupCommercial
+    firstCampaign: GetStatusResultSetupFirstCampaignValue | None
+    billingCompany: str
+
+class GetStatusResultSetupChecksItem(TypedDict):
+    id: str
+    name: str
+    description: str
+    status: Literal["complete", "missing", "blocked"]
+    isBlocker: bool
+    action: GetStatusSuccessSetupChecksItemAction
+    actionLabel: str | None
+
+class GetStatusResultSetupCommercial(TypedDict):
+    billingDetailsComplete: bool
+    missing: list[Literal["TOS", "STANDARD_RATE_CARD", "BILLING_DETAILS"]]
+
+class GetStatusResultSetupFirstCampaignValue(TypedDict):
+    launched: bool
+    action: GetStatusSuccessSetupFirstCampaignAction
+
+class GetStatusResultSetupSellers(TypedDict):
+    total: int
+    returned: int
+    truncated: bool
+    nextCursor: NotRequired[str]
+    results: list[GetStatusResultSetupSellersResultsItem]
+
+class GetStatusResultSetupSellersResultsItem(TypedDict):
+    sellerAccountId: NotRequired[GetStatusSuccessSetupSellersResultsItemSellerAccountId]
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
+    name: str
+    providerType: str | None
+    billingRoute: Literal["direct", "interchange"]
+    status: Literal["ready", "seller_unavailable", "needs_connection", "needs_account_selection", "needs_advertiser_mapping", "needs_commercial_setup", "platform_blocked"]
+    canBuy: bool
+    reason: str
+    action: GetStatusSuccessSetupSellersResultsItemAction
+    actionLabel: str | None
+
 GetStatusSuccessAgentsResultsItemFinalStage: TypeAlias = Literal["built", "connected", "tested", "certified", "listed"]
 
 GetStatusSuccessAgentsResultsItemNextStage: TypeAlias = Literal["built", "connected", "tested", "certified", "listed"]
@@ -4557,7 +4735,77 @@ GetStatusSuccessAgentsResultsItemStage: TypeAlias = Literal["built", "connected"
 
 GetStatusSuccessAgentsResultsItemStuckOnNextActionArguments: TypeAlias = dict[str, str | bool | list[str]]
 
+GetStatusSuccessDestinationsReadyDestinationsItemSellerAccountId: TypeAlias = int
+
 GetStatusSuccessNextActionsItemArguments: TypeAlias = dict[str, str | bool | list[str]]
+
+class GetStatusSuccessOperatorIdentityOperatorUnit(TypedDict):
+    id: str
+    name: NotRequired[str]
+
+GetStatusResultOperatorIdentityOperatorUnitValue: TypeAlias = GetStatusSuccessOperatorIdentityOperatorUnit
+
+class GetStatusSuccessOperatorIdentitySuggestedOperatorUnit(TypedDict):
+    id: str
+    name: NotRequired[str]
+
+class GetStatusSuccessSetupChecksItemActionValue(TypedDict):
+    tool: str
+    arguments: dict[str, JsonValue]
+
+GetStatusSuccessSetupChecksItemAction: TypeAlias = "GetStatusSuccessSetupChecksItemActionValue | None"
+
+class GetStatusSuccessSetupFirstCampaignActionValue(TypedDict):
+    tool: str
+    arguments: dict[str, JsonValue]
+
+GetStatusSuccessSetupFirstCampaignAction: TypeAlias = "GetStatusSuccessSetupFirstCampaignActionValue | None"
+
+class GetStatusSuccessSetupSellersResultsItemActionValue(TypedDict):
+    tool: str
+    arguments: dict[str, JsonValue]
+
+GetStatusSuccessSetupSellersResultsItemAction: TypeAlias = "GetStatusSuccessSetupSellersResultsItemActionValue | None"
+
+GetStatusSuccessSetupSellersResultsItemSellerAccountId: TypeAlias = int
+
+class GetSuccessCampaignPulse(TypedDict):
+    verdict: Literal["delivering", "partially_delivering", "not_delivering", "not_expected_yet", "cannot_verify"]
+    reasonCodes: list[Literal["flight_not_started", "first_snapshot_not_due", "capability_not_declared", "reporting_unsupported", "source_error_after_snapshot", "snapshot_missing", "coverage_partial", "coverage_none", "snapshot_stale", "supported_metric_unavailable", "positive_delivery_observed", "complete_zero_delivery_observed"]]
+    asOf: str
+    dataThrough: GetSuccessCampaignPulseTimeRange | None
+    nextCheckAt: str | None
+    official: Literal[False]
+    nonBillable: Literal[True]
+    mediaBuys: list[GetSuccessCampaignPulseMediaBuy]
+    mediaBuysOmitted: int
+
+class GetSuccessCampaignPulseMediaBuy(TypedDict):
+    mediaBuyId: str
+    verdict: Literal["delivering", "not_delivering", "stale", "unsupported", "source_error", "not_expected_yet", "unverified"]
+    reasonCodes: list[Literal["flight_not_started", "first_snapshot_not_due", "capability_not_declared", "reporting_unsupported", "source_error_after_snapshot", "snapshot_missing", "coverage_partial", "coverage_none", "snapshot_stale", "supported_metric_unavailable", "positive_delivery_observed", "complete_zero_delivery_observed"]]
+    dataThrough: str | None
+    observedAt: str | None
+    freshness: GetSuccessCampaignPulseMediaBuyFreshness
+    metrics: GetSuccessCampaignPulseMediaBuyMetricsValue | None
+
+class GetSuccessCampaignPulseMediaBuyFreshness(TypedDict):
+    status: Literal["fresh", "stale", "missing"]
+    deadline: str | None
+
+class GetSuccessCampaignPulseMediaBuyMetricsValue(TypedDict):
+    impressions: GetSuccessCampaignPulseMetricValue
+    clicks: GetSuccessCampaignPulseMetricValue
+    spend: GetSuccessCampaignPulseMetricValue
+
+class GetSuccessCampaignPulseMetricValue(TypedDict):
+    availability: Literal["present", "explicit_zero", "unsupported", "delayed", "partial", "stale", "missing"]
+    value: float | None
+    currency: NotRequired[str]
+
+class GetSuccessCampaignPulseTimeRange(TypedDict):
+    earliest: str
+    latest: str
 
 GetSuccessObjectBalanceCurrency: TypeAlias = str
 
@@ -4569,7 +4817,7 @@ GetSuccessObjectInvoicesItemPeriodEnd: TypeAlias = str
 
 GetSuccessObjectInvoicesItemPeriodStart: TypeAlias = str
 
-GetSuccessObjectOperationsByDestinationItemSellerAccountId: TypeAlias = str
+GetSuccessObjectOperationsByDestinationItemSellerAccountId: TypeAlias = int
 
 GetSuccessObjectOperationsByDestinationItemSellerName: TypeAlias = str
 
@@ -4651,6 +4899,8 @@ class GetSuccessObjectPlanOfferActivityScheduleItem(TypedDict):
 GetSuccessObjectPlanOfferDiscountEffectiveDate: TypeAlias = str
 
 GetSuccessObjectPlanOfferDiscountEndDate: TypeAlias = str
+
+GetSuccessObjectPlanOfferLastResponseAt: TypeAlias = str
 
 class GetSuccessObjectPlanOfferPlansItemActivityScheduleItem(TypedDict):
     activityCode: Literal["ACTIVATED_SOCIAL_ACCOUNT_MONTH", "SIMPLE_PROPOSAL_EVALUATION", "COMPLEX_PROPOSAL_EVALUATION", "MERCHANDISING_BRIEF_RESPONSE", "MURPH_AI_SUPPORT_SESSION", "HUMAN_EXPERT_SUPPORT_HOUR", "GENERATED_IMAGE", "GENERATED_VIDEO_SECONDS", "ANALYZE_ACCOUNT", "CAMPAIGN_OPTIMIZATION_MONTH", "MANAGED_MEDIA_BUY_MONTH", "STANDARD_DOCUMENT_UNDERSTANDING", "LARGE_DOCUMENT_UNDERSTANDING", "AUDIO_VIDEO_UNDERSTANDING_MINUTES", "CUSTOM_BIGQUERY_GIB", "MODULAR_SOURCE_MANAGEMENT_MONTH", "MANAGED_VIDEO_RENDITION_OUTPUT_SECOND", "COMPLETED_INTERCHANGE_MERCHANDISING_CYCLE", "SOCIAL_ACCOUNT_INTELLIGENCE_BILLING_PERIOD", "INTERCHANGE_MEDIA_BUY_BILLING_PERIOD"]
@@ -4767,7 +5017,7 @@ GetSuccessObjectPlanUpcomingTermStart: TypeAlias = str
 
 GetSuccessObjectStandingHoldsItemCreatedAt: TypeAlias = str
 
-GetSuccessOperationDetailsItemDestinationSellerAccountId: TypeAlias = str
+GetSuccessOperationDetailsItemDestinationSellerAccountId: TypeAlias = int
 
 GetSuccessOperationDetailsItemDestinationSellerName: TypeAlias = str
 
@@ -5163,6 +5413,15 @@ class OpenAdvertisersPageInput(TypedDict):
 class OpenAdvertisersPageResult(TypedDict):
     intent: NotRequired[Literal["add"]]
 
+class OpenAgentActivityPageInput(TypedDict):
+    agentId: str
+    '\n    The agent whose activity to open, from search or get.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class OpenAgentActivityPageResult(TypedDict):
+    agentId: str
+
 class OpenAgentPageInput(TypedDict):
     agentId: str
     '\n    Agent identifier.\n    '
@@ -5206,8 +5465,6 @@ class OpenApprovalsInput(TypedDict):
     '\n    Optional media-buy id to open directly in the queue.\n    '
     buyerAccountId: NotRequired[int]
     '\n    The buyer Account id that disambiguates a buyer-scoped media-buy id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     creativeId: NotRequired[str]
     '\n    Legacy creative id to focus only when exactly one loaded review version matches. Prefer reviewRef.\n    '
     reviewRef: NotRequired[str]
@@ -5221,14 +5478,12 @@ class OpenApprovalsResult(TypedDict):
 class OpenApprovalsResultParams(TypedDict):
     mediaBuyId: NotRequired[str]
     '\n    Optional media-buy id to open directly in the queue.\n    '
-    buyerCustomerId: NotRequired[int]
+    buyerAccountId: NotRequired[int]
     '\n    Optional buyer customer id that disambiguates a buyer-scoped media-buy id.\n    '
     creativeId: NotRequired[str]
     '\n    Legacy creative id to focus only when exactly one loaded review version matches. Prefer reviewRef.\n    '
     reviewRef: NotRequired[str]
     '\n    Exact reviewRef from the approval queue; focuses one creative review version.\n    '
-    buyerAccountId: NotRequired[int]
-    '\n    The buyer Account id; the same number as buyerCustomerId.\n    '
 
 class OpenCampaignReceiptInput(TypedDict):
     campaignId: str
@@ -5296,8 +5551,6 @@ class OpenCampaignReceiptResultReceiptMediaBuysItem(TypedDict):
     '\n    Media buy id.\n    '
     name: str
     '\n    Media buy name.\n    '
-    sellerId: NotRequired[str]
-    '\n    Seller the buy is placed with.\n    '
     sellerAccountId: NotRequired[int]
     '\n    The seller Account id; not the Storefront id beside it.\n    '
     sellerName: NotRequired[str]
@@ -5394,7 +5647,7 @@ class OpenCampaignsPageSuccessPageHumanHandoffRequiredAccount(TypedDict):
     name: str
 
 class OpenCampaignsPageSuccessPageHumanHandoffRequiredPage(TypedDict):
-    resourceUri: Literal["ui://agentic-api/conversation-history/mcp-app.html", "ui://agentic-api/agent-v2/mcp-app.html", "ui://agentic-api/developer-home/mcp-app.html", "ui://agentic-api/agents/mcp-app.html", "ui://agentic-api/create-agent/mcp-app.html", "ui://agentic-api/claim-agent/mcp-app.html", "ui://agentic-api/configure-agent-connection/mcp-app.html", "ui://agentic-api/register-agent-observed-revision/mcp-app.html", "ui://agentic-api/buyer-account-admission/mcp-app.html", "ui://agentic-api/tars-org-supply-asks/mcp-app.html", "ui://agentic-api/tars-run-rate/mcp-app.html", "ui://agentic-api/tars-marketing-email-library/mcp-app.html", "ui://agentic-api/tars-approved-deck-modules/mcp-app.html", "ui://agentic-api/tars-marketing-email-operations/mcp-app.html", "ui://agentic-api/business-rules/mcp-app.html", "ui://agentic-api/demo-storefront/mcp-app.html", "ui://agentic-api/agent-source-credentials/mcp-app.html", "ui://agentic-api/property-roster/mcp-app.html", "ui://agentic-api/seller-account-feed/mcp-app.html", "ui://agentic-api/esa-signals/mcp-app.html", "ui://agentic-api/media-buy-retry/mcp-app.html", "ui://agentic-api/inventory-selector/mcp-app.html", "ui://agentic-api/modular-inventory-source/mcp-app.html", "ui://agentic-api/modular-connect/mcp-app.html", "ui://agentic-api/source-discovery-preview/mcp-app.html", "ui://agentic-api/partner-connection/mcp-app.html", "ui://agentic-api/agent-sources/mcp-app.html", "ui://agentic-api/agent-overview/mcp-app.html", "ui://agentic-api/agent-webhooks/mcp-app.html", "ui://agentic-api/modular-avails-commit/mcp-app.html", "ui://agentic-api/plan-billing/mcp-app.html", "ui://agentic-api/connections/mcp-app.html", "ui://agentic-api/creative-engines/mcp-app.html", "ui://agentic-api/all-advertisers-home/mcp-app.html", "ui://agentic-api/add-advertiser/mcp-app.html", "ui://agentic-api/campaigns/mcp-app.html", "ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html", "ui://agentic-api/creative-library-v3/mcp-app.html", "ui://agentic-api/upload-creative-asset/mcp-app.html", "ui://agentic-api/creative-composer-task/mcp-app.html", "ui://agentic-api/variant-gallery/mcp-app.html", "ui://agentic-api/seller-setup/mcp-app.html", "ui://agentic-api/approvals/mcp-app.html", "ui://agentic-api/notifications/mcp-app.html", "ui://agentic-api/buyer-notifications/mcp-app.html", "ui://agentic-api/buyer-webhooks/mcp-app.html", "ui://agentic-api/proposal-pass-v3/mcp-app.html", "ui://agentic-api/sessions/mcp-app.html", "ui://agentic-api/seller-dashboard/mcp-app.html", "ui://agentic-api/seller-dashboard-v3/mcp-app.html", "ui://agentic-api/product-marketing-v3/mcp-app.html", "ui://agentic-api/library/mcp-app.html", "ui://agentic-api/integrations/mcp-app.html", "ui://agentic-api/release-notes/mcp-app.html", "ui://agentic-api/playbook/mcp-app.html", "ui://agentic-api/media-kit/mcp-app.html", "ui://agentic-api/business-profile/mcp-app.html", "ui://agentic-api/buyer-discounts/mcp-app.html", "ui://agentic-api/esa-sync-diagnostics/mcp-app.html", "ui://agentic-api/esa-inventory-source/mcp-app.html", "ui://agentic-api/source-diagnostics/mcp-app.html", "ui://agentic-api/sponsored-buyers/mcp-app.html", "ui://agentic-api/pending-operations/mcp-app.html", "ui://agentic-api/storefront-briefs/mcp-app.html", "ui://agentic-api/activity-log/mcp-app.html", "ui://agentic-api/merchandising-simulator/mcp-app.html", "ui://agentic-api/media-buys/mcp-app.html", "ui://agentic-api/media-buy-timeline/mcp-app.html", "ui://agentic-api/components/mcp-app.html", "ui://agentic-api/seller-accounts/mcp-app.html"]
+    resourceUri: Literal["ui://agentic-api/conversation-history/mcp-app.html", "ui://agentic-api/agent-v2/mcp-app.html", "ui://agentic-api/developer-home/mcp-app.html", "ui://agentic-api/agents/mcp-app.html", "ui://agentic-api/create-agent/mcp-app.html", "ui://agentic-api/claim-agent/mcp-app.html", "ui://agentic-api/configure-agent-connection/mcp-app.html", "ui://agentic-api/register-agent-observed-revision/mcp-app.html", "ui://agentic-api/buyer-account-admission/mcp-app.html", "ui://agentic-api/tars-org-supply-asks/mcp-app.html", "ui://agentic-api/tars-run-rate/mcp-app.html", "ui://agentic-api/tars-marketing-email-library/mcp-app.html", "ui://agentic-api/tars-approved-deck-modules/mcp-app.html", "ui://agentic-api/tars-marketing-email-operations/mcp-app.html", "ui://agentic-api/business-rules/mcp-app.html", "ui://agentic-api/demo-storefront/mcp-app.html", "ui://agentic-api/agent-source-credentials/mcp-app.html", "ui://agentic-api/property-roster/mcp-app.html", "ui://agentic-api/seller-account-feed/mcp-app.html", "ui://agentic-api/esa-signals/mcp-app.html", "ui://agentic-api/media-buy-retry/mcp-app.html", "ui://agentic-api/inventory-selector/mcp-app.html", "ui://agentic-api/modular-inventory-source/mcp-app.html", "ui://agentic-api/modular-connect/mcp-app.html", "ui://agentic-api/source-discovery-preview/mcp-app.html", "ui://agentic-api/partner-connection/mcp-app.html", "ui://agentic-api/agent-sources/mcp-app.html", "ui://agentic-api/agent-overview/mcp-app.html", "ui://agentic-api/agent-webhooks/mcp-app.html", "ui://agentic-api/agent-activity/mcp-app.html", "ui://agentic-api/modular-avails-commit/mcp-app.html", "ui://agentic-api/plan-billing/mcp-app.html", "ui://agentic-api/connections/mcp-app.html", "ui://agentic-api/creative-engines/mcp-app.html", "ui://agentic-api/all-advertisers-home/mcp-app.html", "ui://agentic-api/add-advertiser/mcp-app.html", "ui://agentic-api/buyer-setup/mcp-app.html", "ui://agentic-api/campaigns/mcp-app.html", "ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html", "ui://agentic-api/creative-library-v3/mcp-app.html", "ui://agentic-api/upload-creative-asset/mcp-app.html", "ui://agentic-api/creative-composer-task/mcp-app.html", "ui://agentic-api/variant-gallery/mcp-app.html", "ui://agentic-api/seller-setup/mcp-app.html", "ui://agentic-api/approvals/mcp-app.html", "ui://agentic-api/notifications/mcp-app.html", "ui://agentic-api/buyer-notifications/mcp-app.html", "ui://agentic-api/buyer-webhooks/mcp-app.html", "ui://agentic-api/proposal-pass-v3/mcp-app.html", "ui://agentic-api/sessions/mcp-app.html", "ui://agentic-api/seller-dashboard/mcp-app.html", "ui://agentic-api/seller-dashboard-v3/mcp-app.html", "ui://agentic-api/product-marketing-v3/mcp-app.html", "ui://agentic-api/library/mcp-app.html", "ui://agentic-api/integrations/mcp-app.html", "ui://agentic-api/release-notes/mcp-app.html", "ui://agentic-api/playbook/mcp-app.html", "ui://agentic-api/media-kit/mcp-app.html", "ui://agentic-api/business-profile/mcp-app.html", "ui://agentic-api/buyer-discounts/mcp-app.html", "ui://agentic-api/esa-sync-diagnostics/mcp-app.html", "ui://agentic-api/esa-inventory-source/mcp-app.html", "ui://agentic-api/source-diagnostics/mcp-app.html", "ui://agentic-api/sponsored-buyers/mcp-app.html", "ui://agentic-api/pending-operations/mcp-app.html", "ui://agentic-api/storefront-briefs/mcp-app.html", "ui://agentic-api/activity-log/mcp-app.html", "ui://agentic-api/merchandising-simulator/mcp-app.html", "ui://agentic-api/media-buys/mcp-app.html", "ui://agentic-api/media-buy-timeline/mcp-app.html", "ui://agentic-api/components/mcp-app.html", "ui://agentic-api/seller-accounts/mcp-app.html"]
     advertiserId: NotRequired[str]
     campaignId: NotRequired[str]
     capability: Literal["reauthenticate_in_browser", "manage_webhooks"]
@@ -5419,50 +5672,18 @@ class OpenCampaignsPageSuccessPageHumanHandoffUnavailableAccount(TypedDict):
     id: int
     name: str
 
-class OpenConnectionsPageInput(TypedDict):
-    advertiserId: NotRequired[str]
-    '\n    Canonical advertiser ID; omit for account scope.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads.\n    '
-    connectionId: NotRequired[str]
-    '\n    Connection ID to open.\n    '
-    accountId: NotRequired[int | str]
-    '\n    Apostra accountId this call runs in, from get_status.\n    '
-    sellerAccountId: NotRequired[int]
-    '\n    The seller\'s Account id. Not the seller object\'s id or any sellerId, which are different numbers.\n    '
-    connectionAction: NotRequired[Literal["connect"]]
-    '\n    Open seller setup; requires sellerId and user confirmation.\n    '
-    connectionAccountId: NotRequired[str]
-    '\n    Its accounts[].id; opens event sources and audiences.\n    '
-
-class OpenConnectionsPageResult(TypedDict):
-    advertiserId: NotRequired[str]
-    '\n    Opened advertiser ID when advertiser-scoped.\n    '
-    sellerId: NotRequired[str]
-    '\n    Opened seller ID when seller-scoped.\n    '
-    sellerAccountId: NotRequired[int]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
-    connectionAction: NotRequired[Literal["connect"]]
-    '\n    Requested seller action when supplied.\n    '
-    connectionId: NotRequired[str]
-    '\n    Opened connection ID.\n    '
-    accountId: NotRequired[str]
-    '\n    Opened account ID.\n    '
-
 class OpenCreativeEnginesPageInput(TypedDict):
-    engineId: NotRequired[str]
-    '\n    Deprecated: send engineAccountId, from the engineAccountId field on creative engine reads. Still focuses the engine with this id.\n    '
+    engineId: NotRequired[JsonValue]
     connectionId: NotRequired[str]
     '\n    Optional creative-engine connection focus hint.\n    '
     engineAccountId: NotRequired[int]
-    '\n    The creative engine\'s Account id. Not the engine object\'s id or any engineId, which are different numbers.\n    '
+    '\n    The creative engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
     connectionAction: NotRequired[Literal["connect"]]
     '\n    Focus the secure setup control for the selected engine. The buyer must start setup in the Page.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
 class OpenCreativeEnginesPageResult(TypedDict):
-    engineId: NotRequired[str]
     engineAccountId: NotRequired[int]
     '\n    The creative engine Account id: the Account that owns this engine. Send it as engineAccountId.\n    '
     connectionId: NotRequired[str]
@@ -5532,53 +5753,40 @@ class OpenDeveloperHomeResult(TypedDict):
 class OpenMediaBuysPageInput(TypedDict):
     accountRelationshipId: NotRequired[str]
     '\n    Seller-owned account relationship to focus.\n    '
-    sellerAccountMappingId: NotRequired[OpenMediaBuysPageRequestSellerAccountMappingId]
+    sellerAccountMappingId: NotRequired[str]
     '\n    Seller account mapping to focus: the id of a seller account mapping row, not a seller Account id.\n    '
-    sellerAccountId: NotRequired[OpenMediaBuysPageRequestSellerAccountId]
-    '\n    Being retired: send sellerAccountMappingId. This holds a seller account mapping id, not a seller Account id.\n    '
     view: NotRequired[Literal["media_buys", "creatives", "delivery"]]
     '\n    Optional relationship view to open.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
-
-OpenMediaBuysPageRequestSellerAccountId: TypeAlias = str
-
-OpenMediaBuysPageRequestSellerAccountMappingId: TypeAlias = str
 
 class OpenMediaBuysPageResult(TypedDict):
     params: OpenMediaBuysPageResultParams
 
 class OpenMediaBuysPageResultParams(TypedDict):
     accountRelationshipId: NotRequired[str]
-    sellerAccountMappingId: NotRequired[OpenMediaBuysPageSuccessParamsSellerAccountMappingId]
-    sellerAccountId: NotRequired[OpenMediaBuysPageSuccessParamsSellerAccountId]
+    sellerAccountMappingId: NotRequired[str]
     view: NotRequired[Literal["media_buys", "creatives", "delivery"]]
-
-OpenMediaBuysPageSuccessParamsSellerAccountId: TypeAlias = str
-
-OpenMediaBuysPageSuccessParamsSellerAccountMappingId: TypeAlias = str
 
 class OpenMediaPartnersPageInput(TypedDict):
     advertiserId: NotRequired[str]
     '\n    Canonical advertiser ID; omit for account scope.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads.\n    '
     connectionId: NotRequired[str]
     '\n    Connection ID to open.\n    '
     connectionAccountId: NotRequired[str]
     '\n    Its accounts[].id; opens event sources and audiences.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    The seller\'s Account id. Not the seller object\'s id or any sellerId, which are different numbers.\n    '
+    '\n    The seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     connectionAction: NotRequired[Literal["connect"]]
-    '\n    Open seller setup; requires sellerId and user confirmation.\n    '
+    '\n    Open seller setup; requires sellerAccountId and user confirmation.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+OpenConnectionsPageInput: TypeAlias = OpenMediaPartnersPageInput
 
 class OpenMediaPartnersPageResult(TypedDict):
     advertiserId: NotRequired[str]
     '\n    Opened advertiser ID when advertiser-scoped.\n    '
-    sellerId: NotRequired[str]
-    '\n    Opened seller ID when seller-scoped.\n    '
     sellerAccountId: NotRequired[int]
     '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
     connectionAction: NotRequired[Literal["connect"]]
@@ -5587,6 +5795,8 @@ class OpenMediaPartnersPageResult(TypedDict):
     '\n    Opened connection ID.\n    '
     accountId: NotRequired[str]
     '\n    Opened account ID.\n    '
+
+OpenConnectionsPageResult: TypeAlias = OpenMediaPartnersPageResult
 
 class OpenPageInput(TypedDict):
     relationshipId: NotRequired[str]
@@ -5882,15 +6092,11 @@ class RequestProposalsInput(TypedDict):
     expectedCampaignRevision: int
     '\n    revision from the last get. Rejected with REVISION_CONFLICT if the campaign has changed since.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    Optional seller Account ids, not seller object ids or sellerIds, which are different numbers. Intersect the campaign seller list. Omit for its list. To contact all eligible sellers, omit sellerIds and sellerAccountIds and set confirmBroadcast true.\n    '
-    sellerIds: NotRequired[list[str]]
-    '\n    Deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads. Optional seller IDs; intersect the campaign seller list. Omit for its list. To contact all eligible sellers, omit sellerIds and set confirmBroadcast true.\n    '
+    '\n    Optional seller Account ids, not seller object ids, which are a different number. Intersect the campaign seller list. Omit for its list. To contact all eligible sellers, omit sellerAccountIds and set confirmBroadcast true.\n    '
     confirmBroadcast: NotRequired[bool]
-    '\n    Required as true only when neither sellerIds nor a campaign seller list applies, before contacting all eligible sellers. Ignored when a selector applies.\n    '
+    '\n    Required as true only when neither sellerAccountIds nor a campaign seller list applies, before contacting all eligible sellers. Ignored when a selector applies.\n    '
     expectedSellerAccountId: NotRequired[int]
-    '\n    The seller\'s Account id, not a seller object id or expectedSellerId, which are different numbers. Optional fail-closed seller check; never grants access. Requires matching current server authority.\n    '
-    expectedSellerId: NotRequired[str]
-    '\n    Deprecated: send expectedSellerAccountId, from the sellerAccountId field on seller reads. Optional fail-closed seller check; never grants access. Requires matching current server authority.\n    '
+    '\n    The seller\'s Account id, not a seller object id, which is a different number. Optional fail-closed seller check; never grants access. Requires matching current server authority.\n    '
     evaluation: NotRequired[RequestProposalsInputEvaluation]
     '\n    Evaluation instructions, inline or by saved policyId. Not yet applied to results.\n    '
     idempotencyKey: NotRequired[str]
@@ -5931,16 +6137,14 @@ class RequestProposalsResult(TypedDict):
 
 class RequestProposalsResultAppliedCohort(TypedDict):
     source: Literal["requested", "campaign", "authorized", "broadcast"]
-    sellerIds: list[str]
     sellerAccountIds: NotRequired[list[int]]
-    '\n    The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.\n    '
+    '\n    The seller Account ids of the sellers in the list. Send them as sellerAccountIds.\n    '
     sellerIdsTotal: int
     sellerIdsTruncated: bool
 
 class RequestProposalsResultCapabilityDescriptorPage(TypedDict):
-    sellerId: str
     sellerAccountId: NotRequired[RequestProposalsSuccessCapabilityDescriptorPageSellerAccountId]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.\n    '
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
     productId: str
     offset: float
     descriptors: list[RequestProposalsResultCapabilityDescriptorPageDescriptorsItem]
@@ -5963,9 +6167,8 @@ class RequestProposalsResultCapabilityDescriptorPageDescriptorsItem(TypedDict):
 
 class RequestProposalsResultCapabilityPage(TypedDict):
     field: Literal["demographicTargeting", "overlaySupport"]
-    sellerId: str
     sellerAccountId: NotRequired[RequestProposalsSuccessCapabilityPageSellerAccountId]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.\n    '
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
     productId: str
     pagePath: NotRequired[list[str]]
     offset: NotRequired[float]
@@ -5999,15 +6202,13 @@ class RequestProposalsResultInclusionPropertyList(TypedDict):
 
 class RequestProposalsResultInclusionPropertyListIncompletePropertiesItem(TypedDict):
     domain: str
-    sellerId: str
     sellerAccountId: NotRequired[RequestProposalsSuccessInclusionPropertyListIncompletePropertiesItemSellerAccountId]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.\n    '
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
 
 class RequestProposalsResultInclusionPropertyListMissingPropertiesItem(TypedDict):
     domain: str
-    sellerId: str
     sellerAccountId: NotRequired[RequestProposalsSuccessInclusionPropertyListMissingPropertiesItemSellerAccountId]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.\n    '
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
     reason: Literal["not_in_seller_scope", "seller_reported_no_match", "seller_unsupported_filter"]
 
 class RequestProposalsResultPage(TypedDict):
@@ -6017,9 +6218,8 @@ class RequestProposalsResultPage(TypedDict):
     nextCursor: NotRequired[str]
 
 class RequestProposalsResultPerSellerItem(TypedDict):
-    sellerId: str
     sellerAccountId: NotRequired[RequestProposalsSuccessPerSellerItemSellerAccountId]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.\n    '
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
     sellerName: NotRequired[str]
     status: Literal["quoted", "products", "failed"]
     proposalIds: NotRequired[list[str]]
@@ -6073,9 +6273,8 @@ class RequestProposalsResultPerSellerItemProductsItem(TypedDict):
     productId: str
     name: str
     description: NotRequired[str]
-    storefrontId: str
     sellerAccountId: NotRequired[RequestProposalsSuccessPerSellerItemProductsItemSellerAccountId]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.\n    '
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
     salesAgentId: str
     inventorySourceId: NotRequired[str]
     deliveryType: NotRequired[Literal["guaranteed", "non_guaranteed"]]
@@ -6129,9 +6328,8 @@ class RequestProposalsResultSkippedSellers(TypedDict):
     truncated: bool
 
 class RequestProposalsResultSkippedSellersSellersItem(TypedDict):
-    sellerId: str
     sellerAccountId: NotRequired[RequestProposalsSuccessSkippedSellersSellersItemSellerAccountId]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.\n    '
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
     sellerName: NotRequired[str]
     reason: Literal["channel_mismatch", "not_transactable", "wholesale_only"]
     sellerChannels: list[str]
@@ -6192,10 +6390,8 @@ RequestProposalsSuccessSkippedSellersSellersItemSellerAccountId: TypeAlias = int
 class RequestSellerReportingUpdateInput(TypedDict):
     mediaBuyId: str
     '\n    Seller media-buy identifier.\n    '
-    buyerAccountId: NotRequired[int]
+    buyerAccountId: int
     '\n    Buyer Account id that owns the media buy.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     action: RequestSellerReportingUpdateInputActionKindRefresh | RequestSellerReportingUpdateInputActionKindReplay
     '\n    Refresh current reporting or replay a bounded day range.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -6308,9 +6504,11 @@ class SaveAccountInput(TypedDict):
     isArchived: NotRequired[bool]
     '\n    true archives the Account and false restores it, each after website approval. Needs id and reason; send it alone.\n    '
     accountType: NotRequired[Literal["buyer", "seller", "developer"]]
-    '\n    Create only: the kind of the new Account. A Developer account owns agents.\n    '
+    '\n    Create only: the kind of the new Account. An Agents account owns agents.\n    '
+    sellingMode: NotRequired[Literal["listing", "storefront"]]
+    '\n    Create a seller as listing or storefront; get_status says what the plan allows. Not for other types.\n    '
     operatingMode: NotRequired[Literal["LISTING_ONLY", "AGENTIC_MEDIA_COMPANY"]]
-    '\n    Create only, and required for a seller: the Seller product. Omit it for a buyer or developer, or for a demoStorefront.\n    '
+    '\n    Deprecated; use sellingMode.\n    '
     demoStorefront: NotRequired[Literal[True]]
     '\n    Create only, a seller: create a platform Demo Storefront, which uses no paid workspace. Only a Scope3 platform operator naming a customer Organization may.\n    '
     customerDomain: NotRequired[str | None]
@@ -6338,6 +6536,7 @@ class SaveAccountResultActionPreview(TypedDict):
     id: NotRequired[str]
     newName: NotRequired[str]
     accountType: NotRequired[Literal["buyer", "seller", "developer"]]
+    sellingMode: NotRequired[Literal["listing", "storefront"] | None]
     operatingMode: NotRequired[Literal["LISTING_ONLY", "AGENTIC_MEDIA_COMPANY"] | None]
     consumesPaidWorkspace: NotRequired[bool]
     blockerReason: NotRequired[str | None]
@@ -6497,6 +6696,8 @@ class SaveAdvertiserInput(TypedDict):
     '\n    Advertiser name. Required when creating.\n    '
     brand: NotRequired[str]
     '\n    Brand domain (e.g. "nike.com") or URL. Required when creating. Resolved via AdCP brand registry.\n    '
+    brand_id: NotRequired[str]
+    '\n    Create only: AdCP brand_id of a sub-brand the brand publishes.\n    '
     publicBrand: NotRequired[bool]
     '\n    Require a published brand.json or AAO-hosted profile when linking brand; no inferred branding.\n    '
     identityContract: NotRequired[Literal["confirmed-v1"]]
@@ -6527,8 +6728,8 @@ class SaveAdvertiserInput(TypedDict):
     '\n    Create-only: reuse one stable key for a logical create; use a new correlationId each attempt.\n    '
     tracking: NotRequired[SaveAdvertiserInputTracking]
     '\n    Advertiser tracker defaults, macros, and URL parameters inherited by campaigns and creatives.\n    '
-    labels: NotRequired[dict[str, list[str]]]
-    '\n    Replace labels for each supplied dimension; [] clears.\n    '
+    labels: NotRequired[list[SaveAdvertiserRequestLabelWriteEntry]]
+    '\n    Replace labels per dimension; empty values clears.\n    '
     brandProfile: NotRequired[SaveAdvertiserInputBrandProfile]
     '\n    Advertiser-stated brand kit, voice rules, banned terms, disclaimers and pages. Save brandProfile in its own save_advertiser call with advertiserId. Available only in the V3 beta with Creative Engines access. `stated: null` clears stated values; `stated.statedAbsence` records that the advertiser confirmed it has no kit, voice or disclaimers.\n    '
     resolveBrand: NotRequired[str]
@@ -6920,6 +7121,12 @@ SaveAdvertiserRequestFootprintProposalBrandCountries: TypeAlias = list[str]
 
 SaveAdvertiserRequestFootprintProposalChannels: TypeAlias = list[Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]]
 
+class SaveAdvertiserRequestLabelWriteEntry(TypedDict):
+    dimension: str
+    '\n    Key of a dimension, such as audience or vertical.\n    '
+    values: list[str]
+    '\n    Value slugs; [] clears.\n    '
+
 class SaveAdvertiserResultActionAccountAssigned(TypedDict):
     account: SaveAdvertiserSuccessAccount
     action: Literal["account_assigned"]
@@ -7002,9 +7209,8 @@ class SaveAdvertiserResultActionPreviewImpactSellersWillSeeNewAccountSellersItem
 
 class SaveAdvertiserResultActionPreviewImpactSellersWillSeeNewAccountSellersItemKindStorefront(TypedDict):
     kind: Literal["storefront"]
-    storefrontId: str
     sellerAccountId: NotRequired[int]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.\n    '
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
     name: NotRequired[str]
 
 class SaveAdvertiserResultActionReportingBucketUpdated(TypedDict):
@@ -7047,8 +7253,10 @@ class SaveAdvertiserSuccessAdvertiser(TypedDict):
     sandbox: bool
     primaryCurrency: str
     brandCountries: JsonValue
+    brandCountriesKnown: bool
     preferredTimezone: JsonValue
     channels: list[JsonValue]
+    channelsKnown: bool
     currencyLocked: bool
     reportingTimezoneLocked: bool
     brand: NotRequired[str]
@@ -7176,6 +7384,7 @@ class SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHref
     connection: NotRequired[SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHrefAndObjectRoleObjectConnection]
     test: NotRequired[SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHrefAndObjectRoleObjectTest]
     endpointControl: NotRequired[Literal["unverified", "verified"]]
+    notReadYet: NotRequired[SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHrefAndObjectRoleObjectNotReadYetValue | None]
 
 class SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHrefAndObjectRoleObjectConnection(TypedDict):
     state: Literal["connected"]
@@ -7189,6 +7398,9 @@ class SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHref
     salesModeProvenance: Literal["AGENT_DECLARED", "OWNER_CONFIRMED"] | None
     displayName: str
     displayNameSource: Literal["agent", "host", "developer"]
+
+class SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHrefAndObjectRoleObjectNotReadYetValue(TypedDict):
+    reason: Literal["authentication_required"]
 
 class SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHrefAndObjectRoleObjectReadingValue(TypedDict):
     agentUrl: str | None
@@ -7256,6 +7468,8 @@ class SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObject(TypedDict):
     reading: SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectReading
     inferred: SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectInferred
     needs: list[Literal["kind", "salesMode"]]
+    waitingAgents: list[SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectWaitingAgentsItem]
+    notReadYet: NotRequired[SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectNotReadYet]
 
 class SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectInferred(TypedDict):
     kind: SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectInferredKind | None
@@ -7270,6 +7484,9 @@ SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectInferredAlternativeKindsI
 
 SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectInferredKind: TypeAlias = Literal["sales", "creative", "buyer"]
 
+class SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectNotReadYet(TypedDict):
+    reason: Literal["authentication_required"]
+
 class SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectReading(TypedDict):
     agentUrl: str | None
     transport: Literal["mcp"] | None
@@ -7278,6 +7495,10 @@ class SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectReading(TypedDict):
     buyingModes: list[str]
     alsoDeclares: list[str]
     brandJsonUrl: str | None
+
+class SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectWaitingAgentsItem(TypedDict):
+    agentId: str
+    displayName: str
 
 class SaveAskInputKindCreate(TypedDict):
     expectedAccountId: NotRequired[int | str]
@@ -7833,7 +8054,9 @@ class SaveBuyerAgentInput(TypedDict):
     displayName: NotRequired[str]
     '\n    Name for creation or rename.\n    '
     kind: NotRequired[Literal["external", "hosted"]]
-    '\n    external is available. hosted creation is not available yet.\n    '
+    '\n    external (default), or hosted: an orchestrator Apostra runs. hosted needs idempotencyKey.\n    '
+    idempotencyKey: NotRequired[str]
+    '\n    New UUID for a hosted create; a retry returns the same agent.\n    '
     access: NotRequired[SaveBuyerAgentInputAccess]
     '\n    Replace exact grants.\n    '
     lifecycleState: NotRequired[Literal["active", "suspended", "retired"]]
@@ -8017,6 +8240,8 @@ class SaveBuyerAgentSuccessBuyerAgentNoun(TypedDict):
     displayName: str
     lifecycleState: Literal["active", "suspended", "retired"]
     registeredAt: str
+    accountId: NotRequired[int | None]
+    hosting: NotRequired[Literal["on_demand", "always_on"] | None]
     credentialHandoff: NotRequired[SaveBuyerAgentSuccessBuyerAgentNounCredentialHandoff]
     credentials: list[SaveBuyerAgentSuccessBuyerAgentCredential]
     credentialCount: int
@@ -8145,9 +8370,7 @@ class SaveCampaignInput(TypedDict):
     confirmLaunch: NotRequired[bool]
     '\n    Use with desiredPhase: active. Omit = preview what will launch. true = execute.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    Seller Account ids, not seller object ids, sellerIds or platform IDs, which are different numbers. Unknown or inaccessible sellers are rejected and never omitted.\n    '
-    sellerIds: NotRequired[list[str]]
-    '\n    Deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads. Seller platform IDs returned by campaign reads, or numeric seller IDs. Unknown or inaccessible sellers are rejected and never omitted.\n    '
+    '\n    Seller Account ids, not seller object ids or platform IDs, which are different numbers. Unknown or inaccessible sellers are rejected and never omitted.\n    '
     creativeIds: NotRequired[list[str]]
     '\n    All creatives on this campaign; replaces membership, a missing id detaches. Omit to keep.\n    '
     autonomy: NotRequired[SaveCampaignInputAutonomy]
@@ -8176,8 +8399,8 @@ class SaveCampaignInput(TypedDict):
     '\n    Inventory execution groups. Use a preset or custom AdCP dimensions; null removes all groups.\n    '
     audienceConfig: NotRequired[SaveCampaignInputAudienceConfig]
     '\n    Campaign audiences. deleteMissing: true replaces each list. Seller sync is unavailable (AI-10203).\n    '
-    labels: NotRequired[dict[str, list[str]]]
-    '\n    Replace labels for each supplied dimension; [] clears.\n    '
+    labels: NotRequired[list[SaveCampaignRequestLabelWriteEntry]]
+    '\n    Replace labels per dimension; empty values clears.\n    '
     campaignPropertyListId: NotRequired[str | None]
     '\n    Campaign\'s own advertiser-owned include list; narrows the advertiser\'s. Null clears only this.\n    '
     campaignPropertyListExcludeId: NotRequired[str | None]
@@ -8671,6 +8894,12 @@ SaveCampaignRequestChannelGroupsItemChannelGroupId: TypeAlias = str
 
 SaveCampaignRequestChannelGroupsItemName: TypeAlias = str
 
+class SaveCampaignRequestLabelWriteEntry(TypedDict):
+    dimension: str
+    '\n    Key of a dimension, such as audience or vertical.\n    '
+    values: list[str]
+    '\n    Value slugs; [] clears.\n    '
+
 SaveCampaignRequestTargetingDaypartsItemStrength: TypeAlias = Literal["required", "preferred"]
 
 SaveCampaignRequestTargetingDemographicsAgeItemStrength: TypeAlias = Literal["required", "preferred"]
@@ -9103,9 +9332,8 @@ class SaveCampaignResultActionActivated(TypedDict):
     membership: NotRequired[SaveCampaignSuccessMembership]
     execution: NotRequired[SaveCampaignSuccessExecution]
     warnings: NotRequired[SaveCampaignSuccessWarnings]
-    skippedSellerIds: NotRequired[SaveCampaignSuccessSkippedSellerIds]
     skippedSellerAccountIds: NotRequired[SaveCampaignSuccessSkippedSellerAccountIds]
-    '\n    The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.\n    '
+    '\n    The seller Account ids of the sellers in the list. Send them as sellerAccountIds.\n    '
     propertyListAttachment: NotRequired[SaveCampaignSuccessPropertyListAttachment]
     propertyListClear: NotRequired[SaveCampaignSuccessPropertyListClear]
     campaignPropertyLists: NotRequired[SaveCampaignSuccessCampaignPropertyLists]
@@ -9127,9 +9355,8 @@ class SaveCampaignResultActionCanceled(TypedDict):
     membership: NotRequired[SaveCampaignSuccessMembership]
     execution: NotRequired[SaveCampaignSuccessExecution]
     warnings: NotRequired[SaveCampaignSuccessWarnings]
-    skippedSellerIds: NotRequired[SaveCampaignSuccessSkippedSellerIds]
     skippedSellerAccountIds: NotRequired[SaveCampaignSuccessSkippedSellerAccountIds]
-    '\n    The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.\n    '
+    '\n    The seller Account ids of the sellers in the list. Send them as sellerAccountIds.\n    '
     propertyListAttachment: NotRequired[SaveCampaignSuccessPropertyListAttachment]
     propertyListClear: NotRequired[SaveCampaignSuccessPropertyListClear]
     campaignPropertyLists: NotRequired[SaveCampaignSuccessCampaignPropertyLists]
@@ -9146,9 +9373,8 @@ class SaveCampaignResultActionCancellationRequested(TypedDict):
     membership: NotRequired[SaveCampaignSuccessMembership]
     execution: NotRequired[SaveCampaignSuccessExecution]
     warnings: NotRequired[SaveCampaignSuccessWarnings]
-    skippedSellerIds: NotRequired[SaveCampaignSuccessSkippedSellerIds]
     skippedSellerAccountIds: NotRequired[SaveCampaignSuccessSkippedSellerAccountIds]
-    '\n    The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.\n    '
+    '\n    The seller Account ids of the sellers in the list. Send them as sellerAccountIds.\n    '
     propertyListAttachment: NotRequired[SaveCampaignSuccessPropertyListAttachment]
     propertyListClear: NotRequired[SaveCampaignSuccessPropertyListClear]
     campaignPropertyLists: NotRequired[SaveCampaignSuccessCampaignPropertyLists]
@@ -9165,9 +9391,8 @@ class SaveCampaignResultActionCreated(TypedDict):
     membership: NotRequired[SaveCampaignSuccessMembership]
     execution: NotRequired[SaveCampaignSuccessExecution]
     warnings: NotRequired[SaveCampaignSuccessWarnings]
-    skippedSellerIds: NotRequired[SaveCampaignSuccessSkippedSellerIds]
     skippedSellerAccountIds: NotRequired[SaveCampaignSuccessSkippedSellerAccountIds]
-    '\n    The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.\n    '
+    '\n    The seller Account ids of the sellers in the list. Send them as sellerAccountIds.\n    '
     propertyListAttachment: NotRequired[SaveCampaignSuccessPropertyListAttachment]
     propertyListClear: NotRequired[SaveCampaignSuccessPropertyListClear]
     campaignPropertyLists: NotRequired[SaveCampaignSuccessCampaignPropertyLists]
@@ -9242,9 +9467,8 @@ class SaveCampaignResultActionRestored(TypedDict):
     membership: NotRequired[SaveCampaignSuccessMembership]
     execution: NotRequired[SaveCampaignSuccessExecution]
     warnings: NotRequired[SaveCampaignSuccessWarnings]
-    skippedSellerIds: NotRequired[SaveCampaignSuccessSkippedSellerIds]
     skippedSellerAccountIds: NotRequired[SaveCampaignSuccessSkippedSellerAccountIds]
-    '\n    The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.\n    '
+    '\n    The seller Account ids of the sellers in the list. Send them as sellerAccountIds.\n    '
     propertyListAttachment: NotRequired[SaveCampaignSuccessPropertyListAttachment]
     propertyListClear: NotRequired[SaveCampaignSuccessPropertyListClear]
     campaignPropertyLists: NotRequired[SaveCampaignSuccessCampaignPropertyLists]
@@ -9268,9 +9492,8 @@ class SaveCampaignResultActionUpdated(TypedDict):
     membership: NotRequired[SaveCampaignSuccessMembership]
     execution: NotRequired[SaveCampaignSuccessExecution]
     warnings: NotRequired[SaveCampaignSuccessWarnings]
-    skippedSellerIds: NotRequired[SaveCampaignSuccessSkippedSellerIds]
     skippedSellerAccountIds: NotRequired[SaveCampaignSuccessSkippedSellerAccountIds]
-    '\n    The seller Account ids of the sellers listed beside it. Send them as sellerAccountIds. Not the same numbers as the Storefront ids.\n    '
+    '\n    The seller Account ids of the sellers in the list. Send them as sellerAccountIds.\n    '
     propertyListAttachment: NotRequired[SaveCampaignSuccessPropertyListAttachment]
     propertyListClear: NotRequired[SaveCampaignSuccessPropertyListClear]
     campaignPropertyLists: NotRequired[SaveCampaignSuccessCampaignPropertyLists]
@@ -9526,8 +9749,6 @@ SaveCampaignSuccessServerTime: TypeAlias = str
 
 SaveCampaignSuccessSkippedSellerAccountIds: TypeAlias = list[int]
 
-SaveCampaignSuccessSkippedSellerIds: TypeAlias = list[str]
-
 SaveCampaignSuccessValue: TypeAlias = JsonValue
 
 SaveCampaignSuccessWarnings: TypeAlias = list[str]
@@ -9605,21 +9826,19 @@ class SaveConnectionInput(TypedDict):
     target: NotRequired[SaveConnectionInputTarget]
     '\n    Service to authorize. Existing connections cannot change target.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    The seller\'s Account id. Not the seller object\'s id or any sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[SaveConnectionRequestSellerId]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads.\n    '
+    '\n    The seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     connectionId: NotRequired[SaveConnectionRequestConnectionId]
     '\n    Connection ID.\n    '
     authorization: NotRequired[SaveConnectionInputAuthorization]
-    '\n    Authorize target, sellerId, or an existing connectionId.\n    '
+    '\n    Authorize target, sellerAccountId, or an existing connectionId.\n    '
     selection: NotRequired[SaveConnectionInputSelection]
-    '\n    Seller selection; requires seller target or sellerId.\n    '
+    '\n    Seller selection; requires seller target or sellerAccountId.\n    '
     advertiserActivation: NotRequired[SaveConnectionInputAdvertiserActivation]
-    '\n    Seller advertiser activation (limited rollout); requires seller target or sellerId.\n    '
+    '\n    Seller advertiser activation (limited rollout); requires seller target or sellerAccountId.\n    '
     billing: NotRequired[SaveConnectionInputBillingKindBillingParty | SaveConnectionInputBillingKindDirectBilling]
-    '\n    Seller billing; requires seller target or sellerId.\n    '
+    '\n    Seller billing; requires seller target or sellerAccountId.\n    '
     featurePolicy: NotRequired[SaveConnectionInputFeaturePolicy]
-    '\n    Seller buy/events/feeds policy; requires seller target or sellerId.\n    '
+    '\n    Seller buy/events/feeds policy; requires seller target or sellerAccountId.\n    '
     enhancedReporting: NotRequired[SaveConnectionInputEnhancedReporting]
     '\n    Set Enhanced Reporting for one account; requires connectionId.\n    '
     identitySelection: NotRequired[SaveConnectionInputIdentitySelection]
@@ -9700,13 +9919,11 @@ class SaveConnectionInputSelection(TypedDict):
 
 class SaveConnectionInputTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
-    '\n    Service role.\n    '
+    '\n    Whether the target is a seller or a creative engine.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id or target.id, which are different numbers.\n    '
+    '\n    For kind seller: the seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     engineAccountId: NotRequired[int]
-    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id or target.id, which are different numbers.\n    '
-    id: NotRequired[str]
-    '\n    Service ID. For kind seller, deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kind creative_engine, deprecated: send engineAccountId, from the engineAccountId field on creative engine reads.\n    '
+    '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 SaveConnectionRequestAdvertiserActivationAdvertiserId: TypeAlias = str
 
@@ -9727,8 +9944,6 @@ SaveConnectionRequestEnhancedReportingAccountId: TypeAlias = str
 SaveConnectionRequestIdentitySelectionAccountId: TypeAlias = str
 
 SaveConnectionRequestSelectedAccountId: TypeAlias = str
-
-SaveConnectionRequestSellerId: TypeAlias = str
 
 class SaveConnectionResultActionAccountSelected(TypedDict):
     action: Literal["account_selected"]
@@ -10115,8 +10330,8 @@ class SaveCreativeInput(TypedDict):
     '\n    Authored social copy slots.\n    '
     industry_identifiers: NotRequired[list[SaveCreativeInputIndustryIdentifiersItem]]
     '\n    AdCP industry IDs broadcast sellers require. Replaces the list.\n    '
-    labels: NotRequired[dict[str, list[str]]]
-    '\n    Dimension values; [] clears.\n    '
+    labels: NotRequired[list[SaveCreativeRequestLabelWriteEntry]]
+    '\n    Replace labels per dimension; empty values clears.\n    '
     isArchived: NotRequired[bool]
     '\n    true archives globally (frees the name); false is not supported.\n    '
     resync: NotRequired[Literal[True]]
@@ -10315,6 +10530,12 @@ SaveCreativeRequestDisplayTagUrl: TypeAlias = str
 SaveCreativeRequestFormatKind: TypeAlias = Literal["image", "html5", "display_tag", "image_carousel", "video_hosted", "video_vast", "audio_hosted", "audio_vast", "audio_daast", "sponsored_placement", "native_in_feed", "responsive_creative", "agent_placement", "seller_rendered_stateful_display", "coordinated_placements", "custom"]
 
 SaveCreativeRequestFormatParams: TypeAlias = dict[str, JsonValue]
+
+class SaveCreativeRequestLabelWriteEntry(TypedDict):
+    dimension: str
+    '\n    Key of a dimension, such as audience or vertical.\n    '
+    values: list[str]
+    '\n    Value slugs; [] clears.\n    '
 
 SaveCreativeRequestLandingPageUrl: TypeAlias = str
 
@@ -10556,10 +10777,8 @@ class SaveCreativeSessionInputDraftRenditionsItemRights(TypedDict):
     '\n    Asset from which rights are inherited.\n    '
 
 class SaveCreativeSessionInputEngine(TypedDict):
-    engineAccountId: NotRequired[int]
-    '\n    The engine\'s Account id, from the engineAccountId field on creative engine reads. Not the engine\'s engineId, which is a different number.\n    '
-    engineId: NotRequired[str]
-    '\n    Deprecated: send engineAccountId, from the engineAccountId field on creative engine reads. Saved Creative Engine identifier.\n    '
+    engineAccountId: int
+    '\n    The engine\'s Account id, from the engineAccountId field on creative engine reads. Not the engine\'s id, which is a different number.\n    '
     connectionId: str
     '\n    Saved engine connection identifier.\n    '
 
@@ -11453,10 +11672,8 @@ class SaveEventSourceSuccessSavedEventSourceEntrySellerAccountsItemHealthIssuesI
     message: str
 
 class SaveEventSourceSuccessSavedEventSourceEntrySellerAccountsItemStorefront(TypedDict):
-    id: str
-    '\n    Storefront ID.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.\n    '
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
     name: str
     '\n    Storefront name.\n    '
 
@@ -11570,10 +11787,8 @@ class SaveEventSourceSuccessUnchangedEventSourceEntrySellerAccountsItemHealthIss
     message: str
 
 class SaveEventSourceSuccessUnchangedEventSourceEntrySellerAccountsItemStorefront(TypedDict):
-    id: str
-    '\n    Storefront ID.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.\n    '
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
     name: str
     '\n    Storefront name.\n    '
 
@@ -11683,10 +11898,8 @@ class SaveEventSourceSuccessUpdatedEventSourceEntrySellerAccountsItemHealthIssue
     message: str
 
 class SaveEventSourceSuccessUpdatedEventSourceEntrySellerAccountsItemStorefront(TypedDict):
-    id: str
-    '\n    Storefront ID.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.\n    '
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
     name: str
     '\n    Storefront name.\n    '
 
@@ -11745,12 +11958,18 @@ class SaveInventorySourceInputAdServer(TypedDict):
 class SaveInventorySourceInputModuleConfig(TypedDict):
     moduleInstanceId: str
     '\n    The seller-local module id returned by this source\'s readiness view.\n    '
-    config: dict[str, JsonValue]
-    '\n    Non-secret module configuration. Nested values are deep-merged by default.\n    '
+    config: list[SaveInventorySourceRequestModuleConfigEntry]
+    '\n    Non-secret module settings, one entry per field. Dotted keys name nested fields and are deep-merged by default.\n    '
     merge: NotRequired[bool]
     '\n    Deep-merge by default; false replaces seller-writable configuration.\n    '
     status: NotRequired[Literal["CONFIGURING", "DISABLED", "ERROR"]]
     '\n    Optional manual module state. ACTIVE is derived by execution workflows.\n    '
+
+class SaveInventorySourceRequestModuleConfigEntry(TypedDict):
+    key: str
+    '\n    Dotted field key from the module contract, for example `cadent.endpointUrl`.\n    '
+    value: str | float | bool
+    '\n    A string, number or boolean setting.\n    '
 
 class SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerForm(TypedDict):
     outcome: Literal["ad_server_form"]
@@ -12078,8 +12297,8 @@ class SaveMaterialInput(TypedDict):
     '\n    Current source revision, required to add a source revision or edit metadata.\n    '
     metadata: NotRequired[SaveMaterialInputMetadataKindBuyerScopedRateCard | SaveMaterialInputMetadataKindUnscoped]
     '\n    Metadata fields; relevance is read-only.\n    '
-    labels: NotRequired[dict[str, list[str]]]
-    '\n    Replace labels for each supplied dimension; [] clears.\n    '
+    labels: NotRequired[list[SaveMaterialRequestLabelWriteEntry]]
+    '\n    Replace labels per dimension; empty values clears.\n    '
     isArchived: NotRequired[bool]
     '\n    true archives the Material; false restores it. Send it alone with materialId.\n    '
     candidateDecisions: NotRequired[list[SaveMaterialRequestSaveMaterialCandidateDecision]]
@@ -12437,6 +12656,32 @@ SaveMaterialInputActionCreateSourceKindUrl: TypeAlias = SaveMaterialInputSourceK
 
 SaveMaterialInputActionReplaceSourceSourceKindUrl: TypeAlias = SaveMaterialInputSourceKindUrl
 
+class SaveMaterialRequestLabelWriteEntry(TypedDict):
+    dimension: str
+    '\n    Key of a dimension, such as audience or vertical.\n    '
+    values: list[str]
+    '\n    Value slugs; [] clears.\n    '
+
+class SaveMaterialRequestMaterialExtractionCompleteness(TypedDict):
+    text: NotRequired[SaveMaterialRequestMaterialFacetCompleteness]
+    '\n    Extraction of text.\n    '
+    structure: NotRequired[SaveMaterialRequestMaterialFacetCompleteness]
+    '\n    Extraction of structure.\n    '
+    tables: NotRequired[SaveMaterialRequestMaterialFacetCompleteness]
+    '\n    Extraction of tables.\n    '
+    visuals: NotRequired[SaveMaterialRequestMaterialFacetCompleteness]
+    '\n    Extraction of visuals.\n    '
+    styles: NotRequired[SaveMaterialRequestMaterialFacetCompleteness]
+    '\n    Extraction of styles.\n    '
+
+SaveMaterialRequestMaterialFacetCompleteness: TypeAlias = Literal["complete", "degraded", "unsupported", "failed"]
+
+class SaveMaterialRequestMaterialProvenanceEntry(TypedDict):
+    key: str
+    '\n    What the parser recorded, e.g. `parser` or `page`.\n    '
+    value: str
+    '\n    What it recorded.\n    '
+
 SaveMaterialRequestMetadataAdvertiserRef: TypeAlias = str
 
 SaveMaterialRequestMetadataBuyerScopeBrandDomain: TypeAlias = str
@@ -12490,10 +12735,8 @@ class SaveMaterialRequestSaveMaterialCandidateDecisionDecision(TypedDict):
 SaveMaterialInputActionDecideCandidateDecision: TypeAlias = SaveMaterialRequestSaveMaterialCandidateDecisionDecision
 
 class SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrection(TypedDict):
-    correctedContent: NotRequired[SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrectionCorrectedContent]
+    correctedContent: SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrectionCorrectedContent
     '\n    Replacement proposedContent for this candidate.\n    '
-    proposedMutation: NotRequired[SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrectionProposedMutation]
-    '\n    Replacement typed proposal; correction does not confirm or save it.\n    '
 
 SaveMaterialInputActionDecideCandidateDecisionCorrection: TypeAlias = SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrection
 
@@ -12509,13 +12752,7 @@ SaveMaterialInputActionDecideCandidateDecisionCorrectionCorrectedContent: TypeAl
 
 SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrectionCorrectedContentSourceTextDigest: TypeAlias = str
 
-class SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrectionProposedMutation(TypedDict):
-    tool: Literal["save_playbook", "save_business_rules", "save_wholesale_product", "save_signal", "save_seller"]
-    '\n    Material tool field.\n    '
-    arguments: dict[str, JsonValue]
-    '\n    Material arguments field.\n    '
-
-SaveMaterialInputActionDecideCandidateDecisionCorrectionProposedMutation: TypeAlias = SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrectionProposedMutation
+SaveMaterialRequestSaveMaterialCandidateDecisionDecisionCorrectionProposedMutation: TypeAlias = dict[str, JsonValue]
 
 class SaveMaterialRequestSaveMaterialCommitPreview(TypedDict):
     sourceRevision: int
@@ -12658,7 +12895,7 @@ class SaveMaterialRequestSourceDerivedStructureNodesItem(TypedDict):
     '\n    Material textDigest field.\n    '
     artifactRef: NotRequired[str]
     '\n    Material artifactRef field.\n    '
-    provenance: NotRequired[dict[str, str]]
+    provenance: NotRequired[list[SaveMaterialRequestMaterialProvenanceEntry]]
     '\n    Material provenance field.\n    '
 
 class SaveMaterialRequestSourceDerivedStructureNodesItemGeometry(TypedDict):
@@ -12810,7 +13047,7 @@ class SaveMaterialRequestSourceItemsItemDerivedStructureNodesItem(TypedDict):
     '\n    Material textDigest field.\n    '
     artifactRef: NotRequired[str]
     '\n    Material artifactRef field.\n    '
-    provenance: NotRequired[dict[str, str]]
+    provenance: NotRequired[list[SaveMaterialRequestMaterialProvenanceEntry]]
     '\n    Material provenance field.\n    '
 
 class SaveMaterialRequestSourceItemsItemDerivedStructureNodesItemGeometry(TypedDict):
@@ -12862,7 +13099,7 @@ class SaveMaterialRequestSourceRenditionRefsItem(TypedDict):
     '\n    Material extractorVersion field.\n    '
     configurationDigest: NotRequired[SaveMaterialRequestSourceRenditionRefsItemConfigurationDigest]
     '\n    Material configurationDigest field.\n    '
-    completeness: NotRequired[dict[str, Literal["complete", "degraded", "unsupported", "failed"]]]
+    completeness: NotRequired[SaveMaterialRequestMaterialExtractionCompleteness]
     '\n    Material completeness field.\n    '
 
 SaveMaterialRequestSourceRenditionRefs: TypeAlias = "list[SaveMaterialRequestSourceRenditionRefsItem]"
@@ -13156,15 +13393,17 @@ class SaveMediaBuyInputKindCreate(TypedDict):
     '\n    Campaign to place the media buy under. Required for explicit creation.\n    '
     channelGroupId: NotRequired[str]
     '\n    channelGroupId for a new buy. Required when campaign has channelGroups; invalid on updates.\n    '
-    sellerAccountId: NotRequired[int]
-    '\n    The seller\'s Account id. Not the seller object\'s id or any sellerId, which are different numbers. Required for explicit creation unless sellerId is sent.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. Still accepted for explicit creation until a later release.\n    '
+    sellerAccountId: int
+    '\n    The seller\'s Account id. Not the seller object\'s id, which is a different number. Required for explicit creation.\n    '
     products: list[SaveMediaBuyInputKindCreateProductsItem]
     budget: NotRequired[SaveMediaBuyInputKindCreateBudget]
     '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
     budgetAllocation: NotRequired[SaveMediaBuyInputKindCreateBudgetAllocationModeFixed | SaveMediaBuyInputKindCreateBudgetAllocationModeSellerOptimized]
     '\n    Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.\n    '
+    daily_budget_cap: NotRequired[float]
+    '\n    Create only: hard daily spend ceiling in the buy\'s currency, at most its total budget. A seller that cannot apply it refuses the buy.\n    '
+    budget_cap_timezone: NotRequired[str]
+    '\n    Create only: IANA timezone of the cap\'s day. Needs daily_budget_cap; omit for the seller\'s default.\n    '
     flight: NotRequired[SaveMediaBuyInputKindCreateFlight]
     '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     isArchived: NotRequired[bool]
@@ -13312,12 +13551,14 @@ class SaveMediaBuyInputKindCreateProductsItem(TypedDict):
     '\n    Provider-native lead form ID. For Meta Instant Forms, must belong to the selected Page.\n    '
     appId: NotRequired[str]
     '\n    Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.\n    '
+    startRequiresAllCreativesApproved: NotRequired[bool]
+    '\n    Create only. True: never starts before every creative is approved; the buy waits. Else books with approved creatives; the rest attach later.\n    '
     remove: NotRequired[bool]
     '\n    Update only: true removes this line item.\n    '
     pacing: NotRequired[Literal["even", "asap", "front_loaded"]]
     '\n    Update only: delivery pacing of this line item. On a running buy the seller must take the change.\n    '
     lineItemRef: NotRequired[str]
-    '\n    Update only: line-item handle from the read; needed for a repeated product.\n    '
+    '\n    Update only: lineItems[].lineItemRef from the read, not the product id. Needed for a repeated product.\n    '
     targetingOverlay: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlay]
 
 class SaveMediaBuyInputKindCreateProductsItemPerformanceStandardsItem(TypedDict):
@@ -13689,6 +13930,10 @@ class SaveMediaBuyInputKindProposal(TypedDict):
     '\n    channelGroupId for a new buy. Required when campaign has channelGroups; invalid on updates.\n    '
     budget: NotRequired[SaveMediaBuyInputKindProposalBudget]
     '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
+    daily_budget_cap: NotRequired[float]
+    '\n    Create only: hard daily spend ceiling in the buy\'s currency, at most its total budget. A seller that cannot apply it refuses the buy.\n    '
+    budget_cap_timezone: NotRequired[str]
+    '\n    Create only: IANA timezone of the cap\'s day. Needs daily_budget_cap; omit for the seller\'s default.\n    '
     flight: NotRequired[SaveMediaBuyInputKindProposalFlight]
     '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     isArchived: NotRequired[bool]
@@ -13727,6 +13972,10 @@ class SaveMediaBuyInputKindUpdate(TypedDict):
     '\n    Single total; seller_optimized: shared pool (default campaign total). One-allocation proposal allowed; multi: products[].budget; else retain allocation.\n    '
     budgetAllocation: NotRequired[SaveMediaBuyInputKindUpdateBudgetAllocationModeFixed | SaveMediaBuyInputKindUpdateBudgetAllocationModeSellerOptimized]
     '\n    Meta: fixed = ad-set budgets; seller_optimized = shared budget. Ask if unclear; required when both modes are supported.\n    '
+    daily_budget_cap: NotRequired[float]
+    '\n    Create only: hard daily spend ceiling in the buy\'s currency, at most its total budget. A seller that cannot apply it refuses the buy.\n    '
+    budget_cap_timezone: NotRequired[str]
+    '\n    Create only: IANA timezone of the cap\'s day. Needs daily_budget_cap; omit for the seller\'s default.\n    '
     flight: NotRequired[SaveMediaBuyInputKindUpdateFlight]
     '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     name: NotRequired[str]
@@ -13878,12 +14127,14 @@ class SaveMediaBuyInputKindUpdateProductsItem(TypedDict):
     '\n    Provider-native lead form ID. For Meta Instant Forms, must belong to the selected Page.\n    '
     appId: NotRequired[str]
     '\n    Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.\n    '
+    startRequiresAllCreativesApproved: NotRequired[bool]
+    '\n    Create only. True: never starts before every creative is approved; the buy waits. Else books with approved creatives; the rest attach later.\n    '
     remove: NotRequired[bool]
     '\n    Update only: true removes this line item.\n    '
     pacing: NotRequired[Literal["even", "asap", "front_loaded"]]
     '\n    Update only: delivery pacing of this line item. On a running buy the seller must take the change.\n    '
     lineItemRef: NotRequired[str]
-    '\n    Update only: line-item handle from the read; needed for a repeated product.\n    '
+    '\n    Update only: lineItems[].lineItemRef from the read, not the product id. Needed for a repeated product.\n    '
     targetingOverlay: NotRequired[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlay]
 
 class SaveMediaBuyInputKindUpdateProductsItemPerformanceStandardsItem(TypedDict):
@@ -14563,8 +14814,6 @@ class SaveMediaBuyResultMediaBuyGoalCommitment(TypedDict):
 
 class SaveMediaBuyResultMediaBuyGoalCommitmentGoalAnswersItem(TypedDict):
     productId: str
-    storefrontId: NotRequired[str | None]
-    '\n    The Storefront the answered line resolves to, fixed when the answer was booked so a later refresh keeps it for exactly that Storefront\'s line. Present on every booked answer whose line resolved to a Storefront, campaign-derived or copied from an accepted proposal alike.\n    '
     pricingOptionId: str | None
     pricingModel: str | None
     fixedPrice: float | None
@@ -14576,7 +14825,7 @@ class SaveMediaBuyResultMediaBuyGoalCommitmentGoalAnswersItem(TypedDict):
     answeredTarget: SaveMediaBuySuccessMediaBuyGoalCommitmentGoalAnswersItemAnsweredTarget | None
     commitment: SaveMediaBuySuccessMediaBuyGoalCommitmentGoalAnswersItemCommitment
     sellerAccountId: NotRequired[int]
-    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId. Not the same number as the Storefront id beside it.\n    '
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
 
 class SaveMediaBuyResultMediaBuyPendingChange(TypedDict):
     status: str
@@ -15173,7 +15422,7 @@ class SavePropertyListInput(TypedDict):
     identifiers: NotRequired[list[SavePropertyListInputIdentifiersItem]]
     '\n    AdCP typed property identifiers. Each may carry `features`: your scores for that property, e.g. {spektre_aspi: {value: 94}}.\n    '
     filters: NotRequired[SavePropertyListRequestPropertyListFilters | None]
-    '\n    Create-only filters. feature_requirements are judged against your saved scores; with them, a list may have no identifiers and resolves over every property you have scored.\n    '
+    '\n    Filters. feature_requirements are judged against your saved scores; with them, a list may have no identifiers and resolves over every property you have scored. On update this replaces the list filters (null clears them); channels_any is fixed at creation.\n    '
     appliesToAllCampaigns: NotRequired[bool]
     '\n    Required on create. Ask the buyer: true applies to all campaigns; false saves for campaign use. Immutable.\n    '
     check: NotRequired[bool]
@@ -15460,7 +15709,11 @@ class SavePropertyListSuccessPropertyListSaveCascadeSummary(TypedDict):
     actionRequired: NotRequired[SavePropertyListSuccessPropertyListSaveCascadeSummaryActionRequired]
     '\n    One entry per active media buy that did not take the change or whose property lists no route enforces after it; every other checked buy took it. Present whenever at least one active media buy was checked.\n    '
     errorMessage: NotRequired[str]
-    '\n    Restore committed, but active-buy updates could not be completed. Counts are unavailable when this field is present.\n    '
+    '\n    Active-buy updates could not be completed for part of the change, such as a restore or a score change whose affected lists could not be looked up. The counts cover only the pushes that completed.\n    '
+    pushedListIds: NotRequired[list[str]]
+    '\n    Property lists affected by a score change in this save whose push to active media buys finished inside the request.\n    '
+    leftToRecheckListIds: NotRequired[list[str]]
+    '\n    Property lists affected by a score change in this save whose push was cancelled or never started when the request ran out of time. Not a failure: the scheduled live-buy re-check catches their buys on its next run.\n    '
 
 SavePropertyListSuccessPropertyListSaveCascadeSummaryActionRequired: TypeAlias = "list[SavePropertyListSuccessPropertyListPushActionRequired]"
 
@@ -15531,7 +15784,7 @@ class SaveRfpInputOrigin(TypedDict):
     '\n    Origin type.\n    '
     presetId: NotRequired[str]
     '\n    Preset id.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    preset: NotRequired[SaveRfpInputOriginPresetKindTyped | SaveRfpInputOriginPresetKindLegacy]
+    preset: NotRequired[SaveRfpInputOriginPreset]
     '\n    Preset data.\n    '
     sourceMaterialId: NotRequired[str]
     '\n    Material id.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
@@ -15545,28 +15798,30 @@ class SaveRfpInputOrigin(TypedDict):
     '\n    Market.\n    '
     channels: NotRequired[SaveRfpRequestOriginChannels]
     '\n    Channels.\n    '
-    details: NotRequired[dict[str, SaveRfpRequestJsonValue]]
-    '\n    Origin facts.\n    '
+    details: NotRequired[list[SaveRfpInputOriginDetailsItem]]
+    '\n    Origin facts as name/value entries.\n    '
 
 SaveRfpInputActionCreateOrigin: TypeAlias = SaveRfpInputOrigin
 
-class SaveRfpInputOriginPresetKindLegacy(TypedDict):
-    kind: Literal["legacy"]
-    '\n    Bounded deployed Quick preset compatibility record.\n    '
-    value: dict[str, SaveRfpRequestJsonValue]
-    '\n    Legacy Quick preset data.\n    '
+class SaveRfpInputOriginDetailsItem(TypedDict):
+    key: str
+    '\n    Entry name.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
+    value: str | float | bool
+    '\n    Entry value: text, a number or true/false.\n    '
 
-SaveRfpInputActionCreateOriginPresetKindLegacy: TypeAlias = SaveRfpInputOriginPresetKindLegacy
-
-class SaveRfpInputOriginPresetKindTyped(TypedDict):
+class SaveRfpInputOriginPreset(TypedDict):
     kind: Literal["typed"]
     '\n    Current typed Quick preset.\n    '
-    value: SaveRfpInputOriginPresetKindTypedValue
+    value: SaveRfpInputOriginPresetValue
     '\n    Quick preset data.\n    '
 
-SaveRfpInputActionCreateOriginPresetKindTyped: TypeAlias = SaveRfpInputOriginPresetKindTyped
+SaveRfpInputActionCreateOriginPresetKindTyped: TypeAlias = SaveRfpInputOriginPreset
 
-class SaveRfpInputOriginPresetKindTypedValue(TypedDict):
+SaveRfpInputOriginPresetKindLegacy: TypeAlias = SaveRfpInputOriginPreset
+
+SaveRfpInputOriginPresetKindTyped: TypeAlias = SaveRfpInputOriginPreset
+
+class SaveRfpInputOriginPresetValue(TypedDict):
     buyer: NotRequired[str]
     '\n    Stable buyer segment or buyer name.\n    '
     advertiser: NotRequired[str]
@@ -15586,17 +15841,19 @@ class SaveRfpInputOriginPresetKindTypedValue(TypedDict):
     budgetBand: NotRequired[Literal["under_10k", "10k_50k", "50k_250k", "250k_1m", "over_1m"]]
     '\n    Stable planning budget band, never exact budget.\n    '
 
-SaveRfpInputActionCreateOriginPresetKindTypedValue: TypeAlias = SaveRfpInputOriginPresetKindTypedValue
+SaveRfpInputActionCreateOriginPresetKindTypedValue: TypeAlias = SaveRfpInputOriginPresetValue
 
-SaveRfpInputActionCreateOriginPresetValue: TypeAlias = SaveRfpInputOriginPresetKindTypedValue
+SaveRfpInputActionCreateOriginPresetValue: TypeAlias = SaveRfpInputOriginPresetValue
+
+SaveRfpInputOriginPresetKindTypedValue: TypeAlias = SaveRfpInputOriginPresetValue
 
 class SaveRfpInputRequest(TypedDict):
     brief: str
     '\n    Brief.\n    '
     budget: NotRequired[SaveRfpInputRequestBudgetKindZeroDecimal | SaveRfpInputRequestBudgetKindTwoDecimal | SaveRfpInputRequestBudgetKindThreeDecimal]
     '\n    Budget.\n    '
-    flight: NotRequired[dict[str, SaveRfpRequestJsonValue]]
-    '\n    Flight.\n    '
+    flight: NotRequired[SaveRfpInputRequestFlight]
+    '\n    Flight dates: start and end, as YYYY-MM-DD.\n    '
     dimensions: NotRequired[SaveRfpInputRequestDimensions]
     '\n    Intent.\n    '
     constraints: NotRequired[SaveRfpInputRequestConstraints]
@@ -15688,6 +15945,12 @@ SaveRfpInputActionAppendTurnRequestDimensions: TypeAlias = SaveRfpInputRequestDi
 
 SaveRfpInputActionCreateRequestDimensions: TypeAlias = SaveRfpInputRequestDimensions
 
+class SaveRfpInputRequestFlight(TypedDict):
+    start: str
+    '\n    Start date (inclusive), ISO 8601 calendar date.\n    '
+    end: str
+    '\n    End date (inclusive), ISO 8601 calendar date.\n    '
+
 class SaveRfpInputRequiredLibraryUnitIdsItem(TypedDict):
     materialId: str
     '\n    Material id.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
@@ -15714,9 +15977,9 @@ SaveRfpRequestAdvertiser: TypeAlias = str
 
 SaveRfpRequestClientRequestId: TypeAlias = str
 
-SaveRfpRequestJsonValue: TypeAlias = "SaveRfpRequestAdvertiser | list[JsonValue] | dict[str, JsonValue] | float | bool | None"
+SaveRfpRequestJ: TypeAlias = JsonValue
 
-SaveRfpRequestJ: TypeAlias = SaveRfpRequestJsonValue
+SaveRfpRequestJsonValue: TypeAlias = JsonValue
 
 SaveRfpRequestOriginAdvertiser: TypeAlias = str
 
@@ -15729,8 +15992,6 @@ SaveRfpRequestOriginChannelsItem: TypeAlias = str
 SaveRfpRequestOriginChannels: TypeAlias = "list[SaveRfpRequestOriginChannelsItem]"
 
 SaveRfpRequestOriginMarket: TypeAlias = str
-
-SaveRfpRequestPropertyNames: TypeAlias = str
 
 SaveRfpRequestRepresentationLocale: TypeAlias = RepresentationLocale
 
@@ -15908,15 +16169,27 @@ SaveRfpSuccessSaveRfpSuccessTurnSavedRfpId: TypeAlias = str
 
 SaveRfpSuccessSaveRfpSuccessTurnSavedTurnId: TypeAlias = str
 
+class SaveRfpTurnInputFeedbackItem(TypedDict):
+    key: SaveRfpTurnRequestFeedbackItemKey
+    '\n    Entry name.\n    '
+    value: SaveRfpTurnRequestFeedbackItemValue
+    '\n    Entry value: text, a number or true/false.\n    '
+
 class SaveRfpTurnInputOutcome(TypedDict):
     result: NotRequired[str]
     '\n    Result.\n    '
     finality: NotRequired[Literal["preliminary", "final", "mixed"]]
     '\n    Finality.\n    '
-    details: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Details.\n    '
+    details: NotRequired[list[SaveRfpTurnInputOutcomeDetailsItem]]
+    '\n    Details as name/value entries, such as bookedBudget (number) and currency.\n    '
 
 SaveRfpInputActionRecordOutcomeOutcome: TypeAlias = SaveRfpTurnInputOutcome
+
+class SaveRfpTurnInputOutcomeDetailsItem(TypedDict):
+    key: SaveRfpTurnRequestOutcomeDetailsItemKey
+    '\n    Entry name.\n    '
+    value: SaveRfpTurnRequestOutcomeDetailsItemValue
+    '\n    Entry value: text, a number or true/false.\n    '
 
 class SaveRfpTurnInputRepresentation(TypedDict):
     format: Literal["seller_response_json", "buyer_proposal_json", "semantic_document_json", "html", "pdf", "pptx"]
@@ -15943,8 +16216,8 @@ class SaveRfpTurnInputWithCancelRepresentationId(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: str
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Feedback.\n    '
+    feedback: NotRequired[list[SaveRfpTurnInputFeedbackItem]]
+    '\n    Feedback as name/value entries.\n    '
     grade: NotRequired[Literal["A", "B", "C", "D", "F"]]
     '\n    Seller grade.\n    '
     ledBy: NotRequired[Literal["agent", "human"]]
@@ -15973,8 +16246,8 @@ class SaveRfpTurnInputWithFeedbackGradeLedByCommentaryWithCommentary(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: NotRequired[str]
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Feedback.\n    '
+    feedback: NotRequired[list[SaveRfpTurnInputFeedbackItem]]
+    '\n    Feedback as name/value entries.\n    '
     grade: NotRequired[Literal["A", "B", "C", "D", "F"]]
     '\n    Seller grade.\n    '
     ledBy: NotRequired[Literal["agent", "human"]]
@@ -16001,8 +16274,8 @@ class SaveRfpTurnInputWithFeedbackGradeLedByCommentaryWithFeedback(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: NotRequired[str]
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: dict[str, SaveRfpTurnRequestDetails]
-    '\n    Feedback.\n    '
+    feedback: list[SaveRfpTurnInputFeedbackItem]
+    '\n    Feedback as name/value entries.\n    '
     grade: NotRequired[Literal["A", "B", "C", "D", "F"]]
     '\n    Seller grade.\n    '
     ledBy: NotRequired[Literal["agent", "human"]]
@@ -16039,8 +16312,8 @@ class SaveRfpTurnInputWithFeedbackGradeLedByCommentaryWithGrade(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: NotRequired[str]
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Feedback.\n    '
+    feedback: NotRequired[list[SaveRfpTurnInputFeedbackItem]]
+    '\n    Feedback as name/value entries.\n    '
     grade: Literal["A", "B", "C", "D", "F"]
     '\n    Seller grade.\n    '
     ledBy: NotRequired[Literal["agent", "human"]]
@@ -16067,8 +16340,8 @@ class SaveRfpTurnInputWithFeedbackGradeLedByCommentaryWithLedBy(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: NotRequired[str]
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Feedback.\n    '
+    feedback: NotRequired[list[SaveRfpTurnInputFeedbackItem]]
+    '\n    Feedback as name/value entries.\n    '
     grade: NotRequired[Literal["A", "B", "C", "D", "F"]]
     '\n    Seller grade.\n    '
     ledBy: Literal["agent", "human"]
@@ -16095,8 +16368,8 @@ class SaveRfpTurnInputWithOutcome(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: NotRequired[str]
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Feedback.\n    '
+    feedback: NotRequired[list[SaveRfpTurnInputFeedbackItem]]
+    '\n    Feedback as name/value entries.\n    '
     grade: NotRequired[Literal["A", "B", "C", "D", "F"]]
     '\n    Seller grade.\n    '
     ledBy: NotRequired[Literal["agent", "human"]]
@@ -16125,8 +16398,8 @@ class SaveRfpTurnInputWithReleased(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: NotRequired[str]
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Feedback.\n    '
+    feedback: NotRequired[list[SaveRfpTurnInputFeedbackItem]]
+    '\n    Feedback as name/value entries.\n    '
     grade: NotRequired[Literal["A", "B", "C", "D", "F"]]
     '\n    Seller grade.\n    '
     ledBy: NotRequired[Literal["agent", "human"]]
@@ -16155,8 +16428,8 @@ class SaveRfpTurnInputWithRepresentation(TypedDict):
     '\n    Request a proposal file.\n    '
     cancelRepresentationId: NotRequired[str]
     '\n    Cancel this requested proposal file.\n\nLeading/trailing whitespace is trimmed; the result must contain a visible character and no control, bidi, or line-separator characters.\n    '
-    feedback: NotRequired[dict[str, SaveRfpTurnRequestDetails]]
-    '\n    Feedback.\n    '
+    feedback: NotRequired[list[SaveRfpTurnInputFeedbackItem]]
+    '\n    Feedback as name/value entries.\n    '
     grade: NotRequired[Literal["A", "B", "C", "D", "F"]]
     '\n    Seller grade.\n    '
     ledBy: NotRequired[Literal["agent", "human"]]
@@ -16178,9 +16451,15 @@ SaveRfpTurnRequestCancelRepresentationId: TypeAlias = str
 
 SaveRfpTurnRequestCommentary: TypeAlias = str
 
-SaveRfpTurnRequestDetails: TypeAlias = "SaveRfpTurnRequestCommentary | list[SaveRfpTurnRequestDetails] | dict[str, SaveRfpTurnRequestDetails] | float | bool | None"
+SaveRfpTurnRequestDetails: TypeAlias = JsonValue
 
-SaveRfpTurnRequestPropertyNames: TypeAlias = str
+SaveRfpTurnRequestFeedbackItemKey: TypeAlias = str
+
+SaveRfpTurnRequestFeedbackItemValue: TypeAlias = str | float | bool
+
+SaveRfpTurnRequestOutcomeDetailsItemKey: TypeAlias = str
+
+SaveRfpTurnRequestOutcomeDetailsItemValue: TypeAlias = str | float | bool
 
 class SaveRfpTurnSuccessSaveRfpSuccessFeedbackSaved(TypedDict):
     outcome: Literal["feedback_saved"]
@@ -16334,6 +16613,8 @@ class SaveSellerInput(TypedDict):
     '\n    Hold (true) or resume (false) new business: buyers stop discovering the Seller and buying; existing delivery continues. Send alone.\n    '
     expectedIsPaused: NotRequired[bool]
     '\n    With isPaused: the hold you last read; a changed hold returns CONFLICT.\n    '
+    sellingMode: NotRequired[Literal["listing", "storefront"]]
+    '\n    Change the account type in place. Direct administrator only. `listing` is refused while Storefront work runs and closes Enhanced Reporting. Send alone.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -16655,6 +16936,29 @@ class SaveSellerSuccessSaveSellerSuccessReopenRecorded(TypedDict):
     intakeId: str
     decision: Literal["reopen"]
 
+class SaveSellerSuccessSaveSellerSuccessSellingModeChanged(TypedDict):
+    outcome: Literal["selling_mode_changed"]
+    action: Literal["selling_mode_changed"]
+    sellingMode: SaveSellerSuccessSaveSellerSuccessSellingModeChangedSellingMode
+
+class SaveSellerSuccessSaveSellerSuccessSellingModeChangedSellingMode(TypedDict):
+    current: Literal["listing", "storefront"]
+    previous: Literal["listing", "storefront"]
+    closedEnhancedReportingAccounts: int
+    activitiesBecome: Literal["billable", "free"]
+    activities: list[SaveSellerSuccessSaveSellerSuccessSellingModeChangedSellingModeActivitiesItem]
+
+class SaveSellerSuccessSaveSellerSuccessSellingModeChangedSellingModeActivitiesItem(TypedDict):
+    activityCode: str
+    name: str
+    ius: float
+    unit: str
+
+class SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged(TypedDict):
+    outcome: Literal["selling_mode_unchanged"]
+    action: Literal["selling_mode_unchanged"]
+    sellingMode: Literal["listing", "storefront"]
+
 class SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded(TypedDict):
     outcome: Literal["source_decision_recorded"]
     action: Literal["source_decision_recorded"]
@@ -16693,7 +16997,7 @@ class SaveSellerSuccessSellerSaveReplayed(TypedDict):
     destinationSaveReplayed: Literal[False]
     materialReceipt: SaveSellerSuccessSellerSaveReplayedMaterialReceipt
 
-SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
+SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
 
 SaveSellerSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
@@ -16730,8 +17034,8 @@ class SaveSignalInputWithDraft(TypedDict):
     '\n    Ad-server source that owns it. Omit to write a seller-catalog signal.\n    '
     id: NotRequired[str]
     '\n    Existing signal id; omit to create.\n    '
-    draft: dict[str, JsonValue]
-    '\n    Signal. Managed writes fully replace; include signalId, name, valueType, and adapterConfig.\n    '
+    draft: SaveSignalRequestManagedSignalDraft | SaveSignalRequestCatalogSignalDraft
+    '\n    Signal. `kind` chooses the shape: managed (with sourceId) or catalog (without).\n    '
     state: NotRequired[Literal["active", "archived"]]
     '\n    Use archived to delete an existing signal.\n    '
     confirmArchiveCascade: NotRequired[bool]
@@ -16742,6 +17046,172 @@ class SaveSignalInputWithDraft(TypedDict):
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
 SaveSignalInput: TypeAlias = "SaveSignalInputWithDraft | SaveSignalInputStateArchived"
+
+class SaveSignalRequestCatalogSignalDraft(TypedDict):
+    kind: Literal["catalog"]
+    '\n    A signal in the seller catalog. Omit sourceId. Create needs signalId and keyType; an update changes name, description, countries, isLive or access.\n    '
+    signalId: NotRequired[str]
+    '\n    Your own stable id; fixed once registered.\n    '
+    name: NotRequired[str]
+    '\n    Display name; needed to create.\n    '
+    description: NotRequired[str]
+    '\n    What the signal is.\n    '
+    keyType: NotRequired[list[Literal["country", "region", "metro", "topic", "eidr", "gracenote", "isrc", "gtin", "rss_guid", "isbn", "url", "url_hash", "custom", "maid", "rampid", "rampid_derived", "hashed_email", "hashed_phone", "id5", "uid2", "euid", "pairid"]]]
+    '\n    What it is keyed on; fixed once registered. All context keys or all identity keys.\n    '
+    countries: NotRequired[list[str] | None]
+    '\n    ISO country codes it is limited to; null lifts the limit.\n    '
+    metadata: NotRequired[SaveSignalRequestCatalogSignalDraftMetadata]
+    '\n    Your own notes as entries; fixed once registered.\n    '
+    agentId: NotRequired[str]
+    '\n    External signals agent that registered it; fixed once registered.\n    '
+    isLive: NotRequired[bool]
+    '\n    Whether buyers can use it.\n    '
+    access: NotRequired[list[SaveSignalRequestSignalAccessGrant]]
+    '\n    Grants at create. To change them use addAccess.\n    '
+    addAccess: NotRequired[list[SaveSignalRequestSignalAccessGrant]]
+    '\n    Grants to add to a registered signal.\n    '
+    updateAccess: NotRequired[list[SaveSignalRequestSignalAccessUpdate]]
+    '\n    Grants to change on a registered signal.\n    '
+    archiveAccess: NotRequired[list[int]]
+    '\n    accessId values to archive.\n    '
+
+class SaveSignalRequestManagedSignalDraft(TypedDict):
+    kind: Literal["managed"]
+    '\n    A signal on an ad-server source. Send sourceId. A write fully replaces the signal, so send every field you keep.\n    '
+    signalId: str
+    '\n    Stable id: letters, numbers, _ and -.\n    '
+    name: str
+    '\n    Display name.\n    '
+    valueType: Literal["binary", "categorical", "numeric"]
+    '\n    binary, categorical or numeric.\n    '
+    adapterConfig: SaveSignalRequestManagedSignalDraftAdapterConfig
+    '\n    The ad-server mapping as entries, one per setting: key is its path (`kind`, `groups[0].criteria[0].keyId`), e.g. key `kind`, value `audience_segment`.\n    '
+    description: NotRequired[str | None]
+    '\n    What the signal is.\n    '
+    categories: NotRequired[list[str]]
+    '\n    Values when valueType is categorical.\n    '
+    range: NotRequired[SaveSignalRequestManagedSignalDraftRangeValue | None]
+    '\n    Bounds when valueType is numeric.\n    '
+    targetingDimension: NotRequired[str | None]
+    '\n    What it narrows: `age` for an age signal, `property` for a property signal, else e.g. `audience`.\n    '
+    ageDetermination: NotRequired[Literal["survey_based", "assumptive", "user_provided", "user_verified"]]
+    '\n    Required for an age signal.\n    '
+    dataProvider: NotRequired[str | None]
+    '\n    Who supplies the data.\n    '
+    tags: NotRequired[list[str]]
+    '\n    Free labels.\n    '
+    pricing_options: NotRequired[list[SaveSignalRequestSignalPricingOption]]
+    '\n    Price to layer this signal onto a buy.\n    '
+
+class SaveSignalRequestManagedSignalDraftRangeValue(TypedDict):
+    min: NotRequired[float | str | None]
+    '\n    Lower bound.\n    '
+    max: NotRequired[float | str | None]
+    '\n    Upper bound.\n    '
+
+class SaveSignalRequestSignalAccessGrant(TypedDict):
+    advertiserId: str
+    '\n    Scope3 advertiser id.\n    '
+    visibility: SaveSignalRequestSignalAccessGrantVisibility
+    price: NotRequired[SaveSignalRequestSignalPricingOption]
+    '\n    Price for this advertiser.\n    '
+
+SaveSignalRequestSignalAccessGrantVisibility: TypeAlias = Literal["PUBLIC", "PROPRIETARY"]
+
+class SaveSignalRequestSignalAccessUpdate(TypedDict):
+    accessId: int
+    '\n    Id of the grant to change.\n    '
+    visibility: NotRequired[SaveSignalRequestSignalAccessUpdateVisibility]
+    price: NotRequired[SaveSignalRequestSignalPricingOption]
+    '\n    New price for this advertiser.\n    '
+
+SaveSignalRequestSignalAccessUpdateVisibility: TypeAlias = Literal["PUBLIC", "PROPRIETARY"]
+
+class SaveSignalRequestSignalConfigEntry(TypedDict):
+    key: str
+    '\n    Path to one setting: dotted names, [n] for a list item, ["a.b"] for a name with a dot or bracket, e.g. `groups[0].criteria[0].keyId`.\n    '
+    value: str | float | bool | list[str] | None | SaveSignalRequestSignalConfigEntryValueValue
+    '\n    A string, number, boolean, list of strings, null, or an empty object.\n    '
+
+SaveSignalRequestCatalogSignalDraftMetadata: TypeAlias = "list[SaveSignalRequestSignalConfigEntry]"
+
+SaveSignalRequestManagedSignalDraftAdapterConfig: TypeAlias = "list[SaveSignalRequestSignalConfigEntry]"
+
+class SaveSignalRequestSignalConfigEntryValueValue(TypedDict):
+    pass
+
+SaveSignalRequestSignalPricingOptionAppliesToOutputFormatIdsItem: TypeAlias = dict[str, object]
+
+class SaveSignalRequestSignalPricingOptionModelCpm(TypedDict):
+    pricing_option_id: SaveSignalRequestSignalPricingOptionPricingOptionId
+    model: Literal["cpm"]
+    '\n    Fixed price per thousand impressions.\n    '
+    cpm: float
+    '\n    Price per thousand impressions.\n    '
+    currency: str
+    '\n    ISO 4217 currency code.\n    '
+
+class SaveSignalRequestSignalPricingOptionModelCustom(TypedDict):
+    pricing_option_id: SaveSignalRequestSignalPricingOptionPricingOptionId
+    model: Literal["custom"]
+    '\n    Pricing agreed outside the standard models.\n    '
+    description: str
+    '\n    How the price works.\n    '
+    metadata: SaveSignalRequestSignalPricingOptionModelCustomMetadata
+    '\n    Operator-facing notes on the price.\n    '
+    currency: NotRequired[str]
+    '\n    ISO 4217 currency code.\n    '
+
+class SaveSignalRequestSignalPricingOptionModelCustomMetadata(TypedDict):
+    summary_for_operator: NotRequired[str]
+    '\n    One line the operator sees for this price.\n    '
+
+class SaveSignalRequestSignalPricingOptionModelFlatFee(TypedDict):
+    pricing_option_id: SaveSignalRequestSignalPricingOptionPricingOptionId
+    model: Literal["flat_fee"]
+    '\n    Flat fee per period.\n    '
+    amount: float
+    '\n    Fee for the period.\n    '
+    period: Literal["monthly", "quarterly", "annual", "campaign"]
+    '\n    Billing period.\n    '
+    currency: str
+    '\n    ISO 4217 currency code.\n    '
+
+class SaveSignalRequestSignalPricingOptionModelPerUnit(TypedDict):
+    pricing_option_id: SaveSignalRequestSignalPricingOptionPricingOptionId
+    model: Literal["per_unit"]
+    '\n    Price per unit of something else.\n    '
+    unit: str
+    '\n    What one unit is.\n    '
+    unit_price: float
+    '\n    Price of one unit.\n    '
+    currency: str
+    '\n    ISO 4217 currency code.\n    '
+
+class SaveSignalRequestSignalPricingOptionModelPercentOfMedia(TypedDict):
+    pricing_option_id: SaveSignalRequestSignalPricingOptionPricingOptionId
+    model: Literal["percent_of_media"]
+    '\n    Percentage of media spend.\n    '
+    percent: float
+    '\n    Percentage of media spend, 0 to 100.\n    '
+    max_cpm: NotRequired[float]
+    '\n    Cap on the resulting price per thousand impressions.\n    '
+    currency: str
+    '\n    ISO 4217 currency code.\n    '
+
+SaveSignalRequestSignalPricingOption: TypeAlias = "SaveSignalRequestSignalPricingOptionModelCpm | SaveSignalRequestSignalPricingOptionModelPercentOfMedia | SaveSignalRequestSignalPricingOptionModelFlatFee | SaveSignalRequestSignalPricingOptionModelPerUnit | SaveSignalRequestSignalPricingOptionModelCustom"
+
+SaveSignalRequestSignalPricingOptionPricingOptionId: TypeAlias = str
+
+SaveSignalRequestSignalPricingOptionSaveSignalRequestSignalPricingOptionModelCpm: TypeAlias = SaveSignalRequestSignalPricingOptionModelCpm
+
+SaveSignalRequestSignalPricingOptionSaveSignalRequestSignalPricingOptionModelCustom: TypeAlias = SaveSignalRequestSignalPricingOptionModelCustom
+
+SaveSignalRequestSignalPricingOptionSaveSignalRequestSignalPricingOptionModelFlatFee: TypeAlias = SaveSignalRequestSignalPricingOptionModelFlatFee
+
+SaveSignalRequestSignalPricingOptionSaveSignalRequestSignalPricingOptionModelPerUnit: TypeAlias = SaveSignalRequestSignalPricingOptionModelPerUnit
+
+SaveSignalRequestSignalPricingOptionSaveSignalRequestSignalPricingOptionModelPercentOfMedia: TypeAlias = SaveSignalRequestSignalPricingOptionModelPercentOfMedia
 
 class SaveSignalSuccessSaveSignalSuccessCreated(TypedDict):
     outcome: Literal["created"]
@@ -16806,8 +17276,8 @@ class SaveWholesaleProductInput(TypedDict):
     '\n    Every price sells under it. Required on create with pricingOptions.\n    '
     channels: NotRequired[list[Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]]]
     '\n    AdCP channels. Required on create; omit keeps them.\n    '
-    inventory: NotRequired[dict[str, JsonValue]]
-    '\n    Source shape. A create needs `execution.adapter`; copy `execution` from `get` of a product on this source.\n    '
+    inventory: NotRequired[SaveWholesaleProductRequestWholesaleInventory]
+    '\n    Ad-server selectors to sell and publisher scope. A create needs `execution.adapter`.\n    '
     formatOptions: NotRequired[list[SaveWholesaleProductInputFormatOptionsItem]]
     '\n    Canonical format: format_kind and params; publisher entries need publisher_domain and format_option_id.\n    '
     pricingOptions: NotRequired[list[SaveWholesaleProductInputPricingOptionsItem]]
@@ -16880,6 +17350,68 @@ class SaveWholesaleProductInputPricingOptionsItem(TypedDict):
     '\n    Your settlement currency.\n    '
     fixed_price: NotRequired[float]
     '\n    CPM to charge. Omit for an auction.\n    '
+
+class SaveWholesaleProductRequestWholesaleFormatBinding(TypedDict):
+    format_option_id: str
+    '\n    The `format_option_id` of the format option it binds.\n    '
+    adapter_config: NotRequired[SaveWholesaleProductRequestWholesaleFormatBindingAdapterConfig]
+    '\n    Ad-server creative setup as entries, e.g. key `roadblocking`, value `as_many_as_possible`.\n    '
+
+class SaveWholesaleProductRequestWholesaleInventory(TypedDict):
+    execution: NotRequired[SaveWholesaleProductRequestWholesaleInventoryExecution | None]
+    '\n    How the ad server runs the product. Needed to create. A change replaces it whole; omit or null keeps it.\n    '
+    publisher_properties: NotRequired[list[SaveWholesaleProductRequestWholesaleInventoryPublisherPropertiesItemSelectionTypeAll | SaveWholesaleProductRequestWholesaleInventoryPublisherPropertiesItemSelectionTypeById | SaveWholesaleProductRequestWholesaleInventoryPublisherPropertiesItemSelectionTypeByTag]]
+    '\n    Publisher scope buyers see, as AdCP publisher selectors. A change replaces it whole; [] clears it.\n    '
+
+class SaveWholesaleProductRequestWholesaleInventoryExecution(TypedDict):
+    adapter: str
+    '\n    The source\'s ad-server adapter, e.g. `google_ad_manager`.\n    '
+    selectors: NotRequired[list[SaveWholesaleProductRequestWholesaleInventorySelector]]
+    '\n    The ad-server objects the product sells.\n    '
+    format_bindings: NotRequired[list[SaveWholesaleProductRequestWholesaleFormatBinding]]
+    '\n    How each accepted format becomes an ad-server creative.\n    '
+
+class SaveWholesaleProductRequestWholesaleInventoryPublisherPropertiesItemSelectionTypeAll(TypedDict):
+    publisher_domain: str
+    '\n    Required here: the sales agent takes one publisher domain per selector.\n    '
+    publisher_domains: NotRequired[list[str]]
+    selection_type: Literal["all"]
+
+class SaveWholesaleProductRequestWholesaleInventoryPublisherPropertiesItemSelectionTypeById(TypedDict):
+    publisher_domain: str
+    '\n    Required here: the sales agent takes one publisher domain per selector.\n    '
+    selection_type: Literal["by_id"]
+    property_ids: list[str]
+
+class SaveWholesaleProductRequestWholesaleInventoryPublisherPropertiesItemSelectionTypeByTag(TypedDict):
+    publisher_domain: str
+    '\n    Required here: the sales agent takes one publisher domain per selector.\n    '
+    publisher_domains: NotRequired[list[str]]
+    selection_type: Literal["by_tag"]
+    property_tags: list[str]
+
+class SaveWholesaleProductRequestWholesaleInventorySelector(TypedDict):
+    selector_type: str
+    '\n    What the selector names, such as `ad_unit` or `placement`. The adapter declares its types.\n    '
+    external_id: str
+    '\n    The ad server id of the selected object.\n    '
+    name: NotRequired[str | None]
+    '\n    Display name of the selected object.\n    '
+    options: NotRequired[SaveWholesaleProductRequestWholesaleInventorySelectorOptions]
+    '\n    Adapter options as entries, e.g. key `include_descendants`, value true. Omit for none.\n    '
+
+class SaveWholesaleProductRequestWholesaleInventorySettingEntry(TypedDict):
+    key: str
+    '\n    Path to one setting: dotted names, [n] for a list item, ["a.b"] for a name with a dot or bracket, e.g. `groups[0].criteria[0].keyId`.\n    '
+    value: str | float | bool | list[str] | None | SaveWholesaleProductRequestWholesaleInventorySettingEntryValueValue
+    '\n    A string, number, boolean, list of strings, null, or an empty object.\n    '
+
+SaveWholesaleProductRequestWholesaleFormatBindingAdapterConfig: TypeAlias = "list[SaveWholesaleProductRequestWholesaleInventorySettingEntry]"
+
+SaveWholesaleProductRequestWholesaleInventorySelectorOptions: TypeAlias = "list[SaveWholesaleProductRequestWholesaleInventorySettingEntry]"
+
+class SaveWholesaleProductRequestWholesaleInventorySettingEntryValueValue(TypedDict):
+    pass
 
 class SaveWholesaleProductSuccessSaveWholesaleProductSuccessDeleted(TypedDict):
     outcome: Literal["deleted"]
@@ -16974,12 +17506,26 @@ class SaveWorkItemInput(TypedDict):
     '\n    Optional note preserved with the decision.\n    '
     expectedContentDigest: NotRequired[str]
     '\n    Required for `creative_review`; copy contentDigest from the exact search or get result.\n    '
-    result: NotRequired[dict[str, JsonValue]]
-    '\n    Modular completion fields named by requiredResultFields. Never secrets.\n    '
+    result: NotRequired[list[SaveWorkItemRequestWorkItemResultEntry]]
+    '\n    Modular completion fields named by requiredResultFields, one entry per field. Never secrets.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveWorkItemRequestModularDailyDelivery(TypedDict):
+    date: str
+    '\n    Calendar day, YYYY-MM-DD.\n    '
+    impressions: int
+    '\n    Impressions delivered that day.\n    '
+    spend: float
+    '\n    Spend that day, in the report currency.\n    '
+
+class SaveWorkItemRequestWorkItemResultEntry(TypedDict):
+    key: str
+    '\n    A key from the work item `requiredResultFields`, for example `upstream.campaignId`.\n    '
+    value: str | float | list[str | SaveWorkItemRequestModularDailyDelivery]
+    '\n    A string or number, a list of strings, or for `reporting.dailyBreakdown` the daily delivery rows.\n    '
 
 class SaveWorkItemSuccessSaveWorkItemSuccessCreated(TypedDict):
     outcome: Literal["created"]
@@ -17027,8 +17573,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "pulse"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchFilter]
@@ -17044,9 +17590,9 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
+    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -17111,8 +17657,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
-    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
-    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
+    labels: NotRequired[list[SearchRequestLabelFilterEntry]]
+    '\n    For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.\n    '
     appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
@@ -17126,9 +17672,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -17189,8 +17733,6 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -17266,8 +17808,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict)
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "pulse"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter]
@@ -17299,8 +17841,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "pulse"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionFilter]
@@ -17316,9 +17858,9 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
+    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -17383,8 +17925,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
-    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
-    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
+    labels: NotRequired[list[SearchRequestLabelFilterEntry]]
+    '\n    For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.\n    '
     appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
@@ -17398,9 +17940,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -17461,8 +18001,6 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -17522,9 +18060,9 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
+    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -17589,8 +18127,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
-    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
-    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
+    labels: NotRequired[list[SearchRequestLabelFilterEntry]]
+    '\n    For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.\n    '
     appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
@@ -17604,9 +18142,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -17667,8 +18203,6 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -17738,8 +18272,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "pulse"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter]
@@ -17755,9 +18289,9 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
+    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -17822,8 +18356,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
-    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
-    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
+    labels: NotRequired[list[SearchRequestLabelFilterEntry]]
+    '\n    For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.\n    '
     appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
@@ -17837,9 +18371,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -17900,8 +18432,6 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -17978,8 +18508,8 @@ class SearchInputKindAdServerTargeting(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "pulse"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindAdServerTargetingFilter]
@@ -17995,9 +18525,9 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
+    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -18062,8 +18592,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
-    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
-    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
+    labels: NotRequired[list[SearchRequestLabelFilterEntry]]
+    '\n    For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.\n    '
     appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
@@ -18077,9 +18607,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -18140,8 +18668,6 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -18218,8 +18744,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "pulse"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSessionFilter]
@@ -18235,9 +18761,9 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
+    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -18302,8 +18828,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
-    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
-    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
+    labels: NotRequired[list[SearchRequestLabelFilterEntry]]
+    '\n    For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.\n    '
     appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
@@ -18317,9 +18843,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -18380,8 +18904,6 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -18458,8 +18980,8 @@ class SearchInputKindCreative(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "pulse"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindCreativeFilter]
@@ -18492,8 +19014,8 @@ class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "pulse"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeAssetAndCatalogFilter
@@ -18509,9 +19031,9 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
+    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -18576,8 +19098,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
-    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
-    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
+    labels: NotRequired[list[SearchRequestLabelFilterEntry]]
+    '\n    For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.\n    '
     appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
@@ -18591,9 +19113,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -18654,8 +19174,6 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -18732,8 +19250,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "pulse"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter
@@ -18749,9 +19267,9 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
+    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -18814,8 +19332,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
-    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
-    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
+    labels: NotRequired[list[SearchRequestLabelFilterEntry]]
+    '\n    For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.\n    '
     appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
@@ -18829,9 +19347,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -18892,8 +19408,6 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -18970,8 +19484,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "pulse"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeCollectionWithFilterCampaignIdFilter
@@ -18987,9 +19501,9 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
+    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -19052,8 +19566,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
-    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
-    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
+    labels: NotRequired[list[SearchRequestLabelFilterEntry]]
+    '\n    For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.\n    '
     appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
@@ -19067,9 +19581,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -19130,8 +19642,6 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -19191,9 +19701,9 @@ class SearchInputKindCreativeFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
+    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -19256,8 +19766,8 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
-    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
-    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
+    labels: NotRequired[list[SearchRequestLabelFilterEntry]]
+    '\n    For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.\n    '
     appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
@@ -19271,9 +19781,7 @@ class SearchInputKindCreativeFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -19334,8 +19842,6 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -19484,8 +19990,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "pulse"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter
@@ -19499,9 +20005,9 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
+    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -19564,8 +20070,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
-    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
-    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
+    labels: NotRequired[list[SearchRequestLabelFilterEntry]]
+    '\n    For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.\n    '
     appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
@@ -19579,9 +20085,7 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -19642,8 +20146,6 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -19724,8 +20226,8 @@ class SearchInputKindEventSource(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "pulse"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindEventSourceFilter]
@@ -19762,8 +20264,8 @@ class SearchInputKindProposal(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "pulse"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindProposalFilter
@@ -19779,9 +20281,9 @@ class SearchInputKindProposalFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
+    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -19846,8 +20348,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
-    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
-    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
+    labels: NotRequired[list[SearchRequestLabelFilterEntry]]
+    '\n    For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.\n    '
     appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
@@ -19861,9 +20363,7 @@ class SearchInputKindProposalFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -19924,8 +20424,6 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -20002,8 +20500,8 @@ class SearchInputKindSourceAccount(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "pulse"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindSourceAccountFilter]
@@ -20021,9 +20519,9 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds seller (buyer account), connection, and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. For kind seller, deprecated: send sellerAccountIds, from the sellerAccountId field on seller reads.\n    '
+    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids or filter.ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -20088,8 +20586,8 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.\n    '
     catalogState: NotRequired[Literal["active", "draft"]]
     '\n    For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.\n    '
-    labels: NotRequired[dict[str, Literal["unlabeled"] | list[str]]]
-    '\n    For kinds advertiser, campaign, material, creative, and creative_asset: label filters. Every key must match; within a key, any listed value matches. unlabeled matches items with no value for that key.\n    '
+    labels: NotRequired[list[SearchRequestLabelFilterEntry]]
+    '\n    For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.\n    '
     appliesTo: NotRequired[Literal["advertiser", "campaign", "material", "creative_asset", "creative"]]
     '\n    For kind dimension: only label dimensions that can tag this kind of object.\n    '
     role: NotRequired[SearchRequestCreativeRole]
@@ -20103,9 +20601,7 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id or sellerId, which are different numbers.\n    '
-    sellerId: NotRequired[str]
-    '\n    Deprecated: send sellerAccountId, from the sellerAccountId field on seller reads. For kinds proposal and creative_format: only this seller, by seller id.\n    '
+    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -20166,8 +20662,6 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: buys from this buyer Account id.\n    '
-    buyerCustomerId: NotRequired[int]
-    '\n    Deprecated: send buyerAccountId instead.\n    '
     accountId: NotRequired[int]
     '\n    For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.\n    '
     sandbox: NotRequired[bool]
@@ -20229,6 +20723,12 @@ SearchRequestCreativeRole: TypeAlias = Literal["evergreen", "reference"]
 
 SearchRequestCreativeSource: TypeAlias = Literal["uploaded", "generated", "connected"]
 
+class SearchRequestLabelFilterEntry(TypedDict):
+    dimension: str
+    '\n    Key of a dimension, such as audience or vertical.\n    '
+    values: list[str]
+    '\n    Value slugs; ["unlabeled"] alone matches items with none.\n    '
+
 class SearchResult(TypedDict):
     sources: list[Literal["objects", "docs", "specs"]]
     objects: NotRequired[SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchSessionPageOutput | SearchResultObjectsWithGroupByAndGroupsAndTotal | SearchResultObjectsKindMaterial | SearchResultObjectsKindMixed]
@@ -20263,6 +20763,19 @@ class SearchResultObjectsWithGroupByAndGroupsAndTotal(TypedDict):
 class SearchResultObjectsWithGroupByAndGroupsAndTotalGroupsItem(TypedDict):
     value: str | None
     count: float
+
+class SearchSuccessCampaignPulseSummary(TypedDict):
+    verdict: Literal["delivering", "partially_delivering", "not_delivering", "not_expected_yet", "cannot_verify"]
+    dataThrough: SearchSuccessCampaignPulseTimeRange | None
+    nextCheckAt: str | None
+
+class SearchSuccessCampaignPulseTimeRange(TypedDict):
+    earliest: str
+    latest: str
+
+class SearchSuccessLabelEntry(TypedDict):
+    dimension: str
+    values: list[str]
 
 class SearchSuccessSearchAccountPageOutput(TypedDict):
     total: NotRequired[SearchSuccessSearchAccountPageOutputTotal]
@@ -21825,6 +22338,7 @@ class SearchSuccessV3CampaignListItem(TypedDict):
     attention: list[Literal["blocked", "off_goal", "drifted", "stale"]]
     attentionNote: NotRequired[str]
     nextAction: NotRequired[SearchSuccessV3CampaignListItemNextAction]
+    pulse: NotRequired[SearchSuccessCampaignPulseSummary]
 
 class SearchSuccessV3CampaignListItemAdvertiser(TypedDict):
     advertiserId: str | None
@@ -21841,7 +22355,7 @@ class SearchSuccessV3CampaignListItemCampaign(TypedDict):
     source: NotRequired[SearchSuccessV3CampaignListItemCampaignSource]
     createdAt: str
     updatedAt: str
-    labels: NotRequired[dict[str, list[str]]]
+    labels: NotRequired[list[SearchSuccessLabelEntry]]
     budget: NotRequired[SearchSuccessV3CampaignListBudget]
     channelGroups: NotRequired[list[SearchSuccessV3CampaignListChannelGroup]]
 
@@ -22233,6 +22747,8 @@ LogEventError: TypeAlias = "V3ToolErrorResponse"
 
 OpenAdvertisersPageError: TypeAlias = "V3ToolErrorResponse"
 
+OpenAgentActivityPageError: TypeAlias = "V3ToolErrorResponse"
+
 OpenAgentPageError: TypeAlias = "V3ToolErrorResponse"
 
 OpenAgentSourcesPageError: TypeAlias = "V3ToolErrorResponse"
@@ -22246,8 +22762,6 @@ OpenApprovalsError: TypeAlias = "V3ToolErrorResponse"
 OpenCampaignReceiptError: TypeAlias = "V3ToolErrorResponse"
 
 OpenCampaignsPageError: TypeAlias = "V3ToolErrorResponse"
-
-OpenConnectionsPageError: TypeAlias = "V3ToolErrorResponse"
 
 OpenCreativeEnginesPageError: TypeAlias = "V3ToolErrorResponse"
 
