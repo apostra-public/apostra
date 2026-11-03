@@ -1,6 +1,6 @@
 {
   "name": "sales-agent-testing",
-  "version": "1.0.0+078812c93c61",
+  "version": "1.0.0+c41660d3c914",
   "description": "Test a first-party or third-party AdCP sales agent with governed buyer workflows.",
   "author": {
     "name": "Scope3 PBC",
