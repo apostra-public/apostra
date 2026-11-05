@@ -151,6 +151,11 @@ export const operations = {
         "name": "receiptId",
         "location": "path",
         "required": true
+      },
+      {
+        "name": "accountId",
+        "location": "query",
+        "required": false
       }
     ],
     "security": [
@@ -244,7 +249,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Current account, state, blockers, exact fixes, accounts to pick from. For seller demand, tells if readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. A Developer account adds each agent's stage, blocker, next call."
+    "summary": "Current account, state, blockers, exact fixes, accounts to pick from. For seller demand, tells if readiness stops requests before source calls; read before diagnosing source health, empty responses, or demand. An Agents account adds each agent's stage, blocker, next call."
   },
   "log_event": {
     "path": "/tools/log_event",
@@ -285,6 +290,25 @@ export const operations = {
     ],
     "summary": "Open the Advertisers Page: every advertiser with its campaign and draft counts and one next action each. Use it for \"show my advertisers\" or \"where do I start\"; the Page self-fetches. To add or set up an advertiser, pass intent: \"add\". For a text answer use search(kind: \"advertiser\")."
   },
+  "open_agent_activity_page": {
+    "path": "/tools/open_agent_activity_page",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open one agent’s Activity Page: the calls Apostra made to it, grouped into certification runs, with what was sent, what it returned and the error. Read-only."
+  },
   "open_agent_page": {
     "path": "/tools/open_agent_page",
     "method": "POST",
@@ -302,7 +326,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Open one agent owned by this Developer account."
+    "summary": "Open one agent owned by this Agents account."
   },
   "open_agent_sources_page": {
     "path": "/tools/open_agent_sources_page",
@@ -359,7 +383,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Open Build an agent for this Developer account."
+    "summary": "Open My agents for this Agents account."
   },
   "open_approvals": {
     "path": "/tools/open_approvals",
@@ -418,25 +442,6 @@ export const operations = {
     ],
     "summary": "Open the Campaigns Page: campaigns with status, flight, and budget; open one for its media buys and creatives. The Page self-fetches, so do not list campaigns in prose. advertiserId scopes to one advertiser; campaignId focuses one campaign. A draft's go-live review is open_campaign_receipt."
   },
-  "open_connections_page": {
-    "path": "/tools/open_connections_page",
-    "method": "POST",
-    "body": true,
-    "binary": false,
-    "idempotencyKey": false,
-    "parameters": [],
-    "security": [
-      {
-        "apiKeyAuth": []
-      },
-      {
-        "m2mOAuth": [
-          "interchange:read"
-        ]
-      }
-    ],
-    "summary": "Open the buyer Media Partners Page. Optionally scope to an advertiser or seller; connectionAction \"connect\" opens that media partner at connection setup without mutating until the user confirms. Replaced by open_media_partners_page, which opens the same Page."
-  },
   "open_creative_engines_page": {
     "path": "/tools/open_creative_engines_page",
     "method": "POST",
@@ -492,7 +497,26 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Open the Developer home for this Developer account: its agents, their stages and what to do next."
+    "summary": "Open My agents for this Agents account: every agent, its status and what to do next."
+  },
+  "open_domains_page": {
+    "path": "/tools/open_domains_page",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open the organization’s Domains Page: the domains it claims, how each was proved, the accounts that use it and whether it is locked. Read-only."
   },
   "open_media_buys_page": {
     "path": "/tools/open_media_buys_page",
@@ -684,7 +708,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerIds and sellerAccountIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
+    "summary": "Request quotes/products. With a MediaBuy cap, only quotes confirming the exact cap are usable. sellerAccountIds fail closed; campaign-only lists use eligible subset. Broadcast needs confirmBroadcast:true."
   },
   "request_seller_reporting_update": {
     "path": "/tools/request_seller_reporting_update",
@@ -1375,7 +1399,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create, replace, or archive a signal. Managed writes need a complete draft; read before updates. Without sourceId, writes the seller catalog."
+    "summary": "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates."
   },
   "save_wholesale_product": {
     "path": "/tools/save_wholesale_product",
