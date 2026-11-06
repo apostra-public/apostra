@@ -5280,6 +5280,14 @@ export type GetDeliveryResponses = {
              */
             coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
             /**
+             * campaign_delivery only: each media buy behind this page's rows whose spend was converted into the advertiser's currency, by mediaBuyId, at most 100. Absent when none was.
+             */
+            currencyConversions?: GetDeliverySuccessCurrencyConversions;
+            /**
+             * Converted buys behind this page left out of currencyConversions by its cap. Absent when none.
+             */
+            currencyConversionsOmitted?: GetDeliverySuccessCurrencyConversionsOmitted;
+            /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
             synthetic?: GetDeliverySuccessSynthetic;
@@ -5308,6 +5316,14 @@ export type GetDeliveryResponses = {
              */
             coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
             /**
+             * campaign_delivery only: each media buy behind this page's rows whose spend was converted into the advertiser's currency, by mediaBuyId, at most 100. Absent when none was.
+             */
+            currencyConversions?: GetDeliverySuccessCurrencyConversions;
+            /**
+             * Converted buys behind this page left out of currencyConversions by its cap. Absent when none.
+             */
+            currencyConversionsOmitted?: GetDeliverySuccessCurrencyConversionsOmitted;
+            /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
             synthetic?: GetDeliverySuccessSynthetic;
@@ -5335,6 +5351,14 @@ export type GetDeliveryResponses = {
              * Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.
              */
             coverage?: GetDeliverySuccessCampaignDeliveryCoverage;
+            /**
+             * campaign_delivery only: each media buy behind this page's rows whose spend was converted into the advertiser's currency, by mediaBuyId, at most 100. Absent when none was.
+             */
+            currencyConversions?: GetDeliverySuccessCurrencyConversions;
+            /**
+             * Converted buys behind this page left out of currencyConversions by its cap. Absent when none.
+             */
+            currencyConversionsOmitted?: GetDeliverySuccessCurrencyConversionsOmitted;
             /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
@@ -5586,6 +5610,8 @@ export type GetDeliveryResponses = {
             page?: never;
             goalProgress?: never;
             coverage?: never;
+            currencyConversions?: never;
+            currencyConversionsOmitted?: never;
             synthetic?: never;
         };
         error: null;
@@ -5640,6 +5666,34 @@ export type GetDeliverySuccessCampaignGoalProgressMediaBuy = {
     mediaBuyId: string;
     campaignId: string | null;
     progress: GetDeliverySuccessGoalProgress;
+};
+
+export type GetDeliverySuccessCurrencyConversions = Array<GetDeliverySuccessDeliveryCurrencyConversion>;
+
+export type GetDeliverySuccessCurrencyConversionsOmitted = number;
+
+export type GetDeliverySuccessDeliveryCurrencyConversion = {
+    mediaBuyId: string;
+    /**
+     * The currency the spend was in before conversion. Equals toCurrency when rateSource is settlement.
+     */
+    fromCurrency: string;
+    /**
+     * The advertiser's currency.
+     */
+    toCurrency: string;
+    /**
+     * toCurrency per one fromCurrency.
+     */
+    rate: number;
+    /**
+     * UTC date of the rate; null when rateSource is settlement.
+     */
+    rateDate: string | null;
+    /**
+     * booked: locked when the buy was booked. snapshot: the daily rate store. settlement: the seller labelled a currency it is not paid in; the spend is taken in the one it is paid in, at rate 1.
+     */
+    rateSource: 'booked' | 'snapshot' | 'settlement';
 };
 
 export type GetDeliverySuccessDeliveryRevision = {

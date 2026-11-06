@@ -441,6 +441,10 @@ class GetDeliveryResultReportCampaignDelivery(TypedDict):
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
     '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
+    currencyConversions: NotRequired[GetDeliverySuccessCurrencyConversions]
+    '\n    campaign_delivery only: each media buy behind this page\'s rows whose spend was converted into the advertiser\'s currency, by mediaBuyId, at most 100. Absent when none was.\n    '
+    currencyConversionsOmitted: NotRequired[GetDeliverySuccessCurrencyConversionsOmitted]
+    '\n    Converted buys behind this page left out of currencyConversions by its cap. Absent when none.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -458,6 +462,10 @@ class GetDeliveryResultReportDelivery(TypedDict):
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
     '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
+    currencyConversions: NotRequired[GetDeliverySuccessCurrencyConversions]
+    '\n    campaign_delivery only: each media buy behind this page\'s rows whose spend was converted into the advertiser\'s currency, by mediaBuyId, at most 100. Absent when none was.\n    '
+    currencyConversionsOmitted: NotRequired[GetDeliverySuccessCurrencyConversionsOmitted]
+    '\n    Converted buys behind this page left out of currencyConversions by its cap. Absent when none.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -714,6 +722,10 @@ class GetDeliveryResultReportMargin(TypedDict):
     '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
     '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
+    currencyConversions: NotRequired[GetDeliverySuccessCurrencyConversions]
+    '\n    campaign_delivery only: each media buy behind this page\'s rows whose spend was converted into the advertiser\'s currency, by mediaBuyId, at most 100. Absent when none was.\n    '
+    currencyConversionsOmitted: NotRequired[GetDeliverySuccessCurrencyConversionsOmitted]
+    '\n    Converted buys behind this page left out of currencyConversions by its cap. Absent when none.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -764,6 +776,23 @@ class GetDeliverySuccessCampaignGoalProgressMediaBuy(TypedDict):
     mediaBuyId: str
     campaignId: str | None
     progress: GetDeliverySuccessGoalProgress
+
+GetDeliverySuccessCurrencyConversionsOmitted: TypeAlias = int
+
+class GetDeliverySuccessDeliveryCurrencyConversion(TypedDict):
+    mediaBuyId: str
+    fromCurrency: str
+    '\n    The currency the spend was in before conversion. Equals toCurrency when rateSource is settlement.\n    '
+    toCurrency: str
+    '\n    The advertiser\'s currency.\n    '
+    rate: float
+    '\n    toCurrency per one fromCurrency.\n    '
+    rateDate: str | None
+    '\n    UTC date of the rate; null when rateSource is settlement.\n    '
+    rateSource: Literal["booked", "snapshot", "settlement"]
+    '\n    booked: locked when the buy was booked. snapshot: the daily rate store. settlement: the seller labelled a currency it is not paid in; the spend is taken in the one it is paid in, at rate 1.\n    '
+
+GetDeliverySuccessCurrencyConversions: TypeAlias = "list[GetDeliverySuccessDeliveryCurrencyConversion]"
 
 class GetDeliverySuccessDeliveryRevision(TypedDict):
     reporting_revision_id: GetDeliverySuccessDeliveryRevisionReportingRevisionId
