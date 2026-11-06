@@ -38962,8 +38962,29 @@ paths:
                                     - include_unknown
                                   additionalProperties: false
                               description: Age range.
-                          required:
-                            - age
+                            gender:
+                              type: object
+                              properties:
+                                values:
+                                  minItems: 1
+                                  type: array
+                                  items:
+                                    anyOf:
+                                      - type: string
+                                        const: female
+                                      - type: string
+                                        const: male
+                                      - type: string
+                                        const: non_binary
+                                  description: Values in this system.
+                                include_unknown:
+                                  type: boolean
+                                  description: Include unknown ages.
+                              required:
+                                - values
+                                - include_unknown
+                              additionalProperties: {}
+                              description: Targeting value.
                           additionalProperties: false
                           description: Demographic criteria.
                         daypart_targets:
@@ -47431,7 +47452,7 @@ paths:
                                 items:
                                   type: string
                               demographics:
-                                description: Audience age targeting.
+                                description: Audience age and gender targeting.
                                 type: object
                                 properties:
                                   age:
@@ -47506,8 +47527,26 @@ paths:
                                           - max
                                           - include_unknown
                                         additionalProperties: false
-                                required:
-                                  - age
+                                  gender:
+                                    type: object
+                                    properties:
+                                      values:
+                                        minItems: 1
+                                        type: array
+                                        items:
+                                          anyOf:
+                                            - type: string
+                                              const: female
+                                            - type: string
+                                              const: male
+                                            - type: string
+                                              const: non_binary
+                                      include_unknown:
+                                        type: boolean
+                                    required:
+                                      - values
+                                      - include_unknown
+                                    additionalProperties: {}
                                 additionalProperties: false
                               frequency_cap:
                                 allOf:
@@ -49224,7 +49263,7 @@ paths:
                                   - type: 'null'
                               demographics:
                                 anyOf:
-                                  - description: Audience age targeting.
+                                  - description: Audience age and gender targeting.
                                     type: object
                                     properties:
                                       age:
@@ -49299,8 +49338,26 @@ paths:
                                               - max
                                               - include_unknown
                                             additionalProperties: false
-                                    required:
-                                      - age
+                                      gender:
+                                        type: object
+                                        properties:
+                                          values:
+                                            minItems: 1
+                                            type: array
+                                            items:
+                                              anyOf:
+                                                - type: string
+                                                  const: female
+                                                - type: string
+                                                  const: male
+                                                - type: string
+                                                  const: non_binary
+                                          include_unknown:
+                                            type: boolean
+                                        required:
+                                          - values
+                                          - include_unknown
+                                        additionalProperties: {}
                                     additionalProperties: false
                                   - type: 'null'
                               frequency_cap:
