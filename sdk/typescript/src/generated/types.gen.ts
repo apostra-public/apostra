@@ -25358,7 +25358,7 @@ export type SaveMediaBuyData = {
              */
             pacing?: 'even' | 'asap' | 'front_loaded';
             /**
-             * Update only: lineItems[].lineItemRef from the read, not the product id. Needed for a repeated product.
+             * Update only: products[].lineItemRef from get(kind: "media_buy", include: ["products"]), not the product id. Needed for a repeated product.
              */
             lineItemRef?: string;
             targetingOverlay?: {
@@ -26200,7 +26200,7 @@ export type SaveMediaBuyData = {
              */
             pacing?: 'even' | 'asap' | 'front_loaded';
             /**
-             * Update only: lineItems[].lineItemRef from the read, not the product id. Needed for a repeated product.
+             * Update only: products[].lineItemRef from get(kind: "media_buy", include: ["products"]), not the product id. Needed for a repeated product.
              */
             lineItemRef?: string;
             targetingOverlay?: {
