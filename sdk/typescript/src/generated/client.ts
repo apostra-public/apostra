@@ -6,7 +6,7 @@ export type ConfirmPaymentAuthorityInput = Wire.ConfirmPaymentAuthorityData['bod
 export type ConfirmPaymentAuthorityResult = Wire.ConfirmPaymentAuthorityResponses[200]['data']
 export type ConfirmPaymentAuthorityError = Wire.ConfirmPaymentAuthorityErrors[keyof Wire.ConfirmPaymentAuthorityErrors]
 
-export type DownloadV3PublicDocumentRevisionInput = { "documentId": NonNullable<Wire.DownloadV3PublicDocumentRevisionData['path']>["documentId"]; "revisionId": NonNullable<Wire.DownloadV3PublicDocumentRevisionData['path']>["revisionId"] }
+export type DownloadV3PublicDocumentRevisionInput = { "documentId": NonNullable<Wire.DownloadV3PublicDocumentRevisionData['path']>["documentId"]; "revisionId": NonNullable<Wire.DownloadV3PublicDocumentRevisionData['path']>["revisionId"]; "accountId"?: NonNullable<Wire.DownloadV3PublicDocumentRevisionData['query']>["accountId"] }
 export type DownloadV3PublicDocumentRevisionResult = Uint8Array
 export type DownloadV3PublicDocumentRevisionError = Wire.DownloadV3PublicDocumentRevisionErrors[keyof Wire.DownloadV3PublicDocumentRevisionErrors]
 
@@ -18,7 +18,7 @@ export type GetInput = Wire.GetData['body']
 export type GetResult = Wire.GetResponses[200]['data']
 export type GetError = Wire.GetErrors[keyof Wire.GetErrors]
 
-export type GetV3PublicDocumentRevisionSectionsInput = { "documentId": NonNullable<Wire.GetV3PublicDocumentRevisionSectionsData['path']>["documentId"]; "revisionId": NonNullable<Wire.GetV3PublicDocumentRevisionSectionsData['path']>["revisionId"]; "section"?: NonNullable<Wire.GetV3PublicDocumentRevisionSectionsData['query']>["section"]; "query"?: NonNullable<Wire.GetV3PublicDocumentRevisionSectionsData['query']>["query"]; "cursor"?: NonNullable<Wire.GetV3PublicDocumentRevisionSectionsData['query']>["cursor"]; "asOf"?: NonNullable<Wire.GetV3PublicDocumentRevisionSectionsData['query']>["asOf"] }
+export type GetV3PublicDocumentRevisionSectionsInput = { "documentId": NonNullable<Wire.GetV3PublicDocumentRevisionSectionsData['path']>["documentId"]; "revisionId": NonNullable<Wire.GetV3PublicDocumentRevisionSectionsData['path']>["revisionId"]; "section"?: NonNullable<Wire.GetV3PublicDocumentRevisionSectionsData['query']>["section"]; "query"?: NonNullable<Wire.GetV3PublicDocumentRevisionSectionsData['query']>["query"]; "cursor"?: NonNullable<Wire.GetV3PublicDocumentRevisionSectionsData['query']>["cursor"]; "asOf"?: NonNullable<Wire.GetV3PublicDocumentRevisionSectionsData['query']>["asOf"]; "accountId"?: NonNullable<Wire.GetV3PublicDocumentRevisionSectionsData['query']>["accountId"] }
 export type GetV3PublicDocumentRevisionSectionsResult = Wire.GetV3PublicDocumentRevisionSectionsResponses[200]['data']
 export type GetV3PublicDocumentRevisionSectionsError = Wire.GetV3PublicDocumentRevisionSectionsErrors[keyof Wire.GetV3PublicDocumentRevisionSectionsErrors]
 

@@ -197,7 +197,14 @@ describe('call reaches every public V3 operation', () => {
     expect(request?.url.pathname).toBe(
       `/api/v3${meta.path.replace(/\{(\w+)\}/g, 'x1')}`,
     )
-    expect(request?.headers.get('x-scope3-customer-id')).toBe('1')
+    // A tool call names its account in the body and a receipt read in the
+    // query; a document read takes no accountId and keeps the header.
+    const namedAccount = meta.body
+      ? request?.body?.accountId
+      : meta.parameters.some((param) => param.name === 'accountId')
+        ? request?.url.searchParams.get('accountId')
+        : request?.headers.get('x-scope3-customer-id')
+    expect(String(namedAccount)).toBe('1')
     expect(request?.headers.get('idempotency-key')).toBe(
       meta.idempotencyKey ? 'key-1' : null,
     )
@@ -220,9 +227,9 @@ describe('call input', () => {
       writeFileSync(file, '{"from":"file","keep":1}')
       expect(
         (await callRead('--input', '{"from":"inline"}')).requests[0]?.body,
-      ).toEqual({ from: 'inline' })
+      ).toEqual({ from: 'inline', accountId: 1 })
       expect((await callRead('--input', `@${file}`)).requests[0]?.body).toEqual(
-        { from: 'file', keep: 1 },
+        { from: 'file', keep: 1, accountId: 1 },
       )
       expect(
         (
@@ -231,7 +238,7 @@ describe('call input', () => {
             { stdin: '{"from":"stdin"}' },
           )
         ).requests[0]?.body,
-      ).toEqual({ from: 'stdin' })
+      ).toEqual({ from: 'stdin', accountId: 1 })
       const overlaid = await callRead(
         '--input',
         `@${file}`,
@@ -247,6 +254,7 @@ describe('call input', () => {
         keep: 1,
         limit: 20,
         filter: { status: 'active' },
+        accountId: 1,
       })
     } finally {
       rmSync(dir, { recursive: true, force: true })
@@ -324,10 +332,10 @@ describe('call names its account', () => {
     vi.stubEnv('APOSTRA_ACCOUNT_ID', '5')
     const fromEnv = await run(['call', 'get_delivery'])
     expect(fromEnv.err).toBe('Using account 5 (APOSTRA_ACCOUNT_ID).\n')
-    expect(fromEnv.requests[0]?.headers.get('x-scope3-customer-id')).toBe('5')
+    expect(fromEnv.requests[0]?.body?.accountId).toBe(5)
     const flag = await run(['call', 'get_delivery', '--account', '6'])
     expect(flag.err).toBe('Using account 6 (--account).\n')
-    expect(flag.requests[0]?.headers.get('x-scope3-customer-id')).toBe('6')
+    expect(flag.requests[0]?.body?.accountId).toBe(6)
   })
 
   it('refuses an account that is not a positive integer', async () => {
@@ -398,9 +406,9 @@ describe('call --all', () => {
     )
     expect(result.code).toBe(0)
     expect(result.requests.map((request) => request.body)).toEqual([
-      { kind: 'campaign' },
-      { kind: 'campaign', cursor: 'c2' },
-      { kind: 'campaign', cursor: 'c3' },
+      { kind: 'campaign', accountId: 1 },
+      { kind: 'campaign', cursor: 'c2', accountId: 1 },
+      { kind: 'campaign', cursor: 'c3', accountId: 1 },
     ])
     const value = envelope(result.out)
     expect(value.data).toEqual([

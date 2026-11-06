@@ -156,9 +156,13 @@ async function startFake(): Promise<Fake> {
         error: null,
       })
     if (path.startsWith('/api/v3/tools/')) {
+      let text = ''
+      for await (const chunk of req) text += chunk
+      const body = text ? (JSON.parse(text) as { accountId?: number }) : {}
       fake.calls.push({
         path,
-        account: req.headers['x-scope3-customer-id'] as string | undefined,
+        account:
+          body.accountId === undefined ? undefined : String(body.accountId),
         authorization: req.headers.authorization,
       })
       return json(res, 200, { data: { delivered: true }, error: null })

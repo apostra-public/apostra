@@ -38,6 +38,11 @@ export const operations = {
         "name": "revisionId",
         "location": "path",
         "required": true
+      },
+      {
+        "name": "accountId",
+        "location": "query",
+        "required": false
       }
     ],
     "security": [
@@ -124,6 +129,11 @@ export const operations = {
       },
       {
         "name": "asOf",
+        "location": "query",
+        "required": false
+      },
+      {
+        "name": "accountId",
         "location": "query",
         "required": false
       }

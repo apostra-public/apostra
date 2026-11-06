@@ -479,6 +479,61 @@ def _wait(seconds: float, deadline: float, cancel: Event | None = None) -> None:
         raise TimeoutError("Apostra request timed out")
 
 
+# Inputs whose ``accountId`` named something other than the call's account
+# before spec section 2.5, by the input it was renamed to, and whether a call
+# is of the kind that carried it. These match the API's own rules.
+_RENAMED_ACCOUNT_INPUTS: dict[str, tuple[str, Callable[[Mapping[str, object]], bool]]] = {
+    "get": ("memberAccountId", lambda fields: fields.get("kind") == "member"),
+    "save_account": ("id", lambda fields: fields.get("accountType") is None),
+    "save_directed_campaign_subscription": ("providerAccountId", lambda fields: True),
+}
+
+
+def _move_renamed_account_input(
+    operation: str, input: Mapping[str, object]
+) -> Mapping[str, object]:
+    """Move an old-shaped ``accountId`` to the input it was renamed to.
+
+    The call keeps naming the same object, and the SDK can name the call's
+    account.
+    """
+    renamed = _RENAMED_ACCOUNT_INPUTS.get(operation)
+    if (
+        renamed is None
+        or input.get("accountId") is None
+        or renamed[0] in input
+        or not renamed[1](input)
+    ):
+        return input
+    moved = {key: value for key, value in input.items() if key != "accountId"}
+    moved[renamed[0]] = input["accountId"]
+    return moved
+
+
+def _name_account(
+    operation: str, input: Mapping[str, object], target: str | None
+) -> tuple[Mapping[str, object], str | None]:
+    """Name the account a request runs in.
+
+    A tool call carries it as ``accountId`` in its body, and a receipt or
+    document read as the ``accountId`` query parameter. An ``accountId`` the
+    input already carries names the call's account and is left as it is. An
+    operation that takes no ``accountId`` keeps the deprecated
+    ``X-SCOPE3-CUSTOMER-ID`` header.
+    """
+    input = _move_renamed_account_input(operation, input)
+    if target is None or input.get("accountId") is not None:
+        return input, None
+    meta = OPERATIONS[operation]
+    takes_account_id = meta["body"] or any(
+        param["name"] == "accountId" for param in meta["parameters"]
+    )
+    if not takes_account_id:
+        return input, target
+    # A number fits every operation: some take only an integer accountId.
+    return {**input, "accountId": int(target)}, None
+
+
 def _prepare(
     operation: str,
     input: Mapping[str, object],
@@ -714,10 +769,11 @@ class SyncTransport:
 
         def send() -> tuple[httpx.Response, bool]:
             token = self.__provider() if self.__provider else self.__token
+            named, header_account = _name_account(operation, input, target)
             meta, path, headers = _prepare(
-                operation, input, token or "", target, idempotency_key
+                operation, named, token or "", header_account, idempotency_key
             )
-            payload = dict(input)
+            payload = dict(named)
             body_key_field = meta.get("bodyKeyField")
             if body_key_field:
                 supplied = payload.get(body_key_field)
@@ -853,10 +909,17 @@ class AsyncTransport:
                         token = (
                             await self.__provider() if self.__provider else self.__token
                         )
-                        meta, path, headers = _prepare(
-                            operation, input, token or "", target, idempotency_key
+                        named, header_account = _name_account(
+                            operation, input, target
                         )
-                        payload = dict(input)
+                        meta, path, headers = _prepare(
+                            operation,
+                            named,
+                            token or "",
+                            header_account,
+                            idempotency_key,
+                        )
+                        payload = dict(named)
                         body_key_field = meta.get("bodyKeyField")
                         if body_key_field:
                             supplied = payload.get(body_key_field)
