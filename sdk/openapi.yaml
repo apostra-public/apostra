@@ -83861,6 +83861,7 @@ components:
                 - ui://agentic-api/buyer-account-admission/mcp-app.html
                 - ui://agentic-api/tars-org-supply-asks/mcp-app.html
                 - ui://agentic-api/tars-run-rate/mcp-app.html
+                - ui://agentic-api/tars-connections/mcp-app.html
                 - ui://agentic-api/tars-internal-library/mcp-app.html
                 - ui://agentic-api/tars-marketing-email-library/mcp-app.html
                 - ui://agentic-api/tars-approved-deck-modules/mcp-app.html
