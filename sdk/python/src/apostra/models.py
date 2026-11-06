@@ -6900,12 +6900,12 @@ class SaveAdvertiserInputAssignAccount(TypedDict):
     '\n    Credential ID when the partner has multiple connections.\n    '
 
 class SaveAdvertiserInputBrandProfile(TypedDict):
-    stated: NotRequired[SaveAdvertiserRequestAdvertiserBrandProfileStated | None]
-    '\n    Stated profile; null clears it.\n    '
     pendingDifferences: NotRequired[list[SaveAdvertiserInputBrandProfilePendingDifferencesItem]]
     '\n    Pending differences.\n    '
     expectedRevision: NotRequired[int]
     '\n    Expected revision.\n    '
+    stated: NotRequired[SaveAdvertiserRequestAdvertiserBrandProfileStated | None]
+    '\n    Stated profile; null clears it.\n    '
 
 class SaveAdvertiserInputBrandProfilePendingDifferencesItem(TypedDict):
     field: str
@@ -10055,6 +10055,8 @@ class SaveConnectionInput(TypedDict):
     '\n    Select a provider account; requires connectionId.\n    '
     advertiserMapping: NotRequired[SaveConnectionInputAdvertiserMapping]
     '\n    Map or unmap an advertiser; requires connectionId.\n    '
+    ownedLink: NotRequired[SaveConnectionInputOwnedLinkKindShowWithUrl | SaveConnectionInputOwnedLinkKindShowStateAbsent]
+    '\n    Confirm a mapped advertiser\'s Spotify show, or confirm it has none; requires connectionId and Creative Engines access.\n    '
     state: NotRequired[Literal["removed"]]
     '\n    Remove the connection; requires connectionId.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -10119,6 +10121,28 @@ class SaveConnectionInputIdentitySelection(TypedDict):
     onlyShowAsAds: NotRequired[bool]
     '\n    Restrict the identity to ad use only; defaults to true.\n    '
 
+class SaveConnectionInputOwnedLinkKindShowStateAbsent(TypedDict):
+    state: Literal["absent"]
+    '\n    Confirm that the advertiser has no Spotify show.\n    '
+    platform: Literal["spotify"]
+    '\n    The Spotify provider.\n    '
+    kind: Literal["show"]
+    '\n    A Spotify podcast show.\n    '
+    advertiserId: SaveConnectionRequestOwnedLinkAdvertiserId
+    '\n    Mapped advertiser ID.\n    '
+
+class SaveConnectionInputOwnedLinkKindShowWithUrl(TypedDict):
+    state: Literal["linked"]
+    '\n    Link the supplied Spotify show.\n    '
+    platform: Literal["spotify"]
+    '\n    The Spotify provider.\n    '
+    kind: Literal["show"]
+    '\n    A Spotify podcast show.\n    '
+    advertiserId: SaveConnectionRequestOwnedLinkAdvertiserId
+    '\n    Mapped advertiser ID.\n    '
+    url: str
+    '\n    Spotify show link from open.spotify.com/show.\n    '
+
 class SaveConnectionInputSelection(TypedDict):
     decision: SaveConnectionRequestBuyerStorefrontSelectionDecision
     '\n    Account decision.\n    '
@@ -10148,6 +10172,8 @@ SaveConnectionRequestConnectionId: TypeAlias = str
 SaveConnectionRequestEnhancedReportingAccountId: TypeAlias = str
 
 SaveConnectionRequestIdentitySelectionAccountId: TypeAlias = str
+
+SaveConnectionRequestOwnedLinkAdvertiserId: TypeAlias = str
 
 SaveConnectionRequestSelectedAccountId: TypeAlias = str
 
@@ -10212,6 +10238,11 @@ class SaveConnectionResultActionIdentitySelectionUpdated(TypedDict):
     object: SaveConnectionSuccessObject
     mutationReceipt: NotRequired[SaveConnectionSuccessMutationReceipt]
 
+class SaveConnectionResultActionOwnedLinkUpdated(TypedDict):
+    action: Literal["owned_link_updated"]
+    object: SaveConnectionSuccessObject
+    mutationReceipt: NotRequired[SaveConnectionSuccessMutationReceipt]
+
 class SaveConnectionResultActionRemoved(TypedDict):
     action: Literal["removed"]
     object: SaveConnectionSuccessObject
@@ -10222,7 +10253,7 @@ class SaveConnectionResultActionSelectionUpdated(TypedDict):
     object: SaveConnectionSuccessObject
     mutationReceipt: NotRequired[SaveConnectionSuccessMutationReceipt]
 
-SaveConnectionResult: TypeAlias = "SaveConnectionResultActionAuthorizationRequired | SaveConnectionResultActionSelectionUpdated | SaveConnectionResultActionAdvertiserActivationUpdated | SaveConnectionResultActionBillingUpdated | SaveConnectionResultActionDirectBillingAccepted | SaveConnectionResultActionFeaturePolicyUpdated | SaveConnectionResultActionEnhancedReportingUpdated | SaveConnectionResultActionIdentitySelectionUpdated | SaveConnectionResultActionAccountsRefreshed | SaveConnectionResultActionAccountSelected | SaveConnectionResultActionAdvertiserMapped | SaveConnectionResultActionAdvertiserUnmapped | SaveConnectionResultActionRemoved"
+SaveConnectionResult: TypeAlias = "SaveConnectionResultActionAuthorizationRequired | SaveConnectionResultActionSelectionUpdated | SaveConnectionResultActionAdvertiserActivationUpdated | SaveConnectionResultActionBillingUpdated | SaveConnectionResultActionDirectBillingAccepted | SaveConnectionResultActionFeaturePolicyUpdated | SaveConnectionResultActionEnhancedReportingUpdated | SaveConnectionResultActionIdentitySelectionUpdated | SaveConnectionResultActionAccountsRefreshed | SaveConnectionResultActionAccountSelected | SaveConnectionResultActionAdvertiserMapped | SaveConnectionResultActionAdvertiserUnmapped | SaveConnectionResultActionOwnedLinkUpdated | SaveConnectionResultActionRemoved"
 
 class SaveConnectionSuccessMutationReceiptStateCommitted(TypedDict):
     state: Literal["committed"]

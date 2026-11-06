@@ -13128,10 +13128,6 @@ export type SaveAdvertiserData = {
          */
         brandProfile?: {
             /**
-             * Stated profile; null clears it.
-             */
-            stated?: SaveAdvertiserRequestAdvertiserBrandProfileStated | null;
-            /**
              * Pending differences.
              */
             pendingDifferences?: Array<{
@@ -13160,6 +13156,10 @@ export type SaveAdvertiserData = {
              * Expected revision.
              */
             expectedRevision?: number;
+            /**
+             * Stated profile; null clears it.
+             */
+            stated?: SaveAdvertiserRequestAdvertiserBrandProfileStated | null;
         };
         /**
          * Domain to resolve to a brand card preview. Set this alone — no other fields.
@@ -18558,6 +18558,49 @@ export type SaveConnectionData = {
             linkId?: SaveConnectionRequestAdvertiserMappingLinkId;
         };
         /**
+         * Confirm a mapped advertiser's Spotify show, or confirm it has none; requires connectionId and Creative Engines access.
+         */
+        ownedLink?: {
+            /**
+             * Link the supplied Spotify show.
+             */
+            state: 'linked';
+            /**
+             * The Spotify provider.
+             */
+            platform: 'spotify';
+            /**
+             * A Spotify podcast show.
+             */
+            kind: 'show';
+            /**
+             * Mapped advertiser ID.
+             */
+            advertiserId: SaveConnectionRequestOwnedLinkAdvertiserId;
+            /**
+             * Spotify show link from open.spotify.com/show.
+             */
+            url: string;
+        } | {
+            /**
+             * Confirm that the advertiser has no Spotify show.
+             */
+            state: 'absent';
+            /**
+             * The Spotify provider.
+             */
+            platform: 'spotify';
+            /**
+             * A Spotify podcast show.
+             */
+            kind: 'show';
+            /**
+             * Mapped advertiser ID.
+             */
+            advertiserId: SaveConnectionRequestOwnedLinkAdvertiserId;
+            url?: never;
+        };
+        /**
          * Remove the connection; requires connectionId.
          */
         state?: 'removed';
@@ -18668,6 +18711,8 @@ export type SaveConnectionRequestEnhancedReportingAccountId = string;
 
 export type SaveConnectionRequestIdentitySelectionAccountId = string;
 
+export type SaveConnectionRequestOwnedLinkAdvertiserId = string;
+
 export type SaveConnectionRequestSelectedAccountId = string;
 
 /** @deprecated use SaveConnectionRequestConnectionId */
@@ -18741,6 +18786,11 @@ export type SaveConnectionResponses = {
             authorization?: never;
         } | {
             action: 'advertiser_unmapped';
+            object: SaveConnectionSuccessObject;
+            mutationReceipt?: SaveConnectionSuccessMutationReceipt;
+            authorization?: never;
+        } | {
+            action: 'owned_link_updated';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
