@@ -13857,7 +13857,7 @@ class SaveMediaBuyInputKindCreateProductsItem(TypedDict):
     pacing: NotRequired[Literal["even", "asap", "front_loaded"]]
     '\n    Update only: delivery pacing of this line item. On a running buy the seller must take the change.\n    '
     lineItemRef: NotRequired[str]
-    '\n    Update only: lineItems[].lineItemRef from the read, not the product id. Needed for a repeated product.\n    '
+    '\n    Update only: products[].lineItemRef from get(kind: "media_buy", include: ["products"]), not the product id. Needed for a repeated product.\n    '
     targetingOverlay: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlay]
 
 class SaveMediaBuyInputKindCreateProductsItemPerformanceStandardsItem(TypedDict):
@@ -14446,7 +14446,7 @@ class SaveMediaBuyInputKindUpdateProductsItem(TypedDict):
     pacing: NotRequired[Literal["even", "asap", "front_loaded"]]
     '\n    Update only: delivery pacing of this line item. On a running buy the seller must take the change.\n    '
     lineItemRef: NotRequired[str]
-    '\n    Update only: lineItems[].lineItemRef from the read, not the product id. Needed for a repeated product.\n    '
+    '\n    Update only: products[].lineItemRef from get(kind: "media_buy", include: ["products"]), not the product id. Needed for a repeated product.\n    '
     targetingOverlay: NotRequired[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlay]
 
 class SaveMediaBuyInputKindUpdateProductsItemPerformanceStandardsItem(TypedDict):

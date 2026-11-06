@@ -47127,8 +47127,8 @@ paths:
                               - front_loaded
                           lineItemRef:
                             description: >-
-                              Update only: lineItems[].lineItemRef from the read, not the product id. Needed for a
-                              repeated product.
+                              Update only: products[].lineItemRef from get(kind: "media_buy", include: ["products"]),
+                              not the product id. Needed for a repeated product.
                             type: string
                             minLength: 1
                             maxLength: 255
@@ -48911,8 +48911,8 @@ paths:
                               - front_loaded
                           lineItemRef:
                             description: >-
-                              Update only: lineItems[].lineItemRef from the read, not the product id. Needed for a
-                              repeated product.
+                              Update only: products[].lineItemRef from get(kind: "media_buy", include: ["products"]),
+                              not the product id. Needed for a repeated product.
                             type: string
                             minLength: 1
                             maxLength: 255
