@@ -34566,11 +34566,6 @@ paths:
                     confirmed it has no kit, voice or disclaimers.
                   type: object
                   properties:
-                    stated:
-                      description: Stated profile; null clears it.
-                      anyOf:
-                        - $ref: '#/components/schemas/save_advertiser_request_AdvertiserBrandProfileStated'
-                        - type: 'null'
                     pendingDifferences:
                       description: Pending differences.
                       maxItems: 50
@@ -34607,6 +34602,11 @@ paths:
                       type: integer
                       exclusiveMinimum: 0
                       maximum: 9007199254740991
+                    stated:
+                      description: Stated profile; null clears it.
+                      anyOf:
+                        - $ref: '#/components/schemas/save_advertiser_request_AdvertiserBrandProfileStated'
+                        - type: 'null'
                   additionalProperties: false
                 resolveBrand:
                   description: Domain to resolve to a brand card preview. Set this alone — no other fields.
@@ -40855,6 +40855,63 @@ paths:
                     - advertiserId
                     - state
                   additionalProperties: false
+                ownedLink:
+                  description: >-
+                    Confirm a mapped advertiser's Spotify show, or confirm it has none; requires connectionId and
+                    Creative Engines access.
+                  oneOf:
+                    - type: object
+                      properties:
+                        state:
+                          type: string
+                          const: linked
+                          description: Link the supplied Spotify show.
+                        platform:
+                          type: string
+                          const: spotify
+                          description: The Spotify provider.
+                        kind:
+                          type: string
+                          const: show
+                          description: A Spotify podcast show.
+                        advertiserId:
+                          description: Mapped advertiser ID.
+                          $ref: '#/components/schemas/save_connection_request_OwnedLinkAdvertiserId'
+                        url:
+                          type: string
+                          maxLength: 2048
+                          format: uri
+                          description: Spotify show link from open.spotify.com/show.
+                      required:
+                        - state
+                        - platform
+                        - kind
+                        - advertiserId
+                        - url
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        state:
+                          type: string
+                          const: absent
+                          description: Confirm that the advertiser has no Spotify show.
+                        platform:
+                          type: string
+                          const: spotify
+                          description: The Spotify provider.
+                        kind:
+                          type: string
+                          const: show
+                          description: A Spotify podcast show.
+                        advertiserId:
+                          description: Mapped advertiser ID.
+                          $ref: '#/components/schemas/save_connection_request_OwnedLinkAdvertiserId'
+                      required:
+                        - state
+                        - platform
+                        - kind
+                        - advertiserId
+                      additionalProperties: false
                 state:
                   description: Remove the connection; requires connectionId.
                   type: string
@@ -41166,6 +41223,19 @@ paths:
                           action:
                             type: string
                             const: advertiser_unmapped
+                          object:
+                            $ref: '#/components/schemas/save_connection_success_Object'
+                          mutationReceipt:
+                            $ref: '#/components/schemas/save_connection_success_MutationReceipt'
+                        required:
+                          - action
+                          - object
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: owned_link_updated
                           object:
                             $ref: '#/components/schemas/save_connection_success_Object'
                           mutationReceipt:
@@ -84665,6 +84735,39 @@ components:
         - dimension
         - values
       additionalProperties: false
+    save_advertiser_request_AdvertiserBrandProfilePendingDifferenceScalar:
+      anyOf:
+        - type: string
+          maxLength: 2048
+        - type: number
+        - type: boolean
+        - type: 'null'
+    save_advertiser_request_AdvertiserBrandProfilePendingDifferenceObjectEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          minLength: 1
+          maxLength: 100
+          description: Field name in a flat pending-difference value.
+        value:
+          description: Scalar value for that field.
+          $ref: '#/components/schemas/save_advertiser_request_AdvertiserBrandProfilePendingDifferenceScalar'
+      required:
+        - key
+        - value
+      additionalProperties: false
+    save_advertiser_request_AdvertiserBrandProfilePendingDifferenceValue:
+      anyOf:
+        - $ref: '#/components/schemas/save_advertiser_request_AdvertiserBrandProfilePendingDifferenceScalar'
+        - maxItems: 50
+          type: array
+          items:
+            $ref: '#/components/schemas/save_advertiser_request_AdvertiserBrandProfilePendingDifferenceScalar'
+        - maxItems: 50
+          type: array
+          items:
+            $ref: '#/components/schemas/save_advertiser_request_AdvertiserBrandProfilePendingDifferenceObjectEntry'
     save_advertiser_request_AdvertiserBrandProfileStated:
       type: object
       properties:
@@ -85177,39 +85280,6 @@ components:
               type: boolean
           additionalProperties: false
       additionalProperties: false
-    save_advertiser_request_AdvertiserBrandProfilePendingDifferenceScalar:
-      anyOf:
-        - type: string
-          maxLength: 2048
-        - type: number
-        - type: boolean
-        - type: 'null'
-    save_advertiser_request_AdvertiserBrandProfilePendingDifferenceObjectEntry:
-      type: object
-      properties:
-        key:
-          type: string
-          minLength: 1
-          maxLength: 100
-          description: Field name in a flat pending-difference value.
-        value:
-          description: Scalar value for that field.
-          $ref: '#/components/schemas/save_advertiser_request_AdvertiserBrandProfilePendingDifferenceScalar'
-      required:
-        - key
-        - value
-      additionalProperties: false
-    save_advertiser_request_AdvertiserBrandProfilePendingDifferenceValue:
-      anyOf:
-        - $ref: '#/components/schemas/save_advertiser_request_AdvertiserBrandProfilePendingDifferenceScalar'
-        - maxItems: 50
-          type: array
-          items:
-            $ref: '#/components/schemas/save_advertiser_request_AdvertiserBrandProfilePendingDifferenceScalar'
-        - maxItems: 50
-          type: array
-          items:
-            $ref: '#/components/schemas/save_advertiser_request_AdvertiserBrandProfilePendingDifferenceObjectEntry'
     save_advertiser_request_BrandCountries:
       maxItems: 249
       type: array
@@ -89006,6 +89076,9 @@ components:
       type: string
       pattern: ^[1-9]\d*$
     save_connection_request_AdvertiserMappingLinkId:
+      type: string
+      pattern: ^[1-9]\d*$
+    save_connection_request_OwnedLinkAdvertiserId:
       type: string
       pattern: ^[1-9]\d*$
     save_connection_success_Object:
