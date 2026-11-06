@@ -8819,8 +8819,10 @@ class SaveCampaignInputTargetingOverlayDaypartTargetsItem(TypedDict):
     '\n    Optional display label.\n    '
 
 class SaveCampaignInputTargetingOverlayDemographics(TypedDict):
-    age: SaveCampaignInputTargetingOverlayDemographicsAgeKindMinimum | SaveCampaignInputTargetingOverlayDemographicsAgeKindMaximum | SaveCampaignInputTargetingOverlayDemographicsAgeKindRange
+    age: NotRequired[SaveCampaignInputTargetingOverlayDemographicsAgeKindMinimum | SaveCampaignInputTargetingOverlayDemographicsAgeKindMaximum | SaveCampaignInputTargetingOverlayDemographicsAgeKindRange]
     '\n    Age range.\n    '
+    gender: NotRequired[SaveCampaignInputTargetingOverlayDemographicsGender]
+    '\n    Targeting value.\n    '
 
 class SaveCampaignInputTargetingOverlayDemographicsAgeKindMaximum(TypedDict):
     kind: Literal["maximum"]
@@ -8859,6 +8861,12 @@ class SaveCampaignInputTargetingOverlayDemographicsAgeKindRange(TypedDict):
     '\n    Accepted age-data bases.\n    '
     accepted_verification_methods: NotRequired[SaveCampaignRequestTargetingOverlayDemographicsAgeAcceptedVerificationMethods]
     '\n    Methods.\n    '
+
+class SaveCampaignInputTargetingOverlayDemographicsGender(TypedDict):
+    values: list[Literal["female", "male", "non_binary"]]
+    '\n    Values in this system.\n    '
+    include_unknown: bool
+    '\n    Include unknown ages.\n    '
 
 class SaveCampaignInputTargetingOverlayGeoProximityItem(TypedDict):
     lat: NotRequired[float]
@@ -13891,7 +13899,7 @@ class SaveMediaBuyInputKindCreateProductsItemTargetingOverlay(TypedDict):
     audience_include: NotRequired[list[str]]
     audience_exclude: NotRequired[list[str]]
     demographics: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographics]
-    '\n    Audience age targeting.\n    '
+    '\n    Audience age and gender targeting.\n    '
     frequency_cap: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayFrequencyCap]
     property_list: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayPropertyList]
     property_list_exclude: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayPropertyListExclude]
@@ -13982,7 +13990,8 @@ class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDaypartTargetsItem(
     '\n    Optional human-readable name for this time window (e.g., \'Morning Drive\', \'Prime Time\')\n    '
 
 class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographics(TypedDict):
-    age: SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeKindMinimum | SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeKindMaximum | SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeKindRange
+    age: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeKindMinimum | SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeKindMaximum | SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeKindRange]
+    gender: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsGender]
 
 class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeKindMaximum(TypedDict):
     kind: Literal["maximum"]
@@ -14009,6 +14018,10 @@ class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeKind
 SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeWithAcceptedVerificationMethodsAcceptedBases: TypeAlias = SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeKindMinimum | SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeKindMaximum | SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeKindRange
 
 SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeWithoutAcceptedVerificationMethodsAcceptedBases: TypeAlias = SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeKindMinimum | SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeKindMaximum | SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsAgeKindRange
+
+class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayDemographicsGender(TypedDict):
+    values: list[Literal["female", "male", "non_binary"]]
+    include_unknown: bool
 
 class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayFrequencyCap(TypedDict):
     suppress: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayFrequencyCapSuppress]
@@ -14581,8 +14594,13 @@ class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDemographicsAgeKind
     accepted_bases: NotRequired[SaveMediaBuyRequestProductsItemTargetingOverlayDemographicsAgeAcceptedBases]
     accepted_verification_methods: NotRequired[SaveMediaBuyRequestProductsItemTargetingOverlayDemographicsAgeAcceptedVerificationMethods]
 
+class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDemographicsGender(TypedDict):
+    values: list[Literal["female", "male", "non_binary"]]
+    include_unknown: bool
+
 class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDemographicsValue(TypedDict):
-    age: SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDemographicsAgeKindMinimum | SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDemographicsAgeKindMaximum | SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDemographicsAgeKindRange
+    age: NotRequired[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDemographicsAgeKindMinimum | SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDemographicsAgeKindMaximum | SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDemographicsAgeKindRange]
+    gender: NotRequired[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDemographicsGender]
 
 SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDemographicsValueAgeWithAcceptedVerificationMethodsAcceptedBases: TypeAlias = SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDemographicsAgeKindMinimum | SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDemographicsAgeKindMaximum | SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayDemographicsAgeKindRange
 

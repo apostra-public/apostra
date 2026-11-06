@@ -16532,7 +16532,7 @@ export type SaveCampaignData = {
                 /**
                  * Age range.
                  */
-                age: {
+                age?: {
                     /**
                      * Targeting value.
                      */
@@ -16601,6 +16601,20 @@ export type SaveCampaignData = {
                      * Methods.
                      */
                     accepted_verification_methods?: SaveCampaignRequestTargetingOverlayDemographicsAgeAcceptedVerificationMethods;
+                };
+                /**
+                 * Targeting value.
+                 */
+                gender?: {
+                    /**
+                     * Values in this system.
+                     */
+                    values: Array<'female' | 'male' | 'non_binary'>;
+                    /**
+                     * Include unknown ages.
+                     */
+                    include_unknown: boolean;
+                    [key: string]: unknown;
                 };
             };
             /**
@@ -25441,10 +25455,10 @@ export type SaveMediaBuyData = {
                 audience_include?: Array<string>;
                 audience_exclude?: Array<string>;
                 /**
-                 * Audience age targeting.
+                 * Audience age and gender targeting.
                  */
                 demographics?: {
-                    age: {
+                    age?: {
                         kind: 'minimum';
                         min: SaveMediaBuyRequestProductsItemTargetingOverlayDemographicsAgeMin;
                         include_unknown: SaveMediaBuyRequestProductsItemTargetingOverlayDemographicsAgeIncludeUnknown;
@@ -25465,6 +25479,11 @@ export type SaveMediaBuyData = {
                         include_unknown: SaveMediaBuyRequestProductsItemTargetingOverlayDemographicsAgeIncludeUnknown;
                         accepted_bases?: SaveMediaBuyRequestProductsItemTargetingOverlayDemographicsAgeAcceptedBases;
                         accepted_verification_methods?: SaveMediaBuyRequestProductsItemTargetingOverlayDemographicsAgeAcceptedVerificationMethods;
+                    };
+                    gender?: {
+                        values: Array<'female' | 'male' | 'non_binary'>;
+                        include_unknown: boolean;
+                        [key: string]: unknown;
                     };
                 };
                 frequency_cap?: {
@@ -26272,7 +26291,7 @@ export type SaveMediaBuyData = {
                 audience_include?: Array<string> | null;
                 audience_exclude?: Array<string> | null;
                 demographics?: {
-                    age: {
+                    age?: {
                         kind: 'minimum';
                         min: SaveMediaBuyRequestProductsItemTargetingOverlayDemographicsAgeMin;
                         include_unknown: SaveMediaBuyRequestProductsItemTargetingOverlayDemographicsAgeIncludeUnknown;
@@ -26293,6 +26312,11 @@ export type SaveMediaBuyData = {
                         include_unknown: SaveMediaBuyRequestProductsItemTargetingOverlayDemographicsAgeIncludeUnknown;
                         accepted_bases?: SaveMediaBuyRequestProductsItemTargetingOverlayDemographicsAgeAcceptedBases;
                         accepted_verification_methods?: SaveMediaBuyRequestProductsItemTargetingOverlayDemographicsAgeAcceptedVerificationMethods;
+                    };
+                    gender?: {
+                        values: Array<'female' | 'male' | 'non_binary'>;
+                        include_unknown: boolean;
+                        [key: string]: unknown;
                     };
                 } | null;
                 frequency_cap?: {
