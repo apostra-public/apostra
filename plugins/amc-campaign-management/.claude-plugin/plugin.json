@@ -2,12 +2,12 @@
   "name": "amc-campaign-management",
   "displayName": "AMC Campaign Management",
   "description": "Operate seller-side campaigns and delivery in Interchange.",
-  "version": "1.0.0+975d2deb796a",
+  "version": "1.0.0+8c4f982e7283",
   "author": {
     "name": "Scope3 PBC",
     "url": "https://interchange.io"
   },
-  "homepage": "https://docs.interchange.io",
+  "homepage": "https://docs.apostra.com",
   "repository": "https://github.com/apostra-public/apostra",
   "license": "Apache-2.0",
   "keywords": [

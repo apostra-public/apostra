@@ -2,12 +2,12 @@
   "name": "buyer-creative-management",
   "displayName": "Buyer Creative Management",
   "description": "Prepare and inspect buyer creative inputs for campaign execution.",
-  "version": "1.0.0+dd7f4e6b97d5",
+  "version": "1.0.0+78be6c042677",
   "author": {
     "name": "Scope3 PBC",
     "url": "https://interchange.io"
   },
-  "homepage": "https://docs.interchange.io",
+  "homepage": "https://docs.apostra.com",
   "repository": "https://github.com/apostra-public/apostra",
   "license": "Apache-2.0",
   "keywords": [

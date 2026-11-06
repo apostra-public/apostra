@@ -1,12 +1,12 @@
 {
   "name": "buyer-account-setup",
-  "version": "1.0.0+8e9e59ec8dca",
+  "version": "1.0.0+c662fbeddabf",
   "description": "Prepare an Interchange buyer account for campaign execution.",
   "author": {
     "name": "Scope3 PBC",
     "url": "https://interchange.io"
   },
-  "homepage": "https://docs.interchange.io",
+  "homepage": "https://docs.apostra.com",
   "repository": "https://github.com/apostra-public/apostra",
   "license": "Apache-2.0",
   "keywords": [
@@ -27,7 +27,7 @@
       "Apostra MCP",
       "Agent skill"
     ],
-    "websiteURL": "https://docs.interchange.io",
+    "websiteURL": "https://docs.apostra.com",
     "defaultPrompt": [
       "Help me use Buyer Account Setup with Apostra."
     ],

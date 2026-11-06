@@ -2,12 +2,12 @@
   "name": "amc-distribution",
   "displayName": "AMC Distribution",
   "description": "Prepare and distribute an Agentic Media Company through supported agent channels.",
-  "version": "1.0.0+a4e9fba66f7d",
+  "version": "1.0.0+9c0b147219f7",
   "author": {
     "name": "Scope3 PBC",
     "url": "https://interchange.io"
   },
-  "homepage": "https://docs.interchange.io",
+  "homepage": "https://docs.apostra.com",
   "repository": "https://github.com/apostra-public/apostra",
   "license": "Apache-2.0",
   "keywords": [

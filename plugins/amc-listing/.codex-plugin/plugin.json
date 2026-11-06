@@ -1,12 +1,12 @@
 {
   "name": "amc-listing",
-  "version": "1.0.0+fa4c2849a03e",
+  "version": "1.0.0+bad3d57cd0d2",
   "description": "Build and maintain an Agentic Media Company listing in Interchange.",
   "author": {
     "name": "Scope3 PBC",
     "url": "https://interchange.io"
   },
-  "homepage": "https://docs.interchange.io",
+  "homepage": "https://docs.apostra.com",
   "repository": "https://github.com/apostra-public/apostra",
   "license": "Apache-2.0",
   "keywords": [
@@ -24,7 +24,7 @@
     "capabilities": [
       "Apostra MCP"
     ],
-    "websiteURL": "https://docs.interchange.io",
+    "websiteURL": "https://docs.apostra.com",
     "defaultPrompt": [
       "Help me use AMC Listing with Apostra."
     ],

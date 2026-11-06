@@ -2,12 +2,12 @@
   "name": "buyer-campaign-management",
   "displayName": "Buyer Campaign Management",
   "description": "Discover sellers, create campaigns, request proposals, and manage delivery.",
-  "version": "1.0.0+9f3452398d56",
+  "version": "1.0.0+65685f1c2e62",
   "author": {
     "name": "Scope3 PBC",
     "url": "https://interchange.io"
   },
-  "homepage": "https://docs.interchange.io",
+  "homepage": "https://docs.apostra.com",
   "repository": "https://github.com/apostra-public/apostra",
   "license": "Apache-2.0",
   "keywords": [

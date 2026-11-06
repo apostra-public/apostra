@@ -2,12 +2,12 @@
   "name": "buyer-reporting",
   "displayName": "Buyer Reporting",
   "description": "Inspect buyer campaign delivery and reporting in Interchange.",
-  "version": "1.0.0+e085938382f2",
+  "version": "1.0.0+a35bcf19b2f0",
   "author": {
     "name": "Scope3 PBC",
     "url": "https://interchange.io"
   },
-  "homepage": "https://docs.interchange.io",
+  "homepage": "https://docs.apostra.com",
   "repository": "https://github.com/apostra-public/apostra",
   "license": "Apache-2.0",
   "keywords": [
