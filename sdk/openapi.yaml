@@ -24808,6 +24808,16 @@ paths:
                               Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and
                               the live read to call for each.
                             $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
+                          currencyConversions:
+                            description: >-
+                              campaign_delivery only: each media buy behind this page's rows whose spend was converted
+                              into the advertiser's currency, by mediaBuyId, at most 100. Absent when none was.
+                            $ref: '#/components/schemas/get_delivery_success_CurrencyConversions'
+                          currencyConversionsOmitted:
+                            description: >-
+                              Converted buys behind this page left out of currencyConversions by its cap. Absent when
+                              none.
+                            $ref: '#/components/schemas/get_delivery_success_CurrencyConversionsOmitted'
                           synthetic:
                             description: >-
                               Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is
@@ -24850,6 +24860,16 @@ paths:
                               Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and
                               the live read to call for each.
                             $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
+                          currencyConversions:
+                            description: >-
+                              campaign_delivery only: each media buy behind this page's rows whose spend was converted
+                              into the advertiser's currency, by mediaBuyId, at most 100. Absent when none was.
+                            $ref: '#/components/schemas/get_delivery_success_CurrencyConversions'
+                          currencyConversionsOmitted:
+                            description: >-
+                              Converted buys behind this page left out of currencyConversions by its cap. Absent when
+                              none.
+                            $ref: '#/components/schemas/get_delivery_success_CurrencyConversionsOmitted'
                           synthetic:
                             description: >-
                               Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is
@@ -24892,6 +24912,16 @@ paths:
                               Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and
                               the live read to call for each.
                             $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
+                          currencyConversions:
+                            description: >-
+                              campaign_delivery only: each media buy behind this page's rows whose spend was converted
+                              into the advertiser's currency, by mediaBuyId, at most 100. Absent when none was.
+                            $ref: '#/components/schemas/get_delivery_success_CurrencyConversions'
+                          currencyConversionsOmitted:
+                            description: >-
+                              Converted buys behind this page left out of currencyConversions by its cap. Absent when
+                              none.
+                            $ref: '#/components/schemas/get_delivery_success_CurrencyConversionsOmitted'
                           synthetic:
                             description: >-
                               Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is
@@ -82172,6 +82202,42 @@ components:
         - inFlightCampaigns
         - withoutStoredRows
       additionalProperties: false
+    get_delivery_success_DeliveryCurrencyConversion:
+      type: object
+      properties:
+        mediaBuyId:
+          type: string
+        fromCurrency:
+          type: string
+          description: The currency the spend was in before conversion. Equals toCurrency when rateSource is settlement.
+        toCurrency:
+          type: string
+          description: The advertiser's currency.
+        rate:
+          type: number
+          description: toCurrency per one fromCurrency.
+        rateDate:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: UTC date of the rate; null when rateSource is settlement.
+        rateSource:
+          type: string
+          enum:
+            - booked
+            - snapshot
+            - settlement
+          description: >-
+            booked: locked when the buy was booked. snapshot: the daily rate store. settlement: the seller labelled a
+            currency it is not paid in; the spend is taken in the one it is paid in, at rate 1.
+      required:
+        - mediaBuyId
+        - fromCurrency
+        - toCurrency
+        - rate
+        - rateDate
+        - rateSource
+      additionalProperties: false
     get_delivery_success_Query:
       type: object
       properties:
@@ -82526,6 +82592,15 @@ components:
         - finality
         - billingEligibility
       additionalProperties: false
+    get_delivery_success_CurrencyConversions:
+      maxItems: 100
+      type: array
+      items:
+        $ref: '#/components/schemas/get_delivery_success_DeliveryCurrencyConversion'
+    get_delivery_success_CurrencyConversionsOmitted:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
     get_delivery_success_Synthetic:
       type: object
       properties:
