@@ -1,12 +1,12 @@
 {
   "name": "buyer-reporting",
-  "version": "1.0.0+e085938382f2",
+  "version": "1.0.0+a35bcf19b2f0",
   "description": "Inspect buyer campaign delivery and reporting in Interchange.",
   "author": {
     "name": "Scope3 PBC",
     "url": "https://interchange.io"
   },
-  "homepage": "https://docs.interchange.io",
+  "homepage": "https://docs.apostra.com",
   "repository": "https://github.com/apostra-public/apostra",
   "license": "Apache-2.0",
   "keywords": [
@@ -27,7 +27,7 @@
       "Apostra MCP",
       "Agent skill"
     ],
-    "websiteURL": "https://docs.interchange.io",
+    "websiteURL": "https://docs.apostra.com",
     "defaultPrompt": [
       "Help me use Buyer Reporting with Apostra."
     ],

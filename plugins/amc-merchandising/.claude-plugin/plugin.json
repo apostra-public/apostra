@@ -2,12 +2,12 @@
   "name": "amc-merchandising",
   "displayName": "AMC Merchandising",
   "description": "Merchandise an Agentic Media Company's inventory and products in Interchange.",
-  "version": "1.0.0+3a28cff8ee1b",
+  "version": "1.0.0+f6a7c59e893c",
   "author": {
     "name": "Scope3 PBC",
     "url": "https://interchange.io"
   },
-  "homepage": "https://docs.interchange.io",
+  "homepage": "https://docs.apostra.com",
   "repository": "https://github.com/apostra-public/apostra",
   "license": "Apache-2.0",
   "keywords": [

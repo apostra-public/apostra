@@ -44,7 +44,7 @@
         "listing",
         "mcp"
       ],
-      "homepage": "https://docs.interchange.io",
+      "homepage": "https://docs.apostra.com",
       "license": "Apache-2.0"
     },
     {
@@ -62,7 +62,7 @@
         "products",
         "mcp"
       ],
-      "homepage": "https://docs.interchange.io",
+      "homepage": "https://docs.apostra.com",
       "license": "Apache-2.0"
     },
     {
@@ -79,7 +79,7 @@
         "distribution",
         "mcp"
       ],
-      "homepage": "https://docs.interchange.io",
+      "homepage": "https://docs.apostra.com",
       "license": "Apache-2.0"
     },
     {
@@ -97,7 +97,7 @@
         "delivery",
         "mcp"
       ],
-      "homepage": "https://docs.interchange.io",
+      "homepage": "https://docs.apostra.com",
       "license": "Apache-2.0"
     },
     {
@@ -115,7 +115,7 @@
         "account",
         "mcp"
       ],
-      "homepage": "https://docs.interchange.io",
+      "homepage": "https://docs.apostra.com",
       "license": "Apache-2.0"
     },
     {
@@ -133,7 +133,7 @@
         "campaigns",
         "mcp"
       ],
-      "homepage": "https://docs.interchange.io",
+      "homepage": "https://docs.apostra.com",
       "license": "Apache-2.0"
     },
     {
@@ -151,7 +151,7 @@
         "creative",
         "mcp"
       ],
-      "homepage": "https://docs.interchange.io",
+      "homepage": "https://docs.apostra.com",
       "license": "Apache-2.0"
     },
     {
@@ -169,7 +169,7 @@
         "reporting",
         "mcp"
       ],
-      "homepage": "https://docs.interchange.io",
+      "homepage": "https://docs.apostra.com",
       "license": "Apache-2.0"
     },
     {
@@ -187,7 +187,7 @@
         "sales-agent",
         "testing"
       ],
-      "homepage": "https://docs.interchange.io",
+      "homepage": "https://docs.apostra.com",
       "license": "Apache-2.0"
     },
     {
@@ -205,7 +205,7 @@
         "self-serve",
         "mcp"
       ],
-      "homepage": "https://docs.interchange.io",
+      "homepage": "https://docs.apostra.com",
       "license": "Apache-2.0"
     }
   ]

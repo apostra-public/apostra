@@ -1,12 +1,12 @@
 {
   "name": "buyer-creative-management",
-  "version": "1.0.0+dd7f4e6b97d5",
+  "version": "1.0.0+78be6c042677",
   "description": "Prepare and inspect buyer creative inputs for campaign execution.",
   "author": {
     "name": "Scope3 PBC",
     "url": "https://interchange.io"
   },
-  "homepage": "https://docs.interchange.io",
+  "homepage": "https://docs.apostra.com",
   "repository": "https://github.com/apostra-public/apostra",
   "license": "Apache-2.0",
   "keywords": [
@@ -27,7 +27,7 @@
       "Apostra MCP",
       "Agent skill"
     ],
-    "websiteURL": "https://docs.interchange.io",
+    "websiteURL": "https://docs.apostra.com",
     "defaultPrompt": [
       "Help me use Buyer Creative Management with Apostra."
     ],
