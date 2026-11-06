@@ -189,12 +189,84 @@ class TransportTests(unittest.TestCase):
             str(requests[0].url), "https://environment.example/tools/get_status"
         )
         self.assertEqual(requests[0].headers["authorization"], "Bearer environment-key")
-        self.assertEqual(requests[0].headers["X-SCOPE3-CUSTOMER-ID"], "12")
+        self.assertNotIn("X-SCOPE3-CUSTOMER-ID", requests[0].headers)
+        self.assertEqual(json.loads(requests[0].content)["accountId"], 12)
         self.assertEqual(
             str(requests[1].url), "https://explicit.example/tools/get_status"
         )
         self.assertEqual(requests[1].headers["authorization"], "Bearer explicit-token")
-        self.assertEqual(requests[1].headers["X-SCOPE3-CUSTOMER-ID"], "34")
+        self.assertNotIn("X-SCOPE3-CUSTOMER-ID", requests[1].headers)
+        self.assertEqual(json.loads(requests[1].content)["accountId"], 34)
+
+    def test_names_the_account_in_the_request_not_the_deprecated_header(
+        self,
+    ) -> None:
+        requests: list[httpx.Request] = []
+
+        def handle(request: httpx.Request) -> httpx.Response:
+            requests.append(request)
+            if request.url.path.endswith("/download"):
+                return httpx.Response(200, content=b"document bytes")
+            return httpx.Response(200, json={"data": {}, "error": None})
+
+        with httpx.Client(transport=httpx.MockTransport(handle)) as http:
+            api = Apostra(api_key="key", account_id="12", http_client=http)
+            api.get_v3_public_mutation_receipt(
+                {"receiptId": "00000000-0000-4000-8000-000000000000"}
+            )
+            api.download_v3_public_document_revision(
+                {"documentId": "doc", "revisionId": "v1"}
+            )
+            api.get_status({"accountId": "12"})
+            api.save_account(
+                {"accountId": 99, "name": "Renamed"}, idempotency_key="rename-99"
+            )
+            # The old shape, which the types no longer describe.
+            api.get(cast(Any, {"kind": "member", "id": "user-1", "accountId": 99}))
+            api.save_directed_campaign_subscription(
+                {"connectionId": "conn-1", "accountId": "act_7"},
+                idempotency_key="subscribe-7",
+            )
+            api.save_account(
+                {"id": 99, "accountId": 34, "name": "Renamed"},
+                idempotency_key="rename-99-in-34",
+            )
+            Apostra(api_key="key", http_client=http).get_status({})
+
+        (
+            receipt,
+            document,
+            same,
+            account,
+            member,
+            subscription,
+            explicit,
+            unnamed,
+        ) = requests
+        self.assertEqual(receipt.url.params["accountId"], "12")
+        self.assertNotIn("X-SCOPE3-CUSTOMER-ID", receipt.headers)
+        self.assertEqual(document.url.params["accountId"], "12")
+        self.assertNotIn("X-SCOPE3-CUSTOMER-ID", document.headers)
+        self.assertEqual(json.loads(same.content), {"accountId": "12"})
+        self.assertNotIn("X-SCOPE3-CUSTOMER-ID", same.headers)
+        self.assertEqual(
+            json.loads(account.content), {"name": "Renamed", "id": 99, "accountId": 12}
+        )
+        self.assertEqual(
+            json.loads(member.content),
+            {"kind": "member", "id": "user-1", "memberAccountId": 99, "accountId": 12},
+        )
+        self.assertEqual(
+            json.loads(subscription.content),
+            {"connectionId": "conn-1", "providerAccountId": "act_7", "accountId": 12},
+        )
+        self.assertEqual(
+            json.loads(explicit.content), {"id": 99, "accountId": 34, "name": "Renamed"}
+        )
+        for request in (account, member, subscription, explicit):
+            self.assertNotIn("X-SCOPE3-CUSTOMER-ID", request.headers)
+        self.assertEqual(json.loads(unnamed.content), {})
+        self.assertNotIn("X-SCOPE3-CUSTOMER-ID", unnamed.headers)
 
     def test_unauthorized_does_not_replay_or_refresh_implicitly(self) -> None:
         tokens = iter(["expired", "fresh"])
@@ -284,7 +356,8 @@ class TransportTests(unittest.TestCase):
         self.assertEqual(
             json.loads(requests[1].content)["idempotencyKey"], "original-key"
         )
-        self.assertEqual(requests[1].headers["X-SCOPE3-CUSTOMER-ID"], "12")
+        self.assertNotIn("X-SCOPE3-CUSTOMER-ID", requests[1].headers)
+        self.assertEqual(json.loads(requests[1].content)["accountId"], 12)
         self.assertEqual(requests[1].headers["idempotency-key"], "original-key")
 
     def test_write_requires_a_caller_supplied_idempotency_key_before_dispatch(
@@ -434,11 +507,12 @@ class TransportTests(unittest.TestCase):
             api.get_status({})
             api.get_status({}, account_id="34")
             self.assertEqual(requests[0].headers["authorization"], "Bearer token-1")
-            self.assertEqual(requests[1].headers["X-SCOPE3-CUSTOMER-ID"], "34")
+            self.assertNotIn("X-SCOPE3-CUSTOMER-ID", requests[1].headers)
+            self.assertEqual(json.loads(requests[1].content)["accountId"], 34)
             self.assertEqual(
                 requests[1].headers["user-agent"], f"apostra-python/{__version__}"
             )
-            self.assertEqual(json.loads(requests[0].content), {})
+            self.assertEqual(json.loads(requests[0].content), {"accountId": 12})
             api.close()
             self.assertFalse(http.is_closed)
             self.assertNotIn("token-", repr(api))
@@ -802,7 +876,8 @@ class AsyncTests(unittest.IsolatedAsyncioTestCase):
             str(requests[0].url), "https://environment.example/tools/get_status"
         )
         self.assertEqual(requests[0].headers["authorization"], "Bearer environment-key")
-        self.assertEqual(requests[0].headers["X-SCOPE3-CUSTOMER-ID"], "12")
+        self.assertNotIn("X-SCOPE3-CUSTOMER-ID", requests[0].headers)
+        self.assertEqual(json.loads(requests[0].content)["accountId"], 12)
 
     async def test_async_body_idempotency_key_matches_header(self) -> None:
         requests: list[httpx.Request] = []
@@ -912,7 +987,8 @@ class AsyncTests(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(len(tokens), 1)
             self.assertEqual(len(calls), 1)
             self.assertEqual(calls[0].headers["authorization"], "Bearer access-token")
-            self.assertEqual(calls[0].headers["X-SCOPE3-CUSTOMER-ID"], "12")
+            self.assertNotIn("X-SCOPE3-CUSTOMER-ID", calls[0].headers)
+            self.assertEqual(json.loads(calls[0].content)["accountId"], 12)
             with self.assertRaises(ValueError):
                 await api.get_status({}, account_id="0")
             self.assertEqual(len(tokens), 1)

@@ -134,7 +134,10 @@ describe('HTTP transport', () => {
     ).toBe('Bearer environment-key')
     expect(
       new Headers(environmentRequest[1].headers).get('X-SCOPE3-CUSTOMER-ID'),
-    ).toBe('12')
+    ).toBeNull()
+    expect(JSON.parse(String(environmentRequest[1].body))).toEqual({
+      accountId: 12,
+    })
 
     await new Apostra({
       accessToken: 'explicit-token',
@@ -150,9 +153,9 @@ describe('HTTP transport', () => {
     expect(new Headers(explicitRequest[1].headers).get('authorization')).toBe(
       'Bearer explicit-token',
     )
-    expect(
-      new Headers(explicitRequest[1].headers).get('X-SCOPE3-CUSTOMER-ID'),
-    ).toBe('34')
+    expect(JSON.parse(String(explicitRequest[1].body))).toEqual({
+      accountId: 34,
+    })
 
     vi.stubEnv('APOSTRA_BASE_URL', 'http://not-loopback.example')
     expect(() => new Apostra()).toThrow('Use an HTTPS base URL')
@@ -178,13 +181,13 @@ describe('HTTP transport', () => {
     expect(new Headers(seen[0].headers).get('authorization')).toBe(
       'Bearer token-1',
     )
-    expect(new Headers(seen[1].headers).get('X-SCOPE3-CUSTOMER-ID')).toBe('34')
+    expect(new Headers(seen[1].headers).get('X-SCOPE3-CUSTOMER-ID')).toBeNull()
     expect(new Headers(seen[1].headers).get('user-agent')).toBe(
       `apostra-typescript/${version}`,
     )
     expect(new Headers(seen[1].headers).get('idempotency-key')).toBe('ask-1')
     expect(seen[1].body).toBe(
-      '{"kind":"update","id":"ask-1","requester":{"state":"accepted"}}',
+      '{"kind":"update","id":"ask-1","requester":{"state":"accepted"},"accountId":34}',
     )
     expect(seen[1].redirect).toBe('error')
     expect(JSON.stringify(client)).not.toContain('token')
@@ -362,6 +365,126 @@ describe('HTTP transport', () => {
       ),
     ).rejects.toThrow()
   })
+  describe('names the account in the request, not the deprecated header', () => {
+    it('reads a receipt with the accountId query parameter', async () => {
+      const fetcher = mockFetch(() => response({}))
+      const client = new Apostra({
+        apiKey: 'key',
+        accountId: '12',
+        fetch: fetcher,
+      })
+      await client.getV3PublicMutationReceipt({
+        receiptId: '00000000-0000-4000-8000-000000000000',
+      })
+      const [url, init] = fetcher.mock.calls[0] as [
+        RequestInfo | URL,
+        RequestInit,
+      ]
+      expect(String(url)).toContain('?accountId=12')
+      expect(new Headers(init.headers).get('X-SCOPE3-CUSTOMER-ID')).toBeNull()
+    })
+
+    it('reads a document with the accountId query parameter', async () => {
+      const fetcher = mockFetch(() => new Response('document bytes'))
+      const client = new Apostra({
+        apiKey: 'key',
+        accountId: '12',
+        fetch: fetcher,
+      })
+      await client.downloadV3PublicDocumentRevision({
+        documentId: 'doc',
+        revisionId: 'v1',
+      })
+      const [url, init] = fetcher.mock.calls[0] as [
+        RequestInfo | URL,
+        RequestInit,
+      ]
+      expect(String(url)).toContain('?accountId=12')
+      expect(new Headers(init.headers).get('X-SCOPE3-CUSTOMER-ID')).toBeNull()
+    })
+
+    it('leaves an accountId the input already carries for the same account', async () => {
+      const fetcher = mockFetch(() => response({}))
+      const client = new Apostra({
+        apiKey: 'key',
+        accountId: '12',
+        fetch: fetcher,
+      })
+      await client.getStatus({ accountId: '12' })
+      const init = fetcher.mock.calls[0][1] as RequestInit
+      expect(JSON.parse(String(init.body))).toEqual({ accountId: '12' })
+      expect(new Headers(init.headers).get('X-SCOPE3-CUSTOMER-ID')).toBeNull()
+    })
+
+    it('moves an old-shaped accountId to the input it was renamed to', async () => {
+      const fetcher = mockFetch(() => response({}))
+      const client = new Apostra({
+        apiKey: 'key',
+        accountId: '12',
+        fetch: fetcher,
+      })
+      await client.saveAccount(
+        { accountId: 99, name: 'Renamed' },
+        { idempotencyKey: 'rename-99' },
+      )
+      await client.get({ kind: 'member', id: 'user-1', accountId: 99 } as never)
+      await client.saveDirectedCampaignSubscription(
+        { connectionId: 'conn-1', accountId: 'act_7' },
+        { idempotencyKey: 'subscribe-7' },
+      )
+      const bodies = fetcher.mock.calls.map(([, init]) =>
+        JSON.parse(String((init as RequestInit).body)),
+      )
+      expect(bodies[0]).toEqual({ name: 'Renamed', id: 99, accountId: 12 })
+      expect(bodies[1]).toEqual({
+        kind: 'member',
+        id: 'user-1',
+        memberAccountId: 99,
+        accountId: 12,
+      })
+      expect(bodies[2]).toEqual({
+        connectionId: 'conn-1',
+        providerAccountId: 'act_7',
+        accountId: 12,
+      })
+      for (const [, init] of fetcher.mock.calls)
+        expect(
+          new Headers((init as RequestInit).headers).get(
+            'X-SCOPE3-CUSTOMER-ID',
+          ),
+        ).toBeNull()
+    })
+
+    it('lets an accountId in the input name the call account over the client default', async () => {
+      const fetcher = mockFetch(() => response({}))
+      const client = new Apostra({
+        apiKey: 'key',
+        accountId: '12',
+        fetch: fetcher,
+      })
+      await client.saveAccount(
+        { id: 99, accountId: 34, name: 'Renamed' } as never,
+        { idempotencyKey: 'rename-99' },
+      )
+      const init = fetcher.mock.calls[0][1] as RequestInit
+      expect(JSON.parse(String(init.body))).toEqual({
+        id: 99,
+        accountId: 34,
+        name: 'Renamed',
+      })
+      expect(new Headers(init.headers).get('X-SCOPE3-CUSTOMER-ID')).toBeNull()
+    })
+
+    it('sends no account when none is configured', async () => {
+      const fetcher = mockFetch(() => response({}))
+      const client = new Apostra({ apiKey: 'key', fetch: fetcher })
+      await client.getStatus({})
+      const init = fetcher.mock.calls[0][1] as RequestInit
+      expect(JSON.parse(String(init.body))).toEqual({})
+      expect(new Headers(init.headers).get('X-SCOPE3-CUSTOMER-ID')).toBeNull()
+    })
+  })
+
   it('encodes document paths, query and binary download', async () => {
     const fetcher = mockFetch(() => new Response('document bytes'))
     const client = new Apostra({ accessToken: 'm2m', fetch: fetcher })
@@ -582,9 +705,7 @@ describe('credential and replay boundaries', () => {
     expect(JSON.parse(String(requests[0]?.body)).idempotencyKey).toBe(
       'original-key',
     )
-    expect(new Headers(requests[1]?.headers).get('X-SCOPE3-CUSTOMER-ID')).toBe(
-      '12',
-    )
+    expect(JSON.parse(String(requests[1]?.body)).accountId).toBe(12)
     expect(new Headers(requests[1]?.headers).get('idempotency-key')).toBe(
       'original-key',
     )

@@ -58,8 +58,14 @@ validation of patterns, lengths, conditional requirements or permissions.
 
 Read calls accept `{ accountId, signal, timeoutMs }`; write calls require those
 options to include a caller-owned `{ idempotencyKey }`. The SDK sends it as
-`Idempotency-Key`, and never creates or replaces it. Account selection uses
-`X-SCOPE3-CUSTOMER-ID`; it must match the account resolved by the credential.
+`Idempotency-Key`, and never creates or replaces it. The account is sent as
+`accountId` in the request body (the `accountId` query parameter on a receipt
+or document read); the API reaches only accounts the credential can use. An
+`accountId` already in the input names the call's account. The SDK never sends
+the deprecated `X-SCOPE3-CUSTOMER-ID` header: an old-shaped `accountId` on
+`save_account`, a member read on `get` or `save_directed_campaign_subscription`
+is moved to the renamed `id`, `memberAccountId` or `providerAccountId` input,
+which new code should use directly.
 Cancellation stops waiting for HTTP; it does not undo server work. Requests
 have a 30-second timeout, do not follow redirects, and retry transient network,
 429 and 5xx failures twice by default with full-jitter backoff. Set

@@ -163,6 +163,69 @@ const account = (value: string | undefined) => {
     throw new TypeError('accountId must be a positive integer string')
   return value
 }
+/**
+ * Inputs whose `accountId` named something other than the call's account
+ * before spec section 2.5, by the input it was renamed to, and whether a call
+ * is of the kind that carried it. These match the API's own rules.
+ */
+const RENAMED_ACCOUNT_INPUTS: Readonly<
+  Record<
+    string,
+    { to: string; carried: (fields: Record<string, unknown>) => boolean }
+  >
+> = {
+  get: { to: 'memberAccountId', carried: (fields) => fields.kind === 'member' },
+  save_account: {
+    to: 'id',
+    carried: (fields) => fields.accountType === undefined,
+  },
+  save_directed_campaign_subscription: {
+    to: 'providerAccountId',
+    carried: () => true,
+  },
+}
+/**
+ * Moves an old-shaped `accountId` to the input it was renamed to, so the call
+ * keeps naming the same object and the SDK can name the call's account.
+ */
+function moveRenamedAccountInput(
+  operation: string,
+  fields: Record<string, unknown>,
+): Record<string, unknown> {
+  const renamed = RENAMED_ACCOUNT_INPUTS[operation]
+  if (
+    !renamed ||
+    fields.accountId === undefined ||
+    renamed.to in fields ||
+    !renamed.carried(fields)
+  )
+    return fields
+  const { accountId, ...rest } = fields
+  return { ...rest, [renamed.to]: accountId }
+}
+/**
+ * Names the account a request runs in. A tool call carries it as `accountId`
+ * in its body, and a receipt or document read as the `accountId` query
+ * parameter. An `accountId` the input already carries names the call's account
+ * and is left as it is. An operation that takes no `accountId` keeps the
+ * deprecated `X-SCOPE3-CUSTOMER-ID` header.
+ */
+function nameAccount(
+  meta: {
+    body: boolean
+    parameters: readonly { readonly name: string }[]
+  },
+  fields: Record<string, unknown>,
+  target: string | undefined,
+): { input: Record<string, unknown>; header?: string } {
+  if (target === undefined || fields.accountId !== undefined)
+    return { input: fields }
+  const takesAccountId =
+    meta.body || meta.parameters.some((param) => param.name === 'accountId')
+  if (!takesAccountId) return { input: fields, header: target }
+  // A number fits every operation: some take only an integer accountId.
+  return { input: { ...fields, accountId: Number(target) } }
+}
 function record(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
@@ -498,10 +561,15 @@ export class Transport {
       Accept: meta.binary ? 'text/markdown' : 'application/json',
       'User-Agent': `apostra-typescript/${version}`,
     })
-    let requestInput = input
-    const fields = requestInput as Record<string, unknown>
+    const named = nameAccount(
+      meta,
+      moveRenamedAccountInput(operation, input as Record<string, unknown>),
+      target,
+    )
+    let requestInput: unknown = named.input
+    const fields = named.input
     const bodyKeyField = 'bodyKeyField' in meta ? meta.bodyKeyField : undefined
-    if (target) headers.set('X-SCOPE3-CUSTOMER-ID', target)
+    if (named.header) headers.set('X-SCOPE3-CUSTOMER-ID', named.header)
     if (meta.idempotencyKey) {
       const key = options.idempotencyKey
       if (typeof key !== 'string' || !/^[\x21-\x7e]{1,255}$/.test(key))

@@ -161,7 +161,12 @@ export type DownloadV3PublicDocumentRevisionData = {
         documentId: string;
         revisionId: string;
     };
-    query?: never;
+    query?: {
+        /**
+         * The account the read runs in, from get_status. Leave it out when your credential works in one account.
+         */
+        accountId?: string;
+    };
     url: '/documents/{documentId}/revisions/{revisionId}/download';
 };
 
@@ -8335,6 +8340,10 @@ export type GetV3PublicDocumentRevisionSectionsData = {
          * Stable evaluation time. Required with cursor and must equal the preceding response applicability.asOf value.
          */
         asOf?: string;
+        /**
+         * The account the read runs in, from get_status. Leave it out when your credential works in one account.
+         */
+        accountId?: string;
     };
     url: '/documents/{documentId}/revisions/{revisionId}/sections';
 };

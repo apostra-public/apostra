@@ -180,14 +180,17 @@ async function exerciseJourneys(command, args, language) {
   for (const request of requests) {
     assert.equal(request.method, 'POST')
     assert.equal(request.headers.authorization, 'Bearer install-fixture-key')
-    assert.equal(request.headers['x-scope3-customer-id'], '12')
+    // The SDK names the account in the request body, not the deprecated header.
+    assert.equal(request.headers['x-scope3-customer-id'], undefined)
+    assert.equal(request.body.accountId, 12)
     assert.match(request.headers['user-agent'], new RegExp(`^apostra-${language}/`))
   }
-  assert.deepEqual(requests[0].body, {})
-  assert.deepEqual(requests[1].body, { kind: 'campaign', limit: 20 })
+  assert.deepEqual(requests[0].body, { accountId: 12 })
+  assert.deepEqual(requests[1].body, { kind: 'campaign', limit: 20, accountId: 12 })
   const delivery = {
     report: 'campaign_delivery', filters: { campaignId: 'fixture-campaign' },
     range: { startDate: '2026-01-01', endDate: '2026-01-02' }, limit: 100,
+    accountId: 12,
   }
   assert.deepEqual(requests[2].body, delivery)
   assert.deepEqual(requests[3].body, { ...delivery, cursor: 'opaque cursor/+?' })

@@ -56,6 +56,7 @@ class DownloadV3PublicDocumentRevisionErrorWithDataError(TypedDict):
 class DownloadV3PublicDocumentRevisionInput(TypedDict):
     documentId: str
     revisionId: str
+    accountId: NotRequired[str]
 
 DownloadV3PublicDocumentRevisionResult: TypeAlias = str
 
@@ -5221,6 +5222,7 @@ class GetV3PublicDocumentRevisionSectionsInput(TypedDict):
     '\n    Opaque continuation cursor. When resuming, resend the preceding response applicability.asOf value as asOf.\n    '
     asOf: NotRequired[str]
     '\n    Stable evaluation time. Required with cursor and must equal the preceding response applicability.asOf value.\n    '
+    accountId: NotRequired[str]
 
 class GetV3PublicDocumentRevisionSectionsResult(TypedDict):
     source: Literal["docs", "specs"]
