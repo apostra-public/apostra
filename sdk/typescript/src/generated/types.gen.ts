@@ -5080,6 +5080,239 @@ export type GetData = {
          * For kind proposal with include products: the cursor from the previous products page of the same proposal.
          */
         proposalProductsCursor?: string;
+    }) | (unknown & {
+        kind: 'buyer_rfp';
+        /**
+         * The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.
+         */
+        id: string;
+        /**
+         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         */
+        after?: string;
+        /**
+         * For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.
+         */
+        through?: string;
+        /**
+         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         */
+        limit?: number;
+        /**
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Required for kind member: the account the member belongs to, this account or a direct child.
+         */
+        memberAccountId?: number;
+        /**
+         * The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.
+         */
+        accountId?: number;
+        /**
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
+         */
+        advertiserId?: string;
+        /**
+         * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
+         */
+        reportId?: string;
+        /**
+         * For kind property_list: where to start the next page of identifiers, from the previous read.
+         */
+        identifierOffset?: number;
+        /**
+         * For kind property_list: which identifiers to page through: all (the default), unresolved, or registered.
+         */
+        identifierCategory?: 'all' | 'unresolved' | 'registered';
+        /**
+         * For kind seller with include products and advertiserId: the productQueryId from the previous read, to poll products that were still loading.
+         */
+        productQueryId?: string;
+        /**
+         * For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.
+         */
+        productRevision?: number;
+        /**
+         * For kind agent with include diagnostics: one validation run id taken from validationRuns.
+         */
+        validationRunId?: string;
+        /**
+         * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
+         */
+        sourceId?: string;
+        /**
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         */
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        /**
+         * For kind catalog with include items: which items to return and the cursor for the next page.
+         */
+        items?: {
+            /**
+             * Filters for the catalog items page; every filter given must match.
+             */
+            filter?: {
+                /**
+                 * Only catalog items with these exact AdCP item keys (e.g. hotel_id), up to 50.
+                 */
+                ids?: Array<string>;
+                /**
+                 * Only catalog items with these exact product GTINs, up to 50.
+                 */
+                gtins?: Array<string>;
+                /**
+                 * Only catalog items carrying any of these tags.
+                 */
+                tags?: Array<string>;
+                /**
+                 * Only catalog items in exactly this category.
+                 */
+                category?: string;
+                /**
+                 * Only catalog items whose text contains this phrase.
+                 */
+                text?: string;
+            };
+            /**
+             * The cursor from the previous catalog items page.
+             */
+            cursor?: string;
+        };
+        /**
+         * For kind material: which revision to read, paging for each collection, and selectors that narrow them.
+         */
+        options?: {
+            /**
+             * Read this exact past source revision instead of the current one.
+             */
+            sourceRevision?: number;
+            /**
+             * Read this rendition of the source revision; omit for the active rendition.
+             */
+            renditionRevision?: number;
+            /**
+             * Paging for each collection in a material read. A candidates page needs no include; a page for any other collection applies only when you also request its matching include.
+             */
+            pages?: {
+                /**
+                 * Page through the extracted facts proposed for the playbook, rules, products, or seller profile. Default 25 rows; no include needed.
+                 */
+                candidates?: GetRequestOptionsPagesCandidates;
+                /**
+                 * Page through extracted text blocks in reading order. Needs include rendition_blocks; default 50 rows.
+                 */
+                rendition_blocks?: GetRequestOptionsPagesRenditionBlocks;
+                /**
+                 * Page through extracted images. Needs include visual_assets; default 25 rows, at most 50.
+                 */
+                visual_assets?: GetRequestOptionsPagesVisualAssets;
+                /**
+                 * Page through extraction warnings and errors. Needs include extraction_diagnostics; default 50 rows.
+                 */
+                extraction_diagnostics?: GetRequestOptionsPagesExtractionDiagnostics;
+                /**
+                 * Page through records of this material being used in RFP responses. Needs include composition_receipts; default 50 rows.
+                 */
+                composition_receipts?: GetRequestOptionsPagesCompositionReceipts;
+                /**
+                 * Page through where this material was used. Needs include usage; at most 48 rows, sent to the app rather than to you.
+                 */
+                usage?: GetRequestOptionsPagesUsage;
+            };
+            /**
+             * Narrow the text blocks, images, and usage returned. A selector is ignored for collections it does not apply to.
+             */
+            select?: {
+                /**
+                 * Keep only text blocks of these kinds, such as heading, table, or speaker_notes.
+                 */
+                blockKinds?: Array<'heading' | 'paragraph' | 'list' | 'table' | 'caption' | 'speaker_notes' | 'ocr' | 'accessibility_text' | 'other'>;
+                /**
+                 * Limit text blocks, images, and usage to one page, slide, or sheet by its unit ID.
+                 */
+                unitId?: string;
+                /**
+                 * Keep only images of these kinds, such as photo, logo, or chart.
+                 */
+                assetKinds?: Array<'photo' | 'illustration' | 'logo' | 'chart' | 'diagram' | 'screenshot' | 'background' | 'other'>;
+                /**
+                 * Keep only images whose reuse rights are any of these, for example allowed or requires_approval.
+                 */
+                reusePolicies?: Array<'allowed' | 'requires_approval' | 'prohibited' | 'unknown'>;
+                /**
+                 * Keep only images whose extraction finished as ready, degraded, or failed.
+                 */
+                assetStatuses?: Array<'ready' | 'degraded' | 'failed'>;
+            };
+        };
+        /**
+         * For kind playbook: read this past version with its content, for example to save it again as current.
+         */
+        version?: number;
+        /**
+         * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
+         */
+        subscriptionsOffset?: number;
+        /**
+         * For kind connection: where to start the next page of provider accounts found on the connection.
+         */
+        connectionAccountsOffset?: number;
+        /**
+         * For kind connection: where to start the next page of advertiser-to-account mappings.
+         */
+        connectionMappingsOffset?: number;
+        /**
+         * Required for kind connection with include inventory: the accounts[].id whose event sources and audiences to list.
+         */
+        connectionAccountId?: string;
+        /**
+         * For kind connection with include inventory: where to start the next page, 50 per page.
+         */
+        connectionInventoryOffset?: number;
+        /**
+         * For kind connection with include inventory: limit the page to seller audiences or event sources.
+         */
+        connectionInventoryObjectType?: 'audience' | 'event_source';
+        /**
+         * For kind connection: the seller or creative engine you expect this connection to reach. The read fails if it reaches another one.
+         */
+        connectionTarget?: {
+            /**
+             * Whether the target is a seller or a creative engine.
+             */
+            kind: 'seller' | 'creative_engine';
+            /**
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
+             */
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
+        };
+        /**
+         * For kind rfp_turn: where to start the next page of feedback, 20 per page.
+         */
+        feedbackOffset?: number;
+        /**
+         * For kind rfp_turn: where to start the next page of representations, 50 per page. Not with representationCursor.
+         */
+        representationOffset?: number;
+        /**
+         * For kind rfp_turn: the representations cursor from the previous read, which keeps pages stable. Not with representationOffset.
+         */
+        representationCursor?: string;
+        /**
+         * For kind audience: where to start the next page of audiences, 50 per page; default 0.
+         */
+        audienceOffset?: number;
+        /**
+         * For kind proposal with include products: the cursor from the previous products page of the same proposal.
+         */
+        proposalProductsCursor?: string;
+        include?: never;
     });
     headers?: {
         /**
@@ -6888,7 +7121,7 @@ export type GetResponses = {
             [key: string]: unknown;
         } | {
             outcome: 'object';
-            kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'library_request' | 'account_relationship' | 'advertiser_access' | 'notification_config';
+            kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'buyer_rfp' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'library_request' | 'account_relationship' | 'advertiser_access' | 'notification_config';
             object: {
                 advertiserId?: string;
                 sandbox?: boolean;
@@ -16403,6 +16636,276 @@ export type SaveBuyerOperatorSuccessPreviewAfterOperatorUnit = {
     name?: string;
     [key: string]: unknown;
 };
+
+export type SaveBuyerRfpData = {
+    body: {
+        /**
+         * Owning advertiser. Required to create; refused otherwise.
+         */
+        advertiserId?: string;
+        /**
+         * RFP to change; only a draft changes. Omit to create or copy.
+         */
+        rfpId?: string;
+        /**
+         * Copy this RFP into a new draft in a new plan. Takes only name and idempotencyKey besides.
+         */
+        duplicateFromRfpId?: string;
+        /**
+         * revision from the last read. Required with rfpId; a stale one is refused.
+         */
+        expectedRevision?: number;
+        /**
+         * Retry key. Required to create or copy, refused on an update.
+         */
+        idempotencyKey?: string;
+        /**
+         * RFP name. Required to create; names a copy.
+         */
+        name?: string;
+        /**
+         * What the buyer wants. null clears it on an update.
+         */
+        brief?: string | null;
+        /**
+         * When to run (AdCP date range), not how long the RFP stays open. null clears.
+         */
+        flight?: SaveBuyerRfpRequestBuyerRfpFlight | null;
+        /**
+         * Size of proposal wanted back (AdCP budget range), not a pot. null clears.
+         */
+        budgetRange?: SaveBuyerRfpRequestBuyerRfpBudgetRange | null;
+        /**
+         * AdCP media channels. null clears.
+         */
+        channels?: Array<'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence'> | null;
+        /**
+         * ISO country and region codes, never names. null clears.
+         */
+        geo?: SaveBuyerRfpRequestBuyerRfpGeo | null;
+        /**
+         * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+         */
+        expectedAccountId?: number | string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers: {
+        /**
+         * Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are sent they must name the same account.
+         *
+         * @deprecated
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+        /**
+         * Required for every write. Reuse the same key and validated body to replay the durable result for seven days. If this operation also accepts idempotencyKey in its JSON body, the values must match.
+         */
+        'Idempotency-Key': string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/save_buyer_rfp';
+};
+
+export type SaveBuyerRfpError = SaveBuyerRfpErrors[keyof SaveBuyerRfpErrors];
+
+export type SaveBuyerRfpErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type SaveBuyerRfpRequestBuyerRfpBudgetRange = {
+    /**
+     * Smallest proposal the buyer wants, in `currency`.
+     */
+    min?: SaveBuyerRfpRequestBuyerRfpBudgetRangeMin;
+    /**
+     * Largest proposal the buyer wants, in `currency`.
+     */
+    max?: SaveBuyerRfpRequestBuyerRfpBudgetRangeMax;
+    /**
+     * ISO 4217 currency code, upper case.
+     */
+    currency: string;
+};
+
+export type SaveBuyerRfpRequestBuyerRfpBudgetRangeMax = number;
+
+export type SaveBuyerRfpRequestBuyerRfpBudgetRangeMin = number;
+
+export type SaveBuyerRfpRequestBuyerRfpFlight = {
+    /**
+     * First day of the flight the ask is for, YYYY-MM-DD.
+     */
+    start: string;
+    /**
+     * Last day of the flight, YYYY-MM-DD, on or after `start`.
+     */
+    end: string;
+};
+
+export type SaveBuyerRfpRequestBuyerRfpGeo = {
+    /**
+     * ISO 3166-1 alpha-2 country codes, upper case.
+     */
+    countries?: Array<string>;
+    /**
+     * ISO 3166-2 subdivision codes, such as US-CA.
+     */
+    regions?: Array<string>;
+};
+
+export type SaveBuyerRfpResponse = SaveBuyerRfpResponses[keyof SaveBuyerRfpResponses];
+
+export type SaveBuyerRfpResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            action: SaveBuyerRfpSuccessSaveBuyerRfpAction;
+            buyerRfp: SaveBuyerRfpSuccessBuyerRfp;
+            replayed: boolean;
+        };
+        error: null;
+    };
+    /**
+     * The write is still running or needs recovery. Retry this operation with the same Idempotency-Key and body; do not mint a new key.
+     */
+    202: {
+        data: {
+            receipt: {
+                id: string;
+                operation: string;
+                state: 'claimed' | 'running' | 'uncertain';
+                stateVersion: number;
+                stateChangedAt: string;
+                pendingReason: string;
+            };
+        };
+        error: null;
+    };
+};
+
+export type SaveBuyerRfpSuccessBuyerRfp = {
+    rfpId: string;
+    planId: string;
+    advertiserId: string;
+    name: string;
+    brief: string | null;
+    status: 'draft' | 'open' | 'closed';
+    revision: number;
+    flight: SaveBuyerRfpSuccessBuyerRfpFlight | null;
+    budgetRange: SaveBuyerRfpSuccessBuyerRfpBudgetRange | null;
+    channels: Array<string> | null;
+    geo: SaveBuyerRfpSuccessBuyerRfpGeo | null;
+    window: SaveBuyerRfpSuccessBuyerRfpWindow | null;
+    duplicatedFromRfpId: string | null;
+    createdAt: string;
+    updatedAt: string;
+};
+
+export type SaveBuyerRfpSuccessBuyerRfpBudgetRange = {
+    /**
+     * Smallest proposal the buyer wants, in `currency`.
+     */
+    min?: SaveBuyerRfpSuccessBuyerRfpBudgetRangeMin;
+    /**
+     * Largest proposal the buyer wants, in `currency`.
+     */
+    max?: SaveBuyerRfpSuccessBuyerRfpBudgetRangeMax;
+    /**
+     * ISO 4217 currency code, upper case.
+     */
+    currency: string;
+};
+
+export type SaveBuyerRfpSuccessBuyerRfpBudgetRangeMax = number;
+
+export type SaveBuyerRfpSuccessBuyerRfpBudgetRangeMin = number;
+
+export type SaveBuyerRfpSuccessBuyerRfpFlight = {
+    /**
+     * First day of the flight the ask is for, YYYY-MM-DD.
+     */
+    start: string;
+    /**
+     * Last day of the flight, YYYY-MM-DD, on or after `start`.
+     */
+    end: string;
+};
+
+export type SaveBuyerRfpSuccessBuyerRfpGeo = {
+    /**
+     * ISO 3166-1 alpha-2 country codes, upper case.
+     */
+    countries?: Array<string>;
+    /**
+     * ISO 3166-2 subdivision codes, such as US-CA.
+     */
+    regions?: Array<string>;
+};
+
+export type SaveBuyerRfpSuccessBuyerRfpWindow = {
+    openedAt: string;
+    responseDeadline: string | null;
+    closedAt: string | null;
+    closedBy: 'buyer' | 'window' | null;
+};
+
+export type SaveBuyerRfpSuccessSaveBuyerRfpAction = 'created' | 'duplicated' | 'updated';
 
 export type SaveCampaignData = {
     body: unknown & {
@@ -32929,6 +33432,10 @@ export type SearchData = {
              */
             type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
             /**
+             * For kind buyer_rfp: RFPs in any of these statuses.
+             */
+            rfpStatus?: Array<'draft' | 'open' | 'closed'>;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -33392,6 +33899,10 @@ export type SearchData = {
              * For kind catalog: catalogs of exactly this AdCP catalog type.
              */
             type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
+            /**
+             * For kind buyer_rfp: RFPs in any of these statuses.
+             */
+            rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
              * For kind property_list: only include lists or only exclude lists.
              */
@@ -33925,6 +34436,10 @@ export type SearchData = {
              */
             type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
             /**
+             * For kind buyer_rfp: RFPs in any of these statuses.
+             */
+            rfpStatus?: Array<'draft' | 'open' | 'closed'>;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -34384,6 +34899,10 @@ export type SearchData = {
              * For kind catalog: catalogs of exactly this AdCP catalog type.
              */
             type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
+            /**
+             * For kind buyer_rfp: RFPs in any of these statuses.
+             */
+            rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
              * For kind property_list: only include lists or only exclude lists.
              */
@@ -34846,6 +35365,10 @@ export type SearchData = {
              */
             type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
             /**
+             * For kind buyer_rfp: RFPs in any of these statuses.
+             */
+            rfpStatus?: Array<'draft' | 'open' | 'closed'>;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -35301,6 +35824,10 @@ export type SearchData = {
              * For kind catalog: catalogs of exactly this AdCP catalog type.
              */
             type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
+            /**
+             * For kind buyer_rfp: RFPs in any of these statuses.
+             */
+            rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
              * For kind property_list: only include lists or only exclude lists.
              */
@@ -35765,6 +36292,10 @@ export type SearchData = {
              * For kind catalog: catalogs of exactly this AdCP catalog type.
              */
             type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
+            /**
+             * For kind buyer_rfp: RFPs in any of these statuses.
+             */
+            rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
              * For kind property_list: only include lists or only exclude lists.
              */
@@ -36352,6 +36883,10 @@ export type SearchData = {
              */
             type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
             /**
+             * For kind buyer_rfp: RFPs in any of these statuses.
+             */
+            rfpStatus?: Array<'draft' | 'open' | 'closed'>;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -36816,6 +37351,478 @@ export type SearchData = {
              */
             type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
             /**
+             * For kind buyer_rfp: RFPs in any of these statuses.
+             */
+            rfpStatus?: Array<'draft' | 'open' | 'closed'>;
+            /**
+             * For kind property_list: only include lists or only exclude lists.
+             */
+            propertyListPurpose?: 'include' | 'exclude';
+            /**
+             * For kinds campaign and media_buy (buyer): items in any of these phases. active includes paused and cancel-pending buys. Campaigns use only draft, active, completed, and canceled. ending appears on results but is not a filter value.
+             */
+            phase?: Array<'draft' | 'active' | 'completed' | 'canceled' | 'pendingApproval' | 'inputRequired' | 'failed' | 'rejected'>;
+            /**
+             * For kind campaign: tracking keeps campaigns that mirror a provider account; managing keeps campaigns built on this platform. Both or neither means no filter.
+             */
+            handling?: Array<'tracking' | 'managing'>;
+            /**
+             * For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.
+             */
+            isPaused?: boolean;
+            /**
+             * Campaign, creative, buyer media_buy: true archived; false active.
+             */
+            isArchived?: boolean;
+            /**
+             * Not applied yet: results come back in stored order whatever you send.
+             */
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            /**
+             * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
+             */
+            campaignId?: string;
+            /**
+             * Exact format identifier for creative results.
+             */
+            formatKind?: string;
+            /**
+             * Lifecycle statuses used to select creative results.
+             */
+            statuses?: Array<SearchRequestAdcpCreativeStatus>;
+            /**
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             */
+            productId?: string;
+            /**
+             * Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.
+             */
+            resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
+            /**
+             * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
+             */
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            /**
+             * creative_asset: assets carrying every tag.
+             */
+            tags?: Array<string>;
+            /**
+             * creative and creative_asset: items in these advertiser collections.
+             */
+            collectionIds?: Array<string>;
+            /**
+             * creative_asset: active (default) or draft. Drafts expose only name, kind, and remaining review work.
+             */
+            assetState?: 'active' | 'draft';
+            /**
+             * For kind catalog only. Omit for active catalogs; use draft explicitly to list person-reviewed uploads.
+             */
+            catalogState?: 'active' | 'draft';
+            /**
+             * For advertiser, campaign, material, creative, creative_asset: label filters. Every entry must match; any listed value matches within one.
+             */
+            labels?: Array<SearchRequestLabelFilterEntry>;
+            /**
+             * For kind dimension: only label dimensions that can tag this kind of object.
+             */
+            appliesTo?: 'advertiser' | 'campaign' | 'material' | 'creative_asset' | 'creative';
+            /**
+             * For kind creative: evergreen or reference, the creative's role in the advertiser's creative library. Not the seller Library.
+             */
+            role?: SearchRequestCreativeRole;
+            /**
+             * For kind creative: durable advertiser Library role. Same stored value as role; use evergreen for delivery-eligible reuse or reference for delivery-ineligible reference material.
+             */
+            libraryRole?: SearchRequestCreativeRole;
+            /**
+             * For kind creative: where the creative came from: uploaded, generated, or connected.
+             */
+            source?: SearchRequestCreativeSource;
+            /**
+             * For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.
+             */
+            promoted?: boolean;
+            /**
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             */
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            /**
+             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             */
+            sellerAccountId?: number;
+            /**
+             * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
+             */
+            origin?: Array<'quick' | 'uploaded' | 'inbound' | 'manual' | 'imported'>;
+            /**
+             * For kinds rfp and rfp_turn: a list of RFP purposes to match. For kind session: one value, live, draft, or evaluation (RFP sessions only).
+             */
+            purpose?: Array<'live' | 'draft' | 'evaluation'> | 'live' | 'draft' | 'evaluation';
+            /**
+             * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
+             */
+            lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
+             */
+            live?: boolean;
+            /**
+             * For kind session (RFP sessions): approval_needed keeps sessions waiting on an approval.
+             */
+            attention?: 'approval_needed';
+            /**
+             * For kind session (RFP sessions): the exact operator domain recorded on the session.
+             */
+            operatorDomain?: string;
+            /**
+             * For kind session: keep sessions run by a human or by an agent, as recorded by their source.
+             */
+            actorKind?: 'human' | 'agent';
+            /**
+             * For kind session: up to 50 exact advertiser ids. Use ids from search, never names.
+             */
+            advertiserIds?: Array<string>;
+            /**
+             * For kind session: up to 50 exact buyer account ids. Use ids from search, never names.
+             */
+            buyerAccountIds?: Array<string>;
+            /**
+             * For kind session (RFP sessions): the channel the session ran over, such as chat, mcp, or email.
+             */
+            transport?: 'chat' | 'mcp' | 'adcp' | 'email' | 'slack' | 'sms' | 'discord' | 'fax';
+            /**
+             * For kind session: sessions updated strictly after this instant.
+             */
+            updatedAfter?: string;
+            /**
+             * For kind session: read one source only. Omitted, sessions come from every source you can read. Filters marked (RFP sessions) need the RFP source; a source you cannot read is refused.
+             */
+            sessionSource?: 'murph_conversation_v1' | 'storefront_rfp_v1' | 'storefront_media_buy_v1' | 'storefront_compose_run_v1' | 'live_certification_run_v1';
+            /**
+             * For kinds rfp, rfp_turn, and session (RFP sessions): exact buyer names recorded on the RFP. A label, not an account id.
+             */
+            buyer?: Array<string>;
+            /**
+             * For kinds rfp, rfp_turn, and session (RFP sessions): exact advertiser names recorded on the RFP. A label, not an advertiser id.
+             */
+            advertiser?: Array<string>;
+            /**
+             * For kinds rfp and rfp_turn: RFPs whose recorded category matches any of these exactly.
+             */
+            category?: Array<string>;
+            /**
+             * For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.
+             */
+            market?: Array<string>;
+            /**
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             */
+            channel?: Array<string>;
+            /**
+             * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
+             */
+            selectedPosture?: Array<string>;
+            /**
+             * For kinds rfp and rfp_turn: turns composed with any of these playbook versions. For rfp, its latest turn is checked.
+             */
+            playbookVersion?: Array<number>;
+            /**
+             * For kinds rfp and rfp_turn: turns whose response came from any of these cache paths. For rfp, its latest turn is checked.
+             */
+            cacheMode?: Array<'miss_full_compose' | 'hit_hydrated' | 'hit_customized' | 'bypassed'>;
+            /**
+             * For kinds rfp and rfp_turn: items with a recorded outcome result matching any of these.
+             */
+            outcome?: Array<string>;
+            /**
+             * For kind rfp_turn: only turns of this RFP, by the RFP id from search.
+             */
+            rfpId?: string;
+            /**
+             * For kind rfp_turn: turns whose response is in any of these states, from queued and processing to a finished state.
+             */
+            responseState?: Array<'queued' | 'processing' | 'ready' | 'passed' | 'needs_clarification' | 'failed'>;
+            /**
+             * For kind rfp_turn: turns whose evaluation is in any of these states.
+             */
+            evaluationState?: Array<string>;
+            /**
+             * For kind rfp_turn: turns built with any of these response recipe versions.
+             */
+            responseRecipeVersion?: Array<string>;
+            /**
+             * For kind rfp_turn: turns written by any of these composer model versions.
+             */
+            modelVersion?: Array<string>;
+            /**
+             * For kind rfp_turn: turns checked by any of these judge (truth gate) versions.
+             */
+            judgeVersion?: Array<string>;
+            /**
+             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             */
+            feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
+            /**
+             * For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.
+             */
+            sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
+            /**
+             * For kind media_buy in a seller account: buys from this buyer Account id.
+             */
+            buyerAccountId?: number;
+            /**
+             * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
+             */
+            accountId?: number;
+            /**
+             * For kind advertiser: true keeps sandbox advertisers, false keeps live ones; omit for both. In a seller account it needs own-supply campaigns.
+             */
+            sandbox?: boolean;
+            /**
+             * For kind advertiser in a buyer account: advertisers linked through this sales agent, by the agent record's agent_id. Not a seller id.
+             */
+            linkedAccountPartnerId?: string;
+            /**
+             * For kind advertiser_grant: grants in any of these states, from invited and active to expired, rejected, or revoked.
+             */
+            grantStatus?: Array<'invited' | 'active' | 'expired' | 'rejected' | 'revoked'>;
+            /**
+             * For kind media_buy in a seller account: buys whose flight starts at or after this full ISO date-time.
+             */
+            flightStartFrom?: string;
+            /**
+             * For kind media_buy in a seller account: buys whose flight starts at or before this full ISO date-time.
+             */
+            flightStartTo?: string;
+            /**
+             * For kind seller in a buyer account: sellers of this type, a global or regional market maker or an Apostra seller.
+             */
+            sellerType?: 'global_market_maker' | 'regional_market_maker' | 'apostra_seller';
+            /**
+             * Deprecated: use sellerType, which takes the same values. Here marketplace_seller means apostra_seller.
+             */
+            classification?: 'global_market_maker' | 'regional_market_maker' | 'marketplace_seller' | 'apostra_seller';
+            /**
+             * For kind seller in a buyer account: true keeps sellers you can transact with through Apostra, false keeps the rest.
+             */
+            transactable?: boolean;
+            /**
+             * Deprecated: use transactable, which takes the same true or false value.
+             */
+            marketplaceReady?: boolean;
+            /**
+             * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
+             */
+            partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
+             */
+            marketplace?: boolean;
+            /**
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
+             */
+            region?: string;
+            /**
+             * For kind material: documents whose extraction state is any of these. needs_upload has no file yet; queued and processing are waiting or running; partial kept only some content.
+             */
+            processingState?: Array<'needs_upload' | 'queued' | 'processing' | 'ready' | 'partial' | 'failed'>;
+            /**
+             * For kind material: response returns RFP responses and imported past proposals; document returns everything else.
+             */
+            materialKind?: 'document' | 'response';
+            /**
+             * For kind material: documents that came from any of these sources: a web page (url), a site crawl, an upload, a crawl manifest, pasted text (inline), or an imported record (history).
+             */
+            sourceKind?: Array<'url' | 'site' | 'upload' | 'crawl_manifest' | 'inline' | 'history'>;
+            /**
+             * For kind material: documents with any of these visibility settings. New documents default to seller_private.
+             */
+            visibility?: Array<'public' | 'seller_private' | 'advertiser_confidential'>;
+            /**
+             * For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.
+             */
+            sourceExtension?: string;
+            /**
+             * For kind material: one Library document category. uncategorized also matches documents with no category.
+             */
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            /**
+             * For kind material: documents tagged with any of these industry verticals, case-insensitive.
+             */
+            vertical?: Array<string>;
+            /**
+             * For kind material: documents in effect at this instant. A missing start or end date counts as open-ended.
+             */
+            effectiveOn?: string;
+            /**
+             * For kind material: documents with no expiry date or one at or after this instant.
+             */
+            expiresAfter?: string;
+            /**
+             * For kind material with include ["browse"]: true keeps documents with at least one page or slide, false keeps documents with none.
+             */
+            hasUnits?: boolean;
+            /**
+             * For kind material: live documents whose status is any of these. processing is waiting on its file or on extraction, incomplete is failed or only partly extracted, ready is usable. Not with materialState draft or archived.
+             */
+            documentStatus?: Array<'processing' | 'incomplete' | 'ready'>;
+            /**
+             * For kind material: live (the default), draft, or archived. Drafts return review details and gaps, never content.
+             */
+            materialState?: 'live' | 'draft' | 'archived';
+            /**
+             * For kind conversation: chats started at or after this UTC time.
+             */
+            conversationStartedAfter?: string;
+            /**
+             * For kind conversation: chats started at or before this UTC time.
+             */
+            conversationStartedBefore?: string;
+        };
+        /**
+         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         */
+        cursor?: string;
+        /**
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
+         */
+        limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         */
+        groupBy?: string;
+        accountId?: number | string;
+    }) | (unknown & {
+        /**
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.
+         */
+        query?: string;
+        /**
+         * The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.
+         */
+        document?: string;
+        /**
+         * The exact revision of an agreement docs hit, read together with its document. Docs only.
+         */
+        revision?: string;
+        /**
+         * One section of an agreement revision. Needs both document and revision.
+         */
+        section?: string;
+        /**
+         * The time to evaluate docs at; defaults to now. When continuing an agreement read with cursor, send the same asOf again.
+         */
+        asOf?: string;
+        /**
+         * What to search: objects, docs, or specs. When omitted, a call with query searches all three and a call without query lists objects. docs and specs need a query, except an agreement read by document and revision.
+         */
+        sources?: Array<'objects' | 'docs' | 'specs'>;
+        /**
+         * Which docs to rank. caller_relevant (the default) skips docs written for other account types; public_research searches every public doc.
+         */
+        docsScope?: 'caller_relevant' | 'public_research';
+        kind: 'buyer_rfp';
+        /**
+         * For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.
+         */
+        sponsoredBuyerCustomerId?: string;
+        /**
+         * For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.
+         */
+        scope?: 'unit';
+        /**
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+         */
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'pulse'>;
+        /**
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         */
+        sourceId?: string;
+        /**
+         * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
+         */
+        filter: {
+            /**
+             * For kind connection: list connections to sellers (the default) or to creative engines.
+             */
+            targetKind?: 'seller' | 'creative_engine';
+            /**
+             * For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.
+             */
+            ids?: Array<string>;
+            /**
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             */
+            sellerAccountIds?: Array<number>;
+            /**
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             */
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            /**
+             * For kind library_request: only gaps opened from this RFP turn, by its id.
+             */
+            originRfpTurnId?: string;
+            /**
+             * For kind coverage: domains with exactly this adagents.json authorization verdict, such as authorized.
+             */
+            authorization?: string;
+            /**
+             * For kind wholesale_product in a seller account: products in this lifecycle status. Read buyerVisibility on each result to know whether buyers can find it.
+             */
+            productStatus?: 'draft' | 'active' | 'archived';
+            /**
+             * For kind ask: requests routed as this type, such as support or supply.
+             */
+            askType?: 'support' | 'product' | 'supply' | 'integration' | 'commercial';
+            /**
+             * For kind ask: open requests, or closed ones (closed includes requests the requester withdrew).
+             */
+            askState?: 'open' | 'closed';
+            /**
+             * For kind ad_server_targeting: which of the source's targeting taxonomies to browse, as named by the source.
+             */
+            candidateType?: string;
+            /**
+             * For kind ad_server_targeting: list the children of this candidate, for example the values under one key.
+             */
+            parentId?: string;
+            /**
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             */
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            /**
+             * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
+             */
+            queue?: 'overdue' | 'unowned';
+            /**
+             * For kind house_discount: preview which discount rule applies to this buyer domain, resolved up its corporate parents.
+             */
+            buyerDomain?: string;
+            /**
+             * For kind campaign: campaigns in any of these statuses. archived returns archived campaigns; every other value returns campaigns that are not archived.
+             */
+            campaignStatus?: Array<'needs_attention' | 'active' | 'draft' | 'completed' | 'paused' | 'canceled' | 'archived'>;
+            /**
+             * For kind campaign: managed campaigns are built on this platform; tracked campaigns mirror a provider account.
+             */
+            campaignMode?: 'managed' | 'tracked';
+            /**
+             * For kind campaign: campaigns whose name contains this text, ignoring case. Used instead of query.
+             */
+            campaignName?: string;
+            /**
+             * The owning advertiser id. Required for event_source, catalog, property_list, creative_asset, creative_format, and buyer wholesale_product. creative, creative_collection, and creative_session take this or campaignId, not both. Over MCP, a buyer search of any of these kinds that sends neither uses the only active advertiser, or names the choices. Buyer media_buy needs this or campaignId. Narrows campaign. For seller, partnerStatus is read for this advertiser, not the account.
+             */
+            advertiserId: string;
+            /**
+             * For kind catalog: catalogs of exactly this AdCP catalog type.
+             */
+            type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
+            /**
+             * For kind buyer_rfp: RFPs in any of these statuses.
+             */
+            rfpStatus?: Array<'draft' | 'open' | 'closed'>;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -37278,6 +38285,10 @@ export type SearchData = {
              * For kind catalog: catalogs of exactly this AdCP catalog type.
              */
             type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
+            /**
+             * For kind buyer_rfp: RFPs in any of these statuses.
+             */
+            rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
              * For kind property_list: only include lists or only exclude lists.
              */
@@ -37742,6 +38753,10 @@ export type SearchData = {
              * For kind catalog: catalogs of exactly this AdCP catalog type.
              */
             type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
+            /**
+             * For kind buyer_rfp: RFPs in any of these statuses.
+             */
+            rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
              * For kind property_list: only include lists or only exclude lists.
              */
@@ -38207,6 +39222,10 @@ export type SearchData = {
              */
             type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
             /**
+             * For kind buyer_rfp: RFPs in any of these statuses.
+             */
+            rfpStatus?: Array<'draft' | 'open' | 'closed'>;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -38671,6 +39690,10 @@ export type SearchData = {
              */
             type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
             /**
+             * For kind buyer_rfp: RFPs in any of these statuses.
+             */
+            rfpStatus?: Array<'draft' | 'open' | 'closed'>;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -39117,7 +40140,7 @@ export type SearchResponses = {
     200: {
         data: {
             sources: Array<'objects' | 'docs' | 'specs'>;
-            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchSessionPageOutput | {
+            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchSessionPageOutput | {
                 kind: string;
                 groupBy: string;
                 total: number;
@@ -39137,7 +40160,7 @@ export type SearchResponses = {
             } | {
                 outcome: 'mixed';
                 kind: 'mixed';
-                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
+                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
                 [key: string]: unknown;
             };
             objectsUnavailable?: string;
@@ -39723,6 +40746,68 @@ export type SearchSuccessSearchBuyerAgentPageOutputValue = unknown;
 export type SearchSuccessSearchBuyerAgentUnavailableOutput = {
     outcome: 'unavailable_buyer_agent';
     kind: 'buyer_agent';
+    unavailable: string;
+    message: string;
+    [key: string]: unknown;
+};
+
+export type SearchSuccessSearchBuyerRfpPageOutput = {
+    total?: SearchSuccessSearchBuyerRfpPageOutputTotal;
+    totalLowerBound?: SearchSuccessSearchBuyerRfpPageOutputTotalLowerBound;
+    returned?: SearchSuccessSearchBuyerRfpPageOutputReturned;
+    hasMore?: SearchSuccessSearchBuyerRfpPageOutputHasMore;
+    truncated?: SearchSuccessSearchBuyerRfpPageOutputTruncated;
+    nextCursor?: SearchSuccessSearchBuyerRfpPageOutputNextCursor;
+    results: SearchSuccessSearchBuyerRfpPageOutputResults;
+    outcome: 'page_buyer_rfp';
+    kind: 'buyer_rfp';
+    [key: string]: SearchSuccessSearchBuyerRfpPageOutputValue | SearchSuccessSearchBuyerRfpPageOutputTotal | SearchSuccessSearchBuyerRfpPageOutputTotalLowerBound | SearchSuccessSearchBuyerRfpPageOutputReturned | SearchSuccessSearchBuyerRfpPageOutputHasMore | SearchSuccessSearchBuyerRfpPageOutputTruncated | SearchSuccessSearchBuyerRfpPageOutputNextCursor | SearchSuccessSearchBuyerRfpPageOutputResults | 'page_buyer_rfp' | 'buyer_rfp' | undefined;
+};
+
+export type SearchSuccessSearchBuyerRfpPageOutputHasMore = boolean;
+
+export type SearchSuccessSearchBuyerRfpPageOutputNextCursor = string;
+
+export type SearchSuccessSearchBuyerRfpPageOutputResults = Array<{
+    advertiserId?: string;
+    name?: string | null;
+    sandbox?: boolean;
+    /**
+     * Where the items come from: url when url is set, file when file is set.
+     */
+    sourceType?: 'inline' | 'url' | 'file' | null;
+    /**
+     * Items in the latest version against the one before it.
+     */
+    lastChangeSummary?: {
+        added: number;
+        updated: number;
+        unchanged: number;
+        removed: number;
+    } | null;
+    /**
+     * The active transform, if any.
+     */
+    transform?: {
+        name: string;
+        updatedAt: string;
+    } | null;
+    [key: string]: unknown;
+}>;
+
+export type SearchSuccessSearchBuyerRfpPageOutputReturned = number;
+
+export type SearchSuccessSearchBuyerRfpPageOutputTotal = number;
+
+export type SearchSuccessSearchBuyerRfpPageOutputTotalLowerBound = number;
+
+export type SearchSuccessSearchBuyerRfpPageOutputTruncated = boolean;
+
+export type SearchSuccessSearchBuyerRfpPageOutputValue = unknown;
+
+export type SearchSuccessSearchBuyerRfpUnavailableOutput = {
+    outcome: 'unavailable_buyer_rfp';
+    kind: 'buyer_rfp';
     unavailable: string;
     message: string;
     [key: string]: unknown;

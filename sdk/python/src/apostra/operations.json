@@ -963,6 +963,25 @@
     ],
     "summary": "Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v2/setup/v3/identity-setup."
   },
+  "save_buyer_rfp": {
+    "path": "/tools/save_buyer_rfp",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Opening an RFP to sellers is not available yet."
+  },
   "save_campaign": {
     "path": "/tools/save_campaign",
     "method": "POST",
