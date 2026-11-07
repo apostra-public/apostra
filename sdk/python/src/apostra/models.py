@@ -9067,8 +9067,6 @@ class SaveCampaignInput(TypedDict):
     '\n    Campaign trackers, advertiser overrides, and creative URL parameters.\n    '
     targetingOverlay: NotRequired[SaveCampaignInputTargetingOverlayValue | None]
     '\n    AdCP campaign targeting overlay.\n    '
-    targeting: NotRequired[SaveCampaignInputTargetingValue | None]
-    '\n    Deprecated; unchanged. Use targetingOverlay. AI-10440: 14-day notice; planned 2 Nov 2026.\n    '
     channelGroups: NotRequired[list[SaveCampaignInputChannelGroupsItemKindPreset | SaveCampaignInputChannelGroupsItemKindCustom] | None]
     '\n    Inventory execution groups. Use a preset or custom AdCP dimensions; null removes all groups.\n    '
     audienceConfig: NotRequired[SaveCampaignInputAudienceConfig]
@@ -9199,84 +9197,6 @@ class SaveCampaignInputOperatorFeesItem(TypedDict):
     '\n    Decimal share of the campaign\'s gross budget: 0.02 for 2%.\n    '
     beneficiary: NotRequired[str]
     '\n    Account id of the operator organisation; must be the account\'s parent organisation, the default.\n    '
-
-class SaveCampaignInputTargetingDaypartsItem(TypedDict):
-    requirementId: str
-    '\n    Stable identifier for this requirement; unique across all targeting dimensions.\n    '
-    strength: SaveCampaignRequestTargetingDaypartsItemStrength
-    '\n    "required" means must satisfy; "preferred" means optimize toward.\n    '
-    timezone: str
-    '\n    IANA tzdata identifier (e.g. "America/New_York").\n    '
-    windows: list[SaveCampaignInputTargetingDaypartsItemWindowsItem]
-    '\n    One or more time windows; delivery is in-scope if it falls inside any window.\n    '
-
-class SaveCampaignInputTargetingDaypartsItemWindowsItem(TypedDict):
-    days: list[Literal["mon", "tue", "wed", "thu", "fri", "sat", "sun"]]
-    '\n    Days of the week this window applies to.\n    '
-    startHour: int
-    '\n    Window start in 24-hour local time, inclusive (0-23).\n    '
-    endHour: int
-    '\n    Window end in 24-hour local time, exclusive (1-24); 24 means end-of-day.\n    '
-
-class SaveCampaignInputTargetingDemographics(TypedDict):
-    age: NotRequired[list[SaveCampaignInputTargetingDemographicsAgeItem]]
-    '\n    Age targeting requirements.\n    '
-
-class SaveCampaignInputTargetingDemographicsAgeItem(TypedDict):
-    requirementId: str
-    '\n    Stable identifier for this requirement; unique across all targeting dimensions.\n    '
-    strength: SaveCampaignRequestTargetingDemographicsAgeItemStrength
-    '\n    "required" means must satisfy; "preferred" means optimize toward.\n    '
-    minAge: NotRequired[int]
-    '\n    Inclusive lower age bound (integer years).\n    '
-    maxAge: NotRequired[int]
-    '\n    Inclusive upper age bound (integer years).\n    '
-    includeUnknownAge: NotRequired[bool]
-    '\n    Include users whose age cannot be determined. Defaults to false.\n    '
-    allowModeledAge: NotRequired[bool]
-    '\n    Accept statistically modeled age when verified signal is unavailable. Defaults to false.\n    '
-
-class SaveCampaignInputTargetingDeviceItem(TypedDict):
-    requirementId: str
-    '\n    Stable identifier for this requirement; unique across all targeting dimensions.\n    '
-    strength: SaveCampaignRequestTargetingDeviceItemStrength
-    '\n    "required" means must satisfy; "preferred" means optimize toward.\n    '
-    include: NotRequired[list[Literal["desktop", "mobile", "tablet", "ctv", "dooh", "unknown"]]]
-    '\n    AdCP device types to include: desktop, mobile, tablet, ctv, dooh, unknown.\n    '
-    exclude: NotRequired[list[Literal["desktop", "mobile", "tablet", "ctv", "dooh", "unknown"]]]
-    '\n    AdCP device types to exclude.\n    '
-
-class SaveCampaignInputTargetingGeoItem(TypedDict):
-    requirementId: str
-    '\n    Stable identifier for this requirement; unique across all targeting dimensions.\n    '
-    strength: SaveCampaignRequestTargetingGeoItemStrength
-    '\n    "required" means must satisfy; "preferred" means optimize toward.\n    '
-    include: NotRequired[list[SaveCampaignRequestTargetingGeoItemIncludeItem]]
-    '\n    ISO 3166-1 alpha-2 country codes or CLDR region subdivisions to include.\n    '
-    exclude: NotRequired[list[SaveCampaignRequestTargetingGeoItemExcludeItem]]
-    '\n    ISO 3166-1 alpha-2 country codes or CLDR region subdivisions to exclude.\n    '
-
-class SaveCampaignInputTargetingGeoMetrosItem(TypedDict):
-    requirementId: str
-    '\n    Retired requirement identifier.\n    '
-    strength: Literal["required"]
-    '\n    Retired requirement strength.\n    '
-    system: Literal["nielsen_dma"]
-    '\n    Nielsen DMA code system.\n    '
-    include: NotRequired[list[str]]
-    '\n    Nielsen DMA codes to include.\n    '
-    exclude: NotRequired[list[str]]
-    '\n    Nielsen DMA codes to exclude.\n    '
-
-class SaveCampaignInputTargetingLanguageItem(TypedDict):
-    requirementId: str
-    '\n    Stable identifier for this requirement; unique across all targeting dimensions.\n    '
-    strength: SaveCampaignRequestTargetingLanguageItemStrength
-    '\n    "required" means must satisfy; "preferred" means optimize toward.\n    '
-    include: NotRequired[list[SaveCampaignRequestTargetingLanguageItemIncludeItem]]
-    '\n    BCP 47 language tags to include (e.g. "en", "en-US").\n    '
-    exclude: NotRequired[list[SaveCampaignRequestTargetingLanguageItemExcludeItem]]
-    '\n    BCP 47 language tags to exclude.\n    '
 
 class SaveCampaignInputTargetingOverlayAgeRestriction(TypedDict):
     min: int
@@ -9419,20 +9339,6 @@ class SaveCampaignInputTargetingOverlayValue(TypedDict):
     '\n    Delivery windows.\n    '
     age_restriction: NotRequired[SaveCampaignInputTargetingOverlayAgeRestriction]
     '\n    Minimum audience age.\n    '
-
-class SaveCampaignInputTargetingValue(TypedDict):
-    geo: NotRequired[list[SaveCampaignInputTargetingGeoItem]]
-    '\n    Geographic targeting requirements (countries and regions).\n    '
-    language: NotRequired[list[SaveCampaignInputTargetingLanguageItem]]
-    '\n    Language targeting requirements (BCP 47 tags).\n    '
-    device: NotRequired[list[SaveCampaignInputTargetingDeviceItem]]
-    '\n    Device-type targeting requirements.\n    '
-    dayparts: NotRequired[list[SaveCampaignInputTargetingDaypartsItem]]
-    '\n    Daypart targeting requirements (time windows per timezone).\n    '
-    demographics: NotRequired[SaveCampaignInputTargetingDemographics]
-    '\n    Demographic targeting requirements.\n    '
-    geoMetros: NotRequired[list[SaveCampaignInputTargetingGeoMetrosItem]]
-    '\n    Nielsen DMA targeting requirements.\n    '
 
 class SaveCampaignInputTracking(TypedDict):
     expectedRevision: NotRequired[int]
@@ -9581,24 +9487,6 @@ class SaveCampaignRequestLabelWriteEntry(TypedDict):
     '\n    Key of a dimension, such as audience or vertical.\n    '
     values: list[str]
     '\n    Value slugs; [] clears.\n    '
-
-SaveCampaignRequestTargetingDaypartsItemStrength: TypeAlias = Literal["required", "preferred"]
-
-SaveCampaignRequestTargetingDemographicsAgeItemStrength: TypeAlias = Literal["required", "preferred"]
-
-SaveCampaignRequestTargetingDeviceItemStrength: TypeAlias = Literal["required", "preferred"]
-
-SaveCampaignRequestTargetingGeoItemExcludeItem: TypeAlias = str
-
-SaveCampaignRequestTargetingGeoItemIncludeItem: TypeAlias = str
-
-SaveCampaignRequestTargetingGeoItemStrength: TypeAlias = Literal["required", "preferred"]
-
-SaveCampaignRequestTargetingLanguageItemExcludeItem: TypeAlias = str
-
-SaveCampaignRequestTargetingLanguageItemIncludeItem: TypeAlias = str
-
-SaveCampaignRequestTargetingLanguageItemStrength: TypeAlias = Literal["required", "preferred"]
 
 SaveCampaignRequestTargetingOverlayBrowser: TypeAlias = list[Literal["chrome", "safari", "firefox", "edge", "opera", "samsung_internet", "android_webview", "other", "unknown"]]
 
