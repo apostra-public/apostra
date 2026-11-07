@@ -36480,6 +36480,13 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 60
+                    countries:
+                      description: 'Supply only: ISO alpha-2 codes of countries to buy in.'
+                      minItems: 1
+                      maxItems: 50
+                      type: array
+                      items:
+                        type: string
                     expectedAccountId:
                       anyOf:
                         - type: integer
