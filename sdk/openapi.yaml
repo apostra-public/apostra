@@ -23787,7 +23787,7 @@ paths:
                                     anyOf:
                                       - type: string
                                       - type: 'null'
-                                    description: mintlify/v2 page explaining this action, when one exists.
+                                    description: Path of the public documentation page explaining this action, when one exists.
                                   severity:
                                     type: string
                                     enum:
