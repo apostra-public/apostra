@@ -394,6 +394,8 @@ class GetDeliveryInput(TypedDict):
     '\n    Dates (max 90 days) or lifetime for delivery; invalid for margin.\n    '
     filters: NotRequired[GetDeliveryInputFilters]
     '\n    Optional report filters; invalid combinations are rejected.\n    '
+    currency: NotRequired[str]
+    '\n    campaign_delivery only: ISO-4217 currency to convert money into at each day\'s rate.\n    '
     limit: NotRequired[int]
     '\n    Maximum rows in this page (1-100).\n    '
     cursor: NotRequired[str]
@@ -445,6 +447,8 @@ class GetDeliveryResultReportCampaignDelivery(TypedDict):
     '\n    campaign_delivery only: each media buy behind this page\'s rows whose spend was converted into the advertiser\'s currency, by mediaBuyId, at most 100. Absent when none was.\n    '
     currencyConversionsOmitted: NotRequired[GetDeliverySuccessCurrencyConversionsOmitted]
     '\n    Converted buys behind this page left out of currencyConversions by its cap. Absent when none.\n    '
+    conversion: NotRequired[GetDeliverySuccessDeliveryConversion]
+    '\n    Present when currency was sent: how money on rows and totals was converted, over every matched row.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -466,6 +470,8 @@ class GetDeliveryResultReportDelivery(TypedDict):
     '\n    campaign_delivery only: each media buy behind this page\'s rows whose spend was converted into the advertiser\'s currency, by mediaBuyId, at most 100. Absent when none was.\n    '
     currencyConversionsOmitted: NotRequired[GetDeliverySuccessCurrencyConversionsOmitted]
     '\n    Converted buys behind this page left out of currencyConversions by its cap. Absent when none.\n    '
+    conversion: NotRequired[GetDeliverySuccessDeliveryConversion]
+    '\n    Present when currency was sent: how money on rows and totals was converted, over every matched row.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -726,6 +732,8 @@ class GetDeliveryResultReportMargin(TypedDict):
     '\n    campaign_delivery only: each media buy behind this page\'s rows whose spend was converted into the advertiser\'s currency, by mediaBuyId, at most 100. Absent when none was.\n    '
     currencyConversionsOmitted: NotRequired[GetDeliverySuccessCurrencyConversionsOmitted]
     '\n    Converted buys behind this page left out of currencyConversions by its cap. Absent when none.\n    '
+    conversion: NotRequired[GetDeliverySuccessDeliveryConversion]
+    '\n    Present when currency was sent: how money on rows and totals was converted, over every matched row.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -778,6 +786,17 @@ class GetDeliverySuccessCampaignGoalProgressMediaBuy(TypedDict):
     progress: GetDeliverySuccessGoalProgress
 
 GetDeliverySuccessCurrencyConversionsOmitted: TypeAlias = int
+
+class GetDeliverySuccessDeliveryConversion(TypedDict):
+    currency: str
+    rateBasis: Literal["daily"]
+    rateSource: Literal["snapshot"]
+    '\n    The daily rate store, crossed through USD.\n    '
+    carriedForwardDays: int
+    '\n    Most days any rate was carried forward, at most 7.\n    '
+    unconverted: list[GetDeliverySuccessDeliveryUnconvertedDay]
+    '\n    Each source currency and day with no rate, by currency then date. A row with such a day keeps its native currency and values.\n    '
+    unconvertedOmitted: NotRequired[int]
 
 class GetDeliverySuccessDeliveryCurrencyConversion(TypedDict):
     mediaBuyId: str
@@ -1113,6 +1132,10 @@ GetDeliverySuccessDeliverySummaryReportingRevisionObservedAt: TypeAlias = str
 
 GetDeliverySuccessDeliverySummaryReportingRevisionReportingRevisionId: TypeAlias = str
 
+class GetDeliverySuccessDeliveryUnconvertedDay(TypedDict):
+    currency: str
+    date: str
+
 class GetDeliverySuccessGoalProgress(TypedDict):
     goal: GetDeliverySuccessGoalProgressGoal | None
     askedTarget: GetDeliverySuccessGoalProgressTarget | None
@@ -1285,7 +1308,7 @@ GetDeliverySuccessRowsItemFinality = TypedDict(
 class GetDeliverySuccessRowsItemMetricsValue(TypedDict):
     value: float | bool | None
     status: Literal["available", "unavailable"]
-    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed"]]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed", "fx_rate_unavailable"]]
 
 class GetDeliverySuccessRowsItemSource(TypedDict):
     operation: GetDeliverySuccessRowsItemSourceOperation
@@ -1356,7 +1379,7 @@ GetDeliverySuccessTotalsByFinalityItemFinality = TypedDict(
 class GetDeliverySuccessTotalsByFinalityItemMetricsValue(TypedDict):
     value: float | bool | None
     status: Literal["available", "unavailable"]
-    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed"]]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed", "fx_rate_unavailable"]]
 
 GetDeliverySuccessTotalsByFinalityItemMetrics: TypeAlias = "dict[str, GetDeliverySuccessTotalsByFinalityItemMetricsValue]"
 
@@ -1383,7 +1406,7 @@ GetDeliverySuccessTotalsFinality = TypedDict(
 class GetDeliverySuccessTotalsMetricsValue(TypedDict):
     value: float | bool | None
     status: Literal["available", "unavailable"]
-    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed"]]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed", "fx_rate_unavailable"]]
 
 GetDeliverySuccessTotalsMetrics: TypeAlias = "dict[str, GetDeliverySuccessTotalsMetricsValue]"
 
