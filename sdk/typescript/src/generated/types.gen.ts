@@ -14716,6 +14716,10 @@ export type SaveAskData = {
          * Supply only: the inventory channel.
          */
         channel?: string;
+        /**
+         * Supply only: ISO alpha-2 codes of countries to buy in.
+         */
+        countries?: Array<string>;
         expectedAccountId?: number | string;
         accountId?: number | string;
         id?: never;
@@ -14754,6 +14758,7 @@ export type SaveAskData = {
         severity?: never;
         subject?: never;
         channel?: never;
+        countries?: never;
     }) & {
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.

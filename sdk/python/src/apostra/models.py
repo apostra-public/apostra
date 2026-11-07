@@ -7848,6 +7848,8 @@ class SaveAskInputKindCreate(TypedDict):
     '\n    Supply domain or integration vendor. Not for support, product or commercial.\n    '
     channel: NotRequired[str]
     '\n    Supply only: the inventory channel.\n    '
+    countries: NotRequired[list[str]]
+    '\n    Supply only: ISO alpha-2 codes of countries to buy in.\n    '
 
 class SaveAskInputKindUpdate(TypedDict):
     expectedAccountId: NotRequired[int | str]
