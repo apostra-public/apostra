@@ -23229,6 +23229,102 @@ paths:
                               paymentTermsChosen:
                                 type: boolean
                                 description: '`false` when no payment terms have been chosen and the `net_60` default applies.'
+                              payer:
+                                type: object
+                                properties:
+                                  contactName:
+                                    anyOf:
+                                      - type: string
+                                      - type: 'null'
+                                    description: Billing contact / payer name
+                                  email:
+                                    type: array
+                                    items:
+                                      type: string
+                                    description: Email addresses invoices are sent to
+                                  ccEmails:
+                                    type: array
+                                    items:
+                                      type: string
+                                    description: Email addresses CC’d on invoices
+                                  phone:
+                                    anyOf:
+                                      - type: string
+                                      - type: 'null'
+                                    description: Billing phone number
+                                  address:
+                                    anyOf:
+                                      - type: string
+                                      - type: 'null'
+                                    description: Billing street address, line 1
+                                  address2:
+                                    anyOf:
+                                      - type: string
+                                      - type: 'null'
+                                    description: Billing street address, line 2
+                                  city:
+                                    anyOf:
+                                      - type: string
+                                      - type: 'null'
+                                    description: Billing city
+                                  region:
+                                    anyOf:
+                                      - type: string
+                                      - type: 'null'
+                                    description: Billing state/province/region
+                                  postalCode:
+                                    anyOf:
+                                      - type: string
+                                      - type: 'null'
+                                    description: Billing postal/ZIP code
+                                  countryAlpha2:
+                                    anyOf:
+                                      - type: string
+                                      - type: 'null'
+                                    description: Billing country (ISO 3166-1 alpha-2)
+                                  taxId:
+                                    anyOf:
+                                      - type: string
+                                      - type: 'null'
+                                    description: Tax/VAT identifier shown on invoices
+                                  complete:
+                                    type: boolean
+                                    description: >-
+                                      Whether the organization has what an invoice needs: a payer name, a street address
+                                      and a country. The same rule as the `BILLING_DETAILS` gap in buyer readiness.
+                                      Computed from the stored details even when the fields below are redacted.
+                                  visibility:
+                                    type: string
+                                    enum:
+                                      - visible
+                                      - redacted
+                                    description: >-
+                                      `redacted` for an organization-scoped service token: the fields in
+                                      `redactedFields` are `null` (the email lists are empty) so a caller can tell "not
+                                      allowed" from "empty".
+                                  redactedFields:
+                                    type: array
+                                    items:
+                                      type: string
+                                required:
+                                  - contactName
+                                  - email
+                                  - ccEmails
+                                  - phone
+                                  - address
+                                  - address2
+                                  - city
+                                  - region
+                                  - postalCode
+                                  - countryAlpha2
+                                  - taxId
+                                  - complete
+                                  - visibility
+                                  - redactedFields
+                                additionalProperties: false
+                                description: >-
+                                  The payer details printed on invoices (name, invoice emails, address, tax ID). Change
+                                  them with `save_billing` `payer`; an administrator approves the change on our site.
                               standing:
                                 type: object
                                 properties:
@@ -23811,6 +23907,7 @@ paths:
                               - paymentAuthority
                               - paymentTerms
                               - paymentTermsChosen
+                              - payer
                               - standing
                               - balance
                               - usage
@@ -36954,11 +37051,13 @@ paths:
     post:
       operationId: save_billing
       summary: >-
-        Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its
-        renewal. Accepting a plan needs an administrator to approve it on our site. Cards stay off MCP.
+        Accept Terms, set the payment terms sellers are asked for, accept a plan, answer its offer, change its renewal
+        or change the payer details on invoices. Accepting a plan and changing payer details need an administrator to
+        approve on our site. Cards stay off MCP.
       description: >-
-        Accept Terms, set the payment terms sellers are asked for, or accept a plan, answer its offer and change its
-        renewal. Accepting a plan needs an administrator to approve it on our site. Cards stay off MCP.
+        Accept Terms, set the payment terms sellers are asked for, accept a plan, answer its offer, change its renewal
+        or change the payer details on invoices. Accepting a plan and changing payer details need an administrator to
+        approve on our site. Cards stay off MCP.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -37032,6 +37131,13 @@ paths:
                 renewal:
                   description: Change the renewal. Send alone.
                   $ref: '#/components/schemas/save_billing_request_SaveBillingRenewal'
+                  type: object
+                  additionalProperties: false
+                payer:
+                  description: >-
+                    Change the payer details printed on invoices; returns approval_required, an administrator approves
+                    on our site. Omitted fields stay, null clears one. Send alone.
+                  $ref: '#/components/schemas/save_billing_request_SaveBillingPayer'
                   type: object
                   additionalProperties: false
                 expectedAccountId:
@@ -37323,6 +37429,108 @@ paths:
                         required:
                           - action
                           - renewal
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: payer_saved
+                          payer:
+                            type: object
+                            properties:
+                              contactName:
+                                anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                description: Billing contact / payer name
+                              email:
+                                type: array
+                                items:
+                                  type: string
+                                description: Email addresses invoices are sent to
+                              ccEmails:
+                                type: array
+                                items:
+                                  type: string
+                                description: Email addresses CC’d on invoices
+                              phone:
+                                anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                description: Billing phone number
+                              address:
+                                anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                description: Billing street address, line 1
+                              address2:
+                                anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                description: Billing street address, line 2
+                              city:
+                                anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                description: Billing city
+                              region:
+                                anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                description: Billing state/province/region
+                              postalCode:
+                                anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                description: Billing postal/ZIP code
+                              countryAlpha2:
+                                anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                description: Billing country (ISO 3166-1 alpha-2)
+                              taxId:
+                                anyOf:
+                                  - type: string
+                                  - type: 'null'
+                                description: Tax/VAT identifier shown on invoices
+                              complete:
+                                type: boolean
+                                description: >-
+                                  Whether the organization has what an invoice needs: a payer name, a street address and
+                                  a country. The same rule as the `BILLING_DETAILS` gap in buyer readiness. Computed
+                                  from the stored details even when the fields below are redacted.
+                              visibility:
+                                type: string
+                                enum:
+                                  - visible
+                                  - redacted
+                                description: >-
+                                  `redacted` for an organization-scoped service token: the fields in `redactedFields`
+                                  are `null` (the email lists are empty) so a caller can tell "not allowed" from
+                                  "empty".
+                              redactedFields:
+                                type: array
+                                items:
+                                  type: string
+                            required:
+                              - contactName
+                              - email
+                              - ccEmails
+                              - phone
+                              - address
+                              - address2
+                              - city
+                              - region
+                              - postalCode
+                              - countryAlpha2
+                              - taxId
+                              - complete
+                              - visibility
+                              - redactedFields
+                            additionalProperties: false
+                        required:
+                          - action
+                          - payer
                         additionalProperties: false
                   error:
                     type: 'null'
@@ -86487,6 +86695,95 @@ components:
         - renewalVersion
         - action
         - reason
+        - idempotencyKey
+      additionalProperties: false
+    save_billing_request_SaveBillingPayer:
+      type: object
+      properties:
+        contactName:
+          description: Billing contact / payer name
+          anyOf:
+            - type: string
+              minLength: 1
+              maxLength: 255
+            - type: 'null'
+        email:
+          description: Email addresses invoices are sent to
+          anyOf:
+            - maxItems: 10
+              type: array
+              items:
+                type: string
+                format: email
+                pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+            - type: 'null'
+        ccEmails:
+          description: Email addresses CC’d on invoices
+          anyOf:
+            - maxItems: 10
+              type: array
+              items:
+                type: string
+                format: email
+                pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+            - type: 'null'
+        phone:
+          description: Billing phone number
+          anyOf:
+            - type: string
+              maxLength: 64
+            - type: 'null'
+        address:
+          description: Billing street address, line 1
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        address2:
+          description: Billing street address, line 2
+          anyOf:
+            - type: string
+              maxLength: 255
+            - type: 'null'
+        city:
+          description: Billing city
+          anyOf:
+            - type: string
+              maxLength: 128
+            - type: 'null'
+        region:
+          description: Billing state/province/region
+          anyOf:
+            - type: string
+              maxLength: 128
+            - type: 'null'
+        postalCode:
+          description: Billing postal/ZIP code
+          anyOf:
+            - type: string
+              maxLength: 32
+            - type: 'null'
+        countryAlpha2:
+          description: Billing country (ISO 3166-1 alpha-2)
+          example: US
+          anyOf:
+            - type: string
+              pattern: ^[A-Z]{2}$
+            - type: 'null'
+        taxId:
+          description: Tax/VAT identifier shown on invoices
+          anyOf:
+            - type: string
+              maxLength: 64
+            - type: 'null'
+        idempotencyKey:
+          type: string
+          minLength: 1
+          maxLength: 200
+          description: >-
+            Stable key for this change; repeat it with the same fields to read the approval outcome. A rejected, expired
+            or failed approval needs a new key.
+      required:
         - idempotencyKey
       additionalProperties: false
     save_billing_request_SaveBillingPlanOfferVersion:

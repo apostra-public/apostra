@@ -6570,6 +6570,64 @@ export type GetResponses = {
                  * `false` when no payment terms have been chosen and the `net_60` default applies.
                  */
                 paymentTermsChosen: boolean;
+                /**
+                 * The payer details printed on invoices (name, invoice emails, address, tax ID). Change them with `save_billing` `payer`; an administrator approves the change on our site.
+                 */
+                payer: {
+                    /**
+                     * Billing contact / payer name
+                     */
+                    contactName: string | null;
+                    /**
+                     * Email addresses invoices are sent to
+                     */
+                    email: Array<string>;
+                    /**
+                     * Email addresses CC’d on invoices
+                     */
+                    ccEmails: Array<string>;
+                    /**
+                     * Billing phone number
+                     */
+                    phone: string | null;
+                    /**
+                     * Billing street address, line 1
+                     */
+                    address: string | null;
+                    /**
+                     * Billing street address, line 2
+                     */
+                    address2: string | null;
+                    /**
+                     * Billing city
+                     */
+                    city: string | null;
+                    /**
+                     * Billing state/province/region
+                     */
+                    region: string | null;
+                    /**
+                     * Billing postal/ZIP code
+                     */
+                    postalCode: string | null;
+                    /**
+                     * Billing country (ISO 3166-1 alpha-2)
+                     */
+                    countryAlpha2: string | null;
+                    /**
+                     * Tax/VAT identifier shown on invoices
+                     */
+                    taxId: string | null;
+                    /**
+                     * Whether the organization has what an invoice needs: a payer name, a street address and a country. The same rule as the `BILLING_DETAILS` gap in buyer readiness. Computed from the stored details even when the fields below are redacted.
+                     */
+                    complete: boolean;
+                    /**
+                     * `redacted` for an organization-scoped service token: the fields in `redactedFields` are `null` (the email lists are empty) so a caller can tell "not allowed" from "empty".
+                     */
+                    visibility: 'visible' | 'redacted';
+                    redactedFields: Array<string>;
+                };
                 standing: {
                     /**
                      * `PREPAY` when the organization must fund a balance to spend; `CREDIT` when it pays on terms.
@@ -15107,6 +15165,10 @@ export type SaveBillingData = {
          */
         renewal?: SaveBillingRequestSaveBillingRenewal;
         /**
+         * Change the payer details printed on invoices; returns approval_required, an administrator approves on our site. Omitted fields stay, null clears one. Send alone.
+         */
+        payer?: SaveBillingRequestSaveBillingPayer;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -15211,6 +15273,57 @@ export type SaveBillingRequestSaveBillingOfferResponse = {
 export type SaveBillingRequestSaveBillingOfferResponseOfferVersion = string;
 
 export type SaveBillingRequestSaveBillingOfferResponsePlanId = string;
+
+export type SaveBillingRequestSaveBillingPayer = {
+    /**
+     * Billing contact / payer name
+     */
+    contactName?: string | null;
+    /**
+     * Email addresses invoices are sent to
+     */
+    email?: Array<string> | null;
+    /**
+     * Email addresses CC’d on invoices
+     */
+    ccEmails?: Array<string> | null;
+    /**
+     * Billing phone number
+     */
+    phone?: string | null;
+    /**
+     * Billing street address, line 1
+     */
+    address?: string | null;
+    /**
+     * Billing street address, line 2
+     */
+    address2?: string | null;
+    /**
+     * Billing city
+     */
+    city?: string | null;
+    /**
+     * Billing state/province/region
+     */
+    region?: string | null;
+    /**
+     * Billing postal/ZIP code
+     */
+    postalCode?: string | null;
+    /**
+     * Billing country (ISO 3166-1 alpha-2)
+     */
+    countryAlpha2?: string | null;
+    /**
+     * Tax/VAT identifier shown on invoices
+     */
+    taxId?: string | null;
+    /**
+     * Stable key for this change; repeat it with the same fields to read the approval outcome. A rejected, expired or failed approval needs a new key.
+     */
+    idempotencyKey: string;
+};
 
 /** @deprecated use SaveBillingData */
 export type SaveBillingRequestSaveBillingPaymentAuthorityInput = SaveBillingData;
@@ -15353,6 +15466,63 @@ export type SaveBillingResponses = {
                 instruction: 'CANCEL_AT_TERM' | 'REINSTATE_AUTO_RENEWAL';
                 effectiveAt: string;
                 changeCutoffAt: string;
+            };
+        } | {
+            action: 'payer_saved';
+            payer: {
+                /**
+                 * Billing contact / payer name
+                 */
+                contactName: string | null;
+                /**
+                 * Email addresses invoices are sent to
+                 */
+                email: Array<string>;
+                /**
+                 * Email addresses CC’d on invoices
+                 */
+                ccEmails: Array<string>;
+                /**
+                 * Billing phone number
+                 */
+                phone: string | null;
+                /**
+                 * Billing street address, line 1
+                 */
+                address: string | null;
+                /**
+                 * Billing street address, line 2
+                 */
+                address2: string | null;
+                /**
+                 * Billing city
+                 */
+                city: string | null;
+                /**
+                 * Billing state/province/region
+                 */
+                region: string | null;
+                /**
+                 * Billing postal/ZIP code
+                 */
+                postalCode: string | null;
+                /**
+                 * Billing country (ISO 3166-1 alpha-2)
+                 */
+                countryAlpha2: string | null;
+                /**
+                 * Tax/VAT identifier shown on invoices
+                 */
+                taxId: string | null;
+                /**
+                 * Whether the organization has what an invoice needs: a payer name, a street address and a country. The same rule as the `BILLING_DETAILS` gap in buyer readiness. Computed from the stored details even when the fields below are redacted.
+                 */
+                complete: boolean;
+                /**
+                 * `redacted` for an organization-scoped service token: the fields in `redactedFields` are `null` (the email lists are empty) so a caller can tell "not allowed" from "empty".
+                 */
+                visibility: 'visible' | 'redacted';
+                redactedFields: Array<string>;
             };
         };
         error: null;
