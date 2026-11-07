@@ -1,80 +1,26 @@
 {
-  "schemaVersion": "2.0",
-  "contract": "deterministic-v3-tool-v1",
+  "schemaVersion": "1.0",
   "skillId": "manage-a-campaign",
-  "skillVersion": "1.1.1",
-  "endpoint": "/mcp/v3",
-  "modelPolicy": "deterministic-no-model",
-  "analytics": {
-    "retention": "metadata-only",
-    "allowlist": [
-      "runId",
-      "skillId",
-      "skillVersion",
-      "skillDigest",
-      "stepId",
-      "attempt",
-      "tool",
-      "requestId",
-      "traceId",
-      "activityId",
-      "terminalState",
-      "assertionResults",
-      "cleanupTerminalState",
-      "errorCode"
-    ],
-    "forbidden": [
-      "rawPrompt",
-      "skillQuery",
-      "matchedTerms",
-      "instructions",
-      "credentials",
-      "signedUrls",
-      "briefs",
-      "creatives",
-      "customerPayloads"
-    ]
-  },
+  "skillVersion": "1.2.0",
   "scenarios": [
     {
-      "id": "buyer-status-read",
-      "title": "Read the current buyer account status",
-      "description": "Read the active buyer account and its current readiness through the ordinary V3 surface without creating or changing state.",
-      "mutationBoundary": "Read-only account status; performs no campaign write, seller dispatch, provider link, or spend.",
-      "cleanupPolicy": "always-reverse-order",
-      "runInputs": [
-        {
-          "name": "accountKind",
-          "source": "constant",
-          "value": "buyer"
-        }
-      ],
-      "steps": [
-        {
-          "id": "check-account-status",
-          "ordinal": 1,
-          "dependsOn": [],
-          "tool": "get_status",
-          "role": "ordinary",
-          "mutates": false,
-          "arguments": {},
-          "execution": {
-            "timeoutMs": 30000,
-            "maxAttempts": 2,
-            "retryDelayMs": 1000,
-            "idempotency": "read_only"
-          },
-          "evidence": {
-            "projection": "structured_tool_response",
-            "requiredPointers": [
-              "/structuredContent/account/accountId",
-              "/structuredContent/state"
-            ],
-            "optionalPointers": []
-          },
-          "outputBindings": [],
-          "cleanup": []
-        }
+      "id": "html5-zip-upload-finished-before-attach",
+      "title": "Upload HTML5 ZIPs, finish the drafts, then attach them",
+      "given": "The buyer has five HTML5 ZIP banners on disk for an existing advertiser and wants them on the campaign.",
+      "expect": [
+        "The agent retrieves the HTML5 creative requirements page and checks each ZIP's click tag, declared size and size limit with the buyer before uploading.",
+        "The agent uploads each ZIP with upload_creative_asset for the exact advertiser, then finishes each returned draft with save_creative mode \"complete\" and the buyer's landing_page_url, with no campaign.",
+        "The agent attaches only complete creatives to the campaign, after confirmation, and reports each creative as uploaded, complete or attached only after a get confirms it; a failed upload is reported as not saved, never as a saved draft."
+      ]
+    },
+    {
+      "id": "draft-campaign-creative-review-reported",
+      "title": "Report creative review on a draft campaign without implying it is running",
+      "given": "The campaign is in phase draft with two draft media buys, and its four creatives read pending_review.",
+      "expect": [
+        "The agent says the campaign is a draft, its media buys are not booked and nothing delivers until it is launched.",
+        "The agent explains that the creatives were sent to the draft buys' sellers when saved, reads platformLinks to name which seller holds each creative, and presents pending_review as that seller's creative review, not a booking.",
+        "The agent names the launch as the next confirmation and does not launch without it."
       ]
     }
   ]
