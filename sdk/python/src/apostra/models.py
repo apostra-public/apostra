@@ -10094,8 +10094,8 @@ class SaveConnectionInput(TypedDict):
     '\n    Select a provider account; requires connectionId.\n    '
     advertiserMapping: NotRequired[SaveConnectionInputAdvertiserMapping]
     '\n    Map or unmap an advertiser; requires connectionId.\n    '
-    ownedLink: NotRequired[SaveConnectionInputOwnedLinkKindShowWithUrl | SaveConnectionInputOwnedLinkKindShowStateAbsent]
-    '\n    Confirm a mapped advertiser\'s Spotify show, or confirm it has none; requires connectionId and Creative Engines access.\n    '
+    ownedLink: NotRequired[SaveConnectionInputOwnedLinkKindShowWithUrl | SaveConnectionInputOwnedLinkKindShowStateAbsent | SaveConnectionInputOwnedLinkKindPageStateLinked | SaveConnectionInputOwnedLinkKindPageStateAbsent]
+    '\n    Confirm a mapped advertiser\'s Spotify show or Facebook Page, or confirm it has none; requires connectionId and Creative Engines access.\n    '
     state: NotRequired[Literal["removed"]]
     '\n    Remove the connection; requires connectionId.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -10159,6 +10159,30 @@ class SaveConnectionInputIdentitySelection(TypedDict):
     '\n    TikTok identity to use, from list_storefront_connection_account_identities; null clears the selection.\n    '
     onlyShowAsAds: NotRequired[bool]
     '\n    Restrict the identity to ad use only; defaults to true.\n    '
+
+class SaveConnectionInputOwnedLinkKindPageStateAbsent(TypedDict):
+    state: Literal["absent"]
+    '\n    Confirm that the advertiser has no Facebook Page.\n    '
+    platform: Literal["meta"]
+    '\n    The Meta provider.\n    '
+    kind: Literal["page"]
+    '\n    A Facebook Page.\n    '
+    advertiserId: SaveConnectionRequestOwnedLinkAdvertiserId
+    '\n    Mapped advertiser ID.\n    '
+
+class SaveConnectionInputOwnedLinkKindPageStateLinked(TypedDict):
+    state: Literal["linked"]
+    '\n    Link the Facebook Page this names, if it is one the advertiser\'s Meta ad account can promote.\n    '
+    platform: Literal["meta"]
+    '\n    The Meta provider.\n    '
+    kind: Literal["page"]
+    '\n    A Facebook Page.\n    '
+    advertiserId: SaveConnectionRequestOwnedLinkAdvertiserId
+    '\n    Mapped advertiser ID.\n    '
+    url: NotRequired[str]
+    '\n    facebook.com Page link; give url or handle.\n    '
+    handle: NotRequired[str]
+    '\n    Page username; give url or handle.\n    '
 
 class SaveConnectionInputOwnedLinkKindShowStateAbsent(TypedDict):
     state: Literal["absent"]

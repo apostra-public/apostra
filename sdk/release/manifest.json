@@ -1535,6 +1535,8 @@
       "SaveConnectionInputEnhancedReporting": "object",
       "SaveConnectionInputFeaturePolicy": "object",
       "SaveConnectionInputIdentitySelection": "object",
+      "SaveConnectionInputOwnedLinkKindPageStateAbsent": "object",
+      "SaveConnectionInputOwnedLinkKindPageStateLinked": "object",
       "SaveConnectionInputOwnedLinkKindShowStateAbsent": "object",
       "SaveConnectionInputOwnedLinkKindShowWithUrl": "object",
       "SaveConnectionInputSelection": "object",

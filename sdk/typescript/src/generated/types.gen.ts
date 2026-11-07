@@ -18635,7 +18635,7 @@ export type SaveConnectionData = {
             linkId?: SaveConnectionRequestAdvertiserMappingLinkId;
         };
         /**
-         * Confirm a mapped advertiser's Spotify show, or confirm it has none; requires connectionId and Creative Engines access.
+         * Confirm a mapped advertiser's Spotify show or Facebook Page, or confirm it has none; requires connectionId and Creative Engines access.
          */
         ownedLink?: {
             /**
@@ -18676,6 +18676,50 @@ export type SaveConnectionData = {
              */
             advertiserId: SaveConnectionRequestOwnedLinkAdvertiserId;
             url?: never;
+        } | {
+            /**
+             * Link the Facebook Page this names, if it is one the advertiser's Meta ad account can promote.
+             */
+            state: 'linked';
+            /**
+             * The Meta provider.
+             */
+            platform: 'meta';
+            /**
+             * A Facebook Page.
+             */
+            kind: 'page';
+            /**
+             * Mapped advertiser ID.
+             */
+            advertiserId: SaveConnectionRequestOwnedLinkAdvertiserId;
+            /**
+             * facebook.com Page link; give url or handle.
+             */
+            url?: string;
+            /**
+             * Page username; give url or handle.
+             */
+            handle?: string;
+        } | {
+            /**
+             * Confirm that the advertiser has no Facebook Page.
+             */
+            state: 'absent';
+            /**
+             * The Meta provider.
+             */
+            platform: 'meta';
+            /**
+             * A Facebook Page.
+             */
+            kind: 'page';
+            /**
+             * Mapped advertiser ID.
+             */
+            advertiserId: SaveConnectionRequestOwnedLinkAdvertiserId;
+            url?: never;
+            handle?: never;
         };
         /**
          * Remove the connection; requires connectionId.
