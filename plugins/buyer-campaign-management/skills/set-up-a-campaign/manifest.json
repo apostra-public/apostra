@@ -2,7 +2,7 @@
   "schemaVersion": "3.0",
   "id": "set-up-a-campaign",
   "name": "Set Up a Campaign",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "description": "Create a grounded buyer campaign with a confirmed goal statement and conversion tracking, request proposals, compare supply on the goal's terms, and stage a selected media buy.",
   "steward": {
     "owner": "bokelley"
@@ -73,7 +73,8 @@
     "mintlify/v2/setup/v3/tool-reference.mdx",
     "mintlify/v3/html5-creative-requirements.mdx",
     "mintlify/v3/manage-ads.mdx",
-    "mintlify/v3/creative-sync-outcomes.mdx"
+    "mintlify/v3/creative-sync-outcomes.mdx",
+    "mintlify/v3/http-api.mdx"
   ],
   "evaluation": {
     "acceptance": {
@@ -87,7 +88,8 @@
         "goal-statement-declined",
         "proposals-compared-on-goal-terms",
         "html5-zip-upload-finished-before-attach",
-        "draft-campaign-creative-review-reported"
+        "draft-campaign-creative-review-reported",
+        "catalog-from-connected-file"
       ]
     },
     "executableAcceptance": {
@@ -96,7 +98,7 @@
       "scenarioContract": "deterministic-v3-tool-v1"
     },
     "telemetry": {
-      "correlationSkillId": "set-up-a-campaign@1.10.0",
+      "correlationSkillId": "set-up-a-campaign@1.11.0",
       "outcomeSignals": [
         "workflow_terminal_state",
         "event_source_action_receipt",

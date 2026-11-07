@@ -55798,8 +55798,52 @@ paths:
                           - measurement_window
                           - last_updated
                     - type: 'null'
+                fixedTargeting:
+                  description: 'GAM: geo and key_values include/exclude on every line item. Each part: omit keeps, null removes.'
+                  anyOf:
+                    - type: object
+                      properties:
+                        geo:
+                          description: Countries every line item runs in. null removes.
+                          anyOf:
+                            - type: object
+                              properties:
+                                geo_countries:
+                                  minItems: 1
+                                  type: array
+                                  items:
+                                    type: string
+                                    pattern: ^[A-Z]{2}$
+                                  description: >-
+                                    Restrict delivery to specific countries. ISO 3166-1 alpha-2 codes (e.g., 'US', 'GB',
+                                    'DE').
+                              required:
+                                - geo_countries
+                              additionalProperties: false
+                            - type: 'null'
+                        key_values:
+                          description: GAM key-values; one entry per key. null removes both lists.
+                          anyOf:
+                            - type: object
+                              properties:
+                                include:
+                                  description: Keys every line item targets (IS). null removes.
+                                  $ref: '#/components/schemas/save_wholesale_product_request_FixedTargetingKeyValuesInclude'
+                                exclude:
+                                  description: Keys every line item excludes (IS_NOT). null removes.
+                                  $ref: '#/components/schemas/save_wholesale_product_request_FixedTargetingKeyValuesExclude'
+                              additionalProperties: false
+                            - type: 'null'
+                      additionalProperties: false
+                    - type: 'null'
+                overlaySupport:
+                  description: 'AdCP overlay_support: targeting dimensions a buyer may set. Leave geo out to allow no buyer geo.'
+                  type: object
+                  propertyNames:
+                    type: string
+                  additionalProperties: {}
                 dryRun:
-                  description: Validate a new product and report findings without writing it. Creates only.
+                  description: Validate a new product without writing it; on GAM it returns lineItemTargeting. Creates only.
                   type: boolean
                 delete:
                   description: Permanently remove this product — only once it is archived, and it cannot be undone.
@@ -100006,6 +100050,48 @@ components:
       required:
         - format_option_id
       additionalProperties: false
+    save_wholesale_product_request_FixedTargetingKeyValuesInclude:
+      anyOf:
+        - minItems: 1
+          type: array
+          items:
+            type: object
+            properties:
+              key_id:
+                description: Synced GAM key id.
+                $ref: '#/components/schemas/save_wholesale_product_request_FixedTargetingKeyValuesIncludeItemKeyId'
+              value_ids:
+                minItems: 1
+                type: array
+                items:
+                  $ref: '#/components/schemas/save_wholesale_product_request_FixedTargetingKeyValuesIncludeItemValueIdsItem'
+                description: Synced GAM value ids; any matches.
+            required:
+              - key_id
+              - value_ids
+            additionalProperties: false
+        - type: 'null'
+    save_wholesale_product_request_FixedTargetingKeyValuesExclude:
+      anyOf:
+        - minItems: 1
+          type: array
+          items:
+            type: object
+            properties:
+              key_id:
+                description: Synced GAM key id.
+                $ref: '#/components/schemas/save_wholesale_product_request_FixedTargetingKeyValuesExcludeItemKeyId'
+              value_ids:
+                minItems: 1
+                type: array
+                items:
+                  $ref: '#/components/schemas/save_wholesale_product_request_FixedTargetingKeyValuesExcludeItemValueIdsItem'
+                description: Synced GAM value ids; any matches.
+            required:
+              - key_id
+              - value_ids
+            additionalProperties: false
+        - type: 'null'
     save_wholesale_product_request_WholesaleInventorySelectorOptions:
       maxItems: 200
       type: array
@@ -100016,6 +100102,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/save_wholesale_product_request_WholesaleInventorySettingEntry'
+    save_wholesale_product_request_FixedTargetingKeyValuesIncludeItemKeyId:
+      type: string
+      pattern: ^\d+$
+    save_wholesale_product_request_FixedTargetingKeyValuesIncludeItemValueIdsItem:
+      type: string
+      pattern: ^\d+$
+    save_wholesale_product_request_FixedTargetingKeyValuesExcludeItemKeyId:
+      type: string
+      pattern: ^\d+$
+    save_wholesale_product_request_FixedTargetingKeyValuesExcludeItemValueIdsItem:
+      type: string
+      pattern: ^\d+$
     save_wholesale_product_success_SaveWholesaleProductSuccessSaved:
       type: object
       properties:
@@ -100197,6 +100295,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/save_wholesale_product_success_SaveWholesaleProductSuccessValidatedWarningsItem'
+        lineItemTargeting:
+          $ref: '#/components/schemas/save_wholesale_product_success_SaveWholesaleProductSuccessValidatedLineItemTargeting'
       required:
         - outcome
         - saved
@@ -100256,6 +100356,11 @@ components:
         type: string
       additionalProperties: {}
     save_wholesale_product_success_SaveWholesaleProductSuccessValidatedWarningsItem:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    save_wholesale_product_success_SaveWholesaleProductSuccessValidatedLineItemTargeting:
       type: object
       propertyNames:
         type: string
