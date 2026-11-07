@@ -3898,7 +3898,12 @@ class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySour
 
 class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigHistoryRefreshRunsResultsItem(TypedDict):
     status: Literal["syncing", "synced", "unchanged", "failed"]
+    trigger: Literal["save", "schedule"]
+    '\n    What started the run: a save or the scheduled pull.\n    '
+    problem: Literal["file_source_needs_reconnect", "file_source_not_found", "file_not_found", "file_access_denied", "file_outside_source", "file_type_unsupported", "file_too_large", "items_invalid", "columns_missing", "feed_unreachable"] | None
+    '\n    The refreshProblem reason the run hit, if any.\n    '
     httpStatus: int | None
+    '\n    Null for a file read.\n    '
     itemCount: int | None
     error: str | None
     startedAt: str
@@ -3927,6 +3932,8 @@ class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySour
     lastChangeSummary: NotRequired[GetSuccessObjectLastChangeSummary | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectTransformValue | None]
+    refreshProblem: NotRequired[GetSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectOperationsStatusAvailable(TypedDict):
     status: Literal["available"]
@@ -5234,6 +5241,12 @@ class GetSuccessCampaignPulseMetricValue(TypedDict):
 class GetSuccessCampaignPulseTimeRange(TypedDict):
     earliest: str
     latest: str
+
+class GetSuccessCatalogRefreshProblem(TypedDict):
+    reason: Literal["file_source_needs_reconnect", "file_source_not_found", "file_not_found", "file_access_denied", "file_outside_source", "file_type_unsupported", "file_too_large", "items_invalid", "columns_missing", "feed_unreachable"]
+    '\n    What stops the refresh.\n    '
+    columns: NotRequired[list[str]]
+    '\n    Missing column names; columns_missing only.\n    '
 
 class GetSuccessHistoryVersionsResultsItemChangeSummary(TypedDict):
     added: int
@@ -10509,6 +10522,8 @@ class SaveCatalogResultObject(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: SaveCatalogResultObjectTransformValue | None
     '\n    The active transform, if any.\n    '
+    refreshProblem: SaveCatalogSuccessCatalogRefreshProblem | None
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 class SaveCatalogResultObjectFile(TypedDict):
     sourceId: str
@@ -10525,6 +10540,12 @@ class SaveCatalogResultObjectLastChangeSummaryValue(TypedDict):
 class SaveCatalogResultObjectTransformValue(TypedDict):
     name: str
     updatedAt: str
+
+class SaveCatalogSuccessCatalogRefreshProblem(TypedDict):
+    reason: Literal["file_source_needs_reconnect", "file_source_not_found", "file_not_found", "file_access_denied", "file_outside_source", "file_type_unsupported", "file_too_large", "items_invalid", "columns_missing", "feed_unreachable"]
+    '\n    What stops the refresh.\n    '
+    columns: NotRequired[list[str]]
+    '\n    Missing column names; columns_missing only.\n    '
 
 class SaveConnectionInput(TypedDict):
     target: NotRequired[SaveConnectionInputTarget]
@@ -21913,6 +21934,12 @@ class SearchSuccessCampaignPulseTimeRange(TypedDict):
     earliest: str
     latest: str
 
+class SearchSuccessCatalogRefreshProblem(TypedDict):
+    reason: Literal["file_source_needs_reconnect", "file_source_not_found", "file_not_found", "file_access_denied", "file_outside_source", "file_type_unsupported", "file_too_large", "items_invalid", "columns_missing", "feed_unreachable"]
+    '\n    What stops the refresh.\n    '
+    columns: NotRequired[list[str]]
+    '\n    Missing column names; columns_missing only.\n    '
+
 class SearchSuccessLabelEntry(TypedDict):
     dimension: str
     values: list[str]
@@ -21942,6 +21969,8 @@ class SearchSuccessSearchAccountPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchAccountPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchAccountPageOutputResults: TypeAlias = "list[SearchSuccessSearchAccountPageOutputResultsItem]"
 
@@ -21990,6 +22019,8 @@ class SearchSuccessSearchAccountRelationshipPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchAccountRelationshipPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchAccountRelationshipPageOutputResults: TypeAlias = "list[SearchSuccessSearchAccountRelationshipPageOutputResultsItem]"
 
@@ -22050,6 +22081,8 @@ class SearchSuccessSearchAdServerTargetingPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchAdServerTargetingPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchAdServerTargetingPageOutputResults: TypeAlias = "list[SearchSuccessSearchAdServerTargetingPageOutputResultsItem]"
 
@@ -22104,6 +22137,8 @@ class SearchSuccessSearchAdvertiserGrantPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchAdvertiserGrantPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchAdvertiserGrantPageOutputResults: TypeAlias = "list[SearchSuccessSearchAdvertiserGrantPageOutputResultsItem]"
 
@@ -22158,6 +22193,8 @@ class SearchSuccessSearchAdvertiserPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchAdvertiserPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchAdvertiserPageOutputResults: TypeAlias = "list[SearchSuccessSearchAdvertiserPageOutputResultsItem]"
 
@@ -22212,6 +22249,8 @@ class SearchSuccessSearchAgentPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchAgentPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchAgentPageOutputResults: TypeAlias = "list[SearchSuccessSearchAgentPageOutputResultsItem]"
 
@@ -22266,6 +22305,8 @@ class SearchSuccessSearchAskPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchAskPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchAskPageOutputResults: TypeAlias = "list[SearchSuccessSearchAskPageOutputResultsItem]"
 
@@ -22320,6 +22361,8 @@ class SearchSuccessSearchBusinessRulesVersionPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchBusinessRulesVersionPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchBusinessRulesVersionPageOutputResults: TypeAlias = "list[SearchSuccessSearchBusinessRulesVersionPageOutputResultsItem]"
 
@@ -22374,6 +22417,8 @@ class SearchSuccessSearchBuyerAgentPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchBuyerAgentPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchBuyerAgentPageOutputResults: TypeAlias = "list[SearchSuccessSearchBuyerAgentPageOutputResultsItem]"
 
@@ -22428,6 +22473,8 @@ class SearchSuccessSearchBuyerRfpPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchBuyerRfpPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchBuyerRfpPageOutputResults: TypeAlias = "list[SearchSuccessSearchBuyerRfpPageOutputResultsItem]"
 
@@ -22482,6 +22529,8 @@ class SearchSuccessSearchCampaignPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCampaignPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchCampaignPageOutputResults: TypeAlias = "list[SearchSuccessSearchCampaignPageOutputResultsItem]"
 
@@ -22536,6 +22585,8 @@ class SearchSuccessSearchCatalogPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCatalogPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchCatalogPageOutputResults: TypeAlias = "list[SearchSuccessSearchCatalogPageOutputResultsItem]"
 
@@ -22590,6 +22641,8 @@ class SearchSuccessSearchConnectionPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchConnectionPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchConnectionPageOutputResults: TypeAlias = "list[SearchSuccessSearchConnectionPageOutputResultsItem]"
 
@@ -22644,6 +22697,8 @@ class SearchSuccessSearchConversationPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchConversationPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchConversationPageOutputResults: TypeAlias = "list[SearchSuccessSearchConversationPageOutputResultsItem]"
 
@@ -22698,6 +22753,8 @@ class SearchSuccessSearchCoveragePageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCoveragePageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchCoveragePageOutputResults: TypeAlias = "list[SearchSuccessSearchCoveragePageOutputResultsItem]"
 
@@ -22752,6 +22809,8 @@ class SearchSuccessSearchCreativeAssetPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCreativeAssetPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchCreativeAssetPageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeAssetPageOutputResultsItem]"
 
@@ -22806,6 +22865,8 @@ class SearchSuccessSearchCreativeCollectionPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCreativeCollectionPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchCreativeCollectionPageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeCollectionPageOutputResultsItem]"
 
@@ -22860,6 +22921,8 @@ class SearchSuccessSearchCreativeEnginePageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCreativeEnginePageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchCreativeEnginePageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeEnginePageOutputResultsItem]"
 
@@ -22914,6 +22977,8 @@ class SearchSuccessSearchCreativeFormatPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCreativeFormatPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchCreativeFormatPageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeFormatPageOutputResultsItem]"
 
@@ -22968,6 +23033,8 @@ class SearchSuccessSearchCreativePageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCreativePageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchCreativePageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativePageOutputResultsItem]"
 
@@ -23016,6 +23083,8 @@ class SearchSuccessSearchCreativeSessionPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCreativeSessionPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchCreativeSessionPageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeSessionPageOutputResultsItem]"
 
@@ -23076,6 +23145,8 @@ class SearchSuccessSearchDimensionPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchDimensionPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchDimensionPageOutputResults: TypeAlias = "list[SearchSuccessSearchDimensionPageOutputResultsItem]"
 
@@ -23130,6 +23201,8 @@ class SearchSuccessSearchEventSourcePageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchEventSourcePageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchEventSourcePageOutputResults: TypeAlias = "list[SearchSuccessSearchEventSourcePageOutputResultsItem]"
 
@@ -23184,6 +23257,8 @@ class SearchSuccessSearchHouseDiscountPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchHouseDiscountPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchHouseDiscountPageOutputResults: TypeAlias = "list[SearchSuccessSearchHouseDiscountPageOutputResultsItem]"
 
@@ -23238,6 +23313,8 @@ class SearchSuccessSearchInventorySourcePageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchInventorySourcePageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchInventorySourcePageOutputResults: TypeAlias = "list[SearchSuccessSearchInventorySourcePageOutputResultsItem]"
 
@@ -23292,6 +23369,8 @@ class SearchSuccessSearchLibraryRequestPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchLibraryRequestPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchLibraryRequestPageOutputResults: TypeAlias = "list[SearchSuccessSearchLibraryRequestPageOutputResultsItem]"
 
@@ -23346,6 +23425,8 @@ class SearchSuccessSearchMaterialPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchMaterialPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchMaterialPageOutputResults: TypeAlias = "list[SearchSuccessSearchMaterialPageOutputResultsItem]"
 
@@ -23400,6 +23481,8 @@ class SearchSuccessSearchMediaBuyPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchMediaBuyPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchMediaBuyPageOutputResults: TypeAlias = "list[SearchSuccessSearchMediaBuyPageOutputResultsItem]"
 
@@ -23454,6 +23537,8 @@ class SearchSuccessSearchMemberPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchMemberPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchMemberPageOutputResults: TypeAlias = "list[SearchSuccessSearchMemberPageOutputResultsItem]"
 
@@ -23508,6 +23593,8 @@ class SearchSuccessSearchPlaybookVersionPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchPlaybookVersionPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchPlaybookVersionPageOutputResults: TypeAlias = "list[SearchSuccessSearchPlaybookVersionPageOutputResultsItem]"
 
@@ -23562,6 +23649,8 @@ class SearchSuccessSearchPropertyListPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchPropertyListPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchPropertyListPageOutputResults: TypeAlias = "list[SearchSuccessSearchPropertyListPageOutputResultsItem]"
 
@@ -23616,6 +23705,8 @@ class SearchSuccessSearchProposalPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchProposalPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchProposalPageOutputResults: TypeAlias = "list[SearchSuccessSearchProposalPageOutputResultsItem]"
 
@@ -23670,6 +23761,8 @@ class SearchSuccessSearchRfpPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchRfpPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchRfpPageOutputResults: TypeAlias = "list[SearchSuccessSearchRfpPageOutputResultsItem]"
 
@@ -23718,6 +23811,8 @@ class SearchSuccessSearchRfpTurnPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchRfpTurnPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchRfpTurnPageOutputResults: TypeAlias = "list[SearchSuccessSearchRfpTurnPageOutputResultsItem]"
 
@@ -23778,6 +23873,8 @@ class SearchSuccessSearchSellerPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchSellerPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchSellerPageOutputResults: TypeAlias = "list[SearchSuccessSearchSellerPageOutputResultsItem]"
 
@@ -23832,6 +23929,8 @@ class SearchSuccessSearchSessionPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchSessionPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchSessionPageOutputResults: TypeAlias = "list[SearchSuccessSearchSessionPageOutputResultsItem]"
 
@@ -23886,6 +23985,8 @@ class SearchSuccessSearchSignalPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchSignalPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchSignalPageOutputResults: TypeAlias = "list[SearchSuccessSearchSignalPageOutputResultsItem]"
 
@@ -23940,6 +24041,8 @@ class SearchSuccessSearchSkillPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchSkillPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchSkillPageOutputResults: TypeAlias = "list[SearchSuccessSearchSkillPageOutputResultsItem]"
 
@@ -23994,6 +24097,8 @@ class SearchSuccessSearchSourceAccountPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchSourceAccountPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchSourceAccountPageOutputResults: TypeAlias = "list[SearchSuccessSearchSourceAccountPageOutputResultsItem]"
 
@@ -24048,6 +24153,8 @@ class SearchSuccessSearchWholesaleProductPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchWholesaleProductPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchWholesaleProductPageOutputResults: TypeAlias = "list[SearchSuccessSearchWholesaleProductPageOutputResultsItem]"
 
@@ -24102,6 +24209,8 @@ class SearchSuccessSearchWorkItemPageOutputResultsItem(TypedDict):
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchWorkItemPageOutputResultsItemTransformValue | None]
     '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
 
 SearchSuccessSearchWorkItemPageOutputResults: TypeAlias = "list[SearchSuccessSearchWorkItemPageOutputResultsItem]"
 
