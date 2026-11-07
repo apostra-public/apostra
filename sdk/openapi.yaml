@@ -40922,61 +40922,121 @@ paths:
                   additionalProperties: false
                 ownedLink:
                   description: >-
-                    Confirm a mapped advertiser's Spotify show, or confirm it has none; requires connectionId and
-                    Creative Engines access.
+                    Confirm a mapped advertiser's Spotify show or Facebook Page, or confirm it has none; requires
+                    connectionId and Creative Engines access.
                   oneOf:
-                    - type: object
-                      properties:
-                        state:
-                          type: string
-                          const: linked
-                          description: Link the supplied Spotify show.
-                        platform:
-                          type: string
-                          const: spotify
-                          description: The Spotify provider.
-                        kind:
-                          type: string
-                          const: show
-                          description: A Spotify podcast show.
-                        advertiserId:
-                          description: Mapped advertiser ID.
-                          $ref: '#/components/schemas/save_connection_request_OwnedLinkAdvertiserId'
-                        url:
-                          type: string
-                          maxLength: 2048
-                          format: uri
-                          description: Spotify show link from open.spotify.com/show.
-                      required:
-                        - state
-                        - platform
-                        - kind
-                        - advertiserId
-                        - url
-                      additionalProperties: false
-                    - type: object
-                      properties:
-                        state:
-                          type: string
-                          const: absent
-                          description: Confirm that the advertiser has no Spotify show.
-                        platform:
-                          type: string
-                          const: spotify
-                          description: The Spotify provider.
-                        kind:
-                          type: string
-                          const: show
-                          description: A Spotify podcast show.
-                        advertiserId:
-                          description: Mapped advertiser ID.
-                          $ref: '#/components/schemas/save_connection_request_OwnedLinkAdvertiserId'
-                      required:
-                        - state
-                        - platform
-                        - kind
-                        - advertiserId
-                      additionalProperties: false
+                    - oneOf:
+                        - type: object
+                          properties:
+                            state:
+                              type: string
+                              const: linked
+                              description: Link the supplied Spotify show.
+                            platform:
+                              type: string
+                              const: spotify
+                              description: The Spotify provider.
+                            kind:
+                              type: string
+                              const: show
+                              description: A Spotify podcast show.
+                            advertiserId:
+                              description: Mapped advertiser ID.
+                              $ref: '#/components/schemas/save_connection_request_OwnedLinkAdvertiserId'
+                            url:
+                              type: string
+                              maxLength: 2048
+                              format: uri
+                              description: Spotify show link from open.spotify.com/show.
+                          required:
+                            - state
+                            - platform
+                            - kind
+                            - advertiserId
+                            - url
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            state:
+                              type: string
+                              const: absent
+                              description: Confirm that the advertiser has no Spotify show.
+                            platform:
+                              type: string
+                              const: spotify
+                              description: The Spotify provider.
+                            kind:
+                              type: string
+                              const: show
+                              description: A Spotify podcast show.
+                            advertiserId:
+                              description: Mapped advertiser ID.
+                              $ref: '#/components/schemas/save_connection_request_OwnedLinkAdvertiserId'
+                          required:
+                            - state
+                            - platform
+                            - kind
+                            - advertiserId
+                          additionalProperties: false
+                    - oneOf:
+                        - type: object
+                          properties:
+                            state:
+                              type: string
+                              const: linked
+                              description: >-
+                                Link the Facebook Page this names, if it is one the advertiser's Meta ad account can
+                                promote.
+                            platform:
+                              type: string
+                              const: meta
+                              description: The Meta provider.
+                            kind:
+                              type: string
+                              const: page
+                              description: A Facebook Page.
+                            advertiserId:
+                              description: Mapped advertiser ID.
+                              $ref: '#/components/schemas/save_connection_request_OwnedLinkAdvertiserId'
+                            url:
+                              description: facebook.com Page link; give url or handle.
+                              type: string
+                              maxLength: 2048
+                              format: uri
+                            handle:
+                              description: Page username; give url or handle.
+                              type: string
+                              minLength: 1
+                              maxLength: 256
+                          required:
+                            - state
+                            - platform
+                            - kind
+                            - advertiserId
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            state:
+                              type: string
+                              const: absent
+                              description: Confirm that the advertiser has no Facebook Page.
+                            platform:
+                              type: string
+                              const: meta
+                              description: The Meta provider.
+                            kind:
+                              type: string
+                              const: page
+                              description: A Facebook Page.
+                            advertiserId:
+                              description: Mapped advertiser ID.
+                              $ref: '#/components/schemas/save_connection_request_OwnedLinkAdvertiserId'
+                          required:
+                            - state
+                            - platform
+                            - kind
+                            - advertiserId
+                          additionalProperties: false
                 state:
                   description: Remove the connection; requires connectionId.
                   type: string
