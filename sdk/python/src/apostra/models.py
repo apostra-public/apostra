@@ -17696,8 +17696,12 @@ class SaveWholesaleProductInput(TypedDict):
     '\n    Fixed age cohort every impression reaches (AdCP included signal). null clears; omit keeps.\n    '
     audienceEvidence: NotRequired[list[dict[str, JsonValue]] | None]
     '\n    AdCP 3.2 audience_evidence entries: planning evidence, never targeting. null clears; omit keeps.\n    '
+    fixedTargeting: NotRequired[SaveWholesaleProductInputFixedTargetingValue | None]
+    '\n    GAM: geo and key_values include/exclude on every line item. Each part: omit keeps, null removes.\n    '
+    overlaySupport: NotRequired[dict[str, JsonValue]]
+    '\n    AdCP overlay_support: targeting dimensions a buyer may set. Leave geo out to allow no buyer geo.\n    '
     dryRun: NotRequired[bool]
-    '\n    Validate a new product and report findings without writing it. Creates only.\n    '
+    '\n    Validate a new product without writing it; on GAM it returns lineItemTargeting. Creates only.\n    '
     delete: NotRequired[Literal[True]]
     '\n    Permanently remove this product — only once it is archived, and it cannot be undone.\n    '
     confirmName: NotRequired[str]
@@ -17708,6 +17712,22 @@ class SaveWholesaleProductInput(TypedDict):
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveWholesaleProductInputFixedTargetingValue(TypedDict):
+    geo: NotRequired[SaveWholesaleProductInputFixedTargetingValueGeoValue | None]
+    '\n    Countries every line item runs in. null removes.\n    '
+    key_values: NotRequired[SaveWholesaleProductInputFixedTargetingValueKeyValuesValue | None]
+    '\n    GAM key-values; one entry per key. null removes both lists.\n    '
+
+class SaveWholesaleProductInputFixedTargetingValueGeoValue(TypedDict):
+    geo_countries: list[str]
+    '\n    Restrict delivery to specific countries. ISO 3166-1 alpha-2 codes (e.g., \'US\', \'GB\', \'DE\').\n    '
+
+class SaveWholesaleProductInputFixedTargetingValueKeyValuesValue(TypedDict):
+    include: NotRequired[SaveWholesaleProductRequestFixedTargetingKeyValuesInclude]
+    '\n    Keys every line item targets (IS). null removes.\n    '
+    exclude: NotRequired[SaveWholesaleProductRequestFixedTargetingKeyValuesExclude]
+    '\n    Keys every line item excludes (IS_NOT). null removes.\n    '
 
 class SaveWholesaleProductInputFormatOptionsItem(TypedDict):
     format_option_id: NotRequired[str]
@@ -17760,6 +17780,30 @@ class SaveWholesaleProductInputPricingOptionsItem(TypedDict):
     '\n    Your settlement currency.\n    '
     fixed_price: NotRequired[float]
     '\n    CPM to charge. Omit for an auction.\n    '
+
+class SaveWholesaleProductRequestFixedTargetingKeyValuesExcludeItem(TypedDict):
+    key_id: SaveWholesaleProductRequestFixedTargetingKeyValuesExcludeItemKeyId
+    '\n    Synced GAM key id.\n    '
+    value_ids: list[SaveWholesaleProductRequestFixedTargetingKeyValuesExcludeItemValueIdsItem]
+    '\n    Synced GAM value ids; any matches.\n    '
+
+SaveWholesaleProductRequestFixedTargetingKeyValuesExclude: TypeAlias = "list[SaveWholesaleProductRequestFixedTargetingKeyValuesExcludeItem] | None"
+
+SaveWholesaleProductRequestFixedTargetingKeyValuesExcludeItemKeyId: TypeAlias = str
+
+SaveWholesaleProductRequestFixedTargetingKeyValuesExcludeItemValueIdsItem: TypeAlias = str
+
+class SaveWholesaleProductRequestFixedTargetingKeyValuesIncludeItem(TypedDict):
+    key_id: SaveWholesaleProductRequestFixedTargetingKeyValuesIncludeItemKeyId
+    '\n    Synced GAM key id.\n    '
+    value_ids: list[SaveWholesaleProductRequestFixedTargetingKeyValuesIncludeItemValueIdsItem]
+    '\n    Synced GAM value ids; any matches.\n    '
+
+SaveWholesaleProductRequestFixedTargetingKeyValuesInclude: TypeAlias = "list[SaveWholesaleProductRequestFixedTargetingKeyValuesIncludeItem] | None"
+
+SaveWholesaleProductRequestFixedTargetingKeyValuesIncludeItemKeyId: TypeAlias = str
+
+SaveWholesaleProductRequestFixedTargetingKeyValuesIncludeItemValueIdsItem: TypeAlias = str
 
 class SaveWholesaleProductRequestWholesaleFormatBinding(TypedDict):
     format_option_id: str
@@ -17868,6 +17912,9 @@ class SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidated(TypedDict)
     valid: Literal[True]
     sourceId: str
     warnings: list[SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidatedWarningsItem]
+    lineItemTargeting: NotRequired[SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidatedLineItemTargeting]
+
+SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidatedLineItemTargeting: TypeAlias = dict[str, JsonValue]
 
 SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidatedWarningsItem: TypeAlias = dict[str, JsonValue]
 

@@ -32022,7 +32022,40 @@ export type SaveWholesaleProductData = {
             [key: string]: unknown;
         }> | null;
         /**
-         * Validate a new product and report findings without writing it. Creates only.
+         * GAM: geo and key_values include/exclude on every line item. Each part: omit keeps, null removes.
+         */
+        fixedTargeting?: {
+            /**
+             * Countries every line item runs in. null removes.
+             */
+            geo?: {
+                /**
+                 * Restrict delivery to specific countries. ISO 3166-1 alpha-2 codes (e.g., 'US', 'GB', 'DE').
+                 */
+                geo_countries: Array<string>;
+            } | null;
+            /**
+             * GAM key-values; one entry per key. null removes both lists.
+             */
+            key_values?: {
+                /**
+                 * Keys every line item targets (IS). null removes.
+                 */
+                include?: SaveWholesaleProductRequestFixedTargetingKeyValuesInclude;
+                /**
+                 * Keys every line item excludes (IS_NOT). null removes.
+                 */
+                exclude?: SaveWholesaleProductRequestFixedTargetingKeyValuesExclude;
+            } | null;
+        } | null;
+        /**
+         * AdCP overlay_support: targeting dimensions a buyer may set. Leave geo out to allow no buyer geo.
+         */
+        overlaySupport?: {
+            [key: string]: unknown;
+        };
+        /**
+         * Validate a new product without writing it; on GAM it returns lineItemTargeting. Creates only.
          */
         dryRun?: boolean;
         /**
@@ -32119,6 +32152,36 @@ export type SaveWholesaleProductErrors = {
      */
     503: V3ToolErrorResponse;
 };
+
+export type SaveWholesaleProductRequestFixedTargetingKeyValuesExclude = Array<{
+    /**
+     * Synced GAM key id.
+     */
+    key_id: SaveWholesaleProductRequestFixedTargetingKeyValuesExcludeItemKeyId;
+    /**
+     * Synced GAM value ids; any matches.
+     */
+    value_ids: Array<SaveWholesaleProductRequestFixedTargetingKeyValuesExcludeItemValueIdsItem>;
+}> | null;
+
+export type SaveWholesaleProductRequestFixedTargetingKeyValuesExcludeItemKeyId = string;
+
+export type SaveWholesaleProductRequestFixedTargetingKeyValuesExcludeItemValueIdsItem = string;
+
+export type SaveWholesaleProductRequestFixedTargetingKeyValuesInclude = Array<{
+    /**
+     * Synced GAM key id.
+     */
+    key_id: SaveWholesaleProductRequestFixedTargetingKeyValuesIncludeItemKeyId;
+    /**
+     * Synced GAM value ids; any matches.
+     */
+    value_ids: Array<SaveWholesaleProductRequestFixedTargetingKeyValuesIncludeItemValueIdsItem>;
+}> | null;
+
+export type SaveWholesaleProductRequestFixedTargetingKeyValuesIncludeItemKeyId = string;
+
+export type SaveWholesaleProductRequestFixedTargetingKeyValuesIncludeItemValueIdsItem = string;
 
 export type SaveWholesaleProductRequestWholesaleFormatBinding = {
     /**
@@ -32306,6 +32369,11 @@ export type SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidated = {
     valid: true;
     sourceId: string;
     warnings: Array<SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidatedWarningsItem>;
+    lineItemTargeting?: SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidatedLineItemTargeting;
+    [key: string]: unknown;
+};
+
+export type SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidatedLineItemTargeting = {
     [key: string]: unknown;
 };
 
