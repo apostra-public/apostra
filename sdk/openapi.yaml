@@ -24043,8 +24043,9 @@ paths:
                                     enum:
                                       - inline
                                       - url
+                                      - file
                                   - type: 'null'
-                                description: Where the items come from; url when url is set.
+                                description: 'Where the items come from: url when url is set, file when file is set.'
                               lastChangeSummary:
                                 anyOf:
                                   - $ref: '#/components/schemas/get_success_ObjectLastChangeSummary'
@@ -40196,13 +40197,13 @@ paths:
     post:
       operationId: save_catalog
       summary: >-
-        Create or replace a catalog: type and exactly one of url (feed URL) or non-empty items are required. If missing,
-        ask the buyer for the feed URL or items before calling. URL saves refetch the feed. To archive, set isArchived:
-        true with identity only; type, url and items are not needed.
+        Create or replace a catalog: type and exactly one of url, non-empty items, or file (in a connected Drive or
+        SharePoint folder) are required. If missing, ask the buyer before calling. Saves reread a url or file. To
+        archive, send isArchived: true with identity only; type and sources are not needed.
       description: >-
-        Create or replace a catalog: type and exactly one of url (feed URL) or non-empty items are required. If missing,
-        ask the buyer for the feed URL or items before calling. URL saves refetch the feed. To archive, set isArchived:
-        true with identity only; type, url and items are not needed.
+        Create or replace a catalog: type and exactly one of url, non-empty items, or file (in a connected Drive or
+        SharePoint folder) are required. If missing, ask the buyer before calling. Saves reread a url or file. To
+        archive, send isArchived: true with identity only; type and sources are not needed.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -40259,7 +40260,7 @@ paths:
                     - destination
                     - app
                 url:
-                  description: Feed URL. On create/replace, required unless items is supplied; never send both.
+                  description: Public feed URL. A create/replace takes exactly one of url, items or file.
                   type: string
                   format: uri
                 feedFormat:
@@ -40283,9 +40284,7 @@ paths:
                     - daily
                     - weekly
                 items:
-                  description: >-
-                    Non-empty AdCP items for the type. On create/replace, required unless url is supplied; never send
-                    both.
+                  description: Non-empty AdCP items for the type. A create/replace takes exactly one of url, items or file.
                   minItems: 1
                   maxItems: 10000
                   type: array
@@ -40294,6 +40293,26 @@ paths:
                     propertyNames:
                       type: string
                     additionalProperties: {}
+                file:
+                  description: >-
+                    One CSV, JSON, XML, Excel or Google Sheets file in a Drive or SharePoint folder the account
+                    connected. A create/replace takes exactly one of url, items or file.
+                  type: object
+                  properties:
+                    sourceId:
+                      type: string
+                      minLength: 1
+                      maxLength: 255
+                      description: Connection ID from the Integrations page.
+                    itemId:
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
+                      description: The provider's file ID in that connection.
+                  required:
+                    - sourceId
+                    - itemId
+                  additionalProperties: false
                 ids:
                   description: Catalog item IDs.
                   minItems: 1
@@ -40502,6 +40521,9 @@ paths:
                             - items
                       - not:
                           required:
+                            - file
+                      - not:
+                          required:
                             - ids
                       - not:
                           required:
@@ -40546,6 +40568,8 @@ paths:
                               - url
                           - required:
                               - items
+                          - required:
+                              - file
                 - if:
                     required:
                       - gtins
@@ -40583,8 +40607,31 @@ paths:
                                 enum:
                                   - inline
                                   - url
+                                  - file
                               - type: 'null'
-                            description: Where the items come from; url when url is set.
+                            description: 'Where the items come from: url when url is set, file when file is set.'
+                          file:
+                            type: object
+                            properties:
+                              sourceId:
+                                type: string
+                                minLength: 1
+                                maxLength: 255
+                                description: Connection ID from the Integrations page.
+                              itemId:
+                                type: string
+                                minLength: 1
+                                maxLength: 1024
+                                description: The provider's file ID in that connection.
+                            required:
+                              - sourceId
+                              - itemId
+                            additionalProperties: false
+                          fileName:
+                            anyOf:
+                              - type: string
+                              - type: 'null'
+                            description: The file's name at the last read; null for other sources.
                           lastChangeSummary:
                             anyOf:
                               - type: object
@@ -40629,6 +40676,7 @@ paths:
                             description: The active transform, if any.
                         required:
                           - sourceType
+                          - fileName
                           - lastChangeSummary
                           - transform
                         additionalProperties: {}
@@ -103296,8 +103344,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -103373,8 +103422,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -103450,8 +103500,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -103527,8 +103578,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -103604,8 +103656,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -103681,8 +103734,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -103758,8 +103812,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -103835,8 +103890,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -103912,8 +103968,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -103989,8 +104046,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -104066,8 +104124,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -104143,8 +104202,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -104220,8 +104280,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -104297,8 +104358,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -104374,8 +104436,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -104451,8 +104514,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -104528,8 +104592,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -104605,8 +104670,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -104682,8 +104748,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -104759,8 +104826,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -104836,8 +104904,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -104913,8 +104982,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -104990,8 +105060,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -105067,8 +105138,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -105144,8 +105216,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -105221,8 +105294,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -105298,8 +105372,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -105375,8 +105450,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -105452,8 +105528,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -105529,8 +105606,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -105606,8 +105684,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -105683,8 +105762,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -105760,8 +105840,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -105837,8 +105918,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -105914,8 +105996,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -105991,8 +106074,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -106068,8 +106152,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -106145,8 +106230,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -106222,8 +106308,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object
@@ -106299,8 +106386,9 @@ components:
                 enum:
                   - inline
                   - url
+                  - file
               - type: 'null'
-            description: Where the items come from; url when url is set.
+            description: 'Where the items come from: url when url is set, file when file is set.'
           lastChangeSummary:
             anyOf:
               - type: object

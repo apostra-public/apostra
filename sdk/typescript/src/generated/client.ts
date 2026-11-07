@@ -785,14 +785,14 @@ export class Apostra extends Transport {
   /** Create: advertiserId/name; flight/budget optional. Receipts and launch previews show local/UTC times in the applicable IANA timezone. desiredPhase: active previews; confirmLaunch: true launches. Cancellation is irreversible: desiredPhase: canceled cancels the campaign and every live media buy. Returns the data together with response headers and request ID. */
   saveCampaignWithResponse(input: SaveCampaignInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveCampaignResult>> { return this.requestDetailed("save_campaign", input, options) }
   /**
-   * Create or replace a catalog: type and exactly one of url (feed URL) or non-empty items are required. If missing, ask the buyer for the feed URL or items before calling. URL saves refetch the feed. To archive, set isArchived: true with identity only; type, url and items are not needed.
+   * Create or replace a catalog: type and exactly one of url, non-empty items, or file (in a connected Drive or SharePoint folder) are required. If missing, ask the buyer before calling. Saves reread a url or file. To archive, send isArchived: true with identity only; type and sources are not needed.
    *
    * @example
    * await client.saveCatalog(input, { idempotencyKey: 'stable-key' })
    */
   saveCatalog(input: SaveCatalogInput, options: WriteRequestOptions): Promise<SaveCatalogResult> { return this.request("save_catalog", input, options) }
 
-  /** Create or replace a catalog: type and exactly one of url (feed URL) or non-empty items are required. If missing, ask the buyer for the feed URL or items before calling. URL saves refetch the feed. To archive, set isArchived: true with identity only; type, url and items are not needed. Returns the data together with response headers and request ID. */
+  /** Create or replace a catalog: type and exactly one of url, non-empty items, or file (in a connected Drive or SharePoint folder) are required. If missing, ask the buyer before calling. Saves reread a url or file. To archive, send isArchived: true with identity only; type and sources are not needed. Returns the data together with response headers and request ID. */
   saveCatalogWithResponse(input: SaveCatalogInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveCatalogResult>> { return this.requestDetailed("save_catalog", input, options) }
   /**
    * Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation.

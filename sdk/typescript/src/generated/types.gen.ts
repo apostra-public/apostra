@@ -6864,9 +6864,9 @@ export type GetResponses = {
                     totalDestinations?: never;
                 };
                 /**
-                 * Where the items come from; url when url is set.
+                 * Where the items come from: url when url is set, file when file is set.
                  */
-                sourceType?: 'inline' | 'url' | null;
+                sourceType?: 'inline' | 'url' | 'file' | null;
                 /**
                  * Items in the latest version against the one before it.
                  */
@@ -18274,7 +18274,7 @@ export type SaveCatalogData = {
          */
         type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
         /**
-         * Feed URL. On create/replace, required unless items is supplied; never send both.
+         * Public feed URL. A create/replace takes exactly one of url, items or file.
          */
         url?: string;
         /**
@@ -18286,11 +18286,24 @@ export type SaveCatalogData = {
          */
         updateFrequency?: 'realtime' | 'hourly' | 'daily' | 'weekly';
         /**
-         * Non-empty AdCP items for the type. On create/replace, required unless url is supplied; never send both.
+         * Non-empty AdCP items for the type. A create/replace takes exactly one of url, items or file.
          */
         items?: Array<{
             [key: string]: unknown;
         }>;
+        /**
+         * One CSV, JSON, XML, Excel or Google Sheets file in a Drive or SharePoint folder the account connected. A create/replace takes exactly one of url, items or file.
+         */
+        file?: {
+            /**
+             * Connection ID from the Integrations page.
+             */
+            sourceId: string;
+            /**
+             * The provider's file ID in that connection.
+             */
+            itemId: string;
+        };
         /**
          * Catalog item IDs.
          */
@@ -18466,9 +18479,23 @@ export type SaveCatalogResponses = {
             action: 'created' | 'updated' | 'unchanged' | 'deleted';
             object: {
                 /**
-                 * Where the items come from; url when url is set.
+                 * Where the items come from: url when url is set, file when file is set.
                  */
-                sourceType: 'inline' | 'url' | null;
+                sourceType: 'inline' | 'url' | 'file' | null;
+                file?: {
+                    /**
+                     * Connection ID from the Integrations page.
+                     */
+                    sourceId: string;
+                    /**
+                     * The provider's file ID in that connection.
+                     */
+                    itemId: string;
+                };
+                /**
+                 * The file's name at the last read; null for other sources.
+                 */
+                fileName: string | null;
                 /**
                  * Items in the latest version against the one before it.
                  */
@@ -38922,9 +38949,9 @@ export type SearchSuccessSearchAccountPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -38976,9 +39003,9 @@ export type SearchSuccessSearchAccountRelationshipPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39046,9 +39073,9 @@ export type SearchSuccessSearchAdServerTargetingPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39108,9 +39135,9 @@ export type SearchSuccessSearchAdvertiserGrantPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39170,9 +39197,9 @@ export type SearchSuccessSearchAdvertiserPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39232,9 +39259,9 @@ export type SearchSuccessSearchAgentPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39294,9 +39321,9 @@ export type SearchSuccessSearchAskPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39356,9 +39383,9 @@ export type SearchSuccessSearchBusinessRulesVersionPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39418,9 +39445,9 @@ export type SearchSuccessSearchBuyerAgentPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39480,9 +39507,9 @@ export type SearchSuccessSearchCampaignPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39542,9 +39569,9 @@ export type SearchSuccessSearchCatalogPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39604,9 +39631,9 @@ export type SearchSuccessSearchConnectionPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39666,9 +39693,9 @@ export type SearchSuccessSearchConversationPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39728,9 +39755,9 @@ export type SearchSuccessSearchCoveragePageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39790,9 +39817,9 @@ export type SearchSuccessSearchCreativeAssetPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39852,9 +39879,9 @@ export type SearchSuccessSearchCreativeCollectionPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39914,9 +39941,9 @@ export type SearchSuccessSearchCreativeEnginePageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -39976,9 +40003,9 @@ export type SearchSuccessSearchCreativeFormatPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40038,9 +40065,9 @@ export type SearchSuccessSearchCreativePageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40092,9 +40119,9 @@ export type SearchSuccessSearchCreativeSessionPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40162,9 +40189,9 @@ export type SearchSuccessSearchDimensionPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40224,9 +40251,9 @@ export type SearchSuccessSearchEventSourcePageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40286,9 +40313,9 @@ export type SearchSuccessSearchHouseDiscountPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40348,9 +40375,9 @@ export type SearchSuccessSearchInventorySourcePageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40410,9 +40437,9 @@ export type SearchSuccessSearchLibraryRequestPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40472,9 +40499,9 @@ export type SearchSuccessSearchMaterialPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40534,9 +40561,9 @@ export type SearchSuccessSearchMediaBuyPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40596,9 +40623,9 @@ export type SearchSuccessSearchMemberPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40658,9 +40685,9 @@ export type SearchSuccessSearchPlaybookVersionPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40720,9 +40747,9 @@ export type SearchSuccessSearchPropertyListPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40782,9 +40809,9 @@ export type SearchSuccessSearchProposalPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40844,9 +40871,9 @@ export type SearchSuccessSearchRfpPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40898,9 +40925,9 @@ export type SearchSuccessSearchRfpTurnPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -40968,9 +40995,9 @@ export type SearchSuccessSearchSellerPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -41030,9 +41057,9 @@ export type SearchSuccessSearchSessionPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -41092,9 +41119,9 @@ export type SearchSuccessSearchSignalPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -41154,9 +41181,9 @@ export type SearchSuccessSearchSkillPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -41216,9 +41243,9 @@ export type SearchSuccessSearchSourceAccountPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -41278,9 +41305,9 @@ export type SearchSuccessSearchWholesaleProductPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */
@@ -41340,9 +41367,9 @@ export type SearchSuccessSearchWorkItemPageOutputResults = Array<{
     name?: string | null;
     sandbox?: boolean;
     /**
-     * Where the items come from; url when url is set.
+     * Where the items come from: url when url is set, file when file is set.
      */
-    sourceType?: 'inline' | 'url' | null;
+    sourceType?: 'inline' | 'url' | 'file' | null;
     /**
      * Items in the latest version against the one before it.
      */

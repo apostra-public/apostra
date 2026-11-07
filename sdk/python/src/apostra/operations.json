@@ -1001,7 +1001,7 @@
         ]
       }
     ],
-    "summary": "Create or replace a catalog: type and exactly one of url (feed URL) or non-empty items are required. If missing, ask the buyer for the feed URL or items before calling. URL saves refetch the feed. To archive, set isArchived: true with identity only; type, url and items are not needed."
+    "summary": "Create or replace a catalog: type and exactly one of url, non-empty items, or file (in a connected Drive or SharePoint folder) are required. If missing, ask the buyer before calling. Saves reread a url or file. To archive, send isArchived: true with identity only; type and sources are not needed."
   },
   "save_connection": {
     "path": "/tools/save_connection",

@@ -389,11 +389,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveCampaignResult], self._request_with_response("save_campaign", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_catalog(self, input: models.SaveCatalogInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCatalogResult:
-        "Create or replace a catalog: type and exactly one of url (feed URL) or non-empty items are required. If missing, ask the buyer for the feed URL or items before calling. URL saves refetch the feed. To archive, set isArchived: true with identity only; type, url and items are not needed."
+        "Create or replace a catalog: type and exactly one of url, non-empty items, or file (in a connected Drive or SharePoint folder) are required. If missing, ask the buyer before calling. Saves reread a url or file. To archive, send isArchived: true with identity only; type and sources are not needed."
         return cast("models.SaveCatalogResult", self._request("save_catalog", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_catalog_with_response(self, input: models.SaveCatalogInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCatalogResult]:
-        "Create or replace a catalog: type and exactly one of url (feed URL) or non-empty items are required. If missing, ask the buyer for the feed URL or items before calling. URL saves refetch the feed. To archive, set isArchived: true with identity only; type, url and items are not needed. Returns the data together with response headers and request ID."
+        "Create or replace a catalog: type and exactly one of url, non-empty items, or file (in a connected Drive or SharePoint folder) are required. If missing, ask the buyer before calling. Saves reread a url or file. To archive, send isArchived: true with identity only; type and sources are not needed. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCatalogResult], self._request_with_response("save_catalog", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_connection(self, input: models.SaveConnectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveConnectionResult:
@@ -990,11 +990,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveCampaignResult], await self._request_with_response("save_campaign", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_catalog(self, input: models.SaveCatalogInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCatalogResult:
-        "Create or replace a catalog: type and exactly one of url (feed URL) or non-empty items are required. If missing, ask the buyer for the feed URL or items before calling. URL saves refetch the feed. To archive, set isArchived: true with identity only; type, url and items are not needed."
+        "Create or replace a catalog: type and exactly one of url, non-empty items, or file (in a connected Drive or SharePoint folder) are required. If missing, ask the buyer before calling. Saves reread a url or file. To archive, send isArchived: true with identity only; type and sources are not needed."
         return cast("models.SaveCatalogResult", await self._request("save_catalog", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_catalog_with_response(self, input: models.SaveCatalogInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCatalogResult]:
-        "Create or replace a catalog: type and exactly one of url (feed URL) or non-empty items are required. If missing, ask the buyer for the feed URL or items before calling. URL saves refetch the feed. To archive, set isArchived: true with identity only; type, url and items are not needed. Returns the data together with response headers and request ID."
+        "Create or replace a catalog: type and exactly one of url, non-empty items, or file (in a connected Drive or SharePoint folder) are required. If missing, ask the buyer before calling. Saves reread a url or file. To archive, send isArchived: true with identity only; type and sources are not needed. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCatalogResult], await self._request_with_response("save_catalog", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_connection(self, input: models.SaveConnectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveConnectionResult:
