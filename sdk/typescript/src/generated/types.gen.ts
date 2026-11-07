@@ -5170,6 +5170,10 @@ export type GetDeliveryData = {
             productId?: string;
         };
         /**
+         * campaign_delivery only: ISO-4217 currency to convert money into at each day's rate.
+         */
+        currency?: string;
+        /**
          * Maximum rows in this page (1-100).
          */
         limit?: number;
@@ -5288,6 +5292,10 @@ export type GetDeliveryResponses = {
              */
             currencyConversionsOmitted?: GetDeliverySuccessCurrencyConversionsOmitted;
             /**
+             * Present when currency was sent: how money on rows and totals was converted, over every matched row.
+             */
+            conversion?: GetDeliverySuccessDeliveryConversion;
+            /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
             synthetic?: GetDeliverySuccessSynthetic;
@@ -5324,6 +5332,10 @@ export type GetDeliveryResponses = {
              */
             currencyConversionsOmitted?: GetDeliverySuccessCurrencyConversionsOmitted;
             /**
+             * Present when currency was sent: how money on rows and totals was converted, over every matched row.
+             */
+            conversion?: GetDeliverySuccessDeliveryConversion;
+            /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
             synthetic?: GetDeliverySuccessSynthetic;
@@ -5359,6 +5371,10 @@ export type GetDeliveryResponses = {
              * Converted buys behind this page left out of currencyConversions by its cap. Absent when none.
              */
             currencyConversionsOmitted?: GetDeliverySuccessCurrencyConversionsOmitted;
+            /**
+             * Present when currency was sent: how money on rows and totals was converted, over every matched row.
+             */
+            conversion?: GetDeliverySuccessDeliveryConversion;
             /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
@@ -5612,6 +5628,7 @@ export type GetDeliveryResponses = {
             coverage?: never;
             currencyConversions?: never;
             currencyConversionsOmitted?: never;
+            conversion?: never;
             synthetic?: never;
         };
         error: null;
@@ -5671,6 +5688,24 @@ export type GetDeliverySuccessCampaignGoalProgressMediaBuy = {
 export type GetDeliverySuccessCurrencyConversions = Array<GetDeliverySuccessDeliveryCurrencyConversion>;
 
 export type GetDeliverySuccessCurrencyConversionsOmitted = number;
+
+export type GetDeliverySuccessDeliveryConversion = {
+    currency: string;
+    rateBasis: 'daily';
+    /**
+     * The daily rate store, crossed through USD.
+     */
+    rateSource: 'snapshot';
+    /**
+     * Most days any rate was carried forward, at most 7.
+     */
+    carriedForwardDays: number;
+    /**
+     * Each source currency and day with no rate, by currency then date. A row with such a day keeps its native currency and values.
+     */
+    unconverted: Array<GetDeliverySuccessDeliveryUnconvertedDay>;
+    unconvertedOmitted?: number;
+};
 
 export type GetDeliverySuccessDeliveryCurrencyConversion = {
     mediaBuyId: string;
@@ -6025,6 +6060,11 @@ export type GetDeliverySuccessDeliverySummaryReportingRevisionObservedAt = strin
 
 export type GetDeliverySuccessDeliverySummaryReportingRevisionReportingRevisionId = string;
 
+export type GetDeliverySuccessDeliveryUnconvertedDay = {
+    currency: string;
+    date: string;
+};
+
 export type GetDeliverySuccessGoalProgress = {
     goal: GetDeliverySuccessGoalProgressGoal | null;
     askedTarget: GetDeliverySuccessGoalProgressTarget | null;
@@ -6240,7 +6280,7 @@ export type GetDeliverySuccessRowsItemFinality = {
 export type GetDeliverySuccessRowsItemMetricsValue = {
     value: number | boolean | null;
     status: 'available' | 'unavailable';
-    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed';
+    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed' | 'fx_rate_unavailable';
 };
 
 export type GetDeliverySuccessRowsItemSourceOperation = 'get_seller_reporting_metrics' | 'get_buyer_reporting_metrics' | 'get_seller_margin_reporting';
@@ -6307,7 +6347,7 @@ export type GetDeliverySuccessTotalsByFinalityItemMetrics = {
 export type GetDeliverySuccessTotalsByFinalityItemMetricsValue = {
     value: number | boolean | null;
     status: 'available' | 'unavailable';
-    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed';
+    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed' | 'fx_rate_unavailable';
 };
 
 export type GetDeliverySuccessTotalsByFinalityItemRowsIncluded = number;
@@ -6333,7 +6373,7 @@ export type GetDeliverySuccessTotalsMetrics = {
 export type GetDeliverySuccessTotalsMetricsValue = {
     value: number | boolean | null;
     status: 'available' | 'unavailable';
-    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed';
+    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed' | 'fx_rate_unavailable';
 };
 
 export type GetDeliverySuccessTotalsRowsIncluded = number;
