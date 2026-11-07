@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.9.0",
+  "skillVersion": "1.10.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -71,6 +71,26 @@
         "Before requesting proposals, the agent restates the goal statement and the commitment wanted and asks for confirmation.",
         "The agent groups sellers by commitment.kind and commitment.meetsAskedTarget read from each proposal, names the answered target for each, and lists the seller that declined.",
         "The agent never presents the best-effort answer as a guarantee or as cheaper than the guaranteed one on price alone, and ties its recommendation to the commitment the buyer wanted."
+      ]
+    },
+    {
+      "id": "html5-zip-upload-finished-before-attach",
+      "title": "Upload HTML5 ZIPs, finish the drafts, then attach them",
+      "given": "The buyer has five HTML5 ZIP banners on disk for an existing advertiser and wants them on the campaign.",
+      "expect": [
+        "The agent retrieves the HTML5 creative requirements page and checks each ZIP's click tag, declared size and size limit with the buyer before uploading.",
+        "The agent uploads each ZIP with upload_creative_asset for the exact advertiser, then finishes each returned draft with save_creative mode \"complete\" and the buyer's landing_page_url, with no campaign.",
+        "The agent attaches only complete creatives to the campaign, after confirmation, and reports each creative as uploaded, complete or attached only after a get confirms it; a failed upload is reported as not saved, never as a saved draft."
+      ]
+    },
+    {
+      "id": "draft-campaign-creative-review-reported",
+      "title": "Report creative review on a draft campaign without implying it is running",
+      "given": "The campaign is in phase draft with two draft media buys, and its four creatives read pending_review.",
+      "expect": [
+        "The agent says the campaign is a draft, its media buys are not booked and nothing delivers until it is launched.",
+        "The agent explains that the creatives were sent to the draft buys' sellers when saved, reads platformLinks to name which seller holds each creative, and presents pending_review as that seller's creative review, not a booking.",
+        "The agent names the launch as the next confirmation and does not launch without it."
       ]
     }
   ]
