@@ -3932,7 +3932,7 @@ class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObje
     message: str
     '\n    Human sentence describing the action, for direct display.\n    '
     docsUrl: str | None
-    '\n    mintlify/v2 page explaining this action, when one exists.\n    '
+    '\n    Path of the public documentation page explaining this action, when one exists.\n    '
     severity: Literal["success", "warning"]
     '\n    `success` when nothing is owed (`NONE`); `warning` for every action that needs doing.\n    '
     canCompleteInChat: bool

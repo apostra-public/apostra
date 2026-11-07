@@ -6743,7 +6743,7 @@ export type GetResponses = {
                      */
                     message: string;
                     /**
-                     * mintlify/v2 page explaining this action, when one exists.
+                     * Path of the public documentation page explaining this action, when one exists.
                      */
                     docsUrl: string | null;
                     /**
