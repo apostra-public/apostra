@@ -25458,6 +25458,11 @@ paths:
                                       - updatedAt
                                     additionalProperties: false
                                   - type: 'null'
+                              refreshProblem:
+                                anyOf:
+                                  - $ref: '#/components/schemas/get_success_CatalogRefreshProblem'
+                                  - type: 'null'
+                                description: What stops the refresh; null if nothing does.
                             additionalProperties: {}
                           sourceId:
                             type: string
@@ -25537,12 +25542,35 @@ paths:
                                             - synced
                                             - unchanged
                                             - failed
+                                        trigger:
+                                          type: string
+                                          enum:
+                                            - save
+                                            - schedule
+                                          description: 'What started the run: a save or the scheduled pull.'
+                                        problem:
+                                          anyOf:
+                                            - type: string
+                                              enum:
+                                                - file_source_needs_reconnect
+                                                - file_source_not_found
+                                                - file_not_found
+                                                - file_access_denied
+                                                - file_outside_source
+                                                - file_type_unsupported
+                                                - file_too_large
+                                                - items_invalid
+                                                - columns_missing
+                                                - feed_unreachable
+                                            - type: 'null'
+                                          description: The refreshProblem reason the run hit, if any.
                                         httpStatus:
                                           anyOf:
                                             - type: integer
                                               minimum: -9007199254740991
                                               maximum: 9007199254740991
                                             - type: 'null'
+                                          description: Null for a file read.
                                         itemCount:
                                           anyOf:
                                             - type: integer
@@ -25561,6 +25589,8 @@ paths:
                                             - 'null'
                                       required:
                                         - status
+                                        - trigger
+                                        - problem
                                         - httpStatus
                                         - itemCount
                                         - error
@@ -42253,11 +42283,17 @@ paths:
                                 additionalProperties: false
                               - type: 'null'
                             description: The active transform, if any.
+                          refreshProblem:
+                            anyOf:
+                              - $ref: '#/components/schemas/save_catalog_success_CatalogRefreshProblem'
+                              - type: 'null'
+                            description: What stops the refresh; null if nothing does.
                         required:
                           - sourceType
                           - fileName
                           - lastChangeSummary
                           - transform
+                          - refreshProblem
                         additionalProperties: {}
                       replayed:
                         type: boolean
@@ -83921,6 +83957,31 @@ components:
           items:
             type: string
       additionalProperties: {}
+    get_success_CatalogRefreshProblem:
+      type: object
+      properties:
+        reason:
+          type: string
+          enum:
+            - file_source_needs_reconnect
+            - file_source_not_found
+            - file_not_found
+            - file_access_denied
+            - file_outside_source
+            - file_type_unsupported
+            - file_too_large
+            - items_invalid
+            - columns_missing
+            - feed_unreachable
+          description: What stops the refresh.
+        columns:
+          description: Missing column names; columns_missing only.
+          type: array
+          items:
+            type: string
+      required:
+        - reason
+      additionalProperties: false
     get_success_CampaignPulse:
       type: object
       properties:
@@ -92974,6 +93035,31 @@ components:
       additionalProperties: false
     save_campaign_success_MediaBuysItemMediaBuyId:
       type: string
+    save_catalog_success_CatalogRefreshProblem:
+      type: object
+      properties:
+        reason:
+          type: string
+          enum:
+            - file_source_needs_reconnect
+            - file_source_not_found
+            - file_not_found
+            - file_access_denied
+            - file_outside_source
+            - file_type_unsupported
+            - file_too_large
+            - items_invalid
+            - columns_missing
+            - feed_unreachable
+          description: What stops the refresh.
+        columns:
+          description: Missing column names; columns_missing only.
+          type: array
+          items:
+            type: string
+      required:
+        - reason
+      additionalProperties: false
     save_connection_request_BuyerStorefrontSelectionDecision:
       type: string
       enum:
@@ -104819,6 +104905,31 @@ components:
         - kind
       additionalProperties:
         $ref: '#/components/schemas/search_success_SearchAccountPageOutputValue'
+    search_success_CatalogRefreshProblem:
+      type: object
+      properties:
+        reason:
+          type: string
+          enum:
+            - file_source_needs_reconnect
+            - file_source_not_found
+            - file_not_found
+            - file_access_denied
+            - file_outside_source
+            - file_type_unsupported
+            - file_too_large
+            - items_invalid
+            - columns_missing
+            - feed_unreachable
+          description: What stops the refresh.
+        columns:
+          description: Missing column names; columns_missing only.
+          type: array
+          items:
+            type: string
+      required:
+        - reason
+      additionalProperties: false
     search_success_SearchMemberPageOutput:
       type: object
       properties:
@@ -107108,6 +107219,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchAccountPageOutputValue: {}
     search_success_SearchMemberPageOutputTotal:
@@ -107186,6 +107302,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchMemberPageOutputValue: {}
     search_success_SearchAgentPageOutputTotal:
@@ -107264,6 +107385,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchAgentPageOutputValue: {}
     search_success_SearchSkillPageOutputTotal:
@@ -107342,6 +107468,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchSkillPageOutputValue: {}
     search_success_SearchInventorySourcePageOutputTotal:
@@ -107420,6 +107551,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchInventorySourcePageOutputValue: {}
     search_success_SearchMaterialPageOutputTotal:
@@ -107498,6 +107634,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchMaterialPageOutputValue: {}
     search_success_SearchCoveragePageOutputTotal:
@@ -107576,6 +107717,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchCoveragePageOutputValue: {}
     search_success_SearchWholesaleProductPageOutputTotal:
@@ -107654,6 +107800,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchWholesaleProductPageOutputValue: {}
     search_success_SearchPlaybookVersionPageOutputTotal:
@@ -107732,6 +107883,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchPlaybookVersionPageOutputValue: {}
     search_success_SearchBusinessRulesVersionPageOutputTotal:
@@ -107810,6 +107966,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchBusinessRulesVersionPageOutputValue: {}
     search_success_SearchHouseDiscountPageOutputTotal:
@@ -107888,6 +108049,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchHouseDiscountPageOutputValue: {}
     search_success_SearchConnectionPageOutputTotal:
@@ -107966,6 +108132,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchConnectionPageOutputValue: {}
     search_success_SearchAccountRelationshipPageOutputTotal:
@@ -108044,6 +108215,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchAccountRelationshipPageOutputValue: {}
     search_success_SearchSourceAccountPageOutputTotal:
@@ -108122,6 +108298,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchSourceAccountPageOutputValue: {}
     search_success_SearchSellerPageOutputTotal:
@@ -108200,6 +108381,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchSellerPageOutputValue: {}
     search_success_SearchAdvertiserPageOutputTotal:
@@ -108278,6 +108464,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchAdvertiserPageOutputValue: {}
     search_success_SearchAdvertiserGrantPageOutputTotal:
@@ -108356,6 +108547,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchAdvertiserGrantPageOutputValue: {}
     search_success_SearchSignalPageOutputTotal:
@@ -108434,6 +108630,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchSignalPageOutputValue: {}
     search_success_SearchAdServerTargetingPageOutputTotal:
@@ -108512,6 +108713,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchAdServerTargetingPageOutputValue: {}
     search_success_SearchWorkItemPageOutputTotal:
@@ -108590,6 +108796,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchWorkItemPageOutputValue: {}
     search_success_SearchCampaignPageOutputTotal:
@@ -108668,6 +108879,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchCampaignPageOutputValue: {}
     search_success_SearchCatalogPageOutputTotal:
@@ -108746,6 +108962,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchCatalogPageOutputValue: {}
     search_success_SearchEventSourcePageOutputTotal:
@@ -108824,6 +109045,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchEventSourcePageOutputValue: {}
     search_success_SearchPropertyListPageOutputTotal:
@@ -108902,6 +109128,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchPropertyListPageOutputValue: {}
     search_success_SearchCreativePageOutputTotal:
@@ -108980,6 +109211,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchCreativePageOutputValue: {}
     search_success_SearchCreativeFormatPageOutputTotal:
@@ -109058,6 +109294,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchCreativeFormatPageOutputValue: {}
     search_success_SearchCreativeAssetPageOutputTotal:
@@ -109136,6 +109377,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchCreativeAssetPageOutputValue: {}
     search_success_SearchCreativeEnginePageOutputTotal:
@@ -109214,6 +109460,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchCreativeEnginePageOutputValue: {}
     search_success_SearchCreativeSessionPageOutputTotal:
@@ -109292,6 +109543,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchCreativeSessionPageOutputValue: {}
     search_success_SearchCreativeCollectionPageOutputTotal:
@@ -109370,6 +109626,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchCreativeCollectionPageOutputValue: {}
     search_success_SearchMediaBuyPageOutputTotal:
@@ -109448,6 +109709,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchMediaBuyPageOutputValue: {}
     search_success_SearchProposalPageOutputTotal:
@@ -109526,6 +109792,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchProposalPageOutputValue: {}
     search_success_SearchRfpPageOutputTotal:
@@ -109604,6 +109875,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchRfpPageOutputValue: {}
     search_success_SearchRfpTurnPageOutputTotal:
@@ -109682,6 +109958,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchRfpTurnPageOutputValue: {}
     search_success_SearchLibraryRequestPageOutputTotal:
@@ -109760,6 +110041,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchLibraryRequestPageOutputValue: {}
     search_success_SearchAskPageOutputTotal:
@@ -109838,6 +110124,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchAskPageOutputValue: {}
     search_success_SearchConversationPageOutputTotal:
@@ -109916,6 +110207,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchConversationPageOutputValue: {}
     search_success_SearchBuyerAgentPageOutputTotal:
@@ -109994,6 +110290,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchBuyerAgentPageOutputValue: {}
     search_success_SearchDimensionPageOutputTotal:
@@ -110072,6 +110373,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchDimensionPageOutputValue: {}
     search_success_SearchBuyerRfpPageOutputTotal:
@@ -110150,6 +110456,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchBuyerRfpPageOutputValue: {}
     search_success_SearchSessionPageOutputTotal:
@@ -110228,6 +110539,11 @@ components:
                 additionalProperties: false
               - type: 'null'
             description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
         additionalProperties: {}
     search_success_SearchSessionPageOutputValue: {}
     upload_creative_asset_request_AdvertiserId:

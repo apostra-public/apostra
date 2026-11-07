@@ -7250,6 +7250,10 @@ export type GetResponses = {
                         }>;
                     };
                 } | null;
+                /**
+                 * What stops the refresh; null if nothing does.
+                 */
+                refreshProblem?: GetSuccessCatalogRefreshProblem | null;
                 [key: string]: unknown;
             };
             sourceId?: string;
@@ -7274,6 +7278,17 @@ export type GetResponses = {
                     truncated: boolean;
                     results: Array<{
                         status: 'syncing' | 'synced' | 'unchanged' | 'failed';
+                        /**
+                         * What started the run: a save or the scheduled pull.
+                         */
+                        trigger: 'save' | 'schedule';
+                        /**
+                         * The refreshProblem reason the run hit, if any.
+                         */
+                        problem: 'file_source_needs_reconnect' | 'file_source_not_found' | 'file_not_found' | 'file_access_denied' | 'file_outside_source' | 'file_type_unsupported' | 'file_too_large' | 'items_invalid' | 'columns_missing' | 'feed_unreachable' | null;
+                        /**
+                         * Null for a file read.
+                         */
                         httpStatus: number | null;
                         itemCount: number | null;
                         error: string | null;
@@ -8367,6 +8382,17 @@ export type GetSuccessCampaignPulseMetricValue = {
 export type GetSuccessCampaignPulseTimeRange = {
     earliest: string;
     latest: string;
+};
+
+export type GetSuccessCatalogRefreshProblem = {
+    /**
+     * What stops the refresh.
+     */
+    reason: 'file_source_needs_reconnect' | 'file_source_not_found' | 'file_not_found' | 'file_access_denied' | 'file_outside_source' | 'file_type_unsupported' | 'file_too_large' | 'items_invalid' | 'columns_missing' | 'feed_unreachable';
+    /**
+     * Missing column names; columns_missing only.
+     */
+    columns?: Array<string>;
 };
 
 export type GetSuccessHistoryVersionsResultsItemChangeSummary = {
@@ -19190,6 +19216,10 @@ export type SaveCatalogResponses = {
                     name: string;
                     updatedAt: string;
                 } | null;
+                /**
+                 * What stops the refresh; null if nothing does.
+                 */
+                refreshProblem: SaveCatalogSuccessCatalogRefreshProblem | null;
                 [key: string]: unknown;
             };
             replayed: boolean;
@@ -19212,6 +19242,17 @@ export type SaveCatalogResponses = {
         };
         error: null;
     };
+};
+
+export type SaveCatalogSuccessCatalogRefreshProblem = {
+    /**
+     * What stops the refresh.
+     */
+    reason: 'file_source_needs_reconnect' | 'file_source_not_found' | 'file_not_found' | 'file_access_denied' | 'file_outside_source' | 'file_type_unsupported' | 'file_too_large' | 'items_invalid' | 'columns_missing' | 'feed_unreachable';
+    /**
+     * Missing column names; columns_missing only.
+     */
+    columns?: Array<string>;
 };
 
 export type SaveConnectionData = {
@@ -40188,6 +40229,17 @@ export type SearchSuccessCampaignPulseTimeRange = {
     latest: string;
 };
 
+export type SearchSuccessCatalogRefreshProblem = {
+    /**
+     * What stops the refresh.
+     */
+    reason: 'file_source_needs_reconnect' | 'file_source_not_found' | 'file_not_found' | 'file_access_denied' | 'file_outside_source' | 'file_type_unsupported' | 'file_too_large' | 'items_invalid' | 'columns_missing' | 'feed_unreachable';
+    /**
+     * Missing column names; columns_missing only.
+     */
+    columns?: Array<string>;
+};
+
 export type SearchSuccessLabelEntry = {
     dimension: string;
     values: Array<string>;
@@ -40234,6 +40286,10 @@ export type SearchSuccessSearchAccountPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -40288,6 +40344,10 @@ export type SearchSuccessSearchAccountRelationshipPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -40358,6 +40418,10 @@ export type SearchSuccessSearchAdServerTargetingPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -40420,6 +40484,10 @@ export type SearchSuccessSearchAdvertiserGrantPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -40482,6 +40550,10 @@ export type SearchSuccessSearchAdvertiserPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -40544,6 +40616,10 @@ export type SearchSuccessSearchAgentPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -40606,6 +40682,10 @@ export type SearchSuccessSearchAskPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -40668,6 +40748,10 @@ export type SearchSuccessSearchBusinessRulesVersionPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -40730,6 +40814,10 @@ export type SearchSuccessSearchBuyerAgentPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -40792,6 +40880,10 @@ export type SearchSuccessSearchBuyerRfpPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -40854,6 +40946,10 @@ export type SearchSuccessSearchCampaignPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -40916,6 +41012,10 @@ export type SearchSuccessSearchCatalogPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -40978,6 +41078,10 @@ export type SearchSuccessSearchConnectionPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41040,6 +41144,10 @@ export type SearchSuccessSearchConversationPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41102,6 +41210,10 @@ export type SearchSuccessSearchCoveragePageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41164,6 +41276,10 @@ export type SearchSuccessSearchCreativeAssetPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41226,6 +41342,10 @@ export type SearchSuccessSearchCreativeCollectionPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41288,6 +41408,10 @@ export type SearchSuccessSearchCreativeEnginePageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41350,6 +41474,10 @@ export type SearchSuccessSearchCreativeFormatPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41412,6 +41540,10 @@ export type SearchSuccessSearchCreativePageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41466,6 +41598,10 @@ export type SearchSuccessSearchCreativeSessionPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41536,6 +41672,10 @@ export type SearchSuccessSearchDimensionPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41598,6 +41738,10 @@ export type SearchSuccessSearchEventSourcePageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41660,6 +41804,10 @@ export type SearchSuccessSearchHouseDiscountPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41722,6 +41870,10 @@ export type SearchSuccessSearchInventorySourcePageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41784,6 +41936,10 @@ export type SearchSuccessSearchLibraryRequestPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41846,6 +42002,10 @@ export type SearchSuccessSearchMaterialPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41908,6 +42068,10 @@ export type SearchSuccessSearchMediaBuyPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -41970,6 +42134,10 @@ export type SearchSuccessSearchMemberPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -42032,6 +42200,10 @@ export type SearchSuccessSearchPlaybookVersionPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -42094,6 +42266,10 @@ export type SearchSuccessSearchPropertyListPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -42156,6 +42332,10 @@ export type SearchSuccessSearchProposalPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -42218,6 +42398,10 @@ export type SearchSuccessSearchRfpPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -42272,6 +42456,10 @@ export type SearchSuccessSearchRfpTurnPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -42342,6 +42530,10 @@ export type SearchSuccessSearchSellerPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -42404,6 +42596,10 @@ export type SearchSuccessSearchSessionPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -42466,6 +42662,10 @@ export type SearchSuccessSearchSignalPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -42528,6 +42728,10 @@ export type SearchSuccessSearchSkillPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -42590,6 +42794,10 @@ export type SearchSuccessSearchSourceAccountPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -42652,6 +42860,10 @@ export type SearchSuccessSearchWholesaleProductPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
@@ -42714,6 +42926,10 @@ export type SearchSuccessSearchWorkItemPageOutputResults = Array<{
         name: string;
         updatedAt: string;
     } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     [key: string]: unknown;
 }>;
 
