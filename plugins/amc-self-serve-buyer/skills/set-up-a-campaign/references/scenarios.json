@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.10.0",
+  "skillVersion": "1.11.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -91,6 +91,16 @@
         "The agent says the campaign is a draft, its media buys are not booked and nothing delivers until it is launched.",
         "The agent explains that the creatives were sent to the draft buys' sellers when saved, reads platformLinks to name which seller holds each creative, and presents pending_review as that seller's creative review, not a booking.",
         "The agent names the launch as the next confirmation and does not launch without it."
+      ]
+    },
+    {
+      "id": "catalog-from-connected-file",
+      "title": "Offer a connected Drive or SharePoint file without browsing it",
+      "given": "The buyer says their product spreadsheet lives in a Google Drive folder their account has connected, and wants it as the advertiser's catalog. They have not given a connection ID or file ID.",
+      "expect": [
+        "The agent sends the buyer to the Catalogs page in the Apostra app to pick the file from its \"Connected folder\" source, and does not claim it can list or open their folders or files.",
+        "The agent does not invent a sourceId or itemId, and calls save_catalog with file only if the buyer gives both IDs.",
+        "If the buyer's account has no connected folder, the agent says connected folders are in early access and offers a feed URL or items instead."
       ]
     }
   ]
