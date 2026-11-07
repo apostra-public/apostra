@@ -3797,8 +3797,8 @@ class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySour
     targetingOverlay: NotRequired[dict[str, JsonValue]]
     '\n    AdCP TargetingOverlay (campaign subset); same shape as the save_campaign targetingOverlay input.\n    '
     operations: NotRequired[GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectOperationsStatusAvailable | GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectOperationsStatusUnavailable]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[GetSuccessObjectLastChangeSummary | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectTransformValue | None]
@@ -10015,13 +10015,15 @@ class SaveCatalogInput(TypedDict):
     type: NotRequired[Literal["offering", "product", "inventory", "store", "promotion", "hotel", "flight", "job", "vehicle", "real_estate", "education", "destination", "app"]]
     '\n    Catalog type. Required when declaring a catalog.\n    '
     url: NotRequired[str]
-    '\n    Feed URL. On create/replace, required unless items is supplied; never send both.\n    '
+    '\n    Public feed URL. A create/replace takes exactly one of url, items or file.\n    '
     feedFormat: NotRequired[Literal["google_merchant_center", "facebook_catalog", "shopify", "linkedin_jobs", "tiktok_shop", "pinterest_catalog", "openai_product_feed", "custom"]]
     '\n    Feed format.\n    '
     updateFrequency: NotRequired[Literal["realtime", "hourly", "daily", "weekly"]]
     '\n    Refresh cadence.\n    '
     items: NotRequired[list[dict[str, JsonValue]]]
-    '\n    Non-empty AdCP items for the type. On create/replace, required unless url is supplied; never send both.\n    '
+    '\n    Non-empty AdCP items for the type. A create/replace takes exactly one of url, items or file.\n    '
+    file: NotRequired[SaveCatalogInputFile]
+    '\n    One CSV, JSON, XML, Excel or Google Sheets file in a Drive or SharePoint folder the account connected. A create/replace takes exactly one of url, items or file.\n    '
     ids: NotRequired[list[str]]
     '\n    Catalog item IDs.\n    '
     gtins: NotRequired[list[str]]
@@ -10067,18 +10069,33 @@ class SaveCatalogInputFeedFieldMappingsItem(TypedDict):
     default: NotRequired[JsonValue]
     '\n    Fallback value.\n    '
 
+class SaveCatalogInputFile(TypedDict):
+    sourceId: str
+    '\n    Connection ID from the Integrations page.\n    '
+    itemId: str
+    '\n    The provider\'s file ID in that connection.\n    '
+
 class SaveCatalogResult(TypedDict):
     action: Literal["created", "updated", "unchanged", "deleted"]
     object: SaveCatalogResultObject
     replayed: bool
 
 class SaveCatalogResultObject(TypedDict):
-    sourceType: Literal["inline", "url"] | None
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: Literal["inline", "url", "file"] | None
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
+    file: NotRequired[SaveCatalogResultObjectFile]
+    fileName: str | None
+    '\n    The file\'s name at the last read; null for other sources.\n    '
     lastChangeSummary: SaveCatalogResultObjectLastChangeSummaryValue | None
     '\n    Items in the latest version against the one before it.\n    '
     transform: SaveCatalogResultObjectTransformValue | None
     '\n    The active transform, if any.\n    '
+
+class SaveCatalogResultObjectFile(TypedDict):
+    sourceId: str
+    '\n    Connection ID from the Integrations page.\n    '
+    itemId: str
+    '\n    The provider\'s file ID in that connection.\n    '
 
 class SaveCatalogResultObjectLastChangeSummaryValue(TypedDict):
     added: int
@@ -21189,8 +21206,8 @@ class SearchSuccessSearchAccountPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchAccountPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchAccountPageOutputResultsItemTransformValue | None]
@@ -21237,8 +21254,8 @@ class SearchSuccessSearchAccountRelationshipPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchAccountRelationshipPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchAccountRelationshipPageOutputResultsItemTransformValue | None]
@@ -21297,8 +21314,8 @@ class SearchSuccessSearchAdServerTargetingPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchAdServerTargetingPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchAdServerTargetingPageOutputResultsItemTransformValue | None]
@@ -21351,8 +21368,8 @@ class SearchSuccessSearchAdvertiserGrantPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchAdvertiserGrantPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchAdvertiserGrantPageOutputResultsItemTransformValue | None]
@@ -21405,8 +21422,8 @@ class SearchSuccessSearchAdvertiserPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchAdvertiserPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchAdvertiserPageOutputResultsItemTransformValue | None]
@@ -21459,8 +21476,8 @@ class SearchSuccessSearchAgentPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchAgentPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchAgentPageOutputResultsItemTransformValue | None]
@@ -21513,8 +21530,8 @@ class SearchSuccessSearchAskPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchAskPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchAskPageOutputResultsItemTransformValue | None]
@@ -21567,8 +21584,8 @@ class SearchSuccessSearchBusinessRulesVersionPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchBusinessRulesVersionPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchBusinessRulesVersionPageOutputResultsItemTransformValue | None]
@@ -21621,8 +21638,8 @@ class SearchSuccessSearchBuyerAgentPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchBuyerAgentPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchBuyerAgentPageOutputResultsItemTransformValue | None]
@@ -21675,8 +21692,8 @@ class SearchSuccessSearchCampaignPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchCampaignPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCampaignPageOutputResultsItemTransformValue | None]
@@ -21729,8 +21746,8 @@ class SearchSuccessSearchCatalogPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchCatalogPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCatalogPageOutputResultsItemTransformValue | None]
@@ -21783,8 +21800,8 @@ class SearchSuccessSearchConnectionPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchConnectionPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchConnectionPageOutputResultsItemTransformValue | None]
@@ -21837,8 +21854,8 @@ class SearchSuccessSearchConversationPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchConversationPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchConversationPageOutputResultsItemTransformValue | None]
@@ -21891,8 +21908,8 @@ class SearchSuccessSearchCoveragePageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchCoveragePageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCoveragePageOutputResultsItemTransformValue | None]
@@ -21945,8 +21962,8 @@ class SearchSuccessSearchCreativeAssetPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchCreativeAssetPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCreativeAssetPageOutputResultsItemTransformValue | None]
@@ -21999,8 +22016,8 @@ class SearchSuccessSearchCreativeCollectionPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchCreativeCollectionPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCreativeCollectionPageOutputResultsItemTransformValue | None]
@@ -22053,8 +22070,8 @@ class SearchSuccessSearchCreativeEnginePageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchCreativeEnginePageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCreativeEnginePageOutputResultsItemTransformValue | None]
@@ -22107,8 +22124,8 @@ class SearchSuccessSearchCreativeFormatPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchCreativeFormatPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCreativeFormatPageOutputResultsItemTransformValue | None]
@@ -22161,8 +22178,8 @@ class SearchSuccessSearchCreativePageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchCreativePageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCreativePageOutputResultsItemTransformValue | None]
@@ -22209,8 +22226,8 @@ class SearchSuccessSearchCreativeSessionPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchCreativeSessionPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchCreativeSessionPageOutputResultsItemTransformValue | None]
@@ -22269,8 +22286,8 @@ class SearchSuccessSearchDimensionPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchDimensionPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchDimensionPageOutputResultsItemTransformValue | None]
@@ -22323,8 +22340,8 @@ class SearchSuccessSearchEventSourcePageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchEventSourcePageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchEventSourcePageOutputResultsItemTransformValue | None]
@@ -22377,8 +22394,8 @@ class SearchSuccessSearchHouseDiscountPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchHouseDiscountPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchHouseDiscountPageOutputResultsItemTransformValue | None]
@@ -22431,8 +22448,8 @@ class SearchSuccessSearchInventorySourcePageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchInventorySourcePageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchInventorySourcePageOutputResultsItemTransformValue | None]
@@ -22485,8 +22502,8 @@ class SearchSuccessSearchLibraryRequestPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchLibraryRequestPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchLibraryRequestPageOutputResultsItemTransformValue | None]
@@ -22539,8 +22556,8 @@ class SearchSuccessSearchMaterialPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchMaterialPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchMaterialPageOutputResultsItemTransformValue | None]
@@ -22593,8 +22610,8 @@ class SearchSuccessSearchMediaBuyPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchMediaBuyPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchMediaBuyPageOutputResultsItemTransformValue | None]
@@ -22647,8 +22664,8 @@ class SearchSuccessSearchMemberPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchMemberPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchMemberPageOutputResultsItemTransformValue | None]
@@ -22701,8 +22718,8 @@ class SearchSuccessSearchPlaybookVersionPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchPlaybookVersionPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchPlaybookVersionPageOutputResultsItemTransformValue | None]
@@ -22755,8 +22772,8 @@ class SearchSuccessSearchPropertyListPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchPropertyListPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchPropertyListPageOutputResultsItemTransformValue | None]
@@ -22809,8 +22826,8 @@ class SearchSuccessSearchProposalPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchProposalPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchProposalPageOutputResultsItemTransformValue | None]
@@ -22863,8 +22880,8 @@ class SearchSuccessSearchRfpPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchRfpPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchRfpPageOutputResultsItemTransformValue | None]
@@ -22911,8 +22928,8 @@ class SearchSuccessSearchRfpTurnPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchRfpTurnPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchRfpTurnPageOutputResultsItemTransformValue | None]
@@ -22971,8 +22988,8 @@ class SearchSuccessSearchSellerPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchSellerPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchSellerPageOutputResultsItemTransformValue | None]
@@ -23025,8 +23042,8 @@ class SearchSuccessSearchSessionPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchSessionPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchSessionPageOutputResultsItemTransformValue | None]
@@ -23079,8 +23096,8 @@ class SearchSuccessSearchSignalPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchSignalPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchSignalPageOutputResultsItemTransformValue | None]
@@ -23133,8 +23150,8 @@ class SearchSuccessSearchSkillPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchSkillPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchSkillPageOutputResultsItemTransformValue | None]
@@ -23187,8 +23204,8 @@ class SearchSuccessSearchSourceAccountPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchSourceAccountPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchSourceAccountPageOutputResultsItemTransformValue | None]
@@ -23241,8 +23258,8 @@ class SearchSuccessSearchWholesaleProductPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchWholesaleProductPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchWholesaleProductPageOutputResultsItemTransformValue | None]
@@ -23295,8 +23312,8 @@ class SearchSuccessSearchWorkItemPageOutputResultsItem(TypedDict):
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
-    sourceType: NotRequired[Literal["inline", "url"] | None]
-    '\n    Where the items come from; url when url is set.\n    '
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[SearchSuccessSearchWorkItemPageOutputResultsItemLastChangeSummaryValue | None]
     '\n    Items in the latest version against the one before it.\n    '
     transform: NotRequired[SearchSuccessSearchWorkItemPageOutputResultsItemTransformValue | None]
