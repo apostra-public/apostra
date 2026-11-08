@@ -448,6 +448,25 @@
     ],
     "summary": "Open the Campaigns Page: campaigns with status, flight, and budget; open one for its media buys and creatives. The Page self-fetches, so do not list campaigns in prose. advertiserId scopes to one advertiser; campaignId focuses one campaign. A draft's go-live review is open_campaign_receipt."
   },
+  "open_catalog_file_picker": {
+    "path": "/tools/open_catalog_file_picker",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open the catalog file picker: the buyer picks one file in a connected Drive or SharePoint folder and saves it as a catalog's source. They pick in the Task, so do not ask for connection or file ids. catalogId replaces that catalog's source; omit it for a new catalog."
+  },
   "open_creative_engines_page": {
     "path": "/tools/open_creative_engines_page",
     "method": "POST",

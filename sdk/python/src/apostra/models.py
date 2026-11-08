@@ -6102,7 +6102,7 @@ class OpenCampaignsPageSuccessPageHumanHandoffRequiredAccount(TypedDict):
     name: str
 
 class OpenCampaignsPageSuccessPageHumanHandoffRequiredPage(TypedDict):
-    resourceUri: Literal["ui://agentic-api/conversation-history/mcp-app.html", "ui://agentic-api/agent-v2/mcp-app.html", "ui://agentic-api/developer-home/mcp-app.html", "ui://agentic-api/agents/mcp-app.html", "ui://agentic-api/create-agent/mcp-app.html", "ui://agentic-api/claim-agent/mcp-app.html", "ui://agentic-api/configure-agent-connection/mcp-app.html", "ui://agentic-api/register-agent-observed-revision/mcp-app.html", "ui://agentic-api/buyer-account-admission/mcp-app.html", "ui://agentic-api/tars-org-supply-asks/mcp-app.html", "ui://agentic-api/tars-run-rate/mcp-app.html", "ui://agentic-api/tars-connections/mcp-app.html", "ui://agentic-api/tars-internal-library/mcp-app.html", "ui://agentic-api/tars-marketing-email-library/mcp-app.html", "ui://agentic-api/tars-approved-deck-modules/mcp-app.html", "ui://agentic-api/tars-marketing-email-operations/mcp-app.html", "ui://agentic-api/business-rules/mcp-app.html", "ui://agentic-api/demo-storefront/mcp-app.html", "ui://agentic-api/agent-source-credentials/mcp-app.html", "ui://agentic-api/property-roster/mcp-app.html", "ui://agentic-api/seller-account-feed/mcp-app.html", "ui://agentic-api/esa-signals/mcp-app.html", "ui://agentic-api/media-buy-retry/mcp-app.html", "ui://agentic-api/inventory-selector/mcp-app.html", "ui://agentic-api/modular-inventory-source/mcp-app.html", "ui://agentic-api/modular-connect/mcp-app.html", "ui://agentic-api/source-discovery-preview/mcp-app.html", "ui://agentic-api/partner-connection/mcp-app.html", "ui://agentic-api/agent-sources/mcp-app.html", "ui://agentic-api/agent-overview/mcp-app.html", "ui://agentic-api/agent-webhooks/mcp-app.html", "ui://agentic-api/agent-activity/mcp-app.html", "ui://agentic-api/organization-domains/mcp-app.html", "ui://agentic-api/modular-avails-commit/mcp-app.html", "ui://agentic-api/plan-billing/mcp-app.html", "ui://agentic-api/connections/mcp-app.html", "ui://agentic-api/creative-engines/mcp-app.html", "ui://agentic-api/all-advertisers-home/mcp-app.html", "ui://agentic-api/add-advertiser/mcp-app.html", "ui://agentic-api/buyer-setup/mcp-app.html", "ui://agentic-api/campaigns/mcp-app.html", "ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html", "ui://agentic-api/creative-library-v3/mcp-app.html", "ui://agentic-api/upload-creative-asset/mcp-app.html", "ui://agentic-api/creative-composer-task/mcp-app.html", "ui://agentic-api/variant-gallery/mcp-app.html", "ui://agentic-api/seller-setup/mcp-app.html", "ui://agentic-api/approvals/mcp-app.html", "ui://agentic-api/notifications/mcp-app.html", "ui://agentic-api/buyer-notifications/mcp-app.html", "ui://agentic-api/buyer-webhooks/mcp-app.html", "ui://agentic-api/proposal-pass-v3/mcp-app.html", "ui://agentic-api/sessions/mcp-app.html", "ui://agentic-api/seller-dashboard/mcp-app.html", "ui://agentic-api/seller-dashboard-v3/mcp-app.html", "ui://agentic-api/product-marketing-v3/mcp-app.html", "ui://agentic-api/library/mcp-app.html", "ui://agentic-api/integrations/mcp-app.html", "ui://agentic-api/release-notes/mcp-app.html", "ui://agentic-api/playbook/mcp-app.html", "ui://agentic-api/media-kit/mcp-app.html", "ui://agentic-api/business-profile/mcp-app.html", "ui://agentic-api/buyer-discounts/mcp-app.html", "ui://agentic-api/esa-sync-diagnostics/mcp-app.html", "ui://agentic-api/esa-inventory-source/mcp-app.html", "ui://agentic-api/source-diagnostics/mcp-app.html", "ui://agentic-api/sponsored-buyers/mcp-app.html", "ui://agentic-api/pending-operations/mcp-app.html", "ui://agentic-api/storefront-briefs/mcp-app.html", "ui://agentic-api/activity-log/mcp-app.html", "ui://agentic-api/merchandising-simulator/mcp-app.html", "ui://agentic-api/media-buys/mcp-app.html", "ui://agentic-api/media-buy-timeline/mcp-app.html", "ui://agentic-api/components/mcp-app.html", "ui://agentic-api/seller-accounts/mcp-app.html"]
+    resourceUri: Literal["ui://agentic-api/conversation-history/mcp-app.html", "ui://agentic-api/agent-v2/mcp-app.html", "ui://agentic-api/developer-home/mcp-app.html", "ui://agentic-api/agents/mcp-app.html", "ui://agentic-api/create-agent/mcp-app.html", "ui://agentic-api/claim-agent/mcp-app.html", "ui://agentic-api/configure-agent-connection/mcp-app.html", "ui://agentic-api/register-agent-observed-revision/mcp-app.html", "ui://agentic-api/buyer-account-admission/mcp-app.html", "ui://agentic-api/tars-org-supply-asks/mcp-app.html", "ui://agentic-api/tars-run-rate/mcp-app.html", "ui://agentic-api/tars-connections/mcp-app.html", "ui://agentic-api/tars-internal-library/mcp-app.html", "ui://agentic-api/tars-marketing-email-library/mcp-app.html", "ui://agentic-api/tars-approved-deck-modules/mcp-app.html", "ui://agentic-api/tars-marketing-email-operations/mcp-app.html", "ui://agentic-api/business-rules/mcp-app.html", "ui://agentic-api/demo-storefront/mcp-app.html", "ui://agentic-api/agent-source-credentials/mcp-app.html", "ui://agentic-api/property-roster/mcp-app.html", "ui://agentic-api/seller-account-feed/mcp-app.html", "ui://agentic-api/esa-signals/mcp-app.html", "ui://agentic-api/media-buy-retry/mcp-app.html", "ui://agentic-api/inventory-selector/mcp-app.html", "ui://agentic-api/modular-inventory-source/mcp-app.html", "ui://agentic-api/modular-connect/mcp-app.html", "ui://agentic-api/source-discovery-preview/mcp-app.html", "ui://agentic-api/partner-connection/mcp-app.html", "ui://agentic-api/agent-sources/mcp-app.html", "ui://agentic-api/agent-overview/mcp-app.html", "ui://agentic-api/agent-webhooks/mcp-app.html", "ui://agentic-api/agent-activity/mcp-app.html", "ui://agentic-api/organization-domains/mcp-app.html", "ui://agentic-api/modular-avails-commit/mcp-app.html", "ui://agentic-api/plan-billing/mcp-app.html", "ui://agentic-api/connections/mcp-app.html", "ui://agentic-api/creative-engines/mcp-app.html", "ui://agentic-api/all-advertisers-home/mcp-app.html", "ui://agentic-api/add-advertiser/mcp-app.html", "ui://agentic-api/buyer-setup/mcp-app.html", "ui://agentic-api/campaigns/mcp-app.html", "ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html", "ui://agentic-api/creative-library-v3/mcp-app.html", "ui://agentic-api/upload-creative-asset/mcp-app.html", "ui://agentic-api/creative-composer-task/mcp-app.html", "ui://agentic-api/catalog-file-picker/mcp-app.html", "ui://agentic-api/variant-gallery/mcp-app.html", "ui://agentic-api/seller-setup/mcp-app.html", "ui://agentic-api/approvals/mcp-app.html", "ui://agentic-api/notifications/mcp-app.html", "ui://agentic-api/buyer-notifications/mcp-app.html", "ui://agentic-api/buyer-webhooks/mcp-app.html", "ui://agentic-api/proposal-pass-v3/mcp-app.html", "ui://agentic-api/sessions/mcp-app.html", "ui://agentic-api/seller-dashboard/mcp-app.html", "ui://agentic-api/seller-dashboard-v3/mcp-app.html", "ui://agentic-api/product-marketing-v3/mcp-app.html", "ui://agentic-api/library/mcp-app.html", "ui://agentic-api/integrations/mcp-app.html", "ui://agentic-api/release-notes/mcp-app.html", "ui://agentic-api/playbook/mcp-app.html", "ui://agentic-api/media-kit/mcp-app.html", "ui://agentic-api/business-profile/mcp-app.html", "ui://agentic-api/buyer-discounts/mcp-app.html", "ui://agentic-api/esa-sync-diagnostics/mcp-app.html", "ui://agentic-api/esa-inventory-source/mcp-app.html", "ui://agentic-api/source-diagnostics/mcp-app.html", "ui://agentic-api/sponsored-buyers/mcp-app.html", "ui://agentic-api/pending-operations/mcp-app.html", "ui://agentic-api/storefront-briefs/mcp-app.html", "ui://agentic-api/activity-log/mcp-app.html", "ui://agentic-api/merchandising-simulator/mcp-app.html", "ui://agentic-api/media-buys/mcp-app.html", "ui://agentic-api/media-buy-timeline/mcp-app.html", "ui://agentic-api/components/mcp-app.html", "ui://agentic-api/seller-accounts/mcp-app.html"]
     advertiserId: NotRequired[str]
     campaignId: NotRequired[str]
     capability: Literal["reauthenticate_in_browser", "manage_webhooks"]
@@ -6126,6 +6126,50 @@ class OpenCampaignsPageSuccessPageHumanHandoffUnavailable(TypedDict):
 class OpenCampaignsPageSuccessPageHumanHandoffUnavailableAccount(TypedDict):
     id: int
     name: str
+
+class OpenCatalogFilePickerInput(TypedDict):
+    advertiserId: str
+    '\n    The advertiser the catalog belongs to; resolve a name with search(kind: "advertiser") first.\n    '
+    catalogId: NotRequired[str]
+    '\n    Replace this catalog\'s source with the chosen file. Omit to make a new catalog.\n    '
+    type: NotRequired[Literal["offering", "product", "inventory", "store", "promotion", "hotel", "flight", "job", "vehicle", "real_estate", "education", "destination", "app"]]
+    '\n    The type to pre-select for a new catalog; the person can change it. Not with catalogId.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class OpenCatalogFilePickerResult(TypedDict):
+    advertiser: OpenCatalogFilePickerResultAdvertiser
+    catalog: NotRequired[OpenCatalogFilePickerResultCatalog]
+    type: NotRequired[OpenCatalogFilePickerSuccessType]
+
+class OpenCatalogFilePickerResultAdvertiser(TypedDict):
+    advertiserId: str
+    name: str
+
+class OpenCatalogFilePickerResultCatalog(TypedDict):
+    catalogId: str
+    name: str | None
+    type: OpenCatalogFilePickerSuccessCatalogType
+    source: OpenCatalogFilePickerResultCatalogSource
+    declaration: OpenCatalogFilePickerResultCatalogDeclaration
+
+class OpenCatalogFilePickerResultCatalogDeclaration(TypedDict):
+    feedFieldMappings: NotRequired[list[dict[str, JsonValue]]]
+    conversionEvents: NotRequired[list[str]]
+    contentIdType: NotRequired[str]
+    ids: NotRequired[list[str]]
+    gtins: NotRequired[list[str]]
+    tags: NotRequired[list[str]]
+    category: NotRequired[str]
+    query: NotRequired[str]
+
+class OpenCatalogFilePickerResultCatalogSource(TypedDict):
+    sourceType: Literal["inline", "url", "file"] | None
+    fileName: str | None
+
+OpenCatalogFilePickerSuccessCatalogType: TypeAlias = Literal["offering", "product", "inventory", "store", "promotion", "hotel", "flight", "job", "vehicle", "real_estate", "education", "destination", "app"]
+
+OpenCatalogFilePickerSuccessType: TypeAlias = Literal["offering", "product", "inventory", "store", "promotion", "hotel", "flight", "job", "vehicle", "real_estate", "education", "destination", "app"]
 
 class OpenCreativeEnginesPageInput(TypedDict):
     engineId: NotRequired[JsonValue]
@@ -24593,6 +24637,8 @@ OpenApprovalsError: TypeAlias = "V3ToolErrorResponse"
 OpenCampaignReceiptError: TypeAlias = "V3ToolErrorResponse"
 
 OpenCampaignsPageError: TypeAlias = "V3ToolErrorResponse"
+
+OpenCatalogFilePickerError: TypeAlias = "V3ToolErrorResponse"
 
 OpenCreativeEnginesPageError: TypeAlias = "V3ToolErrorResponse"
 

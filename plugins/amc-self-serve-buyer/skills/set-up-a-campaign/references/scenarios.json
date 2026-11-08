@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.11.1",
+  "skillVersion": "1.12.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -95,12 +95,12 @@
     },
     {
       "id": "catalog-from-connected-file",
-      "title": "Offer a connected Drive or SharePoint file without browsing it",
+      "title": "Open the file picker for a connected Drive or SharePoint file",
       "given": "The buyer says their product spreadsheet lives in a Google Drive folder their account has connected, and wants it as the advertiser's catalog. They have not given a connection ID or file ID.",
       "expect": [
-        "The agent sends the buyer to the Catalogs page in the Apostra app to pick the file from its \"Connected folder\" source, and does not claim it can list or open their folders or files.",
-        "The agent does not invent a sourceId or itemId, and calls save_catalog with file only if the buyer gives both IDs.",
-        "If the buyer's account has no connected folder, the agent says connected folders are in early access and offers a feed URL or items instead."
+        "The agent opens open_catalog_file_picker with the advertiser's ID (and catalogId only to replace an existing catalog's source), lets the buyer pick the file in the Task, and does not claim it can list or open their folders or files.",
+        "The agent does not ask for a connection ID or file ID or send the buyer to the Apostra app, reads the saved catalog with get afterwards, and calls save_catalog with file directly only if the buyer gives both IDs.",
+        "If the tool refuses with a VALIDATION_ERROR because the account has no connected files, the agent says connected folders are in early access and offers a feed URL or items instead."
       ]
     }
   ]
