@@ -9134,7 +9134,7 @@ class SaveCampaignInput(TypedDict):
     channelGroups: NotRequired[list[SaveCampaignInputChannelGroupsItemKindPreset | SaveCampaignInputChannelGroupsItemKindCustom] | None]
     '\n    Inventory execution groups. Use a preset or custom AdCP dimensions; null removes all groups.\n    '
     audienceConfig: NotRequired[SaveCampaignInputAudienceConfig]
-    '\n    Campaign audiences. deleteMissing: true replaces each list. Seller sync is unavailable (AI-10203).\n    '
+    '\n    Audiences. deleteMissing: true replaces each list. A seller must take mapped audiences to launch.\n    '
     labels: NotRequired[list[SaveCampaignRequestLabelWriteEntry]]
     '\n    Replace labels per dimension; empty values clears.\n    '
     campaignPropertyListId: NotRequired[str | None]

@@ -41182,7 +41182,7 @@ paths:
                             additionalProperties: false
                     - type: 'null'
                 audienceConfig:
-                  description: 'Campaign audiences. deleteMissing: true replaces each list. Seller sync is unavailable (AI-10203).'
+                  description: 'Audiences. deleteMissing: true replaces each list. A seller must take mapped audiences to launch.'
                   type: object
                   properties:
                     targetAudienceIds:
