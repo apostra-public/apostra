@@ -17685,7 +17685,7 @@ export type SaveCampaignData = {
             presetVersion?: never;
         }> | null;
         /**
-         * Campaign audiences. deleteMissing: true replaces each list. Seller sync is unavailable (AI-10203).
+         * Audiences. deleteMissing: true replaces each list. A seller must take mapped audiences to launch.
          */
         audienceConfig?: {
             /**
