@@ -4920,6 +4920,8 @@ class GetStatusResult(TypedDict):
     landing: NotRequired[GetStatusResultLandingPageHome | GetStatusResultLandingPageAgent]
     '\n    The page an Agents account lands on.\n    '
     resources: NotRequired[list[GetStatusResultResourcesItem]]
+    registration: NotRequired[GetStatusResultRegistrationValue | None]
+    '\n    Agent Registration credentials only. null: not read; call get_status again.\n    '
 
 class GetStatusResultAccount(TypedDict):
     accountId: float
@@ -5112,6 +5114,11 @@ class GetStatusResultReachableAccountsItem(TypedDict):
     advertiserIds: NotRequired[list[float]]
     advertiserCount: NotRequired[float]
     access: NotRequired[Literal["read", "read_write"]]
+
+class GetStatusResultRegistrationValue(TypedDict):
+    activationId: str
+    status: Literal["sandbox", "claimed"]
+    expiresAt: str | None
 
 class GetStatusResultResourcesItem(TypedDict):
     id: str
