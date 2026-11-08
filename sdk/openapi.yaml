@@ -31652,6 +31652,13 @@ paths:
                                 type: string
                               query:
                                 type: string
+                              updateFrequency:
+                                type: string
+                                enum:
+                                  - realtime
+                                  - hourly
+                                  - daily
+                                  - weekly
                             additionalProperties: false
                         required:
                           - catalogId
