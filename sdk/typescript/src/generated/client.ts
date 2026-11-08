@@ -787,14 +787,14 @@ export class Apostra extends Transport {
   /** Create a buyer agent, or with id make one change: name, advertiser access, lifecycle state, or credential handoff. Returns the data together with response headers and request ID. */
   saveBuyerAgentWithResponse(input: SaveBuyerAgentInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBuyerAgentResult>> { return this.requestDetailed("save_buyer_agent", input, options) }
   /**
-   * Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v2/setup/v3/identity-setup.
+   * Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v3/identity-setup.
    *
    * @example
    * await client.saveBuyerOperator(input, { idempotencyKey: 'stable-key' })
    */
   saveBuyerOperator(input: SaveBuyerOperatorInput, options: WriteRequestOptions): Promise<SaveBuyerOperatorResult> { return this.request("save_buyer_operator", input, options) }
 
-  /** Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v2/setup/v3/identity-setup. Returns the data together with response headers and request ID. */
+  /** Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v3/identity-setup. Returns the data together with response headers and request ID. */
   saveBuyerOperatorWithResponse(input: SaveBuyerOperatorInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBuyerOperatorResult>> { return this.requestDetailed("save_buyer_operator", input, options) }
   /**
    * Create a draft RFP (the buyer’s ask: flight, budget range for proposals, channels, geo, all optional), change a draft by rfpId, or copy an RFP into a new draft with duplicateFromRfpId. Each new RFP gets its own plan. Opening an RFP to sellers is not available yet.

@@ -381,11 +381,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveBuyerAgentResult], self._request_with_response("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_operator(self, input: models.SaveBuyerOperatorInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerOperatorResult:
-        "Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v2/setup/v3/identity-setup."
+        "Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v3/identity-setup."
         return cast("models.SaveBuyerOperatorResult", self._request("save_buyer_operator", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_operator_with_response(self, input: models.SaveBuyerOperatorInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBuyerOperatorResult]:
-        "Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v2/setup/v3/identity-setup. Returns the data together with response headers and request ID."
+        "Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v3/identity-setup. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBuyerOperatorResult], self._request_with_response("save_buyer_operator", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_rfp(self, input: models.SaveBuyerRfpInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerRfpResult:
@@ -1006,11 +1006,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveBuyerAgentResult], await self._request_with_response("save_buyer_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_operator(self, input: models.SaveBuyerOperatorInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerOperatorResult:
-        "Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v2/setup/v3/identity-setup."
+        "Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v3/identity-setup."
         return cast("models.SaveBuyerOperatorResult", await self._request("save_buyer_operator", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_operator_with_response(self, input: models.SaveBuyerOperatorInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBuyerOperatorResult]:
-        "Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v2/setup/v3/identity-setup. Returns the data together with response headers and request ID."
+        "Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v3/identity-setup. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBuyerOperatorResult], await self._request_with_response("save_buyer_operator", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_rfp(self, input: models.SaveBuyerRfpInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerRfpResult:

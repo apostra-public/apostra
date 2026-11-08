@@ -7231,7 +7231,7 @@ class SaveAdvertiserInput(TypedDict):
     publicBrand: NotRequired[bool]
     '\n    Require a published brand.json or AAO-hosted profile when linking brand; no inferred branding.\n    '
     identityContract: NotRequired[Literal["confirmed-v1"]]
-    '\n    Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.\n    '
+    '\n    Opt in to identity preview and confirmation. Guide: /v3/identity-setup.\n    '
     preview: NotRequired[bool]
     '\n    Preview an existing advertiser brand change without saving.\n    '
     confirmationToken: NotRequired[str]
@@ -7750,7 +7750,7 @@ class SaveAdvertiserResultActionNeedsInputNeedsInputItem(TypedDict):
 class SaveAdvertiserResultActionPreview(TypedDict):
     action: Literal["preview"]
     identityContract: Literal["confirmed-v1"]
-    '\n    Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.\n    '
+    '\n    Opt in to identity preview and confirmation. Guide: /v3/identity-setup.\n    '
     advertiserId: str
     before: JsonValue
     after: SaveAdvertiserResultActionPreviewAfter
@@ -8913,7 +8913,7 @@ class SaveBuyerOperatorInput(TypedDict):
     operator_unit: NotRequired[SaveBuyerOperatorInputOperatorUnit]
     '\n    Short seller-visible code for this account, for example rce. Optional: the saved code stays, or one is generated from the account name. Never default, global or primary.\n    '
     identityContract: NotRequired[Literal["confirmed-v1"]]
-    '\n    Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.\n    '
+    '\n    Opt in to identity preview and confirmation. Guide: /v3/identity-setup.\n    '
     sellerHistoryCoop: NotRequired[bool]
     '\n    Join (true) or leave (false) the seller-history co-op, the data co-op of Terms of Service section 6.3; needs preview and confirmation. Resend the saved identity to change only this. Guide: /v2/concepts/seller-history-co-op.\n    '
     preview: NotRequired[bool]
@@ -8932,7 +8932,7 @@ class SaveBuyerOperatorInputOperatorUnit(TypedDict):
 class SaveBuyerOperatorResult(TypedDict):
     action: Literal["preview", "saved", "unchanged"]
     identityContract: NotRequired[Literal["confirmed-v1"]]
-    '\n    Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.\n    '
+    '\n    Opt in to identity preview and confirmation. Guide: /v3/identity-setup.\n    '
     accessChanged: Literal[False]
     operatorIdentity: NotRequired[SaveBuyerOperatorResultOperatorIdentity]
     preview: NotRequired[SaveBuyerOperatorResultPreview]
@@ -17363,7 +17363,7 @@ class SaveSellerInput(TypedDict):
     resolveBrand: NotRequired[SaveSellerRequestResolveBrand]
     '\n    Look up public brand.json without saving. Send as the only field.\n    '
     identityContract: NotRequired[Literal["confirmed-v1"]]
-    '\n    Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.\n    '
+    '\n    Opt in to identity preview and confirmation. Guide: /v3/identity-setup.\n    '
     preview: NotRequired[bool]
     '\n    Preview an operator-domain change without saving.\n    '
     confirmationToken: NotRequired[str]

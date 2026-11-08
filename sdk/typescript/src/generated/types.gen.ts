@@ -13556,7 +13556,7 @@ export type SaveAdvertiserData = {
          */
         publicBrand?: boolean;
         /**
-         * Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.
+         * Opt in to identity preview and confirmation. Guide: /v3/identity-setup.
          */
         identityContract?: 'confirmed-v1';
         /**
@@ -14571,7 +14571,7 @@ export type SaveAdvertiserResponses = {
         data: {
             action: 'preview';
             /**
-             * Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.
+             * Opt in to identity preview and confirmation. Guide: /v3/identity-setup.
              */
             identityContract: 'confirmed-v1';
             advertiserId: string;
@@ -16654,7 +16654,7 @@ export type SaveBuyerOperatorData = {
             id: string;
         };
         /**
-         * Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.
+         * Opt in to identity preview and confirmation. Guide: /v3/identity-setup.
          */
         identityContract?: 'confirmed-v1';
         /**
@@ -16762,7 +16762,7 @@ export type SaveBuyerOperatorResponses = {
         data: {
             action: 'preview' | 'saved' | 'unchanged';
             /**
-             * Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.
+             * Opt in to identity preview and confirmation. Guide: /v3/identity-setup.
              */
             identityContract?: 'confirmed-v1';
             accessChanged: false;
@@ -31232,7 +31232,7 @@ export type SaveSellerData = {
          */
         resolveBrand?: SaveSellerRequestResolveBrand;
         /**
-         * Opt in to identity preview and confirmation. Guide: /v2/setup/v3/identity-setup.
+         * Opt in to identity preview and confirmation. Guide: /v3/identity-setup.
          */
         identityContract?: 'confirmed-v1';
         /**

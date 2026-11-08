@@ -980,7 +980,7 @@
         ]
       }
     ],
-    "summary": "Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v2/setup/v3/identity-setup."
+    "summary": "Save buyer commercial identity. Read get_status; use identityContract:confirmed-v1 for preview and confirmation. Guide: /v3/identity-setup."
   },
   "save_buyer_rfp": {
     "path": "/tools/save_buyer_rfp",
