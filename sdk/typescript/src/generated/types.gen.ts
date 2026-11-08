@@ -10576,7 +10576,7 @@ export type OpenCampaignsPageSuccessPageHumanHandoffRequired = {
         instruction: 'Show the account and action. Open only at the user’s request; otherwise return the URL. Do not log or post this link publicly.';
     };
     page: {
-        resourceUri: 'ui://agentic-api/conversation-history/mcp-app.html' | 'ui://agentic-api/agent-v2/mcp-app.html' | 'ui://agentic-api/developer-home/mcp-app.html' | 'ui://agentic-api/agents/mcp-app.html' | 'ui://agentic-api/create-agent/mcp-app.html' | 'ui://agentic-api/claim-agent/mcp-app.html' | 'ui://agentic-api/configure-agent-connection/mcp-app.html' | 'ui://agentic-api/register-agent-observed-revision/mcp-app.html' | 'ui://agentic-api/buyer-account-admission/mcp-app.html' | 'ui://agentic-api/tars-org-supply-asks/mcp-app.html' | 'ui://agentic-api/tars-run-rate/mcp-app.html' | 'ui://agentic-api/tars-connections/mcp-app.html' | 'ui://agentic-api/tars-internal-library/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-library/mcp-app.html' | 'ui://agentic-api/tars-approved-deck-modules/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-operations/mcp-app.html' | 'ui://agentic-api/business-rules/mcp-app.html' | 'ui://agentic-api/demo-storefront/mcp-app.html' | 'ui://agentic-api/agent-source-credentials/mcp-app.html' | 'ui://agentic-api/property-roster/mcp-app.html' | 'ui://agentic-api/seller-account-feed/mcp-app.html' | 'ui://agentic-api/esa-signals/mcp-app.html' | 'ui://agentic-api/media-buy-retry/mcp-app.html' | 'ui://agentic-api/inventory-selector/mcp-app.html' | 'ui://agentic-api/modular-inventory-source/mcp-app.html' | 'ui://agentic-api/modular-connect/mcp-app.html' | 'ui://agentic-api/source-discovery-preview/mcp-app.html' | 'ui://agentic-api/partner-connection/mcp-app.html' | 'ui://agentic-api/agent-sources/mcp-app.html' | 'ui://agentic-api/agent-overview/mcp-app.html' | 'ui://agentic-api/agent-webhooks/mcp-app.html' | 'ui://agentic-api/agent-activity/mcp-app.html' | 'ui://agentic-api/organization-domains/mcp-app.html' | 'ui://agentic-api/modular-avails-commit/mcp-app.html' | 'ui://agentic-api/plan-billing/mcp-app.html' | 'ui://agentic-api/connections/mcp-app.html' | 'ui://agentic-api/creative-engines/mcp-app.html' | 'ui://agentic-api/all-advertisers-home/mcp-app.html' | 'ui://agentic-api/add-advertiser/mcp-app.html' | 'ui://agentic-api/buyer-setup/mcp-app.html' | 'ui://agentic-api/campaigns/mcp-app.html' | 'ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html' | 'ui://agentic-api/creative-library-v3/mcp-app.html' | 'ui://agentic-api/upload-creative-asset/mcp-app.html' | 'ui://agentic-api/creative-composer-task/mcp-app.html' | 'ui://agentic-api/variant-gallery/mcp-app.html' | 'ui://agentic-api/seller-setup/mcp-app.html' | 'ui://agentic-api/approvals/mcp-app.html' | 'ui://agentic-api/notifications/mcp-app.html' | 'ui://agentic-api/buyer-notifications/mcp-app.html' | 'ui://agentic-api/buyer-webhooks/mcp-app.html' | 'ui://agentic-api/proposal-pass-v3/mcp-app.html' | 'ui://agentic-api/sessions/mcp-app.html' | 'ui://agentic-api/seller-dashboard/mcp-app.html' | 'ui://agentic-api/seller-dashboard-v3/mcp-app.html' | 'ui://agentic-api/product-marketing-v3/mcp-app.html' | 'ui://agentic-api/library/mcp-app.html' | 'ui://agentic-api/integrations/mcp-app.html' | 'ui://agentic-api/release-notes/mcp-app.html' | 'ui://agentic-api/playbook/mcp-app.html' | 'ui://agentic-api/media-kit/mcp-app.html' | 'ui://agentic-api/business-profile/mcp-app.html' | 'ui://agentic-api/buyer-discounts/mcp-app.html' | 'ui://agentic-api/esa-sync-diagnostics/mcp-app.html' | 'ui://agentic-api/esa-inventory-source/mcp-app.html' | 'ui://agentic-api/source-diagnostics/mcp-app.html' | 'ui://agentic-api/sponsored-buyers/mcp-app.html' | 'ui://agentic-api/pending-operations/mcp-app.html' | 'ui://agentic-api/storefront-briefs/mcp-app.html' | 'ui://agentic-api/activity-log/mcp-app.html' | 'ui://agentic-api/merchandising-simulator/mcp-app.html' | 'ui://agentic-api/media-buys/mcp-app.html' | 'ui://agentic-api/media-buy-timeline/mcp-app.html' | 'ui://agentic-api/components/mcp-app.html' | 'ui://agentic-api/seller-accounts/mcp-app.html';
+        resourceUri: 'ui://agentic-api/conversation-history/mcp-app.html' | 'ui://agentic-api/agent-v2/mcp-app.html' | 'ui://agentic-api/developer-home/mcp-app.html' | 'ui://agentic-api/agents/mcp-app.html' | 'ui://agentic-api/create-agent/mcp-app.html' | 'ui://agentic-api/claim-agent/mcp-app.html' | 'ui://agentic-api/configure-agent-connection/mcp-app.html' | 'ui://agentic-api/register-agent-observed-revision/mcp-app.html' | 'ui://agentic-api/buyer-account-admission/mcp-app.html' | 'ui://agentic-api/tars-org-supply-asks/mcp-app.html' | 'ui://agentic-api/tars-run-rate/mcp-app.html' | 'ui://agentic-api/tars-connections/mcp-app.html' | 'ui://agentic-api/tars-internal-library/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-library/mcp-app.html' | 'ui://agentic-api/tars-approved-deck-modules/mcp-app.html' | 'ui://agentic-api/tars-marketing-email-operations/mcp-app.html' | 'ui://agentic-api/business-rules/mcp-app.html' | 'ui://agentic-api/demo-storefront/mcp-app.html' | 'ui://agentic-api/agent-source-credentials/mcp-app.html' | 'ui://agentic-api/property-roster/mcp-app.html' | 'ui://agentic-api/seller-account-feed/mcp-app.html' | 'ui://agentic-api/esa-signals/mcp-app.html' | 'ui://agentic-api/media-buy-retry/mcp-app.html' | 'ui://agentic-api/inventory-selector/mcp-app.html' | 'ui://agentic-api/modular-inventory-source/mcp-app.html' | 'ui://agentic-api/modular-connect/mcp-app.html' | 'ui://agentic-api/source-discovery-preview/mcp-app.html' | 'ui://agentic-api/partner-connection/mcp-app.html' | 'ui://agentic-api/agent-sources/mcp-app.html' | 'ui://agentic-api/agent-overview/mcp-app.html' | 'ui://agentic-api/agent-webhooks/mcp-app.html' | 'ui://agentic-api/agent-activity/mcp-app.html' | 'ui://agentic-api/organization-domains/mcp-app.html' | 'ui://agentic-api/modular-avails-commit/mcp-app.html' | 'ui://agentic-api/plan-billing/mcp-app.html' | 'ui://agentic-api/connections/mcp-app.html' | 'ui://agentic-api/creative-engines/mcp-app.html' | 'ui://agentic-api/all-advertisers-home/mcp-app.html' | 'ui://agentic-api/add-advertiser/mcp-app.html' | 'ui://agentic-api/buyer-setup/mcp-app.html' | 'ui://agentic-api/campaigns/mcp-app.html' | 'ui://agentic-api/creative-library-v3-assets-v1/mcp-app.html' | 'ui://agentic-api/creative-library-v3/mcp-app.html' | 'ui://agentic-api/upload-creative-asset/mcp-app.html' | 'ui://agentic-api/creative-composer-task/mcp-app.html' | 'ui://agentic-api/catalog-file-picker/mcp-app.html' | 'ui://agentic-api/variant-gallery/mcp-app.html' | 'ui://agentic-api/seller-setup/mcp-app.html' | 'ui://agentic-api/approvals/mcp-app.html' | 'ui://agentic-api/notifications/mcp-app.html' | 'ui://agentic-api/buyer-notifications/mcp-app.html' | 'ui://agentic-api/buyer-webhooks/mcp-app.html' | 'ui://agentic-api/proposal-pass-v3/mcp-app.html' | 'ui://agentic-api/sessions/mcp-app.html' | 'ui://agentic-api/seller-dashboard/mcp-app.html' | 'ui://agentic-api/seller-dashboard-v3/mcp-app.html' | 'ui://agentic-api/product-marketing-v3/mcp-app.html' | 'ui://agentic-api/library/mcp-app.html' | 'ui://agentic-api/integrations/mcp-app.html' | 'ui://agentic-api/release-notes/mcp-app.html' | 'ui://agentic-api/playbook/mcp-app.html' | 'ui://agentic-api/media-kit/mcp-app.html' | 'ui://agentic-api/business-profile/mcp-app.html' | 'ui://agentic-api/buyer-discounts/mcp-app.html' | 'ui://agentic-api/esa-sync-diagnostics/mcp-app.html' | 'ui://agentic-api/esa-inventory-source/mcp-app.html' | 'ui://agentic-api/source-diagnostics/mcp-app.html' | 'ui://agentic-api/sponsored-buyers/mcp-app.html' | 'ui://agentic-api/pending-operations/mcp-app.html' | 'ui://agentic-api/storefront-briefs/mcp-app.html' | 'ui://agentic-api/activity-log/mcp-app.html' | 'ui://agentic-api/merchandising-simulator/mcp-app.html' | 'ui://agentic-api/media-buys/mcp-app.html' | 'ui://agentic-api/media-buy-timeline/mcp-app.html' | 'ui://agentic-api/components/mcp-app.html' | 'ui://agentic-api/seller-accounts/mcp-app.html';
         advertiserId?: string;
         campaignId?: string;
         capability: 'reauthenticate_in_browser' | 'manage_webhooks';
@@ -10597,6 +10597,138 @@ export type OpenCampaignsPageSuccessPageHumanHandoffUnavailable = {
     reason: 'owner_browser_url_unavailable';
     instruction: 'This Page has no supported browser URL. Use an MCP UI host for this Page. Do not construct a platform URL or treat this result as completion.';
 };
+
+export type OpenCatalogFilePickerData = {
+    body: unknown & {
+        /**
+         * The advertiser the catalog belongs to; resolve a name with search(kind: "advertiser") first.
+         */
+        advertiserId: string;
+        /**
+         * Replace this catalog's source with the chosen file. Omit to make a new catalog.
+         */
+        catalogId?: string;
+        /**
+         * The type to pre-select for a new catalog; the person can change it. Not with catalogId.
+         */
+        type?: 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers?: {
+        /**
+         * Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are sent they must name the same account.
+         *
+         * @deprecated
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/open_catalog_file_picker';
+};
+
+export type OpenCatalogFilePickerError = OpenCatalogFilePickerErrors[keyof OpenCatalogFilePickerErrors];
+
+export type OpenCatalogFilePickerErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * A required service is unavailable
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type OpenCatalogFilePickerResponse = OpenCatalogFilePickerResponses[keyof OpenCatalogFilePickerResponses];
+
+export type OpenCatalogFilePickerResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            advertiser: {
+                advertiserId: string;
+                name: string;
+            };
+            catalog?: {
+                catalogId: string;
+                name: string | null;
+                type: OpenCatalogFilePickerSuccessCatalogType;
+                source: {
+                    sourceType: 'inline' | 'url' | 'file' | null;
+                    fileName: string | null;
+                };
+                declaration: {
+                    feedFieldMappings?: Array<{
+                        [key: string]: unknown;
+                    }>;
+                    conversionEvents?: Array<string>;
+                    contentIdType?: string;
+                    ids?: Array<string>;
+                    gtins?: Array<string>;
+                    tags?: Array<string>;
+                    category?: string;
+                    query?: string;
+                };
+            };
+            type?: OpenCatalogFilePickerSuccessType;
+        };
+        error: null;
+    };
+};
+
+export type OpenCatalogFilePickerSuccessCatalogType = 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
+
+export type OpenCatalogFilePickerSuccessType = 'offering' | 'product' | 'inventory' | 'store' | 'promotion' | 'hotel' | 'flight' | 'job' | 'vehicle' | 'real_estate' | 'education' | 'destination' | 'app';
 
 export type OpenConnectionsPageData = OpenMediaPartnersPageData;
 
