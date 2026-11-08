@@ -581,11 +581,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveSessionResult], self._request_with_response("save_session", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_signal(self, input: models.SaveSignalInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSignalResult:
-        "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates."
+        "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates. dryRun checks a new managed draft and saves nothing."
         return cast("models.SaveSignalResult", self._request("save_signal", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_signal_with_response(self, input: models.SaveSignalInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveSignalResult]:
-        "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates. Returns the data together with response headers and request ID."
+        "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates. dryRun checks a new managed draft and saves nothing. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveSignalResult], self._request_with_response("save_signal", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_wholesale_product(self, input: models.SaveWholesaleProductInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveWholesaleProductResult:
@@ -1206,11 +1206,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveSessionResult], await self._request_with_response("save_session", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_signal(self, input: models.SaveSignalInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSignalResult:
-        "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates."
+        "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates. dryRun checks a new managed draft and saves nothing."
         return cast("models.SaveSignalResult", await self._request("save_signal", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_signal_with_response(self, input: models.SaveSignalInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveSignalResult]:
-        "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates. Returns the data together with response headers and request ID."
+        "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates. dryRun checks a new managed draft and saves nothing. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveSignalResult], await self._request_with_response("save_signal", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_wholesale_product(self, input: models.SaveWholesaleProductInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveWholesaleProductResult:
