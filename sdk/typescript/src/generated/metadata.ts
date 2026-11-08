@@ -1467,7 +1467,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates."
+    "summary": "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates. dryRun checks a new managed draft and saves nothing."
   },
   "save_wholesale_product": {
     "path": "/tools/save_wholesale_product",

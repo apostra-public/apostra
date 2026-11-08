@@ -1037,14 +1037,14 @@ export class Apostra extends Transport {
   /** Persist one private coaching note on an accessible Session. Requires a Session ID, note and clientRequestId; never sends a customer message. Returns the data together with response headers and request ID. */
   saveSessionWithResponse(input: SaveSessionInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveSessionResult>> { return this.requestDetailed("save_session", input, options) }
   /**
-   * Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates.
+   * Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates. dryRun checks a new managed draft and saves nothing.
    *
    * @example
    * await client.saveSignal(input, { idempotencyKey: 'stable-key' })
    */
   saveSignal(input: SaveSignalInput, options: WriteRequestOptions): Promise<SaveSignalResult> { return this.request("save_signal", input, options) }
 
-  /** Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates. Returns the data together with response headers and request ID. */
+  /** Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates. dryRun checks a new managed draft and saves nothing. Returns the data together with response headers and request ID. */
   saveSignalWithResponse(input: SaveSignalInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveSignalResult>> { return this.requestDetailed("save_signal", input, options) }
   /**
    * Create, change, or delete one wholesale product on an ad-server source — what buyers discover and buy. Omit `id` to create: needs `name` and `inventory`, validated first. Pass `id` to change only the fields you name. `active` = buyable, `archived` = off the market and reversible, `delete` is not.

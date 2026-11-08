@@ -57140,10 +57140,10 @@ paths:
       operationId: save_signal
       summary: >-
         Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes
-        need a complete draft; read before updates.
+        need a complete draft; read before updates. dryRun checks a new managed draft and saves nothing.
       description: >-
         Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes
-        need a complete draft; read before updates.
+        need a complete draft; read before updates. dryRun checks a new managed draft and saves nothing.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -57217,6 +57217,9 @@ paths:
                 confirmArchiveCascade:
                   description: 'Required to archive a catalog signal: it also archives targeting profiles using it.'
                   type: boolean
+                dryRun:
+                  description: 'Managed draft, new signal only: run the save checks and the ad server check, and save nothing.'
+                  type: boolean
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -57267,6 +57270,19 @@ paths:
                       - not:
                           required:
                             - sourceId
+                - if:
+                    properties:
+                      dryRun:
+                        const: true
+                    required:
+                      - dryRun
+                  then:
+                    allOf:
+                      - required:
+                          - draft
+                      - not:
+                          required:
+                            - id
       responses:
         '200':
           description: Typed operation result
@@ -57282,6 +57298,8 @@ paths:
                       - $ref: '#/components/schemas/save_signal_success_SaveSignalSuccessUpdated'
                       - $ref: '#/components/schemas/save_signal_success_SaveSignalSuccessDeleted'
                       - $ref: '#/components/schemas/save_signal_success_SaveSignalSuccessUnchanged'
+                      - $ref: '#/components/schemas/save_signal_success_SaveSignalSuccessValidated'
+                      - $ref: '#/components/schemas/save_signal_success_SaveSignalSuccessValidationFailed'
                       - anyOf:
                           - $ref: '#/components/schemas/save_signal_success_SellerSaveCandidateReplayed'
                           - $ref: '#/components/schemas/save_signal_success_SellerSaveReplayed'
@@ -58310,7 +58328,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -58320,6 +58339,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -59313,6 +59333,19 @@ paths:
                         properties:
                           kind:
                             const: wholesale_product
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
                         required:
                           - kind
                     - if:
@@ -59861,7 +59894,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -59871,6 +59905,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -60867,6 +60902,19 @@ paths:
                         properties:
                           kind:
                             const: wholesale_product
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
                         required:
                           - kind
                     - if:
@@ -61413,7 +61461,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -61423,6 +61472,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -61555,6 +61605,19 @@ paths:
                         properties:
                           kind:
                             const: wholesale_product
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
                         required:
                           - kind
                     - if:
@@ -62101,7 +62164,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -62111,6 +62175,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -63113,6 +63178,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -63653,7 +63731,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -63663,6 +63742,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -64650,6 +64730,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -65190,7 +65283,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -65200,6 +65294,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -66194,6 +66289,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -66734,7 +66842,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -66744,6 +66853,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -67737,6 +67847,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -68277,7 +68400,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -68287,6 +68411,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -69284,6 +69409,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -69819,7 +69957,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -69829,6 +69968,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       not: {}
@@ -69989,6 +70129,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -70524,7 +70677,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -70534,6 +70688,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       not: {}
@@ -70692,6 +70847,19 @@ paths:
                         properties:
                           kind:
                             const: wholesale_product
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
                         required:
                           - kind
                     - if:
@@ -71238,7 +71406,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -71248,6 +71417,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -72242,6 +72412,19 @@ paths:
                         properties:
                           kind:
                             const: wholesale_product
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
                         required:
                           - kind
                     - if:
@@ -72788,7 +72971,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -72798,6 +72982,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -73798,6 +73983,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -74338,7 +74536,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -74348,6 +74547,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -75350,6 +75550,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -75888,7 +76101,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -75898,6 +76112,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -76897,6 +77112,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -77435,7 +77663,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -77445,6 +77674,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -78444,6 +78674,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -78982,7 +79225,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -78992,6 +79236,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -79992,6 +80237,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -80530,7 +80788,8 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
                         wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind.
+                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
+                        status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -80540,6 +80799,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - authoring
                           - pulse
                     sourceId:
                       description: >-
@@ -81531,6 +81791,19 @@ paths:
                         properties:
                           kind:
                             const: wholesale_product
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
                         required:
                           - kind
                     - if:
@@ -103762,6 +104035,92 @@ components:
         - action
         - object
       additionalProperties: {}
+    save_signal_success_SaveSignalSuccessValidated:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: validated
+        saved:
+          type: boolean
+          const: false
+        dryRun:
+          type: boolean
+          const: true
+        valid:
+          type: boolean
+          const: true
+        sourceId:
+          type: string
+        signalId:
+          type:
+            - string
+            - 'null'
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/save_signal_success_SaveSignalSuccessValidatedWarningsItem'
+      required:
+        - outcome
+        - saved
+        - dryRun
+        - valid
+        - sourceId
+        - signalId
+        - warnings
+      additionalProperties: {}
+    save_signal_success_SaveSignalSuccessValidationFailed:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: validation_failed
+        saved:
+          type: boolean
+          const: false
+        dryRun:
+          type: boolean
+          const: true
+        valid:
+          type: boolean
+          const: false
+        refused:
+          type: string
+          const: validation_failed
+        sourceId:
+          type: string
+        signalId:
+          type:
+            - string
+            - 'null'
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+              - code
+              - message
+            additionalProperties: {}
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/save_signal_success_SaveSignalSuccessValidationFailedWarningsItem'
+      required:
+        - outcome
+        - saved
+        - dryRun
+        - valid
+        - refused
+        - sourceId
+        - signalId
+        - errors
+        - warnings
+      additionalProperties: {}
     save_signal_success_SellerSaveCandidateReplayed:
       type: object
       properties:
@@ -103818,6 +104177,16 @@ components:
         type: string
       additionalProperties: {}
     save_signal_success_SaveSignalSuccessUnchangedObject:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    save_signal_success_SaveSignalSuccessValidatedWarningsItem:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    save_signal_success_SaveSignalSuccessValidationFailedWarningsItem:
       type: object
       propertyNames:
         type: string
