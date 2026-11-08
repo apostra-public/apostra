@@ -921,6 +921,14 @@ export type GetData = {
          */
         validationRunId?: string;
         /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -1156,6 +1164,14 @@ export type GetData = {
          * For kind agent with include diagnostics: one validation run id taken from validationRuns.
          */
         validationRunId?: string;
+        /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -1393,6 +1409,14 @@ export type GetData = {
          */
         validationRunId?: string;
         /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -1624,6 +1648,14 @@ export type GetData = {
          * For kind agent with include diagnostics: one validation run id taken from validationRuns.
          */
         validationRunId?: string;
+        /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -1857,6 +1889,14 @@ export type GetData = {
          * For kind agent with include diagnostics: one validation run id taken from validationRuns.
          */
         validationRunId?: string;
+        /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -2095,6 +2135,14 @@ export type GetData = {
          */
         validationRunId?: string;
         /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -2331,6 +2379,14 @@ export type GetData = {
          */
         validationRunId?: string;
         /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
+        /**
          * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
@@ -2556,6 +2612,14 @@ export type GetData = {
          * For kind agent with include diagnostics: one validation run id taken from validationRuns.
          */
         validationRunId?: string;
+        /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -2793,6 +2857,14 @@ export type GetData = {
          * For kind agent with include diagnostics: one validation run id taken from validationRuns.
          */
         validationRunId?: string;
+        /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
         /**
          * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
          */
@@ -3027,6 +3099,14 @@ export type GetData = {
          */
         validationRunId?: string;
         /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -3260,6 +3340,14 @@ export type GetData = {
          */
         validationRunId?: string;
         /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -3488,6 +3576,14 @@ export type GetData = {
          * For kind agent with include diagnostics: one validation run id taken from validationRuns.
          */
         validationRunId?: string;
+        /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -3726,6 +3822,14 @@ export type GetData = {
          */
         validationRunId?: string;
         /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
+        /**
          * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
@@ -3958,6 +4062,14 @@ export type GetData = {
          * For kind agent with include diagnostics: one validation run id taken from validationRuns.
          */
         validationRunId?: string;
+        /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -4195,6 +4307,14 @@ export type GetData = {
          */
         validationRunId?: string;
         /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -4430,6 +4550,14 @@ export type GetData = {
          * For kind agent with include diagnostics: one validation run id taken from validationRuns.
          */
         validationRunId?: string;
+        /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -4667,6 +4795,14 @@ export type GetData = {
          */
         validationRunId?: string;
         /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -4903,6 +5039,14 @@ export type GetData = {
          */
         validationRunId?: string;
         /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -5138,6 +5282,14 @@ export type GetData = {
          * For kind agent with include diagnostics: one validation run id taken from validationRuns.
          */
         validationRunId?: string;
+        /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * creative_session preview: facebook_feed (default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */

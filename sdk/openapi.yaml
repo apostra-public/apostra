@@ -1875,6 +1875,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -3098,6 +3108,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -4297,6 +4317,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -5484,6 +5514,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -6672,6 +6712,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -7867,6 +7917,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -9061,6 +9121,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       not: {}
                     workItemKind:
@@ -10175,6 +10245,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -11371,6 +11451,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       not: {}
                     workItemKind:
@@ -12559,6 +12649,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -13682,6 +13782,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -14799,6 +14909,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -15993,6 +16113,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       not: {}
                     workItemKind:
@@ -17181,6 +17311,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -18374,6 +18514,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -19567,6 +19717,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -20760,6 +20920,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -21953,6 +22123,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -23147,6 +23327,16 @@ paths:
                       format: uuid
                       pattern: >-
                         ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                    variantId:
+                      description: 'creative_session preview: a variants[].build_variant_id; omit for the saved draft.'
+                      type: string
+                      minLength: 1
+                    placement:
+                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      type: string
+                      enum:
+                        - facebook_feed
+                        - instagram_feed
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
