@@ -11112,6 +11112,8 @@ class SaveCreativeInput(TypedDict):
     '\n    Apply the exact preview atomically; idempotencyKey is required alongside this field.\n    '
     campaignIds: NotRequired[list[str]]
     '\n    Replace campaign membership; omit to keep it.\n    '
+    sellerIds: NotRequired[list[str]]
+    '\n    Seller ids to send this creative to before any buy; replaces the set, [] clears.\n    '
     advertiserId: NotRequired[str]
     '\n    Advertiser scope; required for advertiser-level create, update, and archive.\n    '
     mode: NotRequired[Literal["draft", "complete"]]

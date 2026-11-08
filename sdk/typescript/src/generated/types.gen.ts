@@ -20532,6 +20532,10 @@ export type SaveCreativeData = {
          */
         campaignIds?: Array<string>;
         /**
+         * Seller ids to send this creative to before any buy; replaces the set, [] clears.
+         */
+        sellerIds?: Array<string>;
+        /**
          * Advertiser scope; required for advertiser-level create, update, and archive.
          */
         advertiserId?: string;
