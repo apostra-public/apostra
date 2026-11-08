@@ -6957,7 +6957,7 @@ export type GetResponses = {
                  */
                 paymentTermsChosen: boolean;
                 /**
-                 * The payer details printed on invoices (name, invoice emails, address, tax ID). Change them with `save_billing` `payer`; an administrator approves the change on our site.
+                 * The payer details printed on invoices (name, invoice emails, address, tax ID). Change them with `save_billing` `payer`; a direct administrator saves them on the call.
                  */
                 payer: {
                     /**
@@ -15759,7 +15759,7 @@ export type SaveBillingData = {
          */
         renewal?: SaveBillingRequestSaveBillingRenewal;
         /**
-         * Change the payer details printed on invoices; returns approval_required, an administrator approves on our site. Omitted fields stay, null clears one. Send alone.
+         * Change the payer details printed on invoices; saves now. Omitted fields stay, null clears one. Send alone.
          */
         payer?: SaveBillingRequestSaveBillingPayer;
         /**
@@ -15914,9 +15914,9 @@ export type SaveBillingRequestSaveBillingPayer = {
      */
     taxId?: string | null;
     /**
-     * Stable key for this change; repeat it with the same fields to read the approval outcome. A rejected, expired or failed approval needs a new key.
+     * Accepted for compatibility and ignored; the write sets values, so repeating it changes nothing further.
      */
-    idempotencyKey: string;
+    idempotencyKey?: string;
 };
 
 /** @deprecated use SaveBillingData */
