@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.14.0",
+  "skillVersion": "1.15.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -131,6 +131,16 @@
         "The agent presents the platform seller's products as that seller's standard catalogue for the campaign's channels and markets at its listed prices, not as products chosen for the brief or as a proposal.",
         "The agent does not search or get a proposal for the catalogue seller, and does not list it among sellers that declined or made a commitment against the goal; it says the catalogue makes no commitment on the goal.",
         "When the buyer picks catalogue products, the agent stages them with save_media_buy using the seller's sellerAccountId, the productQueryId as idempotencyKey and the exact selected product data, after confirmation."
+      ]
+    },
+    {
+      "id": "media-buy-budget-sent-once",
+      "title": "Send a media buy budget in one place",
+      "given": "The buyer selects one returned TikTok Traffic product for the whole 5,000 USD budget, and separately two Pinterest products split 3,000 and 2,000 USD.",
+      "expect": [
+        "For the single TikTok product, the agent calls save_media_buy with either a top-level budget or that product's products[].budget, not both.",
+        "For the two Pinterest products, the agent sends a products[].budget for each and no top-level budget.",
+        "If save_media_buy refuses a budget, the agent reads which budget the refusal names, fixes only that, and does not change the amounts the buyer chose."
       ]
     }
   ]
