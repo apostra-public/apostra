@@ -572,6 +572,14 @@ class Apostra(SyncTransport):
         "Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, the intake hold, or the demo's expiry and sample sources. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveSellerResult], self._request_with_response("save_seller", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    def save_session(self, input: models.SaveSessionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSessionResult:
+        "Persist one private coaching note on an accessible Session. Requires a Session ID, note and clientRequestId; never sends a customer message."
+        return cast("models.SaveSessionResult", self._request("save_session", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def save_session_with_response(self, input: models.SaveSessionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveSessionResult]:
+        "Persist one private coaching note on an accessible Session. Requires a Session ID, note and clientRequestId; never sends a customer message. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveSessionResult], self._request_with_response("save_session", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def save_signal(self, input: models.SaveSignalInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSignalResult:
         "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates."
         return cast("models.SaveSignalResult", self._request("save_signal", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -1188,6 +1196,14 @@ class AsyncApostra(AsyncTransport):
     async def save_seller_with_response(self, input: models.SaveSellerInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveSellerResult]:
         "Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), Distribution's OpenAI challenge token, an admission, the intake hold, or the demo's expiry and sample sources. Scope3 eligibility and Market Maker entitlements are read-only here. Read Distribution with get. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveSellerResult], await self._request_with_response("save_seller", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_session(self, input: models.SaveSessionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSessionResult:
+        "Persist one private coaching note on an accessible Session. Requires a Session ID, note and clientRequestId; never sends a customer message."
+        return cast("models.SaveSessionResult", await self._request("save_session", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_session_with_response(self, input: models.SaveSessionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveSessionResult]:
+        "Persist one private coaching note on an accessible Session. Requires a Session ID, note and clientRequestId; never sends a customer message. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveSessionResult], await self._request_with_response("save_session", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_signal(self, input: models.SaveSignalInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSignalResult:
         "Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates."
