@@ -34593,6 +34593,17 @@ paths:
                             type: boolean
                           capabilityGap:
                             type: boolean
+                          missingPublishers:
+                            maxItems: 25
+                            type: array
+                            items:
+                              $ref: '#/components/schemas/request_proposals_success_InclusionPropertyListMissingPublisher'
+                          missingPublishersTotal:
+                            type: integer
+                            exclusiveMinimum: 0
+                            maximum: 9007199254740991
+                          missingPublishersTruncated:
+                            type: boolean
                         required:
                           - requestedDomains
                           - missingProperties
@@ -88227,6 +88238,43 @@ components:
         - code
         - message
       additionalProperties: {}
+    request_proposals_success_InclusionPropertyListMissingPublisher:
+      type: object
+      properties:
+        domain:
+          type: string
+          description: The requested publisher domain, normalized.
+        reason:
+          type: string
+          enum:
+            - no_seller
+            - reseller_only
+          description: >-
+            no_seller: no seller you can see on Apostra carries the domain. reseller_only: every seller that does is a
+            reseller, not the publisher's own seller.
+        resellers:
+          description: The sellers that resell the domain, at most 3. Only on reseller_only.
+          maxItems: 3
+          type: array
+          items:
+            type: object
+            properties:
+              sellerAccountId:
+                description: 'The seller Account id: the Account that owns this seller. Send it as sellerAccountId.'
+                $ref: >-
+                  #/components/schemas/request_proposals_success_InclusionPropertyListMissingPublisherResellersItemSellerAccountId
+              sellerName:
+                type: string
+            additionalProperties: false
+        resellersTotal:
+          description: How many sellers resell the domain. Only on reseller_only.
+          type: integer
+          exclusiveMinimum: 0
+          maximum: 9007199254740991
+      required:
+        - domain
+        - reason
+      additionalProperties: false
     request_proposals_success_PerSellerItemSellerAccountId:
       type: integer
       exclusiveMinimum: 0
@@ -88252,6 +88300,10 @@ components:
       exclusiveMinimum: 0
       maximum: 9007199254740991
     request_proposals_success_SkippedSellersSellersItemSellerAccountId:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
+    request_proposals_success_InclusionPropertyListMissingPublisherResellersItemSellerAccountId:
       type: integer
       exclusiveMinimum: 0
       maximum: 9007199254740991

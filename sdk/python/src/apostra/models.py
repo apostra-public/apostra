@@ -6706,6 +6706,9 @@ class RequestProposalsResultInclusionPropertyList(TypedDict):
     incompletePropertiesTruncated: NotRequired[bool]
     incomplete: bool
     capabilityGap: bool
+    missingPublishers: NotRequired[list[RequestProposalsSuccessInclusionPropertyListMissingPublisher]]
+    missingPublishersTotal: NotRequired[int]
+    missingPublishersTruncated: NotRequired[bool]
 
 class RequestProposalsResultInclusionPropertyListIncompletePropertiesItem(TypedDict):
     domain: str
@@ -6867,6 +6870,23 @@ class RequestProposalsSuccessExpectedGoalPerformance(TypedDict):
 RequestProposalsSuccessInclusionPropertyListIncompletePropertiesItemSellerAccountId: TypeAlias = int
 
 RequestProposalsSuccessInclusionPropertyListMissingPropertiesItemSellerAccountId: TypeAlias = int
+
+class RequestProposalsSuccessInclusionPropertyListMissingPublisher(TypedDict):
+    domain: str
+    '\n    The requested publisher domain, normalized.\n    '
+    reason: Literal["no_seller", "reseller_only"]
+    '\n    no_seller: no seller you can see on Apostra carries the domain. reseller_only: every seller that does is a reseller, not the publisher\'s own seller.\n    '
+    resellers: NotRequired[list[RequestProposalsSuccessInclusionPropertyListMissingPublisherResellersItem]]
+    '\n    The sellers that resell the domain, at most 3. Only on reseller_only.\n    '
+    resellersTotal: NotRequired[int]
+    '\n    How many sellers resell the domain. Only on reseller_only.\n    '
+
+class RequestProposalsSuccessInclusionPropertyListMissingPublisherResellersItem(TypedDict):
+    sellerAccountId: NotRequired[RequestProposalsSuccessInclusionPropertyListMissingPublisherResellersItemSellerAccountId]
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
+    sellerName: NotRequired[str]
+
+RequestProposalsSuccessInclusionPropertyListMissingPublisherResellersItemSellerAccountId: TypeAlias = int
 
 RequestProposalsSuccessPerSellerItemProductsItemSellerAccountId: TypeAlias = int
 
