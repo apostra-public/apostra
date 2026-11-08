@@ -17804,6 +17804,43 @@ SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved |
 
 SaveSellerSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
+class SaveSessionInput(TypedDict):
+    action: Literal["record_note"]
+    '\n    Persist a private Session note.\n    '
+    clientRequestId: NotRequired[SaveSessionRequestClientRequestId]
+    '\n    Idempotency key for this authorised operation.\n    '
+    sessionId: SaveSessionRequestSessionId
+    '\n    Exact accessible Session ID for the private note.\n    '
+    note: str
+    '\n    Private authored coaching note; never delivered to a buyer.\n    '
+    throughEventId: NotRequired[SaveSessionRequestThroughEventId]
+    '\n    Optional exact retained event that the note concerns.\n    '
+    expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+SaveSessionRequestClientRequestId: TypeAlias = str
+
+SaveSessionRequestSessionId: TypeAlias = str
+
+SaveSessionRequestThroughEventId: TypeAlias = str
+
+class SaveSessionResult(TypedDict):
+    sessionId: str
+    action: Literal["record_note"]
+    receipt: SaveSessionResultReceiptValue | None
+    privateNoteId: str | None
+
+class SaveSessionResultReceiptValue(TypedDict):
+    state: Literal["recorded", "queued", "sent", "failed"]
+    messageEventId: SaveSessionSuccessReceiptMessageEventId
+    deliveryRef: SaveSessionSuccessReceiptDeliveryRef | None
+
+SaveSessionSuccessReceiptDeliveryRef: TypeAlias = str
+
+SaveSessionSuccessReceiptMessageEventId: TypeAlias = str
+
 class SaveSignalInputMaterialCandidate(TypedDict):
     sourceMaterialId: str
     '\n    Source Material id returned by get(material).\n    '
@@ -24760,6 +24797,8 @@ SaveRfpError: TypeAlias = "V3ToolErrorResponse"
 SaveRfpTurnError: TypeAlias = "V3ToolErrorResponse"
 
 SaveSellerError: TypeAlias = "V3ToolErrorResponse"
+
+SaveSessionError: TypeAlias = "V3ToolErrorResponse"
 
 SaveSignalError: TypeAlias = "V3ToolErrorResponse"
 
