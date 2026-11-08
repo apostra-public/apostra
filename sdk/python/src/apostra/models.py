@@ -14347,6 +14347,10 @@ class SaveMediaBuyInputKindCreateProductsItem(TypedDict):
     '\n    Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.\n    '
     startRequiresAllCreativesApproved: NotRequired[bool]
     '\n    Create only. True: never starts before every creative is approved; the buy waits. Else books with approved creatives; the rest attach later.\n    '
+    impressions: NotRequired[float]
+    '\n    Create only: AdCP impression goal for this line item. A goal, not a billing guarantee unless the seller commits to it.\n    '
+    flight: NotRequired[SaveMediaBuyInputKindCreateProductsItemFlight]
+    '\n    Create only: this line item\'s own flight, inside the buy\'s. Omitted ends inherit the buy\'s.\n    '
     remove: NotRequired[bool]
     '\n    Update only: true removes this line item.\n    '
     pacing: NotRequired[Literal["even", "asap", "front_loaded"]]
@@ -14354,6 +14358,12 @@ class SaveMediaBuyInputKindCreateProductsItem(TypedDict):
     lineItemRef: NotRequired[str]
     '\n    Update only: products[].lineItemRef from get(kind: "media_buy", include: ["products"]), not the product id. Needed for a repeated product.\n    '
     targetingOverlay: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlay]
+
+class SaveMediaBuyInputKindCreateProductsItemFlight(TypedDict):
+    startAt: NotRequired[str]
+    '\n    ISO 8601 start; not "asap".\n    '
+    endAt: NotRequired[str]
+    '\n    ISO 8601 end.\n    '
 
 class SaveMediaBuyInputKindCreateProductsItemPerformanceStandardsItem(TypedDict):
     metric: Literal["viewability", "ivt", "completion_rate", "brand_safety", "attention_score"]
@@ -14936,6 +14946,10 @@ class SaveMediaBuyInputKindUpdateProductsItem(TypedDict):
     '\n    Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.\n    '
     startRequiresAllCreativesApproved: NotRequired[bool]
     '\n    Create only. True: never starts before every creative is approved; the buy waits. Else books with approved creatives; the rest attach later.\n    '
+    impressions: NotRequired[float]
+    '\n    Create only: AdCP impression goal for this line item. A goal, not a billing guarantee unless the seller commits to it.\n    '
+    flight: NotRequired[SaveMediaBuyInputKindUpdateProductsItemFlight]
+    '\n    Create only: this line item\'s own flight, inside the buy\'s. Omitted ends inherit the buy\'s.\n    '
     remove: NotRequired[bool]
     '\n    Update only: true removes this line item.\n    '
     pacing: NotRequired[Literal["even", "asap", "front_loaded"]]
@@ -14943,6 +14957,12 @@ class SaveMediaBuyInputKindUpdateProductsItem(TypedDict):
     lineItemRef: NotRequired[str]
     '\n    Update only: products[].lineItemRef from get(kind: "media_buy", include: ["products"]), not the product id. Needed for a repeated product.\n    '
     targetingOverlay: NotRequired[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlay]
+
+class SaveMediaBuyInputKindUpdateProductsItemFlight(TypedDict):
+    startAt: NotRequired[str]
+    '\n    ISO 8601 start; not "asap".\n    '
+    endAt: NotRequired[str]
+    '\n    ISO 8601 end.\n    '
 
 class SaveMediaBuyInputKindUpdateProductsItemPerformanceStandardsItem(TypedDict):
     metric: Literal["viewability", "ivt", "completion_rate", "brand_safety", "attention_score"]

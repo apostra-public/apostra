@@ -48936,6 +48936,25 @@ paths:
                               Create only. True: never starts before every creative is approved; the buy waits. Else
                               books with approved creatives; the rest attach later.
                             type: boolean
+                          impressions:
+                            description: >-
+                              Create only: AdCP impression goal for this line item. A goal, not a billing guarantee
+                              unless the seller commits to it.
+                            type: number
+                            minimum: 0
+                          flight:
+                            description: >-
+                              Create only: this line item's own flight, inside the buy's. Omitted ends inherit the
+                              buy's.
+                            type: object
+                            properties:
+                              startAt:
+                                description: ISO 8601 start; not "asap".
+                                type: string
+                              endAt:
+                                description: ISO 8601 end.
+                                type: string
+                            additionalProperties: false
                           remove:
                             description: 'Update only: true removes this line item.'
                             type: boolean
@@ -50720,6 +50739,25 @@ paths:
                               Create only. True: never starts before every creative is approved; the buy waits. Else
                               books with approved creatives; the rest attach later.
                             type: boolean
+                          impressions:
+                            description: >-
+                              Create only: AdCP impression goal for this line item. A goal, not a billing guarantee
+                              unless the seller commits to it.
+                            type: number
+                            minimum: 0
+                          flight:
+                            description: >-
+                              Create only: this line item's own flight, inside the buy's. Omitted ends inherit the
+                              buy's.
+                            type: object
+                            properties:
+                              startAt:
+                                description: ISO 8601 start; not "asap".
+                                type: string
+                              endAt:
+                                description: ISO 8601 end.
+                                type: string
+                            additionalProperties: false
                           remove:
                             description: 'Update only: true removes this line item.'
                             type: boolean
