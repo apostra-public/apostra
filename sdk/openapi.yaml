@@ -46751,7 +46751,9 @@ paths:
                     - OAUTH
                     - BASIC_AUTH
                 agentId:
-                  description: An agent from search kind agent. Send it alone to open the form that connects it.
+                  description: >-
+                    An agent from search kind agent. Send it alone to open the form that connects it. From an Agents
+                    account it connects that account's agent so it can be tested and certified.
                   type: string
                   format: uuid
                   pattern: >-
