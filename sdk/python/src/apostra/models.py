@@ -11155,7 +11155,7 @@ class SaveCreativeInput(TypedDict):
     isArchived: NotRequired[bool]
     '\n    true archives globally (frees the name); false restores it with creativeId and advertiserId, optionally a new name, without re-attaching campaigns.\n    '
     resync: NotRequired[Literal[True]]
-    '\n    Re-send to every media buy, live ones included. With creativeId and advertiserId: that creative on its campaigns. With campaignId alone: every creative of the campaign.\n    '
+    '\n    Re-send to every media buy, live ones included. With creativeId and advertiserId: that creative on its campaigns and to its sellerIds. With campaignId alone: every creative of the campaign.\n    '
     idempotencyKey: NotRequired[str]
     '\n    Stable key per call. Duplicate requires it and replays exactly once; V2-backed writes are best-effort.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -11507,6 +11507,7 @@ class SaveCreativeResultActionResynced(TypedDict):
     action: Literal["resynced"]
     creativeId: str
     campaigns: list[SaveCreativeResultActionResyncedCampaignsItemStatusConfirmed | SaveCreativeResultActionResyncedCampaignsItemStatusQueued | SaveCreativeResultActionResyncedCampaignsItemStatusFailed]
+    queuedSellerIds: list[str]
 
 class SaveCreativeResultActionResyncedCampaignsItemStatusConfirmed(TypedDict):
     campaignId: str

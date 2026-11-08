@@ -44237,7 +44237,7 @@ paths:
                 resync:
                   description: >-
                     Re-send to every media buy, live ones included. With creativeId and advertiserId: that creative on
-                    its campaigns. With campaignId alone: every creative of the campaign.
+                    its campaigns and to its sellerIds. With campaignId alone: every creative of the campaign.
                   type: boolean
                   const: true
                 idempotencyKey:
@@ -44989,10 +44989,15 @@ paths:
                                     - message
                                     - retryable
                                   additionalProperties: false
+                          queuedSellerIds:
+                            type: array
+                            items:
+                              type: string
                         required:
                           - action
                           - creativeId
                           - campaigns
+                          - queuedSellerIds
                         additionalProperties: false
                       - type: object
                         properties:

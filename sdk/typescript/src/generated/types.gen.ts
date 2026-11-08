@@ -20830,7 +20830,7 @@ export type SaveCreativeData = {
          */
         isArchived?: boolean;
         /**
-         * Re-send to every media buy, live ones included. With creativeId and advertiserId: that creative on its campaigns. With campaignId alone: every creative of the campaign.
+         * Re-send to every media buy, live ones included. With creativeId and advertiserId: that creative on its campaigns and to its sellerIds. With campaignId alone: every creative of the campaign.
          */
         resync?: true;
         /**
@@ -21089,6 +21089,7 @@ export type SaveCreativeResponses = {
                 queuedMediaBuyIds?: Array<string>;
                 mediaBuyIds?: never;
             }>;
+            queuedSellerIds: Array<string>;
         } | {
             action: 'campaign_resynced';
             campaignId: string;
