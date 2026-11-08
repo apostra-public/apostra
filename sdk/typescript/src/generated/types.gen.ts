@@ -12756,6 +12756,9 @@ export type RequestProposalsResponses = {
                 incompletePropertiesTruncated?: boolean;
                 incomplete: boolean;
                 capabilityGap: boolean;
+                missingPublishers?: Array<RequestProposalsSuccessInclusionPropertyListMissingPublisher>;
+                missingPublishersTotal?: number;
+                missingPublishersTruncated?: boolean;
             };
             page: {
                 returned: number;
@@ -12872,6 +12875,33 @@ export type RequestProposalsSuccessExpectedGoalPerformance = {
 export type RequestProposalsSuccessInclusionPropertyListIncompletePropertiesItemSellerAccountId = number;
 
 export type RequestProposalsSuccessInclusionPropertyListMissingPropertiesItemSellerAccountId = number;
+
+export type RequestProposalsSuccessInclusionPropertyListMissingPublisher = {
+    /**
+     * The requested publisher domain, normalized.
+     */
+    domain: string;
+    /**
+     * no_seller: no seller you can see on Apostra carries the domain. reseller_only: every seller that does is a reseller, not the publisher's own seller.
+     */
+    reason: 'no_seller' | 'reseller_only';
+    /**
+     * The sellers that resell the domain, at most 3. Only on reseller_only.
+     */
+    resellers?: Array<{
+        /**
+         * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
+         */
+        sellerAccountId?: RequestProposalsSuccessInclusionPropertyListMissingPublisherResellersItemSellerAccountId;
+        sellerName?: string;
+    }>;
+    /**
+     * How many sellers resell the domain. Only on reseller_only.
+     */
+    resellersTotal?: number;
+};
+
+export type RequestProposalsSuccessInclusionPropertyListMissingPublisherResellersItemSellerAccountId = number;
 
 export type RequestProposalsSuccessPerSellerItemProductsItemSellerAccountId = number;
 
