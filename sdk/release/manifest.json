@@ -707,6 +707,7 @@
       "GetStatusResultOperatorIdentityOperatorUnitValue": "other",
       "GetStatusResultOperatorIdentityOrganization": "object",
       "GetStatusResultReachableAccountsItem": "object",
+      "GetStatusResultRegistrationValue": "object",
       "GetStatusResultResourcesItem": "object",
       "GetStatusResultSetup": "object",
       "GetStatusResultSetupChecksItem": "object",

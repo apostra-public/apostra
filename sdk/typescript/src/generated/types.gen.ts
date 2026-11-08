@@ -8288,6 +8288,14 @@ export type GetStatusResponses = {
                 description: string;
                 audience: 'all' | 'sales' | 'creative' | 'buyer';
             }>;
+            /**
+             * Agent Registration credentials only. null: not read; call get_status again.
+             */
+            registration?: {
+                activationId: string;
+                status: 'sandbox' | 'claimed';
+                expiresAt: string | null;
+            } | null;
             [key: string]: unknown;
         };
         error: null;
