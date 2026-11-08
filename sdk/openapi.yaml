@@ -35639,9 +35639,9 @@ paths:
                                   - LISTING_ONLY
                                   - AGENTIC_MEDIA_COMPANY
                                 description: >-
-                                  Mutable seller product choice. LISTING_ONLY lists and manages inventory without
-                                  Apostra merchandising; AGENTIC_MEDIA_COMPANY includes listing plus Apostra's hosted
-                                  Merchandising Agent.
+                                  The stored account type. LISTING_ONLY is a Listing account: your products are listed
+                                  for buyers and you bring your own sales agent. AGENTIC_MEDIA_COMPANY is a Storefront
+                                  account: Apostra's hosted Storefront agent answers buyers for you.
                               - type: 'null'
                           consumesPaidWorkspace:
                             type: boolean
