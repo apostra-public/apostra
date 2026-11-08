@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.13.0",
+  "skillVersion": "1.14.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -121,6 +121,16 @@
         "The agent confirms the round will ask only Meta and Pinterest, then calls request_proposals with their sellerAccountId values as sellerAccountIds and without confirmBroadcast.",
         "If the round is refused with CAMPAIGN_SELLERS_INELIGIBLE, the agent tells the buyer which named sellers cannot be asked, says no seller was contacted, and asks how to proceed instead of widening the round.",
         "The agent does not add a seller the buyer did not name, and saves a seller list on the campaign only if the buyer asks for one."
+      ]
+    },
+    {
+      "id": "catalogue-answers-presented-as-standard-offer",
+      "title": "Present a platform seller's catalogue answer as its standard offer",
+      "given": "A campaign with a clicks goal at a €3 cost-per-click target has a terminal proposal round: two sellers returned quoted proposals, and a platform seller answered with status products, an outcome of kind returned_products with catalogue: true, five products and a productQueryId.",
+      "expect": [
+        "The agent presents the platform seller's products as that seller's standard catalogue for the campaign's channels and markets at its listed prices, not as products chosen for the brief or as a proposal.",
+        "The agent does not search or get a proposal for the catalogue seller, and does not list it among sellers that declined or made a commitment against the goal; it says the catalogue makes no commitment on the goal.",
+        "When the buyer picks catalogue products, the agent stages them with save_media_buy using the seller's sellerAccountId, the productQueryId as idempotencyKey and the exact selected product data, after confirmation."
       ]
     }
   ]

@@ -2,7 +2,7 @@
   "name": "amc-self-serve-buyer",
   "displayName": "AMC Self-Serve Buyer",
   "description": "Bundle buyer workflows for an Agentic Media Company's own self-serve plugin.",
-  "version": "1.0.0+ba371333e260",
+  "version": "1.0.0+237515961ed2",
   "author": {
     "name": "Scope3 PBC",
     "url": "https://interchange.io"
