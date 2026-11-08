@@ -15909,7 +15909,7 @@ class SaveNotificationConfigInputEventSubscriptionActionCreateSubscriptionCatego
     delivery: SaveNotificationConfigRequestEventSubscriptionSubscriptionDelivery
     '\n    How often this subscription sends permitted updates.\n    '
     category: Literal["indicators"]
-    '\n    Subscribe to indicator updates.\n    '
+    '\n    Subscribe to indicators.changed: sent when a package\'s seller indicators change.\n    '
 
 class SaveNotificationConfigInputEventSubscriptionActionCreateSubscriptionCategoryReporting(TypedDict):
     endpointId: str
