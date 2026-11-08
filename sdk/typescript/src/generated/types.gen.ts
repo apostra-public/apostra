@@ -26233,6 +26233,23 @@ export type SaveMediaBuyData = {
              */
             startRequiresAllCreativesApproved?: boolean;
             /**
+             * Create only: AdCP impression goal for this line item. A goal, not a billing guarantee unless the seller commits to it.
+             */
+            impressions?: number;
+            /**
+             * Create only: this line item's own flight, inside the buy's. Omitted ends inherit the buy's.
+             */
+            flight?: {
+                /**
+                 * ISO 8601 start; not "asap".
+                 */
+                startAt?: string;
+                /**
+                 * ISO 8601 end.
+                 */
+                endAt?: string;
+            };
+            /**
              * Update only: true removes this line item.
              */
             remove?: boolean;
@@ -27074,6 +27091,23 @@ export type SaveMediaBuyData = {
              * Create only. True: never starts before every creative is approved; the buy waits. Else books with approved creatives; the rest attach later.
              */
             startRequiresAllCreativesApproved?: boolean;
+            /**
+             * Create only: AdCP impression goal for this line item. A goal, not a billing guarantee unless the seller commits to it.
+             */
+            impressions?: number;
+            /**
+             * Create only: this line item's own flight, inside the buy's. Omitted ends inherit the buy's.
+             */
+            flight?: {
+                /**
+                 * ISO 8601 start; not "asap".
+                 */
+                startAt?: string;
+                /**
+                 * ISO 8601 end.
+                 */
+                endAt?: string;
+            };
             /**
              * Update only: true removes this line item.
              */
