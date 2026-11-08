@@ -34352,6 +34352,9 @@ paths:
                                       type: integer
                                       exclusiveMinimum: 0
                                       maximum: 9007199254740991
+                                    catalogue:
+                                      type: boolean
+                                      const: true
                                   required:
                                     - kind
                                     - productCount
@@ -34773,7 +34776,6 @@ paths:
                                   enum:
                                     - channel_mismatch
                                     - not_transactable
-                                    - wholesale_only
                                 sellerChannels:
                                   type: array
                                   items:
