@@ -10718,6 +10718,7 @@ export type OpenCatalogFilePickerResponses = {
                     tags?: Array<string>;
                     category?: string;
                     query?: string;
+                    updateFrequency?: 'realtime' | 'hourly' | 'daily' | 'weekly';
                 };
             };
             type?: OpenCatalogFilePickerSuccessType;

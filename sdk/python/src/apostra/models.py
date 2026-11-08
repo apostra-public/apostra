@@ -6162,6 +6162,7 @@ class OpenCatalogFilePickerResultCatalogDeclaration(TypedDict):
     tags: NotRequired[list[str]]
     category: NotRequired[str]
     query: NotRequired[str]
+    updateFrequency: NotRequired[Literal["realtime", "hourly", "daily", "weekly"]]
 
 class OpenCatalogFilePickerResultCatalogSource(TypedDict):
     sourceType: Literal["inline", "url", "file"] | None
