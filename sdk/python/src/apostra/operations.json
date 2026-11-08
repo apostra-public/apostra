@@ -923,7 +923,7 @@
         ]
       }
     ],
-    "summary": "Accept Terms, set the payment terms sellers are asked for, accept a plan, answer its offer, change its renewal or change the payer details on invoices. Accepting a plan and changing payer details need an administrator to approve on our site. Cards stay off MCP."
+    "summary": "Accept Terms, set the payment terms sellers are asked for, accept a plan, answer its offer, change its renewal or change the payer details on invoices. Accepting a plan needs an administrator to approve on our site. Cards stay off MCP."
   },
   "save_business_rules": {
     "path": "/tools/save_business_rules",

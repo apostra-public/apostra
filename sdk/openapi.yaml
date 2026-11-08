@@ -24638,7 +24638,7 @@ paths:
                                 additionalProperties: false
                                 description: >-
                                   The payer details printed on invoices (name, invoice emails, address, tax ID). Change
-                                  them with `save_billing` `payer`; an administrator approves the change on our site.
+                                  them with `save_billing` `payer`; a direct administrator saves them on the call.
                               standing:
                                 type: object
                                 properties:
@@ -38702,12 +38702,12 @@ paths:
       operationId: save_billing
       summary: >-
         Accept Terms, set the payment terms sellers are asked for, accept a plan, answer its offer, change its renewal
-        or change the payer details on invoices. Accepting a plan and changing payer details need an administrator to
-        approve on our site. Cards stay off MCP.
+        or change the payer details on invoices. Accepting a plan needs an administrator to approve on our site. Cards
+        stay off MCP.
       description: >-
         Accept Terms, set the payment terms sellers are asked for, accept a plan, answer its offer, change its renewal
-        or change the payer details on invoices. Accepting a plan and changing payer details need an administrator to
-        approve on our site. Cards stay off MCP.
+        or change the payer details on invoices. Accepting a plan needs an administrator to approve on our site. Cards
+        stay off MCP.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -38785,8 +38785,8 @@ paths:
                   additionalProperties: false
                 payer:
                   description: >-
-                    Change the payer details printed on invoices; returns approval_required, an administrator approves
-                    on our site. Omitted fields stay, null clears one. Send alone.
+                    Change the payer details printed on invoices; saves now. Omitted fields stay, null clears one. Send
+                    alone.
                   $ref: '#/components/schemas/save_billing_request_SaveBillingPayer'
                   type: object
                   additionalProperties: false
@@ -90714,14 +90714,10 @@ components:
               maxLength: 64
             - type: 'null'
         idempotencyKey:
+          description: Accepted for compatibility and ignored; the write sets values, so repeating it changes nothing further.
           type: string
           minLength: 1
           maxLength: 200
-          description: >-
-            Stable key for this change; repeat it with the same fields to read the approval outcome. A rejected, expired
-            or failed approval needs a new key.
-      required:
-        - idempotencyKey
       additionalProperties: false
     save_billing_request_SaveBillingPlanOfferVersion:
       type: string
