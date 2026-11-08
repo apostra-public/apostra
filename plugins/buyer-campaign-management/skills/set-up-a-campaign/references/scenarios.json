@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.12.0",
+  "skillVersion": "1.13.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -101,6 +101,26 @@
         "The agent opens open_catalog_file_picker with the advertiser's ID (and catalogId only to replace an existing catalog's source), lets the buyer pick the file in the Task, and does not claim it can list or open their folders or files.",
         "The agent does not ask for a connection ID or file ID or send the buyer to the Apostra app, reads the saved catalog with get afterwards, and calls save_catalog with file directly only if the buyer gives both IDs.",
         "If the tool refuses with a VALIDATION_ERROR because the account has no connected files, the agent says connected folders are in early access and offers a feed URL or items instead."
+      ]
+    },
+    {
+      "id": "proposal-round-to-every-eligible-seller",
+      "title": "Confirm a round to every eligible seller before sending it",
+      "given": "The buyer has a draft campaign with no seller list and asks for proposals without naming any sellers. get_status lists ten ready sellers in readyDestinations.",
+      "expect": [
+        "Before requesting proposals, the agent tells the buyer the round will go to every eligible seller, not only the sellers in the readyDestinations sample, and asks for confirmation.",
+        "After the buyer confirms, the agent calls request_proposals without sellerAccountIds and with confirmBroadcast true, and does not build a seller list from readyDestinations or search results.",
+        "The agent reports who the round asked from appliedCohort."
+      ]
+    },
+    {
+      "id": "proposal-round-to-named-sellers",
+      "title": "Ask only the sellers the buyer named",
+      "given": "The buyer asks for proposals from Meta and Pinterest only, for a draft campaign with no seller list. A seller read returns both sellers with their sellerAccountId.",
+      "expect": [
+        "The agent confirms the round will ask only Meta and Pinterest, then calls request_proposals with their sellerAccountId values as sellerAccountIds and without confirmBroadcast.",
+        "If the round is refused with CAMPAIGN_SELLERS_INELIGIBLE, the agent tells the buyer which named sellers cannot be asked, says no seller was contacted, and asks how to proceed instead of widening the round.",
+        "The agent does not add a seller the buyer did not name, and saves a seller list on the campaign only if the buyer asks for one."
       ]
     }
   ]
