@@ -1447,6 +1447,10 @@ class GetInputKindAdvertiserAccess(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -1574,6 +1578,10 @@ class GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAd
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -1699,6 +1707,10 @@ class GetInputKindAudience(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -1826,6 +1838,10 @@ class GetInputKindBuyerRfp(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     items: NotRequired[GetInputKindBuyerRfpItems]
@@ -1951,6 +1967,10 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -2078,6 +2098,10 @@ class GetInputKindConnection(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -2205,6 +2229,10 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -2330,6 +2358,10 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -2457,6 +2489,10 @@ class GetInputKindCreativeEngine(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     items: NotRequired[GetInputKindCreativeEngineItems]
@@ -2582,6 +2618,10 @@ class GetInputKindCreativeFormat(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     items: NotRequired[GetInputKindCreativeFormatItems]
@@ -2707,6 +2747,10 @@ class GetInputKindCreativeSession(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     items: NotRequired[GetInputKindCreativeSessionItems]
@@ -2832,6 +2876,10 @@ class GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDis
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -2959,6 +3007,10 @@ class GetInputKindMaterial(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -3086,6 +3138,10 @@ class GetInputKindProposal(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -3213,6 +3269,10 @@ class GetInputKindSeller(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -3340,6 +3400,10 @@ class GetInputKindSession(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -3467,6 +3531,10 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -3592,6 +3660,10 @@ class GetInputKindWholesaleProductWithSourceId(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -3733,6 +3805,10 @@ class GetInputKindWorkItem(TypedDict):
     '\n    For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.\n    '
     validationRunId: NotRequired[str]
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
+    variantId: NotRequired[str]
+    '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
+    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: Literal["creative_review", "media_buy_approval", "modular_source"]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
