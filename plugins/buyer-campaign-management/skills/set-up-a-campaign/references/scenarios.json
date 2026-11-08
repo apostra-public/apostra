@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.15.0",
+  "skillVersion": "1.16.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -141,6 +141,16 @@
         "For the single TikTok product, the agent calls save_media_buy with either a top-level budget or that product's products[].budget, not both.",
         "For the two Pinterest products, the agent sends a products[].budget for each and no top-level budget.",
         "If save_media_buy refuses a budget, the agent reads which budget the refusal names, fixes only that, and does not change the amounts the buyer chose."
+      ]
+    },
+    {
+      "id": "auction-product-bid-from-buyer",
+      "title": "Get the bid for an auction-priced product from the buyer",
+      "given": "The buyer selects Pinterest Traffic, whose selected pricing option has no fixed price and carries price guidance, for the whole budget, and has not said what to bid.",
+      "expect": [
+        "Before staging, the agent tells the buyer the product is auction-priced, shows the price guidance the option carries, and asks for a bid in the campaign currency.",
+        "The agent does not invent, estimate or default a bid, and does not stage the buy until the buyer gives one.",
+        "If save_media_buy refuses the product for a missing bid, the agent asks the buyer for one and does not switch to another seller or product unless the buyer chooses to."
       ]
     }
   ]
