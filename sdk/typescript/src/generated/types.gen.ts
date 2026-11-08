@@ -6478,6 +6478,7 @@ export type GetDeliverySuccessRows = Array<{
             management?: string;
             productId?: string | null;
             productName?: string | null;
+            sellerPackageId?: string | null;
             upstreamMediaBuyId?: string;
             upstreamPackageId?: string;
         };

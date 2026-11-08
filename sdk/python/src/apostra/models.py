@@ -1290,6 +1290,7 @@ class GetDeliverySuccessRowsItemDimensionsValueValue(TypedDict):
     management: NotRequired[str]
     productId: NotRequired[str | None]
     productName: NotRequired[str | None]
+    sellerPackageId: NotRequired[str | None]
     upstreamMediaBuyId: NotRequired[str]
     upstreamPackageId: NotRequired[str]
 

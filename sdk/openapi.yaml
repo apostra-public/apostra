@@ -86137,6 +86137,10 @@ components:
                       type:
                         - string
                         - 'null'
+                    sellerPackageId:
+                      type:
+                        - string
+                        - 'null'
                     upstreamMediaBuyId:
                       type: string
                     upstreamPackageId:
