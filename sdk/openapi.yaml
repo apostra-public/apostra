@@ -53355,7 +53355,7 @@ paths:
                                 category:
                                   type: string
                                   const: indicators
-                                  description: Subscribe to indicator updates.
+                                  description: 'Subscribe to indicators.changed: sent when a package''s seller indicators change.'
                               required:
                                 - endpointId
                                 - delivery

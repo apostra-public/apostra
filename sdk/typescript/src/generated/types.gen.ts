@@ -28901,7 +28901,7 @@ export type SaveNotificationConfigData = {
                  */
                 delivery: SaveNotificationConfigRequestEventSubscriptionSubscriptionDelivery;
                 /**
-                 * Subscribe to indicator updates.
+                 * Subscribe to indicators.changed: sent when a package's seller indicators change.
                  */
                 category: 'indicators';
                 reporting?: never;
