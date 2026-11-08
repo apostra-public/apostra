@@ -43843,6 +43843,14 @@ paths:
                     type: string
                     minLength: 1
                     maxLength: 128
+                sellerIds:
+                  description: Seller ids to send this creative to before any buy; replaces the set, [] clears.
+                  maxItems: 200
+                  type: array
+                  items:
+                    type: string
+                    minLength: 1
+                    maxLength: 128
                 advertiserId:
                   description: Advertiser scope; required for advertiser-level create, update, and archive.
                   type: string
