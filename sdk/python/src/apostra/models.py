@@ -12707,7 +12707,7 @@ class SaveInventorySourceInput(TypedDict):
     authenticationType: NotRequired[Literal["API_KEY", "NO_AUTH", "OAUTH", "BASIC_AUTH"]]
     '\n    Required when creating. The secret is collected in a form, never here.\n    '
     agentId: NotRequired[str]
-    '\n    An agent from search kind agent. Send it alone to open the form that connects it.\n    '
+    '\n    An agent from search kind agent. Send it alone to open the form that connects it. From an Agents account it connects that account\'s agent so it can be tested and certified.\n    '
     oauthAudience: NotRequired[str]
     '\n    For OAUTH agents, the resource the token targets. Leave unset to discover it from the agent.\n    '
     description: NotRequired[str]
