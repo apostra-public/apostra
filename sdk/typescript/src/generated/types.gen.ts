@@ -18850,6 +18850,10 @@ export type SaveCampaignRequestCampaignMetricGoal = {
      */
     kind: 'metric';
     /**
+     * Viewability standard for this goal.
+     */
+    standard?: 'mrc' | 'groupm';
+    /**
      * Min seconds for completed_views.
      */
     view_duration_seconds?: number;
