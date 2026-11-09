@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "get-account-ready-to-buy",
-  "skillVersion": "1.3.0",
+  "skillVersion": "1.5.0",
   "scenarios": [
     {
       "id": "payment-authority-two-step",
@@ -11,6 +11,27 @@
         "The agent asks for confirmation, then calls request_payment_authority and keeps the returned single-use confirmation token.",
         "The agent calls confirm_payment_authority with that token and gives the hosted card-capture link only to the organization cardholder.",
         "The agent reads the result with get({ kind: 'billing', accountId }), naming the account on every call, and never asks for card data in chat or in a tool call."
+      ]
+    },
+    {
+      "id": "payment-terms-approval",
+      "title": "Ask an administrator to approve a payment terms choice",
+      "given": "The user chooses net 45 payment terms, and the organization has not chosen them before.",
+      "expect": [
+        "The agent calls save_billing with { paymentTerms } sent alone, and shows the user the approval link from the approval_required answer.",
+        "The agent says nothing changes until a direct administrator approves on our site, and never says the terms are saved before a repeat call with the returned idempotencyKey answers payment_terms_saved.",
+        "To check on the request, the agent repeats the call with that idempotencyKey, or reads pendingApprovals in get({ kind: 'billing', accountId }) when it no longer has the key, and never sends the keyless call again unless the user wants to ask again.",
+        "When the approval reads as rejected, expired or failed, the agent tells the user the request is over and asks before sending a new one."
+      ]
+    },
+    {
+      "id": "renewal-change-approval",
+      "title": "Ask an administrator to approve a renewal change",
+      "given": "The user wants the current plan to end at the end of its term, and get({ kind: 'billing', accountId }) allows that renewal change.",
+      "expect": [
+        "The agent reads renewal.allowedActions, renewal.version and the deadline, asks for a reason of at least three characters, and confirms the change before calling save_billing with { renewal: { renewalVersion, action, reason } } sent alone.",
+        "The agent shows the approval link from the approval_required answer and says nothing changes until a direct administrator approves on our site.",
+        "The agent never says the renewal changed before a repeat call with the returned idempotencyKey answers renewal_changed, and never sends the keyless call again unless the user wants to ask again."
       ]
     }
   ]
