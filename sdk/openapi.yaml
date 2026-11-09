@@ -36643,6 +36643,9 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/save_advertiser_request_LabelWriteEntry'
+                sendCreativesToConnectedSellers:
+                  description: Sync the library to connected sellers that take creatives without a buy; false withdraws.
+                  type: boolean
                 brandProfile:
                   description: >-
                     Advertiser-stated brand kit, voice rules, banned terms, disclaimers and pages. Save brandProfile in
@@ -59311,11 +59314,22 @@ paths:
                               - closed
                         sellerAccountId:
                           description: >-
-                            For kinds proposal and creative_format: only this seller, by its Account id, not a seller
-                            object id, which is a different number.
+                            For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
+                            its Account id, not a seller object id, which is a different number.
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        dataProvider:
+                          description: >-
+                            For buyer kind signal: exact provider names copied from a result, not a text search; partial
+                            names go in query.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 200
                         origin:
                           description: >-
                             For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual,
@@ -60893,11 +60907,22 @@ paths:
                               - closed
                         sellerAccountId:
                           description: >-
-                            For kinds proposal and creative_format: only this seller, by its Account id, not a seller
-                            object id, which is a different number.
+                            For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
+                            its Account id, not a seller object id, which is a different number.
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        dataProvider:
+                          description: >-
+                            For buyer kind signal: exact provider names copied from a result, not a text search; partial
+                            names go in query.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 200
                         origin:
                           description: >-
                             For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual,
@@ -63195,11 +63220,22 @@ paths:
                               - closed
                         sellerAccountId:
                           description: >-
-                            For kinds proposal and creative_format: only this seller, by its Account id, not a seller
-                            object id, which is a different number.
+                            For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
+                            its Account id, not a seller object id, which is a different number.
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        dataProvider:
+                          description: >-
+                            For buyer kind signal: exact provider names copied from a result, not a text search; partial
+                            names go in query.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 200
                         origin:
                           description: >-
                             For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual,
@@ -64769,11 +64805,22 @@ paths:
                               - closed
                         sellerAccountId:
                           description: >-
-                            For kinds proposal and creative_format: only this seller, by its Account id, not a seller
-                            object id, which is a different number.
+                            For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
+                            its Account id, not a seller object id, which is a different number.
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        dataProvider:
+                          description: >-
+                            For buyer kind signal: exact provider names copied from a result, not a text search; partial
+                            names go in query.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 200
                         origin:
                           description: >-
                             For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual,
@@ -66341,11 +66388,22 @@ paths:
                               - closed
                         sellerAccountId:
                           description: >-
-                            For kinds proposal and creative_format: only this seller, by its Account id, not a seller
-                            object id, which is a different number.
+                            For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
+                            its Account id, not a seller object id, which is a different number.
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        dataProvider:
+                          description: >-
+                            For buyer kind signal: exact provider names copied from a result, not a text search; partial
+                            names go in query.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 200
                         origin:
                           description: >-
                             For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual,
@@ -67912,11 +67970,22 @@ paths:
                               - closed
                         sellerAccountId:
                           description: >-
-                            For kinds proposal and creative_format: only this seller, by its Account id, not a seller
-                            object id, which is a different number.
+                            For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
+                            its Account id, not a seller object id, which is a different number.
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        dataProvider:
+                          description: >-
+                            For buyer kind signal: exact provider names copied from a result, not a text search; partial
+                            names go in query.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 200
                         origin:
                           description: >-
                             For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual,
@@ -69490,11 +69559,22 @@ paths:
                               - closed
                         sellerAccountId:
                           description: >-
-                            For kinds proposal and creative_format: only this seller, by its Account id, not a seller
-                            object id, which is a different number.
+                            For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
+                            its Account id, not a seller object id, which is a different number.
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        dataProvider:
+                          description: >-
+                            For buyer kind signal: exact provider names copied from a result, not a text search; partial
+                            names go in query.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 200
                         origin:
                           description: >-
                             For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual,
@@ -72549,11 +72629,22 @@ paths:
                               - closed
                         sellerAccountId:
                           description: >-
-                            For kinds proposal and creative_format: only this seller, by its Account id, not a seller
-                            object id, which is a different number.
+                            For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
+                            its Account id, not a seller object id, which is a different number.
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        dataProvider:
+                          description: >-
+                            For buyer kind signal: exact provider names copied from a result, not a text search; partial
+                            names go in query.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 200
                         origin:
                           description: >-
                             For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual,
@@ -74130,11 +74221,22 @@ paths:
                               - closed
                         sellerAccountId:
                           description: >-
-                            For kinds proposal and creative_format: only this seller, by its Account id, not a seller
-                            object id, which is a different number.
+                            For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
+                            its Account id, not a seller object id, which is a different number.
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        dataProvider:
+                          description: >-
+                            For buyer kind signal: exact provider names copied from a result, not a text search; partial
+                            names go in query.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 200
                         origin:
                           description: >-
                             For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual,
@@ -75711,11 +75813,22 @@ paths:
                               - closed
                         sellerAccountId:
                           description: >-
-                            For kinds proposal and creative_format: only this seller, by its Account id, not a seller
-                            object id, which is a different number.
+                            For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
+                            its Account id, not a seller object id, which is a different number.
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        dataProvider:
+                          description: >-
+                            For buyer kind signal: exact provider names copied from a result, not a text search; partial
+                            names go in query.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 200
                         origin:
                           description: >-
                             For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual,
@@ -77292,11 +77405,22 @@ paths:
                               - closed
                         sellerAccountId:
                           description: >-
-                            For kinds proposal and creative_format: only this seller, by its Account id, not a seller
-                            object id, which is a different number.
+                            For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
+                            its Account id, not a seller object id, which is a different number.
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        dataProvider:
+                          description: >-
+                            For buyer kind signal: exact provider names copied from a result, not a text search; partial
+                            names go in query.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 200
                         origin:
                           description: >-
                             For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual,
@@ -78870,11 +78994,22 @@ paths:
                               - closed
                         sellerAccountId:
                           description: >-
-                            For kinds proposal and creative_format: only this seller, by its Account id, not a seller
-                            object id, which is a different number.
+                            For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
+                            its Account id, not a seller object id, which is a different number.
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        dataProvider:
+                          description: >-
+                            For buyer kind signal: exact provider names copied from a result, not a text search; partial
+                            names go in query.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 200
                         origin:
                           description: >-
                             For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual,
@@ -80448,11 +80583,22 @@ paths:
                               - closed
                         sellerAccountId:
                           description: >-
-                            For kinds proposal and creative_format: only this seller, by its Account id, not a seller
-                            object id, which is a different number.
+                            For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
+                            its Account id, not a seller object id, which is a different number.
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        dataProvider:
+                          description: >-
+                            For buyer kind signal: exact provider names copied from a result, not a text search; partial
+                            names go in query.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 200
                         origin:
                           description: >-
                             For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual,
@@ -82027,11 +82173,22 @@ paths:
                               - closed
                         sellerAccountId:
                           description: >-
-                            For kinds proposal and creative_format: only this seller, by its Account id, not a seller
-                            object id, which is a different number.
+                            For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by
+                            its Account id, not a seller object id, which is a different number.
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        dataProvider:
+                          description: >-
+                            For buyer kind signal: exact provider names copied from a result, not a text search; partial
+                            names go in query.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            minLength: 1
+                            maxLength: 200
                         origin:
                           description: >-
                             For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual,
@@ -91977,6 +92134,8 @@ components:
             - brandLinkId
           additionalProperties: false
         tracking: {}
+        sendCreativesToConnectedSellers:
+          type: boolean
       required:
         - advertiserId
         - name
