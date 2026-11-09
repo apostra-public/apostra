@@ -449,6 +449,7 @@ class GetDeliveryResultReportCampaignDelivery(TypedDict):
     '\n    Converted buys behind this page left out of currencyConversions by its cap. Absent when none.\n    '
     conversion: NotRequired[GetDeliverySuccessDeliveryConversion]
     '\n    Present when currency was sent: how money on rows and totals was converted, over every matched row.\n    '
+    siteOutcomes: NotRequired[GetDeliverySuccessSiteOutcomes]
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -494,6 +495,7 @@ class GetDeliveryResultReportDelivery(TypedDict):
     '\n    Converted buys behind this page left out of currencyConversions by its cap. Absent when none.\n    '
     conversion: NotRequired[GetDeliverySuccessDeliveryConversion]
     '\n    Present when currency was sent: how money on rows and totals was converted, over every matched row.\n    '
+    siteOutcomes: NotRequired[GetDeliverySuccessSiteOutcomes]
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -563,14 +565,14 @@ class GetDeliveryResultReportLiveCampaignDeliveryDeliverySummaryAggregatedTotals
 class GetDeliveryResultReportLiveCampaignDeliveryDeliverySummaryAggregatedTotalsMetricAggregatesItemScopeVendor(TypedDict):
     scope: Literal["vendor"]
     vendor: GetDeliveryResultReportLiveCampaignDeliveryDeliverySummaryAggregatedTotalsMetricAggregatesItemScopeVendorVendor
-    metric_id: str
+    metric_id: GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemMetricId
     qualifier: NotRequired[GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemQualifier]
     value: float
     measurable_impressions: NotRequired[float]
 
 class GetDeliveryResultReportLiveCampaignDeliveryDeliverySummaryAggregatedTotalsMetricAggregatesItemScopeVendorVendor(TypedDict):
-    domain: str
-    brand_id: NotRequired[str]
+    domain: GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemVendorDomain
+    brand_id: NotRequired[GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemVendorBrandId]
 
 class GetDeliveryResultReportLiveCampaignDeliveryDeliverySummaryMediaBuyDeliveriesItem(TypedDict):
     media_buy_id: str
@@ -756,6 +758,7 @@ class GetDeliveryResultReportMargin(TypedDict):
     '\n    Converted buys behind this page left out of currencyConversions by its cap. Absent when none.\n    '
     conversion: NotRequired[GetDeliverySuccessDeliveryConversion]
     '\n    Present when currency was sent: how money on rows and totals was converted, over every matched row.\n    '
+    siteOutcomes: NotRequired[GetDeliverySuccessSiteOutcomes]
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
@@ -1030,6 +1033,8 @@ class GetDeliverySuccessDeliveryRevisionPeriod(TypedDict):
 
 GetDeliverySuccessDeliveryRevisionReportingRevisionId: TypeAlias = str
 
+GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemMetricId: TypeAlias = str
+
 class GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemQualifier(TypedDict):
     viewability_standard: NotRequired[Literal["mrc", "groupm"]]
     completion_source: NotRequired[Literal["seller_attested", "vendor_attested"]]
@@ -1040,6 +1045,10 @@ class GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemQuali
 class GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemQualifierAttributionWindow(TypedDict):
     interval: int
     unit: Literal["seconds", "minutes", "hours", "days", "campaign"]
+
+GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemVendorBrandId: TypeAlias = str
+
+GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemVendorDomain: TypeAlias = str
 
 GetDeliverySuccessDeliverySummaryAggregatedTotalsReachUnit: TypeAlias = Literal["individuals", "households", "devices", "accounts", "cookies", "custom"]
 
@@ -1474,6 +1483,69 @@ GetDeliverySuccessSemanticsMeasurement: TypeAlias = Literal["excluded"]
 GetDeliverySuccessSemanticsMissingValues: TypeAlias = str
 
 GetDeliverySuccessSemanticsSourceOperation: TypeAlias = Literal["get_seller_reporting_metrics", "get_buyer_reporting_metrics", "get_seller_margin_reporting"]
+
+class GetDeliverySuccessSiteOutcomeVendorMetricValue(TypedDict):
+    metric_id: GetDeliverySuccessSiteOutcomeVendorMetricValueMetricId
+    value: float
+    unit: NotRequired[str]
+    breakdown: NotRequired[GetDeliverySuccessSiteOutcomeVendorMetricValueBreakdown]
+    vendor: GetDeliverySuccessSiteOutcomeVendorMetricValueVendor
+
+class GetDeliverySuccessSiteOutcomeVendorMetricValueBreakdown(TypedDict):
+    pass
+
+GetDeliverySuccessSiteOutcomeVendorMetricValueMetricId: TypeAlias = str
+
+class GetDeliverySuccessSiteOutcomeVendorMetricValueVendor(TypedDict):
+    domain: GetDeliverySuccessSiteOutcomeVendorMetricValueVendorDomain
+    brand_id: NotRequired[GetDeliverySuccessSiteOutcomeVendorMetricValueVendorBrandId]
+
+GetDeliverySuccessSiteOutcomeVendorMetricValueVendorBrandId: TypeAlias = str
+
+GetDeliverySuccessSiteOutcomeVendorMetricValueVendorDomain: TypeAlias = str
+
+class GetDeliverySuccessSiteOutcomes(TypedDict):
+    source: GetDeliverySuccessSiteOutcomesSource
+    advertisers: list[GetDeliverySuccessSiteOutcomesAdvertiser]
+
+class GetDeliverySuccessSiteOutcomesAdvertiser(TypedDict):
+    advertiserId: str
+    connection: GetDeliverySuccessSiteOutcomesAdvertiserConnection
+    mediaBuys: list[GetDeliverySuccessSiteOutcomesMediaBuy]
+    truncated: bool
+
+class GetDeliverySuccessSiteOutcomesAdvertiserConnection(TypedDict):
+    status: Literal["pending", "active", "unhealthy", "disconnected"]
+    healthReason: str | None
+    propertyTimezone: str | None
+
+class GetDeliverySuccessSiteOutcomesCost(TypedDict):
+    value: float
+    currency: str
+    finality: GetDeliverySuccessSiteOutcomesCostFinality
+
+GetDeliverySuccessSiteOutcomesCostFinality: TypeAlias = Literal["provisional", "settled"]
+
+class GetDeliverySuccessSiteOutcomesMediaBuy(TypedDict):
+    mediaBuyId: str
+    daysRead: int
+    daysUnavailable: int
+    finality: GetDeliverySuccessSiteOutcomesMediaBuyFinality | None
+    reason: Literal["no_days_read", "no_tagged_visits_found"] | None
+    '\n    Why the counts are empty. no_tagged_visits_found: the seller reported clicks but Google Analytics saw no tagged visits, so the tags may not be reaching the landing page.\n    '
+    vendor_metric_values: list[GetDeliverySuccessSiteOutcomeVendorMetricValue]
+    costPerSession: GetDeliverySuccessSiteOutcomesCost | None
+    costPerKeyEvent: GetDeliverySuccessSiteOutcomesCost | None
+
+GetDeliverySuccessSiteOutcomesMediaBuyFinality: TypeAlias = Literal["provisional", "settled"]
+
+class GetDeliverySuccessSiteOutcomesSource(TypedDict):
+    label: Literal["Site analytics (GA4, same visit, not verified)"]
+    vendor: GetDeliverySuccessSiteOutcomesSourceVendor
+    billable: Literal[False]
+
+class GetDeliverySuccessSiteOutcomesSourceVendor(TypedDict):
+    domain: str
 
 class GetDeliverySuccessSynthetic(TypedDict):
     scenarioId: Literal["synthetic-rolling-delivery-v1"]
