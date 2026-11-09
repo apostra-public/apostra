@@ -116,7 +116,7 @@ JSON. Provide every raw occurrence of `signature`, `timestamp`, and
 
 `open_handoff(url, opener=None)` returns the supplied HTTPS URL in headless
 code. An explicit opener can display a URL actually returned by the API.
-There is no inferred URL, embedded UI, login, wait/resume, or byte-upload helper.
+There is no inferred URL, embedded UI, login, or byte-upload helper.
 Those need a public contract. `upload_creative_asset`
 returns the current typed human task and fallback URL.
 `get_handoff(result)` returns a supported human action with its `kind`, `url`,
@@ -125,5 +125,15 @@ returns the current typed human task and fallback URL.
 headless code or display it with an explicit opener. Opening or closing the
 browser is not completion: follow `resume` and read the affected object before
 continuing. The SDK never infers a URL or embeds a login flow.
+
+`find_handoff(result)` recognises a human handoff or an `approval_required`
+result from any operation and returns a `Handoff` with `url`, `account`,
+`action`, `expires_at` and `resume`, or `None`. `handoff.open(opener=None)`
+opens only through your opener. `handoff.wait_for_completion(...)` (or
+`wait_for_completion_async`) returns only after a fresh server read shows the
+step is done: for an approval, pass `read` that repeats the original call with
+the same idempotency key; for a connection, pass `client`; otherwise pass
+`read` and `until`. A synchronous `read` receives the seconds left; pass them
+as the call's `timeout`. See https://docs.apostra.com/v3/sdk-guide#wait-for-a-person-to-act
 
 Source and releases: https://github.com/apostra-public/apostra

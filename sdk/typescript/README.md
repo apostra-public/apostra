@@ -110,7 +110,7 @@ cryptography.
 
 `openHandoff(url, opener?)` accepts an actual HTTPS URL returned by the API.
 Without an opener it just returns the URL. Some UI operations currently return
-only parameters. URL construction, login, wait/resume, and byte uploads are
+only parameters. URL construction, login and byte uploads are
 unsupported unless a future public contract defines them.
 `getHandoff(result)` narrows a supported human-action result to its `kind`,
 `url`, `expiresAt` and `resume` instructions, or returns `null`. Pass that
@@ -119,6 +119,15 @@ returns the supplied HTTPS URL. Opening or closing the browser is not
 completion: follow `resume` and read the affected object before continuing.
 The SDK never constructs a URL or embeds a login flow.
 `uploadCreativeAsset` exposes the current typed human task and fallback URL.
+
+`findHandoff(result)` recognises a human handoff or an `approval_required`
+result from any operation and returns a handoff with `url`, `account`,
+`action`, `expiresAt` and `resume`, or `null`. `handoff.open(opener?)` opens
+only through your opener. `handoff.waitForCompletion(...)` returns only after
+a fresh server read shows the step is done: for an approval, pass `read` that
+repeats the original call with the same idempotency key; for a connection,
+pass `client`; otherwise pass `read` and `until`. See
+https://docs.apostra.com/v3/sdk-guide#wait-for-a-person-to-act
 
 `@apostra/sdk/metadata` exports generated operation names, paths, security and
 parameter descriptions for CLI discovery. The SDK has no terminal, browser,

@@ -20,7 +20,7 @@ behaviour.
 | Create, update, preview, or confirm a campaign | `save_campaign` |
 | Read delivery | `get_delivery` |
 | Inspect a successful call's request ID or headers | `get_status_with_response` (and the matching `_with_response` method) |
-| Handle a human handoff and resume safely | `get_handoff`, then `open_handoff` |
+| Handle a human handoff or web approval and wait for it | `find_handoff`, then `handoff.open` and `handoff.wait_for_completion` |
 | Authenticate a deployed backend with M2M OAuth | `m2m_token_provider` or `m2m_token_provider_async` |
 | Verify an inbound V3 webhook | `verify_webhook` |
 
