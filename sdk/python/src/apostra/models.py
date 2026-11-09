@@ -19119,7 +19119,9 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    '\n    For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    dataProvider: NotRequired[list[str]]
+    '\n    For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -19389,7 +19391,9 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    '\n    For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    dataProvider: NotRequired[list[str]]
+    '\n    For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -19593,7 +19597,9 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    '\n    For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    dataProvider: NotRequired[list[str]]
+    '\n    For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -19824,7 +19830,9 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    '\n    For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    dataProvider: NotRequired[list[str]]
+    '\n    For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -20062,7 +20070,9 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    '\n    For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    dataProvider: NotRequired[list[str]]
+    '\n    For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -20300,7 +20310,9 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    '\n    For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    dataProvider: NotRequired[list[str]]
+    '\n    For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -20538,7 +20550,9 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    '\n    For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    dataProvider: NotRequired[list[str]]
+    '\n    For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -20810,7 +20824,9 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    '\n    For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    dataProvider: NotRequired[list[str]]
+    '\n    For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -21046,7 +21062,9 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    '\n    For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    dataProvider: NotRequired[list[str]]
+    '\n    For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -21282,7 +21300,9 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    '\n    For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    dataProvider: NotRequired[list[str]]
+    '\n    For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -21484,7 +21504,9 @@ class SearchInputKindCreativeFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    '\n    For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    dataProvider: NotRequired[list[str]]
+    '\n    For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -21790,7 +21812,9 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    '\n    For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    dataProvider: NotRequired[list[str]]
+    '\n    For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -22070,7 +22094,9 @@ class SearchInputKindProposalFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    '\n    For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    dataProvider: NotRequired[list[str]]
+    '\n    For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
@@ -22310,7 +22336,9 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     state: NotRequired[list[Literal["quoted", "bound", "expired", "withdrawn", "open", "released", "closed"]]]
     '\n    Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.\n    '
     sellerAccountId: NotRequired[int]
-    '\n    For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    '\n    For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.\n    '
+    dataProvider: NotRequired[list[str]]
+    '\n    For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.\n    '
     origin: NotRequired[list[Literal["quick", "uploaded", "inbound", "manual", "imported"]]]
     '\n    For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.\n    '
     purpose: NotRequired[list[Literal["live", "draft", "evaluation"]] | Literal["live", "draft", "evaluation"]]
