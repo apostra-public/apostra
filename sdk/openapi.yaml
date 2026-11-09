@@ -40871,8 +40871,8 @@ paths:
                   properties:
                     total:
                       type: number
-                      exclusiveMinimum: 0
-                      description: Total budget in the campaign currency.
+                      minimum: 0
+                      description: Total budget in the campaign currency; 0 for $0 media only.
                     currency:
                       type: string
                       description: ISO 4217 currency code.
@@ -49426,9 +49426,11 @@ paths:
                             description: Returned Product pricing option ID. Pass unchanged when present.
                             type: string
                           budget:
-                            description: Per-product budget. Required with fixed allocation; refused with seller_optimized.
+                            description: >-
+                              Per-product budget; 0 only on a fixed_price 0 option. Required with fixed allocation;
+                              refused with seller_optimized.
                             type: number
-                            exclusiveMinimum: 0
+                            minimum: 0
                           bidPrice:
                             description: Bid in campaign currency. Required for auction products; omit for fixed-price.
                             type: number
@@ -51229,9 +51231,11 @@ paths:
                             description: Returned Product pricing option ID. Pass unchanged when present.
                             type: string
                           budget:
-                            description: Per-product budget. Required with fixed allocation; refused with seller_optimized.
+                            description: >-
+                              Per-product budget; 0 only on a fixed_price 0 option. Required with fixed allocation;
+                              refused with seller_optimized.
                             type: number
-                            exclusiveMinimum: 0
+                            minimum: 0
                           bidPrice:
                             description: Bid in campaign currency. Required for auction products; omit for fixed-price.
                             type: number
