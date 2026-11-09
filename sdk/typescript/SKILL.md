@@ -20,7 +20,7 @@ behaviour.
 | Create, update, preview, or confirm a campaign | `saveCampaign` |
 | Read delivery | `getDelivery` |
 | Inspect a successful call's request ID or headers | `getStatusWithResponse` (and the matching `WithResponse` method) |
-| Handle a human handoff and resume safely | `getHandoff`, then `openHandoff` |
+| Handle a human handoff or web approval and wait for it | `findHandoff`, then `handoff.open` and `handoff.waitForCompletion` |
 | Authenticate a deployed backend with M2M OAuth | `m2mTokenProvider` |
 | Verify an inbound V3 webhook on a server | `@apostra/sdk/webhooks` → `verifyWebhook` |
 

@@ -4,6 +4,7 @@ from .cli_login import (
     cli_login_token_provider as cli_login_token_provider,
     cli_login_token_provider_async as cli_login_token_provider_async,
 )
+from .handoff import Handoff as Handoff, find_handoff as find_handoff
 from .transport import (
     ApostraError as ApostraError,
     AuthenticationError as AuthenticationError,

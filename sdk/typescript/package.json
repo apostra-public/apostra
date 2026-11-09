@@ -54,7 +54,7 @@
     "build": "tsc6 -p tsconfig.build.json",
     "type-check": "tsc6 --noEmit",
     "test": "vitest run",
-    "lint": "biome check src/transport.ts src/cli-login.ts src/webhooks.ts src/index.ts __tests__ examples --error-on-warnings",
+    "lint": "biome check src/transport.ts src/cli-login.ts src/webhooks.ts src/handoff.ts src/index.ts __tests__ examples --error-on-warnings",
     "prepack": "npm run build"
   },
   "devDependencies": {
