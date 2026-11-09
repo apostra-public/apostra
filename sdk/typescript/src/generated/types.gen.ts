@@ -7152,7 +7152,7 @@ export type GetResponses = {
                 /**
                  * The payment terms sellers are asked for on this organization’s behalf: the choice `save_billing` recorded, or net_60 when none has been chosen.
                  */
-                paymentTerms: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
+                paymentTerms: GetSuccessObjectPaymentTerms;
                 /**
                  * `false` when no payment terms have been chosen and the `net_60` default applies.
                  */
@@ -7219,6 +7219,10 @@ export type GetResponses = {
                     visibility: 'visible' | 'redacted';
                     redactedFields: Array<string>;
                 };
+                /**
+                 * The caller’s own payment terms and renewal requests that are waiting for an administrator to approve them on our site, newest first. Empty when there are none. Never another person’s.
+                 */
+                pendingApprovals: Array<GetSuccessBillingPendingApproval>;
                 standing: {
                     /**
                      * `PREPAY` when the organization must fund a balance to spend; `CREDIT` when it pays on terms.
@@ -8711,6 +8715,55 @@ export type GetStatusSuccessSetupSellersResultsItemAction = {
 
 export type GetStatusSuccessSetupSellersResultsItemSellerAccountId = number;
 
+export type GetSuccessBillingPendingApproval = {
+    kind: 'billing.payment_terms';
+    /**
+     * The payment terms that were asked for.
+     */
+    paymentTerms: GetSuccessBillingPendingApprovalPaymentTerms;
+    url: GetSuccessBillingPendingApprovalUrl;
+    idempotencyKey: GetSuccessBillingPendingApprovalIdempotencyKey;
+    expiresAt: GetSuccessBillingPendingApprovalExpiresAt;
+    action?: never;
+    renewalVersion?: never;
+    reason?: never;
+} | {
+    kind: 'billing.renewal';
+    /**
+     * The renewal change that was asked for.
+     */
+    action: 'CANCEL_AT_TERM' | 'REINSTATE_AUTO_RENEWAL';
+    /**
+     * The renewal version the request was made against.
+     */
+    renewalVersion: string;
+    /**
+     * The reason the requester gave. Send it unchanged to read the approval by its key.
+     */
+    reason: string;
+    url: GetSuccessBillingPendingApprovalUrl;
+    idempotencyKey: GetSuccessBillingPendingApprovalIdempotencyKey;
+    expiresAt: GetSuccessBillingPendingApprovalExpiresAt;
+    paymentTerms?: never;
+};
+
+/**
+ * When the request expires if nobody decides it.
+ */
+export type GetSuccessBillingPendingApprovalExpiresAt = string;
+
+/**
+ * The key the request is recorded under. A `save_billing` call that carries it reads this approval and never records another.
+ */
+export type GetSuccessBillingPendingApprovalIdempotencyKey = string;
+
+export type GetSuccessBillingPendingApprovalPaymentTerms = 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
+
+/**
+ * Page on our site where a signed-in direct administrator approves or rejects the request.
+ */
+export type GetSuccessBillingPendingApprovalUrl = string;
+
 export type GetSuccessCampaignGoalProgress = {
     scope: GetSuccessCampaignGoalProgressScope;
     goalKind: 'optimization' | 'delivery';
@@ -9344,6 +9397,8 @@ export type GetSuccessObjectOperationsByDestinationItemSellerName = string;
 export type GetSuccessObjectOperationsByDestinationItemSellerRouteId = string;
 
 export type GetSuccessObjectOperationsByDestinationItemUnassigned = true;
+
+export type GetSuccessObjectPaymentTerms = 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
 
 export type GetSuccessObjectPlanCurrent = {
     planId: GetSuccessObjectPlanCurrentPlanId;
@@ -16505,9 +16560,13 @@ export type SaveBillingData = {
             acceptedVersion: string;
         };
         /**
-         * Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default.
+         * Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default. Returns approval_required. Send alone.
          */
         paymentTerms?: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
+        /**
+         * Optional key for paymentTerms; repeat it to read the outcome. Without one, repeating the call reads it.
+         */
+        idempotencyKey?: string;
         /**
          * Accept or switch plans; returns approval_required. Send alone.
          */
@@ -16517,7 +16576,7 @@ export type SaveBillingData = {
          */
         offerResponse?: SaveBillingRequestSaveBillingOfferResponse;
         /**
-         * Change the renewal. Send alone.
+         * Change the renewal; returns approval_required. Send alone.
          */
         renewal?: SaveBillingRequestSaveBillingRenewal;
         /**
@@ -16733,9 +16792,9 @@ export type SaveBillingRequestSaveBillingRenewal = {
      */
     reason: string;
     /**
-     * Stable key; repeat it to retry.
+     * Optional key; repeat it to read the outcome. Without one, repeating the same call reads it.
      */
-    idempotencyKey: string;
+    idempotencyKey?: string;
 };
 
 /** @deprecated use SaveBillingData */
@@ -16809,7 +16868,7 @@ export type SaveBillingResponses = {
                 termStart: string;
                 termEnd: string;
             };
-        } | SaveBillingSuccessAgentApprovalRequired | {
+        } | SaveBillingSuccessSaveBillingApprovalRequired | {
             action: 'offer_response_recorded';
             offerResponse: {
                 eventId: string;
@@ -16950,11 +17009,7 @@ export type SaveBillingSuccessAgentApproval = {
     failureCode: string | null;
 };
 
-export type SaveBillingSuccessAgentApprovalRequired = {
-    action: 'approval_required';
-    message: string;
-    approval: SaveBillingSuccessAgentApproval;
-};
+export type SaveBillingSuccessAgentApprovalRequired = SaveBillingSuccessSaveBillingApprovalRequired;
 
 export type SaveBillingSuccessCaptureLinkIssuedResult = {
     /**
@@ -16985,6 +17040,16 @@ export type SaveBillingSuccessPendingConfirmationResult = {
      * When the confirmation token expires. Request again after this if it lapses.
      */
     expiresAt: string;
+};
+
+export type SaveBillingSuccessSaveBillingApprovalRequired = {
+    action: 'approval_required';
+    message: string;
+    approval: SaveBillingSuccessAgentApproval;
+    /**
+     * The key this request is recorded under. Repeat the call with it to read the approval without recording a new one.
+     */
+    idempotencyKey?: string;
 };
 
 export type SaveBusinessRulesData = {

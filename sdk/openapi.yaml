@@ -24826,16 +24826,10 @@ paths:
                                   - secureHandoff
                                 additionalProperties: false
                               paymentTerms:
-                                type: string
-                                enum:
-                                  - net_15
-                                  - net_30
-                                  - net_45
-                                  - net_60
-                                  - net_90
                                 description: >-
                                   The payment terms sellers are asked for on this organization’s behalf: the choice
                                   `save_billing` recorded, or net_60 when none has been chosen.
+                                $ref: '#/components/schemas/get_success_ObjectPaymentTerms'
                               paymentTermsChosen:
                                 type: boolean
                                 description: '`false` when no payment terms have been chosen and the `net_60` default applies.'
@@ -24949,6 +24943,14 @@ paths:
                                 description: >-
                                   The payer details printed on invoices (name, invoice emails, address, tax ID). Change
                                   them with `save_billing` `payer`; a direct administrator saves them on the call.
+                              pendingApprovals:
+                                type: array
+                                items:
+                                  $ref: '#/components/schemas/get_success_BillingPendingApproval'
+                                description: >-
+                                  The caller’s own payment terms and renewal requests that are waiting for an
+                                  administrator to approve them on our site, newest first. Empty when there are none.
+                                  Never another person’s.
                               standing:
                                 type: object
                                 properties:
@@ -25532,6 +25534,7 @@ paths:
                               - paymentTerms
                               - paymentTermsChosen
                               - payer
+                              - pendingApprovals
                               - standing
                               - balance
                               - usage
@@ -39085,12 +39088,12 @@ paths:
       operationId: save_billing
       summary: >-
         Accept Terms, set the payment terms sellers are asked for, accept a plan, answer its offer, change its renewal
-        or change the payer details on invoices. Accepting a plan needs an administrator to approve on our site. Cards
-        stay off MCP.
+        or change the payer details on invoices. Accepting a plan, choosing payment terms or changing the renewal needs
+        an administrator to approve on our site. Cards stay off MCP.
       description: >-
         Accept Terms, set the payment terms sellers are asked for, accept a plan, answer its offer, change its renewal
-        or change the payer details on invoices. Accepting a plan needs an administrator to approve on our site. Cards
-        stay off MCP.
+        or change the payer details on invoices. Accepting a plan, choosing payment terms or changing the renewal needs
+        an administrator to approve on our site. Cards stay off MCP.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -39143,7 +39146,9 @@ paths:
                     - acceptedVersion
                   additionalProperties: false
                 paymentTerms:
-                  description: 'Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default.'
+                  description: >-
+                    Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default.
+                    Returns approval_required. Send alone.
                   type: string
                   enum:
                     - net_15
@@ -39151,6 +39156,13 @@ paths:
                     - net_45
                     - net_60
                     - net_90
+                idempotencyKey:
+                  description: >-
+                    Optional key for paymentTerms; repeat it to read the outcome. Without one, repeating the call reads
+                    it.
+                  type: string
+                  minLength: 1
+                  maxLength: 200
                 plan:
                   description: Accept or switch plans; returns approval_required. Send alone.
                   $ref: '#/components/schemas/save_billing_request_SaveBillingPlan'
@@ -39162,7 +39174,7 @@ paths:
                   type: object
                   additionalProperties: false
                 renewal:
-                  description: Change the renewal. Send alone.
+                  description: Change the renewal; returns approval_required. Send alone.
                   $ref: '#/components/schemas/save_billing_request_SaveBillingRenewal'
                   type: object
                   additionalProperties: false
@@ -39194,6 +39206,12 @@ paths:
                         - terms
                     - required:
                         - paymentTerms
+                - if:
+                    required:
+                      - idempotencyKey
+                  then:
+                    required:
+                      - paymentTerms
       responses:
         '200':
           description: Typed operation result
@@ -39410,7 +39428,7 @@ paths:
                           - action
                           - plan
                         additionalProperties: false
-                      - $ref: '#/components/schemas/save_billing_success_AgentApprovalRequired'
+                      - $ref: '#/components/schemas/save_billing_success_SaveBillingApprovalRequired'
                       - type: object
                         properties:
                           action:
@@ -85467,6 +85485,62 @@ components:
           exclusiveMinimum: 0
           maximum: 100
       additionalProperties: false
+    get_success_BillingPendingApproval:
+      oneOf:
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: billing.payment_terms
+            paymentTerms:
+              description: The payment terms that were asked for.
+              $ref: '#/components/schemas/get_success_BillingPendingApprovalPaymentTerms'
+            url:
+              $ref: '#/components/schemas/get_success_BillingPendingApprovalUrl'
+            idempotencyKey:
+              $ref: '#/components/schemas/get_success_BillingPendingApprovalIdempotencyKey'
+            expiresAt:
+              $ref: '#/components/schemas/get_success_BillingPendingApprovalExpiresAt'
+          required:
+            - kind
+            - paymentTerms
+            - url
+            - idempotencyKey
+            - expiresAt
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: billing.renewal
+            action:
+              type: string
+              enum:
+                - CANCEL_AT_TERM
+                - REINSTATE_AUTO_RENEWAL
+              description: The renewal change that was asked for.
+            renewalVersion:
+              type: string
+              pattern: ^v1:[0-9a-f]{64}$
+              description: The renewal version the request was made against.
+            reason:
+              type: string
+              description: The reason the requester gave. Send it unchanged to read the approval by its key.
+            url:
+              $ref: '#/components/schemas/get_success_BillingPendingApprovalUrl'
+            idempotencyKey:
+              $ref: '#/components/schemas/get_success_BillingPendingApprovalIdempotencyKey'
+            expiresAt:
+              $ref: '#/components/schemas/get_success_BillingPendingApprovalExpiresAt'
+          required:
+            - kind
+            - action
+            - renewalVersion
+            - reason
+            - url
+            - idempotencyKey
+            - expiresAt
+          additionalProperties: false
     get_success_RfpTurnRequest:
       type: object
       properties:
@@ -86578,6 +86652,14 @@ components:
         - upper
         - halfWidth
       additionalProperties: false
+    get_success_ObjectPaymentTerms:
+      type: string
+      enum:
+        - net_15
+        - net_30
+        - net_45
+        - net_60
+        - net_90
     get_success_ObjectStandingHoldsItemCreatedAt:
       type: string
     get_success_ObjectBalanceCurrency:
@@ -87100,6 +87182,29 @@ components:
       maximum: 9007199254740991
     get_success_OperationDetailsItemDestinationSellerName:
       type: string
+    get_success_BillingPendingApprovalPaymentTerms:
+      type: string
+      enum:
+        - net_15
+        - net_30
+        - net_45
+        - net_60
+        - net_90
+    get_success_BillingPendingApprovalUrl:
+      type: string
+      format: uri
+      description: Page on our site where a signed-in direct administrator approves or rejects the request.
+    get_success_BillingPendingApprovalIdempotencyKey:
+      type: string
+      description: >-
+        The key the request is recorded under. A `save_billing` call that carries it reads this approval and never
+        records another.
+    get_success_BillingPendingApprovalExpiresAt:
+      type: string
+      format: date-time
+      pattern: >-
+        ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+      description: When the request expires if nobody decides it.
     get_success_CampaignGoalProgressOptimizationGoalVendor:
       type: object
       properties:
@@ -93296,16 +93401,15 @@ components:
           maxLength: 500
           description: Administrator reason, recorded in audit history.
         idempotencyKey:
+          description: Optional key; repeat it to read the outcome. Without one, repeating the same call reads it.
           type: string
           minLength: 8
           maxLength: 128
           pattern: ^[A-Za-z0-9._:-]+$
-          description: Stable key; repeat it to retry.
       required:
         - renewalVersion
         - action
         - reason
-        - idempotencyKey
       additionalProperties: false
     save_billing_request_SaveBillingPayer:
       type: object
@@ -93469,7 +93573,7 @@ components:
         - status
         - expiresAt
       additionalProperties: false
-    save_billing_success_AgentApprovalRequired:
+    save_billing_success_SaveBillingApprovalRequired:
       type: object
       properties:
         action:
@@ -93479,6 +93583,11 @@ components:
           type: string
         approval:
           $ref: '#/components/schemas/save_billing_success_AgentApproval'
+        idempotencyKey:
+          description: >-
+            The key this request is recorded under. Repeat the call with it to read the approval without recording a new
+            one.
+          type: string
       required:
         - action
         - message
