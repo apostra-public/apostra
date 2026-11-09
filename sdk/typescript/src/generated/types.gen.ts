@@ -939,7 +939,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1183,7 +1183,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1427,7 +1427,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1667,7 +1667,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1908,7 +1908,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2153,7 +2153,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2631,7 +2631,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2872,7 +2872,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3595,7 +3595,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3836,7 +3836,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4081,7 +4081,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4325,7 +4325,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4569,7 +4569,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4813,7 +4813,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -5057,7 +5057,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'approvalRouting' | 'listing' | 'identity' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -7454,6 +7454,7 @@ export type GetResponses = {
             accountsTotal?: number;
             unavailableIncludes?: Array<unknown>;
             pulse?: GetSuccessCampaignPulse;
+            goalProgress?: Array<GetSuccessCampaignGoalProgress>;
             operationDetails?: Array<{
                 operationId: string;
                 kind: string;
@@ -8505,6 +8506,510 @@ export type GetStatusSuccessSetupSellersResultsItemAction = {
 
 export type GetStatusSuccessSetupSellersResultsItemSellerAccountId = number;
 
+export type GetSuccessCampaignGoalProgress = {
+    scope: GetSuccessCampaignGoalProgressScope;
+    goalKind: 'optimization' | 'delivery';
+    goalPriority: number | null;
+    goal: GetSuccessCampaignGoalProgressOptimizationGoal | null;
+    askedTarget: GetSuccessCampaignGoalProgressTarget | null;
+    answeredTarget: GetSuccessCampaignGoalProgressTarget | null;
+    commitment: 'guaranteed' | 'best_effort' | 'report_only' | null;
+    commitmentSource: 'proposal' | 'campaign' | null;
+    actual: GetSuccessCampaignGoalProgressActual | null;
+    basis: GetSuccessCampaignGoalProgressBasis | null;
+    freshness: GetSuccessCampaignGoalProgressFreshness;
+    verdict: string | null;
+    verdictWithheld: string | null;
+    judgedAgainst: 'asked' | 'answered' | null;
+    delivery: GetSuccessDeliveryGoalProgress | null;
+    dataThrough: string | null;
+    nextCheckAt: string | null;
+};
+
+export type GetSuccessCampaignGoalProgressActual = {
+    kind: 'cost_per' | 'threshold_rate' | 'volume';
+    value: number;
+    unit: 'impressions' | 'clicks' | 'views' | 'completedViews' | 'conversions' | 'leads' | 'viewableImpressions' | 'vendorMetric';
+    units: number;
+    denominatorUnits: number | null;
+    perUnits: 1 | 1000;
+    currency: string | null;
+};
+
+export type GetSuccessCampaignGoalProgressAdvertiserMeasuredBasis = {
+    kind: 'advertiser_measured';
+    vendor: {
+        domain: GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorDomain;
+        brandId?: GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorBrandId;
+        [key: string]: GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorValue | GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorDomain | GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorBrandId | undefined;
+    };
+    metricId: GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisMetricId;
+    impressions: number;
+};
+
+export type GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisMetricId = string;
+
+export type GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorBrandId = string;
+
+export type GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorDomain = string;
+
+export type GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorValue = unknown;
+
+export type GetSuccessCampaignGoalProgressBasis = GetSuccessCampaignGoalProgressSellerAttestedBasis | GetSuccessCampaignGoalProgressAdvertiserMeasuredBasis | GetSuccessCampaignGoalProgressVendorAttestedBasis;
+
+export type GetSuccessCampaignGoalProgressCostPerTarget = {
+    kind: GetSuccessCampaignGoalProgressCostPerTargetKind;
+    value: GetSuccessCampaignGoalProgressCostPerTargetValue;
+    [key: string]: GetSuccessCampaignGoalProgressCostPerTargetAdditionalValue | GetSuccessCampaignGoalProgressCostPerTargetKind | GetSuccessCampaignGoalProgressCostPerTargetValue;
+};
+
+export type GetSuccessCampaignGoalProgressCostPerTargetAdditionalValue = unknown;
+
+export type GetSuccessCampaignGoalProgressCostPerTargetKind = 'cost_per';
+
+export type GetSuccessCampaignGoalProgressCostPerTargetValue = number;
+
+export type GetSuccessCampaignGoalProgressEventOptimizationTarget = GetSuccessCampaignGoalProgressEventOptimizationTargetCostPerVariant | GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariant | GetSuccessCampaignGoalProgressEventOptimizationTargetMaximizeValueVariant;
+
+export type GetSuccessCampaignGoalProgressEventOptimizationTargetCostPerVariant = {
+    kind: 'cost_per';
+    value: number;
+    [key: string]: unknown;
+};
+
+export type GetSuccessCampaignGoalProgressEventOptimizationTargetMaximizeValueVariant = {
+    kind: GetSuccessCampaignGoalProgressEventOptimizationTargetMaximizeValueVariantKind;
+    [key: string]: GetSuccessCampaignGoalProgressEventOptimizationTargetMaximizeValueVariantValue | GetSuccessCampaignGoalProgressEventOptimizationTargetMaximizeValueVariantKind;
+};
+
+export type GetSuccessCampaignGoalProgressEventOptimizationTargetMaximizeValueVariantKind = 'maximize_value';
+
+export type GetSuccessCampaignGoalProgressEventOptimizationTargetMaximizeValueVariantValue = unknown;
+
+export type GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariant = {
+    kind: GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariantKind;
+    value: GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariantValue;
+    [key: string]: GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariantAdditionalValue | GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariantKind | GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariantValue;
+};
+
+export type GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariantAdditionalValue = unknown;
+
+export type GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariantKind = 'per_ad_spend';
+
+export type GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariantValue = number;
+
+export type GetSuccessCampaignGoalProgressFreshness = {
+    dataThrough?: string | null;
+    reportingPeriodEnd?: string | null;
+    nextExpectedAt?: string | null;
+    notificationType?: string | null;
+    sequenceNumber?: number | null;
+    awaitingLaterReport?: boolean;
+    missingMetrics?: Array<string>;
+};
+
+export type GetSuccessCampaignGoalProgressMaximizeValueTarget = {
+    kind: GetSuccessCampaignGoalProgressMaximizeValueTargetKind;
+    [key: string]: GetSuccessCampaignGoalProgressMaximizeValueTargetValue | GetSuccessCampaignGoalProgressMaximizeValueTargetKind;
+};
+
+export type GetSuccessCampaignGoalProgressMaximizeValueTargetKind = 'maximize_value';
+
+export type GetSuccessCampaignGoalProgressMaximizeValueTargetValue = unknown;
+
+export type GetSuccessCampaignGoalProgressMetricOptimizationTarget = GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariant | GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariant;
+
+export type GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariant = {
+    kind: GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariantKind;
+    value: GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariantValue;
+    [key: string]: GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariantAdditionalValue | GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariantKind | GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariantValue;
+};
+
+export type GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariantAdditionalValue = unknown;
+
+export type GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariantKind = 'cost_per';
+
+export type GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariantValue = number;
+
+export type GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariant = {
+    kind: GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariantKind;
+    value: GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariantValue;
+    [key: string]: GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariantAdditionalValue | GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariantKind | GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariantValue;
+};
+
+export type GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariantAdditionalValue = unknown;
+
+export type GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariantKind = 'threshold_rate';
+
+export type GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariantValue = number;
+
+export type GetSuccessCampaignGoalProgressOptimizationGoal = {
+    kind: 'metric';
+    metric: 'clicks' | 'views' | 'completed_views' | 'viewed_seconds' | 'viewable_rate' | 'attention_seconds' | 'attention_score' | 'engagements' | 'follows' | 'saves' | 'profile_visits' | 'reach';
+    standard?: 'mrc' | 'groupm';
+    vendor?: GetSuccessCampaignGoalProgressOptimizationGoalVendor;
+    reach_unit?: 'individuals' | 'households' | 'devices' | 'accounts' | 'cookies' | 'custom';
+    target_frequency?: {
+        min?: number;
+        max?: number;
+        window: GetSuccessCampaignGoalProgressOptimizationGoalTargetFrequencyWindow;
+        [key: string]: unknown;
+    };
+    view_duration_seconds?: number;
+    target?: GetSuccessCampaignGoalProgressMetricOptimizationTarget;
+    priority?: number;
+    [key: string]: unknown;
+} | {
+    kind: 'event';
+    event_sources: Array<{
+        event_source_id: string;
+        event_type: 'page_view' | 'view_content' | 'select_content' | 'select_item' | 'search' | 'share' | 'add_to_cart' | 'remove_from_cart' | 'viewed_cart' | 'add_to_wishlist' | 'initiate_checkout' | 'add_payment_info' | 'purchase' | 'refund' | 'lead' | 'qualify_lead' | 'close_convert_lead' | 'disqualify_lead' | 'complete_registration' | 'subscribe' | 'follow' | 'content_view' | 'watch_milestone' | 'start_trial' | 'app_install' | 'app_launch' | 'contact' | 'schedule' | 'donate' | 'submit_application' | 'custom';
+        custom_event_name?: string;
+        value_field?: string;
+        value_factor?: number;
+        [key: string]: unknown;
+    }>;
+    target?: GetSuccessCampaignGoalProgressEventOptimizationTarget;
+    attribution_window?: {
+        post_click?: GetSuccessCampaignGoalProgressOptimizationGoalAttributionWindowPostClick;
+        post_view?: GetSuccessCampaignGoalProgressOptimizationGoalAttributionWindowPostView;
+        model?: 'last_touch' | 'first_touch' | 'linear' | 'time_decay' | 'data_driven';
+        [key: string]: unknown;
+    };
+    priority?: number;
+    [key: string]: unknown;
+} | {
+    kind: 'vendor_metric';
+    vendor: GetSuccessCampaignGoalProgressOptimizationGoalVendor;
+    metric_id: GetSuccessCampaignGoalProgressOptimizationGoalMetricId;
+    target?: GetSuccessCampaignGoalProgressVendorMetricOptimizationTarget;
+    priority?: number;
+    [key: string]: unknown;
+};
+
+export type GetSuccessCampaignGoalProgressOptimizationGoalAttributionWindowPostClick = {
+    interval: number;
+    unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+    [key: string]: unknown;
+};
+
+export type GetSuccessCampaignGoalProgressOptimizationGoalAttributionWindowPostView = {
+    interval: number;
+    unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+    [key: string]: unknown;
+};
+
+export type GetSuccessCampaignGoalProgressOptimizationGoalMetricId = string;
+
+export type GetSuccessCampaignGoalProgressOptimizationGoalTargetFrequencyWindow = {
+    interval: number;
+    unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+    [key: string]: unknown;
+};
+
+export type GetSuccessCampaignGoalProgressOptimizationGoalVendor = {
+    domain: GetSuccessCampaignGoalProgressOptimizationGoalVendorDomain;
+    brand_id?: GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandId;
+    countries?: Array<string>;
+    industries?: Array<string>;
+    data_subject_contestation?: {
+        [key: string]: unknown;
+    };
+    brand_kit_override?: {
+        logo?: {
+            asset_type: 'image';
+            url: string;
+            width: number;
+            height: number;
+            file_size_bytes?: number;
+            pixel_ratio?: number;
+            state_id?: string;
+            breakpoint_id?: string;
+            focal_point?: [
+                number,
+                number,
+                never
+            ];
+            format?: string;
+            alt_text?: string;
+            provenance?: {
+                digital_source_type?: 'digital_capture' | 'digital_creation' | 'trained_algorithmic_media' | 'composite_with_trained_algorithmic_media' | 'algorithmic_media' | 'composite_capture' | 'composite_synthetic' | 'human_edits' | 'data_driven_media';
+                synthetic_depiction?: boolean;
+                ai_tool?: {
+                    name: string;
+                    version?: string;
+                    provider?: string;
+                    [key: string]: unknown;
+                };
+                human_oversight?: 'none' | 'prompt_only' | 'selected' | 'edited' | 'directed';
+                declared_by?: {
+                    agent_url?: string;
+                    role: 'creator' | 'advertiser' | 'agency' | 'platform' | 'tool';
+                    [key: string]: unknown;
+                };
+                declared_at?: string;
+                created_time?: string;
+                c2pa?: {
+                    manifest_url: string;
+                    [key: string]: unknown;
+                };
+                embedded_provenance?: Array<{
+                    method: 'manifest_wrapper' | 'provenance_markers';
+                    standard?: string;
+                    provider: string;
+                    verify_agent?: {
+                        agent_url: string;
+                        feature_id?: string;
+                        [key: string]: unknown;
+                    };
+                    embedded_at?: string;
+                    [key: string]: unknown;
+                }>;
+                watermarks?: Array<{
+                    media_type: 'audio' | 'image' | 'video' | 'text';
+                    provider: string;
+                    verify_agent?: {
+                        agent_url: string;
+                        feature_id?: string;
+                        [key: string]: unknown;
+                    };
+                    c2pa_action?: 'c2pa.watermarked.bound' | 'c2pa.watermarked.unbound';
+                    embedded_at?: string;
+                    [key: string]: unknown;
+                }>;
+                disclosure?: {
+                    required: boolean;
+                    jurisdictions?: Array<{
+                        country: string;
+                        region?: string;
+                        regulation: string;
+                        label_text?: string;
+                        render_guidance?: {
+                            persistence?: 'continuous' | 'initial' | 'flexible';
+                            min_duration_ms?: number;
+                            positions?: Array<'prominent' | 'footer' | 'audio' | 'subtitle' | 'overlay' | 'end_card' | 'pre_roll' | 'companion'>;
+                            ext?: GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt;
+                            [key: string]: unknown;
+                        };
+                        [key: string]: unknown;
+                    }>;
+                    [key: string]: unknown;
+                };
+                verification?: Array<{
+                    verified_by: string;
+                    verified_time?: string;
+                    result: 'authentic' | 'ai_generated' | 'ai_modified' | 'inconclusive';
+                    confidence?: number;
+                    details_url?: string;
+                    [key: string]: unknown;
+                }>;
+                ext?: GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceExt;
+                [key: string]: unknown;
+            };
+            [key: string]: unknown;
+        };
+        colors?: {
+            primary?: string;
+            secondary?: string;
+            accent?: string;
+            [key: string]: unknown;
+        };
+        voice?: string;
+        tagline?: string;
+        [key: string]: unknown;
+    };
+    [key: string]: GetSuccessCampaignGoalProgressOptimizationGoalVendorValue | GetSuccessCampaignGoalProgressOptimizationGoalVendorDomain | GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandId | Array<string> | Array<string> | {
+        [key: string]: unknown;
+    } | {
+        logo?: {
+            asset_type: 'image';
+            url: string;
+            width: number;
+            height: number;
+            file_size_bytes?: number;
+            pixel_ratio?: number;
+            state_id?: string;
+            breakpoint_id?: string;
+            focal_point?: [
+                number,
+                number,
+                never
+            ];
+            format?: string;
+            alt_text?: string;
+            provenance?: {
+                digital_source_type?: 'digital_capture' | 'digital_creation' | 'trained_algorithmic_media' | 'composite_with_trained_algorithmic_media' | 'algorithmic_media' | 'composite_capture' | 'composite_synthetic' | 'human_edits' | 'data_driven_media';
+                synthetic_depiction?: boolean;
+                ai_tool?: {
+                    name: string;
+                    version?: string;
+                    provider?: string;
+                    [key: string]: unknown;
+                };
+                human_oversight?: 'none' | 'prompt_only' | 'selected' | 'edited' | 'directed';
+                declared_by?: {
+                    agent_url?: string;
+                    role: 'creator' | 'advertiser' | 'agency' | 'platform' | 'tool';
+                    [key: string]: unknown;
+                };
+                declared_at?: string;
+                created_time?: string;
+                c2pa?: {
+                    manifest_url: string;
+                    [key: string]: unknown;
+                };
+                embedded_provenance?: Array<{
+                    method: 'manifest_wrapper' | 'provenance_markers';
+                    standard?: string;
+                    provider: string;
+                    verify_agent?: {
+                        agent_url: string;
+                        feature_id?: string;
+                        [key: string]: unknown;
+                    };
+                    embedded_at?: string;
+                    [key: string]: unknown;
+                }>;
+                watermarks?: Array<{
+                    media_type: 'audio' | 'image' | 'video' | 'text';
+                    provider: string;
+                    verify_agent?: {
+                        agent_url: string;
+                        feature_id?: string;
+                        [key: string]: unknown;
+                    };
+                    c2pa_action?: 'c2pa.watermarked.bound' | 'c2pa.watermarked.unbound';
+                    embedded_at?: string;
+                    [key: string]: unknown;
+                }>;
+                disclosure?: {
+                    required: boolean;
+                    jurisdictions?: Array<{
+                        country: string;
+                        region?: string;
+                        regulation: string;
+                        label_text?: string;
+                        render_guidance?: {
+                            persistence?: 'continuous' | 'initial' | 'flexible';
+                            min_duration_ms?: number;
+                            positions?: Array<'prominent' | 'footer' | 'audio' | 'subtitle' | 'overlay' | 'end_card' | 'pre_roll' | 'companion'>;
+                            ext?: GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt;
+                            [key: string]: unknown;
+                        };
+                        [key: string]: unknown;
+                    }>;
+                    [key: string]: unknown;
+                };
+                verification?: Array<{
+                    verified_by: string;
+                    verified_time?: string;
+                    result: 'authentic' | 'ai_generated' | 'ai_modified' | 'inconclusive';
+                    confidence?: number;
+                    details_url?: string;
+                    [key: string]: unknown;
+                }>;
+                ext?: GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceExt;
+                [key: string]: unknown;
+            };
+            [key: string]: unknown;
+        };
+        colors?: {
+            primary?: string;
+            secondary?: string;
+            accent?: string;
+            [key: string]: unknown;
+        };
+        voice?: string;
+        tagline?: string;
+        [key: string]: unknown;
+    } | undefined;
+};
+
+export type GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandId = string;
+
+export type GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt = {
+    [key: string]: unknown;
+};
+
+export type GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceExt = {
+    [key: string]: unknown;
+};
+
+export type GetSuccessCampaignGoalProgressOptimizationGoalVendorDomain = string;
+
+export type GetSuccessCampaignGoalProgressOptimizationGoalVendorValue = unknown;
+
+export type GetSuccessCampaignGoalProgressPerAdSpendTarget = {
+    kind: GetSuccessCampaignGoalProgressPerAdSpendTargetKind;
+    value: GetSuccessCampaignGoalProgressPerAdSpendTargetValue;
+    [key: string]: GetSuccessCampaignGoalProgressPerAdSpendTargetAdditionalValue | GetSuccessCampaignGoalProgressPerAdSpendTargetKind | GetSuccessCampaignGoalProgressPerAdSpendTargetValue;
+};
+
+export type GetSuccessCampaignGoalProgressPerAdSpendTargetAdditionalValue = unknown;
+
+export type GetSuccessCampaignGoalProgressPerAdSpendTargetKind = 'per_ad_spend';
+
+export type GetSuccessCampaignGoalProgressPerAdSpendTargetValue = number;
+
+export type GetSuccessCampaignGoalProgressScope = {
+    kind: 'campaign' | 'media_buy' | 'package';
+    campaignId: string;
+    mediaBuyId: string | null;
+    packageId: string | null;
+};
+
+export type GetSuccessCampaignGoalProgressSellerAttestedBasis = {
+    kind: 'seller_attested';
+};
+
+export type GetSuccessCampaignGoalProgressTarget = GetSuccessCampaignGoalProgressCostPerTarget | GetSuccessCampaignGoalProgressThresholdRateTarget | GetSuccessCampaignGoalProgressPerAdSpendTarget | GetSuccessCampaignGoalProgressMaximizeValueTarget;
+
+export type GetSuccessCampaignGoalProgressThresholdRateTarget = {
+    kind: GetSuccessCampaignGoalProgressThresholdRateTargetKind;
+    value: GetSuccessCampaignGoalProgressThresholdRateTargetValue;
+    [key: string]: GetSuccessCampaignGoalProgressThresholdRateTargetAdditionalValue | GetSuccessCampaignGoalProgressThresholdRateTargetKind | GetSuccessCampaignGoalProgressThresholdRateTargetValue;
+};
+
+export type GetSuccessCampaignGoalProgressThresholdRateTargetAdditionalValue = unknown;
+
+export type GetSuccessCampaignGoalProgressThresholdRateTargetKind = 'threshold_rate';
+
+export type GetSuccessCampaignGoalProgressThresholdRateTargetValue = number;
+
+export type GetSuccessCampaignGoalProgressVendorAttestedBasis = {
+    kind: 'vendor_attested';
+    vendor: {
+        domain: GetSuccessCampaignGoalProgressVendorAttestedBasisVendorDomain;
+        brandId?: GetSuccessCampaignGoalProgressVendorAttestedBasisVendorBrandId;
+        [key: string]: GetSuccessCampaignGoalProgressVendorAttestedBasisVendorValue | GetSuccessCampaignGoalProgressVendorAttestedBasisVendorDomain | GetSuccessCampaignGoalProgressVendorAttestedBasisVendorBrandId | undefined;
+    };
+    metricId: GetSuccessCampaignGoalProgressVendorAttestedBasisMetricId;
+    measurableImpressions: number;
+    coverage: number | null;
+};
+
+export type GetSuccessCampaignGoalProgressVendorAttestedBasisMetricId = string;
+
+export type GetSuccessCampaignGoalProgressVendorAttestedBasisVendorBrandId = string;
+
+export type GetSuccessCampaignGoalProgressVendorAttestedBasisVendorDomain = string;
+
+export type GetSuccessCampaignGoalProgressVendorAttestedBasisVendorValue = unknown;
+
+export type GetSuccessCampaignGoalProgressVendorMetricOptimizationTarget = GetSuccessCampaignGoalProgressVendorMetricOptimizationTargetCostPerVariant | GetSuccessCampaignGoalProgressVendorMetricOptimizationTargetThresholdRateVariant;
+
+export type GetSuccessCampaignGoalProgressVendorMetricOptimizationTargetCostPerVariant = {
+    kind: 'cost_per';
+    value: number;
+    [key: string]: unknown;
+};
+
+export type GetSuccessCampaignGoalProgressVendorMetricOptimizationTargetThresholdRateVariant = {
+    kind: 'threshold_rate';
+    value: number;
+    [key: string]: unknown;
+};
+
 export type GetSuccessCampaignPulse = {
     verdict: 'delivering' | 'partially_delivering' | 'not_delivering' | 'not_expected_yet' | 'cannot_verify';
     reasonCodes: Array<'flight_not_started' | 'first_snapshot_not_due' | 'capability_not_declared' | 'reporting_unsupported' | 'source_error_after_snapshot' | 'snapshot_missing' | 'coverage_partial' | 'coverage_none' | 'snapshot_stale' | 'supported_metric_unavailable' | 'positive_delivery_observed' | 'complete_zero_delivery_observed'>;
@@ -8554,6 +9059,53 @@ export type GetSuccessCatalogRefreshProblem = {
      * Missing column names; columns_missing only.
      */
     columns?: Array<string>;
+};
+
+export type GetSuccessDeliveryGoalProgress = {
+    constraint: {
+        kind: 'spend' | 'impressions';
+        amount: number;
+    } | null;
+    expected: number | null;
+    pacingIndex: number | null;
+    deliveryProjection: GetSuccessDeliveryGoalProgressDeliveryProjection | null;
+    projectionRange: GetSuccessDeliveryGoalProgressProjectionRange | null;
+    sellerPacingIndex: number | null;
+    sellerDeliveryProjection: GetSuccessDeliveryGoalProgressSellerDeliveryProjection | null;
+};
+
+export type GetSuccessDeliveryGoalProgressDeliveryProjection = {
+    projected_impressions?: number;
+    projected_spend?: number;
+    projected_end_state: 'on_pace' | 'complete' | 'underdelivery' | 'early_exhaustion';
+    basis: 'trailing_daily_avg' | 'trailing_hourly_avg' | 'platform_model' | 'seller_defined';
+    as_of: string;
+    ext?: GetSuccessDeliveryGoalProgressDeliveryProjectionExt;
+    [key: string]: unknown;
+};
+
+export type GetSuccessDeliveryGoalProgressDeliveryProjectionExt = {
+    [key: string]: unknown;
+};
+
+export type GetSuccessDeliveryGoalProgressProjectionRange = {
+    lower: number;
+    upper: number;
+    halfWidth: number;
+};
+
+export type GetSuccessDeliveryGoalProgressSellerDeliveryProjection = {
+    projected_impressions?: number;
+    projected_spend?: number;
+    projected_end_state: 'on_pace' | 'complete' | 'underdelivery' | 'early_exhaustion';
+    basis: 'trailing_daily_avg' | 'trailing_hourly_avg' | 'platform_model' | 'seller_defined';
+    as_of: string;
+    ext?: GetSuccessDeliveryGoalProgressSellerDeliveryProjectionExt;
+    [key: string]: unknown;
+};
+
+export type GetSuccessDeliveryGoalProgressSellerDeliveryProjectionExt = {
+    [key: string]: unknown;
 };
 
 export type GetSuccessHistoryVersionsResultsItemChangeSummary = {
@@ -33768,9 +34320,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -34236,9 +34788,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -34704,9 +35256,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -34772,9 +35324,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -35240,9 +35792,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -35701,9 +36253,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -36165,9 +36717,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -36629,9 +37181,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -37219,9 +37771,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -37687,9 +38239,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -38155,9 +38707,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -38622,9 +39174,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -39090,9 +39642,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -39558,9 +40110,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -40026,9 +40578,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -40601,6 +41153,13 @@ export type SearchResponses = {
     };
 };
 
+export type SearchSuccessCampaignGoalProgressSummary = {
+    worstVerdict: string | null;
+    deliveryEndState: string | null;
+    dataThrough: string | null;
+    nextCheckAt: string | null;
+};
+
 export type SearchSuccessCampaignPulseSummary = {
     verdict: 'delivering' | 'partially_delivering' | 'not_delivering' | 'not_expected_yet' | 'cannot_verify';
     dataThrough: SearchSuccessCampaignPulseTimeRange | null;
@@ -40673,6 +41232,7 @@ export type SearchSuccessSearchAccountPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -40731,6 +41291,7 @@ export type SearchSuccessSearchAccountRelationshipPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -40805,6 +41366,7 @@ export type SearchSuccessSearchAdServerTargetingPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -40871,6 +41433,7 @@ export type SearchSuccessSearchAdvertiserGrantPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -40937,6 +41500,7 @@ export type SearchSuccessSearchAdvertiserPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41003,6 +41567,7 @@ export type SearchSuccessSearchAgentPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41069,6 +41634,7 @@ export type SearchSuccessSearchAskPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41135,6 +41701,7 @@ export type SearchSuccessSearchBusinessRulesVersionPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41201,6 +41768,7 @@ export type SearchSuccessSearchBuyerAgentPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41267,6 +41835,7 @@ export type SearchSuccessSearchBuyerRfpPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41333,6 +41902,7 @@ export type SearchSuccessSearchCampaignPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41399,6 +41969,7 @@ export type SearchSuccessSearchCatalogPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41465,6 +42036,7 @@ export type SearchSuccessSearchConnectionPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41531,6 +42103,7 @@ export type SearchSuccessSearchConversationPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41597,6 +42170,7 @@ export type SearchSuccessSearchCoveragePageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41663,6 +42237,7 @@ export type SearchSuccessSearchCreativeAssetPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41729,6 +42304,7 @@ export type SearchSuccessSearchCreativeCollectionPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41795,6 +42371,7 @@ export type SearchSuccessSearchCreativeEnginePageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41861,6 +42438,7 @@ export type SearchSuccessSearchCreativeFormatPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41927,6 +42505,7 @@ export type SearchSuccessSearchCreativePageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -41985,6 +42564,7 @@ export type SearchSuccessSearchCreativeSessionPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42059,6 +42639,7 @@ export type SearchSuccessSearchDimensionPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42125,6 +42706,7 @@ export type SearchSuccessSearchEventSourcePageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42191,6 +42773,7 @@ export type SearchSuccessSearchHouseDiscountPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42257,6 +42840,7 @@ export type SearchSuccessSearchInventorySourcePageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42323,6 +42907,7 @@ export type SearchSuccessSearchLibraryRequestPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42389,6 +42974,7 @@ export type SearchSuccessSearchMaterialPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42455,6 +43041,7 @@ export type SearchSuccessSearchMediaBuyPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42521,6 +43108,7 @@ export type SearchSuccessSearchMemberPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42587,6 +43175,7 @@ export type SearchSuccessSearchPlaybookVersionPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42653,6 +43242,7 @@ export type SearchSuccessSearchPropertyListPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42719,6 +43309,7 @@ export type SearchSuccessSearchProposalPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42785,6 +43376,7 @@ export type SearchSuccessSearchRfpPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42843,6 +43435,7 @@ export type SearchSuccessSearchRfpTurnPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42917,6 +43510,7 @@ export type SearchSuccessSearchSellerPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -42983,6 +43577,7 @@ export type SearchSuccessSearchSessionPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -43049,6 +43644,7 @@ export type SearchSuccessSearchSignalPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -43115,6 +43711,7 @@ export type SearchSuccessSearchSkillPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -43181,6 +43778,7 @@ export type SearchSuccessSearchSourceAccountPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -43247,6 +43845,7 @@ export type SearchSuccessSearchWholesaleProductPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -43313,6 +43912,7 @@ export type SearchSuccessSearchWorkItemPageOutputResults = Array<{
      * What stops the refresh; null if nothing does.
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 }>;
 
@@ -43495,6 +44095,7 @@ export type SearchSuccessV3CampaignListItem = {
         };
     };
     pulse?: SearchSuccessCampaignPulseSummary;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
     [key: string]: unknown;
 };
 

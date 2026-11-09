@@ -1935,6 +1935,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -3182,6 +3183,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -4405,6 +4407,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -5616,6 +5619,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -6828,6 +6832,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -8047,6 +8052,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -10402,6 +10408,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -11616,6 +11623,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -15120,6 +15128,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -16332,6 +16341,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -17550,6 +17560,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -18767,6 +18778,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -19984,6 +19996,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -21201,6 +21214,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -22418,6 +22432,7 @@ paths:
                           - propertyLists
                           - sellerScorecard
                           - pulse
+                          - progress
                           - versions
                           - discounts
                           - approvalRouting
@@ -26069,6 +26084,10 @@ paths:
                             items: {}
                           pulse:
                             $ref: '#/components/schemas/get_success_CampaignPulse'
+                          goalProgress:
+                            type: array
+                            items:
+                              $ref: '#/components/schemas/get_success_CampaignGoalProgress'
                           operationDetails:
                             type: array
                             items:
@@ -58830,9 +58849,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -58845,6 +58865,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -60410,9 +60431,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -60425,6 +60447,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -61991,9 +62014,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -62006,6 +62030,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -62708,9 +62733,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -62723,6 +62749,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -64289,9 +64316,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -64304,6 +64332,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -65855,9 +65884,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -65870,6 +65900,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -67428,9 +67459,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -67443,6 +67475,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -69000,9 +69033,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -69015,6 +69049,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -70571,9 +70606,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -70586,6 +70622,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       not: {}
                     filter:
@@ -71305,9 +71342,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -71320,6 +71358,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       not: {}
                     filter:
@@ -72048,9 +72087,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -72063,6 +72103,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -73627,9 +73668,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -73642,6 +73684,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -75206,9 +75249,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -75221,6 +75265,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -76785,9 +76830,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -76800,6 +76846,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -78361,9 +78408,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -78376,6 +78424,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -79937,9 +79986,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -79952,6 +80002,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -81514,9 +81565,10 @@ paths:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
+                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -81529,6 +81581,7 @@ paths:
                           - authoring
                           - pulse
                           - deliverySummary
+                          - progress
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -85421,6 +85474,723 @@ components:
         - availability
         - value
       additionalProperties: false
+    get_success_CampaignGoalProgress:
+      type: object
+      properties:
+        scope:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressScope'
+        goalKind:
+          type: string
+          enum:
+            - optimization
+            - delivery
+        goalPriority:
+          anyOf:
+            - type: integer
+              exclusiveMinimum: 0
+              maximum: 9007199254740991
+            - type: 'null'
+        goal:
+          anyOf:
+            - $ref: '#/components/schemas/get_success_CampaignGoalProgressOptimizationGoal'
+            - type: 'null'
+        askedTarget:
+          anyOf:
+            - $ref: '#/components/schemas/get_success_CampaignGoalProgressTarget'
+            - type: 'null'
+        answeredTarget:
+          anyOf:
+            - $ref: '#/components/schemas/get_success_CampaignGoalProgressTarget'
+            - type: 'null'
+        commitment:
+          anyOf:
+            - type: string
+              enum:
+                - guaranteed
+                - best_effort
+                - report_only
+            - type: 'null'
+        commitmentSource:
+          anyOf:
+            - type: string
+              enum:
+                - proposal
+                - campaign
+            - type: 'null'
+        actual:
+          anyOf:
+            - $ref: '#/components/schemas/get_success_CampaignGoalProgressActual'
+            - type: 'null'
+        basis:
+          anyOf:
+            - $ref: '#/components/schemas/get_success_CampaignGoalProgressBasis'
+            - type: 'null'
+        freshness:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressFreshness'
+        verdict:
+          type:
+            - string
+            - 'null'
+        verdictWithheld:
+          type:
+            - string
+            - 'null'
+        judgedAgainst:
+          anyOf:
+            - type: string
+              enum:
+                - asked
+                - answered
+            - type: 'null'
+        delivery:
+          anyOf:
+            - $ref: '#/components/schemas/get_success_DeliveryGoalProgress'
+            - type: 'null'
+        dataThrough:
+          type:
+            - string
+            - 'null'
+        nextCheckAt:
+          type:
+            - string
+            - 'null'
+      required:
+        - scope
+        - goalKind
+        - goalPriority
+        - goal
+        - askedTarget
+        - answeredTarget
+        - commitment
+        - commitmentSource
+        - actual
+        - basis
+        - freshness
+        - verdict
+        - verdictWithheld
+        - judgedAgainst
+        - delivery
+        - dataThrough
+        - nextCheckAt
+      additionalProperties: false
+    get_success_CampaignGoalProgressScope:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - campaign
+            - media_buy
+            - package
+        campaignId:
+          type: string
+        mediaBuyId:
+          type:
+            - string
+            - 'null'
+        packageId:
+          type:
+            - string
+            - 'null'
+      required:
+        - kind
+        - campaignId
+        - mediaBuyId
+        - packageId
+      additionalProperties: false
+    get_success_CampaignGoalProgressOptimizationGoal:
+      anyOf:
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: metric
+            metric:
+              anyOf:
+                - type: string
+                  const: clicks
+                - type: string
+                  const: views
+                - type: string
+                  const: completed_views
+                - type: string
+                  const: viewed_seconds
+                - type: string
+                  const: viewable_rate
+                - type: string
+                  const: attention_seconds
+                - type: string
+                  const: attention_score
+                - type: string
+                  const: engagements
+                - type: string
+                  const: follows
+                - type: string
+                  const: saves
+                - type: string
+                  const: profile_visits
+                - type: string
+                  const: reach
+            standard:
+              anyOf:
+                - type: string
+                  const: mrc
+                - type: string
+                  const: groupm
+            vendor:
+              $ref: '#/components/schemas/get_success_CampaignGoalProgressOptimizationGoalVendor'
+            reach_unit:
+              anyOf:
+                - type: string
+                  const: individuals
+                - type: string
+                  const: households
+                - type: string
+                  const: devices
+                - type: string
+                  const: accounts
+                - type: string
+                  const: cookies
+                - type: string
+                  const: custom
+            target_frequency:
+              type: object
+              properties:
+                min:
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+                max:
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+                window:
+                  $ref: '#/components/schemas/get_success_CampaignGoalProgressOptimizationGoalTargetFrequencyWindow'
+              required:
+                - window
+              additionalProperties: {}
+            view_duration_seconds:
+              type: number
+              exclusiveMinimum: 0
+            target:
+              $ref: '#/components/schemas/get_success_CampaignGoalProgressMetricOptimizationTarget'
+            priority:
+              type: integer
+              minimum: 1
+              maximum: 9007199254740991
+          required:
+            - kind
+            - metric
+          additionalProperties: {}
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: event
+            event_sources:
+              type: array
+              items:
+                type: object
+                properties:
+                  event_source_id:
+                    type: string
+                    minLength: 1
+                  event_type:
+                    anyOf:
+                      - type: string
+                        const: page_view
+                      - type: string
+                        const: view_content
+                      - type: string
+                        const: select_content
+                      - type: string
+                        const: select_item
+                      - type: string
+                        const: search
+                      - type: string
+                        const: share
+                      - type: string
+                        const: add_to_cart
+                      - type: string
+                        const: remove_from_cart
+                      - type: string
+                        const: viewed_cart
+                      - type: string
+                        const: add_to_wishlist
+                      - type: string
+                        const: initiate_checkout
+                      - type: string
+                        const: add_payment_info
+                      - type: string
+                        const: purchase
+                      - type: string
+                        const: refund
+                      - type: string
+                        const: lead
+                      - type: string
+                        const: qualify_lead
+                      - type: string
+                        const: close_convert_lead
+                      - type: string
+                        const: disqualify_lead
+                      - type: string
+                        const: complete_registration
+                      - type: string
+                        const: subscribe
+                      - type: string
+                        const: follow
+                      - type: string
+                        const: content_view
+                      - type: string
+                        const: watch_milestone
+                      - type: string
+                        const: start_trial
+                      - type: string
+                        const: app_install
+                      - type: string
+                        const: app_launch
+                      - type: string
+                        const: contact
+                      - type: string
+                        const: schedule
+                      - type: string
+                        const: donate
+                      - type: string
+                        const: submit_application
+                      - type: string
+                        const: custom
+                  custom_event_name:
+                    type: string
+                  value_field:
+                    type: string
+                  value_factor:
+                    type: number
+                required:
+                  - event_source_id
+                  - event_type
+                additionalProperties: {}
+            target:
+              $ref: '#/components/schemas/get_success_CampaignGoalProgressEventOptimizationTarget'
+            attribution_window:
+              type: object
+              properties:
+                post_click:
+                  $ref: '#/components/schemas/get_success_CampaignGoalProgressOptimizationGoalAttributionWindowPostClick'
+                post_view:
+                  $ref: '#/components/schemas/get_success_CampaignGoalProgressOptimizationGoalAttributionWindowPostView'
+                model:
+                  anyOf:
+                    - type: string
+                      const: last_touch
+                    - type: string
+                      const: first_touch
+                    - type: string
+                      const: linear
+                    - type: string
+                      const: time_decay
+                    - type: string
+                      const: data_driven
+              additionalProperties: {}
+            priority:
+              type: integer
+              minimum: 1
+              maximum: 9007199254740991
+          required:
+            - kind
+            - event_sources
+          additionalProperties: {}
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: vendor_metric
+            vendor:
+              $ref: '#/components/schemas/get_success_CampaignGoalProgressOptimizationGoalVendor'
+            metric_id:
+              $ref: '#/components/schemas/get_success_CampaignGoalProgressOptimizationGoalMetricId'
+            target:
+              $ref: '#/components/schemas/get_success_CampaignGoalProgressVendorMetricOptimizationTarget'
+            priority:
+              type: integer
+              minimum: 1
+              maximum: 9007199254740991
+          required:
+            - kind
+            - vendor
+            - metric_id
+          additionalProperties: {}
+    get_success_CampaignGoalProgressMetricOptimizationTarget:
+      anyOf:
+        - $ref: '#/components/schemas/get_success_CampaignGoalProgressMetricOptimizationTargetCostPerVariant'
+        - $ref: '#/components/schemas/get_success_CampaignGoalProgressMetricOptimizationTargetThresholdRateVariant'
+    get_success_CampaignGoalProgressMetricOptimizationTargetCostPerVariant:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressMetricOptimizationTargetCostPerVariantKind'
+        value:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressMetricOptimizationTargetCostPerVariantValue'
+      required:
+        - kind
+        - value
+      additionalProperties:
+        $ref: '#/components/schemas/get_success_CampaignGoalProgressMetricOptimizationTargetCostPerVariantAdditionalValue'
+    get_success_CampaignGoalProgressMetricOptimizationTargetThresholdRateVariant:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressMetricOptimizationTargetThresholdRateVariantKind'
+        value:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressMetricOptimizationTargetThresholdRateVariantValue'
+      required:
+        - kind
+        - value
+      additionalProperties:
+        $ref: >-
+          #/components/schemas/get_success_CampaignGoalProgressMetricOptimizationTargetThresholdRateVariantAdditionalValue
+    get_success_CampaignGoalProgressEventOptimizationTarget:
+      anyOf:
+        - $ref: '#/components/schemas/get_success_CampaignGoalProgressEventOptimizationTargetCostPerVariant'
+        - $ref: '#/components/schemas/get_success_CampaignGoalProgressEventOptimizationTargetPerAdSpendVariant'
+        - $ref: '#/components/schemas/get_success_CampaignGoalProgressEventOptimizationTargetMaximizeValueVariant'
+    get_success_CampaignGoalProgressEventOptimizationTargetCostPerVariant:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: cost_per
+        value:
+          type: number
+          exclusiveMinimum: 0
+      required:
+        - kind
+        - value
+      additionalProperties: {}
+    get_success_CampaignGoalProgressEventOptimizationTargetPerAdSpendVariant:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressEventOptimizationTargetPerAdSpendVariantKind'
+        value:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressEventOptimizationTargetPerAdSpendVariantValue'
+      required:
+        - kind
+        - value
+      additionalProperties:
+        $ref: '#/components/schemas/get_success_CampaignGoalProgressEventOptimizationTargetPerAdSpendVariantAdditionalValue'
+    get_success_CampaignGoalProgressEventOptimizationTargetMaximizeValueVariant:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressEventOptimizationTargetMaximizeValueVariantKind'
+      required:
+        - kind
+      additionalProperties:
+        $ref: '#/components/schemas/get_success_CampaignGoalProgressEventOptimizationTargetMaximizeValueVariantValue'
+    get_success_CampaignGoalProgressVendorMetricOptimizationTarget:
+      anyOf:
+        - $ref: '#/components/schemas/get_success_CampaignGoalProgressVendorMetricOptimizationTargetCostPerVariant'
+        - $ref: '#/components/schemas/get_success_CampaignGoalProgressVendorMetricOptimizationTargetThresholdRateVariant'
+    get_success_CampaignGoalProgressVendorMetricOptimizationTargetCostPerVariant:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: cost_per
+        value:
+          type: number
+          exclusiveMinimum: 0
+      required:
+        - kind
+        - value
+      additionalProperties: {}
+    get_success_CampaignGoalProgressVendorMetricOptimizationTargetThresholdRateVariant:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: threshold_rate
+        value:
+          type: number
+          exclusiveMinimum: 0
+      required:
+        - kind
+        - value
+      additionalProperties: {}
+    get_success_CampaignGoalProgressTarget:
+      oneOf:
+        - $ref: '#/components/schemas/get_success_CampaignGoalProgressCostPerTarget'
+        - $ref: '#/components/schemas/get_success_CampaignGoalProgressThresholdRateTarget'
+        - $ref: '#/components/schemas/get_success_CampaignGoalProgressPerAdSpendTarget'
+        - $ref: '#/components/schemas/get_success_CampaignGoalProgressMaximizeValueTarget'
+    get_success_CampaignGoalProgressCostPerTarget:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressCostPerTargetKind'
+        value:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressCostPerTargetValue'
+      required:
+        - kind
+        - value
+      additionalProperties:
+        $ref: '#/components/schemas/get_success_CampaignGoalProgressCostPerTargetAdditionalValue'
+    get_success_CampaignGoalProgressThresholdRateTarget:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressThresholdRateTargetKind'
+        value:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressThresholdRateTargetValue'
+      required:
+        - kind
+        - value
+      additionalProperties:
+        $ref: '#/components/schemas/get_success_CampaignGoalProgressThresholdRateTargetAdditionalValue'
+    get_success_CampaignGoalProgressPerAdSpendTarget:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressPerAdSpendTargetKind'
+        value:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressPerAdSpendTargetValue'
+      required:
+        - kind
+        - value
+      additionalProperties:
+        $ref: '#/components/schemas/get_success_CampaignGoalProgressPerAdSpendTargetAdditionalValue'
+    get_success_CampaignGoalProgressMaximizeValueTarget:
+      type: object
+      properties:
+        kind:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressMaximizeValueTargetKind'
+      required:
+        - kind
+      additionalProperties:
+        $ref: '#/components/schemas/get_success_CampaignGoalProgressMaximizeValueTargetValue'
+    get_success_CampaignGoalProgressActual:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+            - cost_per
+            - threshold_rate
+            - volume
+        value:
+          type: number
+        unit:
+          type: string
+          enum:
+            - impressions
+            - clicks
+            - views
+            - completedViews
+            - conversions
+            - leads
+            - viewableImpressions
+            - vendorMetric
+        units:
+          type: number
+          minimum: 0
+        denominatorUnits:
+          anyOf:
+            - type: number
+              minimum: 0
+            - type: 'null'
+        perUnits:
+          anyOf:
+            - type: number
+              const: 1
+            - type: number
+              const: 1000
+        currency:
+          type:
+            - string
+            - 'null'
+      required:
+        - kind
+        - value
+        - unit
+        - units
+        - denominatorUnits
+        - perUnits
+        - currency
+      additionalProperties: false
+    get_success_CampaignGoalProgressBasis:
+      oneOf:
+        - $ref: '#/components/schemas/get_success_CampaignGoalProgressSellerAttestedBasis'
+        - $ref: '#/components/schemas/get_success_CampaignGoalProgressAdvertiserMeasuredBasis'
+        - $ref: '#/components/schemas/get_success_CampaignGoalProgressVendorAttestedBasis'
+    get_success_CampaignGoalProgressSellerAttestedBasis:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: seller_attested
+      required:
+        - kind
+      additionalProperties: false
+    get_success_CampaignGoalProgressAdvertiserMeasuredBasis:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: advertiser_measured
+        vendor:
+          type: object
+          properties:
+            domain:
+              $ref: '#/components/schemas/get_success_CampaignGoalProgressAdvertiserMeasuredBasisVendorDomain'
+            brandId:
+              $ref: '#/components/schemas/get_success_CampaignGoalProgressAdvertiserMeasuredBasisVendorBrandId'
+          required:
+            - domain
+          additionalProperties:
+            $ref: '#/components/schemas/get_success_CampaignGoalProgressAdvertiserMeasuredBasisVendorValue'
+        metricId:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressAdvertiserMeasuredBasisMetricId'
+        impressions:
+          type: number
+          minimum: 0
+      required:
+        - kind
+        - vendor
+        - metricId
+        - impressions
+      additionalProperties: false
+    get_success_CampaignGoalProgressVendorAttestedBasis:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: vendor_attested
+        vendor:
+          type: object
+          properties:
+            domain:
+              $ref: '#/components/schemas/get_success_CampaignGoalProgressVendorAttestedBasisVendorDomain'
+            brandId:
+              $ref: '#/components/schemas/get_success_CampaignGoalProgressVendorAttestedBasisVendorBrandId'
+          required:
+            - domain
+          additionalProperties:
+            $ref: '#/components/schemas/get_success_CampaignGoalProgressVendorAttestedBasisVendorValue'
+        metricId:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressVendorAttestedBasisMetricId'
+        measurableImpressions:
+          type: number
+          minimum: 0
+        coverage:
+          anyOf:
+            - type: number
+              minimum: 0
+              maximum: 1
+            - type: 'null'
+      required:
+        - kind
+        - vendor
+        - metricId
+        - measurableImpressions
+        - coverage
+      additionalProperties: false
+    get_success_CampaignGoalProgressFreshness:
+      type: object
+      properties:
+        dataThrough:
+          type:
+            - string
+            - 'null'
+        reportingPeriodEnd:
+          type:
+            - string
+            - 'null'
+        nextExpectedAt:
+          type:
+            - string
+            - 'null'
+        notificationType:
+          type:
+            - string
+            - 'null'
+        sequenceNumber:
+          type:
+            - number
+            - 'null'
+        awaitingLaterReport:
+          type: boolean
+        missingMetrics:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+    get_success_DeliveryGoalProgress:
+      type: object
+      properties:
+        constraint:
+          anyOf:
+            - type: object
+              properties:
+                kind:
+                  type: string
+                  enum:
+                    - spend
+                    - impressions
+                amount:
+                  type: number
+              required:
+                - kind
+                - amount
+              additionalProperties: false
+            - type: 'null'
+        expected:
+          type:
+            - number
+            - 'null'
+        pacingIndex:
+          type:
+            - number
+            - 'null'
+        deliveryProjection:
+          anyOf:
+            - $ref: '#/components/schemas/get_success_DeliveryGoalProgressDeliveryProjection'
+            - type: 'null'
+        projectionRange:
+          anyOf:
+            - $ref: '#/components/schemas/get_success_DeliveryGoalProgressProjectionRange'
+            - type: 'null'
+        sellerPacingIndex:
+          type:
+            - number
+            - 'null'
+        sellerDeliveryProjection:
+          anyOf:
+            - $ref: '#/components/schemas/get_success_DeliveryGoalProgressSellerDeliveryProjection'
+            - type: 'null'
+      required:
+        - constraint
+        - expected
+        - pacingIndex
+        - deliveryProjection
+        - projectionRange
+        - sellerPacingIndex
+        - sellerDeliveryProjection
+      additionalProperties: false
+    get_success_DeliveryGoalProgressProjectionRange:
+      type: object
+      properties:
+        lower:
+          type: number
+        upper:
+          type: number
+        halfWidth:
+          type: number
+          minimum: 0
+      required:
+        - lower
+        - upper
+        - halfWidth
+      additionalProperties: false
     get_success_ObjectStandingHoldsItemCreatedAt:
       type: string
     get_success_ObjectBalanceCurrency:
@@ -85943,6 +86713,574 @@ components:
       maximum: 9007199254740991
     get_success_OperationDetailsItemDestinationSellerName:
       type: string
+    get_success_CampaignGoalProgressOptimizationGoalVendor:
+      type: object
+      properties:
+        domain:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressOptimizationGoalVendorDomain'
+        brand_id:
+          $ref: '#/components/schemas/get_success_CampaignGoalProgressOptimizationGoalVendorBrandId'
+        countries:
+          minItems: 1
+          type: array
+          items:
+            type: string
+        industries:
+          type: array
+          items:
+            type: string
+        data_subject_contestation:
+          type: object
+          properties: {}
+          additionalProperties: {}
+        brand_kit_override:
+          type: object
+          properties:
+            logo:
+              type: object
+              properties:
+                asset_type:
+                  type: string
+                  const: image
+                url:
+                  type: string
+                width:
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+                height:
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+                file_size_bytes:
+                  type: integer
+                  minimum: 1
+                  maximum: 9007199254740991
+                pixel_ratio:
+                  type: number
+                  exclusiveMinimum: 0
+                state_id:
+                  type: string
+                breakpoint_id:
+                  type: string
+                focal_point:
+                  type: array
+                  prefixItems:
+                    - type: number
+                    - type: number
+                  items:
+                    not: {}
+                  minItems: 2
+                  maxItems: 2
+                format:
+                  type: string
+                alt_text:
+                  type: string
+                provenance:
+                  type: object
+                  properties:
+                    digital_source_type:
+                      anyOf:
+                        - type: string
+                          const: digital_capture
+                        - type: string
+                          const: digital_creation
+                        - type: string
+                          const: trained_algorithmic_media
+                        - type: string
+                          const: composite_with_trained_algorithmic_media
+                        - type: string
+                          const: algorithmic_media
+                        - type: string
+                          const: composite_capture
+                        - type: string
+                          const: composite_synthetic
+                        - type: string
+                          const: human_edits
+                        - type: string
+                          const: data_driven_media
+                    synthetic_depiction:
+                      type: boolean
+                    ai_tool:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        version:
+                          type: string
+                        provider:
+                          type: string
+                      required:
+                        - name
+                      additionalProperties: {}
+                    human_oversight:
+                      anyOf:
+                        - type: string
+                          const: none
+                        - type: string
+                          const: prompt_only
+                        - type: string
+                          const: selected
+                        - type: string
+                          const: edited
+                        - type: string
+                          const: directed
+                    declared_by:
+                      type: object
+                      properties:
+                        agent_url:
+                          type: string
+                        role:
+                          anyOf:
+                            - type: string
+                              const: creator
+                            - type: string
+                              const: advertiser
+                            - type: string
+                              const: agency
+                            - type: string
+                              const: platform
+                            - type: string
+                              const: tool
+                      required:
+                        - role
+                      additionalProperties: {}
+                    declared_at:
+                      type: string
+                    created_time:
+                      type: string
+                    c2pa:
+                      type: object
+                      properties:
+                        manifest_url:
+                          type: string
+                      required:
+                        - manifest_url
+                      additionalProperties: {}
+                    embedded_provenance:
+                      minItems: 1
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          method:
+                            anyOf:
+                              - type: string
+                                const: manifest_wrapper
+                              - type: string
+                                const: provenance_markers
+                          standard:
+                            type: string
+                          provider:
+                            type: string
+                          verify_agent:
+                            type: object
+                            properties:
+                              agent_url:
+                                type: string
+                              feature_id:
+                                type: string
+                            required:
+                              - agent_url
+                            additionalProperties: {}
+                          embedded_at:
+                            type: string
+                        required:
+                          - method
+                          - provider
+                        additionalProperties: {}
+                    watermarks:
+                      minItems: 1
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          media_type:
+                            anyOf:
+                              - type: string
+                                const: audio
+                              - type: string
+                                const: image
+                              - type: string
+                                const: video
+                              - type: string
+                                const: text
+                          provider:
+                            type: string
+                          verify_agent:
+                            type: object
+                            properties:
+                              agent_url:
+                                type: string
+                              feature_id:
+                                type: string
+                            required:
+                              - agent_url
+                            additionalProperties: {}
+                          c2pa_action:
+                            anyOf:
+                              - type: string
+                                const: c2pa.watermarked.bound
+                              - type: string
+                                const: c2pa.watermarked.unbound
+                          embedded_at:
+                            type: string
+                        required:
+                          - media_type
+                          - provider
+                        additionalProperties: {}
+                    disclosure:
+                      type: object
+                      properties:
+                        required:
+                          type: boolean
+                        jurisdictions:
+                          minItems: 1
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              country:
+                                type: string
+                              region:
+                                type: string
+                              regulation:
+                                type: string
+                              label_text:
+                                type: string
+                              render_guidance:
+                                type: object
+                                properties:
+                                  persistence:
+                                    anyOf:
+                                      - type: string
+                                        const: continuous
+                                      - type: string
+                                        const: initial
+                                      - type: string
+                                        const: flexible
+                                  min_duration_ms:
+                                    type: integer
+                                    minimum: 1
+                                    maximum: 9007199254740991
+                                  positions:
+                                    minItems: 1
+                                    type: array
+                                    items:
+                                      anyOf:
+                                        - type: string
+                                          const: prominent
+                                        - type: string
+                                          const: footer
+                                        - type: string
+                                          const: audio
+                                        - type: string
+                                          const: subtitle
+                                        - type: string
+                                          const: overlay
+                                        - type: string
+                                          const: end_card
+                                        - type: string
+                                          const: pre_roll
+                                        - type: string
+                                          const: companion
+                                  ext:
+                                    $ref: >-
+                                      #/components/schemas/get_success_CampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt
+                                additionalProperties: {}
+                            required:
+                              - country
+                              - regulation
+                            additionalProperties: {}
+                      required:
+                        - required
+                      additionalProperties: {}
+                    verification:
+                      minItems: 1
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          verified_by:
+                            type: string
+                          verified_time:
+                            type: string
+                          result:
+                            anyOf:
+                              - type: string
+                                const: authentic
+                              - type: string
+                                const: ai_generated
+                              - type: string
+                                const: ai_modified
+                              - type: string
+                                const: inconclusive
+                          confidence:
+                            type: number
+                            minimum: 0
+                            maximum: 1
+                          details_url:
+                            type: string
+                        required:
+                          - verified_by
+                          - result
+                        additionalProperties: {}
+                    ext:
+                      $ref: >-
+                        #/components/schemas/get_success_CampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceExt
+                  additionalProperties: {}
+              required:
+                - asset_type
+                - url
+                - width
+                - height
+              additionalProperties: {}
+            colors:
+              type: object
+              properties:
+                primary:
+                  type: string
+                  pattern: ^#[0-9a-fA-F]{6}$
+                secondary:
+                  type: string
+                  pattern: ^#[0-9a-fA-F]{6}$
+                accent:
+                  type: string
+                  pattern: ^#[0-9a-fA-F]{6}$
+              additionalProperties: {}
+            voice:
+              type: string
+            tagline:
+              type: string
+          additionalProperties: {}
+      required:
+        - domain
+      additionalProperties:
+        $ref: '#/components/schemas/get_success_CampaignGoalProgressOptimizationGoalVendorValue'
+    get_success_CampaignGoalProgressOptimizationGoalTargetFrequencyWindow:
+      type: object
+      properties:
+        interval:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        unit:
+          anyOf:
+            - type: string
+              const: seconds
+            - type: string
+              const: minutes
+            - type: string
+              const: hours
+            - type: string
+              const: days
+            - type: string
+              const: campaign
+      required:
+        - interval
+        - unit
+      additionalProperties: {}
+    get_success_CampaignGoalProgressOptimizationGoalAttributionWindowPostClick:
+      type: object
+      properties:
+        interval:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        unit:
+          anyOf:
+            - type: string
+              const: seconds
+            - type: string
+              const: minutes
+            - type: string
+              const: hours
+            - type: string
+              const: days
+            - type: string
+              const: campaign
+      required:
+        - interval
+        - unit
+      additionalProperties: {}
+    get_success_CampaignGoalProgressOptimizationGoalAttributionWindowPostView:
+      type: object
+      properties:
+        interval:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        unit:
+          anyOf:
+            - type: string
+              const: seconds
+            - type: string
+              const: minutes
+            - type: string
+              const: hours
+            - type: string
+              const: days
+            - type: string
+              const: campaign
+      required:
+        - interval
+        - unit
+      additionalProperties: {}
+    get_success_CampaignGoalProgressOptimizationGoalMetricId:
+      type: string
+      minLength: 1
+      maxLength: 64
+      pattern: ^[a-z][a-z0-9_]*$
+    get_success_CampaignGoalProgressMetricOptimizationTargetCostPerVariantKind:
+      type: string
+      const: cost_per
+    get_success_CampaignGoalProgressMetricOptimizationTargetCostPerVariantValue:
+      type: number
+      exclusiveMinimum: 0
+    get_success_CampaignGoalProgressMetricOptimizationTargetCostPerVariantAdditionalValue: {}
+    get_success_CampaignGoalProgressMetricOptimizationTargetThresholdRateVariantKind:
+      type: string
+      const: threshold_rate
+    get_success_CampaignGoalProgressMetricOptimizationTargetThresholdRateVariantValue:
+      type: number
+      exclusiveMinimum: 0
+    get_success_CampaignGoalProgressMetricOptimizationTargetThresholdRateVariantAdditionalValue: {}
+    get_success_CampaignGoalProgressEventOptimizationTargetPerAdSpendVariantKind:
+      type: string
+      const: per_ad_spend
+    get_success_CampaignGoalProgressEventOptimizationTargetPerAdSpendVariantValue:
+      type: number
+      exclusiveMinimum: 0
+    get_success_CampaignGoalProgressEventOptimizationTargetPerAdSpendVariantAdditionalValue: {}
+    get_success_CampaignGoalProgressEventOptimizationTargetMaximizeValueVariantKind:
+      type: string
+      const: maximize_value
+    get_success_CampaignGoalProgressEventOptimizationTargetMaximizeValueVariantValue: {}
+    get_success_CampaignGoalProgressCostPerTargetKind:
+      type: string
+      const: cost_per
+    get_success_CampaignGoalProgressCostPerTargetValue:
+      type: number
+      exclusiveMinimum: 0
+    get_success_CampaignGoalProgressCostPerTargetAdditionalValue: {}
+    get_success_CampaignGoalProgressThresholdRateTargetKind:
+      type: string
+      const: threshold_rate
+    get_success_CampaignGoalProgressThresholdRateTargetValue:
+      type: number
+      exclusiveMinimum: 0
+    get_success_CampaignGoalProgressThresholdRateTargetAdditionalValue: {}
+    get_success_CampaignGoalProgressPerAdSpendTargetKind:
+      type: string
+      const: per_ad_spend
+    get_success_CampaignGoalProgressPerAdSpendTargetValue:
+      type: number
+      exclusiveMinimum: 0
+    get_success_CampaignGoalProgressPerAdSpendTargetAdditionalValue: {}
+    get_success_CampaignGoalProgressMaximizeValueTargetKind:
+      type: string
+      const: maximize_value
+    get_success_CampaignGoalProgressMaximizeValueTargetValue: {}
+    get_success_CampaignGoalProgressAdvertiserMeasuredBasisVendorDomain:
+      type: string
+      pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
+    get_success_CampaignGoalProgressAdvertiserMeasuredBasisVendorBrandId:
+      type: string
+      pattern: ^[a-z0-9_]+$
+    get_success_CampaignGoalProgressAdvertiserMeasuredBasisVendorValue: {}
+    get_success_CampaignGoalProgressAdvertiserMeasuredBasisMetricId:
+      type: string
+      minLength: 1
+      maxLength: 64
+      pattern: ^[a-z][a-z0-9_]*$
+    get_success_CampaignGoalProgressVendorAttestedBasisVendorDomain:
+      type: string
+      pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
+    get_success_CampaignGoalProgressVendorAttestedBasisVendorBrandId:
+      type: string
+      pattern: ^[a-z0-9_]+$
+    get_success_CampaignGoalProgressVendorAttestedBasisVendorValue: {}
+    get_success_CampaignGoalProgressVendorAttestedBasisMetricId:
+      type: string
+      minLength: 1
+      maxLength: 64
+      pattern: ^[a-z][a-z0-9_]*$
+    get_success_DeliveryGoalProgressDeliveryProjection:
+      type: object
+      properties:
+        projected_impressions:
+          type: number
+          minimum: 0
+        projected_spend:
+          type: number
+          minimum: 0
+        projected_end_state:
+          anyOf:
+            - type: string
+              const: on_pace
+            - type: string
+              const: complete
+            - type: string
+              const: underdelivery
+            - type: string
+              const: early_exhaustion
+        basis:
+          anyOf:
+            - type: string
+              const: trailing_daily_avg
+            - type: string
+              const: trailing_hourly_avg
+            - type: string
+              const: platform_model
+            - type: string
+              const: seller_defined
+        as_of:
+          type: string
+        ext:
+          $ref: '#/components/schemas/get_success_DeliveryGoalProgressDeliveryProjectionExt'
+      required:
+        - projected_end_state
+        - basis
+        - as_of
+      additionalProperties: {}
+    get_success_DeliveryGoalProgressSellerDeliveryProjection:
+      type: object
+      properties:
+        projected_impressions:
+          type: number
+          minimum: 0
+        projected_spend:
+          type: number
+          minimum: 0
+        projected_end_state:
+          anyOf:
+            - type: string
+              const: on_pace
+            - type: string
+              const: complete
+            - type: string
+              const: underdelivery
+            - type: string
+              const: early_exhaustion
+        basis:
+          anyOf:
+            - type: string
+              const: trailing_daily_avg
+            - type: string
+              const: trailing_hourly_avg
+            - type: string
+              const: platform_model
+            - type: string
+              const: seller_defined
+        as_of:
+          type: string
+        ext:
+          $ref: '#/components/schemas/get_success_DeliveryGoalProgressSellerDeliveryProjectionExt'
+      required:
+        - projected_end_state
+        - basis
+        - as_of
+      additionalProperties: {}
     get_success_ObjectPlanCurrentPlanId:
       type: string
       description: >-
@@ -86147,6 +87485,33 @@ components:
       type: string
       minLength: 3
       maxLength: 3
+    get_success_CampaignGoalProgressOptimizationGoalVendorDomain:
+      type: string
+      pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
+    get_success_CampaignGoalProgressOptimizationGoalVendorBrandId:
+      type: string
+      pattern: ^[a-z0-9_]+$
+    get_success_CampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    get_success_CampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceExt:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    get_success_CampaignGoalProgressOptimizationGoalVendorValue: {}
+    get_success_DeliveryGoalProgressDeliveryProjectionExt:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    get_success_DeliveryGoalProgressSellerDeliveryProjectionExt:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
     get_success_ObjectPlanCurrentPaymentOptionCurrency:
       type: string
       minLength: 3
@@ -106031,6 +107396,8 @@ components:
           additionalProperties: false
         pulse:
           $ref: '#/components/schemas/search_success_CampaignPulseSummary'
+        progressSummary:
+          $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
       required:
         - campaign
         - advertiser
@@ -106288,6 +107655,31 @@ components:
       required:
         - earliest
         - latest
+      additionalProperties: false
+    search_success_CampaignGoalProgressSummary:
+      type: object
+      properties:
+        worstVerdict:
+          type:
+            - string
+            - 'null'
+        deliveryEndState:
+          type:
+            - string
+            - 'null'
+        dataThrough:
+          type:
+            - string
+            - 'null'
+        nextCheckAt:
+          type:
+            - string
+            - 'null'
+      required:
+        - worstVerdict
+        - deliveryEndState
+        - dataThrough
+        - nextCheckAt
       additionalProperties: false
     search_success_SearchAccountPageOutput:
       type: object
@@ -108637,6 +110029,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchAccountPageOutputValue: {}
     search_success_SearchMemberPageOutputTotal:
@@ -108720,6 +110114,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchMemberPageOutputValue: {}
     search_success_SearchAgentPageOutputTotal:
@@ -108803,6 +110199,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchAgentPageOutputValue: {}
     search_success_SearchSkillPageOutputTotal:
@@ -108886,6 +110284,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchSkillPageOutputValue: {}
     search_success_SearchInventorySourcePageOutputTotal:
@@ -108969,6 +110369,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchInventorySourcePageOutputValue: {}
     search_success_SearchMaterialPageOutputTotal:
@@ -109052,6 +110454,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchMaterialPageOutputValue: {}
     search_success_SearchCoveragePageOutputTotal:
@@ -109135,6 +110539,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchCoveragePageOutputValue: {}
     search_success_SearchWholesaleProductPageOutputTotal:
@@ -109218,6 +110624,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchWholesaleProductPageOutputValue: {}
     search_success_SearchPlaybookVersionPageOutputTotal:
@@ -109301,6 +110709,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchPlaybookVersionPageOutputValue: {}
     search_success_SearchBusinessRulesVersionPageOutputTotal:
@@ -109384,6 +110794,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchBusinessRulesVersionPageOutputValue: {}
     search_success_SearchHouseDiscountPageOutputTotal:
@@ -109467,6 +110879,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchHouseDiscountPageOutputValue: {}
     search_success_SearchConnectionPageOutputTotal:
@@ -109550,6 +110964,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchConnectionPageOutputValue: {}
     search_success_SearchAccountRelationshipPageOutputTotal:
@@ -109633,6 +111049,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchAccountRelationshipPageOutputValue: {}
     search_success_SearchSourceAccountPageOutputTotal:
@@ -109716,6 +111134,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchSourceAccountPageOutputValue: {}
     search_success_SearchSellerPageOutputTotal:
@@ -109799,6 +111219,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchSellerPageOutputValue: {}
     search_success_SearchAdvertiserPageOutputTotal:
@@ -109882,6 +111304,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchAdvertiserPageOutputValue: {}
     search_success_SearchAdvertiserGrantPageOutputTotal:
@@ -109965,6 +111389,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchAdvertiserGrantPageOutputValue: {}
     search_success_SearchSignalPageOutputTotal:
@@ -110048,6 +111474,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchSignalPageOutputValue: {}
     search_success_SearchAdServerTargetingPageOutputTotal:
@@ -110131,6 +111559,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchAdServerTargetingPageOutputValue: {}
     search_success_SearchWorkItemPageOutputTotal:
@@ -110214,6 +111644,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchWorkItemPageOutputValue: {}
     search_success_SearchCampaignPageOutputTotal:
@@ -110297,6 +111729,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchCampaignPageOutputValue: {}
     search_success_SearchCatalogPageOutputTotal:
@@ -110380,6 +111814,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchCatalogPageOutputValue: {}
     search_success_SearchEventSourcePageOutputTotal:
@@ -110463,6 +111899,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchEventSourcePageOutputValue: {}
     search_success_SearchPropertyListPageOutputTotal:
@@ -110546,6 +111984,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchPropertyListPageOutputValue: {}
     search_success_SearchCreativePageOutputTotal:
@@ -110629,6 +112069,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchCreativePageOutputValue: {}
     search_success_SearchCreativeFormatPageOutputTotal:
@@ -110712,6 +112154,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchCreativeFormatPageOutputValue: {}
     search_success_SearchCreativeAssetPageOutputTotal:
@@ -110795,6 +112239,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchCreativeAssetPageOutputValue: {}
     search_success_SearchCreativeEnginePageOutputTotal:
@@ -110878,6 +112324,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchCreativeEnginePageOutputValue: {}
     search_success_SearchCreativeSessionPageOutputTotal:
@@ -110961,6 +112409,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchCreativeSessionPageOutputValue: {}
     search_success_SearchCreativeCollectionPageOutputTotal:
@@ -111044,6 +112494,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchCreativeCollectionPageOutputValue: {}
     search_success_SearchMediaBuyPageOutputTotal:
@@ -111127,6 +112579,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchMediaBuyPageOutputValue: {}
     search_success_SearchProposalPageOutputTotal:
@@ -111210,6 +112664,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchProposalPageOutputValue: {}
     search_success_SearchRfpPageOutputTotal:
@@ -111293,6 +112749,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchRfpPageOutputValue: {}
     search_success_SearchRfpTurnPageOutputTotal:
@@ -111376,6 +112834,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchRfpTurnPageOutputValue: {}
     search_success_SearchLibraryRequestPageOutputTotal:
@@ -111459,6 +112919,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchLibraryRequestPageOutputValue: {}
     search_success_SearchAskPageOutputTotal:
@@ -111542,6 +113004,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchAskPageOutputValue: {}
     search_success_SearchConversationPageOutputTotal:
@@ -111625,6 +113089,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchConversationPageOutputValue: {}
     search_success_SearchBuyerAgentPageOutputTotal:
@@ -111708,6 +113174,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchBuyerAgentPageOutputValue: {}
     search_success_SearchDimensionPageOutputTotal:
@@ -111791,6 +113259,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchDimensionPageOutputValue: {}
     search_success_SearchBuyerRfpPageOutputTotal:
@@ -111874,6 +113344,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchBuyerRfpPageOutputValue: {}
     search_success_SearchSessionPageOutputTotal:
@@ -111957,6 +113429,8 @@ components:
               - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
               - type: 'null'
             description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchSessionPageOutputValue: {}
     upload_creative_asset_request_AdvertiserId:
