@@ -597,11 +597,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveWholesaleProductResult], self._request_with_response("save_wholesale_product", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_work_item(self, input: models.SaveWorkItemInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveWorkItemResult:
-        "Decide a creative or media-buy approval, or complete a modular-source follow-up. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page."
+        "Decide a creative or media-buy approval, overrule a spend conflict, or complete a modular-source follow-up. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page."
         return cast("models.SaveWorkItemResult", self._request("save_work_item", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_work_item_with_response(self, input: models.SaveWorkItemInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveWorkItemResult]:
-        "Decide a creative or media-buy approval, or complete a modular-source follow-up. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page. Returns the data together with response headers and request ID."
+        "Decide a creative or media-buy approval, overrule a spend conflict, or complete a modular-source follow-up. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveWorkItemResult], self._request_with_response("save_work_item", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def search(self, input: models.SearchInput, *, account_id: str | None = None, timeout: float | None = None) -> models.SearchResult:
@@ -1222,11 +1222,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveWholesaleProductResult], await self._request_with_response("save_wholesale_product", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_work_item(self, input: models.SaveWorkItemInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveWorkItemResult:
-        "Decide a creative or media-buy approval, or complete a modular-source follow-up. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page."
+        "Decide a creative or media-buy approval, overrule a spend conflict, or complete a modular-source follow-up. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page."
         return cast("models.SaveWorkItemResult", await self._request("save_work_item", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_work_item_with_response(self, input: models.SaveWorkItemInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveWorkItemResult]:
-        "Decide a creative or media-buy approval, or complete a modular-source follow-up. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page. Returns the data together with response headers and request ID."
+        "Decide a creative or media-buy approval, overrule a spend conflict, or complete a modular-source follow-up. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveWorkItemResult], await self._request_with_response("save_work_item", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def search(self, input: models.SearchInput, *, account_id: str | None = None, timeout: float | None = None) -> models.SearchResult:

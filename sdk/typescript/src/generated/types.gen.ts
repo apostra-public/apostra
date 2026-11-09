@@ -933,9 +933,9 @@ export type GetData = {
          */
         sourceId?: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -1177,9 +1177,9 @@ export type GetData = {
          */
         sourceId?: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -1421,9 +1421,9 @@ export type GetData = {
          */
         sourceId?: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -1661,9 +1661,9 @@ export type GetData = {
          */
         sourceId?: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -1902,9 +1902,9 @@ export type GetData = {
          */
         sourceId?: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -2147,9 +2147,9 @@ export type GetData = {
          */
         sourceId?: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -2387,9 +2387,9 @@ export type GetData = {
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2625,9 +2625,9 @@ export type GetData = {
          */
         sourceId: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -2866,9 +2866,9 @@ export type GetData = {
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -3111,9 +3111,9 @@ export type GetData = {
          */
         sourceId?: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3352,9 +3352,9 @@ export type GetData = {
          */
         sourceId?: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3589,9 +3589,9 @@ export type GetData = {
          */
         sourceId: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -3830,9 +3830,9 @@ export type GetData = {
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -4075,9 +4075,9 @@ export type GetData = {
          */
         sourceId?: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -4319,9 +4319,9 @@ export type GetData = {
          */
         sourceId?: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -4563,9 +4563,9 @@ export type GetData = {
          */
         sourceId?: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -4807,9 +4807,9 @@ export type GetData = {
          */
         sourceId?: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -5051,9 +5051,9 @@ export type GetData = {
          */
         sourceId?: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
@@ -5295,9 +5295,9 @@ export type GetData = {
          */
         sourceId?: string;
         /**
-         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
-        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -34333,7 +34333,7 @@ export type SaveWorkItemData = {
         /**
          * Workstream owning this item.
          */
-        kind: 'creative_review' | 'media_buy_approval' | 'modular_source';
+        kind: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
          * Work-item identifier from search or get.
          */
@@ -34347,7 +34347,7 @@ export type SaveWorkItemData = {
          */
         status: 'approved' | 'rejected' | 'completed';
         /**
-         * Optional note preserved with the decision.
+         * Note preserved with the decision. Required for `contract_conflict`: your reason for the overrule.
          */
         reviewerNotes?: string;
         /**
@@ -34500,6 +34500,7 @@ export type SaveWorkItemSuccessSaveWorkItemSuccessCreated = {
     action: 'created';
     object: SaveWorkItemSuccessSaveWorkItemSuccessCreatedObject;
     actionEvidence?: SaveWorkItemSuccessSaveWorkItemSuccessCreatedActionEvidence;
+    resumeDue?: SaveWorkItemSuccessSaveWorkItemSuccessCreatedResumeDue;
     [key: string]: unknown;
 };
 
@@ -34513,11 +34514,14 @@ export type SaveWorkItemSuccessSaveWorkItemSuccessCreatedObject = {
     [key: string]: unknown;
 };
 
+export type SaveWorkItemSuccessSaveWorkItemSuccessCreatedResumeDue = boolean;
+
 export type SaveWorkItemSuccessSaveWorkItemSuccessUnchanged = {
     outcome: 'unchanged';
     action: 'unchanged';
     object: SaveWorkItemSuccessSaveWorkItemSuccessUnchangedObject;
     actionEvidence?: SaveWorkItemSuccessSaveWorkItemSuccessUnchangedActionEvidence;
+    resumeDue?: SaveWorkItemSuccessSaveWorkItemSuccessUnchangedResumeDue;
     [key: string]: unknown;
 };
 
@@ -34530,6 +34534,8 @@ export type SaveWorkItemSuccessSaveWorkItemSuccessUnchangedActionEvidence = {
 export type SaveWorkItemSuccessSaveWorkItemSuccessUnchangedObject = {
     [key: string]: unknown;
 };
+
+export type SaveWorkItemSuccessSaveWorkItemSuccessUnchangedResumeDue = boolean;
 
 export type SearchData = {
     body: ((unknown & {
@@ -34627,9 +34633,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
-            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
             /**
              * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
              */
@@ -35099,9 +35105,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
-            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
             /**
              * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
              */
@@ -35639,9 +35645,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
-            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
             /**
              * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
              */
@@ -36111,9 +36117,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
-            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
             /**
              * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
              */
@@ -36576,9 +36582,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
-            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
             /**
              * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
              */
@@ -37044,9 +37050,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
-            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
             /**
              * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
              */
@@ -37512,9 +37518,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
-            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
             /**
              * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
              */
@@ -38106,9 +38112,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
-            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
             /**
              * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
              */
@@ -38578,9 +38584,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
-            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
             /**
              * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
              */
@@ -39050,9 +39056,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
-            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
             /**
              * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
              */
@@ -39521,9 +39527,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
-            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
             /**
              * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
              */
@@ -39993,9 +39999,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
-            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
             /**
              * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
              */
@@ -40465,9 +40471,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
-            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
             /**
              * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
              */
@@ -40937,9 +40943,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+             * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
-            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source';
+            workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
             /**
              * For kind work_item: only pending approvals in this queue: overdue (past their deadline) or unowned (nobody assigned). Follow-up tasks have no queues.
              */
