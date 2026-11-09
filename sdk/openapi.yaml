@@ -59127,7 +59127,8 @@ paths:
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
-                            which are different numbers.
+                            which are different numbers. Also narrows buyer wholesale_product browse to these sellers;
+                            omit for every seller.
                           minItems: 1
                           maxItems: 50
                           type: array
@@ -60722,7 +60723,8 @@ paths:
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
-                            which are different numbers.
+                            which are different numbers. Also narrows buyer wholesale_product browse to these sellers;
+                            omit for every seller.
                           minItems: 1
                           maxItems: 50
                           type: array
@@ -63037,7 +63039,8 @@ paths:
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
-                            which are different numbers.
+                            which are different numbers. Also narrows buyer wholesale_product browse to these sellers;
+                            omit for every seller.
                           minItems: 1
                           maxItems: 50
                           type: array
@@ -64633,7 +64636,8 @@ paths:
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
-                            which are different numbers.
+                            which are different numbers. Also narrows buyer wholesale_product browse to these sellers;
+                            omit for every seller.
                           minItems: 1
                           maxItems: 50
                           type: array
@@ -66214,7 +66218,8 @@ paths:
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
-                            which are different numbers.
+                            which are different numbers. Also narrows buyer wholesale_product browse to these sellers;
+                            omit for every seller.
                           minItems: 1
                           maxItems: 50
                           type: array
@@ -67802,7 +67807,8 @@ paths:
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
-                            which are different numbers.
+                            which are different numbers. Also narrows buyer wholesale_product browse to these sellers;
+                            omit for every seller.
                           minItems: 1
                           maxItems: 50
                           type: array
@@ -69389,7 +69395,8 @@ paths:
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
-                            which are different numbers.
+                            which are different numbers. Also narrows buyer wholesale_product browse to these sellers;
+                            omit for every seller.
                           minItems: 1
                           maxItems: 50
                           type: array
@@ -72456,7 +72463,8 @@ paths:
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
-                            which are different numbers.
+                            which are different numbers. Also narrows buyer wholesale_product browse to these sellers;
+                            omit for every seller.
                           minItems: 1
                           maxItems: 50
                           type: array
@@ -74050,7 +74058,8 @@ paths:
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
-                            which are different numbers.
+                            which are different numbers. Also narrows buyer wholesale_product browse to these sellers;
+                            omit for every seller.
                           minItems: 1
                           maxItems: 50
                           type: array
@@ -75644,7 +75653,8 @@ paths:
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
-                            which are different numbers.
+                            which are different numbers. Also narrows buyer wholesale_product browse to these sellers;
+                            omit for every seller.
                           minItems: 1
                           maxItems: 50
                           type: array
@@ -77238,7 +77248,8 @@ paths:
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
-                            which are different numbers.
+                            which are different numbers. Also narrows buyer wholesale_product browse to these sellers;
+                            omit for every seller.
                           minItems: 1
                           maxItems: 50
                           type: array
@@ -78829,7 +78840,8 @@ paths:
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
-                            which are different numbers.
+                            which are different numbers. Also narrows buyer wholesale_product browse to these sellers;
+                            omit for every seller.
                           minItems: 1
                           maxItems: 50
                           type: array
@@ -80420,7 +80432,8 @@ paths:
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
-                            which are different numbers.
+                            which are different numbers. Also narrows buyer wholesale_product browse to these sellers;
+                            omit for every seller.
                           minItems: 1
                           maxItems: 50
                           type: array
@@ -82012,7 +82025,8 @@ paths:
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
-                            which are different numbers.
+                            which are different numbers. Also narrows buyer wholesale_product browse to these sellers;
+                            omit for every seller.
                           minItems: 1
                           maxItems: 50
                           type: array

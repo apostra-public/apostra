@@ -34744,7 +34744,7 @@ export type SearchData = {
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -35216,7 +35216,7 @@ export type SearchData = {
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -35756,7 +35756,7 @@ export type SearchData = {
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -36228,7 +36228,7 @@ export type SearchData = {
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -36693,7 +36693,7 @@ export type SearchData = {
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -37161,7 +37161,7 @@ export type SearchData = {
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -37629,7 +37629,7 @@ export type SearchData = {
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -38223,7 +38223,7 @@ export type SearchData = {
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -38695,7 +38695,7 @@ export type SearchData = {
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -39167,7 +39167,7 @@ export type SearchData = {
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -39638,7 +39638,7 @@ export type SearchData = {
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -40110,7 +40110,7 @@ export type SearchData = {
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -40582,7 +40582,7 @@ export type SearchData = {
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.
              */
             sellerAccountIds?: Array<number>;
             /**
@@ -41054,7 +41054,7 @@ export type SearchData = {
              */
             ids?: Array<string>;
             /**
-             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.
+             * For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.
              */
             sellerAccountIds?: Array<number>;
             /**
