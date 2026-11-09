@@ -19422,7 +19422,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     ids: NotRequired[list[str]]
     '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -19694,7 +19694,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     ids: NotRequired[list[str]]
     '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -19900,7 +19900,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     ids: NotRequired[list[str]]
     '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -20133,7 +20133,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     ids: NotRequired[list[str]]
     '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -20373,7 +20373,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     ids: NotRequired[list[str]]
     '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -20613,7 +20613,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     ids: NotRequired[list[str]]
     '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -20853,7 +20853,7 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     ids: NotRequired[list[str]]
     '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -21127,7 +21127,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     ids: NotRequired[list[str]]
     '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -21367,7 +21367,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     ids: NotRequired[list[str]]
     '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -21605,7 +21605,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     ids: NotRequired[list[str]]
     '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -21809,7 +21809,7 @@ class SearchInputKindCreativeFilter(TypedDict):
     ids: NotRequired[list[str]]
     '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -22117,7 +22117,7 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     ids: NotRequired[list[str]]
     '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -22397,7 +22397,7 @@ class SearchInputKindProposalFilter(TypedDict):
     ids: NotRequired[list[str]]
     '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -22639,7 +22639,7 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     ids: NotRequired[list[str]]
     '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
-    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers.\n    '
+    '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
