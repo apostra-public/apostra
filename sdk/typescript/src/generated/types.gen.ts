@@ -25608,6 +25608,19 @@ export type SaveMaterialData = {
          */
         confirmationId?: string;
         /**
+         * Optional per-insight choice from preview_permanent_delete. Omitted insights use that preview’s default.
+         */
+        insightDispositions?: Array<{
+            /**
+             * Applied insight id returned by preview_permanent_delete.
+             */
+            applicationId: string;
+            /**
+             * remove deletes unchanged document content; keep retains human-edited content and marks its source deleted.
+             */
+            disposition: 'remove' | 'keep';
+        }>;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
