@@ -27,7 +27,7 @@ for await (const page of paginate(
   signal,
 )) {
   pages++
-  if (page.report === 'live_campaign_delivery') continue
+  if (page.report !== 'campaign_delivery') continue
 }
 if (pages===0) throw new Error('Missing delivery result')
 // The complete-window read proves historical reporting. Check the threshold
@@ -44,7 +44,7 @@ for await (const page of paginate(
   signal,
 )) {
   simulatedDayPages++
-  if (page.report === 'live_campaign_delivery') continue
+  if (page.report !== 'campaign_delivery') continue
   const impressions = page.totals?.metrics.impressions?.value
   if (typeof impressions === 'number' && Number.isFinite(impressions)) {
     observedImpressions = Math.max(observedImpressions, impressions)

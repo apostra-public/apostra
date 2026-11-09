@@ -5497,9 +5497,9 @@ export type GetDeliveryData = {
          */
         metrics?: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
         /**
-         * Group-by dimensions; campaign delivery also accepts labels.<dimension_key>. Omit for leaf grain.
+         * Group-by dimensions; campaign delivery also accepts labels.<dimension_key>, and property (tracker impressions per site or app, with date). Omit for leaf grain.
          */
-        dimensions?: Array<'date' | 'advertiser' | 'campaign' | 'channel_group' | 'channel' | 'buyer' | 'media_buy' | 'package' | 'inventory_source' | 'seller' | 'sales_agent' | string>;
+        dimensions?: Array<'date' | 'advertiser' | 'campaign' | 'channel_group' | 'channel' | 'buyer' | 'media_buy' | 'package' | 'inventory_source' | 'seller' | 'sales_agent' | 'property' | string>;
         /**
          * Dates (max 90 days) or lifetime for delivery; invalid for margin.
          */
@@ -5688,6 +5688,7 @@ export type GetDeliveryResponses = {
             delivery?: never;
             deliverySummary?: never;
             authority?: never;
+            propertyDelivery?: never;
         } | {
             report: 'campaign_delivery';
             query: GetDeliverySuccessQuery;
@@ -5728,6 +5729,7 @@ export type GetDeliveryResponses = {
             delivery?: never;
             deliverySummary?: never;
             authority?: never;
+            propertyDelivery?: never;
         } | {
             report: 'margin';
             query: GetDeliverySuccessQuery;
@@ -5768,6 +5770,7 @@ export type GetDeliveryResponses = {
             delivery?: never;
             deliverySummary?: never;
             authority?: never;
+            propertyDelivery?: never;
         } | {
             report: 'live_campaign_delivery';
             query: {
@@ -6015,6 +6018,38 @@ export type GetDeliveryResponses = {
             currencyConversionsOmitted?: never;
             conversion?: never;
             synthetic?: never;
+            propertyDelivery?: never;
+        } | {
+            report: 'campaign_property_delivery';
+            query: GetDeliverySuccessQuery;
+            period: {
+                startDate: string;
+                endDate: string;
+            };
+            rows: Array<GetDeliverySuccessDeliveryPropertyRow>;
+            page: GetDeliverySuccessPage;
+            semantics: {
+                sourceOperation: 'tracker_property_impressions';
+                genericFallback: GetDeliverySuccessSemanticsGenericFallback;
+                measurement: GetDeliverySuccessSemanticsMeasurement;
+                missingValues: GetDeliverySuccessSemanticsMissingValues;
+                freshness: GetDeliverySuccessSemanticsFreshness;
+                finality: GetDeliverySuccessSemanticsFinality;
+                billingEligibility: GetDeliverySuccessSemanticsBillingEligibility;
+            };
+            propertyDelivery: GetDeliverySuccessDeliveryPropertyReport;
+            totals?: never;
+            totalsByFinality?: never;
+            goalProgress?: never;
+            coverage?: never;
+            currencyConversions?: never;
+            currencyConversionsOmitted?: never;
+            conversion?: never;
+            synthetic?: never;
+            campaignId?: never;
+            delivery?: never;
+            deliverySummary?: never;
+            authority?: never;
         };
         error: null;
     };
@@ -6114,6 +6149,126 @@ export type GetDeliverySuccessDeliveryCurrencyConversion = {
      * booked: locked when the buy was booked. snapshot: the daily rate store. settlement: the seller labelled a currency it is not paid in; the spend is taken in the one it is paid in, at rate 1.
      */
     rateSource: 'booked' | 'snapshot' | 'settlement';
+};
+
+export type GetDeliverySuccessDeliveryPropertyReport = {
+    propertySource: 'tracker';
+    mediaBuysRead: number;
+    /**
+     * One entry per seller with tracker impressions in scope, over the whole range.
+     */
+    sellers: Array<GetDeliverySuccessDeliveryPropertySeller>;
+};
+
+export type GetDeliverySuccessDeliveryPropertyRow = {
+    dimensions: {
+        date: string;
+        mediaBuy?: {
+            id: string;
+        };
+        /**
+         * Null when the tracker recorded no package we can map.
+         */
+        package?: {
+            id: string;
+        } | null;
+        /**
+         * The site or app as an AdCP property identifier. Tracker rows use subdomain, domain or bundle_id, with the value as recorded, lowercased.
+         */
+        property: GetDeliverySuccessDeliveryPropertyRowDimensionsProperty;
+    };
+    metrics: {
+        impressions: {
+            value: number;
+            status: 'available';
+        };
+    };
+    /**
+     * Counted by our impression tracker: estimated, not billable.
+     */
+    propertySource: 'tracker';
+    billable: false;
+    estimated: true;
+    /**
+     * The account's scores in force at the end of this UTC day, by feature id; empty when none apply.
+     */
+    features: {
+        [key: string]: {
+            /**
+             * The score: a number, a string or a boolean.
+             */
+            value: boolean | number | string;
+            /**
+             * Unit of a numeric value.
+             */
+            unit?: string;
+            /**
+             * Confidence in the value, from 0 to 1.
+             */
+            confidence?: number;
+            /**
+             * When the value was measured.
+             */
+            measured_at?: string;
+            /**
+             * When the value stops counting.
+             */
+            expires_at?: string;
+            /**
+             * Version of the method that produced the value.
+             */
+            methodology_version?: string;
+        };
+    };
+    /**
+     * Where each score in features is saved, by feature id.
+     */
+    scoreMatches: {
+        [key: string]: GetDeliverySuccessDeliveryPropertyScoreMatch;
+    };
+};
+
+export type GetDeliverySuccessDeliveryPropertyRowDimensionsProperty = {
+    type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+    value: string;
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessDeliveryPropertyScoreMatch = {
+    /**
+     * registrable_domain: www.site.nl uses the score saved for site.nl.
+     */
+    basis: 'exact_host' | 'registrable_domain';
+    identifier: GetDeliverySuccessDeliveryPropertyScoreMatchIdentifier;
+};
+
+export type GetDeliverySuccessDeliveryPropertyScoreMatchIdentifier = {
+    type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+    value: string;
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessDeliveryPropertySeller = {
+    /**
+     * Null for buys booked across several sellers or none.
+     */
+    seller: {
+        id: string;
+        name: string | null;
+    } | null;
+    trackerImpressions: number;
+    /**
+     * Of trackerImpressions, those with a site, an app or both.
+     */
+    impressionsWithProperty: number;
+    /**
+     * impressionsWithProperty / trackerImpressions. Low means rows show where the ad ran only in part.
+     */
+    fillShare: number;
+    /**
+     * Whether a per-property seller report was read; always false today.
+     */
+    sellerReportAvailable: boolean;
 };
 
 export type GetDeliverySuccessDeliveryRevision = {
@@ -6673,13 +6828,25 @@ export type GetDeliverySuccessRowsItemSourceOperation = 'get_seller_reporting_me
 
 export type GetDeliverySuccessSemantics = {
     sourceOperation: GetDeliverySuccessSemanticsSourceOperation;
-    genericFallback: false;
-    measurement: 'excluded';
-    missingValues: string;
-    freshness: string;
-    finality: string;
-    billingEligibility: string;
+    genericFallback: GetDeliverySuccessSemanticsGenericFallback;
+    measurement: GetDeliverySuccessSemanticsMeasurement;
+    missingValues: GetDeliverySuccessSemanticsMissingValues;
+    freshness: GetDeliverySuccessSemanticsFreshness;
+    finality: GetDeliverySuccessSemanticsFinality;
+    billingEligibility: GetDeliverySuccessSemanticsBillingEligibility;
 };
+
+export type GetDeliverySuccessSemanticsBillingEligibility = string;
+
+export type GetDeliverySuccessSemanticsFinality = string;
+
+export type GetDeliverySuccessSemanticsFreshness = string;
+
+export type GetDeliverySuccessSemanticsGenericFallback = false;
+
+export type GetDeliverySuccessSemanticsMeasurement = 'excluded';
+
+export type GetDeliverySuccessSemanticsMissingValues = string;
 
 export type GetDeliverySuccessSemanticsSourceOperation = 'get_seller_reporting_metrics' | 'get_buyer_reporting_metrics' | 'get_seller_margin_reporting';
 

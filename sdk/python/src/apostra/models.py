@@ -384,8 +384,8 @@ class GenerateVariantsSuccessGalleryVariantsItemPreview(TypedDict):
 class GetDeliveryInput(TypedDict):
     metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
     '\n    Metrics; omit for report defaults.\n    '
-    dimensions: NotRequired[list[Literal["date", "advertiser", "campaign", "channel_group", "channel", "buyer", "media_buy", "package", "inventory_source", "seller", "sales_agent"] | str]]
-    '\n    Group-by dimensions; campaign delivery also accepts labels.<dimension_key>. Omit for leaf grain.\n    '
+    dimensions: NotRequired[list[Literal["date", "advertiser", "campaign", "channel_group", "channel", "buyer", "media_buy", "package", "inventory_source", "seller", "sales_agent", "property"] | str]]
+    '\n    Group-by dimensions; campaign delivery also accepts labels.<dimension_key>, and property (tracker impressions per site or app, with date). Omit for leaf grain.\n    '
     sponsoredBuyerCustomerId: NotRequired[str]
     '\n    Server-issued self-serve buyer child scope from the Campaigns Page launch.\n    '
     report: NotRequired[Literal["delivery", "campaign_delivery", "live_campaign_delivery", "margin"]]
@@ -451,6 +451,28 @@ class GetDeliveryResultReportCampaignDelivery(TypedDict):
     '\n    Present when currency was sent: how money on rows and totals was converted, over every matched row.\n    '
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
+
+class GetDeliveryResultReportCampaignPropertyDelivery(TypedDict):
+    report: Literal["campaign_property_delivery"]
+    query: GetDeliverySuccessQuery
+    period: GetDeliveryResultReportCampaignPropertyDeliveryPeriod
+    rows: list[GetDeliverySuccessDeliveryPropertyRow]
+    page: GetDeliverySuccessPage
+    semantics: GetDeliveryResultReportCampaignPropertyDeliverySemantics
+    propertyDelivery: GetDeliverySuccessDeliveryPropertyReport
+
+class GetDeliveryResultReportCampaignPropertyDeliveryPeriod(TypedDict):
+    startDate: str
+    endDate: str
+
+class GetDeliveryResultReportCampaignPropertyDeliverySemantics(TypedDict):
+    sourceOperation: Literal["tracker_property_impressions"]
+    genericFallback: GetDeliverySuccessSemanticsGenericFallback
+    measurement: GetDeliverySuccessSemanticsMeasurement
+    missingValues: GetDeliverySuccessSemanticsMissingValues
+    freshness: GetDeliverySuccessSemanticsFreshness
+    finality: GetDeliverySuccessSemanticsFinality
+    billingEligibility: GetDeliverySuccessSemanticsBillingEligibility
 
 class GetDeliveryResultReportDelivery(TypedDict):
     report: Literal["delivery"]
@@ -737,7 +759,7 @@ class GetDeliveryResultReportMargin(TypedDict):
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
-GetDeliveryResult: TypeAlias = "GetDeliveryResultReportDelivery | GetDeliveryResultReportCampaignDelivery | GetDeliveryResultReportMargin | GetDeliveryResultReportLiveCampaignDelivery"
+GetDeliveryResult: TypeAlias = "GetDeliveryResultReportDelivery | GetDeliveryResultReportCampaignDelivery | GetDeliveryResultReportMargin | GetDeliveryResultReportLiveCampaignDelivery | GetDeliveryResultReportCampaignPropertyDelivery"
 
 class GetDeliverySuccessCampaignDeliveryCoverage(TypedDict):
     inFlightCampaigns: int
@@ -812,6 +834,87 @@ class GetDeliverySuccessDeliveryCurrencyConversion(TypedDict):
     '\n    booked: locked when the buy was booked. snapshot: the daily rate store. settlement: the seller labelled a currency it is not paid in; the spend is taken in the one it is paid in, at rate 1.\n    '
 
 GetDeliverySuccessCurrencyConversions: TypeAlias = "list[GetDeliverySuccessDeliveryCurrencyConversion]"
+
+class GetDeliverySuccessDeliveryPropertyReport(TypedDict):
+    propertySource: Literal["tracker"]
+    mediaBuysRead: int
+    sellers: list[GetDeliverySuccessDeliveryPropertySeller]
+    '\n    One entry per seller with tracker impressions in scope, over the whole range.\n    '
+
+class GetDeliverySuccessDeliveryPropertyRow(TypedDict):
+    dimensions: GetDeliverySuccessDeliveryPropertyRowDimensions
+    metrics: GetDeliverySuccessDeliveryPropertyRowMetrics
+    propertySource: Literal["tracker"]
+    '\n    Counted by our impression tracker: estimated, not billable.\n    '
+    billable: Literal[False]
+    estimated: Literal[True]
+    features: dict[str, GetDeliverySuccessDeliveryPropertyRowFeaturesValue]
+    '\n    The account\'s scores in force at the end of this UTC day, by feature id; empty when none apply.\n    '
+    scoreMatches: dict[str, GetDeliverySuccessDeliveryPropertyScoreMatch]
+    '\n    Where each score in features is saved, by feature id.\n    '
+
+class GetDeliverySuccessDeliveryPropertyRowDimensions(TypedDict):
+    date: str
+    mediaBuy: NotRequired[GetDeliverySuccessDeliveryPropertyRowDimensionsMediaBuy]
+    package: NotRequired[GetDeliverySuccessDeliveryPropertyRowDimensionsPackageValue | None]
+    '\n    Null when the tracker recorded no package we can map.\n    '
+    property: GetDeliverySuccessDeliveryPropertyRowDimensionsProperty
+    '\n    The site or app as an AdCP property identifier. Tracker rows use subdomain, domain or bundle_id, with the value as recorded, lowercased.\n    '
+
+class GetDeliverySuccessDeliveryPropertyRowDimensionsMediaBuy(TypedDict):
+    id: str
+
+class GetDeliverySuccessDeliveryPropertyRowDimensionsPackageValue(TypedDict):
+    id: str
+
+class GetDeliverySuccessDeliveryPropertyRowDimensionsProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
+
+class GetDeliverySuccessDeliveryPropertyRowFeaturesValue(TypedDict):
+    value: bool | float | str
+    '\n    The score: a number, a string or a boolean.\n    '
+    unit: NotRequired[str]
+    '\n    Unit of a numeric value.\n    '
+    confidence: NotRequired[float]
+    '\n    Confidence in the value, from 0 to 1.\n    '
+    measured_at: NotRequired[str]
+    '\n    When the value was measured.\n    '
+    expires_at: NotRequired[str]
+    '\n    When the value stops counting.\n    '
+    methodology_version: NotRequired[str]
+    '\n    Version of the method that produced the value.\n    '
+
+class GetDeliverySuccessDeliveryPropertyRowMetrics(TypedDict):
+    impressions: GetDeliverySuccessDeliveryPropertyRowMetricsImpressions
+
+class GetDeliverySuccessDeliveryPropertyRowMetricsImpressions(TypedDict):
+    value: int
+    status: Literal["available"]
+
+class GetDeliverySuccessDeliveryPropertyScoreMatch(TypedDict):
+    basis: Literal["exact_host", "registrable_domain"]
+    '\n    registrable_domain: www.site.nl uses the score saved for site.nl.\n    '
+    identifier: GetDeliverySuccessDeliveryPropertyScoreMatchIdentifier
+
+class GetDeliverySuccessDeliveryPropertyScoreMatchIdentifier(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
+
+class GetDeliverySuccessDeliveryPropertySeller(TypedDict):
+    seller: GetDeliverySuccessDeliveryPropertySellerSellerValue | None
+    '\n    Null for buys booked across several sellers or none.\n    '
+    trackerImpressions: int
+    impressionsWithProperty: int
+    '\n    Of trackerImpressions, those with a site, an app or both.\n    '
+    fillShare: float
+    '\n    impressionsWithProperty / trackerImpressions. Low means rows show where the ad ran only in part.\n    '
+    sellerReportAvailable: bool
+    '\n    Whether a per-property seller report was read; always false today.\n    '
+
+class GetDeliverySuccessDeliveryPropertySellerSellerValue(TypedDict):
+    id: str
+    name: str | None
 
 class GetDeliverySuccessDeliveryRevision(TypedDict):
     reporting_revision_id: GetDeliverySuccessDeliveryRevisionReportingRevisionId
@@ -1322,12 +1425,24 @@ GetDeliverySuccessRowsItemSourceOperation: TypeAlias = Literal["get_seller_repor
 
 class GetDeliverySuccessSemantics(TypedDict):
     sourceOperation: GetDeliverySuccessSemanticsSourceOperation
-    genericFallback: Literal[False]
-    measurement: Literal["excluded"]
-    missingValues: str
-    freshness: str
-    finality: str
-    billingEligibility: str
+    genericFallback: GetDeliverySuccessSemanticsGenericFallback
+    measurement: GetDeliverySuccessSemanticsMeasurement
+    missingValues: GetDeliverySuccessSemanticsMissingValues
+    freshness: GetDeliverySuccessSemanticsFreshness
+    finality: GetDeliverySuccessSemanticsFinality
+    billingEligibility: GetDeliverySuccessSemanticsBillingEligibility
+
+GetDeliverySuccessSemanticsBillingEligibility: TypeAlias = str
+
+GetDeliverySuccessSemanticsFinality: TypeAlias = str
+
+GetDeliverySuccessSemanticsFreshness: TypeAlias = str
+
+GetDeliverySuccessSemanticsGenericFallback: TypeAlias = Literal[False]
+
+GetDeliverySuccessSemanticsMeasurement: TypeAlias = Literal["excluded"]
+
+GetDeliverySuccessSemanticsMissingValues: TypeAlias = str
 
 GetDeliverySuccessSemanticsSourceOperation: TypeAlias = Literal["get_seller_reporting_metrics", "get_buyer_reporting_metrics", "get_seller_margin_reporting"]
 
