@@ -26590,6 +26590,8 @@ paths:
                               Present when currency was sent: how money on rows and totals was converted, over every
                               matched row.
                             $ref: '#/components/schemas/get_delivery_success_DeliveryConversion'
+                          siteOutcomes:
+                            $ref: '#/components/schemas/get_delivery_success_SiteOutcomes'
                           synthetic:
                             description: >-
                               Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is
@@ -26647,6 +26649,8 @@ paths:
                               Present when currency was sent: how money on rows and totals was converted, over every
                               matched row.
                             $ref: '#/components/schemas/get_delivery_success_DeliveryConversion'
+                          siteOutcomes:
+                            $ref: '#/components/schemas/get_delivery_success_SiteOutcomes'
                           synthetic:
                             description: >-
                               Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is
@@ -26704,6 +26708,8 @@ paths:
                               Present when currency was sent: how money on rows and totals was converted, over every
                               matched row.
                             $ref: '#/components/schemas/get_delivery_success_DeliveryConversion'
+                          siteOutcomes:
+                            $ref: '#/components/schemas/get_delivery_success_SiteOutcomes'
                           synthetic:
                             description: >-
                               Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is
@@ -27057,19 +27063,17 @@ paths:
                                               type: object
                                               properties:
                                                 domain:
-                                                  type: string
-                                                  pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
+                                                  $ref: >-
+                                                    #/components/schemas/get_delivery_success_DeliverySummaryAggregatedTotalsMetricAggregatesItemVendorDomain
                                                 brand_id:
-                                                  type: string
-                                                  pattern: ^[a-z0-9_]+$
+                                                  $ref: >-
+                                                    #/components/schemas/get_delivery_success_DeliverySummaryAggregatedTotalsMetricAggregatesItemVendorBrandId
                                               required:
                                                 - domain
                                               additionalProperties: false
                                             metric_id:
-                                              type: string
-                                              minLength: 1
-                                              maxLength: 64
-                                              pattern: ^[a-z][a-z0-9_]*$
+                                              $ref: >-
+                                                #/components/schemas/get_delivery_success_DeliverySummaryAggregatedTotalsMetricAggregatesItemMetricId
                                             qualifier:
                                               $ref: >-
                                                 #/components/schemas/get_delivery_success_DeliverySummaryAggregatedTotalsMetricAggregatesItemQualifier
@@ -88987,6 +88991,171 @@ components:
         - currency
         - date
       additionalProperties: false
+    get_delivery_success_SiteOutcomes:
+      type: object
+      properties:
+        source:
+          type: object
+          properties:
+            label:
+              type: string
+              const: Site analytics (GA4, same visit, not verified)
+            vendor:
+              type: object
+              properties:
+                domain:
+                  type: string
+              required:
+                - domain
+              additionalProperties: false
+            billable:
+              type: boolean
+              const: false
+          required:
+            - label
+            - vendor
+            - billable
+          additionalProperties: false
+        advertisers:
+          type: array
+          items:
+            $ref: '#/components/schemas/get_delivery_success_SiteOutcomesAdvertiser'
+      required:
+        - source
+        - advertisers
+      additionalProperties: false
+    get_delivery_success_SiteOutcomesAdvertiser:
+      type: object
+      properties:
+        advertiserId:
+          type: string
+        connection:
+          type: object
+          properties:
+            status:
+              type: string
+              enum:
+                - pending
+                - active
+                - unhealthy
+                - disconnected
+            healthReason:
+              type:
+                - string
+                - 'null'
+            propertyTimezone:
+              type:
+                - string
+                - 'null'
+          required:
+            - status
+            - healthReason
+            - propertyTimezone
+          additionalProperties: false
+        mediaBuys:
+          type: array
+          items:
+            $ref: '#/components/schemas/get_delivery_success_SiteOutcomesMediaBuy'
+        truncated:
+          type: boolean
+      required:
+        - advertiserId
+        - connection
+        - mediaBuys
+        - truncated
+      additionalProperties: false
+    get_delivery_success_SiteOutcomesMediaBuy:
+      type: object
+      properties:
+        mediaBuyId:
+          type: string
+        daysRead:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        daysUnavailable:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        finality:
+          anyOf:
+            - $ref: '#/components/schemas/get_delivery_success_SiteOutcomesMediaBuyFinality'
+            - type: 'null'
+        reason:
+          anyOf:
+            - type: string
+              enum:
+                - no_days_read
+                - no_tagged_visits_found
+            - type: 'null'
+          description: >-
+            Why the counts are empty. no_tagged_visits_found: the seller reported clicks but Google Analytics saw no
+            tagged visits, so the tags may not be reaching the landing page.
+        vendor_metric_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/get_delivery_success_SiteOutcomeVendorMetricValue'
+        costPerSession:
+          anyOf:
+            - $ref: '#/components/schemas/get_delivery_success_SiteOutcomesCost'
+            - type: 'null'
+        costPerKeyEvent:
+          anyOf:
+            - $ref: '#/components/schemas/get_delivery_success_SiteOutcomesCost'
+            - type: 'null'
+      required:
+        - mediaBuyId
+        - daysRead
+        - daysUnavailable
+        - finality
+        - reason
+        - vendor_metric_values
+        - costPerSession
+        - costPerKeyEvent
+      additionalProperties: false
+    get_delivery_success_SiteOutcomeVendorMetricValue:
+      type: object
+      properties:
+        metric_id:
+          $ref: '#/components/schemas/get_delivery_success_SiteOutcomeVendorMetricValueMetricId'
+        value:
+          type: number
+        unit:
+          type: string
+        breakdown:
+          type: object
+          properties: {}
+          additionalProperties: {}
+        vendor:
+          type: object
+          properties:
+            domain:
+              $ref: '#/components/schemas/get_delivery_success_SiteOutcomeVendorMetricValueVendorDomain'
+            brand_id:
+              $ref: '#/components/schemas/get_delivery_success_SiteOutcomeVendorMetricValueVendorBrandId'
+          required:
+            - domain
+          additionalProperties: {}
+      required:
+        - metric_id
+        - value
+        - vendor
+      additionalProperties: {}
+    get_delivery_success_SiteOutcomesCost:
+      type: object
+      properties:
+        value:
+          type: number
+          minimum: 0
+        currency:
+          type: string
+        finality:
+          $ref: '#/components/schemas/get_delivery_success_SiteOutcomesCostFinality'
+      required:
+        - value
+        - currency
+        - finality
+      additionalProperties: false
     get_delivery_success_DeliveryPropertyRow:
       type: object
       properties:
@@ -89647,6 +89816,17 @@ components:
             - type: string
               const: ad_recall
       additionalProperties: false
+    get_delivery_success_DeliverySummaryAggregatedTotalsMetricAggregatesItemVendorDomain:
+      type: string
+      pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
+    get_delivery_success_DeliverySummaryAggregatedTotalsMetricAggregatesItemVendorBrandId:
+      type: string
+      pattern: ^[a-z0-9_]+$
+    get_delivery_success_DeliverySummaryAggregatedTotalsMetricAggregatesItemMetricId:
+      type: string
+      minLength: 1
+      maxLength: 64
+      pattern: ^[a-z][a-z0-9_]*$
     get_delivery_success_DeliverySummaryMediaBuyDeliveriesItemPricingModel:
       anyOf:
         - type: string
@@ -90101,6 +90281,27 @@ components:
     get_delivery_success_DeliveryRevisionCoverageLimitationsItemPackageIdsItem:
       type: string
       minLength: 1
+    get_delivery_success_SiteOutcomesMediaBuyFinality:
+      type: string
+      enum:
+        - provisional
+        - settled
+    get_delivery_success_SiteOutcomeVendorMetricValueMetricId:
+      type: string
+      minLength: 1
+      maxLength: 64
+      pattern: ^[a-z][a-z0-9_]*$
+    get_delivery_success_SiteOutcomeVendorMetricValueVendorDomain:
+      type: string
+      pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
+    get_delivery_success_SiteOutcomeVendorMetricValueVendorBrandId:
+      type: string
+      pattern: ^[a-z0-9_]+$
+    get_delivery_success_SiteOutcomesCostFinality:
+      type: string
+      enum:
+        - provisional
+        - settled
     get_delivery_success_DeliveryPropertyRowDimensionsProperty:
       type: object
       properties:

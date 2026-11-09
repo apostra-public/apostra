@@ -5680,6 +5680,7 @@ export type GetDeliveryResponses = {
              * Present when currency was sent: how money on rows and totals was converted, over every matched row.
              */
             conversion?: GetDeliverySuccessDeliveryConversion;
+            siteOutcomes?: GetDeliverySuccessSiteOutcomes;
             /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
@@ -5721,6 +5722,7 @@ export type GetDeliveryResponses = {
              * Present when currency was sent: how money on rows and totals was converted, over every matched row.
              */
             conversion?: GetDeliverySuccessDeliveryConversion;
+            siteOutcomes?: GetDeliverySuccessSiteOutcomes;
             /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
@@ -5762,6 +5764,7 @@ export type GetDeliveryResponses = {
              * Present when currency was sent: how money on rows and totals was converted, over every matched row.
              */
             conversion?: GetDeliverySuccessDeliveryConversion;
+            siteOutcomes?: GetDeliverySuccessSiteOutcomes;
             /**
              * Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.
              */
@@ -5847,10 +5850,10 @@ export type GetDeliveryResponses = {
                     } | {
                         scope: 'vendor';
                         vendor: {
-                            domain: string;
-                            brand_id?: string;
+                            domain: GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemVendorDomain;
+                            brand_id?: GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemVendorBrandId;
                         };
-                        metric_id: string;
+                        metric_id: GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemMetricId;
                         qualifier?: GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemQualifier;
                         value: number;
                         measurable_impressions?: number;
@@ -6017,6 +6020,7 @@ export type GetDeliveryResponses = {
             currencyConversions?: never;
             currencyConversionsOmitted?: never;
             conversion?: never;
+            siteOutcomes?: never;
             synthetic?: never;
             propertyDelivery?: never;
         } | {
@@ -6045,6 +6049,7 @@ export type GetDeliveryResponses = {
             currencyConversions?: never;
             currencyConversionsOmitted?: never;
             conversion?: never;
+            siteOutcomes?: never;
             synthetic?: never;
             campaignId?: never;
             delivery?: never;
@@ -6385,6 +6390,8 @@ export type GetDeliverySuccessDeliveryRevisionPeriod = {
 
 export type GetDeliverySuccessDeliveryRevisionReportingRevisionId = string;
 
+export type GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemMetricId = string;
+
 export type GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemQualifier = {
     viewability_standard?: 'mrc' | 'groupm';
     completion_source?: 'seller_attested' | 'vendor_attested';
@@ -6397,6 +6404,10 @@ export type GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesIte
     interval: number;
     unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
 };
+
+export type GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemVendorBrandId = string;
+
+export type GetDeliverySuccessDeliverySummaryAggregatedTotalsMetricAggregatesItemVendorDomain = string;
 
 export type GetDeliverySuccessDeliverySummaryAggregatedTotalsReachUnit = 'individuals' | 'households' | 'devices' | 'accounts' | 'cookies' | 'custom';
 
@@ -6883,6 +6894,73 @@ export type GetDeliverySuccessSemanticsMeasurement = 'excluded';
 export type GetDeliverySuccessSemanticsMissingValues = string;
 
 export type GetDeliverySuccessSemanticsSourceOperation = 'get_seller_reporting_metrics' | 'get_buyer_reporting_metrics' | 'get_seller_margin_reporting';
+
+export type GetDeliverySuccessSiteOutcomeVendorMetricValue = {
+    metric_id: GetDeliverySuccessSiteOutcomeVendorMetricValueMetricId;
+    value: number;
+    unit?: string;
+    breakdown?: {
+        [key: string]: unknown;
+    };
+    vendor: {
+        domain: GetDeliverySuccessSiteOutcomeVendorMetricValueVendorDomain;
+        brand_id?: GetDeliverySuccessSiteOutcomeVendorMetricValueVendorBrandId;
+        [key: string]: unknown;
+    };
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessSiteOutcomeVendorMetricValueMetricId = string;
+
+export type GetDeliverySuccessSiteOutcomeVendorMetricValueVendorBrandId = string;
+
+export type GetDeliverySuccessSiteOutcomeVendorMetricValueVendorDomain = string;
+
+export type GetDeliverySuccessSiteOutcomes = {
+    source: {
+        label: 'Site analytics (GA4, same visit, not verified)';
+        vendor: {
+            domain: string;
+        };
+        billable: false;
+    };
+    advertisers: Array<GetDeliverySuccessSiteOutcomesAdvertiser>;
+};
+
+export type GetDeliverySuccessSiteOutcomesAdvertiser = {
+    advertiserId: string;
+    connection: {
+        status: 'pending' | 'active' | 'unhealthy' | 'disconnected';
+        healthReason: string | null;
+        propertyTimezone: string | null;
+    };
+    mediaBuys: Array<GetDeliverySuccessSiteOutcomesMediaBuy>;
+    truncated: boolean;
+};
+
+export type GetDeliverySuccessSiteOutcomesCost = {
+    value: number;
+    currency: string;
+    finality: GetDeliverySuccessSiteOutcomesCostFinality;
+};
+
+export type GetDeliverySuccessSiteOutcomesCostFinality = 'provisional' | 'settled';
+
+export type GetDeliverySuccessSiteOutcomesMediaBuy = {
+    mediaBuyId: string;
+    daysRead: number;
+    daysUnavailable: number;
+    finality: GetDeliverySuccessSiteOutcomesMediaBuyFinality | null;
+    /**
+     * Why the counts are empty. no_tagged_visits_found: the seller reported clicks but Google Analytics saw no tagged visits, so the tags may not be reaching the landing page.
+     */
+    reason: 'no_days_read' | 'no_tagged_visits_found' | null;
+    vendor_metric_values: Array<GetDeliverySuccessSiteOutcomeVendorMetricValue>;
+    costPerSession: GetDeliverySuccessSiteOutcomesCost | null;
+    costPerKeyEvent: GetDeliverySuccessSiteOutcomesCost | null;
+};
+
+export type GetDeliverySuccessSiteOutcomesMediaBuyFinality = 'provisional' | 'settled';
 
 export type GetDeliverySuccessSynthetic = {
     scenarioId: 'synthetic-rolling-delivery-v1';
