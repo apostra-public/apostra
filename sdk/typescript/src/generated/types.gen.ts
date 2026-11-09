@@ -13484,7 +13484,7 @@ export type RequestPaymentAuthorityResponses = {
 export type RequestPaymentAuthoritySuccessPendingConfirmationResult = {
     status: 'pending_confirmation';
     /**
-     * Single-use, short-lived token. Call `add_payment_authority` again with `action: "confirm"` and this token to issue the capture link.
+     * Single-use, short-lived token. Call `confirm_payment_authority` with this token to issue the capture link.
      */
     confirmationToken: string;
     summary: string;
@@ -17110,7 +17110,7 @@ export type SaveBillingSuccessPaymentTerms = 'net_15' | 'net_30' | 'net_45' | 'n
 export type SaveBillingSuccessPendingConfirmationResult = {
     status: 'pending_confirmation';
     /**
-     * Single-use, short-lived token. Call `add_payment_authority` again with `action: "confirm"` and this token to issue the capture link.
+     * Single-use, short-lived token. Call `confirm_payment_authority` with this token to issue the capture link.
      */
     confirmationToken: string;
     summary: string;

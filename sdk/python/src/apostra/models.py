@@ -7432,7 +7432,7 @@ class RequestPaymentAuthorityResult(TypedDict):
 class RequestPaymentAuthoritySuccessPendingConfirmationResult(TypedDict):
     status: Literal["pending_confirmation"]
     confirmationToken: str
-    '\n    Single-use, short-lived token. Call `add_payment_authority` again with `action: "confirm"` and this token to issue the capture link.\n    '
+    '\n    Single-use, short-lived token. Call `confirm_payment_authority` with this token to issue the capture link.\n    '
     summary: str
     expiresAt: str
     '\n    When the confirmation token expires. Request again after this if it lapses.\n    '
@@ -9366,7 +9366,7 @@ SaveBillingSuccessPaymentTerms: TypeAlias = Literal["net_15", "net_30", "net_45"
 class SaveBillingSuccessPendingConfirmationResult(TypedDict):
     status: Literal["pending_confirmation"]
     confirmationToken: str
-    '\n    Single-use, short-lived token. Call `add_payment_authority` again with `action: "confirm"` and this token to issue the capture link.\n    '
+    '\n    Single-use, short-lived token. Call `confirm_payment_authority` with this token to issue the capture link.\n    '
     summary: str
     expiresAt: str
     '\n    When the confirmation token expires. Request again after this if it lapses.\n    '

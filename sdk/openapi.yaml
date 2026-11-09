@@ -91852,9 +91852,7 @@ components:
           const: pending_confirmation
         confirmationToken:
           type: string
-          description: >-
-            Single-use, short-lived token. Call `add_payment_authority` again with `action: "confirm"` and this token to
-            issue the capture link.
+          description: Single-use, short-lived token. Call `confirm_payment_authority` with this token to issue the capture link.
         summary:
           type: string
         expiresAt:
@@ -93733,9 +93731,7 @@ components:
           const: pending_confirmation
         confirmationToken:
           type: string
-          description: >-
-            Single-use, short-lived token. Call `add_payment_authority` again with `action: "confirm"` and this token to
-            issue the capture link.
+          description: Single-use, short-lived token. Call `confirm_payment_authority` with this token to issue the capture link.
         summary:
           type: string
         expiresAt:
