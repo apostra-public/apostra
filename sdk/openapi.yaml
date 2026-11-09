@@ -39677,11 +39677,11 @@ paths:
     post:
       operationId: save_business_rules
       summary: >-
-        Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto
-        needs acknowledgeNoHumanReview.
+        Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto, or
+        empty creativePolicy under creative auto, needs acknowledgeNoHumanReview.
       description: >-
-        Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto
-        needs acknowledgeNoHumanReview.
+        Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto, or
+        empty creativePolicy under creative auto, needs acknowledgeNoHumanReview.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -39757,7 +39757,9 @@ paths:
                     - overbook
                     - hold_for_review
                 acknowledgeNoHumanReview:
-                  description: Required to move either approval to auto. Confirms nobody will review those.
+                  description: >-
+                    Required to move either approval to auto, or to save no Creative Policy under creative auto.
+                    Confirms nobody will review those.
                   type: boolean
                 advertisingPolicyDisclosure:
                   description: >-

@@ -365,11 +365,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveBillingResult], self._request_with_response("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_business_rules(self, input: models.SaveBusinessRulesInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBusinessRulesResult:
-        "Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto needs acknowledgeNoHumanReview."
+        "Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto, or empty creativePolicy under creative auto, needs acknowledgeNoHumanReview."
         return cast("models.SaveBusinessRulesResult", self._request("save_business_rules", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_business_rules_with_response(self, input: models.SaveBusinessRulesInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBusinessRulesResult]:
-        "Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto needs acknowledgeNoHumanReview. Returns the data together with response headers and request ID."
+        "Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto, or empty creativePolicy under creative auto, needs acknowledgeNoHumanReview. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBusinessRulesResult], self._request_with_response("save_business_rules", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_buyer_agent(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerAgentResult:
@@ -990,11 +990,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveBillingResult], await self._request_with_response("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_business_rules(self, input: models.SaveBusinessRulesInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBusinessRulesResult:
-        "Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto needs acknowledgeNoHumanReview."
+        "Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto, or empty creativePolicy under creative auto, needs acknowledgeNoHumanReview."
         return cast("models.SaveBusinessRulesResult", await self._request("save_business_rules", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_business_rules_with_response(self, input: models.SaveBusinessRulesInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBusinessRulesResult]:
-        "Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto needs acknowledgeNoHumanReview. Returns the data together with response headers and request ID."
+        "Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto, or empty creativePolicy under creative auto, needs acknowledgeNoHumanReview. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBusinessRulesResult], await self._request_with_response("save_business_rules", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_buyer_agent(self, input: models.SaveBuyerAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBuyerAgentResult:

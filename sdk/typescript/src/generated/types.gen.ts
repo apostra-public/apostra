@@ -17172,7 +17172,7 @@ export type SaveBusinessRulesData = {
          */
         guaranteedOverForecast?: 'overbook' | 'hold_for_review';
         /**
-         * Required to move either approval to auto. Confirms nobody will review those.
+         * Required to move either approval to auto, or to save no Creative Policy under creative auto. Confirms nobody will review those.
          */
         acknowledgeNoHumanReview?: boolean;
         /**
