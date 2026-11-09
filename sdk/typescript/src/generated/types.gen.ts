@@ -18043,7 +18043,7 @@ export type SaveCampaignData = {
          */
         budget?: {
             /**
-             * Total budget in the campaign currency.
+             * Total budget in the campaign currency; 0 for $0 media only.
              */
             total: number;
             /**
@@ -27055,7 +27055,7 @@ export type SaveMediaBuyData = {
              */
             pricingOptionId?: string;
             /**
-             * Per-product budget. Required with fixed allocation; refused with seller_optimized.
+             * Per-product budget; 0 only on a fixed_price 0 option. Required with fixed allocation; refused with seller_optimized.
              */
             budget?: number;
             /**
@@ -27914,7 +27914,7 @@ export type SaveMediaBuyData = {
              */
             pricingOptionId?: string;
             /**
-             * Per-product budget. Required with fixed allocation; refused with seller_optimized.
+             * Per-product budget; 0 only on a fixed_price 0 option. Required with fixed allocation; refused with seller_optimized.
              */
             budget?: number;
             /**

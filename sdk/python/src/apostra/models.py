@@ -9845,7 +9845,7 @@ class SaveCampaignInputBiddingKindRoasRoas(TypedDict):
 
 class SaveCampaignInputBudget(TypedDict):
     total: float
-    '\n    Total budget in the campaign currency.\n    '
+    '\n    Total budget in the campaign currency; 0 for $0 media only.\n    '
     currency: str
     '\n    ISO 4217 currency code.\n    '
     dailyCap: NotRequired[float]
@@ -14986,7 +14986,7 @@ class SaveMediaBuyInputKindCreateProductsItem(TypedDict):
     pricingOptionId: NotRequired[str]
     '\n    Returned Product pricing option ID. Pass unchanged when present.\n    '
     budget: NotRequired[float]
-    '\n    Per-product budget. Required with fixed allocation; refused with seller_optimized.\n    '
+    '\n    Per-product budget; 0 only on a fixed_price 0 option. Required with fixed allocation; refused with seller_optimized.\n    '
     bidPrice: NotRequired[float]
     '\n    Bid in campaign currency. Required for auction products; omit for fixed-price.\n    '
     performanceStandards: NotRequired[list[SaveMediaBuyInputKindCreateProductsItemPerformanceStandardsItem] | None]
@@ -15585,7 +15585,7 @@ class SaveMediaBuyInputKindUpdateProductsItem(TypedDict):
     pricingOptionId: NotRequired[str]
     '\n    Returned Product pricing option ID. Pass unchanged when present.\n    '
     budget: NotRequired[float]
-    '\n    Per-product budget. Required with fixed allocation; refused with seller_optimized.\n    '
+    '\n    Per-product budget; 0 only on a fixed_price 0 option. Required with fixed allocation; refused with seller_optimized.\n    '
     bidPrice: NotRequired[float]
     '\n    Bid in campaign currency. Required for auction products; omit for fixed-price.\n    '
     performanceStandards: NotRequired[list[SaveMediaBuyInputKindUpdateProductsItemPerformanceStandardsItem] | None]
