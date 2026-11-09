@@ -32183,7 +32183,7 @@ export type SaveSellerData = {
             message?: string;
         };
         /**
-         * Which account serves an admitted buyer on one source (see get(account_relationship) sources). Send alone.
+         * Which account serves an admitted buyer on one source, or send a refused source's account request again (see get(account_relationship) sources). Send alone.
          */
         sourceDecision?: {
             relationshipId: SaveSellerRequestSourceDecisionRelationshipId;
@@ -32209,6 +32209,16 @@ export type SaveSellerData = {
              * No account needed.
              */
             decision: 'not_required';
+            bindingMode?: never;
+            sourceExternalAccountId?: never;
+        } | {
+            relationshipId: SaveSellerRequestSourceDecisionRelationshipId;
+            inventorySourceKey: SaveSellerRequestSourceDecisionInventorySourceKey;
+            expectedVersion: SaveSellerRequestSourceDecisionExpectedVersion;
+            /**
+             * Send the refused request again.
+             */
+            decision: 'request_again';
             bindingMode?: never;
             sourceExternalAccountId?: never;
         };
@@ -32604,7 +32614,7 @@ export type SaveSellerResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
+        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessSourceRequestQueued | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
         error: null;
     };
     /**
@@ -32768,6 +32778,16 @@ export type SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded = {
     bindingMode?: 'dedicated' | 'shared_default';
     sourceExternalAccountId: string | null;
     version: number | null;
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessSourceRequestQueued = {
+    outcome: 'source_request_queued';
+    action: 'source_request_queued';
+    relationshipId: string;
+    inventorySourceKey: string;
+    decision: 'request_again';
+    state: 'queued';
     [key: string]: unknown;
 };
 

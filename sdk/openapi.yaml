@@ -56739,8 +56739,8 @@ paths:
                         by get(account_relationship).
                 sourceDecision:
                   description: >-
-                    Which account serves an admitted buyer on one source (see get(account_relationship) sources). Send
-                    alone.
+                    Which account serves an admitted buyer on one source, or send a refused source's account request
+                    again (see get(account_relationship) sources). Send alone.
                   oneOf:
                     - type: object
                       properties:
@@ -56793,6 +56793,27 @@ paths:
                         - decision
                       additionalProperties: false
                       description: The source needs no account for the buyer.
+                    - type: object
+                      properties:
+                        relationshipId:
+                          $ref: '#/components/schemas/save_seller_request_SourceDecisionRelationshipId'
+                        inventorySourceKey:
+                          $ref: '#/components/schemas/save_seller_request_SourceDecisionInventorySourceKey'
+                        expectedVersion:
+                          $ref: '#/components/schemas/save_seller_request_SourceDecisionExpectedVersion'
+                        decision:
+                          type: string
+                          const: request_again
+                          description: Send the refused request again.
+                      required:
+                        - relationshipId
+                        - inventorySourceKey
+                        - expectedVersion
+                        - decision
+                      additionalProperties: false
+                      description: >-
+                        Send a refused source's account request to your sales agent again, once an hour. No account; the
+                        buyer's terms never change.
                 demo:
                   description: >-
                     Demo expiry and sample sources, as desired state. Send alone. Create, reset and delete are on the
@@ -57403,6 +57424,7 @@ paths:
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessDeclineRecorded'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessReopenRecorded'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessSourceDecisionRecorded'
+                      - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessSourceRequestQueued'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessInformationRequested'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessInformationConfirmed'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessInformationWithdrawn'
@@ -105295,6 +105317,33 @@ components:
         - decision
         - sourceExternalAccountId
         - version
+      additionalProperties: {}
+    save_seller_success_SaveSellerSuccessSourceRequestQueued:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: source_request_queued
+        action:
+          type: string
+          const: source_request_queued
+        relationshipId:
+          type: string
+        inventorySourceKey:
+          type: string
+        decision:
+          type: string
+          const: request_again
+        state:
+          type: string
+          const: queued
+      required:
+        - outcome
+        - action
+        - relationshipId
+        - inventorySourceKey
+        - decision
+        - state
       additionalProperties: {}
     save_seller_success_SaveSellerSuccessInformationRequested:
       type: object
