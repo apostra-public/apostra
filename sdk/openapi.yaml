@@ -58567,10 +58567,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -58582,6 +58582,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -59587,6 +59588,19 @@ paths:
                         properties:
                           kind:
                             const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
                         required:
                           - kind
                     - if:
@@ -60133,10 +60147,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -60148,6 +60162,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -61156,6 +61171,19 @@ paths:
                         properties:
                           kind:
                             const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
                         required:
                           - kind
                     - if:
@@ -61700,10 +61728,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -61715,6 +61743,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -61859,6 +61888,19 @@ paths:
                         properties:
                           kind:
                             const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
                         required:
                           - kind
                     - if:
@@ -62403,10 +62445,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -62418,6 +62460,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -63432,6 +63475,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -63970,10 +64026,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -63985,6 +64041,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -64984,6 +65041,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -65522,10 +65592,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -65537,6 +65607,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -66543,6 +66614,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -67081,10 +67165,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -67096,6 +67180,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -68101,6 +68186,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -68639,10 +68737,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -68654,6 +68752,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -69663,6 +69762,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -70196,10 +70308,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -70211,6 +70323,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       not: {}
                     filter:
@@ -70383,6 +70496,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -70916,10 +71042,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -70931,6 +71057,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       not: {}
                     filter:
@@ -71101,6 +71228,19 @@ paths:
                         properties:
                           kind:
                             const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
                         required:
                           - kind
                     - if:
@@ -71645,10 +71785,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -71660,6 +71800,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -72666,6 +72807,19 @@ paths:
                         properties:
                           kind:
                             const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
                         required:
                           - kind
                     - if:
@@ -73210,10 +73364,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -73225,6 +73379,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -74237,6 +74392,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -74775,10 +74943,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -74790,6 +74958,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -75804,6 +75973,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -76340,10 +76522,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -76355,6 +76537,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -77366,6 +77549,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -77902,10 +78098,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -77917,6 +78113,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -78928,6 +79125,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -79464,10 +79674,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -79479,6 +79689,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -80491,6 +80702,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: executionResources
                         required:
                           - include
@@ -81027,10 +81251,10 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Buyer
-                        wholesale_product: executionReadiness, or executionResources with filter.productId and
-                        filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and
-                        status per value; mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
+                        deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -81042,6 +81266,7 @@ paths:
                           - executionResources
                           - authoring
                           - pulse
+                          - deliverySummary
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -82045,6 +82270,19 @@ paths:
                         properties:
                           kind:
                             const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
                         required:
                           - kind
                     - if:
