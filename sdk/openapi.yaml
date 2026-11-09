@@ -26545,8 +26545,8 @@ paths:
                             $ref: '#/components/schemas/get_delivery_success_Semantics'
                           goalProgress:
                             description: >-
-                              Present only for campaign_delivery: campaign goal progress without V2-only pace or
-                              denominator fields.
+                              Present only for campaign_delivery: fresh interval delivery-goal pace and stored
+                              delivery-goal state, without V2-only pace or denominator fields.
                             $ref: '#/components/schemas/get_delivery_success_CampaignGoalProgress'
                           coverage:
                             description: >-
@@ -26602,8 +26602,8 @@ paths:
                             $ref: '#/components/schemas/get_delivery_success_Semantics'
                           goalProgress:
                             description: >-
-                              Present only for campaign_delivery: campaign goal progress without V2-only pace or
-                              denominator fields.
+                              Present only for campaign_delivery: fresh interval delivery-goal pace and stored
+                              delivery-goal state, without V2-only pace or denominator fields.
                             $ref: '#/components/schemas/get_delivery_success_CampaignGoalProgress'
                           coverage:
                             description: >-
@@ -26659,8 +26659,8 @@ paths:
                             $ref: '#/components/schemas/get_delivery_success_Semantics'
                           goalProgress:
                             description: >-
-                              Present only for campaign_delivery: campaign goal progress without V2-only pace or
-                              denominator fields.
+                              Present only for campaign_delivery: fresh interval delivery-goal pace and stored
+                              delivery-goal state, without V2-only pace or denominator fields.
                             $ref: '#/components/schemas/get_delivery_success_CampaignGoalProgress'
                           coverage:
                             description: >-
@@ -88154,10 +88154,15 @@ components:
         campaignId:
           type: string
         progress:
-          $ref: '#/components/schemas/get_delivery_success_GoalProgress'
+          anyOf:
+            - $ref: '#/components/schemas/get_delivery_success_GoalProgress'
+            - type: 'null'
+        deliveryGoal:
+          $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoal'
       required:
         - campaignId
         - progress
+        - deliveryGoal
       additionalProperties: false
     get_delivery_success_GoalProgress:
       type: object
@@ -88522,6 +88527,98 @@ components:
         - awaitingLaterReport
         - missingMetrics
       additionalProperties: false
+    get_delivery_success_GetDeliveryGoal:
+      type: object
+      properties:
+        constraint:
+          anyOf:
+            - type: object
+              properties:
+                kind:
+                  type: string
+                  enum:
+                    - spend
+                    - impressions
+                amount:
+                  type: number
+              required:
+                - kind
+                - amount
+              additionalProperties: false
+            - type: 'null'
+        expected:
+          type:
+            - number
+            - 'null'
+        pacingIndex:
+          type:
+            - number
+            - 'null'
+        deliveryProjection:
+          anyOf:
+            - {}
+            - type: 'null'
+        projectionRange:
+          anyOf:
+            - $ref: '#/components/schemas/get_delivery_success_DeliveryGoalProgressProjectionRange'
+            - type: 'null'
+        sellerPacingIndex:
+          type:
+            - number
+            - 'null'
+        sellerDeliveryProjection:
+          anyOf:
+            - {}
+            - type: 'null'
+        verdict:
+          anyOf:
+            - $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalVerdict'
+            - type: 'null'
+        verdictWithheld:
+          type:
+            - string
+            - 'null'
+        dataThrough:
+          type:
+            - string
+            - 'null'
+      required:
+        - constraint
+        - expected
+        - pacingIndex
+        - deliveryProjection
+        - projectionRange
+        - sellerPacingIndex
+        - sellerDeliveryProjection
+        - verdict
+        - verdictWithheld
+        - dataThrough
+      additionalProperties: false
+    get_delivery_success_DeliveryGoalProgressProjectionRange:
+      type: object
+      properties:
+        lower:
+          type: number
+        upper:
+          type: number
+        halfWidth:
+          type: number
+          minimum: 0
+      required:
+        - lower
+        - upper
+        - halfWidth
+      additionalProperties: false
+    get_delivery_success_GetDeliveryGoalVerdict:
+      anyOf:
+        - type: string
+          const: on_pace
+        - type: string
+          const: complete
+        - type: string
+          const: underdelivery
+        - type: string
+          const: early_exhaustion
     get_delivery_success_CampaignGoalProgressMediaBuy:
       type: object
       properties:
@@ -88532,11 +88629,16 @@ components:
             - string
             - 'null'
         progress:
-          $ref: '#/components/schemas/get_delivery_success_GoalProgress'
+          anyOf:
+            - $ref: '#/components/schemas/get_delivery_success_GoalProgress'
+            - type: 'null'
+        deliveryGoal:
+          $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoal'
       required:
         - mediaBuyId
         - campaignId
         - progress
+        - deliveryGoal
       additionalProperties: false
     get_delivery_success_CampaignDeliveryCoverage:
       type: object

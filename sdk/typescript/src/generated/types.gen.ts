@@ -5661,7 +5661,7 @@ export type GetDeliveryResponses = {
             page: GetDeliverySuccessPage;
             semantics: GetDeliverySuccessSemantics;
             /**
-             * Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.
+             * Present only for campaign_delivery: fresh interval delivery-goal pace and stored delivery-goal state, without V2-only pace or denominator fields.
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
@@ -5702,7 +5702,7 @@ export type GetDeliveryResponses = {
             page: GetDeliverySuccessPage;
             semantics: GetDeliverySuccessSemantics;
             /**
-             * Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.
+             * Present only for campaign_delivery: fresh interval delivery-goal pace and stored delivery-goal state, without V2-only pace or denominator fields.
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
@@ -5743,7 +5743,7 @@ export type GetDeliveryResponses = {
             page: GetDeliverySuccessPage;
             semantics: GetDeliverySuccessSemantics;
             /**
-             * Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.
+             * Present only for campaign_delivery: fresh interval delivery-goal pace and stored delivery-goal state, without V2-only pace or denominator fields.
              */
             goalProgress?: GetDeliverySuccessCampaignGoalProgress;
             /**
@@ -6096,13 +6096,15 @@ export type GetDeliverySuccessCampaignGoalProgress = {
 
 export type GetDeliverySuccessCampaignGoalProgressCampaign = {
     campaignId: string;
-    progress: GetDeliverySuccessGoalProgress;
+    progress: GetDeliverySuccessGoalProgress | null;
+    deliveryGoal: GetDeliverySuccessGetDeliveryGoal;
 };
 
 export type GetDeliverySuccessCampaignGoalProgressMediaBuy = {
     mediaBuyId: string;
     campaignId: string | null;
-    progress: GetDeliverySuccessGoalProgress;
+    progress: GetDeliverySuccessGoalProgress | null;
+    deliveryGoal: GetDeliverySuccessGetDeliveryGoal;
 };
 
 export type GetDeliverySuccessCurrencyConversions = Array<GetDeliverySuccessDeliveryCurrencyConversion>;
@@ -6149,6 +6151,12 @@ export type GetDeliverySuccessDeliveryCurrencyConversion = {
      * booked: locked when the buy was booked. snapshot: the daily rate store. settlement: the seller labelled a currency it is not paid in; the spend is taken in the one it is paid in, at rate 1.
      */
     rateSource: 'booked' | 'snapshot' | 'settlement';
+};
+
+export type GetDeliverySuccessDeliveryGoalProgressProjectionRange = {
+    lower: number;
+    upper: number;
+    halfWidth: number;
 };
 
 export type GetDeliverySuccessDeliveryPropertyReport = {
@@ -6604,6 +6612,32 @@ export type GetDeliverySuccessDeliveryUnconvertedDay = {
     currency: string;
     date: string;
 };
+
+export type GetDeliverySuccessGetDeliveryGoal = {
+    constraint: {
+        kind: 'spend' | 'impressions';
+        amount: number;
+    } | null;
+    expected: number | null;
+    pacingIndex: number | null;
+    deliveryProjection: unknown | null;
+    projectionRange: GetDeliverySuccessDeliveryGoalProgressProjectionRange | null;
+    sellerPacingIndex: number | null;
+    sellerDeliveryProjection: unknown | null;
+    verdict: GetDeliverySuccessGetDeliveryGoalVerdict | null;
+    verdictWithheld: string | null;
+    dataThrough: string | null;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalDeliveryProjection = JsonValue;
+
+export type GetDeliverySuccessGetDeliveryGoalDeliveryProjectionProjectedEndState = GetDeliverySuccessGetDeliveryGoalVerdict;
+
+export type GetDeliverySuccessGetDeliveryGoalSellerDeliveryProjection = JsonValue;
+
+export type GetDeliverySuccessGetDeliveryGoalSellerDeliveryProjectionProjectedEndState = GetDeliverySuccessGetDeliveryGoalVerdict;
+
+export type GetDeliverySuccessGetDeliveryGoalVerdict = 'on_pace' | 'complete' | 'underdelivery' | 'early_exhaustion';
 
 export type GetDeliverySuccessGoalProgress = {
     goal: GetDeliverySuccessGoalProgressGoal | null;
