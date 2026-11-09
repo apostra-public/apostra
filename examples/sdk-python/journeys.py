@@ -32,7 +32,7 @@ async def main() -> None:
             lambda page: page['page'].get('nextCursor') if page['report'] != 'live_campaign_delivery' else None,
         ):
             pages += 1
-            if page['report'] == 'live_campaign_delivery':
+            if page['report'] != 'campaign_delivery':
                 continue
         assert pages > 0
         # Keep the complete-window read above, but require the threshold on the
@@ -57,7 +57,7 @@ async def main() -> None:
             lambda page: page['page'].get('nextCursor') if page['report'] != 'live_campaign_delivery' else None,
         ):
             simulated_day_pages += 1
-            if page['report'] == 'live_campaign_delivery':
+            if page['report'] != 'campaign_delivery':
                 continue
             totals = page.get('totals')
             if totals is None:

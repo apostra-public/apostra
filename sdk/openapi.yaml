@@ -26327,7 +26327,9 @@ paths:
                       - bookedComplete
                       - realizedComplete
                 dimensions:
-                  description: Group-by dimensions; campaign delivery also accepts labels.<dimension_key>. Omit for leaf grain.
+                  description: >-
+                    Group-by dimensions; campaign delivery also accepts labels.<dimension_key>, and property (tracker
+                    impressions per site or app, with date). Omit for leaf grain.
                   minItems: 1
                   maxItems: 5
                   type: array
@@ -26346,6 +26348,7 @@ paths:
                           - inventory_source
                           - seller
                           - sales_agent
+                          - property
                       - type: string
                         pattern: ^labels\.[a-z][a-z0-9_]{0,63}$
                 range:
@@ -27513,6 +27516,69 @@ paths:
                           - delivery
                           - authority
                           - semantics
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          report:
+                            type: string
+                            const: campaign_property_delivery
+                          query:
+                            $ref: '#/components/schemas/get_delivery_success_Query'
+                          period:
+                            type: object
+                            properties:
+                              startDate:
+                                type: string
+                              endDate:
+                                type: string
+                            required:
+                              - startDate
+                              - endDate
+                            additionalProperties: false
+                          rows:
+                            maxItems: 100
+                            type: array
+                            items:
+                              $ref: '#/components/schemas/get_delivery_success_DeliveryPropertyRow'
+                          page:
+                            $ref: '#/components/schemas/get_delivery_success_Page'
+                          semantics:
+                            type: object
+                            properties:
+                              sourceOperation:
+                                type: string
+                                const: tracker_property_impressions
+                              genericFallback:
+                                $ref: '#/components/schemas/get_delivery_success_SemanticsGenericFallback'
+                              measurement:
+                                $ref: '#/components/schemas/get_delivery_success_SemanticsMeasurement'
+                              missingValues:
+                                $ref: '#/components/schemas/get_delivery_success_SemanticsMissingValues'
+                              freshness:
+                                $ref: '#/components/schemas/get_delivery_success_SemanticsFreshness'
+                              finality:
+                                $ref: '#/components/schemas/get_delivery_success_SemanticsFinality'
+                              billingEligibility:
+                                $ref: '#/components/schemas/get_delivery_success_SemanticsBillingEligibility'
+                            required:
+                              - sourceOperation
+                              - genericFallback
+                              - measurement
+                              - missingValues
+                              - freshness
+                              - finality
+                              - billingEligibility
+                            additionalProperties: false
+                          propertyDelivery:
+                            $ref: '#/components/schemas/get_delivery_success_DeliveryPropertyReport'
+                        required:
+                          - report
+                          - query
+                          - period
+                          - rows
+                          - page
+                          - semantics
+                          - propertyDelivery
                         additionalProperties: false
                   error:
                     type: 'null'
@@ -88627,6 +88693,200 @@ components:
         - currency
         - date
       additionalProperties: false
+    get_delivery_success_DeliveryPropertyRow:
+      type: object
+      properties:
+        dimensions:
+          type: object
+          properties:
+            date:
+              type: string
+            mediaBuy:
+              type: object
+              properties:
+                id:
+                  type: string
+              required:
+                - id
+              additionalProperties: false
+            package:
+              description: Null when the tracker recorded no package we can map.
+              anyOf:
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                  required:
+                    - id
+                  additionalProperties: false
+                - type: 'null'
+            property:
+              description: >-
+                The site or app as an AdCP property identifier. Tracker rows use subdomain, domain or bundle_id, with
+                the value as recorded, lowercased.
+              $ref: '#/components/schemas/get_delivery_success_DeliveryPropertyRowDimensionsProperty'
+          required:
+            - date
+            - property
+          additionalProperties: false
+        metrics:
+          type: object
+          properties:
+            impressions:
+              type: object
+              properties:
+                value:
+                  type: integer
+                  minimum: 0
+                  maximum: 9007199254740991
+                status:
+                  type: string
+                  const: available
+              required:
+                - value
+                - status
+              additionalProperties: false
+          required:
+            - impressions
+          additionalProperties: false
+        propertySource:
+          type: string
+          const: tracker
+          description: 'Counted by our impression tracker: estimated, not billable.'
+        billable:
+          type: boolean
+          const: false
+        estimated:
+          type: boolean
+          const: true
+        features:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties:
+            type: object
+            properties:
+              value:
+                anyOf:
+                  - type: boolean
+                  - type: number
+                  - type: string
+                description: 'The score: a number, a string or a boolean.'
+              unit:
+                description: Unit of a numeric value.
+                type: string
+              confidence:
+                description: Confidence in the value, from 0 to 1.
+                type: number
+                minimum: 0
+                maximum: 1
+              measured_at:
+                description: When the value was measured.
+                type: string
+              expires_at:
+                description: When the value stops counting.
+                type: string
+              methodology_version:
+                description: Version of the method that produced the value.
+                type: string
+            required:
+              - value
+            additionalProperties: false
+          description: The account's scores in force at the end of this UTC day, by feature id; empty when none apply.
+        scoreMatches:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties:
+            $ref: '#/components/schemas/get_delivery_success_DeliveryPropertyScoreMatch'
+          description: Where each score in features is saved, by feature id.
+      required:
+        - dimensions
+        - metrics
+        - propertySource
+        - billable
+        - estimated
+        - features
+        - scoreMatches
+      additionalProperties: false
+    get_delivery_success_DeliveryPropertyScoreMatch:
+      type: object
+      properties:
+        basis:
+          type: string
+          enum:
+            - exact_host
+            - registrable_domain
+          description: 'registrable_domain: www.site.nl uses the score saved for site.nl.'
+        identifier:
+          $ref: '#/components/schemas/get_delivery_success_DeliveryPropertyScoreMatchIdentifier'
+      required:
+        - basis
+        - identifier
+      additionalProperties: false
+    get_delivery_success_DeliveryPropertyReport:
+      type: object
+      properties:
+        propertySource:
+          type: string
+          const: tracker
+        mediaBuysRead:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        sellers:
+          type: array
+          items:
+            $ref: '#/components/schemas/get_delivery_success_DeliveryPropertySeller'
+          description: One entry per seller with tracker impressions in scope, over the whole range.
+      required:
+        - propertySource
+        - mediaBuysRead
+        - sellers
+      additionalProperties: false
+    get_delivery_success_DeliveryPropertySeller:
+      type: object
+      properties:
+        seller:
+          anyOf:
+            - type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type:
+                    - string
+                    - 'null'
+              required:
+                - id
+                - name
+              additionalProperties: false
+            - type: 'null'
+          description: Null for buys booked across several sellers or none.
+        trackerImpressions:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        impressionsWithProperty:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: Of trackerImpressions, those with a site, an app or both.
+        fillShare:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: impressionsWithProperty / trackerImpressions. Low means rows show where the ad ran only in part.
+        sellerReportAvailable:
+          type: boolean
+          description: Whether a per-property seller report was read; always false today.
+      required:
+        - seller
+        - trackerImpressions
+        - impressionsWithProperty
+        - fillShare
+        - sellerReportAvailable
+      additionalProperties: false
     get_delivery_success_Query:
       type: object
       properties:
@@ -88963,19 +89223,17 @@ components:
         sourceOperation:
           $ref: '#/components/schemas/get_delivery_success_SemanticsSourceOperation'
         genericFallback:
-          type: boolean
-          const: false
+          $ref: '#/components/schemas/get_delivery_success_SemanticsGenericFallback'
         measurement:
-          type: string
-          const: excluded
+          $ref: '#/components/schemas/get_delivery_success_SemanticsMeasurement'
         missingValues:
-          type: string
+          $ref: '#/components/schemas/get_delivery_success_SemanticsMissingValues'
         freshness:
-          type: string
+          $ref: '#/components/schemas/get_delivery_success_SemanticsFreshness'
         finality:
-          type: string
+          $ref: '#/components/schemas/get_delivery_success_SemanticsFinality'
         billingEligibility:
-          type: string
+          $ref: '#/components/schemas/get_delivery_success_SemanticsBillingEligibility'
       required:
         - sourceOperation
         - genericFallback
@@ -89480,6 +89738,20 @@ components:
           const: flat_rate
         - type: string
           const: time
+    get_delivery_success_SemanticsGenericFallback:
+      type: boolean
+      const: false
+    get_delivery_success_SemanticsMeasurement:
+      type: string
+      const: excluded
+    get_delivery_success_SemanticsMissingValues:
+      type: string
+    get_delivery_success_SemanticsFreshness:
+      type: string
+    get_delivery_success_SemanticsFinality:
+      type: string
+    get_delivery_success_SemanticsBillingEligibility:
+      type: string
     get_delivery_success_DeliveryRevisionReportingRevisionId:
       type: string
       minLength: 1
@@ -89535,6 +89807,112 @@ components:
     get_delivery_success_DeliveryRevisionCoverageLimitationsItemPackageIdsItem:
       type: string
       minLength: 1
+    get_delivery_success_DeliveryPropertyRowDimensionsProperty:
+      type: object
+      properties:
+        type:
+          anyOf:
+            - type: string
+              const: domain
+            - type: string
+              const: subdomain
+            - type: string
+              const: network_id
+            - type: string
+              const: ios_bundle
+            - type: string
+              const: android_package
+            - type: string
+              const: apple_app_store_id
+            - type: string
+              const: google_play_id
+            - type: string
+              const: roku_store_id
+            - type: string
+              const: fire_tv_asin
+            - type: string
+              const: samsung_app_id
+            - type: string
+              const: apple_tv_bundle
+            - type: string
+              const: bundle_id
+            - type: string
+              const: venue_id
+            - type: string
+              const: screen_id
+            - type: string
+              const: openooh_venue_type
+            - type: string
+              const: rss_url
+            - type: string
+              const: apple_podcast_id
+            - type: string
+              const: spotify_collection_id
+            - type: string
+              const: podcast_guid
+            - type: string
+              const: station_id
+            - type: string
+              const: facility_id
+        value:
+          type: string
+      required:
+        - type
+        - value
+      additionalProperties: {}
+    get_delivery_success_DeliveryPropertyScoreMatchIdentifier:
+      type: object
+      properties:
+        type:
+          anyOf:
+            - type: string
+              const: domain
+            - type: string
+              const: subdomain
+            - type: string
+              const: network_id
+            - type: string
+              const: ios_bundle
+            - type: string
+              const: android_package
+            - type: string
+              const: apple_app_store_id
+            - type: string
+              const: google_play_id
+            - type: string
+              const: roku_store_id
+            - type: string
+              const: fire_tv_asin
+            - type: string
+              const: samsung_app_id
+            - type: string
+              const: apple_tv_bundle
+            - type: string
+              const: bundle_id
+            - type: string
+              const: venue_id
+            - type: string
+              const: screen_id
+            - type: string
+              const: openooh_venue_type
+            - type: string
+              const: rss_url
+            - type: string
+              const: apple_podcast_id
+            - type: string
+              const: spotify_collection_id
+            - type: string
+              const: podcast_guid
+            - type: string
+              const: station_id
+            - type: string
+              const: facility_id
+        value:
+          type: string
+      required:
+        - type
+        - value
+      additionalProperties: {}
     get_delivery_success_RowsItemMetricsValue:
       type: object
       properties:
