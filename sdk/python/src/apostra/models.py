@@ -440,7 +440,7 @@ class GetDeliveryResultReportCampaignDelivery(TypedDict):
     page: GetDeliverySuccessPage
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
-    '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
+    '\n    Present only for campaign_delivery: fresh interval delivery-goal pace and stored delivery-goal state, without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
     '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
     currencyConversions: NotRequired[GetDeliverySuccessCurrencyConversions]
@@ -485,7 +485,7 @@ class GetDeliveryResultReportDelivery(TypedDict):
     page: GetDeliverySuccessPage
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
-    '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
+    '\n    Present only for campaign_delivery: fresh interval delivery-goal pace and stored delivery-goal state, without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
     '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
     currencyConversions: NotRequired[GetDeliverySuccessCurrencyConversions]
@@ -747,7 +747,7 @@ class GetDeliveryResultReportMargin(TypedDict):
     page: GetDeliverySuccessPage
     semantics: GetDeliverySuccessSemantics
     goalProgress: NotRequired[GetDeliverySuccessCampaignGoalProgress]
-    '\n    Present only for campaign_delivery: campaign goal progress without V2-only pace or denominator fields.\n    '
+    '\n    Present only for campaign_delivery: fresh interval delivery-goal pace and stored delivery-goal state, without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
     '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
     currencyConversions: NotRequired[GetDeliverySuccessCurrencyConversions]
@@ -800,12 +800,14 @@ class GetDeliverySuccessCampaignGoalProgress(TypedDict):
 
 class GetDeliverySuccessCampaignGoalProgressCampaign(TypedDict):
     campaignId: str
-    progress: GetDeliverySuccessGoalProgress
+    progress: GetDeliverySuccessGoalProgress | None
+    deliveryGoal: GetDeliverySuccessGetDeliveryGoal
 
 class GetDeliverySuccessCampaignGoalProgressMediaBuy(TypedDict):
     mediaBuyId: str
     campaignId: str | None
-    progress: GetDeliverySuccessGoalProgress
+    progress: GetDeliverySuccessGoalProgress | None
+    deliveryGoal: GetDeliverySuccessGetDeliveryGoal
 
 GetDeliverySuccessCurrencyConversionsOmitted: TypeAlias = int
 
@@ -834,6 +836,11 @@ class GetDeliverySuccessDeliveryCurrencyConversion(TypedDict):
     '\n    booked: locked when the buy was booked. snapshot: the daily rate store. settlement: the seller labelled a currency it is not paid in; the spend is taken in the one it is paid in, at rate 1.\n    '
 
 GetDeliverySuccessCurrencyConversions: TypeAlias = "list[GetDeliverySuccessDeliveryCurrencyConversion]"
+
+class GetDeliverySuccessDeliveryGoalProgressProjectionRange(TypedDict):
+    lower: float
+    upper: float
+    halfWidth: float
 
 class GetDeliverySuccessDeliveryPropertyReport(TypedDict):
     propertySource: Literal["tracker"]
@@ -1238,6 +1245,28 @@ GetDeliverySuccessDeliverySummaryReportingRevisionReportingRevisionId: TypeAlias
 class GetDeliverySuccessDeliveryUnconvertedDay(TypedDict):
     currency: str
     date: str
+
+class GetDeliverySuccessGetDeliveryGoal(TypedDict):
+    constraint: GetDeliverySuccessGetDeliveryGoalConstraintValue | None
+    expected: float | None
+    pacingIndex: float | None
+    deliveryProjection: JsonValue | None
+    projectionRange: GetDeliverySuccessDeliveryGoalProgressProjectionRange | None
+    sellerPacingIndex: float | None
+    sellerDeliveryProjection: JsonValue | None
+    verdict: GetDeliverySuccessGetDeliveryGoalVerdict | None
+    verdictWithheld: str | None
+    dataThrough: str | None
+
+class GetDeliverySuccessGetDeliveryGoalConstraintValue(TypedDict):
+    kind: Literal["spend", "impressions"]
+    amount: float
+
+GetDeliverySuccessGetDeliveryGoalVerdict: TypeAlias = Literal["on_pace", "complete", "underdelivery", "early_exhaustion"]
+
+GetDeliverySuccessGetDeliveryGoalDeliveryProjectionProjectedEndState: TypeAlias = GetDeliverySuccessGetDeliveryGoalVerdict
+
+GetDeliverySuccessGetDeliveryGoalSellerDeliveryProjectionProjectedEndState: TypeAlias = GetDeliverySuccessGetDeliveryGoalVerdict
 
 class GetDeliverySuccessGoalProgress(TypedDict):
     goal: GetDeliverySuccessGoalProgressGoal | None
@@ -6340,6 +6369,10 @@ class InFlightReceipt(TypedDict):
     pendingReason: str
 
 JsonValue: TypeAlias = Union[str, int, float, bool, None, list['JsonValue'], dict[str, 'JsonValue']]
+
+GetDeliverySuccessGetDeliveryGoalDeliveryProjection: TypeAlias = JsonValue
+
+GetDeliverySuccessGetDeliveryGoalSellerDeliveryProjection: TypeAlias = JsonValue
 
 GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorValue: TypeAlias = JsonValue
 
