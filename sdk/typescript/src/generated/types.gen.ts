@@ -7009,6 +7009,10 @@ export type GetResponses = {
                      */
                     complete: boolean;
                     /**
+                     * The payer fields an invoice still needs, from `contactName`, `address` and `countryAlpha2`, in that order. Empty when `complete` is true. Computed from the stored details by the same rule as `complete`, even when the fields below are redacted.
+                     */
+                    missing: Array<'contactName' | 'address' | 'countryAlpha2'>;
+                    /**
                      * `redacted` for an organization-scoped service token: the fields in `redactedFields` are `null` (the email lists are empty) so a caller can tell "not allowed" from "empty".
                      */
                     visibility: 'visible' | 'redacted';
@@ -16669,6 +16673,10 @@ export type SaveBillingResponses = {
                  * Whether the organization has what an invoice needs: a payer name, a street address and a country. The same rule as the `BILLING_DETAILS` gap in buyer readiness. Computed from the stored details even when the fields below are redacted.
                  */
                 complete: boolean;
+                /**
+                 * The payer fields an invoice still needs, from `contactName`, `address` and `countryAlpha2`, in that order. Empty when `complete` is true. Computed from the stored details by the same rule as `complete`, even when the fields below are redacted.
+                 */
+                missing: Array<'contactName' | 'address' | 'countryAlpha2'>;
                 /**
                  * `redacted` for an organization-scoped service token: the fields in `redactedFields` are `null` (the email lists are empty) so a caller can tell "not allowed" from "empty".
                  */
