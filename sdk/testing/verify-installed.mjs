@@ -1,9 +1,9 @@
 /** Compare installed archives with their generated release manifest, not a fixed count. */
 import assert from 'node:assert/strict'
 import { execFileSync, spawnSync } from 'node:child_process'
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { join, resolve } from 'node:path'
+import { dirname, join, resolve } from 'node:path'
 
 // The MCP Apps host package has no operation manifest. Check instead that every
 // public entry point the package declares imports from the installed archive and
@@ -43,52 +43,145 @@ process.stdout.write(metadata.version);
 }
 
 // The CLI has no operation manifest of its own. Run the installed `apostra`
-// program as a user would, through the bin link npm created, and check that it
-// reports the expected version and the operations of the SDK installed beside
-// it. With a manifest path, those operations must also be the generated ones.
-// Nothing here signs in, calls the API, or reads real credentials: both
-// commands run offline, with the config directory pointed at an empty one.
+// program as a user would and check that it reports the expected version and
+// the operations of the SDK installed beside it. With a manifest path, those
+// operations must also be the generated ones. Nothing here signs in, calls the
+// API, or reads real credentials: every command runs offline, with an empty
+// home directory and nothing from the caller's environment but PATH.
+//
+// With --published, VERSION is on npm and is also installed the two ways
+// developers install it, `npm i -g @apostra/cli@VERSION` and
+// `npx @apostra/cli@VERSION`, each in its own clean environment, and both get
+// the same checks. Those installs reach the npm registry, never Apostra. A
+// failure names the command and prints its full output.
 if (process.argv[2] === '--cli') {
-  const [, , , installDirectory, expectedVersion, manifestPath] = process.argv
-  assert(installDirectory, 'Usage: verify-installed.mjs --cli INSTALL_DIRECTORY [VERSION] [SDK_MANIFEST]')
-  const directory = resolve(installDirectory)
-  const home = mkdtempSync(join(tmpdir(), 'apostra-cli-home-'))
+  const published = process.argv.includes('--published')
+  const [installDirectory, expectedVersion, manifestPath] = process.argv.slice(3).filter(arg => arg !== '--published')
+  assert(installDirectory, 'Usage: verify-installed.mjs --cli INSTALL_DIRECTORY [VERSION] [SDK_MANIFEST] [--published]')
+  assert(!published || expectedVersion, '--published needs the VERSION to install from npm')
+  const scratch = mkdtempSync(join(tmpdir(), 'apostra-cli-'))
   try {
-    const apostra = (...args) => execFileSync(join(directory, 'node_modules/.bin/apostra'), args, {
-      cwd: directory, encoding: 'utf8', timeout: 30_000,
-      env: { ...process.env, HOME: home, XDG_CONFIG_HOME: home, APPDATA: home },
-    })
-    const version = apostra('--version').trim()
-    if (expectedVersion) assert.equal(version, expectedVersion, 'Installed CLI reports a different version')
-    const envelope = JSON.parse(apostra('operations', 'list', '--json'))
-    assert.equal(envelope.schemaVersion, 1, 'Unexpected CLI envelope version')
-    assert.equal(envelope.ok, true, 'The CLI operations envelope is not a success')
-    const listed = envelope.data
-    const names = listed.operations.map(operation => operation.name)
-    assert(names.length > 0 && names.includes('get_delivery'), 'The CLI lists no SDK operations')
-    assert.equal(new Set(names).size, names.length, 'The CLI lists a duplicate operation')
-    const installedSdk = JSON.parse(readFileSync(join(directory, 'node_modules/@apostra/sdk/package.json'), 'utf8'))
-    assert.equal(listed.sdkVersion, installedSdk.version, 'The CLI did not read the SDK installed beside it')
-    if (manifestPath) {
-      const manifest = JSON.parse(readFileSync(resolve(manifestPath), 'utf8'))
-      assert.equal(listed.sdkVersion, manifest.version, 'The CLI SDK version differs from the manifest')
-      assert.deepEqual([...names].sort(), [...manifest.operations].sort(), 'The CLI operations differ from the manifest')
+    const project = resolve(installDirectory)
+    const projectEnv = cleanEnvironment(join(scratch, 'project'))
+    const reports = [verifyCli(
+      'Installed in a project',
+      args => run(join(project, 'node_modules/.bin/apostra'), args, { cwd: project, env: projectEnv }),
+      join(project, 'node_modules/@apostra/cli'), expectedVersion, manifestPath,
+    )]
+    if (published) {
+      const spec = `@apostra/cli@${expectedVersion}`
+      const globalHome = join(scratch, 'global')
+      const globalEnv = cleanEnvironment(globalHome)
+      const install = run('npm', ['install', '--global', spec], { cwd: join(globalHome, 'work'), env: globalEnv })
+      assert.equal(install.status, 0, `npm i -g ${spec} failed\n${install.output}`)
+      const prefix = globalEnv.npm_config_prefix
+      reports.push(verifyCli(
+        'Installed with npm i -g',
+        args => run(join(prefix, 'bin/apostra'), args, { cwd: join(globalHome, 'work'), env: globalEnv }),
+        join(prefix, 'lib/node_modules/@apostra/cli'), expectedVersion,
+      ))
+      // npx installs the package into its cache on the first run, here `--version`.
+      const npxHome = join(scratch, 'npx')
+      const npxEnv = cleanEnvironment(npxHome)
+      reports.push(verifyCli(
+        'Run with npx',
+        args => run('npx', ['--yes', spec, ...args], { cwd: join(npxHome, 'work'), env: npxEnv }),
+        () => {
+          const installs = readdirSync(join(npxEnv.npm_config_cache, '_npx'))
+          assert.equal(installs.length, 1, `npx made ${installs.length} installs in an empty cache`)
+          return join(npxEnv.npm_config_cache, '_npx', installs[0], 'node_modules/@apostra/cli')
+        },
+        expectedVersion,
+      ))
     }
-    // `call` is installed and reports failures in the envelope with its exit code.
-    // An unknown operation is refused before any credential is read.
-    const refused = spawnSync(join(directory, 'node_modules/.bin/apostra'), ['call', 'no_such_operation', '--account', '1', '--json'], {
-      cwd: directory, encoding: 'utf8', timeout: 30_000,
-      env: { ...process.env, HOME: home, XDG_CONFIG_HOME: home, APPDATA: home },
-    })
-    assert.equal(refused.status, 2, 'apostra call must exit 2 for an unknown operation')
-    const refusal = JSON.parse(refused.stdout)
-    assert.equal(refusal.ok, false)
-    assert.equal(refusal.error.code, 'UNKNOWN_OPERATION')
-    process.stdout.write(`@apostra/cli ${version} installed; it runs and lists ${names.length} operations from @apostra/sdk ${installedSdk.version}.\n`)
+    process.stdout.write(`${reports.join('\n')}\n`)
   } finally {
-    rmSync(home, { recursive: true, force: true })
+    rmSync(scratch, { recursive: true, force: true })
   }
   process.exit(0)
+}
+
+/**
+ * An empty home, with its own npm cache and global prefix and an empty working
+ * directory, and nothing from the caller's environment but PATH: no npm
+ * settings, Apostra credentials or CI tokens.
+ */
+function cleanEnvironment(home) {
+  mkdirSync(join(home, 'work'), { recursive: true })
+  return {
+    PATH: process.env.PATH,
+    HOME: home, XDG_CONFIG_HOME: home, APPDATA: home,
+    npm_config_cache: join(home, 'npm-cache'),
+    npm_config_prefix: join(home, 'npm-global'),
+    // Lifecycle scripts stay off, as for every install in this lane.
+    npm_config_ignore_scripts: 'true',
+    npm_config_update_notifier: 'false', npm_config_fund: 'false', npm_config_audit: 'false',
+  }
+}
+
+/** Runs a command. `output` names it and holds everything it printed, for failure messages. */
+function run(command, args, options) {
+  const result = spawnSync(command, args, { encoding: 'utf8', timeout: 180_000, ...options })
+  const outcome = result.error ? `failed: ${result.error.message}` : result.signal ? `was stopped by ${result.signal}` : `exited ${result.status}`
+  return { ...result, output: `$ ${[command, ...args].join(' ')}\n${outcome}\n--- stdout ---\n${result.stdout ?? ''}\n--- stderr ---\n${result.stderr ?? ''}` }
+}
+
+/**
+ * Checks one installed `apostra`. `apostra(args)` runs it; `cliDirectory` (or a
+ * function returning it, once the first run has installed it) is the installed
+ * package, from which the SDK it loads is found as Node finds it.
+ */
+function verifyCli(label, apostra, cliDirectory, expectedVersion, manifestPath) {
+  const check = (condition, message, result) => assert(condition, `${label}: ${message}\n${result.output}`)
+  const succeed = args => {
+    const result = apostra(args)
+    check(result.status === 0, `apostra ${args.join(' ')} failed`, result)
+    return result
+  }
+  const envelopeOf = result => {
+    try {
+      return JSON.parse(result.stdout)
+    } catch {
+      return check(false, 'apostra printed no JSON envelope', result)
+    }
+  }
+  const versionRun = succeed(['--version'])
+  const version = versionRun.stdout.trim()
+  if (expectedVersion) check(version === expectedVersion, `reports version ${version}, expected ${expectedVersion}`, versionRun)
+  const directory = typeof cliDirectory === 'function' ? cliDirectory() : cliDirectory
+  const cliPackage = JSON.parse(readFileSync(join(directory, 'package.json'), 'utf8'))
+  check(cliPackage.name === '@apostra/cli' && cliPackage.version === version, `${directory} holds ${cliPackage.name}@${cliPackage.version}`, versionRun)
+  const listRun = succeed(['operations', 'list', '--json'])
+  const envelope = envelopeOf(listRun)
+  check(envelope.schemaVersion === 1, 'unexpected CLI envelope version', listRun)
+  check(envelope.ok === true, 'the operations envelope is not a success', listRun)
+  const listed = envelope.data
+  const names = listed.operations.map(operation => operation.name)
+  check(names.length > 0 && names.includes('get_delivery'), 'the CLI lists no SDK operations', listRun)
+  check(new Set(names).size === names.length, 'the CLI lists a duplicate operation', listRun)
+  const installedSdk = sdkBeside(directory)
+  check(listed.sdkVersion === installedSdk.version, `the CLI reports SDK ${listed.sdkVersion}, but ${installedSdk.version} is installed beside it`, listRun)
+  if (manifestPath) {
+    const manifest = JSON.parse(readFileSync(resolve(manifestPath), 'utf8'))
+    assert.equal(listed.sdkVersion, manifest.version, 'The CLI SDK version differs from the manifest')
+    assert.deepEqual([...names].sort(), [...manifest.operations].sort(), 'The CLI operations differ from the manifest')
+  }
+  // `call` is installed and reports failures in the envelope with its exit code.
+  // An unknown operation is refused before any credential is read.
+  const refused = apostra(['call', 'no_such_operation', '--account', '1', '--json'])
+  check(refused.status === 2, 'apostra call must exit 2 for an unknown operation', refused)
+  const refusal = envelopeOf(refused)
+  check(refusal.schemaVersion === 1 && refusal.ok === false && refusal.error?.code === 'UNKNOWN_OPERATION', 'apostra call did not refuse the unknown operation', refused)
+  return `${label}: @apostra/cli ${version} runs and lists ${names.length} operations from @apostra/sdk ${installedSdk.version}.`
+}
+
+/** The @apostra/sdk package.json Node resolves from the installed CLI package. */
+function sdkBeside(cliDirectory) {
+  for (let directory = cliDirectory; ; directory = dirname(directory)) {
+    const candidate = join(directory, 'node_modules/@apostra/sdk/package.json')
+    if (existsSync(candidate)) return JSON.parse(readFileSync(candidate, 'utf8'))
+    assert.notEqual(dirname(directory), directory, `No @apostra/sdk is installed for ${cliDirectory}`)
+  }
 }
 
 const [manifestPath, directory, python] = process.argv.slice(2)
