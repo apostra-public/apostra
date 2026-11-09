@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.16.0",
+  "skillVersion": "1.17.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -151,6 +151,16 @@
         "Before staging, the agent tells the buyer the product is auction-priced, shows the price guidance the option carries, and asks for a bid in the campaign currency.",
         "The agent does not invent, estimate or default a bid, and does not stage the buy until the buyer gives one.",
         "If save_media_buy refuses the product for a missing bid, the agent asks the buyer for one and does not switch to another seller or product unless the buyer chooses to."
+      ]
+    },
+    {
+      "id": "creative-from-hosted-url",
+      "title": "Create a creative from a file the buyer hosts at a public URL",
+      "given": "The buyer gives a public HTTPS URL for a 300x250 PNG and a public VAST tag URL, and wants both on the campaign with a known click-through URL.",
+      "expect": [
+        "The agent does not refuse the URLs and does not send them to the upload Task.",
+        "After confirmation, it calls save_creative with assets giving each public url and its assetType (IMAGE, VAST), the campaignId and landing_page_url, adding vastVersion only when the buyer gave it.",
+        "It uses only the URLs the buyer gave, confirms each creative with get, and, if the buyer had given an HTML5 ZIP URL instead, explains that a ZIP goes through upload_creative_asset."
       ]
     }
   ]

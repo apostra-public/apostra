@@ -2,7 +2,7 @@
   "schemaVersion": "3.0",
   "id": "manage-a-campaign",
   "name": "Manage a Campaign",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Review delivery and safely update, launch, pause, or archive an existing buyer campaign.",
   "steward": {
     "owner": "bokelley"
@@ -63,14 +63,16 @@
     "mintlify/v2/skill.mdx",
     "mintlify/v3/html5-creative-requirements.mdx",
     "mintlify/v3/manage-ads.mdx",
-    "mintlify/v3/creative-sync-outcomes.mdx"
+    "mintlify/v3/creative-sync-outcomes.mdx",
+    "mintlify/v3/tool-reference.mdx"
   ],
   "evaluation": {
     "acceptance": {
       "scenarioAsset": "references/scenarios.json",
       "scenarioIds": [
         "html5-zip-upload-finished-before-attach",
-        "draft-campaign-creative-review-reported"
+        "draft-campaign-creative-review-reported",
+        "creative-from-hosted-url"
       ]
     },
     "executableAcceptance": {
@@ -79,7 +81,7 @@
       "scenarioContract": "deterministic-v3-tool-v1"
     },
     "telemetry": {
-      "correlationSkillId": "manage-a-campaign@1.3.0",
+      "correlationSkillId": "manage-a-campaign@1.4.0",
       "outcomeSignals": [
         "workflow_terminal_state",
         "scenario_assertion_results",
