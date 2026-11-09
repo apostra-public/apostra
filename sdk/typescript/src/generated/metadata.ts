@@ -1505,7 +1505,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Decide a creative or media-buy approval, or complete a modular-source follow-up. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page."
+    "summary": "Decide a creative or media-buy approval, overrule a spend conflict, or complete a modular-source follow-up. Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page."
   },
   "search": {
     "path": "/tools/search",

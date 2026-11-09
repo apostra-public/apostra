@@ -1895,13 +1895,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -3143,13 +3144,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -4367,13 +4369,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -5579,13 +5582,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -6792,13 +6796,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -8012,13 +8017,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -9225,13 +9231,14 @@ paths:
                       not: {}
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       not: {}
                     items:
@@ -10368,13 +10375,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -11583,13 +11591,14 @@ paths:
                       not: {}
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -12802,13 +12811,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       not: {}
                     items:
@@ -13948,13 +13958,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       not: {}
                     items:
@@ -15088,13 +15099,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -16301,13 +16313,14 @@ paths:
                       not: {}
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -17520,13 +17533,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -18738,13 +18752,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -19956,13 +19971,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -21174,13 +21190,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -22392,13 +22409,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
@@ -23611,13 +23629,14 @@ paths:
                       minLength: 1
                     workItemKind:
                       description: >-
-                        Required for kind work_item: which queue holds it. modular_source also needs sourceId;
-                        creative_review and media_buy_approval take no sourceId.
+                        Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other
+                        queues take no sourceId.
                       type: string
                       enum:
                         - creative_review
                         - media_buy_approval
                         - modular_source
+                        - contract_conflict
                     include:
                       not: {}
                     items:
@@ -58634,11 +58653,11 @@ paths:
     post:
       operationId: save_work_item
       summary: >-
-        Decide a creative or media-buy approval, or complete a modular-source follow-up. Repeats preserve evidence;
-        retry, evaluation, and reassignment stay on the approvals Page.
+        Decide a creative or media-buy approval, overrule a spend conflict, or complete a modular-source follow-up.
+        Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page.
       description: >-
-        Decide a creative or media-buy approval, or complete a modular-source follow-up. Repeats preserve evidence;
-        retry, evaluation, and reassignment stay on the approvals Page.
+        Decide a creative or media-buy approval, overrule a spend conflict, or complete a modular-source follow-up.
+        Repeats preserve evidence; retry, evaluation, and reassignment stay on the approvals Page.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -58668,6 +58687,7 @@ paths:
                     - creative_review
                     - media_buy_approval
                     - modular_source
+                    - contract_conflict
                   description: Workstream owning this item.
                 id:
                   type: string
@@ -58685,7 +58705,7 @@ paths:
                     - completed
                   description: Desired terminal state for this kind.
                 reviewerNotes:
-                  description: Optional note preserved with the decision.
+                  description: 'Note preserved with the decision. Required for `contract_conflict`: your reason for the overrule.'
                   type: string
                   maxLength: 2000
                 expectedContentDigest:
@@ -58779,6 +58799,34 @@ paths:
                               const: completed
                           required:
                             - status
+                - if:
+                    properties:
+                      kind:
+                        const: contract_conflict
+                    required:
+                      - kind
+                  then:
+                    allOf:
+                      - allOf:
+                          - not:
+                              required:
+                                - expectedContentDigest
+                          - not:
+                              required:
+                                - result
+                          - not:
+                              required:
+                                - sourceId
+                      - properties:
+                          status:
+                            const: approved
+                        required:
+                          - status
+                      - required:
+                          - reviewerNotes
+                      - properties:
+                          reviewerNotes:
+                            pattern: \S
                 - if:
                     not:
                       properties:
@@ -59145,12 +59193,14 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
+                            work on a source and accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
+                            - contract_conflict
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -60738,12 +60788,14 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
+                            work on a source and accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
+                            - contract_conflict
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -63051,12 +63103,14 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
+                            work on a source and accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
+                            - contract_conflict
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -64645,12 +64699,14 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
+                            work on a source and accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
+                            - contract_conflict
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -66224,12 +66280,14 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
+                            work on a source and accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
+                            - contract_conflict
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -67810,12 +67868,14 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
+                            work on a source and accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
+                            - contract_conflict
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -69395,12 +69455,14 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
+                            work on a source and accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
+                            - contract_conflict
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -72460,12 +72522,14 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
+                            work on a source and accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
+                            - contract_conflict
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -74052,12 +74116,14 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
+                            work on a source and accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
+                            - contract_conflict
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -75644,12 +75710,14 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
+                            work on a source and accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
+                            - contract_conflict
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -77236,12 +77304,14 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
+                            work on a source and accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
+                            - contract_conflict
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -78825,12 +78895,14 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
+                            work on a source and accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
+                            - contract_conflict
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -80414,12 +80486,14 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
+                            work on a source and accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
+                            - contract_conflict
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -82004,12 +82078,14 @@ paths:
                         workItemKind:
                           description: >-
                             For kind work_item: one queue. creative_review and media_buy_approval are approval
-                            decisions; modular_source is follow-up work on a source and accepts the top-level sourceId.
+                            decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up
+                            work on a source and accepts the top-level sourceId.
                           type: string
                           enum:
                             - creative_review
                             - media_buy_approval
                             - modular_source
+                            - contract_conflict
                         queue:
                           description: >-
                             For kind work_item: only pending approvals in this queue: overdue (past their deadline) or
@@ -107618,6 +107694,8 @@ components:
           $ref: '#/components/schemas/save_work_item_success_SaveWorkItemSuccessCreatedObject'
         actionEvidence:
           $ref: '#/components/schemas/save_work_item_success_SaveWorkItemSuccessCreatedActionEvidence'
+        resumeDue:
+          $ref: '#/components/schemas/save_work_item_success_SaveWorkItemSuccessCreatedResumeDue'
       required:
         - outcome
         - action
@@ -107636,6 +107714,8 @@ components:
           $ref: '#/components/schemas/save_work_item_success_SaveWorkItemSuccessUnchangedObject'
         actionEvidence:
           $ref: '#/components/schemas/save_work_item_success_SaveWorkItemSuccessUnchangedActionEvidence'
+        resumeDue:
+          $ref: '#/components/schemas/save_work_item_success_SaveWorkItemSuccessUnchangedResumeDue'
       required:
         - outcome
         - action
@@ -107658,6 +107738,8 @@ components:
         - basis
         - reason
       additionalProperties: {}
+    save_work_item_success_SaveWorkItemSuccessCreatedResumeDue:
+      type: boolean
     save_work_item_success_SaveWorkItemSuccessUnchangedObject:
       type: object
       propertyNames:
@@ -107675,6 +107757,8 @@ components:
         - basis
         - reason
       additionalProperties: {}
+    save_work_item_success_SaveWorkItemSuccessUnchangedResumeDue:
+      type: boolean
     search_request_AdcpCreativeStatus:
       type: string
       enum:
