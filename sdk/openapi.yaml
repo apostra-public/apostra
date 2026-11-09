@@ -24884,6 +24884,19 @@ paths:
                                       Whether the organization has what an invoice needs: a payer name, a street address
                                       and a country. The same rule as the `BILLING_DETAILS` gap in buyer readiness.
                                       Computed from the stored details even when the fields below are redacted.
+                                  missing:
+                                    type: array
+                                    items:
+                                      type: string
+                                      enum:
+                                        - contactName
+                                        - address
+                                        - countryAlpha2
+                                    description: >-
+                                      The payer fields an invoice still needs, from `contactName`, `address` and
+                                      `countryAlpha2`, in that order. Empty when `complete` is true. Computed from the
+                                      stored details by the same rule as `complete`, even when the fields below are
+                                      redacted.
                                   visibility:
                                     type: string
                                     enum:
@@ -24910,6 +24923,7 @@ paths:
                                   - countryAlpha2
                                   - taxId
                                   - complete
+                                  - missing
                                   - visibility
                                   - redactedFields
                                 additionalProperties: false
@@ -39433,6 +39447,19 @@ paths:
                                   Whether the organization has what an invoice needs: a payer name, a street address and
                                   a country. The same rule as the `BILLING_DETAILS` gap in buyer readiness. Computed
                                   from the stored details even when the fields below are redacted.
+                              missing:
+                                type: array
+                                items:
+                                  type: string
+                                  enum:
+                                    - contactName
+                                    - address
+                                    - countryAlpha2
+                                description: >-
+                                  The payer fields an invoice still needs, from `contactName`, `address` and
+                                  `countryAlpha2`, in that order. Empty when `complete` is true. Computed from the
+                                  stored details by the same rule as `complete`, even when the fields below are
+                                  redacted.
                               visibility:
                                 type: string
                                 enum:
@@ -39459,6 +39486,7 @@ paths:
                               - countryAlpha2
                               - taxId
                               - complete
+                              - missing
                               - visibility
                               - redactedFields
                             additionalProperties: false
