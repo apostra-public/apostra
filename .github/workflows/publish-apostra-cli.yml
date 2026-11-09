@@ -120,7 +120,10 @@ jobs:
             if [[ "$attempt" == "$INSTALL_ATTEMPTS" ]]; then exit 1; fi
             sleep 30
           done
-          node sdk/testing/verify-installed.mjs --cli "$install_dir" "$CLI_VERSION"
+          # --published also installs this version the ways developers do, with
+          # `npm i -g` and with `npx`, each in a clean environment, and runs the
+          # same checks on both. A failure prints the install or command output.
+          node sdk/testing/verify-installed.mjs --cli "$install_dir" "$CLI_VERSION" --published
           tag="cli-v$CLI_VERSION"
           if gh release view "$tag" >/dev/null 2>&1; then
             test "$(git ls-remote origin "refs/tags/$tag" | cut -f1)" = "$GITHUB_SHA"
