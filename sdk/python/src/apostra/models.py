@@ -10199,6 +10199,8 @@ class SaveCampaignRequestCampaignGoalVendor(TypedDict):
 class SaveCampaignRequestCampaignMetricGoal(TypedDict):
     kind: Literal["metric"]
     '\n    Goal kind.\n    '
+    standard: NotRequired[Literal["mrc", "groupm"]]
+    '\n    Viewability standard for this goal.\n    '
     view_duration_seconds: NotRequired[float]
     '\n    Min seconds for completed_views.\n    '
     priority: NotRequired[int]

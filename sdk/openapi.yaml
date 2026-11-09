@@ -94754,6 +94754,13 @@ components:
           type: string
           const: metric
           description: Goal kind.
+        standard:
+          description: Viewability standard for this goal.
+          anyOf:
+            - type: string
+              const: mrc
+            - type: string
+              const: groupm
         view_duration_seconds:
           description: Min seconds for completed_views.
           type: number
