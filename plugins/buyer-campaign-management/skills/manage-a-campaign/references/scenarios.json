@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "manage-a-campaign",
-  "skillVersion": "1.2.0",
+  "skillVersion": "1.3.0",
   "scenarios": [
     {
       "id": "html5-zip-upload-finished-before-attach",

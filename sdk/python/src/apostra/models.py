@@ -1453,7 +1453,7 @@ class GetInputKindAdvertiserAccess(TypedDict):
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAdvertiserAccessItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1584,7 +1584,7 @@ class GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAd
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1713,7 +1713,7 @@ class GetInputKindAudience(TypedDict):
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAudienceItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -1973,7 +1973,7 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCatalogAndEventSourceItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2104,7 +2104,7 @@ class GetInputKindConnection(TypedDict):
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindConnectionItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2235,7 +2235,7 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCreativeAndCreativeCollectionWithAdvertiserIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2364,7 +2364,7 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCreativeAndCreativeCollectionWithSourceIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2882,7 +2882,7 @@ class GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDis
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3013,7 +3013,7 @@ class GetInputKindMaterial(TypedDict):
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindMaterialItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3144,7 +3144,7 @@ class GetInputKindProposal(TypedDict):
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindProposalItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3275,7 +3275,7 @@ class GetInputKindSeller(TypedDict):
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindSellerItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3406,7 +3406,7 @@ class GetInputKindSession(TypedDict):
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindSessionItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3537,7 +3537,7 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindWholesaleProductWithAdvertiserIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3666,7 +3666,7 @@ class GetInputKindWholesaleProductWithSourceId(TypedDict):
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindWholesaleProductWithSourceIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3811,7 +3811,7 @@ class GetInputKindWorkItem(TypedDict):
     '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
     workItemKind: Literal["creative_review", "media_buy_approval", "modular_source"]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; creative_review and media_buy_approval take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "approvalRouting", "listing", "identity", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindWorkItemItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3957,6 +3957,7 @@ class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySour
     accountsTotal: NotRequired[float]
     unavailableIncludes: NotRequired[list[JsonValue]]
     pulse: NotRequired[GetSuccessCampaignPulse]
+    goalProgress: NotRequired[list[GetSuccessCampaignGoalProgress]]
     operationDetails: NotRequired[list[GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigOperationDetailsItem]]
     operationDetailsTruncated: NotRequired[Literal[True]]
     messages: NotRequired[list[JsonValue]]
@@ -5288,6 +5289,336 @@ GetStatusSuccessSetupSellersResultsItemAction: TypeAlias = "GetStatusSuccessSetu
 
 GetStatusSuccessSetupSellersResultsItemSellerAccountId: TypeAlias = int
 
+class GetSuccessCampaignGoalProgress(TypedDict):
+    scope: GetSuccessCampaignGoalProgressScope
+    goalKind: Literal["optimization", "delivery"]
+    goalPriority: int | None
+    goal: GetSuccessCampaignGoalProgressOptimizationGoal | None
+    askedTarget: GetSuccessCampaignGoalProgressTarget | None
+    answeredTarget: GetSuccessCampaignGoalProgressTarget | None
+    commitment: Literal["guaranteed", "best_effort", "report_only"] | None
+    commitmentSource: Literal["proposal", "campaign"] | None
+    actual: GetSuccessCampaignGoalProgressActual | None
+    basis: GetSuccessCampaignGoalProgressBasis | None
+    freshness: GetSuccessCampaignGoalProgressFreshness
+    verdict: str | None
+    verdictWithheld: str | None
+    judgedAgainst: Literal["asked", "answered"] | None
+    delivery: GetSuccessDeliveryGoalProgress | None
+    dataThrough: str | None
+    nextCheckAt: str | None
+
+class GetSuccessCampaignGoalProgressActual(TypedDict):
+    kind: Literal["cost_per", "threshold_rate", "volume"]
+    value: float
+    unit: Literal["impressions", "clicks", "views", "completedViews", "conversions", "leads", "viewableImpressions", "vendorMetric"]
+    units: float
+    denominatorUnits: float | None
+    perUnits: Literal[1, 1000]
+    currency: str | None
+
+class GetSuccessCampaignGoalProgressAdvertiserMeasuredBasis(TypedDict):
+    kind: Literal["advertiser_measured"]
+    vendor: GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendor
+    metricId: GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisMetricId
+    impressions: float
+
+GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisMetricId: TypeAlias = str
+
+class GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendor(TypedDict):
+    domain: GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorDomain
+    brandId: NotRequired[GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorBrandId]
+
+GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorBrandId: TypeAlias = str
+
+GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorDomain: TypeAlias = str
+
+class GetSuccessCampaignGoalProgressCostPerTarget(TypedDict):
+    kind: GetSuccessCampaignGoalProgressCostPerTargetKind
+    value: GetSuccessCampaignGoalProgressCostPerTargetValue
+
+GetSuccessCampaignGoalProgressCostPerTargetKind: TypeAlias = Literal["cost_per"]
+
+GetSuccessCampaignGoalProgressCostPerTargetValue: TypeAlias = float
+
+class GetSuccessCampaignGoalProgressEventOptimizationTargetCostPerVariant(TypedDict):
+    kind: Literal["cost_per"]
+    value: float
+
+class GetSuccessCampaignGoalProgressEventOptimizationTargetMaximizeValueVariant(TypedDict):
+    kind: GetSuccessCampaignGoalProgressEventOptimizationTargetMaximizeValueVariantKind
+
+GetSuccessCampaignGoalProgressEventOptimizationTargetMaximizeValueVariantKind: TypeAlias = Literal["maximize_value"]
+
+class GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariant(TypedDict):
+    kind: GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariantKind
+    value: GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariantValue
+
+GetSuccessCampaignGoalProgressEventOptimizationTarget: TypeAlias = "GetSuccessCampaignGoalProgressEventOptimizationTargetCostPerVariant | GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariant | GetSuccessCampaignGoalProgressEventOptimizationTargetMaximizeValueVariant"
+
+GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariantKind: TypeAlias = Literal["per_ad_spend"]
+
+GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariantValue: TypeAlias = float
+
+class GetSuccessCampaignGoalProgressFreshness(TypedDict):
+    dataThrough: NotRequired[str | None]
+    reportingPeriodEnd: NotRequired[str | None]
+    nextExpectedAt: NotRequired[str | None]
+    notificationType: NotRequired[str | None]
+    sequenceNumber: NotRequired[float | None]
+    awaitingLaterReport: NotRequired[bool]
+    missingMetrics: NotRequired[list[str]]
+
+class GetSuccessCampaignGoalProgressMaximizeValueTarget(TypedDict):
+    kind: GetSuccessCampaignGoalProgressMaximizeValueTargetKind
+
+GetSuccessCampaignGoalProgressMaximizeValueTargetKind: TypeAlias = Literal["maximize_value"]
+
+class GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariant(TypedDict):
+    kind: GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariantKind
+    value: GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariantValue
+
+GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariantKind: TypeAlias = Literal["cost_per"]
+
+GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariantValue: TypeAlias = float
+
+class GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariant(TypedDict):
+    kind: GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariantKind
+    value: GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariantValue
+
+GetSuccessCampaignGoalProgressMetricOptimizationTarget: TypeAlias = "GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariant | GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariant"
+
+GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariantKind: TypeAlias = Literal["threshold_rate"]
+
+GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariantValue: TypeAlias = float
+
+class GetSuccessCampaignGoalProgressOptimizationGoalAttributionWindowPostClick(TypedDict):
+    interval: int
+    unit: Literal["seconds", "minutes", "hours", "days", "campaign"]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalAttributionWindowPostView(TypedDict):
+    interval: int
+    unit: Literal["seconds", "minutes", "hours", "days", "campaign"]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalKindEvent(TypedDict):
+    kind: Literal["event"]
+    event_sources: list[GetSuccessCampaignGoalProgressOptimizationGoalKindEventEventSourcesItem]
+    target: NotRequired[GetSuccessCampaignGoalProgressEventOptimizationTarget]
+    attribution_window: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalKindEventAttributionWindow]
+    priority: NotRequired[int]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalKindEventAttributionWindow(TypedDict):
+    post_click: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalAttributionWindowPostClick]
+    post_view: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalAttributionWindowPostView]
+    model: NotRequired[Literal["last_touch", "first_touch", "linear", "time_decay", "data_driven"]]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalKindEventEventSourcesItem(TypedDict):
+    event_source_id: str
+    event_type: Literal["page_view", "view_content", "select_content", "select_item", "search", "share", "add_to_cart", "remove_from_cart", "viewed_cart", "add_to_wishlist", "initiate_checkout", "add_payment_info", "purchase", "refund", "lead", "qualify_lead", "close_convert_lead", "disqualify_lead", "complete_registration", "subscribe", "follow", "content_view", "watch_milestone", "start_trial", "app_install", "app_launch", "contact", "schedule", "donate", "submit_application", "custom"]
+    custom_event_name: NotRequired[str]
+    value_field: NotRequired[str]
+    value_factor: NotRequired[float]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalKindMetric(TypedDict):
+    kind: Literal["metric"]
+    metric: Literal["clicks", "views", "completed_views", "viewed_seconds", "viewable_rate", "attention_seconds", "attention_score", "engagements", "follows", "saves", "profile_visits", "reach"]
+    standard: NotRequired[Literal["mrc", "groupm"]]
+    vendor: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendor]
+    reach_unit: NotRequired[Literal["individuals", "households", "devices", "accounts", "cookies", "custom"]]
+    target_frequency: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalKindMetricTargetFrequency]
+    view_duration_seconds: NotRequired[float]
+    target: NotRequired[GetSuccessCampaignGoalProgressMetricOptimizationTarget]
+    priority: NotRequired[int]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalKindMetricTargetFrequency(TypedDict):
+    min: NotRequired[int]
+    max: NotRequired[int]
+    window: GetSuccessCampaignGoalProgressOptimizationGoalTargetFrequencyWindow
+
+class GetSuccessCampaignGoalProgressOptimizationGoalKindVendorMetric(TypedDict):
+    kind: Literal["vendor_metric"]
+    vendor: GetSuccessCampaignGoalProgressOptimizationGoalVendor
+    metric_id: GetSuccessCampaignGoalProgressOptimizationGoalMetricId
+    target: NotRequired[GetSuccessCampaignGoalProgressVendorMetricOptimizationTarget]
+    priority: NotRequired[int]
+
+GetSuccessCampaignGoalProgressOptimizationGoal: TypeAlias = "GetSuccessCampaignGoalProgressOptimizationGoalKindMetric | GetSuccessCampaignGoalProgressOptimizationGoalKindEvent | GetSuccessCampaignGoalProgressOptimizationGoalKindVendorMetric"
+
+GetSuccessCampaignGoalProgressOptimizationGoalMetricId: TypeAlias = str
+
+class GetSuccessCampaignGoalProgressOptimizationGoalTargetFrequencyWindow(TypedDict):
+    interval: int
+    unit: Literal["seconds", "minutes", "hours", "days", "campaign"]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendor(TypedDict):
+    domain: GetSuccessCampaignGoalProgressOptimizationGoalVendorDomain
+    brand_id: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandId]
+    countries: NotRequired[list[str]]
+    industries: NotRequired[list[str]]
+    data_subject_contestation: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorDataSubjectContestation]
+    brand_kit_override: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverride]
+
+GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandId: TypeAlias = str
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverride(TypedDict):
+    logo: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogo]
+    colors: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideColors]
+    voice: NotRequired[str]
+    tagline: NotRequired[str]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideColors(TypedDict):
+    primary: NotRequired[str]
+    secondary: NotRequired[str]
+    accent: NotRequired[str]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogo(TypedDict):
+    asset_type: Literal["image"]
+    url: str
+    width: int
+    height: int
+    file_size_bytes: NotRequired[int]
+    pixel_ratio: NotRequired[float]
+    state_id: NotRequired[str]
+    breakpoint_id: NotRequired[str]
+    focal_point: NotRequired[list[JsonValue]]
+    format: NotRequired[str]
+    alt_text: NotRequired[str]
+    provenance: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenance]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenance(TypedDict):
+    digital_source_type: NotRequired[Literal["digital_capture", "digital_creation", "trained_algorithmic_media", "composite_with_trained_algorithmic_media", "algorithmic_media", "composite_capture", "composite_synthetic", "human_edits", "data_driven_media"]]
+    synthetic_depiction: NotRequired[bool]
+    ai_tool: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceAiTool]
+    human_oversight: NotRequired[Literal["none", "prompt_only", "selected", "edited", "directed"]]
+    declared_by: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDeclaredBy]
+    declared_at: NotRequired[str]
+    created_time: NotRequired[str]
+    c2pa: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceC2pa]
+    embedded_provenance: NotRequired[list[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceEmbeddedProvenanceItem]]
+    watermarks: NotRequired[list[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceWatermarksItem]]
+    disclosure: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDisclosure]
+    verification: NotRequired[list[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceVerificationItem]]
+    ext: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceExt]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceAiTool(TypedDict):
+    name: str
+    version: NotRequired[str]
+    provider: NotRequired[str]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceC2pa(TypedDict):
+    manifest_url: str
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDeclaredBy(TypedDict):
+    agent_url: NotRequired[str]
+    role: Literal["creator", "advertiser", "agency", "platform", "tool"]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDisclosure(TypedDict):
+    required: bool
+    jurisdictions: NotRequired[list[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItem]]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItem(TypedDict):
+    country: str
+    region: NotRequired[str]
+    regulation: str
+    label_text: NotRequired[str]
+    render_guidance: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidance]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidance(TypedDict):
+    persistence: NotRequired[Literal["continuous", "initial", "flexible"]]
+    min_duration_ms: NotRequired[int]
+    positions: NotRequired[list[Literal["prominent", "footer", "audio", "subtitle", "overlay", "end_card", "pre_roll", "companion"]]]
+    ext: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceEmbeddedProvenanceItem(TypedDict):
+    method: Literal["manifest_wrapper", "provenance_markers"]
+    standard: NotRequired[str]
+    provider: str
+    verify_agent: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceEmbeddedProvenanceItemVerifyAgent]
+    embedded_at: NotRequired[str]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceEmbeddedProvenanceItemVerifyAgent(TypedDict):
+    agent_url: str
+    feature_id: NotRequired[str]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceVerificationItem(TypedDict):
+    verified_by: str
+    verified_time: NotRequired[str]
+    result: Literal["authentic", "ai_generated", "ai_modified", "inconclusive"]
+    confidence: NotRequired[float]
+    details_url: NotRequired[str]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceWatermarksItem(TypedDict):
+    media_type: Literal["audio", "image", "video", "text"]
+    provider: str
+    verify_agent: NotRequired[GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceWatermarksItemVerifyAgent]
+    c2pa_action: NotRequired[Literal["c2pa.watermarked.bound", "c2pa.watermarked.unbound"]]
+    embedded_at: NotRequired[str]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceWatermarksItemVerifyAgent(TypedDict):
+    agent_url: str
+    feature_id: NotRequired[str]
+
+class GetSuccessCampaignGoalProgressOptimizationGoalVendorDataSubjectContestation(TypedDict):
+    pass
+
+GetSuccessCampaignGoalProgressOptimizationGoalVendorDomain: TypeAlias = str
+
+class GetSuccessCampaignGoalProgressPerAdSpendTarget(TypedDict):
+    kind: GetSuccessCampaignGoalProgressPerAdSpendTargetKind
+    value: GetSuccessCampaignGoalProgressPerAdSpendTargetValue
+
+GetSuccessCampaignGoalProgressPerAdSpendTargetKind: TypeAlias = Literal["per_ad_spend"]
+
+GetSuccessCampaignGoalProgressPerAdSpendTargetValue: TypeAlias = float
+
+class GetSuccessCampaignGoalProgressScope(TypedDict):
+    kind: Literal["campaign", "media_buy", "package"]
+    campaignId: str
+    mediaBuyId: str | None
+    packageId: str | None
+
+class GetSuccessCampaignGoalProgressSellerAttestedBasis(TypedDict):
+    kind: Literal["seller_attested"]
+
+class GetSuccessCampaignGoalProgressThresholdRateTarget(TypedDict):
+    kind: GetSuccessCampaignGoalProgressThresholdRateTargetKind
+    value: GetSuccessCampaignGoalProgressThresholdRateTargetValue
+
+GetSuccessCampaignGoalProgressTarget: TypeAlias = "GetSuccessCampaignGoalProgressCostPerTarget | GetSuccessCampaignGoalProgressThresholdRateTarget | GetSuccessCampaignGoalProgressPerAdSpendTarget | GetSuccessCampaignGoalProgressMaximizeValueTarget"
+
+GetSuccessCampaignGoalProgressThresholdRateTargetKind: TypeAlias = Literal["threshold_rate"]
+
+GetSuccessCampaignGoalProgressThresholdRateTargetValue: TypeAlias = float
+
+class GetSuccessCampaignGoalProgressVendorAttestedBasis(TypedDict):
+    kind: Literal["vendor_attested"]
+    vendor: GetSuccessCampaignGoalProgressVendorAttestedBasisVendor
+    metricId: GetSuccessCampaignGoalProgressVendorAttestedBasisMetricId
+    measurableImpressions: float
+    coverage: float | None
+
+GetSuccessCampaignGoalProgressBasis: TypeAlias = "GetSuccessCampaignGoalProgressSellerAttestedBasis | GetSuccessCampaignGoalProgressAdvertiserMeasuredBasis | GetSuccessCampaignGoalProgressVendorAttestedBasis"
+
+GetSuccessCampaignGoalProgressVendorAttestedBasisMetricId: TypeAlias = str
+
+class GetSuccessCampaignGoalProgressVendorAttestedBasisVendor(TypedDict):
+    domain: GetSuccessCampaignGoalProgressVendorAttestedBasisVendorDomain
+    brandId: NotRequired[GetSuccessCampaignGoalProgressVendorAttestedBasisVendorBrandId]
+
+GetSuccessCampaignGoalProgressVendorAttestedBasisVendorBrandId: TypeAlias = str
+
+GetSuccessCampaignGoalProgressVendorAttestedBasisVendorDomain: TypeAlias = str
+
+class GetSuccessCampaignGoalProgressVendorMetricOptimizationTargetCostPerVariant(TypedDict):
+    kind: Literal["cost_per"]
+    value: float
+
+class GetSuccessCampaignGoalProgressVendorMetricOptimizationTargetThresholdRateVariant(TypedDict):
+    kind: Literal["threshold_rate"]
+    value: float
+
+GetSuccessCampaignGoalProgressVendorMetricOptimizationTarget: TypeAlias = "GetSuccessCampaignGoalProgressVendorMetricOptimizationTargetCostPerVariant | GetSuccessCampaignGoalProgressVendorMetricOptimizationTargetThresholdRateVariant"
+
 class GetSuccessCampaignPulse(TypedDict):
     verdict: Literal["delivering", "partially_delivering", "not_delivering", "not_expected_yet", "cannot_verify"]
     reasonCodes: list[Literal["flight_not_started", "first_snapshot_not_due", "capability_not_declared", "reporting_unsupported", "source_error_after_snapshot", "snapshot_missing", "coverage_partial", "coverage_none", "snapshot_stale", "supported_metric_unavailable", "positive_delivery_observed", "complete_zero_delivery_observed"]]
@@ -5331,6 +5662,40 @@ class GetSuccessCatalogRefreshProblem(TypedDict):
     '\n    What stops the refresh.\n    '
     columns: NotRequired[list[str]]
     '\n    Missing column names; columns_missing only.\n    '
+
+class GetSuccessDeliveryGoalProgress(TypedDict):
+    constraint: GetSuccessDeliveryGoalProgressConstraintValue | None
+    expected: float | None
+    pacingIndex: float | None
+    deliveryProjection: GetSuccessDeliveryGoalProgressDeliveryProjection | None
+    projectionRange: GetSuccessDeliveryGoalProgressProjectionRange | None
+    sellerPacingIndex: float | None
+    sellerDeliveryProjection: GetSuccessDeliveryGoalProgressSellerDeliveryProjection | None
+
+class GetSuccessDeliveryGoalProgressConstraintValue(TypedDict):
+    kind: Literal["spend", "impressions"]
+    amount: float
+
+class GetSuccessDeliveryGoalProgressDeliveryProjection(TypedDict):
+    projected_impressions: NotRequired[float]
+    projected_spend: NotRequired[float]
+    projected_end_state: Literal["on_pace", "complete", "underdelivery", "early_exhaustion"]
+    basis: Literal["trailing_daily_avg", "trailing_hourly_avg", "platform_model", "seller_defined"]
+    as_of: str
+    ext: NotRequired[GetSuccessDeliveryGoalProgressDeliveryProjectionExt]
+
+class GetSuccessDeliveryGoalProgressProjectionRange(TypedDict):
+    lower: float
+    upper: float
+    halfWidth: float
+
+class GetSuccessDeliveryGoalProgressSellerDeliveryProjection(TypedDict):
+    projected_impressions: NotRequired[float]
+    projected_spend: NotRequired[float]
+    projected_end_state: Literal["on_pace", "complete", "underdelivery", "early_exhaustion"]
+    basis: Literal["trailing_daily_avg", "trailing_hourly_avg", "platform_model", "seller_defined"]
+    as_of: str
+    ext: NotRequired[GetSuccessDeliveryGoalProgressSellerDeliveryProjectionExt]
 
 class GetSuccessHistoryVersionsResultsItemChangeSummary(TypedDict):
     added: int
@@ -5804,6 +6169,36 @@ class InFlightReceipt(TypedDict):
     pendingReason: str
 
 JsonValue: TypeAlias = Union[str, int, float, bool, None, list['JsonValue'], dict[str, 'JsonValue']]
+
+GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorValue: TypeAlias = JsonValue
+
+GetSuccessCampaignGoalProgressCostPerTargetAdditionalValue: TypeAlias = JsonValue
+
+GetSuccessCampaignGoalProgressEventOptimizationTargetMaximizeValueVariantValue: TypeAlias = JsonValue
+
+GetSuccessCampaignGoalProgressEventOptimizationTargetPerAdSpendVariantAdditionalValue: TypeAlias = JsonValue
+
+GetSuccessCampaignGoalProgressMaximizeValueTargetValue: TypeAlias = JsonValue
+
+GetSuccessCampaignGoalProgressMetricOptimizationTargetCostPerVariantAdditionalValue: TypeAlias = JsonValue
+
+GetSuccessCampaignGoalProgressMetricOptimizationTargetThresholdRateVariantAdditionalValue: TypeAlias = JsonValue
+
+GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt: TypeAlias = dict[str, JsonValue]
+
+GetSuccessCampaignGoalProgressOptimizationGoalVendorBrandKitOverrideLogoProvenanceExt: TypeAlias = dict[str, JsonValue]
+
+GetSuccessCampaignGoalProgressOptimizationGoalVendorValue: TypeAlias = JsonValue
+
+GetSuccessCampaignGoalProgressPerAdSpendTargetAdditionalValue: TypeAlias = JsonValue
+
+GetSuccessCampaignGoalProgressThresholdRateTargetAdditionalValue: TypeAlias = JsonValue
+
+GetSuccessCampaignGoalProgressVendorAttestedBasisVendorValue: TypeAlias = JsonValue
+
+GetSuccessDeliveryGoalProgressDeliveryProjectionExt: TypeAlias = dict[str, JsonValue]
+
+GetSuccessDeliveryGoalProgressSellerDeliveryProjectionExt: TypeAlias = dict[str, JsonValue]
 
 class LogEventInput(TypedDict):
     advertiserId: str
@@ -18600,8 +18995,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchFilter]
@@ -18837,8 +19232,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict)
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter]
@@ -18870,8 +19265,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionFilter]
@@ -19305,8 +19700,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter]
@@ -19543,8 +19938,8 @@ class SearchInputKindAdServerTargeting(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindAdServerTargetingFilter]
@@ -19781,8 +20176,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSessionFilter]
@@ -20019,8 +20414,8 @@ class SearchInputKindBuyerRfp(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindBuyerRfpFilter
@@ -20257,8 +20652,8 @@ class SearchInputKindCreative(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindCreativeFilter]
@@ -20291,8 +20686,8 @@ class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeAssetAndCatalogFilter
@@ -20529,8 +20924,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter
@@ -20765,8 +21160,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeCollectionWithFilterCampaignIdFilter
@@ -21275,8 +21670,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter
@@ -21513,8 +21908,8 @@ class SearchInputKindEventSource(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindEventSourceFilter]
@@ -21551,8 +21946,8 @@ class SearchInputKindProposal(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindProposalFilter
@@ -21789,8 +22184,8 @@ class SearchInputKindSourceAccount(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindSourceAccountFilter]
@@ -22055,6 +22450,12 @@ class SearchResultObjectsWithGroupByAndGroupsAndTotalGroupsItem(TypedDict):
     value: str | None
     count: float
 
+class SearchSuccessCampaignGoalProgressSummary(TypedDict):
+    worstVerdict: str | None
+    deliveryEndState: str | None
+    dataThrough: str | None
+    nextCheckAt: str | None
+
 class SearchSuccessCampaignPulseSummary(TypedDict):
     verdict: Literal["delivering", "partially_delivering", "not_delivering", "not_expected_yet", "cannot_verify"]
     dataThrough: SearchSuccessCampaignPulseTimeRange | None
@@ -22101,6 +22502,7 @@ class SearchSuccessSearchAccountPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchAccountPageOutputResults: TypeAlias = "list[SearchSuccessSearchAccountPageOutputResultsItem]"
 
@@ -22151,6 +22553,7 @@ class SearchSuccessSearchAccountRelationshipPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchAccountRelationshipPageOutputResults: TypeAlias = "list[SearchSuccessSearchAccountRelationshipPageOutputResultsItem]"
 
@@ -22213,6 +22616,7 @@ class SearchSuccessSearchAdServerTargetingPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchAdServerTargetingPageOutputResults: TypeAlias = "list[SearchSuccessSearchAdServerTargetingPageOutputResultsItem]"
 
@@ -22269,6 +22673,7 @@ class SearchSuccessSearchAdvertiserGrantPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchAdvertiserGrantPageOutputResults: TypeAlias = "list[SearchSuccessSearchAdvertiserGrantPageOutputResultsItem]"
 
@@ -22325,6 +22730,7 @@ class SearchSuccessSearchAdvertiserPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchAdvertiserPageOutputResults: TypeAlias = "list[SearchSuccessSearchAdvertiserPageOutputResultsItem]"
 
@@ -22381,6 +22787,7 @@ class SearchSuccessSearchAgentPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchAgentPageOutputResults: TypeAlias = "list[SearchSuccessSearchAgentPageOutputResultsItem]"
 
@@ -22437,6 +22844,7 @@ class SearchSuccessSearchAskPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchAskPageOutputResults: TypeAlias = "list[SearchSuccessSearchAskPageOutputResultsItem]"
 
@@ -22493,6 +22901,7 @@ class SearchSuccessSearchBusinessRulesVersionPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchBusinessRulesVersionPageOutputResults: TypeAlias = "list[SearchSuccessSearchBusinessRulesVersionPageOutputResultsItem]"
 
@@ -22549,6 +22958,7 @@ class SearchSuccessSearchBuyerAgentPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchBuyerAgentPageOutputResults: TypeAlias = "list[SearchSuccessSearchBuyerAgentPageOutputResultsItem]"
 
@@ -22605,6 +23015,7 @@ class SearchSuccessSearchBuyerRfpPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchBuyerRfpPageOutputResults: TypeAlias = "list[SearchSuccessSearchBuyerRfpPageOutputResultsItem]"
 
@@ -22661,6 +23072,7 @@ class SearchSuccessSearchCampaignPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchCampaignPageOutputResults: TypeAlias = "list[SearchSuccessSearchCampaignPageOutputResultsItem]"
 
@@ -22717,6 +23129,7 @@ class SearchSuccessSearchCatalogPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchCatalogPageOutputResults: TypeAlias = "list[SearchSuccessSearchCatalogPageOutputResultsItem]"
 
@@ -22773,6 +23186,7 @@ class SearchSuccessSearchConnectionPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchConnectionPageOutputResults: TypeAlias = "list[SearchSuccessSearchConnectionPageOutputResultsItem]"
 
@@ -22829,6 +23243,7 @@ class SearchSuccessSearchConversationPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchConversationPageOutputResults: TypeAlias = "list[SearchSuccessSearchConversationPageOutputResultsItem]"
 
@@ -22885,6 +23300,7 @@ class SearchSuccessSearchCoveragePageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchCoveragePageOutputResults: TypeAlias = "list[SearchSuccessSearchCoveragePageOutputResultsItem]"
 
@@ -22941,6 +23357,7 @@ class SearchSuccessSearchCreativeAssetPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchCreativeAssetPageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeAssetPageOutputResultsItem]"
 
@@ -22997,6 +23414,7 @@ class SearchSuccessSearchCreativeCollectionPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchCreativeCollectionPageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeCollectionPageOutputResultsItem]"
 
@@ -23053,6 +23471,7 @@ class SearchSuccessSearchCreativeEnginePageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchCreativeEnginePageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeEnginePageOutputResultsItem]"
 
@@ -23109,6 +23528,7 @@ class SearchSuccessSearchCreativeFormatPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchCreativeFormatPageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeFormatPageOutputResultsItem]"
 
@@ -23165,6 +23585,7 @@ class SearchSuccessSearchCreativePageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchCreativePageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativePageOutputResultsItem]"
 
@@ -23215,6 +23636,7 @@ class SearchSuccessSearchCreativeSessionPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchCreativeSessionPageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeSessionPageOutputResultsItem]"
 
@@ -23277,6 +23699,7 @@ class SearchSuccessSearchDimensionPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchDimensionPageOutputResults: TypeAlias = "list[SearchSuccessSearchDimensionPageOutputResultsItem]"
 
@@ -23333,6 +23756,7 @@ class SearchSuccessSearchEventSourcePageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchEventSourcePageOutputResults: TypeAlias = "list[SearchSuccessSearchEventSourcePageOutputResultsItem]"
 
@@ -23389,6 +23813,7 @@ class SearchSuccessSearchHouseDiscountPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchHouseDiscountPageOutputResults: TypeAlias = "list[SearchSuccessSearchHouseDiscountPageOutputResultsItem]"
 
@@ -23445,6 +23870,7 @@ class SearchSuccessSearchInventorySourcePageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchInventorySourcePageOutputResults: TypeAlias = "list[SearchSuccessSearchInventorySourcePageOutputResultsItem]"
 
@@ -23501,6 +23927,7 @@ class SearchSuccessSearchLibraryRequestPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchLibraryRequestPageOutputResults: TypeAlias = "list[SearchSuccessSearchLibraryRequestPageOutputResultsItem]"
 
@@ -23557,6 +23984,7 @@ class SearchSuccessSearchMaterialPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchMaterialPageOutputResults: TypeAlias = "list[SearchSuccessSearchMaterialPageOutputResultsItem]"
 
@@ -23613,6 +24041,7 @@ class SearchSuccessSearchMediaBuyPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchMediaBuyPageOutputResults: TypeAlias = "list[SearchSuccessSearchMediaBuyPageOutputResultsItem]"
 
@@ -23669,6 +24098,7 @@ class SearchSuccessSearchMemberPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchMemberPageOutputResults: TypeAlias = "list[SearchSuccessSearchMemberPageOutputResultsItem]"
 
@@ -23725,6 +24155,7 @@ class SearchSuccessSearchPlaybookVersionPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchPlaybookVersionPageOutputResults: TypeAlias = "list[SearchSuccessSearchPlaybookVersionPageOutputResultsItem]"
 
@@ -23781,6 +24212,7 @@ class SearchSuccessSearchPropertyListPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchPropertyListPageOutputResults: TypeAlias = "list[SearchSuccessSearchPropertyListPageOutputResultsItem]"
 
@@ -23837,6 +24269,7 @@ class SearchSuccessSearchProposalPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchProposalPageOutputResults: TypeAlias = "list[SearchSuccessSearchProposalPageOutputResultsItem]"
 
@@ -23893,6 +24326,7 @@ class SearchSuccessSearchRfpPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchRfpPageOutputResults: TypeAlias = "list[SearchSuccessSearchRfpPageOutputResultsItem]"
 
@@ -23943,6 +24377,7 @@ class SearchSuccessSearchRfpTurnPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchRfpTurnPageOutputResults: TypeAlias = "list[SearchSuccessSearchRfpTurnPageOutputResultsItem]"
 
@@ -24005,6 +24440,7 @@ class SearchSuccessSearchSellerPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchSellerPageOutputResults: TypeAlias = "list[SearchSuccessSearchSellerPageOutputResultsItem]"
 
@@ -24061,6 +24497,7 @@ class SearchSuccessSearchSessionPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchSessionPageOutputResults: TypeAlias = "list[SearchSuccessSearchSessionPageOutputResultsItem]"
 
@@ -24117,6 +24554,7 @@ class SearchSuccessSearchSignalPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchSignalPageOutputResults: TypeAlias = "list[SearchSuccessSearchSignalPageOutputResultsItem]"
 
@@ -24173,6 +24611,7 @@ class SearchSuccessSearchSkillPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchSkillPageOutputResults: TypeAlias = "list[SearchSuccessSearchSkillPageOutputResultsItem]"
 
@@ -24229,6 +24668,7 @@ class SearchSuccessSearchSourceAccountPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchSourceAccountPageOutputResults: TypeAlias = "list[SearchSuccessSearchSourceAccountPageOutputResultsItem]"
 
@@ -24285,6 +24725,7 @@ class SearchSuccessSearchWholesaleProductPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchWholesaleProductPageOutputResults: TypeAlias = "list[SearchSuccessSearchWholesaleProductPageOutputResultsItem]"
 
@@ -24341,6 +24782,7 @@ class SearchSuccessSearchWorkItemPageOutputResultsItem(TypedDict):
     '\n    The active transform, if any.\n    '
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 SearchSuccessSearchWorkItemPageOutputResults: TypeAlias = "list[SearchSuccessSearchWorkItemPageOutputResultsItem]"
 
@@ -24412,6 +24854,7 @@ class SearchSuccessV3CampaignListItem(TypedDict):
     attentionNote: NotRequired[str]
     nextAction: NotRequired[SearchSuccessV3CampaignListItemNextAction]
     pulse: NotRequired[SearchSuccessCampaignPulseSummary]
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
 
 class SearchSuccessV3CampaignListItemAdvertiser(TypedDict):
     advertiserId: str | None
