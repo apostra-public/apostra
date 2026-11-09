@@ -14426,6 +14426,10 @@ export type SaveAdvertiserData = {
          */
         labels?: Array<SaveAdvertiserRequestLabelWriteEntry>;
         /**
+         * Sync the library to connected sellers that take creatives without a buy; false withdraws.
+         */
+        sendCreativesToConnectedSellers?: boolean;
+        /**
          * Advertiser-stated brand kit, voice rules, banned terms, disclaimers and pages. Save brandProfile in its own save_advertiser call with advertiserId. Available only in the V3 beta with Creative Engines access. `stated: null` clears stated values; `stated.statedAbsence` records that the advertiser confirmed it has no kit, voice or disclaimers.
          */
         brandProfile?: {
@@ -15459,6 +15463,7 @@ export type SaveAdvertiserSuccessAdvertiser = {
         brandLinkId: string;
     };
     tracking?: unknown;
+    sendCreativesToConnectedSellers?: boolean;
     [key: string]: unknown;
 };
 
@@ -34537,9 +34542,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
+            /**
+             * For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.
+             */
+            dataProvider?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -35005,9 +35014,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
+            /**
+             * For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.
+             */
+            dataProvider?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -35541,9 +35554,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
+            /**
+             * For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.
+             */
+            dataProvider?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -36005,9 +36022,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
+            /**
+             * For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.
+             */
+            dataProvider?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -36466,9 +36487,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
+            /**
+             * For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.
+             */
+            dataProvider?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -36930,9 +36955,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
+            /**
+             * For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.
+             */
+            dataProvider?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -37394,9 +37423,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
+            /**
+             * For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.
+             */
+            dataProvider?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -37988,9 +38021,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
+            /**
+             * For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.
+             */
+            dataProvider?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -38456,9 +38493,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
+            /**
+             * For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.
+             */
+            dataProvider?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -38924,9 +38965,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
+            /**
+             * For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.
+             */
+            dataProvider?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -39391,9 +39436,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
+            /**
+             * For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.
+             */
+            dataProvider?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -39859,9 +39908,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
+            /**
+             * For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.
+             */
+            dataProvider?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -40327,9 +40380,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
+            /**
+             * For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.
+             */
+            dataProvider?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
@@ -40795,9 +40852,13 @@ export type SearchData = {
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
             /**
-             * For kinds proposal and creative_format: only this seller, by its Account id, not a seller object id, which is a different number.
+             * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
             sellerAccountId?: number;
+            /**
+             * For buyer kind signal: exact provider names copied from a result, not a text search; partial names go in query.
+             */
+            dataProvider?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: how the RFP arrived, such as quick, uploaded, inbound, manual, or imported.
              */
