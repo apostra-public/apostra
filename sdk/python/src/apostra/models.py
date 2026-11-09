@@ -16798,6 +16798,8 @@ class SavePlaybookInputPricingFactsItem(TypedDict):
     '\n    Natural-language applicability condition.\n    '
     hints: NotRequired[SavePlaybookInputPricingFactsItemHints]
     '\n    Preserve constraints returned by get(playbook) when replacing all facts.\n    '
+    scope: NotRequired[Literal["all_inventory"]]
+    '\n    all_inventory: applies to every product, in pricing.currency. Needs a currency and no hints.\n    '
     pricing: SavePlaybookInputPricingFactsItemPricing
     '\n    The price this fact anchors.\n    '
     strength: NotRequired[Literal["hard_floor", "default", "guidance"]]
