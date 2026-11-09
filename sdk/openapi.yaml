@@ -1944,6 +1944,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -2865,6 +2866,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
                         required:
                           - include
                       then:
@@ -3177,6 +3191,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -4097,6 +4112,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
                         required:
                           - include
                       then:
@@ -4386,6 +4414,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -5306,6 +5335,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
                         required:
                           - include
                       then:
@@ -5583,6 +5625,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -6504,6 +6547,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
                         required:
                           - include
                       then:
@@ -6781,6 +6837,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -7702,6 +7759,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
                         required:
                           - include
                       then:
@@ -7986,6 +8056,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -8908,6 +8979,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
                         required:
                           - include
                       then:
@@ -10045,6 +10129,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -10314,6 +10411,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -11245,6 +11343,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -11514,6 +11625,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -12436,6 +12548,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
                         required:
                           - include
                       then:
@@ -13578,6 +13703,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -14711,6 +14849,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -14978,6 +15129,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -15909,6 +16061,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -16176,6 +16341,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -17107,6 +17273,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -17380,6 +17559,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -18301,6 +18481,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
                         required:
                           - include
                       then:
@@ -18583,6 +18776,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -19504,6 +19698,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
                         required:
                           - include
                       then:
@@ -19786,6 +19993,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -20707,6 +20915,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
                         required:
                           - include
                       then:
@@ -20989,6 +21210,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -21919,6 +22141,19 @@ paths:
                         required:
                           - kind
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
                         anyOf:
                           - properties:
                               include:
@@ -22192,6 +22427,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - prebid
                           - commitmentRecord
                           - scores
                           - discoveryCard
@@ -23114,6 +23350,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
                         required:
                           - include
                       then:
@@ -24247,6 +24496,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: prebid
                         required:
                           - include
                       then:
