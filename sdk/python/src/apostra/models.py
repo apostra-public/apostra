@@ -13585,6 +13585,8 @@ class SaveMaterialInput(TypedDict):
     '\n    Material action field.\n    '
     confirmationId: NotRequired[str]
     '\n    Exact server-issued permanent-deletion preview confirmation. Required only for delete_permanently.\n    '
+    insightDispositions: NotRequired[list[SaveMaterialInputInsightDispositionsItem]]
+    '\n    Optional per-insight choice from preview_permanent_delete. Omitted insights use that preview’s default.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -13615,6 +13617,12 @@ SaveMaterialInputActionReprocess: TypeAlias = SaveMaterialInput
 SaveMaterialInputActionRestore: TypeAlias = SaveMaterialInput
 
 SaveMaterialInputActionUpdateMetadata: TypeAlias = SaveMaterialInput
+
+class SaveMaterialInputInsightDispositionsItem(TypedDict):
+    applicationId: str
+    '\n    Applied insight id returned by preview_permanent_delete.\n    '
+    disposition: Literal["remove", "keep"]
+    '\n    remove deletes unchanged document content; keep retains human-edited content and marks its source deleted.\n    '
 
 class SaveMaterialInputMetadataKindBuyerScopedRateCard(TypedDict):
     displayName: NotRequired[SaveMaterialRequestMetadataDisplayName]

@@ -2199,6 +2199,7 @@
       "SaveMaterialInputActionUpdateMetadataMetadataKindBuyerScopedRateCardBuyerScopeKindBrand": "other",
       "SaveMaterialInputActionUpdateMetadataMetadataKindBuyerScopedRateCardBuyerScopeKindOperator": "other",
       "SaveMaterialInputActionUpdateMetadataMetadataKindUnscoped": "other",
+      "SaveMaterialInputInsightDispositionsItem": "object",
       "SaveMaterialInputMetadataKindBuyerScopedRateCard": "object",
       "SaveMaterialInputMetadataKindBuyerScopedRateCardBuyerScopeKindBrand": "object",
       "SaveMaterialInputMetadataKindBuyerScopedRateCardBuyerScopeKindOperator": "object",
