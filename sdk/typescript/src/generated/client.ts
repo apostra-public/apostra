@@ -767,14 +767,14 @@ export class Apostra extends Transport {
   /** Accept Terms, set the payment terms sellers are asked for, accept a plan, answer its offer, change its renewal or change the payer details on invoices. Accepting a plan, choosing payment terms or changing the renewal needs an administrator to approve on our site. Cards stay off MCP. Returns the data together with response headers and request ID. */
   saveBillingWithResponse(input: SaveBillingInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBillingResult>> { return this.requestDetailed("save_billing", input, options) }
   /**
-   * Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto needs acknowledgeNoHumanReview.
+   * Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto, or empty creativePolicy under creative auto, needs acknowledgeNoHumanReview.
    *
    * @example
    * await client.saveBusinessRules(input, { idempotencyKey: 'stable-key' })
    */
   saveBusinessRules(input: SaveBusinessRulesInput, options: WriteRequestOptions): Promise<SaveBusinessRulesResult> { return this.request("save_business_rules", input, options) }
 
-  /** Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto needs acknowledgeNoHumanReview. Returns the data together with response headers and request ID. */
+  /** Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto, or empty creativePolicy under creative auto, needs acknowledgeNoHumanReview. Returns the data together with response headers and request ID. */
   saveBusinessRulesWithResponse(input: SaveBusinessRulesInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBusinessRulesResult>> { return this.requestDetailed("save_business_rules", input, options) }
   /**
    * Create a buyer agent, or with id make one change: name, advertiser access, lifecycle state, or credential handoff.

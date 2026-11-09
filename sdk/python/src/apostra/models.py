@@ -9404,7 +9404,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, or to save no Creative Policy under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: list[Literal["brief_acceptance", "creative_policy"]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -9426,7 +9426,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, or to save no Creative Policy under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -9448,7 +9448,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     guaranteedOverForecast: Literal["overbook", "hold_for_review"]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, or to save no Creative Policy under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -9468,7 +9468,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, or to save no Creative Policy under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -9490,7 +9490,7 @@ class SaveBusinessRulesInputWithPolicy(TypedDict):
     guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, or to save no Creative Policy under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
