@@ -54713,6 +54713,13 @@ paths:
                                     - height
                                   additionalProperties: false
                             additionalProperties: false
+                          scope:
+                            description: >-
+                              all_inventory: applies to every product, in pricing.currency. Needs a currency and no
+                              hints.
+                            type: string
+                            enum:
+                              - all_inventory
                           pricing:
                             type: object
                             properties:

@@ -30277,6 +30277,10 @@ export type SavePlaybookData = {
                     }>;
                 };
                 /**
+                 * all_inventory: applies to every product, in pricing.currency. Needs a currency and no hints.
+                 */
+                scope?: 'all_inventory';
+                /**
                  * The price this fact anchors.
                  */
                 pricing: {
