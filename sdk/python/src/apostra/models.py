@@ -17915,8 +17915,8 @@ class SaveSellerInput(TypedDict):
     '\n    Admin-only Distribution configuration. Send separately from other Seller changes.\n    '
     admission: NotRequired[SaveSellerInputAdmissionDecisionAdmit | SaveSellerInputAdmissionDecisionDecline | SaveSellerInputAdmissionDecisionReopen]
     '\n    Seller-only pending buyer relationship decision; read its intake version immediately before saving.\n    '
-    sourceDecision: NotRequired[SaveSellerInputSourceDecisionDecisionBound | SaveSellerInputSourceDecisionDecisionNotRequired]
-    '\n    Which account serves an admitted buyer on one source (see get(account_relationship) sources). Send alone.\n    '
+    sourceDecision: NotRequired[SaveSellerInputSourceDecisionDecisionBound | SaveSellerInputSourceDecisionDecisionNotRequired | SaveSellerInputSourceDecisionDecisionRequestAgain]
+    '\n    Which account serves an admitted buyer on one source, or send a refused source\'s account request again (see get(account_relationship) sources). Send alone.\n    '
     demo: NotRequired[SaveSellerInputDemo]
     '\n    Demo expiry and sample sources, as desired state. Send alone. Create, reset and delete are on the demo Page.\n    '
     informationRequest: NotRequired[SaveSellerInputInformationRequestActionRequest | SaveSellerInputInformationRequestActionConfirm | SaveSellerInputInformationRequestActionWithdraw]
@@ -18087,6 +18087,13 @@ class SaveSellerInputSourceDecisionDecisionNotRequired(TypedDict):
     expectedVersion: SaveSellerRequestSourceDecisionExpectedVersion
     decision: Literal["not_required"]
     '\n    No account needed.\n    '
+
+class SaveSellerInputSourceDecisionDecisionRequestAgain(TypedDict):
+    relationshipId: SaveSellerRequestSourceDecisionRelationshipId
+    inventorySourceKey: SaveSellerRequestSourceDecisionInventorySourceKey
+    expectedVersion: SaveSellerRequestSourceDecisionExpectedVersion
+    decision: Literal["request_again"]
+    '\n    Send the refused request again.\n    '
 
 SaveSellerRequestChannelsItem: TypeAlias = Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
 
@@ -18283,6 +18290,14 @@ class SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded(TypedDict):
     sourceExternalAccountId: str | None
     version: int | None
 
+class SaveSellerSuccessSaveSellerSuccessSourceRequestQueued(TypedDict):
+    outcome: Literal["source_request_queued"]
+    action: Literal["source_request_queued"]
+    relationshipId: str
+    inventorySourceKey: str
+    decision: Literal["request_again"]
+    state: Literal["queued"]
+
 class SaveSellerSuccessSaveSellerSuccessUnchanged(TypedDict):
     outcome: Literal["unchanged"]
     action: Literal["unchanged"]
@@ -18311,7 +18326,7 @@ class SaveSellerSuccessSellerSaveReplayed(TypedDict):
     destinationSaveReplayed: Literal[False]
     materialReceipt: SaveSellerSuccessSellerSaveReplayedMaterialReceipt
 
-SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
+SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessSourceRequestQueued | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
 
 SaveSellerSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
