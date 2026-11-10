@@ -13989,7 +13989,7 @@ export type RequestProposalsSuccessCapabilityPageSellerAccountId = number;
 export type RequestProposalsSuccessDroppedOptimizationGoalCode = 'goal_kind_not_declared' | 'metric_not_declared' | 'target_kind_not_declared' | 'reach_unit_not_declared' | 'view_duration_not_declared' | 'viewability_standard_not_declared' | 'vendor_metric_not_declared' | 'over_max_optimization_goals';
 
 /**
- * Forecast rate vs rate needed: likely if low meets it, possible if high does
+ * Matching-standard viewable_rate threshold or completed_views target.
  */
 export type RequestProposalsSuccessExpectedGoalPerformance = {
     basis: 'viewable_rate' | 'viewable_per_impression' | 'completion_rate';
