@@ -10821,6 +10821,8 @@ class SaveCampaignResultActionActivated(TypedDict):
     campaign: SaveCampaignSuccessCampaign
     partialWrite: NotRequired[SaveCampaignSuccessPartialWrite]
     priorSteps: NotRequired[SaveCampaignSuccessPriorSteps]
+    takenOver: NotRequired[SaveCampaignSuccessTakenOver]
+    '\n    Set when this write took over a synced campaign: now managed through Apostra, same ids.\n    '
     membership: NotRequired[SaveCampaignSuccessMembership]
     execution: NotRequired[SaveCampaignSuccessExecution]
     warnings: NotRequired[SaveCampaignSuccessWarnings]
@@ -10844,6 +10846,8 @@ class SaveCampaignResultActionCanceled(TypedDict):
     campaign: SaveCampaignSuccessCampaign
     partialWrite: NotRequired[SaveCampaignSuccessPartialWrite]
     priorSteps: NotRequired[SaveCampaignSuccessPriorSteps]
+    takenOver: NotRequired[SaveCampaignSuccessTakenOver]
+    '\n    Set when this write took over a synced campaign: now managed through Apostra, same ids.\n    '
     membership: NotRequired[SaveCampaignSuccessMembership]
     execution: NotRequired[SaveCampaignSuccessExecution]
     warnings: NotRequired[SaveCampaignSuccessWarnings]
@@ -10862,6 +10866,8 @@ class SaveCampaignResultActionCancellationRequested(TypedDict):
     campaign: SaveCampaignSuccessCampaign
     partialWrite: NotRequired[SaveCampaignSuccessPartialWrite]
     priorSteps: NotRequired[SaveCampaignSuccessPriorSteps]
+    takenOver: NotRequired[SaveCampaignSuccessTakenOver]
+    '\n    Set when this write took over a synced campaign: now managed through Apostra, same ids.\n    '
     membership: NotRequired[SaveCampaignSuccessMembership]
     execution: NotRequired[SaveCampaignSuccessExecution]
     warnings: NotRequired[SaveCampaignSuccessWarnings]
@@ -10880,6 +10886,8 @@ class SaveCampaignResultActionCreated(TypedDict):
     campaign: SaveCampaignSuccessCampaign
     partialWrite: NotRequired[SaveCampaignSuccessPartialWrite]
     priorSteps: NotRequired[SaveCampaignSuccessPriorSteps]
+    takenOver: NotRequired[SaveCampaignSuccessTakenOver]
+    '\n    Set when this write took over a synced campaign: now managed through Apostra, same ids.\n    '
     membership: NotRequired[SaveCampaignSuccessMembership]
     execution: NotRequired[SaveCampaignSuccessExecution]
     warnings: NotRequired[SaveCampaignSuccessWarnings]
@@ -10956,6 +10964,8 @@ class SaveCampaignResultActionRestored(TypedDict):
     campaign: SaveCampaignSuccessCampaign
     partialWrite: NotRequired[SaveCampaignSuccessPartialWrite]
     priorSteps: NotRequired[SaveCampaignSuccessPriorSteps]
+    takenOver: NotRequired[SaveCampaignSuccessTakenOver]
+    '\n    Set when this write took over a synced campaign: now managed through Apostra, same ids.\n    '
     membership: NotRequired[SaveCampaignSuccessMembership]
     execution: NotRequired[SaveCampaignSuccessExecution]
     warnings: NotRequired[SaveCampaignSuccessWarnings]
@@ -10981,6 +10991,8 @@ class SaveCampaignResultActionUpdated(TypedDict):
     campaign: SaveCampaignSuccessCampaign
     partialWrite: NotRequired[SaveCampaignSuccessPartialWrite]
     priorSteps: NotRequired[SaveCampaignSuccessPriorSteps]
+    takenOver: NotRequired[SaveCampaignSuccessTakenOver]
+    '\n    Set when this write took over a synced campaign: now managed through Apostra, same ids.\n    '
     membership: NotRequired[SaveCampaignSuccessMembership]
     execution: NotRequired[SaveCampaignSuccessExecution]
     warnings: NotRequired[SaveCampaignSuccessWarnings]
@@ -11240,6 +11252,8 @@ class SaveCampaignSuccessPropertyListPushPending(TypedDict):
 SaveCampaignSuccessServerTime: TypeAlias = str
 
 SaveCampaignSuccessSkippedSellerAccountIds: TypeAlias = list[int]
+
+SaveCampaignSuccessTakenOver: TypeAlias = Literal[True]
 
 SaveCampaignSuccessValue: TypeAlias = JsonValue
 
@@ -16422,6 +16436,8 @@ SaveMediaBuyRequestProductsItemTargetingOverlaySignalTargetingGroupsGroupsItemSi
 class SaveMediaBuyResult(TypedDict):
     serverTime: NotRequired[str]
     replayed: NotRequired[Literal[True]]
+    takenOver: NotRequired[Literal[True]]
+    '\n    Set when this write took over a synced campaign: now managed through Apostra, same ids.\n    '
     action: Literal["staged", "updated", "pending_approval", "paused", "resumed", "pause_requested", "resume_requested", "unchanged", "archived", "cancellation_requested", "canceled"]
     campaignId: NotRequired[str]
     mediaBuyId: NotRequired[str]

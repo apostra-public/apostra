@@ -19544,6 +19544,10 @@ export type SaveCampaignResponses = {
             campaign: SaveCampaignSuccessCampaign;
             partialWrite?: SaveCampaignSuccessPartialWrite;
             priorSteps?: SaveCampaignSuccessPriorSteps;
+            /**
+             * Set when this write took over a synced campaign: now managed through Apostra, same ids.
+             */
+            takenOver?: SaveCampaignSuccessTakenOver;
             membership?: SaveCampaignSuccessMembership;
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
@@ -19558,12 +19562,16 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'created';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'created' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessTakenOver | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'created' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
             partialWrite?: SaveCampaignSuccessPartialWrite;
             priorSteps?: SaveCampaignSuccessPriorSteps;
+            /**
+             * Set when this write took over a synced campaign: now managed through Apostra, same ids.
+             */
+            takenOver?: SaveCampaignSuccessTakenOver;
             membership?: SaveCampaignSuccessMembership;
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
@@ -19578,12 +19586,16 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'updated';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'updated' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessTakenOver | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'updated' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
             partialWrite?: SaveCampaignSuccessPartialWrite;
             priorSteps?: SaveCampaignSuccessPriorSteps;
+            /**
+             * Set when this write took over a synced campaign: now managed through Apostra, same ids.
+             */
+            takenOver?: SaveCampaignSuccessTakenOver;
             membership?: SaveCampaignSuccessMembership;
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
@@ -19598,12 +19610,16 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'activated';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'activated' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessTakenOver | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'activated' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
             partialWrite?: SaveCampaignSuccessPartialWrite;
             priorSteps?: SaveCampaignSuccessPriorSteps;
+            /**
+             * Set when this write took over a synced campaign: now managed through Apostra, same ids.
+             */
+            takenOver?: SaveCampaignSuccessTakenOver;
             membership?: SaveCampaignSuccessMembership;
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
@@ -19618,12 +19634,16 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'restored';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'restored' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessTakenOver | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'restored' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
             partialWrite?: SaveCampaignSuccessPartialWrite;
             priorSteps?: SaveCampaignSuccessPriorSteps;
+            /**
+             * Set when this write took over a synced campaign: now managed through Apostra, same ids.
+             */
+            takenOver?: SaveCampaignSuccessTakenOver;
             membership?: SaveCampaignSuccessMembership;
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
@@ -19638,12 +19658,16 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'canceled';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'canceled' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessTakenOver | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'canceled' | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
             partialWrite?: SaveCampaignSuccessPartialWrite;
             priorSteps?: SaveCampaignSuccessPriorSteps;
+            /**
+             * Set when this write took over a synced campaign: now managed through Apostra, same ids.
+             */
+            takenOver?: SaveCampaignSuccessTakenOver;
             membership?: SaveCampaignSuccessMembership;
             execution?: SaveCampaignSuccessExecution;
             warnings?: SaveCampaignSuccessWarnings;
@@ -19658,7 +19682,7 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'cancellation_requested';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'cancellation_requested' | undefined;
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessTakenOver | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'cancellation_requested' | undefined;
         } | {
             serverTime?: string;
             action: 'pending_approval';
@@ -20016,6 +20040,8 @@ export type SaveCampaignSuccessSkippedSellerAccountIds = Array<number>;
 
 /** @deprecated use SaveCampaignSuccessSkippedSellerAccountIds */
 export type SaveCampaignSuccessSkippedSellerIds = SaveCampaignSuccessSkippedSellerAccountIds;
+
+export type SaveCampaignSuccessTakenOver = true;
 
 export type SaveCampaignSuccessValue = unknown;
 
@@ -29473,6 +29499,10 @@ export type SaveMediaBuyResponses = {
         data: {
             serverTime?: string;
             replayed?: true;
+            /**
+             * Set when this write took over a synced campaign: now managed through Apostra, same ids.
+             */
+            takenOver?: true;
             action: 'staged' | 'updated' | 'pending_approval' | 'paused' | 'resumed' | 'pause_requested' | 'resume_requested' | 'unchanged' | 'archived' | 'cancellation_requested' | 'canceled';
             campaignId?: string;
             mediaBuyId?: string;

@@ -42013,6 +42013,9 @@ paths:
                             $ref: '#/components/schemas/save_campaign_success_PartialWrite'
                           priorSteps:
                             $ref: '#/components/schemas/save_campaign_success_PriorSteps'
+                          takenOver:
+                            description: 'Set when this write took over a synced campaign: now managed through Apostra, same ids.'
+                            $ref: '#/components/schemas/save_campaign_success_TakenOver'
                           membership:
                             $ref: '#/components/schemas/save_campaign_success_Membership'
                           execution:
@@ -42052,6 +42055,9 @@ paths:
                             $ref: '#/components/schemas/save_campaign_success_PartialWrite'
                           priorSteps:
                             $ref: '#/components/schemas/save_campaign_success_PriorSteps'
+                          takenOver:
+                            description: 'Set when this write took over a synced campaign: now managed through Apostra, same ids.'
+                            $ref: '#/components/schemas/save_campaign_success_TakenOver'
                           membership:
                             $ref: '#/components/schemas/save_campaign_success_Membership'
                           execution:
@@ -42091,6 +42097,9 @@ paths:
                             $ref: '#/components/schemas/save_campaign_success_PartialWrite'
                           priorSteps:
                             $ref: '#/components/schemas/save_campaign_success_PriorSteps'
+                          takenOver:
+                            description: 'Set when this write took over a synced campaign: now managed through Apostra, same ids.'
+                            $ref: '#/components/schemas/save_campaign_success_TakenOver'
                           membership:
                             $ref: '#/components/schemas/save_campaign_success_Membership'
                           execution:
@@ -42130,6 +42139,9 @@ paths:
                             $ref: '#/components/schemas/save_campaign_success_PartialWrite'
                           priorSteps:
                             $ref: '#/components/schemas/save_campaign_success_PriorSteps'
+                          takenOver:
+                            description: 'Set when this write took over a synced campaign: now managed through Apostra, same ids.'
+                            $ref: '#/components/schemas/save_campaign_success_TakenOver'
                           membership:
                             $ref: '#/components/schemas/save_campaign_success_Membership'
                           execution:
@@ -42169,6 +42181,9 @@ paths:
                             $ref: '#/components/schemas/save_campaign_success_PartialWrite'
                           priorSteps:
                             $ref: '#/components/schemas/save_campaign_success_PriorSteps'
+                          takenOver:
+                            description: 'Set when this write took over a synced campaign: now managed through Apostra, same ids.'
+                            $ref: '#/components/schemas/save_campaign_success_TakenOver'
                           membership:
                             $ref: '#/components/schemas/save_campaign_success_Membership'
                           execution:
@@ -42208,6 +42223,9 @@ paths:
                             $ref: '#/components/schemas/save_campaign_success_PartialWrite'
                           priorSteps:
                             $ref: '#/components/schemas/save_campaign_success_PriorSteps'
+                          takenOver:
+                            description: 'Set when this write took over a synced campaign: now managed through Apostra, same ids.'
+                            $ref: '#/components/schemas/save_campaign_success_TakenOver'
                           membership:
                             $ref: '#/components/schemas/save_campaign_success_Membership'
                           execution:
@@ -53281,6 +53299,10 @@ paths:
                         pattern: >-
                           ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
                       replayed:
+                        type: boolean
+                        const: true
+                      takenOver:
+                        description: 'Set when this write took over a synced campaign: now managed through Apostra, same ids.'
                         type: boolean
                         const: true
                       action:
@@ -96192,6 +96214,9 @@ components:
       type: array
       items:
         type: string
+    save_campaign_success_TakenOver:
+      type: boolean
+      const: true
     save_campaign_success_Membership:
       type: object
       properties:
