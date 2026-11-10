@@ -89726,10 +89726,8 @@ components:
       type: object
       properties:
         creative_id:
-          anyOf:
-            - type: string
-            - type: 'null'
-          description: Apostra creative id; null when Apostra did not make the ad.
+          type: string
+          description: Apostra creative id, or an id Apostra assigns to a creative made in Meta; see creative_in_library.
         impressions:
           type: number
           minimum: 0
@@ -89884,6 +89882,9 @@ components:
               - event_type
               - count
             additionalProperties: {}
+        creative_in_library:
+          type: boolean
+          description: false when Apostra assigned creative_id; get does not read those.
         platform_ad_id:
           type: string
         platform_ad_name:
@@ -89908,6 +89909,7 @@ components:
             $ref: '#/components/schemas/get_delivery_success_AdDailyDelivery'
       required:
         - creative_id
+        - creative_in_library
         - platform_ad_id
         - platform_ad_name
         - platform_creative_id
