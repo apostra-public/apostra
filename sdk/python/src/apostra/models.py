@@ -10988,10 +10988,17 @@ class SaveCampaignResultActionPendingConfirmationLaunchMediaBuysItem(TypedDict):
     willStart: NotRequired[bool]
     budget: NotRequired[SaveCampaignSuccessLaunchMediaBuysItemBudget]
     sellerName: NotRequired[str]
+    clickMacroLosses: NotRequired[list[SaveCampaignSuccessCampaignLaunchClickMacroLoss]]
+    '\n    Click-URL macros that will not reach you filled. Launching is not blocked.\n    '
+    clickMacroLossesTotal: NotRequired[int]
+    clickMacroLossesTruncated: NotRequired[Literal[True]]
+    clickMacroCheckUnavailableReason: NotRequired[Literal["seller_support_unknown", "check_failed"]]
+    '\n    seller_support_unknown: the seller\'s declaration could not be read, so kept macros may not be filled. check_failed: nothing was checked.\n    '
 
 class SaveCampaignResultActionPendingConfirmationNextStep(TypedDict):
     tool: Literal["save_campaign"]
     arguments: SaveCampaignResultActionPendingConfirmationNextStepArguments
+    message: NotRequired[str]
 
 class SaveCampaignResultActionPendingConfirmationNextStepArguments(TypedDict):
     campaignId: str
@@ -11058,6 +11065,17 @@ class SaveCampaignSuccessCampaign(TypedDict):
     updatedAt: str
     targetingOverlay: NotRequired[dict[str, JsonValue]]
     '\n    AdCP TargetingOverlay (campaign subset); same shape as the save_campaign targetingOverlay input.\n    '
+
+class SaveCampaignSuccessCampaignLaunchClickMacroLoss(TypedDict):
+    creativeId: str
+    macro: str
+    '\n    The macro name, without braces.\n    '
+    paramKey: NotRequired[str]
+    '\n    The click parameter the macro is in; absent when it is in the landing page URL.\n    '
+    source: Literal["landing_page", "creative", "campaign", "advertiser"]
+    '\n    Where to edit it.\n    '
+    reason: Literal["not_fillable", "seller_does_not_fill"]
+    '\n    not_fillable: nothing fills this macro. seller_does_not_fill: this buy\'s seller does not fill it.\n    '
 
 class SaveCampaignSuccessCampaignPropertyLists(TypedDict):
     campaignPropertyListId: str | None

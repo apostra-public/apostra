@@ -19778,6 +19778,16 @@ export type SaveCampaignResponses = {
                     willStart?: boolean;
                     budget?: SaveCampaignSuccessLaunchMediaBuysItemBudget;
                     sellerName?: string;
+                    /**
+                     * Click-URL macros that will not reach you filled. Launching is not blocked.
+                     */
+                    clickMacroLosses?: Array<SaveCampaignSuccessCampaignLaunchClickMacroLoss>;
+                    clickMacroLossesTotal?: number;
+                    clickMacroLossesTruncated?: true;
+                    /**
+                     * seller_support_unknown: the seller's declaration could not be read, so kept macros may not be filled. check_failed: nothing was checked.
+                     */
+                    clickMacroCheckUnavailableReason?: 'seller_support_unknown' | 'check_failed';
                 }>;
                 mediaBuysTruncated?: true;
                 combinedBudget: SaveCampaignSuccessLaunchCombinedBudget | null;
@@ -19797,6 +19807,7 @@ export type SaveCampaignResponses = {
                     expectedRevision: number;
                     idempotencyKey: string;
                 };
+                message?: string;
             };
         };
         error: null;
@@ -19833,6 +19844,26 @@ export type SaveCampaignSuccessCampaign = {
         [key: string]: unknown;
     };
     [key: string]: unknown;
+};
+
+export type SaveCampaignSuccessCampaignLaunchClickMacroLoss = {
+    creativeId: string;
+    /**
+     * The macro name, without braces.
+     */
+    macro: string;
+    /**
+     * The click parameter the macro is in; absent when it is in the landing page URL.
+     */
+    paramKey?: string;
+    /**
+     * Where to edit it.
+     */
+    source: 'landing_page' | 'creative' | 'campaign' | 'advertiser';
+    /**
+     * not_fillable: nothing fills this macro. seller_does_not_fill: this buy's seller does not fill it.
+     */
+    reason: 'not_fillable' | 'seller_does_not_fill';
 };
 
 export type SaveCampaignSuccessCampaignPropertyLists = {
