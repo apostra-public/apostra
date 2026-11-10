@@ -26578,6 +26578,11 @@ paths:
                               Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and
                               the live read to call for each.
                             $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
+                          deliveryFreshness:
+                            description: >-
+                              campaign_delivery only: how current each media buy's stored seller delivery is, and which
+                              buys are stale.
+                            $ref: '#/components/schemas/get_delivery_success_DeliveryFreshness'
                           currencyConversions:
                             description: >-
                               campaign_delivery only: each media buy behind this page's rows whose spend was converted
@@ -26637,6 +26642,11 @@ paths:
                               Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and
                               the live read to call for each.
                             $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
+                          deliveryFreshness:
+                            description: >-
+                              campaign_delivery only: how current each media buy's stored seller delivery is, and which
+                              buys are stale.
+                            $ref: '#/components/schemas/get_delivery_success_DeliveryFreshness'
                           currencyConversions:
                             description: >-
                               campaign_delivery only: each media buy behind this page's rows whose spend was converted
@@ -26696,6 +26706,11 @@ paths:
                               Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and
                               the live read to call for each.
                             $ref: '#/components/schemas/get_delivery_success_CampaignDeliveryCoverage'
+                          deliveryFreshness:
+                            description: >-
+                              campaign_delivery only: how current each media buy's stored seller delivery is, and which
+                              buys are stale.
+                            $ref: '#/components/schemas/get_delivery_success_DeliveryFreshness'
                           currencyConversions:
                             description: >-
                               campaign_delivery only: each media buy behind this page's rows whose spend was converted
@@ -89146,6 +89161,85 @@ components:
       required:
         - inFlightCampaigns
         - withoutStoredRows
+      additionalProperties: false
+    get_delivery_success_DeliveryFreshness:
+      type: object
+      properties:
+        staleMediaBuys:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: Stale media buys in scope, listed or not.
+        mediaBuys:
+          maxItems: 50
+          type: array
+          items:
+            $ref: '#/components/schemas/get_delivery_success_MediaBuyDeliveryFreshness'
+          description: >-
+            Each booked media buy in scope whose flight overlaps the period, at most 50: stale buys first, most overdue
+            first, then by mediaBuyId.
+        mediaBuysOmitted:
+          description: Media buys in scope left out of mediaBuys by its cap. Absent when none.
+          type: integer
+          exclusiveMinimum: 0
+          maximum: 9007199254740991
+      required:
+        - staleMediaBuys
+        - mediaBuys
+      additionalProperties: false
+    get_delivery_success_MediaBuyDeliveryFreshness:
+      type: object
+      properties:
+        mediaBuyId:
+          type: string
+        campaignId:
+          type:
+            - string
+            - 'null'
+        seller:
+          anyOf:
+            - type: object
+              properties:
+                id:
+                  type: string
+                name:
+                  type:
+                    - string
+                    - 'null'
+              required:
+                - id
+                - name
+              additionalProperties: false
+            - type: 'null'
+          description: The seller every product of the buy is bought from; null when its products name none or more than one.
+        lastDayHeld:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Last UTC day (YYYY-MM-DD) Apostra holds any delivery row for, a reported zero included. Null when none.
+        dueThrough:
+          type: string
+          description: >-
+            The last UTC day whose delivery is due now, by the reporting schedule the buy's products declare: a period
+            is due its declared delay after it ends. With no declared schedule, a day is due two days after it starts.
+        overdueDays:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: Due days inside the flight after lastDayHeld, up to dueThrough, with no delivery row.
+        stale:
+          type: boolean
+          description: >-
+            True when overdueDays is 1 or more: the seller delivery Apostra holds is behind. Missing data, not zero
+            delivery.
+      required:
+        - mediaBuyId
+        - campaignId
+        - seller
+        - lastDayHeld
+        - dueThrough
+        - overdueDays
+        - stale
       additionalProperties: false
     get_delivery_success_DeliveryCurrencyConversion:
       type: object
