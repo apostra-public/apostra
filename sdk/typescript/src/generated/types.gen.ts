@@ -27346,6 +27346,10 @@ export type SaveMediaBuyData = {
              */
             impressions?: number;
             /**
+             * Create only: this line item's hard daily spend ceiling, at most its budget.
+             */
+            daily_budget_cap?: number;
+            /**
              * Create only: this line item's own flight, inside the buy's. Omitted ends inherit the buy's.
              */
             flight?: {
@@ -28204,6 +28208,10 @@ export type SaveMediaBuyData = {
              * Create only: AdCP impression goal for this line item. A goal, not a billing guarantee unless the seller commits to it.
              */
             impressions?: number;
+            /**
+             * Create only: this line item's hard daily spend ceiling, at most its budget.
+             */
+            daily_budget_cap?: number;
             /**
              * Create only: this line item's own flight, inside the buy's. Omitted ends inherit the buy's.
              */

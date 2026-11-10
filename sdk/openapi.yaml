@@ -49613,6 +49613,10 @@ paths:
                               unless the seller commits to it.
                             type: number
                             minimum: 0
+                          daily_budget_cap:
+                            description: 'Create only: this line item''s hard daily spend ceiling, at most its budget.'
+                            type: number
+                            minimum: 0
                           flight:
                             description: >-
                               Create only: this line item's own flight, inside the buy's. Omitted ends inherit the
@@ -51416,6 +51420,10 @@ paths:
                             description: >-
                               Create only: AdCP impression goal for this line item. A goal, not a billing guarantee
                               unless the seller commits to it.
+                            type: number
+                            minimum: 0
+                          daily_budget_cap:
+                            description: 'Create only: this line item''s hard daily spend ceiling, at most its budget.'
                             type: number
                             minimum: 0
                           flight:
