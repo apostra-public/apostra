@@ -19945,6 +19945,16 @@ export type SaveCampaignSuccessExecution = {
         }>;
         mediaBuyIds?: never;
         hint?: never;
+    } | {
+        type: 'packages_undeliverable';
+        mediaBuyId: string;
+        dropped: Array<{
+            productId: string;
+            buyerRef: string;
+            reason: string;
+        }>;
+        mediaBuyIds?: never;
+        hint?: never;
     }>;
 };
 

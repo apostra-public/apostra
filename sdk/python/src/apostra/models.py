@@ -11094,7 +11094,7 @@ class SaveCampaignSuccessExecution(TypedDict):
     mediaBuysFailed: float
     noOp: bool
     errors: NotRequired[list[SaveCampaignSuccessExecutionErrorsItem]]
-    warnings: NotRequired[list[SaveCampaignSuccessExecutionWarningsItemTypeCreativesDropped | SaveCampaignSuccessExecutionWarningsItemTypeOptimizationGoalsDropped | SaveCampaignSuccessExecutionWarningsItemTypePacingNotApplied | SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNotApplied | SaveCampaignSuccessExecutionWarningsItemTypeStaleDraft | SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNarrowed]]
+    warnings: NotRequired[list[SaveCampaignSuccessExecutionWarningsItemTypeCreativesDropped | SaveCampaignSuccessExecutionWarningsItemTypeOptimizationGoalsDropped | SaveCampaignSuccessExecutionWarningsItemTypePacingNotApplied | SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNotApplied | SaveCampaignSuccessExecutionWarningsItemTypeStaleDraft | SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNarrowed | SaveCampaignSuccessExecutionWarningsItemTypePackagesUndeliverable]]
 
 class SaveCampaignSuccessExecutionErrorsItem(TypedDict):
     mediaBuyId: str
@@ -11160,6 +11160,16 @@ class SaveCampaignSuccessExecutionWarningsItemTypePacingNotAppliedDroppedItem(Ty
     buyerRef: str
     requestedPacing: SaveCampaignSuccessExecutionWarningsItemDroppedItemRequestedPacing
     appliedPacing: SaveCampaignSuccessExecutionWarningsItemDroppedItemAppliedPacing
+    reason: str
+
+class SaveCampaignSuccessExecutionWarningsItemTypePackagesUndeliverable(TypedDict):
+    type: Literal["packages_undeliverable"]
+    mediaBuyId: str
+    dropped: list[SaveCampaignSuccessExecutionWarningsItemTypePackagesUndeliverableDroppedItem]
+
+class SaveCampaignSuccessExecutionWarningsItemTypePackagesUndeliverableDroppedItem(TypedDict):
+    productId: str
+    buyerRef: str
     reason: str
 
 class SaveCampaignSuccessExecutionWarningsItemTypeStaleDraft(TypedDict):

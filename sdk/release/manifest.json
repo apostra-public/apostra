@@ -1769,6 +1769,8 @@
       "SaveCampaignSuccessExecutionWarningsItemTypeOptimizationGoalsDroppedDroppedItem": "object",
       "SaveCampaignSuccessExecutionWarningsItemTypePacingNotApplied": "object",
       "SaveCampaignSuccessExecutionWarningsItemTypePacingNotAppliedDroppedItem": "object",
+      "SaveCampaignSuccessExecutionWarningsItemTypePackagesUndeliverable": "object",
+      "SaveCampaignSuccessExecutionWarningsItemTypePackagesUndeliverableDroppedItem": "object",
       "SaveCampaignSuccessExecutionWarningsItemTypeStaleDraft": "object",
       "SaveCampaignSuccessLaunchBudgetsByCurrencyItem": "object",
       "SaveCampaignSuccessLaunchCombinedBudget": "object",
