@@ -22,7 +22,7 @@ export type ClientOptions = {
 export type ConfirmPaymentAuthorityData = {
     body: {
         /**
-         * Token returned by request_payment_authority.
+         * Token returned by request_payment_authority once an administrator approved the setup.
          */
         confirmationToken: string;
         /**
@@ -7298,7 +7298,7 @@ export type GetResponses = {
                     redactedFields: Array<string>;
                 };
                 /**
-                 * The caller’s own payment terms and renewal requests that are waiting for an administrator to approve them on our site, newest first. Empty when there are none. Never another person’s.
+                 * The caller’s own payment terms, renewal and card setup requests that are waiting for an administrator to approve them on our site, newest first. Empty when there are none. Never another person’s.
                  */
                 pendingApprovals: Array<GetSuccessBillingPendingApproval>;
                 standing: {
@@ -8823,6 +8823,15 @@ export type GetSuccessBillingPendingApproval = {
     idempotencyKey: GetSuccessBillingPendingApprovalIdempotencyKey;
     expiresAt: GetSuccessBillingPendingApprovalExpiresAt;
     paymentTerms?: never;
+} | {
+    kind: 'billing.payment_method_setup';
+    url: GetSuccessBillingPendingApprovalUrl;
+    idempotencyKey: GetSuccessBillingPendingApprovalIdempotencyKey;
+    expiresAt: GetSuccessBillingPendingApprovalExpiresAt;
+    paymentTerms?: never;
+    action?: never;
+    renewalVersion?: never;
+    reason?: never;
 };
 
 /**
@@ -8831,7 +8840,7 @@ export type GetSuccessBillingPendingApproval = {
 export type GetSuccessBillingPendingApprovalExpiresAt = string;
 
 /**
- * The key the request is recorded under. A `save_billing` call that carries it reads this approval and never records another.
+ * The key the request is recorded under. A call that carries it (`save_billing`, or `request_payment_authority` for a card setup) reads this approval and never records another.
  */
 export type GetSuccessBillingPendingApprovalIdempotencyKey = string;
 
@@ -13368,6 +13377,10 @@ export type RequestBuyerChildAccountSuccessAgentApproval = {
 export type RequestPaymentAuthorityData = {
     body: {
         /**
+         * Stable key for this card setup. Repeat it to read the approval. Without one, the call carries on with your open request or records a new one; the answer names the key.
+         */
+        idempotencyKey?: string;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -13460,6 +13473,18 @@ export type RequestPaymentAuthorityResponses = {
         data: {
             action: 'confirmation_required';
             paymentAuthority: RequestPaymentAuthoritySuccessPendingConfirmationResult;
+            message?: never;
+            approval?: never;
+            idempotencyKey?: never;
+        } | {
+            action: 'approval_required';
+            message: string;
+            approval: RequestPaymentAuthoritySuccessAgentApproval;
+            /**
+             * Key to repeat to read the approval; the one sent, or the one the server made when none was sent.
+             */
+            idempotencyKey: string;
+            paymentAuthority?: never;
         };
         error: null;
     };
@@ -13479,6 +13504,51 @@ export type RequestPaymentAuthorityResponses = {
         };
         error: null;
     };
+};
+
+export type RequestPaymentAuthoritySuccessAgentApproval = {
+    /**
+     * Approval id.
+     */
+    id: string;
+    /**
+     * Kind of sensitive action, for example `buyer_child_account.create`.
+     */
+    kind: string;
+    /**
+     * `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.
+     */
+    state: 'pending' | 'executing' | 'succeeded' | 'failed' | 'rejected' | 'expired';
+    /**
+     * Account the action applies to.
+     */
+    targetCustomerId: string;
+    /**
+     * Role the approver must hold on the account.
+     */
+    requiredRole: 'ADMIN' | 'SUPER_ADMIN' | null;
+    /**
+     * What will happen, in one line. Null once the approval is final.
+     */
+    summary: string | null;
+    /**
+     * Page on our site where a signed-in person approves or rejects the request.
+     */
+    url: string;
+    createdAt: string;
+    expiresAt: string;
+    decidedAt: string | null;
+    completedAt: string | null;
+    /**
+     * Reference to the result once succeeded.
+     */
+    resultReference: {
+        [key: string]: string | number | boolean;
+    } | null;
+    /**
+     * Reason code when the action failed.
+     */
+    failureCode: string | null;
 };
 
 export type RequestPaymentAuthoritySuccessPendingConfirmationResult = {

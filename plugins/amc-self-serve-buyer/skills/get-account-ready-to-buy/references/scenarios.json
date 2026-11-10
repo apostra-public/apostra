@@ -1,14 +1,15 @@
 {
   "schemaVersion": "1.0",
   "skillId": "get-account-ready-to-buy",
-  "skillVersion": "1.5.0",
+  "skillVersion": "1.6.0",
   "scenarios": [
     {
-      "id": "payment-authority-two-step",
-      "title": "Establish payment authority in two confirmed steps",
+      "id": "payment-authority-approved-setup",
+      "title": "Establish payment authority after an administrator approves",
       "given": "get_status reports that the buyer account has no payment authority and the user asks to set up billing.",
       "expect": [
-        "The agent asks for confirmation, then calls request_payment_authority and keeps the returned single-use confirmation token.",
+        "The agent asks for confirmation, then calls request_payment_authority with an idempotencyKey and gives the returned approval link to the user, because an administrator approves the card setup on the Apostra site.",
+        "The agent calls request_payment_authority again with the same idempotencyKey, never a new one, until it returns the single-use confirmation token, or reads pendingApprovals in get({ kind: 'billing', accountId }) when it no longer has the key.",
         "The agent calls confirm_payment_authority with that token and gives the hosted card-capture link only to the organization cardholder.",
         "The agent reads the result with get({ kind: 'billing', accountId }), naming the account on every call, and never asks for card data in chat or in a tool call."
       ]
