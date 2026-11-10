@@ -42364,6 +42364,27 @@ paths:
                                       $ref: '#/components/schemas/save_campaign_success_LaunchMediaBuysItemBudget'
                                     sellerName:
                                       type: string
+                                    clickMacroLosses:
+                                      description: Click-URL macros that will not reach you filled. Launching is not blocked.
+                                      maxItems: 10
+                                      type: array
+                                      items:
+                                        $ref: '#/components/schemas/save_campaign_success_CampaignLaunchClickMacroLoss'
+                                    clickMacroLossesTotal:
+                                      type: integer
+                                      exclusiveMinimum: 0
+                                      maximum: 9007199254740991
+                                    clickMacroLossesTruncated:
+                                      type: boolean
+                                      const: true
+                                    clickMacroCheckUnavailableReason:
+                                      description: >-
+                                        seller_support_unknown: the seller's declaration could not be read, so kept
+                                        macros may not be filled. check_failed: nothing was checked.
+                                      type: string
+                                      enum:
+                                        - seller_support_unknown
+                                        - check_failed
                                   required:
                                     - mediaBuyId
                                     - name
@@ -42426,6 +42447,8 @@ paths:
                                   - expectedRevision
                                   - idempotencyKey
                                 additionalProperties: false
+                              message:
+                                type: string
                             required:
                               - tool
                               - arguments
@@ -96320,6 +96343,37 @@ components:
         - mediaBuyId
       additionalProperties: false
       description: An active media buy whose seller has not yet confirmed the property list change.
+    save_campaign_success_CampaignLaunchClickMacroLoss:
+      type: object
+      properties:
+        creativeId:
+          type: string
+        macro:
+          type: string
+          description: The macro name, without braces.
+        paramKey:
+          description: The click parameter the macro is in; absent when it is in the landing page URL.
+          type: string
+        source:
+          type: string
+          enum:
+            - landing_page
+            - creative
+            - campaign
+            - advertiser
+          description: Where to edit it.
+        reason:
+          type: string
+          enum:
+            - not_fillable
+            - seller_does_not_fill
+          description: 'not_fillable: nothing fills this macro. seller_does_not_fill: this buy''s seller does not fill it.'
+      required:
+        - creativeId
+        - macro
+        - source
+        - reason
+      additionalProperties: false
     save_campaign_success_ServerTime:
       type: string
       format: date-time
