@@ -96603,6 +96603,34 @@ components:
                   - mediaBuyId
                   - dropped
                 additionalProperties: false
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    const: packages_undeliverable
+                  mediaBuyId:
+                    type: string
+                  dropped:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        productId:
+                          type: string
+                        buyerRef:
+                          type: string
+                        reason:
+                          type: string
+                      required:
+                        - productId
+                        - buyerRef
+                        - reason
+                      additionalProperties: false
+                required:
+                  - type
+                  - mediaBuyId
+                  - dropped
+                additionalProperties: false
       required:
         - mediaBuysExecuted
         - mediaBuysAttempted
