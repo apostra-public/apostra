@@ -22207,7 +22207,7 @@ export type SaveCreativeSessionData = {
             connectionId: string;
         };
         /**
-         * Copy exact user brief to request.creative_brief.prompt; requested count to request.variant_count.
+         * Copy exact user brief to request.creative_brief.prompt. Named scenes or concepts: request.variant_axis {dimension:"scene", values}, no variant_count. Bare count: request.variant_count.
          */
         draft?: {
             /**

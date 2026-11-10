@@ -2,7 +2,7 @@
   "schemaVersion": "3.0",
   "id": "generate-campaign-creatives",
   "name": "Generate Campaign Creatives",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "description": "Generate an enrolled buyer's campaign or advertiser Library image, video, or voice creative without choosing an engine, then return its usable URL before optional Library finalisation.",
   "steward": { "owner": "bokelley" },
   "entrypoint": "SKILL.md",
@@ -46,7 +46,7 @@
       "generate_variants",
       "open_variant_gallery"
     ],
-    "optional": ["search", "save_connection"]
+    "optional": ["search", "save_connection", "save_creative"]
   },
   "documentation": [
     "mintlify/v2/setup/v3/creative-engines.mdx",
@@ -58,7 +58,7 @@
       "scenarioIds": ["creative-engine-discovery-no-spend"]
     },
     "telemetry": {
-      "correlationSkillId": "generate-campaign-creatives@1.10.0",
+      "correlationSkillId": "generate-campaign-creatives@1.11.0",
       "outcomeSignals": [
         "workflow_terminal_state",
         "creative_session_action_receipt"
