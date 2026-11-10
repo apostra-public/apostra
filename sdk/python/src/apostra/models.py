@@ -12499,7 +12499,7 @@ class SaveCreativeSessionInputWithAdvertiserId(TypedDict):
     engine: NotRequired[SaveCreativeSessionInputEngine]
     '\n    Leave unset unless the buyer names a connected engine. The server chooses a compatible connected or Scope3-funded engine.\n    '
     draft: NotRequired[SaveCreativeSessionInputDraft]
-    '\n    Copy exact user brief to request.creative_brief.prompt; requested count to request.variant_count.\n    '
+    '\n    Copy exact user brief to request.creative_brief.prompt. Named scenes or concepts: request.variant_axis {dimension:"scene", values}, no variant_count. Bare count: request.variant_count.\n    '
     selectedVariantId: NotRequired[str]
     '\n    Exact generated output to select.\n    '
     approvedVariantId: NotRequired[str]
@@ -12525,7 +12525,7 @@ class SaveCreativeSessionInputWithCampaignId(TypedDict):
     engine: NotRequired[SaveCreativeSessionInputEngine]
     '\n    Leave unset unless the buyer names a connected engine. The server chooses a compatible connected or Scope3-funded engine.\n    '
     draft: NotRequired[SaveCreativeSessionInputDraft]
-    '\n    Copy exact user brief to request.creative_brief.prompt; requested count to request.variant_count.\n    '
+    '\n    Copy exact user brief to request.creative_brief.prompt. Named scenes or concepts: request.variant_axis {dimension:"scene", values}, no variant_count. Bare count: request.variant_count.\n    '
     selectedVariantId: NotRequired[str]
     '\n    Exact generated output to select.\n    '
     approvedVariantId: NotRequired[str]
