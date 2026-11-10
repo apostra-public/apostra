@@ -377,14 +377,14 @@ export class Apostra extends Transport {
   /** Read the state of a V3 HTTP write receipt Returns the data together with response headers and request ID. */
   getV3PublicMutationReceiptWithResponse(input: GetV3PublicMutationReceiptInput, options?: RequestOptions): Promise<ResponseDetails<GetV3PublicMutationReceiptResult>> { return this.requestDetailed("getV3PublicMutationReceipt", input, options) }
   /**
-   * Query seller delivery, stored or live buyer campaign delivery, or margin facts. Use live_campaign_delivery with one campaignId for the connected provider's current response. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded.
+   * Query seller delivery, stored or live buyer campaign delivery, or margin facts. live_campaign_delivery gives one campaign's provider response; live_ad_delivery gives one Meta campaign per ad, per day. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded.
    *
    * @example
    * await client.getDelivery(input)
    */
   getDelivery(input: GetDeliveryInput, options?: RequestOptions): Promise<GetDeliveryResult> { return this.request("get_delivery", input, options) }
 
-  /** Query seller delivery, stored or live buyer campaign delivery, or margin facts. Use live_campaign_delivery with one campaignId for the connected provider's current response. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded. Returns the data together with response headers and request ID. */
+  /** Query seller delivery, stored or live buyer campaign delivery, or margin facts. live_campaign_delivery gives one campaign's provider response; live_ad_delivery gives one Meta campaign per ad, per day. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded. Returns the data together with response headers and request ID. */
   getDeliveryWithResponse(input: GetDeliveryInput, options?: RequestOptions): Promise<ResponseDetails<GetDeliveryResult>> { return this.requestDetailed("get_delivery", input, options) }
   /**
    * Query grouped Seller RFP quality, efficiency, and commercial metrics with metric-specific availability and immutable pages. Defaults to live terminal turns; synthetic purposes are opt-in and excluded from commercial metrics. Use get for individual RFPs or turns.
