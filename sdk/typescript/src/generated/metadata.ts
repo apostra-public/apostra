@@ -471,6 +471,25 @@ export const operations = {
     ],
     "summary": "Open the catalog file picker: the buyer picks one file in a connected Drive or SharePoint folder and saves it as a catalog's source. They pick in the Task, so do not ask for connection or file ids. catalogId replaces that catalog's source; omit it for a new catalog."
   },
+  "open_catalogs_page": {
+    "path": "/tools/open_catalogs_page",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open the Catalogs page for one advertiser: its catalogs with their health, to connect, sync and review. The page loads itself, so do not repeat the list. catalogId opens that catalog. To make a catalog from a connected Drive or SharePoint file, use open_catalog_file_picker."
+  },
   "open_creative_engines_page": {
     "path": "/tools/open_creative_engines_page",
     "method": "POST",
