@@ -41480,7 +41480,7 @@ paths:
                                     kind:
                                       type: string
                                       const: minimum
-                                      description: Targeting value.
+                                      description: range=min+max, minimum=min, maximum=max.
                                     min:
                                       $ref: '#/components/schemas/save_campaign_request_TargetingOverlayDemographicsAgeMin'
                                       description: Minimum age.
@@ -41506,7 +41506,7 @@ paths:
                                     kind:
                                       type: string
                                       const: maximum
-                                      description: Targeting value.
+                                      description: range=min+max, minimum=min, maximum=max.
                                     max:
                                       $ref: '#/components/schemas/save_campaign_request_TargetingOverlayDemographicsAgeMax'
                                       description: Maximum age.
@@ -41532,7 +41532,7 @@ paths:
                                     kind:
                                       type: string
                                       const: range
-                                      description: Targeting value.
+                                      description: range=min+max, minimum=min, maximum=max.
                                     min:
                                       $ref: '#/components/schemas/save_campaign_request_TargetingOverlayDemographicsAgeMin'
                                       description: Minimum age.

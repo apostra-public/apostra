@@ -18641,7 +18641,7 @@ export type SaveCampaignData = {
                  */
                 age?: {
                     /**
-                     * Targeting value.
+                     * range=min+max, minimum=min, maximum=max.
                      */
                     kind: 'minimum';
                     /**
@@ -18663,7 +18663,7 @@ export type SaveCampaignData = {
                     max?: never;
                 } | {
                     /**
-                     * Targeting value.
+                     * range=min+max, minimum=min, maximum=max.
                      */
                     kind: 'maximum';
                     /**
@@ -18685,7 +18685,7 @@ export type SaveCampaignData = {
                     min?: never;
                 } | {
                     /**
-                     * Targeting value.
+                     * range=min+max, minimum=min, maximum=max.
                      */
                     kind: 'range';
                     /**

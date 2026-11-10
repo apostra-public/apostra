@@ -10191,7 +10191,7 @@ class SaveCampaignInputTargetingOverlayDemographics(TypedDict):
 
 class SaveCampaignInputTargetingOverlayDemographicsAgeKindMaximum(TypedDict):
     kind: Literal["maximum"]
-    '\n    Targeting value.\n    '
+    '\n    range=min+max, minimum=min, maximum=max.\n    '
     max: SaveCampaignRequestTargetingOverlayDemographicsAgeMax
     '\n    Maximum age.\n    '
     include_unknown: SaveCampaignRequestTargetingOverlayDemographicsAgeIncludeUnknown
@@ -10203,7 +10203,7 @@ class SaveCampaignInputTargetingOverlayDemographicsAgeKindMaximum(TypedDict):
 
 class SaveCampaignInputTargetingOverlayDemographicsAgeKindMinimum(TypedDict):
     kind: Literal["minimum"]
-    '\n    Targeting value.\n    '
+    '\n    range=min+max, minimum=min, maximum=max.\n    '
     min: SaveCampaignRequestTargetingOverlayDemographicsAgeMin
     '\n    Minimum age.\n    '
     include_unknown: SaveCampaignRequestTargetingOverlayDemographicsAgeIncludeUnknown
@@ -10215,7 +10215,7 @@ class SaveCampaignInputTargetingOverlayDemographicsAgeKindMinimum(TypedDict):
 
 class SaveCampaignInputTargetingOverlayDemographicsAgeKindRange(TypedDict):
     kind: Literal["range"]
-    '\n    Targeting value.\n    '
+    '\n    range=min+max, minimum=min, maximum=max.\n    '
     min: SaveCampaignRequestTargetingOverlayDemographicsAgeMin
     '\n    Minimum age.\n    '
     max: SaveCampaignRequestTargetingOverlayDemographicsAgeMax
