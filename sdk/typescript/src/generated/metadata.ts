@@ -20,7 +20,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Issue the hosted card-capture link for a token from request_payment_authority. Give the link to the cardholder; cards stay off MCP."
+    "summary": "Issue the hosted card-capture link for the token an approved request_payment_authority returned. Give the link to the cardholder; cards stay off MCP."
   },
   "downloadV3PublicDocumentRevision": {
     "path": "/documents/{documentId}/revisions/{revisionId}/download",
@@ -717,7 +717,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Stage a card handoff for the organization and return a confirmation token. No link is issued until confirm_payment_authority."
+    "summary": "Ask a billing administrator to approve a card setup; returns approval_required. Repeat with the same idempotencyKey: once approved, it returns a confirmation token for confirm_payment_authority."
   },
   "request_proposals": {
     "path": "/tools/request_proposals",

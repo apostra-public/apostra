@@ -14,7 +14,7 @@ class AdcpError(TypedDict):
 
 class ConfirmPaymentAuthorityInput(TypedDict):
     confirmationToken: str
-    '\n    Token returned by request_payment_authority.\n    '
+    '\n    Token returned by request_payment_authority once an administrator approved the setup.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -4389,7 +4389,7 @@ class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObje
     payer: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPayerAndObjectPayerAddressAndObjectPayerAddress2AndObjectPayerCcEmailsAndObjectPayerCityAndObjectPayerCompleteAndObjectPayerContactNameAndObjectPayerCountryAlpha2AndObjectPayerEmailAndObjectPayerMissingAndObjectPayerPhoneAndObjectPayerPostalCodeAndObjectPayerRedactedFieldsAndObjectPayerRegionAndObjectPayerTaxIdAndObjectPayerVisibilityAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPendingApprovalsAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectPayer
     '\n    The payer details printed on invoices (name, invoice emails, address, tax ID). Change them with `save_billing` `payer`; a direct administrator saves them on the call.\n    '
     pendingApprovals: list[GetSuccessBillingPendingApproval]
-    '\n    The caller’s own payment terms and renewal requests that are waiting for an administrator to approve them on our site, newest first. Empty when there are none. Never another person’s.\n    '
+    '\n    The caller’s own payment terms, renewal and card setup requests that are waiting for an administrator to approve them on our site, newest first. Empty when there are none. Never another person’s.\n    '
     standing: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPayerAndObjectPayerAddressAndObjectPayerAddress2AndObjectPayerCcEmailsAndObjectPayerCityAndObjectPayerCompleteAndObjectPayerContactNameAndObjectPayerCountryAlpha2AndObjectPayerEmailAndObjectPayerMissingAndObjectPayerPhoneAndObjectPayerPostalCodeAndObjectPayerRedactedFieldsAndObjectPayerRegionAndObjectPayerTaxIdAndObjectPayerVisibilityAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPendingApprovalsAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectStanding
     balance: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPayerAndObjectPayerAddressAndObjectPayerAddress2AndObjectPayerCcEmailsAndObjectPayerCityAndObjectPayerCompleteAndObjectPayerContactNameAndObjectPayerCountryAlpha2AndObjectPayerEmailAndObjectPayerMissingAndObjectPayerPhoneAndObjectPayerPostalCodeAndObjectPayerRedactedFieldsAndObjectPayerRegionAndObjectPayerTaxIdAndObjectPayerVisibilityAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPendingApprovalsAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectBalance
     usage: GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectPayerAndObjectPayerAddressAndObjectPayerAddress2AndObjectPayerCcEmailsAndObjectPayerCityAndObjectPayerCompleteAndObjectPayerContactNameAndObjectPayerCountryAlpha2AndObjectPayerEmailAndObjectPayerMissingAndObjectPayerPhoneAndObjectPayerPostalCodeAndObjectPayerRedactedFieldsAndObjectPayerRegionAndObjectPayerTaxIdAndObjectPayerVisibilityAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPendingApprovalsAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCurrentAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanUpcomingAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectUsage
@@ -5633,6 +5633,12 @@ GetSuccessBillingPendingApprovalExpiresAt: TypeAlias = str
 
 GetSuccessBillingPendingApprovalIdempotencyKey: TypeAlias = str
 
+class GetSuccessBillingPendingApprovalKindBillingPaymentMethodSetup(TypedDict):
+    kind: Literal["billing.payment_method_setup"]
+    url: GetSuccessBillingPendingApprovalUrl
+    idempotencyKey: GetSuccessBillingPendingApprovalIdempotencyKey
+    expiresAt: GetSuccessBillingPendingApprovalExpiresAt
+
 class GetSuccessBillingPendingApprovalKindBillingPaymentTerms(TypedDict):
     kind: Literal["billing.payment_terms"]
     paymentTerms: GetSuccessBillingPendingApprovalPaymentTerms
@@ -5641,7 +5647,7 @@ class GetSuccessBillingPendingApprovalKindBillingPaymentTerms(TypedDict):
     idempotencyKey: GetSuccessBillingPendingApprovalIdempotencyKey
     expiresAt: GetSuccessBillingPendingApprovalExpiresAt
 
-GetSuccessBillingPendingApproval: TypeAlias = "GetSuccessBillingPendingApprovalKindBillingPaymentTerms | GetSuccessBillingPendingApprovalActionCANCELATTERMAndREINSTATEAUTORENEWAL"
+GetSuccessBillingPendingApproval: TypeAlias = "GetSuccessBillingPendingApprovalKindBillingPaymentTerms | GetSuccessBillingPendingApprovalActionCANCELATTERMAndREINSTATEAUTORENEWAL | GetSuccessBillingPendingApprovalKindBillingPaymentMethodSetup"
 
 GetSuccessBillingPendingApprovalPaymentTerms: TypeAlias = Literal["net_15", "net_30", "net_45", "net_60", "net_90"]
 
@@ -7420,14 +7426,49 @@ class RequestBuyerChildAccountSuccessAgentApproval(TypedDict):
     '\n    Reason code when the action failed.\n    '
 
 class RequestPaymentAuthorityInput(TypedDict):
+    idempotencyKey: NotRequired[str]
+    '\n    Stable key for this card setup. Repeat it to read the approval. Without one, the call carries on with your open request or records a new one; the answer names the key.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-class RequestPaymentAuthorityResult(TypedDict):
+class RequestPaymentAuthorityResultActionApprovalRequired(TypedDict):
+    action: Literal["approval_required"]
+    message: str
+    approval: RequestPaymentAuthoritySuccessAgentApproval
+    idempotencyKey: str
+    '\n    Key to repeat to read the approval; the one sent, or the one the server made when none was sent.\n    '
+
+class RequestPaymentAuthorityResultActionConfirmationRequired(TypedDict):
     action: Literal["confirmation_required"]
     paymentAuthority: RequestPaymentAuthoritySuccessPendingConfirmationResult
+
+RequestPaymentAuthorityResult: TypeAlias = RequestPaymentAuthorityResultActionConfirmationRequired
+
+class RequestPaymentAuthoritySuccessAgentApproval(TypedDict):
+    id: str
+    '\n    Approval id.\n    '
+    kind: str
+    '\n    Kind of sensitive action, for example `buyer_child_account.create`.\n    '
+    state: Literal["pending", "executing", "succeeded", "failed", "rejected", "expired"]
+    '\n    `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.\n    '
+    targetCustomerId: str
+    '\n    Account the action applies to.\n    '
+    requiredRole: Literal["ADMIN", "SUPER_ADMIN"] | None
+    '\n    Role the approver must hold on the account.\n    '
+    summary: str | None
+    '\n    What will happen, in one line. Null once the approval is final.\n    '
+    url: str
+    '\n    Page on our site where a signed-in person approves or rejects the request.\n    '
+    createdAt: str
+    expiresAt: str
+    decidedAt: str | None
+    completedAt: str | None
+    resultReference: dict[str, str | float | bool] | None
+    '\n    Reference to the result once succeeded.\n    '
+    failureCode: str | None
+    '\n    Reason code when the action failed.\n    '
 
 class RequestPaymentAuthoritySuccessPendingConfirmationResult(TypedDict):
     status: Literal["pending_confirmation"]

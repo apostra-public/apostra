@@ -5,11 +5,11 @@ from .transport import AsyncTransport, ResponseDetails, SyncTransport
 
 class Apostra(SyncTransport):
     def confirm_payment_authority(self, input: models.ConfirmPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.ConfirmPaymentAuthorityResult:
-        "Issue the hosted card-capture link for a token from request_payment_authority. Give the link to the cardholder; cards stay off MCP."
+        "Issue the hosted card-capture link for the token an approved request_payment_authority returned. Give the link to the cardholder; cards stay off MCP."
         return cast("models.ConfirmPaymentAuthorityResult", self._request("confirm_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def confirm_payment_authority_with_response(self, input: models.ConfirmPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.ConfirmPaymentAuthorityResult]:
-        "Issue the hosted card-capture link for a token from request_payment_authority. Give the link to the cardholder; cards stay off MCP. Returns the data together with response headers and request ID."
+        "Issue the hosted card-capture link for the token an approved request_payment_authority returned. Give the link to the cardholder; cards stay off MCP. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.ConfirmPaymentAuthorityResult], self._request_with_response("confirm_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def download_v3_public_document_revision(self, input: models.DownloadV3PublicDocumentRevisionInput, *, account_id: str | None = None, timeout: float | None = None) -> bytes:
@@ -269,11 +269,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.RequestBuyerChildAccountResult], self._request_with_response("request_buyer_child_account", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def request_payment_authority(self, input: models.RequestPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestPaymentAuthorityResult:
-        "Stage a card handoff for the organization and return a confirmation token. No link is issued until confirm_payment_authority."
+        "Ask a billing administrator to approve a card setup; returns approval_required. Repeat with the same idempotencyKey: once approved, it returns a confirmation token for confirm_payment_authority."
         return cast("models.RequestPaymentAuthorityResult", self._request("request_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def request_payment_authority_with_response(self, input: models.RequestPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.RequestPaymentAuthorityResult]:
-        "Stage a card handoff for the organization and return a confirmation token. No link is issued until confirm_payment_authority. Returns the data together with response headers and request ID."
+        "Ask a billing administrator to approve a card setup; returns approval_required. Repeat with the same idempotencyKey: once approved, it returns a confirmation token for confirm_payment_authority. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.RequestPaymentAuthorityResult], self._request_with_response("request_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def request_proposals(self, input: models.RequestProposalsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestProposalsResult:
@@ -630,11 +630,11 @@ class Apostra(SyncTransport):
 
 class AsyncApostra(AsyncTransport):
     async def confirm_payment_authority(self, input: models.ConfirmPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.ConfirmPaymentAuthorityResult:
-        "Issue the hosted card-capture link for a token from request_payment_authority. Give the link to the cardholder; cards stay off MCP."
+        "Issue the hosted card-capture link for the token an approved request_payment_authority returned. Give the link to the cardholder; cards stay off MCP."
         return cast("models.ConfirmPaymentAuthorityResult", await self._request("confirm_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def confirm_payment_authority_with_response(self, input: models.ConfirmPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.ConfirmPaymentAuthorityResult]:
-        "Issue the hosted card-capture link for a token from request_payment_authority. Give the link to the cardholder; cards stay off MCP. Returns the data together with response headers and request ID."
+        "Issue the hosted card-capture link for the token an approved request_payment_authority returned. Give the link to the cardholder; cards stay off MCP. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.ConfirmPaymentAuthorityResult], await self._request_with_response("confirm_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def download_v3_public_document_revision(self, input: models.DownloadV3PublicDocumentRevisionInput, *, account_id: str | None = None, timeout: float | None = None) -> bytes:
@@ -894,11 +894,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.RequestBuyerChildAccountResult], await self._request_with_response("request_buyer_child_account", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def request_payment_authority(self, input: models.RequestPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestPaymentAuthorityResult:
-        "Stage a card handoff for the organization and return a confirmation token. No link is issued until confirm_payment_authority."
+        "Ask a billing administrator to approve a card setup; returns approval_required. Repeat with the same idempotencyKey: once approved, it returns a confirmation token for confirm_payment_authority."
         return cast("models.RequestPaymentAuthorityResult", await self._request("request_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def request_payment_authority_with_response(self, input: models.RequestPaymentAuthorityInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.RequestPaymentAuthorityResult]:
-        "Stage a card handoff for the organization and return a confirmation token. No link is issued until confirm_payment_authority. Returns the data together with response headers and request ID."
+        "Ask a billing administrator to approve a card setup; returns approval_required. Repeat with the same idempotencyKey: once approved, it returns a confirmation token for confirm_payment_authority. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.RequestPaymentAuthorityResult], await self._request_with_response("request_payment_authority", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def request_proposals(self, input: models.RequestProposalsInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestProposalsResult:
