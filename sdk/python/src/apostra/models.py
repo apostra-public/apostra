@@ -388,8 +388,8 @@ class GetDeliveryInput(TypedDict):
     '\n    Group-by dimensions; campaign delivery also accepts labels.<dimension_key>, and property (tracker impressions per site or app, with date). Omit for leaf grain.\n    '
     sponsoredBuyerCustomerId: NotRequired[str]
     '\n    Server-issued self-serve buyer child scope from the Campaigns Page launch.\n    '
-    report: NotRequired[Literal["delivery", "campaign_delivery", "live_campaign_delivery", "margin"]]
-    '\n    Select seller delivery, stored campaign delivery, live provider campaign delivery, or margin.\n    '
+    report: NotRequired[Literal["delivery", "campaign_delivery", "live_campaign_delivery", "margin", "live_ad_delivery"]]
+    '\n    Select seller delivery, stored campaign delivery, live provider campaign delivery, margin, or live per-ad delivery for one Meta campaign.\n    '
     range: NotRequired[GetDeliveryInputRange]
     '\n    Dates (max 90 days) or lifetime for delivery; invalid for margin.\n    '
     filters: NotRequired[GetDeliveryInputFilters]
@@ -498,6 +498,50 @@ class GetDeliveryResultReportDelivery(TypedDict):
     siteOutcomes: NotRequired[GetDeliverySuccessSiteOutcomes]
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
+
+class GetDeliveryResultReportLiveAdDelivery(TypedDict):
+    report: Literal["live_ad_delivery"]
+    query: GetDeliveryResultReportLiveAdDeliveryQuery
+    campaignId: str
+    currency: str
+    reporting_period: GetDeliveryResultReportLiveAdDeliveryReportingPeriod
+    by_package: list[GetDeliverySuccessAdPackageDelivery]
+    page: GetDeliveryResultReportLiveAdDeliveryPage
+    authority: Literal["live_provider"]
+    semantics: GetDeliveryResultReportLiveAdDeliverySemantics
+
+class GetDeliveryResultReportLiveAdDeliveryPage(TypedDict):
+    limit: float
+    returned: float
+    total: float
+    truncated: bool
+    consistency: Literal["live_per_call"]
+    nextCursor: NotRequired[str]
+
+class GetDeliveryResultReportLiveAdDeliveryQuery(TypedDict):
+    range: GetDeliveryResultReportLiveAdDeliveryQueryRange
+    filters: GetDeliveryResultReportLiveAdDeliveryQueryFilters
+
+class GetDeliveryResultReportLiveAdDeliveryQueryFilters(TypedDict):
+    campaignId: str
+
+class GetDeliveryResultReportLiveAdDeliveryQueryRange(TypedDict):
+    startDate: str
+    endDate: str
+
+class GetDeliveryResultReportLiveAdDeliveryReportingPeriod(TypedDict):
+    start: str
+    end: str
+    timezone: str
+
+class GetDeliveryResultReportLiveAdDeliverySemantics(TypedDict):
+    sourceOperation: Literal["meta_ad_insights"]
+    genericFallback: Literal[False]
+    measurement: Literal["excluded"]
+    missingValues: str
+    freshness: str
+    finality: str
+    billingEligibility: str
 
 class GetDeliveryResultReportLiveCampaignDelivery(TypedDict):
     report: Literal["live_campaign_delivery"]
@@ -762,7 +806,112 @@ class GetDeliveryResultReportMargin(TypedDict):
     synthetic: NotRequired[GetDeliverySuccessSynthetic]
     '\n    Present only for the Apostra-owned synthetic Demo Storefront scenario. This data is unsuitable for commercial decisions.\n    '
 
-GetDeliveryResult: TypeAlias = "GetDeliveryResultReportDelivery | GetDeliveryResultReportCampaignDelivery | GetDeliveryResultReportMargin | GetDeliveryResultReportLiveCampaignDelivery | GetDeliveryResultReportCampaignPropertyDelivery"
+GetDeliveryResult: TypeAlias = "GetDeliveryResultReportDelivery | GetDeliveryResultReportCampaignDelivery | GetDeliveryResultReportMargin | GetDeliveryResultReportLiveCampaignDelivery | GetDeliveryResultReportCampaignPropertyDelivery | GetDeliveryResultReportLiveAdDelivery"
+
+class GetDeliverySuccessAdDailyDelivery(TypedDict):
+    impressions: NotRequired[GetDeliverySuccessAdDailyDeliveryImpressions]
+    spend: NotRequired[GetDeliverySuccessAdDailyDeliverySpend]
+    clicks: NotRequired[GetDeliverySuccessAdDailyDeliveryClicks]
+    ctr: NotRequired[GetDeliverySuccessAdDailyDeliveryCtr]
+    reach: NotRequired[float]
+    reach_unit: NotRequired[Literal["individuals", "households", "devices", "accounts", "cookies", "custom"]]
+    reach_window: NotRequired[GetDeliverySuccessAdDailyDeliveryReachWindow]
+    frequency: NotRequired[float]
+    conversions: NotRequired[GetDeliverySuccessAdDailyDeliveryConversions]
+    by_event_type: NotRequired[GetDeliverySuccessAdDailyDeliveryByEventType]
+    date: str
+
+class GetDeliverySuccessAdDailyDeliveryByEventTypeItem(TypedDict):
+    event_type: Literal["page_view", "view_content", "select_content", "select_item", "search", "share", "add_to_cart", "remove_from_cart", "viewed_cart", "add_to_wishlist", "initiate_checkout", "add_payment_info", "purchase", "refund", "lead", "qualify_lead", "close_convert_lead", "disqualify_lead", "complete_registration", "subscribe", "follow", "content_view", "watch_milestone", "start_trial", "app_install", "app_launch", "contact", "schedule", "donate", "submit_application", "custom"]
+    event_source_id: NotRequired[str]
+    count: float
+    value: NotRequired[float]
+
+GetDeliverySuccessAdDailyDeliveryByEventType: TypeAlias = "list[GetDeliverySuccessAdDailyDeliveryByEventTypeItem]"
+
+GetDeliverySuccessAdDailyDeliveryClicks: TypeAlias = float
+
+GetDeliverySuccessAdDailyDeliveryConversions: TypeAlias = float
+
+GetDeliverySuccessAdDailyDeliveryCtr: TypeAlias = float
+
+GetDeliverySuccessAdDailyDeliveryImpressions: TypeAlias = float
+
+class GetDeliverySuccessAdDailyDeliveryReachWindow(TypedDict):
+    kind: Literal["cumulative", "period", "rolling"]
+    period: NotRequired[GetDeliverySuccessAdDailyDeliveryReachWindowPeriod]
+
+class GetDeliverySuccessAdDailyDeliveryReachWindowPeriod(TypedDict):
+    interval: int
+    unit: Literal["seconds", "minutes", "hours", "days", "campaign"]
+
+GetDeliverySuccessAdDailyDeliverySpend: TypeAlias = float
+
+class GetDeliverySuccessAdDeliveryMetrics(TypedDict):
+    creative_id: str | None
+    '\n    Apostra creative id; null when Apostra did not make the ad.\n    '
+    impressions: NotRequired[float]
+    spend: NotRequired[float]
+    clicks: NotRequired[float]
+    ctr: NotRequired[float]
+    reach: NotRequired[float]
+    reach_unit: NotRequired[Literal["individuals", "households", "devices", "accounts", "cookies", "custom"]]
+    reach_window: NotRequired[GetDeliverySuccessAdDeliveryMetricsReachWindow]
+    frequency: NotRequired[float]
+    conversions: NotRequired[float]
+    by_event_type: NotRequired[list[GetDeliverySuccessAdDeliveryMetricsByEventTypeItem]]
+    platform_ad_id: str
+    platform_ad_name: str | None
+    platform_creative_id: str | None
+    creative_session_id: str | None
+    creative_session_variant_id: str | None
+    daily_breakdown: list[GetDeliverySuccessAdDailyDelivery]
+
+class GetDeliverySuccessAdDeliveryMetricsByEventTypeItem(TypedDict):
+    event_type: Literal["page_view", "view_content", "select_content", "select_item", "search", "share", "add_to_cart", "remove_from_cart", "viewed_cart", "add_to_wishlist", "initiate_checkout", "add_payment_info", "purchase", "refund", "lead", "qualify_lead", "close_convert_lead", "disqualify_lead", "complete_registration", "subscribe", "follow", "content_view", "watch_milestone", "start_trial", "app_install", "app_launch", "contact", "schedule", "donate", "submit_application", "custom"]
+    event_source_id: NotRequired[str]
+    count: float
+    value: NotRequired[float]
+
+class GetDeliverySuccessAdDeliveryMetricsReachWindow(TypedDict):
+    kind: Literal["cumulative", "period", "rolling"]
+    period: NotRequired[GetDeliverySuccessAdDeliveryMetricsReachWindowPeriod]
+
+class GetDeliverySuccessAdDeliveryMetricsReachWindowPeriod(TypedDict):
+    interval: int
+    unit: Literal["seconds", "minutes", "hours", "days", "campaign"]
+
+class GetDeliverySuccessAdPackageDelivery(TypedDict):
+    impressions: NotRequired[GetDeliverySuccessAdPackageDeliveryImpressions]
+    spend: NotRequired[GetDeliverySuccessAdPackageDeliverySpend]
+    clicks: NotRequired[GetDeliverySuccessAdPackageDeliveryClicks]
+    ctr: NotRequired[GetDeliverySuccessAdPackageDeliveryCtr]
+    conversions: NotRequired[GetDeliverySuccessAdPackageDeliveryConversions]
+    by_event_type: NotRequired[GetDeliverySuccessAdPackageDeliveryByEventType]
+    package_id: str
+    pricing_model: Literal["cpm"]
+    rate: float
+    currency: str
+    by_creative: list[GetDeliverySuccessAdDeliveryMetrics]
+    by_creative_truncated: bool
+
+class GetDeliverySuccessAdPackageDeliveryByEventTypeItem(TypedDict):
+    event_type: Literal["page_view", "view_content", "select_content", "select_item", "search", "share", "add_to_cart", "remove_from_cart", "viewed_cart", "add_to_wishlist", "initiate_checkout", "add_payment_info", "purchase", "refund", "lead", "qualify_lead", "close_convert_lead", "disqualify_lead", "complete_registration", "subscribe", "follow", "content_view", "watch_milestone", "start_trial", "app_install", "app_launch", "contact", "schedule", "donate", "submit_application", "custom"]
+    event_source_id: NotRequired[str]
+    count: float
+    value: NotRequired[float]
+
+GetDeliverySuccessAdPackageDeliveryByEventType: TypeAlias = "list[GetDeliverySuccessAdPackageDeliveryByEventTypeItem]"
+
+GetDeliverySuccessAdPackageDeliveryClicks: TypeAlias = float
+
+GetDeliverySuccessAdPackageDeliveryConversions: TypeAlias = float
+
+GetDeliverySuccessAdPackageDeliveryCtr: TypeAlias = float
+
+GetDeliverySuccessAdPackageDeliveryImpressions: TypeAlias = float
+
+GetDeliverySuccessAdPackageDeliverySpend: TypeAlias = float
 
 class GetDeliverySuccessCampaignDeliveryCoverage(TypedDict):
     inFlightCampaigns: int
@@ -6535,6 +6684,10 @@ class InFlightReceipt(TypedDict):
     pendingReason: str
 
 JsonValue: TypeAlias = Union[str, int, float, bool, None, list['JsonValue'], dict[str, 'JsonValue']]
+
+GetDeliverySuccessAdDailyDeliveryValue: TypeAlias = JsonValue
+
+GetDeliverySuccessAdPackageDeliveryValue: TypeAlias = JsonValue
 
 GetDeliverySuccessGetDeliveryGoalDeliveryProjection: TypeAlias = JsonValue
 

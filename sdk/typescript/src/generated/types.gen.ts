@@ -5489,9 +5489,9 @@ export type GetDeliveryData = {
          */
         sponsoredBuyerCustomerId?: string;
         /**
-         * Select seller delivery, stored campaign delivery, live provider campaign delivery, or margin.
+         * Select seller delivery, stored campaign delivery, live provider campaign delivery, margin, or live per-ad delivery for one Meta campaign.
          */
-        report?: 'delivery' | 'campaign_delivery' | 'live_campaign_delivery' | 'margin';
+        report?: 'delivery' | 'campaign_delivery' | 'live_campaign_delivery' | 'margin' | 'live_ad_delivery';
         /**
          * Metrics; omit for report defaults.
          */
@@ -5690,6 +5690,9 @@ export type GetDeliveryResponses = {
             deliverySummary?: never;
             authority?: never;
             propertyDelivery?: never;
+            currency?: never;
+            reporting_period?: never;
+            by_package?: never;
         } | {
             report: 'campaign_delivery';
             query: GetDeliverySuccessQuery;
@@ -5732,6 +5735,9 @@ export type GetDeliveryResponses = {
             deliverySummary?: never;
             authority?: never;
             propertyDelivery?: never;
+            currency?: never;
+            reporting_period?: never;
+            by_package?: never;
         } | {
             report: 'margin';
             query: GetDeliverySuccessQuery;
@@ -5774,6 +5780,9 @@ export type GetDeliveryResponses = {
             deliverySummary?: never;
             authority?: never;
             propertyDelivery?: never;
+            currency?: never;
+            reporting_period?: never;
+            by_package?: never;
         } | {
             report: 'live_campaign_delivery';
             query: {
@@ -6023,6 +6032,9 @@ export type GetDeliveryResponses = {
             siteOutcomes?: never;
             synthetic?: never;
             propertyDelivery?: never;
+            currency?: never;
+            reporting_period?: never;
+            by_package?: never;
         } | {
             report: 'campaign_property_delivery';
             query: GetDeliverySuccessQuery;
@@ -6055,10 +6067,189 @@ export type GetDeliveryResponses = {
             delivery?: never;
             deliverySummary?: never;
             authority?: never;
+            currency?: never;
+            reporting_period?: never;
+            by_package?: never;
+        } | {
+            report: 'live_ad_delivery';
+            query: {
+                range: {
+                    startDate: string;
+                    endDate: string;
+                };
+                filters: {
+                    campaignId: string;
+                };
+            };
+            campaignId: string;
+            currency: string;
+            reporting_period: {
+                start: string;
+                end: string;
+                timezone: string;
+            };
+            by_package: Array<GetDeliverySuccessAdPackageDelivery>;
+            page: {
+                limit: number;
+                returned: number;
+                total: number;
+                truncated: boolean;
+                consistency: 'live_per_call';
+                nextCursor?: string;
+            };
+            authority: 'live_provider';
+            semantics: {
+                sourceOperation: 'meta_ad_insights';
+                genericFallback: false;
+                measurement: 'excluded';
+                missingValues: string;
+                freshness: string;
+                finality: string;
+                billingEligibility: string;
+            };
+            period?: never;
+            rows?: never;
+            totals?: never;
+            totalsByFinality?: never;
+            goalProgress?: never;
+            coverage?: never;
+            currencyConversions?: never;
+            currencyConversionsOmitted?: never;
+            conversion?: never;
+            siteOutcomes?: never;
+            synthetic?: never;
+            delivery?: never;
+            deliverySummary?: never;
+            propertyDelivery?: never;
         };
         error: null;
     };
 };
+
+export type GetDeliverySuccessAdDailyDelivery = {
+    impressions?: GetDeliverySuccessAdDailyDeliveryImpressions;
+    spend?: GetDeliverySuccessAdDailyDeliverySpend;
+    clicks?: GetDeliverySuccessAdDailyDeliveryClicks;
+    ctr?: GetDeliverySuccessAdDailyDeliveryCtr;
+    reach?: number;
+    reach_unit?: 'individuals' | 'households' | 'devices' | 'accounts' | 'cookies' | 'custom';
+    reach_window?: {
+        kind: 'cumulative' | 'period' | 'rolling';
+        period?: {
+            interval: number;
+            unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+            [key: string]: unknown;
+        };
+        [key: string]: unknown;
+    };
+    frequency?: number;
+    conversions?: GetDeliverySuccessAdDailyDeliveryConversions;
+    by_event_type?: GetDeliverySuccessAdDailyDeliveryByEventType;
+    date: string;
+    [key: string]: GetDeliverySuccessAdDailyDeliveryValue | GetDeliverySuccessAdDailyDeliveryImpressions | GetDeliverySuccessAdDailyDeliverySpend | GetDeliverySuccessAdDailyDeliveryClicks | GetDeliverySuccessAdDailyDeliveryCtr | number | 'individuals' | 'households' | 'devices' | 'accounts' | 'cookies' | 'custom' | {
+        kind: 'cumulative' | 'period' | 'rolling';
+        period?: {
+            interval: number;
+            unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+            [key: string]: unknown;
+        };
+        [key: string]: unknown;
+    } | GetDeliverySuccessAdDailyDeliveryConversions | GetDeliverySuccessAdDailyDeliveryByEventType | string | undefined;
+};
+
+export type GetDeliverySuccessAdDailyDeliveryByEventType = Array<{
+    event_type: 'page_view' | 'view_content' | 'select_content' | 'select_item' | 'search' | 'share' | 'add_to_cart' | 'remove_from_cart' | 'viewed_cart' | 'add_to_wishlist' | 'initiate_checkout' | 'add_payment_info' | 'purchase' | 'refund' | 'lead' | 'qualify_lead' | 'close_convert_lead' | 'disqualify_lead' | 'complete_registration' | 'subscribe' | 'follow' | 'content_view' | 'watch_milestone' | 'start_trial' | 'app_install' | 'app_launch' | 'contact' | 'schedule' | 'donate' | 'submit_application' | 'custom';
+    event_source_id?: string;
+    count: number;
+    value?: number;
+    [key: string]: unknown;
+}>;
+
+export type GetDeliverySuccessAdDailyDeliveryClicks = number;
+
+export type GetDeliverySuccessAdDailyDeliveryConversions = number;
+
+export type GetDeliverySuccessAdDailyDeliveryCtr = number;
+
+export type GetDeliverySuccessAdDailyDeliveryImpressions = number;
+
+export type GetDeliverySuccessAdDailyDeliverySpend = number;
+
+export type GetDeliverySuccessAdDailyDeliveryValue = unknown;
+
+export type GetDeliverySuccessAdDeliveryMetrics = {
+    /**
+     * Apostra creative id; null when Apostra did not make the ad.
+     */
+    creative_id: string | null;
+    impressions?: number;
+    spend?: number;
+    clicks?: number;
+    ctr?: number;
+    reach?: number;
+    reach_unit?: 'individuals' | 'households' | 'devices' | 'accounts' | 'cookies' | 'custom';
+    reach_window?: {
+        kind: 'cumulative' | 'period' | 'rolling';
+        period?: {
+            interval: number;
+            unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+            [key: string]: unknown;
+        };
+        [key: string]: unknown;
+    };
+    frequency?: number;
+    conversions?: number;
+    by_event_type?: Array<{
+        event_type: 'page_view' | 'view_content' | 'select_content' | 'select_item' | 'search' | 'share' | 'add_to_cart' | 'remove_from_cart' | 'viewed_cart' | 'add_to_wishlist' | 'initiate_checkout' | 'add_payment_info' | 'purchase' | 'refund' | 'lead' | 'qualify_lead' | 'close_convert_lead' | 'disqualify_lead' | 'complete_registration' | 'subscribe' | 'follow' | 'content_view' | 'watch_milestone' | 'start_trial' | 'app_install' | 'app_launch' | 'contact' | 'schedule' | 'donate' | 'submit_application' | 'custom';
+        event_source_id?: string;
+        count: number;
+        value?: number;
+        [key: string]: unknown;
+    }>;
+    platform_ad_id: string;
+    platform_ad_name: string | null;
+    platform_creative_id: string | null;
+    creative_session_id: string | null;
+    creative_session_variant_id: string | null;
+    daily_breakdown: Array<GetDeliverySuccessAdDailyDelivery>;
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessAdPackageDelivery = {
+    impressions?: GetDeliverySuccessAdPackageDeliveryImpressions;
+    spend?: GetDeliverySuccessAdPackageDeliverySpend;
+    clicks?: GetDeliverySuccessAdPackageDeliveryClicks;
+    ctr?: GetDeliverySuccessAdPackageDeliveryCtr;
+    conversions?: GetDeliverySuccessAdPackageDeliveryConversions;
+    by_event_type?: GetDeliverySuccessAdPackageDeliveryByEventType;
+    package_id: string;
+    pricing_model: 'cpm';
+    rate: number;
+    currency: string;
+    by_creative: Array<GetDeliverySuccessAdDeliveryMetrics>;
+    by_creative_truncated: boolean;
+    [key: string]: GetDeliverySuccessAdPackageDeliveryValue | GetDeliverySuccessAdPackageDeliveryImpressions | GetDeliverySuccessAdPackageDeliverySpend | GetDeliverySuccessAdPackageDeliveryClicks | GetDeliverySuccessAdPackageDeliveryCtr | GetDeliverySuccessAdPackageDeliveryConversions | GetDeliverySuccessAdPackageDeliveryByEventType | string | 'cpm' | number | Array<GetDeliverySuccessAdDeliveryMetrics> | boolean | undefined;
+};
+
+export type GetDeliverySuccessAdPackageDeliveryByEventType = Array<{
+    event_type: 'page_view' | 'view_content' | 'select_content' | 'select_item' | 'search' | 'share' | 'add_to_cart' | 'remove_from_cart' | 'viewed_cart' | 'add_to_wishlist' | 'initiate_checkout' | 'add_payment_info' | 'purchase' | 'refund' | 'lead' | 'qualify_lead' | 'close_convert_lead' | 'disqualify_lead' | 'complete_registration' | 'subscribe' | 'follow' | 'content_view' | 'watch_milestone' | 'start_trial' | 'app_install' | 'app_launch' | 'contact' | 'schedule' | 'donate' | 'submit_application' | 'custom';
+    event_source_id?: string;
+    count: number;
+    value?: number;
+    [key: string]: unknown;
+}>;
+
+export type GetDeliverySuccessAdPackageDeliveryClicks = number;
+
+export type GetDeliverySuccessAdPackageDeliveryConversions = number;
+
+export type GetDeliverySuccessAdPackageDeliveryCtr = number;
+
+export type GetDeliverySuccessAdPackageDeliveryImpressions = number;
+
+export type GetDeliverySuccessAdPackageDeliverySpend = number;
+
+export type GetDeliverySuccessAdPackageDeliveryValue = unknown;
 
 export type GetDeliverySuccessCampaignDeliveryCoverage = {
     /**
