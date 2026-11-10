@@ -443,6 +443,8 @@ class GetDeliveryResultReportCampaignDelivery(TypedDict):
     '\n    Present only for campaign_delivery: fresh interval delivery-goal pace and stored delivery-goal state, without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
     '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
+    deliveryFreshness: NotRequired[GetDeliverySuccessDeliveryFreshness]
+    '\n    campaign_delivery only: how current each media buy\'s stored seller delivery is, and which buys are stale.\n    '
     currencyConversions: NotRequired[GetDeliverySuccessCurrencyConversions]
     '\n    campaign_delivery only: each media buy behind this page\'s rows whose spend was converted into the advertiser\'s currency, by mediaBuyId, at most 100. Absent when none was.\n    '
     currencyConversionsOmitted: NotRequired[GetDeliverySuccessCurrencyConversionsOmitted]
@@ -489,6 +491,8 @@ class GetDeliveryResultReportDelivery(TypedDict):
     '\n    Present only for campaign_delivery: fresh interval delivery-goal pace and stored delivery-goal state, without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
     '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
+    deliveryFreshness: NotRequired[GetDeliverySuccessDeliveryFreshness]
+    '\n    campaign_delivery only: how current each media buy\'s stored seller delivery is, and which buys are stale.\n    '
     currencyConversions: NotRequired[GetDeliverySuccessCurrencyConversions]
     '\n    campaign_delivery only: each media buy behind this page\'s rows whose spend was converted into the advertiser\'s currency, by mediaBuyId, at most 100. Absent when none was.\n    '
     currencyConversionsOmitted: NotRequired[GetDeliverySuccessCurrencyConversionsOmitted]
@@ -796,6 +800,8 @@ class GetDeliveryResultReportMargin(TypedDict):
     '\n    Present only for campaign_delivery: fresh interval delivery-goal pace and stored delivery-goal state, without V2-only pace or denominator fields.\n    '
     coverage: NotRequired[GetDeliverySuccessCampaignDeliveryCoverage]
     '\n    Account-wide campaign_delivery reads only: in-flight campaigns with no stored rows, and the live read to call for each.\n    '
+    deliveryFreshness: NotRequired[GetDeliverySuccessDeliveryFreshness]
+    '\n    campaign_delivery only: how current each media buy\'s stored seller delivery is, and which buys are stale.\n    '
     currencyConversions: NotRequired[GetDeliverySuccessCurrencyConversions]
     '\n    campaign_delivery only: each media buy behind this page\'s rows whose spend was converted into the advertiser\'s currency, by mediaBuyId, at most 100. Absent when none was.\n    '
     currencyConversionsOmitted: NotRequired[GetDeliverySuccessCurrencyConversionsOmitted]
@@ -988,6 +994,14 @@ class GetDeliverySuccessDeliveryCurrencyConversion(TypedDict):
     '\n    booked: locked when the buy was booked. snapshot: the daily rate store. settlement: the seller labelled a currency it is not paid in; the spend is taken in the one it is paid in, at rate 1.\n    '
 
 GetDeliverySuccessCurrencyConversions: TypeAlias = "list[GetDeliverySuccessDeliveryCurrencyConversion]"
+
+class GetDeliverySuccessDeliveryFreshness(TypedDict):
+    staleMediaBuys: int
+    '\n    Stale media buys in scope, listed or not.\n    '
+    mediaBuys: list[GetDeliverySuccessMediaBuyDeliveryFreshness]
+    '\n    Each booked media buy in scope whose flight overlaps the period, at most 50: stale buys first, most overdue first, then by mediaBuyId.\n    '
+    mediaBuysOmitted: NotRequired[int]
+    '\n    Media buys in scope left out of mediaBuys by its cap. Absent when none.\n    '
 
 class GetDeliverySuccessDeliveryGoalProgressProjectionRange(TypedDict):
     lower: float
@@ -1508,6 +1522,24 @@ class GetDeliverySuccessGoalProgressVendorAttestedBasis(TypedDict):
     coverage: float | None
 
 GetDeliverySuccessGoalProgressBasis: TypeAlias = "GetDeliverySuccessGoalProgressSellerAttestedBasis | GetDeliverySuccessGoalProgressAdvertiserMeasuredBasis | GetDeliverySuccessGoalProgressVendorAttestedBasis"
+
+class GetDeliverySuccessMediaBuyDeliveryFreshness(TypedDict):
+    mediaBuyId: str
+    campaignId: str | None
+    seller: GetDeliverySuccessMediaBuyDeliveryFreshnessSellerValue | None
+    '\n    The seller every product of the buy is bought from; null when its products name none or more than one.\n    '
+    lastDayHeld: str | None
+    '\n    Last UTC day (YYYY-MM-DD) Apostra holds any delivery row for, a reported zero included. Null when none.\n    '
+    dueThrough: str
+    '\n    The last UTC day whose delivery is due now, by the reporting schedule the buy\'s products declare: a period is due its declared delay after it ends. With no declared schedule, a day is due two days after it starts.\n    '
+    overdueDays: int
+    '\n    Due days inside the flight after lastDayHeld, up to dueThrough, with no delivery row.\n    '
+    stale: bool
+    '\n    True when overdueDays is 1 or more: the seller delivery Apostra holds is behind. Missing data, not zero delivery.\n    '
+
+class GetDeliverySuccessMediaBuyDeliveryFreshnessSellerValue(TypedDict):
+    id: str
+    name: str | None
 
 class GetDeliverySuccessMetricLabel(TypedDict):
     name: str
