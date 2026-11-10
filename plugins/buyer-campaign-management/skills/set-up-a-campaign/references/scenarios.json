@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.17.0",
+  "skillVersion": "1.18.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -91,6 +91,16 @@
         "The agent says the campaign is a draft, its media buys are not booked and nothing delivers until it is launched.",
         "The agent explains that the creatives were sent to the draft buys' sellers when saved, reads platformLinks to name which seller holds each creative, and presents pending_review as that seller's creative review, not a booking.",
         "The agent names the launch as the next confirmation and does not launch without it."
+      ]
+    },
+    {
+      "id": "catalogs-page-to-review-and-sync",
+      "title": "Open the Catalogs page to see, connect, sync or review catalogs",
+      "given": "The buyer asks to see an advertiser's catalogs, or to check why one catalog has not refreshed and sync it. They name the advertiser, and for the second ask the catalog.",
+      "expect": [
+        "The agent opens open_catalogs_page with the advertiser's ID, adding catalogId only to open one catalog's detail, and does not repeat the catalog list in prose or send the buyer to the Apostra app.",
+        "The agent does not use open_catalog_file_picker for this: that is only for making a catalog from a file in a connected Drive or SharePoint folder.",
+        "If the tool refuses a catalogId because it is not that advertiser's catalog, the agent says so and offers the advertiser's own catalogs instead of retrying with another ID."
       ]
     },
     {

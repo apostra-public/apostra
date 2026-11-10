@@ -172,6 +172,14 @@ class Apostra(SyncTransport):
         "Open the catalog file picker: the buyer picks one file in a connected Drive or SharePoint folder and saves it as a catalog's source. They pick in the Task, so do not ask for connection or file ids. catalogId replaces that catalog's source; omit it for a new catalog. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenCatalogFilePickerResult], self._request_with_response("open_catalog_file_picker", input, account_id=account_id, timeout=timeout))
 
+    def open_catalogs_page(self, input: models.OpenCatalogsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenCatalogsPageResult:
+        "Open the Catalogs page for one advertiser: its catalogs with their health, to connect, sync and review. The page loads itself, so do not repeat the list. catalogId opens that catalog. To make a catalog from a connected Drive or SharePoint file, use open_catalog_file_picker."
+        return cast("models.OpenCatalogsPageResult", self._request("open_catalogs_page", input, account_id=account_id, timeout=timeout))
+
+    def open_catalogs_page_with_response(self, input: models.OpenCatalogsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenCatalogsPageResult]:
+        "Open the Catalogs page for one advertiser: its catalogs with their health, to connect, sync and review. The page loads itself, so do not repeat the list. catalogId opens that catalog. To make a catalog from a connected Drive or SharePoint file, use open_catalog_file_picker. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenCatalogsPageResult], self._request_with_response("open_catalogs_page", input, account_id=account_id, timeout=timeout))
+
     def open_creative_engines_page(self, input: models.OpenCreativeEnginesPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenCreativeEnginesPageResult:
         "Open the buyer Creative Engines Page. Optionally focus an engine, connection, or its secure setup control; the buyer starts setup in the Page, and this does not authorize a provider or start generation."
         return cast("models.OpenCreativeEnginesPageResult", self._request("open_creative_engines_page", input, account_id=account_id, timeout=timeout))
@@ -796,6 +804,14 @@ class AsyncApostra(AsyncTransport):
     async def open_catalog_file_picker_with_response(self, input: models.OpenCatalogFilePickerInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenCatalogFilePickerResult]:
         "Open the catalog file picker: the buyer picks one file in a connected Drive or SharePoint folder and saves it as a catalog's source. They pick in the Task, so do not ask for connection or file ids. catalogId replaces that catalog's source; omit it for a new catalog. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenCatalogFilePickerResult], await self._request_with_response("open_catalog_file_picker", input, account_id=account_id, timeout=timeout))
+
+    async def open_catalogs_page(self, input: models.OpenCatalogsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenCatalogsPageResult:
+        "Open the Catalogs page for one advertiser: its catalogs with their health, to connect, sync and review. The page loads itself, so do not repeat the list. catalogId opens that catalog. To make a catalog from a connected Drive or SharePoint file, use open_catalog_file_picker."
+        return cast("models.OpenCatalogsPageResult", await self._request("open_catalogs_page", input, account_id=account_id, timeout=timeout))
+
+    async def open_catalogs_page_with_response(self, input: models.OpenCatalogsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenCatalogsPageResult]:
+        "Open the Catalogs page for one advertiser: its catalogs with their health, to connect, sync and review. The page loads itself, so do not repeat the list. catalogId opens that catalog. To make a catalog from a connected Drive or SharePoint file, use open_catalog_file_picker. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenCatalogsPageResult], await self._request_with_response("open_catalogs_page", input, account_id=account_id, timeout=timeout))
 
     async def open_creative_engines_page(self, input: models.OpenCreativeEnginesPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenCreativeEnginesPageResult:
         "Open the buyer Creative Engines Page. Optionally focus an engine, connection, or its secure setup control; the buyer starts setup in the Page, and this does not authorize a provider or start generation."
