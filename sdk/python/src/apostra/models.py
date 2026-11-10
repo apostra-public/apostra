@@ -854,8 +854,8 @@ class GetDeliverySuccessAdDailyDeliveryReachWindowPeriod(TypedDict):
 GetDeliverySuccessAdDailyDeliverySpend: TypeAlias = float
 
 class GetDeliverySuccessAdDeliveryMetrics(TypedDict):
-    creative_id: str | None
-    '\n    Apostra creative id; null when Apostra did not make the ad.\n    '
+    creative_id: str
+    '\n    Apostra creative id, or an id Apostra assigns to a creative made in Meta; see creative_in_library.\n    '
     impressions: NotRequired[float]
     spend: NotRequired[float]
     clicks: NotRequired[float]
@@ -866,6 +866,8 @@ class GetDeliverySuccessAdDeliveryMetrics(TypedDict):
     frequency: NotRequired[float]
     conversions: NotRequired[float]
     by_event_type: NotRequired[list[GetDeliverySuccessAdDeliveryMetricsByEventTypeItem]]
+    creative_in_library: bool
+    '\n    false when Apostra assigned creative_id; get does not read those.\n    '
     platform_ad_id: str
     platform_ad_name: str | None
     platform_creative_id: str | None

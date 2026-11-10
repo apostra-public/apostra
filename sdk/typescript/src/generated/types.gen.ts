@@ -6194,9 +6194,9 @@ export type GetDeliverySuccessAdDailyDeliveryValue = unknown;
 
 export type GetDeliverySuccessAdDeliveryMetrics = {
     /**
-     * Apostra creative id; null when Apostra did not make the ad.
+     * Apostra creative id, or an id Apostra assigns to a creative made in Meta; see creative_in_library.
      */
-    creative_id: string | null;
+    creative_id: string;
     impressions?: number;
     spend?: number;
     clicks?: number;
@@ -6221,6 +6221,10 @@ export type GetDeliverySuccessAdDeliveryMetrics = {
         value?: number;
         [key: string]: unknown;
     }>;
+    /**
+     * false when Apostra assigned creative_id; get does not read those.
+     */
+    creative_in_library: boolean;
     platform_ad_id: string;
     platform_ad_name: string | null;
     platform_creative_id: string | null;
