@@ -15222,6 +15222,8 @@ class SaveMediaBuyInputKindCreateProductsItem(TypedDict):
     '\n    Create only. True: never starts before every creative is approved; the buy waits. Else books with approved creatives; the rest attach later.\n    '
     impressions: NotRequired[float]
     '\n    Create only: AdCP impression goal for this line item. A goal, not a billing guarantee unless the seller commits to it.\n    '
+    daily_budget_cap: NotRequired[float]
+    '\n    Create only: this line item\'s hard daily spend ceiling, at most its budget.\n    '
     flight: NotRequired[SaveMediaBuyInputKindCreateProductsItemFlight]
     '\n    Create only: this line item\'s own flight, inside the buy\'s. Omitted ends inherit the buy\'s.\n    '
     remove: NotRequired[bool]
@@ -15821,6 +15823,8 @@ class SaveMediaBuyInputKindUpdateProductsItem(TypedDict):
     '\n    Create only. True: never starts before every creative is approved; the buy waits. Else books with approved creatives; the rest attach later.\n    '
     impressions: NotRequired[float]
     '\n    Create only: AdCP impression goal for this line item. A goal, not a billing guarantee unless the seller commits to it.\n    '
+    daily_budget_cap: NotRequired[float]
+    '\n    Create only: this line item\'s hard daily spend ceiling, at most its budget.\n    '
     flight: NotRequired[SaveMediaBuyInputKindUpdateProductsItemFlight]
     '\n    Create only: this line item\'s own flight, inside the buy\'s. Omitted ends inherit the buy\'s.\n    '
     remove: NotRequired[bool]
