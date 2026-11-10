@@ -92114,7 +92114,7 @@ components:
         - required
         - verdict
       additionalProperties: false
-      description: 'Forecast rate vs rate needed: likely if low meets it, possible if high does'
+      description: Matching-standard viewable_rate threshold or completed_views target.
     request_proposals_success_ProposalRequestSellerError:
       type: object
       properties:
