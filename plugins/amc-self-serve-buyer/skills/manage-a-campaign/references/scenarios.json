@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "manage-a-campaign",
-  "skillVersion": "1.4.0",
+  "skillVersion": "1.5.0",
   "scenarios": [
     {
       "id": "html5-zip-upload-finished-before-attach",
@@ -31,6 +31,16 @@
         "The agent does not refuse the URLs and does not send them to the upload Task.",
         "After confirmation, it calls save_creative with assets giving each public url and its assetType (IMAGE, VAST), the campaignId and landing_page_url, adding vastVersion only when the buyer gave it.",
         "It uses only the URLs the buyer gave, confirms each creative with get, and, if the buyer had given an HTML5 ZIP URL instead, explains that a ZIP goes through upload_creative_asset."
+      ]
+    },
+    {
+      "id": "pre-launch-check-before-confirm",
+      "title": "Check a campaign with the buyer between the launch preview and confirmLaunch",
+      "given": "The buyer asks to launch a draft campaign with two media buys. One buy's preview lists a creative as not ready, and the campaign's click URLs carry a {CACHEBUSTER} macro and the buyer's own utm_source.",
+      "expect": [
+        "The agent calls save_campaign with desiredPhase \"active\" and no confirmLaunch, and presents the preview in full, including the creative that is not ready and the flight in local time and UTC.",
+        "Before asking for confirmation, it reads each media buy with its products and creatives, tests each final click URL with test_creative_macros, and reports pacing, budget and any daily cap without changing them.",
+        "It reports any macro that does not resolve as a blocker for the buyer to decide on, offers autoUtm false with macroAdditions for the buyer's own UTM convention and changes tracking only after confirmation, and calls save_campaign with confirmLaunch true only after the buyer confirms."
       ]
     }
   ]

@@ -27,10 +27,21 @@ Ground every recommendation and change in the current campaign, delivery, and cr
 6. Explain what needs attention and propose the smallest supported change. Before any write, show the exact target, current revision, requested fields, expected effect, and material risk.
 7. After confirmation:
    - Use `save_campaign` for supported campaign changes with the current `expectedRevision` and a stable idempotency key. Reuse that key only when retrying the exact same intent.
-   - To launch, first call `save_campaign` with `desiredPhase: "active"` and without `confirmLaunch`. Show the returned preview, obtain confirmation, then call it again with `confirmLaunch: true`, the preview's revision as `expectedRevision`, and the required idempotency key.
+   - To launch, first call `save_campaign` with `desiredPhase: "active"` and without `confirmLaunch`. Run the checks under "Before you launch" and show their results with the returned preview, obtain confirmation, then call it again with `confirmLaunch: true`, the preview's revision as `expectedRevision`, and the required idempotency key.
    - Use `save_creative` or `save_creative_collection` for confirmed creative changes with exact IDs.
    - Treat campaign or creative archival and financial changes as destructive; require explicit confirmation immediately before the call.
 8. Read the updated campaign and relevant delivery evidence again. Report the observed result, warnings, partial writes, downstream errors, and unresolved actions.
+
+## Before you launch
+
+Between the launch preview and `confirmLaunch: true`, check the campaign with the buyer. The preview and the platform's own launch checks decide readiness; present what they return and never work it out yourself.
+
+1. Present the preview in full: every media buy, each creative the preview lists as not ready, each buy that books now with its creative attaching once the seller approves it, and the flight in local time and UTC. Never summarise a preview problem away.
+2. Read each buy back with `get` kind `media_buy` and `include: ["products", "creatives"]`. Check that each package's targeting and creatives match what the buyer asked for, following [Add buying steps](/v3/build-an-agent#add-buying-steps).
+3. Test each click-through. Read the campaign's tracking with `get` and `include: ["tracking"]`. For each creative's final click URL (its `landing_page_url` with the campaign's click-URL parameters), call `test_creative_macros` with that URL as `rawInput`, a `scenario`, and the macros the URL uses as `requiredMacros`. Report any macro that does not resolve as a blocker for the buyer to decide on. When a creative was just saved, its `save_creative` result also carries `macroPreview`: name to the buyer any macro under `filledBySomeSellers` or `literal`, since it may not expand at every seller. Follow [See how a saved creative's trackers expand](/v3/tool-reference#see-how-a-saved-creatives-trackers-expand) and [Landing-page macros](/v3/landing-page-macros).
+4. State each buy's pacing, budget and any daily cap. Report them; change nothing the buyer did not ask for.
+5. If the buyer keeps their own analytics or UTM convention, offer to turn Apostra's tags off with `tracking.autoUtm: false` and set their parameters as `tracking.macroAdditions`, following [Auto-tagged links](/v3/auto-tagged-links). Change tracking only after confirmation. A creative a seller already holds keeps its old link until it is sent again, so say which creatives that affects.
+6. When a blocker is one the buyer cannot fix, such as a seller refusal or a creative stuck in sync, offer to file it with `save_ask` (`type` `support`, or `supply` for missing inventory). Show the draft and file it only after confirmation.
 
 ## Safety rules
 
