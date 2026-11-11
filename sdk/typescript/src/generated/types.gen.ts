@@ -35769,6 +35769,14 @@ export type SearchData = {
              */
             parentId?: string;
             /**
+             * For kind targeting_value, required: the code system.
+             */
+            system?: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
+            /**
              * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
             workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
@@ -36240,6 +36248,14 @@ export type SearchData = {
              * For kind ad_server_targeting: list the children of this candidate, for example the values under one key.
              */
             parentId?: string;
+            /**
+             * For kind targeting_value, required: the code system.
+             */
+            system?: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
             /**
              * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
@@ -36781,6 +36797,14 @@ export type SearchData = {
              */
             parentId?: string;
             /**
+             * For kind targeting_value, required: the code system.
+             */
+            system?: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
+            /**
              * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
             workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
@@ -37252,6 +37276,14 @@ export type SearchData = {
              * For kind ad_server_targeting: list the children of this candidate, for example the values under one key.
              */
             parentId?: string;
+            /**
+             * For kind targeting_value, required: the code system.
+             */
+            system?: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
             /**
              * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
@@ -37718,6 +37750,14 @@ export type SearchData = {
              */
             parentId?: string;
             /**
+             * For kind targeting_value, required: the code system.
+             */
+            system?: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
+            /**
              * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
             workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
@@ -38186,6 +38226,14 @@ export type SearchData = {
              */
             parentId?: string;
             /**
+             * For kind targeting_value, required: the code system.
+             */
+            system?: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
+            /**
              * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
             workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
@@ -38653,6 +38701,14 @@ export type SearchData = {
              * For kind ad_server_targeting: list the children of this candidate, for example the values under one key.
              */
             parentId?: string;
+            /**
+             * For kind targeting_value, required: the code system.
+             */
+            system?: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
             /**
              * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
@@ -39248,6 +39304,14 @@ export type SearchData = {
              */
             parentId?: string;
             /**
+             * For kind targeting_value, required: the code system.
+             */
+            system?: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
+            /**
              * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
             workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
@@ -39720,6 +39784,14 @@ export type SearchData = {
              */
             parentId?: string;
             /**
+             * For kind targeting_value, required: the code system.
+             */
+            system?: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
+            /**
              * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
             workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
@@ -40126,6 +40198,78 @@ export type SearchData = {
          * Which docs to rank. caller_relevant (the default) skips docs written for other account types; public_research searches every public doc.
          */
         docsScope?: 'caller_relevant' | 'public_research';
+        kind: 'targeting_value';
+        /**
+         * For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.
+         */
+        sponsoredBuyerCustomerId?: string;
+        /**
+         * For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.
+         */
+        scope?: 'unit';
+        /**
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         */
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress'>;
+        /**
+         * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+         */
+        sourceId?: string;
+        /**
+         * Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.
+         */
+        filter: {
+            /**
+             * For kind targeting_value, required: the code system.
+             */
+            system: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
+        };
+        /**
+         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         */
+        cursor?: string;
+        /**
+         * Results per page, default 50. A value above a kind page maximum is capped to it.
+         */
+        limit?: number;
+        /**
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         */
+        groupBy?: string;
+        accountId?: number | string;
+    }) | (unknown & {
+        /**
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.
+         */
+        query?: string;
+        /**
+         * The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.
+         */
+        document?: string;
+        /**
+         * The exact revision of an agreement docs hit, read together with its document. Docs only.
+         */
+        revision?: string;
+        /**
+         * One section of an agreement revision. Needs both document and revision.
+         */
+        section?: string;
+        /**
+         * The time to evaluate docs at; defaults to now. When continuing an agreement read with cursor, send the same asOf again.
+         */
+        asOf?: string;
+        /**
+         * What to search: objects, docs, or specs. When omitted, a call with query searches all three and a call without query lists objects. docs and specs need a query, except an agreement read by document and revision.
+         */
+        sources?: Array<'objects' | 'docs' | 'specs'>;
+        /**
+         * Which docs to rank. caller_relevant (the default) skips docs written for other account types; public_research searches every public doc.
+         */
+        docsScope?: 'caller_relevant' | 'public_research';
         kind: 'buyer_rfp';
         /**
          * For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.
@@ -40191,6 +40335,14 @@ export type SearchData = {
              * For kind ad_server_targeting: list the children of this candidate, for example the values under one key.
              */
             parentId?: string;
+            /**
+             * For kind targeting_value, required: the code system.
+             */
+            system?: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
             /**
              * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
@@ -40663,6 +40815,14 @@ export type SearchData = {
              */
             parentId?: string;
             /**
+             * For kind targeting_value, required: the code system.
+             */
+            system?: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
+            /**
              * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
             workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
@@ -41134,6 +41294,14 @@ export type SearchData = {
              * For kind ad_server_targeting: list the children of this candidate, for example the values under one key.
              */
             parentId?: string;
+            /**
+             * For kind targeting_value, required: the code system.
+             */
+            system?: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
             /**
              * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
@@ -41607,6 +41775,14 @@ export type SearchData = {
              */
             parentId?: string;
             /**
+             * For kind targeting_value, required: the code system.
+             */
+            system?: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
+            /**
              * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
             workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
@@ -42078,6 +42254,14 @@ export type SearchData = {
              * For kind ad_server_targeting: list the children of this candidate, for example the values under one key.
              */
             parentId?: string;
+            /**
+             * For kind targeting_value, required: the code system.
+             */
+            system?: 'nielsen_dma';
+            /**
+             * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
+             */
+            names?: Array<string>;
             /**
              * For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.
              */
@@ -42565,7 +42749,7 @@ export type SearchResponses = {
     200: {
         data: {
             sources: Array<'objects' | 'docs' | 'specs'>;
-            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchSessionPageOutput | {
+            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchSessionPageOutput | {
                 kind: string;
                 groupBy: string;
                 total: number;
@@ -42585,7 +42769,7 @@ export type SearchResponses = {
             } | {
                 outcome: 'mixed';
                 kind: 'mixed';
-                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
+                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
                 [key: string]: unknown;
             };
             objectsUnavailable?: string;
@@ -45244,6 +45428,73 @@ export type SearchSuccessSearchSourceAccountPageOutputValue = unknown;
 export type SearchSuccessSearchSourceAccountUnavailableOutput = {
     outcome: 'unavailable_source_account';
     kind: 'source_account';
+    unavailable: string;
+    message: string;
+    [key: string]: unknown;
+};
+
+export type SearchSuccessSearchTargetingValuePageOutput = {
+    total?: SearchSuccessSearchTargetingValuePageOutputTotal;
+    totalLowerBound?: SearchSuccessSearchTargetingValuePageOutputTotalLowerBound;
+    returned?: SearchSuccessSearchTargetingValuePageOutputReturned;
+    hasMore?: SearchSuccessSearchTargetingValuePageOutputHasMore;
+    truncated?: SearchSuccessSearchTargetingValuePageOutputTruncated;
+    nextCursor?: SearchSuccessSearchTargetingValuePageOutputNextCursor;
+    results: SearchSuccessSearchTargetingValuePageOutputResults;
+    outcome: 'page_targeting_value';
+    kind: 'targeting_value';
+    [key: string]: SearchSuccessSearchTargetingValuePageOutputValue | SearchSuccessSearchTargetingValuePageOutputTotal | SearchSuccessSearchTargetingValuePageOutputTotalLowerBound | SearchSuccessSearchTargetingValuePageOutputReturned | SearchSuccessSearchTargetingValuePageOutputHasMore | SearchSuccessSearchTargetingValuePageOutputTruncated | SearchSuccessSearchTargetingValuePageOutputNextCursor | SearchSuccessSearchTargetingValuePageOutputResults | 'page_targeting_value' | 'targeting_value' | undefined;
+};
+
+export type SearchSuccessSearchTargetingValuePageOutputHasMore = boolean;
+
+export type SearchSuccessSearchTargetingValuePageOutputNextCursor = string;
+
+export type SearchSuccessSearchTargetingValuePageOutputResults = Array<{
+    advertiserId?: string;
+    name?: string | null;
+    sandbox?: boolean;
+    /**
+     * Where the items come from: url when url is set, file when file is set.
+     */
+    sourceType?: 'inline' | 'url' | 'file' | null;
+    /**
+     * Items in the latest version against the one before it.
+     */
+    lastChangeSummary?: {
+        added: number;
+        updated: number;
+        unchanged: number;
+        removed: number;
+    } | null;
+    /**
+     * The active transform, if any.
+     */
+    transform?: {
+        name: string;
+        updatedAt: string;
+    } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    [key: string]: unknown;
+}>;
+
+export type SearchSuccessSearchTargetingValuePageOutputReturned = number;
+
+export type SearchSuccessSearchTargetingValuePageOutputTotal = number;
+
+export type SearchSuccessSearchTargetingValuePageOutputTotalLowerBound = number;
+
+export type SearchSuccessSearchTargetingValuePageOutputTruncated = boolean;
+
+export type SearchSuccessSearchTargetingValuePageOutputValue = unknown;
+
+export type SearchSuccessSearchTargetingValueUnavailableOutput = {
+    outcome: 'unavailable_targeting_value';
+    kind: 'targeting_value';
     unavailable: string;
     message: string;
     [key: string]: unknown;
