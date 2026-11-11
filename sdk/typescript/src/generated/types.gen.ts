@@ -16091,30 +16091,34 @@ export type SaveAdvertiserResponses = {
             advertiser: SaveAdvertiserSuccessAdvertiser;
             creativeResync?: SaveAdvertiserSuccessCreativeResync;
             currencyDefaulted?: SaveAdvertiserSuccessCurrencyDefaulted;
+            timezoneDefaulted?: SaveAdvertiserSuccessTimezoneDefaulted;
             receipt?: SaveAdvertiserSuccessReceipt;
             action: 'created';
-            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessReceipt | 'created' | undefined;
+            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessTimezoneDefaulted | SaveAdvertiserSuccessReceipt | 'created' | undefined;
         } | {
             advertiser: SaveAdvertiserSuccessAdvertiser;
             creativeResync?: SaveAdvertiserSuccessCreativeResync;
             currencyDefaulted?: SaveAdvertiserSuccessCurrencyDefaulted;
+            timezoneDefaulted?: SaveAdvertiserSuccessTimezoneDefaulted;
             receipt?: SaveAdvertiserSuccessReceipt;
             action: 'updated';
-            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessReceipt | 'updated' | undefined;
+            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessTimezoneDefaulted | SaveAdvertiserSuccessReceipt | 'updated' | undefined;
         } | {
             advertiser: SaveAdvertiserSuccessAdvertiser;
             creativeResync?: SaveAdvertiserSuccessCreativeResync;
             currencyDefaulted?: SaveAdvertiserSuccessCurrencyDefaulted;
+            timezoneDefaulted?: SaveAdvertiserSuccessTimezoneDefaulted;
             receipt?: SaveAdvertiserSuccessReceipt;
             action: 'unchanged';
-            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessReceipt | 'unchanged' | undefined;
+            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessTimezoneDefaulted | SaveAdvertiserSuccessReceipt | 'unchanged' | undefined;
         } | {
             advertiser: SaveAdvertiserSuccessAdvertiser;
             creativeResync?: SaveAdvertiserSuccessCreativeResync;
             currencyDefaulted?: SaveAdvertiserSuccessCurrencyDefaulted;
+            timezoneDefaulted?: SaveAdvertiserSuccessTimezoneDefaulted;
             receipt?: SaveAdvertiserSuccessReceipt;
             action: 'restored';
-            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessReceipt | 'restored' | undefined;
+            [key: string]: SaveAdvertiserSuccessValue | SaveAdvertiserSuccessAdvertiser | SaveAdvertiserSuccessCreativeResync | SaveAdvertiserSuccessCurrencyDefaulted | SaveAdvertiserSuccessTimezoneDefaulted | SaveAdvertiserSuccessReceipt | 'restored' | undefined;
         } | {
             advertiserIds: SaveAdvertiserSuccessAdvertiserIds;
             results: SaveAdvertiserSuccessResults;
@@ -16262,6 +16266,8 @@ export type SaveAdvertiserSuccessResults = Array<{
     partialWrite?: boolean;
     [key: string]: unknown;
 }>;
+
+export type SaveAdvertiserSuccessTimezoneDefaulted = boolean;
 
 export type SaveAdvertiserSuccessValue = unknown;
 

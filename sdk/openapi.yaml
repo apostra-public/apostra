@@ -37366,6 +37366,8 @@ paths:
                             $ref: '#/components/schemas/save_advertiser_success_CreativeResync'
                           currencyDefaulted:
                             $ref: '#/components/schemas/save_advertiser_success_CurrencyDefaulted'
+                          timezoneDefaulted:
+                            $ref: '#/components/schemas/save_advertiser_success_TimezoneDefaulted'
                           receipt:
                             $ref: '#/components/schemas/save_advertiser_success_Receipt'
                           action:
@@ -37384,6 +37386,8 @@ paths:
                             $ref: '#/components/schemas/save_advertiser_success_CreativeResync'
                           currencyDefaulted:
                             $ref: '#/components/schemas/save_advertiser_success_CurrencyDefaulted'
+                          timezoneDefaulted:
+                            $ref: '#/components/schemas/save_advertiser_success_TimezoneDefaulted'
                           receipt:
                             $ref: '#/components/schemas/save_advertiser_success_Receipt'
                           action:
@@ -37402,6 +37406,8 @@ paths:
                             $ref: '#/components/schemas/save_advertiser_success_CreativeResync'
                           currencyDefaulted:
                             $ref: '#/components/schemas/save_advertiser_success_CurrencyDefaulted'
+                          timezoneDefaulted:
+                            $ref: '#/components/schemas/save_advertiser_success_TimezoneDefaulted'
                           receipt:
                             $ref: '#/components/schemas/save_advertiser_success_Receipt'
                           action:
@@ -37420,6 +37426,8 @@ paths:
                             $ref: '#/components/schemas/save_advertiser_success_CreativeResync'
                           currencyDefaulted:
                             $ref: '#/components/schemas/save_advertiser_success_CurrencyDefaulted'
+                          timezoneDefaulted:
+                            $ref: '#/components/schemas/save_advertiser_success_TimezoneDefaulted'
                           receipt:
                             $ref: '#/components/schemas/save_advertiser_success_Receipt'
                           action:
@@ -94154,6 +94162,8 @@ components:
         - sellerCount
       additionalProperties: false
     save_advertiser_success_CurrencyDefaulted:
+      type: boolean
+    save_advertiser_success_TimezoneDefaulted:
       type: boolean
     save_advertiser_success_Receipt:
       type: object
