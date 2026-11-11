@@ -45022,6 +45022,12 @@ paths:
                     its campaigns and to its sellerIds. With campaignId alone: every creative of the campaign.
                   type: boolean
                   const: true
+                validateOnly:
+                  description: >-
+                    Check assets and text against the format and save nothing: no Creative, no draft row. Checks a new,
+                    complete creative only — drop creativeId, mode: "draft", and every other shape (archive, resync,
+                    bulk update, membership, Library role, duplicate, session promotion).
+                  type: boolean
                 idempotencyKey:
                   description: >-
                     Stable key per call. Duplicate requires it and replays exactly once; V2-backed writes are
@@ -45442,6 +45448,7 @@ paths:
                   data:
                     oneOf:
                       - $ref: '#/components/schemas/save_creative_success_DuplicateCreativeSuccess'
+                      - $ref: '#/components/schemas/save_creative_success_ValidateOnlyCreativeSuccess'
                       - $ref: '#/components/schemas/save_creative_success_AgentApprovalRequired'
                       - type: object
                         properties:
@@ -99684,6 +99691,41 @@ components:
         - name
         - campaignIds
         - stateRevision
+      additionalProperties: false
+    save_creative_success_ValidateOnlyCreativeSuccess:
+      type: object
+      properties:
+        action:
+          type: string
+          const: validated
+        saved:
+          type: boolean
+          const: false
+        validateOnly:
+          type: boolean
+          const: true
+        valid:
+          type: boolean
+          const: true
+        name:
+          type: string
+        formatKind:
+          type: string
+        campaignId:
+          type: string
+        advertiserId:
+          type: string
+        assetCount:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+      required:
+        - action
+        - saved
+        - validateOnly
+        - valid
+        - name
+        - assetCount
       additionalProperties: false
     save_creative_success_AgentApprovalRequired:
       type: object

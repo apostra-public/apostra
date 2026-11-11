@@ -12567,6 +12567,8 @@ class SaveCreativeInput(TypedDict):
     '\n    true archives globally (frees the name); false restores it with creativeId and advertiserId, optionally a new name, without re-attaching campaigns.\n    '
     resync: NotRequired[Literal[True]]
     '\n    Re-send to every media buy, live ones included. With creativeId and advertiserId: that creative on its campaigns and to its sellerIds. With campaignId alone: every creative of the campaign.\n    '
+    validateOnly: NotRequired[bool]
+    '\n    Check assets and text against the format and save nothing: no Creative, no draft row. Checks a new, complete creative only — drop creativeId, mode: "draft", and every other shape (archive, resync, bulk update, membership, Library role, duplicate, session promotion).\n    '
     idempotencyKey: NotRequired[str]
     '\n    Stable key per call. Duplicate requires it and replays exactly once; V2-backed writes are best-effort.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -13650,7 +13652,18 @@ class SaveCreativeSuccessSaveCreativeLibraryRoleSuccess(TypedDict):
     creative: SaveCreativeSuccessSaveCreativeLibraryRoleCreative
     replayed: bool
 
-SaveCreativeResult: TypeAlias = "SaveCreativeSuccessDuplicateCreativeSuccess | SaveCreativeSuccessAgentApprovalRequired | SaveCreativeResultActionBulkUpdatePreviewed | SaveCreativeResultActionBulkUpdated | SaveCreativeResultActionCreated | SaveCreativeResultActionUpdated | SaveCreativeResultActionAssociated | SaveCreativeResultActionMembershipUpdated | SaveCreativeResultActionResynced | SaveCreativeResultActionCampaignResynced | SaveCreativeResultActionArchived | SaveCreativeResultActionRestored | SaveCreativeResultActionPromoted | SaveCreativeResultActionPromoting | SaveCreativeSuccessSaveCreativeLibraryRoleSuccess"
+class SaveCreativeSuccessValidateOnlyCreativeSuccess(TypedDict):
+    action: Literal["validated"]
+    saved: Literal[False]
+    validateOnly: Literal[True]
+    valid: Literal[True]
+    name: str
+    formatKind: NotRequired[str]
+    campaignId: NotRequired[str]
+    advertiserId: NotRequired[str]
+    assetCount: int
+
+SaveCreativeResult: TypeAlias = "SaveCreativeSuccessDuplicateCreativeSuccess | SaveCreativeSuccessValidateOnlyCreativeSuccess | SaveCreativeSuccessAgentApprovalRequired | SaveCreativeResultActionBulkUpdatePreviewed | SaveCreativeResultActionBulkUpdated | SaveCreativeResultActionCreated | SaveCreativeResultActionUpdated | SaveCreativeResultActionAssociated | SaveCreativeResultActionMembershipUpdated | SaveCreativeResultActionResynced | SaveCreativeResultActionCampaignResynced | SaveCreativeResultActionArchived | SaveCreativeResultActionRestored | SaveCreativeResultActionPromoted | SaveCreativeResultActionPromoting | SaveCreativeSuccessSaveCreativeLibraryRoleSuccess"
 
 SaveCreativeSuccessWarnings: TypeAlias = list[str]
 
