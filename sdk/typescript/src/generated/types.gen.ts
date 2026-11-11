@@ -20790,10 +20790,7 @@ export type SaveCampaignSuccessMediaBuys = Array<{
 } | {
     mediaBuyId: string;
     outcome: 'cancel_failed';
-    error: {
-        code: string;
-        message: string;
-    };
+    error?: SaveCampaignSuccessSellerAdcpErrorSummary;
 }>;
 
 export type SaveCampaignSuccessMediaBuysItemMediaBuyId = string;
@@ -20895,6 +20892,14 @@ export type SaveCampaignSuccessPropertyListPushPending = {
      * The media buy affected
      */
     mediaBuyId: string;
+};
+
+/**
+ * The structured part of the error the seller answered with, in AdCP's own field names: `code` (a standard AdCP error code) and `recovery` (`transient`, `correctable` or `terminal`). The seller's `message`, `suggestion`, `details` and `buyer_reason` are never returned. Absent fields were not reported or were not safe to keep.
+ */
+export type SaveCampaignSuccessSellerAdcpErrorSummary = {
+    code?: string;
+    recovery?: 'transient' | 'correctable' | 'terminal';
 };
 
 export type SaveCampaignSuccessServerTime = string;

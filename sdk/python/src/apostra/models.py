@@ -11770,11 +11770,7 @@ class SaveCampaignSuccessMediaBuysItemOutcomeArchived(TypedDict):
 class SaveCampaignSuccessMediaBuysItemOutcomeCancelFailed(TypedDict):
     mediaBuyId: str
     outcome: Literal["cancel_failed"]
-    error: SaveCampaignSuccessMediaBuysItemOutcomeCancelFailedError
-
-class SaveCampaignSuccessMediaBuysItemOutcomeCancelFailedError(TypedDict):
-    code: str
-    message: str
+    error: NotRequired[SaveCampaignSuccessSellerAdcpErrorSummary]
 
 class SaveCampaignSuccessMediaBuysItemOutcomeCancelPending(TypedDict):
     mediaBuyId: str
@@ -11871,6 +11867,12 @@ SaveCampaignSuccessPropertyListPushActionRequiredReason: TypeAlias = Literal["li
 class SaveCampaignSuccessPropertyListPushPending(TypedDict):
     mediaBuyId: str
     '\n    The media buy affected\n    '
+
+class SaveCampaignSuccessSellerAdcpErrorSummary(TypedDict):
+    code: NotRequired[str]
+    recovery: NotRequired[Literal["transient", "correctable", "terminal"]]
+
+SaveCampaignSuccessMediaBuysItemOutcomeCancelFailedError: TypeAlias = SaveCampaignSuccessSellerAdcpErrorSummary
 
 SaveCampaignSuccessServerTime: TypeAlias = str
 

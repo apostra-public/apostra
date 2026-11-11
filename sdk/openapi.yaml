@@ -98338,6 +98338,26 @@ components:
         - mediaBuyId
       additionalProperties: false
       description: An active media buy whose seller has not yet confirmed the property list change.
+    save_campaign_success_SellerAdcpErrorSummary:
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 64
+        recovery:
+          anyOf:
+            - type: string
+              const: transient
+            - type: string
+              const: correctable
+            - type: string
+              const: terminal
+      additionalProperties: false
+      description: >-
+        The structured part of the error the seller answered with, in AdCP's own field names: `code` (a standard AdCP
+        error code) and `recovery` (`transient`, `correctable` or `terminal`). The seller's `message`, `suggestion`,
+        `details` and `buyer_reason` are never returned. Absent fields were not reported or were not safe to keep.
     save_campaign_success_CampaignLaunchClickMacroLoss:
       type: object
       properties:
@@ -98832,20 +98852,10 @@ components:
                 type: string
                 const: cancel_failed
               error:
-                type: object
-                properties:
-                  code:
-                    type: string
-                  message:
-                    type: string
-                required:
-                  - code
-                  - message
-                additionalProperties: false
+                $ref: '#/components/schemas/save_campaign_success_SellerAdcpErrorSummary'
             required:
               - mediaBuyId
               - outcome
-              - error
             additionalProperties: false
     save_campaign_success_Value: {}
     save_campaign_success_LaunchMediaBuysItemBudget:
