@@ -51544,7 +51544,7 @@ paths:
                       minLength: 1
                     flight:
                       description: >-
-                        Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current
+                        Specific starts must be 5+ minutes away; "asap" starts now. Running buy: resend its current
                         startAt with the new endAt.
                       type: object
                       properties:
@@ -53449,7 +53449,7 @@ paths:
                       minLength: 1
                     flight:
                       description: >-
-                        Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current
+                        Specific starts must be 5+ minutes away; "asap" starts now. Running buy: resend its current
                         startAt with the new endAt.
                       type: object
                       properties:
@@ -53571,7 +53571,7 @@ paths:
                       minLength: 1
                     flight:
                       description: >-
-                        Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current
+                        Specific starts must be 5+ minutes away; "asap" starts now. Running buy: resend its current
                         startAt with the new endAt.
                       type: object
                       properties:
