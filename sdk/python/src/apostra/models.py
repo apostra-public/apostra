@@ -8819,6 +8819,7 @@ class SaveAdvertiserResultActionCreated(TypedDict):
     advertiser: SaveAdvertiserSuccessAdvertiser
     creativeResync: NotRequired[SaveAdvertiserSuccessCreativeResync]
     currencyDefaulted: NotRequired[SaveAdvertiserSuccessCurrencyDefaulted]
+    timezoneDefaulted: NotRequired[SaveAdvertiserSuccessTimezoneDefaulted]
     receipt: NotRequired[SaveAdvertiserSuccessReceipt]
     action: Literal["created"]
 
@@ -8877,6 +8878,7 @@ class SaveAdvertiserResultActionRestored(TypedDict):
     advertiser: SaveAdvertiserSuccessAdvertiser
     creativeResync: NotRequired[SaveAdvertiserSuccessCreativeResync]
     currencyDefaulted: NotRequired[SaveAdvertiserSuccessCurrencyDefaulted]
+    timezoneDefaulted: NotRequired[SaveAdvertiserSuccessTimezoneDefaulted]
     receipt: NotRequired[SaveAdvertiserSuccessReceipt]
     action: Literal["restored"]
 
@@ -8884,6 +8886,7 @@ class SaveAdvertiserResultActionUnchanged(TypedDict):
     advertiser: SaveAdvertiserSuccessAdvertiser
     creativeResync: NotRequired[SaveAdvertiserSuccessCreativeResync]
     currencyDefaulted: NotRequired[SaveAdvertiserSuccessCurrencyDefaulted]
+    timezoneDefaulted: NotRequired[SaveAdvertiserSuccessTimezoneDefaulted]
     receipt: NotRequired[SaveAdvertiserSuccessReceipt]
     action: Literal["unchanged"]
 
@@ -8891,6 +8894,7 @@ class SaveAdvertiserResultActionUpdated(TypedDict):
     advertiser: SaveAdvertiserSuccessAdvertiser
     creativeResync: NotRequired[SaveAdvertiserSuccessCreativeResync]
     currencyDefaulted: NotRequired[SaveAdvertiserSuccessCurrencyDefaulted]
+    timezoneDefaulted: NotRequired[SaveAdvertiserSuccessTimezoneDefaulted]
     receipt: NotRequired[SaveAdvertiserSuccessReceipt]
     action: Literal["updated"]
 
@@ -8969,6 +8973,8 @@ class SaveAdvertiserSuccessResultsItem(TypedDict):
     partialWrite: NotRequired[bool]
 
 SaveAdvertiserSuccessResults: TypeAlias = "list[SaveAdvertiserSuccessResultsItem]"
+
+SaveAdvertiserSuccessTimezoneDefaulted: TypeAlias = bool
 
 SaveAdvertiserSuccessValue: TypeAlias = JsonValue
 
