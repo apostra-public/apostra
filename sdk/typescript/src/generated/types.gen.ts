@@ -8240,6 +8240,7 @@ export type GetResponses = {
                     truncated?: never;
                     totalDestinations?: never;
                 };
+                stalledCancels?: Array<GetSuccessCampaignStalledCancel>;
                 /**
                  * Where the items come from: url when url is set, file when file is set.
                  */
@@ -9497,6 +9498,14 @@ export type GetSuccessBillingPendingApprovalPaymentTerms = 'net_15' | 'net_30' |
  */
 export type GetSuccessBillingPendingApprovalUrl = string;
 
+/**
+ * The structured part of the error the seller refused the cancel with, in AdCP's own field names: `code` (a standard AdCP error code) and `recovery` (`transient`, `correctable` or `terminal`). The seller's `message`, `suggestion`, `details` and `buyer_reason` are never returned. Absent fields were not reported or were not safe to keep.
+ */
+export type GetSuccessCampaignCancelSellerError = {
+    code?: string;
+    recovery?: 'transient' | 'correctable' | 'terminal';
+};
+
 export type GetSuccessCampaignGoalProgress = {
     scope: GetSuccessCampaignGoalProgressScope;
     goalKind: 'optimization' | 'delivery';
@@ -10039,6 +10048,26 @@ export type GetSuccessCampaignPulseMetricValue = {
 export type GetSuccessCampaignPulseTimeRange = {
     earliest: string;
     latest: string;
+};
+
+/**
+ * A buy of an ending campaign whose cancel will not finish without a new request. `refused`: the seller answered the cancel with an error and did not apply it (a rejected cancellation approval reads the same, with no error). `not_delivered`: Apostra tried to send the cancel and gave up without a seller answer. `not_sent`: Apostra holds a complete record that no cancel was sent for this buy. Send the cancel again with `save_campaign` `desiredPhase: "canceled"`, or `save_media_buy` `isCanceled: true` for one buy.
+ */
+export type GetSuccessCampaignStalledCancel = {
+    state: 'refused';
+    mediaBuyId: string;
+    since: string;
+    error?: GetSuccessCampaignCancelSellerError;
+} | {
+    state: 'not_delivered';
+    mediaBuyId: string;
+    since: string;
+    error?: never;
+} | {
+    state: 'not_sent';
+    mediaBuyId: string;
+    since?: never;
+    error?: never;
 };
 
 export type GetSuccessCatalogRefreshProblem = {

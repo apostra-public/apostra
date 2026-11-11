@@ -4733,6 +4733,7 @@ class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySour
     targetingOverlay: NotRequired[dict[str, JsonValue]]
     '\n    AdCP TargetingOverlay (campaign subset); same shape as the save_campaign targetingOverlay input.\n    '
     operations: NotRequired[GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectOperationsStatusAvailable | GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectOperationsStatusUnavailable]
+    stalledCancels: NotRequired[list[GetSuccessCampaignStalledCancel]]
     sourceType: NotRequired[Literal["inline", "url", "file"] | None]
     '\n    Where the items come from: url when url is set, file when file is set.\n    '
     lastChangeSummary: NotRequired[GetSuccessObjectLastChangeSummary | None]
@@ -6165,6 +6166,10 @@ GetSuccessBillingPendingApprovalPaymentTerms: TypeAlias = Literal["net_15", "net
 
 GetSuccessBillingPendingApprovalUrl: TypeAlias = str
 
+class GetSuccessCampaignCancelSellerError(TypedDict):
+    code: NotRequired[str]
+    recovery: NotRequired[Literal["transient", "correctable", "terminal"]]
+
 class GetSuccessCampaignGoalProgress(TypedDict):
     scope: GetSuccessCampaignGoalProgressScope
     goalKind: Literal["optimization", "delivery"]
@@ -6532,6 +6537,23 @@ class GetSuccessCampaignPulseMetricValue(TypedDict):
 class GetSuccessCampaignPulseTimeRange(TypedDict):
     earliest: str
     latest: str
+
+class GetSuccessCampaignStalledCancelStateNotDelivered(TypedDict):
+    state: Literal["not_delivered"]
+    mediaBuyId: str
+    since: str
+
+class GetSuccessCampaignStalledCancelStateNotSent(TypedDict):
+    state: Literal["not_sent"]
+    mediaBuyId: str
+
+class GetSuccessCampaignStalledCancelStateRefused(TypedDict):
+    state: Literal["refused"]
+    mediaBuyId: str
+    since: str
+    error: NotRequired[GetSuccessCampaignCancelSellerError]
+
+GetSuccessCampaignStalledCancel: TypeAlias = "GetSuccessCampaignStalledCancelStateRefused | GetSuccessCampaignStalledCancelStateNotDelivered | GetSuccessCampaignStalledCancelStateNotSent"
 
 class GetSuccessCatalogRefreshProblem(TypedDict):
     reason: Literal["file_source_needs_reconnect", "file_source_not_found", "file_not_found", "file_access_denied", "file_outside_source", "file_type_unsupported", "file_too_large", "items_invalid", "columns_missing", "feed_unreachable"]
