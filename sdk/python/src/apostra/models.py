@@ -1436,6 +1436,343 @@ class GetDeliverySuccessGetDeliveryGoalConstraintValue(TypedDict):
     kind: Literal["spend", "impressions"]
     amount: float
 
+class GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTargetCostPerVariant(TypedDict):
+    kind: Literal["cost_per"]
+    value: float
+
+class GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTargetMaximizeValueVariant(TypedDict):
+    kind: Literal["maximize_value"]
+
+class GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTargetPerAdSpendVariant(TypedDict):
+    kind: Literal["per_ad_spend"]
+    value: float
+
+GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTarget: TypeAlias = "GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTargetCostPerVariant | GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTargetPerAdSpendVariant | GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTargetMaximizeValueVariant"
+
+class GetDeliverySuccessGetDeliveryGoalProgressMetricOptimizationTargetCostPerVariant(TypedDict):
+    kind: Literal["cost_per"]
+    value: float
+
+class GetDeliverySuccessGetDeliveryGoalProgressMetricOptimizationTargetThresholdRateVariant(TypedDict):
+    kind: Literal["threshold_rate"]
+    value: float
+
+GetDeliverySuccessGetDeliveryGoalProgressMetricOptimizationTarget: TypeAlias = "GetDeliverySuccessGetDeliveryGoalProgressMetricOptimizationTargetCostPerVariant | GetDeliverySuccessGetDeliveryGoalProgressMetricOptimizationTargetThresholdRateVariant"
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindow(TypedDict):
+    post_click: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClick]
+    post_view: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostView]
+    model: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowModel]
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowModel: TypeAlias = Literal["last_touch", "first_touch", "linear", "time_decay", "data_driven"]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClick(TypedDict):
+    interval: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickInterval
+    unit: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickUnit
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickInterval: TypeAlias = int
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickUnit: TypeAlias = Literal["seconds", "minutes", "hours", "days", "campaign"]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostView(TypedDict):
+    interval: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewInterval
+    unit: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewUnit
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewInterval: TypeAlias = int
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewUnit: TypeAlias = Literal["seconds", "minutes", "hours", "days", "campaign"]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalKindEvent(TypedDict):
+    kind: Literal["event"]
+    event_sources: list[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalKindEventEventSourcesItem]
+    target: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTarget]
+    attribution_window: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindow]
+    priority: NotRequired[int]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalKindEventEventSourcesItem(TypedDict):
+    event_source_id: str
+    event_type: Literal["page_view", "view_content", "select_content", "select_item", "search", "share", "add_to_cart", "remove_from_cart", "viewed_cart", "add_to_wishlist", "initiate_checkout", "add_payment_info", "purchase", "refund", "lead", "qualify_lead", "close_convert_lead", "disqualify_lead", "complete_registration", "subscribe", "follow", "content_view", "watch_milestone", "start_trial", "app_install", "app_launch", "contact", "schedule", "donate", "submit_application", "custom"]
+    custom_event_name: NotRequired[str]
+    value_field: NotRequired[str]
+    value_factor: NotRequired[float]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalKindMetric(TypedDict):
+    kind: Literal["metric"]
+    metric: Literal["clicks", "views", "completed_views", "viewed_seconds", "viewable_rate", "attention_seconds", "attention_score", "engagements", "follows", "saves", "profile_visits", "reach"]
+    standard: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalStandard]
+    vendor: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendor]
+    reach_unit: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalReachUnit]
+    target_frequency: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequency]
+    view_duration_seconds: NotRequired[float]
+    target: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressMetricOptimizationTarget]
+    priority: NotRequired[int]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalKindVendorMetric(TypedDict):
+    kind: Literal["vendor_metric"]
+    vendor: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendor
+    metric_id: str
+    target: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTarget]
+    priority: NotRequired[int]
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoal: TypeAlias = "GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalKindMetric | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalKindEvent | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalKindVendorMetric"
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendor(TypedDict):
+    domain: str
+    brand_id: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandId]
+    countries: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorCountries]
+    industries: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorIndustries]
+    data_subject_contestation: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorDataSubjectContestation]
+    brand_kit_override: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverride]
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandId: TypeAlias = str
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverride(TypedDict):
+    logo: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogo]
+    colors: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideColors]
+    voice: NotRequired[str]
+    tagline: NotRequired[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideColors(TypedDict):
+    primary: NotRequired[str]
+    secondary: NotRequired[str]
+    accent: NotRequired[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogo(TypedDict):
+    asset_type: Literal["image"]
+    url: str
+    width: int
+    height: int
+    file_size_bytes: NotRequired[int]
+    pixel_ratio: NotRequired[float]
+    state_id: NotRequired[str]
+    breakpoint_id: NotRequired[str]
+    focal_point: NotRequired[list[JsonValue]]
+    format: NotRequired[str]
+    alt_text: NotRequired[str]
+    provenance: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenance]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenance(TypedDict):
+    digital_source_type: NotRequired[Literal["digital_capture", "digital_creation", "trained_algorithmic_media", "composite_with_trained_algorithmic_media", "algorithmic_media", "composite_capture", "composite_synthetic", "human_edits", "data_driven_media"]]
+    synthetic_depiction: NotRequired[bool]
+    ai_tool: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceAiTool]
+    human_oversight: NotRequired[Literal["none", "prompt_only", "selected", "edited", "directed"]]
+    declared_by: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceDeclaredBy]
+    declared_at: NotRequired[str]
+    created_time: NotRequired[str]
+    c2pa: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceC2pa]
+    embedded_provenance: NotRequired[list[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceEmbeddedProvenanceItem]]
+    watermarks: NotRequired[list[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceWatermarksItem]]
+    disclosure: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceDisclosure]
+    verification: NotRequired[list[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceVerificationItem]]
+    ext: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceExt]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceAiTool(TypedDict):
+    name: str
+    version: NotRequired[str]
+    provider: NotRequired[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceC2pa(TypedDict):
+    manifest_url: str
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceDeclaredBy(TypedDict):
+    agent_url: NotRequired[str]
+    role: Literal["creator", "advertiser", "agency", "platform", "tool"]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceDisclosure(TypedDict):
+    required: bool
+    jurisdictions: NotRequired[list[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItem]]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItem(TypedDict):
+    country: str
+    region: NotRequired[str]
+    regulation: str
+    label_text: NotRequired[str]
+    render_guidance: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidance]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidance(TypedDict):
+    persistence: NotRequired[Literal["continuous", "initial", "flexible"]]
+    min_duration_ms: NotRequired[int]
+    positions: NotRequired[list[Literal["prominent", "footer", "audio", "subtitle", "overlay", "end_card", "pre_roll", "companion"]]]
+    ext: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceEmbeddedProvenanceItem(TypedDict):
+    method: Literal["manifest_wrapper", "provenance_markers"]
+    standard: NotRequired[str]
+    provider: str
+    verify_agent: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceEmbeddedProvenanceItemVerifyAgent]
+    embedded_at: NotRequired[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceEmbeddedProvenanceItemVerifyAgent(TypedDict):
+    agent_url: str
+    feature_id: NotRequired[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceVerificationItem(TypedDict):
+    verified_by: str
+    verified_time: NotRequired[str]
+    result: Literal["authentic", "ai_generated", "ai_modified", "inconclusive"]
+    confidence: NotRequired[float]
+    details_url: NotRequired[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceWatermarksItem(TypedDict):
+    media_type: Literal["audio", "image", "video", "text"]
+    provider: str
+    verify_agent: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceWatermarksItemVerifyAgent]
+    c2pa_action: NotRequired[Literal["c2pa.watermarked.bound", "c2pa.watermarked.unbound"]]
+    embedded_at: NotRequired[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceWatermarksItemVerifyAgent(TypedDict):
+    agent_url: str
+    feature_id: NotRequired[str]
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorCountries: TypeAlias = list[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorDataSubjectContestation(TypedDict):
+    pass
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorIndustries: TypeAlias = list[str]
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalReachUnit: TypeAlias = Literal["individuals", "households", "devices", "accounts", "cookies", "custom"]
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalStandard: TypeAlias = Literal["mrc", "groupm"]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequency(TypedDict):
+    min: NotRequired[int]
+    max: NotRequired[int]
+    window: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindow
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindow(TypedDict):
+    interval: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowInterval
+    unit: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowUnit
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowInterval: TypeAlias = int
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowUnit: TypeAlias = Literal["seconds", "minutes", "hours", "days", "campaign"]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendor(TypedDict):
+    domain: str
+    brand_id: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandId]
+    countries: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorCountries]
+    industries: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorIndustries]
+    data_subject_contestation: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorDataSubjectContestation]
+    brand_kit_override: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverride]
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandId: TypeAlias = str
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverride(TypedDict):
+    logo: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogo]
+    colors: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideColors]
+    voice: NotRequired[str]
+    tagline: NotRequired[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideColors(TypedDict):
+    primary: NotRequired[str]
+    secondary: NotRequired[str]
+    accent: NotRequired[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogo(TypedDict):
+    asset_type: Literal["image"]
+    url: str
+    width: int
+    height: int
+    file_size_bytes: NotRequired[int]
+    pixel_ratio: NotRequired[float]
+    state_id: NotRequired[str]
+    breakpoint_id: NotRequired[str]
+    focal_point: NotRequired[list[JsonValue]]
+    format: NotRequired[str]
+    alt_text: NotRequired[str]
+    provenance: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenance]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenance(TypedDict):
+    digital_source_type: NotRequired[Literal["digital_capture", "digital_creation", "trained_algorithmic_media", "composite_with_trained_algorithmic_media", "algorithmic_media", "composite_capture", "composite_synthetic", "human_edits", "data_driven_media"]]
+    synthetic_depiction: NotRequired[bool]
+    ai_tool: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceAiTool]
+    human_oversight: NotRequired[Literal["none", "prompt_only", "selected", "edited", "directed"]]
+    declared_by: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceDeclaredBy]
+    declared_at: NotRequired[str]
+    created_time: NotRequired[str]
+    c2pa: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceC2pa]
+    embedded_provenance: NotRequired[list[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceEmbeddedProvenanceItem]]
+    watermarks: NotRequired[list[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceWatermarksItem]]
+    disclosure: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceDisclosure]
+    verification: NotRequired[list[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceVerificationItem]]
+    ext: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceExt]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceAiTool(TypedDict):
+    name: str
+    version: NotRequired[str]
+    provider: NotRequired[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceC2pa(TypedDict):
+    manifest_url: str
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceDeclaredBy(TypedDict):
+    agent_url: NotRequired[str]
+    role: Literal["creator", "advertiser", "agency", "platform", "tool"]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceDisclosure(TypedDict):
+    required: bool
+    jurisdictions: NotRequired[list[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItem]]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItem(TypedDict):
+    country: str
+    region: NotRequired[str]
+    regulation: str
+    label_text: NotRequired[str]
+    render_guidance: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidance]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidance(TypedDict):
+    persistence: NotRequired[Literal["continuous", "initial", "flexible"]]
+    min_duration_ms: NotRequired[int]
+    positions: NotRequired[list[Literal["prominent", "footer", "audio", "subtitle", "overlay", "end_card", "pre_roll", "companion"]]]
+    ext: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceEmbeddedProvenanceItem(TypedDict):
+    method: Literal["manifest_wrapper", "provenance_markers"]
+    standard: NotRequired[str]
+    provider: str
+    verify_agent: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceEmbeddedProvenanceItemVerifyAgent]
+    embedded_at: NotRequired[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceEmbeddedProvenanceItemVerifyAgent(TypedDict):
+    agent_url: str
+    feature_id: NotRequired[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceVerificationItem(TypedDict):
+    verified_by: str
+    verified_time: NotRequired[str]
+    result: Literal["authentic", "ai_generated", "ai_modified", "inconclusive"]
+    confidence: NotRequired[float]
+    details_url: NotRequired[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceWatermarksItem(TypedDict):
+    media_type: Literal["audio", "image", "video", "text"]
+    provider: str
+    verify_agent: NotRequired[GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceWatermarksItemVerifyAgent]
+    c2pa_action: NotRequired[Literal["c2pa.watermarked.bound", "c2pa.watermarked.unbound"]]
+    embedded_at: NotRequired[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceWatermarksItemVerifyAgent(TypedDict):
+    agent_url: str
+    feature_id: NotRequired[str]
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorCountries: TypeAlias = list[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorDataSubjectContestation(TypedDict):
+    pass
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorIndustries: TypeAlias = list[str]
+
+class GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTargetCostPerVariant(TypedDict):
+    kind: Literal["cost_per"]
+    value: float
+
+class GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTargetThresholdRateVariant(TypedDict):
+    kind: Literal["threshold_rate"]
+    value: float
+
+GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTarget: TypeAlias = "GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTargetCostPerVariant | GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTargetThresholdRateVariant"
+
 GetDeliverySuccessGetDeliveryGoalVerdict: TypeAlias = Literal["on_pace", "complete", "underdelivery", "early_exhaustion"]
 
 GetDeliverySuccessGetDeliveryGoalDeliveryProjectionProjectedEndState: TypeAlias = GetDeliverySuccessGetDeliveryGoalVerdict
@@ -1443,7 +1780,7 @@ GetDeliverySuccessGetDeliveryGoalDeliveryProjectionProjectedEndState: TypeAlias 
 GetDeliverySuccessGetDeliveryGoalSellerDeliveryProjectionProjectedEndState: TypeAlias = GetDeliverySuccessGetDeliveryGoalVerdict
 
 class GetDeliverySuccessGoalProgress(TypedDict):
-    goal: GetDeliverySuccessGoalProgressGoal | None
+    goal: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoal | None
     askedTarget: GetDeliverySuccessGoalProgressTarget | None
     answeredTarget: GetDeliverySuccessGoalProgressTarget | None
     commitment: Literal["guaranteed", "best_effort", "report_only"] | None
@@ -1484,15 +1821,7 @@ class GetDeliverySuccessGoalProgressFreshness(TypedDict):
     awaitingLaterReport: bool
     missingMetrics: list[str]
 
-class GetDeliverySuccessGoalProgressGoal(TypedDict):
-    kind: Literal["metric", "event", "vendor_metric"]
-    subject: str
-    eventTypes: list[str]
-    target: GetDeliverySuccessGoalProgressTarget | None
-    vendor: NotRequired[GetDeliverySuccessGoalProgressVendor]
-    vendorLabel: NotRequired[GetDeliverySuccessVendorLabel]
-    metricId: NotRequired[str]
-    metricLabel: NotRequired[GetDeliverySuccessMetricLabel]
+GetDeliverySuccessGoalProgressGoal: TypeAlias = GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoal
 
 class GetDeliverySuccessGoalProgressMaximiseValueTarget(TypedDict):
     kind: Literal["maximize_value"]
@@ -6725,7 +7054,27 @@ GetDeliverySuccessAdPackageDeliveryValue: TypeAlias = JsonValue
 
 GetDeliverySuccessGetDeliveryGoalDeliveryProjection: TypeAlias = JsonValue
 
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickValue: TypeAlias = JsonValue
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewValue: TypeAlias = JsonValue
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt: TypeAlias = dict[str, JsonValue]
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceExt: TypeAlias = dict[str, JsonValue]
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorValue: TypeAlias = JsonValue
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowValue: TypeAlias = JsonValue
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt: TypeAlias = dict[str, JsonValue]
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceExt: TypeAlias = dict[str, JsonValue]
+
+GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorValue: TypeAlias = JsonValue
+
 GetDeliverySuccessGetDeliveryGoalSellerDeliveryProjection: TypeAlias = JsonValue
+
+GetDeliverySuccessSiteOutcomeVendorMetricValueVendorValue: TypeAlias = JsonValue
 
 GetSuccessCampaignGoalProgressAdvertiserMeasuredBasisVendorValue: TypeAlias = JsonValue
 

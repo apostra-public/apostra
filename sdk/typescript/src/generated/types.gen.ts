@@ -6869,6 +6869,405 @@ export type GetDeliverySuccessGetDeliveryGoalDeliveryProjection = JsonValue;
 
 export type GetDeliverySuccessGetDeliveryGoalDeliveryProjectionProjectedEndState = GetDeliverySuccessGetDeliveryGoalVerdict;
 
+export type GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTarget = GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTargetCostPerVariant | GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTargetPerAdSpendVariant | GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTargetMaximizeValueVariant;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTargetCostPerVariant = {
+    kind: 'cost_per';
+    value: number;
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTargetMaximizeValueVariant = {
+    kind: 'maximize_value';
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTargetPerAdSpendVariant = {
+    kind: 'per_ad_spend';
+    value: number;
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressMetricOptimizationTarget = GetDeliverySuccessGetDeliveryGoalProgressMetricOptimizationTargetCostPerVariant | GetDeliverySuccessGetDeliveryGoalProgressMetricOptimizationTargetThresholdRateVariant;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressMetricOptimizationTargetCostPerVariant = {
+    kind: 'cost_per';
+    value: number;
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressMetricOptimizationTargetThresholdRateVariant = {
+    kind: 'threshold_rate';
+    value: number;
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoal = {
+    kind: 'metric';
+    metric: 'clicks' | 'views' | 'completed_views' | 'viewed_seconds' | 'viewable_rate' | 'attention_seconds' | 'attention_score' | 'engagements' | 'follows' | 'saves' | 'profile_visits' | 'reach';
+    standard?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalStandard;
+    vendor?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendor;
+    reach_unit?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalReachUnit;
+    target_frequency?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequency;
+    view_duration_seconds?: number;
+    target?: GetDeliverySuccessGetDeliveryGoalProgressMetricOptimizationTarget;
+    priority?: number;
+    [key: string]: unknown;
+} | {
+    kind: 'event';
+    event_sources: Array<{
+        event_source_id: string;
+        event_type: 'page_view' | 'view_content' | 'select_content' | 'select_item' | 'search' | 'share' | 'add_to_cart' | 'remove_from_cart' | 'viewed_cart' | 'add_to_wishlist' | 'initiate_checkout' | 'add_payment_info' | 'purchase' | 'refund' | 'lead' | 'qualify_lead' | 'close_convert_lead' | 'disqualify_lead' | 'complete_registration' | 'subscribe' | 'follow' | 'content_view' | 'watch_milestone' | 'start_trial' | 'app_install' | 'app_launch' | 'contact' | 'schedule' | 'donate' | 'submit_application' | 'custom';
+        custom_event_name?: string;
+        value_field?: string;
+        value_factor?: number;
+        [key: string]: unknown;
+    }>;
+    target?: GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTarget;
+    attribution_window?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindow;
+    priority?: number;
+    [key: string]: unknown;
+} | {
+    kind: 'vendor_metric';
+    vendor: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendor;
+    metric_id: string;
+    target?: GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTarget;
+    priority?: number;
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindow = {
+    post_click?: {
+        interval: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickInterval;
+        unit: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickUnit;
+        [key: string]: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickValue | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickInterval | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickUnit;
+    };
+    post_view?: {
+        interval: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewInterval;
+        unit: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewUnit;
+        [key: string]: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewValue | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewInterval | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewUnit;
+    };
+    model?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowModel;
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowModel = 'last_touch' | 'first_touch' | 'linear' | 'time_decay' | 'data_driven';
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickInterval = number;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickUnit = 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickValue = unknown;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewInterval = number;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewUnit = 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewValue = unknown;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendor = {
+    domain: string;
+    brand_id?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandId;
+    countries?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorCountries;
+    industries?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorIndustries;
+    data_subject_contestation?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorDataSubjectContestation;
+    brand_kit_override?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverride;
+    [key: string]: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorValue | string | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandId | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorCountries | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorIndustries | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorDataSubjectContestation | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverride | undefined;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandId = string;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverride = {
+    logo?: {
+        asset_type: 'image';
+        url: string;
+        width: number;
+        height: number;
+        file_size_bytes?: number;
+        pixel_ratio?: number;
+        state_id?: string;
+        breakpoint_id?: string;
+        focal_point?: [
+            number,
+            number,
+            never
+        ];
+        format?: string;
+        alt_text?: string;
+        provenance?: {
+            digital_source_type?: 'digital_capture' | 'digital_creation' | 'trained_algorithmic_media' | 'composite_with_trained_algorithmic_media' | 'algorithmic_media' | 'composite_capture' | 'composite_synthetic' | 'human_edits' | 'data_driven_media';
+            synthetic_depiction?: boolean;
+            ai_tool?: {
+                name: string;
+                version?: string;
+                provider?: string;
+                [key: string]: unknown;
+            };
+            human_oversight?: 'none' | 'prompt_only' | 'selected' | 'edited' | 'directed';
+            declared_by?: {
+                agent_url?: string;
+                role: 'creator' | 'advertiser' | 'agency' | 'platform' | 'tool';
+                [key: string]: unknown;
+            };
+            declared_at?: string;
+            created_time?: string;
+            c2pa?: {
+                manifest_url: string;
+                [key: string]: unknown;
+            };
+            embedded_provenance?: Array<{
+                method: 'manifest_wrapper' | 'provenance_markers';
+                standard?: string;
+                provider: string;
+                verify_agent?: {
+                    agent_url: string;
+                    feature_id?: string;
+                    [key: string]: unknown;
+                };
+                embedded_at?: string;
+                [key: string]: unknown;
+            }>;
+            watermarks?: Array<{
+                media_type: 'audio' | 'image' | 'video' | 'text';
+                provider: string;
+                verify_agent?: {
+                    agent_url: string;
+                    feature_id?: string;
+                    [key: string]: unknown;
+                };
+                c2pa_action?: 'c2pa.watermarked.bound' | 'c2pa.watermarked.unbound';
+                embedded_at?: string;
+                [key: string]: unknown;
+            }>;
+            disclosure?: {
+                required: boolean;
+                jurisdictions?: Array<{
+                    country: string;
+                    region?: string;
+                    regulation: string;
+                    label_text?: string;
+                    render_guidance?: {
+                        persistence?: 'continuous' | 'initial' | 'flexible';
+                        min_duration_ms?: number;
+                        positions?: Array<'prominent' | 'footer' | 'audio' | 'subtitle' | 'overlay' | 'end_card' | 'pre_roll' | 'companion'>;
+                        ext?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt;
+                        [key: string]: unknown;
+                    };
+                    [key: string]: unknown;
+                }>;
+                [key: string]: unknown;
+            };
+            verification?: Array<{
+                verified_by: string;
+                verified_time?: string;
+                result: 'authentic' | 'ai_generated' | 'ai_modified' | 'inconclusive';
+                confidence?: number;
+                details_url?: string;
+                [key: string]: unknown;
+            }>;
+            ext?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceExt;
+            [key: string]: unknown;
+        };
+        [key: string]: unknown;
+    };
+    colors?: {
+        primary?: string;
+        secondary?: string;
+        accent?: string;
+        [key: string]: unknown;
+    };
+    voice?: string;
+    tagline?: string;
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt = {
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceExt = {
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorCountries = Array<string>;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorDataSubjectContestation = {
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorIndustries = Array<string>;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalMetricVendorValue = unknown;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalReachUnit = 'individuals' | 'households' | 'devices' | 'accounts' | 'cookies' | 'custom';
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalStandard = 'mrc' | 'groupm';
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequency = {
+    min?: number;
+    max?: number;
+    window: {
+        interval: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowInterval;
+        unit: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowUnit;
+        [key: string]: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowValue | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowInterval | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowUnit;
+    };
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowInterval = number;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowUnit = 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowValue = unknown;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendor = {
+    domain: string;
+    brand_id?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandId;
+    countries?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorCountries;
+    industries?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorIndustries;
+    data_subject_contestation?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorDataSubjectContestation;
+    brand_kit_override?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverride;
+    [key: string]: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorValue | string | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandId | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorCountries | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorIndustries | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorDataSubjectContestation | GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverride | undefined;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandId = string;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverride = {
+    logo?: {
+        asset_type: 'image';
+        url: string;
+        width: number;
+        height: number;
+        file_size_bytes?: number;
+        pixel_ratio?: number;
+        state_id?: string;
+        breakpoint_id?: string;
+        focal_point?: [
+            number,
+            number,
+            never
+        ];
+        format?: string;
+        alt_text?: string;
+        provenance?: {
+            digital_source_type?: 'digital_capture' | 'digital_creation' | 'trained_algorithmic_media' | 'composite_with_trained_algorithmic_media' | 'algorithmic_media' | 'composite_capture' | 'composite_synthetic' | 'human_edits' | 'data_driven_media';
+            synthetic_depiction?: boolean;
+            ai_tool?: {
+                name: string;
+                version?: string;
+                provider?: string;
+                [key: string]: unknown;
+            };
+            human_oversight?: 'none' | 'prompt_only' | 'selected' | 'edited' | 'directed';
+            declared_by?: {
+                agent_url?: string;
+                role: 'creator' | 'advertiser' | 'agency' | 'platform' | 'tool';
+                [key: string]: unknown;
+            };
+            declared_at?: string;
+            created_time?: string;
+            c2pa?: {
+                manifest_url: string;
+                [key: string]: unknown;
+            };
+            embedded_provenance?: Array<{
+                method: 'manifest_wrapper' | 'provenance_markers';
+                standard?: string;
+                provider: string;
+                verify_agent?: {
+                    agent_url: string;
+                    feature_id?: string;
+                    [key: string]: unknown;
+                };
+                embedded_at?: string;
+                [key: string]: unknown;
+            }>;
+            watermarks?: Array<{
+                media_type: 'audio' | 'image' | 'video' | 'text';
+                provider: string;
+                verify_agent?: {
+                    agent_url: string;
+                    feature_id?: string;
+                    [key: string]: unknown;
+                };
+                c2pa_action?: 'c2pa.watermarked.bound' | 'c2pa.watermarked.unbound';
+                embedded_at?: string;
+                [key: string]: unknown;
+            }>;
+            disclosure?: {
+                required: boolean;
+                jurisdictions?: Array<{
+                    country: string;
+                    region?: string;
+                    regulation: string;
+                    label_text?: string;
+                    render_guidance?: {
+                        persistence?: 'continuous' | 'initial' | 'flexible';
+                        min_duration_ms?: number;
+                        positions?: Array<'prominent' | 'footer' | 'audio' | 'subtitle' | 'overlay' | 'end_card' | 'pre_roll' | 'companion'>;
+                        ext?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt;
+                        [key: string]: unknown;
+                    };
+                    [key: string]: unknown;
+                }>;
+                [key: string]: unknown;
+            };
+            verification?: Array<{
+                verified_by: string;
+                verified_time?: string;
+                result: 'authentic' | 'ai_generated' | 'ai_modified' | 'inconclusive';
+                confidence?: number;
+                details_url?: string;
+                [key: string]: unknown;
+            }>;
+            ext?: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceExt;
+            [key: string]: unknown;
+        };
+        [key: string]: unknown;
+    };
+    colors?: {
+        primary?: string;
+        secondary?: string;
+        accent?: string;
+        [key: string]: unknown;
+    };
+    voice?: string;
+    tagline?: string;
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt = {
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceExt = {
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorCountries = Array<string>;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorDataSubjectContestation = {
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorIndustries = Array<string>;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoalVendorMetricVendorValue = unknown;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTarget = GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTargetCostPerVariant | GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTargetThresholdRateVariant;
+
+export type GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTargetCostPerVariant = {
+    kind: 'cost_per';
+    value: number;
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTargetThresholdRateVariant = {
+    kind: 'threshold_rate';
+    value: number;
+    [key: string]: unknown;
+};
+
 export type GetDeliverySuccessGetDeliveryGoalSellerDeliveryProjection = JsonValue;
 
 export type GetDeliverySuccessGetDeliveryGoalSellerDeliveryProjectionProjectedEndState = GetDeliverySuccessGetDeliveryGoalVerdict;
@@ -6876,7 +7275,7 @@ export type GetDeliverySuccessGetDeliveryGoalSellerDeliveryProjectionProjectedEn
 export type GetDeliverySuccessGetDeliveryGoalVerdict = 'on_pace' | 'complete' | 'underdelivery' | 'early_exhaustion';
 
 export type GetDeliverySuccessGoalProgress = {
-    goal: GetDeliverySuccessGoalProgressGoal | null;
+    goal: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoal | null;
     askedTarget: GetDeliverySuccessGoalProgressTarget | null;
     answeredTarget: GetDeliverySuccessGoalProgressTarget | null;
     commitment: 'guaranteed' | 'best_effort' | 'report_only' | null;
@@ -6924,16 +7323,8 @@ export type GetDeliverySuccessGoalProgressFreshness = {
     missingMetrics: Array<string>;
 };
 
-export type GetDeliverySuccessGoalProgressGoal = {
-    kind: 'metric' | 'event' | 'vendor_metric';
-    subject: string;
-    eventTypes: Array<string>;
-    target: GetDeliverySuccessGoalProgressTarget | null;
-    vendor?: GetDeliverySuccessGoalProgressVendor;
-    vendorLabel?: GetDeliverySuccessVendorLabel;
-    metricId?: string;
-    metricLabel?: GetDeliverySuccessMetricLabel;
-};
+/** @deprecated use GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoal */
+export type GetDeliverySuccessGoalProgressGoal = GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoal;
 
 export type GetDeliverySuccessGoalProgressMaximiseValueTarget = {
     kind: 'maximize_value';
@@ -7158,7 +7549,7 @@ export type GetDeliverySuccessSiteOutcomeVendorMetricValue = {
     vendor: {
         domain: GetDeliverySuccessSiteOutcomeVendorMetricValueVendorDomain;
         brand_id?: GetDeliverySuccessSiteOutcomeVendorMetricValueVendorBrandId;
-        [key: string]: unknown;
+        [key: string]: GetDeliverySuccessSiteOutcomeVendorMetricValueVendorValue | GetDeliverySuccessSiteOutcomeVendorMetricValueVendorDomain | GetDeliverySuccessSiteOutcomeVendorMetricValueVendorBrandId | undefined;
     };
     [key: string]: unknown;
 };
@@ -7168,6 +7559,8 @@ export type GetDeliverySuccessSiteOutcomeVendorMetricValueMetricId = string;
 export type GetDeliverySuccessSiteOutcomeVendorMetricValueVendorBrandId = string;
 
 export type GetDeliverySuccessSiteOutcomeVendorMetricValueVendorDomain = string;
+
+export type GetDeliverySuccessSiteOutcomeVendorMetricValueVendorValue = unknown;
 
 export type GetDeliverySuccessSiteOutcomes = {
     source: {
