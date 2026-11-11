@@ -17266,7 +17266,7 @@ export type SaveAudienceData = {
              */
             consentBasis?: 'consent' | 'legitimate_interest' | 'contract' | 'legal_obligation';
             /**
-             * Map an existing audience to the audience already on each seller account; unlisted accounts are kept.
+             * Map an existing audience to the audience already on each seller account, or bind it to a partner source there; unlisted accounts are kept.
              */
             sellerAccounts?: Array<SaveAudienceRequestAudienceSellerAccountRequest>;
         }>;
@@ -17362,10 +17362,57 @@ export type SaveAudienceRequestAudienceSellerAccountRequest = {
      * The seller's audience ID on that account; checked at sync.
      */
     platformId?: string;
+    source?: SaveAudienceRequestAudienceSourceReference;
     /**
      * True removes the mapping; the seller's object is kept.
      */
     unmap?: true;
+};
+
+/**
+ * AdCP audience source the seller creates the audience from; no members are sent.
+ */
+export type SaveAudienceRequestAudienceSourceReference = {
+    /**
+     * Shared table.
+     */
+    kind: 'dataset';
+    /**
+     * The table's vendor path; not a URL.
+     */
+    locator: string;
+    /**
+     * When the share ends.
+     */
+    access_expires_at?: string;
+    vendor: SaveAudienceRequestAudienceSourceVendor;
+    segment_ref?: never;
+} | {
+    /**
+     * Distributed segment.
+     */
+    kind: 'platform_segment';
+    /**
+     * The segment's vendor id; not a URL.
+     */
+    segment_ref: string;
+    vendor: SaveAudienceRequestAudienceSourceVendor;
+    locator?: never;
+    access_expires_at?: never;
+};
+
+/**
+ * The partner.
+ */
+export type SaveAudienceRequestAudienceSourceVendor = {
+    /**
+     * Partner domain, e.g. snowflake.com.
+     */
+    domain: string;
+    /**
+     * Partner brand.
+     */
+    brand_id?: string;
 };
 
 export type SaveAudienceRequestSaveAudienceMember = {
@@ -25006,7 +25053,7 @@ export type SaveEventSourceSuccessSavedEventSourceEntryValueCurrencies = Array<s
 /**
  * Named reason a buyer object cannot be used on a seller account, from the seller-object-sync blocker table.
  */
-export type SaveEventSourceSuccessSellerObjectSyncBlockerCode = 'SELLER_OBJECT_TYPE_UNSUPPORTED' | 'SELLER_OBJECT_INGESTION_UNMAPPABLE' | 'SELLER_OBJECT_CAPABILITIES_UNAVAILABLE' | 'SELLER_OBJECT_SYNC_PENDING' | 'SELLER_OBJECT_SYNC_FAILED' | 'SELLER_OBJECT_SYNC_EXPIRED' | 'SELLER_OBJECT_SYNC_RECONCILIATION_REQUIRED' | 'SELLER_PROPERTY_LIST_UNSUPPORTED' | 'SELLER_DATA_SHARING_NOT_PERMITTED' | 'SELLER_CREATIVE_REVIEW_PENDING' | 'SELLER_CREATIVE_REJECTED' | 'ESA_AUDIENCE_NAMESPACE_UNRESOLVED' | 'SELLER_EVENT_SOURCE_DESTINATION_MISSING' | 'SELLER_EVENT_SOURCE_DESTINATION_AMBIGUOUS' | 'SELLER_AUDIENCE_MISSING' | 'SELLER_ACCOUNT_NOT_READY';
+export type SaveEventSourceSuccessSellerObjectSyncBlockerCode = 'SELLER_OBJECT_TYPE_UNSUPPORTED' | 'SELLER_OBJECT_INGESTION_UNMAPPABLE' | 'SELLER_OBJECT_CAPABILITIES_UNAVAILABLE' | 'SELLER_OBJECT_SYNC_PENDING' | 'SELLER_OBJECT_SYNC_FAILED' | 'SELLER_OBJECT_SYNC_EXPIRED' | 'SELLER_OBJECT_SYNC_RECONCILIATION_REQUIRED' | 'SELLER_PROPERTY_LIST_UNSUPPORTED' | 'SELLER_DATA_SHARING_NOT_PERMITTED' | 'SELLER_CREATIVE_REVIEW_PENDING' | 'SELLER_CREATIVE_REJECTED' | 'ESA_AUDIENCE_NAMESPACE_UNRESOLVED' | 'SELLER_EVENT_SOURCE_DESTINATION_MISSING' | 'SELLER_EVENT_SOURCE_DESTINATION_AMBIGUOUS' | 'SELLER_AUDIENCE_MISSING' | 'SELLER_ACCOUNT_NOT_READY' | 'SELLER_AUDIENCE_SOURCE_ACCESS_FAILED';
 
 /**
  * State of one buyer object on one seller account: pending, syncing, synced, ending, removing, removed, failed, expired, superseded, or needs_reconciliation.

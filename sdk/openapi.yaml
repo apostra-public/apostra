@@ -39251,8 +39251,8 @@ paths:
                           - legal_obligation
                       sellerAccounts:
                         description: >-
-                          Map an existing audience to the audience already on each seller account; unlisted accounts are
-                          kept.
+                          Map an existing audience to the audience already on each seller account, or bind it to a
+                          partner source there; unlisted accounts are kept.
                         minItems: 1
                         maxItems: 50
                         type: array
@@ -39296,6 +39296,8 @@ paths:
                               oneOf:
                                 - required:
                                     - platformId
+                                - required:
+                                    - source
                                 - required:
                                     - unmap
       responses:
@@ -95782,6 +95784,8 @@ components:
           type: string
           minLength: 1
           maxLength: 255
+        source:
+          $ref: '#/components/schemas/save_audience_request_AudienceSourceReference'
         unmap:
           description: True removes the mapping; the seller's object is kept.
           type: boolean
@@ -95789,6 +95793,61 @@ components:
       required:
         - accountId
       additionalProperties: false
+    save_audience_request_AudienceSourceReference:
+      oneOf:
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: dataset
+              description: Shared table.
+            locator:
+              type: string
+              minLength: 1
+              maxLength: 512
+              description: The table's vendor path; not a URL.
+            access_expires_at:
+              description: When the share ends.
+              type: string
+            vendor:
+              $ref: '#/components/schemas/save_audience_request_AudienceSourceVendor'
+          required:
+            - kind
+            - locator
+            - vendor
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: platform_segment
+              description: Distributed segment.
+            segment_ref:
+              type: string
+              description: The segment's vendor id; not a URL.
+            vendor:
+              $ref: '#/components/schemas/save_audience_request_AudienceSourceVendor'
+          required:
+            - kind
+            - segment_ref
+            - vendor
+          additionalProperties: false
+      description: AdCP audience source the seller creates the audience from; no members are sent.
+    save_audience_request_AudienceSourceVendor:
+      type: object
+      properties:
+        domain:
+          type: string
+          pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
+          description: Partner domain, e.g. snowflake.com.
+        brand_id:
+          description: Partner brand.
+          type: string
+          pattern: ^[a-z0-9_]+$
+      required:
+        - domain
+      additionalProperties: false
+      description: The partner.
     save_audience_request_SaveAudienceMemberExternalId:
       type: string
     save_audience_request_SaveAudienceRemovedMemberExternalId:
@@ -101129,6 +101188,7 @@ components:
         - SELLER_EVENT_SOURCE_DESTINATION_AMBIGUOUS
         - SELLER_AUDIENCE_MISSING
         - SELLER_ACCOUNT_NOT_READY
+        - SELLER_AUDIENCE_SOURCE_ACCESS_FAILED
       description: Named reason a buyer object cannot be used on a seller account, from the seller-object-sync blocker table.
     save_event_source_success_UpdatedEventSourceEntry:
       type: object

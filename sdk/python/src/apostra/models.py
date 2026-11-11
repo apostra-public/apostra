@@ -9653,15 +9653,40 @@ class SaveAudienceInputAudiencesItem(TypedDict):
     consentBasis: NotRequired[Literal["consent", "legitimate_interest", "contract", "legal_obligation"]]
     '\n    GDPR lawful basis for processing.\n    '
     sellerAccounts: NotRequired[list[SaveAudienceRequestAudienceSellerAccountRequest]]
-    '\n    Map an existing audience to the audience already on each seller account; unlisted accounts are kept.\n    '
+    '\n    Map an existing audience to the audience already on each seller account, or bind it to a partner source there; unlisted accounts are kept.\n    '
 
 class SaveAudienceRequestAudienceSellerAccountRequest(TypedDict):
     accountId: str
     '\n    accounts[].id from get(kind:\'connection\').\n    '
     platformId: NotRequired[str]
     '\n    The seller\'s audience ID on that account; checked at sync.\n    '
+    source: NotRequired[SaveAudienceRequestAudienceSourceReference]
     unmap: NotRequired[Literal[True]]
     '\n    True removes the mapping; the seller\'s object is kept.\n    '
+
+class SaveAudienceRequestAudienceSourceReferenceKindDataset(TypedDict):
+    kind: Literal["dataset"]
+    '\n    Shared table.\n    '
+    locator: str
+    '\n    The table\'s vendor path; not a URL.\n    '
+    access_expires_at: NotRequired[str]
+    '\n    When the share ends.\n    '
+    vendor: SaveAudienceRequestAudienceSourceVendor
+
+class SaveAudienceRequestAudienceSourceReferenceKindPlatformSegment(TypedDict):
+    kind: Literal["platform_segment"]
+    '\n    Distributed segment.\n    '
+    segment_ref: str
+    '\n    The segment\'s vendor id; not a URL.\n    '
+    vendor: SaveAudienceRequestAudienceSourceVendor
+
+SaveAudienceRequestAudienceSourceReference: TypeAlias = "SaveAudienceRequestAudienceSourceReferenceKindDataset | SaveAudienceRequestAudienceSourceReferenceKindPlatformSegment"
+
+class SaveAudienceRequestAudienceSourceVendor(TypedDict):
+    domain: str
+    '\n    Partner domain, e.g. snowflake.com.\n    '
+    brand_id: NotRequired[str]
+    '\n    Partner brand.\n    '
 
 class SaveAudienceRequestSaveAudienceMember(TypedDict):
     external_id: SaveAudienceRequestSaveAudienceMemberExternalId
@@ -13979,7 +14004,7 @@ SaveEventSourceSuccessSavedEventSourceEntryUpdatedAt: TypeAlias = str
 
 SaveEventSourceSuccessSavedEventSourceEntryValueCurrencies: TypeAlias = list[str] | None
 
-SaveEventSourceSuccessSellerObjectSyncBlockerCode: TypeAlias = Literal["SELLER_OBJECT_TYPE_UNSUPPORTED", "SELLER_OBJECT_INGESTION_UNMAPPABLE", "SELLER_OBJECT_CAPABILITIES_UNAVAILABLE", "SELLER_OBJECT_SYNC_PENDING", "SELLER_OBJECT_SYNC_FAILED", "SELLER_OBJECT_SYNC_EXPIRED", "SELLER_OBJECT_SYNC_RECONCILIATION_REQUIRED", "SELLER_PROPERTY_LIST_UNSUPPORTED", "SELLER_DATA_SHARING_NOT_PERMITTED", "SELLER_CREATIVE_REVIEW_PENDING", "SELLER_CREATIVE_REJECTED", "ESA_AUDIENCE_NAMESPACE_UNRESOLVED", "SELLER_EVENT_SOURCE_DESTINATION_MISSING", "SELLER_EVENT_SOURCE_DESTINATION_AMBIGUOUS", "SELLER_AUDIENCE_MISSING", "SELLER_ACCOUNT_NOT_READY"]
+SaveEventSourceSuccessSellerObjectSyncBlockerCode: TypeAlias = Literal["SELLER_OBJECT_TYPE_UNSUPPORTED", "SELLER_OBJECT_INGESTION_UNMAPPABLE", "SELLER_OBJECT_CAPABILITIES_UNAVAILABLE", "SELLER_OBJECT_SYNC_PENDING", "SELLER_OBJECT_SYNC_FAILED", "SELLER_OBJECT_SYNC_EXPIRED", "SELLER_OBJECT_SYNC_RECONCILIATION_REQUIRED", "SELLER_PROPERTY_LIST_UNSUPPORTED", "SELLER_DATA_SHARING_NOT_PERMITTED", "SELLER_CREATIVE_REVIEW_PENDING", "SELLER_CREATIVE_REJECTED", "ESA_AUDIENCE_NAMESPACE_UNRESOLVED", "SELLER_EVENT_SOURCE_DESTINATION_MISSING", "SELLER_EVENT_SOURCE_DESTINATION_AMBIGUOUS", "SELLER_AUDIENCE_MISSING", "SELLER_ACCOUNT_NOT_READY", "SELLER_AUDIENCE_SOURCE_ACCESS_FAILED"]
 
 SaveEventSourceSuccessSellerObjectSyncState: TypeAlias = Literal["pending", "syncing", "synced", "ending", "removing", "removed", "failed", "expired", "superseded", "needs_reconciliation"]
 
