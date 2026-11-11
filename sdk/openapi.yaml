@@ -50690,7 +50690,7 @@ paths:
                                   mode: selected
                                   placement_refs:
                                     - placement_id: facebook_feed
-                                      publisher_domain: fb.com
+                                      publisher_domain: facebook.com
                                 type: object
                                 propertyNames:
                                   type: string
@@ -52546,7 +52546,7 @@ paths:
                                       mode: selected
                                       placement_refs:
                                         - placement_id: facebook_feed
-                                          publisher_domain: fb.com
+                                          publisher_domain: facebook.com
                                     type: object
                                     propertyNames:
                                       type: string
