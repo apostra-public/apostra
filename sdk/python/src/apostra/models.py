@@ -17162,8 +17162,20 @@ class SaveMediaBuyResultMediaBuyGoalCommitmentGoalAnswersItem(TypedDict):
     askedGoal: SaveMediaBuySuccessMediaBuyGoalCommitmentGoalAnswersItemAskedGoal | None
     answeredTarget: SaveMediaBuySuccessMediaBuyGoalCommitmentGoalAnswersItemAnsweredTarget | None
     commitment: SaveMediaBuySuccessMediaBuyGoalCommitmentGoalAnswersItemCommitment
+    goalCoverage: NotRequired[SaveMediaBuyResultMediaBuyGoalCommitmentGoalAnswersItemGoalCoverage]
+    '\n    Whether this product\'s own optimization declaration covers the primary disclosed goal, and which goals it does not cover and why. Present when the brief disclosed goals and a declaration was captured with this answer; absent otherwise (not evidence the product declares nothing).\n    '
     sellerAccountId: NotRequired[int]
     '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
+
+class SaveMediaBuyResultMediaBuyGoalCommitmentGoalAnswersItemGoalCoverage(TypedDict):
+    coversPrimaryGoal: bool
+    '\n    Whether the product can optimize to the primary goal (the goal with the lowest priority, else the first), per its stored AdCP optimization declaration (metric_optimization, conversion_tracking, vendor_metric_optimization).\n    '
+    uncovered: list[SaveMediaBuyResultMediaBuyGoalCommitmentGoalAnswersItemGoalCoverageUncoveredItem]
+    '\n    Goals the product cannot optimize to, named by priority, with the reason execute withholds them from its package. Empty when the product can optimize to every disclosed goal.\n    '
+
+class SaveMediaBuyResultMediaBuyGoalCommitmentGoalAnswersItemGoalCoverageUncoveredItem(TypedDict):
+    priority: float
+    code: Literal["goal_kind_not_declared", "metric_not_declared", "target_kind_not_declared", "reach_unit_not_declared", "view_duration_not_declared", "viewability_standard_not_declared", "vendor_metric_not_declared", "over_max_optimization_goals"]
 
 class SaveMediaBuyResultMediaBuyPendingChange(TypedDict):
     status: str

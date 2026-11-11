@@ -2743,6 +2743,8 @@
       "SaveMediaBuyResultMediaBuyFrequencyCap": "object",
       "SaveMediaBuyResultMediaBuyGoalCommitment": "object",
       "SaveMediaBuyResultMediaBuyGoalCommitmentGoalAnswersItem": "object",
+      "SaveMediaBuyResultMediaBuyGoalCommitmentGoalAnswersItemGoalCoverage": "object",
+      "SaveMediaBuyResultMediaBuyGoalCommitmentGoalAnswersItemGoalCoverageUncoveredItem": "object",
       "SaveMediaBuyResultMediaBuyPendingChange": "object",
       "SaveMediaBuyResultMediaBuyPendingChangeDifferences": "object",
       "SaveMediaBuyResultMediaBuyPendingChangeDifferencesBudget": "object",
