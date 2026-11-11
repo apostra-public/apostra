@@ -1966,6 +1966,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -3215,6 +3216,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -4440,6 +4442,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -5653,6 +5656,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -6867,6 +6871,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -8088,6 +8093,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -10446,6 +10452,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -11662,6 +11669,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -15170,6 +15178,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -16384,6 +16393,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -17604,6 +17614,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -18823,6 +18834,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -20042,6 +20054,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -21261,6 +21274,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -22480,6 +22494,7 @@ paths:
                           - items
                           - history
                           - report
+                          - mediaBilling
                           - lifecycle
                           - capacity
                           - source_access
@@ -25545,6 +25560,10 @@ paths:
                               - invoicesTruncated
                               - nextAction
                             additionalProperties: false
+                          mediaBilling:
+                            $ref: '#/components/schemas/get_success_MediaBilling'
+                          unavailableIncludes:
+                            $ref: '#/components/schemas/get_success_UnavailableIncludes'
                         required:
                           - outcome
                           - kind
@@ -25605,6 +25624,10 @@ paths:
                               - managedBy
                               - changeableBy
                             additionalProperties: false
+                          mediaBilling:
+                            $ref: '#/components/schemas/get_success_MediaBilling'
+                          unavailableIncludes:
+                            $ref: '#/components/schemas/get_success_UnavailableIncludes'
                         required:
                           - outcome
                           - kind
@@ -26119,6 +26142,32 @@ paths:
                             items: {}
                           accountsTotal:
                             type: number
+                          mediaBilling:
+                            anyOf:
+                              - type: object
+                                properties:
+                                  entityId:
+                                    type: integer
+                                    minimum: -9007199254740991
+                                    maximum: 9007199254740991
+                                  legal_name:
+                                    type: string
+                                  currency:
+                                    type: string
+                                  source:
+                                    type: string
+                                    enum:
+                                      - advertiser
+                                      - account
+                                      - organization
+                                required:
+                                  - entityId
+                                  - legal_name
+                                  - currency
+                                  - source
+                                additionalProperties: false
+                                description: Who is invoiced for this advertiser. Null when no entity resolves.
+                              - type: 'null'
                           unavailableIncludes:
                             type: array
                             items: {}
@@ -88841,6 +88890,126 @@ components:
       maxLength: 3
     get_success_ObjectInvoicesItemDueAt:
       type: string
+    get_success_MediaBilling:
+      type: object
+      properties:
+        visibility:
+          type: string
+          enum:
+            - visible
+            - redacted
+          description: '`redacted` for an organization-scoped service token: `redactedFields` are left out of every entity.'
+        redactedFields:
+          type: array
+          items:
+            type: string
+        entities:
+          type: array
+          items:
+            type: object
+            properties:
+              legal_name:
+                type: string
+              tax_id:
+                type: string
+              address:
+                type: object
+                properties:
+                  street:
+                    type: string
+                  city:
+                    type: string
+                  postal_code:
+                    type: string
+                  region:
+                    type: string
+                  country:
+                    type: string
+                required:
+                  - street
+                  - city
+                  - postal_code
+                  - country
+                additionalProperties: false
+              contacts:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    role:
+                      anyOf:
+                        - type: string
+                          const: billing
+                        - type: string
+                          const: legal
+                        - type: string
+                          const: creative
+                        - type: string
+                          const: general
+                    email:
+                      type: string
+                      format: email
+                      pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+                  required:
+                    - role
+                  additionalProperties: false
+              id:
+                type: integer
+                minimum: -9007199254740991
+                maximum: 9007199254740991
+              currency:
+                type: string
+              isPrimary:
+                type: boolean
+                description: The primary entity catches whatever has no attachment.
+            required:
+              - legal_name
+              - id
+              - currency
+              - isPrimary
+            additionalProperties: false
+        attachments:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                minimum: -9007199254740991
+                maximum: 9007199254740991
+              entityId:
+                type: integer
+                minimum: -9007199254740991
+                maximum: 9007199254740991
+              advertiserId:
+                type: string
+              accountId:
+                type: integer
+                minimum: -9007199254740991
+                maximum: 9007199254740991
+            required:
+              - id
+              - entityId
+            additionalProperties: false
+      required:
+        - visibility
+        - redactedFields
+        - entities
+        - attachments
+      additionalProperties: false
+    get_success_UnavailableIncludes:
+      type: array
+      items:
+        type: object
+        properties:
+          include:
+            type: string
+          reason:
+            type: string
+        required:
+          - include
+          - reason
+        additionalProperties: false
     get_success_ObjectOperationsByDestinationItemSellerRouteId:
       type: string
     get_success_ObjectOperationsByDestinationItemUnassigned:
