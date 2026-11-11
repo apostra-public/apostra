@@ -15348,7 +15348,7 @@ class SaveMediaBuyInputKindCreate(TypedDict):
     budget_cap_timezone: NotRequired[str]
     '\n    Create only: IANA timezone of the cap\'s day. Needs daily_budget_cap; omit for the seller\'s default.\n    '
     flight: NotRequired[SaveMediaBuyInputKindCreateFlight]
-    '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
+    '\n    Specific starts must be 5+ minutes away; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     isArchived: NotRequired[bool]
     '\n    Update only: true archives a DRAFT, FAILED, CANCELED, or REJECTED buy (campaign unaffected). Send alone. false unsupported.\n    '
     isPaused: NotRequired[bool]
@@ -15897,7 +15897,7 @@ class SaveMediaBuyInputKindProposal(TypedDict):
     budget_cap_timezone: NotRequired[str]
     '\n    Create only: IANA timezone of the cap\'s day. Needs daily_budget_cap; omit for the seller\'s default.\n    '
     flight: NotRequired[SaveMediaBuyInputKindProposalFlight]
-    '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
+    '\n    Specific starts must be 5+ minutes away; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     isArchived: NotRequired[bool]
     '\n    Update only: true archives a DRAFT, FAILED, CANCELED, or REJECTED buy (campaign unaffected). Send alone. false unsupported.\n    '
     isPaused: NotRequired[bool]
@@ -15945,7 +15945,7 @@ class SaveMediaBuyInputKindUpdate(TypedDict):
     budget_cap_timezone: NotRequired[str]
     '\n    Create only: IANA timezone of the cap\'s day. Needs daily_budget_cap; omit for the seller\'s default.\n    '
     flight: NotRequired[SaveMediaBuyInputKindUpdateFlight]
-    '\n    Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
+    '\n    Specific starts must be 5+ minutes away; "asap" starts now. Running buy: resend its current startAt with the new endAt.\n    '
     name: NotRequired[str]
     '\n    Update only: new buy name. A live buy is renamed only after the seller confirms; otherwise an error and the name is unchanged.\n    '
     isArchived: NotRequired[bool]

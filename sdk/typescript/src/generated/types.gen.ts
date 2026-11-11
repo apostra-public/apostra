@@ -28530,7 +28530,7 @@ export type SaveMediaBuyData = {
          */
         budget_cap_timezone?: string;
         /**
-         * Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.
+         * Specific starts must be 5+ minutes away; "asap" starts now. Running buy: resend its current startAt with the new endAt.
          */
         flight?: {
             /**
@@ -29375,7 +29375,7 @@ export type SaveMediaBuyData = {
          */
         budget_cap_timezone?: string;
         /**
-         * Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.
+         * Specific starts must be 5+ minutes away; "asap" starts now. Running buy: resend its current startAt with the new endAt.
          */
         flight?: {
             /**
@@ -29460,7 +29460,7 @@ export type SaveMediaBuyData = {
          */
         budget_cap_timezone?: string;
         /**
-         * Specific starts need a future UTC day; "asap" starts now. Running buy: resend its current startAt with the new endAt.
+         * Specific starts must be 5+ minutes away; "asap" starts now. Running buy: resend its current startAt with the new endAt.
          */
         flight?: {
             /**
