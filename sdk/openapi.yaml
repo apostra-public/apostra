@@ -53873,6 +53873,51 @@ paths:
                                     commitment:
                                       $ref: >-
                                         #/components/schemas/save_media_buy_success_MediaBuyGoalCommitmentGoalAnswersItemCommitment
+                                    goalCoverage:
+                                      description: >-
+                                        Whether this product's own optimization declaration covers the primary disclosed
+                                        goal, and which goals it does not cover and why. Present when the brief
+                                        disclosed goals and a declaration was captured with this answer; absent
+                                        otherwise (not evidence the product declares nothing).
+                                      type: object
+                                      properties:
+                                        coversPrimaryGoal:
+                                          type: boolean
+                                          description: >-
+                                            Whether the product can optimize to the primary goal (the goal with the
+                                            lowest priority, else the first), per its stored AdCP optimization
+                                            declaration (metric_optimization, conversion_tracking,
+                                            vendor_metric_optimization).
+                                        uncovered:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              priority:
+                                                type: number
+                                              code:
+                                                type: string
+                                                enum:
+                                                  - goal_kind_not_declared
+                                                  - metric_not_declared
+                                                  - target_kind_not_declared
+                                                  - reach_unit_not_declared
+                                                  - view_duration_not_declared
+                                                  - viewability_standard_not_declared
+                                                  - vendor_metric_not_declared
+                                                  - over_max_optimization_goals
+                                            required:
+                                              - priority
+                                              - code
+                                            additionalProperties: false
+                                          description: >-
+                                            Goals the product cannot optimize to, named by priority, with the reason
+                                            execute withholds them from its package. Empty when the product can optimize
+                                            to every disclosed goal.
+                                      required:
+                                        - coversPrimaryGoal
+                                        - uncovered
+                                      additionalProperties: false
                                     sellerAccountId:
                                       description: >-
                                         The seller Account id: the Account that owns this seller. Send it as
