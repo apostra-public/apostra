@@ -22641,6 +22641,10 @@ export type SaveCreativeData = {
          */
         resync?: true;
         /**
+         * Check assets and text against the format and save nothing: no Creative, no draft row. Checks a new, complete creative only — drop creativeId, mode: "draft", and every other shape (archive, resync, bulk update, membership, Library role, duplicate, session promotion).
+         */
+        validateOnly?: boolean;
+        /**
          * Stable key per call. Duplicate requires it and replays exactly once; V2-backed writes are best-effort.
          */
         idempotencyKey?: string;
@@ -22789,7 +22793,7 @@ export type SaveCreativeResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveCreativeSuccessDuplicateCreativeSuccess | SaveCreativeSuccessAgentApprovalRequired | {
+        data: SaveCreativeSuccessDuplicateCreativeSuccess | SaveCreativeSuccessValidateOnlyCreativeSuccess | SaveCreativeSuccessAgentApprovalRequired | {
             action: 'bulk_update_previewed';
             preview: {
                 previewToken: string;
@@ -24211,6 +24215,18 @@ export type SaveCreativeSuccessSaveCreativeLibraryRoleSuccess = {
     action: 'library_role_updated';
     creative: SaveCreativeSuccessSaveCreativeLibraryRoleCreative;
     replayed: boolean;
+};
+
+export type SaveCreativeSuccessValidateOnlyCreativeSuccess = {
+    action: 'validated';
+    saved: false;
+    validateOnly: true;
+    valid: true;
+    name: string;
+    formatKind?: string;
+    campaignId?: string;
+    advertiserId?: string;
+    assetCount: number;
 };
 
 export type SaveCreativeSuccessWarnings = Array<string>;
