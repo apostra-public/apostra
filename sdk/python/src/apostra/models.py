@@ -13258,6 +13258,8 @@ class SaveCreativeSuccessCreativeMacroPreviewTrackersItem(TypedDict):
     filledByApostra: list[str]
     literal: NotRequired[list[str]]
     '\n    Macros no declaring seller fills. The seller lists are absent when fillSetUnknownReason is set.\n    '
+    undeliverable: NotRequired[bool]
+    '\n    True when none of the declaring sellers’ formats declare a slot that can carry this tracker, so it will not reach the seller even though this preview shows a compiled URL (scope3_tracker_delivery_unsupported, reason NO_DECLARED_SLOT). Only ever set for impression_tracker.\n    '
 
 class SaveCreativeSuccessDuplicateCreativeSuccess(TypedDict):
     action: Literal["duplicated"]
