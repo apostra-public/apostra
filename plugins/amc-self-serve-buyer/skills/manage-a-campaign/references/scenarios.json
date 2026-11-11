@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "manage-a-campaign",
-  "skillVersion": "1.6.0",
+  "skillVersion": "1.6.1",
   "scenarios": [
     {
       "id": "html5-zip-upload-finished-before-attach",
@@ -49,7 +49,7 @@
       "given": "The buyer asks which ad is winning on an active Meta campaign over the last two weeks and whether any creative is tiring. One of its ads was made in Meta's own tools.",
       "expect": [
         "The agent calls get_delivery with report \"live_ad_delivery\", the campaign in filters.campaignId and an explicit range of at most 90 days, not live_campaign_delivery, and retrieves the Per-ad delivery on Meta page before comparing ads.",
-        "It compares ads only on the figures the response returns, reads missing days, reach and conversions as that page describes, follows page.nextCursor only when the ads the question needs are not on the first page, says how many of page.total ads it compared, and names the ad with creative_id null as one Apostra did not make.",
+        "It compares ads only on the figures the response returns, reads missing days, reach and conversions as that page describes, follows page.nextCursor only when the ads the question needs are not on the first page, says how many of page.total ads it compared, and names an ad with creative_in_library false as one made in Meta's own tools, without calling get on its creative_id.",
         "It separates what the figures show from its recommendation and changes nothing; for a campaign question that is not about individual ads it still uses live_campaign_delivery."
       ]
     }
