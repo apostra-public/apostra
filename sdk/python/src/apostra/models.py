@@ -20136,6 +20136,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    system: NotRequired[Literal["nielsen_dma"]]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
@@ -20408,6 +20412,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    system: NotRequired[Literal["nielsen_dma"]]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
@@ -20614,6 +20622,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    system: NotRequired[Literal["nielsen_dma"]]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
@@ -20847,6 +20859,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    system: NotRequired[Literal["nielsen_dma"]]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
@@ -21087,6 +21103,10 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    system: NotRequired[Literal["nielsen_dma"]]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
@@ -21327,6 +21347,10 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    system: NotRequired[Literal["nielsen_dma"]]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
@@ -21567,6 +21591,10 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    system: NotRequired[Literal["nielsen_dma"]]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
@@ -21841,6 +21869,10 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    system: NotRequired[Literal["nielsen_dma"]]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
@@ -22081,6 +22113,10 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    system: NotRequired[Literal["nielsen_dma"]]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
@@ -22319,6 +22355,10 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    system: NotRequired[Literal["nielsen_dma"]]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
@@ -22523,6 +22563,10 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    system: NotRequired[Literal["nielsen_dma"]]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
@@ -22831,6 +22875,10 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    system: NotRequired[Literal["nielsen_dma"]]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
@@ -23111,6 +23159,10 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    system: NotRequired[Literal["nielsen_dma"]]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
@@ -23328,8 +23380,6 @@ class SearchInputKindSourceAccount(TypedDict):
     groupBy: NotRequired[str]
     '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
 
-SearchInput: TypeAlias = "SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSession | SearchInputKindCreativeAssetAndCatalog | SearchInputKindEventSource | SearchInputKindProposal | SearchInputKindCreativeWithFilterAndFilterCampaignId | SearchInputKindCreative | SearchInputKindCreativeCollectionWithFilterCampaignId | SearchInputKindCreativeCollectionWithFilterAdvertiserId | SearchInputKindCreativeSessionWithFilterCampaignId | SearchInputKindCreativeSessionWithFilterAdvertiserId | SearchInputKindAdServerTargeting | SearchInputKindSourceAccount | SearchInputKindBuyerRfp | SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision | SearchInputDocsScopeCallerRelevantAndPublicResearch"
-
 class SearchInputKindSourceAccountFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
@@ -23353,6 +23403,10 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
+    system: NotRequired[Literal["nielsen_dma"]]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    For kind work_item: one queue. creative_review and media_buy_approval are approval decisions; contract_conflict is a spend conflict to overrule; modular_source is follow-up work on a source and accepts the top-level sourceId.\n    '
     queue: NotRequired[Literal["overdue", "unowned"]]
@@ -23536,6 +23590,48 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
 
+class SearchInputKindTargetingValue(TypedDict):
+    accountId: NotRequired[int | str]
+    query: NotRequired[str]
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    document: NotRequired[str]
+    '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
+    revision: NotRequired[str]
+    '\n    The exact revision of an agreement docs hit, read together with its document. Docs only.\n    '
+    section: NotRequired[str]
+    '\n    One section of an agreement revision. Needs both document and revision.\n    '
+    asOf: NotRequired[str]
+    '\n    The time to evaluate docs at; defaults to now. When continuing an agreement read with cursor, send the same asOf again.\n    '
+    sources: NotRequired[list[Literal["objects", "docs", "specs"]]]
+    '\n    What to search: objects, docs, or specs. When omitted, a call with query searches all three and a call without query lists objects. docs and specs need a query, except an agreement read by document and revision.\n    '
+    docsScope: NotRequired[Literal["caller_relevant", "public_research"]]
+    '\n    Which docs to rank. caller_relevant (the default) skips docs written for other account types; public_research searches every public doc.\n    '
+    kind: Literal["targeting_value"]
+    sponsoredBuyerCustomerId: NotRequired[str]
+    '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
+    scope: NotRequired[Literal["unit"]]
+    '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    sourceId: NotRequired[str]
+    '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
+    filter: SearchInputKindTargetingValueFilter
+    '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
+    cursor: NotRequired[str]
+    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    limit: NotRequired[int]
+    '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
+    groupBy: NotRequired[str]
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.\n    '
+
+SearchInput: TypeAlias = "SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSession | SearchInputKindCreativeAssetAndCatalog | SearchInputKindEventSource | SearchInputKindProposal | SearchInputKindCreativeWithFilterAndFilterCampaignId | SearchInputKindCreative | SearchInputKindCreativeCollectionWithFilterCampaignId | SearchInputKindCreativeCollectionWithFilterAdvertiserId | SearchInputKindCreativeSessionWithFilterCampaignId | SearchInputKindCreativeSessionWithFilterAdvertiserId | SearchInputKindAdServerTargeting | SearchInputKindSourceAccount | SearchInputKindTargetingValue | SearchInputKindBuyerRfp | SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision | SearchInputDocsScopeCallerRelevantAndPublicResearch"
+
+class SearchInputKindTargetingValueFilter(TypedDict):
+    system: Literal["nielsen_dma"]
+    '\n    For kind targeting_value, required: the code system.\n    '
+    names: NotRequired[list[str]]
+    '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
+
 SearchRequestAdcpCreativeStatus: TypeAlias = Literal["processing", "pending_review", "approved", "suspended", "rejected", "archived"]
 
 SearchRequestCreativeRole: TypeAlias = Literal["evergreen", "reference"]
@@ -23550,7 +23646,7 @@ class SearchRequestLabelFilterEntry(TypedDict):
 
 class SearchResult(TypedDict):
     sources: list[Literal["objects", "docs", "specs"]]
-    objects: NotRequired[SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchSessionPageOutput | SearchResultObjectsWithGroupByAndGroupsAndTotal | SearchResultObjectsKindMaterial | SearchResultObjectsKindMixed]
+    objects: NotRequired[SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchSessionPageOutput | SearchResultObjectsWithGroupByAndGroupsAndTotal | SearchResultObjectsKindMaterial | SearchResultObjectsKindMixed]
     objectsUnavailable: NotRequired[str]
     knowledge: NotRequired[list[JsonValue]]
     knowledgeRelevance: NotRequired[JsonValue]
@@ -23569,7 +23665,7 @@ class SearchResultObjectsKindMaterial(TypedDict):
 class SearchResultObjectsKindMixed(TypedDict):
     outcome: Literal["mixed"]
     kind: Literal["mixed"]
-    sections: list[SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput]
+    sections: list[SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput]
 
 class SearchResultObjectsWithGroupByAndGroupsAndTotal(TypedDict):
     kind: str
@@ -25828,6 +25924,63 @@ SearchSuccessSearchSourceAccountPageOutputValue: TypeAlias = JsonValue
 class SearchSuccessSearchSourceAccountUnavailableOutput(TypedDict):
     outcome: Literal["unavailable_source_account"]
     kind: Literal["source_account"]
+    unavailable: str
+    message: str
+
+class SearchSuccessSearchTargetingValuePageOutput(TypedDict):
+    total: NotRequired[SearchSuccessSearchTargetingValuePageOutputTotal]
+    totalLowerBound: NotRequired[SearchSuccessSearchTargetingValuePageOutputTotalLowerBound]
+    returned: NotRequired[SearchSuccessSearchTargetingValuePageOutputReturned]
+    hasMore: NotRequired[SearchSuccessSearchTargetingValuePageOutputHasMore]
+    truncated: NotRequired[SearchSuccessSearchTargetingValuePageOutputTruncated]
+    nextCursor: NotRequired[SearchSuccessSearchTargetingValuePageOutputNextCursor]
+    results: SearchSuccessSearchTargetingValuePageOutputResults
+    outcome: Literal["page_targeting_value"]
+    kind: Literal["targeting_value"]
+
+SearchSuccessSearchTargetingValuePageOutputHasMore: TypeAlias = bool
+
+SearchSuccessSearchTargetingValuePageOutputNextCursor: TypeAlias = str
+
+class SearchSuccessSearchTargetingValuePageOutputResultsItem(TypedDict):
+    advertiserId: NotRequired[str]
+    name: NotRequired[str | None]
+    sandbox: NotRequired[bool]
+    sourceType: NotRequired[Literal["inline", "url", "file"] | None]
+    '\n    Where the items come from: url when url is set, file when file is set.\n    '
+    lastChangeSummary: NotRequired[SearchSuccessSearchTargetingValuePageOutputResultsItemLastChangeSummaryValue | None]
+    '\n    Items in the latest version against the one before it.\n    '
+    transform: NotRequired[SearchSuccessSearchTargetingValuePageOutputResultsItemTransformValue | None]
+    '\n    The active transform, if any.\n    '
+    refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
+    '\n    What stops the refresh; null if nothing does.\n    '
+    progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+
+SearchSuccessSearchTargetingValuePageOutputResults: TypeAlias = "list[SearchSuccessSearchTargetingValuePageOutputResultsItem]"
+
+class SearchSuccessSearchTargetingValuePageOutputResultsItemLastChangeSummaryValue(TypedDict):
+    added: int
+    updated: int
+    unchanged: int
+    removed: int
+
+class SearchSuccessSearchTargetingValuePageOutputResultsItemTransformValue(TypedDict):
+    name: str
+    updatedAt: str
+
+SearchSuccessSearchTargetingValuePageOutputReturned: TypeAlias = float
+
+SearchSuccessSearchTargetingValuePageOutputTotal: TypeAlias = float
+
+SearchSuccessSearchTargetingValuePageOutputTotalLowerBound: TypeAlias = float
+
+SearchSuccessSearchTargetingValuePageOutputTruncated: TypeAlias = bool
+
+SearchSuccessSearchTargetingValuePageOutputValue: TypeAlias = JsonValue
+
+class SearchSuccessSearchTargetingValueUnavailableOutput(TypedDict):
+    outcome: Literal["unavailable_targeting_value"]
+    kind: Literal["targeting_value"]
     unavailable: str
     message: str
 
