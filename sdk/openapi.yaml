@@ -88763,7 +88763,7 @@ components:
       properties:
         goal:
           anyOf:
-            - $ref: '#/components/schemas/get_delivery_success_GoalProgressGoal'
+            - $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoal'
             - type: 'null'
         askedTarget:
           anyOf:
@@ -88836,39 +88836,459 @@ components:
         - basis
         - freshness
       additionalProperties: false
-    get_delivery_success_GoalProgressGoal:
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoal:
+      anyOf:
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: metric
+            metric:
+              anyOf:
+                - type: string
+                  const: clicks
+                - type: string
+                  const: views
+                - type: string
+                  const: completed_views
+                - type: string
+                  const: viewed_seconds
+                - type: string
+                  const: viewable_rate
+                - type: string
+                  const: attention_seconds
+                - type: string
+                  const: attention_score
+                - type: string
+                  const: engagements
+                - type: string
+                  const: follows
+                - type: string
+                  const: saves
+                - type: string
+                  const: profile_visits
+                - type: string
+                  const: reach
+            standard:
+              $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalStandard'
+            vendor:
+              $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendor'
+            reach_unit:
+              $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalReachUnit'
+            target_frequency:
+              $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalTargetFrequency'
+            view_duration_seconds:
+              type: number
+              exclusiveMinimum: 0
+            target:
+              $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressMetricOptimizationTarget'
+            priority:
+              type: integer
+              minimum: 1
+              maximum: 9007199254740991
+          required:
+            - kind
+            - metric
+          additionalProperties: {}
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: event
+            event_sources:
+              type: array
+              items:
+                type: object
+                properties:
+                  event_source_id:
+                    type: string
+                    minLength: 1
+                  event_type:
+                    anyOf:
+                      - type: string
+                        const: page_view
+                      - type: string
+                        const: view_content
+                      - type: string
+                        const: select_content
+                      - type: string
+                        const: select_item
+                      - type: string
+                        const: search
+                      - type: string
+                        const: share
+                      - type: string
+                        const: add_to_cart
+                      - type: string
+                        const: remove_from_cart
+                      - type: string
+                        const: viewed_cart
+                      - type: string
+                        const: add_to_wishlist
+                      - type: string
+                        const: initiate_checkout
+                      - type: string
+                        const: add_payment_info
+                      - type: string
+                        const: purchase
+                      - type: string
+                        const: refund
+                      - type: string
+                        const: lead
+                      - type: string
+                        const: qualify_lead
+                      - type: string
+                        const: close_convert_lead
+                      - type: string
+                        const: disqualify_lead
+                      - type: string
+                        const: complete_registration
+                      - type: string
+                        const: subscribe
+                      - type: string
+                        const: follow
+                      - type: string
+                        const: content_view
+                      - type: string
+                        const: watch_milestone
+                      - type: string
+                        const: start_trial
+                      - type: string
+                        const: app_install
+                      - type: string
+                        const: app_launch
+                      - type: string
+                        const: contact
+                      - type: string
+                        const: schedule
+                      - type: string
+                        const: donate
+                      - type: string
+                        const: submit_application
+                      - type: string
+                        const: custom
+                  custom_event_name:
+                    type: string
+                  value_field:
+                    type: string
+                  value_factor:
+                    type: number
+                required:
+                  - event_source_id
+                  - event_type
+                additionalProperties: {}
+            target:
+              $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressEventOptimizationTarget'
+            attribution_window:
+              $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindow'
+            priority:
+              type: integer
+              minimum: 1
+              maximum: 9007199254740991
+          required:
+            - kind
+            - event_sources
+          additionalProperties: {}
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: vendor_metric
+            vendor:
+              $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendor'
+            metric_id:
+              type: string
+              minLength: 1
+              maxLength: 64
+              pattern: ^[a-z][a-z0-9_]*$
+            target:
+              $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressVendorMetricOptimizationTarget'
+            priority:
+              type: integer
+              minimum: 1
+              maximum: 9007199254740991
+          required:
+            - kind
+            - vendor
+            - metric_id
+          additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalStandard:
+      type: string
+      enum:
+        - mrc
+        - groupm
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendor:
+      type: object
+      properties:
+        domain:
+          type: string
+          pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
+        brand_id:
+          $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorBrandId'
+        countries:
+          $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorCountries'
+        industries:
+          $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorIndustries'
+        data_subject_contestation:
+          $ref: >-
+            #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorDataSubjectContestation
+        brand_kit_override:
+          $ref: >-
+            #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverride
+      required:
+        - domain
+      additionalProperties:
+        $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorValue'
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorBrandId:
+      type: string
+      pattern: ^[a-z0-9_]+$
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalReachUnit:
+      type: string
+      enum:
+        - individuals
+        - households
+        - devices
+        - accounts
+        - cookies
+        - custom
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalTargetFrequency:
+      type: object
+      properties:
+        min:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        max:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        window:
+          type: object
+          properties:
+            interval:
+              $ref: >-
+                #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowInterval
+            unit:
+              $ref: >-
+                #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowUnit
+          required:
+            - interval
+            - unit
+          additionalProperties:
+            $ref: >-
+              #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowValue
+      required:
+        - window
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowInterval:
+      type: integer
+      minimum: 1
+      maximum: 9007199254740991
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowUnit:
+      type: string
+      enum:
+        - seconds
+        - minutes
+        - hours
+        - days
+        - campaign
+    get_delivery_success_GetDeliveryGoalProgressMetricOptimizationTarget:
+      anyOf:
+        - $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressMetricOptimizationTargetCostPerVariant'
+        - $ref: >-
+            #/components/schemas/get_delivery_success_GetDeliveryGoalProgressMetricOptimizationTargetThresholdRateVariant
+    get_delivery_success_GetDeliveryGoalProgressMetricOptimizationTargetCostPerVariant:
       type: object
       properties:
         kind:
           type: string
-          enum:
-            - metric
-            - event
-            - vendor_metric
-        subject:
-          type: string
-        eventTypes:
-          type: array
-          items:
-            type: string
-        target:
-          anyOf:
-            - $ref: '#/components/schemas/get_delivery_success_GoalProgressTarget'
-            - type: 'null'
-        vendor:
-          $ref: '#/components/schemas/get_delivery_success_GoalProgressVendor'
-        vendorLabel:
-          $ref: '#/components/schemas/get_delivery_success_VendorLabel'
-        metricId:
-          type: string
-        metricLabel:
-          $ref: '#/components/schemas/get_delivery_success_MetricLabel'
+          const: cost_per
+        value:
+          type: number
+          exclusiveMinimum: 0
       required:
         - kind
-        - subject
-        - eventTypes
-        - target
-      additionalProperties: false
+        - value
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressMetricOptimizationTargetThresholdRateVariant:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: threshold_rate
+        value:
+          type: number
+          exclusiveMinimum: 0
+      required:
+        - kind
+        - value
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressEventOptimizationTarget:
+      anyOf:
+        - $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressEventOptimizationTargetCostPerVariant'
+        - $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressEventOptimizationTargetPerAdSpendVariant'
+        - $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressEventOptimizationTargetMaximizeValueVariant'
+    get_delivery_success_GetDeliveryGoalProgressEventOptimizationTargetCostPerVariant:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: cost_per
+        value:
+          type: number
+          exclusiveMinimum: 0
+      required:
+        - kind
+        - value
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressEventOptimizationTargetPerAdSpendVariant:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: per_ad_spend
+        value:
+          type: number
+          exclusiveMinimum: 0
+      required:
+        - kind
+        - value
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressEventOptimizationTargetMaximizeValueVariant:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: maximize_value
+      required:
+        - kind
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindow:
+      type: object
+      properties:
+        post_click:
+          type: object
+          properties:
+            interval:
+              $ref: >-
+                #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickInterval
+            unit:
+              $ref: >-
+                #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickUnit
+          required:
+            - interval
+            - unit
+          additionalProperties:
+            $ref: >-
+              #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickValue
+        post_view:
+          type: object
+          properties:
+            interval:
+              $ref: >-
+                #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewInterval
+            unit:
+              $ref: >-
+                #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewUnit
+          required:
+            - interval
+            - unit
+          additionalProperties:
+            $ref: >-
+              #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewValue
+        model:
+          $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindowModel'
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickInterval:
+      type: integer
+      minimum: 1
+      maximum: 9007199254740991
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickUnit:
+      type: string
+      enum:
+        - seconds
+        - minutes
+        - hours
+        - days
+        - campaign
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewInterval:
+      type: integer
+      minimum: 1
+      maximum: 9007199254740991
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewUnit:
+      type: string
+      enum:
+        - seconds
+        - minutes
+        - hours
+        - days
+        - campaign
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindowModel:
+      type: string
+      enum:
+        - last_touch
+        - first_touch
+        - linear
+        - time_decay
+        - data_driven
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendor:
+      type: object
+      properties:
+        domain:
+          type: string
+          pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
+        brand_id:
+          $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandId'
+        countries:
+          $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorCountries'
+        industries:
+          $ref: >-
+            #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorIndustries
+        data_subject_contestation:
+          $ref: >-
+            #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorDataSubjectContestation
+        brand_kit_override:
+          $ref: >-
+            #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverride
+      required:
+        - domain
+      additionalProperties:
+        $ref: '#/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorValue'
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandId:
+      type: string
+      pattern: ^[a-z0-9_]+$
+    get_delivery_success_GetDeliveryGoalProgressVendorMetricOptimizationTarget:
+      anyOf:
+        - $ref: >-
+            #/components/schemas/get_delivery_success_GetDeliveryGoalProgressVendorMetricOptimizationTargetCostPerVariant
+        - $ref: >-
+            #/components/schemas/get_delivery_success_GetDeliveryGoalProgressVendorMetricOptimizationTargetThresholdRateVariant
+    get_delivery_success_GetDeliveryGoalProgressVendorMetricOptimizationTargetCostPerVariant:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: cost_per
+        value:
+          type: number
+          exclusiveMinimum: 0
+      required:
+        - kind
+        - value
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressVendorMetricOptimizationTargetThresholdRateVariant:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: threshold_rate
+        value:
+          type: number
+          exclusiveMinimum: 0
+      required:
+        - kind
+        - value
+      additionalProperties: {}
     get_delivery_success_GoalProgressTarget:
       oneOf:
         - $ref: '#/components/schemas/get_delivery_success_GoalProgressCostPerTarget'
@@ -88920,59 +89340,6 @@ components:
       required:
         - kind
       additionalProperties: false
-    get_delivery_success_GoalProgressVendor:
-      type: object
-      properties:
-        domain:
-          type: string
-        brandId:
-          type: string
-      required:
-        - domain
-      additionalProperties: false
-    get_delivery_success_VendorLabel:
-      type: object
-      properties:
-        name:
-          type: string
-          description: >-
-            The vendor's name from its brand.json, for example `Integral Ad Science`. The vendor's domain when the
-            registry has no name for it.
-        kind:
-          description: >-
-            What brand.json says the vendor is: `measurement` when it lists a measurement agent. Absent when it lists
-            none or the registry could not be read.
-          type: string
-          enum:
-            - measurement
-      required:
-        - name
-      additionalProperties: false
-      description: >-
-        Display label for the measurement vendor beside it. Names are display only; the vendor domain stays the
-        identifier.
-    get_delivery_success_MetricLabel:
-      type: object
-      properties:
-        name:
-          type: string
-          description: >-
-            The metric's id written as words, for example `Brand safety rate`. AdCP's measurement catalog carries no
-            display name.
-        unit:
-          description: >-
-            The unit the vendor's catalog declares for the metric, for example `percent` or `score`. Absent when the
-            catalog does not say.
-          type: string
-        description:
-          description: What the vendor's catalog says the metric measures. Absent when the catalog does not say.
-          type: string
-      required:
-        - name
-      additionalProperties: false
-      description: >-
-        Display label for the vendor metric beside it, from the vendor's measurement catalog. The metric id stays the
-        identifier.
     get_delivery_success_GoalProgressActual:
       type: object
       properties:
@@ -89053,6 +89420,59 @@ components:
         - metricId
         - impressions
       additionalProperties: false
+    get_delivery_success_GoalProgressVendor:
+      type: object
+      properties:
+        domain:
+          type: string
+        brandId:
+          type: string
+      required:
+        - domain
+      additionalProperties: false
+    get_delivery_success_VendorLabel:
+      type: object
+      properties:
+        name:
+          type: string
+          description: >-
+            The vendor's name from its brand.json, for example `Integral Ad Science`. The vendor's domain when the
+            registry has no name for it.
+        kind:
+          description: >-
+            What brand.json says the vendor is: `measurement` when it lists a measurement agent. Absent when it lists
+            none or the registry could not be read.
+          type: string
+          enum:
+            - measurement
+      required:
+        - name
+      additionalProperties: false
+      description: >-
+        Display label for the measurement vendor beside it. Names are display only; the vendor domain stays the
+        identifier.
+    get_delivery_success_MetricLabel:
+      type: object
+      properties:
+        name:
+          type: string
+          description: >-
+            The metric's id written as words, for example `Brand safety rate`. AdCP's measurement catalog carries no
+            display name.
+        unit:
+          description: >-
+            The unit the vendor's catalog declares for the metric, for example `percent` or `score`. Absent when the
+            catalog does not say.
+          type: string
+        description:
+          description: What the vendor's catalog says the metric measures. Absent when the catalog does not say.
+          type: string
+      required:
+        - name
+      additionalProperties: false
+      description: >-
+        Display label for the vendor metric beside it, from the vendor's measurement catalog. The metric id stays the
+        identifier.
     get_delivery_success_GoalProgressVendorAttestedBasis:
       type: object
       properties:
@@ -89623,7 +90043,8 @@ components:
               $ref: '#/components/schemas/get_delivery_success_SiteOutcomeVendorMetricValueVendorBrandId'
           required:
             - domain
-          additionalProperties: {}
+          additionalProperties:
+            $ref: '#/components/schemas/get_delivery_success_SiteOutcomeVendorMetricValueVendorValue'
       required:
         - metric_id
         - value
@@ -91081,6 +91502,677 @@ components:
     get_delivery_success_DeliveryRevisionCoverageLimitationsItemPackageIdsItem:
       type: string
       minLength: 1
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorCountries:
+      minItems: 1
+      type: array
+      items:
+        type: string
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorIndustries:
+      type: array
+      items:
+        type: string
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorDataSubjectContestation:
+      type: object
+      properties: {}
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverride:
+      type: object
+      properties:
+        logo:
+          type: object
+          properties:
+            asset_type:
+              type: string
+              const: image
+            url:
+              type: string
+            width:
+              type: integer
+              minimum: 1
+              maximum: 9007199254740991
+            height:
+              type: integer
+              minimum: 1
+              maximum: 9007199254740991
+            file_size_bytes:
+              type: integer
+              minimum: 1
+              maximum: 9007199254740991
+            pixel_ratio:
+              type: number
+              exclusiveMinimum: 0
+            state_id:
+              type: string
+            breakpoint_id:
+              type: string
+            focal_point:
+              type: array
+              prefixItems:
+                - type: number
+                - type: number
+              items:
+                not: {}
+              minItems: 2
+              maxItems: 2
+            format:
+              type: string
+            alt_text:
+              type: string
+            provenance:
+              type: object
+              properties:
+                digital_source_type:
+                  anyOf:
+                    - type: string
+                      const: digital_capture
+                    - type: string
+                      const: digital_creation
+                    - type: string
+                      const: trained_algorithmic_media
+                    - type: string
+                      const: composite_with_trained_algorithmic_media
+                    - type: string
+                      const: algorithmic_media
+                    - type: string
+                      const: composite_capture
+                    - type: string
+                      const: composite_synthetic
+                    - type: string
+                      const: human_edits
+                    - type: string
+                      const: data_driven_media
+                synthetic_depiction:
+                  type: boolean
+                ai_tool:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    version:
+                      type: string
+                    provider:
+                      type: string
+                  required:
+                    - name
+                  additionalProperties: {}
+                human_oversight:
+                  anyOf:
+                    - type: string
+                      const: none
+                    - type: string
+                      const: prompt_only
+                    - type: string
+                      const: selected
+                    - type: string
+                      const: edited
+                    - type: string
+                      const: directed
+                declared_by:
+                  type: object
+                  properties:
+                    agent_url:
+                      type: string
+                    role:
+                      anyOf:
+                        - type: string
+                          const: creator
+                        - type: string
+                          const: advertiser
+                        - type: string
+                          const: agency
+                        - type: string
+                          const: platform
+                        - type: string
+                          const: tool
+                  required:
+                    - role
+                  additionalProperties: {}
+                declared_at:
+                  type: string
+                created_time:
+                  type: string
+                c2pa:
+                  type: object
+                  properties:
+                    manifest_url:
+                      type: string
+                  required:
+                    - manifest_url
+                  additionalProperties: {}
+                embedded_provenance:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      method:
+                        anyOf:
+                          - type: string
+                            const: manifest_wrapper
+                          - type: string
+                            const: provenance_markers
+                      standard:
+                        type: string
+                      provider:
+                        type: string
+                      verify_agent:
+                        type: object
+                        properties:
+                          agent_url:
+                            type: string
+                          feature_id:
+                            type: string
+                        required:
+                          - agent_url
+                        additionalProperties: {}
+                      embedded_at:
+                        type: string
+                    required:
+                      - method
+                      - provider
+                    additionalProperties: {}
+                watermarks:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      media_type:
+                        anyOf:
+                          - type: string
+                            const: audio
+                          - type: string
+                            const: image
+                          - type: string
+                            const: video
+                          - type: string
+                            const: text
+                      provider:
+                        type: string
+                      verify_agent:
+                        type: object
+                        properties:
+                          agent_url:
+                            type: string
+                          feature_id:
+                            type: string
+                        required:
+                          - agent_url
+                        additionalProperties: {}
+                      c2pa_action:
+                        anyOf:
+                          - type: string
+                            const: c2pa.watermarked.bound
+                          - type: string
+                            const: c2pa.watermarked.unbound
+                      embedded_at:
+                        type: string
+                    required:
+                      - media_type
+                      - provider
+                    additionalProperties: {}
+                disclosure:
+                  type: object
+                  properties:
+                    required:
+                      type: boolean
+                    jurisdictions:
+                      minItems: 1
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          country:
+                            type: string
+                          region:
+                            type: string
+                          regulation:
+                            type: string
+                          label_text:
+                            type: string
+                          render_guidance:
+                            type: object
+                            properties:
+                              persistence:
+                                anyOf:
+                                  - type: string
+                                    const: continuous
+                                  - type: string
+                                    const: initial
+                                  - type: string
+                                    const: flexible
+                              min_duration_ms:
+                                type: integer
+                                minimum: 1
+                                maximum: 9007199254740991
+                              positions:
+                                minItems: 1
+                                type: array
+                                items:
+                                  anyOf:
+                                    - type: string
+                                      const: prominent
+                                    - type: string
+                                      const: footer
+                                    - type: string
+                                      const: audio
+                                    - type: string
+                                      const: subtitle
+                                    - type: string
+                                      const: overlay
+                                    - type: string
+                                      const: end_card
+                                    - type: string
+                                      const: pre_roll
+                                    - type: string
+                                      const: companion
+                              ext:
+                                $ref: >-
+                                  #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt
+                            additionalProperties: {}
+                        required:
+                          - country
+                          - regulation
+                        additionalProperties: {}
+                  required:
+                    - required
+                  additionalProperties: {}
+                verification:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      verified_by:
+                        type: string
+                      verified_time:
+                        type: string
+                      result:
+                        anyOf:
+                          - type: string
+                            const: authentic
+                          - type: string
+                            const: ai_generated
+                          - type: string
+                            const: ai_modified
+                          - type: string
+                            const: inconclusive
+                      confidence:
+                        type: number
+                        minimum: 0
+                        maximum: 1
+                      details_url:
+                        type: string
+                    required:
+                      - verified_by
+                      - result
+                    additionalProperties: {}
+                ext:
+                  $ref: >-
+                    #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceExt
+              additionalProperties: {}
+          required:
+            - asset_type
+            - url
+            - width
+            - height
+          additionalProperties: {}
+        colors:
+          type: object
+          properties:
+            primary:
+              type: string
+              pattern: ^#[0-9a-fA-F]{6}$
+            secondary:
+              type: string
+              pattern: ^#[0-9a-fA-F]{6}$
+            accent:
+              type: string
+              pattern: ^#[0-9a-fA-F]{6}$
+          additionalProperties: {}
+        voice:
+          type: string
+        tagline:
+          type: string
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorValue: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalTargetFrequencyWindowValue: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindowPostClickValue: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalAttributionWindowPostViewValue: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorCountries:
+      minItems: 1
+      type: array
+      items:
+        type: string
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorIndustries:
+      type: array
+      items:
+        type: string
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorDataSubjectContestation:
+      type: object
+      properties: {}
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverride:
+      type: object
+      properties:
+        logo:
+          type: object
+          properties:
+            asset_type:
+              type: string
+              const: image
+            url:
+              type: string
+            width:
+              type: integer
+              minimum: 1
+              maximum: 9007199254740991
+            height:
+              type: integer
+              minimum: 1
+              maximum: 9007199254740991
+            file_size_bytes:
+              type: integer
+              minimum: 1
+              maximum: 9007199254740991
+            pixel_ratio:
+              type: number
+              exclusiveMinimum: 0
+            state_id:
+              type: string
+            breakpoint_id:
+              type: string
+            focal_point:
+              type: array
+              prefixItems:
+                - type: number
+                - type: number
+              items:
+                not: {}
+              minItems: 2
+              maxItems: 2
+            format:
+              type: string
+            alt_text:
+              type: string
+            provenance:
+              type: object
+              properties:
+                digital_source_type:
+                  anyOf:
+                    - type: string
+                      const: digital_capture
+                    - type: string
+                      const: digital_creation
+                    - type: string
+                      const: trained_algorithmic_media
+                    - type: string
+                      const: composite_with_trained_algorithmic_media
+                    - type: string
+                      const: algorithmic_media
+                    - type: string
+                      const: composite_capture
+                    - type: string
+                      const: composite_synthetic
+                    - type: string
+                      const: human_edits
+                    - type: string
+                      const: data_driven_media
+                synthetic_depiction:
+                  type: boolean
+                ai_tool:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    version:
+                      type: string
+                    provider:
+                      type: string
+                  required:
+                    - name
+                  additionalProperties: {}
+                human_oversight:
+                  anyOf:
+                    - type: string
+                      const: none
+                    - type: string
+                      const: prompt_only
+                    - type: string
+                      const: selected
+                    - type: string
+                      const: edited
+                    - type: string
+                      const: directed
+                declared_by:
+                  type: object
+                  properties:
+                    agent_url:
+                      type: string
+                    role:
+                      anyOf:
+                        - type: string
+                          const: creator
+                        - type: string
+                          const: advertiser
+                        - type: string
+                          const: agency
+                        - type: string
+                          const: platform
+                        - type: string
+                          const: tool
+                  required:
+                    - role
+                  additionalProperties: {}
+                declared_at:
+                  type: string
+                created_time:
+                  type: string
+                c2pa:
+                  type: object
+                  properties:
+                    manifest_url:
+                      type: string
+                  required:
+                    - manifest_url
+                  additionalProperties: {}
+                embedded_provenance:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      method:
+                        anyOf:
+                          - type: string
+                            const: manifest_wrapper
+                          - type: string
+                            const: provenance_markers
+                      standard:
+                        type: string
+                      provider:
+                        type: string
+                      verify_agent:
+                        type: object
+                        properties:
+                          agent_url:
+                            type: string
+                          feature_id:
+                            type: string
+                        required:
+                          - agent_url
+                        additionalProperties: {}
+                      embedded_at:
+                        type: string
+                    required:
+                      - method
+                      - provider
+                    additionalProperties: {}
+                watermarks:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      media_type:
+                        anyOf:
+                          - type: string
+                            const: audio
+                          - type: string
+                            const: image
+                          - type: string
+                            const: video
+                          - type: string
+                            const: text
+                      provider:
+                        type: string
+                      verify_agent:
+                        type: object
+                        properties:
+                          agent_url:
+                            type: string
+                          feature_id:
+                            type: string
+                        required:
+                          - agent_url
+                        additionalProperties: {}
+                      c2pa_action:
+                        anyOf:
+                          - type: string
+                            const: c2pa.watermarked.bound
+                          - type: string
+                            const: c2pa.watermarked.unbound
+                      embedded_at:
+                        type: string
+                    required:
+                      - media_type
+                      - provider
+                    additionalProperties: {}
+                disclosure:
+                  type: object
+                  properties:
+                    required:
+                      type: boolean
+                    jurisdictions:
+                      minItems: 1
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          country:
+                            type: string
+                          region:
+                            type: string
+                          regulation:
+                            type: string
+                          label_text:
+                            type: string
+                          render_guidance:
+                            type: object
+                            properties:
+                              persistence:
+                                anyOf:
+                                  - type: string
+                                    const: continuous
+                                  - type: string
+                                    const: initial
+                                  - type: string
+                                    const: flexible
+                              min_duration_ms:
+                                type: integer
+                                minimum: 1
+                                maximum: 9007199254740991
+                              positions:
+                                minItems: 1
+                                type: array
+                                items:
+                                  anyOf:
+                                    - type: string
+                                      const: prominent
+                                    - type: string
+                                      const: footer
+                                    - type: string
+                                      const: audio
+                                    - type: string
+                                      const: subtitle
+                                    - type: string
+                                      const: overlay
+                                    - type: string
+                                      const: end_card
+                                    - type: string
+                                      const: pre_roll
+                                    - type: string
+                                      const: companion
+                              ext:
+                                $ref: >-
+                                  #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt
+                            additionalProperties: {}
+                        required:
+                          - country
+                          - regulation
+                        additionalProperties: {}
+                  required:
+                    - required
+                  additionalProperties: {}
+                verification:
+                  minItems: 1
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      verified_by:
+                        type: string
+                      verified_time:
+                        type: string
+                      result:
+                        anyOf:
+                          - type: string
+                            const: authentic
+                          - type: string
+                            const: ai_generated
+                          - type: string
+                            const: ai_modified
+                          - type: string
+                            const: inconclusive
+                      confidence:
+                        type: number
+                        minimum: 0
+                        maximum: 1
+                      details_url:
+                        type: string
+                    required:
+                      - verified_by
+                      - result
+                    additionalProperties: {}
+                ext:
+                  $ref: >-
+                    #/components/schemas/get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceExt
+              additionalProperties: {}
+          required:
+            - asset_type
+            - url
+            - width
+            - height
+          additionalProperties: {}
+        colors:
+          type: object
+          properties:
+            primary:
+              type: string
+              pattern: ^#[0-9a-fA-F]{6}$
+            secondary:
+              type: string
+              pattern: ^#[0-9a-fA-F]{6}$
+            accent:
+              type: string
+              pattern: ^#[0-9a-fA-F]{6}$
+          additionalProperties: {}
+        voice:
+          type: string
+        tagline:
+          type: string
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorValue: {}
     get_delivery_success_SiteOutcomesMediaBuyFinality:
       type: string
       enum:
@@ -91097,6 +92189,7 @@ components:
     get_delivery_success_SiteOutcomeVendorMetricValueVendorBrandId:
       type: string
       pattern: ^[a-z0-9_]+$
+    get_delivery_success_SiteOutcomeVendorMetricValueVendorValue: {}
     get_delivery_success_SiteOutcomesCostFinality:
       type: string
       enum:
@@ -91681,6 +92774,26 @@ components:
         - interval
         - unit
       additionalProperties: false
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalMetricVendorBrandKitOverrideLogoProvenanceExt:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceDisclosureJurisdictionsItemRenderGuidanceExt:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    get_delivery_success_GetDeliveryGoalProgressOptimizationGoalVendorMetricVendorBrandKitOverrideLogoProvenanceExt:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
     get_delivery_success_TotalsMetricsValue:
       type: object
       properties:
