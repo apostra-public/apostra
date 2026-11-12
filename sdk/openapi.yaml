@@ -57500,10 +57500,11 @@ paths:
                         - interchange
                         - public
                     chatgpt:
-                      description: ChatGPT app icons. A change clears the listing approval.
+                      description: 'ChatGPT app: icons, or approve the reviewed listing.'
                       type: object
                       properties:
                         icons:
+                          description: Icon choice. A change clears the listing approval.
                           oneOf:
                             - type: object
                               properties:
@@ -57535,9 +57536,21 @@ paths:
                                 - directoryIconDataUrl
                                 - composerIconDataUrl
                               additionalProperties: false
-                          description: Icon choice.
-                      required:
-                        - icons
+                        approveListing:
+                          description: 'Approve the reviewed ChatGPT listing: approval_required, an admin approves on the web.'
+                          type: object
+                          properties:
+                            fingerprint:
+                              type: string
+                              pattern: ^[a-f0-9]{64}$
+                              description: listingFingerprint you reviewed.
+                            acknowledgeLegacyConflicts:
+                              description: Confirm the current value of a legacy conflict.
+                              type: boolean
+                              const: true
+                          required:
+                            - fingerprint
+                          additionalProperties: false
                       additionalProperties: false
                     revokeReviewerSandbox:
                       description: Revoke the ChatGPT reviewer sandbox now.

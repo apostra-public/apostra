@@ -33734,13 +33734,13 @@ export type SaveSellerData = {
              */
             visibility?: 'unlisted' | 'interchange' | 'public';
             /**
-             * ChatGPT app icons. A change clears the listing approval.
+             * ChatGPT app: icons, or approve the reviewed listing.
              */
             chatgpt?: {
                 /**
-                 * Icon choice.
+                 * Icon choice. A change clears the listing approval.
                  */
-                icons: {
+                icons?: {
                     /**
                      * Brand-identity icons.
                      */
@@ -33760,6 +33760,19 @@ export type SaveSellerData = {
                      * 48 px PNG data URL.
                      */
                     composerIconDataUrl: string;
+                };
+                /**
+                 * Approve the reviewed ChatGPT listing: approval_required, an admin approves on the web.
+                 */
+                approveListing?: {
+                    /**
+                     * listingFingerprint you reviewed.
+                     */
+                    fingerprint: string;
+                    /**
+                     * Confirm the current value of a legacy conflict.
+                     */
+                    acknowledgeLegacyConflicts?: true;
                 };
             };
             /**

@@ -19263,13 +19263,21 @@ class SaveSellerInputDistribution(TypedDict):
     visibility: NotRequired[Literal["unlisted", "interchange", "public"]]
     '\n    `unlisted` unlists now. `interchange` and `public` return approval_required: an admin approves on the web.\n    '
     chatgpt: NotRequired[SaveSellerInputDistributionChatgpt]
-    '\n    ChatGPT app icons. A change clears the listing approval.\n    '
+    '\n    ChatGPT app: icons, or approve the reviewed listing.\n    '
     revokeReviewerSandbox: NotRequired[Literal[True]]
     '\n    Revoke the ChatGPT reviewer sandbox now.\n    '
 
 class SaveSellerInputDistributionChatgpt(TypedDict):
-    icons: SaveSellerInputDistributionChatgptIconsSourceAutomatic | SaveSellerInputDistributionChatgptIconsSourceManual
-    '\n    Icon choice.\n    '
+    icons: NotRequired[SaveSellerInputDistributionChatgptIconsSourceAutomatic | SaveSellerInputDistributionChatgptIconsSourceManual]
+    '\n    Icon choice. A change clears the listing approval.\n    '
+    approveListing: NotRequired[SaveSellerInputDistributionChatgptApproveListing]
+    '\n    Approve the reviewed ChatGPT listing: approval_required, an admin approves on the web.\n    '
+
+class SaveSellerInputDistributionChatgptApproveListing(TypedDict):
+    fingerprint: str
+    '\n    listingFingerprint you reviewed.\n    '
+    acknowledgeLegacyConflicts: NotRequired[Literal[True]]
+    '\n    Confirm the current value of a legacy conflict.\n    '
 
 class SaveSellerInputDistributionChatgptIconsSourceAutomatic(TypedDict):
     source: Literal["automatic"]
