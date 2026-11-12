@@ -17458,7 +17458,7 @@ export type SaveAudienceRequestAudienceSellerAccountRequest = {
     platformId?: string;
     source?: SaveAudienceRequestAudienceSourceReference;
     /**
-     * True removes the mapping; the seller's object is kept.
+     * True unmaps; deletes the audience if we created it.
      */
     unmap?: true;
 };
