@@ -1942,6 +1942,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
@@ -3192,6 +3194,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
@@ -4418,6 +4422,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
@@ -5632,6 +5638,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
@@ -6847,6 +6855,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
@@ -8069,6 +8079,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
@@ -10428,6 +10440,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
@@ -11645,6 +11659,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
@@ -15154,6 +15170,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
@@ -16369,6 +16387,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
@@ -17590,6 +17610,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
@@ -18810,6 +18832,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
@@ -20030,6 +20054,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
@@ -21250,6 +21276,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
@@ -22470,6 +22498,8 @@ paths:
                           - approvalRouting
                           - listing
                           - identity
+                          - chatgpt
+                          - files
                           - readiness
                           - operating
                           - entitlements
