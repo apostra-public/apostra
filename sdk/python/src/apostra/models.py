@@ -9807,6 +9807,8 @@ class SaveBillingInput(TypedDict):
     '\n    Change the renewal; returns approval_required. Send alone.\n    '
     payer: NotRequired[SaveBillingRequestSaveBillingPayer]
     '\n    Change the payer details printed on invoices; saves now. Omitted fields stay, null clears one. Send alone.\n    '
+    mediaBilling: NotRequired[SaveBillingRequestSaveBillingMediaBilling]
+    '\n    Create, update or remove a media billing entity, or attach or detach one; saves now. One change per call. Send alone.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -9817,6 +9819,70 @@ class SaveBillingInputTerms(TypedDict):
     '\n    Explicitly accept the named Terms version.\n    '
     acceptedVersion: str
     '\n    Terms version shown in Plan & Billing.\n    '
+
+class SaveBillingRequestSaveBillingMediaBilling(TypedDict):
+    entity: NotRequired[SaveBillingRequestSaveBillingMediaBillingEntity]
+    '\n    Create an entity, or update the one named by id. Send the whole entity.\n    '
+    removeEntityId: NotRequired[SaveBillingRequestSaveBillingMediaBillingRemoveEntityId]
+    '\n    Remove an entity that has no attachments.\n    '
+    attach: NotRequired[SaveBillingRequestSaveBillingMediaBillingAttach]
+    '\n    Attach an entity to an advertiser or a child account. Each takes one.\n    '
+    detach: NotRequired[SaveBillingRequestSaveBillingMediaBillingDetach]
+    '\n    Remove an attachment.\n    '
+
+class SaveBillingRequestSaveBillingMediaBillingAttach(TypedDict):
+    entityId: SaveBillingRequestSaveBillingMediaBillingAttachEntityId
+    '\n    Entity to attach.\n    '
+    advertiserId: NotRequired[str]
+    '\n    Advertiser to attach it to.\n    '
+    accountId: NotRequired[int]
+    '\n    A child account of the organization.\n    '
+
+SaveBillingRequestSaveBillingMediaBillingAttachEntityId: TypeAlias = int
+
+class SaveBillingRequestSaveBillingMediaBillingDetach(TypedDict):
+    attachmentId: SaveBillingRequestSaveBillingMediaBillingDetachAttachmentId
+    '\n    Attachment to remove.\n    '
+
+SaveBillingRequestSaveBillingMediaBillingDetachAttachmentId: TypeAlias = int
+
+class SaveBillingRequestSaveBillingMediaBillingEntity(TypedDict):
+    id: NotRequired[SaveBillingRequestSaveBillingMediaBillingEntityId]
+    '\n    Entity to update. Omit to create one.\n    '
+    legal_name: str
+    '\n    Legal name on the invoice.\n    '
+    tax_id: NotRequired[str]
+    '\n    Tax ID, as entered.\n    '
+    address: SaveBillingRequestSaveBillingMediaBillingEntityAddress
+    '\n    Postal address.\n    '
+    contacts: list[SaveBillingRequestSaveBillingMediaBillingEntityContactsItem]
+    '\n    Invoice emails, each as a billing contact.\n    '
+    currency: str
+    '\n    ISO 4217 currency code\n    '
+    isPrimary: NotRequired[bool]
+    '\n    Make this the primary entity. The first entity is always primary.\n    '
+
+class SaveBillingRequestSaveBillingMediaBillingEntityAddress(TypedDict):
+    street: str
+    '\n    Street, one line.\n    '
+    city: str
+    '\n    City.\n    '
+    postal_code: str
+    '\n    Postal code.\n    '
+    region: NotRequired[str]
+    '\n    State or region.\n    '
+    country: str
+    '\n    ISO 3166-1 alpha-2 code.\n    '
+
+class SaveBillingRequestSaveBillingMediaBillingEntityContactsItem(TypedDict):
+    role: Literal["billing"]
+    '\n    Always billing.\n    '
+    email: str
+    '\n    Invoice email.\n    '
+
+SaveBillingRequestSaveBillingMediaBillingEntityId: TypeAlias = int
+
+SaveBillingRequestSaveBillingMediaBillingRemoveEntityId: TypeAlias = int
 
 class SaveBillingRequestSaveBillingOfferResponse(TypedDict):
     offerVersion: SaveBillingRequestSaveBillingOfferResponseOfferVersion
@@ -9917,6 +9983,56 @@ class SaveBillingResultActionConfirmationRequired(TypedDict):
 class SaveBillingResultActionHumanActionRequired(TypedDict):
     paymentAuthority: SaveBillingSuccessCaptureLinkIssuedResult
     action: Literal["human_action_required"]
+
+class SaveBillingResultActionMediaBillingSaved(TypedDict):
+    action: Literal["media_billing_saved"]
+    saved: SaveBillingResultActionMediaBillingSavedSaved
+    '\n    The entity or attachment the change was made to.\n    '
+    mediaBilling: NotRequired[SaveBillingResultActionMediaBillingSavedMediaBilling]
+    '\n    The updated entities and attachments. Left out, with an unavailableIncludes entry, when the read after the write fails.\n    '
+    unavailableIncludes: NotRequired[list[SaveBillingResultActionMediaBillingSavedUnavailableIncludesItem]]
+
+class SaveBillingResultActionMediaBillingSavedMediaBilling(TypedDict):
+    visibility: Literal["visible", "redacted"]
+    '\n    `redacted` for an organization-scoped service token: `redactedFields` are left out of every entity.\n    '
+    redactedFields: list[str]
+    entities: list[SaveBillingResultActionMediaBillingSavedMediaBillingEntitiesItem]
+    attachments: list[SaveBillingResultActionMediaBillingSavedMediaBillingAttachmentsItem]
+
+class SaveBillingResultActionMediaBillingSavedMediaBillingAttachmentsItem(TypedDict):
+    id: int
+    entityId: int
+    advertiserId: NotRequired[str]
+    accountId: NotRequired[int]
+
+class SaveBillingResultActionMediaBillingSavedMediaBillingEntitiesItem(TypedDict):
+    legal_name: str
+    tax_id: NotRequired[str]
+    address: NotRequired[SaveBillingResultActionMediaBillingSavedMediaBillingEntitiesItemAddress]
+    contacts: NotRequired[list[SaveBillingResultActionMediaBillingSavedMediaBillingEntitiesItemContactsItem]]
+    id: int
+    currency: str
+    isPrimary: bool
+    '\n    The primary entity catches whatever has no attachment.\n    '
+
+class SaveBillingResultActionMediaBillingSavedMediaBillingEntitiesItemAddress(TypedDict):
+    street: str
+    city: str
+    postal_code: str
+    region: NotRequired[str]
+    country: str
+
+class SaveBillingResultActionMediaBillingSavedMediaBillingEntitiesItemContactsItem(TypedDict):
+    role: Literal["billing", "legal", "creative", "general"]
+    email: NotRequired[str]
+
+class SaveBillingResultActionMediaBillingSavedSaved(TypedDict):
+    entityId: NotRequired[int]
+    attachmentId: NotRequired[int]
+
+class SaveBillingResultActionMediaBillingSavedUnavailableIncludesItem(TypedDict):
+    include: str
+    reason: str
 
 class SaveBillingResultActionOfferResponseRecorded(TypedDict):
     action: Literal["offer_response_recorded"]
@@ -10071,7 +10187,7 @@ class SaveBillingSuccessSaveBillingApprovalRequired(TypedDict):
     idempotencyKey: NotRequired[str]
     '\n    The key this request is recorded under. Repeat the call with it to read the approval without recording a new one.\n    '
 
-SaveBillingResult: TypeAlias = "SaveBillingResultActionTermsAccepted | SaveBillingResultActionTermsNotRequired | SaveBillingResultActionPaymentTermsSaved | SaveBillingResultActionBillingSaved | SaveBillingResultActionConfirmationRequired | SaveBillingResultActionHumanActionRequired | SaveBillingResultActionPaymentAuthorityPending | SaveBillingResultActionPaymentAuthorityOpened | SaveBillingResultActionPaymentAuthorityVerified | SaveBillingResultActionPaymentAuthorityExpired | SaveBillingResultActionPlanAccepted | SaveBillingSuccessSaveBillingApprovalRequired | SaveBillingResultActionOfferResponseRecorded | SaveBillingResultActionRenewalChanged | SaveBillingResultActionPayerSaved"
+SaveBillingResult: TypeAlias = "SaveBillingResultActionTermsAccepted | SaveBillingResultActionTermsNotRequired | SaveBillingResultActionPaymentTermsSaved | SaveBillingResultActionBillingSaved | SaveBillingResultActionConfirmationRequired | SaveBillingResultActionHumanActionRequired | SaveBillingResultActionPaymentAuthorityPending | SaveBillingResultActionPaymentAuthorityOpened | SaveBillingResultActionPaymentAuthorityVerified | SaveBillingResultActionPaymentAuthorityExpired | SaveBillingResultActionPlanAccepted | SaveBillingSuccessSaveBillingApprovalRequired | SaveBillingResultActionOfferResponseRecorded | SaveBillingResultActionRenewalChanged | SaveBillingResultActionPayerSaved | SaveBillingResultActionMediaBillingSaved"
 
 SaveBillingSuccessAgentApprovalRequired: TypeAlias = SaveBillingSuccessSaveBillingApprovalRequired
 

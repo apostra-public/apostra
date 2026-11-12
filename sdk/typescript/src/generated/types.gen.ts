@@ -17610,6 +17610,10 @@ export type SaveBillingData = {
          */
         payer?: SaveBillingRequestSaveBillingPayer;
         /**
+         * Create, update or remove a media billing entity, or attach or detach one; saves now. One change per call. Send alone.
+         */
+        mediaBilling?: SaveBillingRequestSaveBillingMediaBilling;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -17691,6 +17695,110 @@ export type SaveBillingErrors = {
      */
     503: V3ToolErrorResponse;
 };
+
+export type SaveBillingRequestSaveBillingMediaBilling = {
+    /**
+     * Create an entity, or update the one named by id. Send the whole entity.
+     */
+    entity?: {
+        /**
+         * Entity to update. Omit to create one.
+         */
+        id?: SaveBillingRequestSaveBillingMediaBillingEntityId;
+        /**
+         * Legal name on the invoice.
+         */
+        legal_name: string;
+        /**
+         * Tax ID, as entered.
+         */
+        tax_id?: string;
+        /**
+         * Postal address.
+         */
+        address: {
+            /**
+             * Street, one line.
+             */
+            street: string;
+            /**
+             * City.
+             */
+            city: string;
+            /**
+             * Postal code.
+             */
+            postal_code: string;
+            /**
+             * State or region.
+             */
+            region?: string;
+            /**
+             * ISO 3166-1 alpha-2 code.
+             */
+            country: string;
+        };
+        /**
+         * Invoice emails, each as a billing contact.
+         */
+        contacts: Array<{
+            /**
+             * Always billing.
+             */
+            role: 'billing';
+            /**
+             * Invoice email.
+             */
+            email: string;
+        }>;
+        /**
+         * ISO 4217 currency code
+         */
+        currency: string;
+        /**
+         * Make this the primary entity. The first entity is always primary.
+         */
+        isPrimary?: boolean;
+    };
+    /**
+     * Remove an entity that has no attachments.
+     */
+    removeEntityId?: SaveBillingRequestSaveBillingMediaBillingRemoveEntityId;
+    /**
+     * Attach an entity to an advertiser or a child account. Each takes one.
+     */
+    attach?: {
+        /**
+         * Entity to attach.
+         */
+        entityId: SaveBillingRequestSaveBillingMediaBillingAttachEntityId;
+        /**
+         * Advertiser to attach it to.
+         */
+        advertiserId?: string;
+        /**
+         * A child account of the organization.
+         */
+        accountId?: number;
+    };
+    /**
+     * Remove an attachment.
+     */
+    detach?: {
+        /**
+         * Attachment to remove.
+         */
+        attachmentId: SaveBillingRequestSaveBillingMediaBillingDetachAttachmentId;
+    };
+};
+
+export type SaveBillingRequestSaveBillingMediaBillingAttachEntityId = number;
+
+export type SaveBillingRequestSaveBillingMediaBillingDetachAttachmentId = number;
+
+export type SaveBillingRequestSaveBillingMediaBillingEntityId = number;
+
+export type SaveBillingRequestSaveBillingMediaBillingRemoveEntityId = number;
 
 export type SaveBillingRequestSaveBillingOfferResponse = {
     /**
@@ -17969,6 +18077,56 @@ export type SaveBillingResponses = {
                 visibility: 'visible' | 'redacted';
                 redactedFields: Array<string>;
             };
+        } | {
+            action: 'media_billing_saved';
+            /**
+             * The entity or attachment the change was made to.
+             */
+            saved: {
+                entityId?: number;
+                attachmentId?: number;
+            };
+            /**
+             * The updated entities and attachments. Left out, with an unavailableIncludes entry, when the read after the write fails.
+             */
+            mediaBilling?: {
+                /**
+                 * `redacted` for an organization-scoped service token: `redactedFields` are left out of every entity.
+                 */
+                visibility: 'visible' | 'redacted';
+                redactedFields: Array<string>;
+                entities: Array<{
+                    legal_name: string;
+                    tax_id?: string;
+                    address?: {
+                        street: string;
+                        city: string;
+                        postal_code: string;
+                        region?: string;
+                        country: string;
+                    };
+                    contacts?: Array<{
+                        role: 'billing' | 'legal' | 'creative' | 'general';
+                        email?: string;
+                    }>;
+                    id: number;
+                    currency: string;
+                    /**
+                     * The primary entity catches whatever has no attachment.
+                     */
+                    isPrimary: boolean;
+                }>;
+                attachments: Array<{
+                    id: number;
+                    entityId: number;
+                    advertiserId?: string;
+                    accountId?: number;
+                }>;
+            };
+            unavailableIncludes?: Array<{
+                include: string;
+                reason: string;
+            }>;
         };
         error: null;
     };

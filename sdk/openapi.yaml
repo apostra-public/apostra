@@ -39468,13 +39468,13 @@ paths:
     post:
       operationId: save_billing
       summary: >-
-        Accept Terms, set the payment terms sellers are asked for, accept a plan, answer its offer, change its renewal
-        or change the payer details on invoices. Accepting a plan, choosing payment terms or changing the renewal needs
-        an administrator to approve on our site. Cards stay off MCP.
+        Accept Terms, set the payment terms sellers ask for, accept a plan, answer its offer, change its renewal, change
+        invoice payer details or manage media billing entities. Accepting a plan, choosing payment terms or changing the
+        renewal needs administrator approval on our site. Cards stay off MCP.
       description: >-
-        Accept Terms, set the payment terms sellers are asked for, accept a plan, answer its offer, change its renewal
-        or change the payer details on invoices. Accepting a plan, choosing payment terms or changing the renewal needs
-        an administrator to approve on our site. Cards stay off MCP.
+        Accept Terms, set the payment terms sellers ask for, accept a plan, answer its offer, change its renewal, change
+        invoice payer details or manage media billing entities. Accepting a plan, choosing payment terms or changing the
+        renewal needs administrator approval on our site. Cards stay off MCP.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -39566,6 +39566,13 @@ paths:
                   $ref: '#/components/schemas/save_billing_request_SaveBillingPayer'
                   type: object
                   additionalProperties: false
+                mediaBilling:
+                  description: >-
+                    Create, update or remove a media billing entity, or attach or detach one; saves now. One change per
+                    call. Send alone.
+                  $ref: '#/components/schemas/save_billing_request_SaveBillingMediaBilling'
+                  type: object
+                  additionalProperties: false
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -39587,6 +39594,16 @@ paths:
                         - terms
                     - required:
                         - paymentTerms
+                    - required:
+                        - plan
+                    - required:
+                        - offerResponse
+                    - required:
+                        - renewal
+                    - required:
+                        - payer
+                    - required:
+                        - mediaBilling
                 - if:
                     required:
                       - idempotencyKey
@@ -39977,6 +39994,154 @@ paths:
                         required:
                           - action
                           - payer
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: media_billing_saved
+                          saved:
+                            type: object
+                            properties:
+                              entityId:
+                                type: integer
+                                minimum: -9007199254740991
+                                maximum: 9007199254740991
+                              attachmentId:
+                                type: integer
+                                minimum: -9007199254740991
+                                maximum: 9007199254740991
+                            additionalProperties: false
+                            description: The entity or attachment the change was made to.
+                          mediaBilling:
+                            description: >-
+                              The updated entities and attachments. Left out, with an unavailableIncludes entry, when
+                              the read after the write fails.
+                            type: object
+                            properties:
+                              visibility:
+                                type: string
+                                enum:
+                                  - visible
+                                  - redacted
+                                description: >-
+                                  `redacted` for an organization-scoped service token: `redactedFields` are left out of
+                                  every entity.
+                              redactedFields:
+                                type: array
+                                items:
+                                  type: string
+                              entities:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    legal_name:
+                                      type: string
+                                    tax_id:
+                                      type: string
+                                    address:
+                                      type: object
+                                      properties:
+                                        street:
+                                          type: string
+                                        city:
+                                          type: string
+                                        postal_code:
+                                          type: string
+                                        region:
+                                          type: string
+                                        country:
+                                          type: string
+                                      required:
+                                        - street
+                                        - city
+                                        - postal_code
+                                        - country
+                                      additionalProperties: false
+                                    contacts:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          role:
+                                            anyOf:
+                                              - type: string
+                                                const: billing
+                                              - type: string
+                                                const: legal
+                                              - type: string
+                                                const: creative
+                                              - type: string
+                                                const: general
+                                          email:
+                                            type: string
+                                            format: email
+                                            pattern: >-
+                                              ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+                                        required:
+                                          - role
+                                        additionalProperties: false
+                                    id:
+                                      type: integer
+                                      minimum: -9007199254740991
+                                      maximum: 9007199254740991
+                                    currency:
+                                      type: string
+                                    isPrimary:
+                                      type: boolean
+                                      description: The primary entity catches whatever has no attachment.
+                                  required:
+                                    - legal_name
+                                    - id
+                                    - currency
+                                    - isPrimary
+                                  additionalProperties: false
+                              attachments:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: integer
+                                      minimum: -9007199254740991
+                                      maximum: 9007199254740991
+                                    entityId:
+                                      type: integer
+                                      minimum: -9007199254740991
+                                      maximum: 9007199254740991
+                                    advertiserId:
+                                      type: string
+                                    accountId:
+                                      type: integer
+                                      minimum: -9007199254740991
+                                      maximum: 9007199254740991
+                                  required:
+                                    - id
+                                    - entityId
+                                  additionalProperties: false
+                            required:
+                              - visibility
+                              - redactedFields
+                              - entities
+                              - attachments
+                            additionalProperties: false
+                          unavailableIncludes:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                include:
+                                  type: string
+                                reason:
+                                  type: string
+                              required:
+                                - include
+                                - reason
+                              additionalProperties: false
+                        required:
+                          - action
+                          - saved
                         additionalProperties: false
                   error:
                     type: 'null'
@@ -97520,6 +97685,127 @@ components:
           minLength: 1
           maxLength: 200
       additionalProperties: false
+    save_billing_request_SaveBillingMediaBilling:
+      type: object
+      properties:
+        entity:
+          description: Create an entity, or update the one named by id. Send the whole entity.
+          type: object
+          properties:
+            id:
+              description: Entity to update. Omit to create one.
+              $ref: '#/components/schemas/save_billing_request_SaveBillingMediaBillingEntityId'
+            legal_name:
+              type: string
+              minLength: 1
+              maxLength: 200
+              description: Legal name on the invoice.
+            tax_id:
+              description: Tax ID, as entered.
+              type: string
+              maxLength: 30
+            address:
+              type: object
+              properties:
+                street:
+                  type: string
+                  minLength: 1
+                  maxLength: 200
+                  description: Street, one line.
+                city:
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                  description: City.
+                postal_code:
+                  type: string
+                  minLength: 1
+                  maxLength: 20
+                  description: Postal code.
+                region:
+                  description: State or region.
+                  type: string
+                  maxLength: 100
+                country:
+                  type: string
+                  pattern: ^[A-Z]{2}$
+                  description: ISO 3166-1 alpha-2 code.
+              required:
+                - street
+                - city
+                - postal_code
+                - country
+              additionalProperties: false
+              description: Postal address.
+            contacts:
+              minItems: 1
+              maxItems: 10
+              type: array
+              items:
+                type: object
+                properties:
+                  role:
+                    type: string
+                    const: billing
+                    description: Always billing.
+                  email:
+                    type: string
+                    format: email
+                    pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+                    description: Invoice email.
+                required:
+                  - role
+                  - email
+                additionalProperties: false
+              description: Invoice emails, each as a billing contact.
+            currency:
+              type: string
+              pattern: ^[A-Z]{3}$
+              description: ISO 4217 currency code
+              example: USD
+            isPrimary:
+              description: Make this the primary entity. The first entity is always primary.
+              type: boolean
+          required:
+            - legal_name
+            - address
+            - contacts
+            - currency
+          additionalProperties: false
+        removeEntityId:
+          description: Remove an entity that has no attachments.
+          $ref: '#/components/schemas/save_billing_request_SaveBillingMediaBillingRemoveEntityId'
+        attach:
+          description: Attach an entity to an advertiser or a child account. Each takes one.
+          type: object
+          properties:
+            entityId:
+              description: Entity to attach.
+              $ref: '#/components/schemas/save_billing_request_SaveBillingMediaBillingAttachEntityId'
+            advertiserId:
+              description: Advertiser to attach it to.
+              type: string
+              maxLength: 19
+              pattern: ^[1-9]\d*$
+            accountId:
+              description: A child account of the organization.
+              type: integer
+              exclusiveMinimum: 0
+              maximum: 9007199254740991
+          required:
+            - entityId
+          additionalProperties: false
+        detach:
+          description: Remove an attachment.
+          type: object
+          properties:
+            attachmentId:
+              description: Attachment to remove.
+              $ref: '#/components/schemas/save_billing_request_SaveBillingMediaBillingDetachAttachmentId'
+          required:
+            - attachmentId
+          additionalProperties: false
+      additionalProperties: false
     save_billing_request_SaveBillingPlanOfferVersion:
       type: string
       pattern: ^v1:[0-9a-f]{64}$
@@ -97534,6 +97820,22 @@ components:
       type: string
       minLength: 1
       maxLength: 100
+    save_billing_request_SaveBillingMediaBillingEntityId:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
+    save_billing_request_SaveBillingMediaBillingRemoveEntityId:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
+    save_billing_request_SaveBillingMediaBillingAttachEntityId:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
+    save_billing_request_SaveBillingMediaBillingDetachAttachmentId:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
     save_billing_success_PendingConfirmationResult:
       type: object
       properties:
