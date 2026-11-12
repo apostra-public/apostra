@@ -33779,6 +33779,10 @@ export type SaveSellerData = {
              * Revoke the ChatGPT reviewer sandbox now.
              */
             revokeReviewerSandbox?: true;
+            /**
+             * Request the ChatGPT reviewer sandbox: approval_required, an admin approves on the web. Needs a public listing.
+             */
+            requestReviewerSandbox?: true;
         };
         /**
          * Seller-only pending buyer relationship decision; read its intake version immediately before saving.

@@ -57556,6 +57556,12 @@ paths:
                       description: Revoke the ChatGPT reviewer sandbox now.
                       type: boolean
                       const: true
+                    requestReviewerSandbox:
+                      description: >-
+                        Request the ChatGPT reviewer sandbox: approval_required, an admin approves on the web. Needs a
+                        public listing.
+                      type: boolean
+                      const: true
                   additionalProperties: false
                 admission:
                   description: Seller-only pending buyer relationship decision; read its intake version immediately before saving.
