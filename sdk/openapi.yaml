@@ -98927,7 +98927,7 @@ components:
         source:
           $ref: '#/components/schemas/save_audience_request_AudienceSourceReference'
         unmap:
-          description: True removes the mapping; the seller's object is kept.
+          description: True unmaps; deletes the audience if we created it.
           type: boolean
           const: true
       required:

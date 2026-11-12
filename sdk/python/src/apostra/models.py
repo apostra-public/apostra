@@ -9788,7 +9788,7 @@ class SaveAudienceRequestAudienceSellerAccountRequest(TypedDict):
     '\n    The seller\'s audience ID on that account; checked at sync.\n    '
     source: NotRequired[SaveAudienceRequestAudienceSourceReference]
     unmap: NotRequired[Literal[True]]
-    '\n    True removes the mapping; the seller\'s object is kept.\n    '
+    '\n    True unmaps; deletes the audience if we created it.\n    '
 
 class SaveAudienceRequestAudienceSourceReferenceKindDataset(TypedDict):
     kind: Literal["dataset"]
