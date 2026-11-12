@@ -19424,6 +19424,8 @@ class SaveSellerInputDistribution(TypedDict):
     '\n    ChatGPT app: icons, or approve the reviewed listing.\n    '
     revokeReviewerSandbox: NotRequired[Literal[True]]
     '\n    Revoke the ChatGPT reviewer sandbox now.\n    '
+    requestTextLine: NotRequired[SaveSellerInputDistributionRequestTextLine]
+    '\n    Buy the agent text line: approval_required, an admin approves on the web. It costs money.\n    '
     requestReviewerSandbox: NotRequired[Literal[True]]
     '\n    Request the ChatGPT reviewer sandbox: approval_required, an admin approves on the web. Needs a public listing.\n    '
 
@@ -19450,6 +19452,12 @@ class SaveSellerInputDistributionChatgptIconsSourceManual(TypedDict):
     '\n    256 px PNG data URL.\n    '
     composerIconDataUrl: str
     '\n    48 px PNG data URL.\n    '
+
+class SaveSellerInputDistributionRequestTextLine(TypedDict):
+    areaCode: str
+    '\n    US area code to buy the number in.\n    '
+    requestId: str
+    '\n    Idempotency UUID for this intended line. Sending it again returns the same approval.\n    '
 
 class SaveSellerInputInformationRequestActionConfirm(TypedDict):
     action: Literal["confirm"]
@@ -20482,7 +20490,7 @@ SaveWorkItemSuccessSaveWorkItemSuccessUnchangedResumeDue: TypeAlias = bool
 class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -20499,8 +20507,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchFilter]
@@ -20725,7 +20733,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: str
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -20742,8 +20750,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict)
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter]
@@ -20758,7 +20766,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict)
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: str
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: str
@@ -20775,8 +20783,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionFilter]
@@ -21211,7 +21219,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     accountId: NotRequired[int | str]
     query: str
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     asOf: NotRequired[str]
     '\n    The time to evaluate docs at; defaults to now. When continuing an agreement read with cursor, send the same asOf again.\n    '
     sources: NotRequired[list[Literal["objects", "docs", "specs"]]]
@@ -21222,8 +21230,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter]
@@ -21448,7 +21456,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
 class SearchInputKindAdServerTargeting(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -21466,8 +21474,8 @@ class SearchInputKindAdServerTargeting(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindAdServerTargetingFilter]
@@ -21692,7 +21700,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
 class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSession(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -21710,8 +21718,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSessionFilter]
@@ -21936,7 +21944,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
 class SearchInputKindBuyerRfp(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -21954,8 +21962,8 @@ class SearchInputKindBuyerRfp(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindBuyerRfpFilter
@@ -22180,7 +22188,7 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
 class SearchInputKindCreative(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -22198,8 +22206,8 @@ class SearchInputKindCreative(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindCreativeFilter]
@@ -22214,7 +22222,7 @@ class SearchInputKindCreative(TypedDict):
 class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -22232,8 +22240,8 @@ class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeAssetAndCatalogFilter
@@ -22458,7 +22466,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
 class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -22476,8 +22484,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter
@@ -22700,7 +22708,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
 class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -22718,8 +22726,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeCollectionWithFilterCampaignIdFilter
@@ -23222,7 +23230,7 @@ SearchInputKindCreativeWithFilterAdvertiserIdFilter: TypeAlias = SearchInputKind
 class SearchInputKindCreativeWithFilterAndFilterCampaignId(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -23240,8 +23248,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter
@@ -23466,7 +23474,7 @@ SearchInputKindCreativeWithFilterCampaignIdFilter: TypeAlias = SearchInputKindCr
 class SearchInputKindEventSource(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -23484,8 +23492,8 @@ class SearchInputKindEventSource(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindEventSourceFilter]
@@ -23504,7 +23512,7 @@ class SearchInputKindEventSourceFilter(TypedDict):
 class SearchInputKindProposal(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -23522,8 +23530,8 @@ class SearchInputKindProposal(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindProposalFilter
@@ -23748,7 +23756,7 @@ class SearchInputKindProposalFilter(TypedDict):
 class SearchInputKindSourceAccount(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -23766,8 +23774,8 @@ class SearchInputKindSourceAccount(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindSourceAccountFilter]
@@ -23992,7 +24000,7 @@ class SearchInputKindSourceAccountFilter(TypedDict):
 class SearchInputKindTargetingValue(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; property_list, rfp, rfp_turn, and creative_session take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -24010,8 +24018,8 @@ class SearchInputKindTargetingValue(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindTargetingValueFilter
