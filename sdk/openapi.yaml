@@ -26242,7 +26242,7 @@ paths:
                                   - currency
                                   - source
                                 additionalProperties: false
-                                description: Who is invoiced for this advertiser. Null when no entity resolves.
+                                description: Who is invoiced for this advertiser or child account. Null when no entity resolves.
                               - type: 'null'
                           unavailableIncludes:
                             type: array
