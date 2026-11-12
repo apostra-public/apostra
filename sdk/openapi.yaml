@@ -54760,10 +54760,12 @@ paths:
       operationId: save_notification_config
       summary: >-
         Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only
-        mutable fields. Use save_integration for credentials when needed.
+        mutable fields. Use save_integration for credentials when needed. removePushDeviceId removes one of your own
+        push devices.
       description: >-
         Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only
-        mutable fields. Use save_integration for credentials when needed.
+        mutable fields. Use save_integration for credentials when needed. removePushDeviceId removes one of your own
+        push devices.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -54894,6 +54896,12 @@ paths:
                         - action
                         - subscriptionId
                       additionalProperties: false
+                removePushDeviceId:
+                  description: Remove one of your own push devices (pushDeviceId from get). Alone.
+                  type: string
+                  format: uuid
+                  pattern: >-
+                    ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                 subscriptionId:
                   description: Existing subscription to patch. Omit to create a new one.
                   type: string
@@ -55029,9 +55037,13 @@ paths:
               additionalProperties: false
               allOf:
                 - if:
-                    not:
-                      required:
-                        - subscriptionId
+                    allOf:
+                      - not:
+                          required:
+                            - subscriptionId
+                      - not:
+                          required:
+                            - removePushDeviceId
                   then:
                     allOf:
                       - required:
@@ -55040,6 +55052,32 @@ paths:
                           - content
                       - required:
                           - trigger
+                - if:
+                    required:
+                      - removePushDeviceId
+                  then:
+                    allOf:
+                      - not:
+                          required:
+                            - eventSubscription
+                      - not:
+                          required:
+                            - subscriptionId
+                      - not:
+                          required:
+                            - enabled
+                      - not:
+                          required:
+                            - scope
+                      - not:
+                          required:
+                            - content
+                      - not:
+                          required:
+                            - trigger
+                      - not:
+                          required:
+                            - routeIds
                 - if:
                     required:
                       - subscriptionId
@@ -55246,6 +55284,41 @@ paths:
                           - outcome
                           - action
                           - eventSubscription
+                        additionalProperties: {}
+                      - type: object
+                        properties:
+                          outcome:
+                            type: string
+                            const: push_device_removed
+                          pushDevice:
+                            type: object
+                            properties:
+                              pushDeviceId:
+                                type: string
+                              kind:
+                                type: string
+                                enum:
+                                  - web_push
+                                  - apns
+                                  - fcm
+                              label:
+                                type: string
+                              registeredAt:
+                                type: string
+                              lastDeliveredAt:
+                                type:
+                                  - string
+                                  - 'null'
+                            required:
+                              - pushDeviceId
+                              - kind
+                              - label
+                              - registeredAt
+                              - lastDeliveredAt
+                            additionalProperties: false
+                        required:
+                          - outcome
+                          - pushDevice
                         additionalProperties: {}
                   error:
                     type: 'null'

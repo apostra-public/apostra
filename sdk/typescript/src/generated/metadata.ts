@@ -1350,7 +1350,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed."
+    "summary": "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed. removePushDeviceId removes one of your own push devices."
   },
   "save_playbook": {
     "path": "/tools/save_playbook",

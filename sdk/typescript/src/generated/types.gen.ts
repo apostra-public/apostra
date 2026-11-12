@@ -31453,6 +31453,10 @@ export type SaveNotificationConfigData = {
             reporting?: never;
         };
         /**
+         * Remove one of your own push devices (pushDeviceId from get). Alone.
+         */
+        removePushDeviceId?: string;
+        /**
          * Existing subscription to patch. Omit to create a new one.
          */
         subscriptionId?: string;
@@ -31692,6 +31696,16 @@ export type SaveNotificationConfigResponses = {
                 enabled: boolean;
                 reporting?: never;
             } | null;
+            [key: string]: unknown;
+        } | {
+            outcome: 'push_device_removed';
+            pushDevice: {
+                pushDeviceId: string;
+                kind: 'web_push' | 'apns' | 'fcm';
+                label: string;
+                registeredAt: string;
+                lastDeliveredAt: string | null;
+            };
             [key: string]: unknown;
         };
         error: null;
