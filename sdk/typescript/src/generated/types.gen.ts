@@ -36366,9 +36366,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system?: 'nielsen_dma';
+            system?: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */
@@ -36866,9 +36866,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system?: 'nielsen_dma';
+            system?: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */
@@ -37434,9 +37434,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system?: 'nielsen_dma';
+            system?: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */
@@ -37934,9 +37934,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system?: 'nielsen_dma';
+            system?: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */
@@ -38427,9 +38427,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system?: 'nielsen_dma';
+            system?: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */
@@ -38923,9 +38923,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system?: 'nielsen_dma';
+            system?: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */
@@ -39419,9 +39419,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system?: 'nielsen_dma';
+            system?: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */
@@ -40041,9 +40041,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system?: 'nielsen_dma';
+            system?: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */
@@ -40541,9 +40541,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system?: 'nielsen_dma';
+            system?: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */
@@ -40997,9 +40997,9 @@ export type SearchData = {
          */
         filter: {
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system: 'nielsen_dma';
+            system: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */
@@ -41113,9 +41113,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system?: 'nielsen_dma';
+            system?: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */
@@ -41612,9 +41612,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system?: 'nielsen_dma';
+            system?: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */
@@ -42112,9 +42112,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system?: 'nielsen_dma';
+            system?: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */
@@ -42612,9 +42612,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system?: 'nielsen_dma';
+            system?: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */
@@ -43112,9 +43112,9 @@ export type SearchData = {
              */
             parentId?: string;
             /**
-             * For kind targeting_value, required: the code system.
+             * For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).
              */
-            system?: 'nielsen_dma';
+            system?: 'nielsen_dma' | 'iso_3166_1' | 'iso_3166_2';
             /**
              * For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.
              */

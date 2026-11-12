@@ -20627,8 +20627,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    system: NotRequired[Literal["nielsen_dma"]]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: NotRequired[Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -20913,8 +20913,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    system: NotRequired[Literal["nielsen_dma"]]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: NotRequired[Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -21133,8 +21133,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    system: NotRequired[Literal["nielsen_dma"]]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: NotRequired[Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -21380,8 +21380,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    system: NotRequired[Literal["nielsen_dma"]]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: NotRequired[Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -21634,8 +21634,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    system: NotRequired[Literal["nielsen_dma"]]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: NotRequired[Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -21888,8 +21888,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    system: NotRequired[Literal["nielsen_dma"]]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: NotRequired[Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -22142,8 +22142,8 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    system: NotRequired[Literal["nielsen_dma"]]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: NotRequired[Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -22430,8 +22430,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    system: NotRequired[Literal["nielsen_dma"]]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: NotRequired[Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -22684,8 +22684,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    system: NotRequired[Literal["nielsen_dma"]]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: NotRequired[Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -22936,8 +22936,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    system: NotRequired[Literal["nielsen_dma"]]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: NotRequired[Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -23154,8 +23154,8 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    system: NotRequired[Literal["nielsen_dma"]]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: NotRequired[Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -23476,8 +23476,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    system: NotRequired[Literal["nielsen_dma"]]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: NotRequired[Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -23770,8 +23770,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    system: NotRequired[Literal["nielsen_dma"]]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: NotRequired[Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -24024,8 +24024,8 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind ad_server_targeting: which of the source\'s targeting taxonomies to browse, as named by the source.\n    '
     parentId: NotRequired[str]
     '\n    For kind ad_server_targeting: list the children of this candidate, for example the values under one key.\n    '
-    system: NotRequired[Literal["nielsen_dma"]]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: NotRequired[Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -24258,8 +24258,8 @@ class SearchInputKindTargetingValue(TypedDict):
 SearchInput: TypeAlias = "SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSession | SearchInputKindCreativeAssetAndCatalog | SearchInputKindEventSource | SearchInputKindProposal | SearchInputKindCreativeWithFilterAndFilterCampaignId | SearchInputKindCreative | SearchInputKindCreativeCollectionWithFilterCampaignId | SearchInputKindCreativeCollectionWithFilterAdvertiserId | SearchInputKindCreativeSessionWithFilterCampaignId | SearchInputKindCreativeSessionWithFilterAdvertiserId | SearchInputKindAdServerTargeting | SearchInputKindSourceAccount | SearchInputKindTargetingValue | SearchInputKindBuyerRfp | SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision | SearchInputDocsScopeCallerRelevantAndPublicResearch"
 
 class SearchInputKindTargetingValueFilter(TypedDict):
-    system: Literal["nielsen_dma"]
-    '\n    For kind targeting_value, required: the code system.\n    '
+    system: Literal["nielsen_dma", "iso_3166_1", "iso_3166_2"]
+    '\n    For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2 (region).\n    '
     names: NotRequired[list[str]]
     '\n    For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit names and query to list every value.\n    '
 

@@ -60195,10 +60195,14 @@ paths:
                           type: string
                           minLength: 1
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
@@ -61877,10 +61881,14 @@ paths:
                           type: string
                           minLength: 1
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
@@ -64316,10 +64324,14 @@ paths:
                           type: string
                           minLength: 1
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
@@ -65999,10 +66011,14 @@ paths:
                           type: string
                           minLength: 1
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
@@ -67667,10 +67683,14 @@ paths:
                           type: string
                           minLength: 1
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
@@ -69342,10 +69362,14 @@ paths:
                           type: string
                           minLength: 1
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
@@ -71016,10 +71040,14 @@ paths:
                           type: string
                           minLength: 1
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
@@ -74252,10 +74280,14 @@ paths:
                           type: string
                           minLength: 1
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
@@ -75933,10 +75965,14 @@ paths:
                           type: string
                           minLength: 1
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
@@ -77504,10 +77540,14 @@ paths:
                       type: object
                       properties:
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
@@ -78380,10 +78420,14 @@ paths:
                           type: string
                           minLength: 1
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
@@ -80061,10 +80105,14 @@ paths:
                           type: string
                           minLength: 1
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
@@ -81739,10 +81787,14 @@ paths:
                           type: string
                           minLength: 1
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
@@ -83417,10 +83469,14 @@ paths:
                           type: string
                           minLength: 1
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
@@ -85096,10 +85152,14 @@ paths:
                           type: string
                           minLength: 1
                         system:
-                          description: 'For kind targeting_value, required: the code system.'
+                          description: >-
+                            For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
+                            (region).
                           type: string
                           enum:
                             - nielsen_dma
+                            - iso_3166_1
+                            - iso_3166_2
                         names:
                           description: >-
                             For kind targeting_value: names to turn into the codes saves take, such as DMA names. Omit
