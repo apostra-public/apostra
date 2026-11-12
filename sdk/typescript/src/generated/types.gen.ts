@@ -34271,6 +34271,10 @@ export type SaveSellerData = {
          */
         sellingMode?: 'listing' | 'storefront';
         /**
+         * Choose the brain that answers buyer requests. Direct administrator only. Send alone.
+         */
+        proposalAgent?: SaveSellerRequestSellerProposalAgentInput;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -34476,6 +34480,29 @@ export type SaveSellerRequestPaymentCurrenciesItem = 'USD' | 'EUR' | 'GBP' | 'JP
 
 export type SaveSellerRequestResolveBrand = string;
 
+export type SaveSellerRequestSellerProposalAgentInput = {
+    /**
+     * Brain that answers your buyers: chef, prime or own.
+     */
+    answering: SaveSellerRequestSellerProposalAgentInputAnswering;
+    /**
+     * Brain that also gets each request; its proposals are recorded, never shown. null for none.
+     */
+    shadow: SaveSellerRequestSellerProposalAgentInputShadow | null;
+    /**
+     * Your proposal agent when a brain is own, else null.
+     */
+    ownAgentId: string | null;
+    /**
+     * proposalAgent.updatedAt as read; null if never saved.
+     */
+    expectedUpdatedAt: string | null;
+};
+
+export type SaveSellerRequestSellerProposalAgentInputAnswering = 'chef' | 'prime' | 'own';
+
+export type SaveSellerRequestSellerProposalAgentInputShadow = 'chef' | 'prime' | 'own';
+
 /**
  * The source's expectedVersion.
  */
@@ -34498,7 +34525,7 @@ export type SaveSellerResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessSourceRequestQueued | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessApprovalRequired | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
+        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessSourceRequestQueued | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessApprovalRequired | SaveSellerSuccessSaveSellerSuccessProposalAgent | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
         error: null;
     };
     /**
@@ -34609,6 +34636,30 @@ export type SaveSellerSuccessSaveSellerSuccessPreviewAfter = {
 export type SaveSellerSuccessSaveSellerSuccessPreviewBefore = {
     [key: string]: unknown;
 };
+
+export type SaveSellerSuccessSaveSellerSuccessProposalAgent = {
+    outcome: SaveSellerSuccessSaveSellerSuccessProposalAgentOutcome;
+    action: SaveSellerSuccessSaveSellerSuccessProposalAgentAction;
+    proposalAgent: {
+        answering: 'chef' | 'prime' | 'own';
+        shadow: 'chef' | 'prime' | 'own' | null;
+        ownAgent: {
+            id: string;
+            name: string;
+            endpointHost: string | null;
+            state: 'verified' | 'unverified' | 'archived';
+            [key: string]: unknown;
+        } | null;
+        updatedAt: string | null;
+        updatedBy: string | null;
+        [key: string]: unknown;
+    };
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessProposalAgentAction = 'proposal_agent_saved' | 'proposal_agent_unchanged';
+
+export type SaveSellerSuccessSaveSellerSuccessProposalAgentOutcome = 'proposal_agent_saved' | 'proposal_agent_unchanged';
 
 export type SaveSellerSuccessSaveSellerSuccessReadbackUnavailable = {
     outcome: 'readback_unavailable';

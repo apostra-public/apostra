@@ -19352,6 +19352,8 @@ class SaveSellerInput(TypedDict):
     '\n    With isPaused: the hold you last read; a changed hold returns CONFLICT.\n    '
     sellingMode: NotRequired[Literal["listing", "storefront"]]
     '\n    Change the account type in place. Direct administrator only. `listing` is refused while Storefront work runs and closes Enhanced Reporting. Send alone.\n    '
+    proposalAgent: NotRequired[SaveSellerRequestSellerProposalAgentInput]
+    '\n    Choose the brain that answers buyer requests. Direct administrator only. Send alone.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -19640,6 +19642,20 @@ SaveSellerRequestPaymentCurrenciesItem: TypeAlias = Literal["USD", "EUR", "GBP",
 
 SaveSellerRequestResolveBrand: TypeAlias = str
 
+class SaveSellerRequestSellerProposalAgentInput(TypedDict):
+    answering: SaveSellerRequestSellerProposalAgentInputAnswering
+    '\n    Brain that answers your buyers: chef, prime or own.\n    '
+    shadow: SaveSellerRequestSellerProposalAgentInputShadow | None
+    '\n    Brain that also gets each request; its proposals are recorded, never shown. null for none.\n    '
+    ownAgentId: str | None
+    '\n    Your proposal agent when a brain is own, else null.\n    '
+    expectedUpdatedAt: str | None
+    '\n    proposalAgent.updatedAt as read; null if never saved.\n    '
+
+SaveSellerRequestSellerProposalAgentInputAnswering: TypeAlias = Literal["chef", "prime", "own"]
+
+SaveSellerRequestSellerProposalAgentInputShadow: TypeAlias = Literal["chef", "prime", "own"]
+
 SaveSellerRequestSourceDecisionExpectedVersion: TypeAlias = int
 
 SaveSellerRequestSourceDecisionInventorySourceKey: TypeAlias = str
@@ -19715,6 +19731,28 @@ class SaveSellerSuccessSaveSellerSuccessPreview(TypedDict):
 SaveSellerSuccessSaveSellerSuccessPreviewAfter: TypeAlias = dict[str, JsonValue]
 
 SaveSellerSuccessSaveSellerSuccessPreviewBefore: TypeAlias = dict[str, JsonValue]
+
+class SaveSellerSuccessSaveSellerSuccessProposalAgent(TypedDict):
+    outcome: SaveSellerSuccessSaveSellerSuccessProposalAgentOutcome
+    action: SaveSellerSuccessSaveSellerSuccessProposalAgentAction
+    proposalAgent: SaveSellerSuccessSaveSellerSuccessProposalAgentProposalAgent
+
+SaveSellerSuccessSaveSellerSuccessProposalAgentAction: TypeAlias = Literal["proposal_agent_saved", "proposal_agent_unchanged"]
+
+SaveSellerSuccessSaveSellerSuccessProposalAgentOutcome: TypeAlias = Literal["proposal_agent_saved", "proposal_agent_unchanged"]
+
+class SaveSellerSuccessSaveSellerSuccessProposalAgentProposalAgent(TypedDict):
+    answering: Literal["chef", "prime", "own"]
+    shadow: Literal["chef", "prime", "own"] | None
+    ownAgent: SaveSellerSuccessSaveSellerSuccessProposalAgentProposalAgentOwnAgentValue | None
+    updatedAt: str | None
+    updatedBy: str | None
+
+class SaveSellerSuccessSaveSellerSuccessProposalAgentProposalAgentOwnAgentValue(TypedDict):
+    id: str
+    name: str
+    endpointHost: str | None
+    state: Literal["verified", "unverified", "archived"]
 
 class SaveSellerSuccessSaveSellerSuccessReadbackUnavailable(TypedDict):
     outcome: Literal["readback_unavailable"]
@@ -19809,7 +19847,7 @@ class SaveSellerSuccessSellerSaveReplayed(TypedDict):
     destinationSaveReplayed: Literal[False]
     materialReceipt: SaveSellerSuccessSellerSaveReplayedMaterialReceipt
 
-SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessSourceRequestQueued | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessApprovalRequired | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
+SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessSourceRequestQueued | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessApprovalRequired | SaveSellerSuccessSaveSellerSuccessProposalAgent | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
 
 SaveSellerSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
