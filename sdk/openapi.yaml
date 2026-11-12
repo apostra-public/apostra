@@ -57703,6 +57703,24 @@ paths:
                       description: Revoke the ChatGPT reviewer sandbox now.
                       type: boolean
                       const: true
+                    requestTextLine:
+                      description: 'Buy the agent text line: approval_required, an admin approves on the web. It costs money.'
+                      type: object
+                      properties:
+                        areaCode:
+                          type: string
+                          pattern: ^[2-9]\d{2}$
+                          description: US area code to buy the number in.
+                        requestId:
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                          description: Idempotency UUID for this intended line. Sending it again returns the same approval.
+                      required:
+                        - areaCode
+                        - requestId
+                      additionalProperties: false
                     requestReviewerSandbox:
                       description: >-
                         Request the ChatGPT reviewer sandbox: approval_required, an admin approves on the web. Needs a
@@ -59896,8 +59914,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -59989,11 +60007,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -60007,6 +60025,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -61167,6 +61186,29 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
                         required:
                           - groupBy
                       then:
@@ -61547,8 +61589,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -61614,11 +61656,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -61632,6 +61674,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -62795,6 +62838,29 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
                         required:
                           - groupBy
                       then:
@@ -63175,8 +63241,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -63240,11 +63306,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -63258,6 +63324,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -63522,6 +63589,29 @@ paths:
                               const: evidence_matches
                         required:
                           - include
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
                       then:
                         properties:
                           query:
@@ -63907,8 +63997,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -63972,11 +64062,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -63990,6 +64080,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -65153,6 +65244,29 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
                         required:
                           - groupBy
                       then:
@@ -65533,8 +65647,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -65598,11 +65712,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -65616,6 +65730,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -66764,6 +66879,29 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
                         required:
                           - groupBy
                       then:
@@ -67144,8 +67282,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -67209,11 +67347,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -67227,6 +67365,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -68382,6 +68521,29 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
                         required:
                           - groupBy
                       then:
@@ -68762,8 +68924,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -68827,11 +68989,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -68845,6 +69007,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -69999,6 +70162,29 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
                         required:
                           - groupBy
                       then:
@@ -70379,8 +70565,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -70444,11 +70630,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -70462,6 +70648,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -71620,750 +71807,24 @@ paths:
                           query:
                             maxLength: 512
                     - if:
-                        required:
-                          - groupBy
-                      then:
-                        allOf:
-                          - required:
-                              - kind
-                          - allOf:
-                              - not:
-                                  required:
-                                    - cursor
-                    - if:
-                        required:
-                          - groupBy
-                      then:
-                        properties:
-                          limit:
-                            maximum: 50
-                          sources:
-                            items:
-                              const: objects
-                    - if:
-                        properties:
-                          kind:
-                            const: creative_asset
-                        required:
-                          - kind
-                      then:
-                        properties:
-                          filter:
-                            required:
-                              - advertiserId
-                        required:
-                          - filter
-                    - if:
-                        properties:
-                          kind:
-                            const: catalog
-                        required:
-                          - kind
-                      then:
-                        properties:
-                          filter:
-                            required:
-                              - advertiserId
-                        required:
-                          - filter
-                    - if:
-                        allOf:
-                          - properties:
-                              kind:
-                                const: event_source
-                            required:
-                              - kind
-                          - not:
-                              required:
-                                - groupBy
-                      then:
-                        properties:
-                          filter:
-                            required:
-                              - advertiserId
-                        required:
-                          - filter
-                    - if:
-                        allOf:
-                          - required:
-                              - sources
-                          - properties:
-                              sources:
-                                contains:
-                                  not:
-                                    const: objects
-                      then:
-                        anyOf:
-                          - required:
-                              - query
-                          - required:
-                              - revision
-                          - required:
-                              - section
-                    - if:
-                        properties:
-                          filter:
-                            allOf:
-                              - required:
-                                  - sellerType
-                              - required:
-                                  - classification
-                        required:
-                          - filter
-                      then:
-                        properties:
-                          filter:
-                            anyOf:
-                              - allOf:
-                                  - properties:
-                                      sellerType:
-                                        const: global_market_maker
-                                    required:
-                                      - sellerType
-                                  - properties:
-                                      classification:
-                                        const: global_market_maker
-                                    required:
-                                      - classification
-                              - allOf:
-                                  - properties:
-                                      sellerType:
-                                        const: regional_market_maker
-                                    required:
-                                      - sellerType
-                                  - properties:
-                                      classification:
-                                        const: regional_market_maker
-                                    required:
-                                      - classification
-                              - allOf:
-                                  - properties:
-                                      sellerType:
-                                        const: apostra_seller
-                                    required:
-                                      - sellerType
-                                  - properties:
-                                      classification:
-                                        const: marketplace_seller
-                                    required:
-                                      - classification
-                              - allOf:
-                                  - properties:
-                                      sellerType:
-                                        const: apostra_seller
-                                    required:
-                                      - sellerType
-                                  - properties:
-                                      classification:
-                                        const: apostra_seller
-                                    required:
-                                      - classification
-                        required:
-                          - filter
-                    - if:
-                        properties:
-                          filter:
-                            properties:
-                              marketplace:
-                                const: true
-                            required:
-                              - marketplace
-                        required:
-                          - filter
-                      then:
-                        properties:
-                          filter:
-                            allOf:
-                              - not:
-                                  required:
-                                    - sellerType
-                              - not:
-                                  required:
-                                    - classification
-                              - not:
-                                  required:
-                                    - transactable
-                              - not:
-                                  required:
-                                    - marketplaceReady
-                              - not:
-                                  required:
-                                    - partnerStatus
-                        required:
-                          - filter
-                    - if:
-                        properties:
-                          filter:
-                            allOf:
-                              - required:
-                                  - transactable
-                              - required:
-                                  - marketplaceReady
-                        required:
-                          - filter
-                      then:
-                        properties:
-                          filter:
-                            anyOf:
-                              - allOf:
-                                  - properties:
-                                      transactable:
-                                        const: true
-                                    required:
-                                      - transactable
-                                  - properties:
-                                      marketplaceReady:
-                                        const: true
-                                    required:
-                                      - marketplaceReady
-                              - allOf:
-                                  - properties:
-                                      transactable:
-                                        const: false
-                                    required:
-                                      - transactable
-                                  - properties:
-                                      marketplaceReady:
-                                        const: false
-                                    required:
-                                      - marketplaceReady
-                        required:
-                          - filter
-                    - if:
-                        properties:
-                          kind:
-                            const: ad_server_targeting
-                        required:
-                          - kind
-                      then:
-                        required:
-                          - sourceId
-                    - if:
-                        properties:
-                          kind:
-                            const: source_account
-                        required:
-                          - kind
-                      then:
-                        required:
-                          - sourceId
-                    - if:
-                        properties:
-                          kind:
-                            const: targeting_value
-                        required:
-                          - kind
-                      then:
-                        properties:
-                          filter:
-                            required:
-                              - system
-                        required:
-                          - filter
-                    - if:
-                        properties:
-                          kind:
-                            const: proposal
-                        required:
-                          - kind
-                      then:
-                        properties:
-                          filter:
-                            required:
-                              - campaignId
-                        required:
-                          - filter
-                    - if:
-                        properties:
-                          kind:
-                            const: creative_collection
-                        required:
-                          - kind
-                      then:
-                        oneOf:
-                          - allOf:
-                              - properties:
-                                  filter:
-                                    required:
-                                      - campaignId
-                                required:
-                                  - filter
-                              - not:
-                                  properties:
-                                    filter:
-                                      required:
-                                        - advertiserId
-                                  required:
-                                    - filter
-                          - allOf:
-                              - not:
-                                  properties:
-                                    filter:
-                                      required:
-                                        - campaignId
-                                  required:
-                                    - filter
-                              - properties:
-                                  filter:
-                                    required:
-                                      - advertiserId
-                                required:
-                                  - filter
-                    - if:
-                        allOf:
-                          - properties:
-                              kind:
-                                const: event_source
-                            required:
-                              - kind
-                          - required:
-                              - filter
-                      then:
-                        properties:
-                          filter:
-                            type: object
-                            properties:
-                              advertiserId: {}
-                            additionalProperties: false
-                    - if:
-                        allOf:
-                          - properties:
-                              kind:
-                                const: creative
-                            required:
-                              - kind
-                          - not:
-                              required:
-                                - groupBy
-                      then:
-                        oneOf:
-                          - allOf:
-                              - properties:
-                                  filter:
-                                    required:
-                                      - advertiserId
-                                required:
-                                  - filter
-                              - not:
-                                  properties:
-                                    filter:
-                                      required:
-                                        - campaignId
-                                  required:
-                                    - filter
-                          - allOf:
-                              - not:
-                                  properties:
-                                    filter:
-                                      required:
-                                        - advertiserId
-                                  required:
-                                    - filter
-                              - properties:
-                                  filter:
-                                    required:
-                                      - campaignId
-                                required:
-                                  - filter
-                    - if:
-                        properties:
-                          kind:
-                            const: creative_session
-                        required:
-                          - kind
-                      then:
-                        allOf:
-                          - properties:
-                              filter:
-                                required:
-                                  - campaignId
-                            required:
-                              - filter
-                          - allOf:
-                              - not:
-                                  required:
-                                    - query
-                              - not:
-                                  required:
-                                    - sourceId
-                          - properties:
-                              filter:
-                                type: object
-                                properties:
-                                  campaignId: {}
-                                  status: {}
-                                additionalProperties: false
-                            required:
-                              - filter
-                - type: object
-                  properties:
-                    query:
-                      not: {}
-                    document:
-                      description: >-
-                        The document of an earlier docs hit, to read it in full; send the same query to rank its
-                        sections. Docs only: no kind, filter, or objects source.
-                      type: string
-                      minLength: 1
-                    revision:
-                      description: The exact revision of an agreement docs hit, read together with its document. Docs only.
-                      type: string
-                      minLength: 1
-                    section:
-                      description: One section of an agreement revision. Needs both document and revision.
-                      type: string
-                      minLength: 1
-                    asOf:
-                      description: >-
-                        The time to evaluate docs at; defaults to now. When continuing an agreement read with cursor,
-                        send the same asOf again.
-                      type: string
-                      format: date-time
-                      pattern: >-
-                        ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
-                    sources:
-                      description: >-
-                        What to search: objects, docs, or specs. When omitted, a call with query searches all three and
-                        a call without query lists objects. docs and specs need a query, except an agreement read by
-                        document and revision.
-                      minItems: 1
-                      type: array
-                      items:
-                        type: string
-                        enum:
-                          - objects
-                          - docs
-                          - specs
-                    docsScope:
-                      description: >-
-                        Which docs to rank. caller_relevant (the default) skips docs written for other account types;
-                        public_research searches every public doc.
-                      type: string
-                      enum:
-                        - caller_relevant
-                        - public_research
-                    kind:
-                      const: creative_session
-                    sponsoredBuyerCustomerId:
-                      description: >-
-                        For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id
-                        issued by the Campaigns Page launch. Never invent one.
-                      type: string
-                      maxLength: 19
-                      pattern: ^[1-9]\d*$
-                    scope:
-                      description: >-
-                        For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets
-                        instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.
-                      type: string
-                      const: unit
-                    include:
-                      description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
-                      type: array
-                      items:
-                        type: string
-                        enum:
-                          - evidence_matches
-                          - browse
-                          - commitmentRecord
-                          - executionReadiness
-                          - executionResources
-                          - authoring
-                          - pulse
-                          - deliverySummary
-                          - progress
-                    sourceId:
-                      not: {}
-                    filter:
-                      description: >-
-                        Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
-                        another kind are refused.
-                      type: object
-                      properties:
-                        campaignId:
-                          description: >-
-                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
-                            this or advertiserId, not both. Buyer media_buy needs one.
-                          type: string
-                        status:
-                          description: >-
-                            Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
-                            pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
-                            BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
-                            library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
-                          type: string
-                          enum:
-                            - PENDING
-                            - ACTIVE
-                            - DISABLED
-                            - pending
-                            - approved
-                            - rejected
-                            - revoked
-                            - OPEN
-                            - IN_PROGRESS
-                            - BLOCKED
-                            - COMPLETED
-                            - CANCELLED
-                            - ARCHIVED
-                            - ALL
-                            - open
-                            - closed
-                            - drafting
-                            - refining
-                            - evaluating
-                            - finalized
-                      additionalProperties: false
-                      required:
-                        - campaignId
-                    cursor:
-                      description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
-                      type: string
-                    limit:
-                      description: Results per page, default 50. A value above a kind page maximum is capped to it.
-                      type: integer
-                      minimum: 1
-                      maximum: 200
-                    groupBy:
-                      description: >-
-                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
-                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
-                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status.
-                      type: string
-                      minLength: 1
-                    accountId:
-                      anyOf:
-                        - type: integer
-                          minimum: 1
-                        - type: string
-                          pattern: ^[1-9][0-9]*$
-                  additionalProperties: false
-                  required:
-                    - kind
-                    - filter
-                  allOf:
-                    - anyOf:
-                        - required:
-                            - query
-                        - required:
-                            - kind
-                        - required:
-                            - document
-                        - required:
-                            - revision
-                        - required:
-                            - section
-                    - if:
-                        required:
-                          - revision
-                      then:
-                        required:
-                          - document
-                    - if:
-                        required:
-                          - section
-                      then:
-                        allOf:
-                          - required:
-                              - document
-                          - required:
-                              - revision
-                    - if:
                         properties:
                           include:
                             contains:
-                              const: evidence_matches
-                        required:
-                          - include
-                      then:
-                        allOf:
-                          - properties:
-                              kind:
-                                const: material
-                            required:
-                              - kind
-                          - required:
-                              - query
-                    - if:
-                        properties:
-                          include:
-                            contains:
-                              const: browse
+                              const: outcome
                         required:
                           - include
                       then:
                         properties:
                           kind:
-                            const: material
+                            const: rfp
                         required:
                           - kind
                     - if:
-                        properties:
-                          include:
-                            contains:
-                              const: executionReadiness
-                        required:
-                          - include
-                      then:
                         properties:
                           kind:
-                            const: wholesale_product
+                            const: rfp
                         required:
                           - kind
-                    - if:
-                        properties:
-                          include:
-                            contains:
-                              const: executionResources
-                        required:
-                          - include
-                      then:
-                        properties:
-                          kind:
-                            const: wholesale_product
-                        required:
-                          - kind
-                    - if:
-                        properties:
-                          include:
-                            contains:
-                              const: authoring
-                        required:
-                          - include
-                      then:
-                        properties:
-                          kind:
-                            const: ad_server_targeting
-                        required:
-                          - kind
-                    - if:
-                        properties:
-                          include:
-                            contains:
-                              const: deliverySummary
-                        required:
-                          - include
-                      then:
-                        properties:
-                          kind:
-                            const: media_buy
-                        required:
-                          - kind
-                    - if:
-                        properties:
-                          include:
-                            contains:
-                              const: executionResources
-                        required:
-                          - include
-                      then:
-                        allOf:
-                          - properties:
-                              filter:
-                                required:
-                                  - productId
-                            required:
-                              - filter
-                          - properties:
-                              filter:
-                                required:
-                                  - resourceKind
-                            required:
-                              - filter
-                    - if:
-                        properties:
-                          filter:
-                            required:
-                              - resourceKind
-                        required:
-                          - filter
-                      then:
-                        properties:
-                          include:
-                            contains:
-                              const: executionResources
-                        required:
-                          - include
-                    - if:
-                        required:
-                          - scope
-                      then:
-                        allOf:
-                          - properties:
-                              kind:
-                                const: material
-                            required:
-                              - kind
-                          - properties:
-                              include:
-                                const:
-                                  - browse
-                            required:
-                              - include
-                    - if:
-                        properties:
-                          scope:
-                            const: unit
-                        required:
-                          - scope
-                      then:
-                        allOf:
-                          - not:
-                              required:
-                                - query
-                          - not:
-                              required:
-                                - filter
-                    - not:
-                        allOf:
-                          - properties:
-                              include:
-                                contains:
-                                  const: browse
-                            required:
-                              - include
-                          - properties:
-                              include:
-                                contains:
-                                  const: evidence_matches
-                            required:
-                              - include
-                    - if:
-                        required:
-                          - include
-                      then:
-                        properties:
-                          include:
-                            maxItems: 1
-                            uniqueItems: true
-                    - if:
-                        properties:
-                          include:
-                            contains:
-                              const: browse
-                        required:
-                          - include
-                      then:
-                        properties:
-                          limit:
-                            maximum: 48
-                    - if:
-                        properties:
-                          include:
-                            contains:
-                              const: evidence_matches
-                        required:
-                          - include
                       then:
                         properties:
                           query:
@@ -72809,11 +72270,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -72827,6 +72288,780 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
+                    sourceId:
+                      not: {}
+                    filter:
+                      description: >-
+                        Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
+                        another kind are refused.
+                      type: object
+                      properties:
+                        campaignId:
+                          description: >-
+                            Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
+                            this or advertiserId, not both. Buyer media_buy needs one.
+                          type: string
+                        status:
+                          description: >-
+                            Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
+                            pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
+                            BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
+                            library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
+                            Other kinds refuse it.
+                          type: string
+                          enum:
+                            - PENDING
+                            - ACTIVE
+                            - DISABLED
+                            - pending
+                            - approved
+                            - rejected
+                            - revoked
+                            - OPEN
+                            - IN_PROGRESS
+                            - BLOCKED
+                            - COMPLETED
+                            - CANCELLED
+                            - ARCHIVED
+                            - ALL
+                            - open
+                            - closed
+                            - drafting
+                            - refining
+                            - evaluating
+                            - finalized
+                      additionalProperties: false
+                      required:
+                        - campaignId
+                    cursor:
+                      description: >-
+                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
+                        member.
+                      type: string
+                    limit:
+                      description: Results per page, default 50. A value above a kind page maximum is capped to it.
+                      type: integer
+                      minimum: 1
+                      maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
+                      type: string
+                      minLength: 1
+                    accountId:
+                      anyOf:
+                        - type: integer
+                          minimum: 1
+                        - type: string
+                          pattern: ^[1-9][0-9]*$
+                  additionalProperties: false
+                  required:
+                    - kind
+                    - filter
+                  allOf:
+                    - anyOf:
+                        - required:
+                            - query
+                        - required:
+                            - kind
+                        - required:
+                            - document
+                        - required:
+                            - revision
+                        - required:
+                            - section
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        required:
+                          - document
+                    - if:
+                        required:
+                          - section
+                      then:
+                        allOf:
+                          - required:
+                              - document
+                          - required:
+                              - revision
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: evidence_matches
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: material
+                            required:
+                              - kind
+                          - required:
+                              - query
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: browse
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: material
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: executionReadiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: wholesale_product
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: executionResources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: wholesale_product
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: executionResources
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              filter:
+                                required:
+                                  - productId
+                            required:
+                              - filter
+                          - properties:
+                              filter:
+                                required:
+                                  - resourceKind
+                            required:
+                              - filter
+                    - if:
+                        properties:
+                          filter:
+                            required:
+                              - resourceKind
+                        required:
+                          - filter
+                      then:
+                        properties:
+                          include:
+                            contains:
+                              const: executionResources
+                        required:
+                          - include
+                    - if:
+                        required:
+                          - scope
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: material
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                const:
+                                  - browse
+                            required:
+                              - include
+                    - if:
+                        properties:
+                          scope:
+                            const: unit
+                        required:
+                          - scope
+                      then:
+                        allOf:
+                          - not:
+                              required:
+                                - query
+                          - not:
+                              required:
+                                - filter
+                    - not:
+                        allOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: browse
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: evidence_matches
+                            required:
+                              - include
+                    - if:
+                        required:
+                          - include
+                      then:
+                        properties:
+                          include:
+                            maxItems: 1
+                            uniqueItems: true
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: browse
+                        required:
+                          - include
+                      then:
+                        properties:
+                          limit:
+                            maximum: 48
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: evidence_matches
+                        required:
+                          - include
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_asset
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - advertiserId
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: catalog
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - advertiserId
+                        required:
+                          - filter
+                    - if:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - advertiserId
+                        required:
+                          - filter
+                    - if:
+                        allOf:
+                          - required:
+                              - sources
+                          - properties:
+                              sources:
+                                contains:
+                                  not:
+                                    const: objects
+                      then:
+                        anyOf:
+                          - required:
+                              - query
+                          - required:
+                              - revision
+                          - required:
+                              - section
+                    - if:
+                        properties:
+                          filter:
+                            allOf:
+                              - required:
+                                  - sellerType
+                              - required:
+                                  - classification
+                        required:
+                          - filter
+                      then:
+                        properties:
+                          filter:
+                            anyOf:
+                              - allOf:
+                                  - properties:
+                                      sellerType:
+                                        const: global_market_maker
+                                    required:
+                                      - sellerType
+                                  - properties:
+                                      classification:
+                                        const: global_market_maker
+                                    required:
+                                      - classification
+                              - allOf:
+                                  - properties:
+                                      sellerType:
+                                        const: regional_market_maker
+                                    required:
+                                      - sellerType
+                                  - properties:
+                                      classification:
+                                        const: regional_market_maker
+                                    required:
+                                      - classification
+                              - allOf:
+                                  - properties:
+                                      sellerType:
+                                        const: apostra_seller
+                                    required:
+                                      - sellerType
+                                  - properties:
+                                      classification:
+                                        const: marketplace_seller
+                                    required:
+                                      - classification
+                              - allOf:
+                                  - properties:
+                                      sellerType:
+                                        const: apostra_seller
+                                    required:
+                                      - sellerType
+                                  - properties:
+                                      classification:
+                                        const: apostra_seller
+                                    required:
+                                      - classification
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          filter:
+                            properties:
+                              marketplace:
+                                const: true
+                            required:
+                              - marketplace
+                        required:
+                          - filter
+                      then:
+                        properties:
+                          filter:
+                            allOf:
+                              - not:
+                                  required:
+                                    - sellerType
+                              - not:
+                                  required:
+                                    - classification
+                              - not:
+                                  required:
+                                    - transactable
+                              - not:
+                                  required:
+                                    - marketplaceReady
+                              - not:
+                                  required:
+                                    - partnerStatus
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          filter:
+                            allOf:
+                              - required:
+                                  - transactable
+                              - required:
+                                  - marketplaceReady
+                        required:
+                          - filter
+                      then:
+                        properties:
+                          filter:
+                            anyOf:
+                              - allOf:
+                                  - properties:
+                                      transactable:
+                                        const: true
+                                    required:
+                                      - transactable
+                                  - properties:
+                                      marketplaceReady:
+                                        const: true
+                                    required:
+                                      - marketplaceReady
+                              - allOf:
+                                  - properties:
+                                      transactable:
+                                        const: false
+                                    required:
+                                      - transactable
+                                  - properties:
+                                      marketplaceReady:
+                                        const: false
+                                    required:
+                                      - marketplaceReady
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: source_account
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: targeting_value
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - system
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: proposal
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - campaignId
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_collection
+                        required:
+                          - kind
+                      then:
+                        oneOf:
+                          - allOf:
+                              - properties:
+                                  filter:
+                                    required:
+                                      - campaignId
+                                required:
+                                  - filter
+                              - not:
+                                  properties:
+                                    filter:
+                                      required:
+                                        - advertiserId
+                                  required:
+                                    - filter
+                          - allOf:
+                              - not:
+                                  properties:
+                                    filter:
+                                      required:
+                                        - campaignId
+                                  required:
+                                    - filter
+                              - properties:
+                                  filter:
+                                    required:
+                                      - advertiserId
+                                required:
+                                  - filter
+                    - if:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
+                      then:
+                        properties:
+                          filter:
+                            type: object
+                            properties:
+                              advertiserId: {}
+                            additionalProperties: false
+                    - if:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
+                      then:
+                        oneOf:
+                          - allOf:
+                              - properties:
+                                  filter:
+                                    required:
+                                      - advertiserId
+                                required:
+                                  - filter
+                              - not:
+                                  properties:
+                                    filter:
+                                      required:
+                                        - campaignId
+                                  required:
+                                    - filter
+                          - allOf:
+                              - not:
+                                  properties:
+                                    filter:
+                                      required:
+                                        - advertiserId
+                                  required:
+                                    - filter
+                              - properties:
+                                  filter:
+                                    required:
+                                      - campaignId
+                                required:
+                                  - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_session
+                        required:
+                          - kind
+                      then:
+                        allOf:
+                          - properties:
+                              filter:
+                                required:
+                                  - campaignId
+                            required:
+                              - filter
+                          - allOf:
+                              - not:
+                                  required:
+                                    - query
+                              - not:
+                                  required:
+                                    - sourceId
+                          - properties:
+                              filter:
+                                type: object
+                                properties:
+                                  campaignId: {}
+                                  status: {}
+                                additionalProperties: false
+                            required:
+                              - filter
+                - type: object
+                  properties:
+                    query:
+                      not: {}
+                    document:
+                      description: >-
+                        The document of an earlier docs hit, to read it in full; send the same query to rank its
+                        sections. Docs only: no kind, filter, or objects source.
+                      type: string
+                      minLength: 1
+                    revision:
+                      description: The exact revision of an agreement docs hit, read together with its document. Docs only.
+                      type: string
+                      minLength: 1
+                    section:
+                      description: One section of an agreement revision. Needs both document and revision.
+                      type: string
+                      minLength: 1
+                    asOf:
+                      description: >-
+                        The time to evaluate docs at; defaults to now. When continuing an agreement read with cursor,
+                        send the same asOf again.
+                      type: string
+                      format: date-time
+                      pattern: >-
+                        ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                    sources:
+                      description: >-
+                        What to search: objects, docs, or specs. When omitted, a call with query searches all three and
+                        a call without query lists objects. docs and specs need a query, except an agreement read by
+                        document and revision.
+                      minItems: 1
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - objects
+                          - docs
+                          - specs
+                    docsScope:
+                      description: >-
+                        Which docs to rank. caller_relevant (the default) skips docs written for other account types;
+                        public_research searches every public doc.
+                      type: string
+                      enum:
+                        - caller_relevant
+                        - public_research
+                    kind:
+                      const: creative_session
+                    sponsoredBuyerCustomerId:
+                      description: >-
+                        For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id
+                        issued by the Campaigns Page launch. Never invent one.
+                      type: string
+                      maxLength: 19
+                      pattern: ^[1-9]\d*$
+                    scope:
+                      description: >-
+                        For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets
+                        instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.
+                      type: string
+                      const: unit
+                    include:
+                      description: >-
+                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - evidence_matches
+                          - browse
+                          - commitmentRecord
+                          - executionReadiness
+                          - executionResources
+                          - authoring
+                          - pulse
+                          - deliverySummary
+                          - progress
+                          - outcome
                     sourceId:
                       not: {}
                     filter:
@@ -73117,6 +73352,29 @@ paths:
                               const: evidence_matches
                         required:
                           - include
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
                       then:
                         properties:
                           query:
@@ -73502,8 +73760,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -73567,11 +73825,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -73585,6 +73843,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -74746,6 +75005,29 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
                         required:
                           - groupBy
                       then:
@@ -75126,8 +75408,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -75191,11 +75473,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -75209,6 +75491,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -76370,6 +76653,29 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
                         required:
                           - groupBy
                       then:
@@ -76750,8 +77056,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -76815,11 +77121,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -76833,6 +77139,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -77112,6 +77419,29 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
                         required:
                           - groupBy
                       then:
@@ -77492,8 +77822,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -77557,11 +77887,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -77575,6 +77905,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -78738,6 +79069,29 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
                         required:
                           - groupBy
                       then:
@@ -79118,8 +79472,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -79181,11 +79535,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -79199,6 +79553,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -80359,6 +80714,29 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
                         required:
                           - groupBy
                       then:
@@ -80739,8 +81117,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -80802,11 +81180,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -80820,6 +81198,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -81980,6 +82359,29 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
                         required:
                           - groupBy
                       then:
@@ -82360,8 +82762,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -82423,11 +82825,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -82441,6 +82843,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -83602,6 +84005,29 @@ paths:
                           query:
                             maxLength: 512
                     - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
                         required:
                           - groupBy
                       then:
@@ -83982,8 +84408,8 @@ paths:
                     query:
                       description: >-
                         Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
-                        by document and revision. kind conversation allows up to 200 characters; property_list, rfp,
-                        rfp_turn, and creative_session take no query.
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
                       type: string
                       minLength: 1
                     document:
@@ -84045,11 +84471,11 @@ paths:
                     include:
                       description: >-
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. campaign: pulse. Seller media_buy:
-                        deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product:
-                        executionReadiness, or executionResources with filter.productId and filter.resourceKind.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
+                        save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -84063,6 +84489,7 @@ paths:
                           - pulse
                           - deliverySummary
                           - progress
+                          - outcome
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -85216,6 +85643,29 @@ paths:
                               const: evidence_matches
                         required:
                           - include
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
                       then:
                         properties:
                           query:
