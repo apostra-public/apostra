@@ -991,14 +991,14 @@ export class Apostra extends Transport {
   /** Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed. Returns the data together with response headers and request ID. */
   saveNotificationConfigWithResponse(input: SaveNotificationConfigInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveNotificationConfigResult>> { return this.requestDetailed("save_notification_config", input, options) }
   /**
-   * Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. Halves never roll back each other.
+   * Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. `limits` sets what your brain may offer. Halves never roll back each other.
    *
    * @example
    * await client.savePlaybook(input, { idempotencyKey: 'stable-key' })
    */
   savePlaybook(input: SavePlaybookInput, options: WriteRequestOptions): Promise<SavePlaybookResult> { return this.request("save_playbook", input, options) }
 
-  /** Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. Halves never roll back each other. Returns the data together with response headers and request ID. */
+  /** Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. `limits` sets what your brain may offer. Halves never roll back each other. Returns the data together with response headers and request ID. */
   savePlaybookWithResponse(input: SavePlaybookInput, options: WriteRequestOptions): Promise<ResponseDetails<SavePlaybookResult>> { return this.requestDetailed("save_playbook", input, options) }
   /**
    * Create, update, archive, restore, or AAO-check an advertiser property list. Check uses identifiers without saving. Search/get read saved lists.

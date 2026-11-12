@@ -1939,6 +1939,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -3191,6 +3192,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -4419,6 +4421,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -5635,6 +5638,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -6852,6 +6856,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -8076,6 +8081,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -10437,6 +10443,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -11656,6 +11663,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -15167,6 +15175,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -16384,6 +16393,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -17607,6 +17617,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -18829,6 +18840,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -20051,6 +20063,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -21273,6 +21286,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -22495,6 +22509,7 @@ paths:
                           - progress
                           - versions
                           - discounts
+                          - rate_card
                           - approvalRouting
                           - listing
                           - identity
@@ -55267,12 +55282,12 @@ paths:
       operationId: save_playbook
       summary: >-
         Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the
-        active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. Halves
-        never roll back each other.
+        active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules.
+        `limits` sets what your brain may offer. Halves never roll back each other.
       description: >-
         Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the
-        active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. Halves
-        never roll back each other.
+        active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules.
+        `limits` sets what your brain may offer. Halves never roll back each other.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -55601,6 +55616,116 @@ paths:
                           - houseDomain
                           - scope
                         additionalProperties: false
+                  additionalProperties: false
+                limits:
+                  description: What your agent may offer a buyer; the strictest matching rule wins. A person sets these.
+                  type: object
+                  properties:
+                    rules:
+                      maxItems: 200
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            description: From get(playbook) to replace that rule; omit to add.
+                            type: string
+                          houseDomain:
+                            anyOf:
+                              - pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$
+                                $ref: '#/components/schemas/save_playbook_request_LimitsRulesItemHouseDomain'
+                              - type: 'null'
+                            description: Buyer house, e.g. nike.com; null for every buyer.
+                          scope:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - brand
+                                  - operator
+                              - type: 'null'
+                            description: Axis of houseDomain; null when it is null.
+                          productIds:
+                            anyOf:
+                              - minItems: 1
+                                maxItems: 500
+                                type: array
+                                items:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 255
+                              - type: 'null'
+                            description: Wholesale product ids; null for all.
+                          execution:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - standard
+                                  - custom
+                              - type: 'null'
+                            description: null for either.
+                          outcome:
+                            type: string
+                            enum:
+                              - needs_approval
+                              - never
+                            description: 'needs_approval: you approve first. never: not offered.'
+                          when:
+                            type: object
+                            properties:
+                              lineItemBudgetBelow:
+                                type: object
+                                properties:
+                                  amount:
+                                    type: number
+                                    exclusiveMinimum: 0
+                                    description: Amount.
+                                  currency:
+                                    type: string
+                                    description: ISO 4217.
+                                required:
+                                  - amount
+                                  - currency
+                                additionalProperties: false
+                                description: Line item budget below.
+                              discountPercentAbove:
+                                description: Discount off list above this percent.
+                                type: number
+                                minimum: 0
+                                maximum: 100
+                              priceBelow:
+                                type: object
+                                properties:
+                                  amount:
+                                    type: number
+                                    exclusiveMinimum: 0
+                                    description: Amount.
+                                  currency:
+                                    type: string
+                                    description: ISO 4217.
+                                required:
+                                  - amount
+                                  - currency
+                                additionalProperties: false
+                                description: Offered price below.
+                            additionalProperties: false
+                            description: Holds when every condition named holds. Name at least one.
+                        required:
+                          - houseDomain
+                          - scope
+                          - productIds
+                          - execution
+                          - outcome
+                          - when
+                        additionalProperties: false
+                      description: Rules to set; unmentioned rules stay.
+                    remove:
+                      description: Rule ids to delete.
+                      maxItems: 200
+                      type: array
+                      items:
+                        type: string
+                  required:
+                    - rules
                   additionalProperties: false
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
@@ -108850,6 +108975,10 @@ components:
       minLength: 1
       maxLength: 253
     save_playbook_request_DiscountsRemoveItemHouseDomain:
+      type: string
+      minLength: 1
+      maxLength: 253
+    save_playbook_request_LimitsRulesItemHouseDomain:
       type: string
       minLength: 1
       maxLength: 253

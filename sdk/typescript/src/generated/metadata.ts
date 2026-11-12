@@ -1369,7 +1369,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. Halves never roll back each other."
+    "summary": "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. `limits` sets what your brain may offer. Halves never roll back each other."
   },
   "save_property_list": {
     "path": "/tools/save_property_list",
