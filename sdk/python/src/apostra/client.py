@@ -541,11 +541,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveNotificationConfigResult], self._request_with_response("save_notification_config", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_playbook(self, input: models.SavePlaybookInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SavePlaybookResult:
-        "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. Halves never roll back each other."
+        "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. `limits` sets what your brain may offer. Halves never roll back each other."
         return cast("models.SavePlaybookResult", self._request("save_playbook", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_playbook_with_response(self, input: models.SavePlaybookInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SavePlaybookResult]:
-        "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. Halves never roll back each other. Returns the data together with response headers and request ID."
+        "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. `limits` sets what your brain may offer. Halves never roll back each other. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SavePlaybookResult], self._request_with_response("save_playbook", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_property_list(self, input: models.SavePropertyListInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SavePropertyListResult:
@@ -1174,11 +1174,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveNotificationConfigResult], await self._request_with_response("save_notification_config", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_playbook(self, input: models.SavePlaybookInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SavePlaybookResult:
-        "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. Halves never roll back each other."
+        "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. `limits` sets what your brain may offer. Halves never roll back each other."
         return cast("models.SavePlaybookResult", await self._request("save_playbook", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_playbook_with_response(self, input: models.SavePlaybookInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SavePlaybookResult]:
-        "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. Halves never roll back each other. Returns the data together with response headers and request ID."
+        "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. `limits` sets what your brain may offer. Halves never roll back each other. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SavePlaybookResult], await self._request_with_response("save_playbook", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_property_list(self, input: models.SavePropertyListInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SavePropertyListResult:
