@@ -1970,6 +1970,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -3223,6 +3225,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -4452,6 +4456,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -5669,6 +5675,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -6887,6 +6895,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -8112,6 +8122,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -10474,6 +10486,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -11694,6 +11708,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -15206,6 +15222,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -16424,6 +16442,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -17648,6 +17668,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -18871,6 +18893,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -20094,6 +20118,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -21317,6 +21343,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -22540,6 +22568,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - reads
+                          - reasoning
                           - lifecycle
                           - capacity
                           - source_access
@@ -25748,6 +25778,7 @@ paths:
                               - rfp
                               - rfp_turn
                               - library_request
+                              - decision
                               - account_relationship
                               - advertiser_access
                               - notification_config
@@ -60088,7 +60119,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -60111,6 +60142,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                         originRfpTurnId:
                           description: 'For kind library_request: only gaps opened from this RFP turn, by its id.'
                           type: string
@@ -60333,7 +60368,8 @@ paths:
                         productId:
                           description: >-
                             For kind creative_format: narrow formats to this exact product. With include
-                            executionResources: the product to read resource options for.
+                            executionResources: the product to read resource options for. For kind decision: decisions
+                            about this product.
                           type: string
                           minLength: 1
                           maxLength: 512
@@ -60719,10 +60755,38 @@ paths:
                             - paused
                             - completed
                         buyerAccountId:
-                          description: 'For kind media_buy in a seller account: buys from this buyer Account id.'
+                          description: 'For kind media_buy or decision in a seller account: those for this buyer Account id.'
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        action:
+                          description: 'For kind decision: what the agent did.'
+                          type: string
+                          enum:
+                            - propose
+                            - decline_brief
+                            - refine_terms
+                            - accept_terms
+                            - change_price
+                            - change_product
+                        brain:
+                          description: For kind decision; own is your own model.
+                          type: string
+                          enum:
+                            - chef
+                            - prime
+                            - own
+                        shadow:
+                          description: 'For kind decision: true for the shadow brain.'
+                          type: boolean
+                        after:
+                          description: 'For kind decision: at or after this date-time.'
+                          type: string
+                          format: date-time
+                        through:
+                          description: 'For kind decision: at or before this date-time.'
+                          type: string
+                          format: date-time
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -61737,7 +61801,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -61760,6 +61824,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                         originRfpTurnId:
                           description: 'For kind library_request: only gaps opened from this RFP turn, by its id.'
                           type: string
@@ -61982,7 +62050,8 @@ paths:
                         productId:
                           description: >-
                             For kind creative_format: narrow formats to this exact product. With include
-                            executionResources: the product to read resource options for.
+                            executionResources: the product to read resource options for. For kind decision: decisions
+                            about this product.
                           type: string
                           minLength: 1
                           maxLength: 512
@@ -62368,10 +62437,38 @@ paths:
                             - paused
                             - completed
                         buyerAccountId:
-                          description: 'For kind media_buy in a seller account: buys from this buyer Account id.'
+                          description: 'For kind media_buy or decision in a seller account: those for this buyer Account id.'
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        action:
+                          description: 'For kind decision: what the agent did.'
+                          type: string
+                          enum:
+                            - propose
+                            - decline_brief
+                            - refine_terms
+                            - accept_terms
+                            - change_price
+                            - change_product
+                        brain:
+                          description: For kind decision; own is your own model.
+                          type: string
+                          enum:
+                            - chef
+                            - prime
+                            - own
+                        shadow:
+                          description: 'For kind decision: true for the shadow brain.'
+                          type: boolean
+                        after:
+                          description: 'For kind decision: at or after this date-time.'
+                          type: string
+                          format: date-time
+                        through:
+                          description: 'For kind decision: at or before this date-time.'
+                          type: string
+                          format: date-time
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -64143,7 +64240,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -64166,6 +64263,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                         originRfpTurnId:
                           description: 'For kind library_request: only gaps opened from this RFP turn, by its id.'
                           type: string
@@ -64388,7 +64489,8 @@ paths:
                         productId:
                           description: >-
                             For kind creative_format: narrow formats to this exact product. With include
-                            executionResources: the product to read resource options for.
+                            executionResources: the product to read resource options for. For kind decision: decisions
+                            about this product.
                           type: string
                           minLength: 1
                           maxLength: 512
@@ -64774,10 +64876,38 @@ paths:
                             - paused
                             - completed
                         buyerAccountId:
-                          description: 'For kind media_buy in a seller account: buys from this buyer Account id.'
+                          description: 'For kind media_buy or decision in a seller account: those for this buyer Account id.'
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        action:
+                          description: 'For kind decision: what the agent did.'
+                          type: string
+                          enum:
+                            - propose
+                            - decline_brief
+                            - refine_terms
+                            - accept_terms
+                            - change_price
+                            - change_product
+                        brain:
+                          description: For kind decision; own is your own model.
+                          type: string
+                          enum:
+                            - chef
+                            - prime
+                            - own
+                        shadow:
+                          description: 'For kind decision: true for the shadow brain.'
+                          type: boolean
+                        after:
+                          description: 'For kind decision: at or after this date-time.'
+                          type: string
+                          format: date-time
+                        through:
+                          description: 'For kind decision: at or before this date-time.'
+                          type: string
+                          format: date-time
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -65793,7 +65923,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -65816,6 +65946,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                         originRfpTurnId:
                           description: 'For kind library_request: only gaps opened from this RFP turn, by its id.'
                           type: string
@@ -66029,7 +66163,8 @@ paths:
                         productId:
                           description: >-
                             For kind creative_format: narrow formats to this exact product. With include
-                            executionResources: the product to read resource options for.
+                            executionResources: the product to read resource options for. For kind decision: decisions
+                            about this product.
                           type: string
                           minLength: 1
                           maxLength: 512
@@ -66415,10 +66550,38 @@ paths:
                             - paused
                             - completed
                         buyerAccountId:
-                          description: 'For kind media_buy in a seller account: buys from this buyer Account id.'
+                          description: 'For kind media_buy or decision in a seller account: those for this buyer Account id.'
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        action:
+                          description: 'For kind decision: what the agent did.'
+                          type: string
+                          enum:
+                            - propose
+                            - decline_brief
+                            - refine_terms
+                            - accept_terms
+                            - change_price
+                            - change_product
+                        brain:
+                          description: For kind decision; own is your own model.
+                          type: string
+                          enum:
+                            - chef
+                            - prime
+                            - own
+                        shadow:
+                          description: 'For kind decision: true for the shadow brain.'
+                          type: boolean
+                        after:
+                          description: 'For kind decision: at or after this date-time.'
+                          type: string
+                          format: date-time
+                        through:
+                          description: 'For kind decision: at or before this date-time.'
+                          type: string
+                          format: date-time
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -67428,7 +67591,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -67451,6 +67614,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                         originRfpTurnId:
                           description: 'For kind library_request: only gaps opened from this RFP turn, by its id.'
                           type: string
@@ -67668,7 +67835,8 @@ paths:
                         productId:
                           description: >-
                             For kind creative_format: narrow formats to this exact product. With include
-                            executionResources: the product to read resource options for.
+                            executionResources: the product to read resource options for. For kind decision: decisions
+                            about this product.
                           type: string
                           minLength: 1
                           maxLength: 512
@@ -68054,10 +68222,38 @@ paths:
                             - paused
                             - completed
                         buyerAccountId:
-                          description: 'For kind media_buy in a seller account: buys from this buyer Account id.'
+                          description: 'For kind media_buy or decision in a seller account: those for this buyer Account id.'
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        action:
+                          description: 'For kind decision: what the agent did.'
+                          type: string
+                          enum:
+                            - propose
+                            - decline_brief
+                            - refine_terms
+                            - accept_terms
+                            - change_price
+                            - change_product
+                        brain:
+                          description: For kind decision; own is your own model.
+                          type: string
+                          enum:
+                            - chef
+                            - prime
+                            - own
+                        shadow:
+                          description: 'For kind decision: true for the shadow brain.'
+                          type: boolean
+                        after:
+                          description: 'For kind decision: at or after this date-time.'
+                          type: string
+                          format: date-time
+                        through:
+                          description: 'For kind decision: at or before this date-time.'
+                          type: string
+                          format: date-time
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -69070,7 +69266,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -69093,6 +69289,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                         originRfpTurnId:
                           description: 'For kind library_request: only gaps opened from this RFP turn, by its id.'
                           type: string
@@ -69306,7 +69506,8 @@ paths:
                         productId:
                           description: >-
                             For kind creative_format: narrow formats to this exact product. With include
-                            executionResources: the product to read resource options for.
+                            executionResources: the product to read resource options for. For kind decision: decisions
+                            about this product.
                           type: string
                           minLength: 1
                           maxLength: 512
@@ -69692,10 +69893,38 @@ paths:
                             - paused
                             - completed
                         buyerAccountId:
-                          description: 'For kind media_buy in a seller account: buys from this buyer Account id.'
+                          description: 'For kind media_buy or decision in a seller account: those for this buyer Account id.'
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        action:
+                          description: 'For kind decision: what the agent did.'
+                          type: string
+                          enum:
+                            - propose
+                            - decline_brief
+                            - refine_terms
+                            - accept_terms
+                            - change_price
+                            - change_product
+                        brain:
+                          description: For kind decision; own is your own model.
+                          type: string
+                          enum:
+                            - chef
+                            - prime
+                            - own
+                        shadow:
+                          description: 'For kind decision: true for the shadow brain.'
+                          type: boolean
+                        after:
+                          description: 'For kind decision: at or after this date-time.'
+                          type: string
+                          format: date-time
+                        through:
+                          description: 'For kind decision: at or before this date-time.'
+                          type: string
+                          format: date-time
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -70711,7 +70940,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -70734,6 +70963,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                         originRfpTurnId:
                           description: 'For kind library_request: only gaps opened from this RFP turn, by its id.'
                           type: string
@@ -70951,7 +71184,8 @@ paths:
                         productId:
                           description: >-
                             For kind creative_format: narrow formats to this exact product. With include
-                            executionResources: the product to read resource options for.
+                            executionResources: the product to read resource options for. For kind decision: decisions
+                            about this product.
                           type: string
                           minLength: 1
                           maxLength: 512
@@ -71337,10 +71571,38 @@ paths:
                             - paused
                             - completed
                         buyerAccountId:
-                          description: 'For kind media_buy in a seller account: buys from this buyer Account id.'
+                          description: 'For kind media_buy or decision in a seller account: those for this buyer Account id.'
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        action:
+                          description: 'For kind decision: what the agent did.'
+                          type: string
+                          enum:
+                            - propose
+                            - decline_brief
+                            - refine_terms
+                            - accept_terms
+                            - change_price
+                            - change_product
+                        brain:
+                          description: For kind decision; own is your own model.
+                          type: string
+                          enum:
+                            - chef
+                            - prime
+                            - own
+                        shadow:
+                          description: 'For kind decision: true for the shadow brain.'
+                          type: boolean
+                        after:
+                          description: 'For kind decision: at or after this date-time.'
+                          type: string
+                          format: date-time
+                        through:
+                          description: 'For kind decision: at or before this date-time.'
+                          type: string
+                          format: date-time
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -72321,7 +72583,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -72344,6 +72606,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                       additionalProperties: false
                       required:
                         - campaignId
@@ -73098,7 +73364,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -73121,6 +73387,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                       additionalProperties: false
                       required:
                         - advertiserId
@@ -73906,7 +74176,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -73929,6 +74199,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                         originRfpTurnId:
                           description: 'For kind library_request: only gaps opened from this RFP turn, by its id.'
                           type: string
@@ -74151,7 +74425,8 @@ paths:
                         productId:
                           description: >-
                             For kind creative_format: narrow formats to this exact product. With include
-                            executionResources: the product to read resource options for.
+                            executionResources: the product to read resource options for. For kind decision: decisions
+                            about this product.
                           type: string
                           minLength: 1
                           maxLength: 512
@@ -74537,10 +74812,38 @@ paths:
                             - paused
                             - completed
                         buyerAccountId:
-                          description: 'For kind media_buy in a seller account: buys from this buyer Account id.'
+                          description: 'For kind media_buy or decision in a seller account: those for this buyer Account id.'
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        action:
+                          description: 'For kind decision: what the agent did.'
+                          type: string
+                          enum:
+                            - propose
+                            - decline_brief
+                            - refine_terms
+                            - accept_terms
+                            - change_price
+                            - change_product
+                        brain:
+                          description: For kind decision; own is your own model.
+                          type: string
+                          enum:
+                            - chef
+                            - prime
+                            - own
+                        shadow:
+                          description: 'For kind decision: true for the shadow brain.'
+                          type: boolean
+                        after:
+                          description: 'For kind decision: at or after this date-time.'
+                          type: string
+                          format: date-time
+                        through:
+                          description: 'For kind decision: at or before this date-time.'
+                          type: string
+                          format: date-time
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -75554,7 +75857,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -75577,6 +75880,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                         originRfpTurnId:
                           description: 'For kind library_request: only gaps opened from this RFP turn, by its id.'
                           type: string
@@ -75799,7 +76106,8 @@ paths:
                         productId:
                           description: >-
                             For kind creative_format: narrow formats to this exact product. With include
-                            executionResources: the product to read resource options for.
+                            executionResources: the product to read resource options for. For kind decision: decisions
+                            about this product.
                           type: string
                           minLength: 1
                           maxLength: 512
@@ -76185,10 +76493,38 @@ paths:
                             - paused
                             - completed
                         buyerAccountId:
-                          description: 'For kind media_buy in a seller account: buys from this buyer Account id.'
+                          description: 'For kind media_buy or decision in a seller account: those for this buyer Account id.'
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        action:
+                          description: 'For kind decision: what the agent did.'
+                          type: string
+                          enum:
+                            - propose
+                            - decline_brief
+                            - refine_terms
+                            - accept_terms
+                            - change_price
+                            - change_product
+                        brain:
+                          description: For kind decision; own is your own model.
+                          type: string
+                          enum:
+                            - chef
+                            - prime
+                            - own
+                        shadow:
+                          description: 'For kind decision: true for the shadow brain.'
+                          type: boolean
+                        after:
+                          description: 'For kind decision: at or after this date-time.'
+                          type: string
+                          format: date-time
+                        through:
+                          description: 'For kind decision: at or before this date-time.'
+                          type: string
+                          format: date-time
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -77968,7 +78304,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -77991,6 +78327,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                         originRfpTurnId:
                           description: 'For kind library_request: only gaps opened from this RFP turn, by its id.'
                           type: string
@@ -78213,7 +78553,8 @@ paths:
                         productId:
                           description: >-
                             For kind creative_format: narrow formats to this exact product. With include
-                            executionResources: the product to read resource options for.
+                            executionResources: the product to read resource options for. For kind decision: decisions
+                            about this product.
                           type: string
                           minLength: 1
                           maxLength: 512
@@ -78599,10 +78940,38 @@ paths:
                             - paused
                             - completed
                         buyerAccountId:
-                          description: 'For kind media_buy in a seller account: buys from this buyer Account id.'
+                          description: 'For kind media_buy or decision in a seller account: those for this buyer Account id.'
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        action:
+                          description: 'For kind decision: what the agent did.'
+                          type: string
+                          enum:
+                            - propose
+                            - decline_brief
+                            - refine_terms
+                            - accept_terms
+                            - change_price
+                            - change_product
+                        brain:
+                          description: For kind decision; own is your own model.
+                          type: string
+                          enum:
+                            - chef
+                            - prime
+                            - own
+                        shadow:
+                          description: 'For kind decision: true for the shadow brain.'
+                          type: boolean
+                        after:
+                          description: 'For kind decision: at or after this date-time.'
+                          type: string
+                          format: date-time
+                        through:
+                          description: 'For kind decision: at or before this date-time.'
+                          type: string
+                          format: date-time
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -79616,7 +79985,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -79639,6 +80008,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                         originRfpTurnId:
                           description: 'For kind library_request: only gaps opened from this RFP turn, by its id.'
                           type: string
@@ -79861,7 +80234,8 @@ paths:
                         productId:
                           description: >-
                             For kind creative_format: narrow formats to this exact product. With include
-                            executionResources: the product to read resource options for.
+                            executionResources: the product to read resource options for. For kind decision: decisions
+                            about this product.
                           type: string
                           minLength: 1
                           maxLength: 512
@@ -80247,10 +80621,38 @@ paths:
                             - paused
                             - completed
                         buyerAccountId:
-                          description: 'For kind media_buy in a seller account: buys from this buyer Account id.'
+                          description: 'For kind media_buy or decision in a seller account: those for this buyer Account id.'
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        action:
+                          description: 'For kind decision: what the agent did.'
+                          type: string
+                          enum:
+                            - propose
+                            - decline_brief
+                            - refine_terms
+                            - accept_terms
+                            - change_price
+                            - change_product
+                        brain:
+                          description: For kind decision; own is your own model.
+                          type: string
+                          enum:
+                            - chef
+                            - prime
+                            - own
+                        shadow:
+                          description: 'For kind decision: true for the shadow brain.'
+                          type: boolean
+                        after:
+                          description: 'For kind decision: at or after this date-time.'
+                          type: string
+                          format: date-time
+                        through:
+                          description: 'For kind decision: at or before this date-time.'
+                          type: string
+                          format: date-time
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -81261,7 +81663,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -81284,6 +81686,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                         originRfpTurnId:
                           description: 'For kind library_request: only gaps opened from this RFP turn, by its id.'
                           type: string
@@ -81506,7 +81912,8 @@ paths:
                         productId:
                           description: >-
                             For kind creative_format: narrow formats to this exact product. With include
-                            executionResources: the product to read resource options for.
+                            executionResources: the product to read resource options for. For kind decision: decisions
+                            about this product.
                           type: string
                           minLength: 1
                           maxLength: 512
@@ -81892,10 +82299,38 @@ paths:
                             - paused
                             - completed
                         buyerAccountId:
-                          description: 'For kind media_buy in a seller account: buys from this buyer Account id.'
+                          description: 'For kind media_buy or decision in a seller account: those for this buyer Account id.'
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        action:
+                          description: 'For kind decision: what the agent did.'
+                          type: string
+                          enum:
+                            - propose
+                            - decline_brief
+                            - refine_terms
+                            - accept_terms
+                            - change_price
+                            - change_product
+                        brain:
+                          description: For kind decision; own is your own model.
+                          type: string
+                          enum:
+                            - chef
+                            - prime
+                            - own
+                        shadow:
+                          description: 'For kind decision: true for the shadow brain.'
+                          type: boolean
+                        after:
+                          description: 'For kind decision: at or after this date-time.'
+                          type: string
+                          format: date-time
+                        through:
+                          description: 'For kind decision: at or before this date-time.'
+                          type: string
+                          format: date-time
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -82906,7 +83341,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -82929,6 +83364,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                         originRfpTurnId:
                           description: 'For kind library_request: only gaps opened from this RFP turn, by its id.'
                           type: string
@@ -83151,7 +83590,8 @@ paths:
                         productId:
                           description: >-
                             For kind creative_format: narrow formats to this exact product. With include
-                            executionResources: the product to read resource options for.
+                            executionResources: the product to read resource options for. For kind decision: decisions
+                            about this product.
                           type: string
                           minLength: 1
                           maxLength: 512
@@ -83537,10 +83977,38 @@ paths:
                             - paused
                             - completed
                         buyerAccountId:
-                          description: 'For kind media_buy in a seller account: buys from this buyer Account id.'
+                          description: 'For kind media_buy or decision in a seller account: those for this buyer Account id.'
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        action:
+                          description: 'For kind decision: what the agent did.'
+                          type: string
+                          enum:
+                            - propose
+                            - decline_brief
+                            - refine_terms
+                            - accept_terms
+                            - change_price
+                            - change_product
+                        brain:
+                          description: For kind decision; own is your own model.
+                          type: string
+                          enum:
+                            - chef
+                            - prime
+                            - own
+                        shadow:
+                          description: 'For kind decision: true for the shadow brain.'
+                          type: boolean
+                        after:
+                          description: 'For kind decision: at or after this date-time.'
+                          type: string
+                          format: date-time
+                        through:
+                          description: 'For kind decision: at or before this date-time.'
+                          type: string
+                          format: date-time
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -84552,7 +85020,7 @@ paths:
                             pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS,
                             BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL.
                             library_request: open, closed. creative_session: drafting, refining, evaluating, finalized.
-                            Other kinds refuse it.
+                            decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
                           type: string
                           enum:
                             - PENDING
@@ -84575,6 +85043,10 @@ paths:
                             - refining
                             - evaluating
                             - finalized
+                            - sent
+                            - applied
+                            - waiting_approval
+                            - blocked
                         originRfpTurnId:
                           description: 'For kind library_request: only gaps opened from this RFP turn, by its id.'
                           type: string
@@ -84797,7 +85269,8 @@ paths:
                         productId:
                           description: >-
                             For kind creative_format: narrow formats to this exact product. With include
-                            executionResources: the product to read resource options for.
+                            executionResources: the product to read resource options for. For kind decision: decisions
+                            about this product.
                           type: string
                           minLength: 1
                           maxLength: 512
@@ -85183,10 +85656,38 @@ paths:
                             - paused
                             - completed
                         buyerAccountId:
-                          description: 'For kind media_buy in a seller account: buys from this buyer Account id.'
+                          description: 'For kind media_buy or decision in a seller account: those for this buyer Account id.'
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        action:
+                          description: 'For kind decision: what the agent did.'
+                          type: string
+                          enum:
+                            - propose
+                            - decline_brief
+                            - refine_terms
+                            - accept_terms
+                            - change_price
+                            - change_product
+                        brain:
+                          description: For kind decision; own is your own model.
+                          type: string
+                          enum:
+                            - chef
+                            - prime
+                            - own
+                        shadow:
+                          description: 'For kind decision: true for the shadow brain.'
+                          type: boolean
+                        after:
+                          description: 'For kind decision: at or after this date-time.'
+                          type: string
+                          format: date-time
+                        through:
+                          description: 'For kind decision: at or before this date-time.'
+                          type: string
+                          format: date-time
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -86126,6 +86627,7 @@ paths:
                               - $ref: '#/components/schemas/search_success_SearchRfpPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchRfpTurnPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchLibraryRequestPageOutput'
+                              - $ref: '#/components/schemas/search_success_SearchDecisionPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchAskPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchConversationPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchBuyerAgentPageOutput'
@@ -86233,6 +86735,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchRfpPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchRfpTurnPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchLibraryRequestPageOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchDecisionPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAskPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchConversationPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchBuyerAgentPageOutput'
@@ -86275,6 +86778,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchRfpUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchRfpTurnUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchLibraryRequestUnavailableOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchDecisionUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAskUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchConversationUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchBuyerAgentUnavailableOutput'
@@ -115241,6 +115745,35 @@ components:
         - kind
       additionalProperties:
         $ref: '#/components/schemas/search_success_SearchLibraryRequestPageOutputValue'
+    search_success_SearchDecisionPageOutput:
+      type: object
+      properties:
+        total:
+          $ref: '#/components/schemas/search_success_SearchDecisionPageOutputTotal'
+        totalLowerBound:
+          $ref: '#/components/schemas/search_success_SearchDecisionPageOutputTotalLowerBound'
+        returned:
+          $ref: '#/components/schemas/search_success_SearchDecisionPageOutputReturned'
+        hasMore:
+          $ref: '#/components/schemas/search_success_SearchDecisionPageOutputHasMore'
+        truncated:
+          $ref: '#/components/schemas/search_success_SearchDecisionPageOutputTruncated'
+        nextCursor:
+          $ref: '#/components/schemas/search_success_SearchDecisionPageOutputNextCursor'
+        results:
+          $ref: '#/components/schemas/search_success_SearchDecisionPageOutputResults'
+        outcome:
+          type: string
+          const: page_decision
+        kind:
+          type: string
+          const: decision
+      required:
+        - results
+        - outcome
+        - kind
+      additionalProperties:
+        $ref: '#/components/schemas/search_success_SearchDecisionPageOutputValue'
     search_success_SearchAskPageOutput:
       type: object
       properties:
@@ -116099,6 +116632,25 @@ components:
         kind:
           type: string
           const: library_request
+        unavailable:
+          type: string
+        message:
+          type: string
+      required:
+        - outcome
+        - kind
+        - unavailable
+        - message
+      additionalProperties: {}
+    search_success_SearchDecisionUnavailableOutput:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: unavailable_decision
+        kind:
+          type: string
+          const: decision
         unavailable:
           type: string
         message:
@@ -119491,6 +120043,91 @@ components:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchLibraryRequestPageOutputValue: {}
+    search_success_SearchDecisionPageOutputTotal:
+      type: number
+    search_success_SearchDecisionPageOutputTotalLowerBound:
+      type: number
+    search_success_SearchDecisionPageOutputReturned:
+      type: number
+    search_success_SearchDecisionPageOutputHasMore:
+      type: boolean
+    search_success_SearchDecisionPageOutputTruncated:
+      type: boolean
+    search_success_SearchDecisionPageOutputNextCursor:
+      type: string
+    search_success_SearchDecisionPageOutputResults:
+      type: array
+      items:
+        type: object
+        properties:
+          advertiserId:
+            type: string
+          name:
+            type:
+              - string
+              - 'null'
+          sandbox:
+            type: boolean
+          sourceType:
+            anyOf:
+              - type: string
+                enum:
+                  - inline
+                  - url
+                  - file
+              - type: 'null'
+            description: 'Where the items come from: url when url is set, file when file is set.'
+          lastChangeSummary:
+            anyOf:
+              - type: object
+                properties:
+                  added:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  updated:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  unchanged:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  removed:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                required:
+                  - added
+                  - updated
+                  - unchanged
+                  - removed
+                additionalProperties: false
+              - type: 'null'
+            description: Items in the latest version against the one before it.
+          transform:
+            anyOf:
+              - type: object
+                properties:
+                  name:
+                    type: string
+                  updatedAt:
+                    type: string
+                required:
+                  - name
+                  - updatedAt
+                additionalProperties: false
+              - type: 'null'
+            description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+        additionalProperties: {}
+    search_success_SearchDecisionPageOutputValue: {}
     search_success_SearchAskPageOutputTotal:
       type: number
     search_success_SearchAskPageOutputTotalLowerBound:

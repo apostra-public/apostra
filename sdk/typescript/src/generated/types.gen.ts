@@ -939,7 +939,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1183,7 +1183,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1427,7 +1427,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1667,7 +1667,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1908,7 +1908,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2153,7 +2153,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2631,7 +2631,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2872,7 +2872,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3595,7 +3595,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3836,7 +3836,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4081,7 +4081,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4325,7 +4325,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4569,7 +4569,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4813,7 +4813,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -5057,7 +5057,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. creative: preview. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -8211,7 +8211,7 @@ export type GetResponses = {
             [key: string]: unknown;
         } | {
             outcome: 'object';
-            kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'buyer_rfp' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'library_request' | 'account_relationship' | 'advertiser_access' | 'notification_config';
+            kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'buyer_rfp' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'library_request' | 'decision' | 'account_relationship' | 'advertiser_access' | 'notification_config';
             object: {
                 advertiserId?: string;
                 sandbox?: boolean;
@@ -36334,9 +36334,9 @@ export type SearchData = {
              */
             sellerAccountIds?: Array<number>;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
             /**
              * For kind library_request: only gaps opened from this RFP turn, by its id.
              */
@@ -36446,7 +36446,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.
              */
             productId?: string;
             /**
@@ -36626,9 +36626,29 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer Account id.
+             * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind decision: what the agent did.
+             */
+            action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
+            /**
+             * For kind decision; own is your own model.
+             */
+            brain?: 'chef' | 'prime' | 'own';
+            /**
+             * For kind decision: true for the shadow brain.
+             */
+            shadow?: boolean;
+            /**
+             * For kind decision: at or after this date-time.
+             */
+            after?: string;
+            /**
+             * For kind decision: at or before this date-time.
+             */
+            through?: string;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -36814,9 +36834,9 @@ export type SearchData = {
              */
             sellerAccountIds?: Array<number>;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
             /**
              * For kind library_request: only gaps opened from this RFP turn, by its id.
              */
@@ -36926,7 +36946,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.
              */
             productId?: string;
             /**
@@ -37106,9 +37126,29 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer Account id.
+             * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind decision: what the agent did.
+             */
+            action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
+            /**
+             * For kind decision; own is your own model.
+             */
+            brain?: 'chef' | 'prime' | 'own';
+            /**
+             * For kind decision: true for the shadow brain.
+             */
+            shadow?: boolean;
+            /**
+             * For kind decision: at or after this date-time.
+             */
+            after?: string;
+            /**
+             * For kind decision: at or before this date-time.
+             */
+            through?: string;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -37362,9 +37402,9 @@ export type SearchData = {
              */
             sellerAccountIds?: Array<number>;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
             /**
              * For kind library_request: only gaps opened from this RFP turn, by its id.
              */
@@ -37474,7 +37514,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.
              */
             productId?: string;
             /**
@@ -37654,9 +37694,29 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer Account id.
+             * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind decision: what the agent did.
+             */
+            action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
+            /**
+             * For kind decision; own is your own model.
+             */
+            brain?: 'chef' | 'prime' | 'own';
+            /**
+             * For kind decision: true for the shadow brain.
+             */
+            shadow?: boolean;
+            /**
+             * For kind decision: at or after this date-time.
+             */
+            after?: string;
+            /**
+             * For kind decision: at or before this date-time.
+             */
+            through?: string;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -37842,9 +37902,9 @@ export type SearchData = {
              */
             sellerAccountIds?: Array<number>;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
             /**
              * For kind library_request: only gaps opened from this RFP turn, by its id.
              */
@@ -37950,7 +38010,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.
              */
             productId?: string;
             /**
@@ -38130,9 +38190,29 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer Account id.
+             * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind decision: what the agent did.
+             */
+            action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
+            /**
+             * For kind decision; own is your own model.
+             */
+            brain?: 'chef' | 'prime' | 'own';
+            /**
+             * For kind decision: true for the shadow brain.
+             */
+            shadow?: boolean;
+            /**
+             * For kind decision: at or after this date-time.
+             */
+            after?: string;
+            /**
+             * For kind decision: at or before this date-time.
+             */
+            through?: string;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -38315,9 +38395,9 @@ export type SearchData = {
              */
             sellerAccountIds?: Array<number>;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
             /**
              * For kind library_request: only gaps opened from this RFP turn, by its id.
              */
@@ -38423,7 +38503,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.
              */
             productId?: string;
             /**
@@ -38603,9 +38683,29 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer Account id.
+             * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind decision: what the agent did.
+             */
+            action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
+            /**
+             * For kind decision; own is your own model.
+             */
+            brain?: 'chef' | 'prime' | 'own';
+            /**
+             * For kind decision: true for the shadow brain.
+             */
+            shadow?: boolean;
+            /**
+             * For kind decision: at or after this date-time.
+             */
+            after?: string;
+            /**
+             * For kind decision: at or before this date-time.
+             */
+            through?: string;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -38791,9 +38891,9 @@ export type SearchData = {
              */
             sellerAccountIds?: Array<number>;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
             /**
              * For kind library_request: only gaps opened from this RFP turn, by its id.
              */
@@ -38899,7 +38999,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.
              */
             productId?: string;
             /**
@@ -39079,9 +39179,29 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer Account id.
+             * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind decision: what the agent did.
+             */
+            action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
+            /**
+             * For kind decision; own is your own model.
+             */
+            brain?: 'chef' | 'prime' | 'own';
+            /**
+             * For kind decision: true for the shadow brain.
+             */
+            shadow?: boolean;
+            /**
+             * For kind decision: at or after this date-time.
+             */
+            after?: string;
+            /**
+             * For kind decision: at or before this date-time.
+             */
+            through?: string;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -39267,9 +39387,9 @@ export type SearchData = {
              */
             sellerAccountIds?: Array<number>;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
             /**
              * For kind library_request: only gaps opened from this RFP turn, by its id.
              */
@@ -39375,7 +39495,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.
              */
             productId?: string;
             /**
@@ -39555,9 +39675,29 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer Account id.
+             * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind decision: what the agent did.
+             */
+            action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
+            /**
+             * For kind decision; own is your own model.
+             */
+            brain?: 'chef' | 'prime' | 'own';
+            /**
+             * For kind decision: true for the shadow brain.
+             */
+            shadow?: boolean;
+            /**
+             * For kind decision: at or after this date-time.
+             */
+            after?: string;
+            /**
+             * For kind decision: at or before this date-time.
+             */
+            through?: string;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -39723,9 +39863,9 @@ export type SearchData = {
              */
             campaignId: string;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
         };
         /**
          * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
@@ -39786,9 +39926,9 @@ export type SearchData = {
              */
             advertiserId: string;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
         };
         /**
          * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
@@ -39869,9 +40009,9 @@ export type SearchData = {
              */
             sellerAccountIds?: Array<number>;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
             /**
              * For kind library_request: only gaps opened from this RFP turn, by its id.
              */
@@ -39981,7 +40121,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.
              */
             productId?: string;
             /**
@@ -40161,9 +40301,29 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer Account id.
+             * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind decision: what the agent did.
+             */
+            action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
+            /**
+             * For kind decision; own is your own model.
+             */
+            brain?: 'chef' | 'prime' | 'own';
+            /**
+             * For kind decision: true for the shadow brain.
+             */
+            shadow?: boolean;
+            /**
+             * For kind decision: at or after this date-time.
+             */
+            after?: string;
+            /**
+             * For kind decision: at or before this date-time.
+             */
+            through?: string;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -40349,9 +40509,9 @@ export type SearchData = {
              */
             sellerAccountIds?: Array<number>;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
             /**
              * For kind library_request: only gaps opened from this RFP turn, by its id.
              */
@@ -40461,7 +40621,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.
              */
             productId?: string;
             /**
@@ -40641,9 +40801,29 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer Account id.
+             * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind decision: what the agent did.
+             */
+            action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
+            /**
+             * For kind decision; own is your own model.
+             */
+            brain?: 'chef' | 'prime' | 'own';
+            /**
+             * For kind decision: true for the shadow brain.
+             */
+            shadow?: boolean;
+            /**
+             * For kind decision: at or after this date-time.
+             */
+            after?: string;
+            /**
+             * For kind decision: at or before this date-time.
+             */
+            through?: string;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -40901,9 +41081,9 @@ export type SearchData = {
              */
             sellerAccountIds?: Array<number>;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
             /**
              * For kind library_request: only gaps opened from this RFP turn, by its id.
              */
@@ -41013,7 +41193,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.
              */
             productId?: string;
             /**
@@ -41193,9 +41373,29 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer Account id.
+             * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind decision: what the agent did.
+             */
+            action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
+            /**
+             * For kind decision; own is your own model.
+             */
+            brain?: 'chef' | 'prime' | 'own';
+            /**
+             * For kind decision: true for the shadow brain.
+             */
+            shadow?: boolean;
+            /**
+             * For kind decision: at or after this date-time.
+             */
+            after?: string;
+            /**
+             * For kind decision: at or before this date-time.
+             */
+            through?: string;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -41380,9 +41580,9 @@ export type SearchData = {
              */
             sellerAccountIds?: Array<number>;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
             /**
              * For kind library_request: only gaps opened from this RFP turn, by its id.
              */
@@ -41492,7 +41692,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.
              */
             productId?: string;
             /**
@@ -41672,9 +41872,29 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer Account id.
+             * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind decision: what the agent did.
+             */
+            action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
+            /**
+             * For kind decision; own is your own model.
+             */
+            brain?: 'chef' | 'prime' | 'own';
+            /**
+             * For kind decision: true for the shadow brain.
+             */
+            shadow?: boolean;
+            /**
+             * For kind decision: at or after this date-time.
+             */
+            after?: string;
+            /**
+             * For kind decision: at or before this date-time.
+             */
+            through?: string;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -41860,9 +42080,9 @@ export type SearchData = {
              */
             sellerAccountIds?: Array<number>;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
             /**
              * For kind library_request: only gaps opened from this RFP turn, by its id.
              */
@@ -41972,7 +42192,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.
              */
             productId?: string;
             /**
@@ -42152,9 +42372,29 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer Account id.
+             * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind decision: what the agent did.
+             */
+            action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
+            /**
+             * For kind decision; own is your own model.
+             */
+            brain?: 'chef' | 'prime' | 'own';
+            /**
+             * For kind decision: true for the shadow brain.
+             */
+            shadow?: boolean;
+            /**
+             * For kind decision: at or after this date-time.
+             */
+            after?: string;
+            /**
+             * For kind decision: at or before this date-time.
+             */
+            through?: string;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -42340,9 +42580,9 @@ export type SearchData = {
              */
             sellerAccountIds?: Array<number>;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
             /**
              * For kind library_request: only gaps opened from this RFP turn, by its id.
              */
@@ -42452,7 +42692,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.
              */
             productId?: string;
             /**
@@ -42632,9 +42872,29 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer Account id.
+             * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind decision: what the agent did.
+             */
+            action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
+            /**
+             * For kind decision; own is your own model.
+             */
+            brain?: 'chef' | 'prime' | 'own';
+            /**
+             * For kind decision: true for the shadow brain.
+             */
+            shadow?: boolean;
+            /**
+             * For kind decision: at or after this date-time.
+             */
+            after?: string;
+            /**
+             * For kind decision: at or before this date-time.
+             */
+            through?: string;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -42820,9 +43080,9 @@ export type SearchData = {
              */
             sellerAccountIds?: Array<number>;
             /**
-             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. Other kinds refuse it.
+             * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
-            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized';
+            status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
             /**
              * For kind library_request: only gaps opened from this RFP turn, by its id.
              */
@@ -42932,7 +43192,7 @@ export type SearchData = {
              */
             statuses?: Array<SearchRequestAdcpCreativeStatus>;
             /**
-             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for.
+             * For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.
              */
             productId?: string;
             /**
@@ -43112,9 +43372,29 @@ export type SearchData = {
              */
             sellerStatus?: 'pending_approval' | 'forwarding' | 'forward_failed' | 'awaiting_source' | 'rejected' | 'canceled' | 'booked' | 'delivering' | 'paused' | 'completed';
             /**
-             * For kind media_buy in a seller account: buys from this buyer Account id.
+             * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind decision: what the agent did.
+             */
+            action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
+            /**
+             * For kind decision; own is your own model.
+             */
+            brain?: 'chef' | 'prime' | 'own';
+            /**
+             * For kind decision: true for the shadow brain.
+             */
+            shadow?: boolean;
+            /**
+             * For kind decision: at or after this date-time.
+             */
+            after?: string;
+            /**
+             * For kind decision: at or before this date-time.
+             */
+            through?: string;
             /**
              * For kind member: whose members to list. Omit for the selected account; an organization may name one direct child account.
              */
@@ -43346,7 +43626,7 @@ export type SearchResponses = {
     200: {
         data: {
             sources: Array<'objects' | 'docs' | 'specs'>;
-            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchSessionPageOutput | {
+            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchSessionPageOutput | {
                 kind: string;
                 groupBy: string;
                 total: number;
@@ -43366,7 +43646,7 @@ export type SearchResponses = {
             } | {
                 outcome: 'mixed';
                 kind: 'mixed';
-                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
+                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
                 [key: string]: unknown;
             };
             objectsUnavailable?: string;
@@ -44819,6 +45099,73 @@ export type SearchSuccessSearchCreativeSessionUnavailableOutput = {
 export type SearchSuccessSearchCreativeUnavailableOutput = {
     outcome: 'unavailable_creative';
     kind: 'creative';
+    unavailable: string;
+    message: string;
+    [key: string]: unknown;
+};
+
+export type SearchSuccessSearchDecisionPageOutput = {
+    total?: SearchSuccessSearchDecisionPageOutputTotal;
+    totalLowerBound?: SearchSuccessSearchDecisionPageOutputTotalLowerBound;
+    returned?: SearchSuccessSearchDecisionPageOutputReturned;
+    hasMore?: SearchSuccessSearchDecisionPageOutputHasMore;
+    truncated?: SearchSuccessSearchDecisionPageOutputTruncated;
+    nextCursor?: SearchSuccessSearchDecisionPageOutputNextCursor;
+    results: SearchSuccessSearchDecisionPageOutputResults;
+    outcome: 'page_decision';
+    kind: 'decision';
+    [key: string]: SearchSuccessSearchDecisionPageOutputValue | SearchSuccessSearchDecisionPageOutputTotal | SearchSuccessSearchDecisionPageOutputTotalLowerBound | SearchSuccessSearchDecisionPageOutputReturned | SearchSuccessSearchDecisionPageOutputHasMore | SearchSuccessSearchDecisionPageOutputTruncated | SearchSuccessSearchDecisionPageOutputNextCursor | SearchSuccessSearchDecisionPageOutputResults | 'page_decision' | 'decision' | undefined;
+};
+
+export type SearchSuccessSearchDecisionPageOutputHasMore = boolean;
+
+export type SearchSuccessSearchDecisionPageOutputNextCursor = string;
+
+export type SearchSuccessSearchDecisionPageOutputResults = Array<{
+    advertiserId?: string;
+    name?: string | null;
+    sandbox?: boolean;
+    /**
+     * Where the items come from: url when url is set, file when file is set.
+     */
+    sourceType?: 'inline' | 'url' | 'file' | null;
+    /**
+     * Items in the latest version against the one before it.
+     */
+    lastChangeSummary?: {
+        added: number;
+        updated: number;
+        unchanged: number;
+        removed: number;
+    } | null;
+    /**
+     * The active transform, if any.
+     */
+    transform?: {
+        name: string;
+        updatedAt: string;
+    } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    [key: string]: unknown;
+}>;
+
+export type SearchSuccessSearchDecisionPageOutputReturned = number;
+
+export type SearchSuccessSearchDecisionPageOutputTotal = number;
+
+export type SearchSuccessSearchDecisionPageOutputTotalLowerBound = number;
+
+export type SearchSuccessSearchDecisionPageOutputTruncated = boolean;
+
+export type SearchSuccessSearchDecisionPageOutputValue = unknown;
+
+export type SearchSuccessSearchDecisionUnavailableOutput = {
+    outcome: 'unavailable_decision';
+    kind: 'decision';
     unavailable: string;
     message: string;
     [key: string]: unknown;
