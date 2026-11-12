@@ -48099,6 +48099,26 @@ paths:
                   required:
                     - type
                   additionalProperties: false
+                namingTemplates:
+                  description: >-
+                    A managed Google Ad Manager source's naming templates. Send with id only; an omitted key is
+                    unchanged.
+                  type: object
+                  properties:
+                    order:
+                      description: Order name template; null is the default.
+                      type:
+                        - string
+                        - 'null'
+                    lineItem:
+                      description: Line item name template; null is the default.
+                      type:
+                        - string
+                        - 'null'
+                  additionalProperties: false
+                dryRun:
+                  description: 'Preview namingTemplates: sample names and macros, nothing saved.'
+                  type: boolean
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -48132,6 +48152,10 @@ paths:
                       - $ref: >-
                           #/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessOwnAgentConnectionForm
                       - $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessAdServerForm'
+                      - $ref: >-
+                          #/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesPreviewed
+                      - $ref: >-
+                          #/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesSaved
                       - $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessLegacyCreated'
                   error:
                     type: 'null'
@@ -104333,6 +104357,53 @@ components:
         - action
         - adServerType
       additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesPreviewed:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: naming_templates_previewed
+        action:
+          type: string
+          const: naming_templates_previewed
+        sourceId:
+          $ref: >-
+            #/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesPreviewedSourceId
+        namingTemplates:
+          $ref: >-
+            #/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesPreviewedNamingTemplates
+        preview:
+          $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesPreviewedPreview'
+      required:
+        - outcome
+        - action
+        - sourceId
+        - namingTemplates
+        - preview
+      additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesSaved:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: naming_templates_saved
+        action:
+          type: string
+          const: naming_templates_saved
+        sourceId:
+          $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesSavedSourceId'
+        namingTemplates:
+          $ref: >-
+            #/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesSavedNamingTemplates
+        preview:
+          $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesSavedPreview'
+      required:
+        - outcome
+        - action
+        - sourceId
+        - namingTemplates
+        - preview
+      additionalProperties: {}
     save_inventory_source_success_SaveInventorySourceSuccessLegacyCreated:
       type: object
       properties:
@@ -104373,10 +104444,268 @@ components:
       propertyNames:
         type: string
       additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesPreviewedSourceId:
+      type: string
+    save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesPreviewedNamingTemplates:
+      type: object
+      properties:
+        order:
+          type:
+            - string
+            - 'null'
+        lineItem:
+          type:
+            - string
+            - 'null'
+      required:
+        - order
+        - lineItem
+      additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesPreviewedPreview:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        order:
+          $ref: >-
+            #/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesPreviewedPreviewOrder
+        lineItem:
+          $ref: >-
+            #/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesPreviewedPreviewLineItem
+        sample:
+          type: object
+          properties:
+            brandDomain:
+              type: string
+            startTime:
+              type: string
+            endTime:
+              type: string
+            mediaBuyId:
+              type: string
+            productId:
+              type: string
+            packageName:
+              type: string
+          required:
+            - brandDomain
+            - startTime
+            - endTime
+            - mediaBuyId
+            - productId
+            - packageName
+          additionalProperties: {}
+      required:
+        - valid
+        - order
+        - lineItem
+        - sample
+      additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesSavedSourceId:
+      type: string
+    save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesSavedNamingTemplates:
+      type: object
+      properties:
+        order:
+          type:
+            - string
+            - 'null'
+        lineItem:
+          type:
+            - string
+            - 'null'
+      required:
+        - order
+        - lineItem
+      additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesSavedPreview:
+      type: object
+      properties:
+        valid:
+          type: boolean
+        order:
+          $ref: >-
+            #/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesSavedPreviewOrder
+        lineItem:
+          $ref: >-
+            #/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesSavedPreviewLineItem
+        sample:
+          type: object
+          properties:
+            brandDomain:
+              type: string
+            startTime:
+              type: string
+            endTime:
+              type: string
+            mediaBuyId:
+              type: string
+            productId:
+              type: string
+            packageName:
+              type: string
+          required:
+            - brandDomain
+            - startTime
+            - endTime
+            - mediaBuyId
+            - productId
+            - packageName
+          additionalProperties: {}
+      required:
+        - valid
+        - order
+        - lineItem
+        - sample
+      additionalProperties: {}
     save_inventory_source_success_SaveInventorySourceSuccessLegacyCreatedData:
       type: object
       propertyNames:
         type: string
+      additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesPreviewedPreviewOrder:
+      type: object
+      properties:
+        template:
+          type: string
+        defaultTemplate:
+          type: string
+        usesDefault:
+          type: boolean
+        macros:
+          type: array
+          items:
+            type: string
+        example:
+          type: string
+        issues:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+              - code
+              - message
+            additionalProperties: {}
+      required:
+        - template
+        - defaultTemplate
+        - usesDefault
+        - macros
+        - example
+        - issues
+      additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesPreviewedPreviewLineItem:
+      type: object
+      properties:
+        template:
+          type: string
+        defaultTemplate:
+          type: string
+        usesDefault:
+          type: boolean
+        macros:
+          type: array
+          items:
+            type: string
+        example:
+          type: string
+        issues:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+              - code
+              - message
+            additionalProperties: {}
+      required:
+        - template
+        - defaultTemplate
+        - usesDefault
+        - macros
+        - example
+        - issues
+      additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesSavedPreviewOrder:
+      type: object
+      properties:
+        template:
+          type: string
+        defaultTemplate:
+          type: string
+        usesDefault:
+          type: boolean
+        macros:
+          type: array
+          items:
+            type: string
+        example:
+          type: string
+        issues:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+              - code
+              - message
+            additionalProperties: {}
+      required:
+        - template
+        - defaultTemplate
+        - usesDefault
+        - macros
+        - example
+        - issues
+      additionalProperties: {}
+    save_inventory_source_success_SaveInventorySourceSuccessNamingTemplatesSavedPreviewLineItem:
+      type: object
+      properties:
+        template:
+          type: string
+        defaultTemplate:
+          type: string
+        usesDefault:
+          type: boolean
+        macros:
+          type: array
+          items:
+            type: string
+        example:
+          type: string
+        issues:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+              - code
+              - message
+            additionalProperties: {}
+      required:
+        - template
+        - defaultTemplate
+        - usesDefault
+        - macros
+        - example
+        - issues
       additionalProperties: {}
     save_library_request_success_RequestId:
       type: string
