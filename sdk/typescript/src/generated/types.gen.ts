@@ -22819,7 +22819,7 @@ export type SaveCreativeData = {
             assetRef?: never;
         }>;
         /**
-         * Save one approved session output to the advertiserId Library; campaignId is its session campaign. Needs idempotencyKey; send alone.
+         * Save one approved session output to the advertiserId Library; campaignId only for campaign sessions. Needs idempotencyKey; send alone.
          */
         fromCreativeSessionOutput?: {
             /**

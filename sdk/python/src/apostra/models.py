@@ -12764,7 +12764,7 @@ class SaveCreativeInput(TypedDict):
     sourceAssets: NotRequired[list[SaveCreativeInputSourceAssetsItemKindAssetRef | SaveCreativeInputSourceAssetsItemKindAssetId]]
     '\n    Uploaded JPEG/PNG/MP4 for format slots; a draft may omit it.\n    '
     fromCreativeSessionOutput: NotRequired[SaveCreativeInputFromCreativeSessionOutput]
-    '\n    Save one approved session output to the advertiserId Library; campaignId is its session campaign. Needs idempotencyKey; send alone.\n    '
+    '\n    Save one approved session output to the advertiserId Library; campaignId only for campaign sessions. Needs idempotencyKey; send alone.\n    '
     libraryRole: NotRequired[Literal["evergreen", "reference"]]
     '\n    Buyer Account only. Durable advertiser Library role: evergreen remains delivery-eligible; reference is reusable input material and cannot be attached for delivery.\n    '
     landing_page_url: NotRequired[SaveCreativeRequestLandingPageUrl]

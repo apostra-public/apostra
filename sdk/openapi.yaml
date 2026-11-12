@@ -45132,7 +45132,7 @@ paths:
                         additionalProperties: false
                 fromCreativeSessionOutput:
                   description: >-
-                    Save one approved session output to the advertiserId Library; campaignId is its session campaign.
+                    Save one approved session output to the advertiserId Library; campaignId only for campaign sessions.
                     Needs idempotencyKey; send alone.
                   type: object
                   properties:
@@ -45558,8 +45558,6 @@ paths:
                     allOf:
                       - required:
                           - advertiserId
-                      - required:
-                          - campaignId
                       - required:
                           - idempotencyKey
                       - allOf:
