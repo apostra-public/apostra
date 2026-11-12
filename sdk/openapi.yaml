@@ -1970,6 +1970,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -3225,6 +3227,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -4456,6 +4460,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -5675,6 +5681,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -6895,6 +6903,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -8122,6 +8132,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -10486,6 +10498,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -11708,6 +11722,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -15222,6 +15238,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -16442,6 +16460,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -17668,6 +17688,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -18893,6 +18915,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -20118,6 +20142,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -21343,6 +21369,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -22568,6 +22596,8 @@ paths:
                           - history
                           - report
                           - mediaBilling
+                          - usageDetail
+                          - pricing
                           - reads
                           - reasoning
                           - lifecycle
@@ -24787,10 +24817,28 @@ paths:
                                         maxLength: 240
                                       - type: 'null'
                                     description: The organization’s company name, else its account name, else null.
+                                  roles:
+                                    type: array
+                                    items:
+                                      type: string
+                                      enum:
+                                        - BUYER
+                                        - SELLER
+                                    description: >-
+                                      The organization’s own role or roles. Empty when unresolved. It does not include
+                                      the roles of its child accounts. A surface picks which sections to show from the
+                                      roles.
+                                  currency:
+                                    description: >-
+                                      The currency of the organization’s ledger and standing, which `balance` and every
+                                      amount that names no currency of its own are in.
+                                    $ref: '#/components/schemas/get_success_ObjectOrganizationCurrency'
                                 required:
                                   - customerId
                                   - name
                                   - displayName
+                                  - roles
+                                  - currency
                                 additionalProperties: false
                               terms:
                                 type: object
@@ -25513,6 +25561,148 @@ paths:
                                     description: >-
                                       Whether the organization may continue on Listing with a third-party sales agent
                                       and no plan. Continuing is an offer response that declines the offer.
+                                  eligible:
+                                    type: boolean
+                                    description: >-
+                                      Whether the organization may choose a plan now, for at least one of
+                                      `eligibleWorkloads`.
+                                  eligibleWorkloads:
+                                    type: array
+                                    items:
+                                      type: string
+                                      enum:
+                                        - BUYER
+                                        - STOREFRONT
+                                        - PARTNER
+                                        - DEVELOPER
+                                    description: >-
+                                      The workloads the organization may choose a plan for. Empty when `eligible` is
+                                      false.
+                                  suggestedPlan:
+                                    anyOf:
+                                      - type: object
+                                        properties:
+                                          planId:
+                                            $ref: '#/components/schemas/get_success_ObjectPlanSuggestedPlanPlanId'
+                                          planName:
+                                            $ref: '#/components/schemas/get_success_ObjectPlanSuggestedPlanPlanName'
+                                          currency:
+                                            $ref: '#/components/schemas/get_success_ObjectPlanSuggestedPlanCurrency'
+                                          commitmentMinor:
+                                            $ref: '#/components/schemas/get_success_ObjectPlanSuggestedPlanCommitmentMinor'
+                                          includedIus:
+                                            $ref: '#/components/schemas/get_success_ObjectPlanSuggestedPlanIncludedIus'
+                                          iuPriceMinor:
+                                            $ref: '#/components/schemas/get_success_ObjectPlanSuggestedPlanIuPriceMinor'
+                                          entitlements:
+                                            $ref: '#/components/schemas/get_success_ObjectPlanSuggestedPlanEntitlements'
+                                          scopeIncluded:
+                                            type: array
+                                            items:
+                                              type: string
+                                            description: What the plan covers, as short statements.
+                                        required:
+                                          - planId
+                                          - planName
+                                          - currency
+                                          - commitmentMinor
+                                          - includedIus
+                                          - iuPriceMinor
+                                          - entitlements
+                                          - scopeIncluded
+                                        additionalProperties: false
+                                      - type: 'null'
+                                    description: >-
+                                      The plan the chooser suggests to an organization with no plan in force, or null.
+                                      It is only a suggestion: the organization is not on it and nothing is billed under
+                                      it until it accepts a plan.
+                                  calibratingActivities:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        activityCode:
+                                          type: string
+                                          enum:
+                                            - ACTIVATED_SOCIAL_ACCOUNT_MONTH
+                                            - SIMPLE_PROPOSAL_EVALUATION
+                                            - COMPLEX_PROPOSAL_EVALUATION
+                                            - MERCHANDISING_BRIEF_RESPONSE
+                                            - MURPH_AI_SUPPORT_SESSION
+                                            - HUMAN_EXPERT_SUPPORT_HOUR
+                                            - GENERATED_IMAGE
+                                            - GENERATED_VIDEO_SECONDS
+                                            - ANALYZE_ACCOUNT
+                                            - CAMPAIGN_OPTIMIZATION_MONTH
+                                            - MANAGED_MEDIA_BUY_MONTH
+                                            - STANDARD_DOCUMENT_UNDERSTANDING
+                                            - LARGE_DOCUMENT_UNDERSTANDING
+                                            - AUDIO_VIDEO_UNDERSTANDING_MINUTES
+                                            - CUSTOM_BIGQUERY_GIB
+                                            - MODULAR_SOURCE_MANAGEMENT_MONTH
+                                            - MANAGED_VIDEO_RENDITION_OUTPUT_SECOND
+                                            - COMPLETED_INTERCHANGE_MERCHANDISING_CYCLE
+                                            - SOCIAL_ACCOUNT_INTELLIGENCE_BILLING_PERIOD
+                                            - INTERCHANGE_MEDIA_BUY_BILLING_PERIOD
+                                            - MULTI_SELLER_PRODUCT_RANKING
+                                            - PROPOSAL_EVALUATION_PASS
+                                            - COMPARATIVE_PROPOSAL_RANKING_PASS
+                                            - MURPH_WORKING_SESSION
+                                        status:
+                                          type: string
+                                          enum:
+                                            - CALIBRATING
+                                            - MEASURING
+                                          description: >-
+                                            `CALIBRATING` has a standard IU amount that may still change; `MEASURING`
+                                            has no amount yet.
+                                        iuAmountMilli:
+                                          anyOf:
+                                            - type: integer
+                                              exclusiveMinimum: 0
+                                              maximum: 9007199254740991
+                                            - type: 'null'
+                                          description: >-
+                                            The standard price in thousandths of an IU while `status` is `CALIBRATING`;
+                                            null while `MEASURING`.
+                                        unitCount:
+                                          type: integer
+                                          exclusiveMinimum: 0
+                                          maximum: 9007199254740991
+                                        unit:
+                                          type: string
+                                          enum:
+                                            - ACCOUNT_MONTH
+                                            - ACCOUNT_BILLING_PERIOD
+                                            - PROPOSAL
+                                            - RESPONSE
+                                            - SESSION
+                                            - SUPPORT_HOUR
+                                            - IMAGE
+                                            - GENERATED_SECOND
+                                            - ANALYSIS
+                                            - CAMPAIGN_MONTH
+                                            - MEDIA_BUY_MONTH
+                                            - MEDIA_BUY_BILLING_PERIOD
+                                            - FILE
+                                            - PROCESSING_JOB
+                                            - UNDERSTANDING_MINUTE
+                                            - GIB_SCANNED
+                                            - ACTIVE_SOURCE_MONTH
+                                            - OUTPUT_SECOND
+                                            - RANKING
+                                            - EVALUATION_PASS
+                                            - RANKING_PASS
+                                      required:
+                                        - activityCode
+                                        - status
+                                        - iuAmountMilli
+                                        - unitCount
+                                        - unit
+                                      additionalProperties: false
+                                    description: >-
+                                      The activities whose IU price is still being set or measured, so no price is
+                                      published for them yet. Empty when every activity is priced.
                                 required:
                                   - current
                                   - upcoming
@@ -25522,6 +25712,10 @@ paths:
                                   - showsChoices
                                   - setupGrant
                                   - passThroughAvailable
+                                  - eligible
+                                  - eligibleWorkloads
+                                  - suggestedPlan
+                                  - calibratingActivities
                                 additionalProperties: false
                               invoices:
                                 maxItems: 10
@@ -25617,6 +25811,51 @@ paths:
                                   - severity
                                   - canCompleteInChat
                                 additionalProperties: false
+                              setupProgress:
+                                anyOf:
+                                  - type: object
+                                    properties:
+                                      steps:
+                                        minItems: 4
+                                        maxItems: 4
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            id:
+                                              type: string
+                                              enum:
+                                                - ACCEPT_TOS
+                                                - SELECT_PLAN
+                                                - ADD_BILLING_INFO
+                                                - ADD_PAYMENT_METHOD
+                                            state:
+                                              type: string
+                                              enum:
+                                                - done
+                                                - active
+                                                - todo
+                                          required:
+                                            - id
+                                            - state
+                                          additionalProperties: false
+                                        description: >-
+                                          Exactly four steps, always in this order: terms, plan, billing details,
+                                          payment method.
+                                      activeStep:
+                                        type: integer
+                                        minimum: 1
+                                        maximum: 4
+                                        description: One-based position in `steps` of the step the organization is on now.
+                                    required:
+                                      - steps
+                                      - activeStep
+                                    additionalProperties: false
+                                  - type: 'null'
+                                description: >-
+                                  Where the organization is in the four setup steps while `nextAction` is a setup
+                                  action, decided on the server from the same facts as `nextAction`. Null when it is not
+                                  mid-setup.
                             required:
                               - organization
                               - terms
@@ -25634,9 +25873,14 @@ paths:
                               - invoices
                               - invoicesTruncated
                               - nextAction
+                              - setupProgress
                             additionalProperties: false
                           mediaBilling:
                             $ref: '#/components/schemas/get_success_MediaBilling'
+                          usageDetail:
+                            $ref: '#/components/schemas/get_success_UsageDetail'
+                          pricing:
+                            $ref: '#/components/schemas/get_success_Pricing'
                           unavailableIncludes:
                             $ref: '#/components/schemas/get_success_UnavailableIncludes'
                         required:
@@ -25701,6 +25945,10 @@ paths:
                             additionalProperties: false
                           mediaBilling:
                             $ref: '#/components/schemas/get_success_MediaBilling'
+                          usageDetail:
+                            $ref: '#/components/schemas/get_success_UsageDetail'
+                          pricing:
+                            $ref: '#/components/schemas/get_success_Pricing'
                           unavailableIncludes:
                             $ref: '#/components/schemas/get_success_UnavailableIncludes'
                         required:
@@ -90128,6 +90376,10 @@ components:
         - upper
         - halfWidth
       additionalProperties: false
+    get_success_ObjectOrganizationCurrency:
+      type: string
+      minLength: 3
+      maxLength: 3
     get_success_ObjectPaymentTerms:
       type: string
       enum:
@@ -90576,6 +90828,55 @@ components:
       type: string
     get_success_ObjectPlanRenewalLatestInstructionRecordedAt:
       type: string
+    get_success_ObjectPlanSuggestedPlanPlanId:
+      type: string
+      description: >-
+        The plan’s stable plan code. The customer-safe read carries no internal plan row ids, so this is the identity a
+        caller names a plan by.
+    get_success_ObjectPlanSuggestedPlanPlanName:
+      type: string
+    get_success_ObjectPlanSuggestedPlanCurrency:
+      type: string
+      minLength: 3
+      maxLength: 3
+    get_success_ObjectPlanSuggestedPlanCommitmentMinor:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: Net monthly commitment, minor units of `currency`.
+    get_success_ObjectPlanSuggestedPlanIncludedIus:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    get_success_ObjectPlanSuggestedPlanIuPriceMinor:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: Net price of one IU beyond the included IUs, minor units.
+    get_success_ObjectPlanSuggestedPlanEntitlements:
+      anyOf:
+        - type: object
+          properties:
+            bundleName:
+              type: string
+            features:
+              type: array
+              items:
+                type: string
+              description: Feature keys the plan grants.
+            accountLimit:
+              anyOf:
+                - type: integer
+                  minimum: 0
+                  maximum: 9007199254740991
+                - type: 'null'
+              description: How many accounts the organization may hold, or null.
+          required:
+            - bundleName
+            - features
+            - accountLimit
+          additionalProperties: false
+        - type: 'null'
     get_success_ObjectInvoicesItemPeriodStart:
       type: string
     get_success_ObjectInvoicesItemPeriodEnd:
@@ -90692,6 +90993,240 @@ components:
         - redactedFields
         - entities
         - attachments
+      additionalProperties: false
+    get_success_UsageDetail:
+      type: object
+      properties:
+        iu:
+          anyOf:
+            - type: object
+              properties:
+                currency:
+                  description: The currency `overage` amounts are in, minor units.
+                  $ref: '#/components/schemas/get_success_UsageDetailIuCurrency'
+                cycle:
+                  type: object
+                  properties:
+                    start:
+                      $ref: '#/components/schemas/get_success_UsageDetailIuCycleStart'
+                    end:
+                      $ref: '#/components/schemas/get_success_UsageDetailIuCycleEnd'
+                  required:
+                    - start
+                    - end
+                  additionalProperties: false
+                buckets:
+                  type: object
+                  properties:
+                    free:
+                      $ref: '#/components/schemas/get_success_UsageDetailIuBucketsFree'
+                    rollover:
+                      $ref: '#/components/schemas/get_success_UsageDetailIuBucketsRollover'
+                    included:
+                      $ref: '#/components/schemas/get_success_UsageDetailIuBucketsIncluded'
+                  required:
+                    - free
+                    - rollover
+                    - included
+                  additionalProperties: false
+                overage:
+                  type: object
+                  properties:
+                    ius:
+                      type: number
+                      description: IUs consumed beyond every bucket this cycle.
+                    amountMinor:
+                      type: integer
+                      minimum: -9007199254740991
+                      maximum: 9007199254740991
+                      description: The overage so far this cycle, minor units.
+                    capMinor:
+                      type: integer
+                      minimum: -9007199254740991
+                      maximum: 9007199254740991
+                      description: The cap on overage that has not been charged yet, minor units.
+                    warnAtMinor:
+                      type: integer
+                      minimum: -9007199254740991
+                      maximum: 9007199254740991
+                    overWarnThreshold:
+                      type: boolean
+                    overCap:
+                      type: boolean
+                  required:
+                    - ius
+                    - amountMinor
+                    - capMinor
+                    - warnAtMinor
+                    - overWarnThreshold
+                    - overCap
+                  additionalProperties: false
+                rolloverPolicy:
+                  anyOf:
+                    - type: object
+                      properties:
+                        capBasisPoints:
+                          type: integer
+                          minimum: 1
+                          maximum: 10000
+                        expiresAfterBillingPeriods:
+                          type: integer
+                          exclusiveMinimum: 0
+                          maximum: 9007199254740991
+                      required:
+                        - capBasisPoints
+                        - expiresAfterBillingPeriods
+                      additionalProperties: false
+                    - type: 'null'
+                  description: The accepted terms for rolling included IUs over, or null when the plan does not roll over.
+                forecast:
+                  type: object
+                  properties:
+                    projectedIus:
+                      type: number
+                      description: A straight-line projection of the cycle’s total IUs.
+                    projectedOverageMinor:
+                      type: integer
+                      minimum: -9007199254740991
+                      maximum: 9007199254740991
+                  required:
+                    - projectedIus
+                    - projectedOverageMinor
+                  additionalProperties: false
+              required:
+                - currency
+                - cycle
+                - buckets
+                - overage
+                - rolloverPolicy
+                - forecast
+              additionalProperties: false
+            - type: 'null'
+          description: The IU account for the current cycle, or null when it cannot be read or the organization has none.
+        activity:
+          anyOf:
+            - type: object
+              properties:
+                periodStart:
+                  $ref: '#/components/schemas/get_success_UsageDetailActivityPeriodStart'
+                periodEnd:
+                  $ref: '#/components/schemas/get_success_UsageDetailActivityPeriodEnd'
+                totalIus:
+                  type: number
+                  minimum: 0
+                byActivity:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      activityCode:
+                        type: string
+                      displayName:
+                        type: string
+                      ius:
+                        type: number
+                        exclusiveMinimum: 0
+                    required:
+                      - activityCode
+                      - displayName
+                      - ius
+                    additionalProperties: false
+                byDay:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      date:
+                        type: string
+                        description: A UTC day, YYYY-MM-DD.
+                      ius:
+                        type: number
+                        exclusiveMinimum: 0
+                    required:
+                      - date
+                      - ius
+                    additionalProperties: false
+              required:
+                - periodStart
+                - periodEnd
+                - totalIus
+                - byActivity
+                - byDay
+              additionalProperties: false
+            - type: 'null'
+          description: IUs used this period by activity and by day, or null when the IU experience is unavailable.
+      required:
+        - iu
+        - activity
+      additionalProperties: false
+    get_success_Pricing:
+      type: object
+      properties:
+        source:
+          anyOf:
+            - type: string
+              enum:
+                - standard
+                - custom
+                - inherited
+            - type: 'null'
+          description: >-
+            `standard` for the published rates, `custom` for rates agreed in a contract, `inherited` for the
+            organization’s rates shown on an account. Null when no rate card is in force.
+        rates:
+          type: array
+          items:
+            type: object
+            properties:
+              customerRole:
+                type: string
+                enum:
+                  - BUYER
+                  - SELLER
+              billingType:
+                type: string
+                enum:
+                  - DECISIONED
+                  - ROUTED
+              pricingType:
+                type: string
+                enum:
+                  - MARGIN
+                  - UNIT
+              feeRatePercent:
+                anyOf:
+                  - type: number
+                  - type: 'null'
+                description: The fee as a percentage of media, when `pricingType` is `MARGIN`.
+              unitPrice:
+                anyOf:
+                  - type: number
+                  - type: 'null'
+                description: The price per `unit`, in `currency`, when `pricingType` is `UNIT`.
+              unit:
+                anyOf:
+                  - type: string
+                    enum:
+                      - CPM
+                      - RECORD
+                      - FLAT_RATE
+                  - type: 'null'
+              currency:
+                type:
+                  - string
+                  - 'null'
+            required:
+              - customerRole
+              - billingType
+              - pricingType
+              - feeRatePercent
+              - unitPrice
+              - unit
+              - currency
+            additionalProperties: false
+      required:
+        - source
+        - rates
       additionalProperties: false
     get_success_UnavailableIncludes:
       type: array
@@ -91573,6 +92108,66 @@ components:
       type: string
       minLength: 3
       maxLength: 3
+    get_success_UsageDetailIuCurrency:
+      type: string
+      minLength: 3
+      maxLength: 3
+    get_success_UsageDetailIuCycleStart:
+      type: string
+    get_success_UsageDetailIuCycleEnd:
+      type: string
+    get_success_UsageDetailIuBucketsFree:
+      type: object
+      properties:
+        granted:
+          type: number
+          description: IUs available in this bucket for the cycle. 0 for a bucket the plan and grants do not carry.
+        used:
+          type: number
+          description: IUs drawn from this bucket this cycle.
+        remaining:
+          type: number
+      required:
+        - granted
+        - used
+        - remaining
+      additionalProperties: false
+    get_success_UsageDetailIuBucketsRollover:
+      type: object
+      properties:
+        granted:
+          type: number
+          description: IUs available in this bucket for the cycle. 0 for a bucket the plan and grants do not carry.
+        used:
+          type: number
+          description: IUs drawn from this bucket this cycle.
+        remaining:
+          type: number
+      required:
+        - granted
+        - used
+        - remaining
+      additionalProperties: false
+    get_success_UsageDetailIuBucketsIncluded:
+      type: object
+      properties:
+        granted:
+          type: number
+          description: IUs available in this bucket for the cycle. 0 for a bucket the plan and grants do not carry.
+        used:
+          type: number
+          description: IUs drawn from this bucket this cycle.
+        remaining:
+          type: number
+      required:
+        - granted
+        - used
+        - remaining
+      additionalProperties: false
+    get_success_UsageDetailActivityPeriodStart:
+      type: string
+    get_success_UsageDetailActivityPeriodEnd:
+      type: string
     get_success_CampaignGoalProgressOptimizationGoalVendorDomain:
       type: string
       pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
