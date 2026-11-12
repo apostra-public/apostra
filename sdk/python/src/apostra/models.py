@@ -20739,7 +20739,9 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     market: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
     channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.\n    '
+    countries: NotRequired[list[str]]
+    '\n    For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.\n    '
     selectedPosture: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
     playbookVersion: NotRequired[list[int]]
@@ -21025,7 +21027,9 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     market: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
     channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.\n    '
+    countries: NotRequired[list[str]]
+    '\n    For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.\n    '
     selectedPosture: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
     playbookVersion: NotRequired[list[int]]
@@ -21245,7 +21249,9 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     market: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
     channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.\n    '
+    countries: NotRequired[list[str]]
+    '\n    For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.\n    '
     selectedPosture: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
     playbookVersion: NotRequired[list[int]]
@@ -21492,7 +21498,9 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     market: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
     channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.\n    '
+    countries: NotRequired[list[str]]
+    '\n    For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.\n    '
     selectedPosture: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
     playbookVersion: NotRequired[list[int]]
@@ -21746,7 +21754,9 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     market: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
     channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.\n    '
+    countries: NotRequired[list[str]]
+    '\n    For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.\n    '
     selectedPosture: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
     playbookVersion: NotRequired[list[int]]
@@ -22000,7 +22010,9 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     market: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
     channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.\n    '
+    countries: NotRequired[list[str]]
+    '\n    For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.\n    '
     selectedPosture: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
     playbookVersion: NotRequired[list[int]]
@@ -22254,7 +22266,9 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     market: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
     channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.\n    '
+    countries: NotRequired[list[str]]
+    '\n    For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.\n    '
     selectedPosture: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
     playbookVersion: NotRequired[list[int]]
@@ -22542,7 +22556,9 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     market: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
     channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.\n    '
+    countries: NotRequired[list[str]]
+    '\n    For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.\n    '
     selectedPosture: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
     playbookVersion: NotRequired[list[int]]
@@ -22794,7 +22810,9 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     market: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
     channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.\n    '
+    countries: NotRequired[list[str]]
+    '\n    For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.\n    '
     selectedPosture: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
     playbookVersion: NotRequired[list[int]]
@@ -23046,7 +23064,9 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     market: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
     channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.\n    '
+    countries: NotRequired[list[str]]
+    '\n    For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.\n    '
     selectedPosture: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
     playbookVersion: NotRequired[list[int]]
@@ -23264,7 +23284,9 @@ class SearchInputKindCreativeFilter(TypedDict):
     market: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
     channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.\n    '
+    countries: NotRequired[list[str]]
+    '\n    For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.\n    '
     selectedPosture: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
     playbookVersion: NotRequired[list[int]]
@@ -23586,7 +23608,9 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     market: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
     channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.\n    '
+    countries: NotRequired[list[str]]
+    '\n    For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.\n    '
     selectedPosture: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
     playbookVersion: NotRequired[list[int]]
@@ -23882,7 +23906,9 @@ class SearchInputKindProposalFilter(TypedDict):
     market: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
     channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.\n    '
+    countries: NotRequired[list[str]]
+    '\n    For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.\n    '
     selectedPosture: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
     playbookVersion: NotRequired[list[int]]
@@ -24136,7 +24162,9 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     market: NotRequired[list[str]]
     '\n    For kinds rfp, rfp_turn, and material: items whose recorded market matches any of these.\n    '
     channel: NotRequired[list[str]]
-    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.\n    '
+    '\n    For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.\n    '
+    countries: NotRequired[list[str]]
+    '\n    For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.\n    '
     selectedPosture: NotRequired[list[str]]
     '\n    For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.\n    '
     playbookVersion: NotRequired[list[int]]

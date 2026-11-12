@@ -60661,13 +60661,24 @@ paths:
                         channel:
                           description: >-
                             For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind
-                            seller in a buyer account: sellers that sell any of these channels.
+                            seller in a buyer account: sellers that sell any of these channels. For buyer
+                            wholesale_product browse: asks each seller for products in any of these AdCP media channels.
                           maxItems: 50
                           type: array
                           items:
                             type: string
                             minLength: 1
                             maxLength: 200
+                        countries:
+                          description: >-
+                            For buyer wholesale_product browse: asks each seller for products sold in any of these
+                            countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
                         selectedPosture:
                           description: >-
                             For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its
@@ -62347,13 +62358,24 @@ paths:
                         channel:
                           description: >-
                             For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind
-                            seller in a buyer account: sellers that sell any of these channels.
+                            seller in a buyer account: sellers that sell any of these channels. For buyer
+                            wholesale_product browse: asks each seller for products in any of these AdCP media channels.
                           maxItems: 50
                           type: array
                           items:
                             type: string
                             minLength: 1
                             maxLength: 200
+                        countries:
+                          description: >-
+                            For buyer wholesale_product browse: asks each seller for products sold in any of these
+                            countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
                         selectedPosture:
                           description: >-
                             For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its
@@ -64790,13 +64812,24 @@ paths:
                         channel:
                           description: >-
                             For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind
-                            seller in a buyer account: sellers that sell any of these channels.
+                            seller in a buyer account: sellers that sell any of these channels. For buyer
+                            wholesale_product browse: asks each seller for products in any of these AdCP media channels.
                           maxItems: 50
                           type: array
                           items:
                             type: string
                             minLength: 1
                             maxLength: 200
+                        countries:
+                          description: >-
+                            For buyer wholesale_product browse: asks each seller for products sold in any of these
+                            countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
                         selectedPosture:
                           description: >-
                             For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its
@@ -66468,13 +66501,24 @@ paths:
                         channel:
                           description: >-
                             For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind
-                            seller in a buyer account: sellers that sell any of these channels.
+                            seller in a buyer account: sellers that sell any of these channels. For buyer
+                            wholesale_product browse: asks each seller for products in any of these AdCP media channels.
                           maxItems: 50
                           type: array
                           items:
                             type: string
                             minLength: 1
                             maxLength: 200
+                        countries:
+                          description: >-
+                            For buyer wholesale_product browse: asks each seller for products sold in any of these
+                            countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
                         selectedPosture:
                           description: >-
                             For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its
@@ -68144,13 +68188,24 @@ paths:
                         channel:
                           description: >-
                             For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind
-                            seller in a buyer account: sellers that sell any of these channels.
+                            seller in a buyer account: sellers that sell any of these channels. For buyer
+                            wholesale_product browse: asks each seller for products in any of these AdCP media channels.
                           maxItems: 50
                           type: array
                           items:
                             type: string
                             minLength: 1
                             maxLength: 200
+                        countries:
+                          description: >-
+                            For buyer wholesale_product browse: asks each seller for products sold in any of these
+                            countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
                         selectedPosture:
                           description: >-
                             For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its
@@ -69819,13 +69874,24 @@ paths:
                         channel:
                           description: >-
                             For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind
-                            seller in a buyer account: sellers that sell any of these channels.
+                            seller in a buyer account: sellers that sell any of these channels. For buyer
+                            wholesale_product browse: asks each seller for products in any of these AdCP media channels.
                           maxItems: 50
                           type: array
                           items:
                             type: string
                             minLength: 1
                             maxLength: 200
+                        countries:
+                          description: >-
+                            For buyer wholesale_product browse: asks each seller for products sold in any of these
+                            countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
                         selectedPosture:
                           description: >-
                             For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its
@@ -71501,13 +71567,24 @@ paths:
                         channel:
                           description: >-
                             For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind
-                            seller in a buyer account: sellers that sell any of these channels.
+                            seller in a buyer account: sellers that sell any of these channels. For buyer
+                            wholesale_product browse: asks each seller for products in any of these AdCP media channels.
                           maxItems: 50
                           type: array
                           items:
                             type: string
                             minLength: 1
                             maxLength: 200
+                        countries:
+                          description: >-
+                            For buyer wholesale_product browse: asks each seller for products sold in any of these
+                            countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
                         selectedPosture:
                           description: >-
                             For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its
@@ -74746,13 +74823,24 @@ paths:
                         channel:
                           description: >-
                             For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind
-                            seller in a buyer account: sellers that sell any of these channels.
+                            seller in a buyer account: sellers that sell any of these channels. For buyer
+                            wholesale_product browse: asks each seller for products in any of these AdCP media channels.
                           maxItems: 50
                           type: array
                           items:
                             type: string
                             minLength: 1
                             maxLength: 200
+                        countries:
+                          description: >-
+                            For buyer wholesale_product browse: asks each seller for products sold in any of these
+                            countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
                         selectedPosture:
                           description: >-
                             For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its
@@ -76431,13 +76519,24 @@ paths:
                         channel:
                           description: >-
                             For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind
-                            seller in a buyer account: sellers that sell any of these channels.
+                            seller in a buyer account: sellers that sell any of these channels. For buyer
+                            wholesale_product browse: asks each seller for products in any of these AdCP media channels.
                           maxItems: 50
                           type: array
                           items:
                             type: string
                             minLength: 1
                             maxLength: 200
+                        countries:
+                          description: >-
+                            For buyer wholesale_product browse: asks each seller for products sold in any of these
+                            countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
                         selectedPosture:
                           description: >-
                             For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its
@@ -78886,13 +78985,24 @@ paths:
                         channel:
                           description: >-
                             For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind
-                            seller in a buyer account: sellers that sell any of these channels.
+                            seller in a buyer account: sellers that sell any of these channels. For buyer
+                            wholesale_product browse: asks each seller for products in any of these AdCP media channels.
                           maxItems: 50
                           type: array
                           items:
                             type: string
                             minLength: 1
                             maxLength: 200
+                        countries:
+                          description: >-
+                            For buyer wholesale_product browse: asks each seller for products sold in any of these
+                            countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
                         selectedPosture:
                           description: >-
                             For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its
@@ -80571,13 +80681,24 @@ paths:
                         channel:
                           description: >-
                             For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind
-                            seller in a buyer account: sellers that sell any of these channels.
+                            seller in a buyer account: sellers that sell any of these channels. For buyer
+                            wholesale_product browse: asks each seller for products in any of these AdCP media channels.
                           maxItems: 50
                           type: array
                           items:
                             type: string
                             minLength: 1
                             maxLength: 200
+                        countries:
+                          description: >-
+                            For buyer wholesale_product browse: asks each seller for products sold in any of these
+                            countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
                         selectedPosture:
                           description: >-
                             For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its
@@ -82253,13 +82374,24 @@ paths:
                         channel:
                           description: >-
                             For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind
-                            seller in a buyer account: sellers that sell any of these channels.
+                            seller in a buyer account: sellers that sell any of these channels. For buyer
+                            wholesale_product browse: asks each seller for products in any of these AdCP media channels.
                           maxItems: 50
                           type: array
                           items:
                             type: string
                             minLength: 1
                             maxLength: 200
+                        countries:
+                          description: >-
+                            For buyer wholesale_product browse: asks each seller for products sold in any of these
+                            countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
                         selectedPosture:
                           description: >-
                             For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its
@@ -83935,13 +84067,24 @@ paths:
                         channel:
                           description: >-
                             For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind
-                            seller in a buyer account: sellers that sell any of these channels.
+                            seller in a buyer account: sellers that sell any of these channels. For buyer
+                            wholesale_product browse: asks each seller for products in any of these AdCP media channels.
                           maxItems: 50
                           type: array
                           items:
                             type: string
                             minLength: 1
                             maxLength: 200
+                        countries:
+                          description: >-
+                            For buyer wholesale_product browse: asks each seller for products sold in any of these
+                            countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
                         selectedPosture:
                           description: >-
                             For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its
@@ -85618,13 +85761,24 @@ paths:
                         channel:
                           description: >-
                             For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind
-                            seller in a buyer account: sellers that sell any of these channels.
+                            seller in a buyer account: sellers that sell any of these channels. For buyer
+                            wholesale_product browse: asks each seller for products in any of these AdCP media channels.
                           maxItems: 50
                           type: array
                           items:
                             type: string
                             minLength: 1
                             maxLength: 200
+                        countries:
+                          description: >-
+                            For buyer wholesale_product browse: asks each seller for products sold in any of these
+                            countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+                          minItems: 1
+                          maxItems: 50
+                          type: array
+                          items:
+                            type: string
+                            pattern: ^[A-Z]{2}$
                         selectedPosture:
                           description: >-
                             For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its
