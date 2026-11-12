@@ -19261,7 +19261,7 @@ class SaveSellerInputDistribution(TypedDict):
     checkOpenaiChallenge: NotRequired[Literal[True]]
     '\n    Re-check the OpenAI verification URL.\n    '
     visibility: NotRequired[Literal["unlisted", "interchange", "public"]]
-    '\n    `unlisted` unlists the listing. The others need web approval, not available yet, and are refused.\n    '
+    '\n    `unlisted` unlists now. `interchange` and `public` return approval_required: an admin approves on the web.\n    '
     chatgpt: NotRequired[SaveSellerInputDistributionChatgpt]
     '\n    ChatGPT app icons. A change clears the listing approval.\n    '
     revokeReviewerSandbox: NotRequired[Literal[True]]
@@ -19476,6 +19476,20 @@ class SaveSellerSuccessSaveSellerSuccessAdmissionRecorded(TypedDict):
     intakeId: str
     decision: Literal["admit"]
 
+class SaveSellerSuccessSaveSellerSuccessApprovalRequired(TypedDict):
+    outcome: Literal["approval_required"]
+    action: Literal["approval_required"]
+    message: str
+    approval: SaveSellerSuccessSaveSellerSuccessApprovalRequiredApproval
+    idempotencyKey: NotRequired[str]
+
+class SaveSellerSuccessSaveSellerSuccessApprovalRequiredApproval(TypedDict):
+    id: str
+    kind: str
+    state: str
+    url: str
+    expiresAt: str
+
 class SaveSellerSuccessSaveSellerSuccessBrandResolved(TypedDict):
     outcome: Literal["brand_resolved"]
     action: Literal["brand_resolved"]
@@ -19619,7 +19633,7 @@ class SaveSellerSuccessSellerSaveReplayed(TypedDict):
     destinationSaveReplayed: Literal[False]
     materialReceipt: SaveSellerSuccessSellerSaveReplayedMaterialReceipt
 
-SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessSourceRequestQueued | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
+SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessSourceRequestQueued | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessApprovalRequired | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
 
 SaveSellerSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 

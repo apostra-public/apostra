@@ -1031,14 +1031,14 @@ export class Apostra extends Transport {
   /** Change one RFP turn: release it, request or cancel a proposal file, append feedback, or record its outcome. One of these per call; revise, endorse and attach a response with save_rfp. Returns the data together with response headers and request ID. */
   saveRfpTurnWithResponse(input: SaveRfpTurnInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveRfpTurnResult>> { return this.requestDetailed("save_rfp_turn", input, options) }
   /**
-   * Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change (domain, OpenAI token or check, unlisting, ChatGPT icons, reviewer sandbox), an admission, the intake hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here.
+   * Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change (domain, OpenAI token or check, visibility, ChatGPT icons, sandbox), an admission, the intake hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here.
    *
    * @example
    * await client.saveSeller(input, { idempotencyKey: 'stable-key' })
    */
   saveSeller(input: SaveSellerInput, options: WriteRequestOptions): Promise<SaveSellerResult> { return this.request("save_seller", input, options) }
 
-  /** Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change (domain, OpenAI token or check, unlisting, ChatGPT icons, reviewer sandbox), an admission, the intake hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here. Returns the data together with response headers and request ID. */
+  /** Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change (domain, OpenAI token or check, visibility, ChatGPT icons, sandbox), an admission, the intake hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here. Returns the data together with response headers and request ID. */
   saveSellerWithResponse(input: SaveSellerInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveSellerResult>> { return this.requestDetailed("save_seller", input, options) }
   /**
    * Persist one private coaching note on an accessible Session. Requires a Session ID, note and clientRequestId; never sends a customer message.
