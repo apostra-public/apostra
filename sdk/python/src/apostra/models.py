@@ -19023,9 +19023,9 @@ class SaveSellerInput(TypedDict):
     identityContract: NotRequired[Literal["confirmed-v1"]]
     '\n    Opt in to identity preview and confirmation. Guide: /v3/identity-setup.\n    '
     preview: NotRequired[bool]
-    '\n    Preview an operator-domain change without saving.\n    '
+    '\n    Preview an operator-domain or Distribution hostname change.\n    '
     confirmationToken: NotRequired[str]
-    '\n    Token from the identity preview, supplied after the human confirms the change.\n    '
+    '\n    Token from the identity or hostname preview, sent after the human confirms.\n    '
     materialCandidate: NotRequired[SaveSellerInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     operatorDomain: NotRequired[SaveSellerRequestOperatorDomain]
@@ -19061,7 +19061,7 @@ class SaveSellerInput(TypedDict):
     confirmCurrencyCatalogImpact: NotRequired[bool]
     '\n    Allow a settlement-currency change even when it hides currently buyer-visible fixed prices.\n    '
     distribution: NotRequired[SaveSellerInputDistribution]
-    '\n    Admin-only Distribution configuration. Send separately from other Seller changes.\n    '
+    '\n    Admin-only. One Distribution change per call, sent alone.\n    '
     admission: NotRequired[SaveSellerInputAdmissionDecisionAdmit | SaveSellerInputAdmissionDecisionDecline | SaveSellerInputAdmissionDecisionReopen]
     '\n    Seller-only pending buyer relationship decision; read its intake version immediately before saving.\n    '
     sourceDecision: NotRequired[SaveSellerInputSourceDecisionDecisionBound | SaveSellerInputSourceDecisionDecisionNotRequired | SaveSellerInputSourceDecisionDecisionRequestAgain]
@@ -19132,12 +19132,40 @@ class SaveSellerInputDemo(TypedDict):
     '\n    The complete set of sample sources; keep sample-publisher-display.\n    '
 
 class SaveSellerInputDistribution(TypedDict):
-    openaiChallengeToken: str | None
+    openaiChallengeToken: NotRequired[str | None]
     '\n    OpenAI domain-challenge token, or null to remove it.\n    '
     confirmReplace: NotRequired[bool]
     '\n    Confirm replacing the current OpenAI challenge token.\n    '
     confirmRemove: NotRequired[bool]
     '\n    Confirm removing the current OpenAI challenge token.\n    '
+    hostname: NotRequired[str]
+    '\n    Public listing domain. To replace a saved one, send preview: true, then confirmationToken.\n    '
+    activateHostname: NotRequired[Literal[True]]
+    '\n    Check DNS, TLS and ownership of the saved domain.\n    '
+    checkOpenaiChallenge: NotRequired[Literal[True]]
+    '\n    Re-check the OpenAI verification URL.\n    '
+    visibility: NotRequired[Literal["unlisted", "interchange", "public"]]
+    '\n    `unlisted` unlists the listing. The others need web approval, not available yet, and are refused.\n    '
+    chatgpt: NotRequired[SaveSellerInputDistributionChatgpt]
+    '\n    ChatGPT app icons. A change clears the listing approval.\n    '
+    revokeReviewerSandbox: NotRequired[Literal[True]]
+    '\n    Revoke the ChatGPT reviewer sandbox now.\n    '
+
+class SaveSellerInputDistributionChatgpt(TypedDict):
+    icons: SaveSellerInputDistributionChatgptIconsSourceAutomatic | SaveSellerInputDistributionChatgptIconsSourceManual
+    '\n    Icon choice.\n    '
+
+class SaveSellerInputDistributionChatgptIconsSourceAutomatic(TypedDict):
+    source: Literal["automatic"]
+    '\n    Brand-identity icons.\n    '
+
+class SaveSellerInputDistributionChatgptIconsSourceManual(TypedDict):
+    source: Literal["manual"]
+    '\n    Your own icons.\n    '
+    directoryIconDataUrl: str
+    '\n    256 px PNG data URL.\n    '
+    composerIconDataUrl: str
+    '\n    48 px PNG data URL.\n    '
 
 class SaveSellerInputInformationRequestActionConfirm(TypedDict):
     action: Literal["confirm"]

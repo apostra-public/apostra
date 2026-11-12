@@ -33433,11 +33433,11 @@ export type SaveSellerData = {
          */
         identityContract?: 'confirmed-v1';
         /**
-         * Preview an operator-domain change without saving.
+         * Preview an operator-domain or Distribution hostname change.
          */
         preview?: boolean;
         /**
-         * Token from the identity preview, supplied after the human confirms the change.
+         * Token from the identity or hostname preview, sent after the human confirms.
          */
         confirmationToken?: string;
         /**
@@ -33544,13 +33544,13 @@ export type SaveSellerData = {
          */
         confirmCurrencyCatalogImpact?: boolean;
         /**
-         * Admin-only Distribution configuration. Send separately from other Seller changes.
+         * Admin-only. One Distribution change per call, sent alone.
          */
         distribution?: {
             /**
              * OpenAI domain-challenge token, or null to remove it.
              */
-            openaiChallengeToken: string | null;
+            openaiChallengeToken?: string | null;
             /**
              * Confirm replacing the current OpenAI challenge token.
              */
@@ -33559,6 +33559,55 @@ export type SaveSellerData = {
              * Confirm removing the current OpenAI challenge token.
              */
             confirmRemove?: boolean;
+            /**
+             * Public listing domain. To replace a saved one, send preview: true, then confirmationToken.
+             */
+            hostname?: string;
+            /**
+             * Check DNS, TLS and ownership of the saved domain.
+             */
+            activateHostname?: true;
+            /**
+             * Re-check the OpenAI verification URL.
+             */
+            checkOpenaiChallenge?: true;
+            /**
+             * `unlisted` unlists the listing. The others need web approval, not available yet, and are refused.
+             */
+            visibility?: 'unlisted' | 'interchange' | 'public';
+            /**
+             * ChatGPT app icons. A change clears the listing approval.
+             */
+            chatgpt?: {
+                /**
+                 * Icon choice.
+                 */
+                icons: {
+                    /**
+                     * Brand-identity icons.
+                     */
+                    source: 'automatic';
+                    directoryIconDataUrl?: never;
+                    composerIconDataUrl?: never;
+                } | {
+                    /**
+                     * Your own icons.
+                     */
+                    source: 'manual';
+                    /**
+                     * 256 px PNG data URL.
+                     */
+                    directoryIconDataUrl: string;
+                    /**
+                     * 48 px PNG data URL.
+                     */
+                    composerIconDataUrl: string;
+                };
+            };
+            /**
+             * Revoke the ChatGPT reviewer sandbox now.
+             */
+            revokeReviewerSandbox?: true;
         };
         /**
          * Seller-only pending buyer relationship decision; read its intake version immediately before saving.
