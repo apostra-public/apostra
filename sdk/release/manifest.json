@@ -2905,6 +2905,8 @@
       "SaveNotificationConfigResultActionCreatedAndUpdatedOutcomeReadback": "object",
       "SaveNotificationConfigResultActionCreatedAndUpdatedOutcomeReadbackConfig": "closed-empty-object",
       "SaveNotificationConfigResultActionCreatedAndUpdatedWithReadbackAndWarning": "object",
+      "SaveNotificationConfigResultOutcomePushDeviceRemoved": "object",
+      "SaveNotificationConfigResultOutcomePushDeviceRemovedPushDevice": "object",
       "SaveNotificationConfigSuccessEventSubscriptionDelivery": "object",
       "SaveNotificationConfigSuccessEventSubscriptionEndpointId": "scalar",
       "SaveNotificationConfigSuccessEventSubscriptionOwnerRegisteredBuyerAgent": "object",

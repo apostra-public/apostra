@@ -533,11 +533,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveMediaKitResult], self._request_with_response("save_media_kit", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_notification_config(self, input: models.SaveNotificationConfigInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveNotificationConfigResult:
-        "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed."
+        "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed. removePushDeviceId removes one of your own push devices."
         return cast("models.SaveNotificationConfigResult", self._request("save_notification_config", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_notification_config_with_response(self, input: models.SaveNotificationConfigInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveNotificationConfigResult]:
-        "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed. Returns the data together with response headers and request ID."
+        "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed. removePushDeviceId removes one of your own push devices. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveNotificationConfigResult], self._request_with_response("save_notification_config", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_playbook(self, input: models.SavePlaybookInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SavePlaybookResult:
@@ -1166,11 +1166,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveMediaKitResult], await self._request_with_response("save_media_kit", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_notification_config(self, input: models.SaveNotificationConfigInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveNotificationConfigResult:
-        "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed."
+        "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed. removePushDeviceId removes one of your own push devices."
         return cast("models.SaveNotificationConfigResult", await self._request("save_notification_config", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_notification_config_with_response(self, input: models.SaveNotificationConfigInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveNotificationConfigResult]:
-        "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed. Returns the data together with response headers and request ID."
+        "Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed. removePushDeviceId removes one of your own push devices. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveNotificationConfigResult], await self._request_with_response("save_notification_config", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_playbook(self, input: models.SavePlaybookInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SavePlaybookResult:

@@ -17812,6 +17812,8 @@ class SaveMediaKitResultReplacement(TypedDict):
 class SaveNotificationConfigInput(TypedDict):
     eventSubscription: NotRequired[SaveNotificationConfigInputEventSubscriptionActionCreate | SaveNotificationConfigInputEventSubscriptionActionPatch | SaveNotificationConfigInputEventSubscriptionActionDelete]
     '\n    Manage one agent-owned V3 event subscription through a verified endpoint.\n    '
+    removePushDeviceId: NotRequired[str]
+    '\n    Remove one of your own push devices (pushDeviceId from get). Alone.\n    '
     subscriptionId: NotRequired[str]
     '\n    Existing subscription to patch. Omit to create a new one.\n    '
     enabled: NotRequired[bool]
@@ -17966,7 +17968,18 @@ class SaveNotificationConfigResultActionCreatedAndUpdatedWithReadbackAndWarning(
     warning: Literal["created_but_readback_unavailable", "updated_but_readback_unavailable"]
     readback: Literal["unavailable"]
 
-SaveNotificationConfigResult: TypeAlias = "SaveNotificationConfigResultActionCreatedAndUpdatedOutcomeReadback | SaveNotificationConfigResultActionCreatedAndUpdatedWithReadbackAndWarning | SaveNotificationConfigResultActionCreatedAndUpdatedAndDeleted"
+class SaveNotificationConfigResultOutcomePushDeviceRemoved(TypedDict):
+    outcome: Literal["push_device_removed"]
+    pushDevice: SaveNotificationConfigResultOutcomePushDeviceRemovedPushDevice
+
+SaveNotificationConfigResult: TypeAlias = "SaveNotificationConfigResultActionCreatedAndUpdatedOutcomeReadback | SaveNotificationConfigResultActionCreatedAndUpdatedWithReadbackAndWarning | SaveNotificationConfigResultActionCreatedAndUpdatedAndDeleted | SaveNotificationConfigResultOutcomePushDeviceRemoved"
+
+class SaveNotificationConfigResultOutcomePushDeviceRemovedPushDevice(TypedDict):
+    pushDeviceId: str
+    kind: Literal["web_push", "apns", "fcm"]
+    label: str
+    registeredAt: str
+    lastDeliveredAt: str | None
 
 class SaveNotificationConfigSuccessEventSubscriptionDelivery(TypedDict):
     mode: Literal["every_update"]

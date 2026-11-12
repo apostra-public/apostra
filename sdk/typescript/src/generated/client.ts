@@ -981,14 +981,14 @@ export class Apostra extends Transport {
   /** Deprecated compatibility tool ("listing" is the modern term). It writes only the legacy businessProfile and does not update the canonical buyer-visible listing. New clients must read with `get({ kind: "seller", include: ["listing"] })` and write with `save_seller`. Returns the data together with response headers and request ID. */
   saveMediaKitWithResponse(input: SaveMediaKitInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveMediaKitResult>> { return this.requestDetailed("save_media_kit", input, options) }
   /**
-   * Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed.
+   * Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed. removePushDeviceId removes one of your own push devices.
    *
    * @example
    * await client.saveNotificationConfig(input, { idempotencyKey: 'stable-key' })
    */
   saveNotificationConfig(input: SaveNotificationConfigInput, options: WriteRequestOptions): Promise<SaveNotificationConfigResult> { return this.request("save_notification_config", input, options) }
 
-  /** Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed. Returns the data together with response headers and request ID. */
+  /** Create or update a notification subscription. Omit subscriptionId to create; managed subscriptions permit only mutable fields. Use save_integration for credentials when needed. removePushDeviceId removes one of your own push devices. Returns the data together with response headers and request ID. */
   saveNotificationConfigWithResponse(input: SaveNotificationConfigInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveNotificationConfigResult>> { return this.requestDetailed("save_notification_config", input, options) }
   /**
    * Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. `limits` sets what your brain may offer. Halves never roll back each other.
