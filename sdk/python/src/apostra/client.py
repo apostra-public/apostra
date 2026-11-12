@@ -53,11 +53,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.GetV3PublicMutationReceiptResult], self._request_with_response("getV3PublicMutationReceipt", input, account_id=account_id, timeout=timeout))
 
     def get_delivery(self, input: models.GetDeliveryInput, *, account_id: str | None = None, timeout: float | None = None) -> models.GetDeliveryResult:
-        "Query seller delivery, stored or live buyer campaign delivery, or margin facts. live_campaign_delivery gives one campaign's provider response; live_ad_delivery gives one Meta campaign per ad, per day. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded."
+        "Query seller delivery, stored or live buyer campaign delivery, or margin facts. live_campaign_delivery gives one campaign's provider response; live_ad_delivery gives one campaign per ad, per day. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded."
         return cast("models.GetDeliveryResult", self._request("get_delivery", input, account_id=account_id, timeout=timeout))
 
     def get_delivery_with_response(self, input: models.GetDeliveryInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.GetDeliveryResult]:
-        "Query seller delivery, stored or live buyer campaign delivery, or margin facts. live_campaign_delivery gives one campaign's provider response; live_ad_delivery gives one Meta campaign per ad, per day. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded. Returns the data together with response headers and request ID."
+        "Query seller delivery, stored or live buyer campaign delivery, or margin facts. live_campaign_delivery gives one campaign's provider response; live_ad_delivery gives one campaign per ad, per day. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.GetDeliveryResult], self._request_with_response("get_delivery", input, account_id=account_id, timeout=timeout))
 
     def get_rfp_performance(self, input: models.GetRfpPerformanceInput, *, account_id: str | None = None, timeout: float | None = None) -> models.GetRfpPerformanceResult:
@@ -686,11 +686,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.GetV3PublicMutationReceiptResult], await self._request_with_response("getV3PublicMutationReceipt", input, account_id=account_id, timeout=timeout))
 
     async def get_delivery(self, input: models.GetDeliveryInput, *, account_id: str | None = None, timeout: float | None = None) -> models.GetDeliveryResult:
-        "Query seller delivery, stored or live buyer campaign delivery, or margin facts. live_campaign_delivery gives one campaign's provider response; live_ad_delivery gives one Meta campaign per ad, per day. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded."
+        "Query seller delivery, stored or live buyer campaign delivery, or margin facts. live_campaign_delivery gives one campaign's provider response; live_ad_delivery gives one campaign per ad, per day. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded."
         return cast("models.GetDeliveryResult", await self._request("get_delivery", input, account_id=account_id, timeout=timeout))
 
     async def get_delivery_with_response(self, input: models.GetDeliveryInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.GetDeliveryResult]:
-        "Query seller delivery, stored or live buyer campaign delivery, or margin facts. live_campaign_delivery gives one campaign's provider response; live_ad_delivery gives one Meta campaign per ad, per day. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded. Returns the data together with response headers and request ID."
+        "Query seller delivery, stored or live buyer campaign delivery, or margin facts. live_campaign_delivery gives one campaign's provider response; live_ad_delivery gives one campaign per ad, per day. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.GetDeliveryResult], await self._request_with_response("get_delivery", input, account_id=account_id, timeout=timeout))
 
     async def get_rfp_performance(self, input: models.GetRfpPerformanceInput, *, account_id: str | None = None, timeout: float | None = None) -> models.GetRfpPerformanceResult:

@@ -26323,12 +26323,12 @@ paths:
       operationId: get_delivery
       summary: >-
         Query seller delivery, stored or live buyer campaign delivery, or margin facts. live_campaign_delivery gives one
-        campaign's provider response; live_ad_delivery gives one Meta campaign per ad, per day. campaign_delivery
-        preserves stored rows, totals, and paging. Buyer measurement is excluded.
+        campaign's provider response; live_ad_delivery gives one campaign per ad, per day. campaign_delivery preserves
+        stored rows, totals, and paging. Buyer measurement is excluded.
       description: >-
         Query seller delivery, stored or live buyer campaign delivery, or margin facts. live_campaign_delivery gives one
-        campaign's provider response; live_ad_delivery gives one Meta campaign per ad, per day. campaign_delivery
-        preserves stored rows, totals, and paging. Buyer measurement is excluded.
+        campaign's provider response; live_ad_delivery gives one campaign per ad, per day. campaign_delivery preserves
+        stored rows, totals, and paging. Buyer measurement is excluded.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -26360,7 +26360,7 @@ paths:
                   default: delivery
                   description: >-
                     Select seller delivery, stored campaign delivery, live provider campaign delivery, margin, or live
-                    per-ad delivery for one Meta campaign.
+                    per-ad delivery for one campaign.
                   type: string
                   enum:
                     - delivery
@@ -27761,7 +27761,9 @@ paths:
                             properties:
                               sourceOperation:
                                 type: string
-                                const: meta_ad_insights
+                                enum:
+                                  - meta_ad_insights
+                                  - tiktok_ad_report
                               genericFallback:
                                 type: boolean
                                 const: false
@@ -91855,7 +91857,9 @@ components:
       properties:
         creative_id:
           type: string
-          description: Apostra creative id, or an id Apostra assigns to a creative made in Meta; see creative_in_library.
+          description: >-
+            Apostra creative id, or an id Apostra assigns to a creative made in the ad platform's own tools; see
+            creative_in_library.
         impressions:
           type: number
           minimum: 0

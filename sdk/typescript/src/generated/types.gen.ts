@@ -5489,7 +5489,7 @@ export type GetDeliveryData = {
          */
         sponsoredBuyerCustomerId?: string;
         /**
-         * Select seller delivery, stored campaign delivery, live provider campaign delivery, margin, or live per-ad delivery for one Meta campaign.
+         * Select seller delivery, stored campaign delivery, live provider campaign delivery, margin, or live per-ad delivery for one campaign.
          */
         report?: 'delivery' | 'campaign_delivery' | 'live_campaign_delivery' | 'margin' | 'live_ad_delivery';
         /**
@@ -6113,7 +6113,7 @@ export type GetDeliveryResponses = {
             };
             authority: 'live_provider';
             semantics: {
-                sourceOperation: 'meta_ad_insights';
+                sourceOperation: 'meta_ad_insights' | 'tiktok_ad_report';
                 genericFallback: false;
                 measurement: 'excluded';
                 missingValues: string;
@@ -6194,7 +6194,7 @@ export type GetDeliverySuccessAdDailyDeliveryValue = unknown;
 
 export type GetDeliverySuccessAdDeliveryMetrics = {
     /**
-     * Apostra creative id, or an id Apostra assigns to a creative made in Meta; see creative_in_library.
+     * Apostra creative id, or an id Apostra assigns to a creative made in the ad platform's own tools; see creative_in_library.
      */
     creative_id: string;
     impressions?: number;

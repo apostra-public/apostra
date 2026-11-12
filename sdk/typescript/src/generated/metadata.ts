@@ -202,7 +202,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Query seller delivery, stored or live buyer campaign delivery, or margin facts. live_campaign_delivery gives one campaign's provider response; live_ad_delivery gives one Meta campaign per ad, per day. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded."
+    "summary": "Query seller delivery, stored or live buyer campaign delivery, or margin facts. live_campaign_delivery gives one campaign's provider response; live_ad_delivery gives one campaign per ad, per day. campaign_delivery preserves stored rows, totals, and paging. Buyer measurement is excluded."
   },
   "get_rfp_performance": {
     "path": "/tools/get_rfp_performance",
