@@ -1907,12 +1907,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -3162,12 +3162,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -4393,12 +4393,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -5612,12 +5612,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -6832,12 +6832,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -8059,12 +8059,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -10423,12 +10423,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -11645,12 +11645,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -15159,12 +15159,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -16379,12 +16379,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -17605,12 +17605,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -18830,12 +18830,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -20055,12 +20055,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -21280,12 +21280,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -22505,12 +22505,12 @@ paths:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
                         modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent:
-                        certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking,
-                        propertyLists. media_buy: products, creatives, deliverySummary, liveStatus; seller diagnostics.
-                        proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection:
-                        inventory. creative: preview. catalog: items, history. material: source_access, repeats,
-                        options.pages keys but candidates. property_list: report.
+                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
+                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
+                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
+                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
+                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
+                        repeats, options.pages keys but candidates. property_list: report.
                       type: array
                       items:
                         type: string
