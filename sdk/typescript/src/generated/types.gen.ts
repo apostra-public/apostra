@@ -36589,9 +36589,13 @@ export type SearchData = {
              */
             market?: Array<string>;
             /**
-             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.
              */
             channel?: Array<string>;
+            /**
+             * For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+             */
+            countries?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
              */
@@ -37089,9 +37093,13 @@ export type SearchData = {
              */
             market?: Array<string>;
             /**
-             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.
              */
             channel?: Array<string>;
+            /**
+             * For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+             */
+            countries?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
              */
@@ -37657,9 +37665,13 @@ export type SearchData = {
              */
             market?: Array<string>;
             /**
-             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.
              */
             channel?: Array<string>;
+            /**
+             * For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+             */
+            countries?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
              */
@@ -38153,9 +38165,13 @@ export type SearchData = {
              */
             market?: Array<string>;
             /**
-             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.
              */
             channel?: Array<string>;
+            /**
+             * For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+             */
+            countries?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
              */
@@ -38646,9 +38662,13 @@ export type SearchData = {
              */
             market?: Array<string>;
             /**
-             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.
              */
             channel?: Array<string>;
+            /**
+             * For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+             */
+            countries?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
              */
@@ -39142,9 +39162,13 @@ export type SearchData = {
              */
             market?: Array<string>;
             /**
-             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.
              */
             channel?: Array<string>;
+            /**
+             * For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+             */
+            countries?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
              */
@@ -39638,9 +39662,13 @@ export type SearchData = {
              */
             market?: Array<string>;
             /**
-             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.
              */
             channel?: Array<string>;
+            /**
+             * For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+             */
+            countries?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
              */
@@ -40264,9 +40292,13 @@ export type SearchData = {
              */
             market?: Array<string>;
             /**
-             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.
              */
             channel?: Array<string>;
+            /**
+             * For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+             */
+            countries?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
              */
@@ -40764,9 +40796,13 @@ export type SearchData = {
              */
             market?: Array<string>;
             /**
-             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.
              */
             channel?: Array<string>;
+            /**
+             * For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+             */
+            countries?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
              */
@@ -41336,9 +41372,13 @@ export type SearchData = {
              */
             market?: Array<string>;
             /**
-             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.
              */
             channel?: Array<string>;
+            /**
+             * For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+             */
+            countries?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
              */
@@ -41835,9 +41875,13 @@ export type SearchData = {
              */
             market?: Array<string>;
             /**
-             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.
              */
             channel?: Array<string>;
+            /**
+             * For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+             */
+            countries?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
              */
@@ -42335,9 +42379,13 @@ export type SearchData = {
              */
             market?: Array<string>;
             /**
-             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.
              */
             channel?: Array<string>;
+            /**
+             * For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+             */
+            countries?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
              */
@@ -42835,9 +42883,13 @@ export type SearchData = {
              */
             market?: Array<string>;
             /**
-             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.
              */
             channel?: Array<string>;
+            /**
+             * For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+             */
+            countries?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
              */
@@ -43335,9 +43387,13 @@ export type SearchData = {
              */
             market?: Array<string>;
             /**
-             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels.
+             * For kinds rfp, rfp_turn, and material: items recorded for any of these channels. For kind seller in a buyer account: sellers that sell any of these channels. For buyer wholesale_product browse: asks each seller for products in any of these AdCP media channels.
              */
             channel?: Array<string>;
+            /**
+             * For buyer wholesale_product browse: asks each seller for products sold in any of these countries, as ISO 3166-1 alpha-2 codes such as US or GB.
+             */
+            countries?: Array<string>;
             /**
              * For kinds rfp and rfp_turn: turns that chose any of these response postures. For rfp, its latest turn is checked.
              */
