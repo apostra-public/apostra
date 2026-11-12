@@ -58113,6 +58113,11 @@ paths:
                   enum:
                     - listing
                     - storefront
+                proposalAgent:
+                  description: Choose the brain that answers buyer requests. Direct administrator only. Send alone.
+                  $ref: '#/components/schemas/save_seller_request_SellerProposalAgentInput'
+                  type: object
+                  additionalProperties: false
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -58174,6 +58179,8 @@ paths:
                         - isPaused
                     - required:
                         - sellingMode
+                    - required:
+                        - proposalAgent
                 - if:
                     required:
                       - sourceDecision
@@ -58192,6 +58199,11 @@ paths:
                 - if:
                     required:
                       - sellingMode
+                  then:
+                    maxProperties: 1
+                - if:
+                    required:
+                      - proposalAgent
                   then:
                     maxProperties: 1
                 - if:
@@ -58513,6 +58525,7 @@ paths:
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessSellingModeChanged'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessSellingModeUnchanged'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessApprovalRequired'
+                      - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessProposalAgent'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessPreview'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessUpdated'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessUnchanged'
@@ -111174,6 +111187,35 @@ components:
         - tool
         - arguments
       additionalProperties: {}
+    save_seller_request_SellerProposalAgentInput:
+      type: object
+      properties:
+        answering:
+          description: 'Brain that answers your buyers: chef, prime or own.'
+          $ref: '#/components/schemas/save_seller_request_SellerProposalAgentInputAnswering'
+        shadow:
+          anyOf:
+            - $ref: '#/components/schemas/save_seller_request_SellerProposalAgentInputShadow'
+            - type: 'null'
+          description: Brain that also gets each request; its proposals are recorded, never shown. null for none.
+        ownAgentId:
+          anyOf:
+            - type: string
+              maxLength: 36
+            - type: 'null'
+          description: Your proposal agent when a brain is own, else null.
+        expectedUpdatedAt:
+          anyOf:
+            - type: string
+              maxLength: 40
+            - type: 'null'
+          description: proposalAgent.updatedAt as read; null if never saved.
+      required:
+        - answering
+        - shadow
+        - ownAgentId
+        - expectedUpdatedAt
+      additionalProperties: false
     save_seller_request_ResolveBrand:
       type: string
       minLength: 1
@@ -111378,6 +111420,18 @@ components:
       minimum: 0
       maximum: 2147483647
       description: The source's expectedVersion.
+    save_seller_request_SellerProposalAgentInputAnswering:
+      type: string
+      enum:
+        - chef
+        - prime
+        - own
+    save_seller_request_SellerProposalAgentInputShadow:
+      type: string
+      enum:
+        - chef
+        - prime
+        - own
     save_seller_request_ListingChannelsItem:
       type: string
       enum:
@@ -111844,6 +111898,75 @@ components:
         - message
         - approval
       additionalProperties: {}
+    save_seller_success_SaveSellerSuccessProposalAgent:
+      type: object
+      properties:
+        outcome:
+          $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessProposalAgentOutcome'
+        action:
+          $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessProposalAgentAction'
+        proposalAgent:
+          type: object
+          properties:
+            answering:
+              type: string
+              enum:
+                - chef
+                - prime
+                - own
+            shadow:
+              anyOf:
+                - type: string
+                  enum:
+                    - chef
+                    - prime
+                    - own
+                - type: 'null'
+            ownAgent:
+              anyOf:
+                - type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    endpointHost:
+                      type:
+                        - string
+                        - 'null'
+                    state:
+                      type: string
+                      enum:
+                        - verified
+                        - unverified
+                        - archived
+                  required:
+                    - id
+                    - name
+                    - endpointHost
+                    - state
+                  additionalProperties: {}
+                - type: 'null'
+            updatedAt:
+              type:
+                - string
+                - 'null'
+            updatedBy:
+              type:
+                - string
+                - 'null'
+          required:
+            - answering
+            - shadow
+            - ownAgent
+            - updatedAt
+            - updatedBy
+          additionalProperties: {}
+      required:
+        - outcome
+        - action
+        - proposalAgent
+      additionalProperties: {}
     save_seller_success_SaveSellerSuccessPreview:
       type: object
       properties:
@@ -111974,6 +112097,16 @@ components:
       propertyNames:
         type: string
       additionalProperties: {}
+    save_seller_success_SaveSellerSuccessProposalAgentOutcome:
+      type: string
+      enum:
+        - proposal_agent_saved
+        - proposal_agent_unchanged
+    save_seller_success_SaveSellerSuccessProposalAgentAction:
+      type: string
+      enum:
+        - proposal_agent_saved
+        - proposal_agent_unchanged
     save_seller_success_SaveSellerSuccessPreviewBefore:
       type: object
       propertyNames:
