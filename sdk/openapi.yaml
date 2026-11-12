@@ -57080,13 +57080,13 @@ paths:
     post:
       operationId: save_seller
       summary: >-
-        Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), Distribution's
-        OpenAI challenge token, an admission, the intake hold, or the demo's expiry and sample sources. Scope3
-        eligibility and Market Maker entitlements are read-only here. Read Distribution with get.
+        Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution
+        change (domain, OpenAI token or check, unlisting, ChatGPT icons, reviewer sandbox), an admission, the intake
+        hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here.
       description: >-
-        Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), Distribution's
-        OpenAI challenge token, an admission, the intake hold, or the demo's expiry and sample sources. Scope3
-        eligibility and Market Maker entitlements are read-only here. Read Distribution with get.
+        Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution
+        change (domain, OpenAI token or check, unlisting, ChatGPT icons, reviewer sandbox), an admission, the intake
+        hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -57119,10 +57119,10 @@ paths:
                   const: confirmed-v1
                   description: 'Opt in to identity preview and confirmation. Guide: /v3/identity-setup.'
                 preview:
-                  description: Preview an operator-domain change without saving.
+                  description: Preview an operator-domain or Distribution hostname change.
                   type: boolean
                 confirmationToken:
-                  description: Token from the identity preview, supplied after the human confirms the change.
+                  description: Token from the identity or hostname preview, sent after the human confirms.
                   type: string
                   minLength: 64
                   maxLength: 64
@@ -57263,24 +57263,89 @@ paths:
                   description: Allow a settlement-currency change even when it hides currently buyer-visible fixed prices.
                   type: boolean
                 distribution:
-                  description: Admin-only Distribution configuration. Send separately from other Seller changes.
+                  description: Admin-only. One Distribution change per call, sent alone.
                   type: object
                   properties:
                     openaiChallengeToken:
+                      description: OpenAI domain-challenge token, or null to remove it.
                       anyOf:
                         - type: string
                           minLength: 1
                           maxLength: 2048
                         - type: 'null'
-                      description: OpenAI domain-challenge token, or null to remove it.
                     confirmReplace:
                       description: Confirm replacing the current OpenAI challenge token.
                       type: boolean
                     confirmRemove:
                       description: Confirm removing the current OpenAI challenge token.
                       type: boolean
-                  required:
-                    - openaiChallengeToken
+                    hostname:
+                      description: 'Public listing domain. To replace a saved one, send preview: true, then confirmationToken.'
+                      type: string
+                      minLength: 1
+                      maxLength: 253
+                      pattern: ^\S+\.\S+$
+                    activateHostname:
+                      description: Check DNS, TLS and ownership of the saved domain.
+                      type: boolean
+                      const: true
+                    checkOpenaiChallenge:
+                      description: Re-check the OpenAI verification URL.
+                      type: boolean
+                      const: true
+                    visibility:
+                      description: >-
+                        `unlisted` unlists the listing. The others need web approval, not available yet, and are
+                        refused.
+                      type: string
+                      enum:
+                        - unlisted
+                        - interchange
+                        - public
+                    chatgpt:
+                      description: ChatGPT app icons. A change clears the listing approval.
+                      type: object
+                      properties:
+                        icons:
+                          oneOf:
+                            - type: object
+                              properties:
+                                source:
+                                  type: string
+                                  const: automatic
+                                  description: Brand-identity icons.
+                              required:
+                                - source
+                              additionalProperties: false
+                            - type: object
+                              properties:
+                                source:
+                                  type: string
+                                  const: manual
+                                  description: Your own icons.
+                                directoryIconDataUrl:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 20000
+                                  description: 256 px PNG data URL.
+                                composerIconDataUrl:
+                                  type: string
+                                  minLength: 1
+                                  maxLength: 20000
+                                  description: 48 px PNG data URL.
+                              required:
+                                - source
+                                - directoryIconDataUrl
+                                - composerIconDataUrl
+                              additionalProperties: false
+                          description: Icon choice.
+                      required:
+                        - icons
+                      additionalProperties: false
+                    revokeReviewerSandbox:
+                      description: Revoke the ChatGPT reviewer sandbox now.
+                      type: boolean
+                      const: true
                   additionalProperties: false
                 admission:
                   description: Seller-only pending buyer relationship decision; read its intake version immediately before saving.
