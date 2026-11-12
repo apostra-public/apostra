@@ -9122,6 +9122,10 @@ export type GetStatusResponses = {
                 accountId: number;
                 company: string;
                 kind: 'buyer' | 'seller' | 'org' | 'developer' | null;
+                /**
+                 * Buyer accounts only: true when a launch, a product added to a live media buy or a live budget increase waits for an administrator to approve it on our site.
+                 */
+                requireSpendApproval?: boolean;
                 [key: string]: unknown;
             };
             listedToolAccountKinds: Array<'buyer' | 'seller' | 'org' | 'developer'>;
@@ -15243,7 +15247,11 @@ export type SaveAccountData = {
          */
         customerDomain?: string | null;
         /**
-         * Why this change is needed, shown to the approver. Required to create, rename, archive or restore.
+         * With id of a buyer account: whether new spend waits for website approval. false needs reason and website approval; true is not available yet. Send it alone.
+         */
+        requireSpendApproval?: boolean;
+        /**
+         * Why this change is needed, shown to the approver. Required to create, rename, archive, restore or turn spend approval off.
          */
         reason?: string;
         /**
@@ -15352,7 +15360,7 @@ export type SaveAccountResponses = {
             object: SaveAccountSuccessSaveAccountObject;
         } | {
             action: 'preview';
-            change: 'create' | 'rename' | 'archive' | 'restore';
+            change: 'create' | 'rename' | 'archive' | 'restore' | 'disable_spend_approval';
             /**
              * Whether the same call without dryRun would be recorded.
              */
@@ -15464,10 +15472,17 @@ export type SaveAccountSuccessSaveAccountObject = {
     enabled: boolean;
     status: 'ACTIVE' | 'ARCHIVED';
     archivedAt: string | null;
-    organizationId: string;
+    /**
+     * The Organization the account sits in; null only for a buyer account outside one.
+     */
+    organizationId: string | null;
     settings: {
         company: string;
     };
+    /**
+     * Whether new spend waits for website approval: a boolean on a buyer account, null otherwise.
+     */
+    requireSpendApproval: boolean | null;
 };
 
 export type SaveAdvertiserData = {

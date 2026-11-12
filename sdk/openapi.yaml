@@ -29499,6 +29499,11 @@ paths:
                                   - org
                                   - developer
                               - type: 'null'
+                          requireSpendApproval:
+                            description: >-
+                              Buyer accounts only: true when a launch, a product added to a live media buy or a live
+                              budget increase waits for an administrator to approve it on our site.
+                            type: boolean
                         required:
                           - accountId
                           - company
@@ -36556,8 +36561,15 @@ paths:
                       minLength: 1
                       maxLength: 253
                     - type: 'null'
+                requireSpendApproval:
+                  description: >-
+                    With id of a buyer account: whether new spend waits for website approval. false needs reason and
+                    website approval; true is not available yet. Send it alone.
+                  type: boolean
                 reason:
-                  description: Why this change is needed, shown to the approver. Required to create, rename, archive or restore.
+                  description: >-
+                    Why this change is needed, shown to the approver. Required to create, rename, archive, restore or
+                    turn spend approval off.
                   type: string
                   minLength: 10
                   maxLength: 300
@@ -36677,6 +36689,7 @@ paths:
                               - rename
                               - archive
                               - restore
+                              - disable_spend_approval
                           canRequest:
                             type: boolean
                             description: Whether the same call without dryRun would be recorded.
@@ -97225,7 +97238,10 @@ components:
                 ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
             - type: 'null'
         organizationId:
-          type: string
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: The Organization the account sits in; null only for a buyer account outside one.
         settings:
           type: object
           properties:
@@ -97234,6 +97250,11 @@ components:
           required:
             - company
           additionalProperties: false
+        requireSpendApproval:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          description: 'Whether new spend waits for website approval: a boolean on a buyer account, null otherwise.'
       required:
         - id
         - name
@@ -97244,6 +97265,7 @@ components:
         - archivedAt
         - organizationId
         - settings
+        - requireSpendApproval
       additionalProperties: false
     save_account_success_AgentApprovalRequired:
       type: object

@@ -5902,6 +5902,8 @@ class GetStatusResultAccount(TypedDict):
     accountId: float
     company: str
     kind: Literal["buyer", "seller", "org", "developer"] | None
+    requireSpendApproval: NotRequired[bool]
+    '\n    Buyer accounts only: true when a launch, a product added to a live media buy or a live budget increase waits for an administrator to approve it on our site.\n    '
 
 class GetStatusResultAccounts(TypedDict):
     total: float
@@ -8593,8 +8595,10 @@ class SaveAccountInput(TypedDict):
     '\n    Create only, a seller: create a platform Demo Storefront, which uses no paid workspace. Only a Scope3 platform operator naming a customer Organization may.\n    '
     customerDomain: NotRequired[str | None]
     '\n    Create only: the new Account domain, or null for none.\n    '
+    requireSpendApproval: NotRequired[bool]
+    '\n    With id of a buyer account: whether new spend waits for website approval. false needs reason and website approval; true is not available yet. Send it alone.\n    '
     reason: NotRequired[str]
-    '\n    Why this change is needed, shown to the approver. Required to create, rename, archive or restore.\n    '
+    '\n    Why this change is needed, shown to the approver. Required to create, rename, archive, restore or turn spend approval off.\n    '
     dryRun: NotRequired[bool]
     '\n    true checks the change and returns what would be requested, recording nothing. Send no idempotencyKey with it.\n    '
     idempotencyKey: NotRequired[str]
@@ -8608,7 +8612,7 @@ class SaveAccountInputSettings(TypedDict):
 
 class SaveAccountResultActionPreview(TypedDict):
     action: Literal["preview"]
-    change: Literal["create", "rename", "archive", "restore"]
+    change: Literal["create", "rename", "archive", "restore", "disable_spend_approval"]
     canRequest: bool
     '\n    Whether the same call without dryRun would be recorded.\n    '
     name: str
@@ -8691,8 +8695,11 @@ class SaveAccountSuccessSaveAccountObject(TypedDict):
     enabled: bool
     status: Literal["ACTIVE", "ARCHIVED"]
     archivedAt: str | None
-    organizationId: str
+    organizationId: str | None
+    '\n    The Organization the account sits in; null only for a buyer account outside one.\n    '
     settings: SaveAccountSuccessSaveAccountObjectSettings
+    requireSpendApproval: bool | None
+    '\n    Whether new spend waits for website approval: a boolean on a buyer account, null otherwise.\n    '
 
 SaveAccountResultObject: TypeAlias = SaveAccountSuccessSaveAccountObject
 
