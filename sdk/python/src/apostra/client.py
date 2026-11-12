@@ -573,11 +573,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveRfpTurnResult], self._request_with_response("save_rfp_turn", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_seller(self, input: models.SaveSellerInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSellerResult:
-        "Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change (domain, OpenAI token or check, unlisting, ChatGPT icons, reviewer sandbox), an admission, the intake hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here."
+        "Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change (domain, OpenAI token or check, visibility, ChatGPT icons, sandbox), an admission, the intake hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here."
         return cast("models.SaveSellerResult", self._request("save_seller", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_seller_with_response(self, input: models.SaveSellerInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveSellerResult]:
-        "Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change (domain, OpenAI token or check, unlisting, ChatGPT icons, reviewer sandbox), an admission, the intake hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here. Returns the data together with response headers and request ID."
+        "Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change (domain, OpenAI token or check, visibility, ChatGPT icons, sandbox), an admission, the intake hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveSellerResult], self._request_with_response("save_seller", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_session(self, input: models.SaveSessionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSessionResult:
@@ -1206,11 +1206,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveRfpTurnResult], await self._request_with_response("save_rfp_turn", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_seller(self, input: models.SaveSellerInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSellerResult:
-        "Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change (domain, OpenAI token or check, unlisting, ChatGPT icons, reviewer sandbox), an admission, the intake hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here."
+        "Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change (domain, OpenAI token or check, visibility, ChatGPT icons, sandbox), an admission, the intake hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here."
         return cast("models.SaveSellerResult", await self._request("save_seller", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_seller_with_response(self, input: models.SaveSellerInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveSellerResult]:
-        "Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change (domain, OpenAI token or check, unlisting, ChatGPT icons, reviewer sandbox), an admission, the intake hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here. Returns the data together with response headers and request ID."
+        "Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change (domain, OpenAI token or check, visibility, ChatGPT icons, sandbox), an admission, the intake hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveSellerResult], await self._request_with_response("save_seller", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_session(self, input: models.SaveSessionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveSessionResult:

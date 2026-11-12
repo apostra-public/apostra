@@ -33730,7 +33730,7 @@ export type SaveSellerData = {
              */
             checkOpenaiChallenge?: true;
             /**
-             * `unlisted` unlists the listing. The others need web approval, not available yet, and are refused.
+             * `unlisted` unlists now. `interchange` and `public` return approval_required: an admin approves on the web.
              */
             visibility?: 'unlisted' | 'interchange' | 'public';
             /**
@@ -34254,7 +34254,7 @@ export type SaveSellerResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessSourceRequestQueued | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
+        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessSourceRequestQueued | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessApprovalRequired | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
         error: null;
     };
     /**
@@ -34280,6 +34280,22 @@ export type SaveSellerSuccessSaveSellerSuccessAdmissionRecorded = {
     action: 'admission_recorded';
     intakeId: string;
     decision: 'admit';
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessApprovalRequired = {
+    outcome: 'approval_required';
+    action: 'approval_required';
+    message: string;
+    approval: {
+        id: string;
+        kind: string;
+        state: string;
+        url: string;
+        expiresAt: string;
+        [key: string]: unknown;
+    };
+    idempotencyKey?: string;
     [key: string]: unknown;
 };
 

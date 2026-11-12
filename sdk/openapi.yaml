@@ -57278,12 +57278,12 @@ paths:
       operationId: save_seller
       summary: >-
         Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution
-        change (domain, OpenAI token or check, unlisting, ChatGPT icons, reviewer sandbox), an admission, the intake
-        hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here.
+        change (domain, OpenAI token or check, visibility, ChatGPT icons, sandbox), an admission, the intake hold or
+        demo. Scope3 eligibility and Market Maker entitlements are read-only here.
       description: >-
         Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution
-        change (domain, OpenAI token or check, unlisting, ChatGPT icons, reviewer sandbox), an admission, the intake
-        hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here.
+        change (domain, OpenAI token or check, visibility, ChatGPT icons, sandbox), an admission, the intake hold or
+        demo. Scope3 eligibility and Market Maker entitlements are read-only here.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -57492,8 +57492,8 @@ paths:
                       const: true
                     visibility:
                       description: >-
-                        `unlisted` unlists the listing. The others need web approval, not available yet, and are
-                        refused.
+                        `unlisted` unlists now. `interchange` and `public` return approval_required: an admin approves
+                        on the web.
                       type: string
                       enum:
                         - unlisted
@@ -58328,6 +58328,7 @@ paths:
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessReadyToInvoiceRevoked'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessSellingModeChanged'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessSellingModeUnchanged'
+                      - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessApprovalRequired'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessPreview'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessUpdated'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessUnchanged'
@@ -110878,6 +110879,45 @@ components:
         - outcome
         - action
         - sellingMode
+      additionalProperties: {}
+    save_seller_success_SaveSellerSuccessApprovalRequired:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: approval_required
+        action:
+          type: string
+          const: approval_required
+        message:
+          type: string
+        approval:
+          type: object
+          properties:
+            id:
+              type: string
+            kind:
+              type: string
+            state:
+              type: string
+            url:
+              type: string
+            expiresAt:
+              type: string
+          required:
+            - id
+            - kind
+            - state
+            - url
+            - expiresAt
+          additionalProperties: {}
+        idempotencyKey:
+          type: string
+      required:
+        - outcome
+        - action
+        - message
+        - approval
       additionalProperties: {}
     save_seller_success_SaveSellerSuccessPreview:
       type: object
