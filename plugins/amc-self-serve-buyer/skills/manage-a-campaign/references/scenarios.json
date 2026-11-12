@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "manage-a-campaign",
-  "skillVersion": "1.6.1",
+  "skillVersion": "1.6.2",
   "scenarios": [
     {
       "id": "html5-zip-upload-finished-before-attach",
@@ -48,9 +48,19 @@
       "title": "Answer which ad is winning on a Meta campaign from per-ad delivery",
       "given": "The buyer asks which ad is winning on an active Meta campaign over the last two weeks and whether any creative is tiring. One of its ads was made in Meta's own tools.",
       "expect": [
-        "The agent calls get_delivery with report \"live_ad_delivery\", the campaign in filters.campaignId and an explicit range of at most 90 days, not live_campaign_delivery, and retrieves the Per-ad delivery on Meta page before comparing ads.",
+        "The agent calls get_delivery with report \"live_ad_delivery\", the campaign in filters.campaignId and an explicit range of at most 90 days, not live_campaign_delivery, and retrieves the Per-ad delivery page before comparing ads.",
         "It compares ads only on the figures the response returns, reads missing days, reach and conversions as that page describes, follows page.nextCursor only when the ads the question needs are not on the first page, says how many of page.total ads it compared, and names an ad with creative_in_library false as one made in Meta's own tools, without calling get on its creative_id.",
         "It separates what the figures show from its recommendation and changes nothing; for a campaign question that is not about individual ads it still uses live_campaign_delivery."
+      ]
+    },
+    {
+      "id": "per-ad-question-on-tiktok-campaign",
+      "title": "Answer whether a TikTok ad is tiring from per-ad delivery",
+      "given": "The buyer asks whether any ad in an active TikTok campaign is tiring over the last 60 days. Range reach is absent from the response.",
+      "expect": [
+        "The agent calls get_delivery with report \"live_ad_delivery\", the campaign in filters.campaignId and an explicit range of at most 90 days, and retrieves the Per-ad delivery page, reading its On TikTok section, before comparing ads.",
+        "It reads each package as a TikTok ad group, compares ads on daily frequency and click-through rate, says that range reach is absent over more than 30 days, and never adds daily reach up.",
+        "It separates what the figures show from its recommendation and changes nothing."
       ]
     }
   ]

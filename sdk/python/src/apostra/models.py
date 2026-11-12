@@ -389,7 +389,7 @@ class GetDeliveryInput(TypedDict):
     sponsoredBuyerCustomerId: NotRequired[str]
     '\n    Server-issued self-serve buyer child scope from the Campaigns Page launch.\n    '
     report: NotRequired[Literal["delivery", "campaign_delivery", "live_campaign_delivery", "margin", "live_ad_delivery"]]
-    '\n    Select seller delivery, stored campaign delivery, live provider campaign delivery, margin, or live per-ad delivery for one Meta campaign.\n    '
+    '\n    Select seller delivery, stored campaign delivery, live provider campaign delivery, margin, or live per-ad delivery for one campaign.\n    '
     range: NotRequired[GetDeliveryInputRange]
     '\n    Dates (max 90 days) or lifetime for delivery; invalid for margin.\n    '
     filters: NotRequired[GetDeliveryInputFilters]
@@ -539,7 +539,7 @@ class GetDeliveryResultReportLiveAdDeliveryReportingPeriod(TypedDict):
     timezone: str
 
 class GetDeliveryResultReportLiveAdDeliverySemantics(TypedDict):
-    sourceOperation: Literal["meta_ad_insights"]
+    sourceOperation: Literal["meta_ad_insights", "tiktok_ad_report"]
     genericFallback: Literal[False]
     measurement: Literal["excluded"]
     missingValues: str
@@ -855,7 +855,7 @@ GetDeliverySuccessAdDailyDeliverySpend: TypeAlias = float
 
 class GetDeliverySuccessAdDeliveryMetrics(TypedDict):
     creative_id: str
-    '\n    Apostra creative id, or an id Apostra assigns to a creative made in Meta; see creative_in_library.\n    '
+    '\n    Apostra creative id, or an id Apostra assigns to a creative made in the ad platform\'s own tools; see creative_in_library.\n    '
     impressions: NotRequired[float]
     spend: NotRequired[float]
     clicks: NotRequired[float]
