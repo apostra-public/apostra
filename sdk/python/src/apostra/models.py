@@ -14444,6 +14444,10 @@ class SaveInventorySourceInput(TypedDict):
     '\n    Update one module on an existing modular source. Credentials are never accepted here.\n    '
     adServer: NotRequired[SaveInventorySourceInputAdServer]
     '\n    Send alone to open the form that connects an ad server. For google_ad_manager the result names the service account to add to the network.\n    '
+    namingTemplates: NotRequired[SaveInventorySourceInputNamingTemplates]
+    '\n    A managed Google Ad Manager source\'s naming templates. Send with id only; an omitted key is unchanged.\n    '
+    dryRun: NotRequired[bool]
+    '\n    Preview namingTemplates: sample names and macros, nothing saved.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -14462,6 +14466,12 @@ class SaveInventorySourceInputModuleConfig(TypedDict):
     '\n    Deep-merge by default; false replaces seller-writable configuration.\n    '
     status: NotRequired[Literal["CONFIGURING", "DISABLED", "ERROR"]]
     '\n    Optional manual module state. ACTIVE is derived by execution workflows.\n    '
+
+class SaveInventorySourceInputNamingTemplates(TypedDict):
+    order: NotRequired[str | None]
+    '\n    Order name template; null is the default.\n    '
+    lineItem: NotRequired[str | None]
+    '\n    Line item name template; null is the default.\n    '
 
 class SaveInventorySourceRequestModuleConfigEntry(TypedDict):
     key: str
@@ -14501,6 +14511,108 @@ class SaveInventorySourceSuccessSaveInventorySourceSuccessLegacyCreated(TypedDic
 
 SaveInventorySourceSuccessSaveInventorySourceSuccessLegacyCreatedData: TypeAlias = dict[str, JsonValue]
 
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewed(TypedDict):
+    outcome: Literal["naming_templates_previewed"]
+    action: Literal["naming_templates_previewed"]
+    sourceId: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedSourceId
+    namingTemplates: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedNamingTemplates
+    preview: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreview
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedNamingTemplates(TypedDict):
+    order: str | None
+    lineItem: str | None
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreview(TypedDict):
+    valid: bool
+    order: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreviewOrder
+    lineItem: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreviewLineItem
+    sample: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreviewSample
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreviewLineItem(TypedDict):
+    template: str
+    defaultTemplate: str
+    usesDefault: bool
+    macros: list[str]
+    example: str
+    issues: list[SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreviewLineItemIssuesItem]
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreviewLineItemIssuesItem(TypedDict):
+    code: str
+    message: str
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreviewOrder(TypedDict):
+    template: str
+    defaultTemplate: str
+    usesDefault: bool
+    macros: list[str]
+    example: str
+    issues: list[SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreviewOrderIssuesItem]
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreviewOrderIssuesItem(TypedDict):
+    code: str
+    message: str
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreviewSample(TypedDict):
+    brandDomain: str
+    startTime: str
+    endTime: str
+    mediaBuyId: str
+    productId: str
+    packageName: str
+
+SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedSourceId: TypeAlias = str
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSaved(TypedDict):
+    outcome: Literal["naming_templates_saved"]
+    action: Literal["naming_templates_saved"]
+    sourceId: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedSourceId
+    namingTemplates: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedNamingTemplates
+    preview: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreview
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedNamingTemplates(TypedDict):
+    order: str | None
+    lineItem: str | None
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreview(TypedDict):
+    valid: bool
+    order: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreviewOrder
+    lineItem: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreviewLineItem
+    sample: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreviewSample
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreviewLineItem(TypedDict):
+    template: str
+    defaultTemplate: str
+    usesDefault: bool
+    macros: list[str]
+    example: str
+    issues: list[SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreviewLineItemIssuesItem]
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreviewLineItemIssuesItem(TypedDict):
+    code: str
+    message: str
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreviewOrder(TypedDict):
+    template: str
+    defaultTemplate: str
+    usesDefault: bool
+    macros: list[str]
+    example: str
+    issues: list[SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreviewOrderIssuesItem]
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreviewOrderIssuesItem(TypedDict):
+    code: str
+    message: str
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreviewSample(TypedDict):
+    brandDomain: str
+    startTime: str
+    endTime: str
+    mediaBuyId: str
+    productId: str
+    packageName: str
+
+SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedSourceId: TypeAlias = str
+
 class SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionForm(TypedDict):
     outcome: Literal["own_agent_connection_form"]
     action: Literal["own_agent_connection_form"]
@@ -14536,7 +14648,7 @@ class SaveInventorySourceSuccessSaveInventorySourceSuccessUpdated(TypedDict):
     warning: NotRequired[str]
     moduleConfig: NotRequired[SaveInventorySourceSuccessSaveInventorySourceSuccessUpdatedModuleConfig]
 
-SaveInventorySourceResult: TypeAlias = "SaveInventorySourceSuccessSaveInventorySourceSuccessCreated | SaveInventorySourceSuccessSaveInventorySourceSuccessUpdated | SaveInventorySourceSuccessSaveInventorySourceSuccessUnchanged | SaveInventorySourceSuccessSaveInventorySourceSuccessConnectionForm | SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionForm | SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerForm | SaveInventorySourceSuccessSaveInventorySourceSuccessLegacyCreated"
+SaveInventorySourceResult: TypeAlias = "SaveInventorySourceSuccessSaveInventorySourceSuccessCreated | SaveInventorySourceSuccessSaveInventorySourceSuccessUpdated | SaveInventorySourceSuccessSaveInventorySourceSuccessUnchanged | SaveInventorySourceSuccessSaveInventorySourceSuccessConnectionForm | SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionForm | SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerForm | SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewed | SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSaved | SaveInventorySourceSuccessSaveInventorySourceSuccessLegacyCreated"
 
 class SaveInventorySourceSuccessSaveInventorySourceSuccessUpdatedModuleConfig(TypedDict):
     moduleInstanceId: str

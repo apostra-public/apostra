@@ -25654,6 +25654,23 @@ export type SaveInventorySourceData = {
             type: 'google_ad_manager' | 'freewheel' | 'springserve' | 'adswizz' | 'broadsign' | 'citrusad';
         };
         /**
+         * A managed Google Ad Manager source's naming templates. Send with id only; an omitted key is unchanged.
+         */
+        namingTemplates?: {
+            /**
+             * Order name template; null is the default.
+             */
+            order?: string | null;
+            /**
+             * Line item name template; null is the default.
+             */
+            lineItem?: string | null;
+        };
+        /**
+         * Preview namingTemplates: sample names and macros, nothing saved.
+         */
+        dryRun?: boolean;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -25754,7 +25771,7 @@ export type SaveInventorySourceResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveInventorySourceSuccessSaveInventorySourceSuccessCreated | SaveInventorySourceSuccessSaveInventorySourceSuccessUpdated | SaveInventorySourceSuccessSaveInventorySourceSuccessUnchanged | SaveInventorySourceSuccessSaveInventorySourceSuccessConnectionForm | SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionForm | SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerForm | SaveInventorySourceSuccessSaveInventorySourceSuccessLegacyCreated;
+        data: SaveInventorySourceSuccessSaveInventorySourceSuccessCreated | SaveInventorySourceSuccessSaveInventorySourceSuccessUpdated | SaveInventorySourceSuccessSaveInventorySourceSuccessUnchanged | SaveInventorySourceSuccessSaveInventorySourceSuccessConnectionForm | SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionForm | SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerForm | SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewed | SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSaved | SaveInventorySourceSuccessSaveInventorySourceSuccessLegacyCreated;
         error: null;
     };
     /**
@@ -25818,6 +25835,128 @@ export type SaveInventorySourceSuccessSaveInventorySourceSuccessLegacyCreated = 
 export type SaveInventorySourceSuccessSaveInventorySourceSuccessLegacyCreatedData = {
     [key: string]: unknown;
 };
+
+export type SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewed = {
+    outcome: 'naming_templates_previewed';
+    action: 'naming_templates_previewed';
+    sourceId: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedSourceId;
+    namingTemplates: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedNamingTemplates;
+    preview: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreview;
+    [key: string]: unknown;
+};
+
+export type SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedNamingTemplates = {
+    order: string | null;
+    lineItem: string | null;
+    [key: string]: unknown;
+};
+
+export type SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreview = {
+    valid: boolean;
+    order: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreviewOrder;
+    lineItem: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreviewLineItem;
+    sample: {
+        brandDomain: string;
+        startTime: string;
+        endTime: string;
+        mediaBuyId: string;
+        productId: string;
+        packageName: string;
+        [key: string]: unknown;
+    };
+    [key: string]: unknown;
+};
+
+export type SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreviewLineItem = {
+    template: string;
+    defaultTemplate: string;
+    usesDefault: boolean;
+    macros: Array<string>;
+    example: string;
+    issues: Array<{
+        code: string;
+        message: string;
+        [key: string]: unknown;
+    }>;
+    [key: string]: unknown;
+};
+
+export type SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedPreviewOrder = {
+    template: string;
+    defaultTemplate: string;
+    usesDefault: boolean;
+    macros: Array<string>;
+    example: string;
+    issues: Array<{
+        code: string;
+        message: string;
+        [key: string]: unknown;
+    }>;
+    [key: string]: unknown;
+};
+
+export type SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewedSourceId = string;
+
+export type SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSaved = {
+    outcome: 'naming_templates_saved';
+    action: 'naming_templates_saved';
+    sourceId: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedSourceId;
+    namingTemplates: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedNamingTemplates;
+    preview: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreview;
+    [key: string]: unknown;
+};
+
+export type SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedNamingTemplates = {
+    order: string | null;
+    lineItem: string | null;
+    [key: string]: unknown;
+};
+
+export type SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreview = {
+    valid: boolean;
+    order: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreviewOrder;
+    lineItem: SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreviewLineItem;
+    sample: {
+        brandDomain: string;
+        startTime: string;
+        endTime: string;
+        mediaBuyId: string;
+        productId: string;
+        packageName: string;
+        [key: string]: unknown;
+    };
+    [key: string]: unknown;
+};
+
+export type SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreviewLineItem = {
+    template: string;
+    defaultTemplate: string;
+    usesDefault: boolean;
+    macros: Array<string>;
+    example: string;
+    issues: Array<{
+        code: string;
+        message: string;
+        [key: string]: unknown;
+    }>;
+    [key: string]: unknown;
+};
+
+export type SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedPreviewOrder = {
+    template: string;
+    defaultTemplate: string;
+    usesDefault: boolean;
+    macros: Array<string>;
+    example: string;
+    issues: Array<{
+        code: string;
+        message: string;
+        [key: string]: unknown;
+    }>;
+    [key: string]: unknown;
+};
+
+export type SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSavedSourceId = string;
 
 export type SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionForm = {
     outcome: 'own_agent_connection_form';
