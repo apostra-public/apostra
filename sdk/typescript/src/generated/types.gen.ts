@@ -22819,7 +22819,7 @@ export type SaveCreativeData = {
             assetRef?: never;
         }>;
         /**
-         * Save one approved session output to the advertiserId Library; campaignId is its session campaign. Needs idempotencyKey; send alone.
+         * Save one approved session output to the advertiserId Library; campaignId only for campaign sessions. Needs idempotencyKey; send alone.
          */
         fromCreativeSessionOutput?: {
             /**
@@ -33993,6 +33993,19 @@ export type SaveSellerData = {
              * Revoke the ChatGPT reviewer sandbox now.
              */
             revokeReviewerSandbox?: true;
+            /**
+             * Buy the agent text line: approval_required, an admin approves on the web. It costs money.
+             */
+            requestTextLine?: {
+                /**
+                 * US area code to buy the number in.
+                 */
+                areaCode: string;
+                /**
+                 * Idempotency UUID for this intended line. Sending it again returns the same approval.
+                 */
+                requestId: string;
+            };
             /**
              * Request the ChatGPT reviewer sandbox: approval_required, an admin approves on the web. Needs a public listing.
              */

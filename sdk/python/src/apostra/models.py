@@ -12764,7 +12764,7 @@ class SaveCreativeInput(TypedDict):
     sourceAssets: NotRequired[list[SaveCreativeInputSourceAssetsItemKindAssetRef | SaveCreativeInputSourceAssetsItemKindAssetId]]
     '\n    Uploaded JPEG/PNG/MP4 for format slots; a draft may omit it.\n    '
     fromCreativeSessionOutput: NotRequired[SaveCreativeInputFromCreativeSessionOutput]
-    '\n    Save one approved session output to the advertiserId Library; campaignId is its session campaign. Needs idempotencyKey; send alone.\n    '
+    '\n    Save one approved session output to the advertiserId Library; campaignId only for campaign sessions. Needs idempotencyKey; send alone.\n    '
     libraryRole: NotRequired[Literal["evergreen", "reference"]]
     '\n    Buyer Account only. Durable advertiser Library role: evergreen remains delivery-eligible; reference is reusable input material and cannot be attached for delivery.\n    '
     landing_page_url: NotRequired[SaveCreativeRequestLandingPageUrl]
@@ -19424,6 +19424,8 @@ class SaveSellerInputDistribution(TypedDict):
     '\n    ChatGPT app: icons, or approve the reviewed listing.\n    '
     revokeReviewerSandbox: NotRequired[Literal[True]]
     '\n    Revoke the ChatGPT reviewer sandbox now.\n    '
+    requestTextLine: NotRequired[SaveSellerInputDistributionRequestTextLine]
+    '\n    Buy the agent text line: approval_required, an admin approves on the web. It costs money.\n    '
     requestReviewerSandbox: NotRequired[Literal[True]]
     '\n    Request the ChatGPT reviewer sandbox: approval_required, an admin approves on the web. Needs a public listing.\n    '
 
@@ -19450,6 +19452,12 @@ class SaveSellerInputDistributionChatgptIconsSourceManual(TypedDict):
     '\n    256 px PNG data URL.\n    '
     composerIconDataUrl: str
     '\n    48 px PNG data URL.\n    '
+
+class SaveSellerInputDistributionRequestTextLine(TypedDict):
+    areaCode: str
+    '\n    US area code to buy the number in.\n    '
+    requestId: str
+    '\n    Idempotency UUID for this intended line. Sending it again returns the same approval.\n    '
 
 class SaveSellerInputInformationRequestActionConfirm(TypedDict):
     action: Literal["confirm"]

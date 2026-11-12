@@ -45132,7 +45132,7 @@ paths:
                         additionalProperties: false
                 fromCreativeSessionOutput:
                   description: >-
-                    Save one approved session output to the advertiserId Library; campaignId is its session campaign.
+                    Save one approved session output to the advertiserId Library; campaignId only for campaign sessions.
                     Needs idempotencyKey; send alone.
                   type: object
                   properties:
@@ -45558,8 +45558,6 @@ paths:
                     allOf:
                       - required:
                           - advertiserId
-                      - required:
-                          - campaignId
                       - required:
                           - idempotencyKey
                       - allOf:
@@ -57705,6 +57703,24 @@ paths:
                       description: Revoke the ChatGPT reviewer sandbox now.
                       type: boolean
                       const: true
+                    requestTextLine:
+                      description: 'Buy the agent text line: approval_required, an admin approves on the web. It costs money.'
+                      type: object
+                      properties:
+                        areaCode:
+                          type: string
+                          pattern: ^[2-9]\d{2}$
+                          description: US area code to buy the number in.
+                        requestId:
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                          description: Idempotency UUID for this intended line. Sending it again returns the same approval.
+                      required:
+                        - areaCode
+                        - requestId
+                      additionalProperties: false
                     requestReviewerSandbox:
                       description: >-
                         Request the ChatGPT reviewer sandbox: approval_required, an admin approves on the web. Needs a

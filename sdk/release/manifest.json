@@ -3153,6 +3153,7 @@
       "SaveSellerInputDistributionChatgptApproveListing": "object",
       "SaveSellerInputDistributionChatgptIconsSourceAutomatic": "object",
       "SaveSellerInputDistributionChatgptIconsSourceManual": "object",
+      "SaveSellerInputDistributionRequestTextLine": "object",
       "SaveSellerInputInformationRequestActionConfirm": "object",
       "SaveSellerInputInformationRequestActionRequest": "object",
       "SaveSellerInputInformationRequestActionRequestSetup": "object",
