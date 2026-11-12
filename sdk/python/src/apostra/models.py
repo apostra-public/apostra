@@ -19266,6 +19266,8 @@ class SaveSellerInputDistribution(TypedDict):
     '\n    ChatGPT app: icons, or approve the reviewed listing.\n    '
     revokeReviewerSandbox: NotRequired[Literal[True]]
     '\n    Revoke the ChatGPT reviewer sandbox now.\n    '
+    requestReviewerSandbox: NotRequired[Literal[True]]
+    '\n    Request the ChatGPT reviewer sandbox: approval_required, an admin approves on the web. Needs a public listing.\n    '
 
 class SaveSellerInputDistributionChatgpt(TypedDict):
     icons: NotRequired[SaveSellerInputDistributionChatgptIconsSourceAutomatic | SaveSellerInputDistributionChatgptIconsSourceManual]
