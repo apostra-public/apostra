@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.19.0",
+  "skillVersion": "1.20.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",

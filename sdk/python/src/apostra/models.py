@@ -12328,6 +12328,30 @@ class SaveCampaignResultActionCreated(TypedDict):
     deprecationNotice: NotRequired[SaveCampaignSuccessDeprecationNotice]
     mediaBuys: NotRequired[SaveCampaignSuccessMediaBuys]
     action: Literal["created"]
+    nextStep: NotRequired[SaveCampaignResultActionCreatedNextStepStatusReady | SaveCampaignResultActionCreatedNextStepStatusNeedsInput | SaveCampaignResultActionCreatedNextStepStatusWholesaleCatalogue]
+
+class SaveCampaignResultActionCreatedNextStepStatusNeedsInput(TypedDict):
+    status: Literal["needs_input"]
+    needs: list[SaveCampaignResultActionCreatedNextStepStatusNeedsInputNeedsItem]
+    leadsTo: Literal["request_proposals"]
+
+class SaveCampaignResultActionCreatedNextStepStatusNeedsInputNeedsItem(TypedDict):
+    what: Literal["market", "seller_choice"]
+    tool: Literal["save_campaign", "request_proposals"]
+
+class SaveCampaignResultActionCreatedNextStepStatusReady(TypedDict):
+    status: Literal["ready"]
+    tool: Literal["request_proposals"]
+    arguments: SaveCampaignResultActionCreatedNextStepStatusReadyArguments
+
+class SaveCampaignResultActionCreatedNextStepStatusReadyArguments(TypedDict):
+    campaignId: str
+    expectedCampaignRevision: float
+
+class SaveCampaignResultActionCreatedNextStepStatusWholesaleCatalogue(TypedDict):
+    status: Literal["wholesale_catalogue"]
+    tool: Literal["search"]
+    leadsTo: Literal["save_media_buy"]
 
 class SaveCampaignResultActionCreatedReadbackRequired(TypedDict):
     serverTime: NotRequired[str]
