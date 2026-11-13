@@ -929,7 +929,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -1173,7 +1173,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -1417,7 +1417,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -1657,7 +1657,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -1898,7 +1898,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -2143,7 +2143,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -2387,7 +2387,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -2621,7 +2621,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -2866,7 +2866,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -3107,7 +3107,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -3348,7 +3348,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -3585,7 +3585,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -3830,7 +3830,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -4071,7 +4071,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -4315,7 +4315,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -4559,7 +4559,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -4803,7 +4803,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -5047,7 +5047,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
@@ -5291,7 +5291,7 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * creative_session preview: facebook_feed (default) or instagram_feed.
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**

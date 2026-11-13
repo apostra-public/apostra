@@ -2183,7 +2183,7 @@ class GetInputKindAdvertiserAccess(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -2314,7 +2314,7 @@ class GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAd
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -2443,7 +2443,7 @@ class GetInputKindAudience(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -2574,7 +2574,7 @@ class GetInputKindBuyerRfp(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     items: NotRequired[GetInputKindBuyerRfpItems]
@@ -2703,7 +2703,7 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -2834,7 +2834,7 @@ class GetInputKindConnection(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -2965,7 +2965,7 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -3094,7 +3094,7 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -3225,7 +3225,7 @@ class GetInputKindCreativeEngine(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     items: NotRequired[GetInputKindCreativeEngineItems]
@@ -3354,7 +3354,7 @@ class GetInputKindCreativeFormat(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     items: NotRequired[GetInputKindCreativeFormatItems]
@@ -3483,7 +3483,7 @@ class GetInputKindCreativeSession(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     items: NotRequired[GetInputKindCreativeSessionItems]
@@ -3612,7 +3612,7 @@ class GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDis
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -3743,7 +3743,7 @@ class GetInputKindMaterial(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -3874,7 +3874,7 @@ class GetInputKindProposal(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -4005,7 +4005,7 @@ class GetInputKindSeller(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -4136,7 +4136,7 @@ class GetInputKindSession(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -4267,7 +4267,7 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -4396,7 +4396,7 @@ class GetInputKindWholesaleProductWithSourceId(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
@@ -4541,7 +4541,7 @@ class GetInputKindWorkItem(TypedDict):
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
     placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    creative_session preview: facebook_feed (default) or instagram_feed.\n    '
+    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
     include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
