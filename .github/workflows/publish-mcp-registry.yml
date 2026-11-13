@@ -1,0 +1,66 @@
+# Composed into apostra-public/apostra; never run this from the private source.
+name: Publish to the MCP Registry
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: mcp-registry-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'apostra-public/apostra' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      MCP_PUBLISHER_VERSION: v1.8.9
+      REGISTRY_NAME: io.github.apostra-public/apostra
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+      - name: Install a verified mcp-publisher
+        run: |
+          set -euo pipefail
+          archive=mcp-publisher_linux_amd64.tar.gz
+          base="https://github.com/modelcontextprotocol/registry/releases/download/${MCP_PUBLISHER_VERSION}"
+          curl -fsSL -o "$archive" "$base/$archive"
+          curl -fsSL -o "$archive.sigstore.json" "$base/$archive.sigstore.json"
+          cosign verify-blob \
+            --bundle "$archive.sigstore.json" \
+            --certificate-identity "https://github.com/modelcontextprotocol/registry/.github/workflows/release.yml@refs/tags/${MCP_PUBLISHER_VERSION}" \
+            --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
+            "$archive"
+          tar xzf "$archive" mcp-publisher
+          rm "$archive" "$archive.sigstore.json"
+      - name: Check the manifest names the namespace this repository may publish
+        run: |
+          set -euo pipefail
+          name="$(jq -r .name mcp-registry/server.json)"
+          test "$name" = "$REGISTRY_NAME" || { echo "::error::server.json names $name, expected $REGISTRY_NAME"; exit 1; }
+      - name: Validate the manifest
+        run: ../mcp-publisher validate
+        working-directory: mcp-registry
+      - name: Log in with this workflow's GitHub OIDC identity
+        run: ../mcp-publisher login github-oidc
+        working-directory: mcp-registry
+      - name: Publish
+        run: ../mcp-publisher publish
+        working-directory: mcp-registry
+      - name: Confirm the listing
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3 4 5 6; do
+            if curl -fsSL "https://registry.modelcontextprotocol.io/v0.1/servers?search=apostra" \
+              | jq -e --arg name "$REGISTRY_NAME" '.servers | any(.server.name == $name)' >/dev/null; then
+              echo "Listed: $REGISTRY_NAME" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::$REGISTRY_NAME is not in the registry search for apostra"
+          exit 1
