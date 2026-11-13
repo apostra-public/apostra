@@ -859,6 +859,10 @@ export type GenerateVariantsSuccessGalleryVariants = Array<{
         status: 'pass' | 'warn' | 'fail';
         detail: string;
     };
+    lockedProduct?: {
+        state: 'placed' | 'not_placed';
+        detail?: string;
+    };
 }>;
 
 export type GetData = {
@@ -14232,6 +14236,10 @@ export type OpenVariantGallerySuccessGalleryVariants = Array<{
         status: 'pass' | 'warn' | 'fail';
         detail: string;
     };
+    lockedProduct?: {
+        state: 'placed' | 'not_placed';
+        detail?: string;
+    };
 }>;
 
 export type RefreshInventorySourceHealthData = {
@@ -24674,6 +24682,10 @@ export type SaveCreativeSessionSuccessCreativeSessionGalleryVariants = Array<{
     briefMatch?: {
         status: 'pass' | 'warn' | 'fail';
         detail: string;
+    };
+    lockedProduct?: {
+        state: 'placed' | 'not_placed';
+        detail?: string;
     };
 }>;
 
