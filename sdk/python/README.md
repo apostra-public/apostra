@@ -1,6 +1,7 @@
 # Apostra Python SDK
 
-Typed synchronous and asynchronous calls to the public V3 HTTP API. Python 3.11+.
+The official SDK for Apostra (formerly Scope3 and Interchange). Typed synchronous
+and asynchronous calls to the public V3 HTTP API. Python 3.11+.
 
 ```bash
 python -m pip install apostra
