@@ -10242,9 +10242,13 @@ export type GetSuccessContracts = {
         title: string;
     }>;
     /**
-     * The plans in force before the current and upcoming plans, in the order the document lists them.
+     * Every plan the organization has accepted, the plan in force and the upcoming plan included, in the order the document lists them. `status` says which is which. The plan in force carries here the rate card version and activity terms it was accepted under, which `plan.current` does not.
      */
     planHistory: Array<{
+        /**
+         * `CURRENT` for the plan in force (`plan.current`), `UPCOMING` for the accepted plan waiting for the current term to end (`plan.upcoming`), `PAST` for a plan whose term has ended.
+         */
+        status: 'CURRENT' | 'UPCOMING' | 'PAST';
         planId: GetSuccessContractsPlanHistoryItemPlanId;
         planName: string;
         currency: GetSuccessContractsPlanHistoryItemCurrency;

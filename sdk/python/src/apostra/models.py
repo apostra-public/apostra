@@ -6815,7 +6815,7 @@ class GetSuccessContracts(TypedDict):
     documents: list[GetSuccessContractsDocumentsItem]
     '\n    The agreement documents by id and title. They carry no link: a signed-in browser opens them on our site.\n    '
     planHistory: list[GetSuccessContractsPlanHistoryItem]
-    '\n    The plans in force before the current and upcoming plans, in the order the document lists them.\n    '
+    '\n    Every plan the organization has accepted, the plan in force and the upcoming plan included, in the order the document lists them. `status` says which is which. The plan in force carries here the rate card version and activity terms it was accepted under, which `plan.current` does not.\n    '
     renewalHistory: list[GetSuccessContractsRenewalHistoryItem]
     '\n    Every renewal change recorded for the plan in force, in the order the document lists them. It carries no reason and no actor.\n    '
 
@@ -6839,6 +6839,8 @@ class GetSuccessContractsDocumentsItem(TypedDict):
     title: str
 
 class GetSuccessContractsPlanHistoryItem(TypedDict):
+    status: Literal["CURRENT", "UPCOMING", "PAST"]
+    '\n    `CURRENT` for the plan in force (`plan.current`), `UPCOMING` for the accepted plan waiting for the current term to end (`plan.upcoming`), `PAST` for a plan whose term has ended.\n    '
     planId: GetSuccessContractsPlanHistoryItemPlanId
     planName: str
     currency: GetSuccessContractsPlanHistoryItemCurrency
