@@ -14867,7 +14867,6 @@ export type RequestProposalsResponses = {
                 outcome?: {
                     kind: 'returned_products';
                     productCount: number;
-                    catalogue?: true;
                     reasonCode?: never;
                     code?: never;
                     message?: never;
@@ -14875,7 +14874,6 @@ export type RequestProposalsResponses = {
                 } | {
                     kind: 'no_matching_products';
                     productCount?: never;
-                    catalogue?: never;
                     reasonCode?: never;
                     code?: never;
                     message?: never;
@@ -14883,7 +14881,6 @@ export type RequestProposalsResponses = {
                 } | {
                     kind: 'no_inventory_for_request';
                     productCount?: never;
-                    catalogue?: never;
                     reasonCode?: never;
                     code?: never;
                     message?: never;
@@ -14892,7 +14889,6 @@ export type RequestProposalsResponses = {
                     kind: 'skipped';
                     reasonCode: 'coverage' | 'auth' | 'eligibility' | 'advertiser_activation' | 'account_pending' | 'account_needs_attention' | 'round_predates_account_rule';
                     productCount?: never;
-                    catalogue?: never;
                     code?: never;
                     message?: never;
                     suggestion?: never;
@@ -14900,7 +14896,6 @@ export type RequestProposalsResponses = {
                     kind: 'failed';
                     reasonCode: 'timeout' | 'transport' | 'protocol';
                     productCount?: never;
-                    catalogue?: never;
                     code?: never;
                     message?: never;
                     suggestion?: never;
@@ -14910,7 +14905,6 @@ export type RequestProposalsResponses = {
                     message: string;
                     suggestion?: string;
                     productCount?: never;
-                    catalogue?: never;
                     reasonCode?: never;
                 };
                 propertyCoverage?: Array<{
@@ -15037,7 +15031,7 @@ export type RequestProposalsResponses = {
                      */
                     sellerAccountId?: RequestProposalsSuccessSkippedSellersSellersItemSellerAccountId;
                     sellerName?: string;
-                    reason: 'channel_mismatch' | 'not_transactable';
+                    reason: 'channel_mismatch' | 'not_transactable' | 'wholesale_only';
                     sellerChannels: Array<string>;
                     skipCode?: 'account_requests_blocked' | 'go_live_blocked' | 'advertiser_not_accessible' | 'seller_unavailable_to_buyers';
                 }>;

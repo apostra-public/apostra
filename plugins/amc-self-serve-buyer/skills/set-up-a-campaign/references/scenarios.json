@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.18.0",
+  "skillVersion": "1.19.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -126,27 +126,28 @@
     {
       "id": "proposal-round-to-named-sellers",
       "title": "Ask only the sellers the buyer named",
-      "given": "The buyer asks for proposals from Meta and Pinterest only, for a draft campaign with no seller list. A seller read returns both sellers with their sellerAccountId.",
+      "given": "The buyer asks for proposals from two publishers only, The Daily Courier and Metro Radio, for a draft campaign with no seller list. A seller read returns both sellers with their sellerAccountId and supportsProposals: true.",
       "expect": [
-        "The agent confirms the round will ask only Meta and Pinterest, then calls request_proposals with their sellerAccountId values as sellerAccountIds and without confirmBroadcast.",
+        "The agent confirms the round will ask only The Daily Courier and Metro Radio, then calls request_proposals with their sellerAccountId values as sellerAccountIds and without confirmBroadcast.",
         "If the round is refused with CAMPAIGN_SELLERS_INELIGIBLE, the agent tells the buyer which named sellers cannot be asked, says no seller was contacted, and asks how to proceed instead of widening the round.",
         "The agent does not add a seller the buyer did not name, and saves a seller list on the campaign only if the buyer asks for one."
       ]
     },
     {
-      "id": "catalogue-answers-presented-as-standard-offer",
-      "title": "Present a platform seller's catalogue answer as its standard offer",
-      "given": "A campaign with a clicks goal at a €3 cost-per-click target has a terminal proposal round: two sellers returned quoted proposals, and a platform seller answered with status products, an outcome of kind returned_products with catalogue: true, five products and a productQueryId.",
+      "id": "wholesale-only-sellers-from-the-catalogue",
+      "title": "Get a wholesale-only seller's products from the wholesale catalogue",
+      "given": "A campaign with a clicks goal at a €3 cost-per-click target, display and social channels and US targeting has a terminal proposal round: two sellers returned quoted proposals, and skippedSellers lists a platform seller with reason wholesale_only. The buyer wants that seller in the campaign too.",
       "expect": [
-        "The agent presents the platform seller's products as that seller's standard catalogue for the campaign's channels and markets at its listed prices, not as products chosen for the brief or as a proposal.",
-        "The agent does not search or get a proposal for the catalogue seller, and does not list it among sellers that declined or made a commitment against the goal; it says the catalogue makes no commitment on the goal.",
-        "When the buyer picks catalogue products, the agent stages them with save_media_buy using the seller's sellerAccountId, the productQueryId as idempotencyKey and the exact selected product data, after confirmation."
+        "The agent says the platform seller sells wholesale only and was not asked, and does not search or get a proposal for it or list it among sellers that declined.",
+        "The agent runs search(kind: \"wholesale_product\") with the campaign's advertiserId, that seller's Account id in filter.sellerAccountIds, the campaign's channels in filter.channel and US in filter.countries, and follows every nextCursor.",
+        "The agent presents those products as the seller's standard offer at its listed prices, not as products chosen for the brief, and says they make no commitment on the goal.",
+        "When the buyer picks products, the agent stages them with save_media_buy using the seller's sellerAccountId, the search's productQueryId as idempotencyKey and the exact selected product data, after confirmation."
       ]
     },
     {
       "id": "media-buy-budget-sent-once",
       "title": "Send a media buy budget in one place",
-      "given": "The buyer selects one returned TikTok Traffic product for the whole 5,000 USD budget, and separately two Pinterest products split 3,000 and 2,000 USD.",
+      "given": "From a wholesale search, the buyer selects one TikTok Traffic product for the whole 5,000 USD budget, and separately two Pinterest products split 3,000 and 2,000 USD.",
       "expect": [
         "For the single TikTok product, the agent calls save_media_buy with either a top-level budget or that product's products[].budget, not both.",
         "For the two Pinterest products, the agent sends a products[].budget for each and no top-level budget.",

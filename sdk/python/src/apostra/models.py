@@ -8562,7 +8562,6 @@ class RequestProposalsResultPerSellerItemOutcomeKindNoMatchingProducts(TypedDict
 class RequestProposalsResultPerSellerItemOutcomeKindReturnedProducts(TypedDict):
     kind: Literal["returned_products"]
     productCount: int
-    catalogue: NotRequired[Literal[True]]
 
 class RequestProposalsResultPerSellerItemOutcomeKindSkipped(TypedDict):
     kind: Literal["skipped"]
@@ -8630,7 +8629,7 @@ class RequestProposalsResultSkippedSellersSellersItem(TypedDict):
     sellerAccountId: NotRequired[RequestProposalsSuccessSkippedSellersSellersItemSellerAccountId]
     '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
     sellerName: NotRequired[str]
-    reason: Literal["channel_mismatch", "not_transactable"]
+    reason: Literal["channel_mismatch", "not_transactable", "wholesale_only"]
     sellerChannels: list[str]
     skipCode: NotRequired[Literal["account_requests_blocked", "go_live_blocked", "advertiser_not_accessible", "seller_unavailable_to_buyers"]]
 
