@@ -1940,6 +1940,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -3197,6 +3198,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -4430,6 +4432,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -5651,6 +5654,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -6873,6 +6877,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -8102,6 +8107,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -10468,6 +10474,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -11692,6 +11699,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -15208,6 +15216,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -16430,6 +16439,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -17658,6 +17668,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -18885,6 +18896,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -20112,6 +20124,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -21339,6 +21352,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -22566,6 +22580,7 @@ paths:
                           - versions
                           - discounts
                           - rate_card
+                          - price_paid
                           - approvalRouting
                           - listing
                           - identity
@@ -60386,8 +60401,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -60397,6 +60413,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -62083,8 +62100,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -62094,6 +62112,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -63781,8 +63800,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -63792,6 +63812,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -64537,8 +64558,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -64548,6 +64570,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -66235,8 +66258,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -66246,6 +66270,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -67918,8 +67943,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -67929,6 +67955,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -69608,8 +69635,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -69619,6 +69647,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -71297,8 +71326,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -71308,6 +71338,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -72985,8 +73016,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -72996,6 +73028,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -73762,8 +73795,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -73773,6 +73807,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -74548,8 +74583,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -74559,6 +74595,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -76244,8 +76281,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -76255,6 +76293,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -77940,8 +77979,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -77951,6 +77991,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -78710,8 +78751,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -78721,6 +78763,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -80406,8 +80449,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -80417,6 +80461,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -82099,8 +82144,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -82110,6 +82156,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -83792,8 +83839,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -83803,6 +83851,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
@@ -85486,8 +85535,9 @@ paths:
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
                         progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. ad_server_targeting: authoring (a ready-made
-                        save_signal draft, reach and status per value; mapping kinds).
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
                       type: array
                       items:
                         type: string
@@ -85497,6 +85547,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - price_paid
                           - authoring
                           - pulse
                           - deliverySummary
