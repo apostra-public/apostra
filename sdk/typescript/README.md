@@ -1,6 +1,7 @@
 # Apostra TypeScript SDK
 
-Typed calls to the public V3 HTTP API. Requires Node.js 22.18 or later.
+The official SDK for Apostra (formerly Scope3 and Interchange). Typed calls to the
+public V3 HTTP API. Requires Node.js 22.18 or later.
 
 ```bash
 npm install @apostra/sdk
