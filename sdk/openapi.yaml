@@ -43021,6 +43021,81 @@ paths:
                           action:
                             type: string
                             const: created
+                          nextStep:
+                            oneOf:
+                              - type: object
+                                properties:
+                                  status:
+                                    type: string
+                                    const: ready
+                                  tool:
+                                    type: string
+                                    const: request_proposals
+                                  arguments:
+                                    type: object
+                                    properties:
+                                      campaignId:
+                                        type: string
+                                      expectedCampaignRevision:
+                                        type: number
+                                    required:
+                                      - campaignId
+                                      - expectedCampaignRevision
+                                    additionalProperties: false
+                                required:
+                                  - status
+                                  - tool
+                                  - arguments
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  status:
+                                    type: string
+                                    const: needs_input
+                                  needs:
+                                    minItems: 1
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        what:
+                                          type: string
+                                          enum:
+                                            - market
+                                            - seller_choice
+                                        tool:
+                                          type: string
+                                          enum:
+                                            - save_campaign
+                                            - request_proposals
+                                      required:
+                                        - what
+                                        - tool
+                                      additionalProperties: false
+                                  leadsTo:
+                                    type: string
+                                    const: request_proposals
+                                required:
+                                  - status
+                                  - needs
+                                  - leadsTo
+                                additionalProperties: false
+                              - type: object
+                                properties:
+                                  status:
+                                    type: string
+                                    const: wholesale_catalogue
+                                  tool:
+                                    type: string
+                                    const: search
+                                  leadsTo:
+                                    type: string
+                                    const: save_media_buy
+                                required:
+                                  - status
+                                  - tool
+                                  - leadsTo
+                                additionalProperties: false
                         required:
                           - campaign
                           - action

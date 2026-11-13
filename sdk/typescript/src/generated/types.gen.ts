@@ -21298,7 +21298,56 @@ export type SaveCampaignResponses = {
             deprecationNotice?: SaveCampaignSuccessDeprecationNotice;
             mediaBuys?: SaveCampaignSuccessMediaBuys;
             action: 'created';
-            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessTakenOver | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'created' | undefined;
+            nextStep?: {
+                status: 'ready';
+                tool: 'request_proposals';
+                arguments: {
+                    campaignId: string;
+                    expectedCampaignRevision: number;
+                };
+                needs?: never;
+                leadsTo?: never;
+            } | {
+                status: 'needs_input';
+                needs: Array<{
+                    what: 'market' | 'seller_choice';
+                    tool: 'save_campaign' | 'request_proposals';
+                }>;
+                leadsTo: 'request_proposals';
+                tool?: never;
+                arguments?: never;
+            } | {
+                status: 'wholesale_catalogue';
+                tool: 'search';
+                leadsTo: 'save_media_buy';
+                arguments?: never;
+                needs?: never;
+            };
+            [key: string]: SaveCampaignSuccessValue | SaveCampaignSuccessServerTime | SaveCampaignSuccessCampaign | SaveCampaignSuccessPartialWrite | SaveCampaignSuccessPriorSteps | SaveCampaignSuccessTakenOver | SaveCampaignSuccessMembership | SaveCampaignSuccessExecution | SaveCampaignSuccessWarnings | SaveCampaignSuccessSkippedSellerAccountIds | SaveCampaignSuccessPropertyListAttachment | SaveCampaignSuccessPropertyListClear | SaveCampaignSuccessCampaignPropertyLists | SaveCampaignSuccessCreativeResync | SaveCampaignSuccessDeprecationNotice | SaveCampaignSuccessMediaBuys | 'created' | {
+                status: 'ready';
+                tool: 'request_proposals';
+                arguments: {
+                    campaignId: string;
+                    expectedCampaignRevision: number;
+                };
+                needs?: never;
+                leadsTo?: never;
+            } | {
+                status: 'needs_input';
+                needs: Array<{
+                    what: 'market' | 'seller_choice';
+                    tool: 'save_campaign' | 'request_proposals';
+                }>;
+                leadsTo: 'request_proposals';
+                tool?: never;
+                arguments?: never;
+            } | {
+                status: 'wholesale_catalogue';
+                tool: 'search';
+                leadsTo: 'save_media_buy';
+                arguments?: never;
+                needs?: never;
+            } | undefined;
         } | {
             serverTime?: SaveCampaignSuccessServerTime;
             campaign: SaveCampaignSuccessCampaign;
