@@ -29028,6 +29028,14 @@ export type SaveMediaBuyData = {
              */
             leadFormId?: string;
             /**
+             * Business phone number in international E.164 format. Required for Meta Leads — Calls.
+             */
+            metaCallPhoneNumber?: string;
+            /**
+             * Provider-native Facebook Event ID. Required for Meta Facebook Event Responses; pass one of the upcoming Page-owned Event candidates from account resource readiness.
+             */
+            metaEventId?: string;
+            /**
              * Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.
              */
             appId?: string;
@@ -29890,6 +29898,14 @@ export type SaveMediaBuyData = {
              * Provider-native lead form ID. For Meta Instant Forms, must belong to the selected Page.
              */
             leadFormId?: string;
+            /**
+             * Business phone number in international E.164 format. Required for Meta Leads — Calls.
+             */
+            metaCallPhoneNumber?: string;
+            /**
+             * Provider-native Facebook Event ID. Required for Meta Facebook Event Responses; pass one of the upcoming Page-owned Event candidates from account resource readiness.
+             */
+            metaEventId?: string;
             /**
              * Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.
              */

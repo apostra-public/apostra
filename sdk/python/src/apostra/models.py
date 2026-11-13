@@ -16550,6 +16550,10 @@ class SaveMediaBuyInputKindCreateProductsItem(TypedDict):
     '\n    Meta welcome-message flow ID for lead-to-message destinations (Messenger, Instagram Direct, WhatsApp). Required for these products; never auto-selected.\n    '
     leadFormId: NotRequired[str]
     '\n    Provider-native lead form ID. For Meta Instant Forms, must belong to the selected Page.\n    '
+    metaCallPhoneNumber: NotRequired[str]
+    '\n    Business phone number in international E.164 format. Required for Meta Leads — Calls.\n    '
+    metaEventId: NotRequired[str]
+    '\n    Provider-native Facebook Event ID. Required for Meta Facebook Event Responses; pass one of the upcoming Page-owned Event candidates from account resource readiness.\n    '
     appId: NotRequired[str]
     '\n    Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.\n    '
     startRequiresAllCreativesApproved: NotRequired[bool]
@@ -17151,6 +17155,10 @@ class SaveMediaBuyInputKindUpdateProductsItem(TypedDict):
     '\n    Meta welcome-message flow ID for lead-to-message destinations (Messenger, Instagram Direct, WhatsApp). Required for these products; never auto-selected.\n    '
     leadFormId: NotRequired[str]
     '\n    Provider-native lead form ID. For Meta Instant Forms, must belong to the selected Page.\n    '
+    metaCallPhoneNumber: NotRequired[str]
+    '\n    Business phone number in international E.164 format. Required for Meta Leads — Calls.\n    '
+    metaEventId: NotRequired[str]
+    '\n    Provider-native Facebook Event ID. Required for Meta Facebook Event Responses; pass one of the upcoming Page-owned Event candidates from account resource readiness.\n    '
     appId: NotRequired[str]
     '\n    Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.\n    '
     startRequiresAllCreativesApproved: NotRequired[bool]

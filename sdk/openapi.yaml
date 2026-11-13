@@ -50561,6 +50561,18 @@ paths:
                             example: '987654321098765'
                             type: string
                             minLength: 1
+                          metaCallPhoneNumber:
+                            description: Business phone number in international E.164 format. Required for Meta Leads — Calls.
+                            example: '+14155552671'
+                            type: string
+                            pattern: ^\+[1-9]\d{1,14}$
+                          metaEventId:
+                            description: >-
+                              Provider-native Facebook Event ID. Required for Meta Facebook Event Responses; pass one of
+                              the upcoming Page-owned Event candidates from account resource readiness.
+                            example: '1234567890123456'
+                            type: string
+                            minLength: 1
                           appId:
                             description: >-
                               Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app
@@ -52368,6 +52380,18 @@ paths:
                           leadFormId:
                             description: Provider-native lead form ID. For Meta Instant Forms, must belong to the selected Page.
                             example: '987654321098765'
+                            type: string
+                            minLength: 1
+                          metaCallPhoneNumber:
+                            description: Business phone number in international E.164 format. Required for Meta Leads — Calls.
+                            example: '+14155552671'
+                            type: string
+                            pattern: ^\+[1-9]\d{1,14}$
+                          metaEventId:
+                            description: >-
+                              Provider-native Facebook Event ID. Required for Meta Facebook Event Responses; pass one of
+                              the upcoming Page-owned Event candidates from account resource readiness.
+                            example: '1234567890123456'
                             type: string
                             minLength: 1
                           appId:
