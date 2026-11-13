@@ -889,7 +889,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or allow certification buys. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send it without dryRun. A connected agent is not yet verified as theirs."
+    "summary": "Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent: rename it or allow certification buys. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send it without dryRun. A connected agent is not yet verified as theirs."
   },
   "save_ask": {
     "path": "/tools/save_ask",

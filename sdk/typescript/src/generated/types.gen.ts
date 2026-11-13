@@ -9390,7 +9390,7 @@ export type GetStatusResponses = {
                 results: Array<{
                     agentId: string;
                     displayName: string;
-                    kind: 'sales' | 'creative' | 'buyer';
+                    kind: 'sales' | 'creative' | 'proposal' | 'buyer';
                     findingCount?: number;
                     /**
                      * Findings by outcome: failing ones by severity, and unchecked for the ones not checked yet. A finding that passed is not counted. findingCount counts every finding that has not passed, unchecked ones included.
@@ -17153,9 +17153,9 @@ export type SaveAgentData = {
          */
         reason?: string;
         /**
-         * Agent kind to register: sales or creative.
+         * Agent kind to register: sales, creative or proposal.
          */
-        kind?: 'sales' | 'creative';
+        kind?: 'sales' | 'creative' | 'proposal';
         /**
          * Agent name.
          */
@@ -17327,7 +17327,7 @@ export type SaveAgentResponses = {
             object: {
                 agentId: string;
                 displayName: string;
-                role: 'SALES' | 'CREATIVE';
+                role: 'SALES' | 'CREATIVE' | 'PROPOSAL';
                 href: string;
                 created: boolean;
                 stage?: 'built' | 'connected' | 'tested' | 'certified' | 'listed';
@@ -17405,9 +17405,9 @@ export type SaveAgentResponses = {
     };
 };
 
-export type SaveAgentSuccessObjectInferredAlternativeKindsItem = 'sales' | 'creative' | 'buyer';
+export type SaveAgentSuccessObjectInferredAlternativeKindsItem = 'sales' | 'creative' | 'proposal' | 'buyer';
 
-export type SaveAgentSuccessObjectInferredKind = 'sales' | 'creative' | 'buyer';
+export type SaveAgentSuccessObjectInferredKind = 'sales' | 'creative' | 'proposal' | 'buyer';
 
 export type SaveAgentSuccessSaveAgentDeveloperPreviewedOutput = {
     kind: 'agent';
@@ -17442,9 +17442,9 @@ export type SaveAgentSuccessSaveAgentDeveloperPreviewedOutput = {
     };
 };
 
-export type SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectInferredAlternativeKindsItem = 'sales' | 'creative' | 'buyer';
+export type SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectInferredAlternativeKindsItem = 'sales' | 'creative' | 'proposal' | 'buyer';
 
-export type SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectInferredKind = 'sales' | 'creative' | 'buyer';
+export type SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectInferredKind = 'sales' | 'creative' | 'proposal' | 'buyer';
 
 export type SaveAskData = {
     body: ({

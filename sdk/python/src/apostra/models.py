@@ -6042,7 +6042,7 @@ class GetStatusResultAgents(TypedDict):
 class GetStatusResultAgentsResultsItem(TypedDict):
     agentId: str
     displayName: str
-    kind: Literal["sales", "creative", "buyer"]
+    kind: Literal["sales", "creative", "proposal", "buyer"]
     findingCount: NotRequired[int]
     findingCounts: NotRequired[GetStatusResultAgentsResultsItemFindingCounts]
     '\n    Findings by outcome: failing ones by severity, and unchecked for the ones not checked yet. A finding that passed is not counted. findingCount counts every finding that has not passed, unchecked ones included.\n    '
@@ -9787,8 +9787,8 @@ class SaveAgentInput(TypedDict):
     '\n    Product mode.\n    '
     reason: NotRequired[str]
     '\n    Reason for change.\n    '
-    kind: NotRequired[Literal["sales", "creative"]]
-    '\n    Agent kind to register: sales or creative.\n    '
+    kind: NotRequired[Literal["sales", "creative", "proposal"]]
+    '\n    Agent kind to register: sales, creative or proposal.\n    '
     displayName: NotRequired[str]
     '\n    Agent name.\n    '
     certificationRequested: NotRequired[bool]
@@ -9838,7 +9838,7 @@ class SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHref
 class SaveAgentResultKindAgentWithObjectCreatedAndObjectDisplayNameAndObjectHrefAndObjectRoleObject(TypedDict):
     agentId: str
     displayName: str
-    role: Literal["SALES", "CREATIVE"]
+    role: Literal["SALES", "CREATIVE", "PROPOSAL"]
     href: str
     created: bool
     stage: NotRequired[Literal["built", "connected", "tested", "certified", "listed"]]
@@ -9916,9 +9916,9 @@ class SaveAgentResultKindBuyerAgentObject(TypedDict):
     displayName: str
     lifecycleState: Literal["active"]
 
-SaveAgentSuccessObjectInferredAlternativeKindsItem: TypeAlias = Literal["sales", "creative", "buyer"]
+SaveAgentSuccessObjectInferredAlternativeKindsItem: TypeAlias = Literal["sales", "creative", "proposal", "buyer"]
 
-SaveAgentSuccessObjectInferredKind: TypeAlias = Literal["sales", "creative", "buyer"]
+SaveAgentSuccessObjectInferredKind: TypeAlias = Literal["sales", "creative", "proposal", "buyer"]
 
 class SaveAgentSuccessSaveAgentDeveloperPreviewedOutput(TypedDict):
     kind: Literal["agent"]
@@ -9943,9 +9943,9 @@ class SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectInferred(TypedDict)
     displayName: str
     displayNameSource: Literal["agent", "host", "developer"]
 
-SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectInferredAlternativeKindsItem: TypeAlias = Literal["sales", "creative", "buyer"]
+SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectInferredAlternativeKindsItem: TypeAlias = Literal["sales", "creative", "proposal", "buyer"]
 
-SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectInferredKind: TypeAlias = Literal["sales", "creative", "buyer"]
+SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectInferredKind: TypeAlias = Literal["sales", "creative", "proposal", "buyer"]
 
 class SaveAgentSuccessSaveAgentDeveloperPreviewedOutputObjectNotReadYet(TypedDict):
     reason: Literal["authentication_required"]
