@@ -41857,6 +41857,9 @@ paths:
                   type:
                     - string
                     - 'null'
+                briefConfirmed:
+                  description: Send with brief, true once the buyer has seen that exact text and agreed to it.
+                  type: boolean
                 flight:
                   description: Flight window. Null clears it; omit to leave it unchanged.
                   anyOf:

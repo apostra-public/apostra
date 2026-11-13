@@ -11383,6 +11383,8 @@ class SaveCampaignInput(TypedDict):
     '\n    Revision from last get. Required to cancel; re-read and retry after a conflict.\n    '
     brief: NotRequired[str | None]
     '\n    Campaign brief: goal, audience, and promoted item. Null clears it; omit to leave it unchanged.\n    '
+    briefConfirmed: NotRequired[bool]
+    '\n    Send with brief, true once the buyer has seen that exact text and agreed to it.\n    '
     flight: NotRequired[SaveCampaignInputFlightValue | None]
     '\n    Flight window. Null clears it; omit to leave it unchanged.\n    '
     budget: NotRequired[SaveCampaignInputBudget]
