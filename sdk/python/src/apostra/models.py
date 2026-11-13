@@ -4769,6 +4769,7 @@ GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndM
 
 class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObject(TypedDict):
     advertiserId: NotRequired[str]
+    salesMode: NotRequired[Literal["WHOLESALE", "COMPOSING", "BOTH"] | None]
     sandbox: NotRequired[bool]
     targetingOverlay: NotRequired[dict[str, JsonValue]]
     '\n    AdCP TargetingOverlay (campaign subset); same shape as the save_campaign targetingOverlay input.\n    '

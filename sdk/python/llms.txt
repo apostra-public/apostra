@@ -1,5 +1,7 @@
 # Apostra Python SDK
 
+> Apostra (formerly Scope3 and Interchange) helps you plan, run, and understand advertising across sellers from one connected place.
+
 Read `SKILL.md` in this package before implementing an Apostra task.
 
 - SDK guide: https://docs.apostra.com/v3/sdk-guide

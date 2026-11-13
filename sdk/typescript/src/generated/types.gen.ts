@@ -8312,6 +8312,7 @@ export type GetResponses = {
             kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'buyer_rfp' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'library_request' | 'decision' | 'approval' | 'account_relationship' | 'advertiser_access' | 'notification_config';
             object: {
                 advertiserId?: string;
+                salesMode?: 'WHOLESALE' | 'COMPOSING' | 'BOTH' | null;
                 sandbox?: boolean;
                 /**
                  * AdCP TargetingOverlay (campaign subset); same shape as the save_campaign targetingOverlay input.
