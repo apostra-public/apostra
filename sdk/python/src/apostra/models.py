@@ -20256,22 +20256,38 @@ SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved |
 SaveSellerSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
 class SaveSessionInput(TypedDict):
-    action: Literal["record_note"]
-    '\n    Persist a private Session note.\n    '
-    clientRequestId: NotRequired[SaveSessionRequestClientRequestId]
-    '\n    Idempotency key for this authorised operation.\n    '
+    action: NotRequired[Literal["record_note"]]
+    '\n    Sent only to persist a private note.\n    '
     sessionId: SaveSessionRequestSessionId
-    '\n    Exact accessible Session ID for the private note.\n    '
-    note: str
+    '\n    Exact accessible Session ID the change applies to.\n    '
+    clientRequestId: NotRequired[SaveSessionRequestClientRequestId]
+    '\n    Idempotency key for a private note.\n    '
+    note: NotRequired[str]
     '\n    Private authored coaching note; never delivered to a buyer.\n    '
     throughEventId: NotRequired[SaveSessionRequestThroughEventId]
     '\n    Optional exact retained event that the note concerns.\n    '
+    participants: NotRequired[list[SaveSessionInputParticipantsItem]]
+    '\n    People and agents to add, remove or give a role. A Session always keeps exactly one lead.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
+class SaveSessionInputParticipantsItem(TypedDict):
+    kind: Literal["human", "agent", "assistant"]
+    '\n    human (a person on the account), agent (a buyer agent of the account) or assistant (the Apostra Assistant).\n    '
+    userId: NotRequired[str | None]
+    '\n    The person, for kind human only.\n    '
+    principalId: NotRequired[SaveSessionRequestParticipantsItemPrincipalId | None]
+    '\n    The buyer agent id the buyer_agent read returns, for kind agent only.\n    '
+    role: NotRequired[Literal["lead", "expert", "participant"] | None]
+    '\n    lead answers when nobody is addressed (exactly one per Session); expert and participant answer when addressed. Not for kind human; not needed to remove.\n    '
+    inSession: bool
+    '\n    true adds or changes the role; false removes.\n    '
+
 SaveSessionRequestClientRequestId: TypeAlias = str
+
+SaveSessionRequestParticipantsItemPrincipalId: TypeAlias = str
 
 SaveSessionRequestSessionId: TypeAlias = str
 
@@ -20279,14 +20295,24 @@ SaveSessionRequestThroughEventId: TypeAlias = str
 
 class SaveSessionResult(TypedDict):
     sessionId: str
-    action: Literal["record_note"]
+    action: NotRequired[Literal["record_note"]]
     receipt: SaveSessionResultReceiptValue | None
     privateNoteId: str | None
+    participants: NotRequired[list[SaveSessionResultParticipantsItem]]
+
+class SaveSessionResultParticipantsItem(TypedDict):
+    kind: Literal["human", "agent", "assistant"]
+    userId: str | None
+    principalId: SaveSessionSuccessParticipantsItemPrincipalId | None
+    role: Literal["lead", "expert", "participant"] | None
+    addedAt: str
 
 class SaveSessionResultReceiptValue(TypedDict):
     state: Literal["recorded", "queued", "sent", "failed"]
     messageEventId: SaveSessionSuccessReceiptMessageEventId
     deliveryRef: SaveSessionSuccessReceiptDeliveryRef | None
+
+SaveSessionSuccessParticipantsItemPrincipalId: TypeAlias = str
 
 SaveSessionSuccessReceiptDeliveryRef: TypeAlias = str
 

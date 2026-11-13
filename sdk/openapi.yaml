@@ -59048,11 +59048,13 @@ paths:
     post:
       operationId: save_session
       summary: >-
-        Persist one private coaching note on an accessible Session. Requires a Session ID, note and clientRequestId;
-        never sends a customer message.
+        Change who is in a Buyer account Session: pass participants to add or remove people and agents or to change the
+        lead (one per Session; the Apostra Assistant can lead). On a Seller account, record a private note: action
+        record_note, sessionId, note, clientRequestId. Never messages a customer.
       description: >-
-        Persist one private coaching note on an accessible Session. Requires a Session ID, note and clientRequestId;
-        never sends a customer message.
+        Change who is in a Buyer account Session: pass participants to add or remove people and agents or to change the
+        lead (one per Session; the Apostra Assistant can lead). On a Seller account, record a private note: action
+        record_note, sessionId, note, clientRequestId. Never messages a customer.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -59077,26 +59079,72 @@ paths:
               type: object
               properties:
                 action:
+                  description: Sent only to persist a private note.
                   type: string
                   const: record_note
-                  description: Persist a private Session note.
-                clientRequestId:
-                  description: Idempotency key for this authorised operation.
-                  $ref: '#/components/schemas/save_session_request_ClientRequestId'
-                  type: string
                 sessionId:
-                  description: Exact accessible Session ID for the private note.
+                  description: Exact accessible Session ID the change applies to.
                   $ref: '#/components/schemas/save_session_request_SessionId'
                   type: string
+                clientRequestId:
+                  description: Idempotency key for a private note.
+                  $ref: '#/components/schemas/save_session_request_ClientRequestId'
+                  type: string
                 note:
+                  description: Private authored coaching note; never delivered to a buyer.
                   type: string
                   minLength: 1
                   maxLength: 8000
-                  description: Private authored coaching note; never delivered to a buyer.
                 throughEventId:
                   description: Optional exact retained event that the note concerns.
                   $ref: '#/components/schemas/save_session_request_ThroughEventId'
                   type: string
+                participants:
+                  description: People and agents to add, remove or give a role. A Session always keeps exactly one lead.
+                  minItems: 1
+                  maxItems: 10
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      kind:
+                        type: string
+                        enum:
+                          - human
+                          - agent
+                          - assistant
+                        description: >-
+                          human (a person on the account), agent (a buyer agent of the account) or assistant (the
+                          Apostra Assistant).
+                      userId:
+                        description: The person, for kind human only.
+                        anyOf:
+                          - type: string
+                            pattern: ^[1-9][0-9]{0,17}$
+                          - type: 'null'
+                      principalId:
+                        description: The buyer agent id the buyer_agent read returns, for kind agent only.
+                        anyOf:
+                          - $ref: '#/components/schemas/save_session_request_ParticipantsItemPrincipalId'
+                          - type: 'null'
+                      role:
+                        description: >-
+                          lead answers when nobody is addressed (exactly one per Session); expert and participant answer
+                          when addressed. Not for kind human; not needed to remove.
+                        anyOf:
+                          - type: string
+                            enum:
+                              - lead
+                              - expert
+                              - participant
+                          - type: 'null'
+                      inSession:
+                        type: boolean
+                        description: true adds or changes the role; false removes.
+                    required:
+                      - kind
+                      - inSession
+                    additionalProperties: false
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -59112,10 +59160,7 @@ paths:
                     - type: string
                       pattern: ^[1-9][0-9]*$
               required:
-                - action
-                - clientRequestId
                 - sessionId
-                - note
               additionalProperties: false
       responses:
         '200':
@@ -59161,9 +59206,48 @@ paths:
                         type:
                           - string
                           - 'null'
+                      participants:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            kind:
+                              type: string
+                              enum:
+                                - human
+                                - agent
+                                - assistant
+                            userId:
+                              anyOf:
+                                - type: string
+                                  pattern: ^[1-9][0-9]{0,17}$
+                                - type: 'null'
+                            principalId:
+                              anyOf:
+                                - $ref: '#/components/schemas/save_session_success_ParticipantsItemPrincipalId'
+                                - type: 'null'
+                            role:
+                              anyOf:
+                                - type: string
+                                  enum:
+                                    - lead
+                                    - expert
+                                    - participant
+                                - type: 'null'
+                            addedAt:
+                              type: string
+                              format: date-time
+                              pattern: >-
+                                ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                          required:
+                            - kind
+                            - userId
+                            - principalId
+                            - role
+                            - addedAt
+                          additionalProperties: false
                     required:
                       - sessionId
-                      - action
                       - receipt
                       - privateNoteId
                     additionalProperties: {}
@@ -113990,15 +114074,19 @@ components:
       propertyNames:
         type: string
       additionalProperties: {}
-    save_session_request_ClientRequestId:
-      type: string
-      minLength: 1
-      maxLength: 512
     save_session_request_SessionId:
       type: string
       minLength: 1
       maxLength: 512
+    save_session_request_ClientRequestId:
+      type: string
+      minLength: 1
+      maxLength: 512
     save_session_request_ThroughEventId:
+      type: string
+      minLength: 1
+      maxLength: 512
+    save_session_request_ParticipantsItemPrincipalId:
       type: string
       minLength: 1
       maxLength: 512
@@ -114007,6 +114095,10 @@ components:
       minLength: 1
       maxLength: 512
     save_session_success_ReceiptDeliveryRef:
+      type: string
+      minLength: 1
+      maxLength: 512
+    save_session_success_ParticipantsItemPrincipalId:
       type: string
       minLength: 1
       maxLength: 512
