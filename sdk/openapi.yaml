@@ -30368,6 +30368,7 @@ paths:
                                   enum:
                                     - sales
                                     - creative
+                                    - proposal
                                     - buyer
                                 findingCount:
                                   type: integer
@@ -38647,13 +38648,13 @@ paths:
     post:
       operationId: save_agent
       summary: >-
-        Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or
-        allow certification buys. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send
-        it without dryRun. A connected agent is not yet verified as theirs.
+        Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent:
+        rename it or allow certification buys. To connect from a URL, send agentUrl with dryRun: true, show what was
+        read, then send it without dryRun. A connected agent is not yet verified as theirs.
       description: >-
-        Confirm a Sales Agent product mode, register a Sales or Creative Agent, or update an owned Agent: rename it or
-        allow certification buys. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send
-        it without dryRun. A connected agent is not yet verified as theirs.
+        Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent:
+        rename it or allow certification buys. To connect from a URL, send agentUrl with dryRun: true, show what was
+        read, then send it without dryRun. A connected agent is not yet verified as theirs.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -38703,11 +38704,12 @@ paths:
                   minLength: 1
                   maxLength: 2000
                 kind:
-                  description: 'Agent kind to register: sales or creative.'
+                  description: 'Agent kind to register: sales, creative or proposal.'
                   type: string
                   enum:
                     - sales
                     - creative
+                    - proposal
                 displayName:
                   description: Agent name.
                   type: string
@@ -38862,6 +38864,7 @@ paths:
                                 enum:
                                   - SALES
                                   - CREATIVE
+                                  - PROPOSAL
                               href:
                                 type: string
                               created:
@@ -99839,24 +99842,28 @@ components:
       enum:
         - sales
         - creative
+        - proposal
         - buyer
     save_agent_success_ObjectInferredAlternativeKindsItem:
       type: string
       enum:
         - sales
         - creative
+        - proposal
         - buyer
     save_agent_success_SaveAgentDeveloperPreviewedOutputObjectInferredKind:
       type: string
       enum:
         - sales
         - creative
+        - proposal
         - buyer
     save_agent_success_SaveAgentDeveloperPreviewedOutputObjectInferredAlternativeKindsItem:
       type: string
       enum:
         - sales
         - creative
+        - proposal
         - buyer
     save_ask_success_AskId:
       type:
