@@ -18,9 +18,10 @@ dependencies = [
 ]
 
 [project.urls]
+Homepage = "https://docs.apostra.com"
 Source = "https://github.com/apostra-public/apostra/tree/main/sdk/python"
 Documentation = "https://docs.apostra.com/v3/sdk-guide"
-Changelog = "https://docs.apostra.com/v2/changelog"
+Changelog = "https://docs.apostra.com/v3/changelog"
 
 [dependency-groups]
 dev = ["mypy==1.20.0", "pyright==1.1.408", "ruff==0.12.12", "build==1.3.0"]
