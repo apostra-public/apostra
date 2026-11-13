@@ -2186,7 +2186,7 @@ class GetInputKindAdvertiserAccess(TypedDict):
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAdvertiserAccessItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2317,7 +2317,7 @@ class GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAd
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2446,7 +2446,7 @@ class GetInputKindAudience(TypedDict):
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindAudienceItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2706,7 +2706,7 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCatalogAndEventSourceItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2837,7 +2837,7 @@ class GetInputKindConnection(TypedDict):
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindConnectionItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -2968,7 +2968,7 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCreativeAndCreativeCollectionWithAdvertiserIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3097,7 +3097,7 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindCreativeAndCreativeCollectionWithSourceIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3615,7 +3615,7 @@ class GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDis
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3746,7 +3746,7 @@ class GetInputKindMaterial(TypedDict):
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindMaterialItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -3877,7 +3877,7 @@ class GetInputKindProposal(TypedDict):
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindProposalItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -4008,7 +4008,7 @@ class GetInputKindSeller(TypedDict):
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindSellerItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -4139,7 +4139,7 @@ class GetInputKindSession(TypedDict):
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindSessionItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -4270,7 +4270,7 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindWholesaleProductWithAdvertiserIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -4399,7 +4399,7 @@ class GetInputKindWholesaleProductWithSourceId(TypedDict):
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindWholesaleProductWithSourceIdItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -4544,7 +4544,7 @@ class GetInputKindWorkItem(TypedDict):
     '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
     workItemKind: Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]
     '\n    Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.\n    '
-    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
+    include: NotRequired[list[Literal["diagnostics", "adServerConnection", "adServerStatus", "syncHistory", "sandboxAccount", "modularReadiness", "poweredByAgent", "testRuns", "mappingWorkspace", "mediaBuys", "proposals", "creatives", "recentActivity", "deliverySummary", "sourceIdentity", "tracking", "propertyLists", "sellerScorecard", "pulse", "progress", "versions", "discounts", "rate_card", "price_paid", "effectiveOverlaySupport", "approvalRouting", "listing", "identity", "chatgpt", "files", "readiness", "operating", "entitlements", "teaching", "prebid", "commitmentRecord", "scores", "discoveryCard", "brief", "products", "evaluation", "certification", "validationRuns", "webhookDeliveries", "liveStatus", "pendingChange", "operations", "accounts", "brandProfile", "inventory", "preview", "items", "history", "report", "mediaBilling", "usageDetail", "pricing", "contracts", "paymentMethods", "invoiceHistory", "payouts", "reads", "reasoning", "lifecycle", "capacity", "source_access", "rendition_blocks", "visual_assets", "extraction_diagnostics", "composition_receipts", "repeats", "usage", "rate_card_preview", "avails_sheet_preview"]]]
     '\n    inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.\n    '
     items: NotRequired[GetInputKindWorkItemItems]
     '\n    For kind catalog with include items: which items to return and the cursor for the next page.\n    '
@@ -4997,6 +4997,12 @@ class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObje
     mediaBilling: NotRequired[GetSuccessMediaBilling]
     usageDetail: NotRequired[GetSuccessUsageDetail]
     pricing: NotRequired[GetSuccessPricing]
+    contracts: NotRequired[GetSuccessContracts]
+    accounts: NotRequired[GetSuccessAccounts]
+    accountsTotal: NotRequired[GetSuccessAccountsTotal]
+    '\n    The number of child accounts, whatever `accounts` lists.\n    '
+    paymentMethods: NotRequired[GetSuccessPaymentMethods]
+    invoiceHistory: NotRequired[GetSuccessInvoiceHistory]
     payouts: NotRequired[GetSuccessPayouts]
     unavailableIncludes: NotRequired[GetSuccessUnavailableIncludes]
 
@@ -5036,16 +5042,14 @@ class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObje
     '\n    True only for an organization that prepays and holds funded money. Show `availableMinor` only when it is true.\n    '
 
 class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCurrencyAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectOrganizationRolesAndObjectPayerAndObjectPayerAddressAndObjectPayerAddress2AndObjectPayerCcEmailsAndObjectPayerCityAndObjectPayerCompleteAndObjectPayerContactNameAndObjectPayerCountryAlpha2AndObjectPayerEmailAndObjectPayerMissingAndObjectPayerPhoneAndObjectPayerPostalCodeAndObjectPayerRedactedFieldsAndObjectPayerRegionAndObjectPayerTaxIdAndObjectPayerVisibilityAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPendingApprovalsAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCalibratingActivitiesAndObjectPlanCurrentAndObjectPlanEligibleAndObjectPlanEligibleWorkloadsAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanSuggestedPlanAndObjectPlanUpcomingAndObjectSetupProgressAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectInvoicesItem(TypedDict):
-    number: int
-    reference: str
+    number: GetSuccessObjectInvoicesItemNumber
+    reference: GetSuccessObjectInvoicesItemReference
     periodStart: GetSuccessObjectInvoicesItemPeriodStart
     periodEnd: GetSuccessObjectInvoicesItemPeriodEnd
-    amountMinor: int
-    '\n    The amount invoiced for the period, minor units.\n    '
-    balanceMinor: int
-    '\n    What is still owed on the invoice, minor units; 0 once settled.\n    '
+    amountMinor: GetSuccessObjectInvoicesItemAmountMinor
+    balanceMinor: GetSuccessObjectInvoicesItemBalanceMinor
     currency: GetSuccessObjectInvoicesItemCurrency
-    status: Literal["open", "overdue", "paid"]
+    status: GetSuccessObjectInvoicesItemStatus
     dueAt: GetSuccessObjectInvoicesItemDueAt
 
 class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObjectBalanceCurrencyAndObjectBalanceFundedMinorAndObjectBalanceOwedMinorAndObjectBalanceShowsAvailableAndObjectInvoicesAndObjectInvoicesTruncatedAndObjectNextActionAndObjectNextActionCanCompleteInChatAndObjectNextActionDocsUrlAndObjectNextActionMessageAndObjectNextActionSeverityAndObjectNextActionTypeAndObjectOrganizationCurrencyAndObjectOrganizationCustomerIdAndObjectOrganizationDisplayNameAndObjectOrganizationRolesAndObjectPayerAndObjectPayerAddressAndObjectPayerAddress2AndObjectPayerCcEmailsAndObjectPayerCityAndObjectPayerCompleteAndObjectPayerContactNameAndObjectPayerCountryAlpha2AndObjectPayerEmailAndObjectPayerMissingAndObjectPayerPhoneAndObjectPayerPostalCodeAndObjectPayerRedactedFieldsAndObjectPayerRegionAndObjectPayerTaxIdAndObjectPayerVisibilityAndObjectPaymentAuthorityAndObjectPaymentAuthorityExpiresAtAndObjectPaymentAuthoritySecureHandoffAndObjectPaymentAuthoritySecureHandoffAvailableAndObjectPaymentAuthoritySecureHandoffReasonAndObjectPaymentAuthorityStatusAndObjectPaymentAuthoritySubmissionAndObjectPaymentAuthorityVerifiedAndObjectPaymentTermsAndObjectPaymentTermsChosenAndObjectPayoutAndObjectPayoutOnboardingStatusAndObjectPayoutSetupRequiredAndObjectPendingApprovalsAndObjectPermissionsAndObjectPermissionsCanEditBillingInfoAndObjectPermissionsCanSetPayoutAndObjectPlanAndObjectPlanCalibratingActivitiesAndObjectPlanCurrentAndObjectPlanEligibleAndObjectPlanEligibleWorkloadsAndObjectPlanHelpAvailableAndObjectPlanOfferAndObjectPlanPassThroughAvailableAndObjectPlanRenewalAndObjectPlanSetupGrantAndObjectPlanShowsChoicesAndObjectPlanSuggestedPlanAndObjectPlanUpcomingAndObjectSetupProgressAndObjectStandingAndObjectStandingHoldsAndObjectStandingPostureAndObjectTermsAndObjectTermsAcceptanceRequiredAndObjectTermsAcceptedAtAndObjectTermsAcceptedVersionAndObjectTermsCanAcceptAndObjectTermsCurrentVersionAcceptedAndObjectTermsGovernedByExistingContractAndObjectTermsRequiredVersionAndObjectTermsUrlAndObjectUsageAndObjectUsageActivityIusAndObjectUsageUsedIusObjectNextAction(TypedDict):
@@ -5095,7 +5099,7 @@ class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObje
     '\n    Whether the organization has what an invoice needs: a payer name, a street address and a country. The same rule as the `BILLING_DETAILS` gap in buyer readiness. Computed from the stored details even when the fields below are redacted.\n    '
     missing: list[Literal["contactName", "address", "countryAlpha2"]]
     '\n    The payer fields an invoice still needs, from `contactName`, `address` and `countryAlpha2`, in that order. Empty when `complete` is true. Computed from the stored details by the same rule as `complete`, even when the fields below are redacted.\n    '
-    visibility: Literal["visible", "redacted"]
+    visibility: GetSuccessObjectPayerVisibility
     '\n    `redacted` for an organization-scoped service token: the fields in `redactedFields` are `null` (the email lists are empty) so a caller can tell "not allowed" from "empty".\n    '
     redactedFields: list[str]
 
@@ -5562,6 +5566,12 @@ class GetResultKindBillingWithObjectChangeableByAndObjectManagedByAndObjectManag
     mediaBilling: NotRequired[GetSuccessMediaBilling]
     usageDetail: NotRequired[GetSuccessUsageDetail]
     pricing: NotRequired[GetSuccessPricing]
+    contracts: NotRequired[GetSuccessContracts]
+    accounts: NotRequired[GetSuccessAccounts]
+    accountsTotal: NotRequired[GetSuccessAccountsTotal]
+    '\n    The number of child accounts, whatever `accounts` lists.\n    '
+    paymentMethods: NotRequired[GetSuccessPaymentMethods]
+    invoiceHistory: NotRequired[GetSuccessInvoiceHistory]
     payouts: NotRequired[GetSuccessPayouts]
     unavailableIncludes: NotRequired[GetSuccessUnavailableIncludes]
 
@@ -6344,6 +6354,28 @@ GetStatusSuccessSetupSellersResultsItemAction: TypeAlias = "GetStatusSuccessSetu
 
 GetStatusSuccessSetupSellersResultsItemSellerAccountId: TypeAlias = int
 
+class GetSuccessAccountsItem(TypedDict):
+    id: int
+    name: str
+    company: str | None
+    delegation: Literal["NONE", "VIEW", "OWN"]
+    '\n    Whether the account sees (`VIEW`) or owns (`OWN`) its billing. Always `NONE` today.\n    '
+    iuUsage: GetSuccessAccountsItemIuUsageValue | None
+    '\n    IUs the account used in the organization’s billing cycle. 0 is reported when accepted rating terms exist and the account had no rated activity; null when the IU experience or accepted rating terms are unavailable.\n    '
+
+GetSuccessAccounts: TypeAlias = "list[GetSuccessAccountsItem]"
+
+GetSuccessAccountsItemIuUsagePeriodEnd: TypeAlias = str
+
+GetSuccessAccountsItemIuUsagePeriodStart: TypeAlias = str
+
+class GetSuccessAccountsItemIuUsageValue(TypedDict):
+    quantity: float
+    periodStart: GetSuccessAccountsItemIuUsagePeriodStart
+    periodEnd: GetSuccessAccountsItemIuUsagePeriodEnd
+
+GetSuccessAccountsTotal: TypeAlias = int
+
 class GetSuccessBillingPendingApprovalActionCANCELATTERMAndREINSTATEAUTORENEWAL(TypedDict):
     kind: Literal["billing.renewal"]
     action: Literal["CANCEL_AT_TERM", "REINSTATE_AUTO_RENEWAL"]
@@ -6775,6 +6807,94 @@ class GetSuccessCatalogRefreshProblem(TypedDict):
     columns: NotRequired[list[str]]
     '\n    Missing column names; columns_missing only.\n    '
 
+class GetSuccessContracts(TypedDict):
+    visibility: GetSuccessContractsVisibility
+    '\n    `redacted` for an organization-scoped service token: the fields in `redactedFields` are null.\n    '
+    redactedFields: list[str]
+    agreements: list[GetSuccessContractsAgreementsItem]
+    documents: list[GetSuccessContractsDocumentsItem]
+    '\n    The agreement documents by id and title. They carry no link: a signed-in browser opens them on our site.\n    '
+    planHistory: list[GetSuccessContractsPlanHistoryItem]
+    '\n    The plans in force before the current and upcoming plans, in the order the document lists them.\n    '
+    renewalHistory: list[GetSuccessContractsRenewalHistoryItem]
+    '\n    Every renewal change recorded for the plan in force, in the order the document lists them. It carries no reason and no actor.\n    '
+
+class GetSuccessContractsAgreementsItem(TypedDict):
+    kind: Literal["STANDARD_TOS", "CUSTOM_CONTRACT", "AAA"] | None
+    status: Literal["active", "no_contract", "inherited_active", "inherited_hidden", "organization_contract_missing", "awaiting_acceptance"]
+    effectiveDate: GetSuccessContractsAgreementsItemEffectiveDate | None
+    endDate: GetSuccessContractsAgreementsItemEndDate | None
+    acceptedAt: GetSuccessContractsAgreementsItemAcceptedAt | None
+    acceptedByEmail: str | None
+    '\n    The email of the person who accepted. Null when `visibility` is `redacted`.\n    '
+
+GetSuccessContractsAgreementsItemAcceptedAt: TypeAlias = str
+
+GetSuccessContractsAgreementsItemEffectiveDate: TypeAlias = str
+
+GetSuccessContractsAgreementsItemEndDate: TypeAlias = str
+
+class GetSuccessContractsDocumentsItem(TypedDict):
+    id: str
+    title: str
+
+class GetSuccessContractsPlanHistoryItem(TypedDict):
+    planId: GetSuccessContractsPlanHistoryItemPlanId
+    planName: str
+    currency: GetSuccessContractsPlanHistoryItemCurrency
+    commitmentMinor: GetSuccessContractsPlanHistoryItemCommitmentMinor
+    includedIus: GetSuccessContractsPlanHistoryItemIncludedIus
+    iuPriceMinor: GetSuccessContractsPlanHistoryItemIuPriceMinor
+    termStart: GetSuccessContractsPlanHistoryItemTermStart
+    termEnd: GetSuccessContractsPlanHistoryItemTermEnd
+    rateCardVersion: str
+    '\n    The public version of the Rate Card the plan was accepted under.\n    '
+    acceptedAt: GetSuccessContractsPlanHistoryItemAcceptedAt
+    acceptanceSource: Literal["SIGNUP", "PLAN_BILLING", "MCP_APP", "ADMIN_ORDER_FORM", "AUTO_RENEWAL"]
+    activityTerms: list[GetSuccessContractsPlanHistoryItemActivityTermsItem]
+    '\n    What each priced activity cost under the plan, keyed by `activityCode`. The order is for presentation only.\n    '
+
+GetSuccessContractsPlanHistoryItemAcceptedAt: TypeAlias = str
+
+class GetSuccessContractsPlanHistoryItemActivityTermsItem(TypedDict):
+    activityCode: Literal["ACTIVATED_SOCIAL_ACCOUNT_MONTH", "SIMPLE_PROPOSAL_EVALUATION", "COMPLEX_PROPOSAL_EVALUATION", "MERCHANDISING_BRIEF_RESPONSE", "MURPH_AI_SUPPORT_SESSION", "HUMAN_EXPERT_SUPPORT_HOUR", "GENERATED_IMAGE", "GENERATED_VIDEO_SECONDS", "ANALYZE_ACCOUNT", "CAMPAIGN_OPTIMIZATION_MONTH", "MANAGED_MEDIA_BUY_MONTH", "STANDARD_DOCUMENT_UNDERSTANDING", "LARGE_DOCUMENT_UNDERSTANDING", "AUDIO_VIDEO_UNDERSTANDING_MINUTES", "CUSTOM_BIGQUERY_GIB", "MODULAR_SOURCE_MANAGEMENT_MONTH", "MANAGED_VIDEO_RENDITION_OUTPUT_SECOND", "COMPLETED_INTERCHANGE_MERCHANDISING_CYCLE", "SOCIAL_ACCOUNT_INTELLIGENCE_BILLING_PERIOD", "INTERCHANGE_MEDIA_BUY_BILLING_PERIOD"]
+    displayName: str
+    unitCount: int
+    unit: Literal["ACCOUNT_MONTH", "ACCOUNT_BILLING_PERIOD", "PROPOSAL", "RESPONSE", "SESSION", "SUPPORT_HOUR", "IMAGE", "GENERATED_SECOND", "ANALYSIS", "CAMPAIGN_MONTH", "MEDIA_BUY_MONTH", "MEDIA_BUY_BILLING_PERIOD", "FILE", "PROCESSING_JOB", "UNDERSTANDING_MINUTE", "GIB_SCANNED", "ACTIVE_SOURCE_MONTH", "OUTPUT_SECOND"]
+    catalogStatus: Literal["PUBLISHED", "CALIBRATING", "MEASURING"]
+    standardIuAmountMilli: int | None
+    pricing: Literal["STANDARD", "CUSTOM", "WAIVED", "UNPRICED"]
+    customIuAmountMilli: int | None
+    effectiveIuAmountMilli: int | None
+    billable: bool
+    includedBackfillMonths: int | None
+    payer: NotRequired[Literal["BUYER", "SELLER", "BOTH"]]
+
+GetSuccessContractsPlanHistoryItemCommitmentMinor: TypeAlias = int
+
+GetSuccessContractsPlanHistoryItemCurrency: TypeAlias = str
+
+GetSuccessContractsPlanHistoryItemIncludedIus: TypeAlias = int
+
+GetSuccessContractsPlanHistoryItemIuPriceMinor: TypeAlias = int
+
+GetSuccessContractsPlanHistoryItemPlanId: TypeAlias = str
+
+GetSuccessContractsPlanHistoryItemTermEnd: TypeAlias = str
+
+GetSuccessContractsPlanHistoryItemTermStart: TypeAlias = str
+
+class GetSuccessContractsRenewalHistoryItem(TypedDict):
+    instructionType: Literal["CANCEL_AT_TERM", "REINSTATE_AUTO_RENEWAL"]
+    effectiveAt: GetSuccessContractsRenewalHistoryItemEffectiveAt
+    recordedAt: GetSuccessContractsRenewalHistoryItemRecordedAt
+
+GetSuccessContractsRenewalHistoryItemEffectiveAt: TypeAlias = str
+
+GetSuccessContractsRenewalHistoryItemRecordedAt: TypeAlias = str
+
+GetSuccessContractsVisibility: TypeAlias = Literal["visible", "redacted"]
+
 class GetSuccessDeliveryGoalProgress(TypedDict):
     constraint: GetSuccessDeliveryGoalProgressConstraintValue | None
     expected: float | None
@@ -6815,6 +6935,55 @@ class GetSuccessHistoryVersionsResultsItemChangeSummary(TypedDict):
     unchanged: int
     removed: int
 
+class GetSuccessInvoiceHistory(TypedDict):
+    invoices: list[GetSuccessInvoiceHistoryInvoicesItem]
+    truncated: bool
+    '\n    True when the organization has older invoices than the 120 listed.\n    '
+
+class GetSuccessInvoiceHistoryInvoicesItem(TypedDict):
+    number: GetSuccessInvoiceHistoryInvoicesItemNumber
+    reference: GetSuccessInvoiceHistoryInvoicesItemReference
+    periodStart: GetSuccessInvoiceHistoryInvoicesItemPeriodStart
+    periodEnd: GetSuccessInvoiceHistoryInvoicesItemPeriodEnd
+    amountMinor: GetSuccessInvoiceHistoryInvoicesItemAmountMinor
+    balanceMinor: GetSuccessInvoiceHistoryInvoicesItemBalanceMinor
+    currency: GetSuccessInvoiceHistoryInvoicesItemCurrency
+    status: GetSuccessInvoiceHistoryInvoicesItemStatus
+    dueAt: GetSuccessInvoiceHistoryInvoicesItemDueAt
+    creditNotes: list[GetSuccessInvoiceHistoryInvoicesItemCreditNotesItem]
+    creditNotesTruncated: bool
+    '\n    True when the invoice has more credit notes than the 20 listed.\n    '
+
+GetSuccessInvoiceHistoryInvoicesItemAmountMinor: TypeAlias = int
+
+GetSuccessInvoiceHistoryInvoicesItemBalanceMinor: TypeAlias = int
+
+class GetSuccessInvoiceHistoryInvoicesItemCreditNotesItem(TypedDict):
+    reference: str
+    amountMinor: int
+    '\n    The credit, minor units of `currency`.\n    '
+    currency: GetSuccessInvoiceHistoryInvoicesItemCreditNotesItemCurrency
+    reason: str
+    issuedAt: GetSuccessInvoiceHistoryInvoicesItemCreditNotesItemIssuedAt
+
+GetSuccessInvoiceHistoryInvoicesItemCreditNotesItemCurrency: TypeAlias = str
+
+GetSuccessInvoiceHistoryInvoicesItemCreditNotesItemIssuedAt: TypeAlias = str
+
+GetSuccessInvoiceHistoryInvoicesItemCurrency: TypeAlias = str
+
+GetSuccessInvoiceHistoryInvoicesItemDueAt: TypeAlias = str
+
+GetSuccessInvoiceHistoryInvoicesItemNumber: TypeAlias = int
+
+GetSuccessInvoiceHistoryInvoicesItemPeriodEnd: TypeAlias = str
+
+GetSuccessInvoiceHistoryInvoicesItemPeriodStart: TypeAlias = str
+
+GetSuccessInvoiceHistoryInvoicesItemReference: TypeAlias = str
+
+GetSuccessInvoiceHistoryInvoicesItemStatus: TypeAlias = Literal["open", "overdue", "paid"]
+
 class GetSuccessMediaBilling(TypedDict):
     visibility: Literal["visible", "redacted"]
     '\n    `redacted` for an organization-scoped service token: `redactedFields` are left out of every entity.\n    '
@@ -6851,13 +7020,23 @@ class GetSuccessMediaBillingEntitiesItemContactsItem(TypedDict):
 
 GetSuccessObjectBalanceCurrency: TypeAlias = str
 
+GetSuccessObjectInvoicesItemAmountMinor: TypeAlias = int
+
+GetSuccessObjectInvoicesItemBalanceMinor: TypeAlias = int
+
 GetSuccessObjectInvoicesItemCurrency: TypeAlias = str
 
 GetSuccessObjectInvoicesItemDueAt: TypeAlias = str
 
+GetSuccessObjectInvoicesItemNumber: TypeAlias = int
+
 GetSuccessObjectInvoicesItemPeriodEnd: TypeAlias = str
 
 GetSuccessObjectInvoicesItemPeriodStart: TypeAlias = str
+
+GetSuccessObjectInvoicesItemReference: TypeAlias = str
+
+GetSuccessObjectInvoicesItemStatus: TypeAlias = Literal["open", "overdue", "paid"]
 
 class GetSuccessObjectLastChangeSummary(TypedDict):
     added: int
@@ -6874,6 +7053,8 @@ GetSuccessObjectOperationsByDestinationItemSellerRouteId: TypeAlias = str
 GetSuccessObjectOperationsByDestinationItemUnassigned: TypeAlias = Literal[True]
 
 GetSuccessObjectOrganizationCurrency: TypeAlias = str
+
+GetSuccessObjectPayerVisibility: TypeAlias = Literal["visible", "redacted"]
 
 GetSuccessObjectPaymentTerms: TypeAlias = Literal["net_15", "net_30", "net_45", "net_60", "net_90"]
 
@@ -7097,6 +7278,20 @@ GetSuccessOperationDetailsItemDestinationSellerName: TypeAlias = str
 GetSuccessOperationDetailsItemDestinationSellerRouteId: TypeAlias = str
 
 GetSuccessOperationDetailsItemDestinationUnassigned: TypeAlias = Literal[True]
+
+class GetSuccessPaymentMethods(TypedDict):
+    cards: list[GetSuccessPaymentMethodsCardsItem]
+    cardCollectionEnabled: bool
+    '\n    Whether the organization can add a card now. True wherever the card rail is set up, whether or not it already holds a card.\n    '
+
+class GetSuccessPaymentMethodsCardsItem(TypedDict):
+    id: str
+    '\n    The card’s id, the one a card removal names.\n    '
+    brand: str | None
+    last4: str | None
+    expiresMonth: int | None
+    expiresYear: int | None
+    status: Literal["pending_verification", "verified", "detached"]
 
 class GetSuccessPayouts(TypedDict):
     payees: list[GetSuccessPayoutsPayeesItem]
