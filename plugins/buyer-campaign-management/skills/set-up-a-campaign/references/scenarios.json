@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.20.0",
+  "skillVersion": "1.21.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -172,6 +172,17 @@
         "The agent does not refuse the URLs and does not send them to the upload Task.",
         "After confirmation, it calls save_creative with assets giving each public url and its assetType (IMAGE, VAST), the campaignId and landing_page_url, adding vastVersion only when the buyer gave it.",
         "It uses only the URLs the buyer gave, confirms each creative with get, and, if the buyer had given an HTML5 ZIP URL instead, explains that a ZIP goes through upload_creative_asset."
+      ]
+    },
+    {
+      "id": "brief-confirmed-before-campaign-save",
+      "title": "Confirm the brief before saving the campaign",
+      "given": "The buyer asks for a campaign in one conversational message that names the campaign, its flight, its budget and its goal, and gives no separate brief.",
+      "expect": [
+        "The agent sets the name, flight, budget and currency as fields rather than leaving them to be read out of the brief.",
+        "The agent shows the brief it intends to save in full, says it is what every seller reads at discovery, and asks in one question whether to expand or refine it, offering target audience, KPIs and creative messaging themes.",
+        "The agent calls save_campaign only after the buyer answers, saves the text the buyer agreed to, and sends briefConfirmed: true with it.",
+        "The agent sends a brief the buyer gave it as a brief verbatim; confirming never summarises or truncates it."
       ]
     }
   ]

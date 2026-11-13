@@ -19939,6 +19939,10 @@ export type SaveCampaignData = {
          */
         brief?: string | null;
         /**
+         * Send with brief, true once the buyer has seen that exact text and agreed to it.
+         */
+        briefConfirmed?: boolean;
+        /**
          * Flight window. Null clears it; omit to leave it unchanged.
          */
         flight?: {
