@@ -89096,6 +89096,21 @@ components:
               - status
               - detail
             additionalProperties: false
+          lockedProduct:
+            type: object
+            properties:
+              state:
+                type: string
+                enum:
+                  - placed
+                  - not_placed
+              detail:
+                type: string
+                minLength: 1
+                maxLength: 300
+            required:
+              - state
+            additionalProperties: false
         required:
           - id
           - name
@@ -97788,6 +97803,21 @@ components:
               - status
               - detail
             additionalProperties: false
+          lockedProduct:
+            type: object
+            properties:
+              state:
+                type: string
+                enum:
+                  - placed
+                  - not_placed
+              detail:
+                type: string
+                minLength: 1
+                maxLength: 300
+            required:
+              - state
+            additionalProperties: false
         required:
           - id
           - name
@@ -105051,6 +105081,21 @@ components:
             required:
               - status
               - detail
+            additionalProperties: false
+          lockedProduct:
+            type: object
+            properties:
+              state:
+                type: string
+                enum:
+                  - placed
+                  - not_placed
+              detail:
+                type: string
+                minLength: 1
+                maxLength: 300
+            required:
+              - state
             additionalProperties: false
         required:
           - id

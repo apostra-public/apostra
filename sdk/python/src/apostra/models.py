@@ -368,12 +368,17 @@ class GenerateVariantsSuccessGalleryVariantsItem(TypedDict):
     status: NotRequired[str]
     preview: GenerateVariantsSuccessGalleryVariantsItemPreview
     briefMatch: NotRequired[GenerateVariantsSuccessGalleryVariantsItemBriefMatch]
+    lockedProduct: NotRequired[GenerateVariantsSuccessGalleryVariantsItemLockedProduct]
 
 GenerateVariantsSuccessGalleryVariants: TypeAlias = "list[GenerateVariantsSuccessGalleryVariantsItem]"
 
 class GenerateVariantsSuccessGalleryVariantsItemBriefMatch(TypedDict):
     status: Literal["pass", "warn", "fail"]
     detail: str
+
+class GenerateVariantsSuccessGalleryVariantsItemLockedProduct(TypedDict):
+    state: Literal["placed", "not_placed"]
+    detail: NotRequired[str]
 
 class GenerateVariantsSuccessGalleryVariantsItemPreview(TypedDict):
     type: str
@@ -8287,12 +8292,17 @@ class OpenVariantGallerySuccessGalleryVariantsItem(TypedDict):
     status: NotRequired[str]
     preview: OpenVariantGallerySuccessGalleryVariantsItemPreview
     briefMatch: NotRequired[OpenVariantGallerySuccessGalleryVariantsItemBriefMatch]
+    lockedProduct: NotRequired[OpenVariantGallerySuccessGalleryVariantsItemLockedProduct]
 
 OpenVariantGallerySuccessGalleryVariants: TypeAlias = "list[OpenVariantGallerySuccessGalleryVariantsItem]"
 
 class OpenVariantGallerySuccessGalleryVariantsItemBriefMatch(TypedDict):
     status: Literal["pass", "warn", "fail"]
     detail: str
+
+class OpenVariantGallerySuccessGalleryVariantsItemLockedProduct(TypedDict):
+    state: Literal["placed", "not_placed"]
+    detail: NotRequired[str]
 
 class OpenVariantGallerySuccessGalleryVariantsItemPreview(TypedDict):
     type: str
@@ -14060,12 +14070,17 @@ class SaveCreativeSessionSuccessCreativeSessionGalleryVariantsItem(TypedDict):
     status: NotRequired[str]
     preview: SaveCreativeSessionSuccessCreativeSessionGalleryVariantsItemPreview
     briefMatch: NotRequired[SaveCreativeSessionSuccessCreativeSessionGalleryVariantsItemBriefMatch]
+    lockedProduct: NotRequired[SaveCreativeSessionSuccessCreativeSessionGalleryVariantsItemLockedProduct]
 
 SaveCreativeSessionSuccessCreativeSessionGalleryVariants: TypeAlias = "list[SaveCreativeSessionSuccessCreativeSessionGalleryVariantsItem]"
 
 class SaveCreativeSessionSuccessCreativeSessionGalleryVariantsItemBriefMatch(TypedDict):
     status: Literal["pass", "warn", "fail"]
     detail: str
+
+class SaveCreativeSessionSuccessCreativeSessionGalleryVariantsItemLockedProduct(TypedDict):
+    state: Literal["placed", "not_placed"]
+    detail: NotRequired[str]
 
 class SaveCreativeSessionSuccessCreativeSessionGalleryVariantsItemPreview(TypedDict):
     type: str
