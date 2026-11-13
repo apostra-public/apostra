@@ -26076,6 +26076,7 @@ paths:
                               - rfp_turn
                               - library_request
                               - decision
+                              - approval
                               - account_relationship
                               - advertiser_access
                               - notification_config
@@ -87386,6 +87387,7 @@ paths:
                               - $ref: '#/components/schemas/search_success_SearchRfpTurnPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchLibraryRequestPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchDecisionPageOutput'
+                              - $ref: '#/components/schemas/search_success_SearchApprovalPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchAskPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchConversationPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchBuyerAgentPageOutput'
@@ -87494,6 +87496,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchRfpTurnPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchLibraryRequestPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchDecisionPageOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchApprovalPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAskPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchConversationPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchBuyerAgentPageOutput'
@@ -87537,6 +87540,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchRfpTurnUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchLibraryRequestUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchDecisionUnavailableOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchApprovalUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAskUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchConversationUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchBuyerAgentUnavailableOutput'
@@ -117215,6 +117219,35 @@ components:
         - kind
       additionalProperties:
         $ref: '#/components/schemas/search_success_SearchDecisionPageOutputValue'
+    search_success_SearchApprovalPageOutput:
+      type: object
+      properties:
+        total:
+          $ref: '#/components/schemas/search_success_SearchApprovalPageOutputTotal'
+        totalLowerBound:
+          $ref: '#/components/schemas/search_success_SearchApprovalPageOutputTotalLowerBound'
+        returned:
+          $ref: '#/components/schemas/search_success_SearchApprovalPageOutputReturned'
+        hasMore:
+          $ref: '#/components/schemas/search_success_SearchApprovalPageOutputHasMore'
+        truncated:
+          $ref: '#/components/schemas/search_success_SearchApprovalPageOutputTruncated'
+        nextCursor:
+          $ref: '#/components/schemas/search_success_SearchApprovalPageOutputNextCursor'
+        results:
+          $ref: '#/components/schemas/search_success_SearchApprovalPageOutputResults'
+        outcome:
+          type: string
+          const: page_approval
+        kind:
+          type: string
+          const: approval
+      required:
+        - results
+        - outcome
+        - kind
+      additionalProperties:
+        $ref: '#/components/schemas/search_success_SearchApprovalPageOutputValue'
     search_success_SearchAskPageOutput:
       type: object
       properties:
@@ -118092,6 +118125,25 @@ components:
         kind:
           type: string
           const: decision
+        unavailable:
+          type: string
+        message:
+          type: string
+      required:
+        - outcome
+        - kind
+        - unavailable
+        - message
+      additionalProperties: {}
+    search_success_SearchApprovalUnavailableOutput:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: unavailable_approval
+        kind:
+          type: string
+          const: approval
         unavailable:
           type: string
         message:
@@ -121569,6 +121621,91 @@ components:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchDecisionPageOutputValue: {}
+    search_success_SearchApprovalPageOutputTotal:
+      type: number
+    search_success_SearchApprovalPageOutputTotalLowerBound:
+      type: number
+    search_success_SearchApprovalPageOutputReturned:
+      type: number
+    search_success_SearchApprovalPageOutputHasMore:
+      type: boolean
+    search_success_SearchApprovalPageOutputTruncated:
+      type: boolean
+    search_success_SearchApprovalPageOutputNextCursor:
+      type: string
+    search_success_SearchApprovalPageOutputResults:
+      type: array
+      items:
+        type: object
+        properties:
+          advertiserId:
+            type: string
+          name:
+            type:
+              - string
+              - 'null'
+          sandbox:
+            type: boolean
+          sourceType:
+            anyOf:
+              - type: string
+                enum:
+                  - inline
+                  - url
+                  - file
+              - type: 'null'
+            description: 'Where the items come from: url when url is set, file when file is set.'
+          lastChangeSummary:
+            anyOf:
+              - type: object
+                properties:
+                  added:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  updated:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  unchanged:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  removed:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                required:
+                  - added
+                  - updated
+                  - unchanged
+                  - removed
+                additionalProperties: false
+              - type: 'null'
+            description: Items in the latest version against the one before it.
+          transform:
+            anyOf:
+              - type: object
+                properties:
+                  name:
+                    type: string
+                  updatedAt:
+                    type: string
+                required:
+                  - name
+                  - updatedAt
+                additionalProperties: false
+              - type: 'null'
+            description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+        additionalProperties: {}
+    search_success_SearchApprovalPageOutputValue: {}
     search_success_SearchAskPageOutputTotal:
       type: number
     search_success_SearchAskPageOutputTotalLowerBound:
