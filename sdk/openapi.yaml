@@ -1880,7 +1880,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -3140,7 +3140,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -4376,7 +4376,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -5600,7 +5600,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -6825,7 +6825,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -8057,7 +8057,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -9288,7 +9288,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -10426,7 +10426,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -11659,7 +11659,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -12884,7 +12884,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -14031,7 +14031,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -15172,7 +15172,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -16403,7 +16403,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -17628,7 +17628,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -18858,7 +18858,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -20088,7 +20088,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -21318,7 +21318,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -22548,7 +22548,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
@@ -23779,7 +23779,7 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: 'creative_session preview: facebook_feed (default) or instagram_feed.'
+                      description: 'Meta preview: facebook_feed (creative_session default) or instagram_feed.'
                       type: string
                       enum:
                         - facebook_feed
