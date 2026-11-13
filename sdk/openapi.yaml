@@ -91687,6 +91687,15 @@ components:
           items:
             type: object
             properties:
+              status:
+                type: string
+                enum:
+                  - CURRENT
+                  - UPCOMING
+                  - PAST
+                description: >-
+                  `CURRENT` for the plan in force (`plan.current`), `UPCOMING` for the accepted plan waiting for the
+                  current term to end (`plan.upcoming`), `PAST` for a plan whose term has ended.
               planId:
                 $ref: '#/components/schemas/get_success_ContractsPlanHistoryItemPlanId'
               planName:
@@ -91724,6 +91733,7 @@ components:
                   What each priced activity cost under the plan, keyed by `activityCode`. The order is for presentation
                   only.
             required:
+              - status
               - planId
               - planName
               - currency
@@ -91737,7 +91747,10 @@ components:
               - acceptanceSource
               - activityTerms
             additionalProperties: false
-          description: The plans in force before the current and upcoming plans, in the order the document lists them.
+          description: >-
+            Every plan the organization has accepted, the plan in force and the upcoming plan included, in the order the
+            document lists them. `status` says which is which. The plan in force carries here the rate card version and
+            activity terms it was accepted under, which `plan.current` does not.
         renewalHistory:
           type: array
           items:
