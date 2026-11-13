@@ -943,7 +943,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1187,7 +1187,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1431,7 +1431,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1671,7 +1671,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1912,7 +1912,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2157,7 +2157,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2635,7 +2635,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2876,7 +2876,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3599,7 +3599,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3840,7 +3840,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4085,7 +4085,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4329,7 +4329,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4573,7 +4573,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4817,7 +4817,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -5061,7 +5061,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -7952,7 +7952,7 @@ export type GetResponses = {
                     /**
                      * `redacted` for an organization-scoped service token: the fields in `redactedFields` are `null` (the email lists are empty) so a caller can tell "not allowed" from "empty".
                      */
-                    visibility: 'visible' | 'redacted';
+                    visibility: GetSuccessObjectPayerVisibility;
                     redactedFields: Array<string>;
                 };
                 /**
@@ -8185,20 +8185,14 @@ export type GetResponses = {
                  * The most recent invoices, newest first, at most 10.
                  */
                 invoices: Array<{
-                    number: number;
-                    reference: string;
+                    number: GetSuccessObjectInvoicesItemNumber;
+                    reference: GetSuccessObjectInvoicesItemReference;
                     periodStart: GetSuccessObjectInvoicesItemPeriodStart;
                     periodEnd: GetSuccessObjectInvoicesItemPeriodEnd;
-                    /**
-                     * The amount invoiced for the period, minor units.
-                     */
-                    amountMinor: number;
-                    /**
-                     * What is still owed on the invoice, minor units; 0 once settled.
-                     */
-                    balanceMinor: number;
+                    amountMinor: GetSuccessObjectInvoicesItemAmountMinor;
+                    balanceMinor: GetSuccessObjectInvoicesItemBalanceMinor;
                     currency: GetSuccessObjectInvoicesItemCurrency;
-                    status: 'open' | 'overdue' | 'paid';
+                    status: GetSuccessObjectInvoicesItemStatus;
                     dueAt: GetSuccessObjectInvoicesItemDueAt;
                 }>;
                 /**
@@ -8255,6 +8249,14 @@ export type GetResponses = {
             mediaBilling?: GetSuccessMediaBilling;
             usageDetail?: GetSuccessUsageDetail;
             pricing?: GetSuccessPricing;
+            contracts?: GetSuccessContracts;
+            accounts?: GetSuccessAccounts;
+            /**
+             * The number of child accounts, whatever `accounts` lists.
+             */
+            accountsTotal?: GetSuccessAccountsTotal;
+            paymentMethods?: GetSuccessPaymentMethods;
+            invoiceHistory?: GetSuccessInvoiceHistory;
             payouts?: GetSuccessPayouts;
             unavailableIncludes?: GetSuccessUnavailableIncludes;
         } | {
@@ -8287,6 +8289,14 @@ export type GetResponses = {
             mediaBilling?: GetSuccessMediaBilling;
             usageDetail?: GetSuccessUsageDetail;
             pricing?: GetSuccessPricing;
+            contracts?: GetSuccessContracts;
+            accounts?: GetSuccessAccounts;
+            /**
+             * The number of child accounts, whatever `accounts` lists.
+             */
+            accountsTotal?: GetSuccessAccountsTotal;
+            paymentMethods?: GetSuccessPaymentMethods;
+            invoiceHistory?: GetSuccessInvoiceHistory;
             payouts?: GetSuccessPayouts;
             unavailableIncludes?: GetSuccessUnavailableIncludes;
         } | {
@@ -9542,6 +9552,30 @@ export type GetStatusSuccessSetupSellersResultsItemAction = {
 
 export type GetStatusSuccessSetupSellersResultsItemSellerAccountId = number;
 
+export type GetSuccessAccounts = Array<{
+    id: number;
+    name: string;
+    company: string | null;
+    /**
+     * Whether the account sees (`VIEW`) or owns (`OWN`) its billing. Always `NONE` today.
+     */
+    delegation: 'NONE' | 'VIEW' | 'OWN';
+    /**
+     * IUs the account used in the organization’s billing cycle. 0 is reported when accepted rating terms exist and the account had no rated activity; null when the IU experience or accepted rating terms are unavailable.
+     */
+    iuUsage: {
+        quantity: number;
+        periodStart: GetSuccessAccountsItemIuUsagePeriodStart;
+        periodEnd: GetSuccessAccountsItemIuUsagePeriodEnd;
+    } | null;
+}>;
+
+export type GetSuccessAccountsItemIuUsagePeriodEnd = string;
+
+export type GetSuccessAccountsItemIuUsagePeriodStart = string;
+
+export type GetSuccessAccountsTotal = number;
+
 export type GetSuccessBillingPendingApproval = {
     kind: 'billing.payment_terms';
     /**
@@ -10183,6 +10217,115 @@ export type GetSuccessCatalogRefreshProblem = {
     columns?: Array<string>;
 };
 
+export type GetSuccessContracts = {
+    /**
+     * `redacted` for an organization-scoped service token: the fields in `redactedFields` are null.
+     */
+    visibility: GetSuccessContractsVisibility;
+    redactedFields: Array<string>;
+    agreements: Array<{
+        kind: 'STANDARD_TOS' | 'CUSTOM_CONTRACT' | 'AAA' | null;
+        status: 'active' | 'no_contract' | 'inherited_active' | 'inherited_hidden' | 'organization_contract_missing' | 'awaiting_acceptance';
+        effectiveDate: GetSuccessContractsAgreementsItemEffectiveDate | null;
+        endDate: GetSuccessContractsAgreementsItemEndDate | null;
+        acceptedAt: GetSuccessContractsAgreementsItemAcceptedAt | null;
+        /**
+         * The email of the person who accepted. Null when `visibility` is `redacted`.
+         */
+        acceptedByEmail: string | null;
+    }>;
+    /**
+     * The agreement documents by id and title. They carry no link: a signed-in browser opens them on our site.
+     */
+    documents: Array<{
+        id: string;
+        title: string;
+    }>;
+    /**
+     * The plans in force before the current and upcoming plans, in the order the document lists them.
+     */
+    planHistory: Array<{
+        planId: GetSuccessContractsPlanHistoryItemPlanId;
+        planName: string;
+        currency: GetSuccessContractsPlanHistoryItemCurrency;
+        commitmentMinor: GetSuccessContractsPlanHistoryItemCommitmentMinor;
+        includedIus: GetSuccessContractsPlanHistoryItemIncludedIus;
+        iuPriceMinor: GetSuccessContractsPlanHistoryItemIuPriceMinor;
+        termStart: GetSuccessContractsPlanHistoryItemTermStart;
+        termEnd: GetSuccessContractsPlanHistoryItemTermEnd;
+        /**
+         * The public version of the Rate Card the plan was accepted under.
+         */
+        rateCardVersion: string;
+        acceptedAt: GetSuccessContractsPlanHistoryItemAcceptedAt;
+        acceptanceSource: 'SIGNUP' | 'PLAN_BILLING' | 'MCP_APP' | 'ADMIN_ORDER_FORM' | 'AUTO_RENEWAL';
+        /**
+         * What each priced activity cost under the plan, keyed by `activityCode`. The order is for presentation only.
+         */
+        activityTerms: Array<GetSuccessContractsPlanHistoryItemActivityTermsItem>;
+    }>;
+    /**
+     * Every renewal change recorded for the plan in force, in the order the document lists them. It carries no reason and no actor.
+     */
+    renewalHistory: Array<{
+        instructionType: 'CANCEL_AT_TERM' | 'REINSTATE_AUTO_RENEWAL';
+        effectiveAt: GetSuccessContractsRenewalHistoryItemEffectiveAt;
+        recordedAt: GetSuccessContractsRenewalHistoryItemRecordedAt;
+    }>;
+};
+
+export type GetSuccessContractsAgreementsItemAcceptedAt = string;
+
+export type GetSuccessContractsAgreementsItemEffectiveDate = string;
+
+export type GetSuccessContractsAgreementsItemEndDate = string;
+
+export type GetSuccessContractsPlanHistoryItemAcceptedAt = string;
+
+export type GetSuccessContractsPlanHistoryItemActivityTermsItem = {
+    activityCode: 'ACTIVATED_SOCIAL_ACCOUNT_MONTH' | 'SIMPLE_PROPOSAL_EVALUATION' | 'COMPLEX_PROPOSAL_EVALUATION' | 'MERCHANDISING_BRIEF_RESPONSE' | 'MURPH_AI_SUPPORT_SESSION' | 'HUMAN_EXPERT_SUPPORT_HOUR' | 'GENERATED_IMAGE' | 'GENERATED_VIDEO_SECONDS' | 'ANALYZE_ACCOUNT' | 'CAMPAIGN_OPTIMIZATION_MONTH' | 'MANAGED_MEDIA_BUY_MONTH' | 'STANDARD_DOCUMENT_UNDERSTANDING' | 'LARGE_DOCUMENT_UNDERSTANDING' | 'AUDIO_VIDEO_UNDERSTANDING_MINUTES' | 'CUSTOM_BIGQUERY_GIB' | 'MODULAR_SOURCE_MANAGEMENT_MONTH' | 'MANAGED_VIDEO_RENDITION_OUTPUT_SECOND' | 'COMPLETED_INTERCHANGE_MERCHANDISING_CYCLE' | 'SOCIAL_ACCOUNT_INTELLIGENCE_BILLING_PERIOD' | 'INTERCHANGE_MEDIA_BUY_BILLING_PERIOD';
+    displayName: string;
+    unitCount: number;
+    unit: 'ACCOUNT_MONTH' | 'ACCOUNT_BILLING_PERIOD' | 'PROPOSAL' | 'RESPONSE' | 'SESSION' | 'SUPPORT_HOUR' | 'IMAGE' | 'GENERATED_SECOND' | 'ANALYSIS' | 'CAMPAIGN_MONTH' | 'MEDIA_BUY_MONTH' | 'MEDIA_BUY_BILLING_PERIOD' | 'FILE' | 'PROCESSING_JOB' | 'UNDERSTANDING_MINUTE' | 'GIB_SCANNED' | 'ACTIVE_SOURCE_MONTH' | 'OUTPUT_SECOND';
+    catalogStatus: 'PUBLISHED' | 'CALIBRATING' | 'MEASURING';
+    standardIuAmountMilli: number | null;
+    pricing: 'STANDARD' | 'CUSTOM' | 'WAIVED' | 'UNPRICED';
+    customIuAmountMilli: number | null;
+    effectiveIuAmountMilli: number | null;
+    billable: boolean;
+    includedBackfillMonths: number | null;
+    payer?: 'BUYER' | 'SELLER' | 'BOTH';
+};
+
+/**
+ * Net monthly commitment, minor units of `currency`.
+ */
+export type GetSuccessContractsPlanHistoryItemCommitmentMinor = number;
+
+export type GetSuccessContractsPlanHistoryItemCurrency = string;
+
+export type GetSuccessContractsPlanHistoryItemIncludedIus = number;
+
+/**
+ * Net price of one IU beyond the included IUs, minor units.
+ */
+export type GetSuccessContractsPlanHistoryItemIuPriceMinor = number;
+
+/**
+ * The plan’s stable plan code. The customer-safe read carries no internal plan row ids, so this is the identity a caller names a plan by.
+ */
+export type GetSuccessContractsPlanHistoryItemPlanId = string;
+
+export type GetSuccessContractsPlanHistoryItemTermEnd = string;
+
+export type GetSuccessContractsPlanHistoryItemTermStart = string;
+
+export type GetSuccessContractsRenewalHistoryItemEffectiveAt = string;
+
+export type GetSuccessContractsRenewalHistoryItemRecordedAt = string;
+
+export type GetSuccessContractsVisibility = 'visible' | 'redacted';
+
 export type GetSuccessDeliveryGoalProgress = {
     constraint: {
         kind: 'spend' | 'impressions';
@@ -10237,6 +10380,66 @@ export type GetSuccessHistoryVersionsResultsItemChangeSummary = {
     removed: number;
 };
 
+export type GetSuccessInvoiceHistory = {
+    invoices: Array<{
+        number: GetSuccessInvoiceHistoryInvoicesItemNumber;
+        reference: GetSuccessInvoiceHistoryInvoicesItemReference;
+        periodStart: GetSuccessInvoiceHistoryInvoicesItemPeriodStart;
+        periodEnd: GetSuccessInvoiceHistoryInvoicesItemPeriodEnd;
+        amountMinor: GetSuccessInvoiceHistoryInvoicesItemAmountMinor;
+        balanceMinor: GetSuccessInvoiceHistoryInvoicesItemBalanceMinor;
+        currency: GetSuccessInvoiceHistoryInvoicesItemCurrency;
+        status: GetSuccessInvoiceHistoryInvoicesItemStatus;
+        dueAt: GetSuccessInvoiceHistoryInvoicesItemDueAt;
+        creditNotes: Array<{
+            reference: string;
+            /**
+             * The credit, minor units of `currency`.
+             */
+            amountMinor: number;
+            currency: GetSuccessInvoiceHistoryInvoicesItemCreditNotesItemCurrency;
+            reason: string;
+            issuedAt: GetSuccessInvoiceHistoryInvoicesItemCreditNotesItemIssuedAt;
+        }>;
+        /**
+         * True when the invoice has more credit notes than the 20 listed.
+         */
+        creditNotesTruncated: boolean;
+    }>;
+    /**
+     * True when the organization has older invoices than the 120 listed.
+     */
+    truncated: boolean;
+};
+
+/**
+ * The amount invoiced for the period, minor units.
+ */
+export type GetSuccessInvoiceHistoryInvoicesItemAmountMinor = number;
+
+/**
+ * What is still owed on the invoice, minor units; 0 once settled.
+ */
+export type GetSuccessInvoiceHistoryInvoicesItemBalanceMinor = number;
+
+export type GetSuccessInvoiceHistoryInvoicesItemCreditNotesItemCurrency = string;
+
+export type GetSuccessInvoiceHistoryInvoicesItemCreditNotesItemIssuedAt = string;
+
+export type GetSuccessInvoiceHistoryInvoicesItemCurrency = string;
+
+export type GetSuccessInvoiceHistoryInvoicesItemDueAt = string;
+
+export type GetSuccessInvoiceHistoryInvoicesItemNumber = number;
+
+export type GetSuccessInvoiceHistoryInvoicesItemPeriodEnd = string;
+
+export type GetSuccessInvoiceHistoryInvoicesItemPeriodStart = string;
+
+export type GetSuccessInvoiceHistoryInvoicesItemReference = string;
+
+export type GetSuccessInvoiceHistoryInvoicesItemStatus = 'open' | 'overdue' | 'paid';
+
 export type GetSuccessMediaBilling = {
     /**
      * `redacted` for an organization-scoped service token: `redactedFields` are left out of every entity.
@@ -10274,13 +10477,29 @@ export type GetSuccessMediaBilling = {
 
 export type GetSuccessObjectBalanceCurrency = string;
 
+/**
+ * The amount invoiced for the period, minor units.
+ */
+export type GetSuccessObjectInvoicesItemAmountMinor = number;
+
+/**
+ * What is still owed on the invoice, minor units; 0 once settled.
+ */
+export type GetSuccessObjectInvoicesItemBalanceMinor = number;
+
 export type GetSuccessObjectInvoicesItemCurrency = string;
 
 export type GetSuccessObjectInvoicesItemDueAt = string;
 
+export type GetSuccessObjectInvoicesItemNumber = number;
+
 export type GetSuccessObjectInvoicesItemPeriodEnd = string;
 
 export type GetSuccessObjectInvoicesItemPeriodStart = string;
+
+export type GetSuccessObjectInvoicesItemReference = string;
+
+export type GetSuccessObjectInvoicesItemStatus = 'open' | 'overdue' | 'paid';
 
 export type GetSuccessObjectLastChangeSummary = {
     added: number;
@@ -10298,6 +10517,8 @@ export type GetSuccessObjectOperationsByDestinationItemSellerRouteId = string;
 export type GetSuccessObjectOperationsByDestinationItemUnassigned = true;
 
 export type GetSuccessObjectOrganizationCurrency = string;
+
+export type GetSuccessObjectPayerVisibility = 'visible' | 'redacted';
 
 export type GetSuccessObjectPaymentTerms = 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
 
@@ -10590,6 +10811,24 @@ export type GetSuccessOperationDetailsItemDestinationSellerName = string;
 export type GetSuccessOperationDetailsItemDestinationSellerRouteId = string;
 
 export type GetSuccessOperationDetailsItemDestinationUnassigned = true;
+
+export type GetSuccessPaymentMethods = {
+    cards: Array<{
+        /**
+         * The card’s id, the one a card removal names.
+         */
+        id: string;
+        brand: string | null;
+        last4: string | null;
+        expiresMonth: number | null;
+        expiresYear: number | null;
+        status: 'pending_verification' | 'verified' | 'detached';
+    }>;
+    /**
+     * Whether the organization can add a card now. True wherever the card rail is set up, whether or not it already holds a card.
+     */
+    cardCollectionEnabled: boolean;
+};
 
 export type GetSuccessPayouts = {
     payees: Array<GetSuccessPayoutsPayeesItem>;

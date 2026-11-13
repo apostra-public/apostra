@@ -1974,6 +1974,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -3234,6 +3237,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -4470,6 +4476,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -5694,6 +5703,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -6919,6 +6931,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -8151,6 +8166,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -10520,6 +10538,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -11747,6 +11768,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -15266,6 +15290,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -16491,6 +16518,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -17722,6 +17752,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -18952,6 +18985,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -20182,6 +20218,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -21412,6 +21451,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -22642,6 +22684,9 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - contracts
+                          - paymentMethods
+                          - invoiceHistory
                           - payouts
                           - reads
                           - reasoning
@@ -25094,14 +25139,11 @@ paths:
                                       stored details by the same rule as `complete`, even when the fields below are
                                       redacted.
                                   visibility:
-                                    type: string
-                                    enum:
-                                      - visible
-                                      - redacted
                                     description: >-
                                       `redacted` for an organization-scoped service token: the fields in
                                       `redactedFields` are `null` (the email lists are empty) so a caller can tell "not
                                       allowed" from "empty".
+                                    $ref: '#/components/schemas/get_success_ObjectPayerVisibility'
                                   redactedFields:
                                     type: array
                                     items:
@@ -25769,34 +25811,21 @@ paths:
                                   type: object
                                   properties:
                                     number:
-                                      type: integer
-                                      exclusiveMinimum: 0
-                                      maximum: 9007199254740991
+                                      $ref: '#/components/schemas/get_success_ObjectInvoicesItemNumber'
                                     reference:
-                                      type: string
-                                      example: FEE-000042
+                                      $ref: '#/components/schemas/get_success_ObjectInvoicesItemReference'
                                     periodStart:
                                       $ref: '#/components/schemas/get_success_ObjectInvoicesItemPeriodStart'
                                     periodEnd:
                                       $ref: '#/components/schemas/get_success_ObjectInvoicesItemPeriodEnd'
                                     amountMinor:
-                                      type: integer
-                                      minimum: -9007199254740991
-                                      maximum: 9007199254740991
-                                      description: The amount invoiced for the period, minor units.
+                                      $ref: '#/components/schemas/get_success_ObjectInvoicesItemAmountMinor'
                                     balanceMinor:
-                                      type: integer
-                                      minimum: -9007199254740991
-                                      maximum: 9007199254740991
-                                      description: What is still owed on the invoice, minor units; 0 once settled.
+                                      $ref: '#/components/schemas/get_success_ObjectInvoicesItemBalanceMinor'
                                     currency:
                                       $ref: '#/components/schemas/get_success_ObjectInvoicesItemCurrency'
                                     status:
-                                      type: string
-                                      enum:
-                                        - open
-                                        - overdue
-                                        - paid
+                                      $ref: '#/components/schemas/get_success_ObjectInvoicesItemStatus'
                                     dueAt:
                                       $ref: '#/components/schemas/get_success_ObjectInvoicesItemDueAt'
                                   required:
@@ -25926,6 +25955,17 @@ paths:
                             $ref: '#/components/schemas/get_success_UsageDetail'
                           pricing:
                             $ref: '#/components/schemas/get_success_Pricing'
+                          contracts:
+                            $ref: '#/components/schemas/get_success_Contracts'
+                          accounts:
+                            $ref: '#/components/schemas/get_success_Accounts'
+                          accountsTotal:
+                            description: The number of child accounts, whatever `accounts` lists.
+                            $ref: '#/components/schemas/get_success_AccountsTotal'
+                          paymentMethods:
+                            $ref: '#/components/schemas/get_success_PaymentMethods'
+                          invoiceHistory:
+                            $ref: '#/components/schemas/get_success_InvoiceHistory'
                           payouts:
                             $ref: '#/components/schemas/get_success_Payouts'
                           unavailableIncludes:
@@ -25996,6 +26036,17 @@ paths:
                             $ref: '#/components/schemas/get_success_UsageDetail'
                           pricing:
                             $ref: '#/components/schemas/get_success_Pricing'
+                          contracts:
+                            $ref: '#/components/schemas/get_success_Contracts'
+                          accounts:
+                            $ref: '#/components/schemas/get_success_Accounts'
+                          accountsTotal:
+                            description: The number of child accounts, whatever `accounts` lists.
+                            $ref: '#/components/schemas/get_success_AccountsTotal'
+                          paymentMethods:
+                            $ref: '#/components/schemas/get_success_PaymentMethods'
+                          invoiceHistory:
+                            $ref: '#/components/schemas/get_success_InvoiceHistory'
                           payouts:
                             $ref: '#/components/schemas/get_success_Payouts'
                           unavailableIncludes:
@@ -90617,6 +90668,11 @@ components:
         - net_45
         - net_60
         - net_90
+    get_success_ObjectPayerVisibility:
+      type: string
+      enum:
+        - visible
+        - redacted
     get_success_ObjectStandingHoldsItemCreatedAt:
       type: string
     get_success_ObjectBalanceCurrency:
@@ -91106,14 +91162,37 @@ components:
             - accountLimit
           additionalProperties: false
         - type: 'null'
+    get_success_ObjectInvoicesItemNumber:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
+    get_success_ObjectInvoicesItemReference:
+      type: string
+      example: FEE-000042
     get_success_ObjectInvoicesItemPeriodStart:
       type: string
     get_success_ObjectInvoicesItemPeriodEnd:
       type: string
+    get_success_ObjectInvoicesItemAmountMinor:
+      type: integer
+      minimum: -9007199254740991
+      maximum: 9007199254740991
+      description: The amount invoiced for the period, minor units.
+    get_success_ObjectInvoicesItemBalanceMinor:
+      type: integer
+      minimum: -9007199254740991
+      maximum: 9007199254740991
+      description: What is still owed on the invoice, minor units; 0 once settled.
     get_success_ObjectInvoicesItemCurrency:
       type: string
       minLength: 3
       maxLength: 3
+    get_success_ObjectInvoicesItemStatus:
+      type: string
+      enum:
+        - open
+        - overdue
+        - paid
     get_success_ObjectInvoicesItemDueAt:
       type: string
     get_success_MediaBilling:
@@ -91456,6 +91535,348 @@ components:
       required:
         - source
         - rates
+      additionalProperties: false
+    get_success_Contracts:
+      type: object
+      properties:
+        visibility:
+          description: '`redacted` for an organization-scoped service token: the fields in `redactedFields` are null.'
+          $ref: '#/components/schemas/get_success_ContractsVisibility'
+        redactedFields:
+          type: array
+          items:
+            type: string
+        agreements:
+          type: array
+          items:
+            type: object
+            properties:
+              kind:
+                anyOf:
+                  - type: string
+                    enum:
+                      - STANDARD_TOS
+                      - CUSTOM_CONTRACT
+                      - AAA
+                  - type: 'null'
+              status:
+                type: string
+                enum:
+                  - active
+                  - no_contract
+                  - inherited_active
+                  - inherited_hidden
+                  - organization_contract_missing
+                  - awaiting_acceptance
+              effectiveDate:
+                anyOf:
+                  - $ref: '#/components/schemas/get_success_ContractsAgreementsItemEffectiveDate'
+                  - type: 'null'
+              endDate:
+                anyOf:
+                  - $ref: '#/components/schemas/get_success_ContractsAgreementsItemEndDate'
+                  - type: 'null'
+              acceptedAt:
+                anyOf:
+                  - $ref: '#/components/schemas/get_success_ContractsAgreementsItemAcceptedAt'
+                  - type: 'null'
+              acceptedByEmail:
+                anyOf:
+                  - type: string
+                  - type: 'null'
+                description: The email of the person who accepted. Null when `visibility` is `redacted`.
+            required:
+              - kind
+              - status
+              - effectiveDate
+              - endDate
+              - acceptedAt
+              - acceptedByEmail
+            additionalProperties: false
+        documents:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              title:
+                type: string
+            required:
+              - id
+              - title
+            additionalProperties: false
+          description: 'The agreement documents by id and title. They carry no link: a signed-in browser opens them on our site.'
+        planHistory:
+          type: array
+          items:
+            type: object
+            properties:
+              planId:
+                $ref: '#/components/schemas/get_success_ContractsPlanHistoryItemPlanId'
+              planName:
+                type: string
+              currency:
+                $ref: '#/components/schemas/get_success_ContractsPlanHistoryItemCurrency'
+              commitmentMinor:
+                $ref: '#/components/schemas/get_success_ContractsPlanHistoryItemCommitmentMinor'
+              includedIus:
+                $ref: '#/components/schemas/get_success_ContractsPlanHistoryItemIncludedIus'
+              iuPriceMinor:
+                $ref: '#/components/schemas/get_success_ContractsPlanHistoryItemIuPriceMinor'
+              termStart:
+                $ref: '#/components/schemas/get_success_ContractsPlanHistoryItemTermStart'
+              termEnd:
+                $ref: '#/components/schemas/get_success_ContractsPlanHistoryItemTermEnd'
+              rateCardVersion:
+                type: string
+                description: The public version of the Rate Card the plan was accepted under.
+              acceptedAt:
+                $ref: '#/components/schemas/get_success_ContractsPlanHistoryItemAcceptedAt'
+              acceptanceSource:
+                type: string
+                enum:
+                  - SIGNUP
+                  - PLAN_BILLING
+                  - MCP_APP
+                  - ADMIN_ORDER_FORM
+                  - AUTO_RENEWAL
+              activityTerms:
+                type: array
+                items:
+                  $ref: '#/components/schemas/get_success_ContractsPlanHistoryItemActivityTermsItem'
+                description: >-
+                  What each priced activity cost under the plan, keyed by `activityCode`. The order is for presentation
+                  only.
+            required:
+              - planId
+              - planName
+              - currency
+              - commitmentMinor
+              - includedIus
+              - iuPriceMinor
+              - termStart
+              - termEnd
+              - rateCardVersion
+              - acceptedAt
+              - acceptanceSource
+              - activityTerms
+            additionalProperties: false
+          description: The plans in force before the current and upcoming plans, in the order the document lists them.
+        renewalHistory:
+          type: array
+          items:
+            type: object
+            properties:
+              instructionType:
+                type: string
+                enum:
+                  - CANCEL_AT_TERM
+                  - REINSTATE_AUTO_RENEWAL
+              effectiveAt:
+                $ref: '#/components/schemas/get_success_ContractsRenewalHistoryItemEffectiveAt'
+              recordedAt:
+                $ref: '#/components/schemas/get_success_ContractsRenewalHistoryItemRecordedAt'
+            required:
+              - instructionType
+              - effectiveAt
+              - recordedAt
+            additionalProperties: false
+          description: >-
+            Every renewal change recorded for the plan in force, in the order the document lists them. It carries no
+            reason and no actor.
+      required:
+        - visibility
+        - redactedFields
+        - agreements
+        - documents
+        - planHistory
+        - renewalHistory
+      additionalProperties: false
+    get_success_Accounts:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            exclusiveMinimum: 0
+            maximum: 9007199254740991
+          name:
+            type: string
+          company:
+            type:
+              - string
+              - 'null'
+          delegation:
+            type: string
+            enum:
+              - NONE
+              - VIEW
+              - OWN
+            description: Whether the account sees (`VIEW`) or owns (`OWN`) its billing. Always `NONE` today.
+          iuUsage:
+            anyOf:
+              - type: object
+                properties:
+                  quantity:
+                    type: number
+                    minimum: 0
+                  periodStart:
+                    $ref: '#/components/schemas/get_success_AccountsItemIuUsagePeriodStart'
+                  periodEnd:
+                    $ref: '#/components/schemas/get_success_AccountsItemIuUsagePeriodEnd'
+                required:
+                  - quantity
+                  - periodStart
+                  - periodEnd
+                additionalProperties: false
+              - type: 'null'
+            description: >-
+              IUs the account used in the organization’s billing cycle. 0 is reported when accepted rating terms exist
+              and the account had no rated activity; null when the IU experience or accepted rating terms are
+              unavailable.
+        required:
+          - id
+          - name
+          - company
+          - delegation
+          - iuUsage
+        additionalProperties: false
+    get_success_AccountsTotal:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    get_success_PaymentMethods:
+      type: object
+      properties:
+        cards:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The card’s id, the one a card removal names.
+              brand:
+                type:
+                  - string
+                  - 'null'
+              last4:
+                type:
+                  - string
+                  - 'null'
+              expiresMonth:
+                anyOf:
+                  - type: integer
+                    minimum: 1
+                    maximum: 12
+                  - type: 'null'
+              expiresYear:
+                anyOf:
+                  - type: integer
+                    minimum: -9007199254740991
+                    maximum: 9007199254740991
+                  - type: 'null'
+              status:
+                type: string
+                enum:
+                  - pending_verification
+                  - verified
+                  - detached
+            required:
+              - id
+              - brand
+              - last4
+              - expiresMonth
+              - expiresYear
+              - status
+            additionalProperties: false
+        cardCollectionEnabled:
+          type: boolean
+          description: >-
+            Whether the organization can add a card now. True wherever the card rail is set up, whether or not it
+            already holds a card.
+      required:
+        - cards
+        - cardCollectionEnabled
+      additionalProperties: false
+    get_success_InvoiceHistory:
+      type: object
+      properties:
+        invoices:
+          maxItems: 120
+          type: array
+          items:
+            type: object
+            properties:
+              number:
+                $ref: '#/components/schemas/get_success_InvoiceHistoryInvoicesItemNumber'
+              reference:
+                $ref: '#/components/schemas/get_success_InvoiceHistoryInvoicesItemReference'
+              periodStart:
+                $ref: '#/components/schemas/get_success_InvoiceHistoryInvoicesItemPeriodStart'
+              periodEnd:
+                $ref: '#/components/schemas/get_success_InvoiceHistoryInvoicesItemPeriodEnd'
+              amountMinor:
+                $ref: '#/components/schemas/get_success_InvoiceHistoryInvoicesItemAmountMinor'
+              balanceMinor:
+                $ref: '#/components/schemas/get_success_InvoiceHistoryInvoicesItemBalanceMinor'
+              currency:
+                $ref: '#/components/schemas/get_success_InvoiceHistoryInvoicesItemCurrency'
+              status:
+                $ref: '#/components/schemas/get_success_InvoiceHistoryInvoicesItemStatus'
+              dueAt:
+                $ref: '#/components/schemas/get_success_InvoiceHistoryInvoicesItemDueAt'
+              creditNotes:
+                maxItems: 20
+                type: array
+                items:
+                  type: object
+                  properties:
+                    reference:
+                      type: string
+                      example: CN-000007
+                    amountMinor:
+                      type: integer
+                      minimum: -9007199254740991
+                      maximum: 9007199254740991
+                      description: The credit, minor units of `currency`.
+                    currency:
+                      $ref: '#/components/schemas/get_success_InvoiceHistoryInvoicesItemCreditNotesItemCurrency'
+                    reason:
+                      type: string
+                    issuedAt:
+                      $ref: '#/components/schemas/get_success_InvoiceHistoryInvoicesItemCreditNotesItemIssuedAt'
+                  required:
+                    - reference
+                    - amountMinor
+                    - currency
+                    - reason
+                    - issuedAt
+                  additionalProperties: false
+              creditNotesTruncated:
+                type: boolean
+                description: True when the invoice has more credit notes than the 20 listed.
+            required:
+              - number
+              - reference
+              - periodStart
+              - periodEnd
+              - amountMinor
+              - balanceMinor
+              - currency
+              - status
+              - dueAt
+              - creditNotes
+              - creditNotesTruncated
+            additionalProperties: false
+        truncated:
+          type: boolean
+          description: True when the organization has older invoices than the 120 listed.
+      required:
+        - invoices
+        - truncated
       additionalProperties: false
     get_success_Payouts:
       type: object
@@ -92512,6 +92933,206 @@ components:
     get_success_UsageDetailActivityPeriodStart:
       type: string
     get_success_UsageDetailActivityPeriodEnd:
+      type: string
+    get_success_ContractsVisibility:
+      type: string
+      enum:
+        - visible
+        - redacted
+    get_success_ContractsAgreementsItemEffectiveDate:
+      type: string
+    get_success_ContractsAgreementsItemEndDate:
+      type: string
+    get_success_ContractsAgreementsItemAcceptedAt:
+      type: string
+    get_success_ContractsPlanHistoryItemPlanId:
+      type: string
+      description: >-
+        The plan’s stable plan code. The customer-safe read carries no internal plan row ids, so this is the identity a
+        caller names a plan by.
+    get_success_ContractsPlanHistoryItemCurrency:
+      type: string
+      minLength: 3
+      maxLength: 3
+    get_success_ContractsPlanHistoryItemCommitmentMinor:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: Net monthly commitment, minor units of `currency`.
+    get_success_ContractsPlanHistoryItemIncludedIus:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+    get_success_ContractsPlanHistoryItemIuPriceMinor:
+      type: integer
+      minimum: 0
+      maximum: 9007199254740991
+      description: Net price of one IU beyond the included IUs, minor units.
+    get_success_ContractsPlanHistoryItemTermStart:
+      type: string
+    get_success_ContractsPlanHistoryItemTermEnd:
+      type: string
+    get_success_ContractsPlanHistoryItemAcceptedAt:
+      type: string
+    get_success_ContractsPlanHistoryItemActivityTermsItem:
+      type: object
+      properties:
+        activityCode:
+          type: string
+          enum:
+            - ACTIVATED_SOCIAL_ACCOUNT_MONTH
+            - SIMPLE_PROPOSAL_EVALUATION
+            - COMPLEX_PROPOSAL_EVALUATION
+            - MERCHANDISING_BRIEF_RESPONSE
+            - MURPH_AI_SUPPORT_SESSION
+            - HUMAN_EXPERT_SUPPORT_HOUR
+            - GENERATED_IMAGE
+            - GENERATED_VIDEO_SECONDS
+            - ANALYZE_ACCOUNT
+            - CAMPAIGN_OPTIMIZATION_MONTH
+            - MANAGED_MEDIA_BUY_MONTH
+            - STANDARD_DOCUMENT_UNDERSTANDING
+            - LARGE_DOCUMENT_UNDERSTANDING
+            - AUDIO_VIDEO_UNDERSTANDING_MINUTES
+            - CUSTOM_BIGQUERY_GIB
+            - MODULAR_SOURCE_MANAGEMENT_MONTH
+            - MANAGED_VIDEO_RENDITION_OUTPUT_SECOND
+            - COMPLETED_INTERCHANGE_MERCHANDISING_CYCLE
+            - SOCIAL_ACCOUNT_INTELLIGENCE_BILLING_PERIOD
+            - INTERCHANGE_MEDIA_BUY_BILLING_PERIOD
+        displayName:
+          type: string
+          minLength: 1
+          maxLength: 120
+        unitCount:
+          type: integer
+          exclusiveMinimum: 0
+          maximum: 9007199254740991
+        unit:
+          type: string
+          enum:
+            - ACCOUNT_MONTH
+            - ACCOUNT_BILLING_PERIOD
+            - PROPOSAL
+            - RESPONSE
+            - SESSION
+            - SUPPORT_HOUR
+            - IMAGE
+            - GENERATED_SECOND
+            - ANALYSIS
+            - CAMPAIGN_MONTH
+            - MEDIA_BUY_MONTH
+            - MEDIA_BUY_BILLING_PERIOD
+            - FILE
+            - PROCESSING_JOB
+            - UNDERSTANDING_MINUTE
+            - GIB_SCANNED
+            - ACTIVE_SOURCE_MONTH
+            - OUTPUT_SECOND
+        catalogStatus:
+          type: string
+          enum:
+            - PUBLISHED
+            - CALIBRATING
+            - MEASURING
+        standardIuAmountMilli:
+          anyOf:
+            - type: integer
+              exclusiveMinimum: 0
+              maximum: 2147483647
+            - type: 'null'
+        pricing:
+          type: string
+          enum:
+            - STANDARD
+            - CUSTOM
+            - WAIVED
+            - UNPRICED
+        customIuAmountMilli:
+          anyOf:
+            - type: integer
+              exclusiveMinimum: 0
+              maximum: 2147483647
+            - type: 'null'
+        effectiveIuAmountMilli:
+          anyOf:
+            - type: integer
+              exclusiveMinimum: 0
+              maximum: 2147483647
+            - type: 'null'
+        billable:
+          type: boolean
+        includedBackfillMonths:
+          anyOf:
+            - type: integer
+              minimum: 0
+              maximum: 120
+            - type: 'null'
+        payer:
+          type: string
+          enum:
+            - BUYER
+            - SELLER
+            - BOTH
+      required:
+        - activityCode
+        - displayName
+        - unitCount
+        - unit
+        - catalogStatus
+        - standardIuAmountMilli
+        - pricing
+        - customIuAmountMilli
+        - effectiveIuAmountMilli
+        - billable
+        - includedBackfillMonths
+      additionalProperties: false
+    get_success_ContractsRenewalHistoryItemEffectiveAt:
+      type: string
+    get_success_ContractsRenewalHistoryItemRecordedAt:
+      type: string
+    get_success_AccountsItemIuUsagePeriodStart:
+      type: string
+    get_success_AccountsItemIuUsagePeriodEnd:
+      type: string
+    get_success_InvoiceHistoryInvoicesItemNumber:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
+    get_success_InvoiceHistoryInvoicesItemReference:
+      type: string
+      example: FEE-000042
+    get_success_InvoiceHistoryInvoicesItemPeriodStart:
+      type: string
+    get_success_InvoiceHistoryInvoicesItemPeriodEnd:
+      type: string
+    get_success_InvoiceHistoryInvoicesItemAmountMinor:
+      type: integer
+      minimum: -9007199254740991
+      maximum: 9007199254740991
+      description: The amount invoiced for the period, minor units.
+    get_success_InvoiceHistoryInvoicesItemBalanceMinor:
+      type: integer
+      minimum: -9007199254740991
+      maximum: 9007199254740991
+      description: What is still owed on the invoice, minor units; 0 once settled.
+    get_success_InvoiceHistoryInvoicesItemCurrency:
+      type: string
+      minLength: 3
+      maxLength: 3
+    get_success_InvoiceHistoryInvoicesItemStatus:
+      type: string
+      enum:
+        - open
+        - overdue
+        - paid
+    get_success_InvoiceHistoryInvoicesItemDueAt:
+      type: string
+    get_success_InvoiceHistoryInvoicesItemCreditNotesItemCurrency:
+      type: string
+      minLength: 3
+      maxLength: 3
+    get_success_InvoiceHistoryInvoicesItemCreditNotesItemIssuedAt:
       type: string
     get_success_PayoutsPayeesItem:
       type: object
