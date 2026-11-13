@@ -35216,25 +35216,50 @@ export type SaveSellerSuccessSellerSaveReplayedMaterialReceipt = {
 export type SaveSessionData = {
     body: {
         /**
-         * Persist a private Session note.
+         * Sent only to persist a private note.
          */
-        action: 'record_note';
+        action?: 'record_note';
         /**
-         * Idempotency key for this authorised operation.
-         */
-        clientRequestId: SaveSessionRequestClientRequestId;
-        /**
-         * Exact accessible Session ID for the private note.
+         * Exact accessible Session ID the change applies to.
          */
         sessionId: SaveSessionRequestSessionId;
         /**
+         * Idempotency key for a private note.
+         */
+        clientRequestId?: SaveSessionRequestClientRequestId;
+        /**
          * Private authored coaching note; never delivered to a buyer.
          */
-        note: string;
+        note?: string;
         /**
          * Optional exact retained event that the note concerns.
          */
         throughEventId?: SaveSessionRequestThroughEventId;
+        /**
+         * People and agents to add, remove or give a role. A Session always keeps exactly one lead.
+         */
+        participants?: Array<{
+            /**
+             * human (a person on the account), agent (a buyer agent of the account) or assistant (the Apostra Assistant).
+             */
+            kind: 'human' | 'agent' | 'assistant';
+            /**
+             * The person, for kind human only.
+             */
+            userId?: string | null;
+            /**
+             * The buyer agent id the buyer_agent read returns, for kind agent only.
+             */
+            principalId?: SaveSessionRequestParticipantsItemPrincipalId | null;
+            /**
+             * lead answers when nobody is addressed (exactly one per Session); expert and participant answer when addressed. Not for kind human; not needed to remove.
+             */
+            role?: 'lead' | 'expert' | 'participant' | null;
+            /**
+             * true adds or changes the role; false removes.
+             */
+            inSession: boolean;
+        }>;
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -35320,6 +35345,8 @@ export type SaveSessionErrors = {
 
 export type SaveSessionRequestClientRequestId = string;
 
+export type SaveSessionRequestParticipantsItemPrincipalId = string;
+
 export type SaveSessionRequestSessionId = string;
 
 export type SaveSessionRequestThroughEventId = string;
@@ -35333,13 +35360,20 @@ export type SaveSessionResponses = {
     200: {
         data: {
             sessionId: string;
-            action: 'record_note';
+            action?: 'record_note';
             receipt: {
                 state: 'recorded' | 'queued' | 'sent' | 'failed';
                 messageEventId: SaveSessionSuccessReceiptMessageEventId;
                 deliveryRef: SaveSessionSuccessReceiptDeliveryRef | null;
             } | null;
             privateNoteId: string | null;
+            participants?: Array<{
+                kind: 'human' | 'agent' | 'assistant';
+                userId: string | null;
+                principalId: SaveSessionSuccessParticipantsItemPrincipalId | null;
+                role: 'lead' | 'expert' | 'participant' | null;
+                addedAt: string;
+            }>;
             [key: string]: unknown;
         };
         error: null;
@@ -35361,6 +35395,8 @@ export type SaveSessionResponses = {
         error: null;
     };
 };
+
+export type SaveSessionSuccessParticipantsItemPrincipalId = string;
 
 export type SaveSessionSuccessReceiptDeliveryRef = string;
 

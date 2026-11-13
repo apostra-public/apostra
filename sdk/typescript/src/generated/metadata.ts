@@ -1455,7 +1455,6 @@ export const operations = {
     "body": true,
     "binary": false,
     "idempotencyKey": true,
-    "bodyKeyField": "clientRequestId",
     "parameters": [],
     "security": [
       {
@@ -1467,7 +1466,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Persist one private coaching note on an accessible Session. Requires a Session ID, note and clientRequestId; never sends a customer message."
+    "summary": "Change who is in a Buyer account Session: pass participants to add or remove people and agents or to change the lead (one per Session; the Apostra Assistant can lead). On a Seller account, record a private note: action record_note, sessionId, note, clientRequestId. Never messages a customer."
   },
   "save_signal": {
     "path": "/tools/save_signal",

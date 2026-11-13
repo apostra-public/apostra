@@ -290,7 +290,7 @@ export type SaveSellerInput = Wire.SaveSellerData['body']
 export type SaveSellerResult = Wire.SaveSellerResponses[200]['data']
 export type SaveSellerError = Wire.SaveSellerErrors[keyof Wire.SaveSellerErrors]
 
-export type SaveSessionInput = OptionalWireField<Wire.SaveSessionData['body'], "clientRequestId">
+export type SaveSessionInput = Wire.SaveSessionData['body']
 export type SaveSessionResult = Wire.SaveSessionResponses[200]['data']
 export type SaveSessionError = Wire.SaveSessionErrors[keyof Wire.SaveSessionErrors]
 
@@ -1041,14 +1041,14 @@ export class Apostra extends Transport {
   /** Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change (domain, OpenAI token or check, visibility, ChatGPT icons, sandbox), an admission, the intake hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here. Returns the data together with response headers and request ID. */
   saveSellerWithResponse(input: SaveSellerInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveSellerResult>> { return this.requestDetailed("save_seller", input, options) }
   /**
-   * Persist one private coaching note on an accessible Session. Requires a Session ID, note and clientRequestId; never sends a customer message.
+   * Change who is in a Buyer account Session: pass participants to add or remove people and agents or to change the lead (one per Session; the Apostra Assistant can lead). On a Seller account, record a private note: action record_note, sessionId, note, clientRequestId. Never messages a customer.
    *
    * @example
    * await client.saveSession(input, { idempotencyKey: 'stable-key' })
    */
   saveSession(input: SaveSessionInput, options: WriteRequestOptions): Promise<SaveSessionResult> { return this.request("save_session", input, options) }
 
-  /** Persist one private coaching note on an accessible Session. Requires a Session ID, note and clientRequestId; never sends a customer message. Returns the data together with response headers and request ID. */
+  /** Change who is in a Buyer account Session: pass participants to add or remove people and agents or to change the lead (one per Session; the Apostra Assistant can lead). On a Seller account, record a private note: action record_note, sessionId, note, clientRequestId. Never messages a customer. Returns the data together with response headers and request ID. */
   saveSessionWithResponse(input: SaveSessionInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveSessionResult>> { return this.requestDetailed("save_session", input, options) }
   /**
    * Create, replace, or archive a signal. draft.kind is managed (with sourceId) or catalog (without); managed writes need a complete draft; read before updates. dryRun checks a new managed draft and saves nothing.
