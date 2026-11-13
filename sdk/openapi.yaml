@@ -1941,6 +1941,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -3200,6 +3201,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -4435,6 +4437,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -5658,6 +5661,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -6882,6 +6886,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -8113,6 +8118,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -10481,6 +10487,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -11707,6 +11714,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -15225,6 +15233,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -16449,6 +16458,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -17679,6 +17689,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -18908,6 +18919,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -20137,6 +20149,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -21366,6 +21379,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -22595,6 +22609,7 @@ paths:
                           - discounts
                           - rate_card
                           - price_paid
+                          - effectiveOverlaySupport
                           - approvalRouting
                           - listing
                           - identity
@@ -59668,6 +59683,10 @@ paths:
                         description: CPM to charge. Omit for an auction.
                         type: number
                         minimum: 0
+                      min_spend_per_package:
+                        description: Least spend per package, in this currency.
+                        type: number
+                        minimum: 0
                     required:
                       - pricing_model
                       - currency
@@ -59802,11 +59821,23 @@ paths:
                       additionalProperties: false
                     - type: 'null'
                 overlaySupport:
-                  description: 'AdCP overlay_support: targeting dimensions a buyer may set. Leave geo out to allow no buyer geo.'
-                  type: object
-                  propertyNames:
+                  description: AdCP overlay_support a buyer may set; omit geo for none. null follows the ad server.
+                  anyOf:
+                    - type: object
+                      propertyNames:
+                        type: string
+                      additionalProperties: {}
+                    - type: 'null'
+                videoPlacementTypes:
+                  description: AdCP video placement types. [] clears; omit keeps.
+                  type: array
+                  items:
                     type: string
-                  additionalProperties: {}
+                    enum:
+                      - instream
+                      - accompanying_content
+                      - interstitial
+                      - standalone
                 dryRun:
                   description: Validate a new product without writing it; on GAM it returns lineItemTargeting. Creates only.
                   type: boolean
