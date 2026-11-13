@@ -1,4 +1,4 @@
-# Apostra developer marketplace
+# Apostra (formerly Scope3 and Interchange): developer marketplace
 
 Connect a coding agent to Apostra, verify the account, and build an advertising
 workflow. Start with `apostra-developer`; install the narrower operating
