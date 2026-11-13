@@ -1973,6 +1973,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -3231,6 +3232,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -4465,6 +4467,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -5687,6 +5690,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -6910,6 +6914,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -8140,6 +8145,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -10507,6 +10513,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -11732,6 +11739,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -15249,6 +15257,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -16472,6 +16481,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -17701,6 +17711,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -18929,6 +18940,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -20157,6 +20169,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -21385,6 +21398,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -22613,6 +22627,7 @@ paths:
                           - mediaBilling
                           - usageDetail
                           - pricing
+                          - payouts
                           - reads
                           - reasoning
                           - lifecycle
@@ -25896,6 +25911,8 @@ paths:
                             $ref: '#/components/schemas/get_success_UsageDetail'
                           pricing:
                             $ref: '#/components/schemas/get_success_Pricing'
+                          payouts:
+                            $ref: '#/components/schemas/get_success_Payouts'
                           unavailableIncludes:
                             $ref: '#/components/schemas/get_success_UnavailableIncludes'
                         required:
@@ -25964,6 +25981,8 @@ paths:
                             $ref: '#/components/schemas/get_success_UsageDetail'
                           pricing:
                             $ref: '#/components/schemas/get_success_Pricing'
+                          payouts:
+                            $ref: '#/components/schemas/get_success_Payouts'
                           unavailableIncludes:
                             $ref: '#/components/schemas/get_success_UnavailableIncludes'
                         required:
@@ -91277,6 +91296,122 @@ components:
         - source
         - rates
       additionalProperties: false
+    get_success_Payouts:
+      type: object
+      properties:
+        payees:
+          type: array
+          items:
+            $ref: '#/components/schemas/get_success_PayoutsPayeesItem'
+        payoutDetails:
+          anyOf:
+            - type: object
+              properties:
+                beneficiaryName:
+                  type: string
+                addressLine1:
+                  type: string
+                addressLine2:
+                  type:
+                    - string
+                    - 'null'
+                city:
+                  type: string
+                region:
+                  type:
+                    - string
+                    - 'null'
+                postalCode:
+                  type: string
+                countryCode:
+                  type: string
+                  description: ISO 3166-1 alpha-2.
+                accountNumberLast4:
+                  type: string
+                  description: The last 4 characters of the account number or IBAN. The full value is never returned.
+                bankIdentifierType:
+                  type: string
+                  enum:
+                    - FEDWIRE_ABA
+                    - CHIPS_ABA
+                    - SWIFT_BIC
+                    - BANK_CODE
+                bankIdentifierLast4:
+                  type: string
+                  description: >-
+                    The last 4 characters of the bank identifier (a routing number, a CHIPS number, a SWIFT-BIC or a
+                    local bank code), or an empty string when the identifier has 4 or fewer. The full value is never
+                    returned.
+                completedAt:
+                  type: string
+                  format: date-time
+                  pattern: >-
+                    ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+              required:
+                - beneficiaryName
+                - addressLine1
+                - addressLine2
+                - city
+                - region
+                - postalCode
+                - countryCode
+                - accountNumberLast4
+                - bankIdentifierType
+                - bankIdentifierLast4
+                - completedAt
+              additionalProperties: false
+            - type: 'null'
+          description: >-
+            The default payout details: the primary payee, or the older single payout-details row for an account with no
+            payee. Null when none are on file.
+        inherited:
+          type: boolean
+          description: True when the account has no payout details of its own and shows its organization’s.
+        accounts:
+          description: 'An organization only: one row for each active Seller account under it.'
+          type: array
+          items:
+            type: object
+            properties:
+              accountId:
+                type: integer
+                minimum: -9007199254740991
+                maximum: 9007199254740991
+              name:
+                type: string
+              company:
+                type:
+                  - string
+                  - 'null'
+              inherited:
+                type: boolean
+                description: True when the account has no payout details of its own and shows its organization’s.
+              onboardingStatus:
+                anyOf:
+                  - type: string
+                    enum:
+                      - pending
+                      - complete
+                      - restricted
+                  - type: 'null'
+                description: Payout onboarding status, or null for an account with no payout record.
+              payees:
+                description: The account’s own payees. Present only when `inherited` is false.
+                type: array
+                items:
+                  $ref: '#/components/schemas/get_success_PayoutsAccountsItemPayeesItem'
+            required:
+              - accountId
+              - name
+              - company
+              - inherited
+              - onboardingStatus
+            additionalProperties: false
+      required:
+        - payees
+        - payoutDetails
+        - inherited
+      additionalProperties: false
     get_success_UnavailableIncludes:
       type: array
       items:
@@ -92217,6 +92352,160 @@ components:
       type: string
     get_success_UsageDetailActivityPeriodEnd:
       type: string
+    get_success_PayoutsPayeesItem:
+      type: object
+      properties:
+        entityName:
+          type: string
+        currency:
+          type: string
+          description: ISO 4217.
+        isPrimary:
+          type: boolean
+        beneficiaryName:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type:
+            - string
+            - 'null'
+        city:
+          type: string
+        region:
+          type:
+            - string
+            - 'null'
+        postalCode:
+          type: string
+        countryCode:
+          type: string
+          description: ISO 3166-1 alpha-2.
+        accountNumberLast4:
+          type: string
+          description: The last 4 characters of the account number or IBAN. The full value is never returned.
+        bankIdentifierType:
+          type: string
+          enum:
+            - FEDWIRE_ABA
+            - CHIPS_ABA
+            - SWIFT_BIC
+            - BANK_CODE
+        bankIdentifierLast4:
+          type: string
+          description: >-
+            The last 4 characters of the bank identifier (a routing number, a CHIPS number, a SWIFT-BIC or a local bank
+            code), or an empty string when the identifier has 4 or fewer. The full value is never returned.
+        completedAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        createdAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        updatedAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+      required:
+        - entityName
+        - currency
+        - isPrimary
+        - beneficiaryName
+        - addressLine1
+        - addressLine2
+        - city
+        - region
+        - postalCode
+        - countryCode
+        - accountNumberLast4
+        - bankIdentifierType
+        - bankIdentifierLast4
+        - completedAt
+        - createdAt
+        - updatedAt
+      additionalProperties: false
+    get_success_PayoutsAccountsItemPayeesItem:
+      type: object
+      properties:
+        entityName:
+          type: string
+        currency:
+          type: string
+          description: ISO 4217.
+        isPrimary:
+          type: boolean
+        beneficiaryName:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type:
+            - string
+            - 'null'
+        city:
+          type: string
+        region:
+          type:
+            - string
+            - 'null'
+        postalCode:
+          type: string
+        countryCode:
+          type: string
+          description: ISO 3166-1 alpha-2.
+        accountNumberLast4:
+          type: string
+          description: The last 4 characters of the account number or IBAN. The full value is never returned.
+        bankIdentifierType:
+          type: string
+          enum:
+            - FEDWIRE_ABA
+            - CHIPS_ABA
+            - SWIFT_BIC
+            - BANK_CODE
+        bankIdentifierLast4:
+          type: string
+          description: >-
+            The last 4 characters of the bank identifier (a routing number, a CHIPS number, a SWIFT-BIC or a local bank
+            code), or an empty string when the identifier has 4 or fewer. The full value is never returned.
+        completedAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        createdAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        updatedAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+      required:
+        - entityName
+        - currency
+        - isPrimary
+        - beneficiaryName
+        - addressLine1
+        - addressLine2
+        - city
+        - region
+        - postalCode
+        - countryCode
+        - accountNumberLast4
+        - bankIdentifierType
+        - bankIdentifierLast4
+        - completedAt
+        - createdAt
+        - updatedAt
+      additionalProperties: false
     get_success_CampaignGoalProgressOptimizationGoalVendorDomain:
       type: string
       pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
