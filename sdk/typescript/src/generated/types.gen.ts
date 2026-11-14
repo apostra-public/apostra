@@ -17416,6 +17416,10 @@ export type SaveAgentData = {
          */
         certificationRequested?: boolean;
         /**
+         * Archive or restore.
+         */
+        isArchived?: boolean;
+        /**
          * New Agent operator.
          */
         operator?: {
@@ -17634,6 +17638,7 @@ export type SaveAgentResponses = {
                 agentId: string;
                 displayName: string;
                 certificationRequested?: boolean;
+                isArchived?: boolean;
             };
         };
         error: null;
