@@ -12306,6 +12306,12 @@ class SaveCampaignResultActionActivated(TypedDict):
     mediaBuys: NotRequired[SaveCampaignSuccessMediaBuys]
     action: Literal["activated"]
 
+class SaveCampaignResultActionApprovalRequired(TypedDict):
+    action: Literal["approval_required"]
+    message: str
+    approval: SaveCampaignSuccessAgentApproval
+    serverTime: NotRequired[str]
+
 class SaveCampaignResultActionArchived(TypedDict):
     serverTime: NotRequired[str]
     action: Literal["archived"]
@@ -12507,7 +12513,31 @@ class SaveCampaignResultActionUpdated(TypedDict):
     mediaBuys: NotRequired[SaveCampaignSuccessMediaBuys]
     action: Literal["updated"]
 
-SaveCampaignResult: TypeAlias = "SaveCampaignResultActionArchived | SaveCampaignResultActionCreatedReadbackRequired | SaveCampaignResultActionRestoredReadbackRequired | SaveCampaignResultActionCreated | SaveCampaignResultActionUpdated | SaveCampaignResultActionActivated | SaveCampaignResultActionRestored | SaveCampaignResultActionCanceled | SaveCampaignResultActionCancellationRequested | SaveCampaignResultActionPendingApproval | SaveCampaignResultActionPendingConfirmation"
+SaveCampaignResult: TypeAlias = "SaveCampaignResultActionArchived | SaveCampaignResultActionCreatedReadbackRequired | SaveCampaignResultActionRestoredReadbackRequired | SaveCampaignResultActionCreated | SaveCampaignResultActionUpdated | SaveCampaignResultActionActivated | SaveCampaignResultActionRestored | SaveCampaignResultActionCanceled | SaveCampaignResultActionCancellationRequested | SaveCampaignResultActionPendingApproval | SaveCampaignResultActionPendingConfirmation | SaveCampaignResultActionApprovalRequired"
+
+class SaveCampaignSuccessAgentApproval(TypedDict):
+    id: str
+    '\n    Approval id.\n    '
+    kind: str
+    '\n    Kind of sensitive action, for example `buyer_child_account.create`.\n    '
+    state: Literal["pending", "executing", "succeeded", "failed", "rejected", "expired"]
+    '\n    `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.\n    '
+    targetCustomerId: str
+    '\n    Account the action applies to.\n    '
+    requiredRole: Literal["ADMIN", "SUPER_ADMIN"] | None
+    '\n    Role the approver must hold on the account.\n    '
+    summary: str | None
+    '\n    What will happen, in one line. Null once the approval is final.\n    '
+    url: str
+    '\n    Page on our site where a signed-in person approves or rejects the request.\n    '
+    createdAt: str
+    expiresAt: str
+    decidedAt: str | None
+    completedAt: str | None
+    resultReference: dict[str, str | float | bool] | None
+    '\n    Reference to the result once succeeded.\n    '
+    failureCode: str | None
+    '\n    Reason code when the action failed.\n    '
 
 class SaveCampaignSuccessCampaign(TypedDict):
     campaignId: str

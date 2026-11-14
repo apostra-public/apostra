@@ -21588,6 +21588,11 @@ export type SaveCampaignResponses = {
                 };
                 message?: string;
             };
+        } | {
+            action: 'approval_required';
+            message: string;
+            approval: SaveCampaignSuccessAgentApproval;
+            serverTime?: string;
         };
         error: null;
     };
@@ -21607,6 +21612,51 @@ export type SaveCampaignResponses = {
         };
         error: null;
     };
+};
+
+export type SaveCampaignSuccessAgentApproval = {
+    /**
+     * Approval id.
+     */
+    id: string;
+    /**
+     * Kind of sensitive action, for example `buyer_child_account.create`.
+     */
+    kind: string;
+    /**
+     * `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.
+     */
+    state: 'pending' | 'executing' | 'succeeded' | 'failed' | 'rejected' | 'expired';
+    /**
+     * Account the action applies to.
+     */
+    targetCustomerId: string;
+    /**
+     * Role the approver must hold on the account.
+     */
+    requiredRole: 'ADMIN' | 'SUPER_ADMIN' | null;
+    /**
+     * What will happen, in one line. Null once the approval is final.
+     */
+    summary: string | null;
+    /**
+     * Page on our site where a signed-in person approves or rejects the request.
+     */
+    url: string;
+    createdAt: string;
+    expiresAt: string;
+    decidedAt: string | null;
+    completedAt: string | null;
+    /**
+     * Reference to the result once succeeded.
+     */
+    resultReference: {
+        [key: string]: string | number | boolean;
+    } | null;
+    /**
+     * Reason code when the action failed.
+     */
+    failureCode: string | null;
 };
 
 export type SaveCampaignSuccessCampaign = {
