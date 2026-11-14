@@ -31726,7 +31726,15 @@ export type SaveMediaBuyResponses = {
              * Set when this write took over a synced campaign: now managed through Apostra, same ids.
              */
             takenOver?: true;
-            action: 'staged' | 'updated' | 'pending_approval' | 'paused' | 'resumed' | 'pause_requested' | 'resume_requested' | 'unchanged' | 'archived' | 'cancellation_requested' | 'canceled';
+            action: 'staged' | 'updated' | 'pending_approval' | 'paused' | 'resumed' | 'pause_requested' | 'resume_requested' | 'unchanged' | 'archived' | 'cancellation_requested' | 'canceled' | 'approval_required';
+            message?: string;
+            approval?: {
+                id: string;
+                state: string;
+                url: string;
+                expiresAt: string;
+                [key: string]: unknown;
+            };
             campaignId?: string;
             mediaBuyId?: string;
             isPaused?: boolean;

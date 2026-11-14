@@ -55065,6 +55065,26 @@ paths:
                           - archived
                           - cancellation_requested
                           - canceled
+                          - approval_required
+                      message:
+                        type: string
+                      approval:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          state:
+                            type: string
+                          url:
+                            type: string
+                          expiresAt:
+                            type: string
+                        required:
+                          - id
+                          - state
+                          - url
+                          - expiresAt
+                        additionalProperties: {}
                       campaignId:
                         type: string
                       mediaBuyId:
