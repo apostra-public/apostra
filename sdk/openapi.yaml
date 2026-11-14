@@ -25302,9 +25302,9 @@ paths:
                                         - BUYER
                                         - SELLER
                                     description: >-
-                                      The organization’s own role or roles. Empty when unresolved. It does not include
-                                      the roles of its child accounts. A surface picks which sections to show from the
-                                      roles.
+                                      The roles the organization’s billing covers: its own role together with the roles
+                                      of its child accounts. Empty when unresolved. A surface picks which sections to
+                                      show from the roles.
                                   currency:
                                     description: >-
                                       The currency of the organization’s ledger and standing, which `balance` and every

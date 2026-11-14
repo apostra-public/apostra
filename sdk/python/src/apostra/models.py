@@ -5075,7 +5075,7 @@ class GetResultKindBillingWithObjectBalanceAndObjectBalanceAvailableMinorAndObje
     displayName: str | None
     '\n    The organization’s company name, else its account name, else null.\n    '
     roles: list[Literal["BUYER", "SELLER"]]
-    '\n    The organization’s own role or roles. Empty when unresolved. It does not include the roles of its child accounts. A surface picks which sections to show from the roles.\n    '
+    '\n    The roles the organization’s billing covers: its own role together with the roles of its child accounts. Empty when unresolved. A surface picks which sections to show from the roles.\n    '
     currency: GetSuccessObjectOrganizationCurrency
     '\n    The currency of the organization’s ledger and standing, which `balance` and every amount that names no currency of its own are in.\n    '
 

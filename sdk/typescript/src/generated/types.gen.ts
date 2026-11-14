@@ -7849,7 +7849,7 @@ export type GetResponses = {
                      */
                     displayName: string | null;
                     /**
-                     * The organization’s own role or roles. Empty when unresolved. It does not include the roles of its child accounts. A surface picks which sections to show from the roles.
+                     * The roles the organization’s billing covers: its own role together with the roles of its child accounts. Empty when unresolved. A surface picks which sections to show from the roles.
                      */
                     roles: Array<'BUYER' | 'SELLER'>;
                     /**
