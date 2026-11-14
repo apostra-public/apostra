@@ -1925,6 +1925,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -2915,6 +2918,24 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
                             required:
                               - include
                       then:
@@ -3188,6 +3209,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -4177,6 +4201,24 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
                             required:
                               - include
                       then:
@@ -4427,6 +4469,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -5416,6 +5461,24 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
                             required:
                               - include
                       then:
@@ -5654,6 +5717,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -6644,6 +6710,24 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
                             required:
                               - include
                       then:
@@ -6882,6 +6966,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -7872,6 +7959,24 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
                             required:
                               - include
                       then:
@@ -8117,6 +8222,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -9108,6 +9216,24 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
                             required:
                               - include
                       then:
@@ -10252,6 +10378,24 @@ paths:
                                   const: testRuns
                             required:
                               - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
+                            required:
+                              - include
                       then:
                         properties:
                           kind:
@@ -10489,6 +10633,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -11482,6 +11629,24 @@ paths:
                                   const: testRuns
                             required:
                               - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
+                            required:
+                              - include
                       then:
                         properties:
                           kind:
@@ -11719,6 +11884,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -12710,6 +12878,24 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
                             required:
                               - include
                       then:
@@ -13859,6 +14045,24 @@ paths:
                                   const: testRuns
                             required:
                               - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
+                            required:
+                              - include
                       then:
                         properties:
                           kind:
@@ -15006,6 +15210,24 @@ paths:
                                   const: testRuns
                             required:
                               - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
+                            required:
+                              - include
                       then:
                         properties:
                           kind:
@@ -15241,6 +15463,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -16234,6 +16459,24 @@ paths:
                                   const: testRuns
                             required:
                               - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
+                            required:
+                              - include
                       then:
                         properties:
                           kind:
@@ -16469,6 +16712,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -17462,6 +17708,24 @@ paths:
                                   const: testRuns
                             required:
                               - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
+                            required:
+                              - include
                       then:
                         properties:
                           kind:
@@ -17703,6 +17967,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -18693,6 +18960,24 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
                             required:
                               - include
                       then:
@@ -18936,6 +19221,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -19926,6 +20214,24 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
                             required:
                               - include
                       then:
@@ -20169,6 +20475,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -21159,6 +21468,24 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
                             required:
                               - include
                       then:
@@ -21402,6 +21729,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -22394,6 +22724,24 @@ paths:
                                   const: testRuns
                             required:
                               - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
+                            required:
+                              - include
                       then:
                         properties:
                           kind:
@@ -22635,6 +22983,9 @@ paths:
                           - modularReadiness
                           - poweredByAgent
                           - testRuns
+                          - capabilities
+                          - creativeFormats
+                          - publisherProperties
                           - mappingWorkspace
                           - mediaBuys
                           - proposals
@@ -23626,6 +23977,24 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
                             required:
                               - include
                       then:
@@ -24773,6 +25142,24 @@ paths:
                               include:
                                 contains:
                                   const: testRuns
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: capabilities
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: creativeFormats
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: publisherProperties
                             required:
                               - include
                       then:
@@ -60801,9 +61188,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -60918,10 +61306,28 @@ paths:
                           minLength: 1
                         parentId:
                           description: >-
-                            For kind ad_server_targeting: list the children of this candidate, for example the values
-                            under one key.
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
                           type: string
                           minLength: 1
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
                         system:
                           description: >-
                             For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
@@ -62247,6 +62653,28 @@ paths:
                       then:
                         required:
                           - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
                     - if:
                         properties:
                           kind:
@@ -62500,9 +62928,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -62617,10 +63046,28 @@ paths:
                           minLength: 1
                         parentId:
                           description: >-
-                            For kind ad_server_targeting: list the children of this candidate, for example the values
-                            under one key.
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
                           type: string
                           minLength: 1
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
                         system:
                           description: >-
                             For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
@@ -63949,6 +64396,28 @@ paths:
                       then:
                         required:
                           - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
                     - if:
                         properties:
                           kind:
@@ -64200,9 +64669,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -64707,6 +65177,28 @@ paths:
                       then:
                         required:
                           - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
                     - if:
                         properties:
                           kind:
@@ -64958,9 +65450,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -65075,10 +65568,28 @@ paths:
                           minLength: 1
                         parentId:
                           description: >-
-                            For kind ad_server_targeting: list the children of this candidate, for example the values
-                            under one key.
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
                           type: string
                           minLength: 1
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
                         system:
                           description: >-
                             For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
@@ -66410,6 +66921,28 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
                             const: source_account
                         required:
                           - kind
@@ -66658,9 +67191,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -66775,10 +67309,28 @@ paths:
                           minLength: 1
                         parentId:
                           description: >-
-                            For kind ad_server_targeting: list the children of this candidate, for example the values
-                            under one key.
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
                           type: string
                           minLength: 1
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
                         system:
                           description: >-
                             For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
@@ -68095,6 +68647,28 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
                             const: source_account
                         required:
                           - kind
@@ -68343,9 +68917,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -68460,10 +69035,28 @@ paths:
                           minLength: 1
                         parentId:
                           description: >-
-                            For kind ad_server_targeting: list the children of this candidate, for example the values
-                            under one key.
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
                           type: string
                           minLength: 1
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
                         system:
                           description: >-
                             For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
@@ -69787,6 +70380,28 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
                             const: source_account
                         required:
                           - kind
@@ -70035,9 +70650,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -70152,10 +70768,28 @@ paths:
                           minLength: 1
                         parentId:
                           description: >-
-                            For kind ad_server_targeting: list the children of this candidate, for example the values
-                            under one key.
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
                           type: string
                           minLength: 1
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
                         system:
                           description: >-
                             For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
@@ -71478,6 +72112,28 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
                             const: source_account
                         required:
                           - kind
@@ -71726,9 +72382,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -71843,10 +72500,28 @@ paths:
                           minLength: 1
                         parentId:
                           description: >-
-                            For kind ad_server_targeting: list the children of this candidate, for example the values
-                            under one key.
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
                           type: string
                           minLength: 1
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
                         system:
                           description: >-
                             For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
@@ -73173,6 +73848,28 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
                             const: source_account
                         required:
                           - kind
@@ -73949,6 +74646,28 @@ paths:
                       then:
                         required:
                           - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
                     - if:
                         properties:
                           kind:
@@ -74732,6 +75451,28 @@ paths:
                       then:
                         required:
                           - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
                     - if:
                         properties:
                           kind:
@@ -74983,9 +75724,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -75100,10 +75842,28 @@ paths:
                           minLength: 1
                         parentId:
                           description: >-
-                            For kind ad_server_targeting: list the children of this candidate, for example the values
-                            under one key.
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
                           type: string
                           minLength: 1
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
                         system:
                           description: >-
                             For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
@@ -76430,6 +77190,828 @@ paths:
                       then:
                         required:
                           - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: source_account
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: targeting_value
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - system
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: proposal
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - campaignId
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_collection
+                        required:
+                          - kind
+                      then:
+                        oneOf:
+                          - allOf:
+                              - properties:
+                                  filter:
+                                    required:
+                                      - campaignId
+                                required:
+                                  - filter
+                              - not:
+                                  properties:
+                                    filter:
+                                      required:
+                                        - advertiserId
+                                  required:
+                                    - filter
+                          - allOf:
+                              - not:
+                                  properties:
+                                    filter:
+                                      required:
+                                        - campaignId
+                                  required:
+                                    - filter
+                              - properties:
+                                  filter:
+                                    required:
+                                      - advertiserId
+                                required:
+                                  - filter
+                    - if:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - required:
+                              - filter
+                      then:
+                        properties:
+                          filter:
+                            type: object
+                            properties:
+                              advertiserId: {}
+                            additionalProperties: false
+                    - if:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
+                      then:
+                        oneOf:
+                          - allOf:
+                              - properties:
+                                  filter:
+                                    required:
+                                      - advertiserId
+                                required:
+                                  - filter
+                              - not:
+                                  properties:
+                                    filter:
+                                      required:
+                                        - campaignId
+                                  required:
+                                    - filter
+                          - allOf:
+                              - not:
+                                  properties:
+                                    filter:
+                                      required:
+                                        - advertiserId
+                                  required:
+                                    - filter
+                              - properties:
+                                  filter:
+                                    required:
+                                      - campaignId
+                                required:
+                                  - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_session
+                        required:
+                          - kind
+                      then:
+                        allOf:
+                          - properties:
+                              filter:
+                                required:
+                                  - campaignId
+                            required:
+                              - filter
+                          - allOf:
+                              - not:
+                                  required:
+                                    - query
+                              - not:
+                                  required:
+                                    - sourceId
+                          - properties:
+                              filter:
+                                type: object
+                                properties:
+                                  campaignId: {}
+                                  status: {}
+                                additionalProperties: false
+                            required:
+                              - filter
+                - type: object
+                  properties:
+                    query:
+                      description: >-
+                        Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement
+                        by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by
+                        their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+                      type: string
+                      minLength: 1
+                    document:
+                      description: >-
+                        The document of an earlier docs hit, to read it in full; send the same query to rank its
+                        sections. Docs only: no kind, filter, or objects source.
+                      type: string
+                      minLength: 1
+                    revision:
+                      description: The exact revision of an agreement docs hit, read together with its document. Docs only.
+                      type: string
+                      minLength: 1
+                    section:
+                      description: One section of an agreement revision. Needs both document and revision.
+                      type: string
+                      minLength: 1
+                    asOf:
+                      description: >-
+                        The time to evaluate docs at; defaults to now. When continuing an agreement read with cursor,
+                        send the same asOf again.
+                      type: string
+                      format: date-time
+                      pattern: >-
+                        ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|([+-](?:[01]\d|2[0-3]):[0-5]\d)))$
+                    sources:
+                      description: >-
+                        What to search: objects, docs, or specs. When omitted, a call with query searches all three and
+                        a call without query lists objects. docs and specs need a query, except an agreement read by
+                        document and revision.
+                      minItems: 1
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - objects
+                          - docs
+                          - specs
+                    docsScope:
+                      description: >-
+                        Which docs to rank. caller_relevant (the default) skips docs written for other account types;
+                        public_research searches every public doc.
+                      type: string
+                      enum:
+                        - caller_relevant
+                        - public_research
+                    kind:
+                      const: inventory_source_item
+                    sponsoredBuyerCustomerId:
+                      description: >-
+                        For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id
+                        issued by the Campaigns Page launch. Never invent one.
+                      type: string
+                      maxLength: 19
+                      pattern: ^[1-9]\d*$
+                    scope:
+                      description: >-
+                        For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets
+                        instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.
+                      type: string
+                      const: unit
+                    include:
+                      description: >-
+                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
+                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
+                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
+                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
+                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
+                        mapping kinds).
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - evidence_matches
+                          - browse
+                          - commitmentRecord
+                          - executionReadiness
+                          - executionResources
+                          - price_paid
+                          - authoring
+                          - pulse
+                          - deliverySummary
+                          - progress
+                          - outcome
+                    sourceId:
+                      description: >-
+                        One source to read from, sent here at the top level and not as filter.sourceId. For a Library
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
+                      type: string
+                      minLength: 1
+                    filter:
+                      description: >-
+                        Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with
+                        another kind are refused.
+                      type: object
+                      properties:
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        parentId:
+                          description: >-
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
+                      additionalProperties: false
+                      required:
+                        - selectorType
+                    cursor:
+                      description: >-
+                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
+                        member.
+                      type: string
+                    limit:
+                      description: Results per page, default 50. A value above a kind page maximum is capped to it.
+                      type: integer
+                      minimum: 1
+                      maximum: 200
+                    groupBy:
+                      description: >-
+                        Count the kind by one field instead of listing it: each value with its count, no rows. Needs
+                        kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
+                        creative, event_source: advertiserId, account-wide without filter.advertiserId.
+                        inventory_source: status.
+                      type: string
+                      minLength: 1
+                    accountId:
+                      anyOf:
+                        - type: integer
+                          minimum: 1
+                        - type: string
+                          pattern: ^[1-9][0-9]*$
+                  additionalProperties: false
+                  required:
+                    - kind
+                    - sourceId
+                    - filter
+                  allOf:
+                    - anyOf:
+                        - required:
+                            - query
+                        - required:
+                            - kind
+                        - required:
+                            - document
+                        - required:
+                            - revision
+                        - required:
+                            - section
+                    - if:
+                        required:
+                          - revision
+                      then:
+                        required:
+                          - document
+                    - if:
+                        required:
+                          - section
+                      then:
+                        allOf:
+                          - required:
+                              - document
+                          - required:
+                              - revision
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: evidence_matches
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: material
+                            required:
+                              - kind
+                          - required:
+                              - query
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: browse
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: material
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: executionReadiness
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: wholesale_product
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: executionResources
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: wholesale_product
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: authoring
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: deliverySummary
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: media_buy
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: executionResources
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              filter:
+                                required:
+                                  - productId
+                            required:
+                              - filter
+                          - properties:
+                              filter:
+                                required:
+                                  - resourceKind
+                            required:
+                              - filter
+                    - if:
+                        properties:
+                          filter:
+                            required:
+                              - resourceKind
+                        required:
+                          - filter
+                      then:
+                        properties:
+                          include:
+                            contains:
+                              const: executionResources
+                        required:
+                          - include
+                    - if:
+                        required:
+                          - scope
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: material
+                            required:
+                              - kind
+                          - properties:
+                              include:
+                                const:
+                                  - browse
+                            required:
+                              - include
+                    - if:
+                        properties:
+                          scope:
+                            const: unit
+                        required:
+                          - scope
+                      then:
+                        allOf:
+                          - not:
+                              required:
+                                - query
+                          - not:
+                              required:
+                                - filter
+                    - not:
+                        allOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: browse
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: evidence_matches
+                            required:
+                              - include
+                    - if:
+                        required:
+                          - include
+                      then:
+                        properties:
+                          include:
+                            maxItems: 1
+                            uniqueItems: true
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: browse
+                        required:
+                          - include
+                      then:
+                        properties:
+                          limit:
+                            maximum: 48
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: evidence_matches
+                        required:
+                          - include
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: outcome
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          kind:
+                            const: rfp
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          query:
+                            maxLength: 512
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        allOf:
+                          - required:
+                              - kind
+                          - allOf:
+                              - not:
+                                  required:
+                                    - cursor
+                    - if:
+                        required:
+                          - groupBy
+                      then:
+                        properties:
+                          limit:
+                            maximum: 50
+                          sources:
+                            items:
+                              const: objects
+                    - if:
+                        properties:
+                          kind:
+                            const: creative_asset
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - advertiserId
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: catalog
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - advertiserId
+                        required:
+                          - filter
+                    - if:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: event_source
+                            required:
+                              - kind
+                          - not:
+                              required:
+                                - groupBy
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - advertiserId
+                        required:
+                          - filter
+                    - if:
+                        allOf:
+                          - required:
+                              - sources
+                          - properties:
+                              sources:
+                                contains:
+                                  not:
+                                    const: objects
+                      then:
+                        anyOf:
+                          - required:
+                              - query
+                          - required:
+                              - revision
+                          - required:
+                              - section
+                    - if:
+                        properties:
+                          filter:
+                            allOf:
+                              - required:
+                                  - sellerType
+                              - required:
+                                  - classification
+                        required:
+                          - filter
+                      then:
+                        properties:
+                          filter:
+                            anyOf:
+                              - allOf:
+                                  - properties:
+                                      sellerType:
+                                        const: global_market_maker
+                                    required:
+                                      - sellerType
+                                  - properties:
+                                      classification:
+                                        const: global_market_maker
+                                    required:
+                                      - classification
+                              - allOf:
+                                  - properties:
+                                      sellerType:
+                                        const: regional_market_maker
+                                    required:
+                                      - sellerType
+                                  - properties:
+                                      classification:
+                                        const: regional_market_maker
+                                    required:
+                                      - classification
+                              - allOf:
+                                  - properties:
+                                      sellerType:
+                                        const: apostra_seller
+                                    required:
+                                      - sellerType
+                                  - properties:
+                                      classification:
+                                        const: marketplace_seller
+                                    required:
+                                      - classification
+                              - allOf:
+                                  - properties:
+                                      sellerType:
+                                        const: apostra_seller
+                                    required:
+                                      - sellerType
+                                  - properties:
+                                      classification:
+                                        const: apostra_seller
+                                    required:
+                                      - classification
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          filter:
+                            properties:
+                              marketplace:
+                                const: true
+                            required:
+                              - marketplace
+                        required:
+                          - filter
+                      then:
+                        properties:
+                          filter:
+                            allOf:
+                              - not:
+                                  required:
+                                    - sellerType
+                              - not:
+                                  required:
+                                    - classification
+                              - not:
+                                  required:
+                                    - transactable
+                              - not:
+                                  required:
+                                    - marketplaceReady
+                              - not:
+                                  required:
+                                    - partnerStatus
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          filter:
+                            allOf:
+                              - required:
+                                  - transactable
+                              - required:
+                                  - marketplaceReady
+                        required:
+                          - filter
+                      then:
+                        properties:
+                          filter:
+                            anyOf:
+                              - allOf:
+                                  - properties:
+                                      transactable:
+                                        const: true
+                                    required:
+                                      - transactable
+                                  - properties:
+                                      marketplaceReady:
+                                        const: true
+                                    required:
+                                      - marketplaceReady
+                              - allOf:
+                                  - properties:
+                                      transactable:
+                                        const: false
+                                    required:
+                                      - transactable
+                                  - properties:
+                                      marketplaceReady:
+                                        const: false
+                                    required:
+                                      - marketplaceReady
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
+                            const: ad_server_targeting
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
                     - if:
                         properties:
                           kind:
@@ -76681,9 +78263,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -76798,10 +78381,28 @@ paths:
                           minLength: 1
                         parentId:
                           description: >-
-                            For kind ad_server_targeting: list the children of this candidate, for example the values
-                            under one key.
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
                           type: string
                           minLength: 1
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
                         system:
                           description: >-
                             For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
@@ -78131,6 +79732,28 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
                             const: source_account
                         required:
                           - kind
@@ -78379,9 +80002,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -78903,6 +80527,28 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
                             const: source_account
                         required:
                           - kind
@@ -79151,9 +80797,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -79268,10 +80915,28 @@ paths:
                           minLength: 1
                         parentId:
                           description: >-
-                            For kind ad_server_targeting: list the children of this candidate, for example the values
-                            under one key.
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
                           type: string
                           minLength: 1
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
                         system:
                           description: >-
                             For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
@@ -80603,6 +82268,28 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
                             const: source_account
                         required:
                           - kind
@@ -80849,9 +82536,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -80966,10 +82654,28 @@ paths:
                           minLength: 1
                         parentId:
                           description: >-
-                            For kind ad_server_targeting: list the children of this candidate, for example the values
-                            under one key.
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
                           type: string
                           minLength: 1
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
                         system:
                           description: >-
                             For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
@@ -82298,6 +84004,28 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
                             const: source_account
                         required:
                           - kind
@@ -82544,9 +84272,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -82661,10 +84390,28 @@ paths:
                           minLength: 1
                         parentId:
                           description: >-
-                            For kind ad_server_targeting: list the children of this candidate, for example the values
-                            under one key.
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
                           type: string
                           minLength: 1
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
                         system:
                           description: >-
                             For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
@@ -83993,6 +85740,28 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
                             const: source_account
                         required:
                           - kind
@@ -84239,9 +86008,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -84356,10 +86126,28 @@ paths:
                           minLength: 1
                         parentId:
                           description: >-
-                            For kind ad_server_targeting: list the children of this candidate, for example the values
-                            under one key.
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
                           type: string
                           minLength: 1
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
                         system:
                           description: >-
                             For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
@@ -85689,6 +87477,28 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
                             const: source_account
                         required:
                           - kind
@@ -85935,9 +87745,10 @@ paths:
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
-                        material browse, this is a connected Library source id. Required for ad_server_targeting and
-                        source_account (the accounts one source holds, for a source decision). Optional for seller
-                        wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
+                        material browse, this is a connected Library source id. Required for ad_server_targeting,
+                        inventory_source_item and source_account (the accounts one source holds, for a source decision).
+                        Optional for seller wholesale_product, signal, and seller media_buy, which list every source
+                        when it is omitted.
                       type: string
                       minLength: 1
                     filter:
@@ -86052,10 +87863,28 @@ paths:
                           minLength: 1
                         parentId:
                           description: >-
-                            For kind ad_server_targeting: list the children of this candidate, for example the values
-                            under one key.
+                            For kind ad_server_targeting or inventory_source_item: list the children of this candidate
+                            or selector.
                           type: string
                           minLength: 1
+                        selectorType:
+                          description: >-
+                            For kind inventory_source_item, required: which of the source's selector types to browse, as
+                            get include capabilities lists them.
+                          type: string
+                          minLength: 1
+                        mediaType:
+                          description: 'For kind inventory_source_item: narrow to a media type.'
+                          type: string
+                          enum:
+                            - display
+                            - video
+                        environmentType:
+                          description: 'For kind inventory_source_item: narrow to an environment.'
+                          type: string
+                          enum:
+                            - BROWSER
+                            - VIDEO_PLAYER
                         system:
                           description: >-
                             For kind targeting_value, required: nielsen_dma (DMA), iso_3166_1 (country) or iso_3166_2
@@ -87382,6 +89211,28 @@ paths:
                     - if:
                         properties:
                           kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        required:
+                          - sourceId
+                    - if:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                      then:
+                        properties:
+                          filter:
+                            required:
+                              - selectorType
+                        required:
+                          - filter
+                    - if:
+                        properties:
+                          kind:
                             const: source_account
                         required:
                           - kind
@@ -87587,6 +89438,7 @@ paths:
                               - $ref: '#/components/schemas/search_success_SearchAdvertiserGrantPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchSignalPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchAdServerTargetingPageOutput'
+                              - $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchWorkItemPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchCampaignPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchCatalogPageOutput'
@@ -87696,6 +89548,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchAdvertiserGrantPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchSignalPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAdServerTargetingPageOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchWorkItemPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchCampaignPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchCatalogPageOutput'
@@ -87740,6 +89593,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchAdvertiserGrantUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchSignalUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAdServerTargetingUnavailableOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchInventorySourceItemUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchWorkItemUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchCampaignUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchCatalogUnavailableOutput'
@@ -117674,6 +119528,35 @@ components:
         - kind
       additionalProperties:
         $ref: '#/components/schemas/search_success_SearchAdServerTargetingPageOutputValue'
+    search_success_SearchInventorySourceItemPageOutput:
+      type: object
+      properties:
+        total:
+          $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutputTotal'
+        totalLowerBound:
+          $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutputTotalLowerBound'
+        returned:
+          $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutputReturned'
+        hasMore:
+          $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutputHasMore'
+        truncated:
+          $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutputTruncated'
+        nextCursor:
+          $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutputNextCursor'
+        results:
+          $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutputResults'
+        outcome:
+          type: string
+          const: page_inventory_source_item
+        kind:
+          type: string
+          const: inventory_source_item
+      required:
+        - results
+        - outcome
+        - kind
+      additionalProperties:
+        $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutputValue'
     search_success_SearchWorkItemPageOutput:
       type: object
       properties:
@@ -118750,6 +120633,25 @@ components:
         kind:
           type: string
           const: ad_server_targeting
+        unavailable:
+          type: string
+        message:
+          type: string
+      required:
+        - outcome
+        - kind
+        - unavailable
+        - message
+      additionalProperties: {}
+    search_success_SearchInventorySourceItemUnavailableOutput:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: unavailable_inventory_source_item
+        kind:
+          type: string
+          const: inventory_source_item
         unavailable:
           type: string
         message:
@@ -121124,6 +123026,91 @@ components:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
         additionalProperties: {}
     search_success_SearchAdServerTargetingPageOutputValue: {}
+    search_success_SearchInventorySourceItemPageOutputTotal:
+      type: number
+    search_success_SearchInventorySourceItemPageOutputTotalLowerBound:
+      type: number
+    search_success_SearchInventorySourceItemPageOutputReturned:
+      type: number
+    search_success_SearchInventorySourceItemPageOutputHasMore:
+      type: boolean
+    search_success_SearchInventorySourceItemPageOutputTruncated:
+      type: boolean
+    search_success_SearchInventorySourceItemPageOutputNextCursor:
+      type: string
+    search_success_SearchInventorySourceItemPageOutputResults:
+      type: array
+      items:
+        type: object
+        properties:
+          advertiserId:
+            type: string
+          name:
+            type:
+              - string
+              - 'null'
+          sandbox:
+            type: boolean
+          sourceType:
+            anyOf:
+              - type: string
+                enum:
+                  - inline
+                  - url
+                  - file
+              - type: 'null'
+            description: 'Where the items come from: url when url is set, file when file is set.'
+          lastChangeSummary:
+            anyOf:
+              - type: object
+                properties:
+                  added:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  updated:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  unchanged:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  removed:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                required:
+                  - added
+                  - updated
+                  - unchanged
+                  - removed
+                additionalProperties: false
+              - type: 'null'
+            description: Items in the latest version against the one before it.
+          transform:
+            anyOf:
+              - type: object
+                properties:
+                  name:
+                    type: string
+                  updatedAt:
+                    type: string
+                required:
+                  - name
+                  - updatedAt
+                additionalProperties: false
+              - type: 'null'
+            description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+        additionalProperties: {}
+    search_success_SearchInventorySourceItemPageOutputValue: {}
     search_success_SearchWorkItemPageOutputTotal:
       type: number
     search_success_SearchWorkItemPageOutputTotalLowerBound:
