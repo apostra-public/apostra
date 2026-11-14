@@ -37272,9 +37272,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -37427,6 +37427,10 @@ export type SearchData = {
              * Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.
              */
             resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
+            /**
+             * Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.
+             */
+            assetId?: string;
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
@@ -37788,9 +37792,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -37943,6 +37947,10 @@ export type SearchData = {
              * Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.
              */
             resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
+            /**
+             * Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.
+             */
+            assetId?: string;
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
@@ -38304,9 +38312,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -38372,9 +38380,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -38527,6 +38535,10 @@ export type SearchData = {
              * Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.
              */
             resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
+            /**
+             * Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.
+             */
+            assetId?: string;
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
@@ -38888,9 +38900,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -39039,6 +39051,10 @@ export type SearchData = {
              * Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.
              */
             resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
+            /**
+             * Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.
+             */
+            assetId?: string;
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
@@ -39397,9 +39413,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -39549,6 +39565,10 @@ export type SearchData = {
              */
             resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
             /**
+             * Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.
+             */
+            assetId?: string;
+            /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
             assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
@@ -39909,9 +39929,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -40061,6 +40081,10 @@ export type SearchData = {
              */
             resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
             /**
+             * Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.
+             */
+            assetId?: string;
+            /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
             assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
@@ -40421,9 +40445,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -40572,6 +40596,10 @@ export type SearchData = {
              * Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.
              */
             resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
+            /**
+             * Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.
+             */
+            assetId?: string;
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
@@ -41059,9 +41087,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -41214,6 +41242,10 @@ export type SearchData = {
              * Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.
              */
             resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
+            /**
+             * Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.
+             */
+            assetId?: string;
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
@@ -41575,9 +41607,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -41655,9 +41687,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -41810,6 +41842,10 @@ export type SearchData = {
              * Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.
              */
             resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
+            /**
+             * Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.
+             */
+            assetId?: string;
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
@@ -42171,9 +42207,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -42243,9 +42279,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -42398,6 +42434,10 @@ export type SearchData = {
              * Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.
              */
             resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
+            /**
+             * Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.
+             */
+            assetId?: string;
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
@@ -42758,9 +42798,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -42913,6 +42953,10 @@ export type SearchData = {
              * Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.
              */
             resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
+            /**
+             * Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.
+             */
+            assetId?: string;
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
@@ -43274,9 +43318,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -43429,6 +43473,10 @@ export type SearchData = {
              * Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.
              */
             resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
+            /**
+             * Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.
+             */
+            assetId?: string;
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
@@ -43790,9 +43838,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -43945,6 +43993,10 @@ export type SearchData = {
              * Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.
              */
             resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
+            /**
+             * Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.
+             */
+            assetId?: string;
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
@@ -44306,9 +44358,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -44461,6 +44513,10 @@ export type SearchData = {
              * Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.
              */
             resourceKind?: 'application' | 'catalog' | 'conversion_event' | 'destination' | 'event_source' | 'lead_form' | 'native_asset' | 'platform_identity' | 'product_set' | 'welcome_message';
+            /**
+             * Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.
+             */
+            assetId?: string;
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
@@ -45009,6 +45065,12 @@ export type SearchSuccessSearchAccountPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -45068,6 +45130,12 @@ export type SearchSuccessSearchAccountRelationshipPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -45143,6 +45211,12 @@ export type SearchSuccessSearchAdServerTargetingPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -45210,6 +45284,12 @@ export type SearchSuccessSearchAdvertiserGrantPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -45277,6 +45357,12 @@ export type SearchSuccessSearchAdvertiserPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -45344,6 +45430,12 @@ export type SearchSuccessSearchAgentPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -45411,6 +45503,12 @@ export type SearchSuccessSearchApprovalPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -45478,6 +45576,12 @@ export type SearchSuccessSearchAskPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -45545,6 +45649,12 @@ export type SearchSuccessSearchBusinessRulesVersionPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -45612,6 +45722,12 @@ export type SearchSuccessSearchBuyerAgentPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -45679,6 +45795,12 @@ export type SearchSuccessSearchBuyerRfpPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -45746,6 +45868,12 @@ export type SearchSuccessSearchCampaignPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -45813,6 +45941,12 @@ export type SearchSuccessSearchCatalogPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -45880,6 +46014,12 @@ export type SearchSuccessSearchConnectionPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -45947,6 +46087,12 @@ export type SearchSuccessSearchConversationPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46014,6 +46160,12 @@ export type SearchSuccessSearchCoveragePageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46081,6 +46233,12 @@ export type SearchSuccessSearchCreativeAssetPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46148,6 +46306,12 @@ export type SearchSuccessSearchCreativeCollectionPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46215,6 +46379,12 @@ export type SearchSuccessSearchCreativeEnginePageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46282,6 +46452,12 @@ export type SearchSuccessSearchCreativeFormatPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46349,6 +46525,12 @@ export type SearchSuccessSearchCreativePageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46408,6 +46590,12 @@ export type SearchSuccessSearchCreativeSessionPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46483,6 +46671,12 @@ export type SearchSuccessSearchDecisionPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46550,6 +46744,12 @@ export type SearchSuccessSearchDimensionPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46617,6 +46817,12 @@ export type SearchSuccessSearchEventSourcePageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46684,6 +46890,12 @@ export type SearchSuccessSearchHouseDiscountPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46751,6 +46963,12 @@ export type SearchSuccessSearchInventorySourceItemPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46818,6 +47036,12 @@ export type SearchSuccessSearchInventorySourcePageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46885,6 +47109,12 @@ export type SearchSuccessSearchLibraryRequestPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -46952,6 +47182,12 @@ export type SearchSuccessSearchMaterialPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47019,6 +47255,12 @@ export type SearchSuccessSearchMediaBuyPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47086,6 +47328,12 @@ export type SearchSuccessSearchMemberPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47153,6 +47401,12 @@ export type SearchSuccessSearchPlaybookVersionPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47220,6 +47474,12 @@ export type SearchSuccessSearchPropertyListPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47287,6 +47547,12 @@ export type SearchSuccessSearchProposalPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47354,6 +47620,12 @@ export type SearchSuccessSearchRfpPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47413,6 +47685,12 @@ export type SearchSuccessSearchRfpTurnPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47488,6 +47766,12 @@ export type SearchSuccessSearchSellerPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47555,6 +47839,12 @@ export type SearchSuccessSearchSessionPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47622,6 +47912,12 @@ export type SearchSuccessSearchSignalPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47689,6 +47985,12 @@ export type SearchSuccessSearchSkillPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47756,6 +48058,12 @@ export type SearchSuccessSearchSourceAccountPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47823,6 +48131,12 @@ export type SearchSuccessSearchTargetingValuePageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47890,6 +48204,12 @@ export type SearchSuccessSearchWholesaleProductPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 
@@ -47957,6 +48277,12 @@ export type SearchSuccessSearchWorkItemPageOutputResults = Array<{
      */
     refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
     progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
     [key: string]: unknown;
 }>;
 

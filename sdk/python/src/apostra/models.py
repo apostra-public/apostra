@@ -21323,8 +21323,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchFilter]
@@ -21409,6 +21409,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetId: NotRequired[str]
+    '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
@@ -21584,8 +21586,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict)
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter]
@@ -21617,8 +21619,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionFilter]
@@ -21703,6 +21705,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetId: NotRequired[str]
+    '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
@@ -21931,6 +21935,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetId: NotRequired[str]
+    '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
@@ -22100,8 +22106,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter]
@@ -22186,6 +22192,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetId: NotRequired[str]
+    '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
@@ -22362,8 +22370,8 @@ class SearchInputKindAdServerTargeting(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindAdServerTargetingFilter]
@@ -22448,6 +22456,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetId: NotRequired[str]
+    '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
@@ -22624,8 +22634,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSessionFilter]
@@ -22710,6 +22720,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetId: NotRequired[str]
+    '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
@@ -22886,8 +22898,8 @@ class SearchInputKindBuyerRfp(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindBuyerRfpFilter
@@ -22972,6 +22984,8 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetId: NotRequired[str]
+    '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
@@ -23148,8 +23162,8 @@ class SearchInputKindCreative(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindCreativeFilter]
@@ -23182,8 +23196,8 @@ class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeAssetAndCatalogFilter
@@ -23268,6 +23282,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetId: NotRequired[str]
+    '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
@@ -23444,8 +23460,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter
@@ -23528,6 +23544,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetId: NotRequired[str]
+    '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
@@ -23704,8 +23722,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeCollectionWithFilterCampaignIdFilter
@@ -23788,6 +23806,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetId: NotRequired[str]
+    '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
@@ -24014,6 +24034,8 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetId: NotRequired[str]
+    '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
@@ -24262,8 +24284,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter
@@ -24344,6 +24366,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetId: NotRequired[str]
+    '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
@@ -24524,8 +24548,8 @@ class SearchInputKindEventSource(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindEventSourceFilter]
@@ -24562,8 +24586,8 @@ class SearchInputKindInventorySourceItem(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindInventorySourceItemFilter
@@ -24606,8 +24630,8 @@ class SearchInputKindProposal(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindProposalFilter
@@ -24692,6 +24716,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetId: NotRequired[str]
+    '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
@@ -24868,8 +24894,8 @@ class SearchInputKindSourceAccount(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindSourceAccountFilter]
@@ -24954,6 +24980,8 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind creative_format: narrow formats to this exact product. With include executionResources: the product to read resource options for. For kind decision: decisions about this product.\n    '
     resourceKind: NotRequired[Literal["application", "catalog", "conversion_event", "destination", "event_source", "lead_form", "native_asset", "platform_identity", "product_set", "welcome_message"]]
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
+    assetId: NotRequired[str]
+    '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
     assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
@@ -25130,8 +25158,8 @@ class SearchInputKindTargetingValue(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness, or executionResources with filter.productId and filter.resourceKind. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "pulse", "deliverySummary", "progress", "outcome"]]]
+    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindTargetingValueFilter
@@ -25251,8 +25279,15 @@ class SearchSuccessSearchAccountPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchAccountPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchAccountPageOutputResults: TypeAlias = "list[SearchSuccessSearchAccountPageOutputResultsItem]"
+
+class SearchSuccessSearchAccountPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchAccountPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -25302,8 +25337,15 @@ class SearchSuccessSearchAccountRelationshipPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchAccountRelationshipPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchAccountRelationshipPageOutputResults: TypeAlias = "list[SearchSuccessSearchAccountRelationshipPageOutputResultsItem]"
+
+class SearchSuccessSearchAccountRelationshipPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchAccountRelationshipPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -25365,8 +25407,15 @@ class SearchSuccessSearchAdServerTargetingPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchAdServerTargetingPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchAdServerTargetingPageOutputResults: TypeAlias = "list[SearchSuccessSearchAdServerTargetingPageOutputResultsItem]"
+
+class SearchSuccessSearchAdServerTargetingPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchAdServerTargetingPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -25422,8 +25471,15 @@ class SearchSuccessSearchAdvertiserGrantPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchAdvertiserGrantPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchAdvertiserGrantPageOutputResults: TypeAlias = "list[SearchSuccessSearchAdvertiserGrantPageOutputResultsItem]"
+
+class SearchSuccessSearchAdvertiserGrantPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchAdvertiserGrantPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -25479,8 +25535,15 @@ class SearchSuccessSearchAdvertiserPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchAdvertiserPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchAdvertiserPageOutputResults: TypeAlias = "list[SearchSuccessSearchAdvertiserPageOutputResultsItem]"
+
+class SearchSuccessSearchAdvertiserPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchAdvertiserPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -25536,8 +25599,15 @@ class SearchSuccessSearchAgentPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchAgentPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchAgentPageOutputResults: TypeAlias = "list[SearchSuccessSearchAgentPageOutputResultsItem]"
+
+class SearchSuccessSearchAgentPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchAgentPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -25593,8 +25663,15 @@ class SearchSuccessSearchApprovalPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchApprovalPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchApprovalPageOutputResults: TypeAlias = "list[SearchSuccessSearchApprovalPageOutputResultsItem]"
+
+class SearchSuccessSearchApprovalPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchApprovalPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -25650,8 +25727,15 @@ class SearchSuccessSearchAskPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchAskPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchAskPageOutputResults: TypeAlias = "list[SearchSuccessSearchAskPageOutputResultsItem]"
+
+class SearchSuccessSearchAskPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchAskPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -25707,8 +25791,15 @@ class SearchSuccessSearchBusinessRulesVersionPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchBusinessRulesVersionPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchBusinessRulesVersionPageOutputResults: TypeAlias = "list[SearchSuccessSearchBusinessRulesVersionPageOutputResultsItem]"
+
+class SearchSuccessSearchBusinessRulesVersionPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchBusinessRulesVersionPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -25764,8 +25855,15 @@ class SearchSuccessSearchBuyerAgentPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchBuyerAgentPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchBuyerAgentPageOutputResults: TypeAlias = "list[SearchSuccessSearchBuyerAgentPageOutputResultsItem]"
+
+class SearchSuccessSearchBuyerAgentPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchBuyerAgentPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -25821,8 +25919,15 @@ class SearchSuccessSearchBuyerRfpPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchBuyerRfpPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchBuyerRfpPageOutputResults: TypeAlias = "list[SearchSuccessSearchBuyerRfpPageOutputResultsItem]"
+
+class SearchSuccessSearchBuyerRfpPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchBuyerRfpPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -25878,8 +25983,15 @@ class SearchSuccessSearchCampaignPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchCampaignPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchCampaignPageOutputResults: TypeAlias = "list[SearchSuccessSearchCampaignPageOutputResultsItem]"
+
+class SearchSuccessSearchCampaignPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchCampaignPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -25935,8 +26047,15 @@ class SearchSuccessSearchCatalogPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchCatalogPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchCatalogPageOutputResults: TypeAlias = "list[SearchSuccessSearchCatalogPageOutputResultsItem]"
+
+class SearchSuccessSearchCatalogPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchCatalogPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -25992,8 +26111,15 @@ class SearchSuccessSearchConnectionPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchConnectionPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchConnectionPageOutputResults: TypeAlias = "list[SearchSuccessSearchConnectionPageOutputResultsItem]"
+
+class SearchSuccessSearchConnectionPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchConnectionPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26049,8 +26175,15 @@ class SearchSuccessSearchConversationPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchConversationPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchConversationPageOutputResults: TypeAlias = "list[SearchSuccessSearchConversationPageOutputResultsItem]"
+
+class SearchSuccessSearchConversationPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchConversationPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26106,8 +26239,15 @@ class SearchSuccessSearchCoveragePageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchCoveragePageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchCoveragePageOutputResults: TypeAlias = "list[SearchSuccessSearchCoveragePageOutputResultsItem]"
+
+class SearchSuccessSearchCoveragePageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchCoveragePageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26163,8 +26303,15 @@ class SearchSuccessSearchCreativeAssetPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchCreativeAssetPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchCreativeAssetPageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeAssetPageOutputResultsItem]"
+
+class SearchSuccessSearchCreativeAssetPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchCreativeAssetPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26220,8 +26367,15 @@ class SearchSuccessSearchCreativeCollectionPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchCreativeCollectionPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchCreativeCollectionPageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeCollectionPageOutputResultsItem]"
+
+class SearchSuccessSearchCreativeCollectionPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchCreativeCollectionPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26277,8 +26431,15 @@ class SearchSuccessSearchCreativeEnginePageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchCreativeEnginePageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchCreativeEnginePageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeEnginePageOutputResultsItem]"
+
+class SearchSuccessSearchCreativeEnginePageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchCreativeEnginePageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26334,8 +26495,15 @@ class SearchSuccessSearchCreativeFormatPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchCreativeFormatPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchCreativeFormatPageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeFormatPageOutputResultsItem]"
+
+class SearchSuccessSearchCreativeFormatPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchCreativeFormatPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26391,8 +26559,15 @@ class SearchSuccessSearchCreativePageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchCreativePageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchCreativePageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativePageOutputResultsItem]"
+
+class SearchSuccessSearchCreativePageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchCreativePageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26442,8 +26617,15 @@ class SearchSuccessSearchCreativeSessionPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchCreativeSessionPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchCreativeSessionPageOutputResults: TypeAlias = "list[SearchSuccessSearchCreativeSessionPageOutputResultsItem]"
+
+class SearchSuccessSearchCreativeSessionPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchCreativeSessionPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26505,8 +26687,15 @@ class SearchSuccessSearchDecisionPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchDecisionPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchDecisionPageOutputResults: TypeAlias = "list[SearchSuccessSearchDecisionPageOutputResultsItem]"
+
+class SearchSuccessSearchDecisionPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchDecisionPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26562,8 +26751,15 @@ class SearchSuccessSearchDimensionPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchDimensionPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchDimensionPageOutputResults: TypeAlias = "list[SearchSuccessSearchDimensionPageOutputResultsItem]"
+
+class SearchSuccessSearchDimensionPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchDimensionPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26619,8 +26815,15 @@ class SearchSuccessSearchEventSourcePageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchEventSourcePageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchEventSourcePageOutputResults: TypeAlias = "list[SearchSuccessSearchEventSourcePageOutputResultsItem]"
+
+class SearchSuccessSearchEventSourcePageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchEventSourcePageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26676,8 +26879,15 @@ class SearchSuccessSearchHouseDiscountPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchHouseDiscountPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchHouseDiscountPageOutputResults: TypeAlias = "list[SearchSuccessSearchHouseDiscountPageOutputResultsItem]"
+
+class SearchSuccessSearchHouseDiscountPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchHouseDiscountPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26733,8 +26943,15 @@ class SearchSuccessSearchInventorySourceItemPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchInventorySourceItemPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchInventorySourceItemPageOutputResults: TypeAlias = "list[SearchSuccessSearchInventorySourceItemPageOutputResultsItem]"
+
+class SearchSuccessSearchInventorySourceItemPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchInventorySourceItemPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26790,8 +27007,15 @@ class SearchSuccessSearchInventorySourcePageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchInventorySourcePageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchInventorySourcePageOutputResults: TypeAlias = "list[SearchSuccessSearchInventorySourcePageOutputResultsItem]"
+
+class SearchSuccessSearchInventorySourcePageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchInventorySourcePageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26847,8 +27071,15 @@ class SearchSuccessSearchLibraryRequestPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchLibraryRequestPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchLibraryRequestPageOutputResults: TypeAlias = "list[SearchSuccessSearchLibraryRequestPageOutputResultsItem]"
+
+class SearchSuccessSearchLibraryRequestPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchLibraryRequestPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26904,8 +27135,15 @@ class SearchSuccessSearchMaterialPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchMaterialPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchMaterialPageOutputResults: TypeAlias = "list[SearchSuccessSearchMaterialPageOutputResultsItem]"
+
+class SearchSuccessSearchMaterialPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchMaterialPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -26961,8 +27199,15 @@ class SearchSuccessSearchMediaBuyPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchMediaBuyPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchMediaBuyPageOutputResults: TypeAlias = "list[SearchSuccessSearchMediaBuyPageOutputResultsItem]"
+
+class SearchSuccessSearchMediaBuyPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchMediaBuyPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -27018,8 +27263,15 @@ class SearchSuccessSearchMemberPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchMemberPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchMemberPageOutputResults: TypeAlias = "list[SearchSuccessSearchMemberPageOutputResultsItem]"
+
+class SearchSuccessSearchMemberPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchMemberPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -27075,8 +27327,15 @@ class SearchSuccessSearchPlaybookVersionPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchPlaybookVersionPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchPlaybookVersionPageOutputResults: TypeAlias = "list[SearchSuccessSearchPlaybookVersionPageOutputResultsItem]"
+
+class SearchSuccessSearchPlaybookVersionPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchPlaybookVersionPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -27132,8 +27391,15 @@ class SearchSuccessSearchPropertyListPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchPropertyListPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchPropertyListPageOutputResults: TypeAlias = "list[SearchSuccessSearchPropertyListPageOutputResultsItem]"
+
+class SearchSuccessSearchPropertyListPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchPropertyListPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -27189,8 +27455,15 @@ class SearchSuccessSearchProposalPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchProposalPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchProposalPageOutputResults: TypeAlias = "list[SearchSuccessSearchProposalPageOutputResultsItem]"
+
+class SearchSuccessSearchProposalPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchProposalPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -27246,8 +27519,15 @@ class SearchSuccessSearchRfpPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchRfpPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchRfpPageOutputResults: TypeAlias = "list[SearchSuccessSearchRfpPageOutputResultsItem]"
+
+class SearchSuccessSearchRfpPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchRfpPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -27297,8 +27577,15 @@ class SearchSuccessSearchRfpTurnPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchRfpTurnPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchRfpTurnPageOutputResults: TypeAlias = "list[SearchSuccessSearchRfpTurnPageOutputResultsItem]"
+
+class SearchSuccessSearchRfpTurnPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchRfpTurnPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -27360,8 +27647,15 @@ class SearchSuccessSearchSellerPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchSellerPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchSellerPageOutputResults: TypeAlias = "list[SearchSuccessSearchSellerPageOutputResultsItem]"
+
+class SearchSuccessSearchSellerPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchSellerPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -27417,8 +27711,15 @@ class SearchSuccessSearchSessionPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchSessionPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchSessionPageOutputResults: TypeAlias = "list[SearchSuccessSearchSessionPageOutputResultsItem]"
+
+class SearchSuccessSearchSessionPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchSessionPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -27474,8 +27775,15 @@ class SearchSuccessSearchSignalPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchSignalPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchSignalPageOutputResults: TypeAlias = "list[SearchSuccessSearchSignalPageOutputResultsItem]"
+
+class SearchSuccessSearchSignalPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchSignalPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -27531,8 +27839,15 @@ class SearchSuccessSearchSkillPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchSkillPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchSkillPageOutputResults: TypeAlias = "list[SearchSuccessSearchSkillPageOutputResultsItem]"
+
+class SearchSuccessSearchSkillPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchSkillPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -27588,8 +27903,15 @@ class SearchSuccessSearchSourceAccountPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchSourceAccountPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchSourceAccountPageOutputResults: TypeAlias = "list[SearchSuccessSearchSourceAccountPageOutputResultsItem]"
+
+class SearchSuccessSearchSourceAccountPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchSourceAccountPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -27645,8 +27967,15 @@ class SearchSuccessSearchTargetingValuePageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchTargetingValuePageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchTargetingValuePageOutputResults: TypeAlias = "list[SearchSuccessSearchTargetingValuePageOutputResultsItem]"
+
+class SearchSuccessSearchTargetingValuePageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchTargetingValuePageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -27702,8 +28031,15 @@ class SearchSuccessSearchWholesaleProductPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchWholesaleProductPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchWholesaleProductPageOutputResults: TypeAlias = "list[SearchSuccessSearchWholesaleProductPageOutputResultsItem]"
+
+class SearchSuccessSearchWholesaleProductPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchWholesaleProductPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
@@ -27759,8 +28095,15 @@ class SearchSuccessSearchWorkItemPageOutputResultsItem(TypedDict):
     refreshProblem: NotRequired[SearchSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
+    creativeFit: NotRequired[SearchSuccessSearchWorkItemPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchWorkItemPageOutputResults: TypeAlias = "list[SearchSuccessSearchWorkItemPageOutputResultsItem]"
+
+class SearchSuccessSearchWorkItemPageOutputResultsItemCreativeFit(TypedDict):
+    fits: bool
+    reasons: list[str]
+    requirements: list[str]
+    formatName: NotRequired[str]
 
 class SearchSuccessSearchWorkItemPageOutputResultsItemLastChangeSummaryValue(TypedDict):
     added: int
