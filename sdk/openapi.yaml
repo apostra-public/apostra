@@ -52587,25 +52587,25 @@ paths:
                                   - groups
                                 additionalProperties: false
                               geo_countries:
-                                description: Country codes or names.
+                                description: ISO country codes.
                                 minItems: 1
                                 type: array
                                 items:
                                   type: string
                               geo_countries_exclude:
-                                description: Excluded country codes or names.
+                                description: Excluded ISO country codes.
                                 minItems: 1
                                 type: array
                                 items:
                                   type: string
                               geo_regions:
-                                description: Subdivision codes or names.
+                                description: ISO subdivision codes.
                                 minItems: 1
                                 type: array
                                 items:
                                   type: string
                               geo_regions_exclude:
-                                description: Excluded subdivision codes or names.
+                                description: Excluded ISO subdivision codes.
                                 minItems: 1
                                 type: array
                                 items:

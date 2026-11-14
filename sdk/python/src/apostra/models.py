@@ -17008,13 +17008,13 @@ class SaveMediaBuyInputKindCreateProductsItemTargetingOverlay(TypedDict):
     signal_targeting_groups: NotRequired[SaveMediaBuyInputKindCreateProductsItemTargetingOverlaySignalTargetingGroups]
     '\n    Signal groups and their selection mode.\n    '
     geo_countries: NotRequired[list[str]]
-    '\n    Country codes or names.\n    '
+    '\n    ISO country codes.\n    '
     geo_countries_exclude: NotRequired[list[str]]
-    '\n    Excluded country codes or names.\n    '
+    '\n    Excluded ISO country codes.\n    '
     geo_regions: NotRequired[list[str]]
-    '\n    Subdivision codes or names.\n    '
+    '\n    ISO subdivision codes.\n    '
     geo_regions_exclude: NotRequired[list[str]]
-    '\n    Excluded subdivision codes or names.\n    '
+    '\n    Excluded ISO subdivision codes.\n    '
     geo_postal_areas: NotRequired[list[SaveMediaBuyRequestProductsItemTargetingOverlayGeoPostalAreasItem]]
     '\n    Country-aware postal areas to include.\n    '
     geo_postal_areas_exclude: NotRequired[list[SaveMediaBuyRequestProductsItemTargetingOverlayGeoPostalAreasExcludeItem]]
