@@ -43559,6 +43559,25 @@ paths:
                           - launch
                           - nextStep
                         additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: approval_required
+                          message:
+                            type: string
+                          approval:
+                            $ref: '#/components/schemas/save_campaign_success_AgentApproval'
+                          serverTime:
+                            type: string
+                            format: date-time
+                            pattern: >-
+                              ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                        required:
+                          - action
+                          - message
+                          - approval
+                        additionalProperties: false
                   error:
                     type: 'null'
                 required:
@@ -103718,6 +103737,106 @@ components:
         - macro
         - source
         - reason
+      additionalProperties: false
+    save_campaign_success_AgentApproval:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          pattern: >-
+            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+          description: Approval id.
+        kind:
+          type: string
+          description: Kind of sensitive action, for example `buyer_child_account.create`.
+        state:
+          type: string
+          enum:
+            - pending
+            - executing
+            - succeeded
+            - failed
+            - rejected
+            - expired
+          description: >-
+            `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and
+            `expired` are final.
+        targetCustomerId:
+          type: string
+          description: Account the action applies to.
+        requiredRole:
+          anyOf:
+            - type: string
+              enum:
+                - ADMIN
+                - SUPER_ADMIN
+            - type: 'null'
+          description: Role the approver must hold on the account.
+        summary:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: What will happen, in one line. Null once the approval is final.
+        url:
+          type: string
+          format: uri
+          description: Page on our site where a signed-in person approves or rejects the request.
+        createdAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        expiresAt:
+          type: string
+          format: date-time
+          pattern: >-
+            ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+        decidedAt:
+          anyOf:
+            - type: string
+              format: date-time
+              pattern: >-
+                ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+            - type: 'null'
+        completedAt:
+          anyOf:
+            - type: string
+              format: date-time
+              pattern: >-
+                ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+            - type: 'null'
+        resultReference:
+          anyOf:
+            - type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type:
+                  - string
+                  - number
+                  - boolean
+            - type: 'null'
+          description: Reference to the result once succeeded.
+        failureCode:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Reason code when the action failed.
+      required:
+        - id
+        - kind
+        - state
+        - targetCustomerId
+        - requiredRole
+        - summary
+        - url
+        - createdAt
+        - expiresAt
+        - decidedAt
+        - completedAt
+        - resultReference
+        - failureCode
       additionalProperties: false
     save_campaign_success_ServerTime:
       type: string
