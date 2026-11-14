@@ -30049,19 +30049,19 @@ export type SaveMediaBuyData = {
                     }>;
                 };
                 /**
-                 * Country codes or names.
+                 * ISO country codes.
                  */
                 geo_countries?: Array<string>;
                 /**
-                 * Excluded country codes or names.
+                 * Excluded ISO country codes.
                  */
                 geo_countries_exclude?: Array<string>;
                 /**
-                 * Subdivision codes or names.
+                 * ISO subdivision codes.
                  */
                 geo_regions?: Array<string>;
                 /**
-                 * Excluded subdivision codes or names.
+                 * Excluded ISO subdivision codes.
                  */
                 geo_regions_exclude?: Array<string>;
                 /**
