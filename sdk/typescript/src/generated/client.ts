@@ -965,14 +965,14 @@ export class Apostra extends Transport {
   /** Open a seller library request or close it with seller Material. Returns the data together with response headers and request ID. */
   saveLibraryRequestWithResponse(input: SaveLibraryRequestInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveLibraryRequestResult>> { return this.requestDetailed("save_library_request", input, options) }
   /**
-   * Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra
+   * Save Materials. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For many, confirm once and call per Draft. Seller beta: preview, delete, undo or include imported documents. Delete purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra
    *
    * @example
    * await client.saveMaterial(input, { idempotencyKey: 'stable-key' })
    */
   saveMaterial(input: SaveMaterialInput, options: WriteRequestOptions): Promise<SaveMaterialResult> { return this.request("save_material", input, options) }
 
-  /** Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra Returns the data together with response headers and request ID. */
+  /** Save Materials. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For many, confirm once and call per Draft. Seller beta: preview, delete, undo or include imported documents. Delete purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra Returns the data together with response headers and request ID. */
   saveMaterialWithResponse(input: SaveMaterialInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveMaterialResult>> { return this.requestDetailed("save_material", input, options) }
   /**
    * Create DRAFT buy; no spend until confirmed. Meta: shared campaign=seller_optimized; ad sets=fixed; ask if unclear. Shared: omit product budgets. Pause/resume: mediaBuyId + isPaused. Proposal: flight + total budget; omit products. channelGroupId: required if grouped; invalid ungrouped/updates.

@@ -15646,13 +15646,15 @@ class SaveMaterialInput(TypedDict):
     source: NotRequired[SaveMaterialInputSourceKindUrl | SaveMaterialInputSourceKindSite | SaveMaterialInputSourceKindUpload | SaveMaterialInputSourceKindCrawlManifest | SaveMaterialInputSourceKindInline | SaveMaterialInputSourceKindHistory]
     '\n    Portable source: url, site, upload, crawl_manifest, inline, history. Without materialId it creates the Material; with materialId and expectedRevision it adds a new source revision.\n    '
     expectedRevision: NotRequired[int]
-    '\n    Current source revision, required to add a source revision or edit metadata.\n    '
+    '\n    Current source revision, required to add a source revision, edit metadata, or discard a Draft.\n    '
     metadata: NotRequired[SaveMaterialInputMetadataKindBuyerScopedRateCard | SaveMaterialInputMetadataKindUnscoped]
     '\n    Metadata fields; relevance is read-only.\n    '
     labels: NotRequired[list[SaveMaterialRequestLabelWriteEntry]]
     '\n    Replace labels per dimension; empty values clears.\n    '
     isArchived: NotRequired[bool]
     '\n    true archives the Material; false restores it. Send it alone with materialId.\n    '
+    isDiscarded: NotRequired[Literal[True]]
+    '\n    Permanently discard a Draft. Send with materialId and expectedRevision after confirming with the user.\n    '
     candidateDecisions: NotRequired[list[SaveMaterialRequestSaveMaterialCandidateDecision]]
     '\n    Decisions on Material-owned candidates, recorded in order and idempotent per candidate. Send it alone with materialId. Destination-owned candidates still need their destination save tool; accept one already saved there to record its receipt.\n    '
     unitReusable: NotRequired[list[SaveMaterialRequestSaveMaterialUnitReusable]]
@@ -16557,6 +16559,11 @@ class SaveMaterialSuccessSaveMaterialSuccessCandidatesDecidedDecisionsItem(Typed
     reconciled: bool
     '\n    True when an accept recorded the receipt of a destination save that had already run.\n    '
 
+class SaveMaterialSuccessSaveMaterialSuccessDiscarded(TypedDict):
+    outcome: Literal["discarded"]
+    materialId: str
+    discarded: Literal[True]
+
 class SaveMaterialSuccessSaveMaterialSuccessRateCardCommitted(TypedDict):
     outcome: Literal["rate_card_committed"]
     action: Literal["committed_rate_card"]
@@ -16739,7 +16746,7 @@ class SaveMaterialSuccessSaveMaterialSuccessUnitsMarked(TypedDict):
     materialId: str
     units: list[SaveMaterialSuccessSaveMaterialSuccessUnitsMarkedUnitsItem]
 
-SaveMaterialResult: TypeAlias = "SaveMaterialSuccessSaveMaterialSuccessSaved | SaveMaterialSuccessSaveMaterialSuccessReused | SaveMaterialSuccessSaveMaterialSuccessArchived | SaveMaterialSuccessSaveMaterialSuccessRateCardCommitted | SaveMaterialSuccessSaveMaterialSuccessRateCardPreviewed | SaveMaterialSuccessSaveMaterialSuccessAvailsPreviewed | SaveMaterialSuccessSaveMaterialSuccessAvailsCommitted | SaveMaterialSuccessSaveMaterialSuccessSavedWithRateCard | SaveMaterialSuccessSaveMaterialSuccessReconciled | SaveMaterialSuccessSaveMaterialSuccessCandidatesDecided | SaveMaterialSuccessSaveMaterialSuccessUnitsMarked"
+SaveMaterialResult: TypeAlias = "SaveMaterialSuccessSaveMaterialSuccessSaved | SaveMaterialSuccessSaveMaterialSuccessReused | SaveMaterialSuccessSaveMaterialSuccessDiscarded | SaveMaterialSuccessSaveMaterialSuccessArchived | SaveMaterialSuccessSaveMaterialSuccessRateCardCommitted | SaveMaterialSuccessSaveMaterialSuccessRateCardPreviewed | SaveMaterialSuccessSaveMaterialSuccessAvailsPreviewed | SaveMaterialSuccessSaveMaterialSuccessAvailsCommitted | SaveMaterialSuccessSaveMaterialSuccessSavedWithRateCard | SaveMaterialSuccessSaveMaterialSuccessReconciled | SaveMaterialSuccessSaveMaterialSuccessCandidatesDecided | SaveMaterialSuccessSaveMaterialSuccessUnitsMarked"
 
 class SaveMaterialSuccessSaveMaterialSuccessUnitsMarkedUnitsItem(TypedDict):
     unitId: str

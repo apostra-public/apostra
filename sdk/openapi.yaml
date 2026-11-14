@@ -50321,13 +50321,13 @@ paths:
     post:
       operationId: save_material
       summary: >-
-        Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one
-        imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30
-        days. https://docs.apostra.com/v3/delete-from-apostra
+        Save Materials. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For
+        many, confirm once and call per Draft. Seller beta: preview, delete, undo or include imported documents. Delete
+        purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra
       description: >-
-        Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one
-        imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30
-        days. https://docs.apostra.com/v3/delete-from-apostra
+        Save Materials. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For
+        many, confirm once and call per Draft. Seller beta: preview, delete, undo or include imported documents. Delete
+        purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -50743,7 +50743,7 @@ paths:
                         - referenceId
                       additionalProperties: false
                 expectedRevision:
-                  description: Current source revision, required to add a source revision or edit metadata.
+                  description: Current source revision, required to add a source revision, edit metadata, or discard a Draft.
                   type: integer
                   exclusiveMinimum: 0
                   maximum: 9007199254740991
@@ -50931,6 +50931,12 @@ paths:
                 isArchived:
                   description: true archives the Material; false restores it. Send it alone with materialId.
                   type: boolean
+                isDiscarded:
+                  description: >-
+                    Permanently discard a Draft. Send with materialId and expectedRevision after confirming with the
+                    user.
+                  type: boolean
+                  const: true
                 candidateDecisions:
                   description: >-
                     Decisions on Material-owned candidates, recorded in order and idempotent per candidate. Send it
@@ -51035,6 +51041,7 @@ paths:
                     anyOf:
                       - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessSaved'
                       - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessReused'
+                      - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessDiscarded'
                       - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessArchived'
                       - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessRateCardCommitted'
                       - $ref: '#/components/schemas/save_material_success_SaveMaterialSuccessRateCardPreviewed'
@@ -111618,6 +111625,22 @@ components:
         - materialId
         - unitId
         - reusable
+      additionalProperties: {}
+    save_material_success_SaveMaterialSuccessDiscarded:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: discarded
+        materialId:
+          type: string
+        discarded:
+          type: boolean
+          const: true
+      required:
+        - outcome
+        - materialId
+        - discarded
       additionalProperties: {}
     save_material_success_SaveMaterialSuccessArchived:
       type: object
