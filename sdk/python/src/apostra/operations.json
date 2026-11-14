@@ -942,7 +942,7 @@
         ]
       }
     ],
-    "summary": "Accept Terms, set the payment terms sellers ask for, accept a plan, answer its offer, change its renewal, change invoice payer details or manage media billing entities. Accepting a plan, choosing payment terms or changing the renewal needs administrator approval on our site. Cards stay off MCP."
+    "summary": "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, or remove a card. Plan, payment terms, renewal and card removal need administrator approval on our site. Cards stay off MCP."
   },
   "save_business_rules": {
     "path": "/tools/save_business_rules",

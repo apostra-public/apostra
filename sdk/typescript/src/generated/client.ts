@@ -771,14 +771,14 @@ export class Apostra extends Transport {
   /** Sync first-party CRM audiences for a buyer advertiser. Each audiences[] item may add, remove, or delete members. Returns an operationId; use get(kind: audience, advertiserId: "...") to read match status after it settles. Returns the data together with response headers and request ID. */
   saveAudienceWithResponse(input: SaveAudienceInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAudienceResult>> { return this.requestDetailed("save_audience", input, options) }
   /**
-   * Accept Terms, set the payment terms sellers ask for, accept a plan, answer its offer, change its renewal, change invoice payer details or manage media billing entities. Accepting a plan, choosing payment terms or changing the renewal needs administrator approval on our site. Cards stay off MCP.
+   * Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, or remove a card. Plan, payment terms, renewal and card removal need administrator approval on our site. Cards stay off MCP.
    *
    * @example
    * await client.saveBilling(input, { idempotencyKey: 'stable-key' })
    */
   saveBilling(input: SaveBillingInput, options: WriteRequestOptions): Promise<SaveBillingResult> { return this.request("save_billing", input, options) }
 
-  /** Accept Terms, set the payment terms sellers ask for, accept a plan, answer its offer, change its renewal, change invoice payer details or manage media billing entities. Accepting a plan, choosing payment terms or changing the renewal needs administrator approval on our site. Cards stay off MCP. Returns the data together with response headers and request ID. */
+  /** Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, or remove a card. Plan, payment terms, renewal and card removal need administrator approval on our site. Cards stay off MCP. Returns the data together with response headers and request ID. */
   saveBillingWithResponse(input: SaveBillingInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBillingResult>> { return this.requestDetailed("save_billing", input, options) }
   /**
    * Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto, or empty creativePolicy under creative auto, needs acknowledgeNoHumanReview.
