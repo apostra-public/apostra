@@ -56921,6 +56921,27 @@ paths:
                   required:
                     - rules
                   additionalProperties: false
+                changeLimits:
+                  description: A person's limits on brain catalog changes. Send alone.
+                  type: object
+                  properties:
+                    priceBandPercent:
+                      type: number
+                      minimum: 0
+                      maximum: 50
+                      description: '0-50: brain price changes within this % of list apply at once.'
+                  required:
+                    - priceBandPercent
+                  additionalProperties: false
+                sourceMaterialId:
+                  description: Library file (mat_ id) this change was read from.
+                  type: string
+                  pattern: ^mat_[a-z0-9]{12,40}$
+                idempotencyKey:
+                  description: Repeat with the key approval_required returned to read the outcome.
+                  type: string
+                  minLength: 1
+                  maxLength: 200
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -56939,11 +56960,35 @@ paths:
               allOf:
                 - anyOf:
                     - required:
-                        - content
+                        - active
                     - required:
                         - pricing
                     - required:
                         - discounts
+                    - required:
+                        - limits
+                    - required:
+                        - changeLimits
+                - if:
+                    required:
+                      - changeLimits
+                  then:
+                    allOf:
+                      - not:
+                          required:
+                            - active
+                      - not:
+                          required:
+                            - pricing
+                      - not:
+                          required:
+                            - discounts
+                      - not:
+                          required:
+                            - limits
+                      - not:
+                          required:
+                            - materialCandidate
                 - if:
                     required:
                       - discounts
@@ -56976,6 +57021,7 @@ paths:
                     anyOf:
                       - $ref: '#/components/schemas/save_playbook_success_LessonsProposed'
                       - $ref: '#/components/schemas/save_playbook_success_SavePlaybookSuccessSaved'
+                      - $ref: '#/components/schemas/save_playbook_success_SellerSaveCatalogChangeApprovalRequired'
                       - anyOf:
                           - $ref: '#/components/schemas/save_playbook_success_SellerSaveCandidateReplayed'
                           - $ref: '#/components/schemas/save_playbook_success_SellerSaveReplayed'
@@ -60696,6 +60742,15 @@ paths:
                 prebidIntegrationActive:
                   description: Declare that the Scope3 Prebid module runs on this product's inventory. Set true only if installed.
                   type: boolean
+                sourceMaterialId:
+                  description: Library file (mat_ id) this change was read from.
+                  type: string
+                  pattern: ^mat_[a-z0-9]{12,40}$
+                idempotencyKey:
+                  description: Repeat with the key approval_required returned to read the outcome.
+                  type: string
+                  minLength: 1
+                  maxLength: 200
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -60837,6 +60892,7 @@ paths:
                       - $ref: >-
                           #/components/schemas/save_wholesale_product_success_SaveWholesaleProductSuccessValidationFailed
                       - $ref: '#/components/schemas/save_wholesale_product_success_SaveWholesaleProductSuccessValidated'
+                      - $ref: '#/components/schemas/save_wholesale_product_success_SellerSaveCatalogChangeApprovalRequired'
                       - anyOf:
                           - $ref: '#/components/schemas/save_wholesale_product_success_SellerSaveCandidateReplayed'
                           - $ref: '#/components/schemas/save_wholesale_product_success_SellerSaveReplayed'
@@ -114552,6 +114608,28 @@ components:
         - outcome
         - playbook
       additionalProperties: {}
+    save_playbook_success_SellerSaveCatalogChangeApprovalRequired:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: approval_required
+        action:
+          type: string
+          const: approval_required
+        message:
+          type: string
+        approval:
+          $ref: '#/components/schemas/save_playbook_success_SellerSaveCatalogChangeApprovalRequiredApproval'
+        idempotencyKey:
+          type: string
+      required:
+        - outcome
+        - action
+        - message
+        - approval
+        - idempotencyKey
+      additionalProperties: {}
     save_playbook_success_SellerSaveCandidateReplayed:
       type: object
       properties:
@@ -114598,6 +114676,11 @@ components:
         type: string
       additionalProperties: {}
     save_playbook_success_SavePlaybookSuccessSavedPlaybook:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    save_playbook_success_SellerSaveCatalogChangeApprovalRequiredApproval:
       type: object
       propertyNames:
         type: string
@@ -118298,6 +118381,28 @@ components:
         - sourceId
         - warnings
       additionalProperties: {}
+    save_wholesale_product_success_SellerSaveCatalogChangeApprovalRequired:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: approval_required
+        action:
+          type: string
+          const: approval_required
+        message:
+          type: string
+        approval:
+          $ref: '#/components/schemas/save_wholesale_product_success_SellerSaveCatalogChangeApprovalRequiredApproval'
+        idempotencyKey:
+          type: string
+      required:
+        - outcome
+        - action
+        - message
+        - approval
+        - idempotencyKey
+      additionalProperties: {}
     save_wholesale_product_success_SellerSaveCandidateReplayed:
       type: object
       properties:
@@ -118354,6 +118459,11 @@ components:
         type: string
       additionalProperties: {}
     save_wholesale_product_success_SaveWholesaleProductSuccessValidatedLineItemTargeting:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    save_wholesale_product_success_SellerSaveCatalogChangeApprovalRequiredApproval:
       type: object
       propertyNames:
         type: string

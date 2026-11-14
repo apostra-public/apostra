@@ -18700,6 +18700,12 @@ class SavePlaybookInput(TypedDict):
     '\n    Brand/operator rate-card discounts. Per-rule, not whole-list.\n    '
     limits: NotRequired[SavePlaybookInputLimits]
     '\n    What your agent may offer a buyer; the strictest matching rule wins. A person sets these.\n    '
+    changeLimits: NotRequired[SavePlaybookInputChangeLimits]
+    '\n    A person\'s limits on brain catalog changes. Send alone.\n    '
+    sourceMaterialId: NotRequired[str]
+    '\n    Library file (mat_ id) this change was read from.\n    '
+    idempotencyKey: NotRequired[str]
+    '\n    Repeat with the key approval_required returned to read the outcome.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -18710,6 +18716,10 @@ class SavePlaybookInputActive(TypedDict):
     '\n    Markdown: posture, packaging, selection guidance. Proposes Lessons for review.\n    '
     notes: NotRequired[str | None]
     '\n    Seller note retained with each V3 proposed Lesson. Not shown to buyers.\n    '
+
+class SavePlaybookInputChangeLimits(TypedDict):
+    priceBandPercent: float
+    '\n    0-50: brain price changes within this % of list apply at once.\n    '
 
 class SavePlaybookInputDiscounts(TypedDict):
     rules: NotRequired[list[SavePlaybookInputDiscountsRulesItem]]
@@ -18898,13 +18908,22 @@ class SavePlaybookSuccessSellerSaveCandidateReplayed(TypedDict):
 
 SavePlaybookSuccessSellerSaveCandidateReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
+class SavePlaybookSuccessSellerSaveCatalogChangeApprovalRequired(TypedDict):
+    outcome: Literal["approval_required"]
+    action: Literal["approval_required"]
+    message: str
+    approval: SavePlaybookSuccessSellerSaveCatalogChangeApprovalRequiredApproval
+    idempotencyKey: str
+
+SavePlaybookSuccessSellerSaveCatalogChangeApprovalRequiredApproval: TypeAlias = dict[str, JsonValue]
+
 class SavePlaybookSuccessSellerSaveReplayed(TypedDict):
     outcome: Literal["save_replayed"]
     action: Literal["unchanged"]
     destinationSaveReplayed: Literal[False]
     materialReceipt: SavePlaybookSuccessSellerSaveReplayedMaterialReceipt
 
-SavePlaybookResult: TypeAlias = "SavePlaybookSuccessLessonsProposed | SavePlaybookSuccessSavePlaybookSuccessSaved | SavePlaybookSuccessSellerSaveCandidateReplayed | SavePlaybookSuccessSellerSaveReplayed"
+SavePlaybookResult: TypeAlias = "SavePlaybookSuccessLessonsProposed | SavePlaybookSuccessSavePlaybookSuccessSaved | SavePlaybookSuccessSellerSaveCatalogChangeApprovalRequired | SavePlaybookSuccessSellerSaveCandidateReplayed | SavePlaybookSuccessSellerSaveReplayed"
 
 SavePlaybookSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
@@ -21008,6 +21027,10 @@ class SaveWholesaleProductInput(TypedDict):
     '\n    For delete only. The product\'s exact stored name, read back to confirm the one to remove.\n    '
     prebidIntegrationActive: NotRequired[bool]
     '\n    Declare that the Scope3 Prebid module runs on this product\'s inventory. Set true only if installed.\n    '
+    sourceMaterialId: NotRequired[str]
+    '\n    Library file (mat_ id) this change was read from.\n    '
+    idempotencyKey: NotRequired[str]
+    '\n    Repeat with the key approval_required returned to read the outcome.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -21242,13 +21265,22 @@ class SaveWholesaleProductSuccessSellerSaveCandidateReplayed(TypedDict):
 
 SaveWholesaleProductSuccessSellerSaveCandidateReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
+class SaveWholesaleProductSuccessSellerSaveCatalogChangeApprovalRequired(TypedDict):
+    outcome: Literal["approval_required"]
+    action: Literal["approval_required"]
+    message: str
+    approval: SaveWholesaleProductSuccessSellerSaveCatalogChangeApprovalRequiredApproval
+    idempotencyKey: str
+
+SaveWholesaleProductSuccessSellerSaveCatalogChangeApprovalRequiredApproval: TypeAlias = dict[str, JsonValue]
+
 class SaveWholesaleProductSuccessSellerSaveReplayed(TypedDict):
     outcome: Literal["save_replayed"]
     action: Literal["unchanged"]
     destinationSaveReplayed: Literal[False]
     materialReceipt: SaveWholesaleProductSuccessSellerSaveReplayedMaterialReceipt
 
-SaveWholesaleProductResult: TypeAlias = "SaveWholesaleProductSuccessSaveWholesaleProductSuccessSaved | SaveWholesaleProductSuccessSaveWholesaleProductSuccessDeleted | SaveWholesaleProductSuccessSaveWholesaleProductSuccessUnchanged | SaveWholesaleProductSuccessSaveWholesaleProductSuccessRefused | SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidationFailed | SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidated | SaveWholesaleProductSuccessSellerSaveCandidateReplayed | SaveWholesaleProductSuccessSellerSaveReplayed"
+SaveWholesaleProductResult: TypeAlias = "SaveWholesaleProductSuccessSaveWholesaleProductSuccessSaved | SaveWholesaleProductSuccessSaveWholesaleProductSuccessDeleted | SaveWholesaleProductSuccessSaveWholesaleProductSuccessUnchanged | SaveWholesaleProductSuccessSaveWholesaleProductSuccessRefused | SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidationFailed | SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidated | SaveWholesaleProductSuccessSellerSaveCatalogChangeApprovalRequired | SaveWholesaleProductSuccessSellerSaveCandidateReplayed | SaveWholesaleProductSuccessSellerSaveReplayed"
 
 SaveWholesaleProductSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 
