@@ -38727,12 +38727,12 @@ paths:
       operationId: save_agent
       summary: >-
         Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent:
-        rename it or allow certification buys. To connect from a URL, send agentUrl with dryRun: true, show what was
-        read, then send it without dryRun. A connected agent is not yet verified as theirs.
+        rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what
+        was read, then send without dryRun. A connected agent is unverified as theirs.
       description: >-
         Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent:
-        rename it or allow certification buys. To connect from a URL, send agentUrl with dryRun: true, show what was
-        read, then send it without dryRun. A connected agent is not yet verified as theirs.
+        rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what
+        was read, then send without dryRun. A connected agent is unverified as theirs.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -38795,6 +38795,9 @@ paths:
                   maxLength: 255
                 certificationRequested:
                   description: Allow certification buys.
+                  type: boolean
+                isArchived:
+                  description: Archive or restore.
                   type: boolean
                 operator:
                   description: New Agent operator.
@@ -39181,6 +39184,8 @@ paths:
                               displayName:
                                 type: string
                               certificationRequested:
+                                type: boolean
+                              isArchived:
                                 type: boolean
                             required:
                               - agentId

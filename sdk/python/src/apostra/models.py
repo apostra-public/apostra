@@ -10043,6 +10043,8 @@ class SaveAgentInput(TypedDict):
     '\n    Agent name.\n    '
     certificationRequested: NotRequired[bool]
     '\n    Allow certification buys.\n    '
+    isArchived: NotRequired[bool]
+    '\n    Archive or restore.\n    '
     operator: NotRequired[SaveAgentInputOperatorKindEXISTING | SaveAgentInputOperatorKindNEW]
     '\n    New Agent operator.\n    '
     idempotencyKey: NotRequired[str]
@@ -10144,6 +10146,7 @@ class SaveAgentResultKindAgentWithObjectDisplayNameObject(TypedDict):
     agentId: str
     displayName: str
     certificationRequested: NotRequired[bool]
+    isArchived: NotRequired[bool]
 
 class SaveAgentResultKindAgentWithObjectProductModeAndObjectScope(TypedDict):
     kind: Literal["agent"]

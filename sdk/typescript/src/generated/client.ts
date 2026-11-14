@@ -741,14 +741,14 @@ export class Apostra extends Transport {
   /** Seller-only CRM notes for an exact brand × operator pair. Buyers use save_advertiser.privateNotes; see /v3/manage-ads#private-advertiser-notes. Effective discounts, routing, access and trust are read-only. Returns the data together with response headers and request ID. */
   saveAdvertiserInstructionsWithResponse(input: SaveAdvertiserInstructionsInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAdvertiserInstructionsResult>> { return this.requestDetailed("save_advertiser_instructions", input, options) }
   /**
-   * Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent: rename it or allow certification buys. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send it without dryRun. A connected agent is not yet verified as theirs.
+   * Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A connected agent is unverified as theirs.
    *
    * @example
    * await client.saveAgent(input, { idempotencyKey: 'stable-key' })
    */
   saveAgent(input: SaveAgentInput, options: WriteRequestOptions): Promise<SaveAgentResult> { return this.request("save_agent", input, options) }
 
-  /** Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent: rename it or allow certification buys. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send it without dryRun. A connected agent is not yet verified as theirs. Returns the data together with response headers and request ID. */
+  /** Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A connected agent is unverified as theirs. Returns the data together with response headers and request ID. */
   saveAgentWithResponse(input: SaveAgentInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAgentResult>> { return this.requestDetailed("save_agent", input, options) }
   /**
    * File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first.
