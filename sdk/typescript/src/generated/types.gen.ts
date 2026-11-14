@@ -27969,7 +27969,7 @@ export type SaveMaterialData = {
             content?: never;
         };
         /**
-         * Current source revision, required to add a source revision or edit metadata.
+         * Current source revision, required to add a source revision, edit metadata, or discard a Draft.
          */
         expectedRevision?: number;
         /**
@@ -28161,6 +28161,10 @@ export type SaveMaterialData = {
          * true archives the Material; false restores it. Send it alone with materialId.
          */
         isArchived?: boolean;
+        /**
+         * Permanently discard a Draft. Send with materialId and expectedRevision after confirming with the user.
+         */
+        isDiscarded?: true;
         /**
          * Decisions on Material-owned candidates, recorded in order and idempotent per candidate. Send it alone with materialId. Destination-owned candidates still need their destination save tool; accept one already saved there to record its receipt.
          */
@@ -29088,7 +29092,7 @@ export type SaveMaterialResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveMaterialSuccessSaveMaterialSuccessSaved | SaveMaterialSuccessSaveMaterialSuccessReused | SaveMaterialSuccessSaveMaterialSuccessArchived | SaveMaterialSuccessSaveMaterialSuccessRateCardCommitted | SaveMaterialSuccessSaveMaterialSuccessRateCardPreviewed | SaveMaterialSuccessSaveMaterialSuccessAvailsPreviewed | SaveMaterialSuccessSaveMaterialSuccessAvailsCommitted | SaveMaterialSuccessSaveMaterialSuccessSavedWithRateCard | SaveMaterialSuccessSaveMaterialSuccessReconciled | SaveMaterialSuccessSaveMaterialSuccessCandidatesDecided | SaveMaterialSuccessSaveMaterialSuccessUnitsMarked;
+        data: SaveMaterialSuccessSaveMaterialSuccessSaved | SaveMaterialSuccessSaveMaterialSuccessReused | SaveMaterialSuccessSaveMaterialSuccessDiscarded | SaveMaterialSuccessSaveMaterialSuccessArchived | SaveMaterialSuccessSaveMaterialSuccessRateCardCommitted | SaveMaterialSuccessSaveMaterialSuccessRateCardPreviewed | SaveMaterialSuccessSaveMaterialSuccessAvailsPreviewed | SaveMaterialSuccessSaveMaterialSuccessAvailsCommitted | SaveMaterialSuccessSaveMaterialSuccessSavedWithRateCard | SaveMaterialSuccessSaveMaterialSuccessReconciled | SaveMaterialSuccessSaveMaterialSuccessCandidatesDecided | SaveMaterialSuccessSaveMaterialSuccessUnitsMarked;
         error: null;
     };
     /**
@@ -29197,6 +29201,13 @@ export type SaveMaterialSuccessSaveMaterialSuccessCandidatesDecided = {
         reconciled: boolean;
         [key: string]: unknown;
     }>;
+    [key: string]: unknown;
+};
+
+export type SaveMaterialSuccessSaveMaterialSuccessDiscarded = {
+    outcome: 'discarded';
+    materialId: string;
+    discarded: true;
     [key: string]: unknown;
 };
 

@@ -517,11 +517,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveLibraryRequestResult], self._request_with_response("save_library_request", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_material(self, input: models.SaveMaterialInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMaterialResult:
-        "Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra"
+        "Save Materials. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For many, confirm once and call per Draft. Seller beta: preview, delete, undo or include imported documents. Delete purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra"
         return cast("models.SaveMaterialResult", self._request("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_material_with_response(self, input: models.SaveMaterialInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveMaterialResult]:
-        "Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra Returns the data together with response headers and request ID."
+        "Save Materials. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For many, confirm once and call per Draft. Seller beta: preview, delete, undo or include imported documents. Delete purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveMaterialResult], self._request_with_response("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_media_buy(self, input: models.SaveMediaBuyInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMediaBuyResult:
@@ -1158,11 +1158,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveLibraryRequestResult], await self._request_with_response("save_library_request", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_material(self, input: models.SaveMaterialInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMaterialResult:
-        "Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra"
+        "Save Materials. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For many, confirm once and call per Draft. Seller beta: preview, delete, undo or include imported documents. Delete purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra"
         return cast("models.SaveMaterialResult", await self._request("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_material_with_response(self, input: models.SaveMaterialInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveMaterialResult]:
-        "Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra Returns the data together with response headers and request ID."
+        "Save Materials. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For many, confirm once and call per Draft. Seller beta: preview, delete, undo or include imported documents. Delete purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveMaterialResult], await self._request_with_response("save_material", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_media_buy(self, input: models.SaveMediaBuyInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveMediaBuyResult:

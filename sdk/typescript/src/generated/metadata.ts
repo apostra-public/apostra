@@ -1311,7 +1311,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create or update seller Materials. Seller beta: preview, delete, Undo deletion, or Include again for one imported Library document. Delete archives it, excludes its source until Include again, and purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra"
+    "summary": "Save Materials. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For many, confirm once and call per Draft. Seller beta: preview, delete, undo or include imported documents. Delete purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra"
   },
   "save_media_buy": {
     "path": "/tools/save_media_buy",
