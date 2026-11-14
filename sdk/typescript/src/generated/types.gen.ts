@@ -7956,7 +7956,7 @@ export type GetResponses = {
                     redactedFields: Array<string>;
                 };
                 /**
-                 * The caller’s own payment terms, renewal and card setup requests that are waiting for an administrator to approve them on our site, newest first. Empty when there are none. Never another person’s.
+                 * The caller’s own payment terms, renewal, card setup and card removal requests that are waiting for an administrator to approve them on our site, newest first. Empty when there are none. Never another person’s.
                  */
                 pendingApprovals: Array<GetSuccessBillingPendingApproval>;
                 standing: {
@@ -9596,6 +9596,7 @@ export type GetSuccessBillingPendingApproval = {
     action?: never;
     renewalVersion?: never;
     reason?: never;
+    paymentMethodId?: never;
 } | {
     kind: 'billing.renewal';
     /**
@@ -9614,8 +9615,23 @@ export type GetSuccessBillingPendingApproval = {
     idempotencyKey: GetSuccessBillingPendingApprovalIdempotencyKey;
     expiresAt: GetSuccessBillingPendingApprovalExpiresAt;
     paymentTerms?: never;
+    paymentMethodId?: never;
 } | {
     kind: 'billing.payment_method_setup';
+    url: GetSuccessBillingPendingApprovalUrl;
+    idempotencyKey: GetSuccessBillingPendingApprovalIdempotencyKey;
+    expiresAt: GetSuccessBillingPendingApprovalExpiresAt;
+    paymentTerms?: never;
+    action?: never;
+    renewalVersion?: never;
+    reason?: never;
+    paymentMethodId?: never;
+} | {
+    kind: 'billing.payment_method_remove';
+    /**
+     * The id of the saved card that was asked to be removed.
+     */
+    paymentMethodId: string;
     url: GetSuccessBillingPendingApprovalUrl;
     idempotencyKey: GetSuccessBillingPendingApprovalIdempotencyKey;
     expiresAt: GetSuccessBillingPendingApprovalExpiresAt;
@@ -18218,7 +18234,7 @@ export type SaveAudienceResponses = {
 };
 
 export type SaveBillingData = {
-    body: {
+    body: unknown & {
         /**
          * Accept Terms.
          */
@@ -18237,7 +18253,7 @@ export type SaveBillingData = {
          */
         paymentTerms?: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
         /**
-         * Optional key for paymentTerms; repeat it to read the outcome. Without one, repeating the call reads it.
+         * Key for paymentTerms (optional) and paymentMethod (required); repeat it to read the outcome. A rejected, expired or failed approval needs a new key.
          */
         idempotencyKey?: string;
         /**
@@ -18260,6 +18276,10 @@ export type SaveBillingData = {
          * Create, update or remove a media billing entity, or attach or detach one; saves now. One change per call. Send alone.
          */
         mediaBilling?: SaveBillingRequestSaveBillingMediaBilling;
+        /**
+         * Remove a saved card; returns approval_required. Needs idempotencyKey. Send alone.
+         */
+        paymentMethod?: SaveBillingRequestSaveBillingPaymentMethod;
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -18530,6 +18550,13 @@ export type SaveBillingRequestSaveBillingPaymentAuthorityInputPaymentAuthorityMe
 /** @deprecated use SaveBillingData */
 export type SaveBillingRequestSaveBillingPaymentAuthorityOperation = SaveBillingData;
 
+export type SaveBillingRequestSaveBillingPaymentMethod = {
+    /**
+     * Id of the saved card to remove. Returns approval_required and needs idempotencyKey.
+     */
+    remove: string;
+};
+
 /** @deprecated use SaveBillingData */
 export type SaveBillingRequestSaveBillingPaymentTermsInput = SaveBillingData;
 
@@ -18774,6 +18801,12 @@ export type SaveBillingResponses = {
                 include: string;
                 reason: string;
             }>;
+        } | {
+            action: 'payment_method_removed';
+            paymentMethod: {
+                id: string;
+                removed: true;
+            };
         };
         error: null;
     };

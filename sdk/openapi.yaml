@@ -25173,9 +25173,9 @@ paths:
                                 items:
                                   $ref: '#/components/schemas/get_success_BillingPendingApproval'
                                 description: >-
-                                  The caller’s own payment terms, renewal and card setup requests that are waiting for
-                                  an administrator to approve them on our site, newest first. Empty when there are none.
-                                  Never another person’s.
+                                  The caller’s own payment terms, renewal, card setup and card removal requests that are
+                                  waiting for an administrator to approve them on our site, newest first. Empty when
+                                  there are none. Never another person’s.
                               standing:
                                 type: object
                                 properties:
@@ -39938,13 +39938,13 @@ paths:
     post:
       operationId: save_billing
       summary: >-
-        Accept Terms, set the payment terms sellers ask for, accept a plan, answer its offer, change its renewal, change
-        invoice payer details or manage media billing entities. Accepting a plan, choosing payment terms or changing the
-        renewal needs administrator approval on our site. Cards stay off MCP.
+        Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details,
+        manage media billing entities, or remove a card. Plan, payment terms, renewal and card removal need
+        administrator approval on our site. Cards stay off MCP.
       description: >-
-        Accept Terms, set the payment terms sellers ask for, accept a plan, answer its offer, change its renewal, change
-        invoice payer details or manage media billing entities. Accepting a plan, choosing payment terms or changing the
-        renewal needs administrator approval on our site. Cards stay off MCP.
+        Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details,
+        manage media billing entities, or remove a card. Plan, payment terms, renewal and card removal need
+        administrator approval on our site. Cards stay off MCP.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -40009,8 +40009,8 @@ paths:
                     - net_90
                 idempotencyKey:
                   description: >-
-                    Optional key for paymentTerms; repeat it to read the outcome. Without one, repeating the call reads
-                    it.
+                    Key for paymentTerms (optional) and paymentMethod (required); repeat it to read the outcome. A
+                    rejected, expired or failed approval needs a new key.
                   type: string
                   minLength: 1
                   maxLength: 200
@@ -40041,6 +40041,11 @@ paths:
                     Create, update or remove a media billing entity, or attach or detach one; saves now. One change per
                     call. Send alone.
                   $ref: '#/components/schemas/save_billing_request_SaveBillingMediaBilling'
+                  type: object
+                  additionalProperties: false
+                paymentMethod:
+                  description: Remove a saved card; returns approval_required. Needs idempotencyKey. Send alone.
+                  $ref: '#/components/schemas/save_billing_request_SaveBillingPaymentMethod'
                   type: object
                   additionalProperties: false
                 expectedAccountId:
@@ -40074,12 +40079,23 @@ paths:
                         - payer
                     - required:
                         - mediaBilling
+                    - required:
+                        - paymentMethod
                 - if:
                     required:
                       - idempotencyKey
                   then:
+                    anyOf:
+                      - required:
+                          - paymentTerms
+                      - required:
+                          - paymentMethod
+                - if:
                     required:
-                      - paymentTerms
+                      - paymentMethod
+                  then:
+                    required:
+                      - idempotencyKey
       responses:
         '200':
           description: Typed operation result
@@ -40612,6 +40628,27 @@ paths:
                         required:
                           - action
                           - saved
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: payment_method_removed
+                          paymentMethod:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              removed:
+                                type: boolean
+                                const: true
+                            required:
+                              - id
+                              - removed
+                            additionalProperties: false
+                        required:
+                          - action
+                          - paymentMethod
                         additionalProperties: false
                   error:
                     type: 'null'
@@ -89584,6 +89621,27 @@ components:
             - idempotencyKey
             - expiresAt
           additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: billing.payment_method_remove
+            paymentMethodId:
+              type: string
+              description: The id of the saved card that was asked to be removed.
+            url:
+              $ref: '#/components/schemas/get_success_BillingPendingApprovalUrl'
+            idempotencyKey:
+              $ref: '#/components/schemas/get_success_BillingPendingApprovalIdempotencyKey'
+            expiresAt:
+              $ref: '#/components/schemas/get_success_BillingPendingApprovalExpiresAt'
+          required:
+            - kind
+            - paymentMethodId
+            - url
+            - idempotencyKey
+            - expiresAt
+          additionalProperties: false
     get_success_RfpTurnRequest:
       type: object
       properties:
@@ -101134,6 +101192,16 @@ components:
           required:
             - attachmentId
           additionalProperties: false
+      additionalProperties: false
+    save_billing_request_SaveBillingPaymentMethod:
+      type: object
+      properties:
+        remove:
+          type: string
+          pattern: ^\d+$
+          description: Id of the saved card to remove. Returns approval_required and needs idempotencyKey.
+      required:
+        - remove
       additionalProperties: false
     save_billing_request_SaveBillingPlanOfferVersion:
       type: string
