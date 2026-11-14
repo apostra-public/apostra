@@ -61291,10 +61291,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -61304,6 +61304,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -61652,6 +61653,14 @@ paths:
                             - platform_identity
                             - product_set
                             - welcome_message
+                        assetId:
+                          description: >-
+                            Required with include creativeFit, and only there: the asset_id of an active Creative
+                            Library asset of filter.advertiserId.
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                         assetType:
                           description: 'Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.'
                           type: string
@@ -63031,10 +63040,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -63044,6 +63053,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -63392,6 +63402,14 @@ paths:
                             - platform_identity
                             - product_set
                             - welcome_message
+                        assetId:
+                          description: >-
+                            Required with include creativeFit, and only there: the asset_id of an active Creative
+                            Library asset of filter.advertiserId.
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                         assetType:
                           description: 'Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.'
                           type: string
@@ -64772,10 +64790,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -64785,6 +64803,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -65553,10 +65572,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -65566,6 +65585,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -65914,6 +65934,14 @@ paths:
                             - platform_identity
                             - product_set
                             - welcome_message
+                        assetId:
+                          description: >-
+                            Required with include creativeFit, and only there: the asset_id of an active Creative
+                            Library asset of filter.advertiserId.
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                         assetType:
                           description: 'Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.'
                           type: string
@@ -67294,10 +67322,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -67307,6 +67335,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -67646,6 +67675,14 @@ paths:
                             - platform_identity
                             - product_set
                             - welcome_message
+                        assetId:
+                          description: >-
+                            Required with include creativeFit, and only there: the asset_id of an active Creative
+                            Library asset of filter.advertiserId.
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                         assetType:
                           description: 'Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.'
                           type: string
@@ -69020,10 +69057,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -69033,6 +69070,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -69376,6 +69414,14 @@ paths:
                             - platform_identity
                             - product_set
                             - welcome_message
+                        assetId:
+                          description: >-
+                            Required with include creativeFit, and only there: the asset_id of an active Creative
+                            Library asset of filter.advertiserId.
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                         assetType:
                           description: 'Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.'
                           type: string
@@ -70753,10 +70799,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -70766,6 +70812,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -71105,6 +71152,14 @@ paths:
                             - platform_identity
                             - product_set
                             - welcome_message
+                        assetId:
+                          description: >-
+                            Required with include creativeFit, and only there: the asset_id of an active Creative
+                            Library asset of filter.advertiserId.
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                         assetType:
                           description: 'Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.'
                           type: string
@@ -72485,10 +72540,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -72498,6 +72553,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -72841,6 +72897,14 @@ paths:
                             - platform_identity
                             - product_set
                             - welcome_message
+                        assetId:
+                          description: >-
+                            Required with include creativeFit, and only there: the asset_id of an active Creative
+                            Library asset of filter.advertiserId.
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                         assetType:
                           description: 'Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.'
                           type: string
@@ -74216,10 +74280,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -74229,6 +74293,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -75017,10 +75082,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -75030,6 +75095,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -75827,10 +75893,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -75840,6 +75906,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -76188,6 +76255,14 @@ paths:
                             - platform_identity
                             - product_set
                             - welcome_message
+                        assetId:
+                          description: >-
+                            Required with include creativeFit, and only there: the asset_id of an active Creative
+                            Library asset of filter.advertiserId.
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                         assetType:
                           description: 'Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.'
                           type: string
@@ -77566,10 +77641,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -77579,6 +77654,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -78366,10 +78442,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -78379,6 +78455,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -78727,6 +78804,14 @@ paths:
                             - platform_identity
                             - product_set
                             - welcome_message
+                        assetId:
+                          description: >-
+                            Required with include creativeFit, and only there: the asset_id of an active Creative
+                            Library asset of filter.advertiserId.
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                         assetType:
                           description: 'Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.'
                           type: string
@@ -80105,10 +80190,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -80118,6 +80203,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -80900,10 +80986,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -80913,6 +80999,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -81261,6 +81348,14 @@ paths:
                             - platform_identity
                             - product_set
                             - welcome_message
+                        assetId:
+                          description: >-
+                            Required with include creativeFit, and only there: the asset_id of an active Creative
+                            Library asset of filter.advertiserId.
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                         assetType:
                           description: 'Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.'
                           type: string
@@ -82639,10 +82734,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -82652,6 +82747,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -83000,6 +83096,14 @@ paths:
                             - platform_identity
                             - product_set
                             - welcome_message
+                        assetId:
+                          description: >-
+                            Required with include creativeFit, and only there: the asset_id of an active Creative
+                            Library asset of filter.advertiserId.
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                         assetType:
                           description: 'Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.'
                           type: string
@@ -84375,10 +84479,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -84388,6 +84492,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -84736,6 +84841,14 @@ paths:
                             - platform_identity
                             - product_set
                             - welcome_message
+                        assetId:
+                          description: >-
+                            Required with include creativeFit, and only there: the asset_id of an active Creative
+                            Library asset of filter.advertiserId.
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                         assetType:
                           description: 'Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.'
                           type: string
@@ -86111,10 +86224,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -86124,6 +86237,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -86472,6 +86586,14 @@ paths:
                             - platform_identity
                             - product_set
                             - welcome_message
+                        assetId:
+                          description: >-
+                            Required with include creativeFit, and only there: the asset_id of an active Creative
+                            Library asset of filter.advertiserId.
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                         assetType:
                           description: 'Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.'
                           type: string
@@ -87848,10 +87970,10 @@ paths:
                         One extra projection. material: evidence_matches (page-text matches for query; use no filters)
                         or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
                         result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer wholesale_product: executionReadiness, or executionResources with
-                        filter.productId and filter.resourceKind. Seller wholesale_product: price_paid.
-                        ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value;
-                        mapping kinds).
+                        progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
+                        and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
+                        fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
+                        ready-made save_signal draft, reach and status per value; mapping kinds).
                       type: array
                       items:
                         type: string
@@ -87861,6 +87983,7 @@ paths:
                           - commitmentRecord
                           - executionReadiness
                           - executionResources
+                          - creativeFit
                           - price_paid
                           - authoring
                           - pulse
@@ -88209,6 +88332,14 @@ paths:
                             - platform_identity
                             - product_set
                             - welcome_message
+                        assetId:
+                          description: >-
+                            Required with include creativeFit, and only there: the asset_id of an active Creative
+                            Library asset of filter.advertiserId.
+                          type: string
+                          format: uuid
+                          pattern: >-
+                            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                         assetType:
                           description: 'Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.'
                           type: string
@@ -121620,6 +121751,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchAccountPageOutputValue: {}
     search_success_SearchMemberPageOutputTotal:
@@ -121705,6 +121858,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchMemberPageOutputValue: {}
     search_success_SearchAgentPageOutputTotal:
@@ -121790,6 +121965,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchAgentPageOutputValue: {}
     search_success_SearchSkillPageOutputTotal:
@@ -121875,6 +122072,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchSkillPageOutputValue: {}
     search_success_SearchInventorySourcePageOutputTotal:
@@ -121960,6 +122179,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchInventorySourcePageOutputValue: {}
     search_success_SearchMaterialPageOutputTotal:
@@ -122045,6 +122286,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchMaterialPageOutputValue: {}
     search_success_SearchCoveragePageOutputTotal:
@@ -122130,6 +122393,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchCoveragePageOutputValue: {}
     search_success_SearchWholesaleProductPageOutputTotal:
@@ -122215,6 +122500,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchWholesaleProductPageOutputValue: {}
     search_success_SearchPlaybookVersionPageOutputTotal:
@@ -122300,6 +122607,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchPlaybookVersionPageOutputValue: {}
     search_success_SearchBusinessRulesVersionPageOutputTotal:
@@ -122385,6 +122714,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchBusinessRulesVersionPageOutputValue: {}
     search_success_SearchHouseDiscountPageOutputTotal:
@@ -122470,6 +122821,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchHouseDiscountPageOutputValue: {}
     search_success_SearchConnectionPageOutputTotal:
@@ -122555,6 +122928,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchConnectionPageOutputValue: {}
     search_success_SearchAccountRelationshipPageOutputTotal:
@@ -122640,6 +123035,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchAccountRelationshipPageOutputValue: {}
     search_success_SearchSourceAccountPageOutputTotal:
@@ -122725,6 +123142,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchSourceAccountPageOutputValue: {}
     search_success_SearchSellerPageOutputTotal:
@@ -122810,6 +123249,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchSellerPageOutputValue: {}
     search_success_SearchAdvertiserPageOutputTotal:
@@ -122895,6 +123356,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchAdvertiserPageOutputValue: {}
     search_success_SearchAdvertiserGrantPageOutputTotal:
@@ -122980,6 +123463,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchAdvertiserGrantPageOutputValue: {}
     search_success_SearchSignalPageOutputTotal:
@@ -123065,6 +123570,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchSignalPageOutputValue: {}
     search_success_SearchAdServerTargetingPageOutputTotal:
@@ -123150,6 +123677,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchAdServerTargetingPageOutputValue: {}
     search_success_SearchInventorySourceItemPageOutputTotal:
@@ -123235,6 +123784,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchInventorySourceItemPageOutputValue: {}
     search_success_SearchWorkItemPageOutputTotal:
@@ -123320,6 +123891,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchWorkItemPageOutputValue: {}
     search_success_SearchCampaignPageOutputTotal:
@@ -123405,6 +123998,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchCampaignPageOutputValue: {}
     search_success_SearchCatalogPageOutputTotal:
@@ -123490,6 +124105,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchCatalogPageOutputValue: {}
     search_success_SearchEventSourcePageOutputTotal:
@@ -123575,6 +124212,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchEventSourcePageOutputValue: {}
     search_success_SearchPropertyListPageOutputTotal:
@@ -123660,6 +124319,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchPropertyListPageOutputValue: {}
     search_success_SearchCreativePageOutputTotal:
@@ -123745,6 +124426,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchCreativePageOutputValue: {}
     search_success_SearchCreativeFormatPageOutputTotal:
@@ -123830,6 +124533,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchCreativeFormatPageOutputValue: {}
     search_success_SearchCreativeAssetPageOutputTotal:
@@ -123915,6 +124640,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchCreativeAssetPageOutputValue: {}
     search_success_SearchCreativeEnginePageOutputTotal:
@@ -124000,6 +124747,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchCreativeEnginePageOutputValue: {}
     search_success_SearchCreativeSessionPageOutputTotal:
@@ -124085,6 +124854,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchCreativeSessionPageOutputValue: {}
     search_success_SearchCreativeCollectionPageOutputTotal:
@@ -124170,6 +124961,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchCreativeCollectionPageOutputValue: {}
     search_success_SearchMediaBuyPageOutputTotal:
@@ -124255,6 +125068,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchMediaBuyPageOutputValue: {}
     search_success_SearchProposalPageOutputTotal:
@@ -124340,6 +125175,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchProposalPageOutputValue: {}
     search_success_SearchRfpPageOutputTotal:
@@ -124425,6 +125282,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchRfpPageOutputValue: {}
     search_success_SearchRfpTurnPageOutputTotal:
@@ -124510,6 +125389,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchRfpTurnPageOutputValue: {}
     search_success_SearchLibraryRequestPageOutputTotal:
@@ -124595,6 +125496,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchLibraryRequestPageOutputValue: {}
     search_success_SearchDecisionPageOutputTotal:
@@ -124680,6 +125603,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchDecisionPageOutputValue: {}
     search_success_SearchApprovalPageOutputTotal:
@@ -124765,6 +125710,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchApprovalPageOutputValue: {}
     search_success_SearchAskPageOutputTotal:
@@ -124850,6 +125817,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchAskPageOutputValue: {}
     search_success_SearchConversationPageOutputTotal:
@@ -124935,6 +125924,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchConversationPageOutputValue: {}
     search_success_SearchBuyerAgentPageOutputTotal:
@@ -125020,6 +126031,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchBuyerAgentPageOutputValue: {}
     search_success_SearchDimensionPageOutputTotal:
@@ -125105,6 +126138,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchDimensionPageOutputValue: {}
     search_success_SearchBuyerRfpPageOutputTotal:
@@ -125190,6 +126245,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchBuyerRfpPageOutputValue: {}
     search_success_SearchTargetingValuePageOutputTotal:
@@ -125275,6 +126352,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchTargetingValuePageOutputValue: {}
     search_success_SearchSessionPageOutputTotal:
@@ -125360,6 +126459,28 @@ components:
             description: What stops the refresh; null if nothing does.
           progressSummary:
             $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
         additionalProperties: {}
     search_success_SearchSessionPageOutputValue: {}
     upload_creative_asset_request_AdvertiserId:
