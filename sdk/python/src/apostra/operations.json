@@ -619,6 +619,25 @@
     ],
     "summary": "Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies."
   },
+  "open_pending_approvals": {
+    "path": "/tools/open_pending_approvals",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open the pending approvals Page: the requests waiting on this account for an administrator to approve or reject on our site, each linked to its approval page. The Page loads itself, so do not repeat the list. It approves nothing; search(kind: \"approval\") reads the same list."
+  },
   "open_proposal_pass": {
     "path": "/tools/open_proposal_pass",
     "method": "POST",

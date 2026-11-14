@@ -236,6 +236,14 @@ class Apostra(SyncTransport):
         "Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenPageResult], self._request_with_response("open_page", input, account_id=account_id, timeout=timeout))
 
+    def open_pending_approvals(self, input: models.OpenPendingApprovalsInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenPendingApprovalsResult:
+        "Open the pending approvals Page: the requests waiting on this account for an administrator to approve or reject on our site, each linked to its approval page. The Page loads itself, so do not repeat the list. It approves nothing; search(kind: \"approval\") reads the same list."
+        return cast("models.OpenPendingApprovalsResult", self._request("open_pending_approvals", input, account_id=account_id, timeout=timeout))
+
+    def open_pending_approvals_with_response(self, input: models.OpenPendingApprovalsInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenPendingApprovalsResult]:
+        "Open the pending approvals Page: the requests waiting on this account for an administrator to approve or reject on our site, each linked to its approval page. The Page loads itself, so do not repeat the list. It approves nothing; search(kind: \"approval\") reads the same list. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenPendingApprovalsResult], self._request_with_response("open_pending_approvals", input, account_id=account_id, timeout=timeout))
+
     def open_proposal_pass(self, input: models.OpenProposalPassInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenProposalPassResult:
         "Open Proposal Pass on one exact immutable RFP turn. Supply the matching rfpId and turnId from save_rfp or get; the Page loads the private response itself."
         return cast("models.OpenProposalPassResult", self._request("open_proposal_pass", input, account_id=account_id, timeout=timeout))
@@ -868,6 +876,14 @@ class AsyncApostra(AsyncTransport):
     async def open_page_with_response(self, input: models.OpenPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenPageResult]:
         "Open a compatibility Page. Owners create or attach the Agent in source_diagnostics. External hosts may return text. Credentials and authority changes remain human ceremonies. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenPageResult], await self._request_with_response("open_page", input, account_id=account_id, timeout=timeout))
+
+    async def open_pending_approvals(self, input: models.OpenPendingApprovalsInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenPendingApprovalsResult:
+        "Open the pending approvals Page: the requests waiting on this account for an administrator to approve or reject on our site, each linked to its approval page. The Page loads itself, so do not repeat the list. It approves nothing; search(kind: \"approval\") reads the same list."
+        return cast("models.OpenPendingApprovalsResult", await self._request("open_pending_approvals", input, account_id=account_id, timeout=timeout))
+
+    async def open_pending_approvals_with_response(self, input: models.OpenPendingApprovalsInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenPendingApprovalsResult]:
+        "Open the pending approvals Page: the requests waiting on this account for an administrator to approve or reject on our site, each linked to its approval page. The Page loads itself, so do not repeat the list. It approves nothing; search(kind: \"approval\") reads the same list. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenPendingApprovalsResult], await self._request_with_response("open_pending_approvals", input, account_id=account_id, timeout=timeout))
 
     async def open_proposal_pass(self, input: models.OpenProposalPassInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenProposalPassResult:
         "Open Proposal Pass on one exact immutable RFP turn. Supply the matching rfpId and turnId from save_rfp or get; the Page loads the private response itself."
