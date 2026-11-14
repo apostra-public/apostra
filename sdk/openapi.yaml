@@ -26146,6 +26146,24 @@ paths:
                                   - type: 'null'
                               sandbox:
                                 type: boolean
+                              renderEvidence:
+                                description: Render evidence for a creative review, or null when rendering does not apply.
+                                anyOf:
+                                  - type: object
+                                    properties:
+                                      state:
+                                        type: string
+                                        enum:
+                                          - observed
+                                          - not_rendered
+                                          - not_observed
+                                          - observation_failed
+                                      reason:
+                                        type: string
+                                    required:
+                                      - state
+                                    additionalProperties: false
+                                  - type: 'null'
                               targetingOverlay:
                                 type: object
                                 propertyNames:

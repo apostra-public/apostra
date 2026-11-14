@@ -8315,6 +8315,13 @@ export type GetResponses = {
                 salesMode?: 'WHOLESALE' | 'COMPOSING' | 'BOTH' | null;
                 sandbox?: boolean;
                 /**
+                 * Render evidence for a creative review, or null when rendering does not apply.
+                 */
+                renderEvidence?: {
+                    state: 'observed' | 'not_rendered' | 'not_observed' | 'observation_failed';
+                    reason?: string;
+                } | null;
+                /**
                  * AdCP TargetingOverlay (campaign subset); same shape as the save_campaign targetingOverlay input.
                  */
                 targetingOverlay?: {
