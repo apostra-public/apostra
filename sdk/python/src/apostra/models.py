@@ -18143,7 +18143,9 @@ class SaveMediaBuyResult(TypedDict):
     replayed: NotRequired[Literal[True]]
     takenOver: NotRequired[Literal[True]]
     '\n    Set when this write took over a synced campaign: now managed through Apostra, same ids.\n    '
-    action: Literal["staged", "updated", "pending_approval", "paused", "resumed", "pause_requested", "resume_requested", "unchanged", "archived", "cancellation_requested", "canceled"]
+    action: Literal["staged", "updated", "pending_approval", "paused", "resumed", "pause_requested", "resume_requested", "unchanged", "archived", "cancellation_requested", "canceled", "approval_required"]
+    message: NotRequired[str]
+    approval: NotRequired[SaveMediaBuyResultApproval]
     campaignId: NotRequired[str]
     mediaBuyId: NotRequired[str]
     isPaused: NotRequired[bool]
@@ -18157,6 +18159,12 @@ class SaveMediaBuyResult(TypedDict):
     mediaBuy: NotRequired[SaveMediaBuyResultMediaBuy]
     warnings: NotRequired[list[str]]
     errors: NotRequired[list[SaveMediaBuyResultErrorsItem]]
+
+class SaveMediaBuyResultApproval(TypedDict):
+    id: str
+    state: str
+    url: str
+    expiresAt: str
 
 class SaveMediaBuyResultErrorsItem(TypedDict):
     mediaBuyId: str
