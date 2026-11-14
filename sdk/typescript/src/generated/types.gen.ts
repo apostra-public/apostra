@@ -32650,7 +32650,7 @@ export type SaveNotificationConfigSuccessEventSubscriptionOwnerRegisteredBuyerAg
 export type SaveNotificationConfigSuccessEventSubscriptionSigningProfile = 'standard_webhooks';
 
 export type SavePlaybookData = {
-    body: {
+    body: unknown & {
         /**
          * Exact get(material) provenance; include only to confirm that candidate.
          */
@@ -32923,6 +32923,23 @@ export type SavePlaybookData = {
             remove?: Array<string>;
         };
         /**
+         * A person's limits on brain catalog changes. Send alone.
+         */
+        changeLimits?: {
+            /**
+             * 0-50: brain price changes within this % of list apply at once.
+             */
+            priceBandPercent: number;
+        };
+        /**
+         * Library file (mat_ id) this change was read from.
+         */
+        sourceMaterialId?: string;
+        /**
+         * Repeat with the key approval_required returned to read the outcome.
+         */
+        idempotencyKey?: string;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -33018,7 +33035,7 @@ export type SavePlaybookResponses = {
      * Typed operation result
      */
     200: {
-        data: SavePlaybookSuccessLessonsProposed | SavePlaybookSuccessSavePlaybookSuccessSaved | SavePlaybookSuccessSellerSaveCandidateReplayed | SavePlaybookSuccessSellerSaveReplayed;
+        data: SavePlaybookSuccessLessonsProposed | SavePlaybookSuccessSavePlaybookSuccessSaved | SavePlaybookSuccessSellerSaveCatalogChangeApprovalRequired | SavePlaybookSuccessSellerSaveCandidateReplayed | SavePlaybookSuccessSellerSaveReplayed;
         error: null;
     };
     /**
@@ -33085,6 +33102,19 @@ export type SavePlaybookSuccessSellerSaveCandidateReplayed = {
 };
 
 export type SavePlaybookSuccessSellerSaveCandidateReplayedMaterialReceipt = {
+    [key: string]: unknown;
+};
+
+export type SavePlaybookSuccessSellerSaveCatalogChangeApprovalRequired = {
+    outcome: 'approval_required';
+    action: 'approval_required';
+    message: string;
+    approval: SavePlaybookSuccessSellerSaveCatalogChangeApprovalRequiredApproval;
+    idempotencyKey: string;
+    [key: string]: unknown;
+};
+
+export type SavePlaybookSuccessSellerSaveCatalogChangeApprovalRequiredApproval = {
     [key: string]: unknown;
 };
 
@@ -36690,6 +36720,14 @@ export type SaveWholesaleProductData = {
          */
         prebidIntegrationActive?: boolean;
         /**
+         * Library file (mat_ id) this change was read from.
+         */
+        sourceMaterialId?: string;
+        /**
+         * Repeat with the key approval_required returned to read the outcome.
+         */
+        idempotencyKey?: string;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -36912,7 +36950,7 @@ export type SaveWholesaleProductResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveWholesaleProductSuccessSaveWholesaleProductSuccessSaved | SaveWholesaleProductSuccessSaveWholesaleProductSuccessDeleted | SaveWholesaleProductSuccessSaveWholesaleProductSuccessUnchanged | SaveWholesaleProductSuccessSaveWholesaleProductSuccessRefused | SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidationFailed | SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidated | SaveWholesaleProductSuccessSellerSaveCandidateReplayed | SaveWholesaleProductSuccessSellerSaveReplayed;
+        data: SaveWholesaleProductSuccessSaveWholesaleProductSuccessSaved | SaveWholesaleProductSuccessSaveWholesaleProductSuccessDeleted | SaveWholesaleProductSuccessSaveWholesaleProductSuccessUnchanged | SaveWholesaleProductSuccessSaveWholesaleProductSuccessRefused | SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidationFailed | SaveWholesaleProductSuccessSaveWholesaleProductSuccessValidated | SaveWholesaleProductSuccessSellerSaveCatalogChangeApprovalRequired | SaveWholesaleProductSuccessSellerSaveCandidateReplayed | SaveWholesaleProductSuccessSellerSaveReplayed;
         error: null;
     };
     /**
@@ -37027,6 +37065,19 @@ export type SaveWholesaleProductSuccessSellerSaveCandidateReplayed = {
 };
 
 export type SaveWholesaleProductSuccessSellerSaveCandidateReplayedMaterialReceipt = {
+    [key: string]: unknown;
+};
+
+export type SaveWholesaleProductSuccessSellerSaveCatalogChangeApprovalRequired = {
+    outcome: 'approval_required';
+    action: 'approval_required';
+    message: string;
+    approval: SaveWholesaleProductSuccessSellerSaveCatalogChangeApprovalRequiredApproval;
+    idempotencyKey: string;
+    [key: string]: unknown;
+};
+
+export type SaveWholesaleProductSuccessSellerSaveCatalogChangeApprovalRequiredApproval = {
     [key: string]: unknown;
 };
 
