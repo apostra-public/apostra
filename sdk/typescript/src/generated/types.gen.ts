@@ -7956,7 +7956,7 @@ export type GetResponses = {
                     redactedFields: Array<string>;
                 };
                 /**
-                 * The caller’s own payment terms, renewal, card setup and card removal requests that are waiting for an administrator to approve them on our site, newest first. Empty when there are none. Never another person’s.
+                 * The caller’s own payment terms, renewal, card setup, card removal and payout details requests that are waiting for an administrator to approve them on our site, newest first. A payout details entry carries no bank data. Empty when there are none. Never another person’s.
                  */
                 pendingApprovals: Array<GetSuccessBillingPendingApproval>;
                 standing: {
@@ -9639,6 +9639,16 @@ export type GetSuccessBillingPendingApproval = {
     action?: never;
     renewalVersion?: never;
     reason?: never;
+} | {
+    kind: 'billing.payout_details';
+    url: GetSuccessBillingPendingApprovalUrl;
+    idempotencyKey: GetSuccessBillingPendingApprovalIdempotencyKey;
+    expiresAt: GetSuccessBillingPendingApprovalExpiresAt;
+    paymentTerms?: never;
+    action?: never;
+    renewalVersion?: never;
+    reason?: never;
+    paymentMethodId?: never;
 };
 
 /**

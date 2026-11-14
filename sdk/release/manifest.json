@@ -1038,6 +1038,7 @@
       "GetSuccessBillingPendingApprovalKindBillingPaymentMethodRemove": "object",
       "GetSuccessBillingPendingApprovalKindBillingPaymentMethodSetup": "object",
       "GetSuccessBillingPendingApprovalKindBillingPaymentTerms": "object",
+      "GetSuccessBillingPendingApprovalKindBillingPayoutDetails": "object",
       "GetSuccessBillingPendingApprovalPaymentTerms": "scalar",
       "GetSuccessBillingPendingApprovalUrl": "scalar",
       "GetSuccessCampaignCancelSellerError": "object",
