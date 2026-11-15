@@ -13723,6 +13723,8 @@ class SaveCreativeInput(TypedDict):
     '\n    Uploaded JPEG/PNG/MP4 for format slots; a draft may omit it.\n    '
     fromCreativeSessionOutput: NotRequired[SaveCreativeInputFromCreativeSessionOutput]
     '\n    Save one approved session output to the advertiserId Library; campaignId only for campaign sessions. Needs idempotencyKey; send alone.\n    '
+    fromPlatformAd: NotRequired[SaveCreativeInputFromPlatformAd]
+    '\n    Link this Meta ad in campaignId to Library creativeId, so per-ad delivery reports it. Send alone.\n    '
     libraryRole: NotRequired[Literal["evergreen", "reference"]]
     '\n    Buyer Account only. Durable advertiser Library role: evergreen remains delivery-eligible; reference is reusable input material and cannot be attached for delivery.\n    '
     landing_page_url: NotRequired[SaveCreativeRequestLandingPageUrl]
@@ -13813,6 +13815,10 @@ class SaveCreativeInputFromCreativeSessionOutput(TypedDict):
     '\n    Session revision that recorded the approval.\n    '
     outputHash: str
     '\n    SHA-256 digest recorded by the exact output approval.\n    '
+
+class SaveCreativeInputFromPlatformAd(TypedDict):
+    platformAdId: str
+    '\n    Ad id, as live_ad_delivery platform_ad_id.\n    '
 
 class SaveCreativeInputIndustryIdentifiersItem(TypedDict):
     type: Literal["ad_id", "isci", "clearcast_clock", "idcrea"]
@@ -14056,6 +14062,20 @@ class SaveCreativeResultActionCreated(TypedDict):
     '\n    Per tracker: compiled URL, macros the seller fills, macros left literal. Present when the creative has trackers.\n    '
     warnings: NotRequired[SaveCreativeSuccessWarnings]
     action: Literal["created"]
+
+class SaveCreativeResultActionLinked(TypedDict):
+    action: Literal["linked"]
+    creative: SaveCreativeResultActionLinkedCreative
+    claimed: SaveCreativeResultActionLinkedClaimed
+    alreadyLinked: bool
+
+class SaveCreativeResultActionLinkedClaimed(TypedDict):
+    platform: Literal["meta"]
+    platformAdId: str
+    platformCreativeId: str
+
+class SaveCreativeResultActionLinkedCreative(TypedDict):
+    creativeId: str
 
 class SaveCreativeResultActionMembershipUpdated(TypedDict):
     action: Literal["membership_updated"]
@@ -14840,7 +14860,7 @@ class SaveCreativeSuccessValidateOnlyCreativeSuccess(TypedDict):
     advertiserId: NotRequired[str]
     assetCount: int
 
-SaveCreativeResult: TypeAlias = "SaveCreativeSuccessDuplicateCreativeSuccess | SaveCreativeSuccessValidateOnlyCreativeSuccess | SaveCreativeSuccessAgentApprovalRequired | SaveCreativeResultActionBulkUpdatePreviewed | SaveCreativeResultActionBulkUpdated | SaveCreativeResultActionCreated | SaveCreativeResultActionUpdated | SaveCreativeResultActionAssociated | SaveCreativeResultActionMembershipUpdated | SaveCreativeResultActionResynced | SaveCreativeResultActionCampaignResynced | SaveCreativeResultActionArchived | SaveCreativeResultActionRestored | SaveCreativeResultActionPromoted | SaveCreativeResultActionPromoting | SaveCreativeSuccessSaveCreativeLibraryRoleSuccess"
+SaveCreativeResult: TypeAlias = "SaveCreativeSuccessDuplicateCreativeSuccess | SaveCreativeSuccessValidateOnlyCreativeSuccess | SaveCreativeSuccessAgentApprovalRequired | SaveCreativeResultActionBulkUpdatePreviewed | SaveCreativeResultActionBulkUpdated | SaveCreativeResultActionCreated | SaveCreativeResultActionUpdated | SaveCreativeResultActionAssociated | SaveCreativeResultActionMembershipUpdated | SaveCreativeResultActionResynced | SaveCreativeResultActionCampaignResynced | SaveCreativeResultActionArchived | SaveCreativeResultActionRestored | SaveCreativeResultActionPromoted | SaveCreativeResultActionPromoting | SaveCreativeResultActionLinked | SaveCreativeSuccessSaveCreativeLibraryRoleSuccess"
 
 SaveCreativeSuccessWarnings: TypeAlias = list[str]
 
