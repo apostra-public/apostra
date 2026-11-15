@@ -44848,10 +44848,12 @@ paths:
       operationId: save_connection
       summary: >-
         Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting,
-        selection, billing, policy, activation.
+        selection, billing, policy, activation. sellerAccountIds (up to 100) changes several at once;
+        accountRequestsQueued counts requests that will send, none sent yet.
       description: >-
         Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting,
-        selection, billing, policy, activation.
+        selection, billing, policy, activation. sellerAccountIds (up to 100) changes several at once;
+        accountRequestsQueued counts requests that will send, none sent yet.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -44904,13 +44906,17 @@ paths:
                   additionalProperties: false
                 sellerAccountId:
                   description: The seller's Account id. Not the seller object's id, which is a different number.
+                  $ref: '#/components/schemas/save_connection_request_SellerAccountId'
                   type: integer
-                  exclusiveMinimum: 0
-                  maximum: 9007199254740991
                 connectionId:
                   description: Connection ID.
                   $ref: '#/components/schemas/save_connection_request_ConnectionId'
                   type: string
+                idempotencyKey:
+                  description: 'With sellerAccountIds: the same key and change replays the first answer.'
+                  type: string
+                  minLength: 16
+                  maxLength: 255
                 authorization:
                   description: Authorize target, sellerAccountId, or an existing connectionId.
                   type: object
@@ -44927,8 +44933,16 @@ paths:
                   type: object
                   properties:
                     decision:
-                      description: Account decision.
-                      $ref: '#/components/schemas/save_connection_request_BuyerStorefrontSelectionDecision'
+                      anyOf:
+                        - $ref: '#/components/schemas/save_connection_request_BuyerStorefrontSelectionDecision'
+                        - type: string
+                          const: REMOVE
+                      description: >-
+                        Account decision. REMOVE (sellerAccountIds only): a seller you added goes to DEFAULT, one
+                        Apostra added to ALWAYS_EXCLUDE.
+                    sellerAccountIds:
+                      description: Up to 100 sellers by Account id, instead of sellerAccountId. Each is answered alone.
+                      $ref: '#/components/schemas/save_connection_request_SelectionSellerAccountIds'
                   required:
                     - decision
                   additionalProperties: false
@@ -44950,6 +44964,9 @@ paths:
                         seller account while partner-managed account requests are unavailable.
                       type: boolean
                       const: true
+                    sellerAccountIds:
+                      description: Up to 100 sellers by Account id, instead of sellerAccountId. Each is answered alone.
+                      $ref: '#/components/schemas/save_connection_request_AdvertiserActivationSellerAccountIds'
                   required:
                     - advertiserId
                     - decision
@@ -45532,6 +45549,37 @@ paths:
                         required:
                           - action
                           - object
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: bulk_updated
+                          change:
+                            type: string
+                            enum:
+                              - selection
+                              - advertiserActivation
+                          replayed:
+                            type: boolean
+                          sellers:
+                            type: array
+                            items:
+                              $ref: '#/components/schemas/save_connection_success_SaveConnectionBulkEntry'
+                            description: One entry per requested seller, in request order.
+                          accountRequestsQueued:
+                            type: integer
+                            minimum: 0
+                            maximum: 9007199254740991
+                            description: >-
+                              Account requests that will send for all sellers; none sent yet. Progress:
+                              activation.accountReadiness on each seller.
+                        required:
+                          - action
+                          - change
+                          - replayed
+                          - sellers
+                          - accountRequestsQueued
                         additionalProperties: false
                   error:
                     type: 'null'
@@ -107589,12 +107637,28 @@ components:
         - ENABLED
         - DISABLED
       description: Advertiser-specific seller activation preference. DEFAULT removes the preference and inherits account selection.
+    save_connection_request_SellerAccountId:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
     save_connection_request_ConnectionId:
       type: string
       pattern: ^[1-9]\d*$
+    save_connection_request_SelectionSellerAccountIds:
+      minItems: 1
+      maxItems: 100
+      type: array
+      items:
+        $ref: '#/components/schemas/save_connection_request_SelectionSellerAccountIdsItem'
     save_connection_request_AdvertiserActivationAdvertiserId:
       type: string
       pattern: ^[1-9]\d*$
+    save_connection_request_AdvertiserActivationSellerAccountIds:
+      minItems: 1
+      maxItems: 100
+      type: array
+      items:
+        $ref: '#/components/schemas/save_connection_request_AdvertiserActivationSellerAccountIdsItem'
     save_connection_request_EnhancedReportingAccountId:
       type: string
       pattern: ^[1-9]\d*$
@@ -107616,6 +107680,70 @@ components:
     save_connection_request_OwnedLinkAdvertiserId:
       type: string
       pattern: ^[1-9]\d*$
+    save_connection_request_SelectionSellerAccountIdsItem:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
+    save_connection_request_AdvertiserActivationSellerAccountIdsItem:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
+    save_connection_success_SaveConnectionBulkEntry:
+      type: object
+      properties:
+        sellerAccountId:
+          type: integer
+          exclusiveMinimum: 0
+          maximum: 9007199254740991
+        action:
+          type: string
+          enum:
+            - applied
+            - unchanged
+            - failed
+          description: 'unchanged: already in place, or REMOVE had nothing to remove.'
+        decision:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: The decision now stored; for REMOVE, the one it resolved to. Null if failed.
+        accountRequestsQueued:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: Account requests that will send for this seller; none sent yet.
+        errors:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/save_connection_success_SaveConnectionBulkEntryError'
+      required:
+        - sellerAccountId
+        - action
+        - decision
+        - accountRequestsQueued
+      additionalProperties: false
+    save_connection_success_SaveConnectionBulkEntryError:
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 1
+          maxLength: 64
+        message:
+          type: string
+        recovery:
+          anyOf:
+            - type: string
+              const: transient
+            - type: string
+              const: correctable
+            - type: string
+              const: terminal
+      required:
+        - code
+        - message
+      additionalProperties: {}
     save_connection_success_Object:
       anyOf:
         - type: object

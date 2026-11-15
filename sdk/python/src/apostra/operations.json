@@ -1096,7 +1096,7 @@
         ]
       }
     ],
-    "summary": "Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation."
+    "summary": "Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation. sellerAccountIds (up to 100) changes several at once; accountRequestsQueued counts requests that will send, none sent yet."
   },
   "save_coverage": {
     "path": "/tools/save_coverage",

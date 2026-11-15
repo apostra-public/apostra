@@ -13131,10 +13131,12 @@ class SaveCatalogSuccessCatalogRefreshProblem(TypedDict):
 class SaveConnectionInput(TypedDict):
     target: NotRequired[SaveConnectionInputTarget]
     '\n    Service to authorize. Existing connections cannot change target.\n    '
-    sellerAccountId: NotRequired[int]
+    sellerAccountId: NotRequired[SaveConnectionRequestSellerAccountId]
     '\n    The seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     connectionId: NotRequired[SaveConnectionRequestConnectionId]
     '\n    Connection ID.\n    '
+    idempotencyKey: NotRequired[str]
+    '\n    With sellerAccountIds: the same key and change replays the first answer.\n    '
     authorization: NotRequired[SaveConnectionInputAuthorization]
     '\n    Authorize target, sellerAccountId, or an existing connectionId.\n    '
     selection: NotRequired[SaveConnectionInputSelection]
@@ -13171,6 +13173,8 @@ class SaveConnectionInputAdvertiserActivation(TypedDict):
     '\n    DEFAULT inherits account selection.\n    '
     requestAccount: NotRequired[Literal[True]]
     '\n    Deprecated compatibility field. Accepted only with decision=ENABLED; it does not request a seller account while partner-managed account requests are unavailable.\n    '
+    sellerAccountIds: NotRequired[SaveConnectionRequestAdvertiserActivationSellerAccountIds]
+    '\n    Up to 100 sellers by Account id, instead of sellerAccountId. Each is answered alone.\n    '
 
 class SaveConnectionInputAdvertiserMapping(TypedDict):
     accountId: NotRequired[SaveConnectionRequestAdvertiserMappingAccountId]
@@ -13268,8 +13272,10 @@ class SaveConnectionInputOwnedLinkKindShowWithUrl(TypedDict):
     '\n    Spotify show link from open.spotify.com/show.\n    '
 
 class SaveConnectionInputSelection(TypedDict):
-    decision: SaveConnectionRequestBuyerStorefrontSelectionDecision
-    '\n    Account decision.\n    '
+    decision: SaveConnectionRequestBuyerStorefrontSelectionDecision | Literal["REMOVE"]
+    '\n    Account decision. REMOVE (sellerAccountIds only): a seller you added goes to DEFAULT, one Apostra added to ALWAYS_EXCLUDE.\n    '
+    sellerAccountIds: NotRequired[SaveConnectionRequestSelectionSellerAccountIds]
+    '\n    Up to 100 sellers by Account id, instead of sellerAccountId. Each is answered alone.\n    '
 
 class SaveConnectionInputTarget(TypedDict):
     kind: Literal["seller", "creative_engine"]
@@ -13280,6 +13286,10 @@ class SaveConnectionInputTarget(TypedDict):
     '\n    For kind creative_engine: the engine\'s Account id. Not the engine object\'s id, which is a different number.\n    '
 
 SaveConnectionRequestAdvertiserActivationAdvertiserId: TypeAlias = str
+
+SaveConnectionRequestAdvertiserActivationSellerAccountIdsItem: TypeAlias = int
+
+SaveConnectionRequestAdvertiserActivationSellerAccountIds: TypeAlias = "list[SaveConnectionRequestAdvertiserActivationSellerAccountIdsItem]"
 
 SaveConnectionRequestAdvertiserMappingAccountId: TypeAlias = str
 
@@ -13300,6 +13310,12 @@ SaveConnectionRequestIdentitySelectionAccountId: TypeAlias = str
 SaveConnectionRequestOwnedLinkAdvertiserId: TypeAlias = str
 
 SaveConnectionRequestSelectedAccountId: TypeAlias = str
+
+SaveConnectionRequestSelectionSellerAccountIdsItem: TypeAlias = int
+
+SaveConnectionRequestSelectionSellerAccountIds: TypeAlias = "list[SaveConnectionRequestSelectionSellerAccountIdsItem]"
+
+SaveConnectionRequestSellerAccountId: TypeAlias = int
 
 class SaveConnectionResultActionAccountSelected(TypedDict):
     action: Literal["account_selected"]
@@ -13342,6 +13358,15 @@ class SaveConnectionResultActionBillingUpdated(TypedDict):
     object: SaveConnectionSuccessObject
     mutationReceipt: NotRequired[SaveConnectionSuccessMutationReceipt]
 
+class SaveConnectionResultActionBulkUpdated(TypedDict):
+    action: Literal["bulk_updated"]
+    change: Literal["selection", "advertiserActivation"]
+    replayed: bool
+    sellers: list[SaveConnectionSuccessSaveConnectionBulkEntry]
+    '\n    One entry per requested seller, in request order.\n    '
+    accountRequestsQueued: int
+    '\n    Account requests that will send for all sellers; none sent yet. Progress: activation.accountReadiness on each seller.\n    '
+
 class SaveConnectionResultActionDirectBillingAccepted(TypedDict):
     action: Literal["direct_billing_accepted"]
     object: SaveConnectionSuccessObject
@@ -13377,7 +13402,7 @@ class SaveConnectionResultActionSelectionUpdated(TypedDict):
     object: SaveConnectionSuccessObject
     mutationReceipt: NotRequired[SaveConnectionSuccessMutationReceipt]
 
-SaveConnectionResult: TypeAlias = "SaveConnectionResultActionAuthorizationRequired | SaveConnectionResultActionSelectionUpdated | SaveConnectionResultActionAdvertiserActivationUpdated | SaveConnectionResultActionBillingUpdated | SaveConnectionResultActionDirectBillingAccepted | SaveConnectionResultActionFeaturePolicyUpdated | SaveConnectionResultActionEnhancedReportingUpdated | SaveConnectionResultActionIdentitySelectionUpdated | SaveConnectionResultActionAccountsRefreshed | SaveConnectionResultActionAccountSelected | SaveConnectionResultActionAdvertiserMapped | SaveConnectionResultActionAdvertiserUnmapped | SaveConnectionResultActionOwnedLinkUpdated | SaveConnectionResultActionRemoved"
+SaveConnectionResult: TypeAlias = "SaveConnectionResultActionAuthorizationRequired | SaveConnectionResultActionSelectionUpdated | SaveConnectionResultActionAdvertiserActivationUpdated | SaveConnectionResultActionBillingUpdated | SaveConnectionResultActionDirectBillingAccepted | SaveConnectionResultActionFeaturePolicyUpdated | SaveConnectionResultActionEnhancedReportingUpdated | SaveConnectionResultActionIdentitySelectionUpdated | SaveConnectionResultActionAccountsRefreshed | SaveConnectionResultActionAccountSelected | SaveConnectionResultActionAdvertiserMapped | SaveConnectionResultActionAdvertiserUnmapped | SaveConnectionResultActionOwnedLinkUpdated | SaveConnectionResultActionRemoved | SaveConnectionResultActionBulkUpdated"
 
 class SaveConnectionSuccessMutationReceiptStateCommitted(TypedDict):
     state: Literal["committed"]
@@ -13413,6 +13438,21 @@ class SaveConnectionSuccessMutationReceiptStateReplayed(TypedDict):
 SaveConnectionSuccessMutationReceipt: TypeAlias = "SaveConnectionSuccessMutationReceiptStateCommitted | SaveConnectionSuccessMutationReceiptStateReplayed | SaveConnectionSuccessMutationReceiptStateFailed | SaveConnectionSuccessMutationReceiptStateMissing | SaveConnectionSuccessMutationReceiptStateInFlight | SaveConnectionSuccessMutationReceiptStateReconcileRequired | SaveConnectionSuccessMutationReceiptStateExpired | SaveConnectionSuccessMutationReceiptStateConflict"
 
 SaveConnectionSuccessObject: TypeAlias = dict[str, JsonValue] | None
+
+class SaveConnectionSuccessSaveConnectionBulkEntry(TypedDict):
+    sellerAccountId: int
+    action: Literal["applied", "unchanged", "failed"]
+    '\n    unchanged: already in place, or REMOVE had nothing to remove.\n    '
+    decision: str | None
+    '\n    The decision now stored; for REMOVE, the one it resolved to. Null if failed.\n    '
+    accountRequestsQueued: int
+    '\n    Account requests that will send for this seller; none sent yet.\n    '
+    errors: NotRequired[list[SaveConnectionSuccessSaveConnectionBulkEntryError]]
+
+class SaveConnectionSuccessSaveConnectionBulkEntryError(TypedDict):
+    code: str
+    message: str
+    recovery: NotRequired[Literal["transient", "correctable", "terminal"]]
 
 class SaveCoverageInput(TypedDict):
     domains: NotRequired[list[str]]
