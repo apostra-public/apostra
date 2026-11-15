@@ -5499,7 +5499,7 @@ export type GetDeliveryData = {
         /**
          * Metrics; omit for report defaults.
          */
-        metrics?: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
+        metrics?: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'grps' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
         /**
          * Group-by dimensions; campaign delivery also accepts labels.<dimension_key>, and property (tracker impressions per site or app, with date). Omit for leaf grain.
          */
@@ -7426,7 +7426,7 @@ export type GetDeliverySuccessPeriod = {
 };
 
 export type GetDeliverySuccessQuery = {
-    metrics: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
+    metrics: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'grps' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
     dimensions: Array<string>;
     range?: {
         startDate?: string;
@@ -7514,7 +7514,14 @@ export type GetDeliverySuccessRowsItemFinality = {
 export type GetDeliverySuccessRowsItemMetricsValue = {
     value: number | boolean | null;
     status: 'available' | 'unavailable';
-    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed' | 'fx_rate_unavailable';
+    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed' | 'fx_rate_unavailable' | 'not_additive';
+    /**
+     * grps only: the AdCP measurement_window the points belong to and is_final. A field is absent when it is not known for every day behind the value. Points that are not final can still change, for example when C7 ratings replace C3.
+     */
+    basis?: {
+        measurement_window?: string;
+        is_final?: boolean;
+    };
 };
 
 export type GetDeliverySuccessRowsItemSourceOperation = 'get_seller_reporting_metrics' | 'get_buyer_reporting_metrics' | 'get_seller_margin_reporting';
@@ -7662,7 +7669,14 @@ export type GetDeliverySuccessTotalsByFinalityItemMetrics = {
 export type GetDeliverySuccessTotalsByFinalityItemMetricsValue = {
     value: number | boolean | null;
     status: 'available' | 'unavailable';
-    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed' | 'fx_rate_unavailable';
+    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed' | 'fx_rate_unavailable' | 'not_additive';
+    /**
+     * grps only: the AdCP measurement_window the points belong to and is_final. A field is absent when it is not known for every day behind the value. Points that are not final can still change, for example when C7 ratings replace C3.
+     */
+    basis?: {
+        measurement_window?: string;
+        is_final?: boolean;
+    };
 };
 
 export type GetDeliverySuccessTotalsByFinalityItemRowsIncluded = number;
@@ -7688,7 +7702,14 @@ export type GetDeliverySuccessTotalsMetrics = {
 export type GetDeliverySuccessTotalsMetricsValue = {
     value: number | boolean | null;
     status: 'available' | 'unavailable';
-    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed' | 'fx_rate_unavailable';
+    reason?: 'projected_zero' | 'missing' | 'currency_unavailable' | 'incomplete' | 'revision_unreadable' | 'finality_mixed' | 'fx_rate_unavailable' | 'not_additive';
+    /**
+     * grps only: the AdCP measurement_window the points belong to and is_final. A field is absent when it is not known for every day behind the value. Points that are not final can still change, for example when C7 ratings replace C3.
+     */
+    basis?: {
+        measurement_window?: string;
+        is_final?: boolean;
+    };
 };
 
 export type GetDeliverySuccessTotalsRowsIncluded = number;

@@ -387,7 +387,7 @@ class GenerateVariantsSuccessGalleryVariantsItemPreview(TypedDict):
     height: NotRequired[float]
 
 class GetDeliveryInput(TypedDict):
-    metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
+    metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "grps", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
     '\n    Metrics; omit for report defaults.\n    '
     dimensions: NotRequired[list[Literal["date", "advertiser", "campaign", "channel_group", "channel", "buyer", "media_buy", "package", "inventory_source", "seller", "sales_agent", "property"] | str]]
     '\n    Group-by dimensions; campaign delivery also accepts labels.<dimension_key>, and property (tracker impressions per site or app, with date). Omit for leaf grain.\n    '
@@ -1898,7 +1898,7 @@ class GetDeliverySuccessPeriod(TypedDict):
     endDate: str
 
 class GetDeliverySuccessQuery(TypedDict):
-    metrics: list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]
+    metrics: list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "grps", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]
     dimensions: list[str]
     range: NotRequired[GetDeliverySuccessQueryRange]
     filters: GetDeliverySuccessQueryFilters
@@ -1967,7 +1967,13 @@ GetDeliverySuccessRowsItemFinality = TypedDict(
 class GetDeliverySuccessRowsItemMetricsValue(TypedDict):
     value: float | bool | None
     status: Literal["available", "unavailable"]
-    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed", "fx_rate_unavailable"]]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed", "fx_rate_unavailable", "not_additive"]]
+    basis: NotRequired[GetDeliverySuccessRowsItemMetricsValueBasis]
+    '\n    grps only: the AdCP measurement_window the points belong to and is_final. A field is absent when it is not known for every day behind the value. Points that are not final can still change, for example when C7 ratings replace C3.\n    '
+
+class GetDeliverySuccessRowsItemMetricsValueBasis(TypedDict):
+    measurement_window: NotRequired[str]
+    is_final: NotRequired[bool]
 
 class GetDeliverySuccessRowsItemSource(TypedDict):
     operation: GetDeliverySuccessRowsItemSourceOperation
@@ -2113,9 +2119,15 @@ GetDeliverySuccessTotalsByFinalityItemFinality = TypedDict(
 class GetDeliverySuccessTotalsByFinalityItemMetricsValue(TypedDict):
     value: float | bool | None
     status: Literal["available", "unavailable"]
-    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed", "fx_rate_unavailable"]]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed", "fx_rate_unavailable", "not_additive"]]
+    basis: NotRequired[GetDeliverySuccessTotalsByFinalityItemMetricsValueBasis]
+    '\n    grps only: the AdCP measurement_window the points belong to and is_final. A field is absent when it is not known for every day behind the value. Points that are not final can still change, for example when C7 ratings replace C3.\n    '
 
 GetDeliverySuccessTotalsByFinalityItemMetrics: TypeAlias = "dict[str, GetDeliverySuccessTotalsByFinalityItemMetricsValue]"
+
+class GetDeliverySuccessTotalsByFinalityItemMetricsValueBasis(TypedDict):
+    measurement_window: NotRequired[str]
+    is_final: NotRequired[bool]
 
 GetDeliverySuccessTotalsByFinalityItemRowsIncluded: TypeAlias = int
 
@@ -2140,9 +2152,15 @@ GetDeliverySuccessTotalsFinality = TypedDict(
 class GetDeliverySuccessTotalsMetricsValue(TypedDict):
     value: float | bool | None
     status: Literal["available", "unavailable"]
-    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed", "fx_rate_unavailable"]]
+    reason: NotRequired[Literal["projected_zero", "missing", "currency_unavailable", "incomplete", "revision_unreadable", "finality_mixed", "fx_rate_unavailable", "not_additive"]]
+    basis: NotRequired[GetDeliverySuccessTotalsMetricsValueBasis]
+    '\n    grps only: the AdCP measurement_window the points belong to and is_final. A field is absent when it is not known for every day behind the value. Points that are not final can still change, for example when C7 ratings replace C3.\n    '
 
 GetDeliverySuccessTotalsMetrics: TypeAlias = "dict[str, GetDeliverySuccessTotalsMetricsValue]"
+
+class GetDeliverySuccessTotalsMetricsValueBasis(TypedDict):
+    measurement_window: NotRequired[str]
+    is_final: NotRequired[bool]
 
 GetDeliverySuccessTotalsRowsIncluded: TypeAlias = int
 
