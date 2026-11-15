@@ -1438,7 +1438,7 @@ class GetDeliverySuccessGetDeliveryGoal(TypedDict):
     dataThrough: str | None
 
 class GetDeliverySuccessGetDeliveryGoalConstraintValue(TypedDict):
-    kind: Literal["spend", "impressions"]
+    kind: Literal["spend", "impressions", "grps"]
     amount: float
 
 class GetDeliverySuccessGetDeliveryGoalProgressEventOptimizationTargetCostPerVariant(TypedDict):
@@ -6991,7 +6991,7 @@ class GetSuccessDeliveryGoalProgress(TypedDict):
     sellerDeliveryProjection: GetSuccessDeliveryGoalProgressSellerDeliveryProjection | None
 
 class GetSuccessDeliveryGoalProgressConstraintValue(TypedDict):
-    kind: Literal["spend", "impressions"]
+    kind: Literal["spend", "impressions", "grps"]
     amount: float
 
 class GetSuccessDeliveryGoalProgressDeliveryProjection(TypedDict):
