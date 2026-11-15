@@ -60667,14 +60667,24 @@ paths:
                     properties:
                       pricing_model:
                         type: string
-                        const: cpm
-                        description: Only cpm.
+                        enum:
+                          - cpm
+                          - vcpm
+                          - cpc
+                          - cpcv
+                          - cpv
+                          - cpp
+                          - cpa
+                          - revenue_share
+                          - flat_rate
+                          - time
+                        description: AdCP pricing model. A source sells only the models its ad server books.
                       currency:
                         type: string
                         pattern: ^[A-Z]{3}$
                         description: Your settlement currency.
                       fixed_price:
-                        description: CPM to charge. Omit for an auction.
+                        description: Price per unit of the model. Omit for an auction.
                         type: number
                         minimum: 0
                       min_spend_per_package:
