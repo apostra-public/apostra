@@ -1785,8 +1785,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -1969,6 +1969,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -3069,8 +3072,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -3255,6 +3258,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -4331,8 +4337,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -4515,6 +4521,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -5763,6 +5772,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -7012,6 +7024,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -8084,8 +8099,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -8268,6 +8283,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -9339,8 +9357,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -10501,8 +10519,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -10679,6 +10697,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -11752,8 +11773,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -11930,6 +11951,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -13001,8 +13025,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -14166,8 +14190,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -15331,8 +15355,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -15509,6 +15533,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -16580,8 +16607,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -16758,6 +16785,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -17829,8 +17859,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -18013,6 +18043,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -19083,8 +19116,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -19267,6 +19300,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -20337,8 +20373,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -20521,6 +20557,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -21591,8 +21630,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -21775,6 +21814,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -22845,8 +22887,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -23029,6 +23071,9 @@ paths:
                           - operations
                           - accounts
                           - brandProfile
+                          - presence
+                          - surfaceResults
+                          - paidResults
                           - inventory
                           - preview
                           - items
@@ -24100,8 +24145,8 @@ paths:
                     id:
                       description: >-
                         The id from search or an earlier result; never guess one. For skill, an exact id the user gave
-                        also works. Omit it for singleton kinds, audience, and a property_list report read by reportId.
-                        A work_item also needs workItemKind.
+                        also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds,
+                        audience, and a property_list report read by reportId. A work_item also needs workItemKind.
                       type: string
                       minLength: 1
                     after:
@@ -26554,6 +26599,7 @@ paths:
                               - wholesale_product
                               - advertiser
                               - advertiser_grant
+                              - brand
                               - signal
                               - work_item
                               - ask
@@ -90101,6 +90147,7 @@ paths:
                               - $ref: '#/components/schemas/search_success_SearchSellerPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchAdvertiserPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchAdvertiserGrantPageOutput'
+                              - $ref: '#/components/schemas/search_success_SearchBrandPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchSignalPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchAdServerTargetingPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutput'
@@ -90211,6 +90258,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchSellerPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAdvertiserPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAdvertiserGrantPageOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchBrandPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchSignalPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAdServerTargetingPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchInventorySourceItemPageOutput'
@@ -90256,6 +90304,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchSellerUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAdvertiserUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAdvertiserGrantUnavailableOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchBrandUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchSignalUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAdServerTargetingUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchInventorySourceItemUnavailableOutput'
@@ -120867,6 +120916,35 @@ components:
         - kind
       additionalProperties:
         $ref: '#/components/schemas/search_success_SearchAdvertiserGrantPageOutputValue'
+    search_success_SearchBrandPageOutput:
+      type: object
+      properties:
+        total:
+          $ref: '#/components/schemas/search_success_SearchBrandPageOutputTotal'
+        totalLowerBound:
+          $ref: '#/components/schemas/search_success_SearchBrandPageOutputTotalLowerBound'
+        returned:
+          $ref: '#/components/schemas/search_success_SearchBrandPageOutputReturned'
+        hasMore:
+          $ref: '#/components/schemas/search_success_SearchBrandPageOutputHasMore'
+        truncated:
+          $ref: '#/components/schemas/search_success_SearchBrandPageOutputTruncated'
+        nextCursor:
+          $ref: '#/components/schemas/search_success_SearchBrandPageOutputNextCursor'
+        results:
+          $ref: '#/components/schemas/search_success_SearchBrandPageOutputResults'
+        outcome:
+          type: string
+          const: page_brand
+        kind:
+          type: string
+          const: brand
+      required:
+        - results
+        - outcome
+        - kind
+      additionalProperties:
+        $ref: '#/components/schemas/search_success_SearchBrandPageOutputValue'
     search_success_SearchSignalPageOutput:
       type: object
       properties:
@@ -121992,6 +122070,25 @@ components:
         kind:
           type: string
           const: advertiser_grant
+        unavailable:
+          type: string
+        message:
+          type: string
+      required:
+        - outcome
+        - kind
+        - unavailable
+        - message
+      additionalProperties: {}
+    search_success_SearchBrandUnavailableOutput:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: unavailable_brand
+        kind:
+          type: string
+          const: brand
         unavailable:
           type: string
         message:
@@ -124627,6 +124724,113 @@ components:
             additionalProperties: false
         additionalProperties: {}
     search_success_SearchAdvertiserGrantPageOutputValue: {}
+    search_success_SearchBrandPageOutputTotal:
+      type: number
+    search_success_SearchBrandPageOutputTotalLowerBound:
+      type: number
+    search_success_SearchBrandPageOutputReturned:
+      type: number
+    search_success_SearchBrandPageOutputHasMore:
+      type: boolean
+    search_success_SearchBrandPageOutputTruncated:
+      type: boolean
+    search_success_SearchBrandPageOutputNextCursor:
+      type: string
+    search_success_SearchBrandPageOutputResults:
+      type: array
+      items:
+        type: object
+        properties:
+          advertiserId:
+            type: string
+          name:
+            type:
+              - string
+              - 'null'
+          sandbox:
+            type: boolean
+          sourceType:
+            anyOf:
+              - type: string
+                enum:
+                  - inline
+                  - url
+                  - file
+              - type: 'null'
+            description: 'Where the items come from: url when url is set, file when file is set.'
+          lastChangeSummary:
+            anyOf:
+              - type: object
+                properties:
+                  added:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  updated:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  unchanged:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  removed:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                required:
+                  - added
+                  - updated
+                  - unchanged
+                  - removed
+                additionalProperties: false
+              - type: 'null'
+            description: Items in the latest version against the one before it.
+          transform:
+            anyOf:
+              - type: object
+                properties:
+                  name:
+                    type: string
+                  updatedAt:
+                    type: string
+                required:
+                  - name
+                  - updatedAt
+                additionalProperties: false
+              - type: 'null'
+            description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
+        additionalProperties: {}
+    search_success_SearchBrandPageOutputValue: {}
     search_success_SearchSignalPageOutputTotal:
       type: number
     search_success_SearchSignalPageOutputTotalLowerBound:
