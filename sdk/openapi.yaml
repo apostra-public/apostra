@@ -46390,6 +46390,17 @@ paths:
                     - sessionRevision
                     - outputHash
                   additionalProperties: false
+                fromPlatformAd:
+                  description: Link this Meta ad in campaignId to Library creativeId, so per-ad delivery reports it. Send alone.
+                  type: object
+                  properties:
+                    platformAdId:
+                      type: string
+                      pattern: ^[A-Za-z0-9_-]{1,128}$
+                      description: Ad id, as live_ad_delivery platform_ad_id.
+                  required:
+                    - platformAdId
+                  additionalProperties: false
                 libraryRole:
                   description: >-
                     Buyer Account only. Durable advertiser Library role: evergreen remains delivery-eligible; reference
@@ -47450,6 +47461,42 @@ paths:
                         required:
                           - action
                           - processingState
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: linked
+                          creative:
+                            type: object
+                            properties:
+                              creativeId:
+                                type: string
+                            required:
+                              - creativeId
+                            additionalProperties: false
+                          claimed:
+                            type: object
+                            properties:
+                              platform:
+                                type: string
+                                const: meta
+                              platformAdId:
+                                type: string
+                              platformCreativeId:
+                                type: string
+                            required:
+                              - platform
+                              - platformAdId
+                              - platformCreativeId
+                            additionalProperties: false
+                          alreadyLinked:
+                            type: boolean
+                        required:
+                          - action
+                          - creative
+                          - claimed
+                          - alreadyLinked
                         additionalProperties: false
                       - $ref: '#/components/schemas/save_creative_success_SaveCreativeLibraryRoleSuccess'
                   error:

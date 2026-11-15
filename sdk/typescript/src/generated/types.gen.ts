@@ -24109,6 +24109,15 @@ export type SaveCreativeData = {
             outputHash: string;
         };
         /**
+         * Link this Meta ad in campaignId to Library creativeId, so per-ad delivery reports it. Send alone.
+         */
+        fromPlatformAd?: {
+            /**
+             * Ad id, as live_ad_delivery platform_ad_id.
+             */
+            platformAdId: string;
+        };
+        /**
          * Buyer Account only. Durable advertiser Library role: evergreen remains delivery-eligible; reference is reusable input material and cannot be attached for delivery.
          */
         libraryRole?: 'evergreen' | 'reference';
@@ -24499,6 +24508,17 @@ export type SaveCreativeResponses = {
         } | {
             action: 'promoting';
             processingState: 'quarantined' | 'inspecting' | 'approved';
+        } | {
+            action: 'linked';
+            creative: {
+                creativeId: string;
+            };
+            claimed: {
+                platform: 'meta';
+                platformAdId: string;
+                platformCreativeId: string;
+            };
+            alreadyLinked: boolean;
         } | SaveCreativeSuccessSaveCreativeLibraryRoleSuccess;
         error: null;
     };
