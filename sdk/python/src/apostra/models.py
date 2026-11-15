@@ -21274,12 +21274,12 @@ class SaveWholesaleProductInputMaterialCandidate(TypedDict):
     '\n    Required exact advertiser scope for advertiser-confidential Material.\n    '
 
 class SaveWholesaleProductInputPricingOptionsItem(TypedDict):
-    pricing_model: Literal["cpm"]
-    '\n    Only cpm.\n    '
+    pricing_model: Literal["cpm", "vcpm", "cpc", "cpcv", "cpv", "cpp", "cpa", "revenue_share", "flat_rate", "time"]
+    '\n    AdCP pricing model. A source sells only the models its ad server books.\n    '
     currency: str
     '\n    Your settlement currency.\n    '
     fixed_price: NotRequired[float]
-    '\n    CPM to charge. Omit for an auction.\n    '
+    '\n    Price per unit of the model. Omit for an auction.\n    '
     min_spend_per_package: NotRequired[float]
     '\n    Least spend per package, in this currency.\n    '
 

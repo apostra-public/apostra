@@ -36843,15 +36843,15 @@ export type SaveWholesaleProductData = {
          */
         pricingOptions?: Array<{
             /**
-             * Only cpm.
+             * AdCP pricing model. A source sells only the models its ad server books.
              */
-            pricing_model: 'cpm';
+            pricing_model: 'cpm' | 'vcpm' | 'cpc' | 'cpcv' | 'cpv' | 'cpp' | 'cpa' | 'revenue_share' | 'flat_rate' | 'time';
             /**
              * Your settlement currency.
              */
             currency: string;
             /**
-             * CPM to charge. Omit for an auction.
+             * Price per unit of the model. Omit for an auction.
              */
             fixed_price?: number;
             /**
