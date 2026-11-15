@@ -25721,10 +25721,30 @@ paths:
                                                           - PRIVATE
                                                       displayName:
                                                         type: string
+                                                      adjustmentSource:
+                                                        description: >-
+                                                          `default` for the published rates, `discount` for a corporate
+                                                          discount, `direct` for rates agreed directly, `promo` for a
+                                                          promotion code and `referral` for a referral code.
+                                                        $ref: >-
+                                                          #/components/schemas/get_success_ObjectPlanOfferGovernedByEffectiveRateCardAdjustmentSource
+                                                      priceAdjustment:
+                                                        anyOf:
+                                                          - type: string
+                                                            enum:
+                                                              - PERCENT
+                                                              - PACKAGE
+                                                          - type: 'null'
+                                                        description: >-
+                                                          How the rate card adjusts prices: `PERCENT` by a discount in
+                                                          basis points, `PACKAGE` by package pricing. Null when it does
+                                                          not adjust the price.
                                                     required:
                                                       - version
                                                       - visibility
                                                       - displayName
+                                                      - adjustmentSource
+                                                      - priceAdjustment
                                                     additionalProperties: false
                                                   - type: 'null'
                                               proposal:
@@ -25758,13 +25778,40 @@ paths:
                                                     additionalProperties: false
                                                   - type: 'null'
                                                 description: >-
-                                                  The private proposal that governs the offer. Null for a public offer,
-                                                  and for a read redacted for a service token.
+                                                  The private proposal that governs the offer or the plan. Null for a
+                                                  public one, and for a read redacted for a service token.
+                                              termsUrl:
+                                                anyOf:
+                                                  - type: string
+                                                  - type: 'null'
+                                                description: >-
+                                                  The Terms of Service that govern it, for the standard Terms. Null for
+                                                  a custom contract.
                                             required:
                                               - agreementKind
                                               - effectiveRateCard
                                               - proposal
+                                              - termsUrl
                                             additionalProperties: false
+                                          serviceStart:
+                                            anyOf:
+                                              - type: string
+                                                const: ON_ACCEPTANCE
+                                              - type: object
+                                                properties:
+                                                  kind:
+                                                    type: string
+                                                    const: FIXED_DATE
+                                                  date:
+                                                    type: string
+                                                    format: date
+                                                    pattern: >-
+                                                      ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))$
+                                                required:
+                                                  - kind
+                                                  - date
+                                                additionalProperties: false
+                                            description: 'When service under the offer starts: `ON_ACCEPTANCE`, or a fixed date.'
                                           initialTermMonths:
                                             type: integer
                                             exclusiveMinimum: 0
@@ -25868,6 +25915,26 @@ paths:
                                                   description: >-
                                                     The discount already applied to this plan’s net prices, in basis
                                                     points. 0 when none.
+                                                rolloverPolicy:
+                                                  anyOf:
+                                                    - type: object
+                                                      properties:
+                                                        capBasisPoints:
+                                                          type: integer
+                                                          minimum: 1
+                                                          maximum: 10000
+                                                        expiresAfterBillingPeriods:
+                                                          type: integer
+                                                          exclusiveMinimum: 0
+                                                          maximum: 9007199254740991
+                                                      required:
+                                                        - capBasisPoints
+                                                        - expiresAfterBillingPeriods
+                                                      additionalProperties: false
+                                                    - type: 'null'
+                                                  description: >-
+                                                    The terms for rolling this plan’s included IUs over, or null when it
+                                                    does not roll over.
                                                 activitySchedule:
                                                   anyOf:
                                                     - type: array
@@ -25905,6 +25972,7 @@ paths:
                                                 - listCommitmentMinor
                                                 - listIuPriceMinor
                                                 - discountBasisPoints
+                                                - rolloverPolicy
                                                 - activitySchedule
                                                 - paymentOptions
                                                 - acceptanceConvertsStandaloneAccount
@@ -25912,6 +25980,7 @@ paths:
                                         required:
                                           - offerVersion
                                           - governedBy
+                                          - serviceStart
                                           - initialTermMonths
                                           - lastResponse
                                           - discount
@@ -93145,6 +93214,152 @@ components:
           $ref: '#/components/schemas/get_success_ObjectPlanCurrentIuPriceMinor'
         entitlements:
           $ref: '#/components/schemas/get_success_ObjectPlanCurrentEntitlements'
+        listCommitmentMinor:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: The monthly commitment before any discount, minor units of `currency`.
+        listIuPriceMinor:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: The price of one IU beyond the included IUs before any discount, minor units.
+        discountBasisPoints:
+          type: integer
+          minimum: 0
+          maximum: 9999
+          description: The discount already applied to this plan’s net prices, in basis points. 0 when none.
+        governedBy:
+          type: object
+          properties:
+            agreementKind:
+              type: string
+              enum:
+                - STANDARD_TOS
+                - CUSTOM_CONTRACT
+                - AAA
+            effectiveRateCard:
+              anyOf:
+                - type: object
+                  properties:
+                    version:
+                      type: string
+                    visibility:
+                      type: string
+                      enum:
+                        - PUBLIC
+                        - PRIVATE
+                    displayName:
+                      type: string
+                    adjustmentSource:
+                      description: >-
+                        `default` for the published rates, `discount` for a corporate discount, `direct` for rates
+                        agreed directly, `promo` for a promotion code and `referral` for a referral code.
+                      $ref: '#/components/schemas/get_success_ObjectPlanCurrentGovernedByEffectiveRateCardAdjustmentSource'
+                    priceAdjustment:
+                      anyOf:
+                        - type: string
+                          enum:
+                            - PERCENT
+                            - PACKAGE
+                        - type: 'null'
+                      description: >-
+                        How the rate card adjusts prices: `PERCENT` by a discount in basis points, `PACKAGE` by package
+                        pricing. Null when it does not adjust the price.
+                  required:
+                    - version
+                    - visibility
+                    - displayName
+                    - adjustmentSource
+                    - priceAdjustment
+                  additionalProperties: false
+                - type: 'null'
+            proposal:
+              anyOf:
+                - type: object
+                  properties:
+                    documentTitle:
+                      type: string
+                    scopeIncluded:
+                      type: array
+                      items:
+                        type: string
+                    scopeExclusions:
+                      type: array
+                      items:
+                        type: string
+                    initialTermMonths:
+                      type: integer
+                      exclusiveMinimum: 0
+                      maximum: 9007199254740991
+                    defaultPaymentOptionKey:
+                      type:
+                        - string
+                        - 'null'
+                  required:
+                    - documentTitle
+                    - scopeIncluded
+                    - scopeExclusions
+                    - initialTermMonths
+                    - defaultPaymentOptionKey
+                  additionalProperties: false
+                - type: 'null'
+              description: >-
+                The private proposal that governs the offer or the plan. Null for a public one, and for a read redacted
+                for a service token.
+            termsUrl:
+              anyOf:
+                - type: string
+                - type: 'null'
+              description: The Terms of Service that govern it, for the standard Terms. Null for a custom contract.
+          required:
+            - agreementKind
+            - effectiveRateCard
+            - proposal
+            - termsUrl
+          additionalProperties: false
+        supportPackage:
+          anyOf:
+            - type: object
+              properties:
+                kind:
+                  type: string
+                  enum:
+                    - UNLIMITED_NAMED_SUPPORT
+                    - NAMED_SUPPORT_PACKAGE
+                displayName:
+                  type: string
+                includedHoursPerMonth:
+                  anyOf:
+                    - type: number
+                      exclusiveMinimum: 0
+                    - type: 'null'
+                  description: The hours of support included each month, or null for unlimited named support.
+                additionalHourIus:
+                  anyOf:
+                    - type: number
+                      exclusiveMinimum: 0
+                    - type: 'null'
+                  description: >-
+                    The IU price of a further hour, for a package accepted before support became part of the plan. Null
+                    otherwise.
+              required:
+                - kind
+                - displayName
+                - includedHoursPerMonth
+                - additionalHourIus
+              additionalProperties: false
+            - type: 'null'
+          description: The named support the plan includes, or null.
+        lifecycle:
+          anyOf:
+            - $ref: '#/components/schemas/get_success_ObjectPlanCurrentLifecycle'
+            - type: 'null'
+          description: >-
+            `PENDING_FUNDING` until payment authority exists, `SCHEDULED` before the term starts, `ACTIVE` in force,
+            `BILLING_HOLD` while a payment hold limits spend, `SUSPENDED` while the contract is not in force, `EXPIRED`
+            once the term ended, `SUPERSEDED` once a successor was accepted, and `PAID` for a paid plan that has no
+            contract package. Null when none applies.
         offerVersion:
           type: string
         termStart:
@@ -93171,6 +93386,12 @@ components:
         - includedIus
         - iuPriceMinor
         - entitlements
+        - listCommitmentMinor
+        - listIuPriceMinor
+        - discountBasisPoints
+        - governedBy
+        - supportPackage
+        - lifecycle
         - offerVersion
         - termStart
         - termEnd
@@ -93195,6 +93416,152 @@ components:
           $ref: '#/components/schemas/get_success_ObjectPlanUpcomingIuPriceMinor'
         entitlements:
           $ref: '#/components/schemas/get_success_ObjectPlanUpcomingEntitlements'
+        listCommitmentMinor:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: The monthly commitment before any discount, minor units of `currency`.
+        listIuPriceMinor:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+          description: The price of one IU beyond the included IUs before any discount, minor units.
+        discountBasisPoints:
+          type: integer
+          minimum: 0
+          maximum: 9999
+          description: The discount already applied to this plan’s net prices, in basis points. 0 when none.
+        governedBy:
+          type: object
+          properties:
+            agreementKind:
+              type: string
+              enum:
+                - STANDARD_TOS
+                - CUSTOM_CONTRACT
+                - AAA
+            effectiveRateCard:
+              anyOf:
+                - type: object
+                  properties:
+                    version:
+                      type: string
+                    visibility:
+                      type: string
+                      enum:
+                        - PUBLIC
+                        - PRIVATE
+                    displayName:
+                      type: string
+                    adjustmentSource:
+                      description: >-
+                        `default` for the published rates, `discount` for a corporate discount, `direct` for rates
+                        agreed directly, `promo` for a promotion code and `referral` for a referral code.
+                      $ref: '#/components/schemas/get_success_ObjectPlanUpcomingGovernedByEffectiveRateCardAdjustmentSource'
+                    priceAdjustment:
+                      anyOf:
+                        - type: string
+                          enum:
+                            - PERCENT
+                            - PACKAGE
+                        - type: 'null'
+                      description: >-
+                        How the rate card adjusts prices: `PERCENT` by a discount in basis points, `PACKAGE` by package
+                        pricing. Null when it does not adjust the price.
+                  required:
+                    - version
+                    - visibility
+                    - displayName
+                    - adjustmentSource
+                    - priceAdjustment
+                  additionalProperties: false
+                - type: 'null'
+            proposal:
+              anyOf:
+                - type: object
+                  properties:
+                    documentTitle:
+                      type: string
+                    scopeIncluded:
+                      type: array
+                      items:
+                        type: string
+                    scopeExclusions:
+                      type: array
+                      items:
+                        type: string
+                    initialTermMonths:
+                      type: integer
+                      exclusiveMinimum: 0
+                      maximum: 9007199254740991
+                    defaultPaymentOptionKey:
+                      type:
+                        - string
+                        - 'null'
+                  required:
+                    - documentTitle
+                    - scopeIncluded
+                    - scopeExclusions
+                    - initialTermMonths
+                    - defaultPaymentOptionKey
+                  additionalProperties: false
+                - type: 'null'
+              description: >-
+                The private proposal that governs the offer or the plan. Null for a public one, and for a read redacted
+                for a service token.
+            termsUrl:
+              anyOf:
+                - type: string
+                - type: 'null'
+              description: The Terms of Service that govern it, for the standard Terms. Null for a custom contract.
+          required:
+            - agreementKind
+            - effectiveRateCard
+            - proposal
+            - termsUrl
+          additionalProperties: false
+        supportPackage:
+          anyOf:
+            - type: object
+              properties:
+                kind:
+                  type: string
+                  enum:
+                    - UNLIMITED_NAMED_SUPPORT
+                    - NAMED_SUPPORT_PACKAGE
+                displayName:
+                  type: string
+                includedHoursPerMonth:
+                  anyOf:
+                    - type: number
+                      exclusiveMinimum: 0
+                    - type: 'null'
+                  description: The hours of support included each month, or null for unlimited named support.
+                additionalHourIus:
+                  anyOf:
+                    - type: number
+                      exclusiveMinimum: 0
+                    - type: 'null'
+                  description: >-
+                    The IU price of a further hour, for a package accepted before support became part of the plan. Null
+                    otherwise.
+              required:
+                - kind
+                - displayName
+                - includedHoursPerMonth
+                - additionalHourIus
+              additionalProperties: false
+            - type: 'null'
+          description: The named support the plan includes, or null.
+        lifecycle:
+          anyOf:
+            - $ref: '#/components/schemas/get_success_ObjectPlanUpcomingLifecycle'
+            - type: 'null'
+          description: >-
+            `PENDING_FUNDING` until payment authority exists, `SCHEDULED` before the term starts, `ACTIVE` in force,
+            `BILLING_HOLD` while a payment hold limits spend, `SUSPENDED` while the contract is not in force, `EXPIRED`
+            once the term ended, `SUPERSEDED` once a successor was accepted, and `PAID` for a paid plan that has no
+            contract package. Null when none applies.
         offerVersion:
           type: string
         termStart:
@@ -93221,6 +93588,12 @@ components:
         - includedIus
         - iuPriceMinor
         - entitlements
+        - listCommitmentMinor
+        - listIuPriceMinor
+        - discountBasisPoints
+        - governedBy
+        - supportPackage
+        - lifecycle
         - offerVersion
         - termStart
         - termEnd
@@ -93228,6 +93601,14 @@ components:
         - paymentOption
         - custom
       additionalProperties: false
+    get_success_ObjectPlanOfferGovernedByEffectiveRateCardAdjustmentSource:
+      type: string
+      enum:
+        - default
+        - discount
+        - direct
+        - promo
+        - referral
     get_success_ObjectPlanOfferLastResponseAt:
       type: string
     get_success_ObjectPlanOfferDiscountEffectiveDate:
@@ -93390,10 +93771,34 @@ components:
                   maximum: 9007199254740991
                 - type: 'null'
               description: How many accounts the organization may hold, or null.
+            capacities:
+              type: array
+              items:
+                type: object
+                properties:
+                  target:
+                    type: string
+                    const: COMPATIBILITY_WORKSPACE
+                  unit:
+                    type: string
+                    const: COUNT
+                  limitCount:
+                    type: integer
+                    minimum: 0
+                    maximum: 1000000
+                required:
+                  - target
+                  - unit
+                  - limitCount
+                additionalProperties: false
+              description: >-
+                The bounded capacities the plan grants, each a target, a unit and a limit. Empty when the plan grants
+                none.
           required:
             - bundleName
             - features
             - accountLimit
+            - capacities
           additionalProperties: false
         - type: 'null'
     get_success_ObjectPlanOfferPlansItemActivityScheduleItem:
@@ -93605,10 +94010,34 @@ components:
                   maximum: 9007199254740991
                 - type: 'null'
               description: How many accounts the organization may hold, or null.
+            capacities:
+              type: array
+              items:
+                type: object
+                properties:
+                  target:
+                    type: string
+                    const: COMPATIBILITY_WORKSPACE
+                  unit:
+                    type: string
+                    const: COUNT
+                  limitCount:
+                    type: integer
+                    minimum: 0
+                    maximum: 1000000
+                required:
+                  - target
+                  - unit
+                  - limitCount
+                additionalProperties: false
+              description: >-
+                The bounded capacities the plan grants, each a target, a unit and a limit. Empty when the plan grants
+                none.
           required:
             - bundleName
             - features
             - accountLimit
+            - capacities
           additionalProperties: false
         - type: 'null'
     get_success_ObjectInvoicesItemNumber:
@@ -94082,6 +94511,63 @@ components:
                 $ref: '#/components/schemas/get_success_ContractsPlanHistoryItemIncludedIus'
               iuPriceMinor:
                 $ref: '#/components/schemas/get_success_ContractsPlanHistoryItemIuPriceMinor'
+              listCommitmentMinor:
+                type: integer
+                minimum: 0
+                maximum: 9007199254740991
+                description: The monthly commitment before any discount, minor units of `currency`.
+              listIuPriceMinor:
+                type: integer
+                minimum: 0
+                maximum: 9007199254740991
+                description: The price of one IU beyond the included IUs before any discount, minor units.
+              discountBasisPoints:
+                type: integer
+                minimum: 0
+                maximum: 9999
+                description: The discount already applied to this plan’s net prices, in basis points. 0 when none.
+              supportPackage:
+                anyOf:
+                  - type: object
+                    properties:
+                      kind:
+                        type: string
+                        enum:
+                          - UNLIMITED_NAMED_SUPPORT
+                          - NAMED_SUPPORT_PACKAGE
+                      displayName:
+                        type: string
+                      includedHoursPerMonth:
+                        anyOf:
+                          - type: number
+                            exclusiveMinimum: 0
+                          - type: 'null'
+                        description: The hours of support included each month, or null for unlimited named support.
+                      additionalHourIus:
+                        anyOf:
+                          - type: number
+                            exclusiveMinimum: 0
+                          - type: 'null'
+                        description: >-
+                          The IU price of a further hour, for a package accepted before support became part of the plan.
+                          Null otherwise.
+                    required:
+                      - kind
+                      - displayName
+                      - includedHoursPerMonth
+                      - additionalHourIus
+                    additionalProperties: false
+                  - type: 'null'
+                description: The named support the plan included, or null.
+              lifecycle:
+                anyOf:
+                  - $ref: '#/components/schemas/get_success_ContractsPlanHistoryItemLifecycle'
+                  - type: 'null'
+                description: >-
+                  `PENDING_FUNDING` until payment authority exists, `SCHEDULED` before the term starts, `ACTIVE` in
+                  force, `BILLING_HOLD` while a payment hold limits spend, `SUSPENDED` while the contract is not in
+                  force, `EXPIRED` once the term ended, `SUPERSEDED` once a successor was accepted, and `PAID` for a
+                  paid plan that has no contract package. Null when none applies.
               termStart:
                 $ref: '#/components/schemas/get_success_ContractsPlanHistoryItemTermStart'
               termEnd:
@@ -94114,6 +94600,11 @@ components:
               - commitmentMinor
               - includedIus
               - iuPriceMinor
+              - listCommitmentMinor
+              - listIuPriceMinor
+              - discountBasisPoints
+              - supportPackage
+              - lifecycle
               - termStart
               - termEnd
               - rateCardVersion
@@ -95175,12 +95666,55 @@ components:
                   maximum: 9007199254740991
                 - type: 'null'
               description: How many accounts the organization may hold, or null.
+            capacities:
+              type: array
+              items:
+                type: object
+                properties:
+                  target:
+                    type: string
+                    const: COMPATIBILITY_WORKSPACE
+                  unit:
+                    type: string
+                    const: COUNT
+                  limitCount:
+                    type: integer
+                    minimum: 0
+                    maximum: 1000000
+                required:
+                  - target
+                  - unit
+                  - limitCount
+                additionalProperties: false
+              description: >-
+                The bounded capacities the plan grants, each a target, a unit and a limit. Empty when the plan grants
+                none.
           required:
             - bundleName
             - features
             - accountLimit
+            - capacities
           additionalProperties: false
         - type: 'null'
+    get_success_ObjectPlanCurrentGovernedByEffectiveRateCardAdjustmentSource:
+      type: string
+      enum:
+        - default
+        - discount
+        - direct
+        - promo
+        - referral
+    get_success_ObjectPlanCurrentLifecycle:
+      type: string
+      enum:
+        - PENDING_FUNDING
+        - SCHEDULED
+        - ACTIVE
+        - BILLING_HOLD
+        - SUSPENDED
+        - EXPIRED
+        - SUPERSEDED
+        - PAID
     get_success_ObjectPlanCurrentTermStart:
       type: string
     get_success_ObjectPlanCurrentTermEnd:
@@ -95275,12 +95809,55 @@ components:
                   maximum: 9007199254740991
                 - type: 'null'
               description: How many accounts the organization may hold, or null.
+            capacities:
+              type: array
+              items:
+                type: object
+                properties:
+                  target:
+                    type: string
+                    const: COMPATIBILITY_WORKSPACE
+                  unit:
+                    type: string
+                    const: COUNT
+                  limitCount:
+                    type: integer
+                    minimum: 0
+                    maximum: 1000000
+                required:
+                  - target
+                  - unit
+                  - limitCount
+                additionalProperties: false
+              description: >-
+                The bounded capacities the plan grants, each a target, a unit and a limit. Empty when the plan grants
+                none.
           required:
             - bundleName
             - features
             - accountLimit
+            - capacities
           additionalProperties: false
         - type: 'null'
+    get_success_ObjectPlanUpcomingGovernedByEffectiveRateCardAdjustmentSource:
+      type: string
+      enum:
+        - default
+        - discount
+        - direct
+        - promo
+        - referral
+    get_success_ObjectPlanUpcomingLifecycle:
+      type: string
+      enum:
+        - PENDING_FUNDING
+        - SCHEDULED
+        - ACTIVE
+        - BILLING_HOLD
+        - SUSPENDED
+        - EXPIRED
+        - SUPERSEDED
+        - PAID
     get_success_ObjectPlanUpcomingTermStart:
       type: string
     get_success_ObjectPlanUpcomingTermEnd:
@@ -95430,6 +96007,17 @@ components:
       minimum: 0
       maximum: 9007199254740991
       description: Net price of one IU beyond the included IUs, minor units.
+    get_success_ContractsPlanHistoryItemLifecycle:
+      type: string
+      enum:
+        - PENDING_FUNDING
+        - SCHEDULED
+        - ACTIVE
+        - BILLING_HOLD
+        - SUSPENDED
+        - EXPIRED
+        - SUPERSEDED
+        - PAID
     get_success_ContractsPlanHistoryItemTermStart:
       type: string
     get_success_ContractsPlanHistoryItemTermEnd:
