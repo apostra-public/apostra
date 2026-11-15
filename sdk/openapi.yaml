@@ -93294,6 +93294,7 @@ components:
                   enum:
                     - spend
                     - impressions
+                    - grps
                 amount:
                   type: number
               required:
@@ -97676,6 +97677,7 @@ components:
                   enum:
                     - spend
                     - impressions
+                    - grps
                 amount:
                   type: number
               required:

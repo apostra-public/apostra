@@ -6855,7 +6855,7 @@ export type GetDeliverySuccessDeliveryUnconvertedDay = {
 
 export type GetDeliverySuccessGetDeliveryGoal = {
     constraint: {
-        kind: 'spend' | 'impressions';
+        kind: 'spend' | 'impressions' | 'grps';
         amount: number;
     } | null;
     expected: number | null;
@@ -10461,7 +10461,7 @@ export type GetSuccessContractsVisibility = 'visible' | 'redacted';
 
 export type GetSuccessDeliveryGoalProgress = {
     constraint: {
-        kind: 'spend' | 'impressions';
+        kind: 'spend' | 'impressions' | 'grps';
         amount: number;
     } | null;
     expected: number | null;
