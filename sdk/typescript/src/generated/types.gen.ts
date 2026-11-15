@@ -8032,9 +8032,17 @@ export type GetResponses = {
                                 version: string;
                                 visibility: 'PUBLIC' | 'PRIVATE';
                                 displayName: string;
+                                /**
+                                 * `default` for the published rates, `discount` for a corporate discount, `direct` for rates agreed directly, `promo` for a promotion code and `referral` for a referral code.
+                                 */
+                                adjustmentSource: GetSuccessObjectPlanOfferGovernedByEffectiveRateCardAdjustmentSource;
+                                /**
+                                 * How the rate card adjusts prices: `PERCENT` by a discount in basis points, `PACKAGE` by package pricing. Null when it does not adjust the price.
+                                 */
+                                priceAdjustment: 'PERCENT' | 'PACKAGE' | null;
                             } | null;
                             /**
-                             * The private proposal that governs the offer. Null for a public offer, and for a read redacted for a service token.
+                             * The private proposal that governs the offer or the plan. Null for a public one, and for a read redacted for a service token.
                              */
                             proposal: {
                                 documentTitle: string;
@@ -8043,6 +8051,17 @@ export type GetResponses = {
                                 initialTermMonths: number;
                                 defaultPaymentOptionKey: string | null;
                             } | null;
+                            /**
+                             * The Terms of Service that govern it, for the standard Terms. Null for a custom contract.
+                             */
+                            termsUrl: string | null;
+                        };
+                        /**
+                         * When service under the offer starts: `ON_ACCEPTANCE`, or a fixed date.
+                         */
+                        serviceStart: 'ON_ACCEPTANCE' | {
+                            kind: 'FIXED_DATE';
+                            date: string;
                         };
                         initialTermMonths: number;
                         /**
@@ -8085,6 +8104,13 @@ export type GetResponses = {
                              * The discount already applied to this plan’s net prices, in basis points. 0 when none.
                              */
                             discountBasisPoints: number;
+                            /**
+                             * The terms for rolling this plan’s included IUs over, or null when it does not roll over.
+                             */
+                            rolloverPolicy: {
+                                capBasisPoints: number;
+                                expiresAfterBillingPeriods: number;
+                            } | null;
                             /**
                              * What each priced activity costs on this plan, keyed by `activityCode`, or null when the plan carries no schedule of its own and the offer’s applies.
                              */
@@ -10299,6 +10325,37 @@ export type GetSuccessContracts = {
         commitmentMinor: GetSuccessContractsPlanHistoryItemCommitmentMinor;
         includedIus: GetSuccessContractsPlanHistoryItemIncludedIus;
         iuPriceMinor: GetSuccessContractsPlanHistoryItemIuPriceMinor;
+        /**
+         * The monthly commitment before any discount, minor units of `currency`.
+         */
+        listCommitmentMinor: number;
+        /**
+         * The price of one IU beyond the included IUs before any discount, minor units.
+         */
+        listIuPriceMinor: number;
+        /**
+         * The discount already applied to this plan’s net prices, in basis points. 0 when none.
+         */
+        discountBasisPoints: number;
+        /**
+         * The named support the plan included, or null.
+         */
+        supportPackage: {
+            kind: 'UNLIMITED_NAMED_SUPPORT' | 'NAMED_SUPPORT_PACKAGE';
+            displayName: string;
+            /**
+             * The hours of support included each month, or null for unlimited named support.
+             */
+            includedHoursPerMonth: number | null;
+            /**
+             * The IU price of a further hour, for a package accepted before support became part of the plan. Null otherwise.
+             */
+            additionalHourIus: number | null;
+        } | null;
+        /**
+         * `PENDING_FUNDING` until payment authority exists, `SCHEDULED` before the term starts, `ACTIVE` in force, `BILLING_HOLD` while a payment hold limits spend, `SUSPENDED` while the contract is not in force, `EXPIRED` once the term ended, `SUPERSEDED` once a successor was accepted, and `PAID` for a paid plan that has no contract package. Null when none applies.
+         */
+        lifecycle: GetSuccessContractsPlanHistoryItemLifecycle | null;
         termStart: GetSuccessContractsPlanHistoryItemTermStart;
         termEnd: GetSuccessContractsPlanHistoryItemTermEnd;
         /**
@@ -10358,6 +10415,8 @@ export type GetSuccessContractsPlanHistoryItemIncludedIus = number;
  * Net price of one IU beyond the included IUs, minor units.
  */
 export type GetSuccessContractsPlanHistoryItemIuPriceMinor = number;
+
+export type GetSuccessContractsPlanHistoryItemLifecycle = 'PENDING_FUNDING' | 'SCHEDULED' | 'ACTIVE' | 'BILLING_HOLD' | 'SUSPENDED' | 'EXPIRED' | 'SUPERSEDED' | 'PAID';
 
 /**
  * The plan’s stable plan code. The customer-safe read carries no internal plan row ids, so this is the identity a caller names a plan by.
@@ -10578,6 +10637,67 @@ export type GetSuccessObjectPlanCurrent = {
     includedIus: GetSuccessObjectPlanCurrentIncludedIus;
     iuPriceMinor: GetSuccessObjectPlanCurrentIuPriceMinor;
     entitlements: GetSuccessObjectPlanCurrentEntitlements;
+    /**
+     * The monthly commitment before any discount, minor units of `currency`.
+     */
+    listCommitmentMinor: number;
+    /**
+     * The price of one IU beyond the included IUs before any discount, minor units.
+     */
+    listIuPriceMinor: number;
+    /**
+     * The discount already applied to this plan’s net prices, in basis points. 0 when none.
+     */
+    discountBasisPoints: number;
+    governedBy: {
+        agreementKind: 'STANDARD_TOS' | 'CUSTOM_CONTRACT' | 'AAA';
+        effectiveRateCard: {
+            version: string;
+            visibility: 'PUBLIC' | 'PRIVATE';
+            displayName: string;
+            /**
+             * `default` for the published rates, `discount` for a corporate discount, `direct` for rates agreed directly, `promo` for a promotion code and `referral` for a referral code.
+             */
+            adjustmentSource: GetSuccessObjectPlanCurrentGovernedByEffectiveRateCardAdjustmentSource;
+            /**
+             * How the rate card adjusts prices: `PERCENT` by a discount in basis points, `PACKAGE` by package pricing. Null when it does not adjust the price.
+             */
+            priceAdjustment: 'PERCENT' | 'PACKAGE' | null;
+        } | null;
+        /**
+         * The private proposal that governs the offer or the plan. Null for a public one, and for a read redacted for a service token.
+         */
+        proposal: {
+            documentTitle: string;
+            scopeIncluded: Array<string>;
+            scopeExclusions: Array<string>;
+            initialTermMonths: number;
+            defaultPaymentOptionKey: string | null;
+        } | null;
+        /**
+         * The Terms of Service that govern it, for the standard Terms. Null for a custom contract.
+         */
+        termsUrl: string | null;
+    };
+    /**
+     * The named support the plan includes, or null.
+     */
+    supportPackage: {
+        kind: 'UNLIMITED_NAMED_SUPPORT' | 'NAMED_SUPPORT_PACKAGE';
+        displayName: string;
+        /**
+         * The hours of support included each month, or null for unlimited named support.
+         */
+        includedHoursPerMonth: number | null;
+        /**
+         * The IU price of a further hour, for a package accepted before support became part of the plan. Null otherwise.
+         */
+        additionalHourIus: number | null;
+    } | null;
+    /**
+     * `PENDING_FUNDING` until payment authority exists, `SCHEDULED` before the term starts, `ACTIVE` in force, `BILLING_HOLD` while a payment hold limits spend, `SUSPENDED` while the contract is not in force, `EXPIRED` once the term ended, `SUPERSEDED` once a successor was accepted, and `PAID` for a paid plan that has no contract package. Null when none applies.
+     */
+    lifecycle: GetSuccessObjectPlanCurrentLifecycle | null;
     offerVersion: string;
     termStart: GetSuccessObjectPlanCurrentTermStart;
     termEnd: GetSuccessObjectPlanCurrentTermEnd;
@@ -10611,7 +10731,17 @@ export type GetSuccessObjectPlanCurrentEntitlements = {
      * How many accounts the organization may hold, or null.
      */
     accountLimit: number | null;
+    /**
+     * The bounded capacities the plan grants, each a target, a unit and a limit. Empty when the plan grants none.
+     */
+    capacities: Array<{
+        target: 'COMPATIBILITY_WORKSPACE';
+        unit: 'COUNT';
+        limitCount: number;
+    }>;
 } | null;
+
+export type GetSuccessObjectPlanCurrentGovernedByEffectiveRateCardAdjustmentSource = 'default' | 'discount' | 'direct' | 'promo' | 'referral';
 
 export type GetSuccessObjectPlanCurrentIncludedIus = number;
 
@@ -10619,6 +10749,8 @@ export type GetSuccessObjectPlanCurrentIncludedIus = number;
  * Net price of one IU beyond the included IUs, minor units.
  */
 export type GetSuccessObjectPlanCurrentIuPriceMinor = number;
+
+export type GetSuccessObjectPlanCurrentLifecycle = 'PENDING_FUNDING' | 'SCHEDULED' | 'ACTIVE' | 'BILLING_HOLD' | 'SUSPENDED' | 'EXPIRED' | 'SUPERSEDED' | 'PAID';
 
 export type GetSuccessObjectPlanCurrentPaymentOption = {
     optionKey: string;
@@ -10666,6 +10798,8 @@ export type GetSuccessObjectPlanOfferDiscountEffectiveDate = string;
 
 export type GetSuccessObjectPlanOfferDiscountEndDate = string;
 
+export type GetSuccessObjectPlanOfferGovernedByEffectiveRateCardAdjustmentSource = 'default' | 'discount' | 'direct' | 'promo' | 'referral';
+
 export type GetSuccessObjectPlanOfferLastResponseAt = string;
 
 export type GetSuccessObjectPlanOfferPlansItemActivityScheduleItem = {
@@ -10700,6 +10834,14 @@ export type GetSuccessObjectPlanOfferPlansItemEntitlements = {
      * How many accounts the organization may hold, or null.
      */
     accountLimit: number | null;
+    /**
+     * The bounded capacities the plan grants, each a target, a unit and a limit. Empty when the plan grants none.
+     */
+    capacities: Array<{
+        target: 'COMPATIBILITY_WORKSPACE';
+        unit: 'COUNT';
+        limitCount: number;
+    }>;
 } | null;
 
 export type GetSuccessObjectPlanOfferPlansItemIncludedIus = number;
@@ -10757,6 +10899,14 @@ export type GetSuccessObjectPlanSuggestedPlanEntitlements = {
      * How many accounts the organization may hold, or null.
      */
     accountLimit: number | null;
+    /**
+     * The bounded capacities the plan grants, each a target, a unit and a limit. Empty when the plan grants none.
+     */
+    capacities: Array<{
+        target: 'COMPATIBILITY_WORKSPACE';
+        unit: 'COUNT';
+        limitCount: number;
+    }>;
 } | null;
 
 export type GetSuccessObjectPlanSuggestedPlanIncludedIus = number;
@@ -10781,6 +10931,67 @@ export type GetSuccessObjectPlanUpcoming = {
     includedIus: GetSuccessObjectPlanUpcomingIncludedIus;
     iuPriceMinor: GetSuccessObjectPlanUpcomingIuPriceMinor;
     entitlements: GetSuccessObjectPlanUpcomingEntitlements;
+    /**
+     * The monthly commitment before any discount, minor units of `currency`.
+     */
+    listCommitmentMinor: number;
+    /**
+     * The price of one IU beyond the included IUs before any discount, minor units.
+     */
+    listIuPriceMinor: number;
+    /**
+     * The discount already applied to this plan’s net prices, in basis points. 0 when none.
+     */
+    discountBasisPoints: number;
+    governedBy: {
+        agreementKind: 'STANDARD_TOS' | 'CUSTOM_CONTRACT' | 'AAA';
+        effectiveRateCard: {
+            version: string;
+            visibility: 'PUBLIC' | 'PRIVATE';
+            displayName: string;
+            /**
+             * `default` for the published rates, `discount` for a corporate discount, `direct` for rates agreed directly, `promo` for a promotion code and `referral` for a referral code.
+             */
+            adjustmentSource: GetSuccessObjectPlanUpcomingGovernedByEffectiveRateCardAdjustmentSource;
+            /**
+             * How the rate card adjusts prices: `PERCENT` by a discount in basis points, `PACKAGE` by package pricing. Null when it does not adjust the price.
+             */
+            priceAdjustment: 'PERCENT' | 'PACKAGE' | null;
+        } | null;
+        /**
+         * The private proposal that governs the offer or the plan. Null for a public one, and for a read redacted for a service token.
+         */
+        proposal: {
+            documentTitle: string;
+            scopeIncluded: Array<string>;
+            scopeExclusions: Array<string>;
+            initialTermMonths: number;
+            defaultPaymentOptionKey: string | null;
+        } | null;
+        /**
+         * The Terms of Service that govern it, for the standard Terms. Null for a custom contract.
+         */
+        termsUrl: string | null;
+    };
+    /**
+     * The named support the plan includes, or null.
+     */
+    supportPackage: {
+        kind: 'UNLIMITED_NAMED_SUPPORT' | 'NAMED_SUPPORT_PACKAGE';
+        displayName: string;
+        /**
+         * The hours of support included each month, or null for unlimited named support.
+         */
+        includedHoursPerMonth: number | null;
+        /**
+         * The IU price of a further hour, for a package accepted before support became part of the plan. Null otherwise.
+         */
+        additionalHourIus: number | null;
+    } | null;
+    /**
+     * `PENDING_FUNDING` until payment authority exists, `SCHEDULED` before the term starts, `ACTIVE` in force, `BILLING_HOLD` while a payment hold limits spend, `SUSPENDED` while the contract is not in force, `EXPIRED` once the term ended, `SUPERSEDED` once a successor was accepted, and `PAID` for a paid plan that has no contract package. Null when none applies.
+     */
+    lifecycle: GetSuccessObjectPlanUpcomingLifecycle | null;
     offerVersion: string;
     termStart: GetSuccessObjectPlanUpcomingTermStart;
     termEnd: GetSuccessObjectPlanUpcomingTermEnd;
@@ -10814,7 +11025,17 @@ export type GetSuccessObjectPlanUpcomingEntitlements = {
      * How many accounts the organization may hold, or null.
      */
     accountLimit: number | null;
+    /**
+     * The bounded capacities the plan grants, each a target, a unit and a limit. Empty when the plan grants none.
+     */
+    capacities: Array<{
+        target: 'COMPATIBILITY_WORKSPACE';
+        unit: 'COUNT';
+        limitCount: number;
+    }>;
 } | null;
+
+export type GetSuccessObjectPlanUpcomingGovernedByEffectiveRateCardAdjustmentSource = 'default' | 'discount' | 'direct' | 'promo' | 'referral';
 
 export type GetSuccessObjectPlanUpcomingIncludedIus = number;
 
@@ -10822,6 +11043,8 @@ export type GetSuccessObjectPlanUpcomingIncludedIus = number;
  * Net price of one IU beyond the included IUs, minor units.
  */
 export type GetSuccessObjectPlanUpcomingIuPriceMinor = number;
+
+export type GetSuccessObjectPlanUpcomingLifecycle = 'PENDING_FUNDING' | 'SCHEDULED' | 'ACTIVE' | 'BILLING_HOLD' | 'SUSPENDED' | 'EXPIRED' | 'SUPERSEDED' | 'PAID';
 
 export type GetSuccessObjectPlanUpcomingPaymentOption = {
     optionKey: string;
