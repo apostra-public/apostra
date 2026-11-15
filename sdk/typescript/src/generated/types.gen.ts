@@ -15991,7 +15991,7 @@ export type SaveAccountData = {
          */
         customerDomain?: string | null;
         /**
-         * With id of a buyer account: whether new spend waits for website approval. false needs reason and website approval; true is not available yet. Send it alone.
+         * With id of a buyer account: whether new spend waits for website approval. true saves; false needs reason and approval. Send it alone.
          */
         requireSpendApproval?: boolean;
         /**
@@ -16104,7 +16104,7 @@ export type SaveAccountResponses = {
             object: SaveAccountSuccessSaveAccountObject;
         } | {
             action: 'preview';
-            change: 'create' | 'rename' | 'archive' | 'restore' | 'disable_spend_approval';
+            change: 'create' | 'rename' | 'archive' | 'restore' | 'disable_spend_approval' | 'enable_spend_approval';
             /**
              * Whether the same call without dryRun would be recorded.
              */
