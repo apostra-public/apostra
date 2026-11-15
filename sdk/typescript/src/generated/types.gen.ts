@@ -9366,6 +9366,11 @@ export type GetStatusResponses = {
                 hosting: 'on_demand' | 'always_on';
                 lifecycleState: 'active' | 'suspended' | 'retired';
             } | null;
+            /**
+             * Use goLive and checks from the seller readiness include. Removed on or after 14 December 2026.
+             *
+             * @deprecated
+             */
             phase?: string;
             libraryRequirements?: Array<{
                 id: 'merchandising_agent' | 'guaranteed_inventory' | 'catalogue';

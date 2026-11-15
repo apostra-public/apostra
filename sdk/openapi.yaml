@@ -30702,6 +30702,8 @@ paths:
                             additionalProperties: false
                           - type: 'null'
                       phase:
+                        deprecated: true
+                        description: Use goLive and checks from the seller readiness include. Removed on or after 14 December 2026.
                         type: string
                       libraryRequirements:
                         anyOf:

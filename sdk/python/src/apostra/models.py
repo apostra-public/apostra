@@ -6073,6 +6073,7 @@ class GetStatusResult(TypedDict):
     setup: NotRequired[GetStatusResultSetup]
     agent: NotRequired[GetStatusResultAgentValue | None]
     phase: NotRequired[str]
+    '\n    Use goLive and checks from the seller readiness include. Removed on or after 14 December 2026.\n    '
     libraryRequirements: NotRequired[list[GetStatusResultLibraryRequirementsItem] | None]
     libraryRequirementsOmitted: NotRequired[int]
     libraryRequirementsDiagnostic: NotRequired[str]
