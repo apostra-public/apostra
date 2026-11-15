@@ -9192,7 +9192,7 @@ class SaveAccountInput(TypedDict):
     customerDomain: NotRequired[str | None]
     '\n    Create only: the new Account domain, or null for none.\n    '
     requireSpendApproval: NotRequired[bool]
-    '\n    With id of a buyer account: whether new spend waits for website approval. false needs reason and website approval; true is not available yet. Send it alone.\n    '
+    '\n    With id of a buyer account: whether new spend waits for website approval. true saves; false needs reason and approval. Send it alone.\n    '
     reason: NotRequired[str]
     '\n    Why this change is needed, shown to the approver. Required to create, rename, archive, restore or turn spend approval off.\n    '
     dryRun: NotRequired[bool]
@@ -9208,7 +9208,7 @@ class SaveAccountInputSettings(TypedDict):
 
 class SaveAccountResultActionPreview(TypedDict):
     action: Literal["preview"]
-    change: Literal["create", "rename", "archive", "restore", "disable_spend_approval"]
+    change: Literal["create", "rename", "archive", "restore", "disable_spend_approval", "enable_spend_approval"]
     canRequest: bool
     '\n    Whether the same call without dryRun would be recorded.\n    '
     name: str

@@ -37450,8 +37450,8 @@ paths:
                     - type: 'null'
                 requireSpendApproval:
                   description: >-
-                    With id of a buyer account: whether new spend waits for website approval. false needs reason and
-                    website approval; true is not available yet. Send it alone.
+                    With id of a buyer account: whether new spend waits for website approval. true saves; false needs
+                    reason and approval. Send it alone.
                   type: boolean
                 reason:
                   description: >-
@@ -37577,6 +37577,7 @@ paths:
                               - archive
                               - restore
                               - disable_spend_approval
+                              - enable_spend_approval
                           canRequest:
                             type: boolean
                             description: Whether the same call without dryRun would be recorded.
