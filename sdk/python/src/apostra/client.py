@@ -373,11 +373,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveAudienceResult], self._request_with_response("save_audience", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_billing(self, input: models.SaveBillingInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBillingResult:
-        "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, or remove a card. Plan, payment terms, renewal and card removal need administrator approval on our site. Cards stay off MCP."
+        "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, remove a card, or pay a failed payment now. Plan, payment terms, renewal, card removal and pay now need administrator approval on our site. Cards stay off MCP."
         return cast("models.SaveBillingResult", self._request("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_billing_with_response(self, input: models.SaveBillingInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBillingResult]:
-        "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, or remove a card. Plan, payment terms, renewal and card removal need administrator approval on our site. Cards stay off MCP. Returns the data together with response headers and request ID."
+        "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, remove a card, or pay a failed payment now. Plan, payment terms, renewal, card removal and pay now need administrator approval on our site. Cards stay off MCP. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBillingResult], self._request_with_response("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_business_rules(self, input: models.SaveBusinessRulesInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBusinessRulesResult:
@@ -1014,11 +1014,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveAudienceResult], await self._request_with_response("save_audience", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_billing(self, input: models.SaveBillingInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBillingResult:
-        "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, or remove a card. Plan, payment terms, renewal and card removal need administrator approval on our site. Cards stay off MCP."
+        "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, remove a card, or pay a failed payment now. Plan, payment terms, renewal, card removal and pay now need administrator approval on our site. Cards stay off MCP."
         return cast("models.SaveBillingResult", await self._request("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_billing_with_response(self, input: models.SaveBillingInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBillingResult]:
-        "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, or remove a card. Plan, payment terms, renewal and card removal need administrator approval on our site. Cards stay off MCP. Returns the data together with response headers and request ID."
+        "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, remove a card, or pay a failed payment now. Plan, payment terms, renewal, card removal and pay now need administrator approval on our site. Cards stay off MCP. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBillingResult], await self._request_with_response("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_business_rules(self, input: models.SaveBusinessRulesInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBusinessRulesResult:
