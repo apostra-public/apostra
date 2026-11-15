@@ -22671,11 +22671,15 @@ export type SaveConnectionData = {
         /**
          * The seller's Account id. Not the seller object's id, which is a different number.
          */
-        sellerAccountId?: number;
+        sellerAccountId?: SaveConnectionRequestSellerAccountId;
         /**
          * Connection ID.
          */
         connectionId?: SaveConnectionRequestConnectionId;
+        /**
+         * With sellerAccountIds: the same key and change replays the first answer.
+         */
+        idempotencyKey?: string;
         /**
          * Authorize target, sellerAccountId, or an existing connectionId.
          */
@@ -22690,9 +22694,13 @@ export type SaveConnectionData = {
          */
         selection?: {
             /**
-             * Account decision.
+             * Account decision. REMOVE (sellerAccountIds only): a seller you added goes to DEFAULT, one Apostra added to ALWAYS_EXCLUDE.
              */
-            decision: SaveConnectionRequestBuyerStorefrontSelectionDecision;
+            decision: SaveConnectionRequestBuyerStorefrontSelectionDecision | 'REMOVE';
+            /**
+             * Up to 100 sellers by Account id, instead of sellerAccountId. Each is answered alone.
+             */
+            sellerAccountIds?: SaveConnectionRequestSelectionSellerAccountIds;
         };
         /**
          * Seller advertiser activation (limited rollout); requires seller target or sellerAccountId.
@@ -22712,6 +22720,10 @@ export type SaveConnectionData = {
              * @deprecated
              */
             requestAccount?: true;
+            /**
+             * Up to 100 sellers by Account id, instead of sellerAccountId. Each is answered alone.
+             */
+            sellerAccountIds?: SaveConnectionRequestAdvertiserActivationSellerAccountIds;
         };
         /**
          * Seller billing; requires seller target or sellerAccountId.
@@ -22990,6 +23002,10 @@ export type SaveConnectionErrors = {
 
 export type SaveConnectionRequestAdvertiserActivationAdvertiserId = string;
 
+export type SaveConnectionRequestAdvertiserActivationSellerAccountIds = Array<SaveConnectionRequestAdvertiserActivationSellerAccountIdsItem>;
+
+export type SaveConnectionRequestAdvertiserActivationSellerAccountIdsItem = number;
+
 export type SaveConnectionRequestAdvertiserMappingAccountId = string;
 
 export type SaveConnectionRequestAdvertiserMappingAdvertiserId = string;
@@ -23016,6 +23032,12 @@ export type SaveConnectionRequestOwnedLinkAdvertiserId = string;
 
 export type SaveConnectionRequestSelectedAccountId = string;
 
+export type SaveConnectionRequestSelectionSellerAccountIds = Array<SaveConnectionRequestSelectionSellerAccountIdsItem>;
+
+export type SaveConnectionRequestSelectionSellerAccountIdsItem = number;
+
+export type SaveConnectionRequestSellerAccountId = number;
+
 /** @deprecated use SaveConnectionRequestConnectionId */
 export type SaveConnectionRequestSellerId = SaveConnectionRequestConnectionId;
 
@@ -23035,70 +23057,141 @@ export type SaveConnectionResponses = {
                 mode: 'oauth' | 'bearer';
                 connectionId: string | null;
             };
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
         } | {
             action: 'selection_updated';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
         } | {
             action: 'advertiser_activation_updated';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
         } | {
             action: 'billing_updated';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
         } | {
             action: 'direct_billing_accepted';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
         } | {
             action: 'feature_policy_updated';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
         } | {
             action: 'enhanced_reporting_updated';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
         } | {
             action: 'identity_selection_updated';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
         } | {
             action: 'accounts_refreshed';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
         } | {
             action: 'account_selected';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
         } | {
             action: 'advertiser_mapped';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
         } | {
             action: 'advertiser_unmapped';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
         } | {
             action: 'owned_link_updated';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
         } | {
             action: 'removed';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
+            authorization?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
+        } | {
+            action: 'bulk_updated';
+            change: 'selection' | 'advertiserActivation';
+            replayed: boolean;
+            /**
+             * One entry per requested seller, in request order.
+             */
+            sellers: Array<SaveConnectionSuccessSaveConnectionBulkEntry>;
+            /**
+             * Account requests that will send for all sellers; none sent yet. Progress: activation.accountReadiness on each seller.
+             */
+            accountRequestsQueued: number;
+            object?: never;
+            mutationReceipt?: never;
             authorization?: never;
         };
         error: null;
@@ -23150,6 +23243,30 @@ export type SaveConnectionSuccessMutationReceipt = {
 export type SaveConnectionSuccessObject = {
     [key: string]: unknown;
 } | null;
+
+export type SaveConnectionSuccessSaveConnectionBulkEntry = {
+    sellerAccountId: number;
+    /**
+     * unchanged: already in place, or REMOVE had nothing to remove.
+     */
+    action: 'applied' | 'unchanged' | 'failed';
+    /**
+     * The decision now stored; for REMOVE, the one it resolved to. Null if failed.
+     */
+    decision: string | null;
+    /**
+     * Account requests that will send for this seller; none sent yet.
+     */
+    accountRequestsQueued: number;
+    errors?: Array<SaveConnectionSuccessSaveConnectionBulkEntryError>;
+};
+
+export type SaveConnectionSuccessSaveConnectionBulkEntryError = {
+    code: string;
+    message: string;
+    recovery?: 'transient' | 'correctable' | 'terminal';
+    [key: string]: unknown;
+};
 
 export type SaveCoverageData = {
     body: {

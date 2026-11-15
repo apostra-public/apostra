@@ -855,14 +855,14 @@ export class Apostra extends Transport {
   /** Create or replace a catalog: type and exactly one of url, non-empty items, or file (in a connected Drive or SharePoint folder) are required. If missing, ask the buyer before calling. Saves reread a url or file. To archive, send isArchived: true with identity only; type and sources are not needed. Returns the data together with response headers and request ID. */
   saveCatalogWithResponse(input: SaveCatalogInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveCatalogResult>> { return this.requestDetailed("save_catalog", input, options) }
   /**
-   * Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation.
+   * Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation. sellerAccountIds (up to 100) changes several at once; accountRequestsQueued counts requests that will send, none sent yet.
    *
    * @example
    * await client.saveConnection(input, { idempotencyKey: 'stable-key' })
    */
   saveConnection(input: SaveConnectionInput, options: WriteRequestOptions): Promise<SaveConnectionResult> { return this.request("save_connection", input, options) }
 
-  /** Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation. Returns the data together with response headers and request ID. */
+  /** Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation. sellerAccountIds (up to 100) changes several at once; accountRequestsQueued counts requests that will send, none sent yet. Returns the data together with response headers and request ID. */
   saveConnectionWithResponse(input: SaveConnectionInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveConnectionResult>> { return this.requestDetailed("save_connection", input, options) }
   /**
    * Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read authorization; never assume it.

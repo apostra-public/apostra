@@ -429,11 +429,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveCatalogResult], self._request_with_response("save_catalog", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_connection(self, input: models.SaveConnectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveConnectionResult:
-        "Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation."
+        "Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation. sellerAccountIds (up to 100) changes several at once; accountRequestsQueued counts requests that will send, none sent yet."
         return cast("models.SaveConnectionResult", self._request("save_connection", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_connection_with_response(self, input: models.SaveConnectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveConnectionResult]:
-        "Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation. Returns the data together with response headers and request ID."
+        "Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation. sellerAccountIds (up to 100) changes several at once; accountRequestsQueued counts requests that will send, none sent yet. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveConnectionResult], self._request_with_response("save_connection", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_coverage(self, input: models.SaveCoverageInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCoverageResult:
@@ -1070,11 +1070,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveCatalogResult], await self._request_with_response("save_catalog", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_connection(self, input: models.SaveConnectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveConnectionResult:
-        "Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation."
+        "Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation. sellerAccountIds (up to 100) changes several at once; accountRequestsQueued counts requests that will send, none sent yet."
         return cast("models.SaveConnectionResult", await self._request("save_connection", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_connection_with_response(self, input: models.SaveConnectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveConnectionResult]:
-        "Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation. Returns the data together with response headers and request ID."
+        "Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation. sellerAccountIds (up to 100) changes several at once; accountRequestsQueued counts requests that will send, none sent yet. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveConnectionResult], await self._request_with_response("save_connection", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_coverage(self, input: models.SaveCoverageInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCoverageResult:
