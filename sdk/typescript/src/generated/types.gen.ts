@@ -7956,7 +7956,7 @@ export type GetResponses = {
                     redactedFields: Array<string>;
                 };
                 /**
-                 * The caller’s own payment terms, renewal, card setup, card removal and payout details requests that are waiting for an administrator to approve them on our site, newest first. A payout details entry carries no bank data. Empty when there are none. Never another person’s.
+                 * The caller’s own payment terms, renewal, card setup, card removal, pay now and payout details requests that are waiting for an administrator to approve them on our site, newest first. A payout details entry carries no bank data. Empty when there are none. Never another person’s.
                  */
                 pendingApprovals: Array<GetSuccessBillingPendingApproval>;
                 standing: {
@@ -9639,6 +9639,16 @@ export type GetSuccessBillingPendingApproval = {
     action?: never;
     renewalVersion?: never;
     reason?: never;
+} | {
+    kind: 'billing.pay_now';
+    url: GetSuccessBillingPendingApprovalUrl;
+    idempotencyKey: GetSuccessBillingPendingApprovalIdempotencyKey;
+    expiresAt: GetSuccessBillingPendingApprovalExpiresAt;
+    paymentTerms?: never;
+    action?: never;
+    renewalVersion?: never;
+    reason?: never;
+    paymentMethodId?: never;
 } | {
     kind: 'billing.payout_details';
     url: GetSuccessBillingPendingApprovalUrl;
@@ -18354,7 +18364,7 @@ export type SaveBillingData = {
          */
         paymentTerms?: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
         /**
-         * Key for paymentTerms (optional) and paymentMethod (required); repeat it to read the outcome. A rejected, expired or failed approval needs a new key.
+         * Key for paymentTerms (optional), paymentMethod and payNow (required); repeat it to read the outcome. A rejected, expired or failed approval needs a new key.
          */
         idempotencyKey?: string;
         /**
@@ -18381,6 +18391,10 @@ export type SaveBillingData = {
          * Remove a saved card; returns approval_required. Needs idempotencyKey. Send alone.
          */
         paymentMethod?: SaveBillingRequestSaveBillingPaymentMethod;
+        /**
+         * Charge the saved card now for the open failed payment; returns approval_required, and the payment provider reports the result later. Needs idempotencyKey. Send alone.
+         */
+        payNow?: true;
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
@@ -18907,6 +18921,11 @@ export type SaveBillingResponses = {
             paymentMethod: {
                 id: string;
                 removed: true;
+            };
+        } | {
+            action: 'pay_now_started';
+            payNow: {
+                status: 'processing';
             };
         };
         error: null;

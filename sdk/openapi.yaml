@@ -25560,10 +25560,10 @@ paths:
                                 items:
                                   $ref: '#/components/schemas/get_success_BillingPendingApproval'
                                 description: >-
-                                  The caller’s own payment terms, renewal, card setup, card removal and payout details
-                                  requests that are waiting for an administrator to approve them on our site, newest
-                                  first. A payout details entry carries no bank data. Empty when there are none. Never
-                                  another person’s.
+                                  The caller’s own payment terms, renewal, card setup, card removal, pay now and payout
+                                  details requests that are waiting for an administrator to approve them on our site,
+                                  newest first. A payout details entry carries no bank data. Empty when there are none.
+                                  Never another person’s.
                               standing:
                                 type: object
                                 properties:
@@ -40453,12 +40453,12 @@ paths:
       operationId: save_billing
       summary: >-
         Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details,
-        manage media billing entities, or remove a card. Plan, payment terms, renewal and card removal need
-        administrator approval on our site. Cards stay off MCP.
+        manage media billing entities, remove a card, or pay a failed payment now. Plan, payment terms, renewal, card
+        removal and pay now need administrator approval on our site. Cards stay off MCP.
       description: >-
         Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details,
-        manage media billing entities, or remove a card. Plan, payment terms, renewal and card removal need
-        administrator approval on our site. Cards stay off MCP.
+        manage media billing entities, remove a card, or pay a failed payment now. Plan, payment terms, renewal, card
+        removal and pay now need administrator approval on our site. Cards stay off MCP.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -40523,8 +40523,8 @@ paths:
                     - net_90
                 idempotencyKey:
                   description: >-
-                    Key for paymentTerms (optional) and paymentMethod (required); repeat it to read the outcome. A
-                    rejected, expired or failed approval needs a new key.
+                    Key for paymentTerms (optional), paymentMethod and payNow (required); repeat it to read the outcome.
+                    A rejected, expired or failed approval needs a new key.
                   type: string
                   minLength: 1
                   maxLength: 200
@@ -40562,6 +40562,12 @@ paths:
                   $ref: '#/components/schemas/save_billing_request_SaveBillingPaymentMethod'
                   type: object
                   additionalProperties: false
+                payNow:
+                  description: >-
+                    Charge the saved card now for the open failed payment; returns approval_required, and the payment
+                    provider reports the result later. Needs idempotencyKey. Send alone.
+                  type: boolean
+                  const: true
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -40595,6 +40601,8 @@ paths:
                         - mediaBilling
                     - required:
                         - paymentMethod
+                    - required:
+                        - payNow
                 - if:
                     required:
                       - idempotencyKey
@@ -40604,9 +40612,17 @@ paths:
                           - paymentTerms
                       - required:
                           - paymentMethod
+                      - required:
+                          - payNow
                 - if:
                     required:
                       - paymentMethod
+                  then:
+                    required:
+                      - idempotencyKey
+                - if:
+                    required:
+                      - payNow
                   then:
                     required:
                       - idempotencyKey
@@ -41163,6 +41179,24 @@ paths:
                         required:
                           - action
                           - paymentMethod
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: pay_now_started
+                          payNow:
+                            type: object
+                            properties:
+                              status:
+                                type: string
+                                const: processing
+                            required:
+                              - status
+                            additionalProperties: false
+                        required:
+                          - action
+                          - payNow
                         additionalProperties: false
                   error:
                     type: 'null'
@@ -91852,6 +91886,23 @@ components:
           required:
             - kind
             - paymentMethodId
+            - url
+            - idempotencyKey
+            - expiresAt
+          additionalProperties: false
+        - type: object
+          properties:
+            kind:
+              type: string
+              const: billing.pay_now
+            url:
+              $ref: '#/components/schemas/get_success_BillingPendingApprovalUrl'
+            idempotencyKey:
+              $ref: '#/components/schemas/get_success_BillingPendingApprovalIdempotencyKey'
+            expiresAt:
+              $ref: '#/components/schemas/get_success_BillingPendingApprovalExpiresAt'
+          required:
+            - kind
             - url
             - idempotencyKey
             - expiresAt
