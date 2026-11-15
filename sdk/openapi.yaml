@@ -27304,6 +27304,7 @@ paths:
                       - viewable_rate
                       - cost_per_acquisition
                       - roas
+                      - grps
                       - sellBooked
                       - sellRealized
                       - buyBooked
@@ -98674,6 +98675,7 @@ components:
               - viewable_rate
               - cost_per_acquisition
               - roas
+              - grps
               - sellBooked
               - sellRealized
               - buyBooked
@@ -100596,6 +100598,20 @@ components:
             - revision_unreadable
             - finality_mixed
             - fx_rate_unavailable
+            - not_additive
+        basis:
+          description: >-
+            grps only: the AdCP measurement_window the points belong to and is_final. A field is absent when it is not
+            known for every day behind the value. Points that are not final can still change, for example when C7
+            ratings replace C3.
+          type: object
+          properties:
+            measurement_window:
+              type: string
+              maxLength: 50
+            is_final:
+              type: boolean
+          additionalProperties: false
       required:
         - value
         - status
@@ -100893,6 +100909,20 @@ components:
             - revision_unreadable
             - finality_mixed
             - fx_rate_unavailable
+            - not_additive
+        basis:
+          description: >-
+            grps only: the AdCP measurement_window the points belong to and is_final. A field is absent when it is not
+            known for every day behind the value. Points that are not final can still change, for example when C7
+            ratings replace C3.
+          type: object
+          properties:
+            measurement_window:
+              type: string
+              maxLength: 50
+            is_final:
+              type: boolean
+          additionalProperties: false
       required:
         - value
         - status
@@ -100920,6 +100950,20 @@ components:
             - revision_unreadable
             - finality_mixed
             - fx_rate_unavailable
+            - not_additive
+        basis:
+          description: >-
+            grps only: the AdCP measurement_window the points belong to and is_final. A field is absent when it is not
+            known for every day behind the value. Points that are not final can still change, for example when C7
+            ratings replace C3.
+          type: object
+          properties:
+            measurement_window:
+              type: string
+              maxLength: 50
+            is_final:
+              type: boolean
+          additionalProperties: false
       required:
         - value
         - status
