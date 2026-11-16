@@ -25824,6 +25824,9 @@ paths:
                                                     properties:
                                                       documentTitle:
                                                         type: string
+                                                      executiveSummary:
+                                                        type: string
+                                                        description: The summary at the head of the proposal.
                                                       scopeIncluded:
                                                         type: array
                                                         items:
@@ -25836,15 +25839,76 @@ paths:
                                                         type: integer
                                                         exclusiveMinimum: 0
                                                         maximum: 9007199254740991
+                                                      renewal:
+                                                        oneOf:
+                                                          - type: object
+                                                            properties:
+                                                              kind:
+                                                                type: string
+                                                                const: NO_AUTOMATIC_RENEWAL
+                                                            required:
+                                                              - kind
+                                                            additionalProperties: false
+                                                          - type: object
+                                                            properties:
+                                                              kind:
+                                                                type: string
+                                                                const: AUTOMATIC
+                                                              renewalTermMonths:
+                                                                type: integer
+                                                                exclusiveMinimum: 0
+                                                                maximum: 9007199254740991
+                                                              nonRenewalNoticeDays:
+                                                                type: integer
+                                                                minimum: 0
+                                                                maximum: 9007199254740991
+                                                            required:
+                                                              - kind
+                                                              - renewalTermMonths
+                                                              - nonRenewalNoticeDays
+                                                            additionalProperties: false
+                                                        description: >-
+                                                          What happens when the initial term ends: it renews on its own
+                                                          for the renewal term, or it does not renew.
+                                                      customization:
+                                                        anyOf:
+                                                          - oneOf:
+                                                              - type: object
+                                                                properties:
+                                                                  posture:
+                                                                    type: string
+                                                                    const: EXACT
+                                                                required:
+                                                                  - posture
+                                                                additionalProperties: false
+                                                              - type: object
+                                                                properties:
+                                                                  posture:
+                                                                    type: string
+                                                                    const: CUSTOMIZED
+                                                                  reason:
+                                                                    type: string
+                                                                required:
+                                                                  - posture
+                                                                  - reason
+                                                                additionalProperties: false
+                                                          - type: 'null'
+                                                        description: >-
+                                                          Whether the proposal is the plan of the rate card as it is
+                                                          (`EXACT`) or changed from it (`CUSTOMIZED`, with the reason).
+                                                          Null for a proposal issued before this was recorded.
                                                       defaultPaymentOptionKey:
                                                         type:
                                                           - string
                                                           - 'null'
                                                     required:
                                                       - documentTitle
+                                                      - executiveSummary
                                                       - scopeIncluded
                                                       - scopeExclusions
                                                       - initialTermMonths
+                                                      - renewal
+                                                      - customization
                                                       - defaultPaymentOptionKey
                                                     additionalProperties: false
                                                   - type: 'null'
@@ -26006,6 +26070,13 @@ paths:
                                                   description: >-
                                                     The terms for rolling this plan’s included IUs over, or null when it
                                                     does not roll over.
+                                                scopeIncluded:
+                                                  type: array
+                                                  items:
+                                                    type: string
+                                                  description: >-
+                                                    What the plan covers, as short statements, in the words of its scope
+                                                    list on the rate card revision. Empty when it lists none.
                                                 activitySchedule:
                                                   anyOf:
                                                     - type: array
@@ -26044,6 +26115,7 @@ paths:
                                                 - listIuPriceMinor
                                                 - discountBasisPoints
                                                 - rolloverPolicy
+                                                - scopeIncluded
                                                 - activitySchedule
                                                 - paymentOptions
                                                 - acceptanceConvertsStandaloneAccount
@@ -93872,6 +93944,9 @@ components:
                   properties:
                     documentTitle:
                       type: string
+                    executiveSummary:
+                      type: string
+                      description: The summary at the head of the proposal.
                     scopeIncluded:
                       type: array
                       items:
@@ -93884,15 +93959,75 @@ components:
                       type: integer
                       exclusiveMinimum: 0
                       maximum: 9007199254740991
+                    renewal:
+                      oneOf:
+                        - type: object
+                          properties:
+                            kind:
+                              type: string
+                              const: NO_AUTOMATIC_RENEWAL
+                          required:
+                            - kind
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            kind:
+                              type: string
+                              const: AUTOMATIC
+                            renewalTermMonths:
+                              type: integer
+                              exclusiveMinimum: 0
+                              maximum: 9007199254740991
+                            nonRenewalNoticeDays:
+                              type: integer
+                              minimum: 0
+                              maximum: 9007199254740991
+                          required:
+                            - kind
+                            - renewalTermMonths
+                            - nonRenewalNoticeDays
+                          additionalProperties: false
+                      description: >-
+                        What happens when the initial term ends: it renews on its own for the renewal term, or it does
+                        not renew.
+                    customization:
+                      anyOf:
+                        - oneOf:
+                            - type: object
+                              properties:
+                                posture:
+                                  type: string
+                                  const: EXACT
+                              required:
+                                - posture
+                              additionalProperties: false
+                            - type: object
+                              properties:
+                                posture:
+                                  type: string
+                                  const: CUSTOMIZED
+                                reason:
+                                  type: string
+                              required:
+                                - posture
+                                - reason
+                              additionalProperties: false
+                        - type: 'null'
+                      description: >-
+                        Whether the proposal is the plan of the rate card as it is (`EXACT`) or changed from it
+                        (`CUSTOMIZED`, with the reason). Null for a proposal issued before this was recorded.
                     defaultPaymentOptionKey:
                       type:
                         - string
                         - 'null'
                   required:
                     - documentTitle
+                    - executiveSummary
                     - scopeIncluded
                     - scopeExclusions
                     - initialTermMonths
+                    - renewal
+                    - customization
                     - defaultPaymentOptionKey
                   additionalProperties: false
                 - type: 'null'
@@ -93952,6 +94087,13 @@ components:
             `BILLING_HOLD` while a payment hold limits spend, `SUSPENDED` while the contract is not in force, `EXPIRED`
             once the term ended, `SUPERSEDED` once a successor was accepted, and `PAID` for a paid plan that has no
             contract package. Null when none applies.
+        scopeIncluded:
+          type: array
+          items:
+            type: string
+          description: >-
+            What the plan covers, as short statements, when the rate card revision it was accepted on still lists them.
+            Empty otherwise.
         offerVersion:
           type: string
         termStart:
@@ -93984,6 +94126,7 @@ components:
         - governedBy
         - supportPackage
         - lifecycle
+        - scopeIncluded
         - offerVersion
         - termStart
         - termEnd
@@ -94074,6 +94217,9 @@ components:
                   properties:
                     documentTitle:
                       type: string
+                    executiveSummary:
+                      type: string
+                      description: The summary at the head of the proposal.
                     scopeIncluded:
                       type: array
                       items:
@@ -94086,15 +94232,75 @@ components:
                       type: integer
                       exclusiveMinimum: 0
                       maximum: 9007199254740991
+                    renewal:
+                      oneOf:
+                        - type: object
+                          properties:
+                            kind:
+                              type: string
+                              const: NO_AUTOMATIC_RENEWAL
+                          required:
+                            - kind
+                          additionalProperties: false
+                        - type: object
+                          properties:
+                            kind:
+                              type: string
+                              const: AUTOMATIC
+                            renewalTermMonths:
+                              type: integer
+                              exclusiveMinimum: 0
+                              maximum: 9007199254740991
+                            nonRenewalNoticeDays:
+                              type: integer
+                              minimum: 0
+                              maximum: 9007199254740991
+                          required:
+                            - kind
+                            - renewalTermMonths
+                            - nonRenewalNoticeDays
+                          additionalProperties: false
+                      description: >-
+                        What happens when the initial term ends: it renews on its own for the renewal term, or it does
+                        not renew.
+                    customization:
+                      anyOf:
+                        - oneOf:
+                            - type: object
+                              properties:
+                                posture:
+                                  type: string
+                                  const: EXACT
+                              required:
+                                - posture
+                              additionalProperties: false
+                            - type: object
+                              properties:
+                                posture:
+                                  type: string
+                                  const: CUSTOMIZED
+                                reason:
+                                  type: string
+                              required:
+                                - posture
+                                - reason
+                              additionalProperties: false
+                        - type: 'null'
+                      description: >-
+                        Whether the proposal is the plan of the rate card as it is (`EXACT`) or changed from it
+                        (`CUSTOMIZED`, with the reason). Null for a proposal issued before this was recorded.
                     defaultPaymentOptionKey:
                       type:
                         - string
                         - 'null'
                   required:
                     - documentTitle
+                    - executiveSummary
                     - scopeIncluded
                     - scopeExclusions
                     - initialTermMonths
+                    - renewal
+                    - customization
                     - defaultPaymentOptionKey
                   additionalProperties: false
                 - type: 'null'
@@ -94154,6 +94360,13 @@ components:
             `BILLING_HOLD` while a payment hold limits spend, `SUSPENDED` while the contract is not in force, `EXPIRED`
             once the term ended, `SUPERSEDED` once a successor was accepted, and `PAID` for a paid plan that has no
             contract package. Null when none applies.
+        scopeIncluded:
+          type: array
+          items:
+            type: string
+          description: >-
+            What the plan covers, as short statements, when the rate card revision it was accepted on still lists them.
+            Empty otherwise.
         offerVersion:
           type: string
         termStart:
@@ -94186,6 +94399,7 @@ components:
         - governedBy
         - supportPackage
         - lifecycle
+        - scopeIncluded
         - offerVersion
         - termStart
         - termEnd
