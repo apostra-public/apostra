@@ -19002,8 +19002,16 @@ class SaveNotificationConfigInputContent(TypedDict):
 class SaveNotificationConfigInputEventSubscriptionActionCreate(TypedDict):
     action: Literal["create"]
     '\n    Create one event subscription.\n    '
-    subscription: SaveNotificationConfigInputEventSubscriptionActionCreateSubscriptionCategoryReporting | SaveNotificationConfigInputEventSubscriptionActionCreateSubscriptionCategoryIndicators
+    subscription: SaveNotificationConfigInputEventSubscriptionActionCreateSubscriptionCategoryReporting | SaveNotificationConfigInputEventSubscriptionActionCreateSubscriptionCategoryCampaign | SaveNotificationConfigInputEventSubscriptionActionCreateSubscriptionCategoryIndicators
     '\n    The category and verified endpoint to subscribe.\n    '
+
+class SaveNotificationConfigInputEventSubscriptionActionCreateSubscriptionCategoryCampaign(TypedDict):
+    endpointId: str
+    '\n    ID of the verified webhook endpoint owned by this agent.\n    '
+    delivery: SaveNotificationConfigRequestEventSubscriptionSubscriptionDelivery
+    '\n    How often this subscription sends permitted updates.\n    '
+    category: Literal["campaign"]
+    '\n    Subscribe to campaign progress and Pulse verdict changes.\n    '
 
 class SaveNotificationConfigInputEventSubscriptionActionCreateSubscriptionCategoryIndicators(TypedDict):
     endpointId: str
@@ -19088,7 +19096,16 @@ class SaveNotificationConfigRequestEventSubscriptionSubscriptionReporting(TypedD
 class SaveNotificationConfigResultActionCreatedAndUpdatedAndDeleted(TypedDict):
     outcome: Literal["event_subscription_saved"]
     action: Literal["created", "updated", "deleted"]
-    eventSubscription: SaveNotificationConfigResultActionCreatedAndUpdatedAndDeletedEventSubscriptionSigningProfileStandardWebhooksWithReportingAndReportingFinalDeliveryAndReportingMode | SaveNotificationConfigResultActionCreatedAndUpdatedAndDeletedEventSubscriptionSigningProfileStandardWebhooksCategoryIndicators | None
+    eventSubscription: SaveNotificationConfigResultActionCreatedAndUpdatedAndDeletedEventSubscriptionSigningProfileStandardWebhooksWithReportingAndReportingFinalDeliveryAndReportingMode | SaveNotificationConfigResultActionCreatedAndUpdatedAndDeletedEventSubscriptionSigningProfileStandardWebhooksCategoryIndicators | SaveNotificationConfigResultActionCreatedAndUpdatedAndDeletedEventSubscriptionSigningProfileStandardWebhooksCategoryCampaign | None
+
+class SaveNotificationConfigResultActionCreatedAndUpdatedAndDeletedEventSubscriptionSigningProfileStandardWebhooksCategoryCampaign(TypedDict):
+    endpointId: SaveNotificationConfigSuccessEventSubscriptionEndpointId
+    delivery: SaveNotificationConfigSuccessEventSubscriptionDelivery
+    signingProfile: SaveNotificationConfigSuccessEventSubscriptionSigningProfile
+    id: str
+    owner: SaveNotificationConfigSuccessEventSubscriptionOwnerRegisteredBuyerAgent
+    category: Literal["campaign"]
+    enabled: bool
 
 class SaveNotificationConfigResultActionCreatedAndUpdatedAndDeletedEventSubscriptionSigningProfileStandardWebhooksCategoryIndicators(TypedDict):
     endpointId: SaveNotificationConfigSuccessEventSubscriptionEndpointId

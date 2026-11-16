@@ -56456,6 +56456,27 @@ paths:
                                     #/components/schemas/save_notification_config_request_EventSubscriptionSubscriptionDelivery
                                 category:
                                   type: string
+                                  const: campaign
+                                  description: Subscribe to campaign progress and Pulse verdict changes.
+                              required:
+                                - endpointId
+                                - delivery
+                                - category
+                              additionalProperties: false
+                            - type: object
+                              properties:
+                                endpointId:
+                                  type: string
+                                  format: uuid
+                                  pattern: >-
+                                    ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                                  description: ID of the verified webhook endpoint owned by this agent.
+                                delivery:
+                                  description: How often this subscription sends permitted updates.
+                                  $ref: >-
+                                    #/components/schemas/save_notification_config_request_EventSubscriptionSubscriptionDelivery
+                                category:
+                                  type: string
                                   const: indicators
                                   description: 'Subscribe to indicators.changed: sent when a package''s seller indicators change.'
                               required:
@@ -56884,6 +56905,39 @@ paths:
                                       category:
                                         type: string
                                         const: indicators
+                                      enabled:
+                                        type: boolean
+                                    required:
+                                      - endpointId
+                                      - delivery
+                                      - signingProfile
+                                      - id
+                                      - owner
+                                      - category
+                                      - enabled
+                                    additionalProperties: false
+                                  - type: object
+                                    properties:
+                                      endpointId:
+                                        $ref: >-
+                                          #/components/schemas/save_notification_config_success_EventSubscriptionEndpointId
+                                      delivery:
+                                        $ref: >-
+                                          #/components/schemas/save_notification_config_success_EventSubscriptionDelivery
+                                      signingProfile:
+                                        $ref: >-
+                                          #/components/schemas/save_notification_config_success_EventSubscriptionSigningProfile
+                                      id:
+                                        type: string
+                                        format: uuid
+                                        pattern: >-
+                                          ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                                      owner:
+                                        $ref: >-
+                                          #/components/schemas/save_notification_config_success_EventSubscriptionOwnerRegisteredBuyerAgent
+                                      category:
+                                        type: string
+                                        const: campaign
                                       enabled:
                                         type: boolean
                                     required:
