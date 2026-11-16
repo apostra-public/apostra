@@ -27565,6 +27565,8 @@ paths:
                       - cost_per_acquisition
                       - roas
                       - grps
+                      - reach
+                      - frequency
                       - sellBooked
                       - sellRealized
                       - buyBooked
@@ -97208,6 +97210,58 @@ components:
       type: string
       minLength: 3
       maxLength: 3
+    get_delivery_success_MetricDatumReachUnit:
+      anyOf:
+        - type: string
+          const: individuals
+        - type: string
+          const: households
+        - type: string
+          const: devices
+        - type: string
+          const: accounts
+        - type: string
+          const: cookies
+        - type: string
+          const: custom
+    get_delivery_success_MetricDatumReachWindow:
+      type: object
+      properties:
+        kind:
+          anyOf:
+            - type: string
+              const: cumulative
+            - type: string
+              const: period
+            - type: string
+              const: rolling
+        period:
+          type: object
+          properties:
+            interval:
+              type: integer
+              minimum: 1
+              maximum: 9007199254740991
+            unit:
+              anyOf:
+                - type: string
+                  const: seconds
+                - type: string
+                  const: minutes
+                - type: string
+                  const: hours
+                - type: string
+                  const: days
+                - type: string
+                  const: campaign
+          required:
+            - interval
+            - unit
+          additionalProperties:
+            $ref: '#/components/schemas/get_delivery_success_MetricDatumReachWindowPeriodValue'
+      required:
+        - kind
+      additionalProperties: {}
     get_delivery_success_DeliveryRevision:
       type: object
       properties:
@@ -99385,6 +99439,8 @@ components:
               - cost_per_acquisition
               - roas
               - grps
+              - reach
+              - frequency
               - sellBooked
               - sellRealized
               - buyBooked
@@ -100234,6 +100290,7 @@ components:
       type: string
     get_delivery_success_SemanticsBillingEligibility:
       type: string
+    get_delivery_success_MetricDatumReachWindowPeriodValue: {}
     get_delivery_success_DeliveryRevisionReportingRevisionId:
       type: string
       minLength: 1
@@ -101321,6 +101378,14 @@ components:
             is_final:
               type: boolean
           additionalProperties: false
+        reach_unit:
+          description: 'reach and frequency only: AdCP reach_unit, what the seller counted. Absent when the seller named none.'
+          $ref: '#/components/schemas/get_delivery_success_MetricDatumReachUnit'
+        reach_window:
+          description: >-
+            reach and frequency only: AdCP reach_window, the period the value covers. Absent when the seller declared
+            none, which leaves the window unspecified.
+          $ref: '#/components/schemas/get_delivery_success_MetricDatumReachWindow'
       required:
         - value
         - status
@@ -101632,6 +101697,14 @@ components:
             is_final:
               type: boolean
           additionalProperties: false
+        reach_unit:
+          description: 'reach and frequency only: AdCP reach_unit, what the seller counted. Absent when the seller named none.'
+          $ref: '#/components/schemas/get_delivery_success_MetricDatumReachUnit'
+        reach_window:
+          description: >-
+            reach and frequency only: AdCP reach_window, the period the value covers. Absent when the seller declared
+            none, which leaves the window unspecified.
+          $ref: '#/components/schemas/get_delivery_success_MetricDatumReachWindow'
       required:
         - value
         - status
@@ -101673,6 +101746,14 @@ components:
             is_final:
               type: boolean
           additionalProperties: false
+        reach_unit:
+          description: 'reach and frequency only: AdCP reach_unit, what the seller counted. Absent when the seller named none.'
+          $ref: '#/components/schemas/get_delivery_success_MetricDatumReachUnit'
+        reach_window:
+          description: >-
+            reach and frequency only: AdCP reach_window, the period the value covers. Absent when the seller declared
+            none, which leaves the window unspecified.
+          $ref: '#/components/schemas/get_delivery_success_MetricDatumReachWindow'
       required:
         - value
         - status
