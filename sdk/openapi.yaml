@@ -105765,7 +105765,9 @@ components:
           type: string
         principalKind:
           type: string
-          const: buyer_agent
+          enum:
+            - buyer_agent
+            - registered_agent
         displayName:
           type: string
         lifecycleState:
@@ -105894,6 +105896,56 @@ components:
                 - destinationsTruncated
               additionalProperties: false
             - type: 'null'
+        registration:
+          type: object
+          properties:
+            accountId:
+              type: integer
+              exclusiveMinimum: 0
+              maximum: 9007199254740991
+            claimedAt:
+              type:
+                - string
+                - 'null'
+            revokedAt:
+              type:
+                - string
+                - 'null'
+            revokedBy:
+              anyOf:
+                - oneOf:
+                    - type: object
+                      properties:
+                        kind:
+                          type: string
+                          const: account_admin
+                        name:
+                          type:
+                            - string
+                            - 'null'
+                      required:
+                        - kind
+                        - name
+                      additionalProperties: false
+                    - type: object
+                      properties:
+                        kind:
+                          type: string
+                          const: apostra_staff
+                      required:
+                        - kind
+                      additionalProperties: false
+                - type: 'null'
+            accessScope:
+              type: string
+              const: account
+          required:
+            - accountId
+            - claimedAt
+            - revokedAt
+            - revokedBy
+            - accessScope
+          additionalProperties: false
       required:
         - principalId
         - principalKind
