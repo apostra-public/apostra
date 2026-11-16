@@ -61202,6 +61202,19 @@ paths:
                       - accompanying_content
                       - interstitial
                       - standalone
+                eligibleAccountIds:
+                  description: Buyer accountIds that may see and book it, replaced whole. null opens it to every buyer; omit keeps.
+                  anyOf:
+                    - minItems: 1
+                      maxItems: 50
+                      type: array
+                      items:
+                        type: string
+                        minLength: 1
+                    - type: 'null'
+                confirmVisibilityImpact:
+                  description: 'Required to restrict an open, live product: it hides it from every other buyer at once.'
+                  type: boolean
                 dryRun:
                   description: Validate a new product without writing it; on GAM it returns lineItemTargeting. Creates only.
                   type: boolean
@@ -119801,6 +119814,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/save_wholesale_product_success_SaveWholesaleProductSuccessSavedWarningsItem'
+        eligibleAccountIds:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
       required:
         - outcome
         - saved

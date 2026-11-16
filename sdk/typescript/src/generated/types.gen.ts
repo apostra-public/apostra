@@ -37253,6 +37253,14 @@ export type SaveWholesaleProductData = {
          */
         videoPlacementTypes?: Array<'instream' | 'accompanying_content' | 'interstitial' | 'standalone'>;
         /**
+         * Buyer accountIds that may see and book it, replaced whole. null opens it to every buyer; omit keeps.
+         */
+        eligibleAccountIds?: Array<string> | null;
+        /**
+         * Required to restrict an open, live product: it hides it from every other buyer at once.
+         */
+        confirmVisibilityImpact?: boolean;
+        /**
          * Validate a new product without writing it; on GAM it returns lineItemTargeting. Creates only.
          */
         dryRun?: boolean;
@@ -37551,6 +37559,7 @@ export type SaveWholesaleProductSuccessSaveWholesaleProductSuccessSaved = {
     status: string;
     pricingStatus: string | null;
     warnings: Array<SaveWholesaleProductSuccessSaveWholesaleProductSuccessSavedWarningsItem>;
+    eligibleAccountIds?: Array<string> | null;
     [key: string]: unknown;
 };
 

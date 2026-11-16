@@ -21438,6 +21438,10 @@ class SaveWholesaleProductInput(TypedDict):
     '\n    AdCP overlay_support a buyer may set; omit geo for none. null follows the ad server.\n    '
     videoPlacementTypes: NotRequired[list[Literal["instream", "accompanying_content", "interstitial", "standalone"]]]
     '\n    AdCP video placement types. [] clears; omit keeps.\n    '
+    eligibleAccountIds: NotRequired[list[str] | None]
+    '\n    Buyer accountIds that may see and book it, replaced whole. null opens it to every buyer; omit keeps.\n    '
+    confirmVisibilityImpact: NotRequired[bool]
+    '\n    Required to restrict an open, live product: it hides it from every other buyer at once.\n    '
     dryRun: NotRequired[bool]
     '\n    Validate a new product without writing it; on GAM it returns lineItemTargeting. Creates only.\n    '
     delete: NotRequired[Literal[True]]
@@ -21638,6 +21642,7 @@ class SaveWholesaleProductSuccessSaveWholesaleProductSuccessSaved(TypedDict):
     status: str
     pricingStatus: str | None
     warnings: list[SaveWholesaleProductSuccessSaveWholesaleProductSuccessSavedWarningsItem]
+    eligibleAccountIds: NotRequired[list[str] | None]
 
 SaveWholesaleProductSuccessSaveWholesaleProductSuccessSavedWarningsItem: TypeAlias = dict[str, JsonValue]
 
