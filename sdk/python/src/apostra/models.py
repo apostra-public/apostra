@@ -13374,6 +13374,12 @@ class SaveConnectionInputAdvertiserMapping(TypedDict):
     '\n    Source ID hint.\n    '
     linkId: NotRequired[SaveConnectionRequestAdvertiserMappingLinkId]
     '\n    Mapping link ID.\n    '
+    campaignSync: NotRequired[SaveConnectionInputAdvertiserMappingCampaignSync]
+    '\n    With state mapped: hand the account synced campaigns to this mapped advertiser. Admins only.\n    '
+
+class SaveConnectionInputAdvertiserMappingCampaignSync(TypedDict):
+    owner: bool
+    '\n    true: this advertiser owns the account synced campaigns; they move from the current owner. false is refused.\n    '
 
 class SaveConnectionInputAuthorization(TypedDict):
     mode: NotRequired[Literal["oauth", "bearer"]]
@@ -13554,6 +13560,18 @@ class SaveConnectionResultActionBulkUpdated(TypedDict):
     accountRequestsQueued: int
     '\n    Account requests that will send for all sellers; none sent yet. Progress: activation.accountReadiness on each seller.\n    '
 
+class SaveConnectionResultActionCampaignSyncOwnerUnchanged(TypedDict):
+    action: Literal["campaign_sync_owner_unchanged"]
+    object: SaveConnectionSuccessObject
+    mutationReceipt: NotRequired[SaveConnectionSuccessMutationReceipt]
+    previousOwner: SaveConnectionSuccessPreviousOwner
+
+class SaveConnectionResultActionCampaignSyncOwnerUpdated(TypedDict):
+    action: Literal["campaign_sync_owner_updated"]
+    object: SaveConnectionSuccessObject
+    mutationReceipt: NotRequired[SaveConnectionSuccessMutationReceipt]
+    previousOwner: SaveConnectionSuccessPreviousOwner
+
 class SaveConnectionResultActionDirectBillingAccepted(TypedDict):
     action: Literal["direct_billing_accepted"]
     object: SaveConnectionSuccessObject
@@ -13589,7 +13607,7 @@ class SaveConnectionResultActionSelectionUpdated(TypedDict):
     object: SaveConnectionSuccessObject
     mutationReceipt: NotRequired[SaveConnectionSuccessMutationReceipt]
 
-SaveConnectionResult: TypeAlias = "SaveConnectionResultActionAuthorizationRequired | SaveConnectionResultActionSelectionUpdated | SaveConnectionResultActionAdvertiserActivationUpdated | SaveConnectionResultActionBillingUpdated | SaveConnectionResultActionDirectBillingAccepted | SaveConnectionResultActionFeaturePolicyUpdated | SaveConnectionResultActionEnhancedReportingUpdated | SaveConnectionResultActionIdentitySelectionUpdated | SaveConnectionResultActionAccountsRefreshed | SaveConnectionResultActionAccountSelected | SaveConnectionResultActionAdvertiserMapped | SaveConnectionResultActionAdvertiserUnmapped | SaveConnectionResultActionOwnedLinkUpdated | SaveConnectionResultActionRemoved | SaveConnectionResultActionBulkUpdated"
+SaveConnectionResult: TypeAlias = "SaveConnectionResultActionAuthorizationRequired | SaveConnectionResultActionSelectionUpdated | SaveConnectionResultActionAdvertiserActivationUpdated | SaveConnectionResultActionBillingUpdated | SaveConnectionResultActionDirectBillingAccepted | SaveConnectionResultActionFeaturePolicyUpdated | SaveConnectionResultActionEnhancedReportingUpdated | SaveConnectionResultActionIdentitySelectionUpdated | SaveConnectionResultActionAccountsRefreshed | SaveConnectionResultActionAccountSelected | SaveConnectionResultActionAdvertiserMapped | SaveConnectionResultActionAdvertiserUnmapped | SaveConnectionResultActionCampaignSyncOwnerUpdated | SaveConnectionResultActionCampaignSyncOwnerUnchanged | SaveConnectionResultActionOwnedLinkUpdated | SaveConnectionResultActionRemoved | SaveConnectionResultActionBulkUpdated"
 
 class SaveConnectionSuccessMutationReceiptStateCommitted(TypedDict):
     state: Literal["committed"]
@@ -13625,6 +13643,10 @@ class SaveConnectionSuccessMutationReceiptStateReplayed(TypedDict):
 SaveConnectionSuccessMutationReceipt: TypeAlias = "SaveConnectionSuccessMutationReceiptStateCommitted | SaveConnectionSuccessMutationReceiptStateReplayed | SaveConnectionSuccessMutationReceiptStateFailed | SaveConnectionSuccessMutationReceiptStateMissing | SaveConnectionSuccessMutationReceiptStateInFlight | SaveConnectionSuccessMutationReceiptStateReconcileRequired | SaveConnectionSuccessMutationReceiptStateExpired | SaveConnectionSuccessMutationReceiptStateConflict"
 
 SaveConnectionSuccessObject: TypeAlias = dict[str, JsonValue] | None
+
+class SaveConnectionSuccessPreviousOwner(TypedDict):
+    advertiserId: str
+    advertiserName: str
 
 class SaveConnectionSuccessSaveConnectionBulkEntry(TypedDict):
     sellerAccountId: int

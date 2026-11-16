@@ -45346,6 +45346,18 @@ paths:
                     linkId:
                       description: Mapping link ID.
                       $ref: '#/components/schemas/save_connection_request_AdvertiserMappingLinkId'
+                    campaignSync:
+                      description: 'With state mapped: hand the account synced campaigns to this mapped advertiser. Admins only.'
+                      type: object
+                      properties:
+                        owner:
+                          type: boolean
+                          description: >-
+                            true: this advertiser owns the account synced campaigns; they move from the current owner.
+                            false is refused.
+                      required:
+                        - owner
+                      additionalProperties: false
                   required:
                     - advertiserId
                     - state
@@ -45598,6 +45610,33 @@ paths:
                                 - linkId
                     required:
                       - advertiserMapping
+                - if:
+                    properties:
+                      advertiserMapping:
+                        required:
+                          - campaignSync
+                    required:
+                      - advertiserMapping
+                  then:
+                    properties:
+                      advertiserMapping:
+                        allOf:
+                          - properties:
+                              state:
+                                const: mapped
+                            required:
+                              - state
+                          - properties:
+                              campaignSync:
+                                properties:
+                                  owner:
+                                    const: true
+                                required:
+                                  - owner
+                            required:
+                              - campaignSync
+                    required:
+                      - advertiserMapping
       responses:
         '200':
           description: Typed operation result
@@ -45785,6 +45824,38 @@ paths:
                         required:
                           - action
                           - object
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: campaign_sync_owner_updated
+                          object:
+                            $ref: '#/components/schemas/save_connection_success_Object'
+                          mutationReceipt:
+                            $ref: '#/components/schemas/save_connection_success_MutationReceipt'
+                          previousOwner:
+                            $ref: '#/components/schemas/save_connection_success_PreviousOwner'
+                        required:
+                          - action
+                          - object
+                          - previousOwner
+                        additionalProperties: false
+                      - type: object
+                        properties:
+                          action:
+                            type: string
+                            const: campaign_sync_owner_unchanged
+                          object:
+                            $ref: '#/components/schemas/save_connection_success_Object'
+                          mutationReceipt:
+                            $ref: '#/components/schemas/save_connection_success_MutationReceipt'
+                          previousOwner:
+                            $ref: '#/components/schemas/save_connection_success_PreviousOwner'
+                        required:
+                          - action
+                          - object
+                          - previousOwner
                         additionalProperties: false
                       - type: object
                         properties:
@@ -108886,6 +108957,17 @@ components:
             - state
             - receiptId
           additionalProperties: false
+    save_connection_success_PreviousOwner:
+      type: object
+      properties:
+        advertiserId:
+          type: string
+        advertiserName:
+          type: string
+      required:
+        - advertiserId
+        - advertiserName
+      additionalProperties: false
     save_coverage_request_Add:
       maxItems: 20
       type: array
