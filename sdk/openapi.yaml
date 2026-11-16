@@ -61866,7 +61866,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -61879,6 +61880,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -63013,6 +63015,19 @@ paths:
                         properties:
                           kind:
                             const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
                         required:
                           - kind
                     - if:
@@ -63635,7 +63650,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -63648,6 +63664,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -64785,6 +64802,19 @@ paths:
                         properties:
                           kind:
                             const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
                         required:
                           - kind
                     - if:
@@ -65405,7 +65435,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -65418,6 +65449,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -65567,6 +65599,19 @@ paths:
                         properties:
                           kind:
                             const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
                         required:
                           - kind
                     - if:
@@ -66187,7 +66232,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -66200,6 +66246,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -67343,6 +67390,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: deliverySummary
                         required:
                           - include
@@ -67957,7 +68017,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -67970,6 +68031,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -69098,6 +69160,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: deliverySummary
                         required:
                           - include
@@ -69712,7 +69787,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -69725,6 +69801,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -70860,6 +70937,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: deliverySummary
                         required:
                           - include
@@ -71474,7 +71564,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -71487,6 +71578,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -72621,6 +72713,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: deliverySummary
                         required:
                           - include
@@ -73235,7 +73340,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -73248,6 +73354,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -74386,6 +74493,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: deliverySummary
                         required:
                           - include
@@ -74995,7 +75115,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -75008,6 +75129,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -75188,6 +75310,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: deliverySummary
                         required:
                           - include
@@ -75797,7 +75932,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -75810,6 +75946,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -75988,6 +76125,19 @@ paths:
                         properties:
                           kind:
                             const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
                         required:
                           - kind
                     - if:
@@ -76608,7 +76758,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -76621,6 +76772,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -77756,6 +77908,19 @@ paths:
                         properties:
                           kind:
                             const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
                         required:
                           - kind
                     - if:
@@ -78376,7 +78541,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -78389,6 +78555,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -78557,6 +78724,19 @@ paths:
                         properties:
                           kind:
                             const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
                         required:
                           - kind
                     - if:
@@ -79177,7 +79357,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -79190,6 +79371,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -80331,6 +80513,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: deliverySummary
                         required:
                           - include
@@ -80945,7 +81140,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -80958,6 +81154,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -81121,6 +81318,19 @@ paths:
                         properties:
                           kind:
                             const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
                         required:
                           - kind
                     - if:
@@ -81741,7 +81951,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -81754,6 +81965,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -82897,6 +83109,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: deliverySummary
                         required:
                           - include
@@ -83509,7 +83734,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -83522,6 +83748,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -84662,6 +84889,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: deliverySummary
                         required:
                           - include
@@ -85274,7 +85514,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -85287,6 +85528,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -86427,6 +86669,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: deliverySummary
                         required:
                           - include
@@ -87039,7 +87294,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -87052,6 +87308,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -88193,6 +88450,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: deliverySummary
                         required:
                           - include
@@ -88805,7 +89075,8 @@ paths:
                         progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId
                         and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product
                         fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a
-                        ready-made save_signal draft, reach and status per value; mapping kinds).
+                        ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item:
+                        adServerMetadata (app only).
                       type: array
                       items:
                         type: string
@@ -88818,6 +89089,7 @@ paths:
                           - creativeFit
                           - price_paid
                           - authoring
+                          - adServerMetadata
                           - pulse
                           - deliverySummary
                           - progress
@@ -89950,6 +90222,19 @@ paths:
                         properties:
                           kind:
                             const: ad_server_targeting
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: adServerMetadata
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: inventory_source_item
                         required:
                           - kind
                     - if:
@@ -120059,6 +120344,11 @@ components:
             $ref: '#/components/schemas/save_wholesale_product_success_SaveWholesaleProductSuccessValidatedWarningsItem'
         lineItemTargeting:
           $ref: '#/components/schemas/save_wholesale_product_success_SaveWholesaleProductSuccessValidatedLineItemTargeting'
+        selectorOptionsAdded:
+          type: array
+          items:
+            $ref: >-
+              #/components/schemas/save_wholesale_product_success_SaveWholesaleProductSuccessValidatedSelectorOptionsAddedItem
       required:
         - outcome
         - saved
@@ -120145,6 +120435,11 @@ components:
         type: string
       additionalProperties: {}
     save_wholesale_product_success_SaveWholesaleProductSuccessValidatedLineItemTargeting:
+      type: object
+      propertyNames:
+        type: string
+      additionalProperties: {}
+    save_wholesale_product_success_SaveWholesaleProductSuccessValidatedSelectorOptionsAddedItem:
       type: object
       propertyNames:
         type: string
