@@ -5499,7 +5499,7 @@ export type GetDeliveryData = {
         /**
          * Metrics; omit for report defaults.
          */
-        metrics?: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'grps' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
+        metrics?: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'grps' | 'reach' | 'frequency' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
         /**
          * Group-by dimensions; campaign delivery also accepts labels.<dimension_key>, and property (tracker impressions per site or app, with date). Omit for leaf grain.
          */
@@ -7393,6 +7393,20 @@ export type GetDeliverySuccessMediaBuyDeliveryFreshness = {
     stale: boolean;
 };
 
+export type GetDeliverySuccessMetricDatumReachUnit = 'individuals' | 'households' | 'devices' | 'accounts' | 'cookies' | 'custom';
+
+export type GetDeliverySuccessMetricDatumReachWindow = {
+    kind: 'cumulative' | 'period' | 'rolling';
+    period?: {
+        interval: number;
+        unit: 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+        [key: string]: GetDeliverySuccessMetricDatumReachWindowPeriodValue | number | 'seconds' | 'minutes' | 'hours' | 'days' | 'campaign';
+    };
+    [key: string]: unknown;
+};
+
+export type GetDeliverySuccessMetricDatumReachWindowPeriodValue = unknown;
+
 /**
  * Display label for the vendor metric beside it, from the vendor's measurement catalog. The metric id stays the identifier.
  */
@@ -7426,7 +7440,7 @@ export type GetDeliverySuccessPeriod = {
 };
 
 export type GetDeliverySuccessQuery = {
-    metrics: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'grps' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
+    metrics: Array<'impressions' | 'spend' | 'clicks' | 'views' | 'completed_views' | 'quartile_100' | 'conversions' | 'leads' | 'conversion_value' | 'viewable_impressions' | 'measurable_impressions' | 'cpm' | 'cost_per_click' | 'ctr' | 'completion_rate' | 'viewable_rate' | 'cost_per_acquisition' | 'roas' | 'grps' | 'reach' | 'frequency' | 'sellBooked' | 'sellRealized' | 'buyBooked' | 'buyRealized' | 'spreadBooked' | 'spreadRealized' | 'marginBookedPct' | 'marginRealizedPct' | 'bookedComplete' | 'realizedComplete'>;
     dimensions: Array<string>;
     range?: {
         startDate?: string;
@@ -7522,6 +7536,14 @@ export type GetDeliverySuccessRowsItemMetricsValue = {
         measurement_window?: string;
         is_final?: boolean;
     };
+    /**
+     * reach and frequency only: AdCP reach_unit, what the seller counted. Absent when the seller named none.
+     */
+    reach_unit?: GetDeliverySuccessMetricDatumReachUnit;
+    /**
+     * reach and frequency only: AdCP reach_window, the period the value covers. Absent when the seller declared none, which leaves the window unspecified.
+     */
+    reach_window?: GetDeliverySuccessMetricDatumReachWindow;
 };
 
 export type GetDeliverySuccessRowsItemSourceOperation = 'get_seller_reporting_metrics' | 'get_buyer_reporting_metrics' | 'get_seller_margin_reporting';
@@ -7677,6 +7699,14 @@ export type GetDeliverySuccessTotalsByFinalityItemMetricsValue = {
         measurement_window?: string;
         is_final?: boolean;
     };
+    /**
+     * reach and frequency only: AdCP reach_unit, what the seller counted. Absent when the seller named none.
+     */
+    reach_unit?: GetDeliverySuccessMetricDatumReachUnit;
+    /**
+     * reach and frequency only: AdCP reach_window, the period the value covers. Absent when the seller declared none, which leaves the window unspecified.
+     */
+    reach_window?: GetDeliverySuccessMetricDatumReachWindow;
 };
 
 export type GetDeliverySuccessTotalsByFinalityItemRowsIncluded = number;
@@ -7710,6 +7740,14 @@ export type GetDeliverySuccessTotalsMetricsValue = {
         measurement_window?: string;
         is_final?: boolean;
     };
+    /**
+     * reach and frequency only: AdCP reach_unit, what the seller counted. Absent when the seller named none.
+     */
+    reach_unit?: GetDeliverySuccessMetricDatumReachUnit;
+    /**
+     * reach and frequency only: AdCP reach_window, the period the value covers. Absent when the seller declared none, which leaves the window unspecified.
+     */
+    reach_window?: GetDeliverySuccessMetricDatumReachWindow;
 };
 
 export type GetDeliverySuccessTotalsRowsIncluded = number;
