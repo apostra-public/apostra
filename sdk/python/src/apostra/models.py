@@ -21951,8 +21951,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -22087,6 +22087,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
     '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
     region: NotRequired[str]
@@ -22253,8 +22255,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -22389,6 +22391,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
     '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
     region: NotRequired[str]
@@ -22489,8 +22493,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -22625,6 +22629,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
     '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
     region: NotRequired[str]
@@ -22752,8 +22758,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -22888,6 +22894,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
     '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
     region: NotRequired[str]
@@ -23022,8 +23030,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -23158,6 +23166,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
     '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
     region: NotRequired[str]
@@ -23292,8 +23302,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -23428,6 +23438,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
     '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
     region: NotRequired[str]
@@ -23562,8 +23574,8 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -23698,6 +23710,8 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
     '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
     region: NotRequired[str]
@@ -23866,8 +23880,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -24002,6 +24016,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
     '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
     region: NotRequired[str]
@@ -24136,8 +24152,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -24270,6 +24286,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
     '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
     region: NotRequired[str]
@@ -24402,8 +24420,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: str
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -24538,6 +24556,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
     '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
     region: NotRequired[str]
@@ -24638,8 +24658,8 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -24772,6 +24792,8 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
     '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
     region: NotRequired[str]
@@ -24974,8 +24996,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: str
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -25110,6 +25132,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
     '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
     region: NotRequired[str]
@@ -25330,8 +25354,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: str
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -25466,6 +25490,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
     '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
     region: NotRequired[str]
@@ -25600,8 +25626,8 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kinds campaign and media_buy (buyer): true keeps paused items, false keeps items that are not paused. For campaign it applies only with phase active.\n    '
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
-    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc"]]
-    '\n    Not applied yet: results come back in stored order whatever you send.\n    '
+    sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -25736,6 +25762,8 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
     '\n    Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.\n    '
     region: NotRequired[str]
