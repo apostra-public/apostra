@@ -8071,9 +8071,35 @@ export type GetResponses = {
                              */
                             proposal: {
                                 documentTitle: string;
+                                /**
+                                 * The summary at the head of the proposal.
+                                 */
+                                executiveSummary: string;
                                 scopeIncluded: Array<string>;
                                 scopeExclusions: Array<string>;
                                 initialTermMonths: number;
+                                /**
+                                 * What happens when the initial term ends: it renews on its own for the renewal term, or it does not renew.
+                                 */
+                                renewal: {
+                                    kind: 'NO_AUTOMATIC_RENEWAL';
+                                    renewalTermMonths?: never;
+                                    nonRenewalNoticeDays?: never;
+                                } | {
+                                    kind: 'AUTOMATIC';
+                                    renewalTermMonths: number;
+                                    nonRenewalNoticeDays: number;
+                                };
+                                /**
+                                 * Whether the proposal is the plan of the rate card as it is (`EXACT`) or changed from it (`CUSTOMIZED`, with the reason). Null for a proposal issued before this was recorded.
+                                 */
+                                customization: {
+                                    posture: 'EXACT';
+                                    reason?: never;
+                                } | {
+                                    posture: 'CUSTOMIZED';
+                                    reason: string;
+                                } | null;
                                 defaultPaymentOptionKey: string | null;
                             } | null;
                             /**
@@ -8136,6 +8162,10 @@ export type GetResponses = {
                                 capBasisPoints: number;
                                 expiresAfterBillingPeriods: number;
                             } | null;
+                            /**
+                             * What the plan covers, as short statements, in the words of its scope list on the rate card revision. Empty when it lists none.
+                             */
+                            scopeIncluded: Array<string>;
                             /**
                              * What each priced activity costs on this plan, keyed by `activityCode`, or null when the plan carries no schedule of its own and the offer’s applies.
                              */
@@ -10749,9 +10779,35 @@ export type GetSuccessObjectPlanCurrent = {
          */
         proposal: {
             documentTitle: string;
+            /**
+             * The summary at the head of the proposal.
+             */
+            executiveSummary: string;
             scopeIncluded: Array<string>;
             scopeExclusions: Array<string>;
             initialTermMonths: number;
+            /**
+             * What happens when the initial term ends: it renews on its own for the renewal term, or it does not renew.
+             */
+            renewal: {
+                kind: 'NO_AUTOMATIC_RENEWAL';
+                renewalTermMonths?: never;
+                nonRenewalNoticeDays?: never;
+            } | {
+                kind: 'AUTOMATIC';
+                renewalTermMonths: number;
+                nonRenewalNoticeDays: number;
+            };
+            /**
+             * Whether the proposal is the plan of the rate card as it is (`EXACT`) or changed from it (`CUSTOMIZED`, with the reason). Null for a proposal issued before this was recorded.
+             */
+            customization: {
+                posture: 'EXACT';
+                reason?: never;
+            } | {
+                posture: 'CUSTOMIZED';
+                reason: string;
+            } | null;
             defaultPaymentOptionKey: string | null;
         } | null;
         /**
@@ -10778,6 +10834,10 @@ export type GetSuccessObjectPlanCurrent = {
      * `PENDING_FUNDING` until payment authority exists, `SCHEDULED` before the term starts, `ACTIVE` in force, `BILLING_HOLD` while a payment hold limits spend, `SUSPENDED` while the contract is not in force, `EXPIRED` once the term ended, `SUPERSEDED` once a successor was accepted, and `PAID` for a paid plan that has no contract package. Null when none applies.
      */
     lifecycle: GetSuccessObjectPlanCurrentLifecycle | null;
+    /**
+     * What the plan covers, as short statements, when the rate card revision it was accepted on still lists them. Empty otherwise.
+     */
+    scopeIncluded: Array<string>;
     offerVersion: string;
     termStart: GetSuccessObjectPlanCurrentTermStart;
     termEnd: GetSuccessObjectPlanCurrentTermEnd;
@@ -11043,9 +11103,35 @@ export type GetSuccessObjectPlanUpcoming = {
          */
         proposal: {
             documentTitle: string;
+            /**
+             * The summary at the head of the proposal.
+             */
+            executiveSummary: string;
             scopeIncluded: Array<string>;
             scopeExclusions: Array<string>;
             initialTermMonths: number;
+            /**
+             * What happens when the initial term ends: it renews on its own for the renewal term, or it does not renew.
+             */
+            renewal: {
+                kind: 'NO_AUTOMATIC_RENEWAL';
+                renewalTermMonths?: never;
+                nonRenewalNoticeDays?: never;
+            } | {
+                kind: 'AUTOMATIC';
+                renewalTermMonths: number;
+                nonRenewalNoticeDays: number;
+            };
+            /**
+             * Whether the proposal is the plan of the rate card as it is (`EXACT`) or changed from it (`CUSTOMIZED`, with the reason). Null for a proposal issued before this was recorded.
+             */
+            customization: {
+                posture: 'EXACT';
+                reason?: never;
+            } | {
+                posture: 'CUSTOMIZED';
+                reason: string;
+            } | null;
             defaultPaymentOptionKey: string | null;
         } | null;
         /**
@@ -11072,6 +11158,10 @@ export type GetSuccessObjectPlanUpcoming = {
      * `PENDING_FUNDING` until payment authority exists, `SCHEDULED` before the term starts, `ACTIVE` in force, `BILLING_HOLD` while a payment hold limits spend, `SUSPENDED` while the contract is not in force, `EXPIRED` once the term ended, `SUPERSEDED` once a successor was accepted, and `PAID` for a paid plan that has no contract package. Null when none applies.
      */
     lifecycle: GetSuccessObjectPlanUpcomingLifecycle | null;
+    /**
+     * What the plan covers, as short statements, when the rate card revision it was accepted on still lists them. Empty otherwise.
+     */
+    scopeIncluded: Array<string>;
     offerVersion: string;
     termStart: GetSuccessObjectPlanUpcomingTermStart;
     termEnd: GetSuccessObjectPlanUpcomingTermEnd;
