@@ -38164,9 +38164,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Not applied yet: results come back in stored order whatever you send.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -38435,6 +38435,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
             /**
              * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
              */
@@ -38696,9 +38700,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Not applied yet: results come back in stored order whatever you send.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -38967,6 +38971,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
             /**
              * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
              */
@@ -39296,9 +39304,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Not applied yet: results come back in stored order whatever you send.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -39567,6 +39575,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
             /**
              * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
              */
@@ -39824,9 +39836,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Not applied yet: results come back in stored order whatever you send.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -40095,6 +40107,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
             /**
              * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
              */
@@ -40353,9 +40369,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Not applied yet: results come back in stored order whatever you send.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
              * Exact format identifier for creative results.
              */
@@ -40621,6 +40637,10 @@ export type SearchData = {
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
             /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
+            /**
              * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
              */
             marketplace?: boolean;
@@ -40877,9 +40897,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Not applied yet: results come back in stored order whatever you send.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -41148,6 +41168,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
             /**
              * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
              */
@@ -41409,9 +41433,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Not applied yet: results come back in stored order whatever you send.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
              * Exact format identifier for creative results.
              */
@@ -41676,6 +41700,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
             /**
              * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
              */
@@ -42063,9 +42091,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Not applied yet: results come back in stored order whatever you send.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -42334,6 +42362,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
             /**
              * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
              */
@@ -42675,9 +42707,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Not applied yet: results come back in stored order whatever you send.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -42946,6 +42978,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
             /**
              * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
              */
@@ -43279,9 +43315,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Not applied yet: results come back in stored order whatever you send.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -43550,6 +43586,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
             /**
              * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
              */
@@ -43810,9 +43850,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Not applied yet: results come back in stored order whatever you send.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -44081,6 +44121,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
             /**
              * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
              */
@@ -44342,9 +44386,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Not applied yet: results come back in stored order whatever you send.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -44613,6 +44657,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
             /**
              * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
              */
@@ -44874,9 +44922,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Not applied yet: results come back in stored order whatever you send.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -45145,6 +45193,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
             /**
              * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
              */
@@ -45406,9 +45458,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Not applied yet: results come back in stored order whatever you send.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -45677,6 +45729,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
             /**
              * Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with partnerStatus, sellerType, classification, transactable, marketplaceReady, or ids.
              */

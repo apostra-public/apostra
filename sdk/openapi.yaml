@@ -62313,13 +62313,16 @@ paths:
                           description: 'Campaign, creative, buyer media_buy: true archived; false active.'
                           type: boolean
                         sort:
-                          description: 'Not applied yet: results come back in stored order whatever you send.'
+                          description: >-
+                            Seller (buyer account): name, the default, or followers (refused until creator data exists).
+                            With query and no sort, best match first. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
                             - flightStart
                             - name
                             - spendDesc
+                            - followers
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -62865,6 +62868,9 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        selected:
+                          description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                          type: boolean
                         marketplace:
                           description: >-
                             Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with
@@ -64097,13 +64103,16 @@ paths:
                           description: 'Campaign, creative, buyer media_buy: true archived; false active.'
                           type: boolean
                         sort:
-                          description: 'Not applied yet: results come back in stored order whatever you send.'
+                          description: >-
+                            Seller (buyer account): name, the default, or followers (refused until creator data exists).
+                            With query and no sort, best match first. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
                             - flightStart
                             - name
                             - spendDesc
+                            - followers
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -64649,6 +64658,9 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        selected:
+                          description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                          type: boolean
                         marketplace:
                           description: >-
                             Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with
@@ -66679,13 +66691,16 @@ paths:
                           description: 'Campaign, creative, buyer media_buy: true archived; false active.'
                           type: boolean
                         sort:
-                          description: 'Not applied yet: results come back in stored order whatever you send.'
+                          description: >-
+                            Seller (buyer account): name, the default, or followers (refused until creator data exists).
+                            With query and no sort, best match first. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
                             - flightStart
                             - name
                             - spendDesc
+                            - followers
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -67231,6 +67246,9 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        selected:
+                          description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                          type: boolean
                         marketplace:
                           description: >-
                             Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with
@@ -68455,13 +68473,16 @@ paths:
                           description: 'Campaign, creative, buyer media_buy: true archived; false active.'
                           type: boolean
                         sort:
-                          description: 'Not applied yet: results come back in stored order whatever you send.'
+                          description: >-
+                            Seller (buyer account): name, the default, or followers (refused until creator data exists).
+                            With query and no sort, best match first. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
                             - flightStart
                             - name
                             - spendDesc
+                            - followers
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -69007,6 +69028,9 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        selected:
+                          description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                          type: boolean
                         marketplace:
                           description: >-
                             Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with
@@ -70234,13 +70258,16 @@ paths:
                           description: 'Campaign, creative, buyer media_buy: true archived; false active.'
                           type: boolean
                         sort:
-                          description: 'Not applied yet: results come back in stored order whatever you send.'
+                          description: >-
+                            Seller (buyer account): name, the default, or followers (refused until creator data exists).
+                            With query and no sort, best match first. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
                             - flightStart
                             - name
                             - spendDesc
+                            - followers
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -70781,6 +70808,9 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        selected:
+                          description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                          type: boolean
                         marketplace:
                           description: >-
                             Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with
@@ -72002,13 +72032,16 @@ paths:
                           description: 'Campaign, creative, buyer media_buy: true archived; false active.'
                           type: boolean
                         sort:
-                          description: 'Not applied yet: results come back in stored order whatever you send.'
+                          description: >-
+                            Seller (buyer account): name, the default, or followers (refused until creator data exists).
+                            With query and no sort, best match first. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
                             - flightStart
                             - name
                             - spendDesc
+                            - followers
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -72554,6 +72587,9 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        selected:
+                          description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                          type: boolean
                         marketplace:
                           description: >-
                             Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with
@@ -73787,13 +73823,16 @@ paths:
                           description: 'Campaign, creative, buyer media_buy: true archived; false active.'
                           type: boolean
                         sort:
-                          description: 'Not applied yet: results come back in stored order whatever you send.'
+                          description: >-
+                            Seller (buyer account): name, the default, or followers (refused until creator data exists).
+                            With query and no sort, best match first. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
                             - flightStart
                             - name
                             - spendDesc
+                            - followers
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -74334,6 +74373,9 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        selected:
+                          description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                          type: boolean
                         marketplace:
                           description: >-
                             Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with
@@ -77205,13 +77247,16 @@ paths:
                           description: 'Campaign, creative, buyer media_buy: true archived; false active.'
                           type: boolean
                         sort:
-                          description: 'Not applied yet: results come back in stored order whatever you send.'
+                          description: >-
+                            Seller (buyer account): name, the default, or followers (refused until creator data exists).
+                            With query and no sort, best match first. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
                             - flightStart
                             - name
                             - spendDesc
+                            - followers
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -77757,6 +77802,9 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        selected:
+                          description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                          type: boolean
                         marketplace:
                           description: >-
                             Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with
@@ -79804,13 +79852,16 @@ paths:
                           description: 'Campaign, creative, buyer media_buy: true archived; false active.'
                           type: boolean
                         sort:
-                          description: 'Not applied yet: results come back in stored order whatever you send.'
+                          description: >-
+                            Seller (buyer account): name, the default, or followers (refused until creator data exists).
+                            With query and no sort, best match first. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
                             - flightStart
                             - name
                             - spendDesc
+                            - followers
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -80356,6 +80407,9 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        selected:
+                          description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                          type: boolean
                         marketplace:
                           description: >-
                             Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with
@@ -82398,13 +82452,16 @@ paths:
                           description: 'Campaign, creative, buyer media_buy: true archived; false active.'
                           type: boolean
                         sort:
-                          description: 'Not applied yet: results come back in stored order whatever you send.'
+                          description: >-
+                            Seller (buyer account): name, the default, or followers (refused until creator data exists).
+                            With query and no sort, best match first. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
                             - flightStart
                             - name
                             - spendDesc
+                            - followers
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -82950,6 +83007,9 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        selected:
+                          description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                          type: boolean
                         marketplace:
                           description: >-
                             Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with
@@ -84181,13 +84241,16 @@ paths:
                           description: 'Campaign, creative, buyer media_buy: true archived; false active.'
                           type: boolean
                         sort:
-                          description: 'Not applied yet: results come back in stored order whatever you send.'
+                          description: >-
+                            Seller (buyer account): name, the default, or followers (refused until creator data exists).
+                            With query and no sort, best match first. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
                             - flightStart
                             - name
                             - spendDesc
+                            - followers
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -84733,6 +84796,9 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        selected:
+                          description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                          type: boolean
                         marketplace:
                           description: >-
                             Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with
@@ -85961,13 +86027,16 @@ paths:
                           description: 'Campaign, creative, buyer media_buy: true archived; false active.'
                           type: boolean
                         sort:
-                          description: 'Not applied yet: results come back in stored order whatever you send.'
+                          description: >-
+                            Seller (buyer account): name, the default, or followers (refused until creator data exists).
+                            With query and no sort, best match first. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
                             - flightStart
                             - name
                             - spendDesc
+                            - followers
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -86513,6 +86582,9 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        selected:
+                          description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                          type: boolean
                         marketplace:
                           description: >-
                             Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with
@@ -87741,13 +87813,16 @@ paths:
                           description: 'Campaign, creative, buyer media_buy: true archived; false active.'
                           type: boolean
                         sort:
-                          description: 'Not applied yet: results come back in stored order whatever you send.'
+                          description: >-
+                            Seller (buyer account): name, the default, or followers (refused until creator data exists).
+                            With query and no sort, best match first. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
                             - flightStart
                             - name
                             - spendDesc
+                            - followers
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -88293,6 +88368,9 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        selected:
+                          description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                          type: boolean
                         marketplace:
                           description: >-
                             Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with
@@ -89522,13 +89600,16 @@ paths:
                           description: 'Campaign, creative, buyer media_buy: true archived; false active.'
                           type: boolean
                         sort:
-                          description: 'Not applied yet: results come back in stored order whatever you send.'
+                          description: >-
+                            Seller (buyer account): name, the default, or followers (refused until creator data exists).
+                            With query and no sort, best match first. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
                             - flightStart
                             - name
                             - spendDesc
+                            - followers
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -90074,6 +90155,9 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        selected:
+                          description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                          type: boolean
                         marketplace:
                           description: >-
                             Deprecated: use partnerStatus. true is partnerStatus with all three values. Not with
