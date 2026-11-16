@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "get-account-ready-to-buy",
-  "skillVersion": "1.6.0",
+  "skillVersion": "1.7.0",
   "scenarios": [
     {
       "id": "payment-authority-approved-setup",
@@ -33,6 +33,17 @@
         "The agent reads renewal.allowedActions, renewal.version and the deadline, asks for a reason of at least three characters, and confirms the change before calling save_billing with { renewal: { renewalVersion, action, reason } } sent alone.",
         "The agent shows the approval link from the approval_required answer and says nothing changes until a direct administrator approves on our site.",
         "The agent never says the renewal changed before a repeat call with the returned idempotencyKey answers renewal_changed, and never sends the keyless call again unless the user wants to ask again."
+      ]
+    },
+    {
+      "id": "hand-ad-account-campaigns-to-another-advertiser",
+      "title": "Hand a shared ad account campaigns to another advertiser",
+      "given": "Two advertisers map the same Meta ad account, the user is an administrator, and the advertiser the user names does not own the synced campaigns of the account.",
+      "expect": [
+        "The agent reads get({ kind: 'connection', id }) and reports which advertiser owns the campaigns from campaignSync, then confirms the exact advertiser with the user before changing anything.",
+        "The agent calls save_connection with the connectionId and advertiserMapping { advertiserId, accountId, state: 'mapped', campaignSync: { owner: true } }, and never sends owner false or an ownerAdvertiserId.",
+        "The agent says the campaigns moved under the same ids and that everyone in the account is told, names the previousOwner from the result, and reads the connection again to confirm.",
+        "When the call is refused, the agent says why and what the user can do, and does not retry unless the user asks."
       ]
     }
   ]

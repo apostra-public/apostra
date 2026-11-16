@@ -23007,6 +23007,15 @@ export type SaveConnectionData = {
              * Mapping link ID.
              */
             linkId?: SaveConnectionRequestAdvertiserMappingLinkId;
+            /**
+             * With state mapped: hand the account synced campaigns to this mapped advertiser. Admins only.
+             */
+            campaignSync?: {
+                /**
+                 * true: this advertiser owns the account synced campaigns; they move from the current owner. false is refused.
+                 */
+                owner: boolean;
+            };
         };
         /**
          * Confirm a mapped advertiser's Spotify show or Facebook Page, or confirm it has none; requires connectionId and Creative Engines access.
@@ -23239,6 +23248,7 @@ export type SaveConnectionResponses = {
                 mode: 'oauth' | 'bearer';
                 connectionId: string | null;
             };
+            previousOwner?: never;
             change?: never;
             replayed?: never;
             sellers?: never;
@@ -23248,6 +23258,7 @@ export type SaveConnectionResponses = {
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            previousOwner?: never;
             change?: never;
             replayed?: never;
             sellers?: never;
@@ -23257,6 +23268,7 @@ export type SaveConnectionResponses = {
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            previousOwner?: never;
             change?: never;
             replayed?: never;
             sellers?: never;
@@ -23266,6 +23278,7 @@ export type SaveConnectionResponses = {
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            previousOwner?: never;
             change?: never;
             replayed?: never;
             sellers?: never;
@@ -23275,6 +23288,7 @@ export type SaveConnectionResponses = {
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            previousOwner?: never;
             change?: never;
             replayed?: never;
             sellers?: never;
@@ -23284,6 +23298,7 @@ export type SaveConnectionResponses = {
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            previousOwner?: never;
             change?: never;
             replayed?: never;
             sellers?: never;
@@ -23293,6 +23308,7 @@ export type SaveConnectionResponses = {
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            previousOwner?: never;
             change?: never;
             replayed?: never;
             sellers?: never;
@@ -23302,6 +23318,7 @@ export type SaveConnectionResponses = {
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            previousOwner?: never;
             change?: never;
             replayed?: never;
             sellers?: never;
@@ -23311,6 +23328,7 @@ export type SaveConnectionResponses = {
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            previousOwner?: never;
             change?: never;
             replayed?: never;
             sellers?: never;
@@ -23320,6 +23338,7 @@ export type SaveConnectionResponses = {
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            previousOwner?: never;
             change?: never;
             replayed?: never;
             sellers?: never;
@@ -23329,6 +23348,7 @@ export type SaveConnectionResponses = {
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            previousOwner?: never;
             change?: never;
             replayed?: never;
             sellers?: never;
@@ -23337,6 +23357,27 @@ export type SaveConnectionResponses = {
             action: 'advertiser_unmapped';
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
+            authorization?: never;
+            previousOwner?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
+        } | {
+            action: 'campaign_sync_owner_updated';
+            object: SaveConnectionSuccessObject;
+            mutationReceipt?: SaveConnectionSuccessMutationReceipt;
+            previousOwner: SaveConnectionSuccessPreviousOwner;
+            authorization?: never;
+            change?: never;
+            replayed?: never;
+            sellers?: never;
+            accountRequestsQueued?: never;
+        } | {
+            action: 'campaign_sync_owner_unchanged';
+            object: SaveConnectionSuccessObject;
+            mutationReceipt?: SaveConnectionSuccessMutationReceipt;
+            previousOwner: SaveConnectionSuccessPreviousOwner;
             authorization?: never;
             change?: never;
             replayed?: never;
@@ -23347,6 +23388,7 @@ export type SaveConnectionResponses = {
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            previousOwner?: never;
             change?: never;
             replayed?: never;
             sellers?: never;
@@ -23356,6 +23398,7 @@ export type SaveConnectionResponses = {
             object: SaveConnectionSuccessObject;
             mutationReceipt?: SaveConnectionSuccessMutationReceipt;
             authorization?: never;
+            previousOwner?: never;
             change?: never;
             replayed?: never;
             sellers?: never;
@@ -23375,6 +23418,7 @@ export type SaveConnectionResponses = {
             object?: never;
             mutationReceipt?: never;
             authorization?: never;
+            previousOwner?: never;
         };
         error: null;
     };
@@ -23425,6 +23469,11 @@ export type SaveConnectionSuccessMutationReceipt = {
 export type SaveConnectionSuccessObject = {
     [key: string]: unknown;
 } | null;
+
+export type SaveConnectionSuccessPreviousOwner = {
+    advertiserId: string;
+    advertiserName: string;
+};
 
 export type SaveConnectionSuccessSaveConnectionBulkEntry = {
     sellerAccountId: number;
