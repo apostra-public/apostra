@@ -32951,6 +32951,20 @@ export type SaveNotificationConfigData = {
                  */
                 delivery: SaveNotificationConfigRequestEventSubscriptionSubscriptionDelivery;
                 /**
+                 * Subscribe to campaign progress and Pulse verdict changes.
+                 */
+                category: 'campaign';
+                reporting?: never;
+            } | {
+                /**
+                 * ID of the verified webhook endpoint owned by this agent.
+                 */
+                endpointId: string;
+                /**
+                 * How often this subscription sends permitted updates.
+                 */
+                delivery: SaveNotificationConfigRequestEventSubscriptionSubscriptionDelivery;
+                /**
                  * Subscribe to indicators.changed: sent when a package's seller indicators change.
                  */
                 category: 'indicators';
@@ -33237,6 +33251,15 @@ export type SaveNotificationConfigResponses = {
                 id: string;
                 owner: SaveNotificationConfigSuccessEventSubscriptionOwnerRegisteredBuyerAgent;
                 category: 'indicators';
+                enabled: boolean;
+                reporting?: never;
+            } | {
+                endpointId: SaveNotificationConfigSuccessEventSubscriptionEndpointId;
+                delivery: SaveNotificationConfigSuccessEventSubscriptionDelivery;
+                signingProfile: SaveNotificationConfigSuccessEventSubscriptionSigningProfile;
+                id: string;
+                owner: SaveNotificationConfigSuccessEventSubscriptionOwnerRegisteredBuyerAgent;
+                category: 'campaign';
                 enabled: boolean;
                 reporting?: never;
             } | null;
