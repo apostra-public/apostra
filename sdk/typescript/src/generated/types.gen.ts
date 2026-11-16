@@ -8029,6 +8029,10 @@ export type GetResponses = {
                      * Whether the signed-in person may set payout details. They are set only on the Plan & Billing Page.
                      */
                     canSetPayout: boolean;
+                    /**
+                     * Present when a Scope3 staff support session reads this, which sees everything an administrator sees: `read_only` when it changes nothing, `no_plan_changes` when it keeps the write access it has but never changes a plan. Absent otherwise.
+                     */
+                    supportSessionLimit?: 'read_only' | 'no_plan_changes';
                 };
                 plan: {
                     /**
