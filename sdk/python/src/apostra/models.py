@@ -11582,7 +11582,7 @@ class SaveBuyerAgentSuccessBuyerAgentNotificationSubscription(TypedDict):
 
 class SaveBuyerAgentSuccessBuyerAgentNoun(TypedDict):
     principalId: str
-    principalKind: Literal["buyer_agent"]
+    principalKind: Literal["buyer_agent", "registered_agent"]
     displayName: str
     lifecycleState: Literal["active", "suspended", "retired"]
     registeredAt: str
@@ -11595,6 +11595,7 @@ class SaveBuyerAgentSuccessBuyerAgentNoun(TypedDict):
     activeCredentialCount: int
     access: SaveBuyerAgentSuccessBuyerAgentNounAccess
     notifications: SaveBuyerAgentSuccessBuyerAgentNounNotificationsValue | None
+    registration: NotRequired[SaveBuyerAgentSuccessBuyerAgentNounRegistration]
 
 class SaveBuyerAgentSuccessBuyerAgentNounAccess(TypedDict):
     accessRevision: int
@@ -11617,6 +11618,20 @@ class SaveBuyerAgentSuccessBuyerAgentNounNotificationsValue(TypedDict):
     destinationCount: int
     destinationsTruncated: bool
     contextsTruncated: NotRequired[bool]
+
+class SaveBuyerAgentSuccessBuyerAgentNounRegistration(TypedDict):
+    accountId: int
+    claimedAt: str | None
+    revokedAt: str | None
+    revokedBy: SaveBuyerAgentSuccessBuyerAgentNounRegistrationRevokedByKindAccountAdmin | SaveBuyerAgentSuccessBuyerAgentNounRegistrationRevokedByKindApostraStaff | None
+    accessScope: Literal["account"]
+
+class SaveBuyerAgentSuccessBuyerAgentNounRegistrationRevokedByKindAccountAdmin(TypedDict):
+    kind: Literal["account_admin"]
+    name: str | None
+
+class SaveBuyerAgentSuccessBuyerAgentNounRegistrationRevokedByKindApostraStaff(TypedDict):
+    kind: Literal["apostra_staff"]
 
 class SaveBuyerOperatorInput(TypedDict):
     operatorDomain: str

@@ -20010,7 +20010,7 @@ export type SaveBuyerAgentSuccessBuyerAgentNotificationSubscription = {
 
 export type SaveBuyerAgentSuccessBuyerAgentNoun = {
     principalId: string;
-    principalKind: 'buyer_agent';
+    principalKind: 'buyer_agent' | 'registered_agent';
     displayName: string;
     lifecycleState: 'active' | 'suspended' | 'retired';
     registeredAt: string;
@@ -20042,6 +20042,19 @@ export type SaveBuyerAgentSuccessBuyerAgentNoun = {
         destinationsTruncated: boolean;
         contextsTruncated?: boolean;
     } | null;
+    registration?: {
+        accountId: number;
+        claimedAt: string | null;
+        revokedAt: string | null;
+        revokedBy: {
+            kind: 'account_admin';
+            name: string | null;
+        } | {
+            kind: 'apostra_staff';
+            name?: never;
+        } | null;
+        accessScope: 'account';
+    };
 };
 
 export type SaveBuyerOperatorData = {
