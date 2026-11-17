@@ -37314,6 +37314,20 @@ paths:
                                     - go_live_blocked
                                     - advertiser_not_accessible
                                     - seller_unavailable_to_buyers
+                                readinessStatus:
+                                  type: string
+                                  enum:
+                                    - seller_unavailable
+                                    - needs_connection
+                                    - needs_account_selection
+                                    - needs_advertiser_mapping
+                                    - needs_commercial_setup
+                                    - platform_blocked
+                                accountState:
+                                  type: string
+                                  enum:
+                                    - account_pending
+                                    - account_needs_attention
                               required:
                                 - reason
                                 - sellerChannels
@@ -37326,6 +37340,92 @@ paths:
                             type: boolean
                         required:
                           - requestedChannels
+                          - sellers
+                          - total
+                          - truncated
+                        additionalProperties: false
+                      notOnForAdvertiser:
+                        type: object
+                        properties:
+                          sellers:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                sellerAccountId:
+                                  description: >-
+                                    The seller Account id: the Account that owns this seller. Send it as
+                                    sellerAccountId.
+                                  $ref: >-
+                                    #/components/schemas/request_proposals_success_NotOnForAdvertiserSellersItemSellerAccountId
+                                sellerName:
+                                  type: string
+                                reason:
+                                  type: string
+                                  enum:
+                                    - ADVERTISER_DISABLED
+                                    - NO_AUTOMATIC_MATCH
+                                    - ACCOUNT_ALWAYS_EXCLUDE
+                              required:
+                                - reason
+                              additionalProperties: false
+                          total:
+                            type: integer
+                            exclusiveMinimum: 0
+                            maximum: 9007199254740991
+                          truncated:
+                            type: boolean
+                        required:
+                          - sellers
+                          - total
+                          - truncated
+                        additionalProperties: false
+                      failedSellers:
+                        type: object
+                        properties:
+                          sellers:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                sellerAccountId:
+                                  description: >-
+                                    The seller Account id: the Account that owns this seller. Send it as
+                                    sellerAccountId.
+                                  $ref: >-
+                                    #/components/schemas/request_proposals_success_FailedSellersSellersItemSellerAccountId
+                                sellerName:
+                                  type: string
+                                errorClass:
+                                  type: string
+                                  enum:
+                                    - timeout
+                                    - unreachable
+                                    - auth
+                                    - protocol
+                                    - coverage
+                                    - account
+                                    - eligibility
+                                    - refused
+                                    - outcome_unconfirmed
+                                likelyTransient:
+                                  type: boolean
+                                code:
+                                  type: string
+                                message:
+                                  type: string
+                              required:
+                                - errorClass
+                                - likelyTransient
+                                - message
+                              additionalProperties: false
+                          total:
+                            type: integer
+                            exclusiveMinimum: 0
+                            maximum: 9007199254740991
+                          truncated:
+                            type: boolean
+                        required:
                           - sellers
                           - total
                           - truncated
@@ -104111,6 +104211,14 @@ components:
       exclusiveMinimum: 0
       maximum: 9007199254740991
     request_proposals_success_SkippedSellersSellersItemSellerAccountId:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
+    request_proposals_success_NotOnForAdvertiserSellersItemSellerAccountId:
+      type: integer
+      exclusiveMinimum: 0
+      maximum: 9007199254740991
+    request_proposals_success_FailedSellersSellersItemSellerAccountId:
       type: integer
       exclusiveMinimum: 0
       maximum: 9007199254740991

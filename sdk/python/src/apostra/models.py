@@ -9307,6 +9307,8 @@ class RequestProposalsResult(TypedDict):
     capabilityDescriptorPage: NotRequired[RequestProposalsResultCapabilityDescriptorPage]
     cohortError: NotRequired[RequestProposalsResultCohortErrorValue | None]
     skippedSellers: NotRequired[RequestProposalsResultSkippedSellers]
+    notOnForAdvertiser: NotRequired[RequestProposalsResultNotOnForAdvertiser]
+    failedSellers: NotRequired[RequestProposalsResultFailedSellers]
 
 class RequestProposalsResultAppliedCohort(TypedDict):
     source: Literal["requested", "campaign", "authorized", "broadcast"]
@@ -9361,6 +9363,20 @@ class RequestProposalsResultCohortErrorValue(TypedDict):
     code: str
     message: str
 
+class RequestProposalsResultFailedSellers(TypedDict):
+    sellers: list[RequestProposalsResultFailedSellersSellersItem]
+    total: int
+    truncated: bool
+
+class RequestProposalsResultFailedSellersSellersItem(TypedDict):
+    sellerAccountId: NotRequired[RequestProposalsSuccessFailedSellersSellersItemSellerAccountId]
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
+    sellerName: NotRequired[str]
+    errorClass: Literal["timeout", "unreachable", "auth", "protocol", "coverage", "account", "eligibility", "refused", "outcome_unconfirmed"]
+    likelyTransient: bool
+    code: NotRequired[str]
+    message: str
+
 class RequestProposalsResultInclusionPropertyList(TypedDict):
     requestedDomains: int
     coveredDomains: NotRequired[int]
@@ -9386,6 +9402,17 @@ class RequestProposalsResultInclusionPropertyListMissingPropertiesItem(TypedDict
     sellerAccountId: NotRequired[RequestProposalsSuccessInclusionPropertyListMissingPropertiesItemSellerAccountId]
     '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
     reason: Literal["not_in_seller_scope", "seller_reported_no_match", "seller_unsupported_filter"]
+
+class RequestProposalsResultNotOnForAdvertiser(TypedDict):
+    sellers: list[RequestProposalsResultNotOnForAdvertiserSellersItem]
+    total: int
+    truncated: bool
+
+class RequestProposalsResultNotOnForAdvertiserSellersItem(TypedDict):
+    sellerAccountId: NotRequired[RequestProposalsSuccessNotOnForAdvertiserSellersItemSellerAccountId]
+    '\n    The seller Account id: the Account that owns this seller. Send it as sellerAccountId.\n    '
+    sellerName: NotRequired[str]
+    reason: Literal["ADVERTISER_DISABLED", "NO_AUTOMATIC_MATCH", "ACCOUNT_ALWAYS_EXCLUDE"]
 
 class RequestProposalsResultPage(TypedDict):
     returned: float
@@ -9510,6 +9537,8 @@ class RequestProposalsResultSkippedSellersSellersItem(TypedDict):
     reason: Literal["channel_mismatch", "not_transactable", "wholesale_only"]
     sellerChannels: list[str]
     skipCode: NotRequired[Literal["account_requests_blocked", "go_live_blocked", "advertiser_not_accessible", "seller_unavailable_to_buyers"]]
+    readinessStatus: NotRequired[Literal["seller_unavailable", "needs_connection", "needs_account_selection", "needs_advertiser_mapping", "needs_commercial_setup", "platform_blocked"]]
+    accountState: NotRequired[Literal["account_pending", "account_needs_attention"]]
 
 class RequestProposalsResultSummary(TypedDict):
     sellersRequested: float
@@ -9533,6 +9562,8 @@ class RequestProposalsSuccessExpectedGoalPerformance(TypedDict):
     required: float
     verdict: Literal["likely", "possible", "unlikely"]
 
+RequestProposalsSuccessFailedSellersSellersItemSellerAccountId: TypeAlias = int
+
 RequestProposalsSuccessInclusionPropertyListIncompletePropertiesItemSellerAccountId: TypeAlias = int
 
 RequestProposalsSuccessInclusionPropertyListMissingPropertiesItemSellerAccountId: TypeAlias = int
@@ -9553,6 +9584,8 @@ class RequestProposalsSuccessInclusionPropertyListMissingPublisherResellersItem(
     sellerName: NotRequired[str]
 
 RequestProposalsSuccessInclusionPropertyListMissingPublisherResellersItemSellerAccountId: TypeAlias = int
+
+RequestProposalsSuccessNotOnForAdvertiserSellersItemSellerAccountId: TypeAlias = int
 
 RequestProposalsSuccessPerSellerItemProductsItemSellerAccountId: TypeAlias = int
 
