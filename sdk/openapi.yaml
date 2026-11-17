@@ -25721,6 +25721,13 @@ paths:
                                           - complete
                                       - type: 'null'
                                     description: Storefront billing onboarding, or null when there is none.
+                                  manageUrl:
+                                    description: >-
+                                      The link to the web Payouts page, where an administrator adds or changes a payee.
+                                      Bank details are entered there, never in chat. Present only when `include` has
+                                      `payouts` and `permissions.canSetPayout` is true; absent otherwise. It carries no
+                                      token, secret or bank detail.
+                                    type: string
                                 required:
                                   - setupRequired
                                   - onboardingStatus

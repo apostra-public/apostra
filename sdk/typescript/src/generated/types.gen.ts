@@ -8060,6 +8060,10 @@ export type GetResponses = {
                      * Storefront billing onboarding, or null when there is none.
                      */
                     onboardingStatus: 'pending' | 'complete' | null;
+                    /**
+                     * The link to the web Payouts page, where an administrator adds or changes a payee. Bank details are entered there, never in chat. Present only when `include` has `payouts` and `permissions.canSetPayout` is true; absent otherwise. It carries no token, secret or bank detail.
+                     */
+                    manageUrl?: string;
                 };
                 permissions: {
                     canEditBillingInfo: boolean;
