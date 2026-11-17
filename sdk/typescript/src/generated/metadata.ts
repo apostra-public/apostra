@@ -984,7 +984,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto, or empty creativePolicy under creative auto, needs acknowledgeNoHumanReview."
+    "summary": "Write seller AI Business Rules. Policy writes need an account admin; use policies. Approval auto, or no Creative Policy under creative auto, needs acknowledgeNoHumanReview."
   },
   "save_buyer_agent": {
     "path": "/tools/save_buyer_agent",

@@ -2167,10 +2167,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -3457,10 +3463,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -4721,10 +4733,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -5973,10 +5991,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -7226,10 +7250,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -8486,10 +8516,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -9646,10 +9682,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -10901,10 +10943,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -12156,10 +12204,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -13322,10 +13376,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -14487,10 +14547,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -15739,10 +15805,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -16992,10 +17064,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -18251,10 +18329,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -19509,10 +19593,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -20767,10 +20857,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -22025,10 +22121,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -23283,10 +23385,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -24449,10 +24557,16 @@ paths:
                     version:
                       description: >-
                         For kind playbook: read this past version with its content, for example to save it again as
-                        current.
+                        current. For business_rules, with businessRulesPolicy.
                       type: integer
                       minimum: 1
                       maximum: 9007199254740991
+                    businessRulesPolicy:
+                      description: 'For kind business_rules with version: the policy that numbers it.'
+                      type: string
+                      enum:
+                        - brief_acceptance
+                        - creative_policy
                     subscriptionsOffset:
                       description: >-
                         For kind notification_config: where to start the next page of notification and agent event
@@ -41617,11 +41731,11 @@ paths:
     post:
       operationId: save_business_rules
       summary: >-
-        Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto, or
-        empty creativePolicy under creative auto, needs acknowledgeNoHumanReview.
+        Write seller AI Business Rules. Policy writes need an account admin; use policies. Approval auto, or no Creative
+        Policy under creative auto, needs acknowledgeNoHumanReview.
       description: >-
-        Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto, or
-        empty creativePolicy under creative auto, needs acknowledgeNoHumanReview.
+        Write seller AI Business Rules. Policy writes need an account admin; use policies. Approval auto, or no Creative
+        Policy under creative auto, needs acknowledgeNoHumanReview.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -41674,8 +41788,13 @@ paths:
                     - candidateId
                   additionalProperties: false
                 policy:
-                  description: The policy version to write, as the read returns it.
+                  description: Both policies in one write. Prefer policies.
                   $ref: '#/components/schemas/save_business_rules_request_SaveBusinessRulesPolicy'
+                  type: object
+                  additionalProperties: false
+                policies:
+                  description: 'Change each policy on its own: publish text, save a draft, or make a version live.'
+                  $ref: '#/components/schemas/save_business_rules_request_SaveBusinessRulesPolicies'
                   type: object
                   additionalProperties: false
                 creativeApproval:
@@ -41698,8 +41817,8 @@ paths:
                     - hold_for_review
                 acknowledgeNoHumanReview:
                   description: >-
-                    Required to move either approval to auto, or to save no Creative Policy under creative auto.
-                    Confirms nobody will review those.
+                    Required to move either approval to auto, or to leave Creative Policy empty or off under creative
+                    auto. Confirms nobody will review those.
                   type: boolean
                 advertisingPolicyDisclosure:
                   description: >-
@@ -41783,6 +41902,176 @@ paths:
                                 - briefAcceptancePolicy
                     required:
                       - policy
+                - not:
+                    allOf:
+                      - required:
+                          - policy
+                      - required:
+                          - policies
+                - if:
+                    required:
+                      - policies
+                  then:
+                    properties:
+                      policies:
+                        allOf:
+                          - anyOf:
+                              - required:
+                                  - briefAcceptance
+                              - required:
+                                  - creativePolicy
+                          - if:
+                              required:
+                                - briefAcceptance
+                            then:
+                              properties:
+                                briefAcceptance:
+                                  allOf:
+                                    - anyOf:
+                                        - required:
+                                            - text
+                                        - required:
+                                            - publishVersion
+                                        - required:
+                                            - turnOff
+                                    - if:
+                                        required:
+                                          - turnOff
+                                      then:
+                                        allOf:
+                                          - properties:
+                                              turnOff:
+                                                const: true
+                                            required:
+                                              - turnOff
+                                          - allOf:
+                                              - not:
+                                                  required:
+                                                    - text
+                                              - not:
+                                                  required:
+                                                    - notes
+                                              - not:
+                                                  required:
+                                                    - publish
+                                              - not:
+                                                  required:
+                                                    - publishVersion
+                                              - not:
+                                                  required:
+                                                    - expectedDraftVersion
+                                    - not:
+                                        allOf:
+                                          - required:
+                                              - text
+                                          - required:
+                                              - publishVersion
+                                    - if:
+                                        required:
+                                          - publish
+                                      then:
+                                        required:
+                                          - text
+                                    - if:
+                                        required:
+                                          - notes
+                                      then:
+                                        required:
+                                          - text
+                                    - if:
+                                        properties:
+                                          publish:
+                                            const: false
+                                        required:
+                                          - publish
+                                      then:
+                                        required:
+                                          - expectedDraftVersion
+                                    - if:
+                                        required:
+                                          - publishVersion
+                                      then:
+                                        required:
+                                          - expectedDraftVersion
+                              required:
+                                - briefAcceptance
+                          - if:
+                              required:
+                                - creativePolicy
+                            then:
+                              properties:
+                                creativePolicy:
+                                  allOf:
+                                    - anyOf:
+                                        - required:
+                                            - text
+                                        - required:
+                                            - publishVersion
+                                        - required:
+                                            - turnOff
+                                    - if:
+                                        required:
+                                          - turnOff
+                                      then:
+                                        allOf:
+                                          - properties:
+                                              turnOff:
+                                                const: true
+                                            required:
+                                              - turnOff
+                                          - allOf:
+                                              - not:
+                                                  required:
+                                                    - text
+                                              - not:
+                                                  required:
+                                                    - notes
+                                              - not:
+                                                  required:
+                                                    - publish
+                                              - not:
+                                                  required:
+                                                    - publishVersion
+                                              - not:
+                                                  required:
+                                                    - expectedDraftVersion
+                                    - not:
+                                        allOf:
+                                          - required:
+                                              - text
+                                          - required:
+                                              - publishVersion
+                                    - if:
+                                        required:
+                                          - publish
+                                      then:
+                                        required:
+                                          - text
+                                    - if:
+                                        required:
+                                          - notes
+                                      then:
+                                        required:
+                                          - text
+                                    - if:
+                                        properties:
+                                          publish:
+                                            const: false
+                                        required:
+                                          - publish
+                                      then:
+                                        required:
+                                          - expectedDraftVersion
+                                    - if:
+                                        required:
+                                          - publishVersion
+                                      then:
+                                        required:
+                                          - expectedDraftVersion
+                              required:
+                                - creativePolicy
+                    required:
+                      - policies
                 - anyOf:
                     - properties:
                         policy:
@@ -41795,6 +42084,8 @@ paths:
                                 - creativePolicy
                       required:
                         - policy
+                    - required:
+                        - policies
                     - anyOf:
                         - required:
                             - creativeApproval
@@ -105814,6 +106105,48 @@ components:
           minLength: 1
           maxLength: 2000
       additionalProperties: false
+    save_business_rules_request_SaveBusinessRulesPolicies:
+      type: object
+      properties:
+        briefAcceptance:
+          description: Brief rules for discovery and manual-buy screening.
+          $ref: '#/components/schemas/save_business_rules_request_SaveBusinessRulesPolicyChange'
+        creativePolicy:
+          description: Submitted-creative rules.
+          $ref: '#/components/schemas/save_business_rules_request_SaveBusinessRulesPolicyChange'
+      additionalProperties: false
+    save_business_rules_request_SaveBusinessRulesPolicyChange:
+      type: object
+      properties:
+        text:
+          description: Text for a new version of this policy.
+          type: string
+          minLength: 1
+          maxLength: 50000
+        notes:
+          description: Why this version was written. Only with text.
+          type: string
+          minLength: 1
+          maxLength: 2000
+        publish:
+          description: true, the default, makes text live; false saves it as the draft.
+          type: boolean
+        publishVersion:
+          description: Make this existing version live. Not with text.
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        expectedDraftVersion:
+          description: 'Required with publish false or publishVersion: the current draft, or null for none.'
+          anyOf:
+            - type: integer
+              minimum: 1
+              maximum: 9007199254740991
+            - type: 'null'
+        turnOff:
+          description: true makes no version live. Alone.
+          type: boolean
+      additionalProperties: false
     save_business_rules_success_SaveBusinessRulesSuccessSaved:
       type: object
       properties:
@@ -105828,10 +106161,43 @@ components:
           type:
             - number
             - 'null'
+        policyChanges:
+          type: object
+          properties:
+            briefAcceptance:
+              $ref: '#/components/schemas/save_business_rules_success_SaveBusinessRulesPolicyChangeResult'
+            creativePolicy:
+              $ref: '#/components/schemas/save_business_rules_success_SaveBusinessRulesPolicyChangeResult'
+          additionalProperties: false
       required:
         - outcome
         - businessRules
       additionalProperties: {}
+    save_business_rules_success_SaveBusinessRulesPolicyChangeResult:
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+            - published
+            - draft_saved
+            - draft_published
+            - reactivated
+            - turned_off
+            - unchanged
+        version:
+          type:
+            - number
+            - 'null'
+        replacedVersion:
+          type:
+            - number
+            - 'null'
+      required:
+        - action
+        - version
+        - replacedVersion
+      additionalProperties: false
     save_business_rules_success_SellerSaveCandidateReplayed:
       type: object
       properties:
