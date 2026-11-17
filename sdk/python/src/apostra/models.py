@@ -12982,7 +12982,7 @@ class SaveCampaignSuccessCampaignPropertyListsCascade(TypedDict):
     enforcedByAnotherRouteCount: NotRequired[int]
     pausedCount: NotRequired[int]
     pauseFailedCount: NotRequired[int]
-    actionRequired: NotRequired[list[SaveCampaignSuccessPropertyListPushActionRequired]]
+    actionRequired: NotRequired[list[SaveCampaignSuccessV3PropertyListPushActionRequired]]
     pendingCount: NotRequired[int]
     pendingSellerApproval: NotRequired[list[SaveCampaignSuccessPropertyListPushPending]]
     failedCampaignCount: NotRequired[int]
@@ -13153,7 +13153,7 @@ class SaveCampaignSuccessPropertyListAttachmentCascade(TypedDict):
     enforcedByAnotherRouteCount: NotRequired[int]
     pausedCount: NotRequired[int]
     pauseFailedCount: NotRequired[int]
-    actionRequired: NotRequired[list[SaveCampaignSuccessPropertyListPushActionRequired]]
+    actionRequired: NotRequired[list[SaveCampaignSuccessV3PropertyListPushActionRequired]]
     pendingCount: NotRequired[int]
     pendingSellerApproval: NotRequired[list[SaveCampaignSuccessPropertyListPushPending]]
     failedCampaignCount: NotRequired[int]
@@ -13171,34 +13171,10 @@ class SaveCampaignSuccessPropertyListClearCascade(TypedDict):
     enforcedByAnotherRouteCount: NotRequired[int]
     pausedCount: NotRequired[int]
     pauseFailedCount: NotRequired[int]
-    actionRequired: NotRequired[list[SaveCampaignSuccessPropertyListPushActionRequired]]
+    actionRequired: NotRequired[list[SaveCampaignSuccessV3PropertyListPushActionRequired]]
     pendingCount: NotRequired[int]
     pendingSellerApproval: NotRequired[list[SaveCampaignSuccessPropertyListPushPending]]
     failedCampaignCount: NotRequired[int]
-
-class SaveCampaignSuccessPropertyListPushActionRequiredOutcomePauseFailed(TypedDict):
-    mediaBuyId: str
-    '\n    The media buy affected\n    '
-    outcome: Literal["pause_failed"]
-    '\n    The buy could not be paused. It may still be delivering without its property lists enforced.\n    '
-    reason: SaveCampaignSuccessPropertyListPushActionRequiredReason
-    pauseError: SaveCampaignSuccessPropertyListPushActionRequiredOutcomePauseFailedPauseError
-    '\n    Why the pause failed\n    '
-
-class SaveCampaignSuccessPropertyListPushActionRequiredOutcomePauseFailedPauseError(TypedDict):
-    code: str
-    message: str
-
-class SaveCampaignSuccessPropertyListPushActionRequiredOutcomePaused(TypedDict):
-    mediaBuyId: str
-    '\n    The media buy affected\n    '
-    outcome: Literal["paused"]
-    '\n    The buy was paused. It stays paused until the buyer resumes it.\n    '
-    reason: SaveCampaignSuccessPropertyListPushActionRequiredReason
-
-SaveCampaignSuccessPropertyListPushActionRequired: TypeAlias = "SaveCampaignSuccessPropertyListPushActionRequiredOutcomePaused | SaveCampaignSuccessPropertyListPushActionRequiredOutcomePauseFailed"
-
-SaveCampaignSuccessPropertyListPushActionRequiredReason: TypeAlias = Literal["list_update_not_applied", "list_not_enforceable"]
 
 class SaveCampaignSuccessPropertyListPushPending(TypedDict):
     mediaBuyId: str
@@ -13215,6 +13191,46 @@ SaveCampaignSuccessServerTime: TypeAlias = str
 SaveCampaignSuccessSkippedSellerAccountIds: TypeAlias = list[int]
 
 SaveCampaignSuccessTakenOver: TypeAlias = Literal[True]
+
+class SaveCampaignSuccessV3PropertyListPushActionRequiredOutcomePauseFailed(TypedDict):
+    mediaBuyId: str
+    '\n    The media buy affected\n    '
+    outcome: Literal["pause_failed"]
+    '\n    The buy could not be paused. It may still be delivering without its property lists enforced.\n    '
+    reason: SaveCampaignSuccessV3PropertyListPushActionRequiredReason
+    pauseError: SaveCampaignSuccessV3PropertyListPushActionRequiredOutcomePauseFailedPauseError
+    '\n    Why the pause failed\n    '
+
+SaveCampaignSuccessPropertyListPushActionRequiredOutcomePauseFailed: TypeAlias = SaveCampaignSuccessV3PropertyListPushActionRequiredOutcomePauseFailed
+
+class SaveCampaignSuccessV3PropertyListPushActionRequiredOutcomePauseFailedPauseError(TypedDict):
+    code: str
+    message: str
+
+SaveCampaignSuccessPropertyListPushActionRequiredOutcomePauseFailedPauseError: TypeAlias = SaveCampaignSuccessV3PropertyListPushActionRequiredOutcomePauseFailedPauseError
+
+class SaveCampaignSuccessV3PropertyListPushActionRequiredOutcomePauseRequested(TypedDict):
+    mediaBuyId: str
+    outcome: Literal["pause_requested"]
+    '\n    The pause is unconfirmed; delivery may continue.\n    '
+    reason: SaveCampaignSuccessV3PropertyListPushActionRequiredReason
+
+class SaveCampaignSuccessV3PropertyListPushActionRequiredOutcomePaused(TypedDict):
+    mediaBuyId: str
+    '\n    The media buy affected\n    '
+    outcome: Literal["paused"]
+    '\n    The buy was paused. It stays paused until the buyer resumes it.\n    '
+    reason: SaveCampaignSuccessV3PropertyListPushActionRequiredReason
+
+SaveCampaignSuccessPropertyListPushActionRequiredOutcomePaused: TypeAlias = SaveCampaignSuccessV3PropertyListPushActionRequiredOutcomePaused
+
+SaveCampaignSuccessV3PropertyListPushActionRequired: TypeAlias = "SaveCampaignSuccessV3PropertyListPushActionRequiredOutcomePaused | SaveCampaignSuccessV3PropertyListPushActionRequiredOutcomePauseFailed | SaveCampaignSuccessV3PropertyListPushActionRequiredOutcomePauseRequested"
+
+SaveCampaignSuccessPropertyListPushActionRequired: TypeAlias = SaveCampaignSuccessV3PropertyListPushActionRequired
+
+SaveCampaignSuccessV3PropertyListPushActionRequiredReason: TypeAlias = Literal["list_update_not_applied", "list_not_enforceable"]
+
+SaveCampaignSuccessPropertyListPushActionRequiredReason: TypeAlias = SaveCampaignSuccessV3PropertyListPushActionRequiredReason
 
 SaveCampaignSuccessValue: TypeAlias = JsonValue
 
@@ -19534,7 +19550,7 @@ SavePropertyListRequestPropertyListIdentifier: TypeAlias = SavePropertyListInput
 class SavePropertyListResultActionArchived(TypedDict):
     action: Literal["archived"]
     propertyListId: str
-    cascadeSummary: SavePropertyListSuccessPropertyListCascadeSummary
+    cascadeSummary: SavePropertyListSuccessV3PropertyListCascadeSummary
 
 class SavePropertyListResultActionChecked(TypedDict):
     action: Literal["checked"]
@@ -19565,49 +19581,6 @@ class SavePropertyListResultActionUpdated(TypedDict):
     action: Literal["updated"]
 
 SavePropertyListResult: TypeAlias = "SavePropertyListResultActionChecked | SavePropertyListResultActionCreated | SavePropertyListResultActionUpdated | SavePropertyListResultActionArchived | SavePropertyListResultActionRestored"
-
-class SavePropertyListSuccessPropertyListCascadeSummary(TypedDict):
-    totalMediaBuys: SavePropertyListSuccessPropertyListCascadeSummaryTotalMediaBuys
-    updatedCount: SavePropertyListSuccessPropertyListCascadeSummaryUpdatedCount
-    failedCount: SavePropertyListSuccessPropertyListCascadeSummaryFailedCount
-    sellerUpdatedCount: NotRequired[SavePropertyListSuccessPropertyListCascadeSummarySellerUpdatedCount]
-    '\n    Active media buys whose seller confirmed an update_media_buy call. Present whenever at least one active media buy was checked.\n    '
-    sellerFailedCount: NotRequired[SavePropertyListSuccessPropertyListCascadeSummarySellerFailedCount]
-    '\n    Active media buys whose update_media_buy call failed. Present whenever at least one active media buy was checked.\n    '
-    enforcedByAnotherRouteCount: NotRequired[SavePropertyListSuccessPropertyListCascadeSummaryEnforcedByAnotherRouteCount]
-    '\n    Active media buys proved enforceable by another route, so no update_media_buy call was needed. Present whenever at least one active media buy was checked for enforcement.\n    '
-    pausedCount: NotRequired[SavePropertyListSuccessPropertyListCascadeSummaryPausedCount]
-    '\n    Active media buys that were paused because they did not take the change or no route enforces their lists. Present whenever at least one active media buy was checked.\n    '
-    pauseFailedCount: NotRequired[SavePropertyListSuccessPropertyListCascadeSummaryPauseFailedCount]
-    '\n    Active media buys that needed pausing but could not be paused. Present whenever at least one active media buy was checked.\n    '
-    failedCampaignCount: NotRequired[SavePropertyListSuccessPropertyListCascadeSummaryFailedCampaignCount]
-    '\n    Present only when the push could not run for one or more campaigns at all. Their active media buys are not counted above and were neither updated nor paused; save the list again to retry.\n    '
-    pendingCount: NotRequired[SavePropertyListSuccessPropertyListCascadeSummaryPendingCount]
-    '\n    Active media buys whose seller has not yet confirmed the change, either because it queued the change or because the shared cascade deadline elapsed before a push completed or started. They remain pending for the buyer to retry or follow up. Present whenever at least one active media buy was checked.\n    '
-    pendingSellerApproval: NotRequired[SavePropertyListSuccessPropertyListCascadeSummaryPendingSellerApproval]
-    '\n    One entry per active media buy awaiting seller confirmation, including buys whose campaign had not started before the shared cascade deadline. Present whenever at least one active media buy was checked.\n    '
-    actionRequired: NotRequired[SavePropertyListSuccessPropertyListCascadeSummaryActionRequired]
-    '\n    One entry per active media buy that did not take the change or whose property lists no route enforces after it; every other checked buy took it. Present whenever at least one active media buy was checked.\n    '
-
-SavePropertyListSuccessPropertyListCascadeSummaryEnforcedByAnotherRouteCount: TypeAlias = int
-
-SavePropertyListSuccessPropertyListCascadeSummaryFailedCampaignCount: TypeAlias = int
-
-SavePropertyListSuccessPropertyListCascadeSummaryFailedCount: TypeAlias = int
-
-SavePropertyListSuccessPropertyListCascadeSummaryPauseFailedCount: TypeAlias = int
-
-SavePropertyListSuccessPropertyListCascadeSummaryPausedCount: TypeAlias = int
-
-SavePropertyListSuccessPropertyListCascadeSummaryPendingCount: TypeAlias = int
-
-SavePropertyListSuccessPropertyListCascadeSummarySellerFailedCount: TypeAlias = int
-
-SavePropertyListSuccessPropertyListCascadeSummarySellerUpdatedCount: TypeAlias = int
-
-SavePropertyListSuccessPropertyListCascadeSummaryTotalMediaBuys: TypeAlias = int
-
-SavePropertyListSuccessPropertyListCascadeSummaryUpdatedCount: TypeAlias = int
 
 class SavePropertyListSuccessPropertyListFilters(TypedDict):
     channels_any: NotRequired[list[Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement"]] | None]
@@ -19684,37 +19657,9 @@ class SavePropertyListSuccessPropertyListProjectionIdentifierPage(TypedDict):
     nextOffset: NotRequired[int]
     valueTruncatedCount: NotRequired[int]
 
-class SavePropertyListSuccessPropertyListPushActionRequiredOutcomePauseFailed(TypedDict):
-    mediaBuyId: str
-    '\n    The media buy affected\n    '
-    outcome: Literal["pause_failed"]
-    '\n    The buy could not be paused. It may still be delivering without its property lists enforced.\n    '
-    reason: SavePropertyListSuccessPropertyListPushActionRequiredReason
-    pauseError: SavePropertyListSuccessPropertyListPushActionRequiredOutcomePauseFailedPauseError
-    '\n    Why the pause failed\n    '
-
-class SavePropertyListSuccessPropertyListPushActionRequiredOutcomePauseFailedPauseError(TypedDict):
-    code: str
-    message: str
-
-class SavePropertyListSuccessPropertyListPushActionRequiredOutcomePaused(TypedDict):
-    mediaBuyId: str
-    '\n    The media buy affected\n    '
-    outcome: Literal["paused"]
-    '\n    The buy was paused. It stays paused until the buyer resumes it.\n    '
-    reason: SavePropertyListSuccessPropertyListPushActionRequiredReason
-
-SavePropertyListSuccessPropertyListPushActionRequired: TypeAlias = "SavePropertyListSuccessPropertyListPushActionRequiredOutcomePaused | SavePropertyListSuccessPropertyListPushActionRequiredOutcomePauseFailed"
-
-SavePropertyListSuccessPropertyListCascadeSummaryActionRequired: TypeAlias = "list[SavePropertyListSuccessPropertyListPushActionRequired]"
-
-SavePropertyListSuccessPropertyListPushActionRequiredReason: TypeAlias = Literal["list_update_not_applied", "list_not_enforceable"]
-
 class SavePropertyListSuccessPropertyListPushPending(TypedDict):
     mediaBuyId: str
     '\n    The media buy affected\n    '
-
-SavePropertyListSuccessPropertyListCascadeSummaryPendingSellerApproval: TypeAlias = "list[SavePropertyListSuccessPropertyListPushPending]"
 
 class SavePropertyListSuccessPropertyListResolutionSummary(TypedDict):
     totalRequested: int
@@ -19749,15 +19694,12 @@ class SavePropertyListSuccessPropertyListSaveCascadeSummary(TypedDict):
     pendingSellerApproval: NotRequired[SavePropertyListSuccessPropertyListSaveCascadeSummaryPendingSellerApproval]
     '\n    One entry per active media buy awaiting seller confirmation, including buys whose campaign had not started before the shared cascade deadline. Present whenever at least one active media buy was checked.\n    '
     actionRequired: NotRequired[SavePropertyListSuccessPropertyListSaveCascadeSummaryActionRequired]
-    '\n    One entry per active media buy that did not take the change or whose property lists no route enforces after it; every other checked buy took it. Present whenever at least one active media buy was checked.\n    '
     errorMessage: NotRequired[str]
     '\n    Active-buy updates could not be completed for part of the change, such as a restore or a score change whose affected lists could not be looked up. The counts cover only the pushes that completed.\n    '
     pushedListIds: NotRequired[list[str]]
     '\n    Property lists affected by a score change in this save whose push to active media buys finished inside the request.\n    '
     leftToRecheckListIds: NotRequired[list[str]]
     '\n    Property lists affected by a score change in this save whose push was cancelled or never started when the request ran out of time. Not a failure: the scheduled live-buy re-check catches their buys on its next run.\n    '
-
-SavePropertyListSuccessPropertyListSaveCascadeSummaryActionRequired: TypeAlias = "list[SavePropertyListSuccessPropertyListPushActionRequired]"
 
 SavePropertyListSuccessPropertyListSaveCascadeSummaryEnforcedByAnotherRouteCount: TypeAlias = int
 
@@ -19780,6 +19722,120 @@ SavePropertyListSuccessPropertyListSaveCascadeSummarySellerUpdatedCount: TypeAli
 SavePropertyListSuccessPropertyListSaveCascadeSummaryTotalMediaBuys: TypeAlias = int
 
 SavePropertyListSuccessPropertyListSaveCascadeSummaryUpdatedCount: TypeAlias = int
+
+class SavePropertyListSuccessV3PropertyListCascadeSummary(TypedDict):
+    totalMediaBuys: SavePropertyListSuccessV3PropertyListCascadeSummaryTotalMediaBuys
+    updatedCount: SavePropertyListSuccessV3PropertyListCascadeSummaryUpdatedCount
+    failedCount: SavePropertyListSuccessV3PropertyListCascadeSummaryFailedCount
+    sellerUpdatedCount: NotRequired[SavePropertyListSuccessV3PropertyListCascadeSummarySellerUpdatedCount]
+    '\n    Active media buys whose seller confirmed an update_media_buy call. Present whenever at least one active media buy was checked.\n    '
+    sellerFailedCount: NotRequired[SavePropertyListSuccessV3PropertyListCascadeSummarySellerFailedCount]
+    '\n    Active media buys whose update_media_buy call failed. Present whenever at least one active media buy was checked.\n    '
+    enforcedByAnotherRouteCount: NotRequired[SavePropertyListSuccessV3PropertyListCascadeSummaryEnforcedByAnotherRouteCount]
+    '\n    Active media buys proved enforceable by another route, so no update_media_buy call was needed. Present whenever at least one active media buy was checked for enforcement.\n    '
+    pausedCount: NotRequired[SavePropertyListSuccessV3PropertyListCascadeSummaryPausedCount]
+    '\n    Active media buys that were paused because they did not take the change or no route enforces their lists. Present whenever at least one active media buy was checked.\n    '
+    pauseFailedCount: NotRequired[SavePropertyListSuccessV3PropertyListCascadeSummaryPauseFailedCount]
+    '\n    Active media buys that needed pausing but could not be paused. Present whenever at least one active media buy was checked.\n    '
+    failedCampaignCount: NotRequired[SavePropertyListSuccessV3PropertyListCascadeSummaryFailedCampaignCount]
+    '\n    Present only when the push could not run for one or more campaigns at all. Their active media buys are not counted above and were neither updated nor paused; save the list again to retry.\n    '
+    pendingCount: NotRequired[SavePropertyListSuccessV3PropertyListCascadeSummaryPendingCount]
+    '\n    Active media buys whose seller has not yet confirmed the change, either because it queued the change or because the shared cascade deadline elapsed before a push completed or started. They remain pending for the buyer to retry or follow up. Present whenever at least one active media buy was checked.\n    '
+    pendingSellerApproval: NotRequired[SavePropertyListSuccessV3PropertyListCascadeSummaryPendingSellerApproval]
+    '\n    One entry per active media buy awaiting seller confirmation, including buys whose campaign had not started before the shared cascade deadline. Present whenever at least one active media buy was checked.\n    '
+    actionRequired: NotRequired[SavePropertyListSuccessV3PropertyListCascadeSummaryActionRequired]
+
+SavePropertyListSuccessPropertyListCascadeSummary: TypeAlias = SavePropertyListSuccessV3PropertyListCascadeSummary
+
+SavePropertyListSuccessV3PropertyListCascadeSummaryEnforcedByAnotherRouteCount: TypeAlias = int
+
+SavePropertyListSuccessPropertyListCascadeSummaryEnforcedByAnotherRouteCount: TypeAlias = SavePropertyListSuccessV3PropertyListCascadeSummaryEnforcedByAnotherRouteCount
+
+SavePropertyListSuccessV3PropertyListCascadeSummaryFailedCampaignCount: TypeAlias = int
+
+SavePropertyListSuccessPropertyListCascadeSummaryFailedCampaignCount: TypeAlias = SavePropertyListSuccessV3PropertyListCascadeSummaryFailedCampaignCount
+
+SavePropertyListSuccessV3PropertyListCascadeSummaryFailedCount: TypeAlias = int
+
+SavePropertyListSuccessPropertyListCascadeSummaryFailedCount: TypeAlias = SavePropertyListSuccessV3PropertyListCascadeSummaryFailedCount
+
+SavePropertyListSuccessV3PropertyListCascadeSummaryPauseFailedCount: TypeAlias = int
+
+SavePropertyListSuccessPropertyListCascadeSummaryPauseFailedCount: TypeAlias = SavePropertyListSuccessV3PropertyListCascadeSummaryPauseFailedCount
+
+SavePropertyListSuccessV3PropertyListCascadeSummaryPausedCount: TypeAlias = int
+
+SavePropertyListSuccessPropertyListCascadeSummaryPausedCount: TypeAlias = SavePropertyListSuccessV3PropertyListCascadeSummaryPausedCount
+
+SavePropertyListSuccessV3PropertyListCascadeSummaryPendingCount: TypeAlias = int
+
+SavePropertyListSuccessPropertyListCascadeSummaryPendingCount: TypeAlias = SavePropertyListSuccessV3PropertyListCascadeSummaryPendingCount
+
+SavePropertyListSuccessV3PropertyListCascadeSummaryPendingSellerApproval: TypeAlias = "list[SavePropertyListSuccessPropertyListPushPending]"
+
+SavePropertyListSuccessPropertyListCascadeSummaryPendingSellerApproval: TypeAlias = SavePropertyListSuccessV3PropertyListCascadeSummaryPendingSellerApproval
+
+SavePropertyListSuccessV3PropertyListCascadeSummarySellerFailedCount: TypeAlias = int
+
+SavePropertyListSuccessPropertyListCascadeSummarySellerFailedCount: TypeAlias = SavePropertyListSuccessV3PropertyListCascadeSummarySellerFailedCount
+
+SavePropertyListSuccessV3PropertyListCascadeSummarySellerUpdatedCount: TypeAlias = int
+
+SavePropertyListSuccessPropertyListCascadeSummarySellerUpdatedCount: TypeAlias = SavePropertyListSuccessV3PropertyListCascadeSummarySellerUpdatedCount
+
+SavePropertyListSuccessV3PropertyListCascadeSummaryTotalMediaBuys: TypeAlias = int
+
+SavePropertyListSuccessPropertyListCascadeSummaryTotalMediaBuys: TypeAlias = SavePropertyListSuccessV3PropertyListCascadeSummaryTotalMediaBuys
+
+SavePropertyListSuccessV3PropertyListCascadeSummaryUpdatedCount: TypeAlias = int
+
+SavePropertyListSuccessPropertyListCascadeSummaryUpdatedCount: TypeAlias = SavePropertyListSuccessV3PropertyListCascadeSummaryUpdatedCount
+
+class SavePropertyListSuccessV3PropertyListPushActionRequiredOutcomePauseFailed(TypedDict):
+    mediaBuyId: str
+    '\n    The media buy affected\n    '
+    outcome: Literal["pause_failed"]
+    '\n    The buy could not be paused. It may still be delivering without its property lists enforced.\n    '
+    reason: SavePropertyListSuccessV3PropertyListPushActionRequiredReason
+    pauseError: SavePropertyListSuccessV3PropertyListPushActionRequiredOutcomePauseFailedPauseError
+    '\n    Why the pause failed\n    '
+
+SavePropertyListSuccessPropertyListPushActionRequiredOutcomePauseFailed: TypeAlias = SavePropertyListSuccessV3PropertyListPushActionRequiredOutcomePauseFailed
+
+class SavePropertyListSuccessV3PropertyListPushActionRequiredOutcomePauseFailedPauseError(TypedDict):
+    code: str
+    message: str
+
+SavePropertyListSuccessPropertyListPushActionRequiredOutcomePauseFailedPauseError: TypeAlias = SavePropertyListSuccessV3PropertyListPushActionRequiredOutcomePauseFailedPauseError
+
+class SavePropertyListSuccessV3PropertyListPushActionRequiredOutcomePauseRequested(TypedDict):
+    mediaBuyId: str
+    outcome: Literal["pause_requested"]
+    '\n    The pause is unconfirmed; delivery may continue.\n    '
+    reason: SavePropertyListSuccessV3PropertyListPushActionRequiredReason
+
+class SavePropertyListSuccessV3PropertyListPushActionRequiredOutcomePaused(TypedDict):
+    mediaBuyId: str
+    '\n    The media buy affected\n    '
+    outcome: Literal["paused"]
+    '\n    The buy was paused. It stays paused until the buyer resumes it.\n    '
+    reason: SavePropertyListSuccessV3PropertyListPushActionRequiredReason
+
+SavePropertyListSuccessPropertyListPushActionRequiredOutcomePaused: TypeAlias = SavePropertyListSuccessV3PropertyListPushActionRequiredOutcomePaused
+
+SavePropertyListSuccessV3PropertyListPushActionRequired: TypeAlias = "SavePropertyListSuccessV3PropertyListPushActionRequiredOutcomePaused | SavePropertyListSuccessV3PropertyListPushActionRequiredOutcomePauseFailed | SavePropertyListSuccessV3PropertyListPushActionRequiredOutcomePauseRequested"
+
+SavePropertyListSuccessPropertyListPushActionRequired: TypeAlias = SavePropertyListSuccessV3PropertyListPushActionRequired
+
+SavePropertyListSuccessPropertyListSaveCascadeSummaryActionRequired: TypeAlias = "list[SavePropertyListSuccessV3PropertyListPushActionRequired]"
+
+SavePropertyListSuccessV3PropertyListCascadeSummaryActionRequired: TypeAlias = "list[SavePropertyListSuccessV3PropertyListPushActionRequired]"
+
+SavePropertyListSuccessPropertyListCascadeSummaryActionRequired: TypeAlias = SavePropertyListSuccessV3PropertyListCascadeSummaryActionRequired
+
+SavePropertyListSuccessV3PropertyListPushActionRequiredReason: TypeAlias = Literal["list_update_not_applied", "list_not_enforceable"]
+
+SavePropertyListSuccessPropertyListPushActionRequiredReason: TypeAlias = SavePropertyListSuccessV3PropertyListPushActionRequiredReason
 
 class SaveRfpInput(TypedDict):
     clientRequestId: NotRequired[str]

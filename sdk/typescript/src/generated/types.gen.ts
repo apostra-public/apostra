@@ -22269,7 +22269,7 @@ export type SaveCampaignSuccessCampaignPropertyListsCascade = {
     enforcedByAnotherRouteCount?: number;
     pausedCount?: number;
     pauseFailedCount?: number;
-    actionRequired?: Array<SaveCampaignSuccessPropertyListPushActionRequired>;
+    actionRequired?: Array<SaveCampaignSuccessV3PropertyListPushActionRequired>;
     pendingCount?: number;
     pendingSellerApproval?: Array<SaveCampaignSuccessPropertyListPushPending>;
     failedCampaignCount?: number;
@@ -22455,7 +22455,7 @@ export type SaveCampaignSuccessPropertyListAttachmentCascade = {
     enforcedByAnotherRouteCount?: number;
     pausedCount?: number;
     pauseFailedCount?: number;
-    actionRequired?: Array<SaveCampaignSuccessPropertyListPushActionRequired>;
+    actionRequired?: Array<SaveCampaignSuccessV3PropertyListPushActionRequired>;
     pendingCount?: number;
     pendingSellerApproval?: Array<SaveCampaignSuccessPropertyListPushPending>;
     failedCampaignCount?: number;
@@ -22475,49 +22475,15 @@ export type SaveCampaignSuccessPropertyListClearCascade = {
     enforcedByAnotherRouteCount?: number;
     pausedCount?: number;
     pauseFailedCount?: number;
-    actionRequired?: Array<SaveCampaignSuccessPropertyListPushActionRequired>;
+    actionRequired?: Array<SaveCampaignSuccessV3PropertyListPushActionRequired>;
     pendingCount?: number;
     pendingSellerApproval?: Array<SaveCampaignSuccessPropertyListPushPending>;
     failedCampaignCount?: number;
 };
 
-/**
- * An active media buy that did not take a property list change, or whose property lists no route enforces after it, and needs the buyer to act.
- */
-export type SaveCampaignSuccessPropertyListPushActionRequired = {
-    /**
-     * The media buy affected
-     */
-    mediaBuyId: string;
-    /**
-     * The buy was paused. It stays paused until the buyer resumes it.
-     */
-    outcome: 'paused';
-    reason: SaveCampaignSuccessPropertyListPushActionRequiredReason;
-    pauseError?: never;
-} | {
-    /**
-     * The media buy affected
-     */
-    mediaBuyId: string;
-    /**
-     * The buy could not be paused. It may still be delivering without its property lists enforced.
-     */
-    outcome: 'pause_failed';
-    reason: SaveCampaignSuccessPropertyListPushActionRequiredReason;
-    /**
-     * Why the pause failed
-     */
-    pauseError: {
-        code: string;
-        message: string;
-    };
-};
+export type SaveCampaignSuccessPropertyListPushActionRequired = SaveCampaignSuccessV3PropertyListPushActionRequired;
 
-/**
- * Why the buy needs action. `list_update_not_applied`: the seller did not take the list change. `list_not_enforceable`: after the change, no route enforces every property list that applies to the buy (its seller does not apply the list, and its products do not name only sites and apps the list allows).
- */
-export type SaveCampaignSuccessPropertyListPushActionRequiredReason = 'list_update_not_applied' | 'list_not_enforceable';
+export type SaveCampaignSuccessPropertyListPushActionRequiredReason = SaveCampaignSuccessV3PropertyListPushActionRequiredReason;
 
 /**
  * An active media buy whose seller has not yet confirmed the property list change.
@@ -22545,6 +22511,49 @@ export type SaveCampaignSuccessSkippedSellerAccountIds = Array<number>;
 export type SaveCampaignSuccessSkippedSellerIds = SaveCampaignSuccessSkippedSellerAccountIds;
 
 export type SaveCampaignSuccessTakenOver = true;
+
+export type SaveCampaignSuccessV3PropertyListPushActionRequired = {
+    /**
+     * The media buy affected
+     */
+    mediaBuyId: string;
+    /**
+     * The buy was paused. It stays paused until the buyer resumes it.
+     */
+    outcome: 'paused';
+    reason: SaveCampaignSuccessV3PropertyListPushActionRequiredReason;
+    pauseError?: never;
+} | {
+    /**
+     * The media buy affected
+     */
+    mediaBuyId: string;
+    /**
+     * The buy could not be paused. It may still be delivering without its property lists enforced.
+     */
+    outcome: 'pause_failed';
+    reason: SaveCampaignSuccessV3PropertyListPushActionRequiredReason;
+    /**
+     * Why the pause failed
+     */
+    pauseError: {
+        code: string;
+        message: string;
+    };
+} | {
+    mediaBuyId: string;
+    /**
+     * The pause is unconfirmed; delivery may continue.
+     */
+    outcome: 'pause_requested';
+    reason: SaveCampaignSuccessV3PropertyListPushActionRequiredReason;
+    pauseError?: never;
+};
+
+/**
+ * Why the buy needs action. `list_update_not_applied`: the seller did not take the list change. `list_not_enforceable`: after the change, no route enforces every property list that applies to the buy (its seller does not apply the list, and its products do not name only sites and apps the list allows).
+ */
+export type SaveCampaignSuccessV3PropertyListPushActionRequiredReason = 'list_update_not_applied' | 'list_not_enforceable';
 
 export type SaveCampaignSuccessValue = unknown;
 
@@ -34106,7 +34115,7 @@ export type SavePropertyListResponses = {
         } | {
             action: 'archived';
             propertyListId: string;
-            cascadeSummary: SavePropertyListSuccessPropertyListCascadeSummary;
+            cascadeSummary: SavePropertyListSuccessV3PropertyListCascadeSummary;
             check?: never;
             object?: never;
             propertyList?: never;
@@ -34138,83 +34147,31 @@ export type SavePropertyListResponses = {
     };
 };
 
-/**
- * Summary of the retroactive push of this updated property list to active media buys.
- */
-export type SavePropertyListSuccessPropertyListCascadeSummary = {
-    totalMediaBuys: SavePropertyListSuccessPropertyListCascadeSummaryTotalMediaBuys;
-    updatedCount: SavePropertyListSuccessPropertyListCascadeSummaryUpdatedCount;
-    failedCount: SavePropertyListSuccessPropertyListCascadeSummaryFailedCount;
-    /**
-     * Active media buys whose seller confirmed an update_media_buy call. Present whenever at least one active media buy was checked.
-     */
-    sellerUpdatedCount?: SavePropertyListSuccessPropertyListCascadeSummarySellerUpdatedCount;
-    /**
-     * Active media buys whose update_media_buy call failed. Present whenever at least one active media buy was checked.
-     */
-    sellerFailedCount?: SavePropertyListSuccessPropertyListCascadeSummarySellerFailedCount;
-    /**
-     * Active media buys proved enforceable by another route, so no update_media_buy call was needed. Present whenever at least one active media buy was checked for enforcement.
-     */
-    enforcedByAnotherRouteCount?: SavePropertyListSuccessPropertyListCascadeSummaryEnforcedByAnotherRouteCount;
-    /**
-     * Active media buys that were paused because they did not take the change or no route enforces their lists. Present whenever at least one active media buy was checked.
-     */
-    pausedCount?: SavePropertyListSuccessPropertyListCascadeSummaryPausedCount;
-    /**
-     * Active media buys that needed pausing but could not be paused. Present whenever at least one active media buy was checked.
-     */
-    pauseFailedCount?: SavePropertyListSuccessPropertyListCascadeSummaryPauseFailedCount;
-    /**
-     * Present only when the push could not run for one or more campaigns at all. Their active media buys are not counted above and were neither updated nor paused; save the list again to retry.
-     */
-    failedCampaignCount?: SavePropertyListSuccessPropertyListCascadeSummaryFailedCampaignCount;
-    /**
-     * Active media buys whose seller has not yet confirmed the change, either because it queued the change or because the shared cascade deadline elapsed before a push completed or started. They remain pending for the buyer to retry or follow up. Present whenever at least one active media buy was checked.
-     */
-    pendingCount?: SavePropertyListSuccessPropertyListCascadeSummaryPendingCount;
-    /**
-     * One entry per active media buy awaiting seller confirmation, including buys whose campaign had not started before the shared cascade deadline. Present whenever at least one active media buy was checked.
-     */
-    pendingSellerApproval?: SavePropertyListSuccessPropertyListCascadeSummaryPendingSellerApproval;
-    /**
-     * One entry per active media buy that did not take the change or whose property lists no route enforces after it; every other checked buy took it. Present whenever at least one active media buy was checked.
-     */
-    actionRequired?: SavePropertyListSuccessPropertyListCascadeSummaryActionRequired;
-};
+export type SavePropertyListSuccessPropertyListCascadeSummary = SavePropertyListSuccessV3PropertyListCascadeSummary;
 
-export type SavePropertyListSuccessPropertyListCascadeSummaryActionRequired = Array<SavePropertyListSuccessPropertyListPushActionRequired>;
+export type SavePropertyListSuccessPropertyListCascadeSummaryActionRequired = SavePropertyListSuccessV3PropertyListCascadeSummaryActionRequired;
 
-export type SavePropertyListSuccessPropertyListCascadeSummaryEnforcedByAnotherRouteCount = number;
+export type SavePropertyListSuccessPropertyListCascadeSummaryEnforcedByAnotherRouteCount = SavePropertyListSuccessV3PropertyListCascadeSummaryEnforcedByAnotherRouteCount;
 
-export type SavePropertyListSuccessPropertyListCascadeSummaryFailedCampaignCount = number;
+export type SavePropertyListSuccessPropertyListCascadeSummaryFailedCampaignCount = SavePropertyListSuccessV3PropertyListCascadeSummaryFailedCampaignCount;
 
-/**
- * Active media buys that did not take the change: their update_media_buy call failed, or no route enforces their lists after it, so they were paused without an update. See actionRequired for each one.
- */
-export type SavePropertyListSuccessPropertyListCascadeSummaryFailedCount = number;
+export type SavePropertyListSuccessPropertyListCascadeSummaryFailedCount = SavePropertyListSuccessV3PropertyListCascadeSummaryFailedCount;
 
-export type SavePropertyListSuccessPropertyListCascadeSummaryPauseFailedCount = number;
+export type SavePropertyListSuccessPropertyListCascadeSummaryPauseFailedCount = SavePropertyListSuccessV3PropertyListCascadeSummaryPauseFailedCount;
 
-export type SavePropertyListSuccessPropertyListCascadeSummaryPausedCount = number;
+export type SavePropertyListSuccessPropertyListCascadeSummaryPausedCount = SavePropertyListSuccessV3PropertyListCascadeSummaryPausedCount;
 
-export type SavePropertyListSuccessPropertyListCascadeSummaryPendingCount = number;
+export type SavePropertyListSuccessPropertyListCascadeSummaryPendingCount = SavePropertyListSuccessV3PropertyListCascadeSummaryPendingCount;
 
-export type SavePropertyListSuccessPropertyListCascadeSummaryPendingSellerApproval = Array<SavePropertyListSuccessPropertyListPushPending>;
+export type SavePropertyListSuccessPropertyListCascadeSummaryPendingSellerApproval = SavePropertyListSuccessV3PropertyListCascadeSummaryPendingSellerApproval;
 
-export type SavePropertyListSuccessPropertyListCascadeSummarySellerFailedCount = number;
+export type SavePropertyListSuccessPropertyListCascadeSummarySellerFailedCount = SavePropertyListSuccessV3PropertyListCascadeSummarySellerFailedCount;
 
-export type SavePropertyListSuccessPropertyListCascadeSummarySellerUpdatedCount = number;
+export type SavePropertyListSuccessPropertyListCascadeSummarySellerUpdatedCount = SavePropertyListSuccessV3PropertyListCascadeSummarySellerUpdatedCount;
 
-/**
- * Active media buys found whose campaigns this list change applies to.
- */
-export type SavePropertyListSuccessPropertyListCascadeSummaryTotalMediaBuys = number;
+export type SavePropertyListSuccessPropertyListCascadeSummaryTotalMediaBuys = SavePropertyListSuccessV3PropertyListCascadeSummaryTotalMediaBuys;
 
-/**
- * Active media buys that took the change: their seller confirmed an update_media_buy call with the refreshed list reference, or another route already enforces their lists.
- */
-export type SavePropertyListSuccessPropertyListCascadeSummaryUpdatedCount = number;
+export type SavePropertyListSuccessPropertyListCascadeSummaryUpdatedCount = SavePropertyListSuccessV3PropertyListCascadeSummaryUpdatedCount;
 
 export type SavePropertyListSuccessPropertyListFilters = {
     /**
@@ -34331,43 +34288,9 @@ export type SavePropertyListSuccessPropertyListProjection = {
     replacedPropertyListIds?: Array<string>;
 };
 
-/**
- * An active media buy that did not take a property list change, or whose property lists no route enforces after it, and needs the buyer to act.
- */
-export type SavePropertyListSuccessPropertyListPushActionRequired = {
-    /**
-     * The media buy affected
-     */
-    mediaBuyId: string;
-    /**
-     * The buy was paused. It stays paused until the buyer resumes it.
-     */
-    outcome: 'paused';
-    reason: SavePropertyListSuccessPropertyListPushActionRequiredReason;
-    pauseError?: never;
-} | {
-    /**
-     * The media buy affected
-     */
-    mediaBuyId: string;
-    /**
-     * The buy could not be paused. It may still be delivering without its property lists enforced.
-     */
-    outcome: 'pause_failed';
-    reason: SavePropertyListSuccessPropertyListPushActionRequiredReason;
-    /**
-     * Why the pause failed
-     */
-    pauseError: {
-        code: string;
-        message: string;
-    };
-};
+export type SavePropertyListSuccessPropertyListPushActionRequired = SavePropertyListSuccessV3PropertyListPushActionRequired;
 
-/**
- * Why the buy needs action. `list_update_not_applied`: the seller did not take the list change. `list_not_enforceable`: after the change, no route enforces every property list that applies to the buy (its seller does not apply the list, and its products do not name only sites and apps the list allows).
- */
-export type SavePropertyListSuccessPropertyListPushActionRequiredReason = 'list_update_not_applied' | 'list_not_enforceable';
+export type SavePropertyListSuccessPropertyListPushActionRequiredReason = SavePropertyListSuccessV3PropertyListPushActionRequiredReason;
 
 /**
  * An active media buy whose seller has not yet confirmed the property list change.
@@ -34441,9 +34364,6 @@ export type SavePropertyListSuccessPropertyListSaveCascadeSummary = {
      * One entry per active media buy awaiting seller confirmation, including buys whose campaign had not started before the shared cascade deadline. Present whenever at least one active media buy was checked.
      */
     pendingSellerApproval?: SavePropertyListSuccessPropertyListSaveCascadeSummaryPendingSellerApproval;
-    /**
-     * One entry per active media buy that did not take the change or whose property lists no route enforces after it; every other checked buy took it. Present whenever at least one active media buy was checked.
-     */
     actionRequired?: SavePropertyListSuccessPropertyListSaveCascadeSummaryActionRequired;
     /**
      * Active-buy updates could not be completed for part of the change, such as a restore or a score change whose affected lists could not be looked up. The counts cover only the pushes that completed.
@@ -34459,7 +34379,7 @@ export type SavePropertyListSuccessPropertyListSaveCascadeSummary = {
     leftToRecheckListIds?: Array<string>;
 };
 
-export type SavePropertyListSuccessPropertyListSaveCascadeSummaryActionRequired = Array<SavePropertyListSuccessPropertyListPushActionRequired>;
+export type SavePropertyListSuccessPropertyListSaveCascadeSummaryActionRequired = Array<SavePropertyListSuccessV3PropertyListPushActionRequired>;
 
 export type SavePropertyListSuccessPropertyListSaveCascadeSummaryEnforcedByAnotherRouteCount = number;
 
@@ -34491,6 +34411,121 @@ export type SavePropertyListSuccessPropertyListSaveCascadeSummaryTotalMediaBuys 
  * Active media buys that took the change: their seller confirmed an update_media_buy call with the refreshed list reference, or another route already enforces their lists.
  */
 export type SavePropertyListSuccessPropertyListSaveCascadeSummaryUpdatedCount = number;
+
+export type SavePropertyListSuccessV3PropertyListCascadeSummary = {
+    totalMediaBuys: SavePropertyListSuccessV3PropertyListCascadeSummaryTotalMediaBuys;
+    updatedCount: SavePropertyListSuccessV3PropertyListCascadeSummaryUpdatedCount;
+    failedCount: SavePropertyListSuccessV3PropertyListCascadeSummaryFailedCount;
+    /**
+     * Active media buys whose seller confirmed an update_media_buy call. Present whenever at least one active media buy was checked.
+     */
+    sellerUpdatedCount?: SavePropertyListSuccessV3PropertyListCascadeSummarySellerUpdatedCount;
+    /**
+     * Active media buys whose update_media_buy call failed. Present whenever at least one active media buy was checked.
+     */
+    sellerFailedCount?: SavePropertyListSuccessV3PropertyListCascadeSummarySellerFailedCount;
+    /**
+     * Active media buys proved enforceable by another route, so no update_media_buy call was needed. Present whenever at least one active media buy was checked for enforcement.
+     */
+    enforcedByAnotherRouteCount?: SavePropertyListSuccessV3PropertyListCascadeSummaryEnforcedByAnotherRouteCount;
+    /**
+     * Active media buys that were paused because they did not take the change or no route enforces their lists. Present whenever at least one active media buy was checked.
+     */
+    pausedCount?: SavePropertyListSuccessV3PropertyListCascadeSummaryPausedCount;
+    /**
+     * Active media buys that needed pausing but could not be paused. Present whenever at least one active media buy was checked.
+     */
+    pauseFailedCount?: SavePropertyListSuccessV3PropertyListCascadeSummaryPauseFailedCount;
+    /**
+     * Present only when the push could not run for one or more campaigns at all. Their active media buys are not counted above and were neither updated nor paused; save the list again to retry.
+     */
+    failedCampaignCount?: SavePropertyListSuccessV3PropertyListCascadeSummaryFailedCampaignCount;
+    /**
+     * Active media buys whose seller has not yet confirmed the change, either because it queued the change or because the shared cascade deadline elapsed before a push completed or started. They remain pending for the buyer to retry or follow up. Present whenever at least one active media buy was checked.
+     */
+    pendingCount?: SavePropertyListSuccessV3PropertyListCascadeSummaryPendingCount;
+    /**
+     * One entry per active media buy awaiting seller confirmation, including buys whose campaign had not started before the shared cascade deadline. Present whenever at least one active media buy was checked.
+     */
+    pendingSellerApproval?: SavePropertyListSuccessV3PropertyListCascadeSummaryPendingSellerApproval;
+    actionRequired?: SavePropertyListSuccessV3PropertyListCascadeSummaryActionRequired;
+};
+
+export type SavePropertyListSuccessV3PropertyListCascadeSummaryActionRequired = Array<SavePropertyListSuccessV3PropertyListPushActionRequired>;
+
+export type SavePropertyListSuccessV3PropertyListCascadeSummaryEnforcedByAnotherRouteCount = number;
+
+export type SavePropertyListSuccessV3PropertyListCascadeSummaryFailedCampaignCount = number;
+
+/**
+ * Active media buys that did not take the change: their update_media_buy call failed, or no route enforces their lists after it, so they were paused without an update. See actionRequired for each one.
+ */
+export type SavePropertyListSuccessV3PropertyListCascadeSummaryFailedCount = number;
+
+export type SavePropertyListSuccessV3PropertyListCascadeSummaryPauseFailedCount = number;
+
+export type SavePropertyListSuccessV3PropertyListCascadeSummaryPausedCount = number;
+
+export type SavePropertyListSuccessV3PropertyListCascadeSummaryPendingCount = number;
+
+export type SavePropertyListSuccessV3PropertyListCascadeSummaryPendingSellerApproval = Array<SavePropertyListSuccessPropertyListPushPending>;
+
+export type SavePropertyListSuccessV3PropertyListCascadeSummarySellerFailedCount = number;
+
+export type SavePropertyListSuccessV3PropertyListCascadeSummarySellerUpdatedCount = number;
+
+/**
+ * Active media buys found whose campaigns this list change applies to.
+ */
+export type SavePropertyListSuccessV3PropertyListCascadeSummaryTotalMediaBuys = number;
+
+/**
+ * Active media buys that took the change: their seller confirmed an update_media_buy call with the refreshed list reference, or another route already enforces their lists.
+ */
+export type SavePropertyListSuccessV3PropertyListCascadeSummaryUpdatedCount = number;
+
+export type SavePropertyListSuccessV3PropertyListPushActionRequired = {
+    /**
+     * The media buy affected
+     */
+    mediaBuyId: string;
+    /**
+     * The buy was paused. It stays paused until the buyer resumes it.
+     */
+    outcome: 'paused';
+    reason: SavePropertyListSuccessV3PropertyListPushActionRequiredReason;
+    pauseError?: never;
+} | {
+    /**
+     * The media buy affected
+     */
+    mediaBuyId: string;
+    /**
+     * The buy could not be paused. It may still be delivering without its property lists enforced.
+     */
+    outcome: 'pause_failed';
+    reason: SavePropertyListSuccessV3PropertyListPushActionRequiredReason;
+    /**
+     * Why the pause failed
+     */
+    pauseError: {
+        code: string;
+        message: string;
+    };
+} | {
+    mediaBuyId: string;
+    /**
+     * The pause is unconfirmed; delivery may continue.
+     */
+    outcome: 'pause_requested';
+    reason: SavePropertyListSuccessV3PropertyListPushActionRequiredReason;
+    pauseError?: never;
+};
+
+/**
+ * Why the buy needs action. `list_update_not_applied`: the seller did not take the list change. `list_not_enforceable`: after the change, no route enforces every property list that applies to the buy (its seller does not apply the list, and its products do not name only sites and apps the list allows).
+ */
+export type SavePropertyListSuccessV3PropertyListPushActionRequiredReason = 'list_update_not_applied' | 'list_not_enforceable';
 
 export type SaveRfpData = {
     /**
