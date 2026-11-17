@@ -45997,13 +45997,13 @@ paths:
     post:
       operationId: save_coverage
       summary: >-
-        Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set;
-        `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read
-        authorization; never assume it.
+        Declare publisher domains and claimed properties. `domains` replaces the set; `add`, `remove`,
+        `declareProperties`, `removeProperties`, `refresh` act on named items. Admin-only `inventoryMappings` save with
+        their property edits, all or none; domain edits and `refresh` apply separately.
       description: >-
-        Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set;
-        `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read
-        authorization; never assume it.
+        Declare publisher domains and claimed properties. `domains` replaces the set; `add`, `remove`,
+        `declareProperties`, `removeProperties`, `refresh` act on named items. Admin-only `inventoryMappings` save with
+        their property edits, all or none; domain edits and `refresh` apply separately.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -46102,6 +46102,44 @@ paths:
                           type: string
                           minLength: 1
                           maxLength: 512
+                      inventoryMappings:
+                        description: >-
+                          Admin only. All ad units, placements or key-values this property runs on, checked against the
+                          source's synced catalog. Omit to keep them; `[]` clears.
+                        maxItems: 100
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            inventorySourceId:
+                              description: The inventory source the target is in.
+                              $ref: >-
+                                #/components/schemas/save_coverage_request_DeclarePropertiesItemInventoryMappingsItemInventorySourceId
+                            targetKind:
+                              type: string
+                              enum:
+                                - ad_unit
+                                - placement
+                                - key_value
+                              description: '`ad_unit` and `placement` take externalId; `key_value` takes key and value.'
+                            externalId:
+                              description: The ad unit or placement id in the ad server.
+                              $ref: >-
+                                #/components/schemas/save_coverage_request_DeclarePropertiesItemInventoryMappingsItemExternalId
+                            key:
+                              description: Custom targeting key.
+                              $ref: '#/components/schemas/save_coverage_request_DeclarePropertiesItemInventoryMappingsItemKey'
+                            value:
+                              description: Custom targeting value.
+                              $ref: >-
+                                #/components/schemas/save_coverage_request_DeclarePropertiesItemInventoryMappingsItemValue
+                            includeDescendants:
+                              description: 'Ad units only: also cover child units.'
+                              type: boolean
+                          required:
+                            - inventorySourceId
+                            - targetKind
+                          additionalProperties: false
                     required:
                       - publisher_domain
                     additionalProperties: false
@@ -109177,6 +109215,22 @@ components:
       items:
         type: string
         minLength: 1
+    save_coverage_request_DeclarePropertiesItemInventoryMappingsItemInventorySourceId:
+      type: string
+      minLength: 1
+      maxLength: 512
+    save_coverage_request_DeclarePropertiesItemInventoryMappingsItemExternalId:
+      type: string
+      minLength: 1
+      maxLength: 512
+    save_coverage_request_DeclarePropertiesItemInventoryMappingsItemKey:
+      type: string
+      minLength: 1
+      maxLength: 512
+    save_coverage_request_DeclarePropertiesItemInventoryMappingsItemValue:
+      type: string
+      minLength: 1
+      maxLength: 512
     save_coverage_request_Refresh:
       maxItems: 20
       type: array

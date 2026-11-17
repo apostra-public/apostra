@@ -865,14 +865,14 @@ export class Apostra extends Transport {
   /** Manage seller or creative-engine authorization, accounts and advertiser mappings. Seller-only: reporting, selection, billing, policy, activation. sellerAccountIds (up to 100) changes several at once; accountRequestsQueued counts requests that will send, none sent yet. Returns the data together with response headers and request ID. */
   saveConnectionWithResponse(input: SaveConnectionInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveConnectionResult>> { return this.requestDetailed("save_connection", input, options) }
   /**
-   * Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read authorization; never assume it.
+   * Declare publisher domains and claimed properties. `domains` replaces the set; `add`, `remove`, `declareProperties`, `removeProperties`, `refresh` act on named items. Admin-only `inventoryMappings` save with their property edits, all or none; domain edits and `refresh` apply separately.
    *
    * @example
    * await client.saveCoverage(input, { idempotencyKey: 'stable-key' })
    */
   saveCoverage(input: SaveCoverageInput, options: WriteRequestOptions): Promise<SaveCoverageResult> { return this.request("save_coverage", input, options) }
 
-  /** Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read authorization; never assume it. Returns the data together with response headers and request ID. */
+  /** Declare publisher domains and claimed properties. `domains` replaces the set; `add`, `remove`, `declareProperties`, `removeProperties`, `refresh` act on named items. Admin-only `inventoryMappings` save with their property edits, all or none; domain edits and `refresh` apply separately. Returns the data together with response headers and request ID. */
   saveCoverageWithResponse(input: SaveCoverageInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveCoverageResult>> { return this.requestDetailed("save_coverage", input, options) }
   /**
    * Save content you supply: advertiserId/campaignId, name, message, assets (landing_page_url, social, sourceAssetRef/sourceAssets). New media like radio spots: use save_creative_session. One format selector: formatKind+formatParams or creativeFormatId+formatOptionRef. libraryRole: Buyer Account only.

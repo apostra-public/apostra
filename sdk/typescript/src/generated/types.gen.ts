@@ -23567,6 +23567,35 @@ export type SaveCoverageData = {
              * The publisher's property tags, when known.
              */
             tags?: Array<string>;
+            /**
+             * Admin only. All ad units, placements or key-values this property runs on, checked against the source's synced catalog. Omit to keep them; `[]` clears.
+             */
+            inventoryMappings?: Array<{
+                /**
+                 * The inventory source the target is in.
+                 */
+                inventorySourceId: SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemInventorySourceId;
+                /**
+                 * `ad_unit` and `placement` take externalId; `key_value` takes key and value.
+                 */
+                targetKind: 'ad_unit' | 'placement' | 'key_value';
+                /**
+                 * The ad unit or placement id in the ad server.
+                 */
+                externalId?: SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemExternalId;
+                /**
+                 * Custom targeting key.
+                 */
+                key?: SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemKey;
+                /**
+                 * Custom targeting value.
+                 */
+                value?: SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemValue;
+                /**
+                 * Ad units only: also cover child units.
+                 */
+                includeDescendants?: boolean;
+            }>;
         }>;
         /**
          * Claims to retract. A publisher-origin property cannot be removed here.
@@ -23669,6 +23698,14 @@ export type SaveCoverageErrors = {
 };
 
 export type SaveCoverageRequestAdd = Array<string>;
+
+export type SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemExternalId = string;
+
+export type SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemInventorySourceId = string;
+
+export type SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemKey = string;
+
+export type SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemValue = string;
 
 export type SaveCoverageRequestRefresh = Array<string>;
 

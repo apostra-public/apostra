@@ -1119,7 +1119,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read authorization; never assume it."
+    "summary": "Declare publisher domains and claimed properties. `domains` replaces the set; `add`, `remove`, `declareProperties`, `removeProperties`, `refresh` act on named items. Admin-only `inventoryMappings` save with their property edits, all or none; domain edits and `refresh` apply separately."
   },
   "save_creative": {
     "path": "/tools/save_creative",
