@@ -1363,7 +1363,7 @@ export type GetData = {
          */
         proposalProductsCursor?: string;
     }) | (unknown & {
-        kind: 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'notification_config';
+        kind: 'source_options' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'notification_config';
         /**
          * The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.
          */
@@ -8508,9 +8508,34 @@ export type GetResponses = {
             [key: string]: unknown;
         } | {
             outcome: 'object';
-            kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'brand' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'buyer_rfp' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'library_request' | 'decision' | 'approval' | 'account_relationship' | 'advertiser_access' | 'notification_config';
+            kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'brand' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'source_options' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'buyer_rfp' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'library_request' | 'decision' | 'approval' | 'account_relationship' | 'advertiser_access' | 'notification_config';
             object: {
                 advertiserId?: string;
+                options?: Array<{
+                    optionId: string;
+                    kind: 'ad_server' | 'partner_agent';
+                    label: string;
+                    logoUrl: string | null;
+                    summary: string;
+                    connect: {
+                        tool: 'save_inventory_source';
+                        input: {
+                            agentId: string;
+                            adServer?: never;
+                        } | {
+                            adServer: {
+                                type: 'google_ad_manager' | 'freewheel' | 'springserve' | 'adswizz' | 'broadsign' | 'citrusad';
+                            };
+                            agentId?: never;
+                        };
+                    };
+                    certification: {
+                        status: 'certified' | 'exempt' | 'beta' | 'not_certified';
+                        until: string | null;
+                        sentence: string | null;
+                    } | null;
+                    knownLimits: Array<string>;
+                }>;
                 brandRef?: GetSuccessObjectBrandRef;
                 /**
                  * For a brand-folder Material, the item link, kind, publish date, duration, listen links and transcript state.
