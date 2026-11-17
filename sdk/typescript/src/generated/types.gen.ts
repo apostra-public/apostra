@@ -38725,7 +38725,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -39261,7 +39261,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -39329,7 +39329,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -39865,7 +39865,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -40926,7 +40926,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -41458,7 +41458,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -41990,7 +41990,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -42050,7 +42050,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -42113,7 +42113,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -42652,7 +42652,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -42732,7 +42732,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -43268,7 +43268,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -43340,7 +43340,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -43876,7 +43876,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -44411,7 +44411,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -44947,7 +44947,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -45483,7 +45483,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
@@ -46019,7 +46019,7 @@ export type SearchData = {
          */
         limit?: number;
         /**
-         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status.
+         * Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.
          */
         groupBy?: string;
         accountId?: number | string;
