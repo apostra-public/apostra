@@ -13711,12 +13711,28 @@ class SaveCoverageInputDeclarePropertiesItem(TypedDict):
     '\n    Typed identifiers: site domain, app bundle id, store id.\n    '
     tags: NotRequired[list[str]]
     '\n    The publisher\'s property tags, when known.\n    '
+    inventoryMappings: NotRequired[list[SaveCoverageInputDeclarePropertiesItemInventoryMappingsItem]]
+    '\n    Admin only. All ad units, placements or key-values this property runs on, checked against the source\'s synced catalog. Omit to keep them; `[]` clears.\n    '
 
 class SaveCoverageInputDeclarePropertiesItemIdentifiersItem(TypedDict):
     type: str
     '\n    Identifier kind, e.g. `domain`, `bundle_id`.\n    '
     value: str
     '\n    The identifier itself.\n    '
+
+class SaveCoverageInputDeclarePropertiesItemInventoryMappingsItem(TypedDict):
+    inventorySourceId: SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemInventorySourceId
+    '\n    The inventory source the target is in.\n    '
+    targetKind: Literal["ad_unit", "placement", "key_value"]
+    '\n    `ad_unit` and `placement` take externalId; `key_value` takes key and value.\n    '
+    externalId: NotRequired[SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemExternalId]
+    '\n    The ad unit or placement id in the ad server.\n    '
+    key: NotRequired[SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemKey]
+    '\n    Custom targeting key.\n    '
+    value: NotRequired[SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemValue]
+    '\n    Custom targeting value.\n    '
+    includeDescendants: NotRequired[bool]
+    '\n    Ad units only: also cover child units.\n    '
 
 class SaveCoverageInputRemovePropertiesItem(TypedDict):
     domain: str
@@ -13725,6 +13741,14 @@ class SaveCoverageInputRemovePropertiesItem(TypedDict):
     '\n    Read it from `get`; never guess.\n    '
 
 SaveCoverageRequestAdd: TypeAlias = list[str]
+
+SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemExternalId: TypeAlias = str
+
+SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemInventorySourceId: TypeAlias = str
+
+SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemKey: TypeAlias = str
+
+SaveCoverageRequestDeclarePropertiesItemInventoryMappingsItemValue: TypeAlias = str
 
 SaveCoverageRequestRefresh: TypeAlias = list[str]
 

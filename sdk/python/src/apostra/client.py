@@ -437,11 +437,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveConnectionResult], self._request_with_response("save_connection", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_coverage(self, input: models.SaveCoverageInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCoverageResult:
-        "Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read authorization; never assume it."
+        "Declare publisher domains and claimed properties. `domains` replaces the set; `add`, `remove`, `declareProperties`, `removeProperties`, `refresh` act on named items. Admin-only `inventoryMappings` save with their property edits, all or none; domain edits and `refresh` apply separately."
         return cast("models.SaveCoverageResult", self._request("save_coverage", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_coverage_with_response(self, input: models.SaveCoverageInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCoverageResult]:
-        "Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read authorization; never assume it. Returns the data together with response headers and request ID."
+        "Declare publisher domains and claimed properties. `domains` replaces the set; `add`, `remove`, `declareProperties`, `removeProperties`, `refresh` act on named items. Admin-only `inventoryMappings` save with their property edits, all or none; domain edits and `refresh` apply separately. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCoverageResult], self._request_with_response("save_coverage", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_creative(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeResult:
@@ -1078,11 +1078,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveConnectionResult], await self._request_with_response("save_connection", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_coverage(self, input: models.SaveCoverageInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCoverageResult:
-        "Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read authorization; never assume it."
+        "Declare publisher domains and claimed properties. `domains` replaces the set; `add`, `remove`, `declareProperties`, `removeProperties`, `refresh` act on named items. Admin-only `inventoryMappings` save with their property edits, all or none; domain edits and `refresh` apply separately."
         return cast("models.SaveCoverageResult", await self._request("save_coverage", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_coverage_with_response(self, input: models.SaveCoverageInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCoverageResult]:
-        "Declare publisher domains this Seller sells and its claimed properties. `domains` replaces the complete set; `add`, `remove`, `declareProperties`, `removeProperties`, and `refresh` act on named items only. Read authorization; never assume it. Returns the data together with response headers and request ID."
+        "Declare publisher domains and claimed properties. `domains` replaces the set; `add`, `remove`, `declareProperties`, `removeProperties`, `refresh` act on named items. Admin-only `inventoryMappings` save with their property edits, all or none; domain edits and `refresh` apply separately. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCoverageResult], await self._request_with_response("save_coverage", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeResult:
