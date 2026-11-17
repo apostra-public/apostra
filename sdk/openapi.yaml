@@ -58050,7 +58050,7 @@ paths:
                           propertyListId:
                             type: string
                           cascadeSummary:
-                            $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummary'
+                            $ref: '#/components/schemas/save_property_list_success_V3PropertyListCascadeSummary'
                         required:
                           - action
                           - propertyListId
@@ -108012,7 +108012,7 @@ components:
         Why the goal was not sent: the product's AdCP optimization declaration (metric_optimization,
         conversion_tracking, vendor_metric_optimization) does not cover the goal's kind, metric, target kind, reach
         unit, view duration, viewability standard or vendor metric, or the product's max_optimization_goals was reached.
-    save_campaign_success_PropertyListPushActionRequired:
+    save_campaign_success_V3PropertyListPushActionRequired:
       oneOf:
         - type: object
           properties:
@@ -108024,7 +108024,7 @@ components:
               const: paused
               description: The buy was paused. It stays paused until the buyer resumes it.
             reason:
-              $ref: '#/components/schemas/save_campaign_success_PropertyListPushActionRequiredReason'
+              $ref: '#/components/schemas/save_campaign_success_V3PropertyListPushActionRequiredReason'
           required:
             - mediaBuyId
             - outcome
@@ -108040,7 +108040,7 @@ components:
               const: pause_failed
               description: The buy could not be paused. It may still be delivering without its property lists enforced.
             reason:
-              $ref: '#/components/schemas/save_campaign_success_PropertyListPushActionRequiredReason'
+              $ref: '#/components/schemas/save_campaign_success_V3PropertyListPushActionRequiredReason'
             pauseError:
               type: object
               properties:
@@ -108059,9 +108059,21 @@ components:
             - reason
             - pauseError
           additionalProperties: false
-      description: >-
-        An active media buy that did not take a property list change, or whose property lists no route enforces after
-        it, and needs the buyer to act.
+        - type: object
+          properties:
+            mediaBuyId:
+              type: string
+            outcome:
+              type: string
+              const: pause_requested
+              description: The pause is unconfirmed; delivery may continue.
+            reason:
+              $ref: '#/components/schemas/save_campaign_success_V3PropertyListPushActionRequiredReason'
+          required:
+            - mediaBuyId
+            - outcome
+            - reason
+          additionalProperties: false
     save_campaign_success_PropertyListPushPending:
       type: object
       properties:
@@ -108725,7 +108737,7 @@ components:
         - total
         - currency
       additionalProperties: {}
-    save_campaign_success_PropertyListPushActionRequiredReason:
+    save_campaign_success_V3PropertyListPushActionRequiredReason:
       type: string
       enum:
         - list_update_not_applied
@@ -108788,7 +108800,7 @@ components:
         actionRequired:
           type: array
           items:
-            $ref: '#/components/schemas/save_campaign_success_PropertyListPushActionRequired'
+            $ref: '#/components/schemas/save_campaign_success_V3PropertyListPushActionRequired'
         pendingCount:
           type: integer
           minimum: 0
@@ -108849,7 +108861,7 @@ components:
         actionRequired:
           type: array
           items:
-            $ref: '#/components/schemas/save_campaign_success_PropertyListPushActionRequired'
+            $ref: '#/components/schemas/save_campaign_success_V3PropertyListPushActionRequired'
         pendingCount:
           type: integer
           minimum: 0
@@ -108910,7 +108922,7 @@ components:
         actionRequired:
           type: array
           items:
-            $ref: '#/components/schemas/save_campaign_success_PropertyListPushActionRequired'
+            $ref: '#/components/schemas/save_campaign_success_V3PropertyListPushActionRequired'
         pendingCount:
           type: integer
           minimum: 0
@@ -117508,9 +117520,6 @@ components:
             before the shared cascade deadline. Present whenever at least one active media buy was checked.
           $ref: '#/components/schemas/save_property_list_success_PropertyListSaveCascadeSummaryPendingSellerApproval'
         actionRequired:
-          description: >-
-            One entry per active media buy that did not take the change or whose property lists no route enforces after
-            it; every other checked buy took it. Present whenever at least one active media buy was checked.
           $ref: '#/components/schemas/save_property_list_success_PropertyListSaveCascadeSummaryActionRequired'
         errorMessage:
           description: >-
@@ -117546,7 +117555,7 @@ components:
         - mediaBuyId
       additionalProperties: false
       description: An active media buy whose seller has not yet confirmed the property list change.
-    save_property_list_success_PropertyListPushActionRequired:
+    save_property_list_success_V3PropertyListPushActionRequired:
       oneOf:
         - type: object
           properties:
@@ -117558,7 +117567,7 @@ components:
               const: paused
               description: The buy was paused. It stays paused until the buyer resumes it.
             reason:
-              $ref: '#/components/schemas/save_property_list_success_PropertyListPushActionRequiredReason'
+              $ref: '#/components/schemas/save_property_list_success_V3PropertyListPushActionRequiredReason'
           required:
             - mediaBuyId
             - outcome
@@ -117574,7 +117583,7 @@ components:
               const: pause_failed
               description: The buy could not be paused. It may still be delivering without its property lists enforced.
             reason:
-              $ref: '#/components/schemas/save_property_list_success_PropertyListPushActionRequiredReason'
+              $ref: '#/components/schemas/save_property_list_success_V3PropertyListPushActionRequiredReason'
             pauseError:
               type: object
               properties:
@@ -117593,77 +117602,85 @@ components:
             - reason
             - pauseError
           additionalProperties: false
-      description: >-
-        An active media buy that did not take a property list change, or whose property lists no route enforces after
-        it, and needs the buyer to act.
-    save_property_list_success_PropertyListCascadeSummary:
+        - type: object
+          properties:
+            mediaBuyId:
+              type: string
+            outcome:
+              type: string
+              const: pause_requested
+              description: The pause is unconfirmed; delivery may continue.
+            reason:
+              $ref: '#/components/schemas/save_property_list_success_V3PropertyListPushActionRequiredReason'
+          required:
+            - mediaBuyId
+            - outcome
+            - reason
+          additionalProperties: false
+    save_property_list_success_V3PropertyListCascadeSummary:
       type: object
       properties:
         totalMediaBuys:
-          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryTotalMediaBuys'
+          $ref: '#/components/schemas/save_property_list_success_V3PropertyListCascadeSummaryTotalMediaBuys'
         updatedCount:
-          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryUpdatedCount'
+          $ref: '#/components/schemas/save_property_list_success_V3PropertyListCascadeSummaryUpdatedCount'
         failedCount:
-          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryFailedCount'
+          $ref: '#/components/schemas/save_property_list_success_V3PropertyListCascadeSummaryFailedCount'
         sellerUpdatedCount:
           description: >-
             Active media buys whose seller confirmed an update_media_buy call. Present whenever at least one active
             media buy was checked.
           example: 2
-          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummarySellerUpdatedCount'
+          $ref: '#/components/schemas/save_property_list_success_V3PropertyListCascadeSummarySellerUpdatedCount'
         sellerFailedCount:
           description: >-
             Active media buys whose update_media_buy call failed. Present whenever at least one active media buy was
             checked.
           example: 1
-          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummarySellerFailedCount'
+          $ref: '#/components/schemas/save_property_list_success_V3PropertyListCascadeSummarySellerFailedCount'
         enforcedByAnotherRouteCount:
           description: >-
             Active media buys proved enforceable by another route, so no update_media_buy call was needed. Present
             whenever at least one active media buy was checked for enforcement.
           example: 1
-          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryEnforcedByAnotherRouteCount'
+          $ref: '#/components/schemas/save_property_list_success_V3PropertyListCascadeSummaryEnforcedByAnotherRouteCount'
         pausedCount:
           description: >-
             Active media buys that were paused because they did not take the change or no route enforces their lists.
             Present whenever at least one active media buy was checked.
           example: 1
-          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryPausedCount'
+          $ref: '#/components/schemas/save_property_list_success_V3PropertyListCascadeSummaryPausedCount'
         pauseFailedCount:
           description: >-
             Active media buys that needed pausing but could not be paused. Present whenever at least one active media
             buy was checked.
           example: 0
-          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryPauseFailedCount'
+          $ref: '#/components/schemas/save_property_list_success_V3PropertyListCascadeSummaryPauseFailedCount'
         failedCampaignCount:
           description: >-
             Present only when the push could not run for one or more campaigns at all. Their active media buys are not
             counted above and were neither updated nor paused; save the list again to retry.
           example: 0
-          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryFailedCampaignCount'
+          $ref: '#/components/schemas/save_property_list_success_V3PropertyListCascadeSummaryFailedCampaignCount'
         pendingCount:
           description: >-
             Active media buys whose seller has not yet confirmed the change, either because it queued the change or
             because the shared cascade deadline elapsed before a push completed or started. They remain pending for the
             buyer to retry or follow up. Present whenever at least one active media buy was checked.
           example: 0
-          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryPendingCount'
+          $ref: '#/components/schemas/save_property_list_success_V3PropertyListCascadeSummaryPendingCount'
         pendingSellerApproval:
           description: >-
             One entry per active media buy awaiting seller confirmation, including buys whose campaign had not started
             before the shared cascade deadline. Present whenever at least one active media buy was checked.
-          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryPendingSellerApproval'
+          $ref: '#/components/schemas/save_property_list_success_V3PropertyListCascadeSummaryPendingSellerApproval'
         actionRequired:
-          description: >-
-            One entry per active media buy that did not take the change or whose property lists no route enforces after
-            it; every other checked buy took it. Present whenever at least one active media buy was checked.
-          $ref: '#/components/schemas/save_property_list_success_PropertyListCascadeSummaryActionRequired'
+          $ref: '#/components/schemas/save_property_list_success_V3PropertyListCascadeSummaryActionRequired'
       required:
         - totalMediaBuys
         - updatedCount
         - failedCount
       additionalProperties: false
-      description: Summary of the retroactive push of this updated property list to active media buys.
     save_property_list_success_PropertyListSaveCascadeSummaryTotalMediaBuys:
       type: integer
       minimum: 0
@@ -117721,8 +117738,8 @@ components:
     save_property_list_success_PropertyListSaveCascadeSummaryActionRequired:
       type: array
       items:
-        $ref: '#/components/schemas/save_property_list_success_PropertyListPushActionRequired'
-    save_property_list_success_PropertyListPushActionRequiredReason:
+        $ref: '#/components/schemas/save_property_list_success_V3PropertyListPushActionRequired'
+    save_property_list_success_V3PropertyListPushActionRequiredReason:
       type: string
       enum:
         - list_update_not_applied
@@ -117731,13 +117748,13 @@ components:
         Why the buy needs action. `list_update_not_applied`: the seller did not take the list change.
         `list_not_enforceable`: after the change, no route enforces every property list that applies to the buy (its
         seller does not apply the list, and its products do not name only sites and apps the list allows).
-    save_property_list_success_PropertyListCascadeSummaryTotalMediaBuys:
+    save_property_list_success_V3PropertyListCascadeSummaryTotalMediaBuys:
       type: integer
       minimum: 0
       maximum: 9007199254740991
       description: Active media buys found whose campaigns this list change applies to.
       example: 4
-    save_property_list_success_PropertyListCascadeSummaryUpdatedCount:
+    save_property_list_success_V3PropertyListCascadeSummaryUpdatedCount:
       type: integer
       minimum: 0
       maximum: 9007199254740991
@@ -117745,7 +117762,7 @@ components:
         Active media buys that took the change: their seller confirmed an update_media_buy call with the refreshed list
         reference, or another route already enforces their lists.
       example: 3
-    save_property_list_success_PropertyListCascadeSummaryFailedCount:
+    save_property_list_success_V3PropertyListCascadeSummaryFailedCount:
       type: integer
       minimum: 0
       maximum: 9007199254740991
@@ -117753,42 +117770,42 @@ components:
         Active media buys that did not take the change: their update_media_buy call failed, or no route enforces their
         lists after it, so they were paused without an update. See actionRequired for each one.
       example: 1
-    save_property_list_success_PropertyListCascadeSummarySellerUpdatedCount:
+    save_property_list_success_V3PropertyListCascadeSummarySellerUpdatedCount:
       type: integer
       minimum: 0
       maximum: 9007199254740991
-    save_property_list_success_PropertyListCascadeSummarySellerFailedCount:
+    save_property_list_success_V3PropertyListCascadeSummarySellerFailedCount:
       type: integer
       minimum: 0
       maximum: 9007199254740991
-    save_property_list_success_PropertyListCascadeSummaryEnforcedByAnotherRouteCount:
+    save_property_list_success_V3PropertyListCascadeSummaryEnforcedByAnotherRouteCount:
       type: integer
       minimum: 0
       maximum: 9007199254740991
-    save_property_list_success_PropertyListCascadeSummaryPausedCount:
+    save_property_list_success_V3PropertyListCascadeSummaryPausedCount:
       type: integer
       minimum: 0
       maximum: 9007199254740991
-    save_property_list_success_PropertyListCascadeSummaryPauseFailedCount:
+    save_property_list_success_V3PropertyListCascadeSummaryPauseFailedCount:
       type: integer
       minimum: 0
       maximum: 9007199254740991
-    save_property_list_success_PropertyListCascadeSummaryFailedCampaignCount:
+    save_property_list_success_V3PropertyListCascadeSummaryFailedCampaignCount:
       type: integer
       minimum: 0
       maximum: 9007199254740991
-    save_property_list_success_PropertyListCascadeSummaryPendingCount:
+    save_property_list_success_V3PropertyListCascadeSummaryPendingCount:
       type: integer
       minimum: 0
       maximum: 9007199254740991
-    save_property_list_success_PropertyListCascadeSummaryPendingSellerApproval:
+    save_property_list_success_V3PropertyListCascadeSummaryPendingSellerApproval:
       type: array
       items:
         $ref: '#/components/schemas/save_property_list_success_PropertyListPushPending'
-    save_property_list_success_PropertyListCascadeSummaryActionRequired:
+    save_property_list_success_V3PropertyListCascadeSummaryActionRequired:
       type: array
       items:
-        $ref: '#/components/schemas/save_property_list_success_PropertyListPushActionRequired'
+        $ref: '#/components/schemas/save_property_list_success_V3PropertyListPushActionRequired'
     save_rfp_request_i:
       type: string
       description: >-
