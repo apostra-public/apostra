@@ -128,7 +128,7 @@ class TransportTests(unittest.TestCase):
             self.assertEqual(expiring_provider(), "token-3")
         self.assertEqual(len(requests), 3)
         self.assertEqual(
-            str(requests[0].url), "https://identity.scope3.com/oauth2/token"
+            str(requests[0].url), "https://api.apostra.com/oauth2/token"
         )
         self.assertNotIn("authorization", requests[0].headers)
         self.assertEqual(

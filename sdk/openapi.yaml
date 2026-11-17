@@ -92670,7 +92670,7 @@ components:
         routes.
       flows:
         clientCredentials:
-          tokenUrl: https://identity.scope3.com/oauth2/token
+          tokenUrl: https://api.apostra.com/oauth2/token
           scopes:
             interchange:read: Read account data and call read operations
             interchange:write: Create or update account data
