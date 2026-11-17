@@ -16073,6 +16073,35 @@ export type RequestProposalsResponses = {
                     reason: 'channel_mismatch' | 'not_transactable' | 'wholesale_only';
                     sellerChannels: Array<string>;
                     skipCode?: 'account_requests_blocked' | 'go_live_blocked' | 'advertiser_not_accessible' | 'seller_unavailable_to_buyers';
+                    readinessStatus?: 'seller_unavailable' | 'needs_connection' | 'needs_account_selection' | 'needs_advertiser_mapping' | 'needs_commercial_setup' | 'platform_blocked';
+                    accountState?: 'account_pending' | 'account_needs_attention';
+                }>;
+                total: number;
+                truncated: boolean;
+            };
+            notOnForAdvertiser?: {
+                sellers: Array<{
+                    /**
+                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
+                     */
+                    sellerAccountId?: RequestProposalsSuccessNotOnForAdvertiserSellersItemSellerAccountId;
+                    sellerName?: string;
+                    reason: 'ADVERTISER_DISABLED' | 'NO_AUTOMATIC_MATCH' | 'ACCOUNT_ALWAYS_EXCLUDE';
+                }>;
+                total: number;
+                truncated: boolean;
+            };
+            failedSellers?: {
+                sellers: Array<{
+                    /**
+                     * The seller Account id: the Account that owns this seller. Send it as sellerAccountId.
+                     */
+                    sellerAccountId?: RequestProposalsSuccessFailedSellersSellersItemSellerAccountId;
+                    sellerName?: string;
+                    errorClass: 'timeout' | 'unreachable' | 'auth' | 'protocol' | 'coverage' | 'account' | 'eligibility' | 'refused' | 'outcome_unconfirmed';
+                    likelyTransient: boolean;
+                    code?: string;
+                    message: string;
                 }>;
                 total: number;
                 truncated: boolean;
@@ -16119,6 +16148,8 @@ export type RequestProposalsSuccessExpectedGoalPerformance = {
     verdict: 'likely' | 'possible' | 'unlikely';
 };
 
+export type RequestProposalsSuccessFailedSellersSellersItemSellerAccountId = number;
+
 export type RequestProposalsSuccessInclusionPropertyListIncompletePropertiesItemSellerAccountId = number;
 
 export type RequestProposalsSuccessInclusionPropertyListMissingPropertiesItemSellerAccountId = number;
@@ -16149,6 +16180,8 @@ export type RequestProposalsSuccessInclusionPropertyListMissingPublisher = {
 };
 
 export type RequestProposalsSuccessInclusionPropertyListMissingPublisherResellersItemSellerAccountId = number;
+
+export type RequestProposalsSuccessNotOnForAdvertiserSellersItemSellerAccountId = number;
 
 export type RequestProposalsSuccessPerSellerItemProductsItemSellerAccountId = number;
 
