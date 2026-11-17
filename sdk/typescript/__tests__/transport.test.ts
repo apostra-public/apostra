@@ -53,7 +53,7 @@ describe('HTTP transport', () => {
       ])
       expect(fetcher).toHaveBeenCalledTimes(1)
       const request = fetcher.mock.calls[0] as [RequestInfo | URL, RequestInit]
-      expect(request[0]).toBe('https://identity.scope3.com/oauth2/token')
+      expect(request[0]).toBe('https://api.apostra.com/oauth2/token')
       expect(new Headers(request[1].headers).get('authorization')).toBeNull()
       expect(new URLSearchParams(String(request[1].body))).toEqual(
         new URLSearchParams({

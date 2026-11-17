@@ -1,7 +1,7 @@
 // Generated. Do not edit.
 export const version = '0.37.0'
 export const baseUrl = "https://api.apostra.com/api/v3"
-export const m2mTokenUrl = "https://identity.scope3.com/oauth2/token"
+export const m2mTokenUrl = "https://api.apostra.com/oauth2/token"
 export const operations = {
   "confirm_payment_authority": {
     "path": "/tools/confirm_payment_authority",
