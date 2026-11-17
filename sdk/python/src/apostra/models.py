@@ -2233,7 +2233,9 @@ class GetInputKindAdvertiserAccess(TypedDict):
     options: NotRequired[GetInputKindAdvertiserAccessOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -2364,7 +2366,9 @@ class GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAd
     options: NotRequired[GetInputKindAgentAndBuyerAgentAndSkillAndInventorySourceAndAdvertiserAndAdvertiserGrantAndSignalAndAskAndConversationAndCampaignAndDimensionAndCreativeAssetAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAccountRelationshipOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -2493,7 +2497,9 @@ class GetInputKindAudience(TypedDict):
     options: NotRequired[GetInputKindAudienceOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -2622,7 +2628,9 @@ class GetInputKindBuyerRfp(TypedDict):
     options: NotRequired[GetInputKindBuyerRfpOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -2753,7 +2761,9 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     options: NotRequired[GetInputKindCatalogAndEventSourceOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -2884,7 +2894,9 @@ class GetInputKindConnection(TypedDict):
     options: NotRequired[GetInputKindConnectionOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -3015,7 +3027,9 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     options: NotRequired[GetInputKindCreativeAndCreativeCollectionWithAdvertiserIdOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -3144,7 +3158,9 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     options: NotRequired[GetInputKindCreativeAndCreativeCollectionWithSourceIdOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -3273,7 +3289,9 @@ class GetInputKindCreativeEngine(TypedDict):
     options: NotRequired[GetInputKindCreativeEngineOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -3402,7 +3420,9 @@ class GetInputKindCreativeFormat(TypedDict):
     options: NotRequired[GetInputKindCreativeFormatOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -3531,7 +3551,9 @@ class GetInputKindCreativeSession(TypedDict):
     options: NotRequired[GetInputKindCreativeSessionOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -3662,7 +3684,9 @@ class GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDis
     options: NotRequired[GetInputKindListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndNotificationConfigOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -3793,7 +3817,9 @@ class GetInputKindMaterial(TypedDict):
     options: NotRequired[GetInputKindMaterialOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -3924,7 +3950,9 @@ class GetInputKindProposal(TypedDict):
     options: NotRequired[GetInputKindProposalOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -4055,7 +4083,9 @@ class GetInputKindSeller(TypedDict):
     options: NotRequired[GetInputKindSellerOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -4186,7 +4216,9 @@ class GetInputKindSession(TypedDict):
     options: NotRequired[GetInputKindSessionOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -4317,7 +4349,9 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     options: NotRequired[GetInputKindWholesaleProductWithAdvertiserIdOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -4446,7 +4480,9 @@ class GetInputKindWholesaleProductWithSourceId(TypedDict):
     options: NotRequired[GetInputKindWholesaleProductWithSourceIdOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -4591,7 +4627,9 @@ class GetInputKindWorkItem(TypedDict):
     options: NotRequired[GetInputKindWorkItemOptions]
     '\n    For kind material: which revision to read, paging for each collection, and selectors that narrow them.\n    '
     version: NotRequired[int]
-    '\n    For kind playbook: read this past version with its content, for example to save it again as current.\n    '
+    '\n    For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.\n    '
+    businessRulesPolicy: NotRequired[Literal["brief_acceptance", "creative_policy"]]
+    '\n    For kind business_rules with version: the policy that numbers it.\n    '
     subscriptionsOffset: NotRequired[int]
     '\n    For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.\n    '
     connectionAccountsOffset: NotRequired[int]
@@ -11256,7 +11294,9 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
-    '\n    The policy version to write, as the read returns it.\n    '
+    '\n    Both policies in one write. Prefer policies.\n    '
+    policies: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicies]
+    '\n    Change each policy on its own: publish text, save a draft, or make a version live.\n    '
     creativeApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto approves creatives with no review; manual queues them.\n    '
     mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
@@ -11264,7 +11304,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto, or to save no Creative Policy under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: list[Literal["brief_acceptance", "creative_policy"]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -11278,7 +11318,9 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
-    '\n    The policy version to write, as the read returns it.\n    '
+    '\n    Both policies in one write. Prefer policies.\n    '
+    policies: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicies]
+    '\n    Change each policy on its own: publish text, save a draft, or make a version live.\n    '
     creativeApproval: Literal["auto", "manual"]
     '\n    auto approves creatives with no review; manual queues them.\n    '
     mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
@@ -11286,7 +11328,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto, or to save no Creative Policy under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -11300,7 +11342,9 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
-    '\n    The policy version to write, as the read returns it.\n    '
+    '\n    Both policies in one write. Prefer policies.\n    '
+    policies: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicies]
+    '\n    Change each policy on its own: publish text, save a draft, or make a version live.\n    '
     creativeApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto approves creatives with no review; manual queues them.\n    '
     mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
@@ -11308,7 +11352,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     guaranteedOverForecast: Literal["overbook", "hold_for_review"]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto, or to save no Creative Policy under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -11320,7 +11364,9 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
     policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
-    '\n    The policy version to write, as the read returns it.\n    '
+    '\n    Both policies in one write. Prefer policies.\n    '
+    policies: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicies]
+    '\n    Change each policy on its own: publish text, save a draft, or make a version live.\n    '
     creativeApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto approves creatives with no review; manual queues them.\n    '
     mediaBuyApproval: Literal["auto", "manual"]
@@ -11328,7 +11374,7 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto, or to save no Creative Policy under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -11338,11 +11384,13 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
 
 SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAdvertisingPolicyDisclosureWithMediaBuyApproval: TypeAlias = SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval
 
-class SaveBusinessRulesInputWithPolicy(TypedDict):
-    policy: SaveBusinessRulesRequestSaveBusinessRulesPolicy
-    '\n    The policy version to write, as the read returns it.\n    '
+class SaveBusinessRulesInputWithPolicies(TypedDict):
     materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
     '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
+    policy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicy]
+    '\n    Both policies in one write. Prefer policies.\n    '
+    policies: SaveBusinessRulesRequestSaveBusinessRulesPolicies
+    '\n    Change each policy on its own: publish text, save a draft, or make a version live.\n    '
     creativeApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto approves creatives with no review; manual queues them.\n    '
     mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
@@ -11350,7 +11398,7 @@ class SaveBusinessRulesInputWithPolicy(TypedDict):
     guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto, or to save no Creative Policy under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -11358,7 +11406,35 @@ class SaveBusinessRulesInputWithPolicy(TypedDict):
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
-SaveBusinessRulesInput: TypeAlias = "SaveBusinessRulesInputWithPolicy | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithGuaranteedOverForecast | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure"
+class SaveBusinessRulesInputWithPolicy(TypedDict):
+    policy: SaveBusinessRulesRequestSaveBusinessRulesPolicy
+    '\n    Both policies in one write. Prefer policies.\n    '
+    materialCandidate: NotRequired[SaveBusinessRulesInputMaterialCandidate]
+    '\n    Exact get(material) provenance; include only to confirm that candidate.\n    '
+    policies: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicies]
+    '\n    Change each policy on its own: publish text, save a draft, or make a version live.\n    '
+    creativeApproval: NotRequired[Literal["auto", "manual"]]
+    '\n    auto approves creatives with no review; manual queues them.\n    '
+    mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
+    '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
+    '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
+    acknowledgeNoHumanReview: NotRequired[bool]
+    '\n    Required to move either approval to auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
+    advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
+    '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
+    expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+SaveBusinessRulesInput: TypeAlias = "SaveBusinessRulesInputWithPolicy | SaveBusinessRulesInputWithPolicies | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithCreativeApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithMediaBuyApproval | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithGuaranteedOverForecast | SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverForecastAdvertisingPolicyDisclosureWithAdvertisingPolicyDisclosure"
+
+class SaveBusinessRulesRequestSaveBusinessRulesPolicies(TypedDict):
+    briefAcceptance: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicyChange]
+    '\n    Brief rules for discovery and manual-buy screening.\n    '
+    creativePolicy: NotRequired[SaveBusinessRulesRequestSaveBusinessRulesPolicyChange]
+    '\n    Submitted-creative rules.\n    '
 
 class SaveBusinessRulesRequestSaveBusinessRulesPolicy(TypedDict):
     content: NotRequired[str]
@@ -11370,13 +11446,37 @@ class SaveBusinessRulesRequestSaveBusinessRulesPolicy(TypedDict):
     notes: NotRequired[str]
     '\n    Why this version was written. Version history only.\n    '
 
+class SaveBusinessRulesRequestSaveBusinessRulesPolicyChange(TypedDict):
+    text: NotRequired[str]
+    '\n    Text for a new version of this policy.\n    '
+    notes: NotRequired[str]
+    '\n    Why this version was written. Only with text.\n    '
+    publish: NotRequired[bool]
+    '\n    true, the default, makes text live; false saves it as the draft.\n    '
+    publishVersion: NotRequired[int]
+    '\n    Make this existing version live. Not with text.\n    '
+    expectedDraftVersion: NotRequired[int | None]
+    '\n    Required with publish false or publishVersion: the current draft, or null for none.\n    '
+    turnOff: NotRequired[bool]
+    '\n    true makes no version live. Alone.\n    '
+
+class SaveBusinessRulesSuccessSaveBusinessRulesPolicyChangeResult(TypedDict):
+    action: Literal["published", "draft_saved", "draft_published", "reactivated", "turned_off", "unchanged"]
+    version: float | None
+    replacedVersion: float | None
+
 class SaveBusinessRulesSuccessSaveBusinessRulesSuccessSaved(TypedDict):
     outcome: Literal["saved"]
     businessRules: SaveBusinessRulesSuccessSaveBusinessRulesSuccessSavedBusinessRules
     createdVersion: NotRequired[float]
     replacedVersion: NotRequired[float | None]
+    policyChanges: NotRequired[SaveBusinessRulesSuccessSaveBusinessRulesSuccessSavedPolicyChanges]
 
 SaveBusinessRulesSuccessSaveBusinessRulesSuccessSavedBusinessRules: TypeAlias = dict[str, JsonValue]
+
+class SaveBusinessRulesSuccessSaveBusinessRulesSuccessSavedPolicyChanges(TypedDict):
+    briefAcceptance: NotRequired[SaveBusinessRulesSuccessSaveBusinessRulesPolicyChangeResult]
+    creativePolicy: NotRequired[SaveBusinessRulesSuccessSaveBusinessRulesPolicyChangeResult]
 
 class SaveBusinessRulesSuccessSellerSaveCandidateReplayed(TypedDict):
     outcome: Literal["candidate_replayed"]

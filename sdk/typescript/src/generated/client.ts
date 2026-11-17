@@ -795,14 +795,14 @@ export class Apostra extends Transport {
   /** Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, remove a card, or pay a failed payment now. Plan, payment terms, renewal, card removal and pay now need administrator approval on our site. Cards stay off MCP. Returns the data together with response headers and request ID. */
   saveBillingWithResponse(input: SaveBillingInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBillingResult>> { return this.requestDetailed("save_billing", input, options) }
   /**
-   * Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto, or empty creativePolicy under creative auto, needs acknowledgeNoHumanReview.
+   * Write seller AI Business Rules. Policy writes need an account admin; use policies. Approval auto, or no Creative Policy under creative auto, needs acknowledgeNoHumanReview.
    *
    * @example
    * await client.saveBusinessRules(input, { idempotencyKey: 'stable-key' })
    */
   saveBusinessRules(input: SaveBusinessRulesInput, options: WriteRequestOptions): Promise<SaveBusinessRulesResult> { return this.request("save_business_rules", input, options) }
 
-  /** Write seller AI Business Rules. Policy content needs an account admin and both policy fields. Approval auto, or empty creativePolicy under creative auto, needs acknowledgeNoHumanReview. Returns the data together with response headers and request ID. */
+  /** Write seller AI Business Rules. Policy writes need an account admin; use policies. Approval auto, or no Creative Policy under creative auto, needs acknowledgeNoHumanReview. Returns the data together with response headers and request ID. */
   saveBusinessRulesWithResponse(input: SaveBusinessRulesInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveBusinessRulesResult>> { return this.requestDetailed("save_business_rules", input, options) }
   /**
    * Create a buyer agent, or with id make one change: name, advertiser access, lifecycle state, or credential handoff.

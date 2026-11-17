@@ -1046,9 +1046,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -1290,9 +1294,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -1534,9 +1542,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -1774,9 +1786,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -2015,9 +2031,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -2260,9 +2280,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -2496,9 +2520,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -2738,9 +2766,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -2979,9 +3011,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -3220,9 +3256,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -3461,9 +3501,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -3702,9 +3746,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -3943,9 +3991,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -4188,9 +4240,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -4432,9 +4488,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -4676,9 +4736,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -4920,9 +4984,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -5164,9 +5232,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -5404,9 +5476,13 @@ export type GetData = {
             };
         };
         /**
-         * For kind playbook: read this past version with its content, for example to save it again as current.
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
          */
         version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
         /**
          * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
          */
@@ -19474,7 +19550,7 @@ export type SaveBillingSuccessSaveBillingApprovalRequired = {
 export type SaveBusinessRulesData = {
     body: unknown & ({
         policy: unknown;
-    } | unknown) & {
+    } | unknown | unknown) & {
         /**
          * Exact get(material) provenance; include only to confirm that candidate.
          */
@@ -19497,9 +19573,13 @@ export type SaveBusinessRulesData = {
             advertiserRef?: string;
         };
         /**
-         * The policy version to write, as the read returns it.
+         * Both policies in one write. Prefer policies.
          */
         policy?: SaveBusinessRulesRequestSaveBusinessRulesPolicy;
+        /**
+         * Change each policy on its own: publish text, save a draft, or make a version live.
+         */
+        policies?: SaveBusinessRulesRequestSaveBusinessRulesPolicies;
         /**
          * auto approves creatives with no review; manual queues them.
          */
@@ -19513,7 +19593,7 @@ export type SaveBusinessRulesData = {
          */
         guaranteedOverForecast?: 'overbook' | 'hold_for_review';
         /**
-         * Required to move either approval to auto, or to save no Creative Policy under creative auto. Confirms nobody will review those.
+         * Required to move either approval to auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.
          */
         acknowledgeNoHumanReview?: boolean;
         /**
@@ -19603,6 +19683,17 @@ export type SaveBusinessRulesErrors = {
     503: V3ToolErrorResponse;
 };
 
+export type SaveBusinessRulesRequestSaveBusinessRulesPolicies = {
+    /**
+     * Brief rules for discovery and manual-buy screening.
+     */
+    briefAcceptance?: SaveBusinessRulesRequestSaveBusinessRulesPolicyChange;
+    /**
+     * Submitted-creative rules.
+     */
+    creativePolicy?: SaveBusinessRulesRequestSaveBusinessRulesPolicyChange;
+};
+
 export type SaveBusinessRulesRequestSaveBusinessRulesPolicy = {
     /**
      * Compatibility input for already-sectioned Markdown. Prefer the two explicit policy fields.
@@ -19620,6 +19711,33 @@ export type SaveBusinessRulesRequestSaveBusinessRulesPolicy = {
      * Why this version was written. Version history only.
      */
     notes?: string;
+};
+
+export type SaveBusinessRulesRequestSaveBusinessRulesPolicyChange = {
+    /**
+     * Text for a new version of this policy.
+     */
+    text?: string;
+    /**
+     * Why this version was written. Only with text.
+     */
+    notes?: string;
+    /**
+     * true, the default, makes text live; false saves it as the draft.
+     */
+    publish?: boolean;
+    /**
+     * Make this existing version live. Not with text.
+     */
+    publishVersion?: number;
+    /**
+     * Required with publish false or publishVersion: the current draft, or null for none.
+     */
+    expectedDraftVersion?: number | null;
+    /**
+     * true makes no version live. Alone.
+     */
+    turnOff?: boolean;
 };
 
 export type SaveBusinessRulesResponse = SaveBusinessRulesResponses[keyof SaveBusinessRulesResponses];
@@ -19650,11 +19768,21 @@ export type SaveBusinessRulesResponses = {
     };
 };
 
+export type SaveBusinessRulesSuccessSaveBusinessRulesPolicyChangeResult = {
+    action: 'published' | 'draft_saved' | 'draft_published' | 'reactivated' | 'turned_off' | 'unchanged';
+    version: number | null;
+    replacedVersion: number | null;
+};
+
 export type SaveBusinessRulesSuccessSaveBusinessRulesSuccessSaved = {
     outcome: 'saved';
     businessRules: SaveBusinessRulesSuccessSaveBusinessRulesSuccessSavedBusinessRules;
     createdVersion?: number;
     replacedVersion?: number | null;
+    policyChanges?: {
+        briefAcceptance?: SaveBusinessRulesSuccessSaveBusinessRulesPolicyChangeResult;
+        creativePolicy?: SaveBusinessRulesSuccessSaveBusinessRulesPolicyChangeResult;
+    };
     [key: string]: unknown;
 };
 
