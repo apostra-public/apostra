@@ -21057,6 +21057,7 @@ export type SaveCampaignData = {
                      * Unit.
                      */
                     unit: 'min' | 'hr';
+                    [key: string]: unknown;
                 };
                 /**
                  * Travel mode.
@@ -21074,6 +21075,7 @@ export type SaveCampaignData = {
                      * Unit.
                      */
                     unit: 'km' | 'mi' | 'm';
+                    [key: string]: unknown;
                 };
                 /**
                  * Geographic boundary.
@@ -21087,6 +21089,7 @@ export type SaveCampaignData = {
                      * Geometry coordinates.
                      */
                     coordinates: Array<unknown>;
+                    [key: string]: unknown;
                 };
                 /**
                  * AdCP extension values.
@@ -21230,6 +21233,7 @@ export type SaveCampaignData = {
                  * Optional display label.
                  */
                 label?: string;
+                [key: string]: unknown;
             } & unknown>;
             /**
              * Minimum audience age.
@@ -21247,6 +21251,7 @@ export type SaveCampaignData = {
                  * Accepted age-verification methods.
                  */
                 accepted_methods?: Array<'facial_age_estimation' | 'id_document' | 'digital_id' | 'credit_card' | 'world_id'>;
+                [key: string]: unknown;
             };
         } | null;
         /**
@@ -21691,6 +21696,13 @@ export type SaveCampaignRequestTargetingOverlayGeoMetros = Array<{
      * Values in this system.
      */
     values: Array<string>;
+    /**
+     * Labels by value ID.
+     */
+    value_labels?: {
+        [key: string]: string;
+    };
+    [key: string]: unknown;
 }>;
 
 /**
@@ -21705,6 +21717,13 @@ export type SaveCampaignRequestTargetingOverlayGeoMetrosExclude = Array<{
      * Values in this system.
      */
     values: Array<string>;
+    /**
+     * Labels by value ID.
+     */
+    value_labels?: {
+        [key: string]: string;
+    };
+    [key: string]: unknown;
 }>;
 
 /**
@@ -21743,6 +21762,7 @@ export type SaveCampaignRequestTargetingOverlayGeoPlaces = Array<{
     ext?: {
         [key: string]: unknown;
     };
+    [key: string]: unknown;
 } & (unknown | {
     /**
      * Code system.
@@ -21790,6 +21810,7 @@ export type SaveCampaignRequestTargetingOverlayGeoPlacesExclude = Array<{
     ext?: {
         [key: string]: unknown;
     };
+    [key: string]: unknown;
 } & (unknown | {
     /**
      * Code system.
@@ -21817,6 +21838,7 @@ export type SaveCampaignRequestTargetingOverlayGeoPostalAreas = Array<({
      * Values in this system.
      */
     values: Array<string>;
+    [key: string]: unknown;
 } & {
     /**
      * Country code.
@@ -21925,6 +21947,7 @@ export type SaveCampaignRequestTargetingOverlayGeoPostalAreas = Array<({
      * Values in this system.
      */
     values: Array<string>;
+    [key: string]: unknown;
 }>;
 
 /**
@@ -21943,6 +21966,7 @@ export type SaveCampaignRequestTargetingOverlayGeoPostalAreasExclude = Array<({
      * Values in this system.
      */
     values: Array<string>;
+    [key: string]: unknown;
 } & {
     /**
      * Country code.
@@ -22051,6 +22075,7 @@ export type SaveCampaignRequestTargetingOverlayGeoPostalAreasExclude = Array<({
      * Values in this system.
      */
     values: Array<string>;
+    [key: string]: unknown;
 }>;
 
 export type SaveCampaignRequestTrackingOverridesItemTrackerId = string;
@@ -30478,12 +30503,18 @@ export type SaveMediaBuyData = {
              */
             lineItemRef?: string;
             targetingOverlay?: {
+                geo_value_labels?: {
+                    [key: string]: string;
+                };
                 geo_metros?: Array<{
                     /**
                      * Metro area classification system (e.g., 'nielsen_dma', 'uk_itl2')
                      */
                     system: 'nielsen_dma' | 'uk_itl1' | 'uk_itl2' | 'eurostat_nuts2' | 'custom';
                     values: Array<string>;
+                    value_labels?: {
+                        [key: string]: string;
+                    };
                 }>;
                 geo_metros_exclude?: Array<{
                     /**
@@ -30491,6 +30522,9 @@ export type SaveMediaBuyData = {
                      */
                     system: 'nielsen_dma' | 'uk_itl1' | 'uk_itl2' | 'eurostat_nuts2' | 'custom';
                     values: Array<string>;
+                    value_labels?: {
+                        [key: string]: string;
+                    };
                 }>;
                 geo_places?: Array<{
                     /**
@@ -31349,12 +31383,18 @@ export type SaveMediaBuyData = {
              */
             lineItemRef?: string;
             targetingOverlay?: {
+                geo_value_labels?: {
+                    [key: string]: string;
+                } | null;
                 geo_metros?: Array<{
                     /**
                      * Metro area classification system (e.g., 'nielsen_dma', 'uk_itl2')
                      */
                     system: 'nielsen_dma' | 'uk_itl1' | 'uk_itl2' | 'eurostat_nuts2' | 'custom';
                     values: Array<string>;
+                    value_labels?: {
+                        [key: string]: string;
+                    };
                 }> | null;
                 geo_metros_exclude?: Array<{
                     /**
@@ -31362,6 +31402,9 @@ export type SaveMediaBuyData = {
                      */
                     system: 'nielsen_dma' | 'uk_itl1' | 'uk_itl2' | 'eurostat_nuts2' | 'custom';
                     values: Array<string>;
+                    value_labels?: {
+                        [key: string]: string;
+                    };
                 }> | null;
                 geo_places?: Array<{
                     /**
