@@ -1906,13 +1906,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -1965,6 +1965,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -3202,13 +3203,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -3263,6 +3264,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -4476,13 +4478,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -4535,6 +4537,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -5735,13 +5738,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -5794,6 +5797,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -6995,13 +6999,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -7054,6 +7058,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -8262,13 +8267,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -8321,6 +8326,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -10691,13 +10697,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -10750,6 +10756,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -11953,13 +11960,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -12012,6 +12019,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -15557,13 +15565,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -15616,6 +15624,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -16817,13 +16826,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -16876,6 +16885,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -18083,13 +18093,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -18142,6 +18152,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -19348,13 +19359,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -19407,6 +19418,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -20613,13 +20625,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -20672,6 +20684,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -21878,13 +21891,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -21937,6 +21950,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -23143,13 +23157,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (needs
-                        advertiserId); failed ones go to unavailableIncludes. playbook: versions, discounts.
-                        business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics.
-                        campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives,
-                        deliverySummary, liveStatus. proposal: brief, products, versions, mediaBuys. advertiser:
-                        tracking, accounts. connection: inventory. catalog: items, history. material: source_access,
-                        repeats, options.pages keys but candidates. property_list: report.
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
+                        validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
+                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
+                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
+                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
+                        report.
                       type: array
                       items:
                         type: string
@@ -23202,6 +23216,7 @@ paths:
                           - validationRuns
                           - webhookDeliveries
                           - liveStatus
+                          - reporting_status
                           - pendingChange
                           - operations
                           - accounts
@@ -27591,6 +27606,63 @@ paths:
                             type: array
                             items:
                               $ref: '#/components/schemas/get_success_CampaignGoalProgress'
+                          reportingStatus:
+                            type: object
+                            properties:
+                              obligations:
+                                maxItems: 50
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    reporting_obligation_id:
+                                      type: string
+                                    delivery_config_id:
+                                      type: string
+                                    delivery_config_version:
+                                      type: integer
+                                      minimum: -9007199254740991
+                                      maximum: 9007199254740991
+                                    feed_purpose:
+                                      anyOf:
+                                        - type: string
+                                          const: pacing
+                                        - type: string
+                                          const: analytics
+                                        - type: string
+                                          const: billing
+                                    health:
+                                      anyOf:
+                                        - type: string
+                                          const: healthy
+                                        - type: string
+                                          const: waiting
+                                        - type: string
+                                          const: delayed
+                                        - type: string
+                                          const: action_required
+                                        - type: string
+                                          const: complete
+                                    issue_ids:
+                                      type: array
+                                      items:
+                                        type: string
+                                  required:
+                                    - reporting_obligation_id
+                                    - delivery_config_id
+                                    - delivery_config_version
+                                    - feed_purpose
+                                    - health
+                                    - issue_ids
+                                  additionalProperties: false
+                              obligationsOmitted:
+                                type: integer
+                                minimum: 0
+                                maximum: 9007199254740991
+                            required:
+                              - obligations
+                              - obligationsOmitted
+                            additionalProperties: false
                           operationDetails:
                             type: array
                             items:
