@@ -94984,6 +94984,10 @@ components:
             - conversions
             - leads
             - viewableImpressions
+            - engagements
+            - follows
+            - saves
+            - profileVisits
             - vendorMetric
         units:
           type: number
@@ -95003,6 +95007,30 @@ components:
           type:
             - string
             - 'null'
+        trend:
+          maxItems: 7
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+              value:
+                type: number
+              units:
+                type: number
+                minimum: 0
+              denominatorUnits:
+                anyOf:
+                  - type: number
+                    minimum: 0
+                  - type: 'null'
+            required:
+              - date
+              - value
+              - units
+              - denominatorUnits
+            additionalProperties: false
       required:
         - kind
         - value
@@ -99529,6 +99557,10 @@ components:
             - conversions
             - leads
             - viewableImpressions
+            - engagements
+            - follows
+            - saves
+            - profileVisits
             - vendorMetric
         units:
           type: number
@@ -99543,6 +99575,30 @@ components:
           type:
             - string
             - 'null'
+        trend:
+          maxItems: 7
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+              value:
+                type: number
+              units:
+                type: number
+                minimum: 0
+              denominatorUnits:
+                anyOf:
+                  - type: number
+                    minimum: 0
+                  - type: 'null'
+            required:
+              - date
+              - value
+              - units
+              - denominatorUnits
+            additionalProperties: false
       required:
         - kind
         - value
