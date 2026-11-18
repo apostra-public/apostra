@@ -14779,6 +14779,97 @@ export type OpenPendingApprovalsResponses = {
     };
 };
 
+export type OpenPlanAndBillingData = {
+    body: {
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers?: {
+        /**
+         * Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are sent they must name the same account.
+         *
+         * @deprecated
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/open_plan_and_billing';
+};
+
+export type OpenPlanAndBillingError = OpenPlanAndBillingErrors[keyof OpenPlanAndBillingErrors];
+
+export type OpenPlanAndBillingErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * A required service is unavailable
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type OpenPlanAndBillingResponse = OpenPlanAndBillingResponses[keyof OpenPlanAndBillingResponses];
+
+export type OpenPlanAndBillingResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            opened: true;
+        };
+        error: null;
+    };
+};
+
 export type OpenProposalPassData = {
     body: {
         rfpId: unknown;

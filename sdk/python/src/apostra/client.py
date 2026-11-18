@@ -244,6 +244,14 @@ class Apostra(SyncTransport):
         "Open the pending approvals Page: the requests waiting on this account for an administrator to approve or reject on our site, each linked to its approval page. The Page loads itself, so do not repeat the list. It approves nothing; search(kind: \"approval\") reads the same list. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenPendingApprovalsResult], self._request_with_response("open_pending_approvals", input, account_id=account_id, timeout=timeout))
 
+    def open_plan_and_billing(self, input: models.OpenPlanAndBillingInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenPlanAndBillingResult:
+        "Open the organization's Plan & Billing Page: plan, Terms, payment terms, payment method, payer and payout details, invoices, and requests waiting for an administrator. Use it when the person wants to see or change any of these. To answer one question, read `get` with `kind: \"billing\"` instead."
+        return cast("models.OpenPlanAndBillingResult", self._request("open_plan_and_billing", input, account_id=account_id, timeout=timeout))
+
+    def open_plan_and_billing_with_response(self, input: models.OpenPlanAndBillingInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenPlanAndBillingResult]:
+        "Open the organization's Plan & Billing Page: plan, Terms, payment terms, payment method, payer and payout details, invoices, and requests waiting for an administrator. Use it when the person wants to see or change any of these. To answer one question, read `get` with `kind: \"billing\"` instead. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenPlanAndBillingResult], self._request_with_response("open_plan_and_billing", input, account_id=account_id, timeout=timeout))
+
     def open_proposal_pass(self, input: models.OpenProposalPassInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenProposalPassResult:
         "Open Proposal Pass on one exact immutable RFP turn. Supply the matching rfpId and turnId from save_rfp or get; the Page loads the private response itself."
         return cast("models.OpenProposalPassResult", self._request("open_proposal_pass", input, account_id=account_id, timeout=timeout))
@@ -884,6 +892,14 @@ class AsyncApostra(AsyncTransport):
     async def open_pending_approvals_with_response(self, input: models.OpenPendingApprovalsInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenPendingApprovalsResult]:
         "Open the pending approvals Page: the requests waiting on this account for an administrator to approve or reject on our site, each linked to its approval page. The Page loads itself, so do not repeat the list. It approves nothing; search(kind: \"approval\") reads the same list. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenPendingApprovalsResult], await self._request_with_response("open_pending_approvals", input, account_id=account_id, timeout=timeout))
+
+    async def open_plan_and_billing(self, input: models.OpenPlanAndBillingInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenPlanAndBillingResult:
+        "Open the organization's Plan & Billing Page: plan, Terms, payment terms, payment method, payer and payout details, invoices, and requests waiting for an administrator. Use it when the person wants to see or change any of these. To answer one question, read `get` with `kind: \"billing\"` instead."
+        return cast("models.OpenPlanAndBillingResult", await self._request("open_plan_and_billing", input, account_id=account_id, timeout=timeout))
+
+    async def open_plan_and_billing_with_response(self, input: models.OpenPlanAndBillingInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenPlanAndBillingResult]:
+        "Open the organization's Plan & Billing Page: plan, Terms, payment terms, payment method, payer and payout details, invoices, and requests waiting for an administrator. Use it when the person wants to see or change any of these. To answer one question, read `get` with `kind: \"billing\"` instead. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenPlanAndBillingResult], await self._request_with_response("open_plan_and_billing", input, account_id=account_id, timeout=timeout))
 
     async def open_proposal_pass(self, input: models.OpenProposalPassInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenProposalPassResult:
         "Open Proposal Pass on one exact immutable RFP turn. Supply the matching rfpId and turnId from save_rfp or get; the Page loads the private response itself."
