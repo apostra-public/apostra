@@ -642,6 +642,25 @@ export const operations = {
     ],
     "summary": "Open the pending approvals Page: the requests waiting on this account for an administrator to approve or reject on our site, each linked to its approval page. The Page loads itself, so do not repeat the list. It approves nothing; search(kind: \"approval\") reads the same list."
   },
+  "open_plan_and_billing": {
+    "path": "/tools/open_plan_and_billing",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open the organization's Plan & Billing Page: plan, Terms, payment terms, payment method, payer and payout details, invoices, and requests waiting for an administrator. Use it when the person wants to see or change any of these. To answer one question, read `get` with `kind: \"billing\"` instead."
+  },
   "open_proposal_pass": {
     "path": "/tools/open_proposal_pass",
     "method": "POST",

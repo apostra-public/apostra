@@ -8966,6 +8966,13 @@ class OpenPendingApprovalsInput(TypedDict):
 class OpenPendingApprovalsResult(TypedDict):
     pass
 
+class OpenPlanAndBillingInput(TypedDict):
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class OpenPlanAndBillingResult(TypedDict):
+    opened: Literal[True]
+
 class OpenProposalPassInput(TypedDict):
     rfpId: str
     '\n    Canonical RFP id returned by save_rfp or get.\n    '
@@ -29813,6 +29820,8 @@ OpenMediaPartnersPageError: TypeAlias = "V3ToolErrorResponse"
 OpenPageError: TypeAlias = "V3ToolErrorResponse"
 
 OpenPendingApprovalsError: TypeAlias = "V3ToolErrorResponse"
+
+OpenPlanAndBillingError: TypeAlias = "V3ToolErrorResponse"
 
 OpenProposalPassError: TypeAlias = "V3ToolErrorResponse"
 
