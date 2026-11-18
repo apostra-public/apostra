@@ -12548,6 +12548,8 @@ class SaveCampaignRequestTargetingOverlayGeoMetrosExcludeItem(TypedDict):
     '\n    Code system.\n    '
     values: list[str]
     '\n    Values in this system.\n    '
+    value_labels: NotRequired[dict[str, str]]
+    '\n    Labels by value ID.\n    '
 
 SaveCampaignRequestTargetingOverlayGeoMetrosExclude: TypeAlias = "list[SaveCampaignRequestTargetingOverlayGeoMetrosExcludeItem]"
 
@@ -12556,6 +12558,8 @@ class SaveCampaignRequestTargetingOverlayGeoMetrosItem(TypedDict):
     '\n    Code system.\n    '
     values: list[str]
     '\n    Values in this system.\n    '
+    value_labels: NotRequired[dict[str, str]]
+    '\n    Labels by value ID.\n    '
 
 SaveCampaignRequestTargetingOverlayGeoMetros: TypeAlias = "list[SaveCampaignRequestTargetingOverlayGeoMetrosItem]"
 
@@ -17727,6 +17731,7 @@ class SaveMediaBuyInputKindCreateProductsItemPerformanceStandardsItemVendor(Type
     '\n    Optional vendor brand ID.\n    '
 
 class SaveMediaBuyInputKindCreateProductsItemTargetingOverlay(TypedDict):
+    geo_value_labels: NotRequired[dict[str, str]]
     geo_metros: NotRequired[list[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayGeoMetrosItem]]
     geo_metros_exclude: NotRequired[list[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayGeoMetrosExcludeItem]]
     geo_places: NotRequired[list[SaveMediaBuyInputKindCreateProductsItemTargetingOverlayGeoPlacesItemWithoutSystem | SaveMediaBuyInputKindCreateProductsItemTargetingOverlayGeoPlacesItemWithSystem]]
@@ -17889,11 +17894,13 @@ class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayGeoMetrosExcludeIte
     system: Literal["nielsen_dma", "uk_itl1", "uk_itl2", "eurostat_nuts2", "custom"]
     '\n    Metro area classification system (e.g., \'nielsen_dma\', \'uk_itl2\')\n    '
     values: list[str]
+    value_labels: NotRequired[dict[str, str]]
 
 class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayGeoMetrosItem(TypedDict):
     system: Literal["nielsen_dma", "uk_itl1", "uk_itl2", "eurostat_nuts2", "custom"]
     '\n    Metro area classification system (e.g., \'nielsen_dma\', \'uk_itl2\')\n    '
     values: list[str]
+    value_labels: NotRequired[dict[str, str]]
 
 class SaveMediaBuyInputKindCreateProductsItemTargetingOverlayGeoPlacesExcludeItemWithSystem(TypedDict):
     country: str
@@ -18332,6 +18339,7 @@ class SaveMediaBuyInputKindUpdateProductsItemPerformanceStandardsItemVendor(Type
     '\n    Optional vendor brand ID.\n    '
 
 class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlay(TypedDict):
+    geo_value_labels: NotRequired[dict[str, str] | None]
     geo_metros: NotRequired[list[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayGeoMetrosItem] | None]
     geo_metros_exclude: NotRequired[list[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayGeoMetrosExcludeItem] | None]
     geo_places: NotRequired[list[SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayGeoPlacesValueItemWithoutSystem | SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayGeoPlacesValueItemWithSystem] | None]
@@ -18488,11 +18496,13 @@ class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayGeoMetrosExcludeIte
     system: Literal["nielsen_dma", "uk_itl1", "uk_itl2", "eurostat_nuts2", "custom"]
     '\n    Metro area classification system (e.g., \'nielsen_dma\', \'uk_itl2\')\n    '
     values: list[str]
+    value_labels: NotRequired[dict[str, str]]
 
 class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayGeoMetrosItem(TypedDict):
     system: Literal["nielsen_dma", "uk_itl1", "uk_itl2", "eurostat_nuts2", "custom"]
     '\n    Metro area classification system (e.g., \'nielsen_dma\', \'uk_itl2\')\n    '
     values: list[str]
+    value_labels: NotRequired[dict[str, str]]
 
 class SaveMediaBuyInputKindUpdateProductsItemTargetingOverlayGeoPlacesExcludeValueItemWithSystem(TypedDict):
     country: str

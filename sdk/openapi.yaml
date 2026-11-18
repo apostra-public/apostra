@@ -43821,7 +43821,7 @@ paths:
                                     required:
                                       - value
                                       - unit
-                                    additionalProperties: false
+                                    additionalProperties: {}
                                     description: Maximum travel time.
                                   transport_mode:
                                     type: string
@@ -43848,7 +43848,7 @@ paths:
                                     required:
                                       - value
                                       - unit
-                                    additionalProperties: false
+                                    additionalProperties: {}
                                     description: Radius.
                                   geometry:
                                     type: object
@@ -43866,7 +43866,7 @@ paths:
                                     required:
                                       - type
                                       - coordinates
-                                    additionalProperties: false
+                                    additionalProperties: {}
                                     description: Geographic boundary.
                                   ext:
                                     type: object
@@ -44063,7 +44063,7 @@ paths:
                                     description: Optional display label.
                                 required:
                                   - days
-                                additionalProperties: false
+                                additionalProperties: {}
                               - {}
                           description: Delivery windows.
                         age_restriction:
@@ -44092,7 +44092,7 @@ paths:
                               description: Accepted age-verification methods.
                           required:
                             - min
-                          additionalProperties: false
+                          additionalProperties: {}
                           description: Minimum audience age.
                       additionalProperties: false
                     - type: 'null'
@@ -52481,6 +52481,13 @@ paths:
                           targetingOverlay:
                             type: object
                             properties:
+                              geo_value_labels:
+                                type: object
+                                propertyNames:
+                                  type: string
+                                additionalProperties:
+                                  type: string
+                                  minLength: 1
                               geo_metros:
                                 minItems: 1
                                 type: array
@@ -52501,6 +52508,13 @@ paths:
                                       type: array
                                       items:
                                         type: string
+                                    value_labels:
+                                      type: object
+                                      propertyNames:
+                                        type: string
+                                      additionalProperties:
+                                        type: string
+                                        minLength: 1
                                   required:
                                     - system
                                     - values
@@ -52525,6 +52539,13 @@ paths:
                                       type: array
                                       items:
                                         type: string
+                                    value_labels:
+                                      type: object
+                                      propertyNames:
+                                        type: string
+                                      additionalProperties:
+                                        type: string
+                                        minLength: 1
                                   required:
                                     - system
                                     - values
@@ -54302,6 +54323,15 @@ paths:
                           targetingOverlay:
                             type: object
                             properties:
+                              geo_value_labels:
+                                anyOf:
+                                  - type: object
+                                    propertyNames:
+                                      type: string
+                                    additionalProperties:
+                                      type: string
+                                      minLength: 1
+                                  - type: 'null'
                               geo_metros:
                                 anyOf:
                                   - minItems: 1
@@ -54323,6 +54353,13 @@ paths:
                                           type: array
                                           items:
                                             type: string
+                                        value_labels:
+                                          type: object
+                                          propertyNames:
+                                            type: string
+                                          additionalProperties:
+                                            type: string
+                                            minLength: 1
                                       required:
                                         - system
                                         - values
@@ -54349,6 +54386,13 @@ paths:
                                           type: array
                                           items:
                                             type: string
+                                        value_labels:
+                                          type: object
+                                          propertyNames:
+                                            type: string
+                                          additionalProperties:
+                                            type: string
+                                            minLength: 1
                                       required:
                                         - system
                                         - values
@@ -98330,8 +98374,7 @@ components:
           pattern: ^[A-Za-z0-9_.:-]{1,255}$
         report_definition_uri:
           type: string
-          pattern: >-
-            ^https:\/\/(?![^/]*@)(?!localhost(?:[:/]|$))(?!\[)(?!\d+(?:\.\d+){3}(?::|\/|$))(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}(?::\d+)?(?:\/|$)
+          pattern: ^https:\/\/
         report_definition_sha256:
           type: string
           pattern: ^[A-Fa-f0-9]{64}$
@@ -98345,8 +98388,7 @@ components:
           maxLength: 64
         schema_uri:
           type: string
-          pattern: >-
-            ^https:\/\/(?![^/]*@)(?!localhost(?:[:/]|$))(?!\[)(?!\d+(?:\.\d+){3}(?::|\/|$))(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}(?::\d+)?(?:\/|$)
+          pattern: ^https:\/\/
         schema_sha256:
           type: string
           pattern: ^[A-Fa-f0-9]{64}$
@@ -98468,8 +98510,7 @@ components:
               maxLength: 128
             canonicalization_uri:
               type: string
-              pattern: >-
-                ^https:\/\/(?![^/]*@)(?!localhost(?:[:/]|$))(?!\[)(?!\d+(?:\.\d+){3}(?::|\/|$))(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}(?::\d+)?(?:\/|$)
+              pattern: ^https:\/\/
             canonicalization_sha256:
               type: string
               pattern: ^[A-Fa-f0-9]{64}$
@@ -107762,10 +107803,18 @@ components:
             items:
               type: string
             description: Values in this system.
+          value_labels:
+            type: object
+            propertyNames:
+              type: string
+            additionalProperties:
+              type: string
+              minLength: 1
+            description: Labels by value ID.
         required:
           - system
           - values
-        additionalProperties: false
+        additionalProperties: {}
       description: Metro groups.
     save_campaign_request_TargetingOverlayGeoMetrosExclude:
       minItems: 1
@@ -107788,10 +107837,18 @@ components:
             items:
               type: string
             description: Values in this system.
+          value_labels:
+            type: object
+            propertyNames:
+              type: string
+            additionalProperties:
+              type: string
+              minLength: 1
+            description: Labels by value ID.
         required:
           - system
           - values
-        additionalProperties: false
+        additionalProperties: {}
       description: Metro groups.
     save_campaign_request_TargetingOverlayGeoPostalAreas:
       minItems: 1
@@ -107842,7 +107899,7 @@ components:
                   - country
                   - system
                   - values
-                additionalProperties: false
+                additionalProperties: {}
               - allOf:
                   - type: object
                     properties:
@@ -108028,7 +108085,7 @@ components:
             required:
               - system
               - values
-            additionalProperties: false
+            additionalProperties: {}
       description: Postal-area groups.
     save_campaign_request_TargetingOverlayGeoPostalAreasExclude:
       minItems: 1
@@ -108079,7 +108136,7 @@ components:
                   - country
                   - system
                   - values
-                additionalProperties: false
+                additionalProperties: {}
               - allOf:
                   - type: object
                     properties:
@@ -108265,7 +108322,7 @@ components:
             required:
               - system
               - values
-            additionalProperties: false
+            additionalProperties: {}
       description: Postal-area groups.
     save_campaign_request_TargetingOverlayGeoPlaces:
       minItems: 1
@@ -108341,7 +108398,7 @@ components:
               - system
               - place_type
               - values
-            additionalProperties: false
+            additionalProperties: {}
           - anyOf:
               - {}
               - type: object
@@ -108434,7 +108491,7 @@ components:
               - system
               - place_type
               - values
-            additionalProperties: false
+            additionalProperties: {}
           - anyOf:
               - {}
               - type: object
