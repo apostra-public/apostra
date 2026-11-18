@@ -60098,12 +60098,12 @@ paths:
       operationId: save_seller
       summary: >-
         Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution
-        change (domain, OpenAI token or check, visibility, ChatGPT icons, sandbox), an admission, the intake hold or
-        demo. Scope3 eligibility and Market Maker entitlements are read-only here.
+        change, an admission, the intake hold, demo, or use-case stances. Send useCases in its own save_seller call.
+        Scope3 eligibility and Market Maker entitlements are read-only here.
       description: >-
         Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution
-        change (domain, OpenAI token or check, visibility, ChatGPT icons, sandbox), an admission, the intake hold or
-        demo. Scope3 eligibility and Market Maker entitlements are read-only here.
+        change, an admission, the intake hold, demo, or use-case stances. Send useCases in its own save_seller call.
+        Scope3 eligibility and Market Maker entitlements are read-only here.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -60791,6 +60791,38 @@ paths:
                   $ref: '#/components/schemas/save_seller_request_SellerProposalAgentInput'
                   type: object
                   additionalProperties: false
+                useCases:
+                  description: Send useCases in its own call; offered is derived and cannot be set; null clears.
+                  minItems: 1
+                  maxItems: 8
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      useCaseId:
+                        type: string
+                        enum:
+                          - display_with_our_tag
+                          - vast_video_or_audio_with_our_trackers
+                          - format_with_our_trackers
+                          - cost_per_completed_view_video
+                          - cpa_and_conversion_tracking
+                          - audience_or_signal_targeting
+                          - tmp
+                          - seller_reported_sandbox_buy
+                        description: Use case ID from seller readiness.
+                      stance:
+                        anyOf:
+                          - type: string
+                            enum:
+                              - pursuing
+                              - not_for_us
+                          - type: 'null'
+                        description: Seller choice, or null to clear.
+                    required:
+                      - useCaseId
+                      - stance
+                    additionalProperties: false
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -60854,6 +60886,8 @@ paths:
                         - sellingMode
                     - required:
                         - proposalAgent
+                    - required:
+                        - useCases
                 - if:
                     required:
                       - sourceDecision
@@ -60879,6 +60913,15 @@ paths:
                       - proposalAgent
                   then:
                     maxProperties: 1
+                - if:
+                    required:
+                      - useCases
+                  then:
+                    propertyNames:
+                      enum:
+                        - useCases
+                        - accountId
+                        - expectedAccountId
                 - if:
                     required:
                       - distribution
@@ -61184,6 +61227,7 @@ paths:
                 properties:
                   data:
                     anyOf:
+                      - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessUseCasesSaved'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessBrandResolved'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessAdmissionRecorded'
                       - $ref: '#/components/schemas/save_seller_success_SaveSellerSuccessDeclineRecorded'
@@ -96398,6 +96442,13 @@ components:
                     - rollover
                     - included
                   additionalProperties: false
+                allowance:
+                  description: >-
+                    The cycle’s allowance across every bucket, so a caller never has to add the buckets up itself:
+                    `granted` is what the plan and grants carry, `used` is what has been drawn from them, never more
+                    than `granted`, and `remaining` is what is left. Usage beyond the allowance is `overage`, so
+                    `allowance.used` plus `overage.ius` is the `usedIus` on the bare read.
+                  $ref: '#/components/schemas/get_success_UsageDetailIuAllowance'
                 overage:
                   type: object
                   properties:
@@ -96466,6 +96517,7 @@ components:
                 - currency
                 - cycle
                 - buckets
+                - allowance
                 - overage
                 - rolloverPolicy
                 - forecast
@@ -98153,6 +98205,22 @@ components:
         - remaining
       additionalProperties: false
     get_success_UsageDetailIuBucketsIncluded:
+      type: object
+      properties:
+        granted:
+          type: number
+          description: IUs available in this bucket for the cycle. 0 for a bucket the plan and grants do not carry.
+        used:
+          type: number
+          description: IUs drawn from this bucket this cycle.
+        remaining:
+          type: number
+      required:
+        - granted
+        - used
+        - remaining
+      additionalProperties: false
+    get_success_UsageDetailIuAllowance:
       type: object
       properties:
         granted:
@@ -120193,6 +120261,33 @@ components:
       type: string
       maxLength: 2048
       format: uri
+    save_seller_success_SaveSellerSuccessUseCasesSaved:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: use_cases_saved
+        action:
+          type: string
+          const: use_cases_saved
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              useCaseId:
+                type: string
+              changed:
+                type: boolean
+            required:
+              - useCaseId
+              - changed
+            additionalProperties: false
+      required:
+        - outcome
+        - action
+        - results
+      additionalProperties: {}
     save_seller_success_SaveSellerSuccessBrandResolved:
       type: object
       properties:
