@@ -7371,10 +7371,16 @@ export type GetDeliverySuccessGoalProgress = {
 export type GetDeliverySuccessGoalProgressActual = {
     kind: 'cost_per' | 'threshold_rate' | 'volume';
     value: number;
-    unit: 'impressions' | 'clicks' | 'views' | 'completedViews' | 'conversions' | 'leads' | 'viewableImpressions' | 'vendorMetric';
+    unit: 'impressions' | 'clicks' | 'views' | 'completedViews' | 'conversions' | 'leads' | 'viewableImpressions' | 'engagements' | 'follows' | 'saves' | 'profileVisits' | 'vendorMetric';
     units: number;
     perUnits: 1 | 1000;
     currency: string | null;
+    trend?: Array<{
+        date: string;
+        value: number;
+        units: number;
+        denominatorUnits: number | null;
+    }>;
 };
 
 export type GetDeliverySuccessGoalProgressAdvertiserMeasuredBasis = {
@@ -9989,11 +9995,17 @@ export type GetSuccessCampaignGoalProgress = {
 export type GetSuccessCampaignGoalProgressActual = {
     kind: 'cost_per' | 'threshold_rate' | 'volume';
     value: number;
-    unit: 'impressions' | 'clicks' | 'views' | 'completedViews' | 'conversions' | 'leads' | 'viewableImpressions' | 'vendorMetric';
+    unit: 'impressions' | 'clicks' | 'views' | 'completedViews' | 'conversions' | 'leads' | 'viewableImpressions' | 'engagements' | 'follows' | 'saves' | 'profileVisits' | 'vendorMetric';
     units: number;
     denominatorUnits: number | null;
     perUnits: 1 | 1000;
     currency: string | null;
+    trend?: Array<{
+        date: string;
+        value: number;
+        units: number;
+        denominatorUnits: number | null;
+    }>;
 };
 
 export type GetSuccessCampaignGoalProgressAdvertiserMeasuredBasis = {

@@ -1800,10 +1800,17 @@ class GetDeliverySuccessGoalProgress(TypedDict):
 class GetDeliverySuccessGoalProgressActual(TypedDict):
     kind: Literal["cost_per", "threshold_rate", "volume"]
     value: float
-    unit: Literal["impressions", "clicks", "views", "completedViews", "conversions", "leads", "viewableImpressions", "vendorMetric"]
+    unit: Literal["impressions", "clicks", "views", "completedViews", "conversions", "leads", "viewableImpressions", "engagements", "follows", "saves", "profileVisits", "vendorMetric"]
     units: float
     perUnits: Literal[1, 1000]
     currency: str | None
+    trend: NotRequired[list[GetDeliverySuccessGoalProgressActualTrendItem]]
+
+class GetDeliverySuccessGoalProgressActualTrendItem(TypedDict):
+    date: str
+    value: float
+    units: float
+    denominatorUnits: float | None
 
 class GetDeliverySuccessGoalProgressAdvertiserMeasuredBasis(TypedDict):
     kind: Literal["advertiser_measured"]
@@ -6791,11 +6798,18 @@ class GetSuccessCampaignGoalProgress(TypedDict):
 class GetSuccessCampaignGoalProgressActual(TypedDict):
     kind: Literal["cost_per", "threshold_rate", "volume"]
     value: float
-    unit: Literal["impressions", "clicks", "views", "completedViews", "conversions", "leads", "viewableImpressions", "vendorMetric"]
+    unit: Literal["impressions", "clicks", "views", "completedViews", "conversions", "leads", "viewableImpressions", "engagements", "follows", "saves", "profileVisits", "vendorMetric"]
     units: float
     denominatorUnits: float | None
     perUnits: Literal[1, 1000]
     currency: str | None
+    trend: NotRequired[list[GetSuccessCampaignGoalProgressActualTrendItem]]
+
+class GetSuccessCampaignGoalProgressActualTrendItem(TypedDict):
+    date: str
+    value: float
+    units: float
+    denominatorUnits: float | None
 
 class GetSuccessCampaignGoalProgressAdvertiserMeasuredBasis(TypedDict):
     kind: Literal["advertiser_measured"]
