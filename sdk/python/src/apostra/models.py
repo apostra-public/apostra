@@ -15948,6 +15948,8 @@ class SaveInventorySourceInput(TypedDict):
     '\n    A managed Google Ad Manager source\'s naming templates. Send with id only; an omitted key is unchanged.\n    '
     dryRun: NotRequired[bool]
     '\n    Preview namingTemplates: sample names and macros, nothing saved.\n    '
+    sellerId: NotRequired[int]
+    '\n    Link this seller\'s inventory as a source. The seller must have approved your account. Send alone, or with status ACTIVE to activate it.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]

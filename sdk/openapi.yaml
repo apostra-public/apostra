@@ -50372,6 +50372,13 @@ paths:
                 dryRun:
                   description: 'Preview namingTemplates: sample names and macros, nothing saved.'
                   type: boolean
+                sellerId:
+                  description: >-
+                    Link this seller's inventory as a source. The seller must have approved your account. Send alone, or
+                    with status ACTIVE to activate it.
+                  type: integer
+                  exclusiveMinimum: 0
+                  maximum: 9007199254740991
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:

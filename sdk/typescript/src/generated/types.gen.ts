@@ -27480,6 +27480,10 @@ export type SaveInventorySourceData = {
          */
         dryRun?: boolean;
         /**
+         * Link this seller's inventory as a source. The seller must have approved your account. Send alone, or with status ACTIVE to activate it.
+         */
+        sellerId?: number;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
