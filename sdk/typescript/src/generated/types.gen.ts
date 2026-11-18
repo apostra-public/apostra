@@ -11647,6 +11647,10 @@ export type GetSuccessUsageDetail = {
             rollover: GetSuccessUsageDetailIuBucketsRollover;
             included: GetSuccessUsageDetailIuBucketsIncluded;
         };
+        /**
+         * The cycle’s allowance across every bucket, so a caller never has to add the buckets up itself: `granted` is what the plan and grants carry, `used` is what has been drawn from them, never more than `granted`, and `remaining` is what is left. Usage beyond the allowance is `overage`, so `allowance.used` plus `overage.ius` is the `usedIus` on the bare read.
+         */
+        allowance: GetSuccessUsageDetailIuAllowance;
         overage: {
             /**
              * IUs consumed beyond every bucket this cycle.
@@ -11704,6 +11708,18 @@ export type GetSuccessUsageDetail = {
 export type GetSuccessUsageDetailActivityPeriodEnd = string;
 
 export type GetSuccessUsageDetailActivityPeriodStart = string;
+
+export type GetSuccessUsageDetailIuAllowance = {
+    /**
+     * IUs available in this bucket for the cycle. 0 for a bucket the plan and grants do not carry.
+     */
+    granted: number;
+    /**
+     * IUs drawn from this bucket this cycle.
+     */
+    used: number;
+    remaining: number;
+};
 
 export type GetSuccessUsageDetailIuBucketsFree = {
     /**
@@ -36529,6 +36545,19 @@ export type SaveSellerData = {
          */
         proposalAgent?: SaveSellerRequestSellerProposalAgentInput;
         /**
+         * Send useCases in its own call; offered is derived and cannot be set; null clears.
+         */
+        useCases?: Array<{
+            /**
+             * Use case ID from seller readiness.
+             */
+            useCaseId: 'display_with_our_tag' | 'vast_video_or_audio_with_our_trackers' | 'format_with_our_trackers' | 'cost_per_completed_view_video' | 'cpa_and_conversion_tracking' | 'audience_or_signal_targeting' | 'tmp' | 'seller_reported_sandbox_buy';
+            /**
+             * Seller choice, or null to clear.
+             */
+            stance: 'pursuing' | 'not_for_us' | null;
+        }>;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -36779,7 +36808,7 @@ export type SaveSellerResponses = {
      * Typed operation result
      */
     200: {
-        data: SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessSourceRequestQueued | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessApprovalRequired | SaveSellerSuccessSaveSellerSuccessProposalAgent | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
+        data: SaveSellerSuccessSaveSellerSuccessUseCasesSaved | SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessSourceRequestQueued | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessApprovalRequired | SaveSellerSuccessSaveSellerSuccessProposalAgent | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed;
         error: null;
     };
     /**
@@ -37015,6 +37044,16 @@ export type SaveSellerSuccessSaveSellerSuccessUpdated = {
 };
 
 export type SaveSellerSuccessSaveSellerSuccessUpdatedObject = {
+    [key: string]: unknown;
+};
+
+export type SaveSellerSuccessSaveSellerSuccessUseCasesSaved = {
+    outcome: 'use_cases_saved';
+    action: 'use_cases_saved';
+    results: Array<{
+        useCaseId: string;
+        changed: boolean;
+    }>;
     [key: string]: unknown;
 };
 

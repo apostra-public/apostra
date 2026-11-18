@@ -8031,6 +8031,13 @@ class GetSuccessUsageDetailActivityValue(TypedDict):
     byActivity: list[GetSuccessUsageDetailActivityByActivityItem]
     byDay: list[GetSuccessUsageDetailActivityByDayItem]
 
+class GetSuccessUsageDetailIuAllowance(TypedDict):
+    granted: float
+    '\n    IUs available in this bucket for the cycle. 0 for a bucket the plan and grants do not carry.\n    '
+    used: float
+    '\n    IUs drawn from this bucket this cycle.\n    '
+    remaining: float
+
 class GetSuccessUsageDetailIuBuckets(TypedDict):
     free: GetSuccessUsageDetailIuBucketsFree
     rollover: GetSuccessUsageDetailIuBucketsRollover
@@ -8088,6 +8095,8 @@ class GetSuccessUsageDetailIuValue(TypedDict):
     '\n    The currency `overage` amounts are in, minor units.\n    '
     cycle: GetSuccessUsageDetailIuCycle
     buckets: GetSuccessUsageDetailIuBuckets
+    allowance: GetSuccessUsageDetailIuAllowance
+    '\n    The cycle’s allowance across every bucket, so a caller never has to add the buckets up itself: `granted` is what the plan and grants carry, `used` is what has been drawn from them, never more than `granted`, and `remaining` is what is left. Usage beyond the allowance is `overage`, so `allowance.used` plus `overage.ius` is the `usedIus` on the bare read.\n    '
     overage: GetSuccessUsageDetailIuOverage
     rolloverPolicy: GetSuccessUsageDetailIuValueRolloverPolicyValue | None
     '\n    The accepted terms for rolling included IUs over, or null when the plan does not roll over.\n    '
@@ -21099,6 +21108,8 @@ class SaveSellerInput(TypedDict):
     '\n    Change the account type in place. Direct administrator only. `listing` is refused while Storefront work runs and closes Enhanced Reporting. Send alone.\n    '
     proposalAgent: NotRequired[SaveSellerRequestSellerProposalAgentInput]
     '\n    Choose the brain that answers buyer requests. Direct administrator only. Send alone.\n    '
+    useCases: NotRequired[list[SaveSellerInputUseCasesItem]]
+    '\n    Send useCases in its own call; offered is derived and cannot be set; null clears.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -21310,6 +21321,12 @@ class SaveSellerInputSourceDecisionDecisionRequestAgain(TypedDict):
     expectedVersion: SaveSellerRequestSourceDecisionExpectedVersion
     decision: Literal["request_again"]
     '\n    Send the refused request again.\n    '
+
+class SaveSellerInputUseCasesItem(TypedDict):
+    useCaseId: Literal["display_with_our_tag", "vast_video_or_audio_with_our_trackers", "format_with_our_trackers", "cost_per_completed_view_video", "cpa_and_conversion_tracking", "audience_or_signal_targeting", "tmp", "seller_reported_sandbox_buy"]
+    '\n    Use case ID from seller readiness.\n    '
+    stance: Literal["pursuing", "not_for_us"] | None
+    '\n    Seller choice, or null to clear.\n    '
 
 SaveSellerRequestChannelsItem: TypeAlias = Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
 
@@ -21578,6 +21595,15 @@ class SaveSellerSuccessSaveSellerSuccessUpdated(TypedDict):
 
 SaveSellerSuccessSaveSellerSuccessUpdatedObject: TypeAlias = dict[str, JsonValue]
 
+class SaveSellerSuccessSaveSellerSuccessUseCasesSaved(TypedDict):
+    outcome: Literal["use_cases_saved"]
+    action: Literal["use_cases_saved"]
+    results: list[SaveSellerSuccessSaveSellerSuccessUseCasesSavedResultsItem]
+
+class SaveSellerSuccessSaveSellerSuccessUseCasesSavedResultsItem(TypedDict):
+    useCaseId: str
+    changed: bool
+
 class SaveSellerSuccessSellerSaveCandidateReplayed(TypedDict):
     outcome: Literal["candidate_replayed"]
     action: Literal["unchanged"]
@@ -21592,7 +21618,7 @@ class SaveSellerSuccessSellerSaveReplayed(TypedDict):
     destinationSaveReplayed: Literal[False]
     materialReceipt: SaveSellerSuccessSellerSaveReplayedMaterialReceipt
 
-SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessSourceRequestQueued | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessApprovalRequired | SaveSellerSuccessSaveSellerSuccessProposalAgent | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
+SaveSellerResult: TypeAlias = "SaveSellerSuccessSaveSellerSuccessUseCasesSaved | SaveSellerSuccessSaveSellerSuccessBrandResolved | SaveSellerSuccessSaveSellerSuccessAdmissionRecorded | SaveSellerSuccessSaveSellerSuccessDeclineRecorded | SaveSellerSuccessSaveSellerSuccessReopenRecorded | SaveSellerSuccessSaveSellerSuccessSourceDecisionRecorded | SaveSellerSuccessSaveSellerSuccessSourceRequestQueued | SaveSellerSuccessSaveSellerSuccessInformationRequested | SaveSellerSuccessSaveSellerSuccessInformationConfirmed | SaveSellerSuccessSaveSellerSuccessInformationWithdrawn | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceAsserted | SaveSellerSuccessSaveSellerSuccessReadyToInvoiceRevoked | SaveSellerSuccessSaveSellerSuccessSellingModeChanged | SaveSellerSuccessSaveSellerSuccessSellingModeUnchanged | SaveSellerSuccessSaveSellerSuccessApprovalRequired | SaveSellerSuccessSaveSellerSuccessProposalAgent | SaveSellerSuccessSaveSellerSuccessPreview | SaveSellerSuccessSaveSellerSuccessUpdated | SaveSellerSuccessSaveSellerSuccessUnchanged | SaveSellerSuccessSaveSellerSuccessReadbackUnavailable | SaveSellerSuccessSellerSaveCandidateReplayed | SaveSellerSuccessSellerSaveReplayed"
 
 SaveSellerSuccessSellerSaveReplayedMaterialReceipt: TypeAlias = dict[str, JsonValue]
 

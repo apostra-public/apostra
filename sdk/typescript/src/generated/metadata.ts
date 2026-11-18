@@ -1485,7 +1485,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change (domain, OpenAI token or check, visibility, ChatGPT icons, sandbox), an admission, the intake hold or demo. Scope3 eligibility and Market Maker entitlements are read-only here."
+    "summary": "Save Seller identity, capabilities, buyer-visible listing (mediaKit is a deprecated alias), one Distribution change, an admission, the intake hold, demo, or use-case stances. Send useCases in its own save_seller call. Scope3 eligibility and Market Maker entitlements are read-only here."
   },
   "save_session": {
     "path": "/tools/save_session",
