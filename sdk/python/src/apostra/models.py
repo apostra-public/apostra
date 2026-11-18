@@ -17697,6 +17697,8 @@ class SaveMediaBuyInputKindCreateProductsItem(TypedDict):
     '\n    Provider-native Facebook Event ID. Required for Meta Facebook Event Responses; pass one of the upcoming Page-owned Event candidates from account resource readiness.\n    '
     appId: NotRequired[str]
     '\n    Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.\n    '
+    optimizationGoals: NotRequired[list[SaveMediaBuyRequestCampaignEventGoal | SaveMediaBuyRequestCampaignMetricGoal | SaveMediaBuyRequestCampaignVendorMetricGoal]]
+    '\n    Create only. Per-product optimization goals, overriding the product default and the campaign\'s own optimizationGoals for this line item — e.g. Snap Sales\' conversion event (event_sources[].event_type purchase/add_to_cart/complete_registration) or which pixel/event source to attribute to. Field names INSIDE each goal are ADCP snake_case, not camelCase, the same shape save_campaign\'s optimizationGoals uses. Cost or return targets go in bidPrice/budget, not a goal.\n    '
     startRequiresAllCreativesApproved: NotRequired[bool]
     '\n    Create only. True: never starts before every creative is approved; the buy waits. Else books with approved creatives; the rest attach later.\n    '
     impressions: NotRequired[float]
@@ -17736,7 +17738,7 @@ class SaveMediaBuyInputKindCreateProductsItemPerformanceStandardsItemExt(TypedDi
     '\n    Apostra extension fields.\n    '
 
 class SaveMediaBuyInputKindCreateProductsItemPerformanceStandardsItemExtApostra(TypedDict):
-    metric_id: str
+    metric_id: SaveMediaBuyRequestProductsItemPerformanceStandardsItemExtApostraMetricId
     '\n    The vendor\'s metric id, from the vendor\'s measurement catalog.\n    '
 
 class SaveMediaBuyInputKindCreateProductsItemPerformanceStandardsItemVendor(TypedDict):
@@ -18305,6 +18307,8 @@ class SaveMediaBuyInputKindUpdateProductsItem(TypedDict):
     '\n    Provider-native Facebook Event ID. Required for Meta Facebook Event Responses; pass one of the upcoming Page-owned Event candidates from account resource readiness.\n    '
     appId: NotRequired[str]
     '\n    Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.\n    '
+    optimizationGoals: NotRequired[list[SaveMediaBuyRequestCampaignEventGoal | SaveMediaBuyRequestCampaignMetricGoal | SaveMediaBuyRequestCampaignVendorMetricGoal]]
+    '\n    Create only. Per-product optimization goals, overriding the product default and the campaign\'s own optimizationGoals for this line item — e.g. Snap Sales\' conversion event (event_sources[].event_type purchase/add_to_cart/complete_registration) or which pixel/event source to attribute to. Field names INSIDE each goal are ADCP snake_case, not camelCase, the same shape save_campaign\'s optimizationGoals uses. Cost or return targets go in bidPrice/budget, not a goal.\n    '
     startRequiresAllCreativesApproved: NotRequired[bool]
     '\n    Create only. True: never starts before every creative is approved; the buy waits. Else books with approved creatives; the rest attach later.\n    '
     impressions: NotRequired[float]
@@ -18344,7 +18348,7 @@ class SaveMediaBuyInputKindUpdateProductsItemPerformanceStandardsItemExt(TypedDi
     '\n    Apostra extension fields.\n    '
 
 class SaveMediaBuyInputKindUpdateProductsItemPerformanceStandardsItemExtApostra(TypedDict):
-    metric_id: str
+    metric_id: SaveMediaBuyRequestProductsItemPerformanceStandardsItemExtApostraMetricId
     '\n    The vendor\'s metric id, from the vendor\'s measurement catalog.\n    '
 
 class SaveMediaBuyInputKindUpdateProductsItemPerformanceStandardsItemVendor(TypedDict):
@@ -18727,6 +18731,106 @@ SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemTargetThresholdRateValue
 SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemTargetValue: TypeAlias = float
 
 SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemViewDurationSeconds: TypeAlias = float
+
+class SaveMediaBuyRequestCampaignEventGoal(TypedDict):
+    kind: Literal["event"]
+    '\n    Goal kind.\n    '
+    priority: NotRequired[int]
+    '\n    1 = highest; omitted uses array order.\n    '
+    event_sources: list[SaveMediaBuyRequestCampaignGoalEventSource]
+    '\n    Up to 10 event sources.\n    '
+    target: NotRequired[SaveMediaBuyRequestCampaignEventGoalCostPerTarget | SaveMediaBuyRequestCampaignEventGoalPerAdSpendTarget | SaveMediaBuyRequestCampaignEventGoalMaximizeValueTarget]
+    '\n    Omit to maximize conversions.\n    '
+    attribution_window: NotRequired[SaveMediaBuyRequestCampaignGoalAttributionWindow]
+    '\n    Omit for the seller default.\n    '
+
+class SaveMediaBuyRequestCampaignEventGoalCostPerTarget(TypedDict):
+    kind: Literal["cost_per"]
+    '\n    Target kind.\n    '
+    value: float
+    '\n    Target value.\n    '
+
+class SaveMediaBuyRequestCampaignEventGoalMaximizeValueTarget(TypedDict):
+    kind: Literal["maximize_value"]
+    '\n    Target kind.\n    '
+
+class SaveMediaBuyRequestCampaignEventGoalPerAdSpendTarget(TypedDict):
+    kind: Literal["per_ad_spend"]
+    '\n    Target kind.\n    '
+    value: float
+    '\n    Target value.\n    '
+
+class SaveMediaBuyRequestCampaignGoalAttributionWindow(TypedDict):
+    post_click: SaveMediaBuyRequestCampaignGoalDuration
+    '\n    Click-through window.\n    '
+    post_view: NotRequired[SaveMediaBuyRequestCampaignGoalDuration]
+    '\n    View-through window.\n    '
+
+class SaveMediaBuyRequestCampaignGoalDuration(TypedDict):
+    interval: int
+    '\n    Interval count.\n    '
+    unit: Literal["minutes", "hours", "days", "campaign"]
+    '\n    Interval unit.\n    '
+
+class SaveMediaBuyRequestCampaignGoalEventSource(TypedDict):
+    event_source_id: str
+    '\n    Configured event source.\n    '
+    event_type: Literal["page_view", "view_content", "select_content", "select_item", "search", "share", "add_to_cart", "remove_from_cart", "viewed_cart", "add_to_wishlist", "initiate_checkout", "add_payment_info", "purchase", "refund", "lead", "qualify_lead", "close_convert_lead", "disqualify_lead", "complete_registration", "subscribe", "follow", "content_view", "watch_milestone", "start_trial", "app_install", "app_launch", "contact", "schedule", "donate", "submit_application", "custom"]
+    '\n    Event to count.\n    '
+    custom_event_name: NotRequired[str]
+    '\n    Required when event_type is custom.\n    '
+    value_field: NotRequired[str]
+    '\n    custom_data field holding the value.\n    '
+    value_factor: NotRequired[float]
+    '\n    Multiplier for value_field.\n    '
+
+class SaveMediaBuyRequestCampaignGoalVendor(TypedDict):
+    domain: str
+    '\n    Vendor\'s brand.json domain.\n    '
+    brand_id: NotRequired[str]
+    '\n    Brand within the domain.\n    '
+
+class SaveMediaBuyRequestCampaignMetricGoal(TypedDict):
+    kind: Literal["metric"]
+    '\n    Goal kind.\n    '
+    standard: NotRequired[Literal["mrc", "groupm"]]
+    '\n    Viewability standard for this goal.\n    '
+    view_duration_seconds: NotRequired[float]
+    '\n    Min seconds for completed_views.\n    '
+    priority: NotRequired[int]
+    '\n    1 = highest; omitted uses array order.\n    '
+    metric: Literal["clicks", "views", "completed_views", "viewed_seconds", "viewable_rate", "attention_seconds", "attention_score", "engagements", "follows", "saves", "profile_visits", "reach"]
+    '\n    Seller-tracked metric.\n    '
+    target: NotRequired[SaveMediaBuyRequestCampaignMetricGoalCostPerTarget | SaveMediaBuyRequestCampaignMetricGoalThresholdRateTarget]
+    '\n    Omit to maximize the metric.\n    '
+
+class SaveMediaBuyRequestCampaignMetricGoalCostPerTarget(TypedDict):
+    kind: Literal["cost_per"]
+    '\n    Target kind.\n    '
+    value: float
+    '\n    Target value.\n    '
+
+class SaveMediaBuyRequestCampaignMetricGoalThresholdRateTarget(TypedDict):
+    kind: Literal["threshold_rate"]
+    '\n    Target kind.\n    '
+    value: float
+    '\n    Target value.\n    '
+
+class SaveMediaBuyRequestCampaignVendorMetricGoal(TypedDict):
+    kind: Literal["vendor_metric"]
+    '\n    Goal kind.\n    '
+    metric_id: SaveMediaBuyRequestCampaignVendorMetricGoalMetricId
+    '\n    Vendor\'s metric id.\n    '
+    priority: NotRequired[int]
+    '\n    1 = highest; omitted uses array order.\n    '
+    vendor: SaveMediaBuyRequestCampaignGoalVendor
+    '\n    Measurement vendor that counts the metric.\n    '
+    target: NotRequired[SaveMediaBuyRequestCampaignMetricGoalThresholdRateTarget]
+    '\n    Minimum rate; omit to maximize. A cost goes in bidding.\n    '
+
+SaveMediaBuyRequestCampaignVendorMetricGoalMetricId: TypeAlias = str
+
+SaveMediaBuyRequestProductsItemPerformanceStandardsItemExtApostraMetricId: TypeAlias = str
 
 SaveMediaBuyRequestProductsItemTargetingOverlayDemographicsAgeAcceptedBases: TypeAlias = list[Literal["verified", "declared", "inferred"]]
 

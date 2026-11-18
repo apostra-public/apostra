@@ -30444,7 +30444,7 @@ export type SaveMediaBuyData = {
                         /**
                          * The vendor's metric id, from the vendor's measurement catalog.
                          */
-                        metric_id: string;
+                        metric_id: SaveMediaBuyRequestProductsItemPerformanceStandardsItemExtApostraMetricId;
                     };
                 };
             }> | null;
@@ -30480,6 +30480,10 @@ export type SaveMediaBuyData = {
              * Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.
              */
             appId?: string;
+            /**
+             * Create only. Per-product optimization goals, overriding the product default and the campaign's own optimizationGoals for this line item — e.g. Snap Sales' conversion event (event_sources[].event_type purchase/add_to_cart/complete_registration) or which pixel/event source to attribute to. Field names INSIDE each goal are ADCP snake_case, not camelCase, the same shape save_campaign's optimizationGoals uses. Cost or return targets go in bidPrice/budget, not a goal.
+             */
+            optimizationGoals?: Array<SaveMediaBuyRequestCampaignEventGoal | SaveMediaBuyRequestCampaignMetricGoal | SaveMediaBuyRequestCampaignVendorMetricGoal>;
             /**
              * Create only. True: never starts before every creative is approved; the buy waits. Else books with approved creatives; the rest attach later.
              */
@@ -31324,7 +31328,7 @@ export type SaveMediaBuyData = {
                         /**
                          * The vendor's metric id, from the vendor's measurement catalog.
                          */
-                        metric_id: string;
+                        metric_id: SaveMediaBuyRequestProductsItemPerformanceStandardsItemExtApostraMetricId;
                     };
                 };
             }> | null;
@@ -31360,6 +31364,10 @@ export type SaveMediaBuyData = {
              * Provider-native mobile application ID. For TikTok App Promotion, one of the advertiser app IDs.
              */
             appId?: string;
+            /**
+             * Create only. Per-product optimization goals, overriding the product default and the campaign's own optimizationGoals for this line item — e.g. Snap Sales' conversion event (event_sources[].event_type purchase/add_to_cart/complete_registration) or which pixel/event source to attribute to. Field names INSIDE each goal are ADCP snake_case, not camelCase, the same shape save_campaign's optimizationGoals uses. Cost or return targets go in bidPrice/budget, not a goal.
+             */
+            optimizationGoals?: Array<SaveMediaBuyRequestCampaignEventGoal | SaveMediaBuyRequestCampaignMetricGoal | SaveMediaBuyRequestCampaignVendorMetricGoal>;
             /**
              * Create only. True: never starts before every creative is approved; the buy waits. Else books with approved creatives; the rest attach later.
              */
@@ -32350,6 +32358,190 @@ export type SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemTargetThresh
 export type SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemTargetValue = number;
 
 export type SaveMediaBuyRequestBudgetAllocationOptimizationGoalsItemViewDurationSeconds = number;
+
+export type SaveMediaBuyRequestCampaignEventGoal = {
+    /**
+     * Goal kind.
+     */
+    kind: 'event';
+    /**
+     * 1 = highest; omitted uses array order.
+     */
+    priority?: number;
+    /**
+     * Up to 10 event sources.
+     */
+    event_sources: Array<SaveMediaBuyRequestCampaignGoalEventSource>;
+    /**
+     * Omit to maximize conversions.
+     */
+    target?: SaveMediaBuyRequestCampaignEventGoalCostPerTarget | SaveMediaBuyRequestCampaignEventGoalPerAdSpendTarget | SaveMediaBuyRequestCampaignEventGoalMaximizeValueTarget;
+    /**
+     * Omit for the seller default.
+     */
+    attribution_window?: SaveMediaBuyRequestCampaignGoalAttributionWindow;
+};
+
+export type SaveMediaBuyRequestCampaignEventGoalCostPerTarget = {
+    /**
+     * Target kind.
+     */
+    kind: 'cost_per';
+    /**
+     * Target value.
+     */
+    value: number;
+};
+
+export type SaveMediaBuyRequestCampaignEventGoalMaximizeValueTarget = {
+    /**
+     * Target kind.
+     */
+    kind: 'maximize_value';
+};
+
+export type SaveMediaBuyRequestCampaignEventGoalPerAdSpendTarget = {
+    /**
+     * Target kind.
+     */
+    kind: 'per_ad_spend';
+    /**
+     * Target value.
+     */
+    value: number;
+};
+
+export type SaveMediaBuyRequestCampaignGoalAttributionWindow = {
+    /**
+     * Click-through window.
+     */
+    post_click: SaveMediaBuyRequestCampaignGoalDuration;
+    /**
+     * View-through window.
+     */
+    post_view?: SaveMediaBuyRequestCampaignGoalDuration;
+};
+
+export type SaveMediaBuyRequestCampaignGoalDuration = {
+    /**
+     * Interval count.
+     */
+    interval: number;
+    /**
+     * Interval unit.
+     */
+    unit: 'minutes' | 'hours' | 'days' | 'campaign';
+};
+
+export type SaveMediaBuyRequestCampaignGoalEventSource = {
+    /**
+     * Configured event source.
+     */
+    event_source_id: string;
+    /**
+     * Event to count.
+     */
+    event_type: 'page_view' | 'view_content' | 'select_content' | 'select_item' | 'search' | 'share' | 'add_to_cart' | 'remove_from_cart' | 'viewed_cart' | 'add_to_wishlist' | 'initiate_checkout' | 'add_payment_info' | 'purchase' | 'refund' | 'lead' | 'qualify_lead' | 'close_convert_lead' | 'disqualify_lead' | 'complete_registration' | 'subscribe' | 'follow' | 'content_view' | 'watch_milestone' | 'start_trial' | 'app_install' | 'app_launch' | 'contact' | 'schedule' | 'donate' | 'submit_application' | 'custom';
+    /**
+     * Required when event_type is custom.
+     */
+    custom_event_name?: string;
+    /**
+     * custom_data field holding the value.
+     */
+    value_field?: string;
+    /**
+     * Multiplier for value_field.
+     */
+    value_factor?: number;
+};
+
+export type SaveMediaBuyRequestCampaignGoalVendor = {
+    /**
+     * Vendor's brand.json domain.
+     */
+    domain: string;
+    /**
+     * Brand within the domain.
+     */
+    brand_id?: string;
+};
+
+export type SaveMediaBuyRequestCampaignMetricGoal = {
+    /**
+     * Goal kind.
+     */
+    kind: 'metric';
+    /**
+     * Viewability standard for this goal.
+     */
+    standard?: 'mrc' | 'groupm';
+    /**
+     * Min seconds for completed_views.
+     */
+    view_duration_seconds?: number;
+    /**
+     * 1 = highest; omitted uses array order.
+     */
+    priority?: number;
+    /**
+     * Seller-tracked metric.
+     */
+    metric: 'clicks' | 'views' | 'completed_views' | 'viewed_seconds' | 'viewable_rate' | 'attention_seconds' | 'attention_score' | 'engagements' | 'follows' | 'saves' | 'profile_visits' | 'reach';
+    /**
+     * Omit to maximize the metric.
+     */
+    target?: SaveMediaBuyRequestCampaignMetricGoalCostPerTarget | SaveMediaBuyRequestCampaignMetricGoalThresholdRateTarget;
+};
+
+export type SaveMediaBuyRequestCampaignMetricGoalCostPerTarget = {
+    /**
+     * Target kind.
+     */
+    kind: 'cost_per';
+    /**
+     * Target value.
+     */
+    value: number;
+};
+
+export type SaveMediaBuyRequestCampaignMetricGoalThresholdRateTarget = {
+    /**
+     * Target kind.
+     */
+    kind: 'threshold_rate';
+    /**
+     * Target value.
+     */
+    value: number;
+};
+
+export type SaveMediaBuyRequestCampaignVendorMetricGoal = {
+    /**
+     * Goal kind.
+     */
+    kind: 'vendor_metric';
+    /**
+     * Vendor's metric id.
+     */
+    metric_id: SaveMediaBuyRequestCampaignVendorMetricGoalMetricId;
+    /**
+     * 1 = highest; omitted uses array order.
+     */
+    priority?: number;
+    /**
+     * Measurement vendor that counts the metric.
+     */
+    vendor: SaveMediaBuyRequestCampaignGoalVendor;
+    /**
+     * Minimum rate; omit to maximize. A cost goes in bidding.
+     */
+    target?: SaveMediaBuyRequestCampaignMetricGoalThresholdRateTarget;
+};
+
+export type SaveMediaBuyRequestCampaignVendorMetricGoalMetricId = string;
+
+export type SaveMediaBuyRequestProductsItemPerformanceStandardsItemExtApostraMetricId = string;
 
 export type SaveMediaBuyRequestProductsItemTargetingOverlayDemographicsAgeAcceptedBases = Array<'verified' | 'declared' | 'inferred'>;
 

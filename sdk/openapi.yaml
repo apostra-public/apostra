@@ -52445,11 +52445,9 @@ paths:
                                           type: object
                                           properties:
                                             metric_id:
-                                              type: string
-                                              minLength: 1
-                                              maxLength: 64
-                                              pattern: ^[a-z][a-z0-9_]*$
                                               description: The vendor's metric id, from the vendor's measurement catalog.
+                                              $ref: >-
+                                                #/components/schemas/save_media_buy_request_ProductsItemPerformanceStandardsItemExtApostraMetricId
                                           required:
                                             - metric_id
                                           additionalProperties: false
@@ -52510,6 +52508,22 @@ paths:
                             example: '1827364556677889'
                             type: string
                             minLength: 1
+                          optimizationGoals:
+                            description: >-
+                              Create only. Per-product optimization goals, overriding the product default and the
+                              campaign's own optimizationGoals for this line item — e.g. Snap Sales' conversion event
+                              (event_sources[].event_type purchase/add_to_cart/complete_registration) or which
+                              pixel/event source to attribute to. Field names INSIDE each goal are ADCP snake_case, not
+                              camelCase, the same shape save_campaign's optimizationGoals uses. Cost or return targets
+                              go in bidPrice/budget, not a goal.
+                            minItems: 1
+                            maxItems: 10
+                            type: array
+                            items:
+                              oneOf:
+                                - $ref: '#/components/schemas/save_media_buy_request_CampaignEventGoal'
+                                - $ref: '#/components/schemas/save_media_buy_request_CampaignMetricGoal'
+                                - $ref: '#/components/schemas/save_media_buy_request_CampaignVendorMetricGoal'
                           startRequiresAllCreativesApproved:
                             description: >-
                               Create only. True: never starts before every creative is approved; the buy waits. Else
@@ -54287,11 +54301,9 @@ paths:
                                           type: object
                                           properties:
                                             metric_id:
-                                              type: string
-                                              minLength: 1
-                                              maxLength: 64
-                                              pattern: ^[a-z][a-z0-9_]*$
                                               description: The vendor's metric id, from the vendor's measurement catalog.
+                                              $ref: >-
+                                                #/components/schemas/save_media_buy_request_ProductsItemPerformanceStandardsItemExtApostraMetricId
                                           required:
                                             - metric_id
                                           additionalProperties: false
@@ -54352,6 +54364,22 @@ paths:
                             example: '1827364556677889'
                             type: string
                             minLength: 1
+                          optimizationGoals:
+                            description: >-
+                              Create only. Per-product optimization goals, overriding the product default and the
+                              campaign's own optimizationGoals for this line item — e.g. Snap Sales' conversion event
+                              (event_sources[].event_type purchase/add_to_cart/complete_registration) or which
+                              pixel/event source to attribute to. Field names INSIDE each goal are ADCP snake_case, not
+                              camelCase, the same shape save_campaign's optimizationGoals uses. Cost or return targets
+                              go in bidPrice/budget, not a goal.
+                            minItems: 1
+                            maxItems: 10
+                            type: array
+                            items:
+                              oneOf:
+                                - $ref: '#/components/schemas/save_media_buy_request_CampaignEventGoal'
+                                - $ref: '#/components/schemas/save_media_buy_request_CampaignMetricGoal'
+                                - $ref: '#/components/schemas/save_media_buy_request_CampaignVendorMetricGoal'
                           startRequiresAllCreativesApproved:
                             description: >-
                               Create only. True: never starts before every creative is approved; the buy waits. Else
@@ -115428,6 +115456,288 @@ components:
       propertyNames:
         type: string
       additionalProperties: {}
+    save_media_buy_request_CampaignEventGoal:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: event
+          description: Goal kind.
+        priority:
+          description: 1 = highest; omitted uses array order.
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        event_sources:
+          minItems: 1
+          maxItems: 10
+          type: array
+          items:
+            $ref: '#/components/schemas/save_media_buy_request_CampaignGoalEventSource'
+          description: Up to 10 event sources.
+        target:
+          description: Omit to maximize conversions.
+          oneOf:
+            - $ref: '#/components/schemas/save_media_buy_request_CampaignEventGoalCostPerTarget'
+            - $ref: '#/components/schemas/save_media_buy_request_CampaignEventGoalPerAdSpendTarget'
+            - $ref: '#/components/schemas/save_media_buy_request_CampaignEventGoalMaximizeValueTarget'
+        attribution_window:
+          description: Omit for the seller default.
+          $ref: '#/components/schemas/save_media_buy_request_CampaignGoalAttributionWindow'
+      required:
+        - kind
+        - event_sources
+      additionalProperties: false
+    save_media_buy_request_CampaignGoalEventSource:
+      type: object
+      properties:
+        event_source_id:
+          type: string
+          minLength: 1
+          description: Configured event source.
+        event_type:
+          type: string
+          enum:
+            - page_view
+            - view_content
+            - select_content
+            - select_item
+            - search
+            - share
+            - add_to_cart
+            - remove_from_cart
+            - viewed_cart
+            - add_to_wishlist
+            - initiate_checkout
+            - add_payment_info
+            - purchase
+            - refund
+            - lead
+            - qualify_lead
+            - close_convert_lead
+            - disqualify_lead
+            - complete_registration
+            - subscribe
+            - follow
+            - content_view
+            - watch_milestone
+            - start_trial
+            - app_install
+            - app_launch
+            - contact
+            - schedule
+            - donate
+            - submit_application
+            - custom
+          description: Event to count.
+        custom_event_name:
+          description: Required when event_type is custom.
+          type: string
+        value_field:
+          description: custom_data field holding the value.
+          type: string
+        value_factor:
+          description: Multiplier for value_field.
+          type: number
+      required:
+        - event_source_id
+        - event_type
+      additionalProperties: false
+    save_media_buy_request_CampaignEventGoalCostPerTarget:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: cost_per
+          description: Target kind.
+        value:
+          type: number
+          exclusiveMinimum: 0
+          description: Target value.
+      required:
+        - kind
+        - value
+      additionalProperties: false
+    save_media_buy_request_CampaignEventGoalPerAdSpendTarget:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: per_ad_spend
+          description: Target kind.
+        value:
+          type: number
+          exclusiveMinimum: 0
+          description: Target value.
+      required:
+        - kind
+        - value
+      additionalProperties: false
+    save_media_buy_request_CampaignEventGoalMaximizeValueTarget:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: maximize_value
+          description: Target kind.
+      required:
+        - kind
+      additionalProperties: false
+    save_media_buy_request_CampaignGoalAttributionWindow:
+      type: object
+      properties:
+        post_click:
+          description: Click-through window.
+          $ref: '#/components/schemas/save_media_buy_request_CampaignGoalDuration'
+        post_view:
+          description: View-through window.
+          $ref: '#/components/schemas/save_media_buy_request_CampaignGoalDuration'
+      required:
+        - post_click
+      additionalProperties: false
+    save_media_buy_request_CampaignGoalDuration:
+      type: object
+      properties:
+        interval:
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+          description: Interval count.
+        unit:
+          type: string
+          enum:
+            - minutes
+            - hours
+            - days
+            - campaign
+          description: Interval unit.
+      required:
+        - interval
+        - unit
+      additionalProperties: false
+    save_media_buy_request_CampaignMetricGoal:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: metric
+          description: Goal kind.
+        standard:
+          description: Viewability standard for this goal.
+          anyOf:
+            - type: string
+              const: mrc
+            - type: string
+              const: groupm
+        view_duration_seconds:
+          description: Min seconds for completed_views.
+          type: number
+          exclusiveMinimum: 0
+        priority:
+          description: 1 = highest; omitted uses array order.
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        metric:
+          type: string
+          enum:
+            - clicks
+            - views
+            - completed_views
+            - viewed_seconds
+            - viewable_rate
+            - attention_seconds
+            - attention_score
+            - engagements
+            - follows
+            - saves
+            - profile_visits
+            - reach
+          description: Seller-tracked metric.
+        target:
+          description: Omit to maximize the metric.
+          oneOf:
+            - $ref: '#/components/schemas/save_media_buy_request_CampaignMetricGoalCostPerTarget'
+            - $ref: '#/components/schemas/save_media_buy_request_CampaignMetricGoalThresholdRateTarget'
+      required:
+        - kind
+        - metric
+      additionalProperties: false
+    save_media_buy_request_CampaignMetricGoalCostPerTarget:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: cost_per
+          description: Target kind.
+        value:
+          type: number
+          exclusiveMinimum: 0
+          description: Target value.
+      required:
+        - kind
+        - value
+      additionalProperties: false
+    save_media_buy_request_CampaignMetricGoalThresholdRateTarget:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: threshold_rate
+          description: Target kind.
+        value:
+          type: number
+          exclusiveMinimum: 0
+          description: Target value.
+      required:
+        - kind
+        - value
+      additionalProperties: false
+    save_media_buy_request_CampaignVendorMetricGoal:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: vendor_metric
+          description: Goal kind.
+        metric_id:
+          description: Vendor's metric id.
+          $ref: '#/components/schemas/save_media_buy_request_CampaignVendorMetricGoalMetricId'
+        priority:
+          description: 1 = highest; omitted uses array order.
+          type: integer
+          minimum: 1
+          maximum: 9007199254740991
+        vendor:
+          description: Measurement vendor that counts the metric.
+          $ref: '#/components/schemas/save_media_buy_request_CampaignGoalVendor'
+        target:
+          description: Minimum rate; omit to maximize. A cost goes in bidding.
+          $ref: '#/components/schemas/save_media_buy_request_CampaignMetricGoalThresholdRateTarget'
+      required:
+        - kind
+        - metric_id
+        - vendor
+      additionalProperties: false
+    save_media_buy_request_CampaignGoalVendor:
+      type: object
+      properties:
+        domain:
+          type: string
+          pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
+          description: Vendor's brand.json domain.
+        brand_id:
+          description: Brand within the domain.
+          type: string
+          pattern: ^[a-z0-9_]+$
+      required:
+        - domain
+      additionalProperties: false
+    save_media_buy_request_ProductsItemPerformanceStandardsItemExtApostraMetricId:
+      type: string
+      minLength: 1
+      maxLength: 64
+      pattern: ^[a-z][a-z0-9_]*$
     save_media_buy_request_ProductsItemTargetingOverlayDemographicsAgeMin:
       type: integer
       minimum: 0
@@ -117056,6 +117366,11 @@ components:
         - unit
       additionalProperties: false
       description: Duration used for frequency or attribution.
+    save_media_buy_request_CampaignVendorMetricGoalMetricId:
+      type: string
+      minLength: 1
+      maxLength: 64
+      pattern: ^[a-z][a-z0-9_]*$
     save_media_buy_request_BudgetAllocationOptimizationGoalsItemTargetCostPerValue:
       type: number
       exclusiveMinimum: 0
