@@ -47184,6 +47184,7 @@ paths:
                             - HTML
                             - TEXT
                             - VAST
+                            - DAAST
                       additionalProperties: false
                       description: Creative-selection predicates; all supplied predicates intersect.
                     update:
@@ -47379,6 +47380,7 @@ paths:
                               - HTML
                               - TEXT
                               - VAST
+                              - DAAST
                             description: ZIP requires inspected HTML5 ingestion.
                           contentType:
                             description: MIME type when it cannot be inferred.
@@ -47403,6 +47405,12 @@ paths:
                               - '4.1'
                               - '4.2'
                               - '4.3'
+                          daastVersion:
+                            description: DAAST only. The version of the audio tag (1.0 or 1.1).
+                            type: string
+                            enum:
+                              - '1.0'
+                              - '1.1'
                         required:
                           - assetType
                         additionalProperties: false
@@ -63399,6 +63407,7 @@ paths:
                             - TEXT
                             - URL
                             - VAST
+                            - DAAST
                             - ZIP
                             - FONT
                             - LOGO
@@ -65272,6 +65281,7 @@ paths:
                             - TEXT
                             - URL
                             - VAST
+                            - DAAST
                             - ZIP
                             - FONT
                             - LOGO
@@ -67945,6 +67955,7 @@ paths:
                             - TEXT
                             - URL
                             - VAST
+                            - DAAST
                             - ZIP
                             - FONT
                             - LOGO
@@ -69810,6 +69821,7 @@ paths:
                             - TEXT
                             - URL
                             - VAST
+                            - DAAST
                             - ZIP
                             - FONT
                             - LOGO
@@ -71672,6 +71684,7 @@ paths:
                             - TEXT
                             - URL
                             - VAST
+                            - DAAST
                             - ZIP
                             - FONT
                             - LOGO
@@ -73534,6 +73547,7 @@ paths:
                             - TEXT
                             - URL
                             - VAST
+                            - DAAST
                             - ZIP
                             - FONT
                             - LOGO
@@ -75403,6 +75417,7 @@ paths:
                             - TEXT
                             - URL
                             - VAST
+                            - DAAST
                             - ZIP
                             - FONT
                             - LOGO
@@ -78919,6 +78934,7 @@ paths:
                             - TEXT
                             - URL
                             - VAST
+                            - DAAST
                             - ZIP
                             - FONT
                             - LOGO
@@ -81609,6 +81625,7 @@ paths:
                             - TEXT
                             - URL
                             - VAST
+                            - DAAST
                             - ZIP
                             - FONT
                             - LOGO
@@ -84294,6 +84311,7 @@ paths:
                             - TEXT
                             - URL
                             - VAST
+                            - DAAST
                             - ZIP
                             - FONT
                             - LOGO
@@ -86166,6 +86184,7 @@ paths:
                             - TEXT
                             - URL
                             - VAST
+                            - DAAST
                             - ZIP
                             - FONT
                             - LOGO
@@ -88035,6 +88054,7 @@ paths:
                             - TEXT
                             - URL
                             - VAST
+                            - DAAST
                             - ZIP
                             - FONT
                             - LOGO
@@ -89904,6 +89924,7 @@ paths:
                             - TEXT
                             - URL
                             - VAST
+                            - DAAST
                             - ZIP
                             - FONT
                             - LOGO
@@ -91774,6 +91795,7 @@ paths:
                             - TEXT
                             - URL
                             - VAST
+                            - DAAST
                             - ZIP
                             - FONT
                             - LOGO
