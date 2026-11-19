@@ -62946,6 +62946,69 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        property:
+                          description: >-
+                            For kind seller (buyer account): the sellers that can sell this property, best claim first
+                            (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as
+                            {"type":"domain","value":"nu.nl"}. Needs country.
+                          type: object
+                          properties:
+                            type:
+                              anyOf:
+                                - type: string
+                                  const: domain
+                                - type: string
+                                  const: subdomain
+                                - type: string
+                                  const: network_id
+                                - type: string
+                                  const: ios_bundle
+                                - type: string
+                                  const: android_package
+                                - type: string
+                                  const: apple_app_store_id
+                                - type: string
+                                  const: google_play_id
+                                - type: string
+                                  const: roku_store_id
+                                - type: string
+                                  const: fire_tv_asin
+                                - type: string
+                                  const: samsung_app_id
+                                - type: string
+                                  const: apple_tv_bundle
+                                - type: string
+                                  const: bundle_id
+                                - type: string
+                                  const: venue_id
+                                - type: string
+                                  const: screen_id
+                                - type: string
+                                  const: openooh_venue_type
+                                - type: string
+                                  const: rss_url
+                                - type: string
+                                  const: apple_podcast_id
+                                - type: string
+                                  const: spotify_collection_id
+                                - type: string
+                                  const: podcast_guid
+                                - type: string
+                                  const: station_id
+                                - type: string
+                                  const: facility_id
+                            value:
+                              type: string
+                          required:
+                            - type
+                            - value
+                          additionalProperties: false
+                        country:
+                          description: >-
+                            For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1
+                            alpha-2 code. Needs property.
+                          type: string
+                          pattern: ^[A-Z]{2}$
                         status:
                           description: >-
                             Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
@@ -63199,7 +63262,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With query and no sort, best match first. Other kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first. Other
+                            kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -64736,6 +64800,69 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        property:
+                          description: >-
+                            For kind seller (buyer account): the sellers that can sell this property, best claim first
+                            (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as
+                            {"type":"domain","value":"nu.nl"}. Needs country.
+                          type: object
+                          properties:
+                            type:
+                              anyOf:
+                                - type: string
+                                  const: domain
+                                - type: string
+                                  const: subdomain
+                                - type: string
+                                  const: network_id
+                                - type: string
+                                  const: ios_bundle
+                                - type: string
+                                  const: android_package
+                                - type: string
+                                  const: apple_app_store_id
+                                - type: string
+                                  const: google_play_id
+                                - type: string
+                                  const: roku_store_id
+                                - type: string
+                                  const: fire_tv_asin
+                                - type: string
+                                  const: samsung_app_id
+                                - type: string
+                                  const: apple_tv_bundle
+                                - type: string
+                                  const: bundle_id
+                                - type: string
+                                  const: venue_id
+                                - type: string
+                                  const: screen_id
+                                - type: string
+                                  const: openooh_venue_type
+                                - type: string
+                                  const: rss_url
+                                - type: string
+                                  const: apple_podcast_id
+                                - type: string
+                                  const: spotify_collection_id
+                                - type: string
+                                  const: podcast_guid
+                                - type: string
+                                  const: station_id
+                                - type: string
+                                  const: facility_id
+                            value:
+                              type: string
+                          required:
+                            - type
+                            - value
+                          additionalProperties: false
+                        country:
+                          description: >-
+                            For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1
+                            alpha-2 code. Needs property.
+                          type: string
+                          pattern: ^[A-Z]{2}$
                         status:
                           description: >-
                             Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
@@ -64989,7 +65116,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With query and no sort, best match first. Other kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first. Other
+                            kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -67324,6 +67452,69 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        property:
+                          description: >-
+                            For kind seller (buyer account): the sellers that can sell this property, best claim first
+                            (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as
+                            {"type":"domain","value":"nu.nl"}. Needs country.
+                          type: object
+                          properties:
+                            type:
+                              anyOf:
+                                - type: string
+                                  const: domain
+                                - type: string
+                                  const: subdomain
+                                - type: string
+                                  const: network_id
+                                - type: string
+                                  const: ios_bundle
+                                - type: string
+                                  const: android_package
+                                - type: string
+                                  const: apple_app_store_id
+                                - type: string
+                                  const: google_play_id
+                                - type: string
+                                  const: roku_store_id
+                                - type: string
+                                  const: fire_tv_asin
+                                - type: string
+                                  const: samsung_app_id
+                                - type: string
+                                  const: apple_tv_bundle
+                                - type: string
+                                  const: bundle_id
+                                - type: string
+                                  const: venue_id
+                                - type: string
+                                  const: screen_id
+                                - type: string
+                                  const: openooh_venue_type
+                                - type: string
+                                  const: rss_url
+                                - type: string
+                                  const: apple_podcast_id
+                                - type: string
+                                  const: spotify_collection_id
+                                - type: string
+                                  const: podcast_guid
+                                - type: string
+                                  const: station_id
+                                - type: string
+                                  const: facility_id
+                            value:
+                              type: string
+                          required:
+                            - type
+                            - value
+                          additionalProperties: false
+                        country:
+                          description: >-
+                            For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1
+                            alpha-2 code. Needs property.
+                          type: string
+                          pattern: ^[A-Z]{2}$
                         status:
                           description: >-
                             Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
@@ -67577,7 +67768,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With query and no sort, best match first. Other kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first. Other
+                            kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -69115,6 +69307,69 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        property:
+                          description: >-
+                            For kind seller (buyer account): the sellers that can sell this property, best claim first
+                            (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as
+                            {"type":"domain","value":"nu.nl"}. Needs country.
+                          type: object
+                          properties:
+                            type:
+                              anyOf:
+                                - type: string
+                                  const: domain
+                                - type: string
+                                  const: subdomain
+                                - type: string
+                                  const: network_id
+                                - type: string
+                                  const: ios_bundle
+                                - type: string
+                                  const: android_package
+                                - type: string
+                                  const: apple_app_store_id
+                                - type: string
+                                  const: google_play_id
+                                - type: string
+                                  const: roku_store_id
+                                - type: string
+                                  const: fire_tv_asin
+                                - type: string
+                                  const: samsung_app_id
+                                - type: string
+                                  const: apple_tv_bundle
+                                - type: string
+                                  const: bundle_id
+                                - type: string
+                                  const: venue_id
+                                - type: string
+                                  const: screen_id
+                                - type: string
+                                  const: openooh_venue_type
+                                - type: string
+                                  const: rss_url
+                                - type: string
+                                  const: apple_podcast_id
+                                - type: string
+                                  const: spotify_collection_id
+                                - type: string
+                                  const: podcast_guid
+                                - type: string
+                                  const: station_id
+                                - type: string
+                                  const: facility_id
+                            value:
+                              type: string
+                          required:
+                            - type
+                            - value
+                          additionalProperties: false
+                        country:
+                          description: >-
+                            For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1
+                            alpha-2 code. Needs property.
+                          type: string
+                          pattern: ^[A-Z]{2}$
                         status:
                           description: >-
                             Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
@@ -69359,7 +69614,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With query and no sort, best match first. Other kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first. Other
+                            kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -70891,6 +71147,69 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        property:
+                          description: >-
+                            For kind seller (buyer account): the sellers that can sell this property, best claim first
+                            (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as
+                            {"type":"domain","value":"nu.nl"}. Needs country.
+                          type: object
+                          properties:
+                            type:
+                              anyOf:
+                                - type: string
+                                  const: domain
+                                - type: string
+                                  const: subdomain
+                                - type: string
+                                  const: network_id
+                                - type: string
+                                  const: ios_bundle
+                                - type: string
+                                  const: android_package
+                                - type: string
+                                  const: apple_app_store_id
+                                - type: string
+                                  const: google_play_id
+                                - type: string
+                                  const: roku_store_id
+                                - type: string
+                                  const: fire_tv_asin
+                                - type: string
+                                  const: samsung_app_id
+                                - type: string
+                                  const: apple_tv_bundle
+                                - type: string
+                                  const: bundle_id
+                                - type: string
+                                  const: venue_id
+                                - type: string
+                                  const: screen_id
+                                - type: string
+                                  const: openooh_venue_type
+                                - type: string
+                                  const: rss_url
+                                - type: string
+                                  const: apple_podcast_id
+                                - type: string
+                                  const: spotify_collection_id
+                                - type: string
+                                  const: podcast_guid
+                                - type: string
+                                  const: station_id
+                                - type: string
+                                  const: facility_id
+                            value:
+                              type: string
+                          required:
+                            - type
+                            - value
+                          additionalProperties: false
+                        country:
+                          description: >-
+                            For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1
+                            alpha-2 code. Needs property.
+                          type: string
+                          pattern: ^[A-Z]{2}$
                         status:
                           description: >-
                             Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
@@ -71144,7 +71463,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With query and no sort, best match first. Other kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first. Other
+                            kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -72674,6 +72994,69 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        property:
+                          description: >-
+                            For kind seller (buyer account): the sellers that can sell this property, best claim first
+                            (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as
+                            {"type":"domain","value":"nu.nl"}. Needs country.
+                          type: object
+                          properties:
+                            type:
+                              anyOf:
+                                - type: string
+                                  const: domain
+                                - type: string
+                                  const: subdomain
+                                - type: string
+                                  const: network_id
+                                - type: string
+                                  const: ios_bundle
+                                - type: string
+                                  const: android_package
+                                - type: string
+                                  const: apple_app_store_id
+                                - type: string
+                                  const: google_play_id
+                                - type: string
+                                  const: roku_store_id
+                                - type: string
+                                  const: fire_tv_asin
+                                - type: string
+                                  const: samsung_app_id
+                                - type: string
+                                  const: apple_tv_bundle
+                                - type: string
+                                  const: bundle_id
+                                - type: string
+                                  const: venue_id
+                                - type: string
+                                  const: screen_id
+                                - type: string
+                                  const: openooh_venue_type
+                                - type: string
+                                  const: rss_url
+                                - type: string
+                                  const: apple_podcast_id
+                                - type: string
+                                  const: spotify_collection_id
+                                - type: string
+                                  const: podcast_guid
+                                - type: string
+                                  const: station_id
+                                - type: string
+                                  const: facility_id
+                            value:
+                              type: string
+                          required:
+                            - type
+                            - value
+                          additionalProperties: false
+                        country:
+                          description: >-
+                            For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1
+                            alpha-2 code. Needs property.
+                          type: string
+                          pattern: ^[A-Z]{2}$
                         status:
                           description: >-
                             Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
@@ -72918,7 +73301,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With query and no sort, best match first. Other kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first. Other
+                            kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -74456,6 +74840,69 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        property:
+                          description: >-
+                            For kind seller (buyer account): the sellers that can sell this property, best claim first
+                            (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as
+                            {"type":"domain","value":"nu.nl"}. Needs country.
+                          type: object
+                          properties:
+                            type:
+                              anyOf:
+                                - type: string
+                                  const: domain
+                                - type: string
+                                  const: subdomain
+                                - type: string
+                                  const: network_id
+                                - type: string
+                                  const: ios_bundle
+                                - type: string
+                                  const: android_package
+                                - type: string
+                                  const: apple_app_store_id
+                                - type: string
+                                  const: google_play_id
+                                - type: string
+                                  const: roku_store_id
+                                - type: string
+                                  const: fire_tv_asin
+                                - type: string
+                                  const: samsung_app_id
+                                - type: string
+                                  const: apple_tv_bundle
+                                - type: string
+                                  const: bundle_id
+                                - type: string
+                                  const: venue_id
+                                - type: string
+                                  const: screen_id
+                                - type: string
+                                  const: openooh_venue_type
+                                - type: string
+                                  const: rss_url
+                                - type: string
+                                  const: apple_podcast_id
+                                - type: string
+                                  const: spotify_collection_id
+                                - type: string
+                                  const: podcast_guid
+                                - type: string
+                                  const: station_id
+                                - type: string
+                                  const: facility_id
+                            value:
+                              type: string
+                          required:
+                            - type
+                            - value
+                          additionalProperties: false
+                        country:
+                          description: >-
+                            For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1
+                            alpha-2 code. Needs property.
+                          type: string
+                          pattern: ^[A-Z]{2}$
                         status:
                           description: >-
                             Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
@@ -74709,7 +75156,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With query and no sort, best match first. Other kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first. Other
+                            kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -77880,6 +78328,69 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        property:
+                          description: >-
+                            For kind seller (buyer account): the sellers that can sell this property, best claim first
+                            (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as
+                            {"type":"domain","value":"nu.nl"}. Needs country.
+                          type: object
+                          properties:
+                            type:
+                              anyOf:
+                                - type: string
+                                  const: domain
+                                - type: string
+                                  const: subdomain
+                                - type: string
+                                  const: network_id
+                                - type: string
+                                  const: ios_bundle
+                                - type: string
+                                  const: android_package
+                                - type: string
+                                  const: apple_app_store_id
+                                - type: string
+                                  const: google_play_id
+                                - type: string
+                                  const: roku_store_id
+                                - type: string
+                                  const: fire_tv_asin
+                                - type: string
+                                  const: samsung_app_id
+                                - type: string
+                                  const: apple_tv_bundle
+                                - type: string
+                                  const: bundle_id
+                                - type: string
+                                  const: venue_id
+                                - type: string
+                                  const: screen_id
+                                - type: string
+                                  const: openooh_venue_type
+                                - type: string
+                                  const: rss_url
+                                - type: string
+                                  const: apple_podcast_id
+                                - type: string
+                                  const: spotify_collection_id
+                                - type: string
+                                  const: podcast_guid
+                                - type: string
+                                  const: station_id
+                                - type: string
+                                  const: facility_id
+                            value:
+                              type: string
+                          required:
+                            - type
+                            - value
+                          additionalProperties: false
+                        country:
+                          description: >-
+                            For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1
+                            alpha-2 code. Needs property.
+                          type: string
+                          pattern: ^[A-Z]{2}$
                         status:
                           description: >-
                             Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
@@ -78133,7 +78644,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With query and no sort, best match first. Other kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first. Other
+                            kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -80485,6 +80997,69 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        property:
+                          description: >-
+                            For kind seller (buyer account): the sellers that can sell this property, best claim first
+                            (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as
+                            {"type":"domain","value":"nu.nl"}. Needs country.
+                          type: object
+                          properties:
+                            type:
+                              anyOf:
+                                - type: string
+                                  const: domain
+                                - type: string
+                                  const: subdomain
+                                - type: string
+                                  const: network_id
+                                - type: string
+                                  const: ios_bundle
+                                - type: string
+                                  const: android_package
+                                - type: string
+                                  const: apple_app_store_id
+                                - type: string
+                                  const: google_play_id
+                                - type: string
+                                  const: roku_store_id
+                                - type: string
+                                  const: fire_tv_asin
+                                - type: string
+                                  const: samsung_app_id
+                                - type: string
+                                  const: apple_tv_bundle
+                                - type: string
+                                  const: bundle_id
+                                - type: string
+                                  const: venue_id
+                                - type: string
+                                  const: screen_id
+                                - type: string
+                                  const: openooh_venue_type
+                                - type: string
+                                  const: rss_url
+                                - type: string
+                                  const: apple_podcast_id
+                                - type: string
+                                  const: spotify_collection_id
+                                - type: string
+                                  const: podcast_guid
+                                - type: string
+                                  const: station_id
+                                - type: string
+                                  const: facility_id
+                            value:
+                              type: string
+                          required:
+                            - type
+                            - value
+                          additionalProperties: false
+                        country:
+                          description: >-
+                            For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1
+                            alpha-2 code. Needs property.
+                          type: string
+                          pattern: ^[A-Z]{2}$
                         status:
                           description: >-
                             Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
@@ -80738,7 +81313,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With query and no sort, best match first. Other kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first. Other
+                            kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -83085,6 +83661,69 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        property:
+                          description: >-
+                            For kind seller (buyer account): the sellers that can sell this property, best claim first
+                            (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as
+                            {"type":"domain","value":"nu.nl"}. Needs country.
+                          type: object
+                          properties:
+                            type:
+                              anyOf:
+                                - type: string
+                                  const: domain
+                                - type: string
+                                  const: subdomain
+                                - type: string
+                                  const: network_id
+                                - type: string
+                                  const: ios_bundle
+                                - type: string
+                                  const: android_package
+                                - type: string
+                                  const: apple_app_store_id
+                                - type: string
+                                  const: google_play_id
+                                - type: string
+                                  const: roku_store_id
+                                - type: string
+                                  const: fire_tv_asin
+                                - type: string
+                                  const: samsung_app_id
+                                - type: string
+                                  const: apple_tv_bundle
+                                - type: string
+                                  const: bundle_id
+                                - type: string
+                                  const: venue_id
+                                - type: string
+                                  const: screen_id
+                                - type: string
+                                  const: openooh_venue_type
+                                - type: string
+                                  const: rss_url
+                                - type: string
+                                  const: apple_podcast_id
+                                - type: string
+                                  const: spotify_collection_id
+                                - type: string
+                                  const: podcast_guid
+                                - type: string
+                                  const: station_id
+                                - type: string
+                                  const: facility_id
+                            value:
+                              type: string
+                          required:
+                            - type
+                            - value
+                          additionalProperties: false
+                        country:
+                          description: >-
+                            For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1
+                            alpha-2 code. Needs property.
+                          type: string
+                          pattern: ^[A-Z]{2}$
                         status:
                           description: >-
                             Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
@@ -83338,7 +83977,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With query and no sort, best match first. Other kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first. Other
+                            kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -84874,6 +85514,69 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        property:
+                          description: >-
+                            For kind seller (buyer account): the sellers that can sell this property, best claim first
+                            (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as
+                            {"type":"domain","value":"nu.nl"}. Needs country.
+                          type: object
+                          properties:
+                            type:
+                              anyOf:
+                                - type: string
+                                  const: domain
+                                - type: string
+                                  const: subdomain
+                                - type: string
+                                  const: network_id
+                                - type: string
+                                  const: ios_bundle
+                                - type: string
+                                  const: android_package
+                                - type: string
+                                  const: apple_app_store_id
+                                - type: string
+                                  const: google_play_id
+                                - type: string
+                                  const: roku_store_id
+                                - type: string
+                                  const: fire_tv_asin
+                                - type: string
+                                  const: samsung_app_id
+                                - type: string
+                                  const: apple_tv_bundle
+                                - type: string
+                                  const: bundle_id
+                                - type: string
+                                  const: venue_id
+                                - type: string
+                                  const: screen_id
+                                - type: string
+                                  const: openooh_venue_type
+                                - type: string
+                                  const: rss_url
+                                - type: string
+                                  const: apple_podcast_id
+                                - type: string
+                                  const: spotify_collection_id
+                                - type: string
+                                  const: podcast_guid
+                                - type: string
+                                  const: station_id
+                                - type: string
+                                  const: facility_id
+                            value:
+                              type: string
+                          required:
+                            - type
+                            - value
+                          additionalProperties: false
+                        country:
+                          description: >-
+                            For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1
+                            alpha-2 code. Needs property.
+                          type: string
+                          pattern: ^[A-Z]{2}$
                         status:
                           description: >-
                             Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
@@ -85127,7 +85830,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With query and no sort, best match first. Other kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first. Other
+                            kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -86660,6 +87364,69 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        property:
+                          description: >-
+                            For kind seller (buyer account): the sellers that can sell this property, best claim first
+                            (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as
+                            {"type":"domain","value":"nu.nl"}. Needs country.
+                          type: object
+                          properties:
+                            type:
+                              anyOf:
+                                - type: string
+                                  const: domain
+                                - type: string
+                                  const: subdomain
+                                - type: string
+                                  const: network_id
+                                - type: string
+                                  const: ios_bundle
+                                - type: string
+                                  const: android_package
+                                - type: string
+                                  const: apple_app_store_id
+                                - type: string
+                                  const: google_play_id
+                                - type: string
+                                  const: roku_store_id
+                                - type: string
+                                  const: fire_tv_asin
+                                - type: string
+                                  const: samsung_app_id
+                                - type: string
+                                  const: apple_tv_bundle
+                                - type: string
+                                  const: bundle_id
+                                - type: string
+                                  const: venue_id
+                                - type: string
+                                  const: screen_id
+                                - type: string
+                                  const: openooh_venue_type
+                                - type: string
+                                  const: rss_url
+                                - type: string
+                                  const: apple_podcast_id
+                                - type: string
+                                  const: spotify_collection_id
+                                - type: string
+                                  const: podcast_guid
+                                - type: string
+                                  const: station_id
+                                - type: string
+                                  const: facility_id
+                            value:
+                              type: string
+                          required:
+                            - type
+                            - value
+                          additionalProperties: false
+                        country:
+                          description: >-
+                            For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1
+                            alpha-2 code. Needs property.
+                          type: string
+                          pattern: ^[A-Z]{2}$
                         status:
                           description: >-
                             Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
@@ -86913,7 +87680,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With query and no sort, best match first. Other kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first. Other
+                            kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -88446,6 +89214,69 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        property:
+                          description: >-
+                            For kind seller (buyer account): the sellers that can sell this property, best claim first
+                            (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as
+                            {"type":"domain","value":"nu.nl"}. Needs country.
+                          type: object
+                          properties:
+                            type:
+                              anyOf:
+                                - type: string
+                                  const: domain
+                                - type: string
+                                  const: subdomain
+                                - type: string
+                                  const: network_id
+                                - type: string
+                                  const: ios_bundle
+                                - type: string
+                                  const: android_package
+                                - type: string
+                                  const: apple_app_store_id
+                                - type: string
+                                  const: google_play_id
+                                - type: string
+                                  const: roku_store_id
+                                - type: string
+                                  const: fire_tv_asin
+                                - type: string
+                                  const: samsung_app_id
+                                - type: string
+                                  const: apple_tv_bundle
+                                - type: string
+                                  const: bundle_id
+                                - type: string
+                                  const: venue_id
+                                - type: string
+                                  const: screen_id
+                                - type: string
+                                  const: openooh_venue_type
+                                - type: string
+                                  const: rss_url
+                                - type: string
+                                  const: apple_podcast_id
+                                - type: string
+                                  const: spotify_collection_id
+                                - type: string
+                                  const: podcast_guid
+                                - type: string
+                                  const: station_id
+                                - type: string
+                                  const: facility_id
+                            value:
+                              type: string
+                          required:
+                            - type
+                            - value
+                          additionalProperties: false
+                        country:
+                          description: >-
+                            For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1
+                            alpha-2 code. Needs property.
+                          type: string
+                          pattern: ^[A-Z]{2}$
                         status:
                           description: >-
                             Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
@@ -88699,7 +89530,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With query and no sort, best match first. Other kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first. Other
+                            kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -90233,6 +91065,69 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        property:
+                          description: >-
+                            For kind seller (buyer account): the sellers that can sell this property, best claim first
+                            (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as
+                            {"type":"domain","value":"nu.nl"}. Needs country.
+                          type: object
+                          properties:
+                            type:
+                              anyOf:
+                                - type: string
+                                  const: domain
+                                - type: string
+                                  const: subdomain
+                                - type: string
+                                  const: network_id
+                                - type: string
+                                  const: ios_bundle
+                                - type: string
+                                  const: android_package
+                                - type: string
+                                  const: apple_app_store_id
+                                - type: string
+                                  const: google_play_id
+                                - type: string
+                                  const: roku_store_id
+                                - type: string
+                                  const: fire_tv_asin
+                                - type: string
+                                  const: samsung_app_id
+                                - type: string
+                                  const: apple_tv_bundle
+                                - type: string
+                                  const: bundle_id
+                                - type: string
+                                  const: venue_id
+                                - type: string
+                                  const: screen_id
+                                - type: string
+                                  const: openooh_venue_type
+                                - type: string
+                                  const: rss_url
+                                - type: string
+                                  const: apple_podcast_id
+                                - type: string
+                                  const: spotify_collection_id
+                                - type: string
+                                  const: podcast_guid
+                                - type: string
+                                  const: station_id
+                                - type: string
+                                  const: facility_id
+                            value:
+                              type: string
+                          required:
+                            - type
+                            - value
+                          additionalProperties: false
+                        country:
+                          description: >-
+                            For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1
+                            alpha-2 code. Needs property.
+                          type: string
+                          pattern: ^[A-Z]{2}$
                         status:
                           description: >-
                             Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item:
@@ -90486,7 +91381,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With query and no sort, best match first. Other kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first. Other
+                            kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc

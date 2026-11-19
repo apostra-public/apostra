@@ -22389,6 +22389,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
+    property: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchFilterProperty]
+    '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
+    country: NotRequired[str]
+    '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -22444,7 +22448,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -22617,6 +22621,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind conversation: chats started at or after this UTC time.\n    '
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
+
+class SearchInputDocsScopeCallerRelevantAndPublicResearchFilterProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict):
     accountId: NotRequired[int | str]
@@ -22693,6 +22701,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
+    property: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionFilterProperty]
+    '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
+    country: NotRequired[str]
+    '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -22748,7 +22760,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -22922,6 +22934,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
 
+class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionFilterProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
+
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
@@ -22931,6 +22947,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
+    property: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilterProperty]
+    '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
+    country: NotRequired[str]
+    '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -22986,7 +23006,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -23159,6 +23179,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind conversation: chats started at or after this UTC time.\n    '
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
+
+class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilterProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     accountId: NotRequired[int | str]
@@ -23196,6 +23220,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
+    property: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilterProperty]
+    '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
+    country: NotRequired[str]
+    '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -23251,7 +23279,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -23424,6 +23452,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind conversation: chats started at or after this UTC time.\n    '
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
+
+class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilterProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
 
 class SearchInputKindAdServerTargeting(TypedDict):
     accountId: NotRequired[int | str]
@@ -23468,6 +23500,10 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
+    property: NotRequired[SearchInputKindAdServerTargetingFilterProperty]
+    '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
+    country: NotRequired[str]
+    '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -23523,7 +23559,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -23696,6 +23732,10 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind conversation: chats started at or after this UTC time.\n    '
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
+
+class SearchInputKindAdServerTargetingFilterProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
 
 class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSession(TypedDict):
     accountId: NotRequired[int | str]
@@ -23740,6 +23780,10 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
+    property: NotRequired[SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSessionFilterProperty]
+    '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
+    country: NotRequired[str]
+    '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -23795,7 +23839,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -23969,6 +24013,10 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
 
+class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSessionFilterProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
+
 class SearchInputKindBuyerRfp(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
@@ -24012,6 +24060,10 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
+    property: NotRequired[SearchInputKindBuyerRfpFilterProperty]
+    '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
+    country: NotRequired[str]
+    '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -24067,7 +24119,7 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -24240,6 +24292,10 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kind conversation: chats started at or after this UTC time.\n    '
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
+
+class SearchInputKindBuyerRfpFilterProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
 
 class SearchInputKindCreative(TypedDict):
     accountId: NotRequired[int | str]
@@ -24318,6 +24374,10 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
+    property: NotRequired[SearchInputKindCreativeAssetAndCatalogFilterProperty]
+    '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
+    country: NotRequired[str]
+    '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -24373,7 +24433,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -24547,6 +24607,10 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
 
+class SearchInputKindCreativeAssetAndCatalogFilterProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
+
 class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
@@ -24590,6 +24654,10 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
+    property: NotRequired[SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilterProperty]
+    '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
+    country: NotRequired[str]
+    '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -24645,7 +24713,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -24817,6 +24885,10 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
 
+class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilterProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
+
 class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
@@ -24860,6 +24932,10 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
+    property: NotRequired[SearchInputKindCreativeCollectionWithFilterCampaignIdFilterProperty]
+    '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
+    country: NotRequired[str]
+    '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -24913,7 +24989,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: str
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -25087,6 +25163,10 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
 
+class SearchInputKindCreativeCollectionWithFilterCampaignIdFilterProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
+
 class SearchInputKindCreativeFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
@@ -25096,6 +25176,10 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
+    property: NotRequired[SearchInputKindCreativeFilterProperty]
+    '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
+    country: NotRequired[str]
+    '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -25151,7 +25235,7 @@ class SearchInputKindCreativeFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -25322,6 +25406,10 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kind conversation: chats started at or after this UTC time.\n    '
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
+
+class SearchInputKindCreativeFilterProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
 
 class SearchInputKindCreativeSessionWithFilterAdvertiserId(TypedDict):
     accountId: NotRequired[int | str]
@@ -25436,6 +25524,10 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
+    property: NotRequired[SearchInputKindCreativeWithFilterAndFilterCampaignIdFilterProperty]
+    '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
+    country: NotRequired[str]
+    '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -25489,7 +25581,7 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: str
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -25662,6 +25754,10 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kind conversation: chats started at or after this UTC time.\n    '
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
+
+class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilterProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
 
 SearchInputKindCreativeWithFilterCampaignId: TypeAlias = SearchInputKindCreativeWithFilterAndFilterCampaignId
 
@@ -25792,6 +25888,10 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
+    property: NotRequired[SearchInputKindProposalFilterProperty]
+    '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
+    country: NotRequired[str]
+    '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -25847,7 +25947,7 @@ class SearchInputKindProposalFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: str
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -26021,6 +26121,10 @@ class SearchInputKindProposalFilter(TypedDict):
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
 
+class SearchInputKindProposalFilterProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
+
 class SearchInputKindSourceAccount(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
@@ -26064,6 +26168,10 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
     '\n    For kind seller (buyer account): the sellers that belong to this network, by the network\'s seller Account id. Membership comes from properties\' own adagents.json files. Not with sellerAccountIds.\n    '
+    property: NotRequired[SearchInputKindSourceAccountFilterProperty]
+    '\n    For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property\'s own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.\n    '
+    country: NotRequired[str]
+    '\n    For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.\n    '
     status: NotRequired[Literal["PENDING", "ACTIVE", "DISABLED", "pending", "approved", "rejected", "revoked", "OPEN", "IN_PROGRESS", "BLOCKED", "COMPLETED", "CANCELLED", "ARCHIVED", "ALL", "open", "closed", "drafting", "refining", "evaluating", "finalized", "sent", "applied", "waiting_approval", "blocked"]]
     '\n    Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.\n    '
     originRfpTurnId: NotRequired[str]
@@ -26119,7 +26227,7 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     isArchived: NotRequired[bool]
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
-    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.\n    '
+    '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
     formatKind: NotRequired[str]
@@ -26292,6 +26400,10 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind conversation: chats started at or after this UTC time.\n    '
     conversationStartedBefore: NotRequired[str]
     '\n    For kind conversation: chats started at or before this UTC time.\n    '
+
+class SearchInputKindSourceAccountFilterProperty(TypedDict):
+    type: Literal["domain", "subdomain", "network_id", "ios_bundle", "android_package", "apple_app_store_id", "google_play_id", "roku_store_id", "fire_tv_asin", "samsung_app_id", "apple_tv_bundle", "bundle_id", "venue_id", "screen_id", "openooh_venue_type", "rss_url", "apple_podcast_id", "spotify_collection_id", "podcast_guid", "station_id", "facility_id"]
+    value: str
 
 class SearchInputKindTargetingValue(TypedDict):
     accountId: NotRequired[int | str]
