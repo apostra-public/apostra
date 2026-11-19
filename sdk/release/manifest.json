@@ -1558,6 +1558,7 @@
       "OpenMediaBuysPageResultParams": "object",
       "OpenMediaPartnersPageError": "other",
       "OpenMediaPartnersPageInput": "object",
+      "OpenMediaPartnersPageInputFilter": "object",
       "OpenMediaPartnersPageResult": "object",
       "OpenPageError": "other",
       "OpenPageInput": "object",

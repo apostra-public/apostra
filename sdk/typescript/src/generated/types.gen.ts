@@ -14481,6 +14481,35 @@ export type OpenMediaPartnersPageData = {
          */
         connectionAccountId?: string;
         /**
+         * Open the page narrowed like search kind seller, with these filters. Turn the buyer’s request into it.
+         */
+        filter?: {
+            /**
+             * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
+             */
+            selected?: boolean;
+            /**
+             * For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.
+             */
+            region?: string;
+            /**
+             * Partners that sell any of these channels.
+             */
+            channel?: Array<string>;
+            /**
+             * name, the default, or followers (refused until creator data exists). With query and no sort, best match first.
+             */
+            sort?: 'name' | 'followers';
+        };
+        /**
+         * Open the page searched for this text, across every partner on Apostra, in the buyer’s list or not.
+         */
+        query?: string;
+        /**
+         * The tab of the partner’s page to open. Needs sellerAccountId.
+         */
+        tab?: 'overview' | 'offer' | 'record' | 'advertisers' | 'settings';
+        /**
          * Apostra accountId this call runs in, from get_status.
          */
         accountId?: number | string;
@@ -14583,6 +14612,20 @@ export type OpenMediaPartnersPageResponses = {
              * Opened account ID.
              */
             accountId?: string;
+            /**
+             * The seller search filter the page opened with.
+             */
+            filter?: {
+                [key: string]: unknown;
+            };
+            /**
+             * The search text the page opened with.
+             */
+            query?: string;
+            /**
+             * The partner tab the page opened on.
+             */
+            tab?: 'overview' | 'offer' | 'record' | 'advertisers' | 'settings';
         };
         error: null;
     };
