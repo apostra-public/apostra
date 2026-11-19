@@ -60947,6 +60947,8 @@ paths:
                     - required:
                         - sourceDecision
                     - required:
+                        - demo
+                    - required:
                         - informationRequest
                     - required:
                         - readyToInvoice
@@ -60990,6 +60992,15 @@ paths:
                     propertyNames:
                       enum:
                         - useCases
+                        - accountId
+                        - expectedAccountId
+                - if:
+                    required:
+                      - demo
+                  then:
+                    propertyNames:
+                      enum:
+                        - demo
                         - accountId
                         - expectedAccountId
                 - if:
