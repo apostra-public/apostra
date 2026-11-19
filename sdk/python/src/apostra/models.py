@@ -14284,7 +14284,7 @@ class SaveCreativeInput(TypedDict):
     '\n    Canonical format option; derived from creativeFormatId when supplied.\n    '
     creativeFormatId: NotRequired[str]
     '\n    Signed product-bound selection. Do not combine with formatKind/formatParams.\n    '
-    assets: NotRequired[list[SaveCreativeInputAssetsItemAssetTypeIMAGEAndVIDEOAndAUDIOAndHTMLAndTEXTAndVAST | SaveCreativeInputAssetsItemAssetTypeDisplayTag]]
+    assets: NotRequired[list[SaveCreativeInputAssetsItemAssetTypeIMAGEAndVIDEOAndAUDIOAndHTMLAndTEXTAndVASTAndDAAST | SaveCreativeInputAssetsItemAssetTypeDisplayTag]]
     '\n    Unbound hosted or inline assets; one primary. display_tag is an AdCP asset, not HTML.\n    '
     sourceAssetRef: NotRequired[str]
     '\n    Write-only private JPEG/PNG; create-only with advertiserId/campaignId, not with assets/sourceAssets.\n    '
@@ -14343,12 +14343,12 @@ class SaveCreativeInputAssetsItemAssetTypeDisplayTag(TypedDict):
     macro_declarations: NotRequired[list[dict[str, JsonValue]]]
     '\n    AdCP macro_declarations for the macros in the tag, kept as sent.\n    '
 
-class SaveCreativeInputAssetsItemAssetTypeIMAGEAndVIDEOAndAUDIOAndHTMLAndTEXTAndVAST(TypedDict):
+class SaveCreativeInputAssetsItemAssetTypeIMAGEAndVIDEOAndAUDIOAndHTMLAndTEXTAndVASTAndDAAST(TypedDict):
     url: NotRequired[SaveCreativeRequestAssetsItemUrl]
     '\n    Public URL of a hosted asset.\n    '
     dataUrl: NotRequired[str]
     '\n    Inline bytes as a base64 data URL.\n    '
-    assetType: Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "TEXT", "VAST"]
+    assetType: Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "TEXT", "VAST", "DAAST"]
     '\n    ZIP requires inspected HTML5 ingestion.\n    '
     contentType: NotRequired[str]
     '\n    MIME type when it cannot be inferred.\n    '
@@ -14358,8 +14358,12 @@ class SaveCreativeInputAssetsItemAssetTypeIMAGEAndVIDEOAndAUDIOAndHTMLAndTEXTAnd
     '\n    Make this the primary asset. Not allowed for TEXT.\n    '
     vastVersion: NotRequired[Literal["2.0", "3.0", "4.0", "4.1", "4.2", "4.3"]]
     '\n    VAST only. Overrides the version read from the tag.\n    '
+    daastVersion: NotRequired[Literal["1.0", "1.1"]]
+    '\n    DAAST only. The version of the audio tag (1.0 or 1.1).\n    '
 
-SaveCreativeInputAssetsItem: TypeAlias = SaveCreativeInputAssetsItemAssetTypeIMAGEAndVIDEOAndAUDIOAndHTMLAndTEXTAndVAST
+SaveCreativeInputAssetsItem: TypeAlias = SaveCreativeInputAssetsItemAssetTypeIMAGEAndVIDEOAndAUDIOAndHTMLAndTEXTAndVASTAndDAAST
+
+SaveCreativeInputAssetsItemAssetTypeIMAGEAndVIDEOAndAUDIOAndHTMLAndTEXTAndVAST: TypeAlias = SaveCreativeInputAssetsItemAssetTypeIMAGEAndVIDEOAndAUDIOAndHTMLAndTEXTAndVASTAndDAAST
 
 class SaveCreativeInputFormatOptionRefScopeProduct(TypedDict):
     scope: Literal["product"]
@@ -14428,7 +14432,7 @@ class SaveCreativeInputPreviewBulkUpdateSelection(TypedDict):
     '\n    Select Creatives updated before this timestamp.\n    '
     formatKind: NotRequired[SaveCreativeRequestPreviewBulkUpdateSelectionFormatKind]
     '\n    Canonical format kind to match.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "TEXT", "VAST"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "TEXT", "VAST", "DAAST"]]
     '\n    Creative asset type to match.\n    '
 
 class SaveCreativeInputPreviewBulkUpdateUpdate(TypedDict):
@@ -22485,7 +22489,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetId: NotRequired[str]
     '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "DAAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
     '\n    creative_asset: assets carrying every tag.\n    '
@@ -22801,7 +22805,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetId: NotRequired[str]
     '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "DAAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
     '\n    creative_asset: assets carrying every tag.\n    '
@@ -23051,7 +23055,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetId: NotRequired[str]
     '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "DAAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
     '\n    creative_asset: assets carrying every tag.\n    '
@@ -23328,7 +23332,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetId: NotRequired[str]
     '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "DAAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
     '\n    creative_asset: assets carrying every tag.\n    '
@@ -23612,7 +23616,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetId: NotRequired[str]
     '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "DAAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
     '\n    creative_asset: assets carrying every tag.\n    '
@@ -23896,7 +23900,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetId: NotRequired[str]
     '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "DAAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
     '\n    creative_asset: assets carrying every tag.\n    '
@@ -24180,7 +24184,7 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetId: NotRequired[str]
     '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "DAAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
     '\n    creative_asset: assets carrying every tag.\n    '
@@ -24498,7 +24502,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetId: NotRequired[str]
     '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "DAAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
     '\n    creative_asset: assets carrying every tag.\n    '
@@ -24780,7 +24784,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetId: NotRequired[str]
     '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "DAAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
     '\n    creative_asset: assets carrying every tag.\n    '
@@ -25062,7 +25066,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetId: NotRequired[str]
     '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "DAAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
     '\n    creative_asset: assets carrying every tag.\n    '
@@ -25310,7 +25314,7 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetId: NotRequired[str]
     '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "DAAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
     '\n    creative_asset: assets carrying every tag.\n    '
@@ -25662,7 +25666,7 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetId: NotRequired[str]
     '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "DAAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
     '\n    creative_asset: assets carrying every tag.\n    '
@@ -26032,7 +26036,7 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetId: NotRequired[str]
     '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "DAAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
     '\n    creative_asset: assets carrying every tag.\n    '
@@ -26316,7 +26320,7 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    Required with include executionResources, and only there: which kind of resource the product needs, such as lead_form or application.\n    '
     assetId: NotRequired[str]
     '\n    Required with include creativeFit, and only there: the asset_id of an active Creative Library asset of filter.advertiserId.\n    '
-    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
+    assetType: NotRequired[Literal["IMAGE", "VIDEO", "AUDIO", "HTML", "JAVASCRIPT", "CSS", "TEXT", "URL", "VAST", "DAAST", "ZIP", "FONT", "LOGO", "DOCUMENT"]]
     '\n    Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.\n    '
     tags: NotRequired[list[str]]
     '\n    creative_asset: assets carrying every tag.\n    '

@@ -24497,7 +24497,7 @@ export type SaveCreativeData = {
                 /**
                  * Creative asset type to match.
                  */
-                assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'TEXT' | 'VAST';
+                assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'TEXT' | 'VAST' | 'DAAST';
             };
             /**
              * Fields to change on every selected Creative.
@@ -24647,7 +24647,7 @@ export type SaveCreativeData = {
             /**
              * ZIP requires inspected HTML5 ingestion.
              */
-            assetType: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'TEXT' | 'VAST';
+            assetType: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'TEXT' | 'VAST' | 'DAAST';
             /**
              * MIME type when it cannot be inferred.
              */
@@ -24664,6 +24664,10 @@ export type SaveCreativeData = {
              * VAST only. Overrides the version read from the tag.
              */
             vastVersion?: '2.0' | '3.0' | '4.0' | '4.1' | '4.2' | '4.3';
+            /**
+             * DAAST only. The version of the audio tag (1.0 or 1.1).
+             */
+            daastVersion?: '1.0' | '1.1';
             asset_type?: never;
             delivery_type?: never;
             markup?: never;
@@ -24712,6 +24716,7 @@ export type SaveCreativeData = {
             label?: never;
             makePrimary?: never;
             vastVersion?: never;
+            daastVersion?: never;
         }>;
         /**
          * Write-only private JPEG/PNG; create-only with advertiserId/campaignId, not with assets/sourceAssets.
@@ -38906,7 +38911,7 @@ export type SearchData = {
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
-            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'DAAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
             /**
              * creative_asset: assets carrying every tag.
              */
@@ -39461,7 +39466,7 @@ export type SearchData = {
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
-            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'DAAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
             /**
              * creative_asset: assets carrying every tag.
              */
@@ -40084,7 +40089,7 @@ export type SearchData = {
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
-            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'DAAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
             /**
              * creative_asset: assets carrying every tag.
              */
@@ -40635,7 +40640,7 @@ export type SearchData = {
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
-            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'DAAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
             /**
              * creative_asset: assets carrying every tag.
              */
@@ -41183,7 +41188,7 @@ export type SearchData = {
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
-            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'DAAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
             /**
              * creative_asset: assets carrying every tag.
              */
@@ -41734,7 +41739,7 @@ export type SearchData = {
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
-            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'DAAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
             /**
              * creative_asset: assets carrying every tag.
              */
@@ -42285,7 +42290,7 @@ export type SearchData = {
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
-            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'DAAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
             /**
              * creative_asset: assets carrying every tag.
              */
@@ -42966,7 +42971,7 @@ export type SearchData = {
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
-            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'DAAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
             /**
              * creative_asset: assets carrying every tag.
              */
@@ -43601,7 +43606,7 @@ export type SearchData = {
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
-            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'DAAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
             /**
              * creative_asset: assets carrying every tag.
              */
@@ -44228,7 +44233,7 @@ export type SearchData = {
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
-            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'DAAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
             /**
              * creative_asset: assets carrying every tag.
              */
@@ -44782,7 +44787,7 @@ export type SearchData = {
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
-            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'DAAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
             /**
              * creative_asset: assets carrying every tag.
              */
@@ -45337,7 +45342,7 @@ export type SearchData = {
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
-            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'DAAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
             /**
              * creative_asset: assets carrying every tag.
              */
@@ -45892,7 +45897,7 @@ export type SearchData = {
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
-            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'DAAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
             /**
              * creative_asset: assets carrying every tag.
              */
@@ -46447,7 +46452,7 @@ export type SearchData = {
             /**
              * Creative: has asset type. creative_asset: IMAGE, VIDEO, or AUDIO.
              */
-            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
+            assetType?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'HTML' | 'JAVASCRIPT' | 'CSS' | 'TEXT' | 'URL' | 'VAST' | 'DAAST' | 'ZIP' | 'FONT' | 'LOGO' | 'DOCUMENT';
             /**
              * creative_asset: assets carrying every tag.
              */
