@@ -62120,6 +62120,10 @@ paths:
                         description: Price per unit of the model. Omit for an auction.
                         type: number
                         minimum: 0
+                      floor_price:
+                        description: Auction floor per unit, in this currency. Not with fixed_price.
+                        type: number
+                        minimum: 0
                       min_spend_per_package:
                         description: Least spend per package, in this currency.
                         type: number

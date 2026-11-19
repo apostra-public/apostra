@@ -22118,6 +22118,8 @@ class SaveWholesaleProductInputPricingOptionsItem(TypedDict):
     '\n    Your settlement currency.\n    '
     fixed_price: NotRequired[float]
     '\n    Price per unit of the model. Omit for an auction.\n    '
+    floor_price: NotRequired[float]
+    '\n    Auction floor per unit, in this currency. Not with fixed_price.\n    '
     min_spend_per_package: NotRequired[float]
     '\n    Least spend per package, in this currency.\n    '
 
