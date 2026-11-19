@@ -22402,7 +22402,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -22685,7 +22685,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict)
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision(TypedDict):
     accountId: NotRequired[int | str]
@@ -22718,7 +22718,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -23245,7 +23245,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -23529,7 +23529,7 @@ class SearchInputKindAdServerTargeting(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputKindAdServerTargetingFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -23813,7 +23813,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSessionFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -24097,7 +24097,7 @@ class SearchInputKindBuyerRfp(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputKindBuyerRfpFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -24381,7 +24381,7 @@ class SearchInputKindCreative(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     accountId: NotRequired[int | str]
@@ -24415,7 +24415,7 @@ class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -24699,7 +24699,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -24981,7 +24981,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -25505,7 +25505,7 @@ class SearchInputKindCreativeSessionWithFilterAdvertiserId(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputKindCreativeSessionWithFilterAdvertiserIdFilter(TypedDict):
     advertiserId: str
@@ -25539,7 +25539,7 @@ class SearchInputKindCreativeSessionWithFilterCampaignId(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputKindCreativeSessionWithFilterCampaignIdFilter(TypedDict):
     campaignId: str
@@ -25867,7 +25867,7 @@ class SearchInputKindEventSource(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputKindEventSourceFilter(TypedDict):
     advertiserId: NotRequired[str]
@@ -25905,7 +25905,7 @@ class SearchInputKindInventorySourceItem(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputKindInventorySourceItemFilter(TypedDict):
     selectorType: str
@@ -25949,7 +25949,7 @@ class SearchInputKindProposal(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputKindProposalFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -26233,7 +26233,7 @@ class SearchInputKindSourceAccount(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 class SearchInputKindSourceAccountFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
@@ -26517,7 +26517,7 @@ class SearchInputKindTargetingValue(TypedDict):
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
-    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind.\n    '
+    '\n    Count the kind by one field instead of listing it: each value with its count, no rows. Needs kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType. creative, event_source: advertiserId, account-wide without filter.advertiserId. inventory_source: status. seller: selected, partnerKind, channel, region (channel and region counts overlap).\n    '
 
 SearchInput: TypeAlias = "SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSession | SearchInputKindCreativeAssetAndCatalog | SearchInputKindEventSource | SearchInputKindProposal | SearchInputKindCreativeWithFilterAndFilterCampaignId | SearchInputKindCreative | SearchInputKindCreativeCollectionWithFilterCampaignId | SearchInputKindCreativeCollectionWithFilterAdvertiserId | SearchInputKindCreativeSessionWithFilterCampaignId | SearchInputKindCreativeSessionWithFilterAdvertiserId | SearchInputKindAdServerTargeting | SearchInputKindInventorySourceItem | SearchInputKindSourceAccount | SearchInputKindTargetingValue | SearchInputKindBuyerRfp | SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument | SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision | SearchInputDocsScopeCallerRelevantAndPublicResearch"
 
@@ -26569,6 +26569,8 @@ class SearchResultObjectsWithGroupByAndGroupsAndTotal(TypedDict):
     groups: list[SearchResultObjectsWithGroupByAndGroupsAndTotalGroupsItem]
     truncated: bool
     otherCount: NotRequired[float]
+    overlapping: NotRequired[bool]
+    '\n    Present and true only for a field an object can have several values of (seller channel and region): the counts overlap and add up to more than total.\n    '
 
 class SearchResultObjectsWithGroupByAndGroupsAndTotalGroupsItem(TypedDict):
     value: str | None

@@ -64073,7 +64073,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -65947,7 +65948,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -66746,7 +66748,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -68618,7 +68621,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -72342,7 +72346,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -74205,7 +74210,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -76073,7 +76079,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -76891,7 +76898,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -77713,7 +77721,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -79584,7 +79593,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -80400,7 +80410,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -82272,7 +82283,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -83084,7 +83096,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -84957,7 +84970,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -86826,7 +86840,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -88694,7 +88709,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -90562,7 +90578,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -92431,7 +92448,8 @@ paths:
                         Count the kind by one field instead of listing it: each value with its count, no rows. Needs
                         kind and takes no cursor. limit caps values returned (at most 50). ask: askState, askType.
                         creative, event_source: advertiserId, account-wide without filter.advertiserId.
-                        inventory_source: status. seller: selected, partnerKind.
+                        inventory_source: status. seller: selected, partnerKind, channel, region (channel and region
+                        counts overlap).
                       type: string
                       minLength: 1
                     accountId:
@@ -93197,6 +93215,11 @@ paths:
                                 type: boolean
                               otherCount:
                                 type: number
+                              overlapping:
+                                description: >-
+                                  Present and true only for a field an object can have several values of (seller channel
+                                  and region): the counts overlap and add up to more than total.
+                                type: boolean
                             required:
                               - kind
                               - groupBy
