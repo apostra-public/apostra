@@ -38729,9 +38729,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -38947,6 +38947,14 @@ export type SearchData = {
              * For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.
              */
             promoted?: boolean;
+            /**
+             * For kind creative with include delivery: running, not_running (in the Library and not running) or not_in_library (a Meta creative not in the Library, running or not). Omit for all.
+             */
+            listState?: 'running' | 'not_running' | 'not_in_library';
+            /**
+             * For kind creative with include delivery: the last 1 to 30 complete days of Meta delivery, in each ad account timezone. Default 7.
+             */
+            deliveryDays?: number;
             /**
              * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
              */
@@ -39276,9 +39284,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -39494,6 +39502,14 @@ export type SearchData = {
              * For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.
              */
             promoted?: boolean;
+            /**
+             * For kind creative with include delivery: running, not_running (in the Library and not running) or not_in_library (a Meta creative not in the Library, running or not). Omit for all.
+             */
+            listState?: 'running' | 'not_running' | 'not_in_library';
+            /**
+             * For kind creative with include delivery: the last 1 to 30 complete days of Meta delivery, in each ad account timezone. Default 7.
+             */
+            deliveryDays?: number;
             /**
              * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
              */
@@ -39823,9 +39839,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -39891,9 +39907,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -40109,6 +40125,14 @@ export type SearchData = {
              * For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.
              */
             promoted?: boolean;
+            /**
+             * For kind creative with include delivery: running, not_running (in the Library and not running) or not_in_library (a Meta creative not in the Library, running or not). Omit for all.
+             */
+            listState?: 'running' | 'not_running' | 'not_in_library';
+            /**
+             * For kind creative with include delivery: the last 1 to 30 complete days of Meta delivery, in each ad account timezone. Default 7.
+             */
+            deliveryDays?: number;
             /**
              * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
              */
@@ -40438,9 +40462,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -40652,6 +40676,14 @@ export type SearchData = {
              * For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.
              */
             promoted?: boolean;
+            /**
+             * For kind creative with include delivery: running, not_running (in the Library and not running) or not_in_library (a Meta creative not in the Library, running or not). Omit for all.
+             */
+            listState?: 'running' | 'not_running' | 'not_in_library';
+            /**
+             * For kind creative with include delivery: the last 1 to 30 complete days of Meta delivery, in each ad account timezone. Default 7.
+             */
+            deliveryDays?: number;
             /**
              * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
              */
@@ -40978,9 +41010,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -41193,6 +41225,14 @@ export type SearchData = {
              */
             promoted?: boolean;
             /**
+             * For kind creative with include delivery: running, not_running (in the Library and not running) or not_in_library (a Meta creative not in the Library, running or not). Omit for all.
+             */
+            listState?: 'running' | 'not_running' | 'not_in_library';
+            /**
+             * For kind creative with include delivery: the last 1 to 30 complete days of Meta delivery, in each ad account timezone. Default 7.
+             */
+            deliveryDays?: number;
+            /**
              * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
@@ -41521,9 +41561,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -41736,6 +41776,14 @@ export type SearchData = {
              */
             promoted?: boolean;
             /**
+             * For kind creative with include delivery: running, not_running (in the Library and not running) or not_in_library (a Meta creative not in the Library, running or not). Omit for all.
+             */
+            listState?: 'running' | 'not_running' | 'not_in_library';
+            /**
+             * For kind creative with include delivery: the last 1 to 30 complete days of Meta delivery, in each ad account timezone. Default 7.
+             */
+            deliveryDays?: number;
+            /**
              * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
              */
             state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
@@ -42064,9 +42112,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -42278,6 +42326,14 @@ export type SearchData = {
              * For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.
              */
             promoted?: boolean;
+            /**
+             * For kind creative with include delivery: running, not_running (in the Library and not running) or not_in_library (a Meta creative not in the Library, running or not). Omit for all.
+             */
+            listState?: 'running' | 'not_running' | 'not_in_library';
+            /**
+             * For kind creative with include delivery: the last 1 to 30 complete days of Meta delivery, in each ad account timezone. Default 7.
+             */
+            deliveryDays?: number;
             /**
              * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
              */
@@ -42733,9 +42789,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -42951,6 +43007,14 @@ export type SearchData = {
              * For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.
              */
             promoted?: boolean;
+            /**
+             * For kind creative with include delivery: running, not_running (in the Library and not running) or not_in_library (a Meta creative not in the Library, running or not). Omit for all.
+             */
+            listState?: 'running' | 'not_running' | 'not_in_library';
+            /**
+             * For kind creative with include delivery: the last 1 to 30 complete days of Meta delivery, in each ad account timezone. Default 7.
+             */
+            deliveryDays?: number;
             /**
              * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
              */
@@ -43280,9 +43344,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -43360,9 +43424,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -43578,6 +43642,14 @@ export type SearchData = {
              * For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.
              */
             promoted?: boolean;
+            /**
+             * For kind creative with include delivery: running, not_running (in the Library and not running) or not_in_library (a Meta creative not in the Library, running or not). Omit for all.
+             */
+            listState?: 'running' | 'not_running' | 'not_in_library';
+            /**
+             * For kind creative with include delivery: the last 1 to 30 complete days of Meta delivery, in each ad account timezone. Default 7.
+             */
+            deliveryDays?: number;
             /**
              * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
              */
@@ -43907,9 +43979,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -43979,9 +44051,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -44197,6 +44269,14 @@ export type SearchData = {
              * For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.
              */
             promoted?: boolean;
+            /**
+             * For kind creative with include delivery: running, not_running (in the Library and not running) or not_in_library (a Meta creative not in the Library, running or not). Omit for all.
+             */
+            listState?: 'running' | 'not_running' | 'not_in_library';
+            /**
+             * For kind creative with include delivery: the last 1 to 30 complete days of Meta delivery, in each ad account timezone. Default 7.
+             */
+            deliveryDays?: number;
             /**
              * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
              */
@@ -44525,9 +44605,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -44743,6 +44823,14 @@ export type SearchData = {
              * For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.
              */
             promoted?: boolean;
+            /**
+             * For kind creative with include delivery: running, not_running (in the Library and not running) or not_in_library (a Meta creative not in the Library, running or not). Omit for all.
+             */
+            listState?: 'running' | 'not_running' | 'not_in_library';
+            /**
+             * For kind creative with include delivery: the last 1 to 30 complete days of Meta delivery, in each ad account timezone. Default 7.
+             */
+            deliveryDays?: number;
             /**
              * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
              */
@@ -45072,9 +45160,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -45290,6 +45378,14 @@ export type SearchData = {
              * For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.
              */
             promoted?: boolean;
+            /**
+             * For kind creative with include delivery: running, not_running (in the Library and not running) or not_in_library (a Meta creative not in the Library, running or not). Omit for all.
+             */
+            listState?: 'running' | 'not_running' | 'not_in_library';
+            /**
+             * For kind creative with include delivery: the last 1 to 30 complete days of Meta delivery, in each ad account timezone. Default 7.
+             */
+            deliveryDays?: number;
             /**
              * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
              */
@@ -45619,9 +45715,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -45837,6 +45933,14 @@ export type SearchData = {
              * For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.
              */
             promoted?: boolean;
+            /**
+             * For kind creative with include delivery: running, not_running (in the Library and not running) or not_in_library (a Meta creative not in the Library, running or not). Omit for all.
+             */
+            listState?: 'running' | 'not_running' | 'not_in_library';
+            /**
+             * For kind creative with include delivery: the last 1 to 30 complete days of Meta delivery, in each ad account timezone. Default 7.
+             */
+            deliveryDays?: number;
             /**
              * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
              */
@@ -46166,9 +46270,9 @@ export type SearchData = {
          */
         scope?: 'unit';
         /**
-         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId, which says whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a ready-made save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
+         * One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -46384,6 +46488,14 @@ export type SearchData = {
              * For kind creative: true keeps creatives on the promoted shelf, false keeps the rest; omit for all.
              */
             promoted?: boolean;
+            /**
+             * For kind creative with include delivery: running, not_running (in the Library and not running) or not_in_library (a Meta creative not in the Library, running or not). Omit for all.
+             */
+            listState?: 'running' | 'not_running' | 'not_in_library';
+            /**
+             * For kind creative with include delivery: the last 1 to 30 complete days of Meta delivery, in each ad account timezone. Default 7.
+             */
+            deliveryDays?: number;
             /**
              * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
              */
