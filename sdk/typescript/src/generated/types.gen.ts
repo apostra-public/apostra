@@ -38710,6 +38710,17 @@ export type SearchData = {
              */
             memberOf?: number;
             /**
+             * For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.
+             */
+            property?: {
+                type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+                value: string;
+            };
+            /**
+             * For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.
+             */
+            country?: string;
+            /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
@@ -38818,7 +38829,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
@@ -39246,6 +39257,17 @@ export type SearchData = {
              */
             memberOf?: number;
             /**
+             * For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.
+             */
+            property?: {
+                type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+                value: string;
+            };
+            /**
+             * For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.
+             */
+            country?: string;
+            /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
@@ -39354,7 +39376,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
@@ -39850,6 +39872,17 @@ export type SearchData = {
              */
             memberOf?: number;
             /**
+             * For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.
+             */
+            property?: {
+                type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+                value: string;
+            };
+            /**
+             * For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.
+             */
+            country?: string;
+            /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
@@ -39958,7 +39991,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
@@ -40386,6 +40419,17 @@ export type SearchData = {
              */
             memberOf?: number;
             /**
+             * For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.
+             */
+            property?: {
+                type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+                value: string;
+            };
+            /**
+             * For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.
+             */
+            country?: string;
+            /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
@@ -40490,7 +40534,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
@@ -40915,6 +40959,17 @@ export type SearchData = {
              */
             memberOf?: number;
             /**
+             * For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.
+             */
+            property?: {
+                type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+                value: string;
+            };
+            /**
+             * For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.
+             */
+            country?: string;
+            /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
@@ -41023,7 +41078,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
@@ -41447,6 +41502,17 @@ export type SearchData = {
              */
             memberOf?: number;
             /**
+             * For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.
+             */
+            property?: {
+                type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+                value: string;
+            };
+            /**
+             * For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.
+             */
+            country?: string;
+            /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
@@ -41551,7 +41617,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
@@ -41979,6 +42045,17 @@ export type SearchData = {
              */
             memberOf?: number;
             /**
+             * For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.
+             */
+            property?: {
+                type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+                value: string;
+            };
+            /**
+             * For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.
+             */
+            country?: string;
+            /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
@@ -42087,7 +42164,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
@@ -42637,6 +42714,17 @@ export type SearchData = {
              */
             memberOf?: number;
             /**
+             * For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.
+             */
+            property?: {
+                type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+                value: string;
+            };
+            /**
+             * For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.
+             */
+            country?: string;
+            /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
@@ -42745,7 +42833,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
@@ -43253,6 +43341,17 @@ export type SearchData = {
              */
             memberOf?: number;
             /**
+             * For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.
+             */
+            property?: {
+                type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+                value: string;
+            };
+            /**
+             * For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.
+             */
+            country?: string;
+            /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
@@ -43361,7 +43460,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
@@ -43861,6 +43960,17 @@ export type SearchData = {
              */
             memberOf?: number;
             /**
+             * For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.
+             */
+            property?: {
+                type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+                value: string;
+            };
+            /**
+             * For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.
+             */
+            country?: string;
+            /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
@@ -43969,7 +44079,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
@@ -44396,6 +44506,17 @@ export type SearchData = {
              */
             memberOf?: number;
             /**
+             * For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.
+             */
+            property?: {
+                type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+                value: string;
+            };
+            /**
+             * For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.
+             */
+            country?: string;
+            /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
@@ -44504,7 +44625,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
@@ -44932,6 +45053,17 @@ export type SearchData = {
              */
             memberOf?: number;
             /**
+             * For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.
+             */
+            property?: {
+                type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+                value: string;
+            };
+            /**
+             * For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.
+             */
+            country?: string;
+            /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
@@ -45040,7 +45172,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
@@ -45468,6 +45600,17 @@ export type SearchData = {
              */
             memberOf?: number;
             /**
+             * For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.
+             */
+            property?: {
+                type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+                value: string;
+            };
+            /**
+             * For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.
+             */
+            country?: string;
+            /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
@@ -45576,7 +45719,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
@@ -46004,6 +46147,17 @@ export type SearchData = {
              */
             memberOf?: number;
             /**
+             * For kind seller (buyer account): the sellers that can sell this property, best claim first (propertyAccess.rank), from the property's own adagents.json. Only a domain, such as {"type":"domain","value":"nu.nl"}. Needs country.
+             */
+            property?: {
+                type: 'domain' | 'subdomain' | 'network_id' | 'ios_bundle' | 'android_package' | 'apple_app_store_id' | 'google_play_id' | 'roku_store_id' | 'fire_tv_asin' | 'samsung_app_id' | 'apple_tv_bundle' | 'bundle_id' | 'venue_id' | 'screen_id' | 'openooh_venue_type' | 'rss_url' | 'apple_podcast_id' | 'spotify_collection_id' | 'podcast_guid' | 'station_id' | 'facility_id';
+                value: string;
+            };
+            /**
+             * For kind seller (buyer account): with property, the country to buy it in, as an ISO 3166-1 alpha-2 code. Needs property.
+             */
+            country?: string;
+            /**
              * Status vocabulary depends on kind. inventory_source: PENDING, ACTIVE, DISABLED. work_item: pending (default), approved, rejected, revoked; modular_source uses OPEN, IN_PROGRESS, BLOCKED, COMPLETED, CANCELLED. Buyer advertiser: ACTIVE (default), ARCHIVED, ALL. library_request: open, closed. creative_session: drafting, refining, evaluating, finalized. decision: sent, applied, waiting_approval, blocked. Other kinds refuse it.
              */
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
@@ -46112,7 +46266,7 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
             /**
