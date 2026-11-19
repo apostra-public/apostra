@@ -93530,7 +93530,7 @@ paths:
                     iab_vast.
                   type: string
                   maxLength: 2048
-                  pattern: ^https?:\/\/[A-Za-z0-9\-._~:/?#[\]@!$&'()*+,;=%]+$
+                  pattern: ^https?:\/\/[A-Za-z0-9\-._~:/?#\[\]@!$&'()*+,;=%]+$
                 sourceDialectRevision:
                   description: Revision of that reference. Required for a vendor namespace Apostra has no mapping for.
                   type: string
