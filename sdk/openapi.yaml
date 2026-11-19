@@ -35140,6 +35140,49 @@ paths:
                   pattern: ^[1-9]\d*$
                   maxLength: 19
                   description: Its accounts[].id; opens event sources and audiences.
+                filter:
+                  description: >-
+                    Open the page narrowed like search kind seller, with these filters. Turn the buyer’s request into
+                    it.
+                  type: object
+                  properties:
+                    selected:
+                      description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
+                      type: boolean
+                    region:
+                      description: 'For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.'
+                      type: string
+                      minLength: 1
+                    channel:
+                      description: Partners that sell any of these channels.
+                      maxItems: 50
+                      type: array
+                      items:
+                        type: string
+                        minLength: 1
+                        maxLength: 200
+                    sort:
+                      description: >-
+                        name, the default, or followers (refused until creator data exists). With query and no sort,
+                        best match first.
+                      type: string
+                      enum:
+                        - name
+                        - followers
+                  additionalProperties: false
+                query:
+                  description: Open the page searched for this text, across every partner on Apostra, in the buyer’s list or not.
+                  type: string
+                  minLength: 1
+                tab:
+                  type: string
+                  enum:
+                    - overview
+                    - offer
+                    - record
+                    - advertisers
+                    - settings
+                  description: The tab of the partner’s page to open. Needs sellerAccountId.
                 accountId:
                   description: Apostra accountId this call runs in, from get_status.
                   anyOf:
@@ -35153,6 +35196,9 @@ paths:
               additionalProperties: false
               dependentSchemas:
                 connectionAction:
+                  required:
+                    - sellerAccountId
+                tab:
                   required:
                     - sellerAccountId
               allOf:
@@ -35198,6 +35244,22 @@ paths:
                       accountId:
                         type: string
                         description: Opened account ID.
+                      filter:
+                        type: object
+                        additionalProperties: true
+                        description: The seller search filter the page opened with.
+                      query:
+                        type: string
+                        description: The search text the page opened with.
+                      tab:
+                        type: string
+                        enum:
+                          - overview
+                          - offer
+                          - record
+                          - advertisers
+                          - settings
+                        description: The partner tab the page opened on.
                     additionalProperties: false
                   error:
                     type: 'null'

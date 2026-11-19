@@ -8940,10 +8940,26 @@ class OpenMediaPartnersPageInput(TypedDict):
     '\n    The seller\'s Account id. Not the seller object\'s id, which is a different number.\n    '
     connectionAction: NotRequired[Literal["connect"]]
     '\n    Open seller setup; requires sellerAccountId and user confirmation.\n    '
+    filter: NotRequired[OpenMediaPartnersPageInputFilter]
+    '\n    Open the page narrowed like search kind seller, with these filters. Turn the buyer’s request into it.\n    '
+    query: NotRequired[str]
+    '\n    Open the page searched for this text, across every partner on Apostra, in the buyer’s list or not.\n    '
+    tab: NotRequired[Literal["overview", "offer", "record", "advertisers", "settings"]]
+    '\n    The tab of the partner’s page to open. Needs sellerAccountId.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
 
 OpenConnectionsPageInput: TypeAlias = OpenMediaPartnersPageInput
+
+class OpenMediaPartnersPageInputFilter(TypedDict):
+    selected: NotRequired[bool]
+    '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
+    region: NotRequired[str]
+    '\n    For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.\n    '
+    channel: NotRequired[list[str]]
+    '\n    Partners that sell any of these channels.\n    '
+    sort: NotRequired[Literal["name", "followers"]]
+    '\n    name, the default, or followers (refused until creator data exists). With query and no sort, best match first.\n    '
 
 class OpenMediaPartnersPageResult(TypedDict):
     advertiserId: NotRequired[str]
@@ -8956,6 +8972,12 @@ class OpenMediaPartnersPageResult(TypedDict):
     '\n    Opened connection ID.\n    '
     accountId: NotRequired[str]
     '\n    Opened account ID.\n    '
+    filter: NotRequired[dict[str, JsonValue]]
+    '\n    The seller search filter the page opened with.\n    '
+    query: NotRequired[str]
+    '\n    The search text the page opened with.\n    '
+    tab: NotRequired[Literal["overview", "offer", "record", "advertisers", "settings"]]
+    '\n    The partner tab the page opened on.\n    '
 
 OpenConnectionsPageResult: TypeAlias = OpenMediaPartnersPageResult
 
