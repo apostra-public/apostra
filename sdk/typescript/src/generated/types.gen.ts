@@ -37982,6 +37982,10 @@ export type SaveWholesaleProductData = {
              */
             fixed_price?: number;
             /**
+             * Auction floor per unit, in this currency. Not with fixed_price.
+             */
+            floor_price?: number;
+            /**
              * Least spend per package, in this currency.
              */
             min_spend_per_package?: number;
