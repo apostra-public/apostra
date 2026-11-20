@@ -64216,8 +64216,8 @@ paths:
                       additionalProperties: false
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -66113,8 +66113,8 @@ paths:
                         - advertiserId
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -66913,8 +66913,8 @@ paths:
                       additionalProperties: false
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -68808,8 +68808,8 @@ paths:
                         - campaignId
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -70695,8 +70695,8 @@ paths:
                         - campaignId
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -72577,8 +72577,8 @@ paths:
                       additionalProperties: false
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -74463,8 +74463,8 @@ paths:
                         - campaignId
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -76354,8 +76354,8 @@ paths:
                         - advertiserId
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -77173,8 +77173,8 @@ paths:
                         - campaignId
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -77996,8 +77996,8 @@ paths:
                         - advertiserId
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -79890,8 +79890,8 @@ paths:
                       additionalProperties: false
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -80707,8 +80707,8 @@ paths:
                         - selectorType
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -82602,8 +82602,8 @@ paths:
                       additionalProperties: false
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -83415,8 +83415,8 @@ paths:
                         - system
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -85311,8 +85311,8 @@ paths:
                         - advertiserId
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -87203,8 +87203,8 @@ paths:
                       additionalProperties: false
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -89094,8 +89094,8 @@ paths:
                       additionalProperties: false
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -90985,8 +90985,8 @@ paths:
                       additionalProperties: false
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -92877,8 +92877,8 @@ paths:
                       additionalProperties: false
                     cursor:
                       description: >-
-                        The nextCursor from the previous page of the same search. Not accepted for kinds account and
-                        member.
+                        A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds
+                        account and member.
                       type: string
                     limit:
                       description: Results per page, default 50. A value above a kind page maximum is capped to it.
@@ -125413,6 +125413,8 @@ components:
         kind:
           type: string
           const: seller
+        previousCursor:
+          type: string
       required:
         - results
         - outcome
