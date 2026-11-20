@@ -1311,7 +1311,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Open a seller library request or close it with seller Material."
+    "summary": "Open a Library request or close it with Material."
   },
   "save_material": {
     "path": "/tools/save_material",
@@ -1330,7 +1330,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save Materials. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For many, confirm once and call per Draft. Seller beta: preview, delete, undo or include imported documents. Delete purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra"
+    "summary": "Save Library docs. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For many, confirm once and call per Draft. Seller beta: preview, delete, undo or include imported documents. Delete purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra"
   },
   "save_media_buy": {
     "path": "/tools/save_media_buy",

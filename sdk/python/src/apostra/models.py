@@ -4913,8 +4913,44 @@ class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySour
     transform: NotRequired[GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectTransformValue | None]
     refreshProblem: NotRequired[GetSuccessCatalogRefreshProblem | None]
     '\n    What stops the refresh; null if nothing does.\n    '
+    advertiserIds: NotRequired[list[str]]
+    campaignId: NotRequired[str | None]
+    assignment: NotRequired[GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectAssignmentValue | None]
+    origin: NotRequired[Literal["person", "agent", "source"] | None]
+    createdByBuyerAgentId: NotRequired[str | None]
+    included: NotRequired[GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncluded]
 
 GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObject: TypeAlias = GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObject
+
+class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectAssignmentValue(TypedDict):
+    by: Literal["intake", "rule", "agent", "person"]
+    at: str
+    needsSorting: bool
+
+GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectAssignmentValue: TypeAlias = GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectAssignmentValue
+
+class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncluded(TypedDict):
+    visualAssets: NotRequired[GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncludedVisualAssets]
+
+GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncluded: TypeAlias = GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncluded
+
+class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncludedVisualAssets(TypedDict):
+    results: list[GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncludedVisualAssetsResultsItem]
+
+GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncludedVisualAssets: TypeAlias = GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncludedVisualAssets
+
+class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncludedVisualAssetsResultsItem(TypedDict):
+    previewAccess: NotRequired[GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncludedVisualAssetsResultsItemPreviewAccessValue | None]
+    '\n    Null for Buyer accounts until revocable preview links are available.\n    '
+
+GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncludedVisualAssetsResultsItem: TypeAlias = GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncludedVisualAssetsResultsItem
+
+class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncludedVisualAssetsResultsItemPreviewAccessValue(TypedDict):
+    kind: Literal["signed_preview"]
+    url: str
+    expiresAt: str
+
+GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncludedVisualAssetsResultsItemPreviewAccessValue: TypeAlias = GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectIncludedVisualAssetsResultsItemPreviewAccessValue
 
 class GetResultKindAccountAndMemberAndAgentAndBuyerAgentAndSkillAndInventorySourceAndMaterialAndWholesaleProductAndAdvertiserAndAdvertiserGrantAndBrandAndSignalAndWorkItemAndAskAndConversationAndSessionAndSellerAndSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesAndCoverageAndDistributionAndConnectionAndCreativeEngineAndCreativeSessionAndCampaignAndCatalogAndEventSourceAndDimensionAndBuyerRfpAndPropertyListAndCreativeAndCreativeFormatAndCreativeAssetAndCreativeCollectionAndMediaBuyAndProposalAndAudienceAndRfpAndRfpTurnAndLibraryRequestAndDecisionAndApprovalAndAccountRelationshipAndAdvertiserAccessAndNotificationConfigObjectOperationsStatusAvailable(TypedDict):
     status: Literal["available"]
@@ -16421,9 +16457,11 @@ class SaveLibraryRequestInputActionOpen(TypedDict):
     action: Literal["open"]
     '\n    Open a library request.\n    '
     gap: str
-    '\n    The exact missing seller-library content.\n    '
+    '\n    The exact missing Library content.\n    '
     originRfpTurnId: NotRequired[str]
     '\n    Optional RFP turn that identified this gap.\n    '
+    advertiserIds: NotRequired[list[str]]
+    campaignId: NotRequired[str | None]
 
 SaveLibraryRequestInput: TypeAlias = "SaveLibraryRequestInputActionOpen | SaveLibraryRequestInputActionClose"
 
@@ -16484,6 +16522,10 @@ class SaveMaterialInput(TypedDict):
     '\n    Metadata fields; relevance is read-only.\n    '
     labels: NotRequired[list[SaveMaterialRequestLabelWriteEntry]]
     '\n    Replace labels per dimension; empty values clears.\n    '
+    advertiserIds: NotRequired[list[str]]
+    '\n    Buyer advertisers this document concerns; empty means the whole account.\n    '
+    campaignId: NotRequired[str | None]
+    '\n    Buyer campaign, when assigned to exactly one advertiser; null clears it.\n    '
     isArchived: NotRequired[bool]
     '\n    true archives the Material; false restores it. Send it alone with materialId.\n    '
     isDiscarded: NotRequired[Literal[True]]
@@ -22481,6 +22523,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    needsSorting: NotRequired[bool]
+    '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
+    createdByBuyerAgentId: NotRequired[str]
+    '\n    For Buyer material: the creating buyer agent principal id.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -22799,6 +22845,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    needsSorting: NotRequired[bool]
+    '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
+    createdByBuyerAgentId: NotRequired[str]
+    '\n    For Buyer material: the creating buyer agent principal id.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -23051,6 +23101,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    needsSorting: NotRequired[bool]
+    '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
+    createdByBuyerAgentId: NotRequired[str]
+    '\n    For Buyer material: the creating buyer agent principal id.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -23330,6 +23384,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    needsSorting: NotRequired[bool]
+    '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
+    createdByBuyerAgentId: NotRequired[str]
+    '\n    For Buyer material: the creating buyer agent principal id.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -23616,6 +23674,10 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    needsSorting: NotRequired[bool]
+    '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
+    createdByBuyerAgentId: NotRequired[str]
+    '\n    For Buyer material: the creating buyer agent principal id.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -23902,6 +23964,10 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    needsSorting: NotRequired[bool]
+    '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
+    createdByBuyerAgentId: NotRequired[str]
+    '\n    For Buyer material: the creating buyer agent principal id.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -24188,6 +24254,10 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    needsSorting: NotRequired[bool]
+    '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
+    createdByBuyerAgentId: NotRequired[str]
+    '\n    For Buyer material: the creating buyer agent principal id.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -24508,6 +24578,10 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    needsSorting: NotRequired[bool]
+    '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
+    createdByBuyerAgentId: NotRequired[str]
+    '\n    For Buyer material: the creating buyer agent principal id.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -24792,6 +24866,10 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
+    needsSorting: NotRequired[bool]
+    '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
+    createdByBuyerAgentId: NotRequired[str]
+    '\n    For Buyer material: the creating buyer agent principal id.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -25076,6 +25154,10 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: str
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    needsSorting: NotRequired[bool]
+    '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
+    createdByBuyerAgentId: NotRequired[str]
+    '\n    For Buyer material: the creating buyer agent principal id.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -25326,6 +25408,10 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    Campaign, creative, buyer media_buy: true archived; false active.\n    '
     sort: NotRequired[Literal["updatedDesc", "flightStart", "name", "spendDesc", "followers"]]
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
+    needsSorting: NotRequired[bool]
+    '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
+    createdByBuyerAgentId: NotRequired[str]
+    '\n    For Buyer material: the creating buyer agent principal id.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -25680,6 +25766,10 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: str
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    needsSorting: NotRequired[bool]
+    '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
+    createdByBuyerAgentId: NotRequired[str]
+    '\n    For Buyer material: the creating buyer agent principal id.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -26052,6 +26142,10 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: str
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    needsSorting: NotRequired[bool]
+    '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
+    createdByBuyerAgentId: NotRequired[str]
+    '\n    For Buyer material: the creating buyer agent principal id.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -26338,6 +26432,10 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.\n    '
     campaignId: NotRequired[str]
     '\n    Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.\n    '
+    needsSorting: NotRequired[bool]
+    '\n    For Buyer material or library_request: whether the assignment needs sorting.\n    '
+    createdByBuyerAgentId: NotRequired[str]
+    '\n    For Buyer material: the creating buyer agent principal id.\n    '
     formatKind: NotRequired[str]
     '\n    Exact format identifier for creative results.\n    '
     statuses: NotRequired[list[SearchRequestAdcpCreativeStatus]]
@@ -28524,6 +28622,8 @@ class SearchSuccessSearchLibraryRequestPageOutputResultsItem(TypedDict):
     '\n    What stops the refresh; null if nothing does.\n    '
     progressSummary: NotRequired[SearchSuccessCampaignGoalProgressSummary]
     creativeFit: NotRequired[SearchSuccessSearchLibraryRequestPageOutputResultsItemCreativeFit]
+    advertiserIds: NotRequired[list[str]]
+    campaignId: NotRequired[str | None]
 
 SearchSuccessSearchLibraryRequestPageOutputResults: TypeAlias = "list[SearchSuccessSearchLibraryRequestPageOutputResultsItem]"
 
@@ -28569,12 +28669,33 @@ class SearchSuccessSearchMaterialPageOutput(TypedDict):
     results: SearchSuccessSearchMaterialPageOutputResults
     outcome: Literal["page_material"]
     kind: Literal["material"]
+    countScope: NotRequired[SearchSuccessSearchMaterialPageOutputCountScope]
+    evidenceMatches: NotRequired[SearchSuccessSearchMaterialPageOutputEvidenceMatches]
+
+class SearchSuccessSearchMaterialPageOutputCountScope(TypedDict):
+    principal: Literal["current_seller_customer", "current_buyer_customer"]
+    resultSet: str
+    counts: str
+
+class SearchSuccessSearchMaterialPageOutputEvidenceMatches(TypedDict):
+    countScope: SearchSuccessSearchMaterialPageOutputEvidenceMatchesCountScope
+
+class SearchSuccessSearchMaterialPageOutputEvidenceMatchesCountScope(TypedDict):
+    principal: Literal["current_seller_customer", "current_buyer_customer"]
+    resultSet: str
+    counts: str
 
 SearchSuccessSearchMaterialPageOutputHasMore: TypeAlias = bool
 
 SearchSuccessSearchMaterialPageOutputNextCursor: TypeAlias = str
 
 class SearchSuccessSearchMaterialPageOutputResultsItem(TypedDict):
+    materialId: NotRequired[str]
+    advertiserIds: NotRequired[list[str]]
+    campaignId: NotRequired[str | None]
+    assignment: NotRequired[SearchSuccessSearchMaterialPageOutputResultsItemAssignmentValue | None]
+    origin: NotRequired[Literal["agent", "person", "source"] | None]
+    createdByBuyerAgentId: NotRequired[str | None]
     advertiserId: NotRequired[str]
     name: NotRequired[str | None]
     sandbox: NotRequired[bool]
@@ -28592,6 +28713,11 @@ class SearchSuccessSearchMaterialPageOutputResultsItem(TypedDict):
     creativeFit: NotRequired[SearchSuccessSearchMaterialPageOutputResultsItemCreativeFit]
 
 SearchSuccessSearchMaterialPageOutputResults: TypeAlias = "list[SearchSuccessSearchMaterialPageOutputResultsItem]"
+
+class SearchSuccessSearchMaterialPageOutputResultsItemAssignmentValue(TypedDict):
+    by: Literal["intake", "rule", "agent", "person"]
+    at: str
+    needsSorting: bool
 
 class SearchSuccessSearchMaterialPageOutputResultsItemCreativeFit(TypedDict):
     fits: bool

@@ -8686,6 +8686,32 @@ export type GetResponses = {
                  * What stops the refresh; null if nothing does.
                  */
                 refreshProblem?: GetSuccessCatalogRefreshProblem | null;
+                advertiserIds?: Array<string>;
+                campaignId?: string | null;
+                assignment?: {
+                    by: 'intake' | 'rule' | 'agent' | 'person';
+                    at: string;
+                    needsSorting: boolean;
+                } | null;
+                origin?: 'person' | 'agent' | 'source' | null;
+                createdByBuyerAgentId?: string | null;
+                included?: {
+                    visualAssets?: {
+                        results: Array<{
+                            /**
+                             * Null for Buyer accounts until revocable preview links are available.
+                             */
+                            previewAccess?: {
+                                kind: 'signed_preview';
+                                url: string;
+                                expiresAt: string;
+                            } | null;
+                            [key: string]: unknown;
+                        }>;
+                        [key: string]: unknown;
+                    };
+                    [key: string]: unknown;
+                };
                 [key: string]: unknown;
             };
             sourceId?: string;
@@ -28429,13 +28455,15 @@ export type SaveLibraryRequestData = {
          */
         action: 'open';
         /**
-         * The exact missing seller-library content.
+         * The exact missing Library content.
          */
         gap: string;
         /**
          * Optional RFP turn that identified this gap.
          */
         originRfpTurnId?: string;
+        advertiserIds?: Array<string>;
+        campaignId?: string | null;
         expectedAccountId?: number | string;
         accountId?: number | string;
         id?: never;
@@ -28462,6 +28490,8 @@ export type SaveLibraryRequestData = {
         accountId?: number | string;
         gap?: never;
         originRfpTurnId?: never;
+        advertiserIds?: never;
+        campaignId?: never;
     }) & {
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
@@ -29253,6 +29283,14 @@ export type SaveMaterialData = {
          * Replace labels per dimension; empty values clears.
          */
         labels?: Array<SaveMaterialRequestLabelWriteEntry>;
+        /**
+         * Buyer advertisers this document concerns; empty means the whole account.
+         */
+        advertiserIds?: Array<string>;
+        /**
+         * Buyer campaign, when assigned to exactly one advertiser; null clears it.
+         */
+        campaignId?: string | null;
         /**
          * true archives the Material; false restores it. Send it alone with materialId.
          */
@@ -38893,6 +38931,14 @@ export type SearchData = {
              */
             campaignId?: string;
             /**
+             * For Buyer material or library_request: whether the assignment needs sorting.
+             */
+            needsSorting?: boolean;
+            /**
+             * For Buyer material: the creating buyer agent principal id.
+             */
+            createdByBuyerAgentId?: string;
+            /**
              * Exact format identifier for creative results.
              */
             formatKind?: string;
@@ -39451,6 +39497,14 @@ export type SearchData = {
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId?: string;
+            /**
+             * For Buyer material or library_request: whether the assignment needs sorting.
+             */
+            needsSorting?: boolean;
+            /**
+             * For Buyer material: the creating buyer agent principal id.
+             */
+            createdByBuyerAgentId?: string;
             /**
              * Exact format identifier for creative results.
              */
@@ -40079,6 +40133,14 @@ export type SearchData = {
              */
             campaignId: string;
             /**
+             * For Buyer material or library_request: whether the assignment needs sorting.
+             */
+            needsSorting?: boolean;
+            /**
+             * For Buyer material: the creating buyer agent principal id.
+             */
+            createdByBuyerAgentId?: string;
+            /**
              * Exact format identifier for creative results.
              */
             formatKind?: string;
@@ -40634,6 +40696,14 @@ export type SearchData = {
              */
             campaignId: string;
             /**
+             * For Buyer material or library_request: whether the assignment needs sorting.
+             */
+            needsSorting?: boolean;
+            /**
+             * For Buyer material: the creating buyer agent principal id.
+             */
+            createdByBuyerAgentId?: string;
+            /**
              * Exact format identifier for creative results.
              */
             formatKind?: string;
@@ -41185,6 +41255,14 @@ export type SearchData = {
              * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            /**
+             * For Buyer material or library_request: whether the assignment needs sorting.
+             */
+            needsSorting?: boolean;
+            /**
+             * For Buyer material: the creating buyer agent principal id.
+             */
+            createdByBuyerAgentId?: string;
             /**
              * Exact format identifier for creative results.
              */
@@ -41740,6 +41818,14 @@ export type SearchData = {
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId: string;
+            /**
+             * For Buyer material or library_request: whether the assignment needs sorting.
+             */
+            needsSorting?: boolean;
+            /**
+             * For Buyer material: the creating buyer agent principal id.
+             */
+            createdByBuyerAgentId?: string;
             /**
              * Exact format identifier for creative results.
              */
@@ -42295,6 +42381,14 @@ export type SearchData = {
              * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
              */
             sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            /**
+             * For Buyer material or library_request: whether the assignment needs sorting.
+             */
+            needsSorting?: boolean;
+            /**
+             * For Buyer material: the creating buyer agent principal id.
+             */
+            createdByBuyerAgentId?: string;
             /**
              * Exact format identifier for creative results.
              */
@@ -42981,6 +43075,14 @@ export type SearchData = {
              */
             campaignId?: string;
             /**
+             * For Buyer material or library_request: whether the assignment needs sorting.
+             */
+            needsSorting?: boolean;
+            /**
+             * For Buyer material: the creating buyer agent principal id.
+             */
+            createdByBuyerAgentId?: string;
+            /**
              * Exact format identifier for creative results.
              */
             formatKind?: string;
@@ -43620,6 +43722,14 @@ export type SearchData = {
              */
             campaignId?: string;
             /**
+             * For Buyer material or library_request: whether the assignment needs sorting.
+             */
+            needsSorting?: boolean;
+            /**
+             * For Buyer material: the creating buyer agent principal id.
+             */
+            createdByBuyerAgentId?: string;
+            /**
              * Exact format identifier for creative results.
              */
             formatKind?: string;
@@ -44251,6 +44361,14 @@ export type SearchData = {
              */
             campaignId?: string;
             /**
+             * For Buyer material or library_request: whether the assignment needs sorting.
+             */
+            needsSorting?: boolean;
+            /**
+             * For Buyer material: the creating buyer agent principal id.
+             */
+            createdByBuyerAgentId?: string;
+            /**
              * Exact format identifier for creative results.
              */
             formatKind?: string;
@@ -44808,6 +44926,14 @@ export type SearchData = {
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId?: string;
+            /**
+             * For Buyer material or library_request: whether the assignment needs sorting.
+             */
+            needsSorting?: boolean;
+            /**
+             * For Buyer material: the creating buyer agent principal id.
+             */
+            createdByBuyerAgentId?: string;
             /**
              * Exact format identifier for creative results.
              */
@@ -45367,6 +45493,14 @@ export type SearchData = {
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId?: string;
+            /**
+             * For Buyer material or library_request: whether the assignment needs sorting.
+             */
+            needsSorting?: boolean;
+            /**
+             * For Buyer material: the creating buyer agent principal id.
+             */
+            createdByBuyerAgentId?: string;
             /**
              * Exact format identifier for creative results.
              */
@@ -45927,6 +46061,14 @@ export type SearchData = {
              */
             campaignId?: string;
             /**
+             * For Buyer material or library_request: whether the assignment needs sorting.
+             */
+            needsSorting?: boolean;
+            /**
+             * For Buyer material: the creating buyer agent principal id.
+             */
+            createdByBuyerAgentId?: string;
+            /**
              * Exact format identifier for creative results.
              */
             formatKind?: string;
@@ -46485,6 +46627,14 @@ export type SearchData = {
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
             campaignId?: string;
+            /**
+             * For Buyer material or library_request: whether the assignment needs sorting.
+             */
+            needsSorting?: boolean;
+            /**
+             * For Buyer material: the creating buyer agent principal id.
+             */
+            createdByBuyerAgentId?: string;
             /**
              * Exact format identifier for creative results.
              */
@@ -49209,6 +49359,8 @@ export type SearchSuccessSearchLibraryRequestPageOutputResults = Array<{
         requirements: Array<string>;
         formatName?: string;
     };
+    advertiserIds?: Array<string>;
+    campaignId?: string | null;
     [key: string]: unknown;
 }>;
 
@@ -49240,7 +49392,27 @@ export type SearchSuccessSearchMaterialPageOutput = {
     results: SearchSuccessSearchMaterialPageOutputResults;
     outcome: 'page_material';
     kind: 'material';
-    [key: string]: SearchSuccessSearchMaterialPageOutputValue | SearchSuccessSearchMaterialPageOutputTotal | SearchSuccessSearchMaterialPageOutputTotalLowerBound | SearchSuccessSearchMaterialPageOutputReturned | SearchSuccessSearchMaterialPageOutputHasMore | SearchSuccessSearchMaterialPageOutputTruncated | SearchSuccessSearchMaterialPageOutputNextCursor | SearchSuccessSearchMaterialPageOutputResults | 'page_material' | 'material' | undefined;
+    countScope?: SearchSuccessSearchMaterialPageOutputCountScope;
+    evidenceMatches?: {
+        countScope: SearchSuccessSearchMaterialPageOutputEvidenceMatchesCountScope;
+        [key: string]: unknown;
+    };
+    [key: string]: SearchSuccessSearchMaterialPageOutputValue | SearchSuccessSearchMaterialPageOutputTotal | SearchSuccessSearchMaterialPageOutputTotalLowerBound | SearchSuccessSearchMaterialPageOutputReturned | SearchSuccessSearchMaterialPageOutputHasMore | SearchSuccessSearchMaterialPageOutputTruncated | SearchSuccessSearchMaterialPageOutputNextCursor | SearchSuccessSearchMaterialPageOutputResults | 'page_material' | 'material' | SearchSuccessSearchMaterialPageOutputCountScope | {
+        countScope: SearchSuccessSearchMaterialPageOutputEvidenceMatchesCountScope;
+        [key: string]: unknown;
+    } | undefined;
+};
+
+export type SearchSuccessSearchMaterialPageOutputCountScope = {
+    principal: 'current_seller_customer' | 'current_buyer_customer';
+    resultSet: string;
+    counts: string;
+};
+
+export type SearchSuccessSearchMaterialPageOutputEvidenceMatchesCountScope = {
+    principal: 'current_seller_customer' | 'current_buyer_customer';
+    resultSet: string;
+    counts: string;
 };
 
 export type SearchSuccessSearchMaterialPageOutputHasMore = boolean;
@@ -49248,6 +49420,16 @@ export type SearchSuccessSearchMaterialPageOutputHasMore = boolean;
 export type SearchSuccessSearchMaterialPageOutputNextCursor = string;
 
 export type SearchSuccessSearchMaterialPageOutputResults = Array<{
+    materialId?: string;
+    advertiserIds?: Array<string>;
+    campaignId?: string | null;
+    assignment?: {
+        by: 'intake' | 'rule' | 'agent' | 'person';
+        at: string;
+        needsSorting: boolean;
+    } | null;
+    origin?: 'agent' | 'person' | 'source' | null;
+    createdByBuyerAgentId?: string | null;
     advertiserId?: string;
     name?: string | null;
     sandbox?: boolean;

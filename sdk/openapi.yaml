@@ -27311,6 +27311,81 @@ paths:
                                   - $ref: '#/components/schemas/get_success_CatalogRefreshProblem'
                                   - type: 'null'
                                 description: What stops the refresh; null if nothing does.
+                              advertiserIds:
+                                type: array
+                                items:
+                                  type: string
+                              campaignId:
+                                type:
+                                  - string
+                                  - 'null'
+                              assignment:
+                                anyOf:
+                                  - type: object
+                                    properties:
+                                      by:
+                                        type: string
+                                        enum:
+                                          - intake
+                                          - rule
+                                          - agent
+                                          - person
+                                      at:
+                                        type: string
+                                      needsSorting:
+                                        type: boolean
+                                    required:
+                                      - by
+                                      - at
+                                      - needsSorting
+                                    additionalProperties: false
+                                  - type: 'null'
+                              origin:
+                                anyOf:
+                                  - type: string
+                                    enum:
+                                      - person
+                                      - agent
+                                      - source
+                                  - type: 'null'
+                              createdByBuyerAgentId:
+                                type:
+                                  - string
+                                  - 'null'
+                              included:
+                                type: object
+                                properties:
+                                  visualAssets:
+                                    type: object
+                                    properties:
+                                      results:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            previewAccess:
+                                              description: Null for Buyer accounts until revocable preview links are available.
+                                              anyOf:
+                                                - type: object
+                                                  properties:
+                                                    kind:
+                                                      type: string
+                                                      const: signed_preview
+                                                    url:
+                                                      type: string
+                                                    expiresAt:
+                                                      type: string
+                                                  required:
+                                                    - kind
+                                                    - url
+                                                    - expiresAt
+                                                  additionalProperties: false
+                                                - type: 'null'
+                                          additionalProperties: {}
+                                    required:
+                                      - results
+                                    additionalProperties: {}
+                                additionalProperties: {}
                             additionalProperties: {}
                           sourceId:
                             type: string
@@ -51437,8 +51512,8 @@ paths:
   /tools/save_library_request:
     post:
       operationId: save_library_request
-      summary: Open a seller library request or close it with seller Material.
-      description: Open a seller library request or close it with seller Material.
+      summary: Open a Library request or close it with Material.
+      description: Open a Library request or close it with Material.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -51471,11 +51546,22 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 4000
-                      description: The exact missing seller-library content.
+                      description: The exact missing Library content.
                     originRfpTurnId:
                       description: Optional RFP turn that identified this gap.
                       type: string
                       minLength: 1
+                    advertiserIds:
+                      maxItems: 20
+                      type: array
+                      items:
+                        type: string
+                        pattern: ^[1-9][0-9]*$
+                    campaignId:
+                      anyOf:
+                        - type: string
+                          minLength: 1
+                        - type: 'null'
                     expectedAccountId:
                       anyOf:
                         - type: integer
@@ -51710,11 +51796,11 @@ paths:
     post:
       operationId: save_material
       summary: >-
-        Save Materials. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For
+        Save Library docs. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For
         many, confirm once and call per Draft. Seller beta: preview, delete, undo or include imported documents. Delete
         purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra
       description: >-
-        Save Materials. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For
+        Save Library docs. Discard is permanent: ask the user to confirm and wait for a separate yes before calling. For
         many, confirm once and call per Draft. Seller beta: preview, delete, undo or include imported documents. Delete
         purges it after 30 days. https://docs.apostra.com/v3/delete-from-apostra
       security:
@@ -52317,6 +52403,21 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/save_material_request_LabelWriteEntry'
+                advertiserIds:
+                  description: Buyer advertisers this document concerns; empty means the whole account.
+                  maxItems: 20
+                  type: array
+                  items:
+                    type: string
+                    minLength: 1
+                    maxLength: 32
+                campaignId:
+                  description: Buyer campaign, when assigned to exactly one advertiser; null clears it.
+                  anyOf:
+                    - type: string
+                      minLength: 1
+                      maxLength: 200
+                    - type: 'null'
                 isArchived:
                   description: true archives the Material; false restores it. Send it alone with materialId.
                   type: boolean
@@ -63376,6 +63477,13 @@ paths:
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
                             this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
+                        needsSorting:
+                          description: 'For Buyer material or library_request: whether the assignment needs sorting.'
+                          type: boolean
+                        createdByBuyerAgentId:
+                          description: 'For Buyer material: the creating buyer agent principal id.'
+                          type: string
+                          minLength: 1
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -65264,6 +65372,13 @@ paths:
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
                             this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
+                        needsSorting:
+                          description: 'For Buyer material or library_request: whether the assignment needs sorting.'
+                          type: boolean
+                        createdByBuyerAgentId:
+                          description: 'For Buyer material: the creating buyer agent principal id.'
+                          type: string
+                          minLength: 1
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -67952,6 +68067,13 @@ paths:
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
                             this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
+                        needsSorting:
+                          description: 'For Buyer material or library_request: whether the assignment needs sorting.'
+                          type: boolean
+                        createdByBuyerAgentId:
+                          description: 'For Buyer material: the creating buyer agent principal id.'
+                          type: string
+                          minLength: 1
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -69832,6 +69954,13 @@ paths:
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
                             this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
+                        needsSorting:
+                          description: 'For Buyer material or library_request: whether the assignment needs sorting.'
+                          type: boolean
+                        createdByBuyerAgentId:
+                          description: 'For Buyer material: the creating buyer agent principal id.'
+                          type: string
+                          minLength: 1
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -71709,6 +71838,13 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                        needsSorting:
+                          description: 'For Buyer material or library_request: whether the assignment needs sorting.'
+                          type: boolean
+                        createdByBuyerAgentId:
+                          description: 'For Buyer material: the creating buyer agent principal id.'
+                          type: string
+                          minLength: 1
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -73586,6 +73722,13 @@ paths:
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
                             this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
+                        needsSorting:
+                          description: 'For Buyer material or library_request: whether the assignment needs sorting.'
+                          type: boolean
+                        createdByBuyerAgentId:
+                          description: 'For Buyer material: the creating buyer agent principal id.'
+                          type: string
+                          minLength: 1
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -75470,6 +75613,13 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                        needsSorting:
+                          description: 'For Buyer material or library_request: whether the assignment needs sorting.'
+                          type: boolean
+                        createdByBuyerAgentId:
+                          description: 'For Buyer material: the creating buyer agent principal id.'
+                          type: string
+                          minLength: 1
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -79001,6 +79151,13 @@ paths:
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
                             this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
+                        needsSorting:
+                          description: 'For Buyer material or library_request: whether the assignment needs sorting.'
+                          type: boolean
+                        createdByBuyerAgentId:
+                          description: 'For Buyer material: the creating buyer agent principal id.'
+                          type: string
+                          minLength: 1
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -81706,6 +81863,13 @@ paths:
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
                             this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
+                        needsSorting:
+                          description: 'For Buyer material or library_request: whether the assignment needs sorting.'
+                          type: boolean
+                        createdByBuyerAgentId:
+                          description: 'For Buyer material: the creating buyer agent principal id.'
+                          type: string
+                          minLength: 1
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -84406,6 +84570,13 @@ paths:
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
                             this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
+                        needsSorting:
+                          description: 'For Buyer material or library_request: whether the assignment needs sorting.'
+                          type: boolean
+                        createdByBuyerAgentId:
+                          description: 'For Buyer material: the creating buyer agent principal id.'
+                          type: string
+                          minLength: 1
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -86293,6 +86464,13 @@ paths:
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
                             this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
+                        needsSorting:
+                          description: 'For Buyer material or library_request: whether the assignment needs sorting.'
+                          type: boolean
+                        createdByBuyerAgentId:
+                          description: 'For Buyer material: the creating buyer agent principal id.'
+                          type: string
+                          minLength: 1
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -88177,6 +88355,13 @@ paths:
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
                             this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
+                        needsSorting:
+                          description: 'For Buyer material or library_request: whether the assignment needs sorting.'
+                          type: boolean
+                        createdByBuyerAgentId:
+                          description: 'For Buyer material: the creating buyer agent principal id.'
+                          type: string
+                          minLength: 1
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -90061,6 +90246,13 @@ paths:
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
                             this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
+                        needsSorting:
+                          description: 'For Buyer material or library_request: whether the assignment needs sorting.'
+                          type: boolean
+                        createdByBuyerAgentId:
+                          description: 'For Buyer material: the creating buyer agent principal id.'
+                          type: string
+                          minLength: 1
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -91946,6 +92138,13 @@ paths:
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
                             this or advertiserId, not both. Buyer media_buy needs one.
                           type: string
+                        needsSorting:
+                          description: 'For Buyer material or library_request: whether the assignment needs sorting.'
+                          type: boolean
+                        createdByBuyerAgentId:
+                          description: 'For Buyer material: the creating buyer agent principal id.'
+                          type: string
+                          minLength: 1
                         formatKind:
                           description: Exact format identifier for creative results.
                           type: string
@@ -124709,6 +124908,16 @@ components:
         kind:
           type: string
           const: material
+        countScope:
+          $ref: '#/components/schemas/search_success_SearchMaterialPageOutputCountScope'
+        evidenceMatches:
+          type: object
+          properties:
+            countScope:
+              $ref: '#/components/schemas/search_success_SearchMaterialPageOutputEvidenceMatchesCountScope'
+          required:
+            - countScope
+          additionalProperties: {}
       required:
         - results
         - outcome
@@ -124720,6 +124929,49 @@ components:
       items:
         type: object
         properties:
+          materialId:
+            type: string
+          advertiserIds:
+            type: array
+            items:
+              type: string
+          campaignId:
+            type:
+              - string
+              - 'null'
+          assignment:
+            anyOf:
+              - type: object
+                properties:
+                  by:
+                    type: string
+                    enum:
+                      - intake
+                      - rule
+                      - agent
+                      - person
+                  at:
+                    type: string
+                  needsSorting:
+                    type: boolean
+                required:
+                  - by
+                  - at
+                  - needsSorting
+                additionalProperties: false
+              - type: 'null'
+          origin:
+            anyOf:
+              - type: string
+                enum:
+                  - agent
+                  - person
+                  - source
+              - type: 'null'
+          createdByBuyerAgentId:
+            type:
+              - string
+              - 'null'
           advertiserId:
             type: string
           name:
@@ -125805,6 +126057,108 @@ components:
         - kind
       additionalProperties:
         $ref: '#/components/schemas/search_success_SearchLibraryRequestPageOutputValue'
+    search_success_SearchLibraryRequestPageOutputResults:
+      type: array
+      items:
+        type: object
+        properties:
+          advertiserId:
+            type: string
+          name:
+            type:
+              - string
+              - 'null'
+          sandbox:
+            type: boolean
+          sourceType:
+            description: 'Where the items come from: url when url is set, file when file is set.'
+            anyOf:
+              - type: string
+                enum:
+                  - inline
+                  - url
+                  - file
+              - type: 'null'
+          lastChangeSummary:
+            description: Items in the latest version against the one before it.
+            anyOf:
+              - type: object
+                properties:
+                  added:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  updated:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  unchanged:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  removed:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                required:
+                  - added
+                  - updated
+                  - unchanged
+                  - removed
+                additionalProperties: false
+              - type: 'null'
+          transform:
+            description: The active transform, if any.
+            anyOf:
+              - type: object
+                properties:
+                  name:
+                    type: string
+                  updatedAt:
+                    type: string
+                required:
+                  - name
+                  - updatedAt
+                additionalProperties: false
+              - type: 'null'
+          refreshProblem:
+            description: What stops the refresh; null if nothing does.
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
+          advertiserIds:
+            type: array
+            items:
+              type: string
+          campaignId:
+            type:
+              - string
+              - 'null'
+        additionalProperties: {}
     search_success_SearchDecisionPageOutput:
       type: object
       properties:
@@ -127761,6 +128115,40 @@ components:
       type: boolean
     search_success_SearchMaterialPageOutputNextCursor:
       type: string
+    search_success_SearchMaterialPageOutputCountScope:
+      type: object
+      properties:
+        principal:
+          type: string
+          enum:
+            - current_seller_customer
+            - current_buyer_customer
+        resultSet:
+          type: string
+        counts:
+          type: string
+      required:
+        - principal
+        - resultSet
+        - counts
+      additionalProperties: false
+    search_success_SearchMaterialPageOutputEvidenceMatchesCountScope:
+      type: object
+      properties:
+        principal:
+          type: string
+          enum:
+            - current_seller_customer
+            - current_buyer_customer
+        resultSet:
+          type: string
+        counts:
+          type: string
+      required:
+        - principal
+        - resultSet
+        - counts
+      additionalProperties: false
     search_success_SearchMaterialPageOutputValue: {}
     search_success_SearchCoveragePageOutputTotal:
       type: number
@@ -130984,100 +131372,6 @@ components:
       type: boolean
     search_success_SearchLibraryRequestPageOutputNextCursor:
       type: string
-    search_success_SearchLibraryRequestPageOutputResults:
-      type: array
-      items:
-        type: object
-        properties:
-          advertiserId:
-            type: string
-          name:
-            type:
-              - string
-              - 'null'
-          sandbox:
-            type: boolean
-          sourceType:
-            anyOf:
-              - type: string
-                enum:
-                  - inline
-                  - url
-                  - file
-              - type: 'null'
-            description: 'Where the items come from: url when url is set, file when file is set.'
-          lastChangeSummary:
-            anyOf:
-              - type: object
-                properties:
-                  added:
-                    type: integer
-                    minimum: 0
-                    maximum: 9007199254740991
-                  updated:
-                    type: integer
-                    minimum: 0
-                    maximum: 9007199254740991
-                  unchanged:
-                    type: integer
-                    minimum: 0
-                    maximum: 9007199254740991
-                  removed:
-                    type: integer
-                    minimum: 0
-                    maximum: 9007199254740991
-                required:
-                  - added
-                  - updated
-                  - unchanged
-                  - removed
-                additionalProperties: false
-              - type: 'null'
-            description: Items in the latest version against the one before it.
-          transform:
-            anyOf:
-              - type: object
-                properties:
-                  name:
-                    type: string
-                  updatedAt:
-                    type: string
-                required:
-                  - name
-                  - updatedAt
-                additionalProperties: false
-              - type: 'null'
-            description: The active transform, if any.
-          refreshProblem:
-            anyOf:
-              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
-              - type: 'null'
-            description: What stops the refresh; null if nothing does.
-          progressSummary:
-            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
-          creativeFit:
-            type: object
-            properties:
-              fits:
-                type: boolean
-              reasons:
-                maxItems: 24
-                type: array
-                items:
-                  type: string
-              requirements:
-                maxItems: 32
-                type: array
-                items:
-                  type: string
-              formatName:
-                type: string
-            required:
-              - fits
-              - reasons
-              - requirements
-            additionalProperties: false
-        additionalProperties: {}
     search_success_SearchLibraryRequestPageOutputValue: {}
     search_success_SearchDecisionPageOutputTotal:
       type: number
