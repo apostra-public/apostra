@@ -18,8 +18,9 @@ the applicable `set-up-an-event-source` skill through the active account's
    `setup` object as an installation handoff, not proof of a running sender.
 3. Build the sender against the documented ingestion contract. Per-event
    records and pre-aggregated measurement outcomes have different endpoints;
-   select by data shape, not by which example is shortest. Use V2 REST for
-   runtime event ingestion where the V3 catalog has no equivalent.
+   select by data shape, not by which example is shortest. Send per-event
+   records with the V3 `log_event` tool or its `/api/v3/tools/log_event` route,
+   and use V2 REST only for a shape the V3 catalog does not cover.
 4. Define stable event IDs, time-zone handling, field mapping, bounded
    retries, and deduplication. Test the mapping with synthetic events and
    verify partial failures are surfaced rather than counted as accepted.

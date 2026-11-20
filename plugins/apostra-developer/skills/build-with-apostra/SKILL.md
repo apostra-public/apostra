@@ -97,6 +97,19 @@ Agent when the software already has one, create one only when deployed software
 needs its own identity and credential, or use the available sandbox while
 prototyping safely.
 
+## Account structure, who can enter an account, and testing
+
+Apostra has organizations, the Buyer Accounts inside them, and advertisers inside
+a Buyer Account. A builder that buys for several clients usually runs one Buyer
+Account with an advertiser for each client. The organization holds people and
+billing and is not a place to work. An organization member with neither
+a direct permission on a Buyer Account nor ADMIN on the organization cannot enter
+it: `get_status` shows only the organization, and naming the account is refused. Tell them to ask an
+administrator to add them to the Buyer Account as an Editor, then stop live work.
+Read [accounts-and-testing.md](references/accounts-and-testing.md) for that
+handoff, for what the sandbox proves and where it stops, and for server-side
+conversion tracking.
+
 ## Prove the contract before writing calls
 
 Read a tool's schema before writing any call to it. The schema carries required
@@ -122,6 +135,9 @@ the same mistake and still pass.
 
 Read only the reference needed for the task:
 
+- [accounts-and-testing.md](references/accounts-and-testing.md): account and
+  advertiser structure, an account the person cannot enter, the sandbox, and
+  server-side conversion tracking.
 - [daily-campaign-review.md](references/daily-campaign-review.md): read-only
   campaign pacing and performance review across the current and prior period.
 - [agents.md](references/agents.md): seller discovery, connecting a seller,

@@ -2,7 +2,7 @@
   "schemaVersion": "3.0",
   "id": "build-with-apostra",
   "name": "Build with Apostra",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Use Apostra to plan or run ads, automate campaign work, read results, or build those jobs into tested software.",
   "steward": {
     "owner": "bokelley"
@@ -37,6 +37,11 @@
     {
       "route": "references/data-pipelines.md",
       "file": "references/data-pipelines.md",
+      "contentType": "text/markdown; charset=utf-8"
+    },
+    {
+      "route": "references/accounts-and-testing.md",
+      "file": "references/accounts-and-testing.md",
       "contentType": "text/markdown; charset=utf-8"
     },
     {
@@ -86,6 +91,7 @@
       "save_campaign",
       "save_media_buy",
       "save_event_source",
+      "log_event",
       "request_proposals",
       "get_delivery"
     ]
@@ -95,6 +101,11 @@
     "mintlify/v3/http-api.mdx",
     "mintlify/v3/authentication.mdx",
     "mintlify/v3/account-access.mdx",
+    "mintlify/v3/name-the-account.mdx",
+    "mintlify/v3/several-client-accounts.mdx",
+    "mintlify/v3/concepts.mdx",
+    "mintlify/v3/limitations.mdx",
+    "mintlify/v3/developer-quickstart.mdx",
     "mintlify/v3/choose-your-loop.mdx",
     "mintlify/v3/quickstart.mdx",
     "mintlify/v3/sdk-quickstart.mdx",
@@ -127,7 +138,7 @@
       ]
     },
     "telemetry": {
-      "correlationSkillId": "build-with-apostra@1.1.0",
+      "correlationSkillId": "build-with-apostra@1.1.1",
       "outcomeSignals": [
         "workflow_terminal_state",
         "scenario_assertion_results"
