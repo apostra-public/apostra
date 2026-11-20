@@ -22084,6 +22084,14 @@ class SaveWholesaleProductInput(TypedDict):
     '\n    Buyer accountIds that may see and book it, replaced whole. null opens it to every buyer; omit keeps.\n    '
     confirmVisibilityImpact: NotRequired[bool]
     '\n    Required to restrict an open, live product: it hides it from every other buyer at once.\n    '
+    collections: NotRequired[list[SaveWholesaleProductInputCollectionsItem] | None]
+    '\n    AdCP collections: the shows sold. [] = not disclosed. null clears; omit keeps.\n    '
+    installments: NotRequired[list[SaveWholesaleProductInputInstallmentsItem] | None]
+    '\n    AdCP installments: the episodes sold, each with a collection_ref. null clears; omit keeps.\n    '
+    collectionTargetingAllowed: NotRequired[bool | None]
+    '\n    AdCP: buyers may buy some of the shows. Only if the ad server books that. null clears.\n    '
+    holdPolicy: NotRequired[SaveWholesaleProductInputHoldPolicyValue | None]
+    '\n    AdCP hold_policy. Refused with available: true unless the source can hold. null clears.\n    '
     dryRun: NotRequired[bool]
     '\n    Validate a new product without writing it; on GAM it returns lineItemTargeting. Creates only.\n    '
     delete: NotRequired[Literal[True]]
@@ -22100,6 +22108,12 @@ class SaveWholesaleProductInput(TypedDict):
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveWholesaleProductInputCollectionsItem(TypedDict):
+    publisher_domain: str
+    '\n    Publisher domain.\n    '
+    collection_ids: NotRequired[list[str]]
+    '\n    Show ids from its adagents.json.\n    '
 
 class SaveWholesaleProductInputFixedTargetingValue(TypedDict):
     geo: NotRequired[SaveWholesaleProductInputFixedTargetingValueGeoValue | None]
@@ -22127,6 +22141,20 @@ class SaveWholesaleProductInputFormatOptionsItem(TypedDict):
     params: dict[str, JsonValue]
     '\n    Canonical constraints, checked against the kind\'s AdCP params. Publisher formats must equal or narrow the catalog declaration.\n    '
 
+class SaveWholesaleProductInputHoldPolicyValue(TypedDict):
+    available: bool
+    '\n    Whether a hold is offered.\n    '
+    min_duration: NotRequired[str]
+    '\n    Minimum hold duration.\n    '
+    max_duration: NotRequired[str]
+    '\n    Maximum initial hold duration.\n    '
+    extendable: NotRequired[bool]
+    '\n    Whether a hold can be extended.\n    '
+    max_total_duration: NotRequired[str]
+    '\n    Maximum total hold duration.\n    '
+    rankable: NotRequired[bool]
+    '\n    Whether holds may be ranked.\n    '
+
 class SaveWholesaleProductInputIncludedAgeSignalDemographicPredicate(TypedDict):
     age: SaveWholesaleProductInputIncludedAgeSignalDemographicPredicateAge
     '\n    Closed range of whole ages, 18-120.\n    '
@@ -22150,6 +22178,20 @@ class SaveWholesaleProductInputIncludedAgeSignalValue(TypedDict):
     '\n    Defaults to age_<min>_<max>.\n    '
     name: NotRequired[str]
     '\n    Defaults to \'Ages <min>-<max>\'.\n    '
+
+class SaveWholesaleProductInputInstallmentsItem(TypedDict):
+    installment_id: str
+    '\n    Episode id.\n    '
+    collection_ref: NotRequired[SaveWholesaleProductInputInstallmentsItemCollectionRef]
+    '\n    Its show.\n    '
+    scheduled_at: NotRequired[str]
+    '\n    Air time, ISO 8601.\n    '
+
+class SaveWholesaleProductInputInstallmentsItemCollectionRef(TypedDict):
+    publisher_domain: str
+    '\n    Publisher domain.\n    '
+    collection_id: str
+    '\n    Show id.\n    '
 
 class SaveWholesaleProductInputMaterialCandidate(TypedDict):
     sourceMaterialId: str
