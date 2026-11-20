@@ -36,7 +36,7 @@ under whatever name it already has.
 6. Inspect `tools/list`. Send the account ID `get_status` returned as
    `accountId` on every call, and call `get_status` with no `accountId` to list
    the accounts you can reach. To work in another account, send that account's
-   `accountId`; nothing needs switching. An account ID is not a seller ID.
+   `accountId`. An account ID is not a seller ID.
    Keep these schemas: they are the contract for every call you write later,
    and reading one costs a fraction of debugging a rejected request.
 7. Make one scoped read appropriate to the task. A buyer's seller discovery
