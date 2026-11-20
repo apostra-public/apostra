@@ -22448,7 +22448,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -22737,7 +22737,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict)
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -22770,7 +22770,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -23309,7 +23309,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -23599,7 +23599,7 @@ class SearchInputKindAdServerTargeting(TypedDict):
     filter: NotRequired[SearchInputKindAdServerTargetingFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -23889,7 +23889,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     filter: NotRequired[SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndDimensionAndSessionFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -24179,7 +24179,7 @@ class SearchInputKindBuyerRfp(TypedDict):
     filter: SearchInputKindBuyerRfpFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -24469,7 +24469,7 @@ class SearchInputKindCreative(TypedDict):
     filter: NotRequired[SearchInputKindCreativeFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -24503,7 +24503,7 @@ class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     filter: SearchInputKindCreativeAssetAndCatalogFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -24793,7 +24793,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     filter: SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -25081,7 +25081,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     filter: SearchInputKindCreativeCollectionWithFilterCampaignIdFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -25617,7 +25617,7 @@ class SearchInputKindCreativeSessionWithFilterAdvertiserId(TypedDict):
     filter: SearchInputKindCreativeSessionWithFilterAdvertiserIdFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -25651,7 +25651,7 @@ class SearchInputKindCreativeSessionWithFilterCampaignId(TypedDict):
     filter: SearchInputKindCreativeSessionWithFilterCampaignIdFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -25695,7 +25695,7 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignId(TypedDict):
     filter: SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
 
@@ -25985,7 +25985,7 @@ class SearchInputKindEventSource(TypedDict):
     filter: NotRequired[SearchInputKindEventSourceFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -26023,7 +26023,7 @@ class SearchInputKindInventorySourceItem(TypedDict):
     filter: SearchInputKindInventorySourceItemFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -26067,7 +26067,7 @@ class SearchInputKindProposal(TypedDict):
     filter: SearchInputKindProposalFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -26357,7 +26357,7 @@ class SearchInputKindSourceAccount(TypedDict):
     filter: NotRequired[SearchInputKindSourceAccountFilter]
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -26647,7 +26647,7 @@ class SearchInputKindTargetingValue(TypedDict):
     filter: SearchInputKindTargetingValueFilter
     '\n    Narrow the listed kind. Each filter names the kinds it applies to; most filters sent with another kind are refused.\n    '
     cursor: NotRequired[str]
-    '\n    The nextCursor from the previous page of the same search. Not accepted for kinds account and member.\n    '
+    '\n    A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.\n    '
     limit: NotRequired[int]
     '\n    Results per page, default 50. A value above a kind page maximum is capped to it.\n    '
     groupBy: NotRequired[str]
@@ -29228,6 +29228,7 @@ class SearchSuccessSearchSellerPageOutput(TypedDict):
     results: SearchSuccessSearchSellerPageOutputResults
     outcome: Literal["page_seller"]
     kind: Literal["seller"]
+    previousCursor: NotRequired[str]
 
 SearchSuccessSearchSellerPageOutputHasMore: TypeAlias = bool
 

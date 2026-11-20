@@ -39296,7 +39296,7 @@ export type SearchData = {
             conversationStartedBefore?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -39863,7 +39863,7 @@ export type SearchData = {
             conversationStartedBefore?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -39931,7 +39931,7 @@ export type SearchData = {
             advertiserId?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -40498,7 +40498,7 @@ export type SearchData = {
             conversationStartedBefore?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -41061,7 +41061,7 @@ export type SearchData = {
             conversationStartedBefore?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -41621,7 +41621,7 @@ export type SearchData = {
             conversationStartedBefore?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -42184,7 +42184,7 @@ export type SearchData = {
             conversationStartedBefore?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -42747,7 +42747,7 @@ export type SearchData = {
             conversationStartedBefore?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -42807,7 +42807,7 @@ export type SearchData = {
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -42870,7 +42870,7 @@ export type SearchData = {
             status?: 'PENDING' | 'ACTIVE' | 'DISABLED' | 'pending' | 'approved' | 'rejected' | 'revoked' | 'OPEN' | 'IN_PROGRESS' | 'BLOCKED' | 'COMPLETED' | 'CANCELLED' | 'ARCHIVED' | 'ALL' | 'open' | 'closed' | 'drafting' | 'refining' | 'evaluating' | 'finalized' | 'sent' | 'applied' | 'waiting_approval' | 'blocked';
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -43440,7 +43440,7 @@ export type SearchData = {
             conversationStartedBefore?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -43520,7 +43520,7 @@ export type SearchData = {
             environmentType?: 'BROWSER' | 'VIDEO_PLAYER';
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -44087,7 +44087,7 @@ export type SearchData = {
             conversationStartedBefore?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -44159,7 +44159,7 @@ export type SearchData = {
             names?: Array<string>;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -44726,7 +44726,7 @@ export type SearchData = {
             conversationStartedBefore?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -45292,7 +45292,7 @@ export type SearchData = {
             conversationStartedBefore?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -45859,7 +45859,7 @@ export type SearchData = {
             conversationStartedBefore?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -46426,7 +46426,7 @@ export type SearchData = {
             conversationStartedBefore?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -46993,7 +46993,7 @@ export type SearchData = {
             conversationStartedBefore?: string;
         };
         /**
-         * The nextCursor from the previous page of the same search. Not accepted for kinds account and member.
+         * A nextCursor, or for kind seller a previousCursor, from the same search. Not accepted for kinds account and member.
          */
         cursor?: string;
         /**
@@ -50026,7 +50026,8 @@ export type SearchSuccessSearchSellerPageOutput = {
     results: SearchSuccessSearchSellerPageOutputResults;
     outcome: 'page_seller';
     kind: 'seller';
-    [key: string]: SearchSuccessSearchSellerPageOutputValue | SearchSuccessSearchSellerPageOutputTotal | SearchSuccessSearchSellerPageOutputTotalLowerBound | SearchSuccessSearchSellerPageOutputReturned | SearchSuccessSearchSellerPageOutputHasMore | SearchSuccessSearchSellerPageOutputTruncated | SearchSuccessSearchSellerPageOutputNextCursor | SearchSuccessSearchSellerPageOutputResults | 'page_seller' | 'seller' | undefined;
+    previousCursor?: string;
+    [key: string]: SearchSuccessSearchSellerPageOutputValue | SearchSuccessSearchSellerPageOutputTotal | SearchSuccessSearchSellerPageOutputTotalLowerBound | SearchSuccessSearchSellerPageOutputReturned | SearchSuccessSearchSellerPageOutputHasMore | SearchSuccessSearchSellerPageOutputTruncated | SearchSuccessSearchSellerPageOutputNextCursor | SearchSuccessSearchSellerPageOutputResults | 'page_seller' | 'seller' | string | undefined;
 };
 
 export type SearchSuccessSearchSellerPageOutputHasMore = boolean;
