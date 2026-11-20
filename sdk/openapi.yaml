@@ -100355,6 +100355,7 @@ components:
                 - metric_unsupported
                 - metric_not_reported
                 - too_few_observations
+                - terms_unavailable
             - type: 'null'
         basis:
           anyOf:

@@ -7363,7 +7363,7 @@ export type GetDeliverySuccessGoalProgress = {
     actual: GetDeliverySuccessGoalProgressActual | null;
     verdict: 'on_track' | 'behind' | 'beat' | null;
     judgedAgainst: 'asked' | 'answered' | null;
-    verdictWithheld: 'no_goal' | 'no_target' | 'metric_unsupported' | 'metric_not_reported' | 'too_few_observations' | null;
+    verdictWithheld: 'no_goal' | 'no_target' | 'metric_unsupported' | 'metric_not_reported' | 'too_few_observations' | 'terms_unavailable' | null;
     basis: GetDeliverySuccessGoalProgressBasis | null;
     freshness: GetDeliverySuccessGoalProgressFreshness;
 };
