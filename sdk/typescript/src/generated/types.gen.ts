@@ -8105,6 +8105,10 @@ export type GetResponses = {
                      * `PREPAY` when the organization must fund a balance to spend; `CREDIT` when it pays on terms.
                      */
                     posture: 'PREPAY' | 'CREDIT';
+                    /**
+                     * How the organization pays for the media it buys: `posture` when the organization buys media, and null when it does not (a seller that only sells has no media spend). Show it as Media spend, and show nothing when it is null.
+                     */
+                    mediaSpend: 'PREPAY' | 'CREDIT' | null;
                     holds: Array<{
                         reason: string;
                         createdAt: GetSuccessObjectStandingHoldsItemCreatedAt;
@@ -8322,6 +8326,10 @@ export type GetResponses = {
                             recordedAt: GetSuccessObjectPlanRenewalLatestInstructionRecordedAt;
                         } | null;
                     } | null;
+                    /**
+                     * How the plan in force charges the organization, or null when the plan has no published description of it. `card_monthly_usage`: the Standard plan, which charges the card on file once a month for the IUs used. Show it as the plan’s charges and show nothing when it is null.
+                     */
+                    charges: 'card_monthly_usage' | null;
                     /**
                      * Whether a plan help request can be filed now.
                      */
