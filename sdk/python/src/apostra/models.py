@@ -1793,7 +1793,7 @@ class GetDeliverySuccessGoalProgress(TypedDict):
     actual: GetDeliverySuccessGoalProgressActual | None
     verdict: Literal["on_track", "behind", "beat"] | None
     judgedAgainst: Literal["asked", "answered"] | None
-    verdictWithheld: Literal["no_goal", "no_target", "metric_unsupported", "metric_not_reported", "too_few_observations"] | None
+    verdictWithheld: Literal["no_goal", "no_target", "metric_unsupported", "metric_not_reported", "too_few_observations", "terms_unavailable"] | None
     basis: GetDeliverySuccessGoalProgressBasis | None
     freshness: GetDeliverySuccessGoalProgressFreshness
 
