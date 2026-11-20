@@ -25787,6 +25787,17 @@ paths:
                                     description: >-
                                       `PREPAY` when the organization must fund a balance to spend; `CREDIT` when it pays
                                       on terms.
+                                  mediaSpend:
+                                    anyOf:
+                                      - type: string
+                                        enum:
+                                          - PREPAY
+                                          - CREDIT
+                                      - type: 'null'
+                                    description: >-
+                                      How the organization pays for the media it buys: `posture` when the organization
+                                      buys media, and null when it does not (a seller that only sells has no media
+                                      spend). Show it as Media spend, and show nothing when it is null.
                                   holds:
                                     type: array
                                     items:
@@ -25802,6 +25813,7 @@ paths:
                                       additionalProperties: false
                                 required:
                                   - posture
+                                  - mediaSpend
                                   - holds
                                 additionalProperties: false
                               balance:
@@ -26346,6 +26358,17 @@ paths:
                                           - latestInstruction
                                         additionalProperties: false
                                       - type: 'null'
+                                  charges:
+                                    anyOf:
+                                      - type: string
+                                        enum:
+                                          - card_monthly_usage
+                                      - type: 'null'
+                                    description: >-
+                                      How the plan in force charges the organization, or null when the plan has no
+                                      published description of it. `card_monthly_usage`: the Standard plan, which
+                                      charges the card on file once a month for the IUs used. Show it as the plan’s
+                                      charges and show nothing when it is null.
                                   helpAvailable:
                                     type: boolean
                                     description: Whether a plan help request can be filed now.
@@ -26552,6 +26575,7 @@ paths:
                                   - upcoming
                                   - offer
                                   - renewal
+                                  - charges
                                   - helpAvailable
                                   - showsChoices
                                   - setupGrant
