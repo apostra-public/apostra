@@ -8956,6 +8956,8 @@ class OpenMediaPartnersPageInputFilter(TypedDict):
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     region: NotRequired[str]
     '\n    For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     channel: NotRequired[list[str]]
     '\n    Partners that sell any of these channels.\n    '
     sort: NotRequired[Literal["name", "followers"]]
@@ -22615,6 +22617,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     selected: NotRequired[bool]
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
@@ -22931,6 +22935,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     selected: NotRequired[bool]
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
@@ -23181,6 +23187,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     selected: NotRequired[bool]
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
@@ -23458,6 +23466,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     selected: NotRequired[bool]
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
@@ -23742,6 +23752,8 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     selected: NotRequired[bool]
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
@@ -24026,6 +24038,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     selected: NotRequired[bool]
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
@@ -24310,6 +24324,8 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     selected: NotRequired[bool]
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
@@ -24628,6 +24644,8 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     selected: NotRequired[bool]
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
@@ -24910,6 +24928,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     selected: NotRequired[bool]
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
@@ -25192,6 +25212,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     selected: NotRequired[bool]
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
@@ -25440,6 +25462,8 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     selected: NotRequired[bool]
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
@@ -25792,6 +25816,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     selected: NotRequired[bool]
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
@@ -26162,6 +26188,8 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     selected: NotRequired[bool]
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
@@ -26446,6 +26474,8 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    Deprecated: use transactable, which takes the same true or false value.\n    '
     partnerStatus: NotRequired[list[Literal["ACTIVE", "NEEDS_CONNECTION", "AVAILABLE"]]]
     '\n    For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.\n    '
+    partnerKind: NotRequired[list[Literal["platform", "media"] | None]]
+    '\n    For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.\n    '
     selected: NotRequired[bool]
     '\n    For kind seller in a buyer account: true keeps sellers in your list, false the rest.\n    '
     marketplace: NotRequired[bool]
