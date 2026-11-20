@@ -50692,6 +50692,22 @@ paths:
                   type: integer
                   exclusiveMinimum: 0
                   maximum: 9007199254740991
+                dealTerms:
+                  description: >-
+                    A managed source's publisher share: products sell at its cost marked up to it. null removes. Send
+                    with id only.
+                  anyOf:
+                    - type: object
+                      properties:
+                        publisherSharePercent:
+                          type: number
+                          description: >-
+                            Percent of its price the publisher is owed, above 0 up to 100. 70 sells a 7.00 cost at
+                            10.00.
+                      required:
+                        - publisherSharePercent
+                      additionalProperties: false
+                    - type: 'null'
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -115026,6 +115042,24 @@ components:
           $ref: '#/components/schemas/save_inventory_source_success_SaveInventorySourceSuccessUpdatedObject'
         warning:
           type: string
+        retiredProducts:
+          type: object
+          properties:
+            count:
+              type: integer
+              minimum: 0
+              maximum: 9007199254740991
+            productIds:
+              type: array
+              items:
+                type: string
+            truncated:
+              type: boolean
+          required:
+            - count
+            - productIds
+            - truncated
+          additionalProperties: false
         moduleConfig:
           type: object
           properties:

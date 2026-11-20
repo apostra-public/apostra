@@ -16124,6 +16124,8 @@ class SaveInventorySourceInput(TypedDict):
     '\n    Preview namingTemplates: sample names and macros, nothing saved.\n    '
     sellerId: NotRequired[int]
     '\n    Link this seller\'s inventory as a source. The seller must have approved your account. Send alone, or with status ACTIVE to activate it.\n    '
+    dealTerms: NotRequired[SaveInventorySourceInputDealTermsValue | None]
+    '\n    A managed source\'s publisher share: products sell at its cost marked up to it. null removes. Send with id only.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -16132,6 +16134,10 @@ class SaveInventorySourceInput(TypedDict):
 class SaveInventorySourceInputAdServer(TypedDict):
     type: Literal["google_ad_manager", "freewheel", "springserve", "adswizz", "broadsign", "citrusad"]
     '\n    citrusad is Epsilon Retail Media.\n    '
+
+class SaveInventorySourceInputDealTermsValue(TypedDict):
+    publisherSharePercent: float
+    '\n    Percent of its price the publisher is owed, above 0 up to 100. 70 sells a 7.00 cost at 10.00.\n    '
 
 class SaveInventorySourceInputModuleConfig(TypedDict):
     moduleInstanceId: str
@@ -16322,6 +16328,7 @@ class SaveInventorySourceSuccessSaveInventorySourceSuccessUpdated(TypedDict):
     action: Literal["updated"]
     object: SaveInventorySourceSuccessSaveInventorySourceSuccessUpdatedObject
     warning: NotRequired[str]
+    retiredProducts: NotRequired[SaveInventorySourceSuccessSaveInventorySourceSuccessUpdatedRetiredProducts]
     moduleConfig: NotRequired[SaveInventorySourceSuccessSaveInventorySourceSuccessUpdatedModuleConfig]
 
 SaveInventorySourceResult: TypeAlias = "SaveInventorySourceSuccessSaveInventorySourceSuccessCreated | SaveInventorySourceSuccessSaveInventorySourceSuccessUpdated | SaveInventorySourceSuccessSaveInventorySourceSuccessUnchanged | SaveInventorySourceSuccessSaveInventorySourceSuccessConnectionForm | SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionForm | SaveInventorySourceSuccessSaveInventorySourceSuccessAdServerForm | SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesPreviewed | SaveInventorySourceSuccessSaveInventorySourceSuccessNamingTemplatesSaved | SaveInventorySourceSuccessSaveInventorySourceSuccessLegacyCreated"
@@ -16331,6 +16338,11 @@ class SaveInventorySourceSuccessSaveInventorySourceSuccessUpdatedModuleConfig(Ty
     updated: Literal[True]
 
 SaveInventorySourceSuccessSaveInventorySourceSuccessUpdatedObject: TypeAlias = dict[str, JsonValue]
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessUpdatedRetiredProducts(TypedDict):
+    count: int
+    productIds: list[str]
+    truncated: bool
 
 class SaveLessonInput(TypedDict):
     action: Literal["propose", "approve", "retire", "preview"]
