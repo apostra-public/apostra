@@ -35153,6 +35153,20 @@ paths:
                       description: 'For kind seller in a buyer account: sellers in this country, a group such as EMEA, or WORLDWIDE.'
                       type: string
                       minLength: 1
+                    partnerKind:
+                      description: >-
+                        For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media,
+                        or null for a seller with no kind. Combines with the other seller filters.
+                      minItems: 1
+                      maxItems: 3
+                      type: array
+                      items:
+                        anyOf:
+                          - type: string
+                            enum:
+                              - platform
+                              - media
+                          - type: 'null'
                     channel:
                       description: Partners that sell any of these channels.
                       maxItems: 50
@@ -63920,6 +63934,20 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        partnerKind:
+                          description: >-
+                            For kind seller in a buyer account: sellers whose partnerKind is any of these: platform,
+                            media, or null for a seller with no kind. Combines with the other seller filters.
+                          minItems: 1
+                          maxItems: 3
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - platform
+                                  - media
+                              - type: 'null'
                         selected:
                           description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
                           type: boolean
@@ -65794,6 +65822,20 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        partnerKind:
+                          description: >-
+                            For kind seller in a buyer account: sellers whose partnerKind is any of these: platform,
+                            media, or null for a seller with no kind. Combines with the other seller filters.
+                          minItems: 1
+                          maxItems: 3
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - platform
+                                  - media
+                              - type: 'null'
                         selected:
                           description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
                           type: boolean
@@ -68468,6 +68510,20 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        partnerKind:
+                          description: >-
+                            For kind seller in a buyer account: sellers whose partnerKind is any of these: platform,
+                            media, or null for a seller with no kind. Combines with the other seller filters.
+                          minItems: 1
+                          maxItems: 3
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - platform
+                                  - media
+                              - type: 'null'
                         selected:
                           description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
                           type: boolean
@@ -70334,6 +70390,20 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        partnerKind:
+                          description: >-
+                            For kind seller in a buyer account: sellers whose partnerKind is any of these: platform,
+                            media, or null for a seller with no kind. Combines with the other seller filters.
+                          minItems: 1
+                          maxItems: 3
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - platform
+                                  - media
+                              - type: 'null'
                         selected:
                           description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
                           type: boolean
@@ -72197,6 +72267,20 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        partnerKind:
+                          description: >-
+                            For kind seller in a buyer account: sellers whose partnerKind is any of these: platform,
+                            media, or null for a seller with no kind. Combines with the other seller filters.
+                          minItems: 1
+                          maxItems: 3
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - platform
+                                  - media
+                              - type: 'null'
                         selected:
                           description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
                           type: boolean
@@ -74060,6 +74144,20 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        partnerKind:
+                          description: >-
+                            For kind seller in a buyer account: sellers whose partnerKind is any of these: platform,
+                            media, or null for a seller with no kind. Combines with the other seller filters.
+                          minItems: 1
+                          maxItems: 3
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - platform
+                                  - media
+                              - type: 'null'
                         selected:
                           description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
                           type: boolean
@@ -75930,6 +76028,20 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        partnerKind:
+                          description: >-
+                            For kind seller in a buyer account: sellers whose partnerKind is any of these: platform,
+                            media, or null for a seller with no kind. Combines with the other seller filters.
+                          minItems: 1
+                          maxItems: 3
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - platform
+                                  - media
+                              - type: 'null'
                         selected:
                           description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
                           type: boolean
@@ -79447,6 +79559,20 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        partnerKind:
+                          description: >-
+                            For kind seller in a buyer account: sellers whose partnerKind is any of these: platform,
+                            media, or null for a seller with no kind. Combines with the other seller filters.
+                          minItems: 1
+                          maxItems: 3
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - platform
+                                  - media
+                              - type: 'null'
                         selected:
                           description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
                           type: boolean
@@ -82138,6 +82264,20 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        partnerKind:
+                          description: >-
+                            For kind seller in a buyer account: sellers whose partnerKind is any of these: platform,
+                            media, or null for a seller with no kind. Combines with the other seller filters.
+                          minItems: 1
+                          maxItems: 3
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - platform
+                                  - media
+                              - type: 'null'
                         selected:
                           description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
                           type: boolean
@@ -84824,6 +84964,20 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        partnerKind:
+                          description: >-
+                            For kind seller in a buyer account: sellers whose partnerKind is any of these: platform,
+                            media, or null for a seller with no kind. Combines with the other seller filters.
+                          minItems: 1
+                          maxItems: 3
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - platform
+                                  - media
+                              - type: 'null'
                         selected:
                           description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
                           type: boolean
@@ -86697,6 +86851,20 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        partnerKind:
+                          description: >-
+                            For kind seller in a buyer account: sellers whose partnerKind is any of these: platform,
+                            media, or null for a seller with no kind. Combines with the other seller filters.
+                          minItems: 1
+                          maxItems: 3
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - platform
+                                  - media
+                              - type: 'null'
                         selected:
                           description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
                           type: boolean
@@ -88567,6 +88735,20 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        partnerKind:
+                          description: >-
+                            For kind seller in a buyer account: sellers whose partnerKind is any of these: platform,
+                            media, or null for a seller with no kind. Combines with the other seller filters.
+                          minItems: 1
+                          maxItems: 3
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - platform
+                                  - media
+                              - type: 'null'
                         selected:
                           description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
                           type: boolean
@@ -90437,6 +90619,20 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        partnerKind:
+                          description: >-
+                            For kind seller in a buyer account: sellers whose partnerKind is any of these: platform,
+                            media, or null for a seller with no kind. Combines with the other seller filters.
+                          minItems: 1
+                          maxItems: 3
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - platform
+                                  - media
+                              - type: 'null'
                         selected:
                           description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
                           type: boolean
@@ -92308,6 +92504,20 @@ paths:
                               - ACTIVE
                               - NEEDS_CONNECTION
                               - AVAILABLE
+                        partnerKind:
+                          description: >-
+                            For kind seller in a buyer account: sellers whose partnerKind is any of these: platform,
+                            media, or null for a seller with no kind. Combines with the other seller filters.
+                          minItems: 1
+                          maxItems: 3
+                          type: array
+                          items:
+                            anyOf:
+                              - type: string
+                                enum:
+                                  - platform
+                                  - media
+                              - type: 'null'
                         selected:
                           description: 'For kind seller in a buyer account: true keeps sellers in your list, false the rest.'
                           type: boolean

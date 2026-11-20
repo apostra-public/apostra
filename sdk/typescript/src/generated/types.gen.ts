@@ -14493,6 +14493,10 @@ export type OpenMediaPartnersPageData = {
              */
             region?: string;
             /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
+            /**
              * Partners that sell any of these channels.
              */
             channel?: Array<string>;
@@ -39161,6 +39165,10 @@ export type SearchData = {
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
             /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
+            /**
              * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
              */
             selected?: boolean;
@@ -39715,6 +39723,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
             /**
              * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
              */
@@ -40339,6 +40351,10 @@ export type SearchData = {
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
             /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
+            /**
              * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
              */
             selected?: boolean;
@@ -40890,6 +40906,10 @@ export type SearchData = {
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
             /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
+            /**
              * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
              */
             selected?: boolean;
@@ -41437,6 +41457,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
             /**
              * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
              */
@@ -41988,6 +42012,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
             /**
              * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
              */
@@ -42539,6 +42567,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
             /**
              * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
              */
@@ -43221,6 +43253,10 @@ export type SearchData = {
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
             /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
+            /**
              * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
              */
             selected?: boolean;
@@ -43856,6 +43892,10 @@ export type SearchData = {
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
             /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
+            /**
              * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
              */
             selected?: boolean;
@@ -44483,6 +44523,10 @@ export type SearchData = {
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
             /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
+            /**
              * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
              */
             selected?: boolean;
@@ -45036,6 +45080,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
             /**
              * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
              */
@@ -45591,6 +45639,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
             /**
              * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
              */
@@ -46147,6 +46199,10 @@ export type SearchData = {
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
             /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
+            /**
              * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
              */
             selected?: boolean;
@@ -46701,6 +46757,10 @@ export type SearchData = {
              * For kind seller in a buyer account: sellers whose partnerStatus is any of these, across every seller listed on Apostra. ACTIVE are turned on for you (for filter.advertiserId when given), even while the account is still being set up (controlPlane.activation on get), NEEDS_CONNECTION need your own login on their platform, AVAILABLE are not turned on. Combines with sellerType and transactable. Not with ids.
              */
             partnerStatus?: Array<'ACTIVE' | 'NEEDS_CONNECTION' | 'AVAILABLE'>;
+            /**
+             * For kind seller in a buyer account: sellers whose partnerKind is any of these: platform, media, or null for a seller with no kind. Combines with the other seller filters.
+             */
+            partnerKind?: Array<'platform' | 'media' | null>;
             /**
              * For kind seller in a buyer account: true keeps sellers in your list, false the rest.
              */
