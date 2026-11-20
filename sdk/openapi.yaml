@@ -62426,6 +62426,92 @@ paths:
                 confirmVisibilityImpact:
                   description: 'Required to restrict an open, live product: it hides it from every other buyer at once.'
                   type: boolean
+                collections:
+                  description: 'AdCP collections: the shows sold. [] = not disclosed. null clears; omit keeps.'
+                  anyOf:
+                    - type: array
+                      items:
+                        type: object
+                        properties:
+                          publisher_domain:
+                            type: string
+                            pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
+                            description: Publisher domain.
+                          collection_ids:
+                            description: Show ids from its adagents.json.
+                            minItems: 1
+                            type: array
+                            items:
+                              type: string
+                        required:
+                          - publisher_domain
+                        additionalProperties: {}
+                    - type: 'null'
+                installments:
+                  description: 'AdCP installments: the episodes sold, each with a collection_ref. null clears; omit keeps.'
+                  anyOf:
+                    - type: array
+                      items:
+                        type: object
+                        properties:
+                          installment_id:
+                            type: string
+                            description: Episode id.
+                          collection_ref:
+                            description: Its show.
+                            type: object
+                            properties:
+                              publisher_domain:
+                                type: string
+                                pattern: ^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$
+                                description: Publisher domain.
+                              collection_id:
+                                type: string
+                                minLength: 1
+                                description: Show id.
+                            required:
+                              - publisher_domain
+                              - collection_id
+                            additionalProperties: {}
+                          scheduled_at:
+                            description: Air time, ISO 8601.
+                            type: string
+                        required:
+                          - installment_id
+                        additionalProperties: {}
+                    - type: 'null'
+                collectionTargetingAllowed:
+                  description: 'AdCP: buyers may buy some of the shows. Only if the ad server books that. null clears.'
+                  type:
+                    - boolean
+                    - 'null'
+                holdPolicy:
+                  description: 'AdCP hold_policy. Refused with available: true unless the source can hold. null clears.'
+                  anyOf:
+                    - type: object
+                      properties:
+                        available:
+                          type: boolean
+                          description: Whether a hold is offered.
+                        min_duration:
+                          description: Minimum hold duration.
+                          type: string
+                        max_duration:
+                          description: Maximum initial hold duration.
+                          type: string
+                        extendable:
+                          description: Whether a hold can be extended.
+                          type: boolean
+                        max_total_duration:
+                          description: Maximum total hold duration.
+                          type: string
+                        rankable:
+                          description: Whether holds may be ranked.
+                          type: boolean
+                      required:
+                        - available
+                      additionalProperties: false
+                    - type: 'null'
                 dryRun:
                   description: Validate a new product without writing it; on GAM it returns lineItemTargeting. Creates only.
                   type: boolean

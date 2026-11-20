@@ -38136,6 +38136,81 @@ export type SaveWholesaleProductData = {
          */
         confirmVisibilityImpact?: boolean;
         /**
+         * AdCP collections: the shows sold. [] = not disclosed. null clears; omit keeps.
+         */
+        collections?: Array<{
+            /**
+             * Publisher domain.
+             */
+            publisher_domain: string;
+            /**
+             * Show ids from its adagents.json.
+             */
+            collection_ids?: Array<string>;
+            [key: string]: unknown;
+        }> | null;
+        /**
+         * AdCP installments: the episodes sold, each with a collection_ref. null clears; omit keeps.
+         */
+        installments?: Array<{
+            /**
+             * Episode id.
+             */
+            installment_id: string;
+            /**
+             * Its show.
+             */
+            collection_ref?: {
+                /**
+                 * Publisher domain.
+                 */
+                publisher_domain: string;
+                /**
+                 * Show id.
+                 */
+                collection_id: string;
+                [key: string]: unknown;
+            };
+            /**
+             * Air time, ISO 8601.
+             */
+            scheduled_at?: string;
+            [key: string]: unknown;
+        }> | null;
+        /**
+         * AdCP: buyers may buy some of the shows. Only if the ad server books that. null clears.
+         */
+        collectionTargetingAllowed?: boolean | null;
+        /**
+         * AdCP hold_policy. Refused with available: true unless the source can hold. null clears.
+         */
+        holdPolicy?: {
+            /**
+             * Whether a hold is offered.
+             */
+            available: boolean;
+            /**
+             * Minimum hold duration.
+             */
+            min_duration?: string;
+            /**
+             * Maximum initial hold duration.
+             */
+            max_duration?: string;
+            /**
+             * Whether a hold can be extended.
+             */
+            extendable?: boolean;
+            /**
+             * Maximum total hold duration.
+             */
+            max_total_duration?: string;
+            /**
+             * Whether holds may be ranked.
+             */
+            rankable?: boolean;
+        } | null;
+        /**
          * Validate a new product without writing it; on GAM it returns lineItemTargeting. Creates only.
          */
         dryRun?: boolean;
