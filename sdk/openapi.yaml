@@ -106264,6 +106264,7 @@ components:
                 - ui://agentic-api/buyer-account-admission/mcp-app.html
                 - ui://agentic-api/tars-org-supply-asks/mcp-app.html
                 - ui://agentic-api/tars-library-figure-review/mcp-app.html
+                - ui://agentic-api/tars-initiative-status/mcp-app.html
                 - ui://agentic-api/tars-run-rate/mcp-app.html
                 - ui://agentic-api/tars-connections/mcp-app.html
                 - ui://agentic-api/tars-internal-library/mcp-app.html
