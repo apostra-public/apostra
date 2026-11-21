@@ -372,6 +372,14 @@ class Apostra(SyncTransport):
         "Register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A connected agent is unverified as theirs. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAgentResult], self._request_with_response("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    def save_agent_record(self, input: models.SaveAgentRecordInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAgentRecordResult:
+        "Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them). Send recordId and expectedRevision with text, content or materialIds to correct it, or isArchived true to forget it or false to restore it. Only that agent saves new memories."
+        return cast("models.SaveAgentRecordResult", self._request("save_agent_record", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def save_agent_record_with_response(self, input: models.SaveAgentRecordInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAgentRecordResult]:
+        "Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them). Send recordId and expectedRevision with text, content or materialIds to correct it, or isArchived true to forget it or false to restore it. Only that agent saves new memories. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveAgentRecordResult], self._request_with_response("save_agent_record", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
         "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
         return cast("models.SaveAskResult", self._request("save_ask", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -1036,6 +1044,14 @@ class AsyncApostra(AsyncTransport):
     async def save_agent_with_response(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAgentResult]:
         "Register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A connected agent is unverified as theirs. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAgentResult], await self._request_with_response("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_agent_record(self, input: models.SaveAgentRecordInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAgentRecordResult:
+        "Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them). Send recordId and expectedRevision with text, content or materialIds to correct it, or isArchived true to forget it or false to restore it. Only that agent saves new memories."
+        return cast("models.SaveAgentRecordResult", await self._request("save_agent_record", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_agent_record_with_response(self, input: models.SaveAgentRecordInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAgentRecordResult]:
+        "Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them). Send recordId and expectedRevision with text, content or materialIds to correct it, or isArchived true to forget it or false to restore it. Only that agent saves new memories. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveAgentRecordResult], await self._request_with_response("save_agent_record", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
         "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
