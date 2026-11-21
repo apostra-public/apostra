@@ -948,6 +948,25 @@ export const operations = {
     ],
     "summary": "Register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A connected agent is unverified as theirs."
   },
+  "save_agent_record": {
+    "path": "/tools/save_agent_record",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them). Send recordId and expectedRevision with text, content or materialIds to correct it, or isArchived true to forget it or false to restore it. Only that agent saves new memories."
+  },
   "save_ask": {
     "path": "/tools/save_ask",
     "method": "POST",

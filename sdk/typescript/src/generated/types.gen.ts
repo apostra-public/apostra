@@ -5621,6 +5621,255 @@ export type GetData = {
          */
         canvasSourceCursor?: string;
         include?: never;
+    }) | (unknown & {
+        kind: 'agent_record';
+        /**
+         * The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.
+         */
+        id: string;
+        /**
+         * For kind session: pageNextAfter from the previous read to get the next page of events, or resumeAfter to catch up later.
+         */
+        after?: string;
+        /**
+         * For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.
+         */
+        through?: string;
+        /**
+         * For kind session: events per page, default 50. Lower it if a page is too large to return.
+         */
+        limit?: number;
+        /**
+         * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
+         */
+        buyerAccountId?: number;
+        /**
+         * Required for kind member: the account the member belongs to, this account or a direct child.
+         */
+        memberAccountId?: number;
+        /**
+         * The Apostra accountId this call runs in, from get_status. On a member read without memberAccountId: deprecated, read as memberAccountId.
+         */
+        accountId?: number;
+        /**
+         * The owning advertiser id. Required for event_source, catalog, creative_format, audience, and property_list (except a report read). creative and creative_collection take this or a campaign sourceId, not both. Buyer wholesale_product: the one searched with. For seller, the advertiser to price include products for and read partnerStatus for, instead of the account.
+         */
+        advertiserId?: string;
+        /**
+         * For kind property_list with include report: the report id returned by a save_property_list check. No list id is needed.
+         */
+        reportId?: string;
+        /**
+         * For kind property_list: where to start the next page of identifiers, from the previous read.
+         */
+        identifierOffset?: number;
+        /**
+         * For kind property_list: which identifiers to page through: all (the default), unresolved, or registered.
+         */
+        identifierCategory?: 'all' | 'unresolved' | 'registered';
+        /**
+         * For kind seller with include products and advertiserId: the productQueryId from the previous read, to poll products that were still loading.
+         */
+        productQueryId?: string;
+        /**
+         * For kind seller, with productQueryId: the productRevision from the previous read, so only changes since then come back.
+         */
+        productRevision?: number;
+        /**
+         * For kind agent with include diagnostics: one validation run id taken from validationRuns.
+         */
+        validationRunId?: string;
+        /**
+         * creative_session preview: a variants[].build_variant_id; omit for the saved draft.
+         */
+        variantId?: string;
+        /**
+         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         */
+        placement?: 'facebook_feed' | 'instagram_feed';
+        /**
+         * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
+         */
+        sourceId?: string;
+        /**
+         * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
+         */
+        workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
+        /**
+         * For kind catalog with include items: which items to return and the cursor for the next page.
+         */
+        items?: {
+            /**
+             * Filters for the catalog items page; every filter given must match.
+             */
+            filter?: {
+                /**
+                 * Only catalog items with these exact AdCP item keys (e.g. hotel_id), up to 50.
+                 */
+                ids?: Array<string>;
+                /**
+                 * Only catalog items with these exact product GTINs, up to 50.
+                 */
+                gtins?: Array<string>;
+                /**
+                 * Only catalog items carrying any of these tags.
+                 */
+                tags?: Array<string>;
+                /**
+                 * Only catalog items in exactly this category.
+                 */
+                category?: string;
+                /**
+                 * Only catalog items whose text contains this phrase.
+                 */
+                text?: string;
+            };
+            /**
+             * The cursor from the previous catalog items page.
+             */
+            cursor?: string;
+        };
+        /**
+         * For kind material: which revision to read, paging for each collection, and selectors that narrow them.
+         */
+        options?: {
+            /**
+             * Read this exact past source revision instead of the current one.
+             */
+            sourceRevision?: number;
+            /**
+             * Read this rendition of the source revision; omit for the active rendition.
+             */
+            renditionRevision?: number;
+            /**
+             * Paging for each collection in a material read. A candidates page needs no include; a page for any other collection applies only when you also request its matching include.
+             */
+            pages?: {
+                /**
+                 * Page through the extracted facts proposed for the playbook, rules, products, or seller profile. Default 25 rows; no include needed.
+                 */
+                candidates?: GetRequestOptionsPagesCandidates;
+                /**
+                 * Page through extracted text blocks in reading order. Needs include rendition_blocks; default 50 rows.
+                 */
+                rendition_blocks?: GetRequestOptionsPagesRenditionBlocks;
+                /**
+                 * Page through extracted images. Needs include visual_assets; default 25 rows, at most 50.
+                 */
+                visual_assets?: GetRequestOptionsPagesVisualAssets;
+                /**
+                 * Page through extraction warnings and errors. Needs include extraction_diagnostics; default 50 rows.
+                 */
+                extraction_diagnostics?: GetRequestOptionsPagesExtractionDiagnostics;
+                /**
+                 * Page through records of this material being used in RFP responses. Needs include composition_receipts; default 50 rows.
+                 */
+                composition_receipts?: GetRequestOptionsPagesCompositionReceipts;
+                /**
+                 * Page through where this material was used. Needs include usage; at most 48 rows, sent to the app rather than to you.
+                 */
+                usage?: GetRequestOptionsPagesUsage;
+            };
+            /**
+             * Narrow the text blocks, images, and usage returned. A selector is ignored for collections it does not apply to.
+             */
+            select?: {
+                /**
+                 * Keep only text blocks of these kinds, such as heading, table, or speaker_notes.
+                 */
+                blockKinds?: Array<'heading' | 'paragraph' | 'list' | 'table' | 'caption' | 'speaker_notes' | 'ocr' | 'accessibility_text' | 'other'>;
+                /**
+                 * Limit text blocks, images, and usage to one page, slide, or sheet by its unit ID.
+                 */
+                unitId?: string;
+                /**
+                 * Keep only images of these kinds, such as photo, logo, or chart.
+                 */
+                assetKinds?: Array<'photo' | 'illustration' | 'logo' | 'chart' | 'diagram' | 'screenshot' | 'background' | 'other'>;
+                /**
+                 * Keep only images whose reuse rights are any of these, for example allowed or requires_approval.
+                 */
+                reusePolicies?: Array<'allowed' | 'requires_approval' | 'prohibited' | 'unknown'>;
+                /**
+                 * Keep only images whose extraction finished as ready, degraded, or failed.
+                 */
+                assetStatuses?: Array<'ready' | 'degraded' | 'failed'>;
+            };
+        };
+        /**
+         * For kind playbook: read this past version with its content, for example to save it again as current. For business_rules, with businessRulesPolicy.
+         */
+        version?: number;
+        /**
+         * For kind business_rules with version: the policy that numbers it.
+         */
+        businessRulesPolicy?: 'brief_acceptance' | 'creative_policy';
+        /**
+         * For kind notification_config: where to start the next page of notification and agent event subscriptions, which come newest first.
+         */
+        subscriptionsOffset?: number;
+        /**
+         * For kind connection: where to start the next page of provider accounts found on the connection.
+         */
+        connectionAccountsOffset?: number;
+        /**
+         * For kind connection: where to start the next page of advertiser-to-account mappings.
+         */
+        connectionMappingsOffset?: number;
+        /**
+         * Required for kind connection with include inventory: the accounts[].id whose event sources and audiences to list.
+         */
+        connectionAccountId?: string;
+        /**
+         * For kind connection with include inventory: where to start the next page, 50 per page.
+         */
+        connectionInventoryOffset?: number;
+        /**
+         * For kind connection with include inventory: limit the page to seller audiences or event sources.
+         */
+        connectionInventoryObjectType?: 'audience' | 'event_source';
+        /**
+         * For kind connection: the seller or creative engine you expect this connection to reach. The read fails if it reaches another one.
+         */
+        connectionTarget?: {
+            /**
+             * Whether the target is a seller or a creative engine.
+             */
+            kind: 'seller' | 'creative_engine';
+            /**
+             * For kind seller: the seller's Account id. Not the seller object's id, which is a different number.
+             */
+            sellerAccountId?: number;
+            /**
+             * For kind creative_engine: the engine's Account id. Not the engine object's id, which is a different number.
+             */
+            engineAccountId?: number;
+        };
+        /**
+         * For kind rfp_turn: where to start the next page of feedback, 20 per page.
+         */
+        feedbackOffset?: number;
+        /**
+         * For kind rfp_turn: where to start the next page of representations, 50 per page. Not with representationCursor.
+         */
+        representationOffset?: number;
+        /**
+         * For kind rfp_turn: the representations cursor from the previous read, which keeps pages stable. Not with representationOffset.
+         */
+        representationCursor?: string;
+        /**
+         * For kind audience: where to start the next page of audiences, 50 per page; default 0.
+         */
+        audienceOffset?: number;
+        /**
+         * For kind proposal with include products: the cursor from the previous products page of the same proposal.
+         */
+        proposalProductsCursor?: string;
+        /**
+         * For include canvas_source: the nextCursor from the previous page of the same canvas.
+         */
+        canvasSourceCursor?: string;
+        include?: never;
     });
     headers?: {
         /**
@@ -8598,7 +8847,7 @@ export type GetResponses = {
             [key: string]: unknown;
         } | {
             outcome: 'object';
-            kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'project' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'brand' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'source_options' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'buyer_rfp' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'library_request' | 'decision' | 'approval' | 'account_relationship' | 'advertiser_access' | 'notification_config';
+            kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'project' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'brand' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'source_options' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'buyer_rfp' | 'agent_record' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'library_request' | 'decision' | 'approval' | 'account_relationship' | 'advertiser_access' | 'notification_config';
             object: {
                 advertiserId?: string;
                 options?: Array<{
@@ -18615,6 +18864,203 @@ export type SaveAgentErrors = {
      */
     503: V3ToolErrorResponse;
 };
+
+export type SaveAgentRecordData = {
+    body: {
+        /**
+         * Record to correct, forget or restore. Omit only to save a new memory.
+         */
+        recordId?: string;
+        /**
+         * revision from the last read. Required with recordId; a stale one is refused.
+         */
+        expectedRevision?: number;
+        /**
+         * true forgets the record (it is kept and can be restored); false restores it. Send alone with recordId and expectedRevision.
+         */
+        isArchived?: boolean;
+        /**
+         * Whose memory a new record joins: account, advertiser, or the person the turn runs for.
+         */
+        scope?: 'account' | 'advertiser' | 'person';
+        /**
+         * The advertiser of a new advertiser record: the one the turn is for.
+         */
+        advertiserId?: string;
+        /**
+         * One of that advertiser’s campaigns a new advertiser record concerns.
+         */
+        campaignId?: string;
+        /**
+         * fact (true until replaced), event (happened at a time) or instruction (how a person wants the agent to work).
+         */
+        recordType?: 'fact' | 'event' | 'instruction';
+        /**
+         * Short key a new fact or instruction is about, such as cpm-ceiling. A newer record on the same topic replaces the older one.
+         */
+        topic?: string;
+        /**
+         * When a new event happened. Events only.
+         */
+        occurredAt?: string;
+        /**
+         * The memory in words, at most 1,000 characters. Required for a new record.
+         */
+        text?: string;
+        /**
+         * Structured detail as one JSON object of at most 256 KB, such as measurement rows. null clears it on a correction.
+         */
+        content?: {
+            [key: string]: unknown;
+        } | null;
+        /**
+         * Library materials the record cites, at most 20. Citing grants no access.
+         */
+        materialIds?: Array<string>;
+        /**
+         * Why the agent saved a new record.
+         */
+        reason?: string;
+        /**
+         * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+         */
+        expectedAccountId?: number | string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers: {
+        /**
+         * Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are sent they must name the same account.
+         *
+         * @deprecated
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+        /**
+         * Required for every write. Reuse the same key and validated body to replay the durable result for seven days. If this operation also accepts idempotencyKey in its JSON body, the values must match.
+         */
+        'Idempotency-Key': string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/save_agent_record';
+};
+
+export type SaveAgentRecordError = SaveAgentRecordErrors[keyof SaveAgentRecordErrors];
+
+export type SaveAgentRecordErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type SaveAgentRecordResponse = SaveAgentRecordResponses[keyof SaveAgentRecordResponses];
+
+export type SaveAgentRecordResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            action: SaveAgentRecordSuccessSaveAgentRecordAction;
+            agentRecord: SaveAgentRecordSuccessAgentRecord;
+        };
+        error: null;
+    };
+    /**
+     * The write is still running or needs recovery. Retry this operation with the same Idempotency-Key and body; do not mint a new key.
+     */
+    202: {
+        data: {
+            receipt: {
+                id: string;
+                operation: string;
+                state: 'claimed' | 'running' | 'uncertain';
+                stateVersion: number;
+                stateChangedAt: string;
+                pendingReason: string;
+            };
+        };
+        error: null;
+    };
+};
+
+export type SaveAgentRecordSuccessAgentRecord = {
+    id: string;
+    scope: 'account' | 'advertiser' | 'person';
+    advertiserId: string | null;
+    campaignId: string | null;
+    userId: string | null;
+    recordType: 'fact' | 'event' | 'instruction';
+    topic: string | null;
+    occurredAt: string | null;
+    text: string;
+    content?: unknown;
+    materialIds: Array<string>;
+    revision: number;
+    isArchived: boolean;
+    supersedesRecordId: string | null;
+    supersededByRecordId: string | null;
+    unattended: boolean;
+    askedByUserId: string | null;
+    writtenByAgentId: string | null;
+    lastEditedByUserId: string | null;
+    sourceAdvertiserIds: Array<string>;
+    createdAt: string;
+    updatedAt: string;
+};
+
+export type SaveAgentRecordSuccessSaveAgentRecordAction = 'created' | 'unchanged' | 'archived_by_person' | 'revised' | 'archived' | 'restored';
 
 /** @deprecated use SaveAgentData */
 export type SaveAgentRequestSaveAgentDeveloperCreateInput = SaveAgentData;
@@ -39821,6 +40267,26 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
+             * For kind agent_record: only account, advertiser or your own (person) memory.
+             */
+            recordScope?: 'account' | 'advertiser' | 'person';
+            /**
+             * For kind agent_record: only facts, events or instructions.
+             */
+            recordType?: 'fact' | 'event' | 'instruction';
+            /**
+             * For kind agent_record: only records on this topic, such as cpm-ceiling.
+             */
+            topic?: string;
+            /**
+             * For kind agent_record: true keeps records a schedule or an event saved with nobody watching.
+             */
+            unattended?: boolean;
+            /**
+             * For kind agent_record: true also returns records a newer one on the same topic replaced.
+             */
+            includeSuperseded?: boolean;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -39837,7 +40303,7 @@ export type SearchData = {
              */
             isPaused?: boolean;
             /**
-             * Campaign, creative, buyer media_buy: true archived; false active.
+             * Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.
              */
             isArchived?: boolean;
             /**
@@ -40392,6 +40858,26 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
+             * For kind agent_record: only account, advertiser or your own (person) memory.
+             */
+            recordScope?: 'account' | 'advertiser' | 'person';
+            /**
+             * For kind agent_record: only facts, events or instructions.
+             */
+            recordType?: 'fact' | 'event' | 'instruction';
+            /**
+             * For kind agent_record: only records on this topic, such as cpm-ceiling.
+             */
+            topic?: string;
+            /**
+             * For kind agent_record: true keeps records a schedule or an event saved with nobody watching.
+             */
+            unattended?: boolean;
+            /**
+             * For kind agent_record: true also returns records a newer one on the same topic replaced.
+             */
+            includeSuperseded?: boolean;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -40408,7 +40894,7 @@ export type SearchData = {
              */
             isPaused?: boolean;
             /**
-             * Campaign, creative, buyer media_buy: true archived; false active.
+             * Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.
              */
             isArchived?: boolean;
             /**
@@ -41031,6 +41517,26 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
+             * For kind agent_record: only account, advertiser or your own (person) memory.
+             */
+            recordScope?: 'account' | 'advertiser' | 'person';
+            /**
+             * For kind agent_record: only facts, events or instructions.
+             */
+            recordType?: 'fact' | 'event' | 'instruction';
+            /**
+             * For kind agent_record: only records on this topic, such as cpm-ceiling.
+             */
+            topic?: string;
+            /**
+             * For kind agent_record: true keeps records a schedule or an event saved with nobody watching.
+             */
+            unattended?: boolean;
+            /**
+             * For kind agent_record: true also returns records a newer one on the same topic replaced.
+             */
+            includeSuperseded?: boolean;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -41047,7 +41553,7 @@ export type SearchData = {
              */
             isPaused?: boolean;
             /**
-             * Campaign, creative, buyer media_buy: true archived; false active.
+             * Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.
              */
             isArchived?: boolean;
             /**
@@ -41598,6 +42104,26 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
+             * For kind agent_record: only account, advertiser or your own (person) memory.
+             */
+            recordScope?: 'account' | 'advertiser' | 'person';
+            /**
+             * For kind agent_record: only facts, events or instructions.
+             */
+            recordType?: 'fact' | 'event' | 'instruction';
+            /**
+             * For kind agent_record: only records on this topic, such as cpm-ceiling.
+             */
+            topic?: string;
+            /**
+             * For kind agent_record: true keeps records a schedule or an event saved with nobody watching.
+             */
+            unattended?: boolean;
+            /**
+             * For kind agent_record: true also returns records a newer one on the same topic replaced.
+             */
+            includeSuperseded?: boolean;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -41614,7 +42140,7 @@ export type SearchData = {
              */
             isPaused?: boolean;
             /**
-             * Campaign, creative, buyer media_buy: true archived; false active.
+             * Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.
              */
             isArchived?: boolean;
             /**
@@ -42166,6 +42692,26 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
+             * For kind agent_record: only account, advertiser or your own (person) memory.
+             */
+            recordScope?: 'account' | 'advertiser' | 'person';
+            /**
+             * For kind agent_record: only facts, events or instructions.
+             */
+            recordType?: 'fact' | 'event' | 'instruction';
+            /**
+             * For kind agent_record: only records on this topic, such as cpm-ceiling.
+             */
+            topic?: string;
+            /**
+             * For kind agent_record: true keeps records a schedule or an event saved with nobody watching.
+             */
+            unattended?: boolean;
+            /**
+             * For kind agent_record: true also returns records a newer one on the same topic replaced.
+             */
+            includeSuperseded?: boolean;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -42182,7 +42728,7 @@ export type SearchData = {
              */
             isPaused?: boolean;
             /**
-             * Campaign, creative, buyer media_buy: true archived; false active.
+             * Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.
              */
             isArchived?: boolean;
             /**
@@ -42729,6 +43275,26 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
+             * For kind agent_record: only account, advertiser or your own (person) memory.
+             */
+            recordScope?: 'account' | 'advertiser' | 'person';
+            /**
+             * For kind agent_record: only facts, events or instructions.
+             */
+            recordType?: 'fact' | 'event' | 'instruction';
+            /**
+             * For kind agent_record: only records on this topic, such as cpm-ceiling.
+             */
+            topic?: string;
+            /**
+             * For kind agent_record: true keeps records a schedule or an event saved with nobody watching.
+             */
+            unattended?: boolean;
+            /**
+             * For kind agent_record: true also returns records a newer one on the same topic replaced.
+             */
+            includeSuperseded?: boolean;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -42745,7 +43311,7 @@ export type SearchData = {
              */
             isPaused?: boolean;
             /**
-             * Campaign, creative, buyer media_buy: true archived; false active.
+             * Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.
              */
             isArchived?: boolean;
             /**
@@ -43300,6 +43866,26 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
+             * For kind agent_record: only account, advertiser or your own (person) memory.
+             */
+            recordScope?: 'account' | 'advertiser' | 'person';
+            /**
+             * For kind agent_record: only facts, events or instructions.
+             */
+            recordType?: 'fact' | 'event' | 'instruction';
+            /**
+             * For kind agent_record: only records on this topic, such as cpm-ceiling.
+             */
+            topic?: string;
+            /**
+             * For kind agent_record: true keeps records a schedule or an event saved with nobody watching.
+             */
+            unattended?: boolean;
+            /**
+             * For kind agent_record: true also returns records a newer one on the same topic replaced.
+             */
+            includeSuperseded?: boolean;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -43316,7 +43902,7 @@ export type SearchData = {
              */
             isPaused?: boolean;
             /**
-             * Campaign, creative, buyer media_buy: true archived; false active.
+             * Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.
              */
             isArchived?: boolean;
             /**
@@ -43993,6 +44579,26 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
+             * For kind agent_record: only account, advertiser or your own (person) memory.
+             */
+            recordScope?: 'account' | 'advertiser' | 'person';
+            /**
+             * For kind agent_record: only facts, events or instructions.
+             */
+            recordType?: 'fact' | 'event' | 'instruction';
+            /**
+             * For kind agent_record: only records on this topic, such as cpm-ceiling.
+             */
+            topic?: string;
+            /**
+             * For kind agent_record: true keeps records a schedule or an event saved with nobody watching.
+             */
+            unattended?: boolean;
+            /**
+             * For kind agent_record: true also returns records a newer one on the same topic replaced.
+             */
+            includeSuperseded?: boolean;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -44009,7 +44615,7 @@ export type SearchData = {
              */
             isPaused?: boolean;
             /**
-             * Campaign, creative, buyer media_buy: true archived; false active.
+             * Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.
              */
             isArchived?: boolean;
             /**
@@ -44644,6 +45250,26 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
+             * For kind agent_record: only account, advertiser or your own (person) memory.
+             */
+            recordScope?: 'account' | 'advertiser' | 'person';
+            /**
+             * For kind agent_record: only facts, events or instructions.
+             */
+            recordType?: 'fact' | 'event' | 'instruction';
+            /**
+             * For kind agent_record: only records on this topic, such as cpm-ceiling.
+             */
+            topic?: string;
+            /**
+             * For kind agent_record: true keeps records a schedule or an event saved with nobody watching.
+             */
+            unattended?: boolean;
+            /**
+             * For kind agent_record: true also returns records a newer one on the same topic replaced.
+             */
+            includeSuperseded?: boolean;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -44660,7 +45286,7 @@ export type SearchData = {
              */
             isPaused?: boolean;
             /**
-             * Campaign, creative, buyer media_buy: true archived; false active.
+             * Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.
              */
             isArchived?: boolean;
             /**
@@ -45287,6 +45913,26 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
+             * For kind agent_record: only account, advertiser or your own (person) memory.
+             */
+            recordScope?: 'account' | 'advertiser' | 'person';
+            /**
+             * For kind agent_record: only facts, events or instructions.
+             */
+            recordType?: 'fact' | 'event' | 'instruction';
+            /**
+             * For kind agent_record: only records on this topic, such as cpm-ceiling.
+             */
+            topic?: string;
+            /**
+             * For kind agent_record: true keeps records a schedule or an event saved with nobody watching.
+             */
+            unattended?: boolean;
+            /**
+             * For kind agent_record: true also returns records a newer one on the same topic replaced.
+             */
+            includeSuperseded?: boolean;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -45303,7 +45949,7 @@ export type SearchData = {
              */
             isPaused?: boolean;
             /**
-             * Campaign, creative, buyer media_buy: true archived; false active.
+             * Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.
              */
             isArchived?: boolean;
             /**
@@ -45857,6 +46503,26 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
+             * For kind agent_record: only account, advertiser or your own (person) memory.
+             */
+            recordScope?: 'account' | 'advertiser' | 'person';
+            /**
+             * For kind agent_record: only facts, events or instructions.
+             */
+            recordType?: 'fact' | 'event' | 'instruction';
+            /**
+             * For kind agent_record: only records on this topic, such as cpm-ceiling.
+             */
+            topic?: string;
+            /**
+             * For kind agent_record: true keeps records a schedule or an event saved with nobody watching.
+             */
+            unattended?: boolean;
+            /**
+             * For kind agent_record: true also returns records a newer one on the same topic replaced.
+             */
+            includeSuperseded?: boolean;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -45873,7 +46539,7 @@ export type SearchData = {
              */
             isPaused?: boolean;
             /**
-             * Campaign, creative, buyer media_buy: true archived; false active.
+             * Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.
              */
             isArchived?: boolean;
             /**
@@ -46428,6 +47094,26 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
+             * For kind agent_record: only account, advertiser or your own (person) memory.
+             */
+            recordScope?: 'account' | 'advertiser' | 'person';
+            /**
+             * For kind agent_record: only facts, events or instructions.
+             */
+            recordType?: 'fact' | 'event' | 'instruction';
+            /**
+             * For kind agent_record: only records on this topic, such as cpm-ceiling.
+             */
+            topic?: string;
+            /**
+             * For kind agent_record: true keeps records a schedule or an event saved with nobody watching.
+             */
+            unattended?: boolean;
+            /**
+             * For kind agent_record: true also returns records a newer one on the same topic replaced.
+             */
+            includeSuperseded?: boolean;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -46444,7 +47130,7 @@ export type SearchData = {
              */
             isPaused?: boolean;
             /**
-             * Campaign, creative, buyer media_buy: true archived; false active.
+             * Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.
              */
             isArchived?: boolean;
             /**
@@ -46999,6 +47685,26 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
+             * For kind agent_record: only account, advertiser or your own (person) memory.
+             */
+            recordScope?: 'account' | 'advertiser' | 'person';
+            /**
+             * For kind agent_record: only facts, events or instructions.
+             */
+            recordType?: 'fact' | 'event' | 'instruction';
+            /**
+             * For kind agent_record: only records on this topic, such as cpm-ceiling.
+             */
+            topic?: string;
+            /**
+             * For kind agent_record: true keeps records a schedule or an event saved with nobody watching.
+             */
+            unattended?: boolean;
+            /**
+             * For kind agent_record: true also returns records a newer one on the same topic replaced.
+             */
+            includeSuperseded?: boolean;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -47015,7 +47721,7 @@ export type SearchData = {
              */
             isPaused?: boolean;
             /**
-             * Campaign, creative, buyer media_buy: true archived; false active.
+             * Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.
              */
             isArchived?: boolean;
             /**
@@ -47570,6 +48276,26 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
+             * For kind agent_record: only account, advertiser or your own (person) memory.
+             */
+            recordScope?: 'account' | 'advertiser' | 'person';
+            /**
+             * For kind agent_record: only facts, events or instructions.
+             */
+            recordType?: 'fact' | 'event' | 'instruction';
+            /**
+             * For kind agent_record: only records on this topic, such as cpm-ceiling.
+             */
+            topic?: string;
+            /**
+             * For kind agent_record: true keeps records a schedule or an event saved with nobody watching.
+             */
+            unattended?: boolean;
+            /**
+             * For kind agent_record: true also returns records a newer one on the same topic replaced.
+             */
+            includeSuperseded?: boolean;
+            /**
              * For kind property_list: only include lists or only exclude lists.
              */
             propertyListPurpose?: 'include' | 'exclude';
@@ -47586,7 +48312,7 @@ export type SearchData = {
              */
             isPaused?: boolean;
             /**
-             * Campaign, creative, buyer media_buy: true archived; false active.
+             * Campaign, creative, buyer media_buy, agent_record: true archived (forgotten); false active.
              */
             isArchived?: boolean;
             /**
@@ -48084,7 +48810,7 @@ export type SearchResponses = {
     200: {
         data: {
             sources: Array<'objects' | 'docs' | 'specs'>;
-            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | {
+            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | {
                 kind: string;
                 groupBy: string;
                 total: number;
@@ -48108,7 +48834,7 @@ export type SearchResponses = {
             } | {
                 outcome: 'mixed';
                 kind: 'mixed';
-                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchBrandUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchInventorySourceItemUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchApprovalUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchProjectUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
+                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchBrandUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchInventorySourceItemUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchApprovalUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchAgentRecordUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchProjectUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
                 [key: string]: unknown;
             };
             objectsUnavailable?: string;
@@ -48593,6 +49319,79 @@ export type SearchSuccessSearchAgentPageOutputTotalLowerBound = number;
 export type SearchSuccessSearchAgentPageOutputTruncated = boolean;
 
 export type SearchSuccessSearchAgentPageOutputValue = unknown;
+
+export type SearchSuccessSearchAgentRecordPageOutput = {
+    total?: SearchSuccessSearchAgentRecordPageOutputTotal;
+    totalLowerBound?: SearchSuccessSearchAgentRecordPageOutputTotalLowerBound;
+    returned?: SearchSuccessSearchAgentRecordPageOutputReturned;
+    hasMore?: SearchSuccessSearchAgentRecordPageOutputHasMore;
+    truncated?: SearchSuccessSearchAgentRecordPageOutputTruncated;
+    nextCursor?: SearchSuccessSearchAgentRecordPageOutputNextCursor;
+    results: SearchSuccessSearchAgentRecordPageOutputResults;
+    outcome: 'page_agent_record';
+    kind: 'agent_record';
+    [key: string]: SearchSuccessSearchAgentRecordPageOutputValue | SearchSuccessSearchAgentRecordPageOutputTotal | SearchSuccessSearchAgentRecordPageOutputTotalLowerBound | SearchSuccessSearchAgentRecordPageOutputReturned | SearchSuccessSearchAgentRecordPageOutputHasMore | SearchSuccessSearchAgentRecordPageOutputTruncated | SearchSuccessSearchAgentRecordPageOutputNextCursor | SearchSuccessSearchAgentRecordPageOutputResults | 'page_agent_record' | 'agent_record' | undefined;
+};
+
+export type SearchSuccessSearchAgentRecordPageOutputHasMore = boolean;
+
+export type SearchSuccessSearchAgentRecordPageOutputNextCursor = string;
+
+export type SearchSuccessSearchAgentRecordPageOutputResults = Array<{
+    advertiserId?: string;
+    name?: string | null;
+    sandbox?: boolean;
+    /**
+     * Where the items come from: url when url is set, file when file is set.
+     */
+    sourceType?: 'inline' | 'url' | 'file' | null;
+    /**
+     * Items in the latest version against the one before it.
+     */
+    lastChangeSummary?: {
+        added: number;
+        updated: number;
+        unchanged: number;
+        removed: number;
+    } | null;
+    /**
+     * The active transform, if any.
+     */
+    transform?: {
+        name: string;
+        updatedAt: string;
+    } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
+    [key: string]: unknown;
+}>;
+
+export type SearchSuccessSearchAgentRecordPageOutputReturned = number;
+
+export type SearchSuccessSearchAgentRecordPageOutputTotal = number;
+
+export type SearchSuccessSearchAgentRecordPageOutputTotalLowerBound = number;
+
+export type SearchSuccessSearchAgentRecordPageOutputTruncated = boolean;
+
+export type SearchSuccessSearchAgentRecordPageOutputValue = unknown;
+
+export type SearchSuccessSearchAgentRecordUnavailableOutput = {
+    outcome: 'unavailable_agent_record';
+    kind: 'agent_record';
+    unavailable: string;
+    message: string;
+    [key: string]: unknown;
+};
 
 export type SearchSuccessSearchAgentUnavailableOutput = {
     outcome: 'unavailable_agent';
