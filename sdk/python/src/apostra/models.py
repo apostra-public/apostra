@@ -13093,6 +13093,8 @@ class SaveCampaignInputTargetingOverlayValue(TypedDict):
     '\n    Delivery windows.\n    '
     age_restriction: NotRequired[SaveCampaignInputTargetingOverlayAgeRestriction]
     '\n    Minimum audience age.\n    '
+    geo_value_labels: NotRequired[dict[str, str]]
+    '\n    Names by code; ignored on save.\n    '
 
 class SaveCampaignInputTracking(TypedDict):
     expectedRevision: NotRequired[int]

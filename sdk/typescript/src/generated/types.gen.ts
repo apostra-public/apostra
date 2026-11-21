@@ -22176,6 +22176,12 @@ export type SaveCampaignData = {
                 accepted_methods?: Array<'facial_age_estimation' | 'id_document' | 'digital_id' | 'credit_card' | 'world_id'>;
                 [key: string]: unknown;
             };
+            /**
+             * Names by code; ignored on save.
+             */
+            geo_value_labels?: {
+                [key: string]: string;
+            };
         } | null;
         /**
          * Inventory execution groups. Use a preset or custom AdCP dimensions; null removes all groups.

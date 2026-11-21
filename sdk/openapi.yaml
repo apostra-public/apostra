@@ -46240,6 +46240,14 @@ paths:
                             - min
                           additionalProperties: {}
                           description: Minimum audience age.
+                        geo_value_labels:
+                          type: object
+                          propertyNames:
+                            type: string
+                          additionalProperties:
+                            type: string
+                            minLength: 1
+                          description: Names by code; ignored on save.
                       additionalProperties: false
                     - type: 'null'
                 channelGroups:
