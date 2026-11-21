@@ -40424,13 +40424,13 @@ paths:
     post:
       operationId: save_agent
       summary: >-
-        Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent:
-        rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what
-        was read, then send without dryRun. A connected agent is unverified as theirs.
+        Register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or
+        archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A
+        connected agent is unverified as theirs.
       description: >-
-        Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent:
-        rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what
-        was read, then send without dryRun. A connected agent is unverified as theirs.
+        Register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or
+        archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A
+        connected agent is unverified as theirs.
       security:
         - apiKeyAuth: []
         - m2mOAuth:

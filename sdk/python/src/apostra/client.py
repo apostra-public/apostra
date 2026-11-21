@@ -365,11 +365,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveAdvertiserInstructionsResult], self._request_with_response("save_advertiser_instructions", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_agent(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAgentResult:
-        "Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A connected agent is unverified as theirs."
+        "Register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A connected agent is unverified as theirs."
         return cast("models.SaveAgentResult", self._request("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_agent_with_response(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAgentResult]:
-        "Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A connected agent is unverified as theirs. Returns the data together with response headers and request ID."
+        "Register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A connected agent is unverified as theirs. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAgentResult], self._request_with_response("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
@@ -1030,11 +1030,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveAdvertiserInstructionsResult], await self._request_with_response("save_advertiser_instructions", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_agent(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAgentResult:
-        "Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A connected agent is unverified as theirs."
+        "Register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A connected agent is unverified as theirs."
         return cast("models.SaveAgentResult", await self._request("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_agent_with_response(self, input: models.SaveAgentInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAgentResult]:
-        "Confirm a Sales Agent product mode, register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A connected agent is unverified as theirs. Returns the data together with response headers and request ID."
+        "Register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A connected agent is unverified as theirs. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAgentResult], await self._request_with_response("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
