@@ -12026,12 +12026,12 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     '\n    Change each policy on its own: publish text, save a draft, or make a version live.\n    '
     creativeApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto approves creatives with no review; manual queues them.\n    '
-    mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
-    '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    mediaBuyApproval: NotRequired[Literal["auto", "manual", "ai_assisted"]]
+    '\n    auto skips review; ai_assisted queues unless clearly within policy; manual queues every buy.\n    '
     guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, media buys from manual to ai_assisted, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: list[Literal["brief_acceptance", "creative_policy"]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -12050,12 +12050,12 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     '\n    Change each policy on its own: publish text, save a draft, or make a version live.\n    '
     creativeApproval: Literal["auto", "manual"]
     '\n    auto approves creatives with no review; manual queues them.\n    '
-    mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
-    '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    mediaBuyApproval: NotRequired[Literal["auto", "manual", "ai_assisted"]]
+    '\n    auto skips review; ai_assisted queues unless clearly within policy; manual queues every buy.\n    '
     guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, media buys from manual to ai_assisted, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -12074,12 +12074,12 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     '\n    Change each policy on its own: publish text, save a draft, or make a version live.\n    '
     creativeApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto approves creatives with no review; manual queues them.\n    '
-    mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
-    '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    mediaBuyApproval: NotRequired[Literal["auto", "manual", "ai_assisted"]]
+    '\n    auto skips review; ai_assisted queues unless clearly within policy; manual queues every buy.\n    '
     guaranteedOverForecast: Literal["overbook", "hold_for_review"]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, media buys from manual to ai_assisted, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -12096,12 +12096,12 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalGuaranteedOverFo
     '\n    Change each policy on its own: publish text, save a draft, or make a version live.\n    '
     creativeApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto approves creatives with no review; manual queues them.\n    '
-    mediaBuyApproval: Literal["auto", "manual"]
-    '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    mediaBuyApproval: Literal["auto", "manual", "ai_assisted"]
+    '\n    auto skips review; ai_assisted queues unless clearly within policy; manual queues every buy.\n    '
     guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, media buys from manual to ai_assisted, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -12120,12 +12120,12 @@ class SaveBusinessRulesInputWithPolicies(TypedDict):
     '\n    Change each policy on its own: publish text, save a draft, or make a version live.\n    '
     creativeApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto approves creatives with no review; manual queues them.\n    '
-    mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
-    '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    mediaBuyApproval: NotRequired[Literal["auto", "manual", "ai_assisted"]]
+    '\n    auto skips review; ai_assisted queues unless clearly within policy; manual queues every buy.\n    '
     guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, media buys from manual to ai_assisted, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -12142,12 +12142,12 @@ class SaveBusinessRulesInputWithPolicy(TypedDict):
     '\n    Change each policy on its own: publish text, save a draft, or make a version live.\n    '
     creativeApproval: NotRequired[Literal["auto", "manual"]]
     '\n    auto approves creatives with no review; manual queues them.\n    '
-    mediaBuyApproval: NotRequired[Literal["auto", "manual"]]
-    '\n    auto skips the create evaluator and human queue; manual evaluates and queues exceptions.\n    '
+    mediaBuyApproval: NotRequired[Literal["auto", "manual", "ai_assisted"]]
+    '\n    auto skips review; ai_assisted queues unless clearly within policy; manual queues every buy.\n    '
     guaranteedOverForecast: NotRequired[Literal["overbook", "hold_for_review"]]
     '\n    Guaranteed buys over the ad server forecast: send anyway, or hold for review.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move either approval to auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move either approval to auto, media buys from manual to ai_assisted, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
