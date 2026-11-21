@@ -414,6 +414,25 @@ export const operations = {
     ],
     "summary": "Open the Approvals Page for reviews, assignments, routing, evidence, decisions, and forward recovery. Focus by exact media-buy identity or reviewRef; creativeId works only for one loaded version."
   },
+  "open_buyer_agents_page": {
+    "path": "/tools/open_buyer_agents_page",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": false,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:read"
+        ]
+      }
+    ],
+    "summary": "Open the Buyer agents Page: the agents a person claimed into this account, each with its client, claim date and active or revoked state, and Revoke for an administrator. The Page loads itself, so do not repeat the list. search(kind: \"buyer_agent\") reads the same list; save_buyer_agent revokes."
+  },
   "open_campaign_receipt": {
     "path": "/tools/open_campaign_receipt",
     "method": "POST",
