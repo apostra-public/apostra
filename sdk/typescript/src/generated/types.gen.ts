@@ -20467,15 +20467,15 @@ export type SaveBusinessRulesData = {
          */
         creativeApproval?: 'auto' | 'manual';
         /**
-         * auto skips the create evaluator and human queue; manual evaluates and queues exceptions.
+         * auto skips review; ai_assisted queues unless clearly within policy; manual queues every buy.
          */
-        mediaBuyApproval?: 'auto' | 'manual';
+        mediaBuyApproval?: 'auto' | 'manual' | 'ai_assisted';
         /**
          * Guaranteed buys over the ad server forecast: send anyway, or hold for review.
          */
         guaranteedOverForecast?: 'overbook' | 'hold_for_review';
         /**
-         * Required to move either approval to auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.
+         * Required to move either approval to auto, media buys from manual to ai_assisted, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.
          */
         acknowledgeNoHumanReview?: boolean;
         /**

@@ -44072,11 +44072,12 @@ paths:
                     - auto
                     - manual
                 mediaBuyApproval:
-                  description: auto skips the create evaluator and human queue; manual evaluates and queues exceptions.
+                  description: auto skips review; ai_assisted queues unless clearly within policy; manual queues every buy.
                   type: string
                   enum:
                     - auto
                     - manual
+                    - ai_assisted
                 guaranteedOverForecast:
                   description: 'Guaranteed buys over the ad server forecast: send anyway, or hold for review.'
                   type: string
@@ -44085,8 +44086,8 @@ paths:
                     - hold_for_review
                 acknowledgeNoHumanReview:
                   description: >-
-                    Required to move either approval to auto, or to leave Creative Policy empty or off under creative
-                    auto. Confirms nobody will review those.
+                    Required to move either approval to auto, media buys from manual to ai_assisted, or to leave
+                    Creative Policy empty or off under creative auto. Confirms nobody will review those.
                   type: boolean
                 advertisingPolicyDisclosure:
                   description: >-
