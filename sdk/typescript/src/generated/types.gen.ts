@@ -20471,11 +20471,19 @@ export type SaveBusinessRulesData = {
          */
         mediaBuyApproval?: 'auto' | 'manual' | 'ai_assisted';
         /**
+         * New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.
+         */
+        accountApproval?: 'auto' | 'manual';
+        /**
+         * Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.
+         */
+        accountMaxAutoAcceptPaymentTerms?: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90' | 'prepay';
+        /**
          * Guaranteed buys over the ad server forecast: send anyway, or hold for review.
          */
         guaranteedOverForecast?: 'overbook' | 'hold_for_review';
         /**
-         * Required to move either approval to auto, media buys from manual to ai_assisted, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.
+         * Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.
          */
         acknowledgeNoHumanReview?: boolean;
         /**
