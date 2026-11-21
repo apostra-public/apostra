@@ -1907,13 +1907,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -3213,13 +3213,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -4496,13 +4496,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -5764,13 +5764,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -7033,13 +7033,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -8309,13 +8309,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -10752,13 +10752,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -12023,13 +12023,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -15646,13 +15646,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -16915,13 +16915,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -18190,13 +18190,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -19464,13 +19464,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -20738,13 +20738,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -22012,13 +22012,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -23286,13 +23286,13 @@ paths:
                     include:
                       description: >-
                         inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount,
-                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId).
+                        modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId).
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
-                        products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief,
+                        products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection:
                         inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
-                        candidates. property_list: report.
+                        candidates. property_list: report
                       type: array
                       items:
                         type: string
@@ -56193,6 +56193,84 @@ paths:
                         Update only: true irreversibly requests cancellation of one buy; send as the only change. Seller
                         confirmation may be pending; already canceled returns unchanged. false is unsupported.
                       type: boolean
+                    tracking:
+                      description: >-
+                        This buy's own trackers (max 10), added to the campaign's and advertiser's, for this seller
+                        only. Update: send alone. Sent with the next creative send.
+                      type: object
+                      properties:
+                        expectedRevision:
+                          description: Last-read trackingRevision. Rejects concurrent tracking updates.
+                          type: integer
+                          minimum: 0
+                          maximum: 9007199254740991
+                        trackers:
+                          maxItems: 10
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              trackerId:
+                                description: Stable tracker ID returned by a prior read. Omit when creating.
+                                type: string
+                                pattern: ^trk_[a-f0-9]{24}$
+                              name:
+                                type: string
+                                minLength: 1
+                                maxLength: 100
+                                description: Human-readable tracker name.
+                              vendorName:
+                                description: Measurement or tracking vendor name.
+                                type: string
+                                minLength: 1
+                                maxLength: 100
+                              url:
+                                type: string
+                                maxLength: 8192
+                                format: uri
+                                description: >-
+                                  Raw vendor URL. Required on create; omit with trackerId on update to keep the stored
+                                  URL.
+                              trackerType:
+                                type: string
+                                enum:
+                                  - impression
+                                  - click
+                                  - custom
+                                description: Event that causes this tracker to fire.
+                              customEventName:
+                                description: Required when trackerType is custom.
+                                type: string
+                                minLength: 1
+                                maxLength: 100
+                              enabled:
+                                description: Whether this tracker is enabled at its owning scope.
+                                type: boolean
+                              gvlVendorId:
+                                description: IAB GVL vendor ID for TCF consent macro scoping (e.g. 550 for HappyDemics).
+                                example: 550
+                                type: integer
+                                exclusiveMinimum: 0
+                                maximum: 9007199254740991
+                              sourceDialect:
+                                description: >-
+                                  Declare only when trusted context identifies the dialect; otherwise omit for
+                                  exact-origin detection.
+                                type: string
+                                enum:
+                                  - adcp
+                                  - happydemics
+                                  - gam
+                                  - vast
+                                  - custom
+                            required:
+                              - name
+                              - trackerType
+                            additionalProperties: false
+                          description: Complete list of this buy's own trackers.
+                      required:
+                        - trackers
+                      additionalProperties: false
                     idempotencyKey:
                       type: string
                       description: 'Creation: returned productQueryId. Update: deduplication key. Unused with fromProposalId.'
@@ -58154,6 +58232,84 @@ paths:
                         Update only: true irreversibly requests cancellation of one buy; send as the only change. Seller
                         confirmation may be pending; already canceled returns unchanged. false is unsupported.
                       type: boolean
+                    tracking:
+                      description: >-
+                        This buy's own trackers (max 10), added to the campaign's and advertiser's, for this seller
+                        only. Update: send alone. Sent with the next creative send.
+                      type: object
+                      properties:
+                        expectedRevision:
+                          description: Last-read trackingRevision. Rejects concurrent tracking updates.
+                          type: integer
+                          minimum: 0
+                          maximum: 9007199254740991
+                        trackers:
+                          maxItems: 10
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              trackerId:
+                                description: Stable tracker ID returned by a prior read. Omit when creating.
+                                type: string
+                                pattern: ^trk_[a-f0-9]{24}$
+                              name:
+                                type: string
+                                minLength: 1
+                                maxLength: 100
+                                description: Human-readable tracker name.
+                              vendorName:
+                                description: Measurement or tracking vendor name.
+                                type: string
+                                minLength: 1
+                                maxLength: 100
+                              url:
+                                type: string
+                                maxLength: 8192
+                                format: uri
+                                description: >-
+                                  Raw vendor URL. Required on create; omit with trackerId on update to keep the stored
+                                  URL.
+                              trackerType:
+                                type: string
+                                enum:
+                                  - impression
+                                  - click
+                                  - custom
+                                description: Event that causes this tracker to fire.
+                              customEventName:
+                                description: Required when trackerType is custom.
+                                type: string
+                                minLength: 1
+                                maxLength: 100
+                              enabled:
+                                description: Whether this tracker is enabled at its owning scope.
+                                type: boolean
+                              gvlVendorId:
+                                description: IAB GVL vendor ID for TCF consent macro scoping (e.g. 550 for HappyDemics).
+                                example: 550
+                                type: integer
+                                exclusiveMinimum: 0
+                                maximum: 9007199254740991
+                              sourceDialect:
+                                description: >-
+                                  Declare only when trusted context identifies the dialect; otherwise omit for
+                                  exact-origin detection.
+                                type: string
+                                enum:
+                                  - adcp
+                                  - happydemics
+                                  - gam
+                                  - vast
+                                  - custom
+                            required:
+                              - name
+                              - trackerType
+                            additionalProperties: false
+                          description: Complete list of this buy's own trackers.
+                      required:
+                        - trackers
+                      additionalProperties: false
                     idempotencyKey:
                       type: string
                       description: 'Creation: returned productQueryId. Update: deduplication key. Unused with fromProposalId.'
@@ -58269,6 +58425,84 @@ paths:
                         Update only: true irreversibly requests cancellation of one buy; send as the only change. Seller
                         confirmation may be pending; already canceled returns unchanged. false is unsupported.
                       type: boolean
+                    tracking:
+                      description: >-
+                        This buy's own trackers (max 10), added to the campaign's and advertiser's, for this seller
+                        only. Update: send alone. Sent with the next creative send.
+                      type: object
+                      properties:
+                        expectedRevision:
+                          description: Last-read trackingRevision. Rejects concurrent tracking updates.
+                          type: integer
+                          minimum: 0
+                          maximum: 9007199254740991
+                        trackers:
+                          maxItems: 10
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              trackerId:
+                                description: Stable tracker ID returned by a prior read. Omit when creating.
+                                type: string
+                                pattern: ^trk_[a-f0-9]{24}$
+                              name:
+                                type: string
+                                minLength: 1
+                                maxLength: 100
+                                description: Human-readable tracker name.
+                              vendorName:
+                                description: Measurement or tracking vendor name.
+                                type: string
+                                minLength: 1
+                                maxLength: 100
+                              url:
+                                type: string
+                                maxLength: 8192
+                                format: uri
+                                description: >-
+                                  Raw vendor URL. Required on create; omit with trackerId on update to keep the stored
+                                  URL.
+                              trackerType:
+                                type: string
+                                enum:
+                                  - impression
+                                  - click
+                                  - custom
+                                description: Event that causes this tracker to fire.
+                              customEventName:
+                                description: Required when trackerType is custom.
+                                type: string
+                                minLength: 1
+                                maxLength: 100
+                              enabled:
+                                description: Whether this tracker is enabled at its owning scope.
+                                type: boolean
+                              gvlVendorId:
+                                description: IAB GVL vendor ID for TCF consent macro scoping (e.g. 550 for HappyDemics).
+                                example: 550
+                                type: integer
+                                exclusiveMinimum: 0
+                                maximum: 9007199254740991
+                              sourceDialect:
+                                description: >-
+                                  Declare only when trusted context identifies the dialect; otherwise omit for
+                                  exact-origin detection.
+                                type: string
+                                enum:
+                                  - adcp
+                                  - happydemics
+                                  - gam
+                                  - vast
+                                  - custom
+                            required:
+                              - name
+                              - trackerType
+                            additionalProperties: false
+                          description: Complete list of this buy's own trackers.
+                      required:
+                        - trackers
+                      additionalProperties: false
                     idempotencyKey:
                       type: string
                       description: 'Creation: returned productQueryId. Update: deduplication key. Unused with fromProposalId.'
@@ -58773,6 +59007,26 @@ paths:
                           - createdAt
                           - updatedAt
                         additionalProperties: {}
+                      tracking:
+                        type: object
+                        properties:
+                          trackers:
+                            type: array
+                            items:
+                              type: object
+                              propertyNames:
+                                type: string
+                              additionalProperties: {}
+                          trackingRevision:
+                            type: integer
+                            minimum: -9007199254740991
+                            maximum: 9007199254740991
+                          updatedAt:
+                            type: string
+                        required:
+                          - trackers
+                          - trackingRevision
+                        additionalProperties: false
                       warnings:
                         type: array
                         items:
