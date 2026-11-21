@@ -43999,11 +43999,11 @@ paths:
     post:
       operationId: save_business_rules
       summary: >-
-        Write seller AI Business Rules. Policy writes need an account admin; use policies. Approval auto, or no Creative
-        Policy under creative auto, needs acknowledgeNoHumanReview.
+        Write seller AI Business Rules. Policy writes need an account admin; use policies. Approval auto, longer account
+        terms under auto, or no Creative Policy under creative auto, needs acknowledgeNoHumanReview.
       description: >-
-        Write seller AI Business Rules. Policy writes need an account admin; use policies. Approval auto, or no Creative
-        Policy under creative auto, needs acknowledgeNoHumanReview.
+        Write seller AI Business Rules. Policy writes need an account admin; use policies. Approval auto, longer account
+        terms under auto, or no Creative Policy under creative auto, needs acknowledgeNoHumanReview.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -44078,6 +44078,26 @@ paths:
                     - auto
                     - manual
                     - ai_assisted
+                accountApproval:
+                  description: >-
+                    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every
+                    one for review.
+                  type: string
+                  enum:
+                    - auto
+                    - manual
+                accountMaxAutoAcceptPaymentTerms:
+                  description: >-
+                    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default
+                    net_60.
+                  type: string
+                  enum:
+                    - net_15
+                    - net_30
+                    - net_45
+                    - net_60
+                    - net_90
+                    - prepay
                 guaranteedOverForecast:
                   description: 'Guaranteed buys over the ad server forecast: send anyway, or hold for review.'
                   type: string
@@ -44086,8 +44106,9 @@ paths:
                     - hold_for_review
                 acknowledgeNoHumanReview:
                   description: >-
-                    Required to move either approval to auto, media buys from manual to ai_assisted, or to leave
-                    Creative Policy empty or off under creative auto. Confirms nobody will review those.
+                    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen
+                    accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under
+                    creative auto. Confirms nobody will review those.
                   type: boolean
                 advertisingPolicyDisclosure:
                   description: >-
@@ -44360,6 +44381,10 @@ paths:
                             - creativeApproval
                         - required:
                             - mediaBuyApproval
+                        - required:
+                            - accountApproval
+                        - required:
+                            - accountMaxAutoAcceptPaymentTerms
                         - required:
                             - guaranteedOverForecast
                         - required:
