@@ -40260,7 +40260,7 @@ export type SaveWorkItemSuccessSaveWorkItemSuccessUnchangedResumeDue = boolean;
 export type SearchData = {
     body: ((unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -40851,7 +40851,7 @@ export type SearchData = {
         accountId?: number | string;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -41442,7 +41442,7 @@ export type SearchData = {
         accountId?: number | string;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -41510,7 +41510,7 @@ export type SearchData = {
         accountId?: number | string;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -42101,7 +42101,7 @@ export type SearchData = {
         accountId?: number | string;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -42685,7 +42685,7 @@ export type SearchData = {
         groupBy?: never;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -43272,7 +43272,7 @@ export type SearchData = {
         accountId?: number | string;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -43859,7 +43859,7 @@ export type SearchData = {
         accountId?: number | string;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -44572,7 +44572,7 @@ export type SearchData = {
         sourceId?: never;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -45163,7 +45163,7 @@ export type SearchData = {
         accountId?: number | string;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -45243,7 +45243,7 @@ export type SearchData = {
         accountId?: number | string;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -45834,7 +45834,7 @@ export type SearchData = {
         accountId?: number | string;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -45906,7 +45906,7 @@ export type SearchData = {
         accountId?: number | string;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -46497,7 +46497,7 @@ export type SearchData = {
         accountId?: number | string;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query: string;
         /**
@@ -47088,7 +47088,7 @@ export type SearchData = {
         kind?: never;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -47679,7 +47679,7 @@ export type SearchData = {
         kind?: never;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
@@ -48270,7 +48270,7 @@ export type SearchData = {
         kind?: never;
     }) | (unknown & {
         /**
-         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, and creative_session take no query.
+         * Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.
          */
         query?: string;
         /**
