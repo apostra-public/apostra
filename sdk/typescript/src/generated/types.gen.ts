@@ -941,7 +941,7 @@ export type GetData = {
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -1193,7 +1193,7 @@ export type GetData = {
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'propertyClaims' | 'collections' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -1445,7 +1445,7 @@ export type GetData = {
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -1693,7 +1693,7 @@ export type GetData = {
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -1942,7 +1942,7 @@ export type GetData = {
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -2195,7 +2195,7 @@ export type GetData = {
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -2689,7 +2689,7 @@ export type GetData = {
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -2938,7 +2938,7 @@ export type GetData = {
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -3685,7 +3685,7 @@ export type GetData = {
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -3934,7 +3934,7 @@ export type GetData = {
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -4187,7 +4187,7 @@ export type GetData = {
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -4439,7 +4439,7 @@ export type GetData = {
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -4691,7 +4691,7 @@ export type GetData = {
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -4943,7 +4943,7 @@ export type GetData = {
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -5195,7 +5195,7 @@ export type GetData = {
          */
         workItemKind: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
         /**
-         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products (+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report.
+         * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
         include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview'>;
         /**
@@ -32085,6 +32085,56 @@ export type SaveMediaBuyData = {
          */
         isCanceled?: boolean;
         /**
+         * This buy's own trackers (max 10), added to the campaign's and advertiser's, for this seller only. Update: send alone. Sent with the next creative send.
+         */
+        tracking?: {
+            /**
+             * Last-read trackingRevision. Rejects concurrent tracking updates.
+             */
+            expectedRevision?: number;
+            /**
+             * Complete list of this buy's own trackers.
+             */
+            trackers: Array<{
+                /**
+                 * Stable tracker ID returned by a prior read. Omit when creating.
+                 */
+                trackerId?: string;
+                /**
+                 * Human-readable tracker name.
+                 */
+                name: string;
+                /**
+                 * Measurement or tracking vendor name.
+                 */
+                vendorName?: string;
+                /**
+                 * Raw vendor URL. Required on create; omit with trackerId on update to keep the stored URL.
+                 */
+                url?: string;
+                /**
+                 * Event that causes this tracker to fire.
+                 */
+                trackerType: 'impression' | 'click' | 'custom';
+                /**
+                 * Required when trackerType is custom.
+                 */
+                customEventName?: string;
+                /**
+                 * Whether this tracker is enabled at its owning scope.
+                 */
+                enabled?: boolean;
+                /**
+                 * IAB GVL vendor ID for TCF consent macro scoping (e.g. 550 for HappyDemics).
+                 */
+                gvlVendorId?: number;
+                /**
+                 * Declare only when trusted context identifies the dialect; otherwise omit for exact-origin detection.
+                 */
+                sourceDialect?: 'adcp' | 'happydemics' | 'gam' | 'vast' | 'custom';
+            }>;
+        };
+        /**
          * Creation: returned productQueryId. Update: deduplication key. Unused with fromProposalId.
          */
         idempotencyKey: string;
@@ -32955,6 +33005,56 @@ export type SaveMediaBuyData = {
          */
         isCanceled?: boolean;
         /**
+         * This buy's own trackers (max 10), added to the campaign's and advertiser's, for this seller only. Update: send alone. Sent with the next creative send.
+         */
+        tracking?: {
+            /**
+             * Last-read trackingRevision. Rejects concurrent tracking updates.
+             */
+            expectedRevision?: number;
+            /**
+             * Complete list of this buy's own trackers.
+             */
+            trackers: Array<{
+                /**
+                 * Stable tracker ID returned by a prior read. Omit when creating.
+                 */
+                trackerId?: string;
+                /**
+                 * Human-readable tracker name.
+                 */
+                name: string;
+                /**
+                 * Measurement or tracking vendor name.
+                 */
+                vendorName?: string;
+                /**
+                 * Raw vendor URL. Required on create; omit with trackerId on update to keep the stored URL.
+                 */
+                url?: string;
+                /**
+                 * Event that causes this tracker to fire.
+                 */
+                trackerType: 'impression' | 'click' | 'custom';
+                /**
+                 * Required when trackerType is custom.
+                 */
+                customEventName?: string;
+                /**
+                 * Whether this tracker is enabled at its owning scope.
+                 */
+                enabled?: boolean;
+                /**
+                 * IAB GVL vendor ID for TCF consent macro scoping (e.g. 550 for HappyDemics).
+                 */
+                gvlVendorId?: number;
+                /**
+                 * Declare only when trusted context identifies the dialect; otherwise omit for exact-origin detection.
+                 */
+                sourceDialect?: 'adcp' | 'happydemics' | 'gam' | 'vast' | 'custom';
+            }>;
+        };
+        /**
          * Creation: returned productQueryId. Update: deduplication key. Unused with fromProposalId.
          */
         idempotencyKey: string;
@@ -33035,6 +33135,56 @@ export type SaveMediaBuyData = {
          * Update only: true irreversibly requests cancellation of one buy; send as the only change. Seller confirmation may be pending; already canceled returns unchanged. false is unsupported.
          */
         isCanceled?: boolean;
+        /**
+         * This buy's own trackers (max 10), added to the campaign's and advertiser's, for this seller only. Update: send alone. Sent with the next creative send.
+         */
+        tracking?: {
+            /**
+             * Last-read trackingRevision. Rejects concurrent tracking updates.
+             */
+            expectedRevision?: number;
+            /**
+             * Complete list of this buy's own trackers.
+             */
+            trackers: Array<{
+                /**
+                 * Stable tracker ID returned by a prior read. Omit when creating.
+                 */
+                trackerId?: string;
+                /**
+                 * Human-readable tracker name.
+                 */
+                name: string;
+                /**
+                 * Measurement or tracking vendor name.
+                 */
+                vendorName?: string;
+                /**
+                 * Raw vendor URL. Required on create; omit with trackerId on update to keep the stored URL.
+                 */
+                url?: string;
+                /**
+                 * Event that causes this tracker to fire.
+                 */
+                trackerType: 'impression' | 'click' | 'custom';
+                /**
+                 * Required when trackerType is custom.
+                 */
+                customEventName?: string;
+                /**
+                 * Whether this tracker is enabled at its owning scope.
+                 */
+                enabled?: boolean;
+                /**
+                 * IAB GVL vendor ID for TCF consent macro scoping (e.g. 550 for HappyDemics).
+                 */
+                gvlVendorId?: number;
+                /**
+                 * Declare only when trusted context identifies the dialect; otherwise omit for exact-origin detection.
+                 */
+                sourceDialect?: 'adcp' | 'happydemics' | 'gam' | 'vast' | 'custom';
+            }>;
+        };
         /**
          * Creation: returned productQueryId. Update: deduplication key. Unused with fromProposalId.
          */
@@ -33886,6 +34036,13 @@ export type SaveMediaBuyResponses = {
                 createdAt: string;
                 updatedAt: string;
                 [key: string]: unknown;
+            };
+            tracking?: {
+                trackers: Array<{
+                    [key: string]: unknown;
+                }>;
+                trackingRevision: number;
+                updatedAt?: string;
             };
             warnings?: Array<string>;
             errors?: Array<{
