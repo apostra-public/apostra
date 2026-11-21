@@ -148,6 +148,14 @@ class Apostra(SyncTransport):
         "Open the Approvals Page for reviews, assignments, routing, evidence, decisions, and forward recovery. Focus by exact media-buy identity or reviewRef; creativeId works only for one loaded version. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenApprovalsResult], self._request_with_response("open_approvals", input, account_id=account_id, timeout=timeout))
 
+    def open_buyer_agents_page(self, input: models.OpenBuyerAgentsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenBuyerAgentsPageResult:
+        "Open the Buyer agents Page: the agents a person claimed into this account, each with its client, claim date and active or revoked state, and Revoke for an administrator. The Page loads itself, so do not repeat the list. search(kind: \"buyer_agent\") reads the same list; save_buyer_agent revokes."
+        return cast("models.OpenBuyerAgentsPageResult", self._request("open_buyer_agents_page", input, account_id=account_id, timeout=timeout))
+
+    def open_buyer_agents_page_with_response(self, input: models.OpenBuyerAgentsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenBuyerAgentsPageResult]:
+        "Open the Buyer agents Page: the agents a person claimed into this account, each with its client, claim date and active or revoked state, and Revoke for an administrator. The Page loads itself, so do not repeat the list. search(kind: \"buyer_agent\") reads the same list; save_buyer_agent revokes. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenBuyerAgentsPageResult], self._request_with_response("open_buyer_agents_page", input, account_id=account_id, timeout=timeout))
+
     def open_campaign_receipt(self, input: models.OpenCampaignReceiptInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenCampaignReceiptResult:
         "Open Review & go live for one draft campaign: budget, flight, staged media buys and their budget split, why each buy is not live yet, and the readiness blockers. Use when a buyer asks if a draft is ready to launch. Refuses non-draft campaigns; launching stays a separate confirmed save_campaign."
         return cast("models.OpenCampaignReceiptResult", self._request("open_campaign_receipt", input, account_id=account_id, timeout=timeout))
@@ -804,6 +812,14 @@ class AsyncApostra(AsyncTransport):
     async def open_approvals_with_response(self, input: models.OpenApprovalsInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenApprovalsResult]:
         "Open the Approvals Page for reviews, assignments, routing, evidence, decisions, and forward recovery. Focus by exact media-buy identity or reviewRef; creativeId works only for one loaded version. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.OpenApprovalsResult], await self._request_with_response("open_approvals", input, account_id=account_id, timeout=timeout))
+
+    async def open_buyer_agents_page(self, input: models.OpenBuyerAgentsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenBuyerAgentsPageResult:
+        "Open the Buyer agents Page: the agents a person claimed into this account, each with its client, claim date and active or revoked state, and Revoke for an administrator. The Page loads itself, so do not repeat the list. search(kind: \"buyer_agent\") reads the same list; save_buyer_agent revokes."
+        return cast("models.OpenBuyerAgentsPageResult", await self._request("open_buyer_agents_page", input, account_id=account_id, timeout=timeout))
+
+    async def open_buyer_agents_page_with_response(self, input: models.OpenBuyerAgentsPageInput, *, account_id: str | None = None, timeout: float | None = None) -> ResponseDetails[models.OpenBuyerAgentsPageResult]:
+        "Open the Buyer agents Page: the agents a person claimed into this account, each with its client, claim date and active or revoked state, and Revoke for an administrator. The Page loads itself, so do not repeat the list. search(kind: \"buyer_agent\") reads the same list; save_buyer_agent revokes. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.OpenBuyerAgentsPageResult], await self._request_with_response("open_buyer_agents_page", input, account_id=account_id, timeout=timeout))
 
     async def open_campaign_receipt(self, input: models.OpenCampaignReceiptInput, *, account_id: str | None = None, timeout: float | None = None) -> models.OpenCampaignReceiptResult:
         "Open Review & go live for one draft campaign: budget, flight, staged media buys and their budget split, why each buy is not live yet, and the readiness blockers. Use when a buyer asks if a draft is ready to launch. Refuses non-draft campaigns; launching stays a separate confirmed save_campaign."
