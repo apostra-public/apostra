@@ -389,14 +389,14 @@ class GenerateVariantsSuccessGalleryVariantsItemPreview(TypedDict):
 class GetDeliveryInput(TypedDict):
     metrics: NotRequired[list[Literal["impressions", "spend", "clicks", "views", "completed_views", "quartile_100", "conversions", "leads", "conversion_value", "viewable_impressions", "measurable_impressions", "cpm", "cost_per_click", "ctr", "completion_rate", "viewable_rate", "cost_per_acquisition", "roas", "grps", "reach", "frequency", "sellBooked", "sellRealized", "buyBooked", "buyRealized", "spreadBooked", "spreadRealized", "marginBookedPct", "marginRealizedPct", "bookedComplete", "realizedComplete"]]]
     '\n    Metrics; omit for report defaults.\n    '
-    dimensions: NotRequired[list[Literal["date", "advertiser", "campaign", "channel_group", "channel", "buyer", "media_buy", "package", "inventory_source", "seller", "sales_agent", "property"] | str]]
+    dimensions: NotRequired[list[Literal["date", "advertiser", "campaign", "channel_group", "channel", "buyer", "media_buy", "package", "inventory_source", "deal_terms_version", "statement_line", "seller", "sales_agent", "property"] | str]]
     '\n    Group-by dimensions; campaign delivery also accepts labels.<dimension_key>, and property (tracker impressions per site or app, with date). Omit for leaf grain.\n    '
     sponsoredBuyerCustomerId: NotRequired[str]
     '\n    Server-issued self-serve buyer child scope from the Campaigns Page launch.\n    '
     report: NotRequired[Literal["delivery", "campaign_delivery", "live_campaign_delivery", "margin", "live_ad_delivery"]]
     '\n    Select seller delivery, stored campaign delivery, live provider campaign delivery, margin, or live per-ad delivery for one campaign.\n    '
     range: NotRequired[GetDeliveryInputRange]
-    '\n    Dates (max 90 days) or lifetime for delivery; invalid for margin.\n    '
+    '\n    Dates (max 90 days) or lifetime for delivery. Margin: one closed calendar month, a publisher statement.\n    '
     filters: NotRequired[GetDeliveryInputFilters]
     '\n    Optional report filters; invalid combinations are rejected.\n    '
     currency: NotRequired[str]
@@ -1975,7 +1975,7 @@ GetDeliverySuccessRowsItemFinality = TypedDict(
         "status": Required["Literal[\"available\", \"unavailable\", \"not_applicable\"]"],
         "class": Required["Literal[\"SNAPSHOT\", \"OFFICIAL\"] | None"],
         "revision": Required["GetDeliverySuccessDeliveryRevision | None"],
-        "reason": NotRequired["Literal[\"revision_evidence_unavailable\", \"revision_evidence_mixed\", \"revision_unreadable\", \"cumulative_margin_ledger\"]"],
+        "reason": NotRequired["Literal[\"revision_evidence_unavailable\", \"revision_evidence_mixed\", \"revision_unreadable\", \"cumulative_margin_ledger\", \"closed_period_statement\"]"],
         "supportedClasses": NotRequired["list[Literal[\"SNAPSHOT\", \"OFFICIAL\"]]"],
     },
     total=False,
@@ -2131,7 +2131,7 @@ GetDeliverySuccessTotalsByFinalityItemFinality = TypedDict(
         "status": Required["Literal[\"available\", \"unavailable\", \"not_applicable\"]"],
         "class": Required["Literal[\"SNAPSHOT\", \"OFFICIAL\"] | None"],
         "revision": Required["GetDeliverySuccessDeliveryRevision | None"],
-        "reason": NotRequired["Literal[\"revision_evidence_unavailable\", \"revision_evidence_mixed\", \"revision_unreadable\", \"cumulative_margin_ledger\"]"],
+        "reason": NotRequired["Literal[\"revision_evidence_unavailable\", \"revision_evidence_mixed\", \"revision_unreadable\", \"cumulative_margin_ledger\", \"closed_period_statement\"]"],
         "supportedClasses": NotRequired["list[Literal[\"SNAPSHOT\", \"OFFICIAL\"]]"],
     },
     total=False,
@@ -2168,7 +2168,7 @@ GetDeliverySuccessTotalsFinality = TypedDict(
         "status": Required["Literal[\"available\", \"unavailable\", \"not_applicable\"]"],
         "class": Required["Literal[\"SNAPSHOT\", \"OFFICIAL\"] | None"],
         "revision": Required["GetDeliverySuccessDeliveryRevision | None"],
-        "reason": NotRequired["Literal[\"revision_evidence_unavailable\", \"revision_evidence_mixed\", \"revision_unreadable\", \"cumulative_margin_ledger\"]"],
+        "reason": NotRequired["Literal[\"revision_evidence_unavailable\", \"revision_evidence_mixed\", \"revision_unreadable\", \"cumulative_margin_ledger\", \"closed_period_statement\"]"],
         "supportedClasses": NotRequired["list[Literal[\"SNAPSHOT\", \"OFFICIAL\"]]"],
     },
     total=False,

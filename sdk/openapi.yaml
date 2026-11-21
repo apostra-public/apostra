@@ -29333,13 +29333,17 @@ paths:
                           - media_buy
                           - package
                           - inventory_source
+                          - deal_terms_version
+                          - statement_line
                           - seller
                           - sales_agent
                           - property
                       - type: string
                         pattern: ^labels\.[a-z][a-z0-9_]{0,63}$
                 range:
-                  description: Dates (max 90 days) or lifetime for delivery; invalid for margin.
+                  description: >-
+                    Dates (max 90 days) or lifetime for delivery. Margin: one closed calendar month, a publisher
+                    statement.
                   type: object
                   properties:
                     startDate:
@@ -107296,6 +107300,7 @@ components:
             - revision_evidence_mixed
             - revision_unreadable
             - cumulative_margin_ledger
+            - closed_period_statement
         supportedClasses:
           type: array
           items:
@@ -107358,6 +107363,7 @@ components:
             - revision_evidence_mixed
             - revision_unreadable
             - cumulative_margin_ledger
+            - closed_period_statement
         supportedClasses:
           type: array
           items:
@@ -107423,6 +107429,7 @@ components:
             - revision_evidence_mixed
             - revision_unreadable
             - cumulative_margin_ledger
+            - closed_period_statement
         supportedClasses:
           type: array
           items:
