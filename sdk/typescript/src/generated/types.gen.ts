@@ -5904,9 +5904,9 @@ export type GetDeliveryData = {
         /**
          * Group-by dimensions; campaign delivery also accepts labels.<dimension_key>, and property (tracker impressions per site or app, with date). Omit for leaf grain.
          */
-        dimensions?: Array<'date' | 'advertiser' | 'campaign' | 'channel_group' | 'channel' | 'buyer' | 'media_buy' | 'package' | 'inventory_source' | 'seller' | 'sales_agent' | 'property' | string>;
+        dimensions?: Array<'date' | 'advertiser' | 'campaign' | 'channel_group' | 'channel' | 'buyer' | 'media_buy' | 'package' | 'inventory_source' | 'deal_terms_version' | 'statement_line' | 'seller' | 'sales_agent' | 'property' | string>;
         /**
-         * Dates (max 90 days) or lifetime for delivery; invalid for margin.
+         * Dates (max 90 days) or lifetime for delivery. Margin: one closed calendar month, a publisher statement.
          */
         range?: {
             /**
@@ -7928,7 +7928,7 @@ export type GetDeliverySuccessRowsItemFinality = {
     status: 'available' | 'unavailable' | 'not_applicable';
     class: 'SNAPSHOT' | 'OFFICIAL' | null;
     revision: GetDeliverySuccessDeliveryRevision | null;
-    reason?: 'revision_evidence_unavailable' | 'revision_evidence_mixed' | 'revision_unreadable' | 'cumulative_margin_ledger';
+    reason?: 'revision_evidence_unavailable' | 'revision_evidence_mixed' | 'revision_unreadable' | 'cumulative_margin_ledger' | 'closed_period_statement';
     supportedClasses?: Array<'SNAPSHOT' | 'OFFICIAL'>;
 };
 
@@ -8087,7 +8087,7 @@ export type GetDeliverySuccessTotalsByFinalityItemFinality = {
     status: 'available' | 'unavailable' | 'not_applicable';
     class: 'SNAPSHOT' | 'OFFICIAL' | null;
     revision: GetDeliverySuccessDeliveryRevision | null;
-    reason?: 'revision_evidence_unavailable' | 'revision_evidence_mixed' | 'revision_unreadable' | 'cumulative_margin_ledger';
+    reason?: 'revision_evidence_unavailable' | 'revision_evidence_mixed' | 'revision_unreadable' | 'cumulative_margin_ledger' | 'closed_period_statement';
     supportedClasses?: Array<'SNAPSHOT' | 'OFFICIAL'>;
 };
 
@@ -8128,7 +8128,7 @@ export type GetDeliverySuccessTotalsFinality = {
     status: 'available' | 'unavailable' | 'not_applicable';
     class: 'SNAPSHOT' | 'OFFICIAL' | null;
     revision: GetDeliverySuccessDeliveryRevision | null;
-    reason?: 'revision_evidence_unavailable' | 'revision_evidence_mixed' | 'revision_unreadable' | 'cumulative_margin_ledger';
+    reason?: 'revision_evidence_unavailable' | 'revision_evidence_mixed' | 'revision_unreadable' | 'cumulative_margin_ledger' | 'closed_period_statement';
     supportedClasses?: Array<'SNAPSHOT' | 'OFFICIAL'>;
 };
 
