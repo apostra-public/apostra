@@ -1911,9 +1911,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -1989,6 +1989,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -2273,6 +2276,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
@@ -3208,9 +3216,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -3288,6 +3296,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -3572,6 +3583,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                   additionalProperties: false
@@ -4483,9 +4499,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -4561,6 +4577,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -4845,6 +4864,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                   additionalProperties: false
@@ -5743,9 +5767,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -5821,6 +5845,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -6105,6 +6132,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - advertiserId
@@ -7004,9 +7036,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -7082,6 +7114,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -7366,6 +7401,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - advertiserId
@@ -8272,9 +8312,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -8350,6 +8390,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -8634,6 +8677,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
@@ -9801,6 +9849,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
@@ -10702,9 +10755,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -10780,6 +10833,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -11064,6 +11120,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
@@ -11965,9 +12026,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -12043,6 +12104,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -12327,6 +12391,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
@@ -13500,6 +13569,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
@@ -14672,6 +14746,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
@@ -15570,9 +15649,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -15648,6 +15727,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -15932,6 +16014,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
@@ -16831,9 +16918,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -16909,6 +16996,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -17193,6 +17283,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
@@ -18098,9 +18193,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -18176,6 +18271,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -18460,6 +18558,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
@@ -19364,9 +19467,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -19442,6 +19545,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -19726,6 +19832,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
@@ -20630,9 +20741,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -20708,6 +20819,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -20992,6 +21106,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
@@ -21896,9 +22015,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -21974,6 +22093,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -22258,6 +22380,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
@@ -23162,9 +23289,9 @@ paths:
                         playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification,
                         validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy:
                         products, creatives, deliverySummary, liveStatus, reporting_status. proposal: brief, products,
-                        versions, mediaBuys. advertiser: tracking, accounts. connection: inventory. catalog: items,
-                        history. material: source_access, repeats, options.pages keys but candidates. property_list:
-                        report.
+                        versions, mediaBuys. advertiser: tracking, accounts, canvas* (also project). connection:
+                        inventory. catalog: items, history. material: source_access, repeats, options.pages keys but
+                        candidates. property_list: report.
                       type: array
                       items:
                         type: string
@@ -23240,6 +23367,9 @@ paths:
                           - payouts
                           - reads
                           - reasoning
+                          - canvas
+                          - canvas_source
+                          - canvas_versions
                           - lifecycle
                           - capacity
                           - source_access
@@ -23524,6 +23654,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
@@ -24697,6 +24832,11 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 2048
+                    canvasSourceCursor:
+                      description: 'For include canvas_source: the nextCursor from the previous page of the same canvas.'
+                      type: string
+                      minLength: 1
+                      maxLength: 1024
                   required:
                     - kind
                     - id
