@@ -1409,6 +1409,25 @@ export const operations = {
     ],
     "summary": "Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. `limits` sets what your brain may offer. Halves never roll back each other."
   },
+  "save_project": {
+    "path": "/tools/save_project",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, or lead. A Project is one conversation plus its objective, attachments and the bounds its lead agent works inside. Wider bounds return approval_required."
+  },
   "save_property_list": {
     "path": "/tools/save_property_list",
     "method": "POST",

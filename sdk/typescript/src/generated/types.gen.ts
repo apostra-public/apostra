@@ -867,7 +867,7 @@ export type GenerateVariantsSuccessGalleryVariants = Array<{
 
 export type GetData = {
     body: (unknown & {
-        kind: 'agent' | 'buyer_agent' | 'skill' | 'inventory_source' | 'advertiser' | 'advertiser_grant' | 'signal' | 'ask' | 'conversation' | 'campaign' | 'dimension' | 'creative_asset' | 'media_buy' | 'rfp' | 'rfp_turn' | 'library_request' | 'account_relationship';
+        kind: 'agent' | 'buyer_agent' | 'project' | 'skill' | 'inventory_source' | 'advertiser' | 'advertiser_grant' | 'signal' | 'ask' | 'conversation' | 'campaign' | 'dimension' | 'creative_asset' | 'media_buy' | 'rfp' | 'rfp_turn' | 'library_request' | 'account_relationship';
         /**
          * The id from search or an earlier result; never guess one. For skill, an exact id the user gave also works. A brand's id is its domain, or domain/brand_id. Omit it for singleton kinds, audience, and a property_list report read by reportId. A work_item also needs workItemKind.
          */
@@ -8522,7 +8522,7 @@ export type GetResponses = {
             [key: string]: unknown;
         } | {
             outcome: 'object';
-            kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'brand' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'source_options' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'buyer_rfp' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'library_request' | 'decision' | 'approval' | 'account_relationship' | 'advertiser_access' | 'notification_config';
+            kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'project' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'brand' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'source_options' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'buyer_rfp' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'library_request' | 'decision' | 'approval' | 'account_relationship' | 'advertiser_access' | 'notification_config';
             object: {
                 advertiserId?: string;
                 options?: Array<{
@@ -34523,6 +34523,656 @@ export type SavePlaybookSuccessSellerSaveReplayedMaterialReceipt = {
     [key: string]: unknown;
 };
 
+export type SaveProjectData = {
+    body: unknown & {
+        /**
+         * The Project to change. Omit it to create a Project.
+         */
+        id?: SaveProjectRequestId;
+        /**
+         * Idempotency key for a create: repeating it returns the same Project and conversation.
+         */
+        clientRequestId?: SaveProjectRequestClientRequestId;
+        /**
+         * The Project name, up to 200 characters. Required to create.
+         */
+        name?: string;
+        /**
+         * What success is, in words, up to 2,000 characters (AdCP objectives).
+         */
+        objectives?: string;
+        /**
+         * Create only: the Project belongs to this advertiser. Omit it for an account-level Project. Never changes.
+         */
+        advertiserId?: SaveProjectRequestAdvertiserId;
+        /**
+         * Create only: an existing active, shared chat of yours that becomes the Project's conversation, once. Omit it to make a new conversation.
+         */
+        sessionId?: SaveProjectRequestSessionId;
+        /**
+         * Create only: what the Project is about.
+         */
+        attachments?: Array<SaveProjectRequestAttachmentsItem>;
+        /**
+         * Edit only: attach one campaign, media buy, RFP, material, connection or seller exchange.
+         */
+        attach?: SaveProjectRequestAttach;
+        /**
+         * Edit only: detach one attachment. A detached media buy leaves the bounds in a narrower revision.
+         */
+        detach?: {
+            /**
+             * The kind of the attachment.
+             */
+            kind: SaveProjectRequestDetachKind;
+            /**
+             * The id the attachment was attached with.
+             */
+            id: SaveProjectRequestDetachId;
+        };
+        /**
+         * The limits the lead may work inside. A revision that is not narrower in every field waits for an administrator to approve it on our site.
+         */
+        bounds?: {
+            flight: {
+                start: string;
+                end: string;
+                [key: string]: unknown;
+            };
+            channels?: {
+                required?: Array<SaveProjectRequestBoundsChannelsRequiredItem>;
+                allowed?: Array<SaveProjectRequestBoundsChannelsAllowedItem>;
+                mix_targets?: {
+                    [key: string]: {
+                        min_pct?: number;
+                        max_pct?: number;
+                        [key: string]: unknown;
+                    };
+                };
+                [key: string]: unknown;
+            };
+            countries?: Array<string>;
+            regions?: Array<string>;
+            policy_ids?: Array<string>;
+            policy_categories?: Array<string>;
+            approved_sellers?: Array<string> | null;
+            human_review_required?: boolean;
+            budget: {
+                total: number;
+                currency: string;
+                accounting_mode?: 'gross_commitment' | 'verified_net_cost';
+                per_seller_max_pct?: number;
+                reallocation_threshold: number;
+                allocations?: {
+                    [key: string]: {
+                        amount?: number;
+                        max_pct?: number;
+                        [key: string]: unknown;
+                    };
+                };
+                periods?: Array<{
+                    budget_period_id: string;
+                    start: string;
+                    end: string;
+                    amount: number;
+                    [key: string]: unknown;
+                }>;
+                [key: string]: unknown;
+            };
+            /**
+             * The actions the lead may take without asking: move_budget, change_pacing, pause_or_resume_media_buy, assign_approved_creative.
+             */
+            autonomousActions: Array<'move_budget' | 'change_pacing' | 'pause_or_resume_media_buy' | 'assign_approved_creative'>;
+            /**
+             * Daily action count and IU cap for autonomous work.
+             */
+            limits: {
+                /**
+                 * Autonomous actions allowed per day, 1 to 50. Default 10.
+                 */
+                maxActionsPerDay?: number;
+                /**
+                 * The Project's cap in IUs, or null for the account's spending cap alone.
+                 */
+                iuBudget?: number | null;
+            };
+            /**
+             * The media buys autonomous actions may change.
+             */
+            targets: {
+                /**
+                 * Attached media buys the lead may change, each listed. A buy added later is a wider revision.
+                 */
+                mediaBuyIds: Array<SaveProjectRequestBoundsTargetsMediaBuyIdsItem>;
+            };
+            /**
+             * Not available yet: refused with NOT_IMPLEMENTED. Use policy_ids and policy_categories.
+             */
+            custom_policies?: Array<unknown>;
+        };
+        /**
+         * The acting agent. Also the conversation's lead.
+         */
+        lead?: {
+            /**
+             * A buyer agent of the account.
+             */
+            kind: 'agent';
+            /**
+             * The buyer agent id the buyer_agent read returns.
+             */
+            principalId: SaveProjectRequestLeadPrincipalId;
+        } | {
+            /**
+             * The Apostra Assistant.
+             */
+            kind: 'assistant';
+            principalId?: never;
+        };
+        /**
+         * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+         */
+        expectedAccountId?: number | string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers: {
+        /**
+         * Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are sent they must name the same account.
+         *
+         * @deprecated
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+        /**
+         * Required for every write. Reuse the same key and validated body to replay the durable result for seven days. If this operation also accepts idempotencyKey in its JSON body, the values must match.
+         */
+        'Idempotency-Key': string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/save_project';
+};
+
+export type SaveProjectError = SaveProjectErrors[keyof SaveProjectErrors];
+
+export type SaveProjectErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type SaveProjectRequestAdvertiserId = string;
+
+export type SaveProjectRequestAttach = {
+    /**
+     * What is attached: a campaign, media_buy, rfp (a buyer RFP), material, connection or a seller exchange.
+     */
+    kind: SaveProjectRequestAttachKind;
+    /**
+     * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
+     */
+    id: SaveProjectRequestAttachId;
+    /**
+     * How the Project relates to it: subject, request, response, evidence or outcome.
+     */
+    relation: 'subject' | 'request' | 'response' | 'evidence' | 'outcome';
+};
+
+export type SaveProjectRequestAttachId = string;
+
+export type SaveProjectRequestAttachKind = 'campaign' | 'media_buy' | 'rfp' | 'material' | 'connection' | 'exchange';
+
+export type SaveProjectRequestAttachmentsItem = {
+    /**
+     * What is attached: a campaign, media_buy, rfp (a buyer RFP), material, connection or a seller exchange.
+     */
+    kind: SaveProjectRequestAttachmentsItemKind;
+    /**
+     * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
+     */
+    id: SaveProjectRequestAttachmentsItemId;
+    /**
+     * How the Project relates to it: subject, request, response, evidence or outcome.
+     */
+    relation: 'subject' | 'request' | 'response' | 'evidence' | 'outcome';
+};
+
+export type SaveProjectRequestAttachmentsItemId = string;
+
+export type SaveProjectRequestAttachmentsItemKind = 'campaign' | 'media_buy' | 'rfp' | 'material' | 'connection' | 'exchange';
+
+export type SaveProjectRequestBoundsChannelsAllowedItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+
+export type SaveProjectRequestBoundsChannelsRequiredItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+
+export type SaveProjectRequestBoundsTargetsMediaBuyIdsItem = string;
+
+export type SaveProjectRequestClientRequestId = string;
+
+export type SaveProjectRequestDetachId = string;
+
+export type SaveProjectRequestDetachKind = 'campaign' | 'media_buy' | 'rfp' | 'material' | 'connection' | 'exchange';
+
+export type SaveProjectRequestId = string;
+
+export type SaveProjectRequestLeadPrincipalId = string;
+
+export type SaveProjectRequestSessionId = string;
+
+export type SaveProjectResponse = SaveProjectResponses[keyof SaveProjectResponses];
+
+export type SaveProjectResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            kind: 'project';
+            object: SaveProjectSuccessObject;
+            action?: never;
+            message?: never;
+            approval?: never;
+            project?: never;
+        } | {
+            action: 'approval_required';
+            message: string;
+            approval: SaveProjectSuccessAgentApproval;
+            project: SaveProjectSuccessProject;
+            kind?: never;
+            object?: never;
+        };
+        error: null;
+    };
+    /**
+     * The write is still running or needs recovery. Retry this operation with the same Idempotency-Key and body; do not mint a new key.
+     */
+    202: {
+        data: {
+            receipt: {
+                id: string;
+                operation: string;
+                state: 'claimed' | 'running' | 'uncertain';
+                stateVersion: number;
+                stateChangedAt: string;
+                pendingReason: string;
+            };
+        };
+        error: null;
+    };
+};
+
+export type SaveProjectSuccessAgentApproval = {
+    /**
+     * Approval id.
+     */
+    id: string;
+    /**
+     * Kind of sensitive action, for example `buyer_child_account.create`.
+     */
+    kind: string;
+    /**
+     * `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.
+     */
+    state: 'pending' | 'executing' | 'succeeded' | 'failed' | 'rejected' | 'expired';
+    /**
+     * Account the action applies to.
+     */
+    targetCustomerId: string;
+    /**
+     * Role the approver must hold on the account.
+     */
+    requiredRole: 'ADMIN' | 'SUPER_ADMIN' | null;
+    /**
+     * What will happen, in one line. Null once the approval is final.
+     */
+    summary: string | null;
+    /**
+     * Page on our site where a signed-in person approves or rejects the request.
+     */
+    url: string;
+    createdAt: string;
+    expiresAt: string;
+    decidedAt: string | null;
+    completedAt: string | null;
+    /**
+     * Reference to the result once succeeded.
+     */
+    resultReference: {
+        [key: string]: string | number | boolean;
+    } | null;
+    /**
+     * Reason code when the action failed.
+     */
+    failureCode: string | null;
+};
+
+export type SaveProjectSuccessObject = {
+    id: string;
+    name: string;
+    createdByUserId: string | null;
+    advertiserId: string | null;
+    sessionId: string;
+    objectives: string;
+    lead: {
+        /**
+         * A buyer agent of the account.
+         */
+        kind: 'agent';
+        /**
+         * The buyer agent id the buyer_agent read returns.
+         */
+        principalId: SaveProjectSuccessObjectLeadPrincipalId;
+    } | {
+        /**
+         * The Apostra Assistant.
+         */
+        kind: 'assistant';
+        principalId?: never;
+    };
+    attachments: Array<{
+        /**
+         * What is attached: a campaign, media_buy, rfp (a buyer RFP), material, connection or a seller exchange.
+         */
+        kind: 'campaign' | 'media_buy' | 'rfp' | 'material' | 'connection' | 'exchange';
+        /**
+         * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
+         */
+        id: SaveProjectSuccessObjectAttachmentsItemId;
+        /**
+         * How the Project relates to it: subject, request, response, evidence or outcome.
+         */
+        relation: 'subject' | 'request' | 'response' | 'evidence' | 'outcome';
+    }>;
+    bounds: {
+        flight: {
+            start: string;
+            end: string;
+            [key: string]: unknown;
+        };
+        channels?: {
+            required?: Array<SaveProjectSuccessObjectBoundsChannelsRequiredItem>;
+            allowed?: Array<SaveProjectSuccessObjectBoundsChannelsAllowedItem>;
+            mix_targets?: {
+                [key: string]: {
+                    min_pct?: number;
+                    max_pct?: number;
+                    [key: string]: unknown;
+                };
+            };
+            [key: string]: unknown;
+        };
+        countries?: Array<string>;
+        regions?: Array<string>;
+        policy_ids?: Array<string>;
+        policy_categories?: Array<string>;
+        approved_sellers?: Array<string> | null;
+        human_review_required?: boolean;
+        budget: {
+            total: number;
+            currency: string;
+            accounting_mode?: 'gross_commitment' | 'verified_net_cost';
+            per_seller_max_pct?: number;
+            reallocation_threshold: number;
+            allocations?: {
+                [key: string]: {
+                    amount?: number;
+                    max_pct?: number;
+                    [key: string]: unknown;
+                };
+            };
+            periods?: Array<{
+                budget_period_id: string;
+                start: string;
+                end: string;
+                amount: number;
+                [key: string]: unknown;
+            }>;
+            [key: string]: unknown;
+        };
+        /**
+         * The actions the lead may take without asking: move_budget, change_pacing, pause_or_resume_media_buy, assign_approved_creative.
+         */
+        autonomousActions: Array<'move_budget' | 'change_pacing' | 'pause_or_resume_media_buy' | 'assign_approved_creative'>;
+        /**
+         * Daily action count and IU cap for autonomous work.
+         */
+        limits: {
+            /**
+             * Autonomous actions allowed per day, 1 to 50. Default 10.
+             */
+            maxActionsPerDay: number;
+            /**
+             * The Project's cap in IUs, or null for the account's spending cap alone.
+             */
+            iuBudget: number | null;
+        };
+        /**
+         * The media buys autonomous actions may change.
+         */
+        targets: {
+            /**
+             * Attached media buys the lead may change, each listed. A buy added later is a wider revision.
+             */
+            mediaBuyIds: Array<SaveProjectSuccessObjectBoundsTargetsMediaBuyIdsItem>;
+        };
+        revision: number;
+        approval: {
+            approvedBy: string | null;
+            approvedAt: string;
+            approvedRevision: number;
+        } | null;
+    } | null;
+    state: 'draft' | 'active' | 'paused' | 'archived';
+    pausedReason: 'stopped_by_person' | 'stopped_by_agent' | 'account_stopped' | 'approver_lost_authority' | 'write_outcome_unknown' | 'flight_ended' | 'unarchived' | null;
+    archivedAt: string | null;
+    archivedByUserId: string | null;
+    progress: null;
+    attention: Array<{
+        kind: 'bounds_approval_pending' | 'new_bounds_needed' | 'reapproval_needed' | 'resume_needed' | 'account_stop_on' | 'write_unsettled';
+        reason: string;
+        url: string | null;
+    }>;
+};
+
+export type SaveProjectSuccessObjectAttachmentsItemId = string;
+
+export type SaveProjectSuccessObjectBoundsChannelsAllowedItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+
+export type SaveProjectSuccessObjectBoundsChannelsRequiredItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+
+export type SaveProjectSuccessObjectBoundsTargetsMediaBuyIdsItem = string;
+
+export type SaveProjectSuccessObjectLeadPrincipalId = string;
+
+export type SaveProjectSuccessProject = {
+    id: string;
+    name: string;
+    createdByUserId: string | null;
+    advertiserId: string | null;
+    sessionId: string;
+    objectives: string;
+    lead: {
+        /**
+         * A buyer agent of the account.
+         */
+        kind: 'agent';
+        /**
+         * The buyer agent id the buyer_agent read returns.
+         */
+        principalId: SaveProjectSuccessProjectLeadPrincipalId;
+    } | {
+        /**
+         * The Apostra Assistant.
+         */
+        kind: 'assistant';
+        principalId?: never;
+    };
+    attachments: Array<{
+        /**
+         * What is attached: a campaign, media_buy, rfp (a buyer RFP), material, connection or a seller exchange.
+         */
+        kind: 'campaign' | 'media_buy' | 'rfp' | 'material' | 'connection' | 'exchange';
+        /**
+         * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
+         */
+        id: SaveProjectSuccessProjectAttachmentsItemId;
+        /**
+         * How the Project relates to it: subject, request, response, evidence or outcome.
+         */
+        relation: 'subject' | 'request' | 'response' | 'evidence' | 'outcome';
+    }>;
+    bounds: {
+        flight: {
+            start: string;
+            end: string;
+            [key: string]: unknown;
+        };
+        channels?: {
+            required?: Array<SaveProjectSuccessProjectBoundsChannelsRequiredItem>;
+            allowed?: Array<SaveProjectSuccessProjectBoundsChannelsAllowedItem>;
+            mix_targets?: {
+                [key: string]: {
+                    min_pct?: number;
+                    max_pct?: number;
+                    [key: string]: unknown;
+                };
+            };
+            [key: string]: unknown;
+        };
+        countries?: Array<string>;
+        regions?: Array<string>;
+        policy_ids?: Array<string>;
+        policy_categories?: Array<string>;
+        approved_sellers?: Array<string> | null;
+        human_review_required?: boolean;
+        budget: {
+            total: number;
+            currency: string;
+            accounting_mode?: 'gross_commitment' | 'verified_net_cost';
+            per_seller_max_pct?: number;
+            reallocation_threshold: number;
+            allocations?: {
+                [key: string]: {
+                    amount?: number;
+                    max_pct?: number;
+                    [key: string]: unknown;
+                };
+            };
+            periods?: Array<{
+                budget_period_id: string;
+                start: string;
+                end: string;
+                amount: number;
+                [key: string]: unknown;
+            }>;
+            [key: string]: unknown;
+        };
+        /**
+         * The actions the lead may take without asking: move_budget, change_pacing, pause_or_resume_media_buy, assign_approved_creative.
+         */
+        autonomousActions: Array<'move_budget' | 'change_pacing' | 'pause_or_resume_media_buy' | 'assign_approved_creative'>;
+        /**
+         * Daily action count and IU cap for autonomous work.
+         */
+        limits: {
+            /**
+             * Autonomous actions allowed per day, 1 to 50. Default 10.
+             */
+            maxActionsPerDay: number;
+            /**
+             * The Project's cap in IUs, or null for the account's spending cap alone.
+             */
+            iuBudget: number | null;
+        };
+        /**
+         * The media buys autonomous actions may change.
+         */
+        targets: {
+            /**
+             * Attached media buys the lead may change, each listed. A buy added later is a wider revision.
+             */
+            mediaBuyIds: Array<SaveProjectSuccessProjectBoundsTargetsMediaBuyIdsItem>;
+        };
+        revision: number;
+        approval: {
+            approvedBy: string | null;
+            approvedAt: string;
+            approvedRevision: number;
+        } | null;
+    } | null;
+    state: 'draft' | 'active' | 'paused' | 'archived';
+    pausedReason: 'stopped_by_person' | 'stopped_by_agent' | 'account_stopped' | 'approver_lost_authority' | 'write_outcome_unknown' | 'flight_ended' | 'unarchived' | null;
+    archivedAt: string | null;
+    archivedByUserId: string | null;
+    progress: null;
+    attention: Array<{
+        kind: 'bounds_approval_pending' | 'new_bounds_needed' | 'reapproval_needed' | 'resume_needed' | 'account_stop_on' | 'write_unsettled';
+        reason: string;
+        url: string | null;
+    }>;
+};
+
+export type SaveProjectSuccessProjectAttachmentsItemId = string;
+
+export type SaveProjectSuccessProjectBoundsChannelsAllowedItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+
+export type SaveProjectSuccessProjectBoundsChannelsRequiredItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+
+export type SaveProjectSuccessProjectBoundsTargetsMediaBuyIdsItem = string;
+
+export type SaveProjectSuccessProjectLeadPrincipalId = string;
+
 export type SavePropertyListData = {
     body: unknown & {
         /**
@@ -38867,7 +39517,7 @@ export type SearchData = {
          * Which docs to rank. caller_relevant (the default) skips docs written for other account types; public_research searches every public doc.
          */
         docsScope?: 'caller_relevant' | 'public_research';
-        kind: 'agent' | 'skill' | 'inventory_source' | 'material' | 'coverage' | 'wholesale_product' | 'playbook_version' | 'business_rules_version' | 'house_discount' | 'connection' | 'account_relationship' | 'seller' | 'advertiser' | 'advertiser_grant' | 'signal' | 'work_item' | 'campaign' | 'creative_format' | 'creative_engine' | 'media_buy' | 'rfp' | 'rfp_turn' | 'library_request' | 'ask' | 'conversation' | 'buyer_agent' | 'dimension' | 'session';
+        kind: 'agent' | 'skill' | 'inventory_source' | 'material' | 'coverage' | 'wholesale_product' | 'playbook_version' | 'business_rules_version' | 'house_discount' | 'connection' | 'account_relationship' | 'seller' | 'advertiser' | 'advertiser_grant' | 'signal' | 'work_item' | 'campaign' | 'creative_format' | 'creative_engine' | 'media_buy' | 'rfp' | 'rfp_turn' | 'library_request' | 'ask' | 'conversation' | 'buyer_agent' | 'project' | 'dimension' | 'session';
         /**
          * For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.
          */
@@ -39112,9 +39762,9 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -39135,6 +39785,10 @@ export type SearchData = {
              * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
              */
             lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind project: also list archived Projects. Default false.
+             */
+            includeArchived?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -39679,9 +40333,9 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -39702,6 +40356,10 @@ export type SearchData = {
              * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
              */
             lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind project: also list archived Projects. Default false.
+             */
+            includeArchived?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -40314,9 +40972,9 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -40337,6 +40995,10 @@ export type SearchData = {
              * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
              */
             lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind project: also list archived Projects. Default false.
+             */
+            includeArchived?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -40877,9 +41539,9 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -40900,6 +41562,10 @@ export type SearchData = {
              * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
              */
             lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind project: also list archived Projects. Default false.
+             */
+            includeArchived?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -41437,9 +42103,9 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -41460,6 +42126,10 @@ export type SearchData = {
              * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
              */
             lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind project: also list archived Projects. Default false.
+             */
+            includeArchived?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -42000,9 +42670,9 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -42023,6 +42693,10 @@ export type SearchData = {
              * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
              */
             lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind project: also list archived Projects. Default false.
+             */
+            includeArchived?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -42563,9 +43237,9 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -42586,6 +43260,10 @@ export type SearchData = {
              * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
              */
             lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind project: also list archived Projects. Default false.
+             */
+            includeArchived?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -43256,9 +43934,9 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -43279,6 +43957,10 @@ export type SearchData = {
              * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
              */
             lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind project: also list archived Projects. Default false.
+             */
+            includeArchived?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -43903,9 +44585,9 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -43926,6 +44608,10 @@ export type SearchData = {
              * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
              */
             lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind project: also list archived Projects. Default false.
+             */
+            includeArchived?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -44542,9 +45228,9 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -44565,6 +45251,10 @@ export type SearchData = {
              * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
              */
             lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind project: also list archived Projects. Default false.
+             */
+            includeArchived?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -45108,9 +45798,9 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -45131,6 +45821,10 @@ export type SearchData = {
              * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
              */
             lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind project: also list archived Projects. Default false.
+             */
+            includeArchived?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -45675,9 +46369,9 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -45698,6 +46392,10 @@ export type SearchData = {
              * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
              */
             lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind project: also list archived Projects. Default false.
+             */
+            includeArchived?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -46242,9 +46940,9 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -46265,6 +46963,10 @@ export type SearchData = {
              * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
              */
             lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind project: also list archived Projects. Default false.
+             */
+            includeArchived?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -46809,9 +47511,9 @@ export type SearchData = {
              */
             deliveryDays?: number;
             /**
-             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed.
+             * Lifecycle states to match. proposal: quoted, bound, expired, withdrawn. rfp and rfp_turn: open, released, closed. project: draft, active, paused, archived; archived implies includeArchived.
              */
-            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed'>;
+            state?: Array<'quoted' | 'bound' | 'expired' | 'withdrawn' | 'open' | 'released' | 'closed' | 'draft' | 'active' | 'paused' | 'archived'>;
             /**
              * For kinds proposal and creative_format, and in a buyer account, signal: only this seller, by its Account id, not a seller object id, which is a different number.
              */
@@ -46832,6 +47534,10 @@ export type SearchData = {
              * For kind session: active, closed, or archived. archived reads only Murph chat sessions.
              */
             lifecycle?: 'active' | 'closed' | 'archived';
+            /**
+             * For kind project: also list archived Projects. Default false.
+             */
+            includeArchived?: boolean;
             /**
              * For kind session (RFP sessions): true for sessions seen live, false for those seen not live. Sessions with unknown liveness match neither.
              */
@@ -47211,7 +47917,7 @@ export type SearchResponses = {
     200: {
         data: {
             sources: Array<'objects' | 'docs' | 'specs'>;
-            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchSessionPageOutput | {
+            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | {
                 kind: string;
                 groupBy: string;
                 total: number;
@@ -47235,7 +47941,7 @@ export type SearchResponses = {
             } | {
                 outcome: 'mixed';
                 kind: 'mixed';
-                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchBrandUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchInventorySourceItemUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchApprovalUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
+                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchBrandUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchInventorySourceItemUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchApprovalUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchProjectUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
                 [key: string]: unknown;
             };
             objectsUnavailable?: string;
@@ -49816,6 +50522,79 @@ export type SearchSuccessSearchPlaybookVersionPageOutputValue = unknown;
 export type SearchSuccessSearchPlaybookVersionUnavailableOutput = {
     outcome: 'unavailable_playbook_version';
     kind: 'playbook_version';
+    unavailable: string;
+    message: string;
+    [key: string]: unknown;
+};
+
+export type SearchSuccessSearchProjectPageOutput = {
+    total?: SearchSuccessSearchProjectPageOutputTotal;
+    totalLowerBound?: SearchSuccessSearchProjectPageOutputTotalLowerBound;
+    returned?: SearchSuccessSearchProjectPageOutputReturned;
+    hasMore?: SearchSuccessSearchProjectPageOutputHasMore;
+    truncated?: SearchSuccessSearchProjectPageOutputTruncated;
+    nextCursor?: SearchSuccessSearchProjectPageOutputNextCursor;
+    results: SearchSuccessSearchProjectPageOutputResults;
+    outcome: 'page_project';
+    kind: 'project';
+    [key: string]: SearchSuccessSearchProjectPageOutputValue | SearchSuccessSearchProjectPageOutputTotal | SearchSuccessSearchProjectPageOutputTotalLowerBound | SearchSuccessSearchProjectPageOutputReturned | SearchSuccessSearchProjectPageOutputHasMore | SearchSuccessSearchProjectPageOutputTruncated | SearchSuccessSearchProjectPageOutputNextCursor | SearchSuccessSearchProjectPageOutputResults | 'page_project' | 'project' | undefined;
+};
+
+export type SearchSuccessSearchProjectPageOutputHasMore = boolean;
+
+export type SearchSuccessSearchProjectPageOutputNextCursor = string;
+
+export type SearchSuccessSearchProjectPageOutputResults = Array<{
+    advertiserId?: string;
+    name?: string | null;
+    sandbox?: boolean;
+    /**
+     * Where the items come from: url when url is set, file when file is set.
+     */
+    sourceType?: 'inline' | 'url' | 'file' | null;
+    /**
+     * Items in the latest version against the one before it.
+     */
+    lastChangeSummary?: {
+        added: number;
+        updated: number;
+        unchanged: number;
+        removed: number;
+    } | null;
+    /**
+     * The active transform, if any.
+     */
+    transform?: {
+        name: string;
+        updatedAt: string;
+    } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
+    [key: string]: unknown;
+}>;
+
+export type SearchSuccessSearchProjectPageOutputReturned = number;
+
+export type SearchSuccessSearchProjectPageOutputTotal = number;
+
+export type SearchSuccessSearchProjectPageOutputTotalLowerBound = number;
+
+export type SearchSuccessSearchProjectPageOutputTruncated = boolean;
+
+export type SearchSuccessSearchProjectPageOutputValue = unknown;
+
+export type SearchSuccessSearchProjectUnavailableOutput = {
+    outcome: 'unavailable_project';
+    kind: 'project';
     unavailable: string;
     message: string;
     [key: string]: unknown;
