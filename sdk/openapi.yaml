@@ -124673,9 +124673,7 @@ components:
                   type: integer
                   minimum: -9007199254740991
                   maximum: 9007199254740991
-                  description: >-
-                    Media buys left out of the total: ones you cannot read and, for now, archived ones whose delivery
-                    cannot be read yet.
+                  description: Media buys left out of the total because you cannot read them.
               required:
                 - total
                 - currency
@@ -125127,9 +125125,7 @@ components:
                   type: integer
                   minimum: -9007199254740991
                   maximum: 9007199254740991
-                  description: >-
-                    Media buys left out of the total: ones you cannot read and, for now, archived ones whose delivery
-                    cannot be read yet.
+                  description: Media buys left out of the total because you cannot read them.
               required:
                 - total
                 - currency

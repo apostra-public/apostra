@@ -21322,7 +21322,7 @@ class SaveProjectSuccessObjectSpendValue(TypedDict):
     mediaBuysIncluded: int
     '\n    Counted media buys: attached ones plus those under attached campaigns that you can read.\n    '
     mediaBuysOmitted: int
-    '\n    Media buys left out of the total: ones you cannot read and, for now, archived ones whose delivery cannot be read yet.\n    '
+    '\n    Media buys left out of the total because you cannot read them.\n    '
 
 class SaveProjectSuccessProject(TypedDict):
     id: str
@@ -21467,7 +21467,7 @@ class SaveProjectSuccessProjectSpendValue(TypedDict):
     mediaBuysIncluded: int
     '\n    Counted media buys: attached ones plus those under attached campaigns that you can read.\n    '
     mediaBuysOmitted: int
-    '\n    Media buys left out of the total: ones you cannot read and, for now, archived ones whose delivery cannot be read yet.\n    '
+    '\n    Media buys left out of the total because you cannot read them.\n    '
 
 class SavePropertyListInput(TypedDict):
     advertiserId: str

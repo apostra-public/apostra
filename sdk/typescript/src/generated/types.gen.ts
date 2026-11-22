@@ -36320,7 +36320,7 @@ export type SaveProjectSuccessObject = {
          */
         mediaBuysIncluded: number;
         /**
-         * Media buys left out of the total: ones you cannot read and, for now, archived ones whose delivery cannot be read yet.
+         * Media buys left out of the total because you cannot read them.
          */
         mediaBuysOmitted: number;
     } | null;
@@ -36502,7 +36502,7 @@ export type SaveProjectSuccessProject = {
          */
         mediaBuysIncluded: number;
         /**
-         * Media buys left out of the total: ones you cannot read and, for now, archived ones whose delivery cannot be read yet.
+         * Media buys left out of the total because you cannot read them.
          */
         mediaBuysOmitted: number;
     } | null;
