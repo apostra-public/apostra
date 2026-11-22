@@ -40800,7 +40800,7 @@ export type SearchData = {
              */
             judgeVersion?: Array<string>;
             /**
-             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             * For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.
              */
             feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
             /**
@@ -41391,7 +41391,7 @@ export type SearchData = {
              */
             judgeVersion?: Array<string>;
             /**
-             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             * For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.
              */
             feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
             /**
@@ -42050,7 +42050,7 @@ export type SearchData = {
              */
             judgeVersion?: Array<string>;
             /**
-             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             * For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.
              */
             feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
             /**
@@ -42637,7 +42637,7 @@ export type SearchData = {
              */
             judgeVersion?: Array<string>;
             /**
-             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             * For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.
              */
             feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
             /**
@@ -43221,7 +43221,7 @@ export type SearchData = {
              */
             judgeVersion?: Array<string>;
             /**
-             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             * For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.
              */
             feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
             /**
@@ -43808,7 +43808,7 @@ export type SearchData = {
              */
             judgeVersion?: Array<string>;
             /**
-             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             * For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.
              */
             feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
             /**
@@ -44395,7 +44395,7 @@ export type SearchData = {
              */
             judgeVersion?: Array<string>;
             /**
-             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             * For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.
              */
             feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
             /**
@@ -45112,7 +45112,7 @@ export type SearchData = {
              */
             judgeVersion?: Array<string>;
             /**
-             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             * For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.
              */
             feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
             /**
@@ -45783,7 +45783,7 @@ export type SearchData = {
              */
             judgeVersion?: Array<string>;
             /**
-             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             * For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.
              */
             feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
             /**
@@ -46446,7 +46446,7 @@ export type SearchData = {
              */
             judgeVersion?: Array<string>;
             /**
-             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             * For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.
              */
             feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
             /**
@@ -47036,7 +47036,7 @@ export type SearchData = {
              */
             judgeVersion?: Array<string>;
             /**
-             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             * For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.
              */
             feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
             /**
@@ -47627,7 +47627,7 @@ export type SearchData = {
              */
             judgeVersion?: Array<string>;
             /**
-             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             * For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.
              */
             feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
             /**
@@ -48218,7 +48218,7 @@ export type SearchData = {
              */
             judgeVersion?: Array<string>;
             /**
-             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             * For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.
              */
             feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
             /**
@@ -48809,7 +48809,7 @@ export type SearchData = {
              */
             judgeVersion?: Array<string>;
             /**
-             * For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.
+             * For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.
              */
             feedbackStatus?: Array<'unreviewed' | 'reviewed'>;
             /**

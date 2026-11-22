@@ -66563,8 +66563,8 @@ paths:
                             minLength: 1
                         feedbackStatus:
                           description: >-
-                            For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at
-                            least one piece.
+                            For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with
+                            some.
                           type: array
                           items:
                             type: string
@@ -68492,8 +68492,8 @@ paths:
                             minLength: 1
                         feedbackStatus:
                           description: >-
-                            For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at
-                            least one piece.
+                            For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with
+                            some.
                           type: array
                           items:
                             type: string
@@ -71222,8 +71222,8 @@ paths:
                             minLength: 1
                         feedbackStatus:
                           description: >-
-                            For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at
-                            least one piece.
+                            For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with
+                            some.
                           type: array
                           items:
                             type: string
@@ -73143,8 +73143,8 @@ paths:
                             minLength: 1
                         feedbackStatus:
                           description: >-
-                            For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at
-                            least one piece.
+                            For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with
+                            some.
                           type: array
                           items:
                             type: string
@@ -75061,8 +75061,8 @@ paths:
                             minLength: 1
                         feedbackStatus:
                           description: >-
-                            For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at
-                            least one piece.
+                            For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with
+                            some.
                           type: array
                           items:
                             type: string
@@ -76979,8 +76979,8 @@ paths:
                             minLength: 1
                         feedbackStatus:
                           description: >-
-                            For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at
-                            least one piece.
+                            For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with
+                            some.
                           type: array
                           items:
                             type: string
@@ -78904,8 +78904,8 @@ paths:
                             minLength: 1
                         feedbackStatus:
                           description: >-
-                            For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at
-                            least one piece.
+                            For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with
+                            some.
                           type: array
                           items:
                             type: string
@@ -82476,8 +82476,8 @@ paths:
                             minLength: 1
                         feedbackStatus:
                           description: >-
-                            For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at
-                            least one piece.
+                            For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with
+                            some.
                           type: array
                           items:
                             type: string
@@ -85223,8 +85223,8 @@ paths:
                             minLength: 1
                         feedbackStatus:
                           description: >-
-                            For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at
-                            least one piece.
+                            For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with
+                            some.
                           type: array
                           items:
                             type: string
@@ -87965,8 +87965,8 @@ paths:
                             minLength: 1
                         feedbackStatus:
                           description: >-
-                            For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at
-                            least one piece.
+                            For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with
+                            some.
                           type: array
                           items:
                             type: string
@@ -89893,8 +89893,8 @@ paths:
                             minLength: 1
                         feedbackStatus:
                           description: >-
-                            For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at
-                            least one piece.
+                            For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with
+                            some.
                           type: array
                           items:
                             type: string
@@ -91818,8 +91818,8 @@ paths:
                             minLength: 1
                         feedbackStatus:
                           description: >-
-                            For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at
-                            least one piece.
+                            For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with
+                            some.
                           type: array
                           items:
                             type: string
@@ -93743,8 +93743,8 @@ paths:
                             minLength: 1
                         feedbackStatus:
                           description: >-
-                            For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at
-                            least one piece.
+                            For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with
+                            some.
                           type: array
                           items:
                             type: string
@@ -95669,8 +95669,8 @@ paths:
                             minLength: 1
                         feedbackStatus:
                           description: >-
-                            For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at
-                            least one piece.
+                            For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with
+                            some.
                           type: array
                           items:
                             type: string

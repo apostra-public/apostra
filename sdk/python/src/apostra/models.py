@@ -23834,7 +23834,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     judgeVersion: NotRequired[list[str]]
     '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
     feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    '\n    For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
@@ -24168,7 +24168,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     judgeVersion: NotRequired[list[str]]
     '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
     feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    '\n    For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
@@ -24436,7 +24436,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     judgeVersion: NotRequired[list[str]]
     '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
     feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    '\n    For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
@@ -24731,7 +24731,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     judgeVersion: NotRequired[list[str]]
     '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
     feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    '\n    For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
@@ -25033,7 +25033,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     judgeVersion: NotRequired[list[str]]
     '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
     feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    '\n    For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
@@ -25337,7 +25337,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     judgeVersion: NotRequired[list[str]]
     '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
     feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    '\n    For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
@@ -25641,7 +25641,7 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     judgeVersion: NotRequired[list[str]]
     '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
     feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    '\n    For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
@@ -25977,7 +25977,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     judgeVersion: NotRequired[list[str]]
     '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
     feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    '\n    For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
@@ -26277,7 +26277,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     judgeVersion: NotRequired[list[str]]
     '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
     feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    '\n    For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
@@ -26577,7 +26577,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     judgeVersion: NotRequired[list[str]]
     '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
     feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    '\n    For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
@@ -26843,7 +26843,7 @@ class SearchInputKindCreativeFilter(TypedDict):
     judgeVersion: NotRequired[list[str]]
     '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
     feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    '\n    For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
@@ -27213,7 +27213,7 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     judgeVersion: NotRequired[list[str]]
     '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
     feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    '\n    For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
@@ -27601,7 +27601,7 @@ class SearchInputKindProposalFilter(TypedDict):
     judgeVersion: NotRequired[list[str]]
     '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
     feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    '\n    For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
@@ -27903,7 +27903,7 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     judgeVersion: NotRequired[list[str]]
     '\n    For kind rfp_turn: turns checked by any of these judge (truth gate) versions.\n    '
     feedbackStatus: NotRequired[list[Literal["unreviewed", "reviewed"]]]
-    '\n    For kind rfp_turn: unreviewed keeps turns with no feedback; reviewed keeps turns with at least one piece.\n    '
+    '\n    For kind rfp_turn: unreviewed keeps turns with no seller feedback; reviewed keeps turns with some.\n    '
     sellerStatus: NotRequired[Literal["pending_approval", "forwarding", "forward_failed", "awaiting_source", "rejected", "canceled", "booked", "delivering", "paused", "completed"]]
     '\n    For kind media_buy in a seller account: buys in this state of review, forwarding, and delivery.\n    '
     buyerAccountId: NotRequired[int]
