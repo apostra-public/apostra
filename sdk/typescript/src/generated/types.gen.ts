@@ -17280,7 +17280,7 @@ export type SaveAccountData = {
          */
         operatingMode?: 'LISTING_ONLY' | 'AGENTIC_MEDIA_COMPANY';
         /**
-         * Create only, a seller: create a platform Demo Storefront, which uses no paid workspace. Only a Scope3 platform operator naming a customer Organization may.
+         * Create only, a seller: a Demo Storefront (synthetic sample inventory, never charged). The Organization's direct administrator may, one at a time (get_status says if you can); so may a platform operator.
          */
         demoStorefront?: true;
         /**

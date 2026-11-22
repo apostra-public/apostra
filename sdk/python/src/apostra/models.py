@@ -10465,7 +10465,7 @@ class SaveAccountInput(TypedDict):
     operatingMode: NotRequired[Literal["LISTING_ONLY", "AGENTIC_MEDIA_COMPANY"]]
     '\n    Deprecated; use sellingMode.\n    '
     demoStorefront: NotRequired[Literal[True]]
-    '\n    Create only, a seller: create a platform Demo Storefront, which uses no paid workspace. Only a Scope3 platform operator naming a customer Organization may.\n    '
+    '\n    Create only, a seller: a Demo Storefront (synthetic sample inventory, never charged). The Organization\'s direct administrator may, one at a time (get_status says if you can); so may a platform operator.\n    '
     customerDomain: NotRequired[str | None]
     '\n    Create only: the new Account domain, or null for none.\n    '
     requireSpendApproval: NotRequired[bool]
