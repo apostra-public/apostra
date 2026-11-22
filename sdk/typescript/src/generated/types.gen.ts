@@ -8938,7 +8938,7 @@ export type GetResponses = {
             [key: string]: unknown;
         } | {
             outcome: 'object';
-            kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'project' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'brand' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'source_options' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'buyer_rfp' | 'agent_record' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'library_request' | 'decision' | 'approval' | 'account_relationship' | 'advertiser_access' | 'notification_config';
+            kind: 'account' | 'member' | 'agent' | 'buyer_agent' | 'project' | 'skill' | 'inventory_source' | 'material' | 'wholesale_product' | 'advertiser' | 'advertiser_grant' | 'brand' | 'brand_source' | 'signal' | 'work_item' | 'ask' | 'conversation' | 'session' | 'seller' | 'source_options' | 'listing' | 'media_kit' | 'playbook' | 'business_rules' | 'coverage' | 'distribution' | 'connection' | 'creative_engine' | 'creative_session' | 'campaign' | 'catalog' | 'event_source' | 'dimension' | 'buyer_rfp' | 'agent_record' | 'property_list' | 'creative' | 'creative_format' | 'creative_asset' | 'creative_collection' | 'media_buy' | 'proposal' | 'audience' | 'rfp' | 'rfp_turn' | 'library_request' | 'decision' | 'approval' | 'account_relationship' | 'advertiser_access' | 'notification_config';
             object: {
                 advertiserId?: string;
                 options?: Array<{
@@ -20519,6 +20519,309 @@ export type SaveBillingSuccessSaveBillingApprovalRequired = {
      */
     idempotencyKey?: string;
 };
+
+export type SaveBrandSourceData = {
+    body: {
+        /**
+         * Unique key for this change; reuse it to retry the same request.
+         */
+        idempotencyKey: string;
+        /**
+         * Source id when changing an existing source; omit when adding one.
+         */
+        id?: string;
+        /**
+         * Brand id for a new source.
+         */
+        brand?: string;
+        /**
+         * Source type for a new source. Apple Podcasts show links resolve to RSS feeds.
+         */
+        provider?: 'website' | 'rss' | 'youtube_channel' | 'apple_podcasts';
+        /**
+         * HTTPS address of the new source.
+         */
+        url?: string;
+        /**
+         * Optional name for a new source.
+         */
+        name?: string;
+        /**
+         * People named in the new source whose agreements are needed.
+         */
+        people?: Array<{
+            name: SaveBrandSourceRequestPeopleItemName;
+            role: SaveBrandSourceRequestPeopleItemRole;
+        }>;
+        /**
+         * Proposed permitted uses, for a new source or a change to an existing one.
+         */
+        uses?: Array<'agent_context' | 'creative_generation' | 'fact_proposals' | 'surface_publish'>;
+        /**
+         * Agreements recorded for named people; confirmation is required.
+         */
+        personAgreements?: Array<{
+            name: SaveBrandSourceRequestPersonAgreementsItemName;
+            role: SaveBrandSourceRequestPersonAgreementsItemRole;
+            /**
+             * Whether the agreement covers a demo or ongoing use.
+             */
+            scope: 'demo' | 'ongoing';
+            /**
+             * Date the person gave their agreement, in YYYY-MM-DD format.
+             */
+            date: string;
+        }>;
+        /**
+         * Archive an existing source, or restore it with false.
+         */
+        isArchived?: boolean;
+        /**
+         * Pause an existing source, or resume it with false.
+         */
+        isPaused?: boolean;
+        /**
+         * Request a refresh of an existing source.
+         */
+        refreshRequested?: true;
+        /**
+         * Accept a suggested source and propose its uses.
+         */
+        acceptSuggestion?: true;
+        /**
+         * Dismiss a suggested source.
+         */
+        dismissSuggestion?: true;
+        /**
+         * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+         */
+        expectedAccountId?: number | string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers: {
+        /**
+         * Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are sent they must name the same account.
+         *
+         * @deprecated
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+        /**
+         * Required for every write. Reuse the same key and validated body to replay the durable result for seven days. If this operation also accepts idempotencyKey in its JSON body, the values must match.
+         */
+        'Idempotency-Key': string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/save_brand_source';
+};
+
+export type SaveBrandSourceError = SaveBrandSourceErrors[keyof SaveBrandSourceErrors];
+
+export type SaveBrandSourceErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+     */
+    503: V3ToolErrorResponse;
+};
+
+/**
+ * Name of the person appearing in the source.
+ */
+export type SaveBrandSourceRequestPeopleItemName = string;
+
+/**
+ * Their role in the source, such as host or guest.
+ */
+export type SaveBrandSourceRequestPeopleItemRole = string;
+
+/**
+ * Name of the person appearing in the source.
+ */
+export type SaveBrandSourceRequestPersonAgreementsItemName = string;
+
+/**
+ * Their role in the source, such as host or guest.
+ */
+export type SaveBrandSourceRequestPersonAgreementsItemRole = string;
+
+export type SaveBrandSourceResponse = SaveBrandSourceResponses[keyof SaveBrandSourceResponses];
+
+export type SaveBrandSourceResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            action: 'saved';
+            source: {
+                id: string;
+                brand: string;
+                provider: 'website' | 'rss' | 'youtube_channel';
+                url: string;
+                name: string | null;
+                origin: 'suggested' | 'person' | 'agent';
+                evidence: Array<string>;
+                state: 'suggested' | 'pending_confirmation' | 'active' | 'held' | 'paused' | 'archived';
+                rights: {
+                    uses: Array<'agent_context' | 'creative_generation' | 'fact_proposals' | 'surface_publish'>;
+                    confirmedBy: SaveBrandSourceSuccessBrandSourceConfirmer | null;
+                    confirmedAt: string | null;
+                    people: Array<{
+                        name: string;
+                        role: string;
+                    }>;
+                    personAgreements: Array<{
+                        name: string;
+                        role: string;
+                        scope: 'demo' | 'ongoing';
+                        date: string;
+                        recordedBy: SaveBrandSourceSuccessBrandSourceAgreementRecorder;
+                    }>;
+                };
+                libraryHeldBy: {
+                    accountId: number;
+                    name: string;
+                };
+                sync: null;
+                transcription: null;
+                links: Array<unknown>;
+            };
+        } | SaveBrandSourceSuccessAgentApprovalRequired;
+        error: null;
+    };
+    /**
+     * The write is still running or needs recovery. Retry this operation with the same Idempotency-Key and body; do not mint a new key.
+     */
+    202: {
+        data: {
+            receipt: {
+                id: string;
+                operation: string;
+                state: 'claimed' | 'running' | 'uncertain';
+                stateVersion: number;
+                stateChangedAt: string;
+                pendingReason: string;
+            };
+        };
+        error: null;
+    };
+};
+
+export type SaveBrandSourceSuccessAgentApproval = {
+    /**
+     * Approval id.
+     */
+    id: string;
+    /**
+     * Kind of sensitive action, for example `buyer_child_account.create`.
+     */
+    kind: string;
+    /**
+     * `pending` waits for a person; `executing` was approved and is running; `succeeded`, `failed`, `rejected` and `expired` are final.
+     */
+    state: 'pending' | 'executing' | 'succeeded' | 'failed' | 'rejected' | 'expired';
+    /**
+     * Account the action applies to.
+     */
+    targetCustomerId: string;
+    /**
+     * Role the approver must hold on the account.
+     */
+    requiredRole: 'ADMIN' | 'SUPER_ADMIN' | null;
+    /**
+     * What will happen, in one line. Null once the approval is final.
+     */
+    summary: string | null;
+    /**
+     * Page on our site where a signed-in person approves or rejects the request.
+     */
+    url: string;
+    createdAt: string;
+    expiresAt: string;
+    decidedAt: string | null;
+    completedAt: string | null;
+    /**
+     * Reference to the result once succeeded.
+     */
+    resultReference: {
+        [key: string]: string | number | boolean;
+    } | null;
+    /**
+     * Reason code when the action failed.
+     */
+    failureCode: string | null;
+};
+
+export type SaveBrandSourceSuccessAgentApprovalRequired = {
+    action: 'approval_required';
+    message: string;
+    approval: SaveBrandSourceSuccessAgentApproval;
+};
+
+export type SaveBrandSourceSuccessBrandSourceAgreementRecorder = {
+    principalKind: 'human' | 'buyer_agent';
+    userName: string | null;
+};
+
+export type SaveBrandSourceSuccessBrandSourceConfirmer = {
+    principalKind: 'human';
+    userName: string | null;
+};
+
+export type SaveBrandSourceSuccessSourceRightsConfirmedBy = SaveBrandSourceSuccessBrandSourceConfirmer;
+
+export type SaveBrandSourceSuccessSourceRightsPersonAgreementsItemRecordedBy = SaveBrandSourceSuccessBrandSourceAgreementRecorder;
 
 export type SaveBusinessRulesData = {
     body: unknown & ({
@@ -40892,7 +41195,7 @@ export type SearchData = {
              */
             region?: string;
             /**
-             * For kind material: the brand noun id (domain or domain/brand_id). Not combinable with unit scope or browse.
+             * For kind material or brand_source: the brand noun id (domain or domain/brand_id). Required for brand_source. Not combinable with unit scope or browse.
              */
             brand?: string;
             /**
@@ -41483,7 +41786,7 @@ export type SearchData = {
              */
             region?: string;
             /**
-             * For kind material: the brand noun id (domain or domain/brand_id). Not combinable with unit scope or browse.
+             * For kind material or brand_source: the brand noun id (domain or domain/brand_id). Required for brand_source. Not combinable with unit scope or browse.
              */
             brand?: string;
             /**
@@ -42142,7 +42445,7 @@ export type SearchData = {
              */
             region?: string;
             /**
-             * For kind material: the brand noun id (domain or domain/brand_id). Not combinable with unit scope or browse.
+             * For kind material or brand_source: the brand noun id (domain or domain/brand_id). Required for brand_source. Not combinable with unit scope or browse.
              */
             brand?: string;
             /**
@@ -42729,7 +43032,7 @@ export type SearchData = {
              */
             region?: string;
             /**
-             * For kind material: the brand noun id (domain or domain/brand_id). Not combinable with unit scope or browse.
+             * For kind material or brand_source: the brand noun id (domain or domain/brand_id). Required for brand_source. Not combinable with unit scope or browse.
              */
             brand?: string;
             /**
@@ -43313,7 +43616,7 @@ export type SearchData = {
              */
             region?: string;
             /**
-             * For kind material: the brand noun id (domain or domain/brand_id). Not combinable with unit scope or browse.
+             * For kind material or brand_source: the brand noun id (domain or domain/brand_id). Required for brand_source. Not combinable with unit scope or browse.
              */
             brand?: string;
             /**
@@ -43900,7 +44203,7 @@ export type SearchData = {
              */
             region?: string;
             /**
-             * For kind material: the brand noun id (domain or domain/brand_id). Not combinable with unit scope or browse.
+             * For kind material or brand_source: the brand noun id (domain or domain/brand_id). Required for brand_source. Not combinable with unit scope or browse.
              */
             brand?: string;
             /**
@@ -44487,7 +44790,7 @@ export type SearchData = {
              */
             region?: string;
             /**
-             * For kind material: the brand noun id (domain or domain/brand_id). Not combinable with unit scope or browse.
+             * For kind material or brand_source: the brand noun id (domain or domain/brand_id). Required for brand_source. Not combinable with unit scope or browse.
              */
             brand?: string;
             /**
@@ -45204,7 +45507,7 @@ export type SearchData = {
              */
             region?: string;
             /**
-             * For kind material: the brand noun id (domain or domain/brand_id). Not combinable with unit scope or browse.
+             * For kind material or brand_source: the brand noun id (domain or domain/brand_id). Required for brand_source. Not combinable with unit scope or browse.
              */
             brand?: string;
             /**
@@ -45875,7 +46178,7 @@ export type SearchData = {
              */
             region?: string;
             /**
-             * For kind material: the brand noun id (domain or domain/brand_id). Not combinable with unit scope or browse.
+             * For kind material or brand_source: the brand noun id (domain or domain/brand_id). Required for brand_source. Not combinable with unit scope or browse.
              */
             brand?: string;
             /**
@@ -46538,7 +46841,7 @@ export type SearchData = {
              */
             region?: string;
             /**
-             * For kind material: the brand noun id (domain or domain/brand_id). Not combinable with unit scope or browse.
+             * For kind material or brand_source: the brand noun id (domain or domain/brand_id). Required for brand_source. Not combinable with unit scope or browse.
              */
             brand?: string;
             /**
@@ -47128,7 +47431,7 @@ export type SearchData = {
              */
             region?: string;
             /**
-             * For kind material: the brand noun id (domain or domain/brand_id). Not combinable with unit scope or browse.
+             * For kind material or brand_source: the brand noun id (domain or domain/brand_id). Required for brand_source. Not combinable with unit scope or browse.
              */
             brand?: string;
             /**
@@ -47719,7 +48022,7 @@ export type SearchData = {
              */
             region?: string;
             /**
-             * For kind material: the brand noun id (domain or domain/brand_id). Not combinable with unit scope or browse.
+             * For kind material or brand_source: the brand noun id (domain or domain/brand_id). Required for brand_source. Not combinable with unit scope or browse.
              */
             brand?: string;
             /**
@@ -48310,7 +48613,7 @@ export type SearchData = {
              */
             region?: string;
             /**
-             * For kind material: the brand noun id (domain or domain/brand_id). Not combinable with unit scope or browse.
+             * For kind material or brand_source: the brand noun id (domain or domain/brand_id). Required for brand_source. Not combinable with unit scope or browse.
              */
             brand?: string;
             /**
@@ -48901,7 +49204,7 @@ export type SearchData = {
              */
             region?: string;
             /**
-             * For kind material: the brand noun id (domain or domain/brand_id). Not combinable with unit scope or browse.
+             * For kind material or brand_source: the brand noun id (domain or domain/brand_id). Required for brand_source. Not combinable with unit scope or browse.
              */
             brand?: string;
             /**
@@ -49087,7 +49390,7 @@ export type SearchResponses = {
     200: {
         data: {
             sources: Array<'objects' | 'docs' | 'specs'>;
-            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | {
+            objects?: SearchSuccessV3CampaignListResponse | SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | {
                 kind: string;
                 groupBy: string;
                 total: number;
@@ -49115,7 +49418,7 @@ export type SearchResponses = {
             } | {
                 outcome: 'mixed';
                 kind: 'mixed';
-                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchBrandUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchInventorySourceItemUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchApprovalUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchAgentRecordUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchProjectUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
+                sections: Array<SearchSuccessSearchAccountPageOutput | SearchSuccessSearchMemberPageOutput | SearchSuccessSearchAgentPageOutput | SearchSuccessSearchSkillPageOutput | SearchSuccessSearchInventorySourcePageOutput | SearchSuccessSearchMaterialPageOutput | SearchSuccessSearchCoveragePageOutput | SearchSuccessSearchWholesaleProductPageOutput | SearchSuccessSearchPlaybookVersionPageOutput | SearchSuccessSearchBusinessRulesVersionPageOutput | SearchSuccessSearchHouseDiscountPageOutput | SearchSuccessSearchConnectionPageOutput | SearchSuccessSearchAccountRelationshipPageOutput | SearchSuccessSearchSourceAccountPageOutput | SearchSuccessSearchSellerPageOutput | SearchSuccessSearchAdvertiserPageOutput | SearchSuccessSearchAdvertiserGrantPageOutput | SearchSuccessSearchBrandPageOutput | SearchSuccessSearchBrandSourcePageOutput | SearchSuccessSearchSignalPageOutput | SearchSuccessSearchAdServerTargetingPageOutput | SearchSuccessSearchInventorySourceItemPageOutput | SearchSuccessSearchWorkItemPageOutput | SearchSuccessSearchCampaignPageOutput | SearchSuccessSearchCatalogPageOutput | SearchSuccessSearchEventSourcePageOutput | SearchSuccessSearchPropertyListPageOutput | SearchSuccessSearchCreativePageOutput | SearchSuccessSearchCreativeFormatPageOutput | SearchSuccessSearchCreativeAssetPageOutput | SearchSuccessSearchCreativeEnginePageOutput | SearchSuccessSearchCreativeSessionPageOutput | SearchSuccessSearchCreativeCollectionPageOutput | SearchSuccessSearchMediaBuyPageOutput | SearchSuccessSearchProposalPageOutput | SearchSuccessSearchRfpPageOutput | SearchSuccessSearchRfpTurnPageOutput | SearchSuccessSearchLibraryRequestPageOutput | SearchSuccessSearchDecisionPageOutput | SearchSuccessSearchApprovalPageOutput | SearchSuccessSearchAskPageOutput | SearchSuccessSearchConversationPageOutput | SearchSuccessSearchBuyerAgentPageOutput | SearchSuccessSearchDimensionPageOutput | SearchSuccessSearchBuyerRfpPageOutput | SearchSuccessSearchAgentRecordPageOutput | SearchSuccessSearchTargetingValuePageOutput | SearchSuccessSearchProjectPageOutput | SearchSuccessSearchSessionPageOutput | SearchSuccessSearchAccountUnavailableOutput | SearchSuccessSearchMemberUnavailableOutput | SearchSuccessSearchAgentUnavailableOutput | SearchSuccessSearchSkillUnavailableOutput | SearchSuccessSearchInventorySourceUnavailableOutput | SearchSuccessSearchMaterialUnavailableOutput | SearchSuccessSearchCoverageUnavailableOutput | SearchSuccessSearchWholesaleProductUnavailableOutput | SearchSuccessSearchPlaybookVersionUnavailableOutput | SearchSuccessSearchBusinessRulesVersionUnavailableOutput | SearchSuccessSearchHouseDiscountUnavailableOutput | SearchSuccessSearchConnectionUnavailableOutput | SearchSuccessSearchAccountRelationshipUnavailableOutput | SearchSuccessSearchSourceAccountUnavailableOutput | SearchSuccessSearchSellerUnavailableOutput | SearchSuccessSearchAdvertiserUnavailableOutput | SearchSuccessSearchAdvertiserGrantUnavailableOutput | SearchSuccessSearchBrandUnavailableOutput | SearchSuccessSearchBrandSourceUnavailableOutput | SearchSuccessSearchSignalUnavailableOutput | SearchSuccessSearchAdServerTargetingUnavailableOutput | SearchSuccessSearchInventorySourceItemUnavailableOutput | SearchSuccessSearchWorkItemUnavailableOutput | SearchSuccessSearchCampaignUnavailableOutput | SearchSuccessSearchCatalogUnavailableOutput | SearchSuccessSearchEventSourceUnavailableOutput | SearchSuccessSearchPropertyListUnavailableOutput | SearchSuccessSearchCreativeUnavailableOutput | SearchSuccessSearchCreativeFormatUnavailableOutput | SearchSuccessSearchCreativeAssetUnavailableOutput | SearchSuccessSearchCreativeEngineUnavailableOutput | SearchSuccessSearchCreativeSessionUnavailableOutput | SearchSuccessSearchCreativeCollectionUnavailableOutput | SearchSuccessSearchMediaBuyUnavailableOutput | SearchSuccessSearchProposalUnavailableOutput | SearchSuccessSearchRfpUnavailableOutput | SearchSuccessSearchRfpTurnUnavailableOutput | SearchSuccessSearchLibraryRequestUnavailableOutput | SearchSuccessSearchDecisionUnavailableOutput | SearchSuccessSearchApprovalUnavailableOutput | SearchSuccessSearchAskUnavailableOutput | SearchSuccessSearchConversationUnavailableOutput | SearchSuccessSearchBuyerAgentUnavailableOutput | SearchSuccessSearchDimensionUnavailableOutput | SearchSuccessSearchBuyerRfpUnavailableOutput | SearchSuccessSearchAgentRecordUnavailableOutput | SearchSuccessSearchTargetingValueUnavailableOutput | SearchSuccessSearchProjectUnavailableOutput | SearchSuccessSearchSessionUnavailableOutput>;
                 [key: string]: unknown;
             };
             objectsUnavailable?: string;
@@ -49135,6 +49438,16 @@ export type SearchResponses = {
 export type SearchSuccessBrandLibrarySearchBrandKey = {
     domain: string;
     brand_id?: string;
+};
+
+export type SearchSuccessBrandSourceAgreementRecorder = {
+    principalKind: 'human' | 'buyer_agent';
+    userName: string | null;
+};
+
+export type SearchSuccessBrandSourceConfirmer = {
+    principalKind: 'human';
+    userName: string | null;
 };
 
 export type SearchSuccessCampaignGoalProgressSummary = {
@@ -49892,6 +50205,113 @@ export type SearchSuccessSearchBrandPageOutputTotalLowerBound = number;
 export type SearchSuccessSearchBrandPageOutputTruncated = boolean;
 
 export type SearchSuccessSearchBrandPageOutputValue = unknown;
+
+export type SearchSuccessSearchBrandSourcePageOutput = {
+    total?: SearchSuccessSearchBrandSourcePageOutputTotal;
+    totalLowerBound?: SearchSuccessSearchBrandSourcePageOutputTotalLowerBound;
+    returned?: SearchSuccessSearchBrandSourcePageOutputReturned;
+    hasMore?: SearchSuccessSearchBrandSourcePageOutputHasMore;
+    truncated?: SearchSuccessSearchBrandSourcePageOutputTruncated;
+    nextCursor?: SearchSuccessSearchBrandSourcePageOutputNextCursor;
+    results: SearchSuccessSearchBrandSourcePageOutputResults;
+    outcome: 'page_brand_source';
+    kind: 'brand_source';
+    [key: string]: SearchSuccessSearchBrandSourcePageOutputValue | SearchSuccessSearchBrandSourcePageOutputTotal | SearchSuccessSearchBrandSourcePageOutputTotalLowerBound | SearchSuccessSearchBrandSourcePageOutputReturned | SearchSuccessSearchBrandSourcePageOutputHasMore | SearchSuccessSearchBrandSourcePageOutputTruncated | SearchSuccessSearchBrandSourcePageOutputNextCursor | SearchSuccessSearchBrandSourcePageOutputResults | 'page_brand_source' | 'brand_source' | undefined;
+};
+
+export type SearchSuccessSearchBrandSourcePageOutputHasMore = boolean;
+
+export type SearchSuccessSearchBrandSourcePageOutputNextCursor = string;
+
+export type SearchSuccessSearchBrandSourcePageOutputResults = Array<{
+    advertiserId?: string;
+    name: string | null;
+    sandbox?: boolean;
+    /**
+     * Where the items come from: url when url is set, file when file is set.
+     */
+    sourceType?: 'inline' | 'url' | 'file' | null;
+    /**
+     * Items in the latest version against the one before it.
+     */
+    lastChangeSummary?: {
+        added: number;
+        updated: number;
+        unchanged: number;
+        removed: number;
+    } | null;
+    /**
+     * The active transform, if any.
+     */
+    transform?: {
+        name: string;
+        updatedAt: string;
+    } | null;
+    /**
+     * What stops the refresh; null if nothing does.
+     */
+    refreshProblem?: SearchSuccessCatalogRefreshProblem | null;
+    progressSummary?: SearchSuccessCampaignGoalProgressSummary;
+    creativeFit?: {
+        fits: boolean;
+        reasons: Array<string>;
+        requirements: Array<string>;
+        formatName?: string;
+    };
+    id: string;
+    brand: string;
+    provider: 'website' | 'rss' | 'youtube_channel';
+    url: string;
+    origin: 'suggested' | 'person' | 'agent';
+    evidence: Array<string>;
+    state: 'suggested' | 'pending_confirmation' | 'active' | 'held' | 'paused' | 'archived';
+    rights: {
+        uses: Array<'agent_context' | 'creative_generation' | 'fact_proposals' | 'surface_publish'>;
+        confirmedBy: SearchSuccessBrandSourceConfirmer | null;
+        confirmedAt: string | null;
+        people: Array<{
+            name: string;
+            role: string;
+        }>;
+        personAgreements: Array<{
+            name: string;
+            role: string;
+            scope: 'demo' | 'ongoing';
+            date: string;
+            recordedBy: SearchSuccessBrandSourceAgreementRecorder;
+        }>;
+    };
+    libraryHeldBy: {
+        accountId: number;
+        name: string;
+    };
+    sync: null;
+    transcription: null;
+    links: Array<unknown>;
+    [key: string]: unknown;
+}>;
+
+export type SearchSuccessSearchBrandSourcePageOutputResultsItemRightsConfirmedBy = SearchSuccessBrandSourceConfirmer;
+
+export type SearchSuccessSearchBrandSourcePageOutputResultsItemRightsPersonAgreementsItemRecordedBy = SearchSuccessBrandSourceAgreementRecorder;
+
+export type SearchSuccessSearchBrandSourcePageOutputReturned = number;
+
+export type SearchSuccessSearchBrandSourcePageOutputTotal = number;
+
+export type SearchSuccessSearchBrandSourcePageOutputTotalLowerBound = number;
+
+export type SearchSuccessSearchBrandSourcePageOutputTruncated = boolean;
+
+export type SearchSuccessSearchBrandSourcePageOutputValue = unknown;
+
+export type SearchSuccessSearchBrandSourceUnavailableOutput = {
+    outcome: 'unavailable_brand_source';
+    kind: 'brand_source';
+    unavailable: string;
+    message: string;
+    [key: string]: unknown;
+};
 
 export type SearchSuccessSearchBrandUnavailableOutput = {
     outcome: 'unavailable_brand';

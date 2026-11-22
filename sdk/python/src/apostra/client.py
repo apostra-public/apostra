@@ -404,6 +404,14 @@ class Apostra(SyncTransport):
         "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, remove a card, or pay a failed payment now. Plan, payment terms, renewal, card removal and pay now need administrator approval on our site. Cards stay off MCP. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBillingResult], self._request_with_response("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    def save_brand_source(self, input: models.SaveBrandSourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBrandSourceResult:
+        "Add or change one brand Library source. A person confirms its permitted uses before it is read."
+        return cast("models.SaveBrandSourceResult", self._request("save_brand_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def save_brand_source_with_response(self, input: models.SaveBrandSourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBrandSourceResult]:
+        "Add or change one brand Library source. A person confirms its permitted uses before it is read. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveBrandSourceResult], self._request_with_response("save_brand_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def save_business_rules(self, input: models.SaveBusinessRulesInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBusinessRulesResult:
         "Write seller AI Business Rules. Policy writes need an account admin; use policies. Approval auto, longer account terms under auto, or no Creative Policy under creative auto, needs acknowledgeNoHumanReview."
         return cast("models.SaveBusinessRulesResult", self._request("save_business_rules", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -1076,6 +1084,14 @@ class AsyncApostra(AsyncTransport):
     async def save_billing_with_response(self, input: models.SaveBillingInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBillingResult]:
         "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, remove a card, or pay a failed payment now. Plan, payment terms, renewal, card removal and pay now need administrator approval on our site. Cards stay off MCP. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveBillingResult], await self._request_with_response("save_billing", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_brand_source(self, input: models.SaveBrandSourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBrandSourceResult:
+        "Add or change one brand Library source. A person confirms its permitted uses before it is read."
+        return cast("models.SaveBrandSourceResult", await self._request("save_brand_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_brand_source_with_response(self, input: models.SaveBrandSourceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveBrandSourceResult]:
+        "Add or change one brand Library source. A person confirms its permitted uses before it is read. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveBrandSourceResult], await self._request_with_response("save_brand_source", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_business_rules(self, input: models.SaveBusinessRulesInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveBusinessRulesResult:
         "Write seller AI Business Rules. Policy writes need an account admin; use policies. Approval auto, longer account terms under auto, or no Creative Policy under creative auto, needs acknowledgeNoHumanReview."

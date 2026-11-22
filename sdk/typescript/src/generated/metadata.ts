@@ -1024,6 +1024,26 @@ export const operations = {
     ],
     "summary": "Accept Terms, set seller payment terms, accept a plan, answer its offer, change its renewal or payer details, manage media billing entities, remove a card, or pay a failed payment now. Plan, payment terms, renewal, card removal and pay now need administrator approval on our site. Cards stay off MCP."
   },
+  "save_brand_source": {
+    "path": "/tools/save_brand_source",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "bodyKeyField": "idempotencyKey",
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Add or change one brand Library source. A person confirms its permitted uses before it is read."
+  },
   "save_business_rules": {
     "path": "/tools/save_business_rules",
     "method": "POST",
