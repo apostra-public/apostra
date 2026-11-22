@@ -9954,6 +9954,19 @@ export type GetStatusResponses = {
                  * Buyer accounts only: true when a launch, a product added to a live media buy or a live budget increase waits for an administrator to approve it on our site.
                  */
                 requireSpendApproval?: boolean;
+                /**
+                 * Buyer accounts only: whether Projects are on and whether the account's autonomy stop is on.
+                 */
+                agentAutonomy?: {
+                    /**
+                     * Whether Projects are available to this account.
+                     */
+                    enabled: boolean;
+                    /**
+                     * Whether the account stop is on. It paused every active Project; clearing it resumes none. Set it with save_account autonomyPaused.
+                     */
+                    paused: boolean;
+                };
                 [key: string]: unknown;
             };
             listedToolAccountKinds: Array<'buyer' | 'seller' | 'org' | 'developer'>;
@@ -17292,7 +17305,11 @@ export type SaveAccountData = {
          */
         requireSpendApproval?: boolean;
         /**
-         * Why this change is needed, shown to the approver. Required to create, rename, archive, restore or turn spend approval off.
+         * With id of a buyer account: true stops every Project's lead at once, for anyone with write. false clears the account stop, for an administrator; it resumes no Project. Send it alone, with only reason and dryRun.
+         */
+        autonomyPaused?: boolean;
+        /**
+         * Why this change is needed, shown to the approver. Required to create, rename, archive, restore or turn spend approval off. Optional with autonomyPaused, kept with the stop.
          */
         reason?: string;
         /**
@@ -17394,14 +17411,30 @@ export type SaveAccountResponses = {
             accessChanged: false;
             lifecycleChanged: false;
             object: SaveAccountSuccessSaveAccountObject;
+            /**
+             * With autonomyPaused: whether the account stop is on after this call.
+             */
+            autonomyPaused?: SaveAccountSuccessAutonomyPaused;
+            /**
+             * With autonomyPaused: true, how many active Projects this call paused.
+             */
+            projectsPaused?: SaveAccountSuccessProjectsPaused;
         } | {
             action: 'unchanged';
             accessChanged: false;
             lifecycleChanged: false;
             object: SaveAccountSuccessSaveAccountObject;
+            /**
+             * With autonomyPaused: whether the account stop is on after this call.
+             */
+            autonomyPaused?: SaveAccountSuccessAutonomyPaused;
+            /**
+             * With autonomyPaused: true, how many active Projects this call paused.
+             */
+            projectsPaused?: SaveAccountSuccessProjectsPaused;
         } | {
             action: 'preview';
-            change: 'create' | 'rename' | 'archive' | 'restore' | 'disable_spend_approval' | 'enable_spend_approval';
+            change: 'create' | 'rename' | 'archive' | 'restore' | 'disable_spend_approval' | 'enable_spend_approval' | 'stop_autonomy' | 'clear_autonomy_stop';
             /**
              * Whether the same call without dryRun would be recorded.
              */
@@ -17416,6 +17449,10 @@ export type SaveAccountResponses = {
             sellingMode?: 'listing' | 'storefront' | null;
             operatingMode?: 'LISTING_ONLY' | 'AGENTIC_MEDIA_COMPANY' | null;
             consumesPaidWorkspace?: boolean;
+            /**
+             * A stop preview: how many active Projects it would pause.
+             */
+            projectsPaused?: number;
             blockerReason?: string | null;
             campaignBlockers?: number;
             mediaBuyBlockers?: number;
@@ -17504,6 +17541,10 @@ export type SaveAccountSuccessAgentApprovalRequired = {
     message: string;
     approval: SaveAccountSuccessAgentApproval;
 };
+
+export type SaveAccountSuccessAutonomyPaused = boolean;
+
+export type SaveAccountSuccessProjectsPaused = number;
 
 export type SaveAccountSuccessSaveAccountObject = {
     id: string;
@@ -35863,6 +35904,22 @@ export type SaveProjectData = {
             principalId?: never;
         };
         /**
+         * true stops this Project's lead at once. false resumes it, for an administrator signed in as themselves; the administrator who approved the bounds resumes at once, another needs approval. Send it with the id and only reason, idempotencyKey and dryRun.
+         */
+        autonomyPaused?: boolean;
+        /**
+         * Edit only, with autonomyPaused: why, kept with the stop.
+         */
+        reason?: string;
+        /**
+         * Edit only, with autonomyPaused: false: a UUID for this resume. Repeat the same call to see the approval outcome. Required unless dryRun.
+         */
+        idempotencyKey?: string;
+        /**
+         * Edit only, with autonomyPaused: true checks the change and records nothing.
+         */
+        dryRun?: boolean;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -36017,6 +36074,8 @@ export type SaveProjectResponses = {
             message?: never;
             approval?: never;
             project?: never;
+            change?: never;
+            outcome?: never;
         } | {
             action: 'approval_required';
             message: string;
@@ -36024,6 +36083,17 @@ export type SaveProjectResponses = {
             project: SaveProjectSuccessProject;
             kind?: never;
             object?: never;
+            change?: never;
+            outcome?: never;
+        } | {
+            action: 'preview';
+            change: 'stop' | 'resume';
+            outcome: 'would_save' | 'would_request_approval' | 'unchanged';
+            project: SaveProjectSuccessProject;
+            kind?: never;
+            object?: never;
+            message?: never;
+            approval?: never;
         };
         error: null;
     };

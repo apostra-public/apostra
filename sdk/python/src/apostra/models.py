@@ -7056,6 +7056,14 @@ class GetStatusResultAccount(TypedDict):
     kind: Literal["buyer", "seller", "org", "developer"] | None
     requireSpendApproval: NotRequired[bool]
     '\n    Buyer accounts only: true when a launch, a product added to a live media buy or a live budget increase waits for an administrator to approve it on our site.\n    '
+    agentAutonomy: NotRequired[GetStatusResultAccountAgentAutonomy]
+    '\n    Buyer accounts only: whether Projects are on and whether the account\'s autonomy stop is on.\n    '
+
+class GetStatusResultAccountAgentAutonomy(TypedDict):
+    enabled: bool
+    '\n    Whether Projects are available to this account.\n    '
+    paused: bool
+    '\n    Whether the account stop is on. It paused every active Project; clearing it resumes none. Set it with save_account autonomyPaused.\n    '
 
 class GetStatusResultAccounts(TypedDict):
     total: float
@@ -10470,8 +10478,10 @@ class SaveAccountInput(TypedDict):
     '\n    Create only: the new Account domain, or null for none.\n    '
     requireSpendApproval: NotRequired[bool]
     '\n    With id of a buyer account: whether new spend waits for website approval. true saves; false needs reason and approval. Send it alone.\n    '
+    autonomyPaused: NotRequired[bool]
+    '\n    With id of a buyer account: true stops every Project\'s lead at once, for anyone with write. false clears the account stop, for an administrator; it resumes no Project. Send it alone, with only reason and dryRun.\n    '
     reason: NotRequired[str]
-    '\n    Why this change is needed, shown to the approver. Required to create, rename, archive, restore or turn spend approval off.\n    '
+    '\n    Why this change is needed, shown to the approver. Required to create, rename, archive, restore or turn spend approval off. Optional with autonomyPaused, kept with the stop.\n    '
     dryRun: NotRequired[bool]
     '\n    true checks the change and returns what would be requested, recording nothing. Send no idempotencyKey with it.\n    '
     idempotencyKey: NotRequired[str]
@@ -10485,7 +10495,7 @@ class SaveAccountInputSettings(TypedDict):
 
 class SaveAccountResultActionPreview(TypedDict):
     action: Literal["preview"]
-    change: Literal["create", "rename", "archive", "restore", "disable_spend_approval", "enable_spend_approval"]
+    change: Literal["create", "rename", "archive", "restore", "disable_spend_approval", "enable_spend_approval", "stop_autonomy", "clear_autonomy_stop"]
     canRequest: bool
     '\n    Whether the same call without dryRun would be recorded.\n    '
     name: str
@@ -10496,6 +10506,8 @@ class SaveAccountResultActionPreview(TypedDict):
     sellingMode: NotRequired[Literal["listing", "storefront"] | None]
     operatingMode: NotRequired[Literal["LISTING_ONLY", "AGENTIC_MEDIA_COMPANY"] | None]
     consumesPaidWorkspace: NotRequired[bool]
+    projectsPaused: NotRequired[int]
+    '\n    A stop preview: how many active Projects it would pause.\n    '
     blockerReason: NotRequired[str | None]
     campaignBlockers: NotRequired[int]
     mediaBuyBlockers: NotRequired[int]
@@ -10522,12 +10534,20 @@ class SaveAccountResultActionSaved(TypedDict):
     accessChanged: Literal[False]
     lifecycleChanged: Literal[False]
     object: SaveAccountSuccessSaveAccountObject
+    autonomyPaused: NotRequired[SaveAccountSuccessAutonomyPaused]
+    '\n    With autonomyPaused: whether the account stop is on after this call.\n    '
+    projectsPaused: NotRequired[SaveAccountSuccessProjectsPaused]
+    '\n    With autonomyPaused: true, how many active Projects this call paused.\n    '
 
 class SaveAccountResultActionUnchanged(TypedDict):
     action: Literal["unchanged"]
     accessChanged: Literal[False]
     lifecycleChanged: Literal[False]
     object: SaveAccountSuccessSaveAccountObject
+    autonomyPaused: NotRequired[SaveAccountSuccessAutonomyPaused]
+    '\n    With autonomyPaused: whether the account stop is on after this call.\n    '
+    projectsPaused: NotRequired[SaveAccountSuccessProjectsPaused]
+    '\n    With autonomyPaused: true, how many active Projects this call paused.\n    '
 
 class SaveAccountSuccessAgentApproval(TypedDict):
     id: str
@@ -10559,6 +10579,10 @@ class SaveAccountSuccessAgentApprovalRequired(TypedDict):
     approval: SaveAccountSuccessAgentApproval
 
 SaveAccountResult: TypeAlias = SaveAccountResultActionSaved | SaveAccountResultActionUnchanged | SaveAccountResultActionPreview | SaveAccountSuccessAgentApprovalRequired
+
+SaveAccountSuccessAutonomyPaused: TypeAlias = bool
+
+SaveAccountSuccessProjectsPaused: TypeAlias = int
 
 class SaveAccountSuccessSaveAccountObject(TypedDict):
     id: str
@@ -20979,6 +21003,14 @@ class SaveProjectInput(TypedDict):
     '\n    The limits the lead may work inside. A revision that is not narrower in every field waits for an administrator to approve it on our site.\n    '
     lead: NotRequired[SaveProjectInputLeadKindAgent | SaveProjectInputLeadKindAssistant]
     '\n    The acting agent. Also the conversation\'s lead.\n    '
+    autonomyPaused: NotRequired[bool]
+    '\n    true stops this Project\'s lead at once. false resumes it, for an administrator signed in as themselves; the administrator who approved the bounds resumes at once, another needs approval. Send it with the id and only reason, idempotencyKey and dryRun.\n    '
+    reason: NotRequired[str]
+    '\n    Edit only, with autonomyPaused: why, kept with the stop.\n    '
+    idempotencyKey: NotRequired[str]
+    '\n    Edit only, with autonomyPaused: false: a UUID for this resume. Repeat the same call to see the approval outcome. Required unless dryRun.\n    '
+    dryRun: NotRequired[bool]
+    '\n    Edit only, with autonomyPaused: true checks the change and records nothing.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -21111,11 +21143,17 @@ class SaveProjectResultActionApprovalRequired(TypedDict):
     approval: SaveProjectSuccessAgentApproval
     project: SaveProjectSuccessProject
 
+class SaveProjectResultActionPreview(TypedDict):
+    action: Literal["preview"]
+    change: Literal["stop", "resume"]
+    outcome: Literal["would_save", "would_request_approval", "unchanged"]
+    project: SaveProjectSuccessProject
+
 class SaveProjectResultKindProject(TypedDict):
     kind: Literal["project"]
     object: SaveProjectSuccessObject
 
-SaveProjectResult: TypeAlias = "SaveProjectResultKindProject | SaveProjectResultActionApprovalRequired"
+SaveProjectResult: TypeAlias = "SaveProjectResultKindProject | SaveProjectResultActionApprovalRequired | SaveProjectResultActionPreview"
 
 class SaveProjectSuccessAgentApproval(TypedDict):
     id: str

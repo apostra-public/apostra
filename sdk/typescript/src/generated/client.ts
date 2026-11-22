@@ -755,14 +755,14 @@ export class Apostra extends Transport {
   /** Review a Buyer child under the selected Organization: name, role, capacity, plan coverage, operator, inherited access and other effects. Read-only; nothing is created. Show the review to the person, then call request_buyer_child_account. Returns the data together with response headers and request ID. */
   reviewBuyerChildAccountWithResponse(input: ReviewBuyerChildAccountInput, options?: RequestOptions): Promise<ResponseDetails<ReviewBuyerChildAccountResult>> { return this.requestDetailed("review_buyer_child_account", input, options) }
   /**
-   * Create a child Account (omit id), rename one, or archive or restore it (isArchived). Each is recorded for website approval by an Organization administrator; repeat with the same idempotencyKey for the outcome. dryRun previews. settings.company saves at once. Never changes owners or members.
+   * Create a child Account (omit id), rename one, or archive or restore it (isArchived), each recorded for website approval by an Organization administrator; repeat the idempotencyKey for the outcome. dryRun previews. settings.company saves at once. autonomyPaused stops or clears a buyer account's stop.
    *
    * @example
    * await client.saveAccount(input, { idempotencyKey: 'stable-key' })
    */
   saveAccount(input: SaveAccountInput, options: WriteRequestOptions): Promise<SaveAccountResult> { return this.request("save_account", input, options) }
 
-  /** Create a child Account (omit id), rename one, or archive or restore it (isArchived). Each is recorded for website approval by an Organization administrator; repeat with the same idempotencyKey for the outcome. dryRun previews. settings.company saves at once. Never changes owners or members. Returns the data together with response headers and request ID. */
+  /** Create a child Account (omit id), rename one, or archive or restore it (isArchived), each recorded for website approval by an Organization administrator; repeat the idempotencyKey for the outcome. dryRun previews. settings.company saves at once. autonomyPaused stops or clears a buyer account's stop. Returns the data together with response headers and request ID. */
   saveAccountWithResponse(input: SaveAccountInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAccountResult>> { return this.requestDetailed("save_account", input, options) }
   /**
    * Save an advertiser or mappings. Buyer privateNotes: owning Buyer Account only; /v3/manage-ads#private-advertiser-notes. Confirm markets/channels (footprintProposal); needs_input=ask; never recreate for currency. Brand: identityContract:confirmed-v1; preview: resolveBrand; read advertiser.brandRef.
@@ -1075,14 +1075,14 @@ export class Apostra extends Transport {
   /** Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. `limits` sets what your brain may offer. Halves never roll back each other. Returns the data together with response headers and request ID. */
   savePlaybookWithResponse(input: SavePlaybookInput, options: WriteRequestOptions): Promise<ResponseDetails<SavePlaybookResult>> { return this.requestDetailed("save_playbook", input, options) }
   /**
-   * Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, or lead. A Project is one conversation plus its objective, attachments and the bounds its lead agent works inside. Wider bounds return approval_required.
+   * Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, lead, or autonomyPaused (stop; an administrator resumes). A Project is one conversation plus its objective, attachments and lead's bounds. Wider bounds return approval_required.
    *
    * @example
    * await client.saveProject(input, { idempotencyKey: 'stable-key' })
    */
   saveProject(input: SaveProjectInput, options: WriteRequestOptions): Promise<SaveProjectResult> { return this.request("save_project", input, options) }
 
-  /** Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, or lead. A Project is one conversation plus its objective, attachments and the bounds its lead agent works inside. Wider bounds return approval_required. Returns the data together with response headers and request ID. */
+  /** Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, lead, or autonomyPaused (stop; an administrator resumes). A Project is one conversation plus its objective, attachments and lead's bounds. Wider bounds return approval_required. Returns the data together with response headers and request ID. */
   saveProjectWithResponse(input: SaveProjectInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveProjectResult>> { return this.requestDetailed("save_project", input, options) }
   /**
    * Create, update, archive, restore, or AAO-check an advertiser property list. Check uses identifiers without saving. Search/get read saved lists.
