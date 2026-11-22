@@ -373,11 +373,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveAgentResult], self._request_with_response("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_agent_record(self, input: models.SaveAgentRecordInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAgentRecordResult:
-        "Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them). Send recordId and expectedRevision with text, content or materialIds to correct it, or isArchived true to forget it or false to restore it. Only that agent saves new memories."
+        "Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them): recordId and expectedRevision with text, content or materialIds, or isArchived. Only that agent saves new memories, except a memory file (recordType file)."
         return cast("models.SaveAgentRecordResult", self._request("save_agent_record", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_agent_record_with_response(self, input: models.SaveAgentRecordInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAgentRecordResult]:
-        "Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them). Send recordId and expectedRevision with text, content or materialIds to correct it, or isArchived true to forget it or false to restore it. Only that agent saves new memories. Returns the data together with response headers and request ID."
+        "Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them): recordId and expectedRevision with text, content or materialIds, or isArchived. Only that agent saves new memories, except a memory file (recordType file). Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAgentRecordResult], self._request_with_response("save_agent_record", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
@@ -1046,11 +1046,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveAgentResult], await self._request_with_response("save_agent", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_agent_record(self, input: models.SaveAgentRecordInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAgentRecordResult:
-        "Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them). Send recordId and expectedRevision with text, content or materialIds to correct it, or isArchived true to forget it or false to restore it. Only that agent saves new memories."
+        "Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them): recordId and expectedRevision with text, content or materialIds, or isArchived. Only that agent saves new memories, except a memory file (recordType file)."
         return cast("models.SaveAgentRecordResult", await self._request("save_agent_record", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_agent_record_with_response(self, input: models.SaveAgentRecordInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAgentRecordResult]:
-        "Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them). Send recordId and expectedRevision with text, content or materialIds to correct it, or isArchived true to forget it or false to restore it. Only that agent saves new memories. Returns the data together with response headers and request ID."
+        "Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them): recordId and expectedRevision with text, content or materialIds, or isArchived. Only that agent saves new memories, except a memory file (recordType file). Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAgentRecordResult], await self._request_with_response("save_agent_record", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:

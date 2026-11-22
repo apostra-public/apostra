@@ -18983,9 +18983,9 @@ export type SaveAgentRecordData = {
          */
         campaignId?: string;
         /**
-         * fact (true until replaced), event (happened at a time) or instruction (how a person wants the agent to work).
+         * fact (true until replaced), event (happened at a time), instruction (how a person wants the agent to work), or file: the one memory page of the account or of an advertiser (the goal, what was learned, how work is done there, what was tried), with no topic. Save the whole page again to change it; never put one person’s own memory in it.
          */
-        recordType?: 'fact' | 'event' | 'instruction';
+        recordType?: 'fact' | 'event' | 'instruction' | 'file';
         /**
          * Short key a new fact or instruction is about, such as cpm-ceiling. A newer record on the same topic replaces the older one.
          */
@@ -18995,7 +18995,7 @@ export type SaveAgentRecordData = {
          */
         occurredAt?: string;
         /**
-         * The memory in words, at most 1,000 characters. Required for a new record.
+         * The memory in words, at most 1,000 characters (a file 4,000). Required for a new record.
          */
         text?: string;
         /**
@@ -19132,7 +19132,7 @@ export type SaveAgentRecordSuccessAgentRecord = {
     advertiserId: string | null;
     campaignId: string | null;
     userId: string | null;
-    recordType: 'fact' | 'event' | 'instruction';
+    recordType: 'fact' | 'event' | 'instruction' | 'file';
     topic: string | null;
     occurredAt: string | null;
     text: string;
@@ -40550,7 +40550,7 @@ export type SearchData = {
             /**
              * For kind agent_record: only facts, events or instructions.
              */
-            recordType?: 'fact' | 'event' | 'instruction';
+            recordType?: 'fact' | 'event' | 'instruction' | 'file';
             /**
              * For kind agent_record: only records on this topic, such as cpm-ceiling.
              */
@@ -41141,7 +41141,7 @@ export type SearchData = {
             /**
              * For kind agent_record: only facts, events or instructions.
              */
-            recordType?: 'fact' | 'event' | 'instruction';
+            recordType?: 'fact' | 'event' | 'instruction' | 'file';
             /**
              * For kind agent_record: only records on this topic, such as cpm-ceiling.
              */
@@ -41800,7 +41800,7 @@ export type SearchData = {
             /**
              * For kind agent_record: only facts, events or instructions.
              */
-            recordType?: 'fact' | 'event' | 'instruction';
+            recordType?: 'fact' | 'event' | 'instruction' | 'file';
             /**
              * For kind agent_record: only records on this topic, such as cpm-ceiling.
              */
@@ -42387,7 +42387,7 @@ export type SearchData = {
             /**
              * For kind agent_record: only facts, events or instructions.
              */
-            recordType?: 'fact' | 'event' | 'instruction';
+            recordType?: 'fact' | 'event' | 'instruction' | 'file';
             /**
              * For kind agent_record: only records on this topic, such as cpm-ceiling.
              */
@@ -42975,7 +42975,7 @@ export type SearchData = {
             /**
              * For kind agent_record: only facts, events or instructions.
              */
-            recordType?: 'fact' | 'event' | 'instruction';
+            recordType?: 'fact' | 'event' | 'instruction' | 'file';
             /**
              * For kind agent_record: only records on this topic, such as cpm-ceiling.
              */
@@ -43558,7 +43558,7 @@ export type SearchData = {
             /**
              * For kind agent_record: only facts, events or instructions.
              */
-            recordType?: 'fact' | 'event' | 'instruction';
+            recordType?: 'fact' | 'event' | 'instruction' | 'file';
             /**
              * For kind agent_record: only records on this topic, such as cpm-ceiling.
              */
@@ -44149,7 +44149,7 @@ export type SearchData = {
             /**
              * For kind agent_record: only facts, events or instructions.
              */
-            recordType?: 'fact' | 'event' | 'instruction';
+            recordType?: 'fact' | 'event' | 'instruction' | 'file';
             /**
              * For kind agent_record: only records on this topic, such as cpm-ceiling.
              */
@@ -44862,7 +44862,7 @@ export type SearchData = {
             /**
              * For kind agent_record: only facts, events or instructions.
              */
-            recordType?: 'fact' | 'event' | 'instruction';
+            recordType?: 'fact' | 'event' | 'instruction' | 'file';
             /**
              * For kind agent_record: only records on this topic, such as cpm-ceiling.
              */
@@ -45533,7 +45533,7 @@ export type SearchData = {
             /**
              * For kind agent_record: only facts, events or instructions.
              */
-            recordType?: 'fact' | 'event' | 'instruction';
+            recordType?: 'fact' | 'event' | 'instruction' | 'file';
             /**
              * For kind agent_record: only records on this topic, such as cpm-ceiling.
              */
@@ -46196,7 +46196,7 @@ export type SearchData = {
             /**
              * For kind agent_record: only facts, events or instructions.
              */
-            recordType?: 'fact' | 'event' | 'instruction';
+            recordType?: 'fact' | 'event' | 'instruction' | 'file';
             /**
              * For kind agent_record: only records on this topic, such as cpm-ceiling.
              */
@@ -46786,7 +46786,7 @@ export type SearchData = {
             /**
              * For kind agent_record: only facts, events or instructions.
              */
-            recordType?: 'fact' | 'event' | 'instruction';
+            recordType?: 'fact' | 'event' | 'instruction' | 'file';
             /**
              * For kind agent_record: only records on this topic, such as cpm-ceiling.
              */
@@ -47377,7 +47377,7 @@ export type SearchData = {
             /**
              * For kind agent_record: only facts, events or instructions.
              */
-            recordType?: 'fact' | 'event' | 'instruction';
+            recordType?: 'fact' | 'event' | 'instruction' | 'file';
             /**
              * For kind agent_record: only records on this topic, such as cpm-ceiling.
              */
@@ -47968,7 +47968,7 @@ export type SearchData = {
             /**
              * For kind agent_record: only facts, events or instructions.
              */
-            recordType?: 'fact' | 'event' | 'instruction';
+            recordType?: 'fact' | 'event' | 'instruction' | 'file';
             /**
              * For kind agent_record: only records on this topic, such as cpm-ceiling.
              */
@@ -48559,7 +48559,7 @@ export type SearchData = {
             /**
              * For kind agent_record: only facts, events or instructions.
              */
-            recordType?: 'fact' | 'event' | 'instruction';
+            recordType?: 'fact' | 'event' | 'instruction' | 'file';
             /**
              * For kind agent_record: only records on this topic, such as cpm-ceiling.
              */
