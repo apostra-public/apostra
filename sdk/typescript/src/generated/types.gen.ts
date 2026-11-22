@@ -36165,6 +36165,16 @@ export type SaveProjectSuccessObject = {
     name: string;
     createdByUserId: string | null;
     advertiserId: string | null;
+    advertiser: {
+        /**
+         * The advertiser id; equals the Project's advertiserId.
+         */
+        id: string;
+        /**
+         * The advertiser's name, read-only. Null when you cannot read the advertiser.
+         */
+        name: string | null;
+    } | null;
     sessionId: string;
     objectives: string;
     lead: {
@@ -36192,6 +36202,10 @@ export type SaveProjectSuccessObject = {
          * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
          */
         id: SaveProjectSuccessObjectAttachmentsItemId;
+        /**
+         * The attached record's own name, read-only. Null when you cannot read the record or it is gone; never the id.
+         */
+        name: string | null;
         /**
          * How the Project relates to it: subject, request, response, evidence or outcome.
          */
@@ -36281,11 +36295,41 @@ export type SaveProjectSuccessObject = {
     archivedAt: string | null;
     archivedByUserId: string | null;
     progress: null;
+    spend: {
+        /**
+         * Delivered gross spend over the counted buys, in `currency`. Null when withheld (see reason), never a partial sum.
+         */
+        total: number | null;
+        /**
+         * The budget currency of the Project's current bounds revision.
+         */
+        currency: string;
+        /**
+         * Why total is null: no daily rate to convert a day (fx_rate_unavailable) or a buy whose delivery has no currency (currency_unavailable). Null when total is a number.
+         */
+        reason: 'fx_rate_unavailable' | 'currency_unavailable' | null;
+        /**
+         * The earliest and latest last-held reporting day across the counted buys. Null parts when no counted buy holds delivery.
+         */
+        dataThrough: {
+            earliest: string | null;
+            latest: string | null;
+        };
+        /**
+         * Counted media buys: attached ones plus those under attached campaigns that you can read.
+         */
+        mediaBuysIncluded: number;
+        /**
+         * Media buys left out of the total: ones you cannot read and, for now, archived ones whose delivery cannot be read yet.
+         */
+        mediaBuysOmitted: number;
+    } | null;
     attention: Array<{
         kind: 'bounds_approval_pending' | 'new_bounds_needed' | 'reapproval_needed' | 'resume_needed' | 'account_stop_on' | 'write_unsettled';
         reason: string;
         url: string | null;
     }>;
+    url: string;
 };
 
 export type SaveProjectSuccessObjectAttachmentsItemId = string;
@@ -36303,6 +36347,16 @@ export type SaveProjectSuccessProject = {
     name: string;
     createdByUserId: string | null;
     advertiserId: string | null;
+    advertiser: {
+        /**
+         * The advertiser id; equals the Project's advertiserId.
+         */
+        id: string;
+        /**
+         * The advertiser's name, read-only. Null when you cannot read the advertiser.
+         */
+        name: string | null;
+    } | null;
     sessionId: string;
     objectives: string;
     lead: {
@@ -36330,6 +36384,10 @@ export type SaveProjectSuccessProject = {
          * The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.
          */
         id: SaveProjectSuccessProjectAttachmentsItemId;
+        /**
+         * The attached record's own name, read-only. Null when you cannot read the record or it is gone; never the id.
+         */
+        name: string | null;
         /**
          * How the Project relates to it: subject, request, response, evidence or outcome.
          */
@@ -36419,11 +36477,41 @@ export type SaveProjectSuccessProject = {
     archivedAt: string | null;
     archivedByUserId: string | null;
     progress: null;
+    spend: {
+        /**
+         * Delivered gross spend over the counted buys, in `currency`. Null when withheld (see reason), never a partial sum.
+         */
+        total: number | null;
+        /**
+         * The budget currency of the Project's current bounds revision.
+         */
+        currency: string;
+        /**
+         * Why total is null: no daily rate to convert a day (fx_rate_unavailable) or a buy whose delivery has no currency (currency_unavailable). Null when total is a number.
+         */
+        reason: 'fx_rate_unavailable' | 'currency_unavailable' | null;
+        /**
+         * The earliest and latest last-held reporting day across the counted buys. Null parts when no counted buy holds delivery.
+         */
+        dataThrough: {
+            earliest: string | null;
+            latest: string | null;
+        };
+        /**
+         * Counted media buys: attached ones plus those under attached campaigns that you can read.
+         */
+        mediaBuysIncluded: number;
+        /**
+         * Media buys left out of the total: ones you cannot read and, for now, archived ones whose delivery cannot be read yet.
+         */
+        mediaBuysOmitted: number;
+    } | null;
     attention: Array<{
         kind: 'bounds_approval_pending' | 'new_bounds_needed' | 'reapproval_needed' | 'resume_needed' | 'account_stop_on' | 'write_unsettled';
         reason: string;
         url: string | null;
     }>;
+    url: string;
 };
 
 export type SaveProjectSuccessProjectAttachmentsItemId = string;
