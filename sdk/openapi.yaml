@@ -124294,6 +124294,23 @@ components:
           type:
             - string
             - 'null'
+        advertiser:
+          anyOf:
+            - type: object
+              properties:
+                id:
+                  type: string
+                  description: The advertiser id; equals the Project's advertiserId.
+                name:
+                  anyOf:
+                    - type: string
+                    - type: 'null'
+                  description: The advertiser's name, read-only. Null when you cannot read the advertiser.
+              required:
+                - id
+                - name
+              additionalProperties: false
+            - type: 'null'
         sessionId:
           type: string
         objectives:
@@ -124342,6 +124359,13 @@ components:
               id:
                 description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
                 $ref: '#/components/schemas/save_project_success_ObjectAttachmentsItemId'
+              name:
+                anyOf:
+                  - type: string
+                  - type: 'null'
+                description: >-
+                  The attached record's own name, read-only. Null when you cannot read the record or it is gone; never
+                  the id.
               relation:
                 type: string
                 enum:
@@ -124354,6 +124378,7 @@ components:
             required:
               - kind
               - id
+              - name
               - relation
             additionalProperties: false
         bounds:
@@ -124597,6 +124622,69 @@ components:
             - 'null'
         progress:
           type: 'null'
+        spend:
+          anyOf:
+            - type: object
+              properties:
+                total:
+                  anyOf:
+                    - type: number
+                    - type: 'null'
+                  description: >-
+                    Delivered gross spend over the counted buys, in `currency`. Null when withheld (see reason), never a
+                    partial sum.
+                currency:
+                  type: string
+                  description: The budget currency of the Project's current bounds revision.
+                reason:
+                  anyOf:
+                    - type: string
+                      enum:
+                        - fx_rate_unavailable
+                        - currency_unavailable
+                    - type: 'null'
+                  description: >-
+                    Why total is null: no daily rate to convert a day (fx_rate_unavailable) or a buy whose delivery has
+                    no currency (currency_unavailable). Null when total is a number.
+                dataThrough:
+                  type: object
+                  properties:
+                    earliest:
+                      type:
+                        - string
+                        - 'null'
+                    latest:
+                      type:
+                        - string
+                        - 'null'
+                  required:
+                    - earliest
+                    - latest
+                  additionalProperties: false
+                  description: >-
+                    The earliest and latest last-held reporting day across the counted buys. Null parts when no counted
+                    buy holds delivery.
+                mediaBuysIncluded:
+                  type: integer
+                  minimum: -9007199254740991
+                  maximum: 9007199254740991
+                  description: 'Counted media buys: attached ones plus those under attached campaigns that you can read.'
+                mediaBuysOmitted:
+                  type: integer
+                  minimum: -9007199254740991
+                  maximum: 9007199254740991
+                  description: >-
+                    Media buys left out of the total: ones you cannot read and, for now, archived ones whose delivery
+                    cannot be read yet.
+              required:
+                - total
+                - currency
+                - reason
+                - dataThrough
+                - mediaBuysIncluded
+                - mediaBuysOmitted
+              additionalProperties: false
+            - type: 'null'
         attention:
           type: array
           items:
@@ -124622,11 +124710,14 @@ components:
               - reason
               - url
             additionalProperties: false
+        url:
+          type: string
       required:
         - id
         - name
         - createdByUserId
         - advertiserId
+        - advertiser
         - sessionId
         - objectives
         - lead
@@ -124637,7 +124728,9 @@ components:
         - archivedAt
         - archivedByUserId
         - progress
+        - spend
         - attention
+        - url
       additionalProperties: false
     save_project_success_Project:
       type: object
@@ -124655,6 +124748,23 @@ components:
           type:
             - string
             - 'null'
+        advertiser:
+          anyOf:
+            - type: object
+              properties:
+                id:
+                  type: string
+                  description: The advertiser id; equals the Project's advertiserId.
+                name:
+                  anyOf:
+                    - type: string
+                    - type: 'null'
+                  description: The advertiser's name, read-only. Null when you cannot read the advertiser.
+              required:
+                - id
+                - name
+              additionalProperties: false
+            - type: 'null'
         sessionId:
           type: string
         objectives:
@@ -124703,6 +124813,13 @@ components:
               id:
                 description: 'The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.'
                 $ref: '#/components/schemas/save_project_success_ProjectAttachmentsItemId'
+              name:
+                anyOf:
+                  - type: string
+                  - type: 'null'
+                description: >-
+                  The attached record's own name, read-only. Null when you cannot read the record or it is gone; never
+                  the id.
               relation:
                 type: string
                 enum:
@@ -124715,6 +124832,7 @@ components:
             required:
               - kind
               - id
+              - name
               - relation
             additionalProperties: false
         bounds:
@@ -124958,6 +125076,69 @@ components:
             - 'null'
         progress:
           type: 'null'
+        spend:
+          anyOf:
+            - type: object
+              properties:
+                total:
+                  anyOf:
+                    - type: number
+                    - type: 'null'
+                  description: >-
+                    Delivered gross spend over the counted buys, in `currency`. Null when withheld (see reason), never a
+                    partial sum.
+                currency:
+                  type: string
+                  description: The budget currency of the Project's current bounds revision.
+                reason:
+                  anyOf:
+                    - type: string
+                      enum:
+                        - fx_rate_unavailable
+                        - currency_unavailable
+                    - type: 'null'
+                  description: >-
+                    Why total is null: no daily rate to convert a day (fx_rate_unavailable) or a buy whose delivery has
+                    no currency (currency_unavailable). Null when total is a number.
+                dataThrough:
+                  type: object
+                  properties:
+                    earliest:
+                      type:
+                        - string
+                        - 'null'
+                    latest:
+                      type:
+                        - string
+                        - 'null'
+                  required:
+                    - earliest
+                    - latest
+                  additionalProperties: false
+                  description: >-
+                    The earliest and latest last-held reporting day across the counted buys. Null parts when no counted
+                    buy holds delivery.
+                mediaBuysIncluded:
+                  type: integer
+                  minimum: -9007199254740991
+                  maximum: 9007199254740991
+                  description: 'Counted media buys: attached ones plus those under attached campaigns that you can read.'
+                mediaBuysOmitted:
+                  type: integer
+                  minimum: -9007199254740991
+                  maximum: 9007199254740991
+                  description: >-
+                    Media buys left out of the total: ones you cannot read and, for now, archived ones whose delivery
+                    cannot be read yet.
+              required:
+                - total
+                - currency
+                - reason
+                - dataThrough
+                - mediaBuysIncluded
+                - mediaBuysOmitted
+              additionalProperties: false
+            - type: 'null'
         attention:
           type: array
           items:
@@ -124983,11 +125164,14 @@ components:
               - reason
               - url
             additionalProperties: false
+        url:
+          type: string
       required:
         - id
         - name
         - createdByUserId
         - advertiserId
+        - advertiser
         - sessionId
         - objectives
         - lead
@@ -124998,7 +125182,9 @@ components:
         - archivedAt
         - archivedByUserId
         - progress
+        - spend
         - attention
+        - url
       additionalProperties: false
     save_project_success_ObjectLeadPrincipalId:
       type: string

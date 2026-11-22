@@ -21184,6 +21184,7 @@ class SaveProjectSuccessObject(TypedDict):
     name: str
     createdByUserId: str | None
     advertiserId: str | None
+    advertiser: SaveProjectSuccessObjectAdvertiserValue | None
     sessionId: str
     objectives: str
     lead: SaveProjectSuccessObjectLeadKindAgent | SaveProjectSuccessObjectLeadKindAssistant
@@ -21194,13 +21195,23 @@ class SaveProjectSuccessObject(TypedDict):
     archivedAt: str | None
     archivedByUserId: str | None
     progress: None
+    spend: SaveProjectSuccessObjectSpendValue | None
     attention: list[SaveProjectSuccessObjectAttentionItem]
+    url: str
+
+class SaveProjectSuccessObjectAdvertiserValue(TypedDict):
+    id: str
+    '\n    The advertiser id; equals the Project\'s advertiserId.\n    '
+    name: str | None
+    '\n    The advertiser\'s name, read-only. Null when you cannot read the advertiser.\n    '
 
 class SaveProjectSuccessObjectAttachmentsItem(TypedDict):
     kind: Literal["campaign", "media_buy", "rfp", "material", "connection", "exchange"]
     '\n    What is attached: a campaign, media_buy, rfp (a buyer RFP), material, connection or a seller exchange.\n    '
     id: SaveProjectSuccessObjectAttachmentsItemId
     '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
+    name: str | None
+    '\n    The attached record\'s own name, read-only. Null when you cannot read the record or it is gone; never the id.\n    '
     relation: Literal["subject", "request", "response", "evidence", "outcome"]
     '\n    How the Project relates to it: subject, request, response, evidence or outcome.\n    '
 
@@ -21295,11 +21306,30 @@ class SaveProjectSuccessObjectLeadKindAssistant(TypedDict):
 
 SaveProjectSuccessObjectLeadPrincipalId: TypeAlias = str
 
+class SaveProjectSuccessObjectSpendDataThrough(TypedDict):
+    earliest: str | None
+    latest: str | None
+
+class SaveProjectSuccessObjectSpendValue(TypedDict):
+    total: float | None
+    '\n    Delivered gross spend over the counted buys, in `currency`. Null when withheld (see reason), never a partial sum.\n    '
+    currency: str
+    '\n    The budget currency of the Project\'s current bounds revision.\n    '
+    reason: Literal["fx_rate_unavailable", "currency_unavailable"] | None
+    '\n    Why total is null: no daily rate to convert a day (fx_rate_unavailable) or a buy whose delivery has no currency (currency_unavailable). Null when total is a number.\n    '
+    dataThrough: SaveProjectSuccessObjectSpendDataThrough
+    '\n    The earliest and latest last-held reporting day across the counted buys. Null parts when no counted buy holds delivery.\n    '
+    mediaBuysIncluded: int
+    '\n    Counted media buys: attached ones plus those under attached campaigns that you can read.\n    '
+    mediaBuysOmitted: int
+    '\n    Media buys left out of the total: ones you cannot read and, for now, archived ones whose delivery cannot be read yet.\n    '
+
 class SaveProjectSuccessProject(TypedDict):
     id: str
     name: str
     createdByUserId: str | None
     advertiserId: str | None
+    advertiser: SaveProjectSuccessProjectAdvertiserValue | None
     sessionId: str
     objectives: str
     lead: SaveProjectSuccessProjectLeadKindAgent | SaveProjectSuccessProjectLeadKindAssistant
@@ -21310,13 +21340,23 @@ class SaveProjectSuccessProject(TypedDict):
     archivedAt: str | None
     archivedByUserId: str | None
     progress: None
+    spend: SaveProjectSuccessProjectSpendValue | None
     attention: list[SaveProjectSuccessProjectAttentionItem]
+    url: str
+
+class SaveProjectSuccessProjectAdvertiserValue(TypedDict):
+    id: str
+    '\n    The advertiser id; equals the Project\'s advertiserId.\n    '
+    name: str | None
+    '\n    The advertiser\'s name, read-only. Null when you cannot read the advertiser.\n    '
 
 class SaveProjectSuccessProjectAttachmentsItem(TypedDict):
     kind: Literal["campaign", "media_buy", "rfp", "material", "connection", "exchange"]
     '\n    What is attached: a campaign, media_buy, rfp (a buyer RFP), material, connection or a seller exchange.\n    '
     id: SaveProjectSuccessProjectAttachmentsItemId
     '\n    The id the read of that kind returns: a campaign id, buyer media buy id, RFP id or connection id.\n    '
+    name: str | None
+    '\n    The attached record\'s own name, read-only. Null when you cannot read the record or it is gone; never the id.\n    '
     relation: Literal["subject", "request", "response", "evidence", "outcome"]
     '\n    How the Project relates to it: subject, request, response, evidence or outcome.\n    '
 
@@ -21410,6 +21450,24 @@ class SaveProjectSuccessProjectLeadKindAssistant(TypedDict):
     '\n    The Apostra Assistant.\n    '
 
 SaveProjectSuccessProjectLeadPrincipalId: TypeAlias = str
+
+class SaveProjectSuccessProjectSpendDataThrough(TypedDict):
+    earliest: str | None
+    latest: str | None
+
+class SaveProjectSuccessProjectSpendValue(TypedDict):
+    total: float | None
+    '\n    Delivered gross spend over the counted buys, in `currency`. Null when withheld (see reason), never a partial sum.\n    '
+    currency: str
+    '\n    The budget currency of the Project\'s current bounds revision.\n    '
+    reason: Literal["fx_rate_unavailable", "currency_unavailable"] | None
+    '\n    Why total is null: no daily rate to convert a day (fx_rate_unavailable) or a buy whose delivery has no currency (currency_unavailable). Null when total is a number.\n    '
+    dataThrough: SaveProjectSuccessProjectSpendDataThrough
+    '\n    The earliest and latest last-held reporting day across the counted buys. Null parts when no counted buy holds delivery.\n    '
+    mediaBuysIncluded: int
+    '\n    Counted media buys: attached ones plus those under attached campaigns that you can read.\n    '
+    mediaBuysOmitted: int
+    '\n    Media buys left out of the total: ones you cannot read and, for now, archived ones whose delivery cannot be read yet.\n    '
 
 class SavePropertyListInput(TypedDict):
     advertiserId: str
