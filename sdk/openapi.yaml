@@ -102651,7 +102651,7 @@ components:
             - type: string
               const: complete
             - type: string
-              const: underdelivery
+              const: under_delivery
             - type: string
               const: early_exhaustion
         basis:
@@ -102689,7 +102689,7 @@ components:
             - type: string
               const: complete
             - type: string
-              const: underdelivery
+              const: under_delivery
             - type: string
               const: early_exhaustion
         basis:
@@ -104761,7 +104761,7 @@ components:
         - type: string
           const: complete
         - type: string
-          const: underdelivery
+          const: under_delivery
         - type: string
           const: early_exhaustion
     get_delivery_success_CampaignGoalProgressMediaBuy:

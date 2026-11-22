@@ -7757,7 +7757,7 @@ export type GetDeliverySuccessGetDeliveryGoalSellerDeliveryProjection = JsonValu
 
 export type GetDeliverySuccessGetDeliveryGoalSellerDeliveryProjectionProjectedEndState = GetDeliverySuccessGetDeliveryGoalVerdict;
 
-export type GetDeliverySuccessGetDeliveryGoalVerdict = 'on_pace' | 'complete' | 'underdelivery' | 'early_exhaustion';
+export type GetDeliverySuccessGetDeliveryGoalVerdict = 'on_pace' | 'complete' | 'under_delivery' | 'early_exhaustion';
 
 export type GetDeliverySuccessGoalProgress = {
     goal: GetDeliverySuccessGetDeliveryGoalProgressOptimizationGoal | null;
@@ -11165,7 +11165,7 @@ export type GetSuccessDeliveryGoalProgress = {
 export type GetSuccessDeliveryGoalProgressDeliveryProjection = {
     projected_impressions?: number;
     projected_spend?: number;
-    projected_end_state: 'on_pace' | 'complete' | 'underdelivery' | 'early_exhaustion';
+    projected_end_state: 'on_pace' | 'complete' | 'under_delivery' | 'early_exhaustion';
     basis: 'trailing_daily_avg' | 'trailing_hourly_avg' | 'platform_model' | 'seller_defined';
     as_of: string;
     ext?: GetSuccessDeliveryGoalProgressDeliveryProjectionExt;
@@ -11185,7 +11185,7 @@ export type GetSuccessDeliveryGoalProgressProjectionRange = {
 export type GetSuccessDeliveryGoalProgressSellerDeliveryProjection = {
     projected_impressions?: number;
     projected_spend?: number;
-    projected_end_state: 'on_pace' | 'complete' | 'underdelivery' | 'early_exhaustion';
+    projected_end_state: 'on_pace' | 'complete' | 'under_delivery' | 'early_exhaustion';
     basis: 'trailing_daily_avg' | 'trailing_hourly_avg' | 'platform_model' | 'seller_defined';
     as_of: string;
     ext?: GetSuccessDeliveryGoalProgressSellerDeliveryProjectionExt;
