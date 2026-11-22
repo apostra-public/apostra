@@ -28056,6 +28056,8 @@ class SearchResultObjectsKindMaterial(TypedDict):
     kind: Literal["material"]
     returned: float
     truncated: bool
+    productSheetImportAvailable: NotRequired[bool]
+    '\n    Whether the current seller can import products from a sheet.\n    '
 
 class SearchResultObjectsKindMixed(TypedDict):
     outcome: Literal["mixed"]
