@@ -1778,7 +1778,7 @@ class GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTargetThr
 
 GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTarget: TypeAlias = "GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTargetCostPerVariant | GetDeliverySuccessGetDeliveryGoalProgressVendorMetricOptimizationTargetThresholdRateVariant"
 
-GetDeliverySuccessGetDeliveryGoalVerdict: TypeAlias = Literal["on_pace", "complete", "underdelivery", "early_exhaustion"]
+GetDeliverySuccessGetDeliveryGoalVerdict: TypeAlias = Literal["on_pace", "complete", "under_delivery", "early_exhaustion"]
 
 GetDeliverySuccessGetDeliveryGoalDeliveryProjectionProjectedEndState: TypeAlias = GetDeliverySuccessGetDeliveryGoalVerdict
 
@@ -7803,7 +7803,7 @@ class GetSuccessDeliveryGoalProgressConstraintValue(TypedDict):
 class GetSuccessDeliveryGoalProgressDeliveryProjection(TypedDict):
     projected_impressions: NotRequired[float]
     projected_spend: NotRequired[float]
-    projected_end_state: Literal["on_pace", "complete", "underdelivery", "early_exhaustion"]
+    projected_end_state: Literal["on_pace", "complete", "under_delivery", "early_exhaustion"]
     basis: Literal["trailing_daily_avg", "trailing_hourly_avg", "platform_model", "seller_defined"]
     as_of: str
     ext: NotRequired[GetSuccessDeliveryGoalProgressDeliveryProjectionExt]
@@ -7816,7 +7816,7 @@ class GetSuccessDeliveryGoalProgressProjectionRange(TypedDict):
 class GetSuccessDeliveryGoalProgressSellerDeliveryProjection(TypedDict):
     projected_impressions: NotRequired[float]
     projected_spend: NotRequired[float]
-    projected_end_state: Literal["on_pace", "complete", "underdelivery", "early_exhaustion"]
+    projected_end_state: Literal["on_pace", "complete", "under_delivery", "early_exhaustion"]
     basis: Literal["trailing_daily_avg", "trailing_hourly_avg", "platform_model", "seller_defined"]
     as_of: str
     ext: NotRequired[GetSuccessDeliveryGoalProgressSellerDeliveryProjectionExt]
