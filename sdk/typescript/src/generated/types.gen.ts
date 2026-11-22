@@ -49107,6 +49107,10 @@ export type SearchResponses = {
                 kind: 'material';
                 returned: number;
                 truncated: boolean;
+                /**
+                 * Whether the current seller can import products from a sheet.
+                 */
+                productSheetImportAvailable?: boolean;
                 [key: string]: unknown;
             } | {
                 outcome: 'mixed';

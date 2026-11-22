@@ -96811,6 +96811,9 @@ paths:
                                 type: number
                               truncated:
                                 type: boolean
+                              productSheetImportAvailable:
+                                description: Whether the current seller can import products from a sheet.
+                                type: boolean
                             required:
                               - outcome
                               - kind
