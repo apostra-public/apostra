@@ -333,11 +333,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.ReviewBuyerChildAccountResult], self._request_with_response("review_buyer_child_account", input, account_id=account_id, timeout=timeout))
 
     def save_account(self, input: models.SaveAccountInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAccountResult:
-        "Create a child Account (omit id), rename one, or archive or restore it (isArchived). Each is recorded for website approval by an Organization administrator; repeat with the same idempotencyKey for the outcome. dryRun previews. settings.company saves at once. Never changes owners or members."
+        "Create a child Account (omit id), rename one, or archive or restore it (isArchived), each recorded for website approval by an Organization administrator; repeat the idempotencyKey for the outcome. dryRun previews. settings.company saves at once. autonomyPaused stops or clears a buyer account's stop."
         return cast("models.SaveAccountResult", self._request("save_account", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_account_with_response(self, input: models.SaveAccountInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAccountResult]:
-        "Create a child Account (omit id), rename one, or archive or restore it (isArchived). Each is recorded for website approval by an Organization administrator; repeat with the same idempotencyKey for the outcome. dryRun previews. settings.company saves at once. Never changes owners or members. Returns the data together with response headers and request ID."
+        "Create a child Account (omit id), rename one, or archive or restore it (isArchived), each recorded for website approval by an Organization administrator; repeat the idempotencyKey for the outcome. dryRun previews. settings.company saves at once. autonomyPaused stops or clears a buyer account's stop. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAccountResult], self._request_with_response("save_account", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_advertiser(self, input: models.SaveAdvertiserInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserResult:
@@ -589,11 +589,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SavePlaybookResult], self._request_with_response("save_playbook", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_project(self, input: models.SaveProjectInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveProjectResult:
-        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, or lead. A Project is one conversation plus its objective, attachments and the bounds its lead agent works inside. Wider bounds return approval_required."
+        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, lead, or autonomyPaused (stop; an administrator resumes). A Project is one conversation plus its objective, attachments and lead's bounds. Wider bounds return approval_required."
         return cast("models.SaveProjectResult", self._request("save_project", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_project_with_response(self, input: models.SaveProjectInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveProjectResult]:
-        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, or lead. A Project is one conversation plus its objective, attachments and the bounds its lead agent works inside. Wider bounds return approval_required. Returns the data together with response headers and request ID."
+        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, lead, or autonomyPaused (stop; an administrator resumes). A Project is one conversation plus its objective, attachments and lead's bounds. Wider bounds return approval_required. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveProjectResult], self._request_with_response("save_project", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_property_list(self, input: models.SavePropertyListInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SavePropertyListResult:
@@ -1014,11 +1014,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.ReviewBuyerChildAccountResult], await self._request_with_response("review_buyer_child_account", input, account_id=account_id, timeout=timeout))
 
     async def save_account(self, input: models.SaveAccountInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAccountResult:
-        "Create a child Account (omit id), rename one, or archive or restore it (isArchived). Each is recorded for website approval by an Organization administrator; repeat with the same idempotencyKey for the outcome. dryRun previews. settings.company saves at once. Never changes owners or members."
+        "Create a child Account (omit id), rename one, or archive or restore it (isArchived), each recorded for website approval by an Organization administrator; repeat the idempotencyKey for the outcome. dryRun previews. settings.company saves at once. autonomyPaused stops or clears a buyer account's stop."
         return cast("models.SaveAccountResult", await self._request("save_account", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_account_with_response(self, input: models.SaveAccountInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAccountResult]:
-        "Create a child Account (omit id), rename one, or archive or restore it (isArchived). Each is recorded for website approval by an Organization administrator; repeat with the same idempotencyKey for the outcome. dryRun previews. settings.company saves at once. Never changes owners or members. Returns the data together with response headers and request ID."
+        "Create a child Account (omit id), rename one, or archive or restore it (isArchived), each recorded for website approval by an Organization administrator; repeat the idempotencyKey for the outcome. dryRun previews. settings.company saves at once. autonomyPaused stops or clears a buyer account's stop. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAccountResult], await self._request_with_response("save_account", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_advertiser(self, input: models.SaveAdvertiserInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAdvertiserResult:
@@ -1270,11 +1270,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SavePlaybookResult], await self._request_with_response("save_playbook", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_project(self, input: models.SaveProjectInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveProjectResult:
-        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, or lead. A Project is one conversation plus its objective, attachments and the bounds its lead agent works inside. Wider bounds return approval_required."
+        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, lead, or autonomyPaused (stop; an administrator resumes). A Project is one conversation plus its objective, attachments and lead's bounds. Wider bounds return approval_required."
         return cast("models.SaveProjectResult", await self._request("save_project", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_project_with_response(self, input: models.SaveProjectInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveProjectResult]:
-        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, or lead. A Project is one conversation plus its objective, attachments and the bounds its lead agent works inside. Wider bounds return approval_required. Returns the data together with response headers and request ID."
+        "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, lead, or autonomyPaused (stop; an administrator resumes). A Project is one conversation plus its objective, attachments and lead's bounds. Wider bounds return approval_required. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveProjectResult], await self._request_with_response("save_project", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_property_list(self, input: models.SavePropertyListInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SavePropertyListResult:

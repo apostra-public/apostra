@@ -870,7 +870,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create a child Account (omit id), rename one, or archive or restore it (isArchived). Each is recorded for website approval by an Organization administrator; repeat with the same idempotencyKey for the outcome. dryRun previews. settings.company saves at once. Never changes owners or members."
+    "summary": "Create a child Account (omit id), rename one, or archive or restore it (isArchived), each recorded for website approval by an Organization administrator; repeat the idempotencyKey for the outcome. dryRun previews. settings.company saves at once. autonomyPaused stops or clears a buyer account's stop."
   },
   "save_advertiser": {
     "path": "/tools/save_advertiser",
@@ -1484,7 +1484,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, or lead. A Project is one conversation plus its objective, attachments and the bounds its lead agent works inside. Wider bounds return approval_required."
+    "summary": "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, lead, or autonomyPaused (stop; an administrator resumes). A Project is one conversation plus its objective, attachments and lead's bounds. Wider bounds return approval_required."
   },
   "save_property_list": {
     "path": "/tools/save_property_list",
