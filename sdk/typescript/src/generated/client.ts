@@ -801,14 +801,14 @@ export class Apostra extends Transport {
   /** Register a Sales, Creative or Proposal Agent, or update an owned Agent: rename, allow certification buys, or archive. To connect from a URL, send agentUrl with dryRun: true, show what was read, then send without dryRun. A connected agent is unverified as theirs. Returns the data together with response headers and request ID. */
   saveAgentWithResponse(input: SaveAgentInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAgentResult>> { return this.requestDetailed("save_agent", input, options) }
   /**
-   * Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them). Send recordId and expectedRevision with text, content or materialIds to correct it, or isArchived true to forget it or false to restore it. Only that agent saves new memories.
+   * Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them): recordId and expectedRevision with text, content or materialIds, or isArchived. Only that agent saves new memories, except a memory file (recordType file).
    *
    * @example
    * await client.saveAgentRecord(input, { idempotencyKey: 'stable-key' })
    */
   saveAgentRecord(input: SaveAgentRecordInput, options: WriteRequestOptions): Promise<SaveAgentRecordResult> { return this.request("save_agent_record", input, options) }
 
-  /** Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them). Send recordId and expectedRevision with text, content or materialIds to correct it, or isArchived true to forget it or false to restore it. Only that agent saves new memories. Returns the data together with response headers and request ID. */
+  /** Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them): recordId and expectedRevision with text, content or materialIds, or isArchived. Only that agent saves new memories, except a memory file (recordType file). Returns the data together with response headers and request ID. */
   saveAgentRecordWithResponse(input: SaveAgentRecordInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAgentRecordResult>> { return this.requestDetailed("save_agent_record", input, options) }
   /**
    * File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first.

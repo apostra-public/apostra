@@ -11231,14 +11231,14 @@ class SaveAgentRecordInput(TypedDict):
     '\n    The advertiser of a new advertiser record: the one the turn is for.\n    '
     campaignId: NotRequired[str]
     '\n    One of that advertiser’s campaigns a new advertiser record concerns.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
-    '\n    fact (true until replaced), event (happened at a time) or instruction (how a person wants the agent to work).\n    '
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
+    '\n    fact (true until replaced), event (happened at a time), instruction (how a person wants the agent to work), or file: the one memory page of the account or of an advertiser (the goal, what was learned, how work is done there, what was tried), with no topic. Save the whole page again to change it; never put one person’s own memory in it.\n    '
     topic: NotRequired[str]
     '\n    Short key a new fact or instruction is about, such as cpm-ceiling. A newer record on the same topic replaces the older one.\n    '
     occurredAt: NotRequired[str]
     '\n    When a new event happened. Events only.\n    '
     text: NotRequired[str]
-    '\n    The memory in words, at most 1,000 characters. Required for a new record.\n    '
+    '\n    The memory in words, at most 1,000 characters (a file 4,000). Required for a new record.\n    '
     content: NotRequired[dict[str, JsonValue] | None]
     '\n    Structured detail as one JSON object of at most 256 KB, such as measurement rows. null clears it on a correction.\n    '
     materialIds: NotRequired[list[str]]
@@ -11260,7 +11260,7 @@ class SaveAgentRecordSuccessAgentRecord(TypedDict):
     advertiserId: str | None
     campaignId: str | None
     userId: str | None
-    recordType: Literal["fact", "event", "instruction"]
+    recordType: Literal["fact", "event", "instruction", "file"]
     topic: str | None
     occurredAt: str | None
     text: str
@@ -23707,7 +23707,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
     recordScope: NotRequired[Literal["account", "advertiser", "person"]]
     '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
     '\n    For kind agent_record: only records on this topic, such as cpm-ceiling.\n    '
@@ -24041,7 +24041,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
     recordScope: NotRequired[Literal["account", "advertiser", "person"]]
     '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
     '\n    For kind agent_record: only records on this topic, such as cpm-ceiling.\n    '
@@ -24309,7 +24309,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
     recordScope: NotRequired[Literal["account", "advertiser", "person"]]
     '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
     '\n    For kind agent_record: only records on this topic, such as cpm-ceiling.\n    '
@@ -24604,7 +24604,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
     recordScope: NotRequired[Literal["account", "advertiser", "person"]]
     '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
     '\n    For kind agent_record: only records on this topic, such as cpm-ceiling.\n    '
@@ -24906,7 +24906,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
     recordScope: NotRequired[Literal["account", "advertiser", "person"]]
     '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
     '\n    For kind agent_record: only records on this topic, such as cpm-ceiling.\n    '
@@ -25210,7 +25210,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
     recordScope: NotRequired[Literal["account", "advertiser", "person"]]
     '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
     '\n    For kind agent_record: only records on this topic, such as cpm-ceiling.\n    '
@@ -25514,7 +25514,7 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
     recordScope: NotRequired[Literal["account", "advertiser", "person"]]
     '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
     '\n    For kind agent_record: only records on this topic, such as cpm-ceiling.\n    '
@@ -25850,7 +25850,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
     recordScope: NotRequired[Literal["account", "advertiser", "person"]]
     '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
     '\n    For kind agent_record: only records on this topic, such as cpm-ceiling.\n    '
@@ -26152,7 +26152,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
     recordScope: NotRequired[Literal["account", "advertiser", "person"]]
     '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
     '\n    For kind agent_record: only records on this topic, such as cpm-ceiling.\n    '
@@ -26450,7 +26450,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
     recordScope: NotRequired[Literal["account", "advertiser", "person"]]
     '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
     '\n    For kind agent_record: only records on this topic, such as cpm-ceiling.\n    '
@@ -26718,7 +26718,7 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
     recordScope: NotRequired[Literal["account", "advertiser", "person"]]
     '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
     '\n    For kind agent_record: only records on this topic, such as cpm-ceiling.\n    '
@@ -27086,7 +27086,7 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
     recordScope: NotRequired[Literal["account", "advertiser", "person"]]
     '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
     '\n    For kind agent_record: only records on this topic, such as cpm-ceiling.\n    '
@@ -27474,7 +27474,7 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
     recordScope: NotRequired[Literal["account", "advertiser", "person"]]
     '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
     '\n    For kind agent_record: only records on this topic, such as cpm-ceiling.\n    '
@@ -27776,7 +27776,7 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
     recordScope: NotRequired[Literal["account", "advertiser", "person"]]
     '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
-    recordType: NotRequired[Literal["fact", "event", "instruction"]]
+    recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
     '\n    For kind agent_record: only records on this topic, such as cpm-ceiling.\n    '
