@@ -28666,6 +28666,45 @@ paths:
                                       type: array
                                       items:
                                         type: string
+                                    requires:
+                                      anyOf:
+                                        - type: object
+                                          properties:
+                                            sellingMode:
+                                              type: string
+                                              const: storefront
+                                            message:
+                                              type: string
+                                            resolve:
+                                              type: object
+                                              properties:
+                                                tool:
+                                                  type: string
+                                                  const: save_seller
+                                                input:
+                                                  type: object
+                                                  properties:
+                                                    sellingMode:
+                                                      type: string
+                                                      const: storefront
+                                                  required:
+                                                    - sellingMode
+                                                  additionalProperties: false
+                                              required:
+                                                - tool
+                                                - input
+                                              additionalProperties: false
+                                          required:
+                                            - sellingMode
+                                            - message
+                                            - resolve
+                                          additionalProperties: false
+                                        - type: 'null'
+                                      description: >-
+                                        Set when the account type must change before this source can connect: the source
+                                        uses Apostra's managed sales agent, which the account's current type does not
+                                        include. `resolve` is the call an administrator of the billing organization
+                                        makes. Connecting the source before then is refused.
                                   required:
                                     - optionId
                                     - kind
@@ -28675,6 +28714,7 @@ paths:
                                     - connect
                                     - certification
                                     - knownLimits
+                                    - requires
                                   additionalProperties: false
                               brandRef:
                                 $ref: '#/components/schemas/get_success_ObjectBrandRef'
