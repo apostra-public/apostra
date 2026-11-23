@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "set-up-a-campaign",
-  "skillVersion": "1.21.0",
+  "skillVersion": "1.22.0",
   "scenarios": [
     {
       "id": "conversion-source-before-campaign",
@@ -183,6 +183,18 @@
         "The agent shows the brief it intends to save in full, says it is what every seller reads at discovery, and asks in one question whether to expand or refine it, offering target audience, KPIs and creative messaging themes.",
         "The agent calls save_campaign only after the buyer answers, saves the text the buyer agreed to, and sends briefConfirmed: true with it.",
         "The agent sends a brief the buyer gave it as a brief verbatim; confirming never summarises or truncates it."
+      ]
+    },
+    {
+      "id": "draft-before-billing-recommends-net-60",
+      "title": "Draft the first campaign before billing is done, and recommend net 60 for confirmation",
+      "given": "A new buyer with no billing details and no payment terms asks for a campaign in one message, naming an advertiser that does not exist in the account.",
+      "expect": [
+        "The agent says the advertiser was not found and offers to add it, instead of stopping.",
+        "The agent drafts the campaign from the details given and shows the brief for confirmation, instead of refusing until billing is done.",
+        "The agent says billing details and payment terms are needed before anything can be bought, and what each one is.",
+        "The agent recommends net 60 with one sentence of reason (every storefront accepts up to net 60 automatically, so a buy goes through without negotiating terms) and asks the buyer to confirm or choose another term.",
+        "The agent does not apply a payment term the buyer has not confirmed, and does not stage a media buy or launch the campaign while a readiness blocker is open."
       ]
     }
   ]

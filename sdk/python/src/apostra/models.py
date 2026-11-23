@@ -11856,7 +11856,7 @@ class SaveBillingInput(TypedDict):
     terms: NotRequired[SaveBillingInputTerms]
     '\n    Accept Terms.\n    '
     paymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90"]]
-    '\n    Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default. Returns approval_required. Send alone.\n    '
+    '\n    Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Recommend net_60, which sellers accept without review, and confirm with the buyer. Returns approval_required. Send alone.\n    '
     idempotencyKey: NotRequired[str]
     '\n    Key for paymentTerms (optional), paymentMethod and payNow (required); repeat it to read the outcome. A rejected, expired or failed approval needs a new key.\n    '
     plan: NotRequired[SaveBillingRequestSaveBillingPlan]
