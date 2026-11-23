@@ -1604,6 +1604,8 @@ paths:
                                 $ref: '#/components/schemas/generate_variants_success_GalleryApprovedOutputHash'
                               finalCreativeId:
                                 $ref: '#/components/schemas/generate_variants_success_GalleryFinalCreativeId'
+                              finalDestination:
+                                $ref: '#/components/schemas/generate_variants_success_GalleryFinalDestination'
                               generationPending:
                                 $ref: '#/components/schemas/generate_variants_success_GalleryGenerationPending'
                               terminal:
@@ -1644,6 +1646,8 @@ paths:
                                 $ref: '#/components/schemas/generate_variants_success_GalleryApprovedOutputHash'
                               finalCreativeId:
                                 $ref: '#/components/schemas/generate_variants_success_GalleryFinalCreativeId'
+                              finalDestination:
+                                $ref: '#/components/schemas/generate_variants_success_GalleryFinalDestination'
                               generationPending:
                                 $ref: '#/components/schemas/generate_variants_success_GalleryGenerationPending'
                               terminal:
@@ -1998,6 +2002,8 @@ paths:
                           - commitmentRecord
                           - scores
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -2982,6 +2988,26 @@ paths:
                         properties:
                           kind:
                             const: seller
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
                         required:
                           - kind
                     - if:
@@ -3355,6 +3381,8 @@ paths:
                           - propertyClaims
                           - collections
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -4338,6 +4366,26 @@ paths:
                         properties:
                           kind:
                             const: seller
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
                         required:
                           - kind
                     - if:
@@ -4685,6 +4733,8 @@ paths:
                           - commitmentRecord
                           - scores
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -5668,6 +5718,26 @@ paths:
                         properties:
                           kind:
                             const: seller
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
                         required:
                           - kind
                     - if:
@@ -6002,6 +6072,8 @@ paths:
                           - commitmentRecord
                           - scores
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -6986,6 +7058,26 @@ paths:
                         properties:
                           kind:
                             const: seller
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
                         required:
                           - kind
                     - if:
@@ -7320,6 +7412,8 @@ paths:
                           - commitmentRecord
                           - scores
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -8304,6 +8398,26 @@ paths:
                         properties:
                           kind:
                             const: seller
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
                         required:
                           - kind
                     - if:
@@ -8645,6 +8759,8 @@ paths:
                           - commitmentRecord
                           - scores
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -9630,6 +9746,26 @@ paths:
                         properties:
                           kind:
                             const: seller
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
                         required:
                           - kind
                     - if:
@@ -10855,6 +10991,26 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
                                   const: poweredByAgent
                             required:
                               - include
@@ -11183,6 +11339,8 @@ paths:
                           - commitmentRecord
                           - scores
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -12175,6 +12333,26 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
                                   const: poweredByAgent
                             required:
                               - include
@@ -12503,6 +12681,8 @@ paths:
                           - commitmentRecord
                           - scores
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -13488,6 +13668,26 @@ paths:
                         properties:
                           kind:
                             const: seller
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
                         required:
                           - kind
                     - if:
@@ -14718,6 +14918,26 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
                                   const: poweredByAgent
                             required:
                               - include
@@ -15941,6 +16161,26 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
                                   const: poweredByAgent
                             required:
                               - include
@@ -16267,6 +16507,8 @@ paths:
                           - commitmentRecord
                           - scores
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -17259,6 +17501,26 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
                                   const: poweredByAgent
                             required:
                               - include
@@ -17585,6 +17847,8 @@ paths:
                           - commitmentRecord
                           - scores
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -18577,6 +18841,26 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
                                   const: poweredByAgent
                             required:
                               - include
@@ -18909,6 +19193,8 @@ paths:
                           - commitmentRecord
                           - scores
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -19893,6 +20179,26 @@ paths:
                         properties:
                           kind:
                             const: seller
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
                         required:
                           - kind
                     - if:
@@ -20232,6 +20538,8 @@ paths:
                           - commitmentRecord
                           - scores
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -21216,6 +21524,26 @@ paths:
                         properties:
                           kind:
                             const: seller
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
                         required:
                           - kind
                     - if:
@@ -21555,6 +21883,8 @@ paths:
                           - commitmentRecord
                           - scores
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -22539,6 +22869,26 @@ paths:
                         properties:
                           kind:
                             const: seller
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
                         required:
                           - kind
                     - if:
@@ -22878,6 +23228,8 @@ paths:
                           - commitmentRecord
                           - scores
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -23869,6 +24221,26 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
                                   const: poweredByAgent
                             required:
                               - include
@@ -24201,6 +24573,8 @@ paths:
                           - commitmentRecord
                           - scores
                           - discoveryCard
+                          - decisionRecord
+                          - briefArtifact
                           - brief
                           - products
                           - evaluation
@@ -25186,6 +25560,26 @@ paths:
                         properties:
                           kind:
                             const: seller
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
                         required:
                           - kind
                     - if:
@@ -26416,6 +26810,26 @@ paths:
                           - properties:
                               include:
                                 contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
                                   const: poweredByAgent
                             required:
                               - include
@@ -27632,6 +28046,26 @@ paths:
                         properties:
                           kind:
                             const: seller
+                        required:
+                          - kind
+                    - if:
+                        anyOf:
+                          - properties:
+                              include:
+                                contains:
+                                  const: decisionRecord
+                            required:
+                              - include
+                          - properties:
+                              include:
+                                contains:
+                                  const: briefArtifact
+                            required:
+                              - include
+                      then:
+                        properties:
+                          kind:
+                            const: intelligence_run
                         required:
                           - kind
                     - if:
@@ -29203,6 +29637,7 @@ paths:
                               - audience
                               - rfp
                               - rfp_turn
+                              - intelligence_run
                               - library_request
                               - decision
                               - approval
@@ -38880,6 +39315,8 @@ paths:
                                 $ref: '#/components/schemas/open_variant_gallery_success_GalleryApprovedOutputHash'
                               finalCreativeId:
                                 $ref: '#/components/schemas/open_variant_gallery_success_GalleryFinalCreativeId'
+                              finalDestination:
+                                $ref: '#/components/schemas/open_variant_gallery_success_GalleryFinalDestination'
                               generationPending:
                                 $ref: '#/components/schemas/open_variant_gallery_success_GalleryGenerationPending'
                               terminal:
@@ -38920,6 +39357,8 @@ paths:
                                 $ref: '#/components/schemas/open_variant_gallery_success_GalleryApprovedOutputHash'
                               finalCreativeId:
                                 $ref: '#/components/schemas/open_variant_gallery_success_GalleryFinalCreativeId'
+                              finalDestination:
+                                $ref: '#/components/schemas/open_variant_gallery_success_GalleryFinalDestination'
                               generationPending:
                                 $ref: '#/components/schemas/open_variant_gallery_success_GalleryGenerationPending'
                               terminal:
@@ -52460,11 +52899,11 @@ paths:
       summary: >-
         Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft,
         selected output, approval, or finalisation. It never generates; generate_variants does. To save an approved
-        output to the Library, use save_creative with fromCreativeSessionOutput.
+        output to the Library, finalise it with destination library.
       description: >-
         Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft,
         selected output, approval, or finalisation. It never generates; generate_variants does. To save an approved
-        output to the Library, use save_creative with fromCreativeSessionOutput.
+        output to the Library, finalise it with destination library.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -52776,6 +53215,15 @@ paths:
                       type: string
                       minLength: 1
                       maxLength: 5000
+                    destination:
+                      description: >-
+                        campaign (default for a campaign session) or library: a complete ad in the advertiser Library,
+                        no campaign attached. An output saves once; attach a Library creative with save_creative
+                        campaignIds.
+                      type: string
+                      enum:
+                        - campaign
+                        - library
                   required:
                     - approvedVariantId
                     - approvedSessionRevision
@@ -67230,6 +67678,7 @@ paths:
                         - media_buy
                         - rfp
                         - rfp_turn
+                        - intelligence_run
                         - library_request
                         - ask
                         - conversation
@@ -68179,13 +68628,22 @@ paths:
                           description: 'For kind decision: true for the shadow brain.'
                           type: boolean
                         after:
-                          description: 'For kind decision: at or after this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or after this date-time.'
                           type: string
                           format: date-time
                         through:
-                          description: 'For kind decision: at or before this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or before this date-time.'
                           type: string
                           format: date-time
+                        buyingMode:
+                          description: >-
+                            For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page
+                            lists.
+                          type: string
+                          enum:
+                            - brief
+                            - wholesale
+                            - refine
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -70124,13 +70582,22 @@ paths:
                           description: 'For kind decision: true for the shadow brain.'
                           type: boolean
                         after:
-                          description: 'For kind decision: at or after this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or after this date-time.'
                           type: string
                           format: date-time
                         through:
-                          description: 'For kind decision: at or before this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or before this date-time.'
                           type: string
                           format: date-time
+                        buyingMode:
+                          description: >-
+                            For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page
+                            lists.
+                          type: string
+                          enum:
+                            - brief
+                            - wholesale
+                            - refine
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -72871,13 +73338,22 @@ paths:
                           description: 'For kind decision: true for the shadow brain.'
                           type: boolean
                         after:
-                          description: 'For kind decision: at or after this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or after this date-time.'
                           type: string
                           format: date-time
                         through:
-                          description: 'For kind decision: at or before this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or before this date-time.'
                           type: string
                           format: date-time
+                        buyingMode:
+                          description: >-
+                            For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page
+                            lists.
+                          type: string
+                          enum:
+                            - brief
+                            - wholesale
+                            - refine
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -74808,13 +75284,22 @@ paths:
                           description: 'For kind decision: true for the shadow brain.'
                           type: boolean
                         after:
-                          description: 'For kind decision: at or after this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or after this date-time.'
                           type: string
                           format: date-time
                         through:
-                          description: 'For kind decision: at or before this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or before this date-time.'
                           type: string
                           format: date-time
+                        buyingMode:
+                          description: >-
+                            For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page
+                            lists.
+                          type: string
+                          enum:
+                            - brief
+                            - wholesale
+                            - refine
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -76742,13 +77227,22 @@ paths:
                           description: 'For kind decision: true for the shadow brain.'
                           type: boolean
                         after:
-                          description: 'For kind decision: at or after this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or after this date-time.'
                           type: string
                           format: date-time
                         through:
-                          description: 'For kind decision: at or before this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or before this date-time.'
                           type: string
                           format: date-time
+                        buyingMode:
+                          description: >-
+                            For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page
+                            lists.
+                          type: string
+                          enum:
+                            - brief
+                            - wholesale
+                            - refine
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -78676,13 +79170,22 @@ paths:
                           description: 'For kind decision: true for the shadow brain.'
                           type: boolean
                         after:
-                          description: 'For kind decision: at or after this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or after this date-time.'
                           type: string
                           format: date-time
                         through:
-                          description: 'For kind decision: at or before this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or before this date-time.'
                           type: string
                           format: date-time
+                        buyingMode:
+                          description: >-
+                            For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page
+                            lists.
+                          type: string
+                          enum:
+                            - brief
+                            - wholesale
+                            - refine
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -80617,13 +81120,22 @@ paths:
                           description: 'For kind decision: true for the shadow brain.'
                           type: boolean
                         after:
-                          description: 'For kind decision: at or after this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or after this date-time.'
                           type: string
                           format: date-time
                         through:
-                          description: 'For kind decision: at or before this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or before this date-time.'
                           type: string
                           format: date-time
+                        buyingMode:
+                          description: >-
+                            For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page
+                            lists.
+                          type: string
+                          enum:
+                            - brief
+                            - wholesale
+                            - refine
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -84209,13 +84721,22 @@ paths:
                           description: 'For kind decision: true for the shadow brain.'
                           type: boolean
                         after:
-                          description: 'For kind decision: at or after this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or after this date-time.'
                           type: string
                           format: date-time
                         through:
-                          description: 'For kind decision: at or before this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or before this date-time.'
                           type: string
                           format: date-time
+                        buyingMode:
+                          description: >-
+                            For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page
+                            lists.
+                          type: string
+                          enum:
+                            - brief
+                            - wholesale
+                            - refine
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -86973,13 +87494,22 @@ paths:
                           description: 'For kind decision: true for the shadow brain.'
                           type: boolean
                         after:
-                          description: 'For kind decision: at or after this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or after this date-time.'
                           type: string
                           format: date-time
                         through:
-                          description: 'For kind decision: at or before this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or before this date-time.'
                           type: string
                           format: date-time
+                        buyingMode:
+                          description: >-
+                            For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page
+                            lists.
+                          type: string
+                          enum:
+                            - brief
+                            - wholesale
+                            - refine
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -89732,13 +90262,22 @@ paths:
                           description: 'For kind decision: true for the shadow brain.'
                           type: boolean
                         after:
-                          description: 'For kind decision: at or after this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or after this date-time.'
                           type: string
                           format: date-time
                         through:
-                          description: 'For kind decision: at or before this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or before this date-time.'
                           type: string
                           format: date-time
+                        buyingMode:
+                          description: >-
+                            For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page
+                            lists.
+                          type: string
+                          enum:
+                            - brief
+                            - wholesale
+                            - refine
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -91676,13 +92215,22 @@ paths:
                           description: 'For kind decision: true for the shadow brain.'
                           type: boolean
                         after:
-                          description: 'For kind decision: at or after this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or after this date-time.'
                           type: string
                           format: date-time
                         through:
-                          description: 'For kind decision: at or before this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or before this date-time.'
                           type: string
                           format: date-time
+                        buyingMode:
+                          description: >-
+                            For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page
+                            lists.
+                          type: string
+                          enum:
+                            - brief
+                            - wholesale
+                            - refine
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -93617,13 +94165,22 @@ paths:
                           description: 'For kind decision: true for the shadow brain.'
                           type: boolean
                         after:
-                          description: 'For kind decision: at or after this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or after this date-time.'
                           type: string
                           format: date-time
                         through:
-                          description: 'For kind decision: at or before this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or before this date-time.'
                           type: string
                           format: date-time
+                        buyingMode:
+                          description: >-
+                            For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page
+                            lists.
+                          type: string
+                          enum:
+                            - brief
+                            - wholesale
+                            - refine
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -95558,13 +96115,22 @@ paths:
                           description: 'For kind decision: true for the shadow brain.'
                           type: boolean
                         after:
-                          description: 'For kind decision: at or after this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or after this date-time.'
                           type: string
                           format: date-time
                         through:
-                          description: 'For kind decision: at or before this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or before this date-time.'
                           type: string
                           format: date-time
+                        buyingMode:
+                          description: >-
+                            For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page
+                            lists.
+                          type: string
+                          enum:
+                            - brief
+                            - wholesale
+                            - refine
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -97500,13 +98066,22 @@ paths:
                           description: 'For kind decision: true for the shadow brain.'
                           type: boolean
                         after:
-                          description: 'For kind decision: at or after this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or after this date-time.'
                           type: string
                           format: date-time
                         through:
-                          description: 'For kind decision: at or before this date-time.'
+                          description: 'For kinds decision and intelligence_run: at or before this date-time.'
                           type: string
                           format: date-time
+                        buyingMode:
+                          description: >-
+                            For kind intelligence_run: runs of this mode; brief is the buyer briefs the Briefs page
+                            lists.
+                          type: string
+                          enum:
+                            - brief
+                            - wholesale
+                            - refine
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -98514,6 +99089,7 @@ paths:
                               - $ref: '#/components/schemas/search_success_SearchProposalPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchRfpPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchRfpTurnPageOutput'
+                              - $ref: '#/components/schemas/search_success_SearchIntelligenceRunPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchLibraryRequestPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchDecisionPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchApprovalPageOutput'
@@ -98636,6 +99212,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchProposalPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchRfpPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchRfpTurnPageOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchIntelligenceRunPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchLibraryRequestPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchDecisionPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchApprovalPageOutput'
@@ -98685,6 +99262,7 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchProposalUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchRfpUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchRfpTurnUnavailableOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchIntelligenceRunUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchLibraryRequestUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchDecisionUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchApprovalUnavailableOutput'
@@ -100372,6 +100950,11 @@ components:
     generate_variants_success_GalleryFinalCreativeId:
       type: string
       minLength: 1
+    generate_variants_success_GalleryFinalDestination:
+      type: string
+      enum:
+        - campaign
+        - library
     generate_variants_success_GalleryGenerationPending:
       type: boolean
     generate_variants_success_GalleryTerminal:
@@ -110627,6 +111210,11 @@ components:
     open_variant_gallery_success_GalleryFinalCreativeId:
       type: string
       minLength: 1
+    open_variant_gallery_success_GalleryFinalDestination:
+      type: string
+      enum:
+        - campaign
+        - library
     open_variant_gallery_success_GalleryGenerationPending:
       type: boolean
     open_variant_gallery_success_GalleryTerminal:
@@ -118443,6 +119031,8 @@ components:
               $ref: '#/components/schemas/save_creative_session_success_CreativeSessionGalleryApprovedOutputHash'
             finalCreativeId:
               $ref: '#/components/schemas/save_creative_session_success_CreativeSessionGalleryFinalCreativeId'
+            finalDestination:
+              $ref: '#/components/schemas/save_creative_session_success_CreativeSessionGalleryFinalDestination'
             generationPending:
               $ref: '#/components/schemas/save_creative_session_success_CreativeSessionGalleryGenerationPending'
             terminal:
@@ -118483,6 +119073,8 @@ components:
               $ref: '#/components/schemas/save_creative_session_success_CreativeSessionGalleryApprovedOutputHash'
             finalCreativeId:
               $ref: '#/components/schemas/save_creative_session_success_CreativeSessionGalleryFinalCreativeId'
+            finalDestination:
+              $ref: '#/components/schemas/save_creative_session_success_CreativeSessionGalleryFinalDestination'
             generationPending:
               $ref: '#/components/schemas/save_creative_session_success_CreativeSessionGalleryGenerationPending'
             terminal:
@@ -118618,6 +119210,11 @@ components:
     save_creative_session_success_CreativeSessionGalleryFinalCreativeId:
       type: string
       minLength: 1
+    save_creative_session_success_CreativeSessionGalleryFinalDestination:
+      type: string
+      enum:
+        - campaign
+        - library
     save_creative_session_success_CreativeSessionGalleryGenerationPending:
       type: boolean
     save_creative_session_success_CreativeSessionGalleryTerminal:
@@ -133080,6 +133677,35 @@ components:
         - kind
       additionalProperties:
         $ref: '#/components/schemas/search_success_SearchRfpTurnPageOutputValue'
+    search_success_SearchIntelligenceRunPageOutput:
+      type: object
+      properties:
+        total:
+          $ref: '#/components/schemas/search_success_SearchIntelligenceRunPageOutputTotal'
+        totalLowerBound:
+          $ref: '#/components/schemas/search_success_SearchIntelligenceRunPageOutputTotalLowerBound'
+        returned:
+          $ref: '#/components/schemas/search_success_SearchIntelligenceRunPageOutputReturned'
+        hasMore:
+          $ref: '#/components/schemas/search_success_SearchIntelligenceRunPageOutputHasMore'
+        truncated:
+          $ref: '#/components/schemas/search_success_SearchIntelligenceRunPageOutputTruncated'
+        nextCursor:
+          $ref: '#/components/schemas/search_success_SearchIntelligenceRunPageOutputNextCursor'
+        results:
+          $ref: '#/components/schemas/search_success_SearchIntelligenceRunPageOutputResults'
+        outcome:
+          type: string
+          const: page_intelligence_run
+        kind:
+          type: string
+          const: intelligence_run
+      required:
+        - results
+        - outcome
+        - kind
+      additionalProperties:
+        $ref: '#/components/schemas/search_success_SearchIntelligenceRunPageOutputValue'
     search_success_SearchLibraryRequestPageOutput:
       type: object
       properties:
@@ -134223,6 +134849,25 @@ components:
         kind:
           type: string
           const: rfp_turn
+        unavailable:
+          type: string
+        message:
+          type: string
+      required:
+        - outcome
+        - kind
+        - unavailable
+        - message
+      additionalProperties: {}
+    search_success_SearchIntelligenceRunUnavailableOutput:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: unavailable_intelligence_run
+        kind:
+          type: string
+          const: intelligence_run
         unavailable:
           type: string
         message:
@@ -138540,6 +139185,113 @@ components:
             additionalProperties: false
         additionalProperties: {}
     search_success_SearchRfpTurnPageOutputValue: {}
+    search_success_SearchIntelligenceRunPageOutputTotal:
+      type: number
+    search_success_SearchIntelligenceRunPageOutputTotalLowerBound:
+      type: number
+    search_success_SearchIntelligenceRunPageOutputReturned:
+      type: number
+    search_success_SearchIntelligenceRunPageOutputHasMore:
+      type: boolean
+    search_success_SearchIntelligenceRunPageOutputTruncated:
+      type: boolean
+    search_success_SearchIntelligenceRunPageOutputNextCursor:
+      type: string
+    search_success_SearchIntelligenceRunPageOutputResults:
+      type: array
+      items:
+        type: object
+        properties:
+          advertiserId:
+            type: string
+          name:
+            type:
+              - string
+              - 'null'
+          sandbox:
+            type: boolean
+          sourceType:
+            anyOf:
+              - type: string
+                enum:
+                  - inline
+                  - url
+                  - file
+              - type: 'null'
+            description: 'Where the items come from: url when url is set, file when file is set.'
+          lastChangeSummary:
+            anyOf:
+              - type: object
+                properties:
+                  added:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  updated:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  unchanged:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  removed:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                required:
+                  - added
+                  - updated
+                  - unchanged
+                  - removed
+                additionalProperties: false
+              - type: 'null'
+            description: Items in the latest version against the one before it.
+          transform:
+            anyOf:
+              - type: object
+                properties:
+                  name:
+                    type: string
+                  updatedAt:
+                    type: string
+                required:
+                  - name
+                  - updatedAt
+                additionalProperties: false
+              - type: 'null'
+            description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
+        additionalProperties: {}
+    search_success_SearchIntelligenceRunPageOutputValue: {}
     search_success_SearchLibraryRequestPageOutputTotal:
       type: number
     search_success_SearchLibraryRequestPageOutputTotalLowerBound:
