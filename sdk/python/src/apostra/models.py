@@ -2230,8 +2230,8 @@ class GetInputKindAdvertiserAccess(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -2369,8 +2369,8 @@ class GetInputKindAgentAndBuyerAgentAndProjectAndSkillAndInventorySourceAndAdver
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -2522,8 +2522,8 @@ class GetInputKindAgentRecord(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -2657,8 +2657,8 @@ class GetInputKindAudience(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -2796,8 +2796,8 @@ class GetInputKindBuyerRfp(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -2933,8 +2933,8 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -3072,8 +3072,8 @@ class GetInputKindConnection(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -3211,8 +3211,8 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -3348,8 +3348,8 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -3487,8 +3487,8 @@ class GetInputKindCreativeEngine(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -3624,8 +3624,8 @@ class GetInputKindCreativeFormat(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -3761,8 +3761,8 @@ class GetInputKindCreativeSession(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -3898,8 +3898,8 @@ class GetInputKindMaterial(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -4037,8 +4037,8 @@ class GetInputKindProposal(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -4176,8 +4176,8 @@ class GetInputKindSeller(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -4315,8 +4315,8 @@ class GetInputKindSession(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -4454,8 +4454,8 @@ class GetInputKindSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesA
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -4607,8 +4607,8 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -4744,8 +4744,8 @@ class GetInputKindWholesaleProductWithSourceId(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: NotRequired[Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]]
@@ -4897,8 +4897,8 @@ class GetInputKindWorkItem(TypedDict):
     '\n    For kind agent with include diagnostics: one validation run id taken from validationRuns.\n    '
     variantId: NotRequired[str]
     '\n    creative_session preview: a variants[].build_variant_id; omit for the saved draft.\n    '
-    placement: NotRequired[Literal["facebook_feed", "instagram_feed"]]
-    '\n    Meta preview: facebook_feed (creative_session default) or instagram_feed.\n    '
+    placement: NotRequired[Literal["facebook_feed", "instagram_feed", "facebook_stories", "instagram_stories", "facebook_reels", "instagram_reels"]]
+    '\n    Meta preview placement; the session default is facebook_feed.\n    '
     pageId: NotRequired[str]
     '\n    creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.\n    '
     workItemKind: Literal["creative_review", "media_buy_approval", "modular_source", "contract_conflict"]
