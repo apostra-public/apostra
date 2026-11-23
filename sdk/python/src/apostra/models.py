@@ -21068,9 +21068,9 @@ class SaveProjectInputBounds(TypedDict):
     human_review_required: NotRequired[bool]
     budget: SaveProjectInputBoundsBudget
     autonomousActions: list[Literal["move_budget", "change_pacing", "pause_or_resume_media_buy", "assign_approved_creative"]]
-    '\n    The actions the lead may take without asking: move_budget, change_pacing, pause_or_resume_media_buy, assign_approved_creative.\n    '
+    '\n    The actions the lead may take without asking.\n    '
     limits: SaveProjectInputBoundsLimits
-    '\n    Daily action count and IU cap for autonomous work.\n    '
+    '\n    Daily action count and IU cap.\n    '
     targets: SaveProjectInputBoundsTargets
     '\n    The media buys autonomous actions may change.\n    '
     custom_policies: NotRequired[list[JsonValue]]
@@ -21082,6 +21082,7 @@ class SaveProjectInputBoundsBudget(TypedDict):
     accounting_mode: NotRequired[Literal["gross_commitment", "verified_net_cost"]]
     per_seller_max_pct: NotRequired[float]
     reallocation_threshold: float
+    '\n    An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total` means unlimited.\n    '
     allocations: NotRequired[dict[str, SaveProjectInputBoundsBudgetAllocationsValue]]
     periods: NotRequired[list[SaveProjectInputBoundsBudgetPeriodsItem]]
 
@@ -21110,13 +21111,13 @@ class SaveProjectInputBoundsFlight(TypedDict):
 
 class SaveProjectInputBoundsLimits(TypedDict):
     maxActionsPerDay: NotRequired[int]
-    '\n    Autonomous actions allowed per day, 1 to 50. Default 10.\n    '
+    '\n    Autonomous actions allowed per day.\n    '
     iuBudget: NotRequired[float | None]
     '\n    The Project\'s cap in IUs, or null for the account\'s spending cap alone.\n    '
 
 class SaveProjectInputBoundsTargets(TypedDict):
     mediaBuyIds: list[SaveProjectRequestBoundsTargetsMediaBuyIdsItem]
-    '\n    Attached media buys the lead may change, each listed. A buy added later is a wider revision.\n    '
+    '\n    Attached media buys the lead may change. A buy added later is a wider revision.\n    '
 
 class SaveProjectInputDetach(TypedDict):
     kind: SaveProjectRequestDetachKind
@@ -21269,6 +21270,7 @@ class SaveProjectSuccessObjectBoundsBudget(TypedDict):
     accounting_mode: NotRequired[Literal["gross_commitment", "verified_net_cost"]]
     per_seller_max_pct: NotRequired[float]
     reallocation_threshold: float
+    '\n    An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total` means unlimited.\n    '
     allocations: NotRequired[dict[str, SaveProjectSuccessObjectBoundsBudgetAllocationsValue]]
     periods: NotRequired[list[SaveProjectSuccessObjectBoundsBudgetPeriodsItem]]
 
@@ -21301,13 +21303,13 @@ class SaveProjectSuccessObjectBoundsFlight(TypedDict):
 
 class SaveProjectSuccessObjectBoundsLimits(TypedDict):
     maxActionsPerDay: int
-    '\n    Autonomous actions allowed per day, 1 to 50. Default 10.\n    '
+    '\n    Autonomous actions allowed per day.\n    '
     iuBudget: float | None
     '\n    The Project\'s cap in IUs, or null for the account\'s spending cap alone.\n    '
 
 class SaveProjectSuccessObjectBoundsTargets(TypedDict):
     mediaBuyIds: list[SaveProjectSuccessObjectBoundsTargetsMediaBuyIdsItem]
-    '\n    Attached media buys the lead may change, each listed. A buy added later is a wider revision.\n    '
+    '\n    Attached media buys the lead may change. A buy added later is a wider revision.\n    '
 
 SaveProjectSuccessObjectBoundsTargetsMediaBuyIdsItem: TypeAlias = str
 
@@ -21322,9 +21324,9 @@ class SaveProjectSuccessObjectBoundsValue(TypedDict):
     human_review_required: NotRequired[bool]
     budget: SaveProjectSuccessObjectBoundsBudget
     autonomousActions: list[Literal["move_budget", "change_pacing", "pause_or_resume_media_buy", "assign_approved_creative"]]
-    '\n    The actions the lead may take without asking: move_budget, change_pacing, pause_or_resume_media_buy, assign_approved_creative.\n    '
+    '\n    The actions the lead may take without asking.\n    '
     limits: SaveProjectSuccessObjectBoundsLimits
-    '\n    Daily action count and IU cap for autonomous work.\n    '
+    '\n    Daily action count and IU cap.\n    '
     targets: SaveProjectSuccessObjectBoundsTargets
     '\n    The media buys autonomous actions may change.\n    '
     revision: int
@@ -21414,6 +21416,7 @@ class SaveProjectSuccessProjectBoundsBudget(TypedDict):
     accounting_mode: NotRequired[Literal["gross_commitment", "verified_net_cost"]]
     per_seller_max_pct: NotRequired[float]
     reallocation_threshold: float
+    '\n    An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval; `total` means unlimited.\n    '
     allocations: NotRequired[dict[str, SaveProjectSuccessProjectBoundsBudgetAllocationsValue]]
     periods: NotRequired[list[SaveProjectSuccessProjectBoundsBudgetPeriodsItem]]
 
@@ -21446,13 +21449,13 @@ class SaveProjectSuccessProjectBoundsFlight(TypedDict):
 
 class SaveProjectSuccessProjectBoundsLimits(TypedDict):
     maxActionsPerDay: int
-    '\n    Autonomous actions allowed per day, 1 to 50. Default 10.\n    '
+    '\n    Autonomous actions allowed per day.\n    '
     iuBudget: float | None
     '\n    The Project\'s cap in IUs, or null for the account\'s spending cap alone.\n    '
 
 class SaveProjectSuccessProjectBoundsTargets(TypedDict):
     mediaBuyIds: list[SaveProjectSuccessProjectBoundsTargetsMediaBuyIdsItem]
-    '\n    Attached media buys the lead may change, each listed. A buy added later is a wider revision.\n    '
+    '\n    Attached media buys the lead may change. A buy added later is a wider revision.\n    '
 
 SaveProjectSuccessProjectBoundsTargetsMediaBuyIdsItem: TypeAlias = str
 
@@ -21467,9 +21470,9 @@ class SaveProjectSuccessProjectBoundsValue(TypedDict):
     human_review_required: NotRequired[bool]
     budget: SaveProjectSuccessProjectBoundsBudget
     autonomousActions: list[Literal["move_budget", "change_pacing", "pause_or_resume_media_buy", "assign_approved_creative"]]
-    '\n    The actions the lead may take without asking: move_budget, change_pacing, pause_or_resume_media_buy, assign_approved_creative.\n    '
+    '\n    The actions the lead may take without asking.\n    '
     limits: SaveProjectSuccessProjectBoundsLimits
-    '\n    Daily action count and IU cap for autonomous work.\n    '
+    '\n    Daily action count and IU cap.\n    '
     targets: SaveProjectSuccessProjectBoundsTargets
     '\n    The media buys autonomous actions may change.\n    '
     revision: int
@@ -24062,8 +24065,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchFilter]
@@ -24079,7 +24082,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
+    '\n    For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
@@ -24363,8 +24366,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict)
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter]
@@ -24396,8 +24399,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevisionFilter]
@@ -24413,7 +24416,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
+    '\n    For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
@@ -24681,7 +24684,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
+    '\n    For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
@@ -24959,8 +24962,8 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter]
@@ -24976,7 +24979,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
+    '\n    For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
@@ -25261,8 +25264,8 @@ class SearchInputKindAdServerTargeting(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindAdServerTargetingFilter]
@@ -25278,7 +25281,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
+    '\n    For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
@@ -25563,8 +25566,8 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSessionFilter]
@@ -25582,7 +25585,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
+    '\n    For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
@@ -25869,8 +25872,8 @@ class SearchInputKindBuyerRfp(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindBuyerRfpFilter
@@ -25886,7 +25889,7 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
+    '\n    For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
@@ -26171,8 +26174,8 @@ class SearchInputKindCreative(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindCreativeFilter]
@@ -26205,8 +26208,8 @@ class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeAssetAndCatalogFilter
@@ -26222,7 +26225,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
+    '\n    For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
@@ -26507,8 +26510,8 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter
@@ -26524,7 +26527,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
+    '\n    For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
@@ -26807,8 +26810,8 @@ class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeCollectionWithFilterCampaignIdFilter
@@ -26824,7 +26827,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
+    '\n    For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
@@ -27090,7 +27093,7 @@ class SearchInputKindCreativeFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
+    '\n    For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
@@ -27445,8 +27448,8 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignId(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter
@@ -27460,7 +27463,7 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
+    '\n    For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
@@ -27747,8 +27750,8 @@ class SearchInputKindEventSource(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindEventSourceFilter]
@@ -27785,8 +27788,8 @@ class SearchInputKindInventorySourceItem(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindInventorySourceItemFilter
@@ -27829,8 +27832,8 @@ class SearchInputKindProposal(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindProposalFilter
@@ -27846,7 +27849,7 @@ class SearchInputKindProposalFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
+    '\n    For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
@@ -28131,8 +28134,8 @@ class SearchInputKindSourceAccount(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: str
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: NotRequired[SearchInputKindSourceAccountFilter]
@@ -28148,7 +28151,7 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     targetKind: NotRequired[Literal["seller", "creative_engine"]]
     '\n    For kind connection: list connections to sellers (the default) or to creative engines.\n    '
     ids: NotRequired[list[str]]
-    '\n    For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
+    '\n    For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come back in missingIds. Not used for kind seller: send sellerAccountIds.\n    '
     sellerAccountIds: NotRequired[list[int]]
     '\n    For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids, which are different numbers. Also narrows buyer wholesale_product browse to these sellers; omit for every seller.\n    '
     memberOf: NotRequired[int]
@@ -28433,8 +28436,8 @@ class SearchInputKindTargetingValue(TypedDict):
     '\n    For kind campaign in a seller account, with filter.advertiserId: the self-serve buyer account id issued by the Campaigns Page launch. Never invent one.\n    '
     scope: NotRequired[Literal["unit"]]
     '\n    For kind material with include ["browse"] only: "unit" browses single pages, slides, and sheets instead of whole documents. Takes no query or filter. Rows go to the app; you get the count.\n    '
-    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery"]]]
-    '\n    One extra projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy: progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness; executionResources with filter.productId and filter.resourceKind; or creativeFit with filter.assetId: whether each product fits that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
+    include: NotRequired[list[Literal["evidence_matches", "browse", "commitmentRecord", "executionReadiness", "executionResources", "creativeFit", "price_paid", "authoring", "adServerMetadata", "pulse", "deliverySummary", "progress", "outcome", "delivery", "assets"]]]
+    '\n    One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP\'s response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).\n    '
     sourceId: NotRequired[str]
     '\n    One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.\n    '
     filter: SearchInputKindTargetingValueFilter

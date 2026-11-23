@@ -1075,14 +1075,14 @@ export class Apostra extends Transport {
   /** Write selling guidance. `active` turns Playbook prose and its optional seller note into proposed Lessons; the active Playbook is unchanged. `pricing` replaces facts. `discounts` sets or removes brand/operator rules. `limits` sets what your brain may offer. Halves never roll back each other. Returns the data together with response headers and request ID. */
   savePlaybookWithResponse(input: SavePlaybookInput, options: WriteRequestOptions): Promise<ResponseDetails<SavePlaybookResult>> { return this.requestDetailed("save_playbook", input, options) }
   /**
-   * Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, lead, or autonomyPaused (stop; an administrator resumes). A Project is one conversation plus its objective, attachments and lead's bounds. Wider bounds return approval_required.
+   * Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, lead, or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required. reallocation_threshold is a currency amount.
    *
    * @example
    * await client.saveProject(input, { idempotencyKey: 'stable-key' })
    */
   saveProject(input: SaveProjectInput, options: WriteRequestOptions): Promise<SaveProjectResult> { return this.request("save_project", input, options) }
 
-  /** Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, lead, or autonomyPaused (stop; an administrator resumes). A Project is one conversation plus its objective, attachments and lead's bounds. Wider bounds return approval_required. Returns the data together with response headers and request ID. */
+  /** Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, lead, or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required. reallocation_threshold is a currency amount. Returns the data together with response headers and request ID. */
   saveProjectWithResponse(input: SaveProjectInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveProjectResult>> { return this.requestDetailed("save_project", input, options) }
   /**
    * Create, update, archive, restore, or AAO-check an advertiser property list. Check uses identifiers without saving. Search/get read saved lists.

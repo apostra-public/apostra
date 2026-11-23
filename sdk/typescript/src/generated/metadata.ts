@@ -1484,7 +1484,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, lead, or autonomyPaused (stop; an administrator resumes). A Project is one conversation plus its objective, attachments and lead's bounds. Wider bounds return approval_required."
+    "summary": "Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds, lead, or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required. reallocation_threshold is a currency amount."
   },
   "save_property_list": {
     "path": "/tools/save_property_list",
