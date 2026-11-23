@@ -1885,7 +1885,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -1896,8 +1898,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -1991,6 +1993,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -3205,7 +3208,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -3216,8 +3221,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -3313,6 +3318,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -4502,7 +4508,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -4513,8 +4521,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -4608,6 +4616,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -5784,7 +5793,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -5795,8 +5806,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -5890,6 +5901,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -7067,7 +7079,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -7078,8 +7092,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -7173,6 +7187,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -8357,7 +8372,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -8368,8 +8385,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -8463,6 +8480,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -9646,7 +9664,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -9657,8 +9677,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -10827,7 +10847,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -10838,8 +10860,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -10933,6 +10955,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -12118,7 +12141,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -12129,8 +12154,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -12218,6 +12243,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -13401,7 +13427,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -13412,8 +13440,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -14591,7 +14619,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -14602,8 +14632,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -15775,7 +15805,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -15786,8 +15818,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -15881,6 +15913,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -17064,7 +17097,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -17075,8 +17110,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -17164,6 +17199,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -18347,7 +18383,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -18358,8 +18396,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -18453,6 +18491,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -19635,7 +19674,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -19646,8 +19687,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -19741,6 +19782,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -20923,7 +20965,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -20934,8 +20978,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -21029,6 +21073,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -22211,7 +22256,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -22222,8 +22269,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -22317,6 +22364,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -23499,7 +23547,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -23510,8 +23560,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -23605,6 +23655,7 @@ paths:
                           - paidResults
                           - inventory
                           - preview
+                          - platform_preview
                           - items
                           - history
                           - report
@@ -24788,7 +24839,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -24799,8 +24852,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
@@ -25978,7 +26031,9 @@ paths:
                       type: string
                       minLength: 1
                     placement:
-                      description: Meta preview placement; the session default is facebook_feed.
+                      description: >-
+                        Meta preview placement; the default is facebook_feed. A Creative is offered only the placements
+                        its format declares.
                       type: string
                       enum:
                         - facebook_feed
@@ -25989,8 +26044,8 @@ paths:
                         - instagram_reels
                     pageId:
                       description: >-
-                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
-                        account with several Pages and a Creative that keeps none.
+                        creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account
+                        with several Pages and a Creative that keeps none.
                       type: string
                       minLength: 1
                     sourceId:
