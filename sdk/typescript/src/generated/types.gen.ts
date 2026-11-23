@@ -956,7 +956,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1224,7 +1224,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'propertyClaims' | 'collections' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'propertyClaims' | 'collections' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1492,7 +1492,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1756,7 +1756,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2021,7 +2021,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2290,7 +2290,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2816,7 +2816,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3081,7 +3081,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3876,7 +3876,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4141,7 +4141,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4410,7 +4410,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4678,7 +4678,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4946,7 +4946,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -5214,7 +5214,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -5482,7 +5482,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'analytics' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -41231,7 +41231,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -41400,9 +41400,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Seller media_buy: attention. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -41627,6 +41627,14 @@ export type SearchData = {
              * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind media_buy in a seller account: true leaves out finished buys.
+             */
+            activeOnly?: boolean;
+            /**
+             * For kind media_buy in a seller account: buys under this account_relationship id.
+             */
+            accountRelationshipId?: string;
             /**
              * For kind decision: what the agent did.
              */
@@ -41826,7 +41834,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -41995,9 +42003,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Seller media_buy: attention. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -42223,6 +42231,14 @@ export type SearchData = {
              */
             buyerAccountId?: number;
             /**
+             * For kind media_buy in a seller account: true leaves out finished buys.
+             */
+            activeOnly?: boolean;
+            /**
+             * For kind media_buy in a seller account: buys under this account_relationship id.
+             */
+            accountRelationshipId?: string;
+            /**
              * For kind decision: what the agent did.
              */
             action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
@@ -42421,7 +42437,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -42489,7 +42505,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -42658,9 +42674,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Seller media_buy: attention. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -42885,6 +42901,14 @@ export type SearchData = {
              * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind media_buy in a seller account: true leaves out finished buys.
+             */
+            activeOnly?: boolean;
+            /**
+             * For kind media_buy in a seller account: buys under this account_relationship id.
+             */
+            accountRelationshipId?: string;
             /**
              * For kind decision: what the agent did.
              */
@@ -43084,7 +43108,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -43249,9 +43273,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Seller media_buy: attention. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -43476,6 +43500,14 @@ export type SearchData = {
              * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind media_buy in a seller account: true leaves out finished buys.
+             */
+            activeOnly?: boolean;
+            /**
+             * For kind media_buy in a seller account: buys under this account_relationship id.
+             */
+            accountRelationshipId?: string;
             /**
              * For kind decision: what the agent did.
              */
@@ -43672,7 +43704,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -43841,9 +43873,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Seller media_buy: attention. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
              * For Buyer material or library_request: whether the assignment needs sorting.
              */
@@ -44065,6 +44097,14 @@ export type SearchData = {
              */
             buyerAccountId?: number;
             /**
+             * For kind media_buy in a seller account: true leaves out finished buys.
+             */
+            activeOnly?: boolean;
+            /**
+             * For kind media_buy in a seller account: buys under this account_relationship id.
+             */
+            accountRelationshipId?: string;
+            /**
              * For kind decision: what the agent did.
              */
             action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
@@ -44263,7 +44303,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -44428,9 +44468,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Seller media_buy: attention. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -44656,6 +44696,14 @@ export type SearchData = {
              */
             buyerAccountId?: number;
             /**
+             * For kind media_buy in a seller account: true leaves out finished buys.
+             */
+            activeOnly?: boolean;
+            /**
+             * For kind media_buy in a seller account: buys under this account_relationship id.
+             */
+            accountRelationshipId?: string;
+            /**
              * For kind decision: what the agent did.
              */
             action?: 'propose' | 'decline_brief' | 'refine_terms' | 'accept_terms' | 'change_price' | 'change_product';
@@ -44854,7 +44902,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -45023,9 +45071,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Seller media_buy: attention. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
              * For Buyer material or library_request: whether the assignment needs sorting.
              */
@@ -45246,6 +45294,14 @@ export type SearchData = {
              * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind media_buy in a seller account: true leaves out finished buys.
+             */
+            activeOnly?: boolean;
+            /**
+             * For kind media_buy in a seller account: buys under this account_relationship id.
+             */
+            accountRelationshipId?: string;
             /**
              * For kind decision: what the agent did.
              */
@@ -45571,7 +45627,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -45740,9 +45796,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Seller media_buy: attention. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -45967,6 +46023,14 @@ export type SearchData = {
              * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind media_buy in a seller account: true leaves out finished buys.
+             */
+            activeOnly?: boolean;
+            /**
+             * For kind media_buy in a seller account: buys under this account_relationship id.
+             */
+            accountRelationshipId?: string;
             /**
              * For kind decision: what the agent did.
              */
@@ -46166,7 +46230,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -46246,7 +46310,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -46415,9 +46479,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Seller media_buy: attention. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -46642,6 +46706,14 @@ export type SearchData = {
              * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind media_buy in a seller account: true leaves out finished buys.
+             */
+            activeOnly?: boolean;
+            /**
+             * For kind media_buy in a seller account: buys under this account_relationship id.
+             */
+            accountRelationshipId?: string;
             /**
              * For kind decision: what the agent did.
              */
@@ -46841,7 +46913,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -46913,7 +46985,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -47082,9 +47154,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Seller media_buy: attention. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -47309,6 +47381,14 @@ export type SearchData = {
              * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind media_buy in a seller account: true leaves out finished buys.
+             */
+            activeOnly?: boolean;
+            /**
+             * For kind media_buy in a seller account: buys under this account_relationship id.
+             */
+            accountRelationshipId?: string;
             /**
              * For kind decision: what the agent did.
              */
@@ -47507,7 +47587,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -47676,9 +47756,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Seller media_buy: attention. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -47903,6 +47983,14 @@ export type SearchData = {
              * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind media_buy in a seller account: true leaves out finished buys.
+             */
+            activeOnly?: boolean;
+            /**
+             * For kind media_buy in a seller account: buys under this account_relationship id.
+             */
+            accountRelationshipId?: string;
             /**
              * For kind decision: what the agent did.
              */
@@ -48102,7 +48190,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -48271,9 +48359,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Seller media_buy: attention. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -48498,6 +48586,14 @@ export type SearchData = {
              * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind media_buy in a seller account: true leaves out finished buys.
+             */
+            activeOnly?: boolean;
+            /**
+             * For kind media_buy in a seller account: buys under this account_relationship id.
+             */
+            accountRelationshipId?: string;
             /**
              * For kind decision: what the agent did.
              */
@@ -48697,7 +48793,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -48866,9 +48962,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Seller media_buy: attention. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -49093,6 +49189,14 @@ export type SearchData = {
              * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind media_buy in a seller account: true leaves out finished buys.
+             */
+            activeOnly?: boolean;
+            /**
+             * For kind media_buy in a seller account: buys under this account_relationship id.
+             */
+            accountRelationshipId?: string;
             /**
              * For kind decision: what the agent did.
              */
@@ -49292,7 +49396,7 @@ export type SearchData = {
         /**
          * One projection. material: evidence_matches (page-text matches for query; use no filters) or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy: progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product: executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit (filter.assetId): does each product fit that Library asset. Seller wholesale_product: price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value; mapping kinds). inventory_source_item: adServerMetadata (app only).
          */
-        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
+        include?: Array<'evidence_matches' | 'browse' | 'commitmentRecord' | 'executionReadiness' | 'executionResources' | 'creativeFit' | 'price_paid' | 'authoring' | 'adServerMetadata' | 'pulse' | 'deliverySummary' | 'attention' | 'progress' | 'outcome' | 'delivery' | 'assets'>;
         /**
          * One source to read from, sent here at the top level and not as filter.sourceId. For a Library material browse, this is a connected Library source id. Required for ad_server_targeting, inventory_source_item and source_account (the accounts one source holds, for a source decision). Optional for seller wholesale_product, signal, and seller media_buy, which list every source when it is omitted.
          */
@@ -49461,9 +49565,9 @@ export type SearchData = {
              */
             isArchived?: boolean;
             /**
-             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Other kinds: not applied yet.
+             * Seller (buyer account): name, the default, or followers (refused until creator data exists). With property and no sort, best claim first; with query and no sort, best match first. Seller media_buy: attention. Other kinds: not applied yet.
              */
-            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers';
+            sort?: 'updatedDesc' | 'flightStart' | 'name' | 'spendDesc' | 'followers' | 'attention';
             /**
              * Campaign id. Proposal needs it. creative, creative_collection, and creative_session take this or advertiserId, not both. Buyer media_buy needs one.
              */
@@ -49688,6 +49792,14 @@ export type SearchData = {
              * For kind media_buy or decision in a seller account: those for this buyer Account id.
              */
             buyerAccountId?: number;
+            /**
+             * For kind media_buy in a seller account: true leaves out finished buys.
+             */
+            activeOnly?: boolean;
+            /**
+             * For kind media_buy in a seller account: buys under this account_relationship id.
+             */
+            accountRelationshipId?: string;
             /**
              * For kind decision: what the agent did.
              */

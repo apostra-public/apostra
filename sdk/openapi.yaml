@@ -1993,6 +1993,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -2961,6 +2962,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -3334,6 +3348,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -4303,6 +4318,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -4652,6 +4680,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -5607,6 +5636,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: analytics
                         required:
                           - include
                       then:
@@ -5955,6 +5997,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -6911,6 +6954,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: analytics
                         required:
                           - include
                       then:
@@ -7259,6 +7315,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -8215,6 +8272,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: analytics
                         required:
                           - include
                       then:
@@ -8570,6 +8640,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -9527,6 +9598,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: analytics
                         required:
                           - include
                       then:
@@ -10744,6 +10828,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -11081,6 +11178,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -12050,6 +12148,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -12387,6 +12498,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -13344,6 +13456,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: analytics
                         required:
                           - include
                       then:
@@ -14566,6 +14691,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -15776,6 +15914,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -16111,6 +16262,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -17080,6 +17232,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -17415,6 +17580,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -18384,6 +18550,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -18725,6 +18904,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -19681,6 +19861,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: analytics
                         required:
                           - include
                       then:
@@ -20034,6 +20227,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -20990,6 +21184,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: analytics
                         required:
                           - include
                       then:
@@ -21343,6 +21550,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -22299,6 +22507,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: analytics
                         required:
                           - include
                       then:
@@ -22652,6 +22873,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -23620,6 +23842,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -23961,6 +24196,7 @@ paths:
                           - operating
                           - entitlements
                           - teaching
+                          - analytics
                           - prebid
                           - commitmentRecord
                           - scores
@@ -24918,6 +25154,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: analytics
                         required:
                           - include
                       then:
@@ -26140,6 +26389,19 @@ paths:
                         properties:
                           include:
                             contains:
+                              const: analytics
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
                               const: prebid
                         required:
                           - include
@@ -27338,6 +27600,19 @@ paths:
                           include:
                             contains:
                               const: teaching
+                        required:
+                          - include
+                      then:
+                        properties:
+                          kind:
+                            const: seller
+                        required:
+                          - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: analytics
                         required:
                           - include
                       then:
@@ -67000,6 +67275,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -67403,8 +67679,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With property and no sort, best claim first; with query and no sort, best match first. Other
-                            kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first.
+                            Seller media_buy: attention. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -67412,6 +67688,7 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                            - attention
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -67874,6 +68151,13 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        activeOnly:
+                          description: 'For kind media_buy in a seller account: true leaves out finished buys.'
+                          type: boolean
+                        accountRelationshipId:
+                          description: 'For kind media_buy in a seller account: buys under this account_relationship id.'
+                          type: string
+                          pattern: ^[1-9][0-9]*$
                         action:
                           description: 'For kind decision: what the agent did.'
                           type: string
@@ -68936,6 +69220,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -69339,8 +69624,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With property and no sort, best claim first; with query and no sort, best match first. Other
-                            kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first.
+                            Seller media_buy: attention. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -69348,6 +69633,7 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                            - attention
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -69810,6 +70096,13 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        activeOnly:
+                          description: 'For kind media_buy in a seller account: true leaves out finished buys.'
+                          type: boolean
+                        accountRelationshipId:
+                          description: 'For kind media_buy in a seller account: buys under this account_relationship id.'
+                          type: string
+                          pattern: ^[1-9][0-9]*$
                         action:
                           description: 'For kind decision: what the agent did.'
                           type: string
@@ -70873,6 +71166,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -71673,6 +71967,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -72076,8 +72371,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With property and no sort, best claim first; with query and no sort, best match first. Other
-                            kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first.
+                            Seller media_buy: attention. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -72085,6 +72380,7 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                            - attention
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -72547,6 +72843,13 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        activeOnly:
+                          description: 'For kind media_buy in a seller account: true leaves out finished buys.'
+                          type: boolean
+                        accountRelationshipId:
+                          description: 'For kind media_buy in a seller account: buys under this account_relationship id.'
+                          type: string
+                          pattern: ^[1-9][0-9]*$
                         action:
                           description: 'For kind decision: what the agent did.'
                           type: string
@@ -73610,6 +73913,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -74004,8 +74308,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With property and no sort, best claim first; with query and no sort, best match first. Other
-                            kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first.
+                            Seller media_buy: attention. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -74013,6 +74317,7 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                            - attention
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -74475,6 +74780,13 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        activeOnly:
+                          description: 'For kind media_buy in a seller account: true leaves out finished buys.'
+                          type: boolean
+                        accountRelationshipId:
+                          description: 'For kind media_buy in a seller account: buys under this account_relationship id.'
+                          type: string
+                          pattern: ^[1-9][0-9]*$
                         action:
                           description: 'For kind decision: what the agent did.'
                           type: string
@@ -75531,6 +75843,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -75934,8 +76247,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With property and no sort, best claim first; with query and no sort, best match first. Other
-                            kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first.
+                            Seller media_buy: attention. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -75943,6 +76256,7 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                            - attention
                         needsSorting:
                           description: 'For Buyer material or library_request: whether the assignment needs sorting.'
                           type: boolean
@@ -76400,6 +76714,13 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        activeOnly:
+                          description: 'For kind media_buy in a seller account: true leaves out finished buys.'
+                          type: boolean
+                        accountRelationshipId:
+                          description: 'For kind media_buy in a seller account: buys under this account_relationship id.'
+                          type: string
+                          pattern: ^[1-9][0-9]*$
                         action:
                           description: 'For kind decision: what the agent did.'
                           type: string
@@ -77460,6 +77781,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -77854,8 +78176,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With property and no sort, best claim first; with query and no sort, best match first. Other
-                            kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first.
+                            Seller media_buy: attention. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -77863,6 +78185,7 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                            - attention
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -78325,6 +78648,13 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        activeOnly:
+                          description: 'For kind media_buy in a seller account: true leaves out finished buys.'
+                          type: boolean
+                        accountRelationshipId:
+                          description: 'For kind media_buy in a seller account: buys under this account_relationship id.'
+                          type: string
+                          pattern: ^[1-9][0-9]*$
                         action:
                           description: 'For kind decision: what the agent did.'
                           type: string
@@ -79388,6 +79718,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -79791,8 +80122,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With property and no sort, best claim first; with query and no sort, best match first. Other
-                            kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first.
+                            Seller media_buy: attention. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -79800,6 +80131,7 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                            - attention
                         needsSorting:
                           description: 'For Buyer material or library_request: whether the assignment needs sorting.'
                           type: boolean
@@ -80257,6 +80589,13 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        activeOnly:
+                          description: 'For kind media_buy in a seller account: true leaves out finished buys.'
+                          type: boolean
+                        accountRelationshipId:
+                          description: 'For kind media_buy in a seller account: buys under this account_relationship id.'
+                          type: string
+                          pattern: ^[1-9][0-9]*$
                         action:
                           description: 'For kind decision: what the agent did.'
                           type: string
@@ -81315,6 +81654,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -82135,6 +82475,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -82964,6 +83305,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -83367,8 +83709,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With property and no sort, best claim first; with query and no sort, best match first. Other
-                            kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first.
+                            Seller media_buy: attention. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -83376,6 +83718,7 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                            - attention
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -83838,6 +84181,13 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        activeOnly:
+                          description: 'For kind media_buy in a seller account: true leaves out finished buys.'
+                          type: boolean
+                        accountRelationshipId:
+                          description: 'For kind media_buy in a seller account: buys under this account_relationship id.'
+                          type: string
+                          pattern: ^[1-9][0-9]*$
                         action:
                           description: 'For kind decision: what the agent did.'
                           type: string
@@ -84899,6 +85249,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -85718,6 +86069,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -86121,8 +86473,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With property and no sort, best claim first; with query and no sort, best match first. Other
-                            kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first.
+                            Seller media_buy: attention. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -86130,6 +86482,7 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                            - attention
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -86592,6 +86945,13 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        activeOnly:
+                          description: 'For kind media_buy in a seller account: true leaves out finished buys.'
+                          type: boolean
+                        accountRelationshipId:
+                          description: 'For kind media_buy in a seller account: buys under this account_relationship id.'
+                          type: string
+                          pattern: ^[1-9][0-9]*$
                         action:
                           description: 'For kind decision: what the agent did.'
                           type: string
@@ -87653,6 +88013,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -88467,6 +88828,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -88870,8 +89232,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With property and no sort, best claim first; with query and no sort, best match first. Other
-                            kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first.
+                            Seller media_buy: attention. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -88879,6 +89241,7 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                            - attention
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -89341,6 +89704,13 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        activeOnly:
+                          description: 'For kind media_buy in a seller account: true leaves out finished buys.'
+                          type: boolean
+                        accountRelationshipId:
+                          description: 'For kind media_buy in a seller account: buys under this account_relationship id.'
+                          type: string
+                          pattern: ^[1-9][0-9]*$
                         action:
                           description: 'For kind decision: what the agent did.'
                           type: string
@@ -90402,6 +90772,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -90805,8 +91176,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With property and no sort, best claim first; with query and no sort, best match first. Other
-                            kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first.
+                            Seller media_buy: attention. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -90814,6 +91185,7 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                            - attention
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -91276,6 +91648,13 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        activeOnly:
+                          description: 'For kind media_buy in a seller account: true leaves out finished buys.'
+                          type: boolean
+                        accountRelationshipId:
+                          description: 'For kind media_buy in a seller account: buys under this account_relationship id.'
+                          type: string
+                          pattern: ^[1-9][0-9]*$
                         action:
                           description: 'For kind decision: what the agent did.'
                           type: string
@@ -92334,6 +92713,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -92737,8 +93117,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With property and no sort, best claim first; with query and no sort, best match first. Other
-                            kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first.
+                            Seller media_buy: attention. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -92746,6 +93126,7 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                            - attention
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -93208,6 +93589,13 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        activeOnly:
+                          description: 'For kind media_buy in a seller account: true leaves out finished buys.'
+                          type: boolean
+                        accountRelationshipId:
+                          description: 'For kind media_buy in a seller account: buys under this account_relationship id.'
+                          type: string
+                          pattern: ^[1-9][0-9]*$
                         action:
                           description: 'For kind decision: what the agent did.'
                           type: string
@@ -94266,6 +94654,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -94669,8 +95058,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With property and no sort, best claim first; with query and no sort, best match first. Other
-                            kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first.
+                            Seller media_buy: attention. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -94678,6 +95067,7 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                            - attention
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -95140,6 +95530,13 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        activeOnly:
+                          description: 'For kind media_buy in a seller account: true leaves out finished buys.'
+                          type: boolean
+                        accountRelationshipId:
+                          description: 'For kind media_buy in a seller account: buys under this account_relationship id.'
+                          type: string
+                          pattern: ^[1-9][0-9]*$
                         action:
                           description: 'For kind decision: what the agent did.'
                           type: string
@@ -96199,6 +96596,7 @@ paths:
                           - adServerMetadata
                           - pulse
                           - deliverySummary
+                          - attention
                           - progress
                           - outcome
                           - delivery
@@ -96602,8 +97000,8 @@ paths:
                         sort:
                           description: >-
                             Seller (buyer account): name, the default, or followers (refused until creator data exists).
-                            With property and no sort, best claim first; with query and no sort, best match first. Other
-                            kinds: not applied yet.
+                            With property and no sort, best claim first; with query and no sort, best match first.
+                            Seller media_buy: attention. Other kinds: not applied yet.
                           type: string
                           enum:
                             - updatedDesc
@@ -96611,6 +97009,7 @@ paths:
                             - name
                             - spendDesc
                             - followers
+                            - attention
                         campaignId:
                           description: >-
                             Campaign id. Proposal needs it. creative, creative_collection, and creative_session take
@@ -97073,6 +97472,13 @@ paths:
                           type: integer
                           exclusiveMinimum: 0
                           maximum: 9007199254740991
+                        activeOnly:
+                          description: 'For kind media_buy in a seller account: true leaves out finished buys.'
+                          type: boolean
+                        accountRelationshipId:
+                          description: 'For kind media_buy in a seller account: buys under this account_relationship id.'
+                          type: string
+                          pattern: ^[1-9][0-9]*$
                         action:
                           description: 'For kind decision: what the agent did.'
                           type: string
