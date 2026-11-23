@@ -19974,7 +19974,7 @@ export type SaveBillingData = {
             acceptedVersion: string;
         };
         /**
-         * Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Use net_60 for the default. Returns approval_required. Send alone.
+         * Terms to ask sellers for: net_15, net_30, net_45, net_60, or net_90. Recommend net_60, which sellers accept without review, and confirm with the buyer. Returns approval_required. Send alone.
          */
         paymentTerms?: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90';
         /**
