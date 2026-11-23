@@ -7073,8 +7073,24 @@ class GetStatusInput(TypedDict):
     '\n    Buyer accounts only. setup adds the setup checklist and a page of sellers, each with its next step as a tool call.\n    '
     sellersCursor: NotRequired[str]
     '\n    Buyer accounts only, with include setup: the setup.sellers.nextCursor of the previous page.\n    '
+    changes: NotRequired[GetStatusInputChanges]
+    '\n    Follow what changed in up to 20 Projects, conversations or runs. Returns notices (kind and time, never content); read the thing with get.\n    '
     accountId: NotRequired[int | str]
     '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class GetStatusInputChanges(TypedDict):
+    scopes: list[GetStatusInputChangesScopesItem]
+    '\n    What to follow, 1 to 20 scopes.\n    '
+    since: NotRequired[str]
+    '\n    The changes.cursor of the previous answer. Without it, the answer is cursorExpired with a cursor to follow from.\n    '
+    waitSeconds: NotRequired[int]
+    '\n    Seconds to wait for a change, up to 30. Default 0.\n    '
+
+class GetStatusInputChangesScopesItem(TypedDict):
+    scopeKind: Literal["project", "conversation", "run"]
+    '\n    project, conversation or run. A conversation and its run are two scopes.\n    '
+    id: str
+    '\n    A Project\'s id, or a Session\'s id for a conversation or run.\n    '
 
 class GetStatusResult(TypedDict):
     serverTime: str
@@ -7104,6 +7120,8 @@ class GetStatusResult(TypedDict):
     resources: NotRequired[list[GetStatusResultResourcesItem]]
     registration: NotRequired[GetStatusResultRegistrationValue | None]
     '\n    Agent Registration credentials only. null: not read; call get_status again.\n    '
+    changes: NotRequired[GetStatusResultChanges]
+    '\n    With the changes input: what changed in its scopes since its cursor.\n    '
 
 class GetStatusResultAccount(TypedDict):
     accountId: float
@@ -7217,6 +7235,22 @@ class GetStatusResultBlockersItem(TypedDict):
     why: NotRequired[str]
     effect: NotRequired[str]
     fix: NotRequired[str]
+
+class GetStatusResultChanges(TypedDict):
+    notices: list[GetStatusResultChangesNoticesItem]
+    cursor: str
+    hasMore: bool
+    cursorExpired: bool
+
+class GetStatusResultChangesNoticesItem(TypedDict):
+    scope: GetStatusResultChangesNoticesItemScope
+    kind: str
+    '\n    One of state, bounds, attachments, message, attention, approval, canvas, memory_file, step. Ignore a kind you do not know.\n    '
+    at: str
+
+class GetStatusResultChangesNoticesItemScope(TypedDict):
+    scopeKind: Literal["project", "conversation", "run"]
+    id: str
 
 class GetStatusResultDestinations(TypedDict):
     total: float

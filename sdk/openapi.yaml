@@ -32670,6 +32670,51 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 512
+                changes:
+                  description: >-
+                    Follow what changed in up to 20 Projects, conversations or runs. Returns notices (kind and time,
+                    never content); read the thing with get.
+                  type: object
+                  properties:
+                    scopes:
+                      minItems: 1
+                      maxItems: 20
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          scopeKind:
+                            type: string
+                            enum:
+                              - project
+                              - conversation
+                              - run
+                            description: project, conversation or run. A conversation and its run are two scopes.
+                          id:
+                            type: string
+                            minLength: 1
+                            maxLength: 128
+                            description: A Project's id, or a Session's id for a conversation or run.
+                        required:
+                          - scopeKind
+                          - id
+                        additionalProperties: false
+                      description: What to follow, 1 to 20 scopes.
+                    since:
+                      description: >-
+                        The changes.cursor of the previous answer. Without it, the answer is cursorExpired with a cursor
+                        to follow from.
+                      type: string
+                      minLength: 1
+                      maxLength: 2048
+                    waitSeconds:
+                      description: Seconds to wait for a change, up to 30. Default 0.
+                      type: integer
+                      minimum: 0
+                      maximum: 30
+                  required:
+                    - scopes
+                  additionalProperties: false
                 accountId:
                   description: Apostra accountId this call runs in, from get_status.
                   anyOf:
@@ -33591,6 +33636,57 @@ paths:
                               - expiresAt
                             additionalProperties: false
                           - type: 'null'
+                      changes:
+                        description: 'With the changes input: what changed in its scopes since its cursor.'
+                        type: object
+                        properties:
+                          notices:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                scope:
+                                  type: object
+                                  properties:
+                                    scopeKind:
+                                      type: string
+                                      enum:
+                                        - project
+                                        - conversation
+                                        - run
+                                    id:
+                                      type: string
+                                  required:
+                                    - scopeKind
+                                    - id
+                                  additionalProperties: false
+                                kind:
+                                  type: string
+                                  description: >-
+                                    One of state, bounds, attachments, message, attention, approval, canvas,
+                                    memory_file, step. Ignore a kind you do not know.
+                                at:
+                                  type: string
+                                  format: date-time
+                                  pattern: >-
+                                    ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                              required:
+                                - scope
+                                - kind
+                                - at
+                              additionalProperties: false
+                          cursor:
+                            type: string
+                          hasMore:
+                            type: boolean
+                          cursorExpired:
+                            type: boolean
+                        required:
+                          - notices
+                          - cursor
+                          - hasMore
+                          - cursorExpired
+                        additionalProperties: false
                     required:
                       - serverTime
                       - account
