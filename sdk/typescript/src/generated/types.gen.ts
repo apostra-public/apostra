@@ -930,9 +930,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -1190,9 +1190,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -1450,9 +1450,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -1706,9 +1706,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -1963,9 +1963,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -2224,9 +2224,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -2484,9 +2484,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -2734,9 +2734,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -2995,9 +2995,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -3252,9 +3252,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -3509,9 +3509,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -3762,9 +3762,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -4023,9 +4023,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -4280,9 +4280,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -4540,9 +4540,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -4800,9 +4800,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -5060,9 +5060,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -5320,9 +5320,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -5580,9 +5580,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
@@ -5837,9 +5837,9 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview: facebook_feed (creative_session default) or instagram_feed.
+         * Meta preview placement; the session default is facebook_feed.
          */
-        placement?: 'facebook_feed' | 'instagram_feed';
+        placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
          * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
