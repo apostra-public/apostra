@@ -2499,6 +2499,8 @@
       "SaveCampaignSuccessExecutionWarningsItemTypePackagesUndeliverable": "object",
       "SaveCampaignSuccessExecutionWarningsItemTypePackagesUndeliverableDroppedItem": "object",
       "SaveCampaignSuccessExecutionWarningsItemTypeStaleDraft": "object",
+      "SaveCampaignSuccessExecutionWarningsItemTypeTrackersNotSent": "object",
+      "SaveCampaignSuccessExecutionWarningsItemTypeTrackersNotSentDroppedItem": "object",
       "SaveCampaignSuccessLaunchBudgetsByCurrencyItem": "object",
       "SaveCampaignSuccessLaunchCombinedBudget": "object",
       "SaveCampaignSuccessLaunchMediaBuysItemBudget": "object",

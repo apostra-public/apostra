@@ -115395,6 +115395,34 @@ components:
                   - mediaBuyId
                   - dropped
                 additionalProperties: false
+              - type: object
+                properties:
+                  type:
+                    type: string
+                    const: trackers_not_sent
+                  mediaBuyId:
+                    type: string
+                  dropped:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        trackerId:
+                          type: string
+                        trackerName:
+                          type: string
+                        reason:
+                          type: string
+                      required:
+                        - trackerId
+                        - trackerName
+                        - reason
+                      additionalProperties: false
+                required:
+                  - type
+                  - mediaBuyId
+                  - dropped
+                additionalProperties: false
       required:
         - mediaBuysExecuted
         - mediaBuysAttempted
