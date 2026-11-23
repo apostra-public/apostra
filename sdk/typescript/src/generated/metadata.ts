@@ -866,7 +866,7 @@ export const operations = {
       },
       {
         "m2mOAuth": [
-          "interchange:admin"
+          "interchange:write"
         ]
       }
     ],
