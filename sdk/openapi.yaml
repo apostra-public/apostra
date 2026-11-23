@@ -1890,6 +1890,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -3200,6 +3206,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -4487,6 +4499,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -5759,6 +5777,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -7032,6 +7056,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -8312,6 +8342,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -9591,6 +9627,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       not: {}
                     workItemKind:
@@ -10762,6 +10804,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -12043,6 +12091,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       not: {}
                     workItemKind:
@@ -13316,6 +13370,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -14496,6 +14556,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -15670,6 +15736,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -16949,6 +17021,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       not: {}
                     workItemKind:
@@ -18222,6 +18300,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -19500,6 +19584,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -20778,6 +20868,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -22056,6 +22152,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -23334,6 +23436,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -24613,6 +24721,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the
@@ -25793,6 +25907,12 @@ paths:
                       enum:
                         - facebook_feed
                         - instagram_feed
+                    pageId:
+                      description: >-
+                        creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an
+                        account with several Pages and a Creative that keeps none.
+                      type: string
+                      minLength: 1
                     sourceId:
                       description: >-
                         Which scope holds the object. Required for wholesale_product and modular_source work_item: the

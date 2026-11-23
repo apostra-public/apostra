@@ -934,6 +934,10 @@ export type GetData = {
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -1189,6 +1193,10 @@ export type GetData = {
          * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
+        /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -1446,6 +1454,10 @@ export type GetData = {
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -1697,6 +1709,10 @@ export type GetData = {
          * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
+        /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -1950,6 +1966,10 @@ export type GetData = {
          * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
+        /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -2208,6 +2228,10 @@ export type GetData = {
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -2464,6 +2488,10 @@ export type GetData = {
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
+        /**
          * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
@@ -2709,6 +2737,10 @@ export type GetData = {
          * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
+        /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -2966,6 +2998,10 @@ export type GetData = {
          * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
+        /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
         /**
          * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
@@ -3220,6 +3256,10 @@ export type GetData = {
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -3473,6 +3513,10 @@ export type GetData = {
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -3721,6 +3765,10 @@ export type GetData = {
          * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
+        /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -3979,6 +4027,10 @@ export type GetData = {
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
+        /**
          * Required for kind work_item: which queue holds it. modular_source also needs sourceId; the other queues take no sourceId.
          */
         workItemKind?: 'creative_review' | 'media_buy_approval' | 'modular_source' | 'contract_conflict';
@@ -4231,6 +4283,10 @@ export type GetData = {
          * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
+        /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -4488,6 +4544,10 @@ export type GetData = {
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -4743,6 +4803,10 @@ export type GetData = {
          * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
+        /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -5000,6 +5064,10 @@ export type GetData = {
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -5255,6 +5323,10 @@ export type GetData = {
          * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
+        /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
@@ -5512,6 +5584,10 @@ export type GetData = {
          */
         placement?: 'facebook_feed' | 'instagram_feed';
         /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
+        /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
         sourceId?: string;
@@ -5764,6 +5840,10 @@ export type GetData = {
          * Meta preview: facebook_feed (creative_session default) or instagram_feed.
          */
         placement?: 'facebook_feed' | 'instagram_feed';
+        /**
+         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         */
+        pageId?: string;
         /**
          * Which scope holds the object. Required for wholesale_product and modular_source work_item: the inventory source id from search. signal: the ad-server source; omit for a seller-catalog signal. creative, creative_collection, creative_session: the campaign id. creative_asset: the advertiser id.
          */
