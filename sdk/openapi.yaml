@@ -42876,15 +42876,21 @@ paths:
                     recordId and expectedRevision.
                   type: boolean
                 scope:
-                  description: 'Whose memory a new record joins: account, advertiser, or the person the turn runs for.'
+                  description: 'Whose memory a new record joins: account, advertiser, Project, or the person the turn runs for.'
                   type: string
                   enum:
                     - account
                     - advertiser
+                    - project
                     - person
                 advertiserId:
                   description: 'The advertiser of a new advertiser record: the one the turn is for.'
                   type: string
+                projectId:
+                  description: 'The Project of a new Project record: the one the turn is for.'
+                  type: string
+                  minLength: 1
+                  maxLength: 64
                 campaignId:
                   description: One of that advertiser’s campaigns a new advertiser record concerns.
                   type: string
@@ -66956,12 +66962,18 @@ paths:
                               - open
                               - closed
                         recordScope:
-                          description: 'For kind agent_record: only account, advertiser or your own (person) memory.'
+                          description: 'For kind agent_record: only account, advertiser, Project or your own (person) memory.'
                           type: string
                           enum:
                             - account
                             - advertiser
+                            - project
                             - person
+                        projectId:
+                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -68886,12 +68898,18 @@ paths:
                               - open
                               - closed
                         recordScope:
-                          description: 'For kind agent_record: only account, advertiser or your own (person) memory.'
+                          description: 'For kind agent_record: only account, advertiser, Project or your own (person) memory.'
                           type: string
                           enum:
                             - account
                             - advertiser
+                            - project
                             - person
+                        projectId:
+                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -71617,12 +71635,18 @@ paths:
                               - open
                               - closed
                         recordScope:
-                          description: 'For kind agent_record: only account, advertiser or your own (person) memory.'
+                          description: 'For kind agent_record: only account, advertiser, Project or your own (person) memory.'
                           type: string
                           enum:
                             - account
                             - advertiser
+                            - project
                             - person
+                        projectId:
+                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -73539,12 +73563,18 @@ paths:
                               - open
                               - closed
                         recordScope:
-                          description: 'For kind agent_record: only account, advertiser or your own (person) memory.'
+                          description: 'For kind agent_record: only account, advertiser, Project or your own (person) memory.'
                           type: string
                           enum:
                             - account
                             - advertiser
+                            - project
                             - person
+                        projectId:
+                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -75463,12 +75493,18 @@ paths:
                               - open
                               - closed
                         recordScope:
-                          description: 'For kind agent_record: only account, advertiser or your own (person) memory.'
+                          description: 'For kind agent_record: only account, advertiser, Project or your own (person) memory.'
                           type: string
                           enum:
                             - account
                             - advertiser
+                            - project
                             - person
+                        projectId:
+                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -77377,12 +77413,18 @@ paths:
                               - open
                               - closed
                         recordScope:
-                          description: 'For kind agent_record: only account, advertiser or your own (person) memory.'
+                          description: 'For kind agent_record: only account, advertiser, Project or your own (person) memory.'
                           type: string
                           enum:
                             - account
                             - advertiser
+                            - project
                             - person
+                        projectId:
+                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -79308,12 +79350,18 @@ paths:
                               - open
                               - closed
                         recordScope:
-                          description: 'For kind agent_record: only account, advertiser or your own (person) memory.'
+                          description: 'For kind agent_record: only account, advertiser, Project or your own (person) memory.'
                           type: string
                           enum:
                             - account
                             - advertiser
+                            - project
                             - person
+                        projectId:
+                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -82878,12 +82926,18 @@ paths:
                               - open
                               - closed
                         recordScope:
-                          description: 'For kind agent_record: only account, advertiser or your own (person) memory.'
+                          description: 'For kind agent_record: only account, advertiser, Project or your own (person) memory.'
                           type: string
                           enum:
                             - account
                             - advertiser
+                            - project
                             - person
+                        projectId:
+                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -85626,12 +85680,18 @@ paths:
                               - open
                               - closed
                         recordScope:
-                          description: 'For kind agent_record: only account, advertiser or your own (person) memory.'
+                          description: 'For kind agent_record: only account, advertiser, Project or your own (person) memory.'
                           type: string
                           enum:
                             - account
                             - advertiser
+                            - project
                             - person
+                        projectId:
+                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -88369,12 +88429,18 @@ paths:
                               - open
                               - closed
                         recordScope:
-                          description: 'For kind agent_record: only account, advertiser or your own (person) memory.'
+                          description: 'For kind agent_record: only account, advertiser, Project or your own (person) memory.'
                           type: string
                           enum:
                             - account
                             - advertiser
+                            - project
                             - person
+                        projectId:
+                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -90298,12 +90364,18 @@ paths:
                               - open
                               - closed
                         recordScope:
-                          description: 'For kind agent_record: only account, advertiser or your own (person) memory.'
+                          description: 'For kind agent_record: only account, advertiser, Project or your own (person) memory.'
                           type: string
                           enum:
                             - account
                             - advertiser
+                            - project
                             - person
+                        projectId:
+                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -92224,12 +92296,18 @@ paths:
                               - open
                               - closed
                         recordScope:
-                          description: 'For kind agent_record: only account, advertiser or your own (person) memory.'
+                          description: 'For kind agent_record: only account, advertiser, Project or your own (person) memory.'
                           type: string
                           enum:
                             - account
                             - advertiser
+                            - project
                             - person
+                        projectId:
+                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -94150,12 +94228,18 @@ paths:
                               - open
                               - closed
                         recordScope:
-                          description: 'For kind agent_record: only account, advertiser or your own (person) memory.'
+                          description: 'For kind agent_record: only account, advertiser, Project or your own (person) memory.'
                           type: string
                           enum:
                             - account
                             - advertiser
+                            - project
                             - person
+                        projectId:
+                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -96077,12 +96161,18 @@ paths:
                               - open
                               - closed
                         recordScope:
-                          description: 'For kind agent_record: only account, advertiser or your own (person) memory.'
+                          description: 'For kind agent_record: only account, advertiser, Project or your own (person) memory.'
                           type: string
                           enum:
                             - account
                             - advertiser
+                            - project
                             - person
+                        projectId:
+                          description: 'For kind agent_record: only this Project’s memory (a Project id).'
+                          type: string
+                          minLength: 1
+                          maxLength: 64
                         recordType:
                           description: 'For kind agent_record: only facts, events or instructions.'
                           type: string
@@ -111824,8 +111914,13 @@ components:
           enum:
             - account
             - advertiser
+            - project
             - person
         advertiserId:
+          type:
+            - string
+            - 'null'
+        projectId:
           type:
             - string
             - 'null'
@@ -111899,6 +111994,7 @@ components:
         - id
         - scope
         - advertiserId
+        - projectId
         - campaignId
         - userId
         - recordType

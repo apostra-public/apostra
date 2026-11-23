@@ -11494,10 +11494,12 @@ class SaveAgentRecordInput(TypedDict):
     '\n    revision from the last read. Required with recordId; a stale one is refused.\n    '
     isArchived: NotRequired[bool]
     '\n    true forgets the record (it is kept and can be restored); false restores it. Send alone with recordId and expectedRevision.\n    '
-    scope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    Whose memory a new record joins: account, advertiser, or the person the turn runs for.\n    '
+    scope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    Whose memory a new record joins: account, advertiser, Project, or the person the turn runs for.\n    '
     advertiserId: NotRequired[str]
     '\n    The advertiser of a new advertiser record: the one the turn is for.\n    '
+    projectId: NotRequired[str]
+    '\n    The Project of a new Project record: the one the turn is for.\n    '
     campaignId: NotRequired[str]
     '\n    One of that advertiser’s campaigns a new advertiser record concerns.\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
@@ -11525,8 +11527,9 @@ class SaveAgentRecordResult(TypedDict):
 
 class SaveAgentRecordSuccessAgentRecord(TypedDict):
     id: str
-    scope: Literal["account", "advertiser", "person"]
+    scope: Literal["account", "advertiser", "project", "person"]
     advertiserId: str | None
+    projectId: str | None
     campaignId: str | None
     userId: str | None
     recordType: Literal["fact", "event", "instruction", "file"]
@@ -24197,8 +24200,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
     rfpStatus: NotRequired[list[Literal["draft", "open", "closed"]]]
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
-    recordScope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
+    recordScope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    For kind agent_record: only account, advertiser, Project or your own (person) memory.\n    '
+    projectId: NotRequired[str]
+    '\n    For kind agent_record: only this Project’s memory (a Project id).\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
@@ -24531,8 +24536,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
     rfpStatus: NotRequired[list[Literal["draft", "open", "closed"]]]
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
-    recordScope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
+    recordScope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    For kind agent_record: only account, advertiser, Project or your own (person) memory.\n    '
+    projectId: NotRequired[str]
+    '\n    For kind agent_record: only this Project’s memory (a Project id).\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
@@ -24799,8 +24806,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
     rfpStatus: NotRequired[list[Literal["draft", "open", "closed"]]]
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
-    recordScope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
+    recordScope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    For kind agent_record: only account, advertiser, Project or your own (person) memory.\n    '
+    projectId: NotRequired[str]
+    '\n    For kind agent_record: only this Project’s memory (a Project id).\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
@@ -25094,8 +25103,10 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
     rfpStatus: NotRequired[list[Literal["draft", "open", "closed"]]]
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
-    recordScope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
+    recordScope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    For kind agent_record: only account, advertiser, Project or your own (person) memory.\n    '
+    projectId: NotRequired[str]
+    '\n    For kind agent_record: only this Project’s memory (a Project id).\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
@@ -25396,8 +25407,10 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
     rfpStatus: NotRequired[list[Literal["draft", "open", "closed"]]]
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
-    recordScope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
+    recordScope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    For kind agent_record: only account, advertiser, Project or your own (person) memory.\n    '
+    projectId: NotRequired[str]
+    '\n    For kind agent_record: only this Project’s memory (a Project id).\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
@@ -25700,8 +25713,10 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
     rfpStatus: NotRequired[list[Literal["draft", "open", "closed"]]]
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
-    recordScope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
+    recordScope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    For kind agent_record: only account, advertiser, Project or your own (person) memory.\n    '
+    projectId: NotRequired[str]
+    '\n    For kind agent_record: only this Project’s memory (a Project id).\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
@@ -26004,8 +26019,10 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
     rfpStatus: NotRequired[list[Literal["draft", "open", "closed"]]]
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
-    recordScope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
+    recordScope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    For kind agent_record: only account, advertiser, Project or your own (person) memory.\n    '
+    projectId: NotRequired[str]
+    '\n    For kind agent_record: only this Project’s memory (a Project id).\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
@@ -26340,8 +26357,10 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
     rfpStatus: NotRequired[list[Literal["draft", "open", "closed"]]]
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
-    recordScope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
+    recordScope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    For kind agent_record: only account, advertiser, Project or your own (person) memory.\n    '
+    projectId: NotRequired[str]
+    '\n    For kind agent_record: only this Project’s memory (a Project id).\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
@@ -26642,8 +26661,10 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
     rfpStatus: NotRequired[list[Literal["draft", "open", "closed"]]]
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
-    recordScope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
+    recordScope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    For kind agent_record: only account, advertiser, Project or your own (person) memory.\n    '
+    projectId: NotRequired[str]
+    '\n    For kind agent_record: only this Project’s memory (a Project id).\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
@@ -26940,8 +26961,10 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
     rfpStatus: NotRequired[list[Literal["draft", "open", "closed"]]]
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
-    recordScope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
+    recordScope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    For kind agent_record: only account, advertiser, Project or your own (person) memory.\n    '
+    projectId: NotRequired[str]
+    '\n    For kind agent_record: only this Project’s memory (a Project id).\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
@@ -27208,8 +27231,10 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
     rfpStatus: NotRequired[list[Literal["draft", "open", "closed"]]]
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
-    recordScope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
+    recordScope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    For kind agent_record: only account, advertiser, Project or your own (person) memory.\n    '
+    projectId: NotRequired[str]
+    '\n    For kind agent_record: only this Project’s memory (a Project id).\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
@@ -27576,8 +27601,10 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
     rfpStatus: NotRequired[list[Literal["draft", "open", "closed"]]]
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
-    recordScope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
+    recordScope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    For kind agent_record: only account, advertiser, Project or your own (person) memory.\n    '
+    projectId: NotRequired[str]
+    '\n    For kind agent_record: only this Project’s memory (a Project id).\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
@@ -27964,8 +27991,10 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
     rfpStatus: NotRequired[list[Literal["draft", "open", "closed"]]]
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
-    recordScope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
+    recordScope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    For kind agent_record: only account, advertiser, Project or your own (person) memory.\n    '
+    projectId: NotRequired[str]
+    '\n    For kind agent_record: only this Project’s memory (a Project id).\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
@@ -28266,8 +28295,10 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind catalog: catalogs of exactly this AdCP catalog type.\n    '
     rfpStatus: NotRequired[list[Literal["draft", "open", "closed"]]]
     '\n    For kind buyer_rfp: RFPs in any of these statuses.\n    '
-    recordScope: NotRequired[Literal["account", "advertiser", "person"]]
-    '\n    For kind agent_record: only account, advertiser or your own (person) memory.\n    '
+    recordScope: NotRequired[Literal["account", "advertiser", "project", "person"]]
+    '\n    For kind agent_record: only account, advertiser, Project or your own (person) memory.\n    '
+    projectId: NotRequired[str]
+    '\n    For kind agent_record: only this Project’s memory (a Project id).\n    '
     recordType: NotRequired[Literal["fact", "event", "instruction", "file"]]
     '\n    For kind agent_record: only facts, events or instructions.\n    '
     topic: NotRequired[str]
