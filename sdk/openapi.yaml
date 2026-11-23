@@ -38374,13 +38374,13 @@ paths:
     post:
       operationId: refresh_inventory_source_health
       summary: >-
-        Rechecks one external sales-agent source with no-spend get_products and, if it publishes one, a catalog refresh.
-        Returns each check, findings still open, evidence IDs and readiness; no source configuration or media buy. scope
-        accounts re-lists the source's accounts instead.
+        Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh.
+        Returns checks, open findings, evidence and readiness without changing source configuration or creating a media
+        buy. scope accounts re-lists accounts instead.
       description: >-
-        Rechecks one external sales-agent source with no-spend get_products and, if it publishes one, a catalog refresh.
-        Returns each check, findings still open, evidence IDs and readiness; no source configuration or media buy. scope
-        accounts re-lists the source's accounts instead.
+        Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh.
+        Returns checks, open findings, evidence and readiness without changing source configuration or creating a media
+        buy. scope accounts re-lists accounts instead.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -38408,7 +38408,9 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 255
-                  description: Exact external sales-agent source. Managed and modular sources have dedicated diagnostics.
+                  description: >-
+                    Exact source ID. Managed ad-server sources use a connection test; external sales agents use
+                    discovery checks.
                 scope:
                   description: >-
                     health (default) rechecks the source. accounts asks the source to list its accounts again, for
@@ -109811,7 +109813,9 @@ components:
           type: string
         operation:
           type: string
-          const: get_products
+          enum:
+            - get_products
+            - ad_server_connection
         checks:
           type: array
           items:
@@ -109822,6 +109826,7 @@ components:
                 enum:
                   - get_products
                   - catalog_warm
+                  - ad_server_connection
               outcome:
                 type: string
                 enum:

@@ -9924,7 +9924,7 @@ class OpenVariantGallerySuccessGalleryVariantsItemPreview(TypedDict):
 
 class RefreshInventorySourceHealthInput(TypedDict):
     sourceId: str
-    '\n    Exact external sales-agent source. Managed and modular sources have dedicated diagnostics.\n    '
+    '\n    Exact source ID. Managed ad-server sources use a connection test; external sales agents use discovery checks.\n    '
     scope: NotRequired[Literal["health", "accounts"]]
     '\n    health (default) rechecks the source. accounts asks the source to list its accounts again, for sources that take account mappings.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -9950,7 +9950,7 @@ class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthChecked(Typ
     sourceId: str
     outcome: Literal["passed", "empty", "failed", "not_reached"]
     checkedAt: str
-    operation: Literal["get_products"]
+    operation: Literal["get_products", "ad_server_connection"]
     checks: list[RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCheckedChecksItem]
     openFindings: list[RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCheckedOpenFindingsItem]
     evidence: RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCheckedEvidence
@@ -9959,7 +9959,7 @@ class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthChecked(Typ
 RefreshInventorySourceHealthResult: TypeAlias = RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthChecked
 
 class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCheckedChecksItem(TypedDict):
-    check: Literal["get_products", "catalog_warm"]
+    check: Literal["get_products", "catalog_warm", "ad_server_connection"]
     outcome: Literal["passed", "empty", "failed", "not_reached", "not_applicable"]
     message: str
 

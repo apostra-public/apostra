@@ -16031,7 +16031,7 @@ export type RefreshInventorySourceHealthData = {
         sourceId: unknown;
     } & {
         /**
-         * Exact external sales-agent source. Managed and modular sources have dedicated diagnostics.
+         * Exact source ID. Managed ad-server sources use a connection test; external sales agents use discovery checks.
          */
         sourceId: string;
         /**
@@ -16167,9 +16167,9 @@ export type RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCheck
     sourceId: string;
     outcome: 'passed' | 'empty' | 'failed' | 'not_reached';
     checkedAt: string;
-    operation: 'get_products';
+    operation: 'get_products' | 'ad_server_connection';
     checks: Array<{
-        check: 'get_products' | 'catalog_warm';
+        check: 'get_products' | 'catalog_warm' | 'ad_server_connection';
         outcome: 'passed' | 'empty' | 'failed' | 'not_reached' | 'not_applicable';
         message: string;
     }>;
