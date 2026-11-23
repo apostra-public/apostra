@@ -19159,13 +19159,17 @@ export type SaveAgentRecordData = {
          */
         isArchived?: boolean;
         /**
-         * Whose memory a new record joins: account, advertiser, or the person the turn runs for.
+         * Whose memory a new record joins: account, advertiser, Project, or the person the turn runs for.
          */
-        scope?: 'account' | 'advertiser' | 'person';
+        scope?: 'account' | 'advertiser' | 'project' | 'person';
         /**
          * The advertiser of a new advertiser record: the one the turn is for.
          */
         advertiserId?: string;
+        /**
+         * The Project of a new Project record: the one the turn is for.
+         */
+        projectId?: string;
         /**
          * One of that advertiser’s campaigns a new advertiser record concerns.
          */
@@ -19316,8 +19320,9 @@ export type SaveAgentRecordResponses = {
 
 export type SaveAgentRecordSuccessAgentRecord = {
     id: string;
-    scope: 'account' | 'advertiser' | 'person';
+    scope: 'account' | 'advertiser' | 'project' | 'person';
     advertiserId: string | null;
+    projectId: string | null;
     campaignId: string | null;
     userId: string | null;
     recordType: 'fact' | 'event' | 'instruction' | 'file';
@@ -41171,9 +41176,13 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
-             * For kind agent_record: only account, advertiser or your own (person) memory.
+             * For kind agent_record: only account, advertiser, Project or your own (person) memory.
              */
-            recordScope?: 'account' | 'advertiser' | 'person';
+            recordScope?: 'account' | 'advertiser' | 'project' | 'person';
+            /**
+             * For kind agent_record: only this Project’s memory (a Project id).
+             */
+            projectId?: string;
             /**
              * For kind agent_record: only facts, events or instructions.
              */
@@ -41762,9 +41771,13 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
-             * For kind agent_record: only account, advertiser or your own (person) memory.
+             * For kind agent_record: only account, advertiser, Project or your own (person) memory.
              */
-            recordScope?: 'account' | 'advertiser' | 'person';
+            recordScope?: 'account' | 'advertiser' | 'project' | 'person';
+            /**
+             * For kind agent_record: only this Project’s memory (a Project id).
+             */
+            projectId?: string;
             /**
              * For kind agent_record: only facts, events or instructions.
              */
@@ -42421,9 +42434,13 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
-             * For kind agent_record: only account, advertiser or your own (person) memory.
+             * For kind agent_record: only account, advertiser, Project or your own (person) memory.
              */
-            recordScope?: 'account' | 'advertiser' | 'person';
+            recordScope?: 'account' | 'advertiser' | 'project' | 'person';
+            /**
+             * For kind agent_record: only this Project’s memory (a Project id).
+             */
+            projectId?: string;
             /**
              * For kind agent_record: only facts, events or instructions.
              */
@@ -43008,9 +43025,13 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
-             * For kind agent_record: only account, advertiser or your own (person) memory.
+             * For kind agent_record: only account, advertiser, Project or your own (person) memory.
              */
-            recordScope?: 'account' | 'advertiser' | 'person';
+            recordScope?: 'account' | 'advertiser' | 'project' | 'person';
+            /**
+             * For kind agent_record: only this Project’s memory (a Project id).
+             */
+            projectId?: string;
             /**
              * For kind agent_record: only facts, events or instructions.
              */
@@ -43596,9 +43617,13 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
-             * For kind agent_record: only account, advertiser or your own (person) memory.
+             * For kind agent_record: only account, advertiser, Project or your own (person) memory.
              */
-            recordScope?: 'account' | 'advertiser' | 'person';
+            recordScope?: 'account' | 'advertiser' | 'project' | 'person';
+            /**
+             * For kind agent_record: only this Project’s memory (a Project id).
+             */
+            projectId?: string;
             /**
              * For kind agent_record: only facts, events or instructions.
              */
@@ -44179,9 +44204,13 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
-             * For kind agent_record: only account, advertiser or your own (person) memory.
+             * For kind agent_record: only account, advertiser, Project or your own (person) memory.
              */
-            recordScope?: 'account' | 'advertiser' | 'person';
+            recordScope?: 'account' | 'advertiser' | 'project' | 'person';
+            /**
+             * For kind agent_record: only this Project’s memory (a Project id).
+             */
+            projectId?: string;
             /**
              * For kind agent_record: only facts, events or instructions.
              */
@@ -44770,9 +44799,13 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
-             * For kind agent_record: only account, advertiser or your own (person) memory.
+             * For kind agent_record: only account, advertiser, Project or your own (person) memory.
              */
-            recordScope?: 'account' | 'advertiser' | 'person';
+            recordScope?: 'account' | 'advertiser' | 'project' | 'person';
+            /**
+             * For kind agent_record: only this Project’s memory (a Project id).
+             */
+            projectId?: string;
             /**
              * For kind agent_record: only facts, events or instructions.
              */
@@ -45483,9 +45516,13 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
-             * For kind agent_record: only account, advertiser or your own (person) memory.
+             * For kind agent_record: only account, advertiser, Project or your own (person) memory.
              */
-            recordScope?: 'account' | 'advertiser' | 'person';
+            recordScope?: 'account' | 'advertiser' | 'project' | 'person';
+            /**
+             * For kind agent_record: only this Project’s memory (a Project id).
+             */
+            projectId?: string;
             /**
              * For kind agent_record: only facts, events or instructions.
              */
@@ -46154,9 +46191,13 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
-             * For kind agent_record: only account, advertiser or your own (person) memory.
+             * For kind agent_record: only account, advertiser, Project or your own (person) memory.
              */
-            recordScope?: 'account' | 'advertiser' | 'person';
+            recordScope?: 'account' | 'advertiser' | 'project' | 'person';
+            /**
+             * For kind agent_record: only this Project’s memory (a Project id).
+             */
+            projectId?: string;
             /**
              * For kind agent_record: only facts, events or instructions.
              */
@@ -46817,9 +46858,13 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
-             * For kind agent_record: only account, advertiser or your own (person) memory.
+             * For kind agent_record: only account, advertiser, Project or your own (person) memory.
              */
-            recordScope?: 'account' | 'advertiser' | 'person';
+            recordScope?: 'account' | 'advertiser' | 'project' | 'person';
+            /**
+             * For kind agent_record: only this Project’s memory (a Project id).
+             */
+            projectId?: string;
             /**
              * For kind agent_record: only facts, events or instructions.
              */
@@ -47407,9 +47452,13 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
-             * For kind agent_record: only account, advertiser or your own (person) memory.
+             * For kind agent_record: only account, advertiser, Project or your own (person) memory.
              */
-            recordScope?: 'account' | 'advertiser' | 'person';
+            recordScope?: 'account' | 'advertiser' | 'project' | 'person';
+            /**
+             * For kind agent_record: only this Project’s memory (a Project id).
+             */
+            projectId?: string;
             /**
              * For kind agent_record: only facts, events or instructions.
              */
@@ -47998,9 +48047,13 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
-             * For kind agent_record: only account, advertiser or your own (person) memory.
+             * For kind agent_record: only account, advertiser, Project or your own (person) memory.
              */
-            recordScope?: 'account' | 'advertiser' | 'person';
+            recordScope?: 'account' | 'advertiser' | 'project' | 'person';
+            /**
+             * For kind agent_record: only this Project’s memory (a Project id).
+             */
+            projectId?: string;
             /**
              * For kind agent_record: only facts, events or instructions.
              */
@@ -48589,9 +48642,13 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
-             * For kind agent_record: only account, advertiser or your own (person) memory.
+             * For kind agent_record: only account, advertiser, Project or your own (person) memory.
              */
-            recordScope?: 'account' | 'advertiser' | 'person';
+            recordScope?: 'account' | 'advertiser' | 'project' | 'person';
+            /**
+             * For kind agent_record: only this Project’s memory (a Project id).
+             */
+            projectId?: string;
             /**
              * For kind agent_record: only facts, events or instructions.
              */
@@ -49180,9 +49237,13 @@ export type SearchData = {
              */
             rfpStatus?: Array<'draft' | 'open' | 'closed'>;
             /**
-             * For kind agent_record: only account, advertiser or your own (person) memory.
+             * For kind agent_record: only account, advertiser, Project or your own (person) memory.
              */
-            recordScope?: 'account' | 'advertiser' | 'person';
+            recordScope?: 'account' | 'advertiser' | 'project' | 'person';
+            /**
+             * For kind agent_record: only this Project’s memory (a Project id).
+             */
+            projectId?: string;
             /**
              * For kind agent_record: only facts, events or instructions.
              */
