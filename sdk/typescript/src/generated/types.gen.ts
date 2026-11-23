@@ -53666,9 +53666,17 @@ export type SearchSuccessV3CampaignListResponse = {
     nextCursor?: string;
     ownSupplyScope?: boolean;
     defaultStatusScope: boolean;
+    phaseCounts?: SearchSuccessV3CampaignPhaseCounts;
     droppedFilters?: Array<string>;
     results: Array<SearchSuccessV3CampaignListItem>;
     [key: string]: unknown;
+};
+
+export type SearchSuccessV3CampaignPhaseCounts = {
+    draft: number;
+    active: number;
+    completed: number;
+    canceled: number;
 };
 
 export type TestCreativeMacrosData = {
