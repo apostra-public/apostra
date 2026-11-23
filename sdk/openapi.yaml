@@ -67515,6 +67515,7 @@ paths:
                             - case_study
                             - specification_sheet
                             - media_kit
+                            - script
                             - uncategorized
                         vertical:
                           description: 'For kind material: documents tagged with any of these industry verticals, case-insensitive.'
@@ -69445,6 +69446,7 @@ paths:
                             - case_study
                             - specification_sheet
                             - media_kit
+                            - script
                             - uncategorized
                         vertical:
                           description: 'For kind material: documents tagged with any of these industry verticals, case-insensitive.'
@@ -72177,6 +72179,7 @@ paths:
                             - case_study
                             - specification_sheet
                             - media_kit
+                            - script
                             - uncategorized
                         vertical:
                           description: 'For kind material: documents tagged with any of these industry verticals, case-insensitive.'
@@ -74099,6 +74102,7 @@ paths:
                             - case_study
                             - specification_sheet
                             - media_kit
+                            - script
                             - uncategorized
                         vertical:
                           description: 'For kind material: documents tagged with any of these industry verticals, case-insensitive.'
@@ -76018,6 +76022,7 @@ paths:
                             - case_study
                             - specification_sheet
                             - media_kit
+                            - script
                             - uncategorized
                         vertical:
                           description: 'For kind material: documents tagged with any of these industry verticals, case-insensitive.'
@@ -77937,6 +77942,7 @@ paths:
                             - case_study
                             - specification_sheet
                             - media_kit
+                            - script
                             - uncategorized
                         vertical:
                           description: 'For kind material: documents tagged with any of these industry verticals, case-insensitive.'
@@ -79863,6 +79869,7 @@ paths:
                             - case_study
                             - specification_sheet
                             - media_kit
+                            - script
                             - uncategorized
                         vertical:
                           description: 'For kind material: documents tagged with any of these industry verticals, case-insensitive.'
@@ -83438,6 +83445,7 @@ paths:
                             - case_study
                             - specification_sheet
                             - media_kit
+                            - script
                             - uncategorized
                         vertical:
                           description: 'For kind material: documents tagged with any of these industry verticals, case-insensitive.'
@@ -86187,6 +86195,7 @@ paths:
                             - case_study
                             - specification_sheet
                             - media_kit
+                            - script
                             - uncategorized
                         vertical:
                           description: 'For kind material: documents tagged with any of these industry verticals, case-insensitive.'
@@ -88931,6 +88940,7 @@ paths:
                             - case_study
                             - specification_sheet
                             - media_kit
+                            - script
                             - uncategorized
                         vertical:
                           description: 'For kind material: documents tagged with any of these industry verticals, case-insensitive.'
@@ -90860,6 +90870,7 @@ paths:
                             - case_study
                             - specification_sheet
                             - media_kit
+                            - script
                             - uncategorized
                         vertical:
                           description: 'For kind material: documents tagged with any of these industry verticals, case-insensitive.'
@@ -92786,6 +92797,7 @@ paths:
                             - case_study
                             - specification_sheet
                             - media_kit
+                            - script
                             - uncategorized
                         vertical:
                           description: 'For kind material: documents tagged with any of these industry verticals, case-insensitive.'
@@ -94712,6 +94724,7 @@ paths:
                             - case_study
                             - specification_sheet
                             - media_kit
+                            - script
                             - uncategorized
                         vertical:
                           description: 'For kind material: documents tagged with any of these industry verticals, case-insensitive.'
@@ -96639,6 +96652,7 @@ paths:
                             - case_study
                             - specification_sheet
                             - media_kit
+                            - script
                             - uncategorized
                         vertical:
                           description: 'For kind material: documents tagged with any of these industry verticals, case-insensitive.'
@@ -120612,6 +120626,7 @@ components:
             - case_study
             - specification_sheet
             - media_kit
+            - script
         - type: 'null'
     save_material_request_MetadataVisibility:
       type: string

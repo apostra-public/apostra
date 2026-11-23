@@ -30671,7 +30671,7 @@ export type SaveMaterialRequestMetadataDescription = string;
 
 export type SaveMaterialRequestMetadataDisplayName = string;
 
-export type SaveMaterialRequestMetadataDocumentPurpose = 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | null;
+export type SaveMaterialRequestMetadataDocumentPurpose = 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | null;
 
 export type SaveMaterialRequestMetadataEffectiveFrom = string;
 
@@ -41483,7 +41483,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -42074,7 +42074,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -42733,7 +42733,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -43320,7 +43320,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -43904,7 +43904,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -44491,7 +44491,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -45078,7 +45078,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -45795,7 +45795,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -46466,7 +46466,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -47129,7 +47129,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -47719,7 +47719,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -48310,7 +48310,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -48901,7 +48901,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
@@ -49492,7 +49492,7 @@ export type SearchData = {
             /**
              * For kind material: one Library document category. uncategorized also matches documents with no category.
              */
-            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'uncategorized';
+            documentPurpose?: 'sales_deck' | 'one_sheet' | 'case_study' | 'specification_sheet' | 'media_kit' | 'script' | 'uncategorized';
             /**
              * For kind material: documents tagged with any of these industry verticals, case-insensitive.
              */
