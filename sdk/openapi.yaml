@@ -1813,6 +1813,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -3136,6 +3154,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -4436,6 +4472,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -5721,6 +5775,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -7007,6 +7079,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -8300,6 +8390,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -9592,6 +9700,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -10781,6 +10907,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -12069,6 +12213,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -13355,6 +13517,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -14547,6 +14727,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -15739,6 +15937,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -17025,6 +17241,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -18311,6 +18545,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -19602,6 +19854,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -20893,6 +21163,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -22184,6 +22472,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -23475,6 +23781,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -24767,6 +25091,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone
@@ -25959,6 +26301,24 @@ paths:
                       type: integer
                       minimum: 1
                       maximum: 100
+                    threadStates:
+                      description: 'For a Project conversation: keep only thread starts in these states.'
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - needs_you
+                          - evaluating
+                          - new
+                          - drafted
+                          - fixed
+                          - no_action_needed
+                    openThreads:
+                      description: 'For a Project conversation: keep only open threads.'
+                      type: boolean
+                      const: true
                     buyerAccountId:
                       description: >-
                         For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone

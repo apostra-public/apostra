@@ -886,6 +886,14 @@ export type GetData = {
          */
         limit?: number;
         /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -1145,6 +1153,14 @@ export type GetData = {
          * For kind session: events per page, default 50. Lower it if a page is too large to return.
          */
         limit?: number;
+        /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -1406,6 +1422,14 @@ export type GetData = {
          */
         limit?: number;
         /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -1661,6 +1685,14 @@ export type GetData = {
          * For kind session: events per page, default 50. Lower it if a page is too large to return.
          */
         limit?: number;
+        /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -1918,6 +1950,14 @@ export type GetData = {
          * For kind session: events per page, default 50. Lower it if a page is too large to return.
          */
         limit?: number;
+        /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -2180,6 +2220,14 @@ export type GetData = {
          */
         limit?: number;
         /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -2440,6 +2488,14 @@ export type GetData = {
          */
         limit?: number;
         /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -2693,6 +2749,14 @@ export type GetData = {
          * For kind session: events per page, default 50. Lower it if a page is too large to return.
          */
         limit?: number;
+        /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -2950,6 +3014,14 @@ export type GetData = {
          * For kind session: events per page, default 50. Lower it if a page is too large to return.
          */
         limit?: number;
+        /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -3208,6 +3280,14 @@ export type GetData = {
          */
         limit?: number;
         /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -3465,6 +3545,14 @@ export type GetData = {
          */
         limit?: number;
         /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -3721,6 +3809,14 @@ export type GetData = {
          * For kind session: events per page, default 50. Lower it if a page is too large to return.
          */
         limit?: number;
+        /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -3979,6 +4075,14 @@ export type GetData = {
          */
         limit?: number;
         /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -4235,6 +4339,14 @@ export type GetData = {
          * For kind session: events per page, default 50. Lower it if a page is too large to return.
          */
         limit?: number;
+        /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -4496,6 +4608,14 @@ export type GetData = {
          */
         limit?: number;
         /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -4755,6 +4875,14 @@ export type GetData = {
          * For kind session: events per page, default 50. Lower it if a page is too large to return.
          */
         limit?: number;
+        /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -5016,6 +5144,14 @@ export type GetData = {
          */
         limit?: number;
         /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -5275,6 +5411,14 @@ export type GetData = {
          * For kind session: events per page, default 50. Lower it if a page is too large to return.
          */
         limit?: number;
+        /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
@@ -5536,6 +5680,14 @@ export type GetData = {
          */
         limit?: number;
         /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
+        /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
         buyerAccountId?: number;
@@ -5792,6 +5944,14 @@ export type GetData = {
          * For kind session: events per page, default 50. Lower it if a page is too large to return.
          */
         limit?: number;
+        /**
+         * For a Project conversation: keep only thread starts in these states.
+         */
+        threadStates?: Array<'needs_you' | 'evaluating' | 'new' | 'drafted' | 'fixed' | 'no_action_needed'>;
+        /**
+         * For a Project conversation: keep only open threads.
+         */
+        openThreads?: true;
         /**
          * For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.
          */
