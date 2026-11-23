@@ -930,11 +930,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -948,7 +948,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1190,11 +1190,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -1208,7 +1208,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'propertyClaims' | 'collections' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'propertyClaims' | 'collections' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1450,11 +1450,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -1468,7 +1468,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1706,11 +1706,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -1724,7 +1724,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -1963,11 +1963,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -1981,7 +1981,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2224,11 +2224,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -2242,7 +2242,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2484,11 +2484,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -2734,11 +2734,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -2752,7 +2752,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -2995,11 +2995,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -3009,7 +3009,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -3252,11 +3252,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -3509,11 +3509,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -3762,11 +3762,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -3780,7 +3780,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4023,11 +4023,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -4037,7 +4037,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4280,11 +4280,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -4298,7 +4298,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4540,11 +4540,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -4558,7 +4558,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -4800,11 +4800,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -4818,7 +4818,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -5060,11 +5060,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -5078,7 +5078,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -5320,11 +5320,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -5338,7 +5338,7 @@ export type GetData = {
         /**
          * inventory_source: diagnostics, adServerConnection, adServerStatus, syncHistory, sandboxAccount, modularReadiness. seller: listing, identity, commitmentRecord, scores, products(+advertiserId). playbook: versions, discounts. business_rules: versions, approvalRouting. agent: certification, validationRuns, diagnostics. campaign: mediaBuys, creatives, tracking, propertyLists. media_buy: products, creatives, deliverySummary, liveStatus, reporting_status, tracking. proposal: brief, products, versions, mediaBuys. advertiser: tracking, accounts, canvas*(+project). connection: inventory. catalog: items, history. material: source_access, repeats, options.pages keys but candidates. property_list: report
          */
-        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
+        include?: Array<'diagnostics' | 'adServerConnection' | 'adServerStatus' | 'syncHistory' | 'sandboxAccount' | 'modularReadiness' | 'poweredByAgent' | 'testRuns' | 'capabilities' | 'creativeFormats' | 'publisherProperties' | 'mappingWorkspace' | 'mediaBuys' | 'proposals' | 'creatives' | 'recentActivity' | 'deliverySummary' | 'sourceIdentity' | 'tracking' | 'propertyLists' | 'sellerScorecard' | 'pulse' | 'progress' | 'versions' | 'discounts' | 'rate_card' | 'price_paid' | 'effectiveOverlaySupport' | 'approvalRouting' | 'listing' | 'identity' | 'chatgpt' | 'files' | 'readiness' | 'operating' | 'entitlements' | 'teaching' | 'prebid' | 'commitmentRecord' | 'scores' | 'discoveryCard' | 'brief' | 'products' | 'evaluation' | 'certification' | 'validationRuns' | 'webhookDeliveries' | 'liveStatus' | 'reporting_status' | 'pendingChange' | 'operations' | 'accounts' | 'brandProfile' | 'presence' | 'surfaceResults' | 'library' | 'paidResults' | 'inventory' | 'preview' | 'platform_preview' | 'items' | 'history' | 'report' | 'mediaBilling' | 'usageDetail' | 'pricing' | 'contracts' | 'paymentMethods' | 'invoiceHistory' | 'payouts' | 'reads' | 'reasoning' | 'canvas' | 'canvas_source' | 'canvas_versions' | 'lifecycle' | 'capacity' | 'source_access' | 'rendition_blocks' | 'visual_assets' | 'extraction_diagnostics' | 'composition_receipts' | 'repeats' | 'usage' | 'rate_card_preview' | 'avails_sheet_preview' | 'product_sheet_preview'>;
         /**
          * For kind catalog with include items: which items to return and the cursor for the next page.
          */
@@ -5580,11 +5580,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
@@ -5837,11 +5837,11 @@ export type GetData = {
          */
         variantId?: string;
         /**
-         * Meta preview placement; the session default is facebook_feed.
+         * Meta preview placement; the default is facebook_feed. A Creative is offered only the placements its format declares.
          */
         placement?: 'facebook_feed' | 'instagram_feed' | 'facebook_stories' | 'instagram_stories' | 'facebook_reels' | 'instagram_reels';
         /**
-         * creative preview with placement: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
+         * creative platform_preview: the Meta Page to preview as, as on save_media_buy. For an account with several Pages and a Creative that keeps none.
          */
         pageId?: string;
         /**
