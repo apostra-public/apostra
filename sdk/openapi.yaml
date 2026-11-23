@@ -39960,7 +39960,15 @@ paths:
       security:
         - apiKeyAuth: []
         - m2mOAuth:
-            - interchange:admin
+            - interchange:write
+      x-interchange-invocation-permissions:
+        defaultRequiredPermission: interchange:admin
+        rules:
+          - all:
+              - path:
+                  - autonomyPaused
+                equals: true
+            requiredPermission: interchange:write
       parameters:
         - name: X-SCOPE3-CUSTOMER-ID
           in: header
