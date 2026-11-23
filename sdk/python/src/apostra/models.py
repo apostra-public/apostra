@@ -247,6 +247,7 @@ class GenerateVariantsResult(TypedDict):
     sessionOmitted: NotRequired[dict[str, int]]
     revision: int
     sessionGeneration: NotRequired[str]
+    notes: NotRequired[list[str]]
     leaves: list[GenerateVariantsResultLeavesItem]
     completedVariants: NotRequired[list[GenerateVariantsResultCompletedVariantsItem]]
     terminal: NotRequired[GenerateVariantsResultTerminal]

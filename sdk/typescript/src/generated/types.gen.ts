@@ -715,6 +715,7 @@ export type GenerateVariantsResponses = {
             };
             revision: number;
             sessionGeneration?: string;
+            notes?: Array<string>;
             leaves: Array<{
                 leafId: string;
                 status: 'pending' | 'dispatching' | 'submitted' | 'completed' | 'uncertain' | 'not_dispatched';
