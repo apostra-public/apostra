@@ -7210,11 +7210,11 @@ class GetStatusResultAccount(TypedDict):
     requireSpendApproval: NotRequired[bool]
     '\n    Buyer accounts only: true when a launch, a product added to a live media buy or a live budget increase waits for an administrator to approve it on our site.\n    '
     agentAutonomy: NotRequired[GetStatusResultAccountAgentAutonomy]
-    '\n    Buyer accounts only: whether Projects are on and whether the account\'s autonomy stop is on.\n    '
+    '\n    Buyer accounts only: whether the account\'s agent acts on its own in Projects, and whether its stop is on.\n    '
 
 class GetStatusResultAccountAgentAutonomy(TypedDict):
     enabled: bool
-    '\n    Whether Projects are available to this account.\n    '
+    '\n    Whether the account\'s agent may act on its own in Projects. When false, a person approves each action.\n    '
     paused: bool
     '\n    Whether the account stop is on. It paused every active Project; clearing it resumes none. Set it with save_account autonomyPaused.\n    '
 
@@ -21383,6 +21383,7 @@ class SaveProjectSuccessObject(TypedDict):
     archivedByUserId: str | None
     progress: None
     spend: SaveProjectSuccessObjectSpendValue | None
+    autonomy: SaveProjectSuccessObjectAutonomy
     attention: list[SaveProjectSuccessObjectAttentionItem]
     url: str
 
@@ -21408,6 +21409,12 @@ class SaveProjectSuccessObjectAttentionItem(TypedDict):
     kind: Literal["bounds_approval_pending", "new_bounds_needed", "reapproval_needed", "resume_needed", "account_stop_on", "write_unsettled"]
     reason: str
     url: str | None
+
+class SaveProjectSuccessObjectAutonomy(TypedDict):
+    actsOnItsOwn: bool
+    '\n    Whether the account\'s agent may act on its own inside the bounds. When false, a person approves each action.\n    '
+    reason: str | None
+    '\n    Why not, in plain words to pass on. Null when actsOnItsOwn is true.\n    '
 
 class SaveProjectSuccessObjectBoundsBudget(TypedDict):
     total: float
@@ -21529,6 +21536,7 @@ class SaveProjectSuccessProject(TypedDict):
     archivedByUserId: str | None
     progress: None
     spend: SaveProjectSuccessProjectSpendValue | None
+    autonomy: SaveProjectSuccessProjectAutonomy
     attention: list[SaveProjectSuccessProjectAttentionItem]
     url: str
 
@@ -21554,6 +21562,12 @@ class SaveProjectSuccessProjectAttentionItem(TypedDict):
     kind: Literal["bounds_approval_pending", "new_bounds_needed", "reapproval_needed", "resume_needed", "account_stop_on", "write_unsettled"]
     reason: str
     url: str | None
+
+class SaveProjectSuccessProjectAutonomy(TypedDict):
+    actsOnItsOwn: bool
+    '\n    Whether the account\'s agent may act on its own inside the bounds. When false, a person approves each action.\n    '
+    reason: str | None
+    '\n    Why not, in plain words to pass on. Null when actsOnItsOwn is true.\n    '
 
 class SaveProjectSuccessProjectBoundsBudget(TypedDict):
     total: float
