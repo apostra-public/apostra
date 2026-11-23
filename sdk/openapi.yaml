@@ -38731,6 +38731,19 @@ paths:
                   type: integer
                   exclusiveMinimum: 0
                   maximum: 9007199254740991
+                productIds:
+                  description: >-
+                    wholesale_product ids from your search (max 25) to build proposals from. Each must belong to a
+                    seller addressed. Use productIdsExclusive to forbid other products.
+                  minItems: 1
+                  maxItems: 25
+                  type: array
+                  items:
+                    type: string
+                    minLength: 1
+                productIdsExclusive:
+                  description: 'AdCP product_ids_exclusive: proposals may use only the productIds. Needs productIds.'
+                  type: boolean
                 evaluation:
                   description: Evaluation instructions, inline or by saved policyId. Not yet applied to results.
                   type: object

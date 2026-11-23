@@ -16524,6 +16524,14 @@ export type RequestProposalsData = {
          */
         expectedSellerAccountId?: number;
         /**
+         * wholesale_product ids from your search (max 25) to build proposals from. Each must belong to a seller addressed. Use productIdsExclusive to forbid other products.
+         */
+        productIds?: Array<string>;
+        /**
+         * AdCP product_ids_exclusive: proposals may use only the productIds. Needs productIds.
+         */
+        productIdsExclusive?: boolean;
+        /**
          * Evaluation instructions, inline or by saved policyId. Not yet applied to results.
          */
         evaluation?: {

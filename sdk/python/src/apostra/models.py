@@ -10048,6 +10048,10 @@ class RequestProposalsInput(TypedDict):
     '\n    Required as true only when neither sellerAccountIds nor a campaign seller list applies, before contacting all eligible sellers. Ignored when a selector applies.\n    '
     expectedSellerAccountId: NotRequired[int]
     '\n    The seller\'s Account id, not a seller object id, which is a different number. Optional fail-closed seller check; never grants access. Requires matching current server authority.\n    '
+    productIds: NotRequired[list[str]]
+    '\n    wholesale_product ids from your search (max 25) to build proposals from. Each must belong to a seller addressed. Use productIdsExclusive to forbid other products.\n    '
+    productIdsExclusive: NotRequired[bool]
+    '\n    AdCP product_ids_exclusive: proposals may use only the productIds. Needs productIds.\n    '
     evaluation: NotRequired[RequestProposalsInputEvaluation]
     '\n    Evaluation instructions, inline or by saved policyId. Not yet applied to results.\n    '
     idempotencyKey: NotRequired[str]
