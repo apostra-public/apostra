@@ -17932,7 +17932,7 @@ SaveMaterialRequestMetadataDescription: TypeAlias = str
 
 SaveMaterialRequestMetadataDisplayName: TypeAlias = str
 
-SaveMaterialRequestMetadataDocumentPurpose: TypeAlias = Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit"] | None
+SaveMaterialRequestMetadataDocumentPurpose: TypeAlias = Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script"] | None
 
 SaveMaterialRequestMetadataEffectiveFrom: TypeAlias = str
 
@@ -24333,7 +24333,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -24667,7 +24667,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -24935,7 +24935,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilter(Type
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -25230,7 +25230,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilter(TypedDi
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -25532,7 +25532,7 @@ class SearchInputKindAdServerTargetingFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -25836,7 +25836,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -26140,7 +26140,7 @@ class SearchInputKindBuyerRfpFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -26476,7 +26476,7 @@ class SearchInputKindCreativeAssetAndCatalogFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -26776,7 +26776,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -27076,7 +27076,7 @@ class SearchInputKindCreativeCollectionWithFilterCampaignIdFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -27342,7 +27342,7 @@ class SearchInputKindCreativeFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -27712,7 +27712,7 @@ class SearchInputKindCreativeWithFilterAndFilterCampaignIdFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -28100,7 +28100,7 @@ class SearchInputKindProposalFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
@@ -28402,7 +28402,7 @@ class SearchInputKindSourceAccountFilter(TypedDict):
     '\n    For kind material: documents with any of these visibility settings. New documents default to seller_private.\n    '
     sourceExtension: NotRequired[str]
     '\n    For kind material: one file extension such as pdf or pptx, matched case-insensitively against the file name, URL path, or content type.\n    '
-    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "uncategorized"]]
+    documentPurpose: NotRequired[Literal["sales_deck", "one_sheet", "case_study", "specification_sheet", "media_kit", "script", "uncategorized"]]
     '\n    For kind material: one Library document category. uncategorized also matches documents with no category.\n    '
     vertical: NotRequired[list[str]]
     '\n    For kind material: documents tagged with any of these industry verticals, case-insensitive.\n    '
