@@ -52910,16 +52910,16 @@ paths:
                   maximum: 9007199254740991
                 dealTerms:
                   description: >-
-                    A managed source's publisher share of the price: products sell at its cost marked up, unless you set
-                    a price. null removes. Send with id only.
+                    A managed source's margin: products sell at its cost marked up to it, unless you set a price. null
+                    removes. Send with id only.
                   anyOf:
                     - type: object
                       properties:
-                        publisherSharePercent:
+                        curatorMarginPercent:
                           type: number
-                          description: Percent of the price the publisher is owed, above 0 up to 100.
+                          description: Percent of the buyer’s price you keep, 0 up to under 100.
                       required:
-                        - publisherSharePercent
+                        - curatorMarginPercent
                       additionalProperties: false
                     - type: 'null'
                 expectedAccountId:
