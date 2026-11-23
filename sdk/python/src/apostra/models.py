@@ -16983,7 +16983,7 @@ class SaveInventorySourceInput(TypedDict):
     sellerId: NotRequired[int]
     '\n    Link this seller\'s inventory as a source. The seller must have approved your account. Send alone, or with status ACTIVE to activate it.\n    '
     dealTerms: NotRequired[SaveInventorySourceInputDealTermsValue | None]
-    '\n    A managed source\'s publisher share of the price: products sell at its cost marked up, unless you set a price. null removes. Send with id only.\n    '
+    '\n    A managed source\'s margin: products sell at its cost marked up to it, unless you set a price. null removes. Send with id only.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -16994,8 +16994,8 @@ class SaveInventorySourceInputAdServer(TypedDict):
     '\n    citrusad is Epsilon Retail Media.\n    '
 
 class SaveInventorySourceInputDealTermsValue(TypedDict):
-    publisherSharePercent: float
-    '\n    Percent of the price the publisher is owed, above 0 up to 100.\n    '
+    curatorMarginPercent: float
+    '\n    Percent of the buyer’s price you keep, 0 up to under 100.\n    '
 
 class SaveInventorySourceInputModuleConfig(TypedDict):
     moduleInstanceId: str

@@ -28755,13 +28755,13 @@ export type SaveInventorySourceData = {
          */
         sellerId?: number;
         /**
-         * A managed source's publisher share of the price: products sell at its cost marked up, unless you set a price. null removes. Send with id only.
+         * A managed source's margin: products sell at its cost marked up to it, unless you set a price. null removes. Send with id only.
          */
         dealTerms?: {
             /**
-             * Percent of the price the publisher is owed, above 0 up to 100.
+             * Percent of the buyer’s price you keep, 0 up to under 100.
              */
-            publisherSharePercent: number;
+            curatorMarginPercent: number;
         } | null;
         /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
