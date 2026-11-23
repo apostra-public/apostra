@@ -9957,6 +9957,32 @@ export type GetStatusData = {
          */
         sellersCursor?: string;
         /**
+         * Follow what changed in up to 20 Projects, conversations or runs. Returns notices (kind and time, never content); read the thing with get.
+         */
+        changes?: {
+            /**
+             * What to follow, 1 to 20 scopes.
+             */
+            scopes: Array<{
+                /**
+                 * project, conversation or run. A conversation and its run are two scopes.
+                 */
+                scopeKind: 'project' | 'conversation' | 'run';
+                /**
+                 * A Project's id, or a Session's id for a conversation or run.
+                 */
+                id: string;
+            }>;
+            /**
+             * The changes.cursor of the previous answer. Without it, the answer is cursorExpired with a cursor to follow from.
+             */
+            since?: string;
+            /**
+             * Seconds to wait for a change, up to 30. Default 0.
+             */
+            waitSeconds?: number;
+        };
+        /**
          * Apostra accountId this call runs in, from get_status.
          */
         accountId?: number | string;
@@ -10337,6 +10363,25 @@ export type GetStatusResponses = {
                 status: 'sandbox' | 'claimed';
                 expiresAt: string | null;
             } | null;
+            /**
+             * With the changes input: what changed in its scopes since its cursor.
+             */
+            changes?: {
+                notices: Array<{
+                    scope: {
+                        scopeKind: 'project' | 'conversation' | 'run';
+                        id: string;
+                    };
+                    /**
+                     * One of state, bounds, attachments, message, attention, approval, canvas, memory_file, step. Ignore a kind you do not know.
+                     */
+                    kind: string;
+                    at: string;
+                }>;
+                cursor: string;
+                hasMore: boolean;
+                cursorExpired: boolean;
+            };
             [key: string]: unknown;
         };
         error: null;
