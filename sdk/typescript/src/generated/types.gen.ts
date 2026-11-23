@@ -9046,6 +9046,19 @@ export type GetResponses = {
                         sentence: string | null;
                     } | null;
                     knownLimits: Array<string>;
+                    /**
+                     * Set when the account type must change before this source can connect: the source uses Apostra's managed sales agent, which the account's current type does not include. `resolve` is the call an administrator of the billing organization makes. Connecting the source before then is refused.
+                     */
+                    requires: {
+                        sellingMode: 'storefront';
+                        message: string;
+                        resolve: {
+                            tool: 'save_seller';
+                            input: {
+                                sellingMode: 'storefront';
+                            };
+                        };
+                    } | null;
                 }>;
                 brandRef?: GetSuccessObjectBrandRef;
                 /**
