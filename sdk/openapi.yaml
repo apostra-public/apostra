@@ -1444,13 +1444,17 @@ paths:
                               items:
                                 type: string
                             failureReason:
-                              type: string
-                              enum:
-                                - creative_pre_provider_invalid_format
-                                - creative_pre_provider_invalid_request
-                                - generated_audio_too_short
-                                - generated_audio_undecodable
-                                - provider_error
+                              anyOf:
+                                - type: string
+                                  enum:
+                                    - creative_pre_provider_invalid_format
+                                    - creative_pre_provider_invalid_request
+                                    - creative_engine_reconnect_required
+                                    - generated_audio_too_short
+                                    - generated_audio_undecodable
+                                    - provider_error
+                                - type: string
+                                  pattern: ^provider_start_http_4\d\d$
                           required:
                             - leafId
                             - status
