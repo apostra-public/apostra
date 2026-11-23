@@ -14320,7 +14320,7 @@ class SaveCampaignSuccessExecution(TypedDict):
     mediaBuysFailed: float
     noOp: bool
     errors: NotRequired[list[SaveCampaignSuccessExecutionErrorsItem]]
-    warnings: NotRequired[list[SaveCampaignSuccessExecutionWarningsItemTypeCreativesDropped | SaveCampaignSuccessExecutionWarningsItemTypeOptimizationGoalsDropped | SaveCampaignSuccessExecutionWarningsItemTypePacingNotApplied | SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNotApplied | SaveCampaignSuccessExecutionWarningsItemTypeStaleDraft | SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNarrowed | SaveCampaignSuccessExecutionWarningsItemTypePackagesUndeliverable]]
+    warnings: NotRequired[list[SaveCampaignSuccessExecutionWarningsItemTypeCreativesDropped | SaveCampaignSuccessExecutionWarningsItemTypeOptimizationGoalsDropped | SaveCampaignSuccessExecutionWarningsItemTypePacingNotApplied | SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNotApplied | SaveCampaignSuccessExecutionWarningsItemTypeStaleDraft | SaveCampaignSuccessExecutionWarningsItemTypeDemographicsNarrowed | SaveCampaignSuccessExecutionWarningsItemTypePackagesUndeliverable | SaveCampaignSuccessExecutionWarningsItemTypeTrackersNotSent]]
 
 class SaveCampaignSuccessExecutionErrorsItem(TypedDict):
     mediaBuyId: str
@@ -14402,6 +14402,16 @@ class SaveCampaignSuccessExecutionWarningsItemTypeStaleDraft(TypedDict):
     type: Literal["stale_draft"]
     mediaBuyIds: list[str]
     hint: str
+
+class SaveCampaignSuccessExecutionWarningsItemTypeTrackersNotSent(TypedDict):
+    type: Literal["trackers_not_sent"]
+    mediaBuyId: str
+    dropped: list[SaveCampaignSuccessExecutionWarningsItemTypeTrackersNotSentDroppedItem]
+
+class SaveCampaignSuccessExecutionWarningsItemTypeTrackersNotSentDroppedItem(TypedDict):
+    trackerId: str
+    trackerName: str
+    reason: str
 
 class SaveCampaignSuccessLaunchBudgetsByCurrencyItem(TypedDict):
     total: float

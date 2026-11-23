@@ -23938,6 +23938,16 @@ export type SaveCampaignSuccessExecution = {
         }>;
         mediaBuyIds?: never;
         hint?: never;
+    } | {
+        type: 'trackers_not_sent';
+        mediaBuyId: string;
+        dropped: Array<{
+            trackerId: string;
+            trackerName: string;
+            reason: string;
+        }>;
+        mediaBuyIds?: never;
+        hint?: never;
     }>;
 };
 
