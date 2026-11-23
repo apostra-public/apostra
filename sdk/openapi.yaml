@@ -61440,12 +61440,12 @@ paths:
       operationId: save_project
       summary: >-
         Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds,
-        lead, or autonomyPaused (stop; an administrator resumes). A Project is one conversation plus its objective,
-        attachments and lead's bounds. Wider bounds return approval_required.
+        lead, or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required.
+        reallocation_threshold is a currency amount.
       description: >-
         Create a Buyer account's Project (omit id), or with id make one change: details, one attach or detach, bounds,
-        lead, or autonomyPaused (stop; an administrator resumes). A Project is one conversation plus its objective,
-        attachments and lead's bounds. Wider bounds return approval_required.
+        lead, or autonomyPaused (stop; an administrator resumes). Wider bounds return approval_required.
+        reallocation_threshold is a currency amount.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -61606,6 +61606,9 @@ paths:
                         reallocation_threshold:
                           type: number
                           minimum: 0
+                          description: >-
+                            An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval;
+                            `total` means unlimited.
                         allocations:
                           type: object
                           propertyNames:
@@ -61660,15 +61663,13 @@ paths:
                           - change_pacing
                           - pause_or_resume_media_buy
                           - assign_approved_creative
-                      description: >-
-                        The actions the lead may take without asking: move_budget, change_pacing,
-                        pause_or_resume_media_buy, assign_approved_creative.
+                      description: The actions the lead may take without asking.
                     limits:
                       type: object
                       properties:
                         maxActionsPerDay:
                           default: 10
-                          description: Autonomous actions allowed per day, 1 to 50. Default 10.
+                          description: Autonomous actions allowed per day.
                           type: integer
                           minimum: 1
                           maximum: 50
@@ -61680,7 +61681,7 @@ paths:
                               exclusiveMinimum: 0
                             - type: 'null'
                       additionalProperties: false
-                      description: Daily action count and IU cap for autonomous work.
+                      description: Daily action count and IU cap.
                     targets:
                       type: object
                       properties:
@@ -61689,7 +61690,7 @@ paths:
                           type: array
                           items:
                             $ref: '#/components/schemas/save_project_request_BoundsTargetsMediaBuyIdsItem'
-                          description: Attached media buys the lead may change, each listed. A buy added later is a wider revision.
+                          description: Attached media buys the lead may change. A buy added later is a wider revision.
                       required:
                         - mediaBuyIds
                       additionalProperties: false
@@ -66399,12 +66400,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -66425,6 +66426,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -66448,15 +66450,14 @@ paths:
                             - creative_engine
                         ids:
                           description: >-
-                            For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in
-                            missingIds. Not used for kind seller: send sellerAccountIds.
+                            For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come
+                            back in missingIds. Not used for kind seller: send sellerAccountIds.
                           minItems: 1
                           maxItems: 50
                           type: array
                           items:
                             type: string
-                            maxLength: 19
-                            pattern: ^[1-9]\d*$
+                            maxLength: 255
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
@@ -68329,12 +68330,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -68355,6 +68356,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -68378,15 +68380,14 @@ paths:
                             - creative_engine
                         ids:
                           description: >-
-                            For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in
-                            missingIds. Not used for kind seller: send sellerAccountIds.
+                            For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come
+                            back in missingIds. Not used for kind seller: send sellerAccountIds.
                           minItems: 1
                           maxItems: 50
                           type: array
                           items:
                             type: string
-                            maxLength: 19
-                            pattern: ^[1-9]\d*$
+                            maxLength: 255
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
@@ -70260,12 +70261,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -70286,6 +70287,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -71060,12 +71062,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -71086,6 +71088,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -71109,15 +71112,14 @@ paths:
                             - creative_engine
                         ids:
                           description: >-
-                            For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in
-                            missingIds. Not used for kind seller: send sellerAccountIds.
+                            For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come
+                            back in missingIds. Not used for kind seller: send sellerAccountIds.
                           minItems: 1
                           maxItems: 50
                           type: array
                           items:
                             type: string
-                            maxLength: 19
-                            pattern: ^[1-9]\d*$
+                            maxLength: 255
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
@@ -72991,12 +72993,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -73017,6 +73019,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -73040,15 +73043,14 @@ paths:
                             - creative_engine
                         ids:
                           description: >-
-                            For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in
-                            missingIds. Not used for kind seller: send sellerAccountIds.
+                            For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come
+                            back in missingIds. Not used for kind seller: send sellerAccountIds.
                           minItems: 1
                           maxItems: 50
                           type: array
                           items:
                             type: string
-                            maxLength: 19
-                            pattern: ^[1-9]\d*$
+                            maxLength: 255
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
@@ -74906,12 +74908,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -74932,6 +74934,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -74955,15 +74958,14 @@ paths:
                             - creative_engine
                         ids:
                           description: >-
-                            For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in
-                            missingIds. Not used for kind seller: send sellerAccountIds.
+                            For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come
+                            back in missingIds. Not used for kind seller: send sellerAccountIds.
                           minItems: 1
                           maxItems: 50
                           type: array
                           items:
                             type: string
-                            maxLength: 19
-                            pattern: ^[1-9]\d*$
+                            maxLength: 255
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
@@ -76829,12 +76831,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -76855,6 +76857,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -76878,15 +76881,14 @@ paths:
                             - creative_engine
                         ids:
                           description: >-
-                            For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in
-                            missingIds. Not used for kind seller: send sellerAccountIds.
+                            For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come
+                            back in missingIds. Not used for kind seller: send sellerAccountIds.
                           minItems: 1
                           maxItems: 50
                           type: array
                           items:
                             type: string
-                            maxLength: 19
-                            pattern: ^[1-9]\d*$
+                            maxLength: 255
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
@@ -78751,12 +78753,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -78777,6 +78779,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -78800,15 +78803,14 @@ paths:
                             - creative_engine
                         ids:
                           description: >-
-                            For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in
-                            missingIds. Not used for kind seller: send sellerAccountIds.
+                            For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come
+                            back in missingIds. Not used for kind seller: send sellerAccountIds.
                           minItems: 1
                           maxItems: 50
                           type: array
                           items:
                             type: string
-                            maxLength: 19
-                            pattern: ^[1-9]\d*$
+                            maxLength: 255
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
@@ -80671,12 +80673,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -80697,6 +80699,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       not: {}
                     filter:
@@ -81490,12 +81493,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -81516,6 +81519,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       not: {}
                     filter:
@@ -82319,12 +82323,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -82345,6 +82349,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -82368,15 +82373,14 @@ paths:
                             - creative_engine
                         ids:
                           description: >-
-                            For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in
-                            missingIds. Not used for kind seller: send sellerAccountIds.
+                            For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come
+                            back in missingIds. Not used for kind seller: send sellerAccountIds.
                           minItems: 1
                           maxItems: 50
                           type: array
                           items:
                             type: string
-                            maxLength: 19
-                            pattern: ^[1-9]\d*$
+                            maxLength: 255
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
@@ -84248,12 +84252,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -84274,6 +84278,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -85067,12 +85072,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -85093,6 +85098,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -85116,15 +85122,14 @@ paths:
                             - creative_engine
                         ids:
                           description: >-
-                            For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in
-                            missingIds. Not used for kind seller: send sellerAccountIds.
+                            For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come
+                            back in missingIds. Not used for kind seller: send sellerAccountIds.
                           minItems: 1
                           maxItems: 50
                           type: array
                           items:
                             type: string
-                            maxLength: 19
-                            pattern: ^[1-9]\d*$
+                            maxLength: 255
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
@@ -86996,12 +87001,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -87022,6 +87027,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -87810,12 +87816,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -87836,6 +87842,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -87859,15 +87866,14 @@ paths:
                             - creative_engine
                         ids:
                           description: >-
-                            For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in
-                            missingIds. Not used for kind seller: send sellerAccountIds.
+                            For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come
+                            back in missingIds. Not used for kind seller: send sellerAccountIds.
                           minItems: 1
                           maxItems: 50
                           type: array
                           items:
                             type: string
-                            maxLength: 19
-                            pattern: ^[1-9]\d*$
+                            maxLength: 255
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
@@ -89739,12 +89745,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -89765,6 +89771,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -89788,15 +89795,14 @@ paths:
                             - creative_engine
                         ids:
                           description: >-
-                            For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in
-                            missingIds. Not used for kind seller: send sellerAccountIds.
+                            For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come
+                            back in missingIds. Not used for kind seller: send sellerAccountIds.
                           minItems: 1
                           maxItems: 50
                           type: array
                           items:
                             type: string
-                            maxLength: 19
-                            pattern: ^[1-9]\d*$
+                            maxLength: 255
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
@@ -91665,12 +91671,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -91691,6 +91697,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -91714,15 +91721,14 @@ paths:
                             - creative_engine
                         ids:
                           description: >-
-                            For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in
-                            missingIds. Not used for kind seller: send sellerAccountIds.
+                            For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come
+                            back in missingIds. Not used for kind seller: send sellerAccountIds.
                           minItems: 1
                           maxItems: 50
                           type: array
                           items:
                             type: string
-                            maxLength: 19
-                            pattern: ^[1-9]\d*$
+                            maxLength: 255
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
@@ -93591,12 +93597,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -93617,6 +93623,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -93640,15 +93647,14 @@ paths:
                             - creative_engine
                         ids:
                           description: >-
-                            For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in
-                            missingIds. Not used for kind seller: send sellerAccountIds.
+                            For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come
+                            back in missingIds. Not used for kind seller: send sellerAccountIds.
                           minItems: 1
                           maxItems: 50
                           type: array
                           items:
                             type: string
-                            maxLength: 19
-                            pattern: ^[1-9]\d*$
+                            maxLength: 255
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
@@ -95518,12 +95524,12 @@ paths:
                       const: unit
                     include:
                       description: >-
-                        One extra projection. material: evidence_matches (page-text matches for query; use no filters)
-                        or browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
-                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign and media_buy:
-                        progress. Buyer creative: delivery. Buyer wholesale_product: executionReadiness;
-                        executionResources with filter.productId and filter.resourceKind; or creativeFit with
-                        filter.assetId: whether each product fits that Library asset. Seller wholesale_product:
+                        One projection. material: evidence_matches (page-text matches for query; use no filters) or
+                        browse (rows go to the app). seller: commitmentRecord. rfp: outcome (each RFP's response and
+                        result). campaign: pulse. Seller media_buy: deliverySummary. Buyer campaign, media_buy:
+                        progress. Buyer creative: delivery, assets (tag, click URL). Buyer wholesale_product:
+                        executionReadiness; executionResources (filter.productId, filter.resourceKind); or creativeFit
+                        (filter.assetId): does each product fit that Library asset. Seller wholesale_product:
                         price_paid. ad_server_targeting: authoring (a save_signal draft, reach and status per value;
                         mapping kinds). inventory_source_item: adServerMetadata (app only).
                       type: array
@@ -95544,6 +95550,7 @@ paths:
                           - progress
                           - outcome
                           - delivery
+                          - assets
                     sourceId:
                       description: >-
                         One source to read from, sent here at the top level and not as filter.sourceId. For a Library
@@ -95567,15 +95574,14 @@ paths:
                             - creative_engine
                         ids:
                           description: >-
-                            For kinds connection and creative_engine: up to 50 exact ids. Ids not found come back in
-                            missingIds. Not used for kind seller: send sellerAccountIds.
+                            For kinds connection, creative_engine and creative: up to 50 exact ids. Ids not found come
+                            back in missingIds. Not used for kind seller: send sellerAccountIds.
                           minItems: 1
                           maxItems: 50
                           type: array
                           items:
                             type: string
-                            maxLength: 19
-                            pattern: ^[1-9]\d*$
+                            maxLength: 255
                         sellerAccountIds:
                           description: >-
                             For kind seller (buyer account): up to 50 exact seller Account ids, not seller object ids,
@@ -124674,6 +124680,9 @@ components:
                     reallocation_threshold:
                       type: number
                       minimum: 0
+                      description: >-
+                        An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval;
+                        `total` means unlimited.
                     allocations:
                       type: object
                       propertyNames:
@@ -124728,15 +124737,13 @@ components:
                       - change_pacing
                       - pause_or_resume_media_buy
                       - assign_approved_creative
-                  description: >-
-                    The actions the lead may take without asking: move_budget, change_pacing, pause_or_resume_media_buy,
-                    assign_approved_creative.
+                  description: The actions the lead may take without asking.
                 limits:
                   type: object
                   properties:
                     maxActionsPerDay:
                       default: 10
-                      description: Autonomous actions allowed per day, 1 to 50. Default 10.
+                      description: Autonomous actions allowed per day.
                       type: integer
                       minimum: 1
                       maximum: 50
@@ -124751,7 +124758,7 @@ components:
                     - maxActionsPerDay
                     - iuBudget
                   additionalProperties: false
-                  description: Daily action count and IU cap for autonomous work.
+                  description: Daily action count and IU cap.
                 targets:
                   type: object
                   properties:
@@ -124760,7 +124767,7 @@ components:
                       type: array
                       items:
                         $ref: '#/components/schemas/save_project_success_ObjectBoundsTargetsMediaBuyIdsItem'
-                      description: Attached media buys the lead may change, each listed. A buy added later is a wider revision.
+                      description: Attached media buys the lead may change. A buy added later is a wider revision.
                   required:
                     - mediaBuyIds
                   additionalProperties: false
@@ -125126,6 +125133,9 @@ components:
                     reallocation_threshold:
                       type: number
                       minimum: 0
+                      description: >-
+                        An amount in `budget.currency`, not a percentage. 0 means every reallocation needs approval;
+                        `total` means unlimited.
                     allocations:
                       type: object
                       propertyNames:
@@ -125180,15 +125190,13 @@ components:
                       - change_pacing
                       - pause_or_resume_media_buy
                       - assign_approved_creative
-                  description: >-
-                    The actions the lead may take without asking: move_budget, change_pacing, pause_or_resume_media_buy,
-                    assign_approved_creative.
+                  description: The actions the lead may take without asking.
                 limits:
                   type: object
                   properties:
                     maxActionsPerDay:
                       default: 10
-                      description: Autonomous actions allowed per day, 1 to 50. Default 10.
+                      description: Autonomous actions allowed per day.
                       type: integer
                       minimum: 1
                       maximum: 50
@@ -125203,7 +125211,7 @@ components:
                     - maxActionsPerDay
                     - iuBudget
                   additionalProperties: false
-                  description: Daily action count and IU cap for autonomous work.
+                  description: Daily action count and IU cap.
                 targets:
                   type: object
                   properties:
@@ -125212,7 +125220,7 @@ components:
                       type: array
                       items:
                         $ref: '#/components/schemas/save_project_success_ProjectBoundsTargetsMediaBuyIdsItem'
-                      description: Attached media buys the lead may change, each listed. A buy added later is a wider revision.
+                      description: Attached media buys the lead may change. A buy added later is a wider revision.
                   required:
                     - mediaBuyIds
                   additionalProperties: false
