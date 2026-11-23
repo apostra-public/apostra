@@ -305,7 +305,7 @@ class GenerateVariantsResultLeavesItem(TypedDict):
     status: Literal["pending", "dispatching", "submitted", "completed", "uncertain", "not_dispatched"]
     taskId: NotRequired[str]
     variantIds: NotRequired[list[str]]
-    failureReason: NotRequired[Literal["creative_pre_provider_invalid_format", "creative_pre_provider_invalid_request", "generated_audio_too_short", "generated_audio_undecodable", "provider_error"]]
+    failureReason: NotRequired[Literal["creative_pre_provider_invalid_format", "creative_pre_provider_invalid_request", "creative_engine_reconnect_required", "generated_audio_too_short", "generated_audio_undecodable", "provider_error"] | str]
 
 class GenerateVariantsResultPollScopeAdvertiser(TypedDict):
     scope: Literal["advertiser"]

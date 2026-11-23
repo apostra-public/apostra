@@ -721,7 +721,7 @@ export type GenerateVariantsResponses = {
                 status: 'pending' | 'dispatching' | 'submitted' | 'completed' | 'uncertain' | 'not_dispatched';
                 taskId?: string;
                 variantIds?: Array<string>;
-                failureReason?: 'creative_pre_provider_invalid_format' | 'creative_pre_provider_invalid_request' | 'generated_audio_too_short' | 'generated_audio_undecodable' | 'provider_error';
+                failureReason?: 'creative_pre_provider_invalid_format' | 'creative_pre_provider_invalid_request' | 'creative_engine_reconnect_required' | 'generated_audio_too_short' | 'generated_audio_undecodable' | 'provider_error' | string;
             }>;
             completedVariants?: Array<{
                 variantId: string;
