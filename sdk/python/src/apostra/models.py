@@ -2208,6 +2208,10 @@ class GetInputKindAdvertiserAccess(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -2347,6 +2351,10 @@ class GetInputKindAgentAndBuyerAgentAndProjectAndSkillAndInventorySourceAndAdver
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -2500,6 +2508,10 @@ class GetInputKindAgentRecord(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -2635,6 +2647,10 @@ class GetInputKindAudience(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -2774,6 +2790,10 @@ class GetInputKindBuyerRfp(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -2911,6 +2931,10 @@ class GetInputKindCatalogAndEventSource(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -3050,6 +3074,10 @@ class GetInputKindConnection(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -3189,6 +3217,10 @@ class GetInputKindCreativeAndCreativeCollectionWithAdvertiserId(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -3328,6 +3360,10 @@ class GetInputKindCreativeAndCreativeCollectionWithSourceId(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -3465,6 +3501,10 @@ class GetInputKindCreativeEngine(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -3602,6 +3642,10 @@ class GetInputKindCreativeFormat(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -3739,6 +3783,10 @@ class GetInputKindCreativeSession(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -3876,6 +3924,10 @@ class GetInputKindMaterial(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -4015,6 +4067,10 @@ class GetInputKindProposal(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -4154,6 +4210,10 @@ class GetInputKindSeller(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -4293,6 +4353,10 @@ class GetInputKindSession(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -4432,6 +4496,10 @@ class GetInputKindSourceOptionsAndListingAndMediaKitAndPlaybookAndBusinessRulesA
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -4585,6 +4653,10 @@ class GetInputKindWholesaleProductWithAdvertiserId(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -4724,6 +4796,10 @@ class GetInputKindWholesaleProductWithSourceId(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
@@ -4875,6 +4951,10 @@ class GetInputKindWorkItem(TypedDict):
     '\n    For kind session, with after: the snapshotThrough from the previous read, so new events do not shift the pages.\n    '
     limit: NotRequired[int]
     '\n    For kind session: events per page, default 50. Lower it if a page is too large to return.\n    '
+    threadStates: NotRequired[list[Literal["needs_you", "evaluating", "new", "drafted", "fixed", "no_action_needed"]]]
+    '\n    For a Project conversation: keep only thread starts in these states.\n    '
+    openThreads: NotRequired[Literal[True]]
+    '\n    For a Project conversation: keep only open threads.\n    '
     buyerAccountId: NotRequired[int]
     '\n    For kind media_buy in a seller account: the buyer Account id, needed when the media-buy id alone is ambiguous across buyers.\n    '
     memberAccountId: NotRequired[int]
