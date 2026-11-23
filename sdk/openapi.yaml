@@ -129530,6 +129530,8 @@ components:
           type: boolean
         defaultStatusScope:
           type: boolean
+        phaseCounts:
+          $ref: '#/components/schemas/search_success_V3CampaignPhaseCounts'
         droppedFilters:
           type: array
           items:
@@ -129547,6 +129549,31 @@ components:
         - defaultStatusScope
         - results
       additionalProperties: {}
+    search_success_V3CampaignPhaseCounts:
+      type: object
+      properties:
+        draft:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        active:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        completed:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        canceled:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+      required:
+        - draft
+        - active
+        - completed
+        - canceled
+      additionalProperties: false
     search_success_V3CampaignListItem:
       type: object
       properties:

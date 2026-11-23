@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "skillId": "manage-a-campaign",
-  "skillVersion": "1.6.2",
+  "skillVersion": "1.6.3",
   "scenarios": [
     {
       "id": "html5-zip-upload-finished-before-attach",
@@ -61,6 +61,16 @@
         "The agent calls get_delivery with report \"live_ad_delivery\", the campaign in filters.campaignId and an explicit range of at most 90 days, and retrieves the Per-ad delivery page, reading its On TikTok section, before comparing ads.",
         "It reads each package as a TikTok ad group, compares ads on daily frequency and click-through rate, says that range reach is absent over more than 30 days, and never adds daily reach up.",
         "It separates what the figures show from its recommendation and changes nothing."
+      ]
+    },
+    {
+      "id": "campaign-status-question-covers-every-phase",
+      "title": "Answer how campaigns are doing across every phase, drafts included",
+      "given": "The buyer asks how their campaigns are doing for an advertiser whose Campaigns page lists two draft campaigns, one starting in a few days, and nothing active.",
+      "expect": [
+        "The agent calls search with kind campaign and no filter.phase, not filter.phase active, so the draft campaigns are in the read.",
+        "It reports the count in each phase from phaseCounts, names each draft with its start date, and says a draft has no delivery yet.",
+        "It does not call get_delivery for a draft campaign or describe one as running, booked or delivering."
       ]
     }
   ]
