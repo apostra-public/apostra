@@ -24062,7 +24062,7 @@ SaveWorkItemSuccessSaveWorkItemSuccessUnchangedResumeDue: TypeAlias = bool
 class SearchInputDocsScopeCallerRelevantAndPublicResearch(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -24363,7 +24363,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchFilterProperty(TypedDic
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: str
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -24396,7 +24396,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocument(TypedDict)
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentAndRevision(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: str
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: str
@@ -24965,7 +24965,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithDocumentFilterPrope
 class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQuery(TypedDict):
     accountId: NotRequired[int | str]
     query: str
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     asOf: NotRequired[str]
     '\n    The time to evaluate docs at; defaults to now. When continuing an agreement read with cursor, send the same asOf again.\n    '
     sources: NotRequired[list[Literal["objects", "docs", "specs"]]]
@@ -25260,7 +25260,7 @@ class SearchInputDocsScopeCallerRelevantAndPublicResearchWithQueryFilterProperty
 class SearchInputKindAdServerTargeting(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -25562,7 +25562,7 @@ class SearchInputKindAdServerTargetingFilterProperty(TypedDict):
 class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWholesaleProductAndPlaybookVersionAndBusinessRulesVersionAndHouseDiscountAndConnectionAndAccountRelationshipAndSellerAndAdvertiserAndAdvertiserGrantAndSignalAndWorkItemAndCampaignAndCreativeFormatAndCreativeEngineAndMediaBuyAndRfpAndRfpTurnAndLibraryRequestAndAskAndConversationAndBuyerAgentAndProjectAndDimensionAndSession(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -25868,7 +25868,7 @@ class SearchInputKindAgentAndSkillAndInventorySourceAndMaterialAndCoverageAndWho
 class SearchInputKindBuyerRfp(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -26170,7 +26170,7 @@ class SearchInputKindBuyerRfpFilterProperty(TypedDict):
 class SearchInputKindCreative(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -26204,7 +26204,7 @@ class SearchInputKindCreative(TypedDict):
 class SearchInputKindCreativeAssetAndCatalog(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -26506,7 +26506,7 @@ class SearchInputKindCreativeAssetAndCatalogFilterProperty(TypedDict):
 class SearchInputKindCreativeCollectionWithFilterAdvertiserId(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -26806,7 +26806,7 @@ class SearchInputKindCreativeCollectionWithFilterAdvertiserIdFilterProperty(Type
 class SearchInputKindCreativeCollectionWithFilterCampaignId(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -27444,7 +27444,7 @@ SearchInputKindCreativeWithFilterAdvertiserIdFilter: TypeAlias = SearchInputKind
 class SearchInputKindCreativeWithFilterAndFilterCampaignId(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -27746,7 +27746,7 @@ SearchInputKindCreativeWithFilterCampaignIdFilter: TypeAlias = SearchInputKindCr
 class SearchInputKindEventSource(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -27784,7 +27784,7 @@ class SearchInputKindEventSourceFilter(TypedDict):
 class SearchInputKindInventorySourceItem(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -27828,7 +27828,7 @@ class SearchInputKindInventorySourceItemFilter(TypedDict):
 class SearchInputKindProposal(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -28130,7 +28130,7 @@ class SearchInputKindProposalFilterProperty(TypedDict):
 class SearchInputKindSourceAccount(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
@@ -28432,7 +28432,7 @@ class SearchInputKindSourceAccountFilterProperty(TypedDict):
 class SearchInputKindTargetingValue(TypedDict):
     accountId: NotRequired[int | str]
     query: NotRequired[str]
-    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn, creative_session, and project take no query.\n    '
+    '\n    Text to match, or a question for the docs. Omit it only to list a kind or to read an agreement by document and revision. kind conversation allows up to 200 characters; kind rfp ranks RFPs by their latest brief, up to 512; property_list, rfp_turn and creative_session take no query.\n    '
     document: NotRequired[str]
     '\n    The document of an earlier docs hit, to read it in full; send the same query to rank its sections. Docs only: no kind, filter, or objects source.\n    '
     revision: NotRequired[str]
