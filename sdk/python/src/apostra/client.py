@@ -381,11 +381,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.SaveAgentRecordResult], self._request_with_response("save_agent_record", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
-        "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
+        "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose or ask yes/no first."
         return cast("models.SaveAskResult", self._request("save_ask", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_ask_with_response(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAskResult]:
-        "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first. Returns the data together with response headers and request ID."
+        "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose or ask yes/no first. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAskResult], self._request_with_response("save_ask", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def save_audience(self, input: models.SaveAudienceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAudienceResult:
@@ -1062,11 +1062,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.SaveAgentRecordResult], await self._request_with_response("save_agent_record", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_ask(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAskResult:
-        "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
+        "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose or ask yes/no first."
         return cast("models.SaveAskResult", await self._request("save_ask", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_ask_with_response(self, input: models.SaveAskInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveAskResult]:
-        "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first. Returns the data together with response headers and request ID."
+        "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose or ask yes/no first. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveAskResult], await self._request_with_response("save_ask", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_audience(self, input: models.SaveAudienceInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveAudienceResult:
