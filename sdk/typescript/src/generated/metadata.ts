@@ -984,7 +984,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first."
+    "summary": "File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose or ask yes/no first."
   },
   "save_audience": {
     "path": "/tools/save_audience",

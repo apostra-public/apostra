@@ -815,14 +815,14 @@ export class Apostra extends Transport {
   /** Correct, forget or restore a memory the account’s own agent keeps (search or get with kind agent_record reads them): recordId and expectedRevision with text, content or materialIds, or isArchived. Only that agent saves new memories, except a memory file (recordType file). Returns the data together with response headers and request ID. */
   saveAgentRecordWithResponse(input: SaveAgentRecordInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAgentRecordResult>> { return this.requestDetailed("save_agent_record", input, options) }
   /**
-   * File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first.
+   * File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose or ask yes/no first.
    *
    * @example
    * await client.saveAsk(input, { idempotencyKey: 'stable-key' })
    */
   saveAsk(input: SaveAskInput, options: WriteRequestOptions): Promise<SaveAskResult> { return this.request("save_ask", input, options) }
 
-  /** File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose first. Returns the data together with response headers and request ID. */
+  /** File or update a typed ask in the Apostra Support workflow; returns askId. kind create files a new ask; kind update sends only id and requester. Supply is buyer inventory. Call immediately with type support when a person explicitly asks for a human; do not diagnose or ask yes/no first. Returns the data together with response headers and request ID. */
   saveAskWithResponse(input: SaveAskInput, options: WriteRequestOptions): Promise<ResponseDetails<SaveAskResult>> { return this.requestDetailed("save_ask", input, options) }
   /**
    * Sync first-party CRM audiences for a buyer advertiser. Each audiences[] item may add, remove, or delete members. Returns an operationId; use get(kind: audience, advertiserId: "...") to read match status after it settles.
