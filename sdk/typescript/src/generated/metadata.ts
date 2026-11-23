@@ -754,7 +754,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Rechecks one external sales-agent source with no-spend get_products and, if it publishes one, a catalog refresh. Returns each check, findings still open, evidence IDs and readiness; no source configuration or media buy. scope accounts re-lists the source's accounts instead."
+    "summary": "Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness without changing source configuration or creating a media buy. scope accounts re-lists accounts instead."
   },
   "request_buyer_child_account": {
     "path": "/tools/request_buyer_child_account",
