@@ -10235,11 +10235,11 @@ export type GetStatusResponses = {
                  */
                 requireSpendApproval?: boolean;
                 /**
-                 * Buyer accounts only: whether Projects are on and whether the account's autonomy stop is on.
+                 * Buyer accounts only: whether the account's agent acts on its own in Projects, and whether its stop is on.
                  */
                 agentAutonomy?: {
                     /**
-                     * Whether Projects are available to this account.
+                     * Whether the account's agent may act on its own in Projects. When false, a person approves each action.
                      */
                     enabled: boolean;
                     /**
@@ -36652,6 +36652,16 @@ export type SaveProjectSuccessObject = {
          */
         mediaBuysOmitted: number;
     } | null;
+    autonomy: {
+        /**
+         * Whether the account's agent may act on its own inside the bounds. When false, a person approves each action.
+         */
+        actsOnItsOwn: boolean;
+        /**
+         * Why not, in plain words to pass on. Null when actsOnItsOwn is true.
+         */
+        reason: string | null;
+    };
     attention: Array<{
         kind: 'bounds_approval_pending' | 'new_bounds_needed' | 'reapproval_needed' | 'resume_needed' | 'account_stop_on' | 'write_unsettled';
         reason: string;
@@ -36837,6 +36847,16 @@ export type SaveProjectSuccessProject = {
          */
         mediaBuysOmitted: number;
     } | null;
+    autonomy: {
+        /**
+         * Whether the account's agent may act on its own inside the bounds. When false, a person approves each action.
+         */
+        actsOnItsOwn: boolean;
+        /**
+         * Why not, in plain words to pass on. Null when actsOnItsOwn is true.
+         */
+        reason: string | null;
+    };
     attention: Array<{
         kind: 'bounds_approval_pending' | 'new_bounds_needed' | 'reapproval_needed' | 'resume_needed' | 'account_stop_on' | 'write_unsettled';
         reason: string;

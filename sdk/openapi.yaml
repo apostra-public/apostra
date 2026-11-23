@@ -33127,13 +33127,15 @@ paths:
                             type: boolean
                           agentAutonomy:
                             description: >-
-                              Buyer accounts only: whether Projects are on and whether the account's autonomy stop is
-                              on.
+                              Buyer accounts only: whether the account's agent acts on its own in Projects, and whether
+                              its stop is on.
                             type: object
                             properties:
                               enabled:
                                 type: boolean
-                                description: Whether Projects are available to this account.
+                                description: >-
+                                  Whether the account's agent may act on its own in Projects. When false, a person
+                                  approves each action.
                               paused:
                                 type: boolean
                                 description: >-
@@ -125595,6 +125597,23 @@ components:
                 - mediaBuysOmitted
               additionalProperties: false
             - type: 'null'
+        autonomy:
+          type: object
+          properties:
+            actsOnItsOwn:
+              type: boolean
+              description: >-
+                Whether the account's agent may act on its own inside the bounds. When false, a person approves each
+                action.
+            reason:
+              anyOf:
+                - type: string
+                - type: 'null'
+              description: Why not, in plain words to pass on. Null when actsOnItsOwn is true.
+          required:
+            - actsOnItsOwn
+            - reason
+          additionalProperties: false
         attention:
           type: array
           items:
@@ -125639,6 +125658,7 @@ components:
         - archivedByUserId
         - progress
         - spend
+        - autonomy
         - attention
         - url
       additionalProperties: false
@@ -126048,6 +126068,23 @@ components:
                 - mediaBuysOmitted
               additionalProperties: false
             - type: 'null'
+        autonomy:
+          type: object
+          properties:
+            actsOnItsOwn:
+              type: boolean
+              description: >-
+                Whether the account's agent may act on its own inside the bounds. When false, a person approves each
+                action.
+            reason:
+              anyOf:
+                - type: string
+                - type: 'null'
+              description: Why not, in plain words to pass on. Null when actsOnItsOwn is true.
+          required:
+            - actsOnItsOwn
+            - reason
+          additionalProperties: false
         attention:
           type: array
           items:
@@ -126092,6 +126129,7 @@ components:
         - archivedByUserId
         - progress
         - spend
+        - autonomy
         - attention
         - url
       additionalProperties: false
