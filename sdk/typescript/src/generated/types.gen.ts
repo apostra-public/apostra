@@ -21578,10 +21578,6 @@ export type SaveBusinessRulesData = {
          */
         accountMaxAutoAcceptPaymentTerms?: 'net_15' | 'net_30' | 'net_45' | 'net_60' | 'net_90' | 'prepay';
         /**
-         * Guaranteed buys over the ad server forecast: send anyway, or hold for review.
-         */
-        guaranteedOverForecast?: 'overbook' | 'hold_for_review';
-        /**
          * Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.
          */
         acknowledgeNoHumanReview?: boolean;
