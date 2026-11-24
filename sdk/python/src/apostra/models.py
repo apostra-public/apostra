@@ -12939,6 +12939,20 @@ SaveBrandSourceSuccessSourceRightsConfirmedBy: TypeAlias = SaveBrandSourceSucces
 
 SaveBrandSourceSuccessSourceRightsPersonAgreementsItemRecordedBy: TypeAlias = SaveBrandSourceSuccessBrandSourceAgreementRecorder
 
+class SaveBusinessRulesInputAccountApprovalOperatorsItem(TypedDict):
+    operator: str
+    '\n    Operator domain.\n    '
+    operator_unit: NotRequired[SaveBusinessRulesInputAccountApprovalOperatorsItemOperatorUnit]
+    '\n    AdCP operator unit.\n    '
+    admission: NotRequired[Literal["accept", "review", "reject"] | None]
+    '\n    null: operator row, else accountApproval.\n    '
+    accountScope: NotRequired[Literal["operator", "operator_brand"]]
+    '\n    Default operator.\n    '
+
+class SaveBusinessRulesInputAccountApprovalOperatorsItemOperatorUnit(TypedDict):
+    id: str
+    '\n    Unit id.\n    '
+
 class SaveBusinessRulesInputMaterialCandidate(TypedDict):
     sourceMaterialId: str
     '\n    Source Material id returned by get(material).\n    '
@@ -12964,8 +12978,10 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
     accountMaxAutoAcceptPaymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]]
     '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
+    accountApprovalOperators: NotRequired[list[SaveBusinessRulesInputAccountApprovalOperatorsItem]]
+    '\n    Per-operator rows, each replacing its operator\'s row; a default row is removed. accept/review apply only to a verified operator, reject to any claim.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -12988,8 +13004,10 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
     accountMaxAutoAcceptPaymentTerms: Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]
     '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
+    accountApprovalOperators: NotRequired[list[SaveBusinessRulesInputAccountApprovalOperatorsItem]]
+    '\n    Per-operator rows, each replacing its operator\'s row; a default row is removed. accept/review apply only to a verified operator, reject to any claim.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -13012,8 +13030,10 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
     accountMaxAutoAcceptPaymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]]
     '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
+    accountApprovalOperators: NotRequired[list[SaveBusinessRulesInputAccountApprovalOperatorsItem]]
+    '\n    Per-operator rows, each replacing its operator\'s row; a default row is removed. accept/review apply only to a verified operator, reject to any claim.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: list[Literal["brief_acceptance", "creative_policy"]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -13036,8 +13056,10 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
     accountMaxAutoAcceptPaymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]]
     '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
+    accountApprovalOperators: NotRequired[list[SaveBusinessRulesInputAccountApprovalOperatorsItem]]
+    '\n    Per-operator rows, each replacing its operator\'s row; a default row is removed. accept/review apply only to a verified operator, reject to any claim.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -13060,8 +13082,10 @@ class SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalA
     '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
     accountMaxAutoAcceptPaymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]]
     '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
+    accountApprovalOperators: NotRequired[list[SaveBusinessRulesInputAccountApprovalOperatorsItem]]
+    '\n    Per-operator rows, each replacing its operator\'s row; a default row is removed. accept/review apply only to a verified operator, reject to any claim.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -13106,8 +13130,10 @@ class SaveBusinessRulesInputWithPolicies(TypedDict):
     '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
     accountMaxAutoAcceptPaymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]]
     '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
+    accountApprovalOperators: NotRequired[list[SaveBusinessRulesInputAccountApprovalOperatorsItem]]
+    '\n    Per-operator rows, each replacing its operator\'s row; a default row is removed. accept/review apply only to a verified operator, reject to any claim.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]
@@ -13130,8 +13156,10 @@ class SaveBusinessRulesInputWithPolicy(TypedDict):
     '\n    New buyer accounts: auto accepts those within accountMaxAutoAcceptPaymentTerms; manual queues every one for review.\n    '
     accountMaxAutoAcceptPaymentTerms: NotRequired[Literal["net_15", "net_30", "net_45", "net_60", "net_90", "prepay"]]
     '\n    Longest payment terms accountApproval auto accepts without review; prepay is shortest. Default net_60.\n    '
+    accountApprovalOperators: NotRequired[list[SaveBusinessRulesInputAccountApprovalOperatorsItem]]
+    '\n    Per-operator rows, each replacing its operator\'s row; a default row is removed. accept/review apply only to a verified operator, reject to any claim.\n    '
     acknowledgeNoHumanReview: NotRequired[bool]
-    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
+    '\n    Required to move any approval to auto, media buys from manual to ai_assisted, to lengthen accountMaxAutoAcceptPaymentTerms under account auto, to accept an operator that accountApproval would review, or to leave Creative Policy empty or off under creative auto. Confirms nobody will review those.\n    '
     advertisingPolicyDisclosure: NotRequired[list[Literal["brief_acceptance", "creative_policy"]]]
     '\n    Policy sections to show buyers on the listing. Empty hides them. Rejection reasons may still quote the rule a creative broke.\n    '
     expectedAccountId: NotRequired[int | str]

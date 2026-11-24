@@ -2334,6 +2334,8 @@
       "SaveBrandSourceSuccessSourceRightsPersonAgreementsItemRecordedBy": "other",
       "SaveBusinessRulesError": "other",
       "SaveBusinessRulesInput": "other",
+      "SaveBusinessRulesInputAccountApprovalOperatorsItem": "object",
+      "SaveBusinessRulesInputAccountApprovalOperatorsItemOperatorUnit": "object",
       "SaveBusinessRulesInputMaterialCandidate": "object",
       "SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAccountApproval": "object",
       "SaveBusinessRulesInputWithCreativeApprovalMediaBuyApprovalAccountApprovalAccountMaxAutoAcceptPaymentTermsAdvertisingPolicyDisclosureWithAccountMaxAutoAcceptPaymentTerms": "object",
