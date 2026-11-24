@@ -68370,6 +68370,8 @@ paths:
                         - intelligence_run
                         - library_request
                         - ask
+                        - notification
+                        - release_update
                         - conversation
                         - buyer_agent
                         - project
@@ -69333,6 +69335,17 @@ paths:
                             - brief
                             - wholesale
                             - refine
+                        unreadOnly:
+                          description: 'For kind notification: only the notifications you have not read.'
+                          type: boolean
+                        releaseView:
+                          description: 'For release_update: for_you (default), explore, all, or board (features by stage).'
+                          type: string
+                          enum:
+                            - for_you
+                            - explore
+                            - all
+                            - board
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -71287,6 +71300,17 @@ paths:
                             - brief
                             - wholesale
                             - refine
+                        unreadOnly:
+                          description: 'For kind notification: only the notifications you have not read.'
+                          type: boolean
+                        releaseView:
+                          description: 'For release_update: for_you (default), explore, all, or board (features by stage).'
+                          type: string
+                          enum:
+                            - for_you
+                            - explore
+                            - all
+                            - board
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -74043,6 +74067,17 @@ paths:
                             - brief
                             - wholesale
                             - refine
+                        unreadOnly:
+                          description: 'For kind notification: only the notifications you have not read.'
+                          type: boolean
+                        releaseView:
+                          description: 'For release_update: for_you (default), explore, all, or board (features by stage).'
+                          type: string
+                          enum:
+                            - for_you
+                            - explore
+                            - all
+                            - board
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -75989,6 +76024,17 @@ paths:
                             - brief
                             - wholesale
                             - refine
+                        unreadOnly:
+                          description: 'For kind notification: only the notifications you have not read.'
+                          type: boolean
+                        releaseView:
+                          description: 'For release_update: for_you (default), explore, all, or board (features by stage).'
+                          type: string
+                          enum:
+                            - for_you
+                            - explore
+                            - all
+                            - board
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -77932,6 +77978,17 @@ paths:
                             - brief
                             - wholesale
                             - refine
+                        unreadOnly:
+                          description: 'For kind notification: only the notifications you have not read.'
+                          type: boolean
+                        releaseView:
+                          description: 'For release_update: for_you (default), explore, all, or board (features by stage).'
+                          type: string
+                          enum:
+                            - for_you
+                            - explore
+                            - all
+                            - board
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -79875,6 +79932,17 @@ paths:
                             - brief
                             - wholesale
                             - refine
+                        unreadOnly:
+                          description: 'For kind notification: only the notifications you have not read.'
+                          type: boolean
+                        releaseView:
+                          description: 'For release_update: for_you (default), explore, all, or board (features by stage).'
+                          type: string
+                          enum:
+                            - for_you
+                            - explore
+                            - all
+                            - board
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -81825,6 +81893,17 @@ paths:
                             - brief
                             - wholesale
                             - refine
+                        unreadOnly:
+                          description: 'For kind notification: only the notifications you have not read.'
+                          type: boolean
+                        releaseView:
+                          description: 'For release_update: for_you (default), explore, all, or board (features by stage).'
+                          type: string
+                          enum:
+                            - for_you
+                            - explore
+                            - all
+                            - board
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -85426,6 +85505,17 @@ paths:
                             - brief
                             - wholesale
                             - refine
+                        unreadOnly:
+                          description: 'For kind notification: only the notifications you have not read.'
+                          type: boolean
+                        releaseView:
+                          description: 'For release_update: for_you (default), explore, all, or board (features by stage).'
+                          type: string
+                          enum:
+                            - for_you
+                            - explore
+                            - all
+                            - board
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -88199,6 +88289,17 @@ paths:
                             - brief
                             - wholesale
                             - refine
+                        unreadOnly:
+                          description: 'For kind notification: only the notifications you have not read.'
+                          type: boolean
+                        releaseView:
+                          description: 'For release_update: for_you (default), explore, all, or board (features by stage).'
+                          type: string
+                          enum:
+                            - for_you
+                            - explore
+                            - all
+                            - board
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -90967,6 +91068,17 @@ paths:
                             - brief
                             - wholesale
                             - refine
+                        unreadOnly:
+                          description: 'For kind notification: only the notifications you have not read.'
+                          type: boolean
+                        releaseView:
+                          description: 'For release_update: for_you (default), explore, all, or board (features by stage).'
+                          type: string
+                          enum:
+                            - for_you
+                            - explore
+                            - all
+                            - board
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -92920,6 +93032,17 @@ paths:
                             - brief
                             - wholesale
                             - refine
+                        unreadOnly:
+                          description: 'For kind notification: only the notifications you have not read.'
+                          type: boolean
+                        releaseView:
+                          description: 'For release_update: for_you (default), explore, all, or board (features by stage).'
+                          type: string
+                          enum:
+                            - for_you
+                            - explore
+                            - all
+                            - board
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -94870,6 +94993,17 @@ paths:
                             - brief
                             - wholesale
                             - refine
+                        unreadOnly:
+                          description: 'For kind notification: only the notifications you have not read.'
+                          type: boolean
+                        releaseView:
+                          description: 'For release_update: for_you (default), explore, all, or board (features by stage).'
+                          type: string
+                          enum:
+                            - for_you
+                            - explore
+                            - all
+                            - board
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -96820,6 +96954,17 @@ paths:
                             - brief
                             - wholesale
                             - refine
+                        unreadOnly:
+                          description: 'For kind notification: only the notifications you have not read.'
+                          type: boolean
+                        releaseView:
+                          description: 'For release_update: for_you (default), explore, all, or board (features by stage).'
+                          type: string
+                          enum:
+                            - for_you
+                            - explore
+                            - all
+                            - board
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -98771,6 +98916,17 @@ paths:
                             - brief
                             - wholesale
                             - refine
+                        unreadOnly:
+                          description: 'For kind notification: only the notifications you have not read.'
+                          type: boolean
+                        releaseView:
+                          description: 'For release_update: for_you (default), explore, all, or board (features by stage).'
+                          type: string
+                          enum:
+                            - for_you
+                            - explore
+                            - all
+                            - board
                         accountId:
                           description: >-
                             For kind member: whose members to list. Omit for the selected account; an organization may
@@ -99783,6 +99939,8 @@ paths:
                               - $ref: '#/components/schemas/search_success_SearchDecisionPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchApprovalPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchAskPageOutput'
+                              - $ref: '#/components/schemas/search_success_SearchNotificationPageOutput'
+                              - $ref: '#/components/schemas/search_success_SearchReleaseUpdatePageOutput'
                               - $ref: '#/components/schemas/search_success_SearchConversationPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchBuyerAgentPageOutput'
                               - $ref: '#/components/schemas/search_success_SearchDimensionPageOutput'
@@ -99906,6 +100064,8 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchDecisionPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchApprovalPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAskPageOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchNotificationPageOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchReleaseUpdatePageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchConversationPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchBuyerAgentPageOutput'
                                     - $ref: '#/components/schemas/search_success_SearchDimensionPageOutput'
@@ -99956,6 +100116,8 @@ paths:
                                     - $ref: '#/components/schemas/search_success_SearchDecisionUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchApprovalUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchAskUnavailableOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchNotificationUnavailableOutput'
+                                    - $ref: '#/components/schemas/search_success_SearchReleaseUpdateUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchConversationUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchBuyerAgentUnavailableOutput'
                                     - $ref: '#/components/schemas/search_success_SearchDimensionUnavailableOutput'
@@ -135360,6 +135522,64 @@ components:
         - kind
       additionalProperties:
         $ref: '#/components/schemas/search_success_SearchAskPageOutputValue'
+    search_success_SearchNotificationPageOutput:
+      type: object
+      properties:
+        total:
+          $ref: '#/components/schemas/search_success_SearchNotificationPageOutputTotal'
+        totalLowerBound:
+          $ref: '#/components/schemas/search_success_SearchNotificationPageOutputTotalLowerBound'
+        returned:
+          $ref: '#/components/schemas/search_success_SearchNotificationPageOutputReturned'
+        hasMore:
+          $ref: '#/components/schemas/search_success_SearchNotificationPageOutputHasMore'
+        truncated:
+          $ref: '#/components/schemas/search_success_SearchNotificationPageOutputTruncated'
+        nextCursor:
+          $ref: '#/components/schemas/search_success_SearchNotificationPageOutputNextCursor'
+        results:
+          $ref: '#/components/schemas/search_success_SearchNotificationPageOutputResults'
+        outcome:
+          type: string
+          const: page_notification
+        kind:
+          type: string
+          const: notification
+      required:
+        - results
+        - outcome
+        - kind
+      additionalProperties:
+        $ref: '#/components/schemas/search_success_SearchNotificationPageOutputValue'
+    search_success_SearchReleaseUpdatePageOutput:
+      type: object
+      properties:
+        total:
+          $ref: '#/components/schemas/search_success_SearchReleaseUpdatePageOutputTotal'
+        totalLowerBound:
+          $ref: '#/components/schemas/search_success_SearchReleaseUpdatePageOutputTotalLowerBound'
+        returned:
+          $ref: '#/components/schemas/search_success_SearchReleaseUpdatePageOutputReturned'
+        hasMore:
+          $ref: '#/components/schemas/search_success_SearchReleaseUpdatePageOutputHasMore'
+        truncated:
+          $ref: '#/components/schemas/search_success_SearchReleaseUpdatePageOutputTruncated'
+        nextCursor:
+          $ref: '#/components/schemas/search_success_SearchReleaseUpdatePageOutputNextCursor'
+        results:
+          $ref: '#/components/schemas/search_success_SearchReleaseUpdatePageOutputResults'
+        outcome:
+          type: string
+          const: page_release_update
+        kind:
+          type: string
+          const: release_update
+      required:
+        - results
+        - outcome
+        - kind
+      additionalProperties:
+        $ref: '#/components/schemas/search_success_SearchReleaseUpdatePageOutputValue'
     search_success_SearchConversationPageOutput:
       type: object
       properties:
@@ -136380,6 +136600,44 @@ components:
         kind:
           type: string
           const: ask
+        unavailable:
+          type: string
+        message:
+          type: string
+      required:
+        - outcome
+        - kind
+        - unavailable
+        - message
+      additionalProperties: {}
+    search_success_SearchNotificationUnavailableOutput:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: unavailable_notification
+        kind:
+          type: string
+          const: notification
+        unavailable:
+          type: string
+        message:
+          type: string
+      required:
+        - outcome
+        - kind
+        - unavailable
+        - message
+      additionalProperties: {}
+    search_success_SearchReleaseUpdateUnavailableOutput:
+      type: object
+      properties:
+        outcome:
+          type: string
+          const: unavailable_release_update
+        kind:
+          type: string
+          const: release_update
         unavailable:
           type: string
         message:
@@ -141062,6 +141320,220 @@ components:
             additionalProperties: false
         additionalProperties: {}
     search_success_SearchAskPageOutputValue: {}
+    search_success_SearchNotificationPageOutputTotal:
+      type: number
+    search_success_SearchNotificationPageOutputTotalLowerBound:
+      type: number
+    search_success_SearchNotificationPageOutputReturned:
+      type: number
+    search_success_SearchNotificationPageOutputHasMore:
+      type: boolean
+    search_success_SearchNotificationPageOutputTruncated:
+      type: boolean
+    search_success_SearchNotificationPageOutputNextCursor:
+      type: string
+    search_success_SearchNotificationPageOutputResults:
+      type: array
+      items:
+        type: object
+        properties:
+          advertiserId:
+            type: string
+          name:
+            type:
+              - string
+              - 'null'
+          sandbox:
+            type: boolean
+          sourceType:
+            anyOf:
+              - type: string
+                enum:
+                  - inline
+                  - url
+                  - file
+              - type: 'null'
+            description: 'Where the items come from: url when url is set, file when file is set.'
+          lastChangeSummary:
+            anyOf:
+              - type: object
+                properties:
+                  added:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  updated:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  unchanged:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  removed:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                required:
+                  - added
+                  - updated
+                  - unchanged
+                  - removed
+                additionalProperties: false
+              - type: 'null'
+            description: Items in the latest version against the one before it.
+          transform:
+            anyOf:
+              - type: object
+                properties:
+                  name:
+                    type: string
+                  updatedAt:
+                    type: string
+                required:
+                  - name
+                  - updatedAt
+                additionalProperties: false
+              - type: 'null'
+            description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
+        additionalProperties: {}
+    search_success_SearchNotificationPageOutputValue: {}
+    search_success_SearchReleaseUpdatePageOutputTotal:
+      type: number
+    search_success_SearchReleaseUpdatePageOutputTotalLowerBound:
+      type: number
+    search_success_SearchReleaseUpdatePageOutputReturned:
+      type: number
+    search_success_SearchReleaseUpdatePageOutputHasMore:
+      type: boolean
+    search_success_SearchReleaseUpdatePageOutputTruncated:
+      type: boolean
+    search_success_SearchReleaseUpdatePageOutputNextCursor:
+      type: string
+    search_success_SearchReleaseUpdatePageOutputResults:
+      type: array
+      items:
+        type: object
+        properties:
+          advertiserId:
+            type: string
+          name:
+            type:
+              - string
+              - 'null'
+          sandbox:
+            type: boolean
+          sourceType:
+            anyOf:
+              - type: string
+                enum:
+                  - inline
+                  - url
+                  - file
+              - type: 'null'
+            description: 'Where the items come from: url when url is set, file when file is set.'
+          lastChangeSummary:
+            anyOf:
+              - type: object
+                properties:
+                  added:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  updated:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  unchanged:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  removed:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                required:
+                  - added
+                  - updated
+                  - unchanged
+                  - removed
+                additionalProperties: false
+              - type: 'null'
+            description: Items in the latest version against the one before it.
+          transform:
+            anyOf:
+              - type: object
+                properties:
+                  name:
+                    type: string
+                  updatedAt:
+                    type: string
+                required:
+                  - name
+                  - updatedAt
+                additionalProperties: false
+              - type: 'null'
+            description: The active transform, if any.
+          refreshProblem:
+            anyOf:
+              - $ref: '#/components/schemas/search_success_CatalogRefreshProblem'
+              - type: 'null'
+            description: What stops the refresh; null if nothing does.
+          progressSummary:
+            $ref: '#/components/schemas/search_success_CampaignGoalProgressSummary'
+          creativeFit:
+            type: object
+            properties:
+              fits:
+                type: boolean
+              reasons:
+                maxItems: 24
+                type: array
+                items:
+                  type: string
+              requirements:
+                maxItems: 32
+                type: array
+                items:
+                  type: string
+              formatName:
+                type: string
+            required:
+              - fits
+              - reasons
+              - requirements
+            additionalProperties: false
+        additionalProperties: {}
+    search_success_SearchReleaseUpdatePageOutputValue: {}
     search_success_SearchConversationPageOutputTotal:
       type: number
     search_success_SearchConversationPageOutputTotalLowerBound:
