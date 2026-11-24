@@ -39606,11 +39606,11 @@ paths:
       summary: >-
         Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh.
         Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy.
-        scope picks another probe: accounts, inventory, connection, capabilities, brief.
+        scope picks another probe.
       description: >-
         Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh.
         Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy.
-        scope picks another probe: accounts, inventory, connection, capabilities, brief.
+        scope picks another probe.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
