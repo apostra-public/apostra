@@ -100,7 +100,7 @@ prototyping safely.
 ## Account structure, who can enter an account, and testing
 
 Apostra has organizations, the Buyer Accounts inside them, and advertisers inside
-a Buyer Account. A builder that buys for several clients usually runs one Buyer
+a Buyer Account. A Seller Account can test its own Storefront with a sandbox advertiser but cannot create a live Advertiser or buy live media; for live buying use the organization's Buyer Account, or request one with `request_buyer_child_account`. A builder that buys for several clients usually runs one Buyer
 Account with an advertiser for each client. The organization holds people and
 billing and is not a place to work. An organization member with neither
 a direct permission on a Buyer Account nor ADMIN on the organization cannot enter
