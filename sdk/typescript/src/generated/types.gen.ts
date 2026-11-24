@@ -26016,6 +26016,291 @@ export type SaveCoverageSuccessSaveCoverageSuccessReconciledRemoved = {
     [key: string]: unknown;
 };
 
+export type SaveCreativeAssetData = {
+    body: {
+        /**
+         * The advertiser whose Library holds the assets.
+         */
+        advertiserId: string;
+        /**
+         * One entry per asset, at most 50; all are saved or none. Each replaces that asset's rights.
+         */
+        items: Array<{
+            /**
+             * Library asset id, from search or get on creative_asset.
+             */
+            assetId: string;
+            /**
+             * AdCP rights entries, one for each party the rights come from: the copyright holder, and each person pictured. Replaces the asset’s rights.
+             */
+            rights: Array<{
+                uses: Array<'likeness' | 'voice' | 'name' | 'endorsement' | 'motion_capture' | 'signature' | 'catchphrase' | 'sync' | 'background_music' | 'editorial' | 'commercial' | 'ai_generated_image'>;
+                valid_from?: string;
+                valid_until?: string;
+                countries?: Array<SaveCreativeAssetRequestItemsItemRightsItemCountriesItem>;
+                excluded_countries?: Array<SaveCreativeAssetRequestItemsItemRightsItemExcludedCountriesItem>;
+                channels?: Array<SaveCreativeAssetRequestItemsItemRightsItemChannelsItem>;
+                excluded_channels?: Array<SaveCreativeAssetRequestItemsItemRightsItemExcludedChannelsItem>;
+                right_type?: 'talent' | 'character' | 'brand_ip' | 'music' | 'stock_media';
+                restrictions?: Array<string>;
+                disclosure?: {
+                    [key: string]: unknown;
+                };
+                ext?: {
+                    apostra: {
+                        /**
+                         * The named party this entry is about: the copyright holder on a commercial entry, or the person pictured on a likeness entry.
+                         */
+                        holder?: {
+                            /**
+                             * Whether the party is a person or an organization.
+                             */
+                            kind: 'person' | 'organization';
+                            /**
+                             * Who holds the copyright, or who is pictured.
+                             */
+                            name: string;
+                        };
+                        /**
+                         * Documents the entry rests on, such as a signed model release kept in the Library.
+                         */
+                        evidence?: Array<{
+                            /**
+                             * What the document is.
+                             */
+                            kind: 'model_release' | 'licence' | 'other';
+                            /**
+                             * The Library document that holds the file.
+                             */
+                            materialId: string;
+                        }>;
+                        /**
+                         * What the rights are for: a finished creative used as it is, or a building block combined into new ads. Stated by a person; the same on every entry of an asset.
+                         */
+                        assetKind?: 'finished_creative' | 'building_block';
+                        /**
+                         * How many identifiable people the asset shows, where 0 means none. Stated by a person, never inferred.
+                         */
+                        peoplePictured?: number;
+                    };
+                };
+            }>;
+            /**
+             * AdCP provenance, when AI was involved in making the asset. A photo a person made needs none.
+             */
+            provenance?: {
+                digital_source_type?: 'digital_capture' | 'digital_creation' | 'trained_algorithmic_media' | 'composite_with_trained_algorithmic_media' | 'algorithmic_media' | 'composite_capture' | 'composite_synthetic' | 'human_edits' | 'data_driven_media';
+                synthetic_depiction?: boolean;
+                ai_tool?: {
+                    name: string;
+                    version?: string;
+                    provider?: string;
+                    [key: string]: unknown;
+                };
+                human_oversight?: 'none' | 'prompt_only' | 'selected' | 'edited' | 'directed';
+                declared_by?: {
+                    agent_url?: string;
+                    role: 'creator' | 'advertiser' | 'agency' | 'platform' | 'tool';
+                    [key: string]: unknown;
+                };
+                declared_at?: string;
+                created_time?: string;
+                c2pa?: {
+                    manifest_url: string;
+                    [key: string]: unknown;
+                };
+                embedded_provenance?: Array<{
+                    method: 'manifest_wrapper' | 'provenance_markers';
+                    standard?: string;
+                    provider: string;
+                    verify_agent?: {
+                        agent_url: string;
+                        feature_id?: string;
+                        [key: string]: unknown;
+                    };
+                    embedded_at?: string;
+                    [key: string]: unknown;
+                }>;
+                watermarks?: Array<{
+                    media_type: 'audio' | 'image' | 'video' | 'text';
+                    provider: string;
+                    verify_agent?: {
+                        agent_url: string;
+                        feature_id?: string;
+                        [key: string]: unknown;
+                    };
+                    c2pa_action?: 'c2pa.watermarked.bound' | 'c2pa.watermarked.unbound';
+                    embedded_at?: string;
+                    [key: string]: unknown;
+                }>;
+                disclosure?: {
+                    required: boolean;
+                    jurisdictions?: Array<{
+                        country: string;
+                        region?: string;
+                        regulation: string;
+                        label_text?: string;
+                        render_guidance?: {
+                            persistence?: 'continuous' | 'initial' | 'flexible';
+                            min_duration_ms?: number;
+                            positions?: Array<'prominent' | 'footer' | 'audio' | 'subtitle' | 'overlay' | 'end_card' | 'pre_roll' | 'companion'>;
+                            ext?: SaveCreativeAssetRequestItemsItemProvenanceDisclosureJurisdictionsItemRenderGuidanceExt;
+                            [key: string]: unknown;
+                        };
+                        [key: string]: unknown;
+                    }>;
+                    [key: string]: unknown;
+                };
+                verification?: Array<{
+                    verified_by: string;
+                    verified_time?: string;
+                    result: 'authentic' | 'ai_generated' | 'ai_modified' | 'inconclusive';
+                    confidence?: number;
+                    details_url?: string;
+                    [key: string]: unknown;
+                }>;
+                ext?: SaveCreativeAssetRequestItemsItemProvenanceExt;
+                [key: string]: unknown;
+            };
+        }>;
+        /**
+         * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
+         */
+        expectedAccountId?: number | string;
+        /**
+         * Apostra accountId this call runs in, from get_status.
+         */
+        accountId?: number | string;
+    };
+    headers: {
+        /**
+         * Deprecated: send accountId in the request body instead. Retires on the announced removal date. If both are sent they must name the same account.
+         *
+         * @deprecated
+         */
+        'X-SCOPE3-CUSTOMER-ID'?: string;
+        /**
+         * Required for every write. Reuse the same key and validated body to replay the durable result for seven days. If this operation also accepts idempotencyKey in its JSON body, the values must match.
+         */
+        'Idempotency-Key': string;
+    };
+    path?: never;
+    query?: never;
+    url: '/tools/save_creative_asset';
+};
+
+export type SaveCreativeAssetError = SaveCreativeAssetErrors[keyof SaveCreativeAssetErrors];
+
+export type SaveCreativeAssetErrors = {
+    /**
+     * Invalid operation input
+     */
+    400: V3ToolErrorResponse;
+    /**
+     * Missing or invalid API credential
+     */
+    401: V3ToolErrorResponse;
+    /**
+     * Account credit limit exceeded
+     */
+    402: V3ToolErrorResponse;
+    /**
+     * The credential or account cannot perform this operation
+     */
+    403: V3ToolErrorResponse;
+    /**
+     * Requested resource not found
+     */
+    404: V3ToolErrorResponse;
+    /**
+     * Operation conflicts with current resource state
+     */
+    409: V3ToolErrorResponse;
+    /**
+     * Request body exceeds the accepted size
+     */
+    413: V3ToolErrorResponse;
+    /**
+     * Request body encoding or character set is unsupported
+     */
+    415: V3ToolErrorResponse;
+    /**
+     * Operation cannot process the supplied input
+     */
+    422: V3ToolErrorResponse;
+    /**
+     * Request rate limit exceeded
+     */
+    429: V3ToolErrorResponse;
+    /**
+     * Unexpected operation failure
+     */
+    500: V3ToolErrorResponse;
+    /**
+     * Recognised operation behaviour is not implemented
+     */
+    501: V3ToolErrorResponse;
+    /**
+     * The write could not be durably claimed before dispatch, so it is safe to retry with the same key
+     */
+    503: V3ToolErrorResponse;
+};
+
+export type SaveCreativeAssetRequestItemsItemProvenanceDisclosureJurisdictionsItemRenderGuidanceExt = {
+    [key: string]: unknown;
+};
+
+export type SaveCreativeAssetRequestItemsItemProvenanceExt = {
+    [key: string]: unknown;
+};
+
+export type SaveCreativeAssetRequestItemsItemRightsItemChannelsItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+
+export type SaveCreativeAssetRequestItemsItemRightsItemCountriesItem = string;
+
+export type SaveCreativeAssetRequestItemsItemRightsItemExcludedChannelsItem = 'display' | 'olv' | 'social' | 'search' | 'ctv' | 'linear_tv' | 'radio' | 'streaming_audio' | 'podcast' | 'dooh' | 'ooh' | 'print' | 'cinema' | 'email' | 'gaming' | 'retail_media' | 'influencer' | 'affiliate' | 'product_placement' | 'sponsored_intelligence';
+
+export type SaveCreativeAssetRequestItemsItemRightsItemExcludedCountriesItem = string;
+
+export type SaveCreativeAssetResponse = SaveCreativeAssetResponses[keyof SaveCreativeAssetResponses];
+
+export type SaveCreativeAssetResponses = {
+    /**
+     * Typed operation result
+     */
+    200: {
+        data: {
+            action: 'recorded';
+            items: Array<{
+                assetId: string;
+                rightsState: 'pending_confirmation' | 'confirmed' | 'rejected' | 'paused' | 'revoked';
+                rights: Array<{
+                    rights_id: string;
+                    approval_status?: 'pending' | 'approved' | 'rejected';
+                    [key: string]: unknown;
+                }>;
+            }>;
+        };
+        error: null;
+    };
+    /**
+     * The write is still running or needs recovery. Retry this operation with the same Idempotency-Key and body; do not mint a new key.
+     */
+    202: {
+        data: {
+            receipt: {
+                id: string;
+                operation: string;
+                state: 'claimed' | 'running' | 'uncertain';
+                stateVersion: number;
+                stateChangedAt: string;
+                pendingReason: string;
+            };
+        };
+        error: null;
+    };
+};
+
 export type SaveCreativeCollectionData = {
     body: (unknown | unknown) & {
         /**

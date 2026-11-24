@@ -1213,6 +1213,25 @@
     ],
     "summary": "Save content you supply: advertiserId/campaignId, name, message, assets (landing_page_url, social, sourceAssetRef/sourceAssets). New media like radio spots: use save_creative_session. One format selector: formatKind+formatParams or creativeFormatId+formatOptionRef. libraryRole: Buyer Account only."
   },
+  "save_creative_asset": {
+    "path": "/tools/save_creative_asset",
+    "method": "POST",
+    "body": true,
+    "binary": false,
+    "idempotencyKey": true,
+    "parameters": [],
+    "security": [
+      {
+        "apiKeyAuth": []
+      },
+      {
+        "m2mOAuth": [
+          "interchange:write"
+        ]
+      }
+    ],
+    "summary": "Record the rights a person states for Library assets: who holds them and where, how long and in which channels and countries an ad may use them, as AdCP rights entries. A save replaces the asset’s rights and only proposes them; recording does not make an asset usable."
+  },
   "save_creative_collection": {
     "path": "/tools/save_creative_collection",
     "method": "POST",
