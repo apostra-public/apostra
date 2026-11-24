@@ -28242,6 +28242,7 @@ export type SaveCreativeSuccessCreativeMacroPreview = {
 export type SaveCreativeSuccessDuplicateCreativeSuccess = {
     action: 'duplicated';
     sourceCreativeId: string;
+    warnings?: Array<string>;
     creative: SaveCreativeSuccessCreativeDuplicate;
     replayed: boolean;
 };

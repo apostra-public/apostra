@@ -119500,6 +119500,10 @@ components:
           const: duplicated
         sourceCreativeId:
           type: string
+        warnings:
+          type: array
+          items:
+            type: string
         creative:
           $ref: '#/components/schemas/save_creative_success_CreativeDuplicate'
         replayed:

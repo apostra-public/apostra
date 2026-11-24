@@ -16947,6 +16947,7 @@ class SaveCreativeSuccessCreativeMacroPreviewTrackersItem(TypedDict):
 class SaveCreativeSuccessDuplicateCreativeSuccess(TypedDict):
     action: Literal["duplicated"]
     sourceCreativeId: str
+    warnings: NotRequired[list[str]]
     creative: SaveCreativeSuccessCreativeDuplicate
     replayed: bool
 
