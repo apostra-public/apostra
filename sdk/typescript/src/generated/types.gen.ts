@@ -16471,6 +16471,13 @@ export type RequestBuyerChildAccountResponses = {
             action: 'approval_required';
             message: string;
             approval: RequestBuyerChildAccountSuccessAgentApproval;
+            /**
+             * The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.
+             */
+            approvers?: Array<{
+                name: string | null;
+                email: string | null;
+            }>;
         };
         error: null;
     };
@@ -16638,11 +16645,19 @@ export type RequestPaymentAuthorityResponses = {
             paymentAuthority: RequestPaymentAuthoritySuccessPendingConfirmationResult;
             message?: never;
             approval?: never;
+            approvers?: never;
             idempotencyKey?: never;
         } | {
             action: 'approval_required';
             message: string;
             approval: RequestPaymentAuthoritySuccessAgentApproval;
+            /**
+             * The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.
+             */
+            approvers?: Array<{
+                name: string | null;
+                email: string | null;
+            }>;
             /**
              * Key to repeat to read the approval; the one sent, or the one the server made when none was sent.
              */
@@ -17855,6 +17870,13 @@ export type SaveAccountSuccessAgentApprovalRequired = {
     action: 'approval_required';
     message: string;
     approval: SaveAccountSuccessAgentApproval;
+    /**
+     * The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.
+     */
+    approvers?: Array<{
+        name: string | null;
+        email: string | null;
+    }>;
 };
 
 export type SaveAccountSuccessAutonomyPaused = boolean;
@@ -20899,6 +20921,13 @@ export type SaveBillingSuccessSaveBillingApprovalRequired = {
     message: string;
     approval: SaveBillingSuccessAgentApproval;
     /**
+     * The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.
+     */
+    approvers?: Array<{
+        name: string | null;
+        email: string | null;
+    }>;
+    /**
      * The key this request is recorded under. Repeat the call with it to read the approval without recording a new one.
      */
     idempotencyKey?: string;
@@ -21191,6 +21220,13 @@ export type SaveBrandSourceSuccessAgentApprovalRequired = {
     action: 'approval_required';
     message: string;
     approval: SaveBrandSourceSuccessAgentApproval;
+    /**
+     * The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.
+     */
+    approvers?: Array<{
+        name: string | null;
+        email: string | null;
+    }>;
 };
 
 export type SaveBrandSourceSuccessBrandSourceAgreementRecorder = {
@@ -23977,6 +24013,13 @@ export type SaveCampaignResponses = {
             action: 'approval_required';
             message: string;
             approval: SaveCampaignSuccessAgentApproval;
+            /**
+             * The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.
+             */
+            approvers?: Array<{
+                name: string | null;
+                email: string | null;
+            }>;
             serverTime?: string;
         };
         error: null;
@@ -27832,6 +27875,13 @@ export type SaveCreativeSuccessAgentApprovalRequired = {
     action: 'approval_required';
     message: string;
     approval: SaveCreativeSuccessAgentApproval;
+    /**
+     * The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.
+     */
+    approvers?: Array<{
+        name: string | null;
+        email: string | null;
+    }>;
 };
 
 export type SaveCreativeSuccessAlreadyExisted = true;
@@ -36437,6 +36487,7 @@ export type SaveProjectResponses = {
             action?: never;
             message?: never;
             approval?: never;
+            approvers?: never;
             project?: never;
             change?: never;
             outcome?: never;
@@ -36444,6 +36495,13 @@ export type SaveProjectResponses = {
             action: 'approval_required';
             message: string;
             approval: SaveProjectSuccessAgentApproval;
+            /**
+             * The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.
+             */
+            approvers?: Array<{
+                name: string | null;
+                email: string | null;
+            }>;
             project: SaveProjectSuccessProject;
             kind?: never;
             object?: never;
@@ -36458,6 +36516,7 @@ export type SaveProjectResponses = {
             object?: never;
             message?: never;
             approval?: never;
+            approvers?: never;
         };
         error: null;
     };

@@ -39695,6 +39695,28 @@ paths:
                         type: string
                       approval:
                         $ref: '#/components/schemas/request_buyer_child_account_success_AgentApproval'
+                      approvers:
+                        description: >-
+                          The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or
+                          an agent or service token acting with no person present). email is null when no person is
+                          behind the call. Absent when the caller can approve; never empty.
+                        minItems: 1
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type:
+                                - string
+                                - 'null'
+                            email:
+                              type:
+                                - string
+                                - 'null'
+                          required:
+                            - name
+                            - email
+                          additionalProperties: false
                     required:
                       - action
                       - message
@@ -39857,6 +39879,28 @@ paths:
                             type: string
                           approval:
                             $ref: '#/components/schemas/request_payment_authority_success_AgentApproval'
+                          approvers:
+                            description: >-
+                              The account's direct administrators who can approve, when the caller cannot (Scope3 staff,
+                              or an agent or service token acting with no person present). email is null when no person
+                              is behind the call. Absent when the caller can approve; never empty.
+                            minItems: 1
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type:
+                                    - string
+                                    - 'null'
+                                email:
+                                  type:
+                                    - string
+                                    - 'null'
+                              required:
+                                - name
+                                - email
+                              additionalProperties: false
                           idempotencyKey:
                             type: string
                             description: >-
@@ -49069,6 +49113,28 @@ paths:
                             type: string
                           approval:
                             $ref: '#/components/schemas/save_campaign_success_AgentApproval'
+                          approvers:
+                            description: >-
+                              The account's direct administrators who can approve, when the caller cannot (Scope3 staff,
+                              or an agent or service token acting with no person present). email is null when no person
+                              is behind the call. Absent when the caller can approve; never empty.
+                            minItems: 1
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type:
+                                    - string
+                                    - 'null'
+                                email:
+                                  type:
+                                    - string
+                                    - 'null'
+                              required:
+                                - name
+                                - email
+                              additionalProperties: false
                           serverTime:
                             type: string
                             format: date-time
@@ -63153,6 +63219,28 @@ paths:
                             type: string
                           approval:
                             $ref: '#/components/schemas/save_project_success_AgentApproval'
+                          approvers:
+                            description: >-
+                              The account's direct administrators who can approve, when the caller cannot (Scope3 staff,
+                              or an agent or service token acting with no person present). email is null when no person
+                              is behind the call. Absent when the caller can approve; never empty.
+                            minItems: 1
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type:
+                                    - string
+                                    - 'null'
+                                email:
+                                  type:
+                                    - string
+                                    - 'null'
+                              required:
+                                - name
+                                - email
+                              additionalProperties: false
                           project:
                             $ref: '#/components/schemas/save_project_success_Project'
                         required:
@@ -111908,6 +111996,28 @@ components:
           type: string
         approval:
           $ref: '#/components/schemas/save_account_success_AgentApproval'
+        approvers:
+          description: >-
+            The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or
+            service token acting with no person present). email is null when no person is behind the call. Absent when
+            the caller can approve; never empty.
+          minItems: 1
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type:
+                  - string
+                  - 'null'
+              email:
+                type:
+                  - string
+                  - 'null'
+            required:
+              - name
+              - email
+            additionalProperties: false
       required:
         - action
         - message
@@ -113965,6 +114075,28 @@ components:
           type: string
         approval:
           $ref: '#/components/schemas/save_billing_success_AgentApproval'
+        approvers:
+          description: >-
+            The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or
+            service token acting with no person present). email is null when no person is behind the call. Absent when
+            the caller can approve; never empty.
+          minItems: 1
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type:
+                  - string
+                  - 'null'
+              email:
+                type:
+                  - string
+                  - 'null'
+            required:
+              - name
+              - email
+            additionalProperties: false
         idempotencyKey:
           description: >-
             The key this request is recorded under. Repeat the call with it to read the approval without recording a new
@@ -114143,6 +114275,28 @@ components:
           type: string
         approval:
           $ref: '#/components/schemas/save_brand_source_success_AgentApproval'
+        approvers:
+          description: >-
+            The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or
+            service token acting with no person present). email is null when no person is behind the call. Absent when
+            the caller can approve; never empty.
+          minItems: 1
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type:
+                  - string
+                  - 'null'
+              email:
+                type:
+                  - string
+                  - 'null'
+            required:
+              - name
+              - email
+            additionalProperties: false
       required:
         - action
         - message
@@ -118213,6 +118367,28 @@ components:
           type: string
         approval:
           $ref: '#/components/schemas/save_creative_success_AgentApproval'
+        approvers:
+          description: >-
+            The account's direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or
+            service token acting with no person present). email is null when no person is behind the call. Absent when
+            the caller can approve; never empty.
+          minItems: 1
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type:
+                  - string
+                  - 'null'
+              email:
+                type:
+                  - string
+                  - 'null'
+            required:
+              - name
+              - email
+            additionalProperties: false
       required:
         - action
         - message

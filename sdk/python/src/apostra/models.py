@@ -10185,6 +10185,12 @@ class RequestBuyerChildAccountResult(TypedDict):
     action: Literal["approval_required"]
     message: str
     approval: RequestBuyerChildAccountSuccessAgentApproval
+    approvers: NotRequired[list[RequestBuyerChildAccountResultApproversItem]]
+    '\n    The account\'s direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.\n    '
+
+class RequestBuyerChildAccountResultApproversItem(TypedDict):
+    name: str | None
+    email: str | None
 
 class RequestBuyerChildAccountSuccessAgentApproval(TypedDict):
     id: str
@@ -10222,8 +10228,14 @@ class RequestPaymentAuthorityResultActionApprovalRequired(TypedDict):
     action: Literal["approval_required"]
     message: str
     approval: RequestPaymentAuthoritySuccessAgentApproval
+    approvers: NotRequired[list[RequestPaymentAuthorityResultActionApprovalRequiredApproversItem]]
+    '\n    The account\'s direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.\n    '
     idempotencyKey: str
     '\n    Key to repeat to read the approval; the one sent, or the one the server made when none was sent.\n    '
+
+class RequestPaymentAuthorityResultActionApprovalRequiredApproversItem(TypedDict):
+    name: str | None
+    email: str | None
 
 class RequestPaymentAuthorityResultActionConfirmationRequired(TypedDict):
     action: Literal["confirmation_required"]
@@ -10848,8 +10860,14 @@ class SaveAccountSuccessAgentApprovalRequired(TypedDict):
     action: Literal["approval_required"]
     message: str
     approval: SaveAccountSuccessAgentApproval
+    approvers: NotRequired[list[SaveAccountSuccessAgentApprovalRequiredApproversItem]]
+    '\n    The account\'s direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.\n    '
 
 SaveAccountResult: TypeAlias = SaveAccountResultActionSaved | SaveAccountResultActionUnchanged | SaveAccountResultActionPreview | SaveAccountSuccessAgentApprovalRequired
+
+class SaveAccountSuccessAgentApprovalRequiredApproversItem(TypedDict):
+    name: str | None
+    email: str | None
 
 SaveAccountSuccessAutonomyPaused: TypeAlias = bool
 
@@ -12508,12 +12526,18 @@ class SaveBillingSuccessSaveBillingApprovalRequired(TypedDict):
     action: Literal["approval_required"]
     message: str
     approval: SaveBillingSuccessAgentApproval
+    approvers: NotRequired[list[SaveBillingSuccessSaveBillingApprovalRequiredApproversItem]]
+    '\n    The account\'s direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.\n    '
     idempotencyKey: NotRequired[str]
     '\n    The key this request is recorded under. Repeat the call with it to read the approval without recording a new one.\n    '
 
 SaveBillingResult: TypeAlias = "SaveBillingResultActionTermsAccepted | SaveBillingResultActionTermsNotRequired | SaveBillingResultActionPaymentTermsSaved | SaveBillingResultActionBillingSaved | SaveBillingResultActionConfirmationRequired | SaveBillingResultActionHumanActionRequired | SaveBillingResultActionPaymentAuthorityPending | SaveBillingResultActionPaymentAuthorityOpened | SaveBillingResultActionPaymentAuthorityVerified | SaveBillingResultActionPaymentAuthorityExpired | SaveBillingResultActionPlanAccepted | SaveBillingSuccessSaveBillingApprovalRequired | SaveBillingResultActionOfferResponseRecorded | SaveBillingResultActionRenewalChanged | SaveBillingResultActionPayerSaved | SaveBillingResultActionMediaBillingSaved | SaveBillingResultActionPaymentMethodRemoved | SaveBillingResultActionPayNowStarted"
 
 SaveBillingSuccessAgentApprovalRequired: TypeAlias = SaveBillingSuccessSaveBillingApprovalRequired
+
+class SaveBillingSuccessSaveBillingApprovalRequiredApproversItem(TypedDict):
+    name: str | None
+    email: str | None
 
 class SaveBrandSourceInput(TypedDict):
     idempotencyKey: NotRequired[str]
@@ -12638,8 +12662,14 @@ class SaveBrandSourceSuccessAgentApprovalRequired(TypedDict):
     action: Literal["approval_required"]
     message: str
     approval: SaveBrandSourceSuccessAgentApproval
+    approvers: NotRequired[list[SaveBrandSourceSuccessAgentApprovalRequiredApproversItem]]
+    '\n    The account\'s direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.\n    '
 
 SaveBrandSourceResult: TypeAlias = "SaveBrandSourceResultValue | SaveBrandSourceSuccessAgentApprovalRequired"
+
+class SaveBrandSourceSuccessAgentApprovalRequiredApproversItem(TypedDict):
+    name: str | None
+    email: str | None
 
 class SaveBrandSourceSuccessBrandSourceAgreementRecorder(TypedDict):
     principalKind: Literal["human", "buyer_agent"]
@@ -14280,7 +14310,13 @@ class SaveCampaignResultActionApprovalRequired(TypedDict):
     action: Literal["approval_required"]
     message: str
     approval: SaveCampaignSuccessAgentApproval
+    approvers: NotRequired[list[SaveCampaignResultActionApprovalRequiredApproversItem]]
+    '\n    The account\'s direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.\n    '
     serverTime: NotRequired[str]
+
+class SaveCampaignResultActionApprovalRequiredApproversItem(TypedDict):
+    name: str | None
+    email: str | None
 
 class SaveCampaignResultActionArchived(TypedDict):
     serverTime: NotRequired[str]
@@ -16615,6 +16651,12 @@ class SaveCreativeSuccessAgentApprovalRequired(TypedDict):
     action: Literal["approval_required"]
     message: str
     approval: SaveCreativeSuccessAgentApproval
+    approvers: NotRequired[list[SaveCreativeSuccessAgentApprovalRequiredApproversItem]]
+    '\n    The account\'s direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.\n    '
+
+class SaveCreativeSuccessAgentApprovalRequiredApproversItem(TypedDict):
+    name: str | None
+    email: str | None
 
 SaveCreativeSuccessAlreadyExisted: TypeAlias = Literal[True]
 
@@ -21444,7 +21486,13 @@ class SaveProjectResultActionApprovalRequired(TypedDict):
     action: Literal["approval_required"]
     message: str
     approval: SaveProjectSuccessAgentApproval
+    approvers: NotRequired[list[SaveProjectResultActionApprovalRequiredApproversItem]]
+    '\n    The account\'s direct administrators who can approve, when the caller cannot (Scope3 staff, or an agent or service token acting with no person present). email is null when no person is behind the call. Absent when the caller can approve; never empty.\n    '
     project: SaveProjectSuccessProject
+
+class SaveProjectResultActionApprovalRequiredApproversItem(TypedDict):
+    name: str | None
+    email: str | None
 
 class SaveProjectResultActionPreview(TypedDict):
     action: Literal["preview"]
