@@ -2025,6 +2025,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -2375,6 +2376,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -3406,6 +3423,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -3755,6 +3773,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -4760,6 +4794,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -5109,6 +5144,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -6101,6 +6152,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -6451,6 +6503,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -7443,6 +7511,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -7793,6 +7862,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -8792,6 +8877,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -9143,6 +9229,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -10384,6 +10486,22 @@ paths:
                           - kind
                     - if:
                         properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
+                    - if:
+                        properties:
                           kind:
                             const: catalog
                         required:
@@ -11375,6 +11493,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -11726,6 +11845,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -12719,6 +12854,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -13070,6 +13206,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -14316,6 +14468,22 @@ paths:
                           - kind
                     - if:
                         properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
+                    - if:
+                        properties:
                           kind:
                             const: catalog
                         required:
@@ -15560,6 +15728,22 @@ paths:
                           - kind
                     - if:
                         properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
+                    - if:
+                        properties:
                           kind:
                             const: catalog
                         required:
@@ -16549,6 +16733,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -16900,6 +17085,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -17891,6 +18092,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -18242,6 +18444,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -19239,6 +19457,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -19589,6 +19808,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -20586,6 +20821,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -20936,6 +21172,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -21933,6 +22185,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -22283,6 +22536,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -23280,6 +23549,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -23630,6 +23900,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -24627,6 +24913,7 @@ paths:
                           - inventory
                           - preview
                           - platform_preview
+                          - attachTargets
                           - items
                           - history
                           - report
@@ -24978,6 +25265,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -26224,6 +26527,22 @@ paths:
                           - kind
                     - if:
                         properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
+                    - if:
+                        properties:
                           kind:
                             const: catalog
                         required:
@@ -27466,6 +27785,22 @@ paths:
                             const: creative
                         required:
                           - kind
+                    - if:
+                        properties:
+                          include:
+                            contains:
+                              const: attachTargets
+                        required:
+                          - include
+                      then:
+                        allOf:
+                          - properties:
+                              kind:
+                                const: creative
+                            required:
+                              - kind
+                          - required:
+                              - advertiserId
                     - if:
                         properties:
                           kind:
@@ -54314,12 +54649,12 @@ paths:
       operationId: save_creative_session
       summary: >-
         Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft,
-        selected output, approval, or finalisation. It never generates; generate_variants does. Save to the Library with
-        destination library, or a composer draft with finalizeToLibrary.
+        composer slots (updateDraft), selected output, approval, or finalisation. It never generates; generate_variants
+        does. Library: destination library, or a composer draft with finalizeToLibrary.
       description: >-
         Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft,
-        selected output, approval, or finalisation. It never generates; generate_variants does. Save to the Library with
-        destination library, or a composer draft with finalizeToLibrary.
+        composer slots (updateDraft), selected output, approval, or finalisation. It never generates; generate_variants
+        does. Library: destination library, or a composer draft with finalizeToLibrary.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -54357,10 +54692,16 @@ paths:
                   type: string
                   minLength: 1
                 idempotencyKey:
-                  description: Required for a draft; optional for selecting or approving.
+                  description: Required for a draft or updateDraft; optional for selecting or approving.
                   type: string
                   minLength: 1
                   maxLength: 200
+                sessionGeneration:
+                  description: Lifecycle id from the last response, checked with updateDraft or selectedVariantId.
+                  type: string
+                  format: uuid
+                  pattern: >-
+                    ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
                 engine:
                   type: object
                   properties:
@@ -54596,8 +54937,62 @@ paths:
                   required:
                     - request
                   additionalProperties: false
+                updateDraft:
+                  type: object
+                  properties:
+                    slots:
+                      minItems: 1
+                      maxItems: 32
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            minLength: 1
+                            maxLength: 80
+                            description: Slot id, such as headline.
+                          value:
+                            description: Copy or URL for a copy or url slot. null clears it.
+                            anyOf:
+                              - type: string
+                                minLength: 1
+                                maxLength: 5000
+                              - type: 'null'
+                          assetId:
+                            description: Library asset id for an asset slot. null clears it.
+                            anyOf:
+                              - type: string
+                                format: uuid
+                                pattern: >-
+                                  ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                              - type: 'null'
+                        required:
+                          - id
+                        additionalProperties: false
+                      description: The slots to change, each once.
+                    title:
+                      description: Name for the draft.
+                      type: string
+                      minLength: 1
+                      maxLength: 255
+                    clickUrl:
+                      description: Click-through URL. null removes it.
+                      anyOf:
+                        - type: string
+                          maxLength: 2000
+                          format: uri
+                        - type: 'null'
+                  required:
+                    - slots
+                  additionalProperties: false
+                  description: >-
+                    Edit a composer draft's slots. Send it with sessionId, expectedRevision and idempotencyKey. Slots
+                    not named keep their value.
                 selectedVariantId:
-                  description: Exact generated output to select.
+                  description: >-
+                    Exact generated output to select. On a composer draft it also fills the draft's slots from that
+                    concept.
                   type: string
                   minLength: 1
                 approvedVariantId:
@@ -54605,7 +55000,7 @@ paths:
                   type: string
                   minLength: 1
                 expectedRevision:
-                  description: Session revision being changed. Required to select or approve.
+                  description: Session revision being changed. Required to updateDraft, select or approve.
                   type: integer
                   exclusiveMinimum: 0
                   maximum: 9007199254740991
