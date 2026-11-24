@@ -2640,6 +2640,8 @@
       "SaveCatalogInput": "object",
       "SaveCatalogInputFeedFieldMappingsItem": "object",
       "SaveCatalogInputFile": "object",
+      "SaveCatalogInputItemAdditionsItem": "object",
+      "SaveCatalogInputItemAdditionsItemAssetsItem": "object",
       "SaveCatalogResult": "object",
       "SaveCatalogResultObject": "object",
       "SaveCatalogResultObjectFile": "object",

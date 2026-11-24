@@ -24860,6 +24860,38 @@ export type SaveCatalogData = {
             default?: unknown;
         }>;
         /**
+         * Fields and Library assets to add to items; refreshes keep them. Send alone.
+         */
+        itemAdditions?: Array<{
+            /**
+             * Catalog item key.
+             */
+            itemId: string;
+            /**
+             * Fields to add, each replacing the feed value.
+             */
+            set?: {
+                [key: string]: unknown;
+            };
+            /**
+             * Added fields to stop adding.
+             */
+            clear?: Array<string>;
+            /**
+             * All Library assets tied to the item.
+             */
+            assets?: Array<{
+                /**
+                 * Library asset ID.
+                 */
+                assetId: string;
+                /**
+                 * AdCP asset group, or finished_creative.
+                 */
+                role?: 'main_image' | 'images_landscape' | 'images_vertical' | 'images_square' | 'video' | 'video_vertical' | 'video_horizontal' | 'finished_creative';
+            }>;
+        }>;
+        /**
          * Set true to archive this catalog. Omit to create or replace its declaration.
          */
         isArchived?: boolean;
