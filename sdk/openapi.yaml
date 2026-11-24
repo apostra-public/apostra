@@ -50039,6 +50039,66 @@ paths:
                         description: Fallback value.
                         additionalProperties: true
                     additionalProperties: false
+                itemAdditions:
+                  description: Fields and Library assets to add to items; refreshes keep them. Send alone.
+                  minItems: 1
+                  maxItems: 50
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      itemId:
+                        type: string
+                        minLength: 1
+                        maxLength: 512
+                        description: Catalog item key.
+                      set:
+                        description: Fields to add, each replacing the feed value.
+                        type: object
+                        propertyNames:
+                          type: string
+                          minLength: 1
+                          maxLength: 128
+                        additionalProperties: {}
+                      clear:
+                        description: Added fields to stop adding.
+                        maxItems: 30
+                        type: array
+                        items:
+                          type: string
+                          minLength: 1
+                          maxLength: 128
+                      assets:
+                        description: All Library assets tied to the item.
+                        maxItems: 50
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            assetId:
+                              type: string
+                              format: uuid
+                              pattern: >-
+                                ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+                              description: Library asset ID.
+                            role:
+                              description: AdCP asset group, or finished_creative.
+                              type: string
+                              enum:
+                                - main_image
+                                - images_landscape
+                                - images_vertical
+                                - images_square
+                                - video
+                                - video_vertical
+                                - video_horizontal
+                                - finished_creative
+                          required:
+                            - assetId
+                          additionalProperties: false
+                    required:
+                      - itemId
+                    additionalProperties: false
                 isArchived:
                   description: Set true to archive this catalog. Omit to create or replace its declaration.
                   type: boolean
@@ -50133,6 +50193,9 @@ paths:
                       - not:
                           required:
                             - feedFieldMappings
+                      - not:
+                          required:
+                            - itemAdditions
                 - if:
                     required:
                       - isArchived
@@ -50143,9 +50206,63 @@ paths:
                     required:
                       - isArchived
                 - if:
-                    not:
-                      required:
-                        - isArchived
+                    required:
+                      - itemAdditions
+                  then:
+                    allOf:
+                      - not:
+                          required:
+                            - name
+                      - not:
+                          required:
+                            - type
+                      - not:
+                          required:
+                            - url
+                      - not:
+                          required:
+                            - feedFormat
+                      - not:
+                          required:
+                            - updateFrequency
+                      - not:
+                          required:
+                            - items
+                      - not:
+                          required:
+                            - file
+                      - not:
+                          required:
+                            - ids
+                      - not:
+                          required:
+                            - gtins
+                      - not:
+                          required:
+                            - tags
+                      - not:
+                          required:
+                            - category
+                      - not:
+                          required:
+                            - query
+                      - not:
+                          required:
+                            - conversionEvents
+                      - not:
+                          required:
+                            - contentIdType
+                      - not:
+                          required:
+                            - feedFieldMappings
+                - if:
+                    allOf:
+                      - not:
+                          required:
+                            - isArchived
+                      - not:
+                          required:
+                            - itemAdditions
                   then:
                     allOf:
                       - required:

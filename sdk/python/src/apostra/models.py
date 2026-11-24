@@ -15090,6 +15090,8 @@ class SaveCatalogInput(TypedDict):
     '\n    Conversion events.\n    '
     contentIdType: NotRequired[Literal["sku", "gtin", "offering_id", "job_id", "hotel_id", "flight_id", "vehicle_id", "listing_id", "store_id", "program_id", "destination_id", "app_id"]]
     '\n    Catalog item identifier.\n    '
+    itemAdditions: NotRequired[list[SaveCatalogInputItemAdditionsItem]]
+    '\n    Fields and Library assets to add to items; refreshes keep them. Send alone.\n    '
     isArchived: NotRequired[bool]
     '\n    Set true to archive this catalog. Omit to create or replace its declaration.\n    '
     idempotencyKey: NotRequired[str]
@@ -15126,6 +15128,22 @@ class SaveCatalogInputFile(TypedDict):
     '\n    Connection ID from the Integrations page.\n    '
     itemId: str
     '\n    The provider\'s file ID in that connection.\n    '
+
+class SaveCatalogInputItemAdditionsItem(TypedDict):
+    itemId: str
+    '\n    Catalog item key.\n    '
+    set: NotRequired[dict[str, JsonValue]]
+    '\n    Fields to add, each replacing the feed value.\n    '
+    clear: NotRequired[list[str]]
+    '\n    Added fields to stop adding.\n    '
+    assets: NotRequired[list[SaveCatalogInputItemAdditionsItemAssetsItem]]
+    '\n    All Library assets tied to the item.\n    '
+
+class SaveCatalogInputItemAdditionsItemAssetsItem(TypedDict):
+    assetId: str
+    '\n    Library asset ID.\n    '
+    role: NotRequired[Literal["main_image", "images_landscape", "images_vertical", "images_square", "video", "video_vertical", "video_horizontal", "finished_creative"]]
+    '\n    AdCP asset group, or finished_creative.\n    '
 
 class SaveCatalogResult(TypedDict):
     action: Literal["created", "updated", "unchanged", "deleted"]
