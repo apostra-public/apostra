@@ -4192,6 +4192,7 @@
       "SaveWholesaleProductSuccessSellerSaveReplayedMaterialReceipt": "map",
       "SaveWorkItemError": "other",
       "SaveWorkItemInput": "object",
+      "SaveWorkItemInputGamCleanup": "object",
       "SaveWorkItemRequestModularDailyDelivery": "object",
       "SaveWorkItemRequestWorkItemResultEntry": "object",
       "SaveWorkItemResult": "other",
