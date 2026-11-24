@@ -33022,6 +33022,26 @@ class SearchSuccessV3CampaignPhaseCounts(TypedDict):
     completed: int
     canceled: int
 
+class StartCertificationRunInput(TypedDict):
+    sourceId: NotRequired[str]
+    '\n    Exact source ID to certify through. Required for a seller. An agent owner may leave it out when the agent has exactly one bound source.\n    '
+    agentId: NotRequired[str]
+    '\n    The agent to certify, for an owner. Without sourceId it must have exactly one bound source.\n    '
+    expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class StartCertificationRunResult(TypedDict):
+    sourceId: str
+    run: StartCertificationRunResultRun
+    nextRunAllowedAt: str
+
+class StartCertificationRunResultRun(TypedDict):
+    id: str
+    startedAt: str
+    familyCount: int
+
 class TestCreativeMacrosInput(TypedDict):
     requiredMacros: NotRequired[list[Literal["MEDIA_BUY_ID", "PACKAGE_ID", "CREATIVE_ID", "CACHEBUSTER", "TIMESTAMP", "CLICK_URL", "GDPR", "GDPR_CONSENT", "ADDTL_CONSENT", "US_PRIVACY", "GPP_STRING", "GPP_SID", "IP_ADDRESS", "LIMIT_AD_TRACKING", "DEVICE_TYPE", "OS", "OS_VERSION", "DEVICE_MAKE", "DEVICE_MODEL", "USER_AGENT", "APP_BUNDLE", "APP_NAME", "COUNTRY", "REGION", "CITY", "ZIP", "DMA", "LAT", "LONG", "DEVICE_ID", "DEVICE_ID_TYPE", "DOMAIN", "PAGE_URL", "REFERRER", "KEYWORDS", "PLACEMENT_ID", "FOLD_POSITION", "AD_WIDTH", "AD_HEIGHT", "VIDEO_ID", "VIDEO_TITLE", "VIDEO_DURATION", "VIDEO_CATEGORY", "CONTENT_GENRE", "CONTENT_RATING", "PLAYER_WIDTH", "PLAYER_HEIGHT", "POD_POSITION", "POD_SIZE", "AD_BREAK_ID", "STATION_ID", "COLLECTION_NAME", "INSTALLMENT_ID", "AUDIO_DURATION", "TMPX", "IMPRESSION_ID", "AXEM", "CATALOG_ID", "SKU", "GTIN", "OFFERING_ID", "JOB_ID", "HOTEL_ID", "FLIGHT_ID", "VEHICLE_ID", "LISTING_ID", "STORE_ID", "PROGRAM_ID", "DESTINATION_ID", "CREATIVE_VARIANT_ID", "APP_ITEM_ID", "ITEM_NAME", "ITEM_DESCRIPTION", "ITEM_TAGLINE", "ITEM_PRICE", "ITEM_PRICE_CURRENCY"]]]
     '\n    Required macros must occur and have values. Absence fails; defaults to all canonical macros present.\n    '
@@ -33345,6 +33365,8 @@ SaveWholesaleProductError: TypeAlias = "V3ToolErrorResponse"
 SaveWorkItemError: TypeAlias = "V3ToolErrorResponse"
 
 SearchError: TypeAlias = "V3ToolErrorResponse"
+
+StartCertificationRunError: TypeAlias = "V3ToolErrorResponse"
 
 TestCreativeMacrosError: TypeAlias = "V3ToolErrorResponse"
 
