@@ -39605,12 +39605,12 @@ paths:
       operationId: refresh_inventory_source_health
       summary: >-
         Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh.
-        Returns checks, open findings, evidence and readiness without changing source configuration or creating a media
-        buy. scope accounts re-lists accounts instead.
+        Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy.
+        scope picks another probe: accounts, inventory, connection, capabilities, brief.
       description: >-
         Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh.
-        Returns checks, open findings, evidence and readiness without changing source configuration or creating a media
-        buy. scope accounts re-lists accounts instead.
+        Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy.
+        scope picks another probe: accounts, inventory, connection, capabilities, brief.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -39643,12 +39643,28 @@ paths:
                     discovery checks.
                 scope:
                   description: >-
-                    health (default) rechecks the source. accounts asks the source to list its accounts again, for
-                    sources that take account mappings.
+                    health (default) rechecks the source. accounts re-lists its accounts. inventory refreshes a managed
+                    ad-server source, connection tests it, capabilities re-checks one ad-server capability or an
+                    external agent, brief dry-runs a buyer brief on a modular source.
                   type: string
                   enum:
                     - health
                     - accounts
+                    - inventory
+                    - connection
+                    - capabilities
+                    - brief
+                capability:
+                  description: 'With scope capabilities on an ad-server source: which one.'
+                  type: string
+                  enum:
+                    - reporting
+                    - forecasting
+                brief:
+                  description: 'With scope brief: the buyer brief to test.'
+                  type: string
+                  minLength: 1
+                  maxLength: 5000
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -39670,6 +39686,36 @@ paths:
                 - properties:
                     sourceId:
                       pattern: \S
+                - properties:
+                    brief:
+                      pattern: \S
+                - if:
+                    properties:
+                      scope:
+                        const: brief
+                    required:
+                      - scope
+                  then:
+                    required:
+                      - brief
+                - if:
+                    required:
+                      - brief
+                  then:
+                    properties:
+                      scope:
+                        const: brief
+                    required:
+                      - scope
+                - if:
+                    required:
+                      - capability
+                  then:
+                    properties:
+                      scope:
+                        const: capabilities
+                    required:
+                      - scope
       responses:
         '200':
           description: Typed operation result
@@ -39685,6 +39731,15 @@ paths:
                           #/components/schemas/refresh_inventory_source_health_success_RefreshInventorySourceHealthChecked
                       - $ref: >-
                           #/components/schemas/refresh_inventory_source_health_success_RefreshInventorySourceHealthAccountsListed
+                      - anyOf:
+                          - $ref: >-
+                              #/components/schemas/refresh_inventory_source_health_success_RefreshInventorySourceHealthInventoryRefreshed
+                          - $ref: >-
+                              #/components/schemas/refresh_inventory_source_health_success_RefreshInventorySourceHealthConnectionTested
+                          - $ref: >-
+                              #/components/schemas/refresh_inventory_source_health_success_RefreshInventorySourceHealthCapabilitiesChecked
+                          - $ref: >-
+                              #/components/schemas/refresh_inventory_source_health_success_RefreshInventorySourceHealthBriefTested
                   error:
                     type: 'null'
                 required:
@@ -112387,6 +112442,279 @@ components:
         - sourceId
         - scope
         - accounts
+      additionalProperties: false
+    refresh_inventory_source_health_success_RefreshInventorySourceHealthInventoryRefreshed:
+      type: object
+      properties:
+        sourceId:
+          type: string
+        scope:
+          type: string
+          const: inventory
+        inventory:
+          type: object
+          properties:
+            status:
+              type: string
+              enum:
+                - started
+                - already_running
+            syncRunIds:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties:
+                type: string
+            startedAt:
+              type:
+                - string
+                - 'null'
+            runningSyncTypes:
+              type: array
+              items:
+                type: string
+          required:
+            - status
+            - syncRunIds
+            - startedAt
+            - runningSyncTypes
+          additionalProperties: false
+      required:
+        - sourceId
+        - scope
+        - inventory
+      additionalProperties: false
+    refresh_inventory_source_health_success_RefreshInventorySourceHealthConnectionTested:
+      type: object
+      properties:
+        sourceId:
+          type: string
+        scope:
+          type: string
+          const: connection
+        connection:
+          type: object
+          properties:
+            success:
+              type: boolean
+            error:
+              type:
+                - string
+                - 'null'
+            errorCode:
+              type:
+                - string
+                - 'null'
+            remediation:
+              type:
+                - string
+                - 'null'
+            testedAt:
+              type: string
+            capabilityChecks:
+              type: array
+              items:
+                type: object
+                properties:
+                  capability:
+                    type: string
+                  status:
+                    type: string
+                  message:
+                    type:
+                      - string
+                      - 'null'
+                required:
+                  - capability
+                  - status
+                  - message
+                additionalProperties: false
+          required:
+            - success
+            - error
+            - errorCode
+            - remediation
+            - testedAt
+            - capabilityChecks
+          additionalProperties: false
+      required:
+        - sourceId
+        - scope
+        - connection
+      additionalProperties: false
+    refresh_inventory_source_health_success_RefreshInventorySourceHealthCapabilitiesChecked:
+      type: object
+      properties:
+        sourceId:
+          type: string
+        scope:
+          type: string
+          const: capabilities
+        capabilities:
+          anyOf:
+            - type: object
+              properties:
+                kind:
+                  type: string
+                  const: ad_server
+                capability:
+                  type: string
+                  enum:
+                    - reporting
+                    - forecasting
+                capabilityState:
+                  type: string
+                  enum:
+                    - unknown
+                    - available
+                    - awaiting_vendor_permission
+                status:
+                  type: string
+                probePerformed:
+                  type: boolean
+                recoveryStarted:
+                  type: boolean
+                syncRunId:
+                  type:
+                    - string
+                    - 'null'
+                message:
+                  type: string
+              required:
+                - kind
+                - capability
+                - capabilityState
+                - status
+                - probePerformed
+                - recoveryStarted
+                - syncRunId
+                - message
+              additionalProperties: false
+            - type: object
+              properties:
+                kind:
+                  type: string
+                  const: agent
+                agentId:
+                  type: string
+                version:
+                  type: string
+                tools:
+                  type: array
+                  items:
+                    type: string
+                requireOperatorAuth:
+                  type: boolean
+                defaultBilling:
+                  type:
+                    - string
+                    - 'null'
+                supportedBillings:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - kind
+                - agentId
+                - version
+                - tools
+                - requireOperatorAuth
+                - defaultBilling
+                - supportedBillings
+              additionalProperties: false
+      required:
+        - sourceId
+        - scope
+        - capabilities
+      additionalProperties: false
+    refresh_inventory_source_health_success_RefreshInventorySourceHealthBriefTested:
+      type: object
+      properties:
+        sourceId:
+          type: string
+        scope:
+          type: string
+          const: brief
+        brief:
+          type: object
+          properties:
+            ok:
+              type: boolean
+            dryRun:
+              type: boolean
+              const: true
+            persistedProducts:
+              type: boolean
+            buyerBookable:
+              type: boolean
+            intelligenceRunId:
+              type:
+                - string
+                - 'null'
+            result:
+              type: object
+              properties:
+                kind:
+                  type: string
+                  enum:
+                    - ok
+                    - error
+                code:
+                  type:
+                    - string
+                    - 'null'
+                message:
+                  type:
+                    - string
+                    - 'null'
+              required:
+                - kind
+                - code
+                - message
+              additionalProperties: false
+            productCount:
+              type: integer
+              minimum: 0
+              maximum: 9007199254740991
+            products:
+              type: array
+              items:
+                type: object
+                properties:
+                  productId:
+                    type:
+                      - string
+                      - 'null'
+                  name:
+                    type:
+                      - string
+                      - 'null'
+                  reasoning:
+                    type:
+                      - string
+                      - 'null'
+                required:
+                  - productId
+                  - name
+                  - reasoning
+                additionalProperties: false
+            productsTruncated:
+              type: boolean
+          required:
+            - ok
+            - dryRun
+            - persistedProducts
+            - buyerBookable
+            - intelligenceRunId
+            - result
+            - productCount
+            - products
+            - productsTruncated
+          additionalProperties: false
+      required:
+        - sourceId
+        - scope
+        - brief
       additionalProperties: false
     request_buyer_child_account_success_AgentApproval:
       type: object

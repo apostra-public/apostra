@@ -10236,8 +10236,12 @@ class OpenVariantGallerySuccessGalleryVariantsItemPreview(TypedDict):
 class RefreshInventorySourceHealthInput(TypedDict):
     sourceId: str
     '\n    Exact source ID. Managed ad-server sources use a connection test; external sales agents use discovery checks.\n    '
-    scope: NotRequired[Literal["health", "accounts"]]
-    '\n    health (default) rechecks the source. accounts asks the source to list its accounts again, for sources that take account mappings.\n    '
+    brief: NotRequired[str]
+    '\n    With scope brief: the buyer brief to test.\n    '
+    scope: NotRequired[Literal["health", "accounts", "inventory", "connection", "capabilities", "brief"]]
+    '\n    health (default) rechecks the source. accounts re-lists its accounts. inventory refreshes a managed ad-server source, connection tests it, capabilities re-checks one ad-server capability or an external agent, brief dry-runs a buyer brief on a modular source.\n    '
+    capability: NotRequired[Literal["reporting", "forecasting"]]
+    '\n    With scope capabilities on an ad-server source: which one.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -10256,6 +10260,56 @@ class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthAccountsLis
     authoritative: bool
     truncated: bool
     diagnosticCode: str | None
+
+class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthBriefTested(TypedDict):
+    sourceId: str
+    scope: Literal["brief"]
+    brief: RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthBriefTestedBrief
+
+class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthBriefTestedBrief(TypedDict):
+    ok: bool
+    dryRun: Literal[True]
+    persistedProducts: bool
+    buyerBookable: bool
+    intelligenceRunId: str | None
+    result: RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthBriefTestedBriefResult
+    productCount: int
+    products: list[RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthBriefTestedBriefProductsItem]
+    productsTruncated: bool
+
+class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthBriefTestedBriefProductsItem(TypedDict):
+    productId: str | None
+    name: str | None
+    reasoning: str | None
+
+class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthBriefTestedBriefResult(TypedDict):
+    kind: Literal["ok", "error"]
+    code: str | None
+    message: str | None
+
+class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCapabilitiesChecked(TypedDict):
+    sourceId: str
+    scope: Literal["capabilities"]
+    capabilities: RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCapabilitiesCheckedCapabilitiesKindAdServer | RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCapabilitiesCheckedCapabilitiesKindAgent
+
+class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCapabilitiesCheckedCapabilitiesKindAdServer(TypedDict):
+    kind: Literal["ad_server"]
+    capability: Literal["reporting", "forecasting"]
+    capabilityState: Literal["unknown", "available", "awaiting_vendor_permission"]
+    status: str
+    probePerformed: bool
+    recoveryStarted: bool
+    syncRunId: str | None
+    message: str
+
+class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCapabilitiesCheckedCapabilitiesKindAgent(TypedDict):
+    kind: Literal["agent"]
+    agentId: str
+    version: str
+    tools: list[str]
+    requireOperatorAuth: bool
+    defaultBilling: str | None
+    supportedBillings: list[str]
 
 class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthChecked(TypedDict):
     sourceId: str
@@ -10299,6 +10353,35 @@ class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCheckedRead
     reason: str | None
 
 RefreshInventorySourceHealthResultReadiness: TypeAlias = RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthCheckedReadiness
+
+class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthConnectionTested(TypedDict):
+    sourceId: str
+    scope: Literal["connection"]
+    connection: RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthConnectionTestedConnection
+
+class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthConnectionTestedConnection(TypedDict):
+    success: bool
+    error: str | None
+    errorCode: str | None
+    remediation: str | None
+    testedAt: str
+    capabilityChecks: list[RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthConnectionTestedConnectionCapabilityChecksItem]
+
+class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthConnectionTestedConnectionCapabilityChecksItem(TypedDict):
+    capability: str
+    status: str
+    message: str | None
+
+class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthInventoryRefreshed(TypedDict):
+    sourceId: str
+    scope: Literal["inventory"]
+    inventory: RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthInventoryRefreshedInventory
+
+class RefreshInventorySourceHealthSuccessRefreshInventorySourceHealthInventoryRefreshedInventory(TypedDict):
+    status: Literal["started", "already_running"]
+    syncRunIds: dict[str, str]
+    startedAt: str | None
+    runningSyncTypes: list[str]
 
 RepresentationLocale: TypeAlias = str
 

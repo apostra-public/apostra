@@ -695,14 +695,14 @@ export class Apostra extends Transport {
   /** Show a saved Creative Session’s variants (find via search/get kind creative_session). Not for generating new variants. Returns the data together with response headers and request ID. */
   openVariantGalleryWithResponse(input: OpenVariantGalleryInput, options?: RequestOptions): Promise<ResponseDetails<OpenVariantGalleryResult>> { return this.requestDetailed("open_variant_gallery", input, options) }
   /**
-   * Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness without changing source configuration or creating a media buy. scope accounts re-lists accounts instead.
+   * Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy. scope picks another probe: accounts, inventory, connection, capabilities, brief.
    *
    * @example
    * await client.refreshInventorySourceHealth(input, { idempotencyKey: 'stable-key' })
    */
   refreshInventorySourceHealth(input: RefreshInventorySourceHealthInput, options: WriteRequestOptions): Promise<RefreshInventorySourceHealthResult> { return this.request("refresh_inventory_source_health", input, options) }
 
-  /** Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness without changing source configuration or creating a media buy. scope accounts re-lists accounts instead. Returns the data together with response headers and request ID. */
+  /** Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy. scope picks another probe: accounts, inventory, connection, capabilities, brief. Returns the data together with response headers and request ID. */
   refreshInventorySourceHealthWithResponse(input: RefreshInventorySourceHealthInput, options: WriteRequestOptions): Promise<ResponseDetails<RefreshInventorySourceHealthResult>> { return this.requestDetailed("refresh_inventory_source_health", input, options) }
   /**
    * Request a Buyer child under the selected Organization. Nothing is created until an Organization administrator approves it on our site; the result is approval_required with a link to show the person. Repeat with the same idempotencyKey and name for the outcome.
