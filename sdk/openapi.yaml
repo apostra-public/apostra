@@ -112506,6 +112506,14 @@ components:
               items:
                 $ref: '#/components/schemas/save_advertiser_request_AdvertiserBrandProfileStatedVoiceDontsItem'
           additionalProperties: false
+        assetRules:
+          description: >-
+            How generation may treat each kind of asset. An asset rule beats a role rule, then the default (product and
+            logo: unaltered).
+          maxItems: 40
+          type: array
+          items:
+            $ref: '#/components/schemas/save_advertiser_request_AdvertiserAssetRule'
         bannedTerms:
           description: Banned copy terms.
           maxItems: 200
@@ -112582,6 +112590,40 @@ components:
               description: No disclaimers.
               type: boolean
           additionalProperties: false
+      additionalProperties: false
+    save_advertiser_request_AdvertiserAssetRule:
+      type: object
+      properties:
+        role:
+          description: Asset role. Give this or assetId.
+          type: string
+          enum:
+            - product
+            - logo
+            - background
+            - reference
+            - copy
+            - audio
+            - video
+        assetId:
+          description: Library asset. Give this or role.
+          type: string
+          format: uuid
+          pattern: >-
+            ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
+        use:
+          type: string
+          enum:
+            - unaltered
+            - adaptable
+          description: 'unaltered: exactly as uploaded. adaptable: may be transformed.'
+        note:
+          description: Why, for example "never cropped".
+          type: string
+          minLength: 1
+          maxLength: 300
+      required:
+        - use
       additionalProperties: false
     save_advertiser_request_BrandCountries:
       maxItems: 249

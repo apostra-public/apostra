@@ -18669,6 +18669,25 @@ export type SaveAdvertiserInstructionsSuccessSaveAdvertiserInstructionsSuccessUp
     [key: string]: unknown;
 };
 
+export type SaveAdvertiserRequestAdvertiserAssetRule = {
+    /**
+     * Asset role. Give this or assetId.
+     */
+    role?: 'product' | 'logo' | 'background' | 'reference' | 'copy' | 'audio' | 'video';
+    /**
+     * Library asset. Give this or role.
+     */
+    assetId?: string;
+    /**
+     * unaltered: exactly as uploaded. adaptable: may be transformed.
+     */
+    use: 'unaltered' | 'adaptable';
+    /**
+     * Why, for example "never cropped".
+     */
+    note?: string;
+};
+
 export type SaveAdvertiserRequestAdvertiserBrandProfilePendingDifferenceObjectEntry = {
     /**
      * Field name in a flat pending-difference value.
@@ -18812,6 +18831,10 @@ export type SaveAdvertiserRequestAdvertiserBrandProfileStated = {
          */
         donts?: Array<SaveAdvertiserRequestAdvertiserBrandProfileStatedVoiceDontsItem>;
     };
+    /**
+     * How generation may treat each kind of asset. An asset rule beats a role rule, then the default (product and logo: unaltered).
+     */
+    assetRules?: Array<SaveAdvertiserRequestAdvertiserAssetRule>;
     /**
      * Banned copy terms.
      */
