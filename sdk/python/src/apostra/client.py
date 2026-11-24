@@ -484,6 +484,14 @@ class Apostra(SyncTransport):
         "Save content you supply: advertiserId/campaignId, name, message, assets (landing_page_url, social, sourceAssetRef/sourceAssets). New media like radio spots: use save_creative_session. One format selector: formatKind+formatParams or creativeFormatId+formatOptionRef. libraryRole: Buyer Account only. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCreativeResult], self._request_with_response("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
+    def save_creative_asset(self, input: models.SaveCreativeAssetInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeAssetResult:
+        "Record the rights a person states for Library assets: who holds them and where, how long and in which channels and countries an ad may use them, as AdCP rights entries. A save replaces the asset’s rights and only proposes them; recording does not make an asset usable."
+        return cast("models.SaveCreativeAssetResult", self._request("save_creative_asset", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    def save_creative_asset_with_response(self, input: models.SaveCreativeAssetInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeAssetResult]:
+        "Record the rights a person states for Library assets: who holds them and where, how long and in which channels and countries an ad may use them, as AdCP rights entries. A save replaces the asset’s rights and only proposes them; recording does not make an asset usable. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveCreativeAssetResult], self._request_with_response("save_creative_asset", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
     def save_creative_collection(self, input: models.SaveCreativeCollectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeCollectionResult:
         "Manage collections. Create with one owner and name: campaignId or advertiserId. Only advertiser mutations of an existing collection need expectedUpdatedAt; campaign writes and creates do not. isArchived archives or restores advertiser collections."
         return cast("models.SaveCreativeCollectionResult", self._request("save_creative_collection", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
@@ -1172,6 +1180,14 @@ class AsyncApostra(AsyncTransport):
     async def save_creative_with_response(self, input: models.SaveCreativeInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeResult]:
         "Save content you supply: advertiserId/campaignId, name, message, assets (landing_page_url, social, sourceAssetRef/sourceAssets). New media like radio spots: use save_creative_session. One format selector: formatKind+formatParams or creativeFormatId+formatOptionRef. libraryRole: Buyer Account only. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.SaveCreativeResult], await self._request_with_response("save_creative", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_creative_asset(self, input: models.SaveCreativeAssetInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeAssetResult:
+        "Record the rights a person states for Library assets: who holds them and where, how long and in which channels and countries an ad may use them, as AdCP rights entries. A save replaces the asset’s rights and only proposes them; recording does not make an asset usable."
+        return cast("models.SaveCreativeAssetResult", await self._request("save_creative_asset", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
+
+    async def save_creative_asset_with_response(self, input: models.SaveCreativeAssetInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.SaveCreativeAssetResult]:
+        "Record the rights a person states for Library assets: who holds them and where, how long and in which channels and countries an ad may use them, as AdCP rights entries. A save replaces the asset’s rights and only proposes them; recording does not make an asset usable. Returns the data together with response headers and request ID."
+        return cast(ResponseDetails[models.SaveCreativeAssetResult], await self._request_with_response("save_creative_asset", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def save_creative_collection(self, input: models.SaveCreativeCollectionInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.SaveCreativeCollectionResult:
         "Manage collections. Create with one owner and name: campaignId or advertiserId. Only advertiser mutations of an existing collection need expectedUpdatedAt; campaign writes and creates do not. isArchived archives or restores advertiser collections."

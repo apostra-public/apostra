@@ -15653,6 +15653,163 @@ class SaveCoverageSuccessSaveCoverageSuccessReconciledRemoved(TypedDict):
     count: int
     truncated: bool
 
+class SaveCreativeAssetInput(TypedDict):
+    advertiserId: str
+    '\n    The advertiser whose Library holds the assets.\n    '
+    items: list[SaveCreativeAssetInputItemsItem]
+    '\n    One entry per asset, at most 50; all are saved or none. Each replaces that asset\'s rights.\n    '
+    expectedAccountId: NotRequired[int | str]
+    '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
+    accountId: NotRequired[int | str]
+    '\n    Apostra accountId this call runs in, from get_status.\n    '
+
+class SaveCreativeAssetInputItemsItem(TypedDict):
+    assetId: str
+    '\n    Library asset id, from search or get on creative_asset.\n    '
+    rights: list[SaveCreativeAssetInputItemsItemRightsItem]
+    '\n    AdCP rights entries, one for each party the rights come from: the copyright holder, and each person pictured. Replaces the asset’s rights.\n    '
+    provenance: NotRequired[SaveCreativeAssetInputItemsItemProvenance]
+    '\n    AdCP provenance, when AI was involved in making the asset. A photo a person made needs none.\n    '
+
+class SaveCreativeAssetInputItemsItemProvenance(TypedDict):
+    digital_source_type: NotRequired[Literal["digital_capture", "digital_creation", "trained_algorithmic_media", "composite_with_trained_algorithmic_media", "algorithmic_media", "composite_capture", "composite_synthetic", "human_edits", "data_driven_media"]]
+    synthetic_depiction: NotRequired[bool]
+    ai_tool: NotRequired[SaveCreativeAssetInputItemsItemProvenanceAiTool]
+    human_oversight: NotRequired[Literal["none", "prompt_only", "selected", "edited", "directed"]]
+    declared_by: NotRequired[SaveCreativeAssetInputItemsItemProvenanceDeclaredBy]
+    declared_at: NotRequired[str]
+    created_time: NotRequired[str]
+    c2pa: NotRequired[SaveCreativeAssetInputItemsItemProvenanceC2pa]
+    embedded_provenance: NotRequired[list[SaveCreativeAssetInputItemsItemProvenanceEmbeddedProvenanceItem]]
+    watermarks: NotRequired[list[SaveCreativeAssetInputItemsItemProvenanceWatermarksItem]]
+    disclosure: NotRequired[SaveCreativeAssetInputItemsItemProvenanceDisclosure]
+    verification: NotRequired[list[SaveCreativeAssetInputItemsItemProvenanceVerificationItem]]
+    ext: NotRequired[SaveCreativeAssetRequestItemsItemProvenanceExt]
+
+class SaveCreativeAssetInputItemsItemProvenanceAiTool(TypedDict):
+    name: str
+    version: NotRequired[str]
+    provider: NotRequired[str]
+
+class SaveCreativeAssetInputItemsItemProvenanceC2pa(TypedDict):
+    manifest_url: str
+
+class SaveCreativeAssetInputItemsItemProvenanceDeclaredBy(TypedDict):
+    agent_url: NotRequired[str]
+    role: Literal["creator", "advertiser", "agency", "platform", "tool"]
+
+class SaveCreativeAssetInputItemsItemProvenanceDisclosure(TypedDict):
+    required: bool
+    jurisdictions: NotRequired[list[SaveCreativeAssetInputItemsItemProvenanceDisclosureJurisdictionsItem]]
+
+class SaveCreativeAssetInputItemsItemProvenanceDisclosureJurisdictionsItem(TypedDict):
+    country: str
+    region: NotRequired[str]
+    regulation: str
+    label_text: NotRequired[str]
+    render_guidance: NotRequired[SaveCreativeAssetInputItemsItemProvenanceDisclosureJurisdictionsItemRenderGuidance]
+
+class SaveCreativeAssetInputItemsItemProvenanceDisclosureJurisdictionsItemRenderGuidance(TypedDict):
+    persistence: NotRequired[Literal["continuous", "initial", "flexible"]]
+    min_duration_ms: NotRequired[int]
+    positions: NotRequired[list[Literal["prominent", "footer", "audio", "subtitle", "overlay", "end_card", "pre_roll", "companion"]]]
+    ext: NotRequired[SaveCreativeAssetRequestItemsItemProvenanceDisclosureJurisdictionsItemRenderGuidanceExt]
+
+class SaveCreativeAssetInputItemsItemProvenanceEmbeddedProvenanceItem(TypedDict):
+    method: Literal["manifest_wrapper", "provenance_markers"]
+    standard: NotRequired[str]
+    provider: str
+    verify_agent: NotRequired[SaveCreativeAssetInputItemsItemProvenanceEmbeddedProvenanceItemVerifyAgent]
+    embedded_at: NotRequired[str]
+
+class SaveCreativeAssetInputItemsItemProvenanceEmbeddedProvenanceItemVerifyAgent(TypedDict):
+    agent_url: str
+    feature_id: NotRequired[str]
+
+class SaveCreativeAssetInputItemsItemProvenanceVerificationItem(TypedDict):
+    verified_by: str
+    verified_time: NotRequired[str]
+    result: Literal["authentic", "ai_generated", "ai_modified", "inconclusive"]
+    confidence: NotRequired[float]
+    details_url: NotRequired[str]
+
+class SaveCreativeAssetInputItemsItemProvenanceWatermarksItem(TypedDict):
+    media_type: Literal["audio", "image", "video", "text"]
+    provider: str
+    verify_agent: NotRequired[SaveCreativeAssetInputItemsItemProvenanceWatermarksItemVerifyAgent]
+    c2pa_action: NotRequired[Literal["c2pa.watermarked.bound", "c2pa.watermarked.unbound"]]
+    embedded_at: NotRequired[str]
+
+class SaveCreativeAssetInputItemsItemProvenanceWatermarksItemVerifyAgent(TypedDict):
+    agent_url: str
+    feature_id: NotRequired[str]
+
+class SaveCreativeAssetInputItemsItemRightsItem(TypedDict):
+    uses: list[Literal["likeness", "voice", "name", "endorsement", "motion_capture", "signature", "catchphrase", "sync", "background_music", "editorial", "commercial", "ai_generated_image"]]
+    valid_from: NotRequired[str]
+    valid_until: NotRequired[str]
+    countries: NotRequired[list[SaveCreativeAssetRequestItemsItemRightsItemCountriesItem]]
+    excluded_countries: NotRequired[list[SaveCreativeAssetRequestItemsItemRightsItemExcludedCountriesItem]]
+    channels: NotRequired[list[SaveCreativeAssetRequestItemsItemRightsItemChannelsItem]]
+    excluded_channels: NotRequired[list[SaveCreativeAssetRequestItemsItemRightsItemExcludedChannelsItem]]
+    right_type: NotRequired[Literal["talent", "character", "brand_ip", "music", "stock_media"]]
+    restrictions: NotRequired[list[str]]
+    disclosure: NotRequired[SaveCreativeAssetInputItemsItemRightsItemDisclosure]
+    ext: NotRequired[SaveCreativeAssetInputItemsItemRightsItemExt]
+
+class SaveCreativeAssetInputItemsItemRightsItemDisclosure(TypedDict):
+    pass
+
+class SaveCreativeAssetInputItemsItemRightsItemExt(TypedDict):
+    apostra: SaveCreativeAssetInputItemsItemRightsItemExtApostra
+
+class SaveCreativeAssetInputItemsItemRightsItemExtApostra(TypedDict):
+    holder: NotRequired[SaveCreativeAssetInputItemsItemRightsItemExtApostraHolder]
+    '\n    The named party this entry is about: the copyright holder on a commercial entry, or the person pictured on a likeness entry.\n    '
+    evidence: NotRequired[list[SaveCreativeAssetInputItemsItemRightsItemExtApostraEvidenceItem]]
+    '\n    Documents the entry rests on, such as a signed model release kept in the Library.\n    '
+    assetKind: NotRequired[Literal["finished_creative", "building_block"]]
+    '\n    What the rights are for: a finished creative used as it is, or a building block combined into new ads. Stated by a person; the same on every entry of an asset.\n    '
+    peoplePictured: NotRequired[int]
+    '\n    How many identifiable people the asset shows, where 0 means none. Stated by a person, never inferred.\n    '
+
+class SaveCreativeAssetInputItemsItemRightsItemExtApostraEvidenceItem(TypedDict):
+    kind: Literal["model_release", "licence", "other"]
+    '\n    What the document is.\n    '
+    materialId: str
+    '\n    The Library document that holds the file.\n    '
+
+class SaveCreativeAssetInputItemsItemRightsItemExtApostraHolder(TypedDict):
+    kind: Literal["person", "organization"]
+    '\n    Whether the party is a person or an organization.\n    '
+    name: str
+    '\n    Who holds the copyright, or who is pictured.\n    '
+
+SaveCreativeAssetRequestItemsItemProvenanceDisclosureJurisdictionsItemRenderGuidanceExt: TypeAlias = dict[str, JsonValue]
+
+SaveCreativeAssetRequestItemsItemProvenanceExt: TypeAlias = dict[str, JsonValue]
+
+SaveCreativeAssetRequestItemsItemRightsItemChannelsItem: TypeAlias = Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+
+SaveCreativeAssetRequestItemsItemRightsItemCountriesItem: TypeAlias = str
+
+SaveCreativeAssetRequestItemsItemRightsItemExcludedChannelsItem: TypeAlias = Literal["display", "olv", "social", "search", "ctv", "linear_tv", "radio", "streaming_audio", "podcast", "dooh", "ooh", "print", "cinema", "email", "gaming", "retail_media", "influencer", "affiliate", "product_placement", "sponsored_intelligence"]
+
+SaveCreativeAssetRequestItemsItemRightsItemExcludedCountriesItem: TypeAlias = str
+
+class SaveCreativeAssetResult(TypedDict):
+    action: Literal["recorded"]
+    items: list[SaveCreativeAssetResultItemsItem]
+
+class SaveCreativeAssetResultItemsItem(TypedDict):
+    assetId: str
+    rightsState: Literal["pending_confirmation", "confirmed", "rejected", "paused", "revoked"]
+    rights: list[SaveCreativeAssetResultItemsItemRightsItem]
+
+class SaveCreativeAssetResultItemsItemRightsItem(TypedDict):
+    rights_id: str
+    approval_status: NotRequired[Literal["pending", "approved", "rejected"]]
+
 class SaveCreativeCollectionInputAddMembersItem(TypedDict):
     memberType: Literal["creative", "asset"]
     '\n    Whether this member is a saved creative or an existing asset.\n    '
@@ -33317,6 +33474,8 @@ SaveCatalogError: TypeAlias = "V3ToolErrorResponse"
 SaveConnectionError: TypeAlias = "V3ToolErrorResponse"
 
 SaveCoverageError: TypeAlias = "V3ToolErrorResponse"
+
+SaveCreativeAssetError: TypeAlias = "V3ToolErrorResponse"
 
 SaveCreativeCollectionError: TypeAlias = "V3ToolErrorResponse"
 
