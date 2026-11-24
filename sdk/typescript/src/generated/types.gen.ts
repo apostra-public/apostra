@@ -27139,6 +27139,10 @@ export type SaveCreativeSessionData = {
             destination?: 'campaign' | 'library';
         };
         /**
+         * Save the Creative composer's draft to the advertiser Library as a complete ad: the image and every filled copy slot, no campaign attached. Send it with sessionId only. An incomplete ad is refused with the missing slots named; saving again with unchanged slots returns the same Creative.
+         */
+        finalizeToLibrary?: true;
+        /**
          * Apostra accountId you are working in (from get_status). The write fails if the account has changed.
          */
         expectedAccountId?: number | string;
@@ -29653,6 +29657,10 @@ export type SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnecti
     sourceDiagnosticsMode: 'connect';
     connectionContract: SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionFormConnectionContract;
     productModePresentation?: true;
+    testStorefront?: {
+        state: 'will_be_created' | 'exists';
+        name: string;
+    };
     [key: string]: unknown;
 };
 

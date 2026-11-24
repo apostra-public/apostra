@@ -16304,6 +16304,8 @@ class SaveCreativeSessionInputWithAdvertiserId(TypedDict):
     '\n    Session revision being changed. Required to select or approve.\n    '
     finalization: NotRequired[SaveCreativeSessionInputFinalization]
     '\n    Finalise the exact approved output into a Creative. Send it with sessionId only.\n    '
+    finalizeToLibrary: NotRequired[Literal[True]]
+    '\n    Save the Creative composer\'s draft to the advertiser Library as a complete ad: the image and every filled copy slot, no campaign attached. Send it with sessionId only. An incomplete ad is refused with the missing slots named; saving again with unchanged slots returns the same Creative.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -16330,6 +16332,8 @@ class SaveCreativeSessionInputWithCampaignId(TypedDict):
     '\n    Session revision being changed. Required to select or approve.\n    '
     finalization: NotRequired[SaveCreativeSessionInputFinalization]
     '\n    Finalise the exact approved output into a Creative. Send it with sessionId only.\n    '
+    finalizeToLibrary: NotRequired[Literal[True]]
+    '\n    Save the Creative composer\'s draft to the advertiser Library as a complete ad: the image and every filled copy slot, no campaign attached. Send it with sessionId only. An incomplete ad is refused with the missing slots named; saving again with unchanged slots returns the same Creative.\n    '
     expectedAccountId: NotRequired[int | str]
     '\n    Apostra accountId you are working in (from get_status). The write fails if the account has changed.\n    '
     accountId: NotRequired[int | str]
@@ -17652,12 +17656,17 @@ class SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionForm
     sourceDiagnosticsMode: Literal["connect"]
     connectionContract: SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionFormConnectionContract
     productModePresentation: NotRequired[Literal[True]]
+    testStorefront: NotRequired[SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionFormTestStorefront]
 
 class SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionFormBindingTarget(TypedDict):
     agentId: str
     salesProductMode: Literal["WHOLESALE", "COMPOSING", "BOTH"] | None
 
 SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionFormConnectionContract: TypeAlias = dict[str, JsonValue]
+
+class SaveInventorySourceSuccessSaveInventorySourceSuccessOwnAgentConnectionFormTestStorefront(TypedDict):
+    state: Literal["will_be_created", "exists"]
+    name: str
 
 class SaveInventorySourceSuccessSaveInventorySourceSuccessUnchanged(TypedDict):
     outcome: Literal["unchanged"]

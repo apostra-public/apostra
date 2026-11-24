@@ -53436,12 +53436,12 @@ paths:
       operationId: save_creative_session
       summary: >-
         Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft,
-        selected output, approval, or finalisation. It never generates; generate_variants does. To save an approved
-        output to the Library, finalise it with destination library.
+        selected output, approval, or finalisation. It never generates; generate_variants does. Save to the Library with
+        destination library, or a composer draft with finalizeToLibrary.
       description: >-
         Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft,
-        selected output, approval, or finalisation. It never generates; generate_variants does. To save an approved
-        output to the Library, finalise it with destination library.
+        selected output, approval, or finalisation. It never generates; generate_variants does. Save to the Library with
+        destination library, or a composer draft with finalizeToLibrary.
       security:
         - apiKeyAuth: []
         - m2mOAuth:
@@ -53767,6 +53767,13 @@ paths:
                     - approvedSessionRevision
                   additionalProperties: false
                   description: Finalise the exact approved output into a Creative. Send it with sessionId only.
+                finalizeToLibrary:
+                  description: >-
+                    Save the Creative composer's draft to the advertiser Library as a complete ad: the image and every
+                    filled copy slot, no campaign attached. Send it with sessionId only. An incomplete ad is refused
+                    with the missing slots named; saving again with unchanged slots returns the same Creative.
+                  type: boolean
+                  const: true
                 expectedAccountId:
                   description: Apostra accountId you are working in (from get_status). The write fails if the account has changed.
                   anyOf:
@@ -121878,6 +121885,20 @@ components:
         productModePresentation:
           type: boolean
           const: true
+        testStorefront:
+          type: object
+          properties:
+            state:
+              type: string
+              enum:
+                - will_be_created
+                - exists
+            name:
+              type: string
+          required:
+            - state
+            - name
+          additionalProperties: false
       required:
         - outcome
         - action

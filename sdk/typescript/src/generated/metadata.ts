@@ -1253,7 +1253,7 @@ export const operations = {
         ]
       }
     ],
-    "summary": "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. To save an approved output to the Library, finalise it with destination library."
+    "summary": "Save a Creative Session for image, video, or voice/audio (including radio spots) from a brief: its draft, selected output, approval, or finalisation. It never generates; generate_variants does. Save to the Library with destination library, or a composer draft with finalizeToLibrary."
   },
   "save_dimension": {
     "path": "/tools/save_dimension",
