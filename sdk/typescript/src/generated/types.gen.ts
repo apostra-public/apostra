@@ -29791,7 +29791,7 @@ export type SaveInventorySourceData = {
          */
         authenticationType?: 'API_KEY' | 'NO_AUTH' | 'OAUTH' | 'BASIC_AUTH';
         /**
-         * An agent from search kind agent. Send it alone to open the form that connects it. From an Agents account it connects that account's agent so it can be tested and certified.
+         * An agent from search kind agent. Send it alone to open the form that connects it; an agent already connected answers with its source. From an Agents account it connects that account's agent so it can be tested and certified.
          */
         agentId?: string;
         /**
