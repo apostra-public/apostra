@@ -29450,7 +29450,7 @@ export type SaveInventorySourceData = {
          */
         sellerId?: number;
         /**
-         * A managed source's margin: products sell at its cost marked up to it, unless you set a price. null removes. Send with id only.
+         * A managed or linked source's margin: products sell at its cost marked up to it, unless you set a price. null removes. Send with id only.
          */
         dealTerms?: {
             /**
