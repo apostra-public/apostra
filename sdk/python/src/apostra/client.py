@@ -285,11 +285,11 @@ class Apostra(SyncTransport):
         return cast(ResponseDetails[models.OpenVariantGalleryResult], self._request_with_response("open_variant_gallery", input, account_id=account_id, timeout=timeout))
 
     def refresh_inventory_source_health(self, input: models.RefreshInventorySourceHealthInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RefreshInventorySourceHealthResult:
-        "Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy. scope picks another probe: accounts, inventory, connection, capabilities, brief."
+        "Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy. scope picks another probe."
         return cast("models.RefreshInventorySourceHealthResult", self._request("refresh_inventory_source_health", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def refresh_inventory_source_health_with_response(self, input: models.RefreshInventorySourceHealthInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.RefreshInventorySourceHealthResult]:
-        "Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy. scope picks another probe: accounts, inventory, connection, capabilities, brief. Returns the data together with response headers and request ID."
+        "Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy. scope picks another probe. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.RefreshInventorySourceHealthResult], self._request_with_response("refresh_inventory_source_health", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     def request_buyer_child_account(self, input: models.RequestBuyerChildAccountInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestBuyerChildAccountResult:
@@ -966,11 +966,11 @@ class AsyncApostra(AsyncTransport):
         return cast(ResponseDetails[models.OpenVariantGalleryResult], await self._request_with_response("open_variant_gallery", input, account_id=account_id, timeout=timeout))
 
     async def refresh_inventory_source_health(self, input: models.RefreshInventorySourceHealthInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RefreshInventorySourceHealthResult:
-        "Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy. scope picks another probe: accounts, inventory, connection, capabilities, brief."
+        "Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy. scope picks another probe."
         return cast("models.RefreshInventorySourceHealthResult", await self._request("refresh_inventory_source_health", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def refresh_inventory_source_health_with_response(self, input: models.RefreshInventorySourceHealthInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> ResponseDetails[models.RefreshInventorySourceHealthResult]:
-        "Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy. scope picks another probe: accounts, inventory, connection, capabilities, brief. Returns the data together with response headers and request ID."
+        "Rechecks a managed ad-server connection or an external agent with no-spend get_products and catalog refresh. Returns checks, open findings, evidence and readiness; changes no source configuration, creates no media buy. scope picks another probe. Returns the data together with response headers and request ID."
         return cast(ResponseDetails[models.RefreshInventorySourceHealthResult], await self._request_with_response("refresh_inventory_source_health", input, account_id=account_id, timeout=timeout, idempotency_key=idempotency_key))
 
     async def request_buyer_child_account(self, input: models.RequestBuyerChildAccountInput, *, account_id: str | None = None, timeout: float | None = None, idempotency_key: str) -> models.RequestBuyerChildAccountResult:
