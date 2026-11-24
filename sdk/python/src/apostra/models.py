@@ -17715,7 +17715,7 @@ class SaveInventorySourceInput(TypedDict):
     dryRun: NotRequired[bool]
     '\n    Preview namingTemplates: sample names and macros, nothing saved.\n    '
     sellerId: NotRequired[int]
-    '\n    Link this seller\'s inventory as a source. The seller must have approved your account. Send alone, or with status ACTIVE to activate it.\n    '
+    '\n    Link this seller\'s inventory as a source. The seller must be listed; it approves each account you ask it for. Send alone, or with status ACTIVE to activate it.\n    '
     dealTerms: NotRequired[SaveInventorySourceInputDealTermsValue | None]
     '\n    A managed or linked source\'s margin: products sell at its cost marked up to it, unless you set a price. null removes. Send with id only.\n    '
     expectedAccountId: NotRequired[int | str]
